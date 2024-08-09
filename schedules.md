@@ -10,3 +10,9 @@
 * https://github.com/jquense/react-big-calendar
 * https://bryntum.com/products/react-calendar/
 * https://fullcalendar.io/demos
+
+
+
+##### Usecases:
+1. Scheduled journeys or campaigns
+2. Business rule conflicts
