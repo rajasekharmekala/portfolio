@@ -187,12 +187,19 @@ python3 scripts/send_email.py --report "googledrive/newsletters/Options_Underwri
 
 ---
 
-### Step 10: Workspace Hygiene
+### Step 10: Workspace Hygiene & Cache Pruning
 
-1. Delete any transient scripts or temp files created during execution.
-2. Preserve the permanent infrastructure whitelist:
+1. Delete any transient scripts or temp files created during execution (`rm -f scripts/build_*.py scripts/generate_*.py` and `rm -rf scripts/__pycache__/`).
+2. Mandatory Cache Cleanup: Prune any stale prior-session cache files from `scripts/.cache/` (e.g. `find scripts/.cache/ -type f ! -name "aliases.json" -delete` for older session files) to ensure zero cross-session state pollution.
+3. Preserve the permanent infrastructure whitelist:
+   - `scripts/market_facts.py`
    - `scripts/validate_report.py`
    - `scripts/send_email.py`
+   - `scripts/build_dossier_portal.py`
+   - `scripts/serve_blogs.py`
+   - `scripts/dossier_builder_template.py`
+   - `scripts/com.portfolio.blogs.fileserver.plist`
+   - `scripts/.cache/aliases.json`
    - `Options_Positions.xlsx`
    - `US_Shortlist.xlsx`
    - `googledrive/` directory structure

@@ -63,15 +63,22 @@ graph TD
 
 ---
 
-### Step 1: Session Date, Environment & Sibling Coherence
+### Step 1: Session Date, Environment, Cache Hygiene & Sibling Coherence
 
 1. **Determine Session Date (`<YYYY-MM-DD>`):**
    - Check the active NSE trading session date. If running after market hours on a weekday, use today's date. If on a weekend or holiday, use the most recent completed NSE trading session date.
-2. **Ingest Sibling Market Intelligence Report:**
+2. **Mandatory Cache Hygiene & Fresh-Run Guarantee (Zero Prior-Session Bias):**
+   - Every execution must operate with zero bias and zero historical state pollution. Before generating or loading files, prune all stale facts, research, and screen artifacts from prior session dates in `scripts/.cache/`:
+     ```bash
+     # Remove all prior session cache artifacts; preserve only persistent config (aliases.json)
+     find scripts/.cache/ -type f ! -name "aliases.json" -delete
+     ```
+   - This ensures the run starts completely from scratch with a pristine cache environment.
+3. **Ingest Sibling Market Intelligence Report:**
    - Check `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html` or `scripts/.cache/facts_IN_<YYYY-MM-DD>.json`.
    - Record the verbatim `regime.label`, market breadth, sector quadrant map, and the 30 names on the Bear List.
    - If a market report exists for today, the audit's Chapter 1 must restate its regime and sector matrix verbatim.
-3. **Verify Environment & SMTP Credentials:**
+4. **Verify Environment & SMTP Credentials:**
    - Confirm `.env` exists with `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `GMAIL_RECIPIENT` (default: `rajasekharreddymekala732@gmail.com`).
    - Confirm target paths are accessible:
      - `googledrive/sheets/Zerodha_Holdings.xlsx` (or `sheets/Zerodha_Holdings.xlsx`)
@@ -102,14 +109,14 @@ graph TD
 
 ---
 
-### Step 3: Reuse or Build the Facts Ledger
+### Step 3: Build Fresh Facts Ledger from Scratch (Zero Prior Bias)
 
-1. **Check Facts Cache:**
-   - If `scripts/.cache/facts_IN_<YYYY-MM-DD>.json` exists from today's market intelligence run, load and reuse it directly.
-   - If missing, generate it:
+1. **Generate Fresh Facts Ledger:**
+   - Always generate a fresh facts ledger for the designated session date `<YYYY-MM-DD>` from live market data:
      ```bash
      python3 scripts/market_facts.py --market IN --date <YYYY-MM-DD> --screen nifty500
      ```
+   - Running from scratch guarantees zero prior-session bias and ensures all market breadth, moving averages, and prices reflect live, unpolluted exchange data.
 2. **Triage Holdings & Shortlist Failures:**
    - Verify that every ticker in `Zerodha_Holdings.xlsx` and `Zerodha_Shortlist.xlsx` has valid entries in `facts["instruments"]`.
    - If any holding or shortlist symbol is listed in `facts["failures"]`, resolve it via `scripts/.cache/aliases.json` (e.g., broker code vs Yahoo `.NS` symbol) and re-run with `--extra <SYMBOL>` before proceeding.
@@ -224,15 +231,21 @@ python3 scripts/send_email.py \
 
 ---
 
-### Step 9: Workspace Hygiene & Script Cleanup
+### Step 9: Workspace Hygiene, Script Cleanup & Cache Pruning
 
 1. **Delete Transient Scripts:**
    - Remove any temporary generator, audit builder, or calculator scripts created during this run:
      ```bash
-     rm -f scripts/build_*.py scripts/generate_*.py scripts/audit_*.py
+     rm -f scripts/build_*.py scripts/generate_*.py scripts/audit_*.py scripts/update_*.py scripts/make_*.py scripts/fix_*.py scripts/apply_*.py
      rm -rf scripts/__pycache__/ __pycache__/
      ```
-2. **Preserve Permanent Infrastructure Whitelist:**
+2. **Mandatory Cache Cleanup (Strict Zero-Stale Artifact Policy):**
+   - After email dispatch completes, prune any intermediate files from `scripts/.cache/` older than the current session date, or wipe transient caches so stale files do not accumulate:
+     ```bash
+     # Remove all cache artifacts older than today's session, preserving aliases.json
+     find scripts/.cache/ -type f ! -name "aliases.json" ! -name "*<YYYY-MM-DD>*" -delete
+     ```
+3. **Preserve Permanent Infrastructure Whitelist:**
    - `scripts/market_facts.py`
    - `scripts/validate_report.py`
    - `scripts/send_email.py`
@@ -240,6 +253,6 @@ python3 scripts/send_email.py \
    - `scripts/serve_blogs.py`
    - `scripts/dossier_builder_template.py`
    - `scripts/com.portfolio.blogs.fileserver.plist`
-   - `scripts/.cache/`
+   - `scripts/.cache/aliases.json`
    - `.agents/`
-3. **Verify Clean Tree:** Run `ls scripts/` and confirm only whitelisted files remain.
+4. **Verify Clean Tree:** Run `ls scripts/` and confirm only whitelisted files remain.

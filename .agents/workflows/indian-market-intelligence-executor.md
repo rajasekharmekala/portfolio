@@ -50,12 +50,17 @@ graph TD
 
 ---
 
-### Step 1: Session Date & Environment Setup
+### Step 1: Session Date, Cache Hygiene & Environment Setup
 
 1. **Determine Session Date (`<YYYY-MM-DD>`):**
    - Check the active NSE trading session date. If running after 16:00 IST on a weekday, use today's date. If running on a weekend, market holiday, or before market close, determine the most recent completed NSE trading session date.
-   - Verify if a facts ledger already exists in `scripts/.cache/facts_IN_<YYYY-MM-DD>.json`.
-2. **Verify Credentials & Workbooks:**
+2. **Mandatory Cache Hygiene & Fresh-Run Guarantee (Zero Prior-Session Bias):**
+   - Every execution must operate with zero bias and zero historical state pollution. Before generating or loading files, prune all stale facts, research, and screen artifacts from prior session dates in `scripts/.cache/`:
+     ```bash
+     find scripts/.cache/ -type f ! -name "aliases.json" -delete
+     ```
+   - This ensures the run starts completely from scratch with a pristine cache environment.
+3. **Verify Credentials & Workbooks:**
    - Confirm `.env` exists and contains Gmail SMTP credentials:
      - `GMAIL_USER` (or `GMAIL_ADDRESS` / `EMAIL_USER`)
      - `GMAIL_APP_PASSWORD` (or `EMAIL_PASSWORD`)
@@ -68,16 +73,16 @@ graph TD
 
 ---
 
-### Step 2: Build or Load the Facts Ledger
+### Step 2: Build the Facts Ledger from Scratch (Zero Prior Bias)
 
-Run the facts ledger builder to fetch daily market bars, compute indicators, and screen the Nifty 500 universe:
+Run the facts ledger builder from scratch to fetch daily market bars, compute indicators, and screen the Nifty 500 universe:
 
 ```bash
 python3 scripts/market_facts.py --market IN --date <YYYY-MM-DD> --screen nifty500
 ```
 
 > [!NOTE]
-> If `scripts/.cache/facts_IN_<YYYY-MM-DD>.json` already exists for the designated session date, reuse it directly. **Never copy or rename an older ledger to a new date**, as the validator enforces date honesty against the underlying bar timestamps.
+> Always generate the facts ledger fresh from live market data for the designated session date. **Never reuse stale prior-session files or copy/rename an older ledger to a new date**, as the validator enforces date honesty against the underlying bar timestamps.
 
 Inspect the ledger output and record key macro parameters:
 - `facts["asof"]`: Session date
@@ -244,7 +249,12 @@ python3 scripts/send_email.py \
      rm -f scripts/build_*.py scripts/generate_*.py build_full_market_intel.py generate_market_intel.py
      rm -rf scripts/__pycache__/ __pycache__/
      ```
-2. **Preserve Permanent Infrastructure Whitelist:**
+2. **Mandatory Cache Cleanup (Strict Zero-Stale Artifact Policy):**
+   - Prune intermediate files from `scripts/.cache/` older than the current session date:
+     ```bash
+     find scripts/.cache/ -type f ! -name "aliases.json" ! -name "*<YYYY-MM-DD>*" -delete
+     ```
+3. **Preserve Permanent Infrastructure Whitelist:**
    - `scripts/market_facts.py`
    - `scripts/validate_report.py`
    - `scripts/send_email.py`
@@ -252,6 +262,6 @@ python3 scripts/send_email.py \
    - `scripts/serve_blogs.py`
    - `scripts/dossier_builder_template.py`
    - `scripts/com.portfolio.blogs.fileserver.plist`
-   - `scripts/.cache/`
+   - `scripts/.cache/aliases.json`
    - `.agents/`
-3. **Verify Clean Tree:** Run `ls scripts/` and confirm only whitelisted files remain.
+4. **Verify Clean Tree:** Run `ls scripts/` and confirm only whitelisted files remain.
