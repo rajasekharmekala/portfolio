@@ -10,7 +10,7 @@ Read `_COMMON.md` first.
 
 ## 1. Session date and run directory
 
-As in `market_intelligence.md` §1–2.
+As in `market_intelligence.md` §1–2. The options report uses the latest completed, data-verified exchange session date, even when that date precedes the run date.
 
 ## 2. Positions
 

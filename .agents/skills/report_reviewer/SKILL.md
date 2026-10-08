@@ -28,6 +28,7 @@ Score each area as PASS, REVISE, or BLOCK. BLOCK means the report must not be de
 
 ### A. Source-based assessment
 - Every number in prose and tables is either in the ledger (same value, same as-of date) or in the research record with a `source_url`, `as_of`, and `retrieved_at`. Flag every number you cannot trace, with its location.
+- Check that the report date is the latest completed market session supported by a verified final benchmark close, not automatically the run's calendar date. The ledger `asof`, report title/subtitle, filename date and report claims must agree; flag an undisclosed data delay.
 - Every verdict (KEEP, TRIM, EXIT, ACCUMULATE, WATCH, Bull or Bear placement, Top-3 setup) cites the rule and the number that triggered it, and that number matches the ledger.
 - Any figure whose `as_of` is not the session date is labelled as prior-session in the report.
 - Any claim about a company (business, catalyst, guidance, pledge, order book) that does not appear in the research record is a finding. "Known" facts from memory are not sources.

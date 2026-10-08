@@ -16,6 +16,8 @@ description: >-
 
 > **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
+> **Report date (binding):** date the review to the latest completed exchange session with a verified final benchmark close, following `../_shared/RUN_PROTOCOL.md` §0. Do not use the run's calendar date by default. Use that exact session date for the ledger, researched market prices, report title, filename, and validation; disclose a data delay if the latest verified session predates the run date.
+
 <!-- MARKET IN -->
 Act as a **Senior Institutional Equity Research Analyst** conducting a **Resurrection Triage** of previously rejected securities in the `watchlist.archive` array of `data/watchlist/IN.json`.
 <!-- /MARKET -->

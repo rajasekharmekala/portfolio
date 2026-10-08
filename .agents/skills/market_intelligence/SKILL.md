@@ -16,6 +16,8 @@ description: >-
 
 > **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
+> **Report date (binding):** date the briefing to the latest completed Indian/US exchange session with a verified final benchmark close, following `../_shared/RUN_PROTOCOL.md` §0. Do not use the run's calendar date by default. Use the same session date in the facts ledger, HTML, filename, research queries, watchlist updates, and validation; disclose any data delay when the latest available completed session predates the run date.
+
 <!-- MARKET IN -->
 Act as a **Senior Institutional Equity Research Analyst**, **Derivatives Strategist**, and **Wikipedia Financial Editor** covering Indian Equity Markets (NSE/BSE).
 <!-- /MARKET -->
@@ -31,10 +33,10 @@ Execute the **Daily US Market Intelligence & Watchlist Ingestion Engine**:
 <!-- /MARKET -->
 1. Generate an exhaustive daily market intelligence briefing formatted in authentic **Wikipedia Design System** (NPOV encyclopedic tone, floating infobox, wikitables, footnotes, verified citations).
 <!-- MARKET IN -->
-2. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html`** (maintaining **strictly only the single latest generated report showing the run date on the page**, and automatically deleting all prior versions).
+2. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html`**, where the date is the resolved latest completed market session (not necessarily the run date). Maintain strictly the single latest generated report and display that session date on the page.
 <!-- /MARKET -->
 <!-- MARKET US -->
-2. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/US_Market_Intelligence_<YYYY-MM-DD>.html`** (maintaining **strictly only the single latest generated report showing the run date on the page**, and automatically deleting all prior versions).
+2. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/US_Market_Intelligence_<YYYY-MM-DD>.html`**, where the date is the resolved latest completed market session (not necessarily the run date). Maintain strictly the single latest generated report and display that session date on the page.
 <!-- /MARKET -->
 3. Transmit the complete deliverable via Gmail to **`rajasekharreddymekala732@gmail.com`**.
 <!-- MARKET IN -->
@@ -903,7 +905,7 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <!-- MARKET US -->
   - **Target Location:** `docs/reports/US_Market_Intelligence_<YYYY-MM-DD>.html`
 <!-- /MARKET -->
-  - **Date Display:** The run date (`YYYY-MM-DD` / formatted session date) must be prominently displayed in the document title, subtitle, and Wikipedia Infobox metadata.
+  - **Date Display:** The resolved market session date (`YYYY-MM-DD` / formatted session date), which is the latest completed data-verified session and may be earlier than the run date, must be prominently displayed in the document title, subtitle, and Wikipedia Infobox metadata.
 <!-- MARKET IN -->
   - **Prune Prior Versions:** Automatically scan `docs/reports/` and delete / remove all previous versions matching `Daily_Market_Intelligence_*.html` prior to or upon saving the new file, ensuring only the single latest report is maintained in docs/reports/.
 <!-- /MARKET -->

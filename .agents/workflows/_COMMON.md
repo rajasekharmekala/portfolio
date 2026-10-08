@@ -18,7 +18,7 @@ Create it first, as RUN_PROTOCOL §1 says. Every file this run creates lives the
 
 ## Preflight (every run)
 
-1. Resolve the session date for the market (see the market workflow). Use the market's session date, not the system date.
+1. Resolve the **latest completed market session** under `../skills/_shared/RUN_PROTOCOL.md` §0. Do not default to the calendar date of the run. Check exchange holidays and close time, then confirm the benchmark's final daily bar; if today's session is incomplete or its final bar is not available, date the report to the most recent earlier completed session with a verified close. Record `run_date` and `session_date` separately when they differ.
 2. Check inputs: `python3 scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"`. A missing or mis-shaped source stops the run. The manifest records the SHA-256 of every input.
 3. Read `.env` for the email settings: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `GMAIL_RECIPIENT`. The recipient comes from `.env`, not from this document.
 
@@ -26,7 +26,7 @@ Create it first, as RUN_PROTOCOL §1 says. Every file this run creates lives the
 
 `python3 scripts/market_facts.py --market <MKT> --date <session> --screen <ledger_screen from markets.json> --run-dir "<RUN_DIR>"`
 
-It writes the ledger and the fact pack into `<RUN_DIR>/cache/` and records per-symbol freshness and input hashes in `<RUN_DIR>/manifest.json`. If it exits with `STALE DATA` or `HOLDINGS NOT CURRENT`, stop. Do not relabel, copy, or rename a ledger. Re-run after the source updates. Use `--allow-stale-holdings` only if the user has said so, and state the reason in the report.
+It writes the ledger and the fact pack into `<RUN_DIR>/cache/` and records per-symbol freshness and input hashes in `<RUN_DIR>/manifest.json`. The date argument is the resolved latest completed session, not necessarily the run date. If the newest completed session's final benchmark bar is unavailable, retry once, then resolve the most recent earlier completed session with a verified bar and build for that exact date; do not relabel, copy, or rename a ledger. Stop only when no recent completed benchmark session can be verified or the selected-date build fails. If it exits with `HOLDINGS NOT CURRENT`, stop. Use `--allow-stale-holdings` only if the user has said so, and state the reason in the report. The report filename, title and as-of label all use the ledger session date.
 
 A symbol listed in `failures` must be resolved before any N/A cell is allowed. Aliases live in `scripts/config/aliases.json`, which is version-controlled.
 

@@ -16,6 +16,8 @@ description: >-
 
 > **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
+> **Market-data date (binding):** use market facts from the latest completed exchange session with a verified final benchmark close, following `../_shared/RUN_PROTOCOL.md` §0. Do not use the run's calendar date by default. State the as-of session and use it consistently for prices, technical gates, entry levels, and any dated allocation report.
+
 <!-- MARKET IN -->
 Act as a **Senior Institutional Chief Investment Officer (CIO)**, **Lead Quantitative Equity Portfolio Manager**, and **Elite Stock Picker** covering Indian Equity Markets (NSE/BSE).
 <!-- /MARKET -->

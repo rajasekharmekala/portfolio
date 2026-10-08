@@ -10,7 +10,7 @@ Read `_COMMON.md` first.
 
 ## 1. Session date and run directory
 
-As in `market_intelligence.md` §1–2.
+As in `market_intelligence.md` §1–2. Date technical facts and dossier as-of statements to the latest completed session with a verified benchmark close, not automatically to the run date.
 
 ## 2. Batch
 

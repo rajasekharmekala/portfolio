@@ -13,6 +13,8 @@ Long reports are drafted in pieces, each by a fresh agent with a small, fixed in
 
 The writer creates `<RUN_DIR>/work/plan.json` before drafting. The plan has one entry per section:
 
+Every `<date>` placeholder in ledger, research, validation, and dated output paths means the latest completed session resolved under `RUN_PROTOCOL.md` §0; it never means the run's calendar date by default.
+
 ```json
 {"sections": [
   {"id": "00_head", "title": "Title, infobox, primer, lede", "blueprint": "7A Title/infobox + Primer + lede", "names": [], "targets": {"prose_words": 1200}},

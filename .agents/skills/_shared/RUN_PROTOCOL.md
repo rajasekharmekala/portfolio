@@ -3,6 +3,15 @@
 This protocol exists because earlier runs leaked state into later ones: prior-day ledgers, prior-day research,
 and hardcoded dates produced reports that looked current but were not. These rules apply to every run.
 
+## 0. Report session date (binding for every skill and workflow)
+
+Date every report and its data to the **latest completed market session**, not automatically to the calendar date on which the run starts. Resolve the session separately for the target exchange:
+
+1. Check the exchange calendar and session hours for holidays, weekends, and whether today's session has actually closed (NSE/BSE: 15:30 IST; US exchanges: 16:00 ET, with a 30-minute data-publication allowance).
+2. Use a session date only when the benchmark's final daily close for that date is present in the fresh data source. If today's session is not complete, use the previous completed session. After today's close, wait through the publication window in step 1 before deciding its bar is missing. Do not stamp a report with today's date merely because the run is happening today.
+3. Build the ledger with that exact selected date and make it the report's date, filename date, research query date, and validator date. Never rename or relabel data to fit a desired date. Record both `run_date` and `session_date` in the manifest when they differ, and state the report's as-of session prominently.
+4. If the latest exchange session has closed, its publication window has elapsed, and its final bar is still missing, retry once, then step back to the most recent earlier completed session whose benchmark close is verified and use that exact date. This is a data-availability fallback, not permission to relabel prices. Disclose the as-of date and delay in the report. Stop only if no recent completed session can be verified or the selected date fails the ledger freshness check.
+
 ## 1. Run directory (isolation)
 
 Create a fresh, private directory at the start of every run. Never reuse one.
@@ -29,10 +38,10 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 
 ## 4. Freshness
 
-- The ledger's `asof` must equal the session date. `market_facts.py` exits non-zero if the benchmark's last bar is on another date. Do not rename, copy, or relabel a ledger. If the build fails for staleness, wait and retry; if it still fails, stop and report.
+- The ledger's `asof` must equal the resolved latest completed session date under §0. `market_facts.py` exits non-zero if the benchmark's last bar is on another date. Do not rename, copy, or relabel a ledger. If the current calendar day's session is incomplete, resolve the prior session. If its completed close is missing, retry once, then use the most recent earlier completed session with a verified benchmark close. If that exact-date build fails, stop and report.
 - Every web-sourced value needs `source_url`, `as_of` (the date the value describes), and `retrieved_at` (ISO 8601 time of retrieval). A value whose `as_of` is not the session date must be labeled as prior-session in the report.
 - Never fall back to "latest file" lookup. Every file path is explicit.
-- Never use the system date as a stand-in for the session date. Use the market's session date (ET for US, IST for India).
+- Never use the system date as a stand-in for the session date. Use the latest completed, data-verified market session (ET for US, IST for India), even when it is earlier than the run date.
 
 ## 5. Outputs and cleanup
 

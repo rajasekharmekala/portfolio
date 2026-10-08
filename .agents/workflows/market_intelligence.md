@@ -10,7 +10,7 @@ Read `_COMMON.md` first. It sets the run directory, preflight, ledger, research,
 
 ## 1. Session date
 
-Use the market's session date. For `US`, use the last completed Eastern Time session (after 16:30 ET on a weekday, today's date). For `IN`, use the last completed NSE session (after 15:30 IST on a weekday, today's date). On weekends and market holidays, use the previous session.
+Use the **latest completed market session with a verified final benchmark close**, not the calendar date of the run by default. Check the exchange calendar and local close time first. For `US`, wait through the 30-minute publication window after the 16:00 ET close; for `IN`, wait until after the 15:30 IST close. If today's session has not completed, use the previous completed session. If its bar remains missing after the publication window, retry once and then step back to the most recent earlier completed session whose final benchmark bar is verified. Use that exact date for the ledger, report title, filename, research queries and validator. Record the separate run date and session date when they differ, and disclose a data delay. Stop only if no completed session can be verified or the exact-date ledger still fails; never invent or relabel a date.
 
 ## 2. Run directory and preflight
 
