@@ -4,7 +4,7 @@ description: >-
   Autonomous incremental watchlist-to-shortlist deep underwriting engine for US equity markets (NYSE/NASDAQ).
   Processes candidates in continuous, stateful batches of 4 securities per run, conducts 360-degree fundamental
   and technical deep-dives using the US 3-layer framework (Hard Gating Floors, Sector KPIs, Support-Aware Entry Posture),
-  generates and updates in-place Wikipedia-style HTML company blog dossiers in googledrive/blogs/<SYMBOL>_dossier.html,
+  generates and updates in-place Wikipedia-style HTML company blog dossiers in docs/blogs/<SYMBOL>_dossier.html,
   seeds qualified US peers into watchlist/US_Portfolio_Watchlist.xlsx, and dynamically maintains the capacity-constrained
   shortlist/US_Shortlist.xlsx (strictly capped at 10 Core Alpha + 10 Tactical Momentum + 5 Leveraged Satellite autowritten slots)
   using institutional displacement economics.
@@ -19,7 +19,7 @@ Act as an **Institutional Equity Portfolio Director**, **Chief US Underwriting O
 Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting Engine**:
 1. Incrementally process exactly **4 pending securities per run** from `Active_Watchlist` in **`watchlist/US_Portfolio_Watchlist.xlsx`**.
 2. For each security, dispatch a dedicated, independent research subagent (1 subagent per company) to conduct an exhaustive 360-degree fundamental and technical underwriting analysis.
-3. Generate and persist a comprehensive, standalone Wikipedia-style HTML research dossier saved directly to **`googledrive/blogs/<SYMBOL>_dossier.html`** (matching the exact design system, typography, infobox, wikitables, and 25–40+ primary SEC EDGAR citations defined in `us_company_report`).
+3. Generate and persist a comprehensive, standalone Wikipedia-style HTML research dossier saved directly to **`docs/blogs/<SYMBOL>_dossier.html`** (matching the exact design system, typography, infobox, wikitables, and 25–40+ primary SEC EDGAR citations defined in `us_company_report`).
 4. Apply institutional **Displacement Economics** to update **`shortlist/US_Shortlist.xlsx`** (strictly adhering to the 10 Core Alpha + 10 Tactical Momentum + 5 Leveraged Satellite autowritten capacity caps).
 5. Update **`watchlist/US_Portfolio_Watchlist.xlsx`** in-place (updating Active_Watchlist status and routing rejected candidates to Archive_Rejected with full audit trails).
 6. Automatically rebuild the master blog portal by executing `python3 scripts/build_dossier_portal.py`.
@@ -34,7 +34,7 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
 4. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE:**
    - Any one-off execution scripts created during this run (e.g., `generate_*.py`, `build_*_dossiers*.py`, `expand_*.py`, `update_*_workbooks.py`, `update_*_watchlist*.py`) are **transient pipeline artifacts**. IMMEDIATELY after the pipeline completes successfully, delete them: `rm scripts/<one-off-script>.py` and remove `scripts/__pycache__/`.
    - **Zero Prior-Session Bias & Cache Cleanup**: Stale cache artifacts from prior session dates in `scripts/.cache/` (e.g. `facts_*`, `research_*`, `audit_*`, `screen_*`) must be pruned. Every run starts from a clean, unbiased baseline. Only persistent configuration (`scripts/.cache/aliases.json`) is preserved across sessions.
-   - Whitelist to preserve: `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `googledrive/blogs/dossier_nav.js`, `googledrive/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
+   - Whitelist to preserve: `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `docs/blogs/dossier_nav.js`, `docs/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
 
 ---
 
@@ -115,11 +115,11 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
    - Launch an independent research subagent for each of the 4 companies to eliminate context dilution.
 3. **Deep Underwriting & Wikipedia HTML Dossier Generation:**
    - Subagent executes two-step live web search, financial forensics, and support-level calculation.
-   - Subagent generates the self-contained HTML research dossier in `googledrive/blogs/<SYMBOL>_dossier.html` using the complete Wikipedia HTML design system, fonts, floated infobox, decision banner, wikitables, and 25–40+ SEC EDGAR citations from `us_company_report`.
+   - Subagent generates the self-contained HTML research dossier in `docs/blogs/<SYMBOL>_dossier.html` using the complete Wikipedia HTML design system, fonts, floated infobox, decision banner, wikitables, and 25–40+ SEC EDGAR citations from `us_company_report`.
 4. **Displacement Economics & Registry Updates:**
    - Reconcile the 10 Core + 10 Tactical + 5 Leveraged slots in `shortlist/US_Shortlist.xlsx`.
    - Update `watchlist/US_Portfolio_Watchlist.xlsx` marking evaluated rows `COMPLETED` and setting `Research Dossier Path`.
    - If Layer 1 failed, move candidate to `Archive_Rejected` with full forensic reason.
 5. **Master Portal Regeneration:**
-   - Run `python3 scripts/build_dossier_portal.py` to regenerate `googledrive/blogs/index.html` and `googledrive/blogs/dossiers.json`.
+   - Run `python3 scripts/build_dossier_portal.py` to regenerate `docs/blogs/index.html` and `docs/blogs/dossiers.json`.
 6. **Report Summary:** Present a structured summary table of the 4 evaluated candidates and shortlist displacements to the user.

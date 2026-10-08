@@ -32,7 +32,7 @@ Before executing any step, you MUST read and internalize the following governing
    - **10 Core Alpha** positions
    - **10 Tactical Momentum** positions
    - **5 Leveraged Satellite** positions
-5. **HTML Dossiers**: Each candidate must produce a detailed HTML dossier at `googledrive/blogs/<SYMBOL>_dossier.html`.
+5. **HTML Dossiers**: Each candidate must produce a detailed HTML dossier at `docs/blogs/<SYMBOL>_dossier.html`.
 6. **Live Web Search**: Use DuckDuckGo web search extensively to verify current fundamentals, technicals, and catalysts. Do NOT rely on stale data.
 7. **Validation Gate**: Each dossier must pass `python3 scripts/validate_report.py --kind dossier` before dispatch.
 8. **In-Place Update**: The shortlist workbook must be updated in-place. Do NOT create a new file.
@@ -41,13 +41,13 @@ Before executing any step, you MUST read and internalize the following governing
 
 ## 1.5 Independent Reviewer Gate (mandatory before delivery)
 
-Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to Drive, published, or emailed.
+Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to docs/, published, or emailed.
 
 1. **Run the reviewer passes.** Read `../config/reviewer.json` and `../skills/_shared/REVIEWER_OPERATIONS.md`. Run each pass in the config as a separate fresh agent, using the model set in the config. Do not name a model in this workflow.
 2. **Give the reviewer only its inputs:** the report path, `<RUN_DIR>/cache/facts_<MKT>_<date>.json`, `<RUN_DIR>/cache/research_<MKT>_<date>.json`, the snapshots in `<RUN_DIR>/inputs/`, the sibling report if it exists, the three standards in `../skills/_shared/`, and the validator output. Do not pass the Story Brief, your drafts, or your reasoning.
 3. **Act on the result.** The reviewer writes `<RUN_DIR>/review_round_<N>.json`. On `REVISE` or `BLOCK`, fix every BLOCK and REVISE finding in the report, re-run `validate_report.py` until it shows `RESULT: PASS`, and send the report back to the reviewer. Address NOTE findings where practical.
 4. **Round limit.** Run at most two review rounds. If the report is still not `APPROVE` after round two, do not deliver. Keep `<RUN_DIR>`, and report the open findings to the user.
-5. **Delivery condition.** Save to Drive, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
+5. **Delivery condition.** Save to docs/, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
 
 ## 1. Execution Pipeline (Step-by-Step)
 
@@ -158,11 +158,11 @@ For **each of the 4 candidates**, generate a detailed HTML dossier:
 9. **Displacement Economics**: What it replaces, opportunity cost
 10. **Verdict**: SHORTLIST (with category) or REMAIN ON WATCHLIST
 
-Write each dossier to `googledrive/blogs/<SYMBOL>_dossier.html`.
+Write each dossier to `docs/blogs/<SYMBOL>_dossier.html`.
 
 ```bash
 # Verify all 4 dossiers were created
-ls -la googledrive/blogs/*_dossier.html
+ls -la docs/blogs/*_dossier.html
 ```
 
 ---
@@ -172,7 +172,7 @@ ls -la googledrive/blogs/*_dossier.html
 ```bash
 # Validate each dossier
 for symbol in <SYMBOL_1> <SYMBOL_2> <SYMBOL_3> <SYMBOL_4>; do
-    python3 scripts/validate_report.py --kind dossier --file "googledrive/blogs/${symbol}_dossier.html"
+    python3 scripts/validate_report.py --kind dossier --file "docs/blogs/${symbol}_dossier.html"
 done
 ```
 
@@ -217,7 +217,7 @@ python3 scripts/send_email.py --subject "US Watchlist → Shortlist: Batch of 4 
    - `scripts/config/aliases.json`
    - `US_Portfolio_Watchlist.xlsx`
    - `US_Portfolio_Shortlist.xlsx`
-   - `googledrive/` directory structure
+   - `docs/` and data directory structure
 
 > [!NOTE]
 > The workflow is complete when all 4 dossiers are dispatched and the shortlist is updated.

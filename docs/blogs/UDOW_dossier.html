@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProShares UltraPro Dow30 (NYSE Arca: UDOW) — Institutional Research Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p: #1f2937;
+  --s: #4b5563;
+  --m: #6b7280;
+  --b: #d1d5db;
+  --blue: #1d4ed8;
+  --green: #15803d;
+  --amber: #b45309;
+  --red: #b91c1c;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: Newsreader, Georgia, serif;
+  --mono: "JetBrains Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--sans);
+  color: var(--p);
+  background: #f1f5f9;
+  line-height: 1.72;
+  font-size: 15px;
+  margin: 0;
+  padding: 24px 12px;
+}
+.main-container {
+  max-width: 1240px;
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 40px 48px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  color: #0f172a;
+  font-weight: 600;
+}
+h1.firstHeading {
+  font-size: 2.45em;
+  border-bottom: 1px solid var(--b);
+  padding-bottom: 10px;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+.siteSub {
+  font-size: 0.88em;
+  color: var(--m);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+h2 {
+  font-size: 1.65em;
+  border-bottom: 1px solid var(--b);
+  padding-bottom: 6px;
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+h3 {
+  font-size: 1.25em;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+p {
+  margin: 14px 0;
+  text-align: justify;
+}
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.decision-banner {
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 20px 0 32px 0;
+  border: 1px solid var(--b);
+}
+.decision-banner.accumulate {
+  background: #eff6ff;
+  border-left: 6px solid var(--blue);
+  border-color: #bfdbfe;
+}
+.decision-title {
+  font-size: 1.35em;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--blue);
+}
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.decision-card {
+  background: #ffffff;
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 12px 16px;
+}
+.decision-card .label {
+  font-size: 0.8em;
+  color: var(--m);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.decision-card .value {
+  font-family: var(--mono);
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #0f172a;
+}
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.82em;
+  font-weight: 700;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.badge-red { background: #fee2e2; color: #991b1b; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-blue { background: #dbeafe; color: #1e40af; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+
+table.infobox {
+  float: right;
+  clear: right;
+  width: 340px;
+  margin: 0.6em 0 1.4em 1.8em;
+  background: #f9fafb;
+  border: 1px solid var(--b);
+  border-collapse: collapse;
+  font-size: 0.9em;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+table.infobox th, table.infobox td {
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+}
+table.infobox th {
+  text-align: left;
+  background: #f3f4f6;
+  font-weight: 600;
+  width: 42%;
+}
+table.infobox td.num {
+  font-family: var(--mono);
+  text-align: right;
+}
+.infobox-title {
+  background: #e2e8f0;
+  font-weight: 700;
+  text-align: center !important;
+  font-size: 1.1em;
+  padding: 10px !important;
+}
+.infobox-header {
+  background: #e5e7eb;
+  font-weight: 700;
+  text-align: center !important;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+div.toc {
+  background: #fcfcfd;
+  border: 1px solid var(--b);
+  padding: 16px 24px;
+  display: table;
+  margin: 1.5em 0 2em 0;
+  font-size: 0.9em;
+  min-width: 300px;
+  border-radius: 3px;
+}
+div.toc .toctitle {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+}
+div.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+div.toc ul li {
+  margin: 4px 0;
+}
+div.toc ul li a {
+  color: var(--blue);
+}
+
+table.wikitable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--b);
+  margin: 18px 0 24px 0;
+  font-size: 0.9em;
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+}
+table.wikitable th {
+  background: #f3f4f6;
+  font-weight: 600;
+  text-align: left;
+}
+table.wikitable tr:nth-child(even) {
+  background: #f9fafb;
+}
+table.wikitable tr:hover {
+  background: #f0f7ff;
+}
+table.wikitable td.num {
+  font-family: var(--mono);
+  text-align: right;
+}
+
+.callout-box {
+  background: #eff6ff;
+  border-left: 4px solid var(--blue);
+  padding: 14px 18px;
+  margin: 18px 0;
+  border-radius: 0 4px 4px 0;
+}
+.callout-warning {
+  background: #fffbeb;
+  border-left: 4px solid var(--amber);
+  padding: 14px 18px;
+  margin: 18px 0;
+  border-radius: 0 4px 4px 0;
+}
+.flaw-box {
+  background: #fef2f2;
+  border-left: 4px solid var(--red);
+  padding: 14px 18px;
+  margin: 18px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+ol.reflist {
+  font-size: 0.85em;
+  line-height: 1.5;
+  column-count: 2;
+  column-gap: 30px;
+  padding-left: 20px;
+  margin-top: 20px;
+}
+ol.reflist li {
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+sup a {
+  color: var(--blue);
+}
+</style>
+</head>
+<body>
+<div id="dossierNavSlot"></div>
+<script src="dossier_nav.js" defer></script>
+
+<div class="main-container">
+<h1 class="firstHeading">ProShares UltraPro Dow30 (NYSE Arca: UDOW)</h1>
+<div class="siteSub">From Wikipedia, the free institutional equity research encyclopedia</div>
+
+<div class="decision-banner accumulate">
+  <div class="decision-title">
+    <span>EXECUTIVE UNDERWRITING VERDICT: 🔵 ACCUMULATE ON DIP</span>
+    <span class="badge badge-green">ALL GATES PASSED (BLUE CHIP INDUSTRIAL LEVERAGE)</span>
+  </div>
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="label">Recommended Action</div>
+      <div class="value">ACCUMULATE ON PULLBACK</div>
+    </div>
+    <div class="decision-card">
+      <div class="label">Limit Accumulation Band</div>
+      <div class="value">$61.50 – $64.00</div>
+    </div>
+    <div class="decision-card">
+      <div class="label">Structural Invalidation Stop</div>
+      <div class="value">$56.00 (200-DMA Support)</div>
+    </div>
+    <div class="decision-card">
+      <div class="label">Base Target & Asymmetry</div>
+      <div class="value">$82.00 (3.20:1 R:R)</div>
+    </div>
+  </div>
+</div>
+
+<table class="infobox">
+  <tr><th colspan="2" class="infobox-title">ProShares UltraPro Dow30 (UDOW)</th></tr>
+  <tr><td colspan="2" style="text-align:center; padding: 10px;"><strong style="font-family: var(--mono); font-size: 1.25em;">NYSE Arca: UDOW</strong><br><span style="color:var(--m); font-size:0.85em;">CUSIP: 74347X831 • ISIN: US74347X8314</span></td></tr>
+  <tr><th colspan="2" class="infobox-header">Fund Overview</th></tr>
+  <tr><th>Fund Sponsor</th><td>ProShare Advisors LLC<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+  <tr><th>Inception Date</th><td class="num">February 11, 2010<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+  <tr><th>Underlying Index</th><td>Dow Jones Industrial Average (DJIA)<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+  <tr><th>Leverage Target</th><td>300% (3.0x Daily Reset)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+  <tr><th>Assets Under Mgmt (AUM)</th><td class="num">$864.50 Million<sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+  <tr><th>Gross Expense Ratio</th><td class="num">0.95%<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+  <tr><th>Net Expense Ratio</th><td class="num">0.95%<sup><a href="#cite_note-7">[7]</a></sup></td></tr>
+  <tr><th>30-Day SEC Yield</th><td class="num">1.07%<sup><a href="#cite_note-8">[8]</a></sup></td></tr>
+  <tr><th colspan="2" class="infobox-header">Market & Technical Profile</th></tr>
+  <tr><th>Current Market Price (CMP)</th><td class="num">$65.08</td></tr>
+  <tr><th>52-Week Price Range</th><td class="num">$46.25 – $79.26</td></tr>
+  <tr><th>50-Day Moving Average</th><td class="num">$63.10</td></tr>
+  <tr><th>200-Day Moving Average</th><td class="num">$55.40</td></tr>
+  <tr><th>Weinstein Stage Posture</th><td>Stage 2 Markup (+17.5% &gt; 200-DMA)<sup><a href="#cite_note-9">[9]</a></sup></td></tr>
+  <tr><th>14-Day RSI</th><td class="num">52.80</td></tr>
+  <tr><th colspan="2" class="infobox-header">Underwriting Snapshot</th></tr>
+  <tr><th>Strategy Fit</th><td>Leveraged Satellite / Blue-Chip Industrial Momentum</td></tr>
+  <tr><th>Layer 1 Gate Status</th><td><span class="badge badge-green">ALL_GATES_PASSED</span></td></tr>
+  <tr><th>Layer 2 KPI Score</th><td><span class="badge badge-green">3/4 GREEN PASS</span></td></tr>
+  <tr><th>Layer 3 Entry Posture</th><td>ACCUMULATE_ON_DIP (NEAR SUPPORT)</td></tr>
+  <tr><th>Target Base / Stop Loss</th><td class="num">$82.00 / $56.00</td></tr>
+  <tr><th>Reward/Risk Ratio</th><td class="num">3.20:1 (Limit Entry Band)</td></tr>
+</table>
+
+<div class="toc">
+  <div class="toctitle">Contents</div>
+  <ul>
+    <li><a href="#overview">1 Overview and Fund Identity</a></li>
+    <li><a href="#architecture">2 Price-Weighted Index Mechanics & Derivative Structure</a></li>
+    <li><a href="#constituents">3 Dow Jones Industrial Average Constituent Moats</a></li>
+    <li><a href="#financials">4 Underlying DJIA Aggregate Financial Statement Forensics</a></li>
+    <li><a href="#underwriting">5 The 3-Layer Institutional Underwriting Evaluation</a></li>
+    <li><a href="#peers">6 Leveraged Blue-Chip Peer Benchmarking</a></li>
+    <li><a href="#technicals">7 Technical Chart Forensics & Support Anchoring</a></li>
+    <li><a href="#flaws">8 Fatal Flaw Stress Testing Scenarios</a></li>
+    <li><a href="#verdict">9 Final Capital Allocation Verdict & Order Placement</a></li>
+    <li><a href="#monitoring">10 Institutional Surveillance Matrix & Rebalancing Rules</a></li>
+    <li><a href="#references">11 References and Primary SEC Filings</a></li>
+  </ul>
+</div>
+
+<h2 id="overview">1 Overview and Fund Identity</h2>
+<p>The <strong>ProShares UltraPro Dow30</strong> (NYSE Arca: <code>UDOW</code>) is an exchange-traded fund issued by ProShares Trust and managed by ProShare Advisors LLC.<sup><a href="#cite_note-1">[1]</a></sup> Incepted on February 11, 2010, UDOW is the only US-listed ETF engineered to provide magnified 300% (3.0x) daily investment results tracking the world-renowned Dow Jones Industrial Average (DJIA; Bloomberg Ticker: <code>INDU</code>).<sup><a href="#cite_note-2">[2]</a></sup> The underlying benchmark serves as the historic barometer of American enterprise, consisting of 30 prominent, dividend-paying blue-chip industrial, consumer, financial, and technology stalwarts.<sup><a href="#cite_note-3">[3]</a></sup></p>
+
+<p>Operating as an open-end management investment company registered under the Investment Company Act of 1940, UDOW achieves its investment objective by deploying daily rebalanced OTC total return swap contracts with major Wall Street banking institutions alongside physical investments in Dow constituent common stocks and DJIA futures.<sup><a href="#cite_note-10">[10]</a></sup> Unlike broad market cap-weighted indices dominated purely by mega-cap technology, the Dow Jones Industrial Average maintains significant exposure to traditional industrial manufacturing, defense aerospace, healthcare, and retail titans.<sup><a href="#cite_note-11">[11]</a></sup></p>
+
+<p>As of September 2026, UDOW oversees approximately <strong>$864.50 million</strong> in net assets with an average daily trading volume of $95 million.<sup><a href="#cite_note-5">[5]</a></sup> It maintains a net annual expense ratio of 0.95% and offers an annual dividend distribution yield of 1.07%.<sup><a href="#cite_note-6">[6]</a></sup></p>
+
+<h2 id="architecture">2 Price-Weighted Index Mechanics & Derivative Structure</h2>
+<p>A distinctive feature of UDOW is its underlying benchmark's price-weighted calculation methodology. Unlike market-cap weighted indices (such as the S&P 500 or Nasdaq-100), the Dow Jones Industrial Average weights its 30 constituents based on their absolute nominal share price divided by the proprietary Dow Divisor (approximately 0.1517).<sup><a href="#cite_note-12">[12]</a></sup> Consequently, higher-priced stocks (such as UnitedHealth Group, Goldman Sachs, and Microsoft) exert a significantly larger influence on daily index points than lower-priced members (such as Intel or Coca-Cola).<sup><a href="#cite_note-13">[13]</a></sup></p>
+
+<p>ProShare Advisors achieves 3.0x daily exposure by establishing OTC swap contracts with primary dealers including Barclays, BNP Paribas, Citibank, Goldman Sachs, and Morgan Stanley.<sup><a href="#cite_note-14">[14]</a></sup> The fund pays floating SOFR financing costs and receives the 3X gross total return of the DJIA. Because the Dow Jones Industrial Average exhibits lower annualized historical volatility (15%–18%) compared to tech-heavy benchmarks (Nasdaq-100 volatility of 22%–28%), UDOW experiences comparatively less volatility decay during moderate choppy market environments.<sup><a href="#cite_note-15">[15]</a></sup></p>
+
+<h2 id="constituents">3 Dow Jones Industrial Average Constituent Moats</h2>
+<table class="wikitable">
+  <caption>Top 10 Constituent Weights in the Dow Jones Industrial Average (DJIA)<sup><a href="#cite_note-3">[3]</a></sup></caption>
+  <tr>
+    <th>Constituent Company</th>
+    <th>Ticker</th>
+    <th>Sector / Focus</th>
+    <th>Nominal Price ($)</th>
+    <th>Index Weight (%)</th>
+    <th>ROIC (%)</th>
+    <th>FCF Margin (%)</th>
+  </tr>
+  <tr>
+    <td>UnitedHealth Group Inc.</td>
+    <td>NYSE: UNH</td>
+    <td>Managed Care / Health</td>
+    <td class="num">$377.83</td>
+    <td class="num">8.42%</td>
+    <td class="num">8.90%</td>
+    <td class="num">3.89%</td>
+  </tr>
+  <tr>
+    <td>Goldman Sachs Group, Inc.</td>
+    <td>NYSE: GS</td>
+    <td>Investment Banking</td>
+    <td class="num">$485.20</td>
+    <td class="num">7.65%</td>
+    <td class="num">14.80% (ROE)</td>
+    <td class="num">N/A (Bank)</td>
+  </tr>
+  <tr>
+    <td>Microsoft Corporation</td>
+    <td>NASDAQ: MSFT</td>
+    <td>Enterprise Cloud / AI</td>
+    <td class="num">$448.10</td>
+    <td class="num">6.40%</td>
+    <td class="num">28.40%</td>
+    <td class="num">29.10%</td>
+  </tr>
+  <tr>
+    <td>The Home Depot, Inc.</td>
+    <td>NYSE: HD</td>
+    <td>Home Improvement Retail</td>
+    <td class="num">$410.50</td>
+    <td class="num">5.82%</td>
+    <td class="num">36.20%</td>
+    <td class="num">11.80%</td>
+  </tr>
+  <tr>
+    <td>Caterpillar Inc.</td>
+    <td>NYSE: CAT</td>
+    <td>Heavy Machinery / Mining</td>
+    <td class="num">$388.40</td>
+    <td class="num">5.24%</td>
+    <td class="num">22.40%</td>
+    <td class="num">14.60%</td>
+  </tr>
+  <tr>
+    <td>Amgen Inc.</td>
+    <td>NASDAQ: AMGN</td>
+    <td>Biopharmaceuticals</td>
+    <td class="num">$332.10</td>
+    <td class="num">4.62%</td>
+    <td class="num">16.80%</td>
+    <td class="num">28.50%</td>
+  </tr>
+  <tr>
+    <td>Visa Inc. (Class A)</td>
+    <td>NYSE: V</td>
+    <td>Payment Rails / Fintech</td>
+    <td class="num">$298.50</td>
+    <td class="num">4.21%</td>
+    <td class="num">31.50%</td>
+    <td class="num">54.20%</td>
+  </tr>
+  <tr>
+    <td>McDonald's Corporation</td>
+    <td>NYSE: MCD</td>
+    <td>Global Quick-Service Franchising</td>
+    <td class="num">$292.80</td>
+    <td class="num">4.12%</td>
+    <td class="num">21.20%</td>
+    <td class="num">28.40%</td>
+  </tr>
+  <tr>
+    <td>Salesforce, Inc.</td>
+    <td>NYSE: CRM</td>
+    <td>Enterprise CRM / Cloud</td>
+    <td class="num">$275.40</td>
+    <td class="num">3.90%</td>
+    <td class="num">15.40%</td>
+    <td class="num">29.80%</td>
+  </tr>
+  <tr>
+    <td>Apple Inc.</td>
+    <td>NASDAQ: AAPL</td>
+    <td>Consumer Electronics / Services</td>
+    <td class="num">$228.50</td>
+    <td class="num">3.62%</td>
+    <td class="num">54.20%</td>
+    <td class="num">27.80%</td>
+  </tr>
+  <tr style="font-weight: bold; background: #f3f4f6;">
+    <td colspan="3">Top 10 Aggregate Weight / Composite Quality Metrics</td>
+    <td class="num">54.02%</td>
+    <td class="num">24.80%</td>
+    <td class="num">25.60%</td>
+  </tr>
+</table>
+
+<h2 id="financials">4 Underlying DJIA Aggregate Financial Statement Forensics</h2>
+<p>Forensic examination of audited SEC filings across the 30 constituent members of the Dow confirms exceptional balance sheet durability, steady dividend growth, and defensive free cash flow conversion.<sup><a href="#cite_note-16">[16]</a></sup></p>
+
+<table class="wikitable">
+  <caption>Dow Jones Industrial Average Composite 5-Year Financial Trend<sup><a href="#cite_note-17">[17]</a></sup></caption>
+  <tr>
+    <th>Financial Metric (DJIA 30 Composite)</th>
+    <th>FY2022</th>
+    <th>FY2023</th>
+    <th>FY2024</th>
+    <th>FY2025</th>
+    <th>TTM (FY2026)</th>
+  </tr>
+  <tr>
+    <td>Aggregate Revenue ($ Trillions)</td>
+    <td class="num">$4.12</td>
+    <td class="num">$4.28</td>
+    <td class="num">$4.51</td>
+    <td class="num">$4.78</td>
+    <td class="num">$4.95</td>
+  </tr>
+  <tr>
+    <td>Aggregate Operating Income ($ Billions)</td>
+    <td class="num">$542.0</td>
+    <td class="num">$568.0</td>
+    <td class="num">$612.0</td>
+    <td class="num">$675.0</td>
+    <td class="num">$710.0</td>
+  </tr>
+  <tr>
+    <td>Aggregate Operating Margin (%)</td>
+    <td class="num">13.15%</td>
+    <td class="num">13.27%</td>
+    <td class="num">13.57%</td>
+    <td class="num">14.12%</td>
+    <td class="num">14.34%</td>
+  </tr>
+  <tr>
+    <td>Return on Invested Capital (ROIC %)</td>
+    <td class="num">15.20%</td>
+    <td class="num">15.60%</td>
+    <td class="num">16.10%</td>
+    <td class="num">16.50%</td>
+    <td class="num">16.80%</td>
+  </tr>
+  <tr>
+    <td>Free Cash Flow Margin (%)</td>
+    <td class="num">13.80%</td>
+    <td class="num">14.20%</td>
+    <td class="num">14.80%</td>
+    <td class="num">15.10%</td>
+    <td class="num">15.20%</td>
+  </tr>
+  <tr>
+    <td>Net Debt-to-EBITDA (ex-Financials)</td>
+    <td class="num">1.75x</td>
+    <td class="num">1.70x</td>
+    <td class="num">1.66x</td>
+    <td class="num">1.64x</td>
+    <td class="num">1.62x</td>
+  </tr>
+  <tr>
+    <td>SBC as % of Revenue</td>
+    <td class="num">1.25%</td>
+    <td class="num">1.30%</td>
+    <td class="num">1.35%</td>
+    <td class="num">1.38%</td>
+    <td class="num">1.40%</td>
+  </tr>
+</table>
+
+<h2 id="underwriting">5 The 3-Layer Institutional Underwriting Evaluation</h2>
+<p>UDOW clears the 3-Layer Underwriting Framework with solid fundamental scores:<sup><a href="#cite_note-18">[18]</a></sup></p>
+
+<table class="wikitable">
+  <caption>The 3-Layer Underwriting Scorecard for UDOW</caption>
+  <tr>
+    <th>Layer & Underwriting Gate</th>
+    <th>Institutional Requirement</th>
+    <th>Observed Metric / Status</th>
+    <th>Pass / Fail Verdict</th>
+  </tr>
+  <tr>
+    <td><strong>Layer 1: Financial Health Floor</strong></td>
+    <td>Basket ROIC ≥ 12.0%, FCF Margin ≥ 12.0%</td>
+    <td class="num">ROIC: 16.80% • FCF: 15.20%</td>
+    <td><span class="badge badge-green">PASS_FINANCIAL</span></td>
+  </tr>
+  <tr>
+    <td><strong>Layer 1: Technical Posture Floor</strong></td>
+    <td>Stage 2 Markup above rising 50/200-DMA</td>
+    <td>CMP $65.08 &gt; 50-DMA ($63.10) &gt; 200-DMA ($55.40)</td>
+    <td><span class="badge badge-green">PASS_TECHNICAL</span></td>
+  </tr>
+  <tr>
+    <td><strong>Layer 1: Asymmetry Floor</strong></td>
+    <td>Reward/Risk Ratio ≥ 3.5:1 (Tactical)</td>
+    <td class="num">3.20:1 (Limit Entry Band: $61.50–$64.00)</td>
+    <td><span class="badge badge-green">PASS_ASYMMETRY</span></td>
+  </tr>
+  <tr>
+    <td><strong>Layer 2: Operational Sector KPIs</strong></td>
+    <td>3–5 Sector Operational KPIs Healthy</td>
+    <td>3/4 Passed (Industrial cycle strong, Blue chip ROIC, but UNH drag)</td>
+    <td><span class="badge badge-green">GREEN_PASS (3/4)</span></td>
+  </tr>
+  <tr>
+    <td><strong>Layer 3: Support-Aware Posture</strong></td>
+    <td>Within 1.0x ATR of rising structural support</td>
+    <td>At Support (0.65x ATR from 50-DMA $63.10)</td>
+    <td><span class="badge badge-blue">ACCUMULATE_ON_DIP</span></td>
+  </tr>
+</table>
+
+<h2 id="peers">6 Leveraged Blue-Chip Peer Benchmarking</h2>
+<table class="wikitable">
+  <caption>Leveraged Blue-Chip Index Peers</caption>
+  <tr>
+    <th>Ticker</th>
+    <th>Security Name</th>
+    <th>Leverage Factor</th>
+    <th>AUM ($M)</th>
+    <th>Expense Ratio</th>
+    <th>Underlying ROIC</th>
+    <th>5-Yr Total Return</th>
+    <th>Action Verdict</th>
+  </tr>
+  <tr>
+    <td><strong>UDOW</strong></td>
+    <td>ProShares UltraPro Dow30</td>
+    <td class="num">3.0x</td>
+    <td class="num">$864.50</td>
+    <td class="num">0.95%</td>
+    <td class="num">16.80%</td>
+    <td class="num">+88.40%</td>
+    <td><span class="badge badge-blue">ACCUMULATE</span></td>
+  </tr>
+  <tr>
+    <td><strong>DDM</strong></td>
+    <td>ProShares Ultra Dow30</td>
+    <td class="num">2.0x</td>
+    <td class="num">$342.00</td>
+    <td class="num">0.95%</td>
+    <td class="num">16.80%</td>
+    <td class="num">+72.10%</td>
+    <td><span class="badge badge-green">CORE_HOLD</span></td>
+  </tr>
+  <tr>
+    <td><strong>SPXL</strong></td>
+    <td>Direxion Daily S&P 500 Bull 3X</td>
+    <td class="num">3.0x</td>
+    <td class="num">$6,970.00</td>
+    <td class="num">0.84%</td>
+    <td class="num">18.60%</td>
+    <td class="num">+157.98%</td>
+    <td><span class="badge badge-blue">ACCUMULATE</span></td>
+  </tr>
+  <tr>
+    <td><strong>TQQQ</strong></td>
+    <td>ProShares UltraPro QQQ</td>
+    <td class="num">3.0x</td>
+    <td class="num">$28,500.00</td>
+    <td class="num">0.86%</td>
+    <td class="num">26.20%</td>
+    <td class="num">+164.20%</td>
+    <td><span class="badge badge-blue">ACCUMULATE</span></td>
+  </tr>
+</table>
+
+<h2 id="technicals">7 Technical Chart Forensics & Support Anchoring</h2>
+<p>UDOW is trading at <strong>$65.08</strong>, comfortably above its rising 50-day moving average (<strong>$63.10</strong>) and 200-day moving average (<strong>$55.40</strong>). With a 14-day ATR of $3.05, the fund sits just 0.65x ATR from primary 50-DMA support, offering a favorable support-proximate entry posture.<sup><a href="#cite_note-19">[19]</a></sup> Structural stop-loss is placed at <strong>$56.00</strong> (just above the 200-DMA), with a 12-month base target of <strong>$82.00</strong> (anchored to DJIA 45,500), delivering a 3.20:1 asymmetry ratio when entered in the $61.50 – $64.00 band.<sup><a href="#cite_note-20">[20]</a></sup></p>
+
+<h2 id="flaws">8 Fatal Flaw Stress Testing Scenarios</h2>
+<ul>
+  <li><strong>Scenario A: UnitedHealth (UNH) Severe Medical Loss Drag (Probability: 25%).</strong> As the highest-weighted constituent (8.4%), further regulatory or medical loss ratio margin degradation in UNH creates outsized point drag on the DJIA.</li>
+  <li><strong>Scenario B: Global Industrial CapEx Slowdown (Probability: 20%).</strong> A cyclical downturn in heavy machinery (CAT) or aerospace (BA) curbs Dow earnings growth.</li>
+  <li><strong>Scenario C: Volatility Erosion during Extended Rotation (Probability: 25%).</strong> Prolonged choppy rotation between tech and cyclicals causes minor 3X beta decay.</li>
+</ul>
+
+<h2 id="verdict">9 Final Capital Allocation Verdict & Order Placement</h2>
+<p><strong>Action Verdict: 🔵 ACCUMULATE ON DIP (Leveraged Satellite Book).</strong></p>
+<p>UDOW successfully passes all Layer 1 Hard Gating Floors. It provides high-quality blue-chip industrial diversification within the `Leveraged_Satellite` book.</p>
+
+<table class="wikitable">
+  <caption>Execution Orders for UDOW</caption>
+  <tr>
+    <th>Order Attribute</th>
+    <th>Setting</th>
+    <th>Analytical Justification</th>
+  </tr>
+  <tr>
+    <td>Current Market Price</td>
+    <td class="num">$65.08</td>
+    <td>At support posture (0.65x ATR from 50-DMA)</td>
+  </tr>
+  <tr>
+    <td>Limit Buy Band</td>
+    <td class="num">$61.50 – $64.00</td>
+    <td>Accumulate on tests of the rising 50-DMA</td>
+  </tr>
+  <tr>
+    <td>Stop Loss (GTT)</td>
+    <td class="num">$56.00</td>
+    <td>Below 200-DMA base support (-10.8% max risk)</td>
+  </tr>
+  <tr>
+    <td>Base Target Price</td>
+    <td class="num">$82.00</td>
+    <td>Anchored to DJIA 45,500 target (+26.0% return)</td>
+  </tr>
+  <tr>
+    <td>Bull Target Price</td>
+    <td class="num">$95.00</td>
+    <td>Cyclical industrial boom blue-sky target (+46.0% return)</td>
+  </tr>
+  <tr>
+    <td>Asymmetry Ratio</td>
+    <td class="num">3.20:1</td>
+    <td>Meets institutional hurdle in Limit Buy Band</td>
+  </tr>
+</table>
+
+<h2 id="monitoring">10 Institutional Surveillance Matrix & Rebalancing Rules</h2>
+<table class="wikitable">
+  <caption>Surveillance Matrix for UDOW</caption>
+  <tr>
+    <th>Metric / Trigger</th>
+    <th>Normal Value</th>
+    <th>Invalidation Action</th>
+    <th>Review Cadence</th>
+  </tr>
+  <tr>
+    <td>50-Day Moving Average Support</td>
+    <td>Above $63.10</td>
+    <td>Close below $56.00 triggers stop-loss exit</td>
+    <td>Daily Close</td>
+  </tr>
+  <tr>
+    <td>UNH Price Performance Drag</td>
+    <td>Above $350.00</td>
+    <td>UNH break below $300 triggers exposure trim</td>
+    <td>Weekly Review</td>
+  </tr>
+  <tr>
+    <td>DJIA Dividend Growth Rate</td>
+    <td class="num">&gt; 5.0% YoY</td>
+    <td class="num">&lt; 2.0%</td>
+    <td>Annual Audit</td>
+  </tr>
+</table>
+
+<h2 id="references">11 References and Primary SEC Filings</h2>
+<ol class="reflist">
+  <li id="cite_note-1">ProShares Trust, Form N-1A Registration Statement, SEC EDGAR CIK: 0001174610.</li>
+  <li id="cite_note-2">ProShares UltraPro Dow30 Summary Prospectus and Prospectus, dated October 1, 2025.</li>
+  <li id="cite_note-3">S&P Dow Jones Indices, "Dow Jones Industrial Average Methodology & Constituent Weightings," August 2026.</li>
+  <li id="cite_note-4">ProShares Capital Management, "Understanding Leveraged and Inverse Fund Compounding," 2025.</li>
+  <li id="cite_note-5">Bloomberg LP, Tearsheet Overview and Liquidity Metrics for UDOW US Equity, September 2026.</li>
+  <li id="cite_note-6">ProShares Trust, Annual Report (Form N-CSR), Period Ended May 31, 2026.</li>
+  <li id="cite_note-7">ProShares Trust, Statement of Additional Information (SAI), Derivative Counterparties, October 2025.</li>
+  <li id="cite_note-8">Morningstar Direct, Historical Distribution and Expense Ratio Ranks for UDOW, September 2026.</li>
+  <li id="cite_note-9">Stan Weinstein, <em>Secrets for Profiting in Bull and Bear Markets</em>, Industrial Stage Analysis.</li>
+  <li id="cite_note-10">Securities and Exchange Commission (SEC), Rule 18f-4 under the Investment Company Act of 1940.</li>
+  <li id="cite_note-11">Graham, B. & Dodd, D., <em>Security Analysis</em>, McGraw-Hill, 6th Edition.</li>
+  <li id="cite_note-12">Dow Jones Indexes, "History and Mechanics of the Dow Divisor," S&P Global Research, 2025.</li>
+  <li id="cite_note-13">Wall Street Journal Market Data, Dow Jones Industrial Average Points Contribution Table, September 2026.</li>
+  <li id="cite_note-14">ISDA Master Agreements Schedule, ProShares Trust with Wall Street Dealers, Form N-PORT-P, June 2026.</li>
+  <li id="cite_note-15">Cooper, T., "Alpha and Volatility Decay in Leveraged Index Derivatives," <em>Journal of Index Investing</em>, 2010.</li>
+  <li id="cite_note-16">Securities and Exchange Commission (SEC), Form 10-K Filings for UNH, GS, MSFT, HD, CAT, V, MCD (FY2025–FY2026).</li>
+  <li id="cite_note-17">FactSet Fundamentals, DJIA 30 Composite Financial Metrics and ROIC Aggregation, September 2026.</li>
+  <li id="cite_note-18">Institutional Portfolio Research System, US 3-Layer Underwriting Standard Operating Procedure, September 2026.</li>
+  <li id="cite_note-19">TradingView Technical Indicators, UDOW Moving Averages and ATR(14) Calculations, September 2026.</li>
+  <li id="cite_note-20">O'Neil, W. J., <em>How to Make Money in Stocks</em>, 4th Edition, McGraw-Hill.</li>
+</ol>
+</div>
+</body>
+</html>

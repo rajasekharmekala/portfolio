@@ -41,13 +41,13 @@ Before executing any step, you MUST read and internalize the following governing
 
 ## 1.5 Independent Reviewer Gate (mandatory before delivery)
 
-Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to Drive, published, or emailed.
+Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to docs/, published, or emailed.
 
 1. **Run the reviewer passes.** Read `../config/reviewer.json` and `../skills/_shared/REVIEWER_OPERATIONS.md`. Run each pass in the config as a separate fresh agent, using the model set in the config. Do not name a model in this workflow.
 2. **Give the reviewer only its inputs:** the report path, `<RUN_DIR>/cache/facts_<MKT>_<date>.json`, `<RUN_DIR>/cache/research_<MKT>_<date>.json`, the snapshots in `<RUN_DIR>/inputs/`, the sibling report if it exists, the three standards in `../skills/_shared/`, and the validator output. Do not pass the Story Brief, your drafts, or your reasoning.
 3. **Act on the result.** The reviewer writes `<RUN_DIR>/review_round_<N>.json`. On `REVISE` or `BLOCK`, fix every BLOCK and REVISE finding in the report, re-run `validate_report.py` until it shows `RESULT: PASS`, and send the report back to the reviewer. Address NOTE findings where practical.
 4. **Round limit.** Run at most two review rounds. If the report is still not `APPROVE` after round two, do not deliver. Keep `<RUN_DIR>`, and report the open findings to the user.
-5. **Delivery condition.** Save to Drive, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
+5. **Delivery condition.** Save to docs/, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
 
 ## 1. Execution Pipeline (Step-by-Step)
 
@@ -173,11 +173,11 @@ Document the classification with a 2–3 sentence rationale.
    - **Header**: Date, "US Archive Resurrection Review — Batch of 6"
    - **Table**: Symbol, Original Rejection, Current Status, Classification, Rationale
    - **Summary**: X resurrected, Y remain rejected
-2. Write to `googledrive/newsletters/US_Archive_Resurrection_<YYYY-MM-DD>.html`.
+2. Write to `docs/reports/US_Archive_Resurrection_<YYYY-MM-DD>.html`.
 
 ```bash
 # Verify the report was created
-ls -la googledrive/newsletters/US_Archive_Resurrection_$(date +%Y-%m-%d).html
+ls -la docs/reports/US_Archive_Resurrection_$(date +%Y-%m-%d).html
 ```
 
 ---
@@ -192,7 +192,7 @@ python3 scripts/validate_report.py --kind summary
 - If `RESULT: FAIL` → fix and re-validate.
 
 ```bash
-python3 scripts/send_email.py --report "googledrive/newsletters/US_Archive_Resurrection_$(date +%Y-%m-%d).html" --subject "US Archive Resurrection Review - $(date +%Y-%m-%d)"
+python3 scripts/send_email.py --report "docs/reports/US_Archive_Resurrection_$(date +%Y-%m-%d).html" --subject "US Archive Resurrection Review - $(date +%Y-%m-%d)"
 ```
 
 ---
@@ -212,7 +212,7 @@ python3 scripts/send_email.py --report "googledrive/newsletters/US_Archive_Resur
    - `scripts/config/aliases.json`
    - `US_Portfolio_Watchlist.xlsx`
    - `US_Portfolio_Archive.xlsx`
-   - `googledrive/` directory structure
+   - `docs/` and data directory structure
 
 > [!NOTE]
 > The workflow is complete when the watchlist is updated, the report is dispatched, and the workspace is clean.

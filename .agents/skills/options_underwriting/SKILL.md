@@ -5,7 +5,7 @@ description: >-
   Screens liquid F&O candidates from shortlist/Zerodha_Shortlist.xlsx and watchlist/Zerodha_Watchlist.xlsx, evaluates IV/RV volatility squeeze,
   F&O smart money flow (Long Build-Up), strike OI migration, and GEX levels. Constructs defined-risk Bull Call Spreads and tactical calls
   (Delta 0.45–0.60), audits active positions against the 4 discrete actions (HOLD, ROLL_UP_OUT, CONVERT_SPREAD, KILL),
-  and persists institutional briefings in googledrive/newsletters/Options_Underwriting_NSE_<YYYY-MM-DD>.html.
+  and persists institutional briefings in docs/reports/Options_Underwriting_NSE_<YYYY-MM-DD>.html.
 ---
 
 # Quantitative Institutional Options Underwriting & Lifecycle Engine (NSE F&O)
@@ -26,7 +26,7 @@ Execute the **Quantitative Institutional Options Underwriting & Lifecycle Engine
    - **`ROLL_UP_OUT`** (Harvest gamma when Delta $>0.75$ or P&L $\ge +80\%$; roll to Delta $0.50$ next month).
    - **`CONVERT_SPREAD`** (Freeze delta and stop theta decay at Resistance 1 by selling OTM call).
    - **`KILL`** (Option loss $\le -40\%$, or underlying breaks 50-DMA, or DTE $<20$ without breakout).
-4. Persist an exhaustive, Wikipedia-styled HTML report to **`googledrive/newsletters/Options_Underwriting_NSE_<YYYY-MM-DD>.html`**, update **`Portfolio Research System/05_Options_Book.md`**, and synchronize **`sheets/Options_Positions.xlsx`** in-place.
+4. Persist an exhaustive, Wikipedia-styled HTML report to **`docs/reports/Options_Underwriting_NSE_<YYYY-MM-DD>.html`**, update **`Portfolio Research System/05_Options_Book.md`**, and synchronize **`sheets/Options_Positions.xlsx`** in-place.
 
 ---
 
@@ -53,7 +53,7 @@ Execute the **Quantitative Institutional Options Underwriting & Lifecycle Engine
 6. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE (NO RESIDUAL ARTIFACTS):**
    - Any one-off execution scripts created during this run are **transient pipeline artifacts**. IMMEDIATELY after the pipeline completes successfully, delete them: `rm scripts/<one-off-script>.py` and remove `scripts/__pycache__/`.
    - **Zero Prior-Session Bias & Cache Cleanup**: Stale cache artifacts from prior session dates in `scripts/.cache/` (e.g. `facts_*`, `research_*`, `audit_*`, `screen_*`) must be pruned. Every run starts from a clean, unbiased baseline. Only persistent configuration (`scripts/.cache/aliases.json`) is preserved across sessions.
-   - **PERMANENT INFRASTRUCTURE WHITELIST (NEVER DELETE):** `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `googledrive/blogs/dossier_nav.js`, `googledrive/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
+   - **PERMANENT INFRASTRUCTURE WHITELIST (NEVER DELETE):** `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `docs/blogs/dossier_nav.js`, `docs/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
    - **Pre-termination verification:** run `ls scripts/` and confirm ONLY whitelisted files remain. Leaving one-off generator/update scripts behind is a pipeline failure.
 
 ---

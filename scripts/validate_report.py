@@ -5,7 +5,7 @@ dump, is too thin to teach a beginner, has too many N/A cells, contradicts the f
 web-research record, or has unrendered/boilerplate content.
 
 Usage:
-  python3 scripts/validate_report.py --report googledrive/newsletters/US_Market_Intelligence_2026-09-28.html \
+  python3 scripts/validate_report.py --report docs/reports/US_Market_Intelligence_2026-09-28.html \
       --kind market_intel --facts scripts/.cache/facts_US_2026-09-28.json
   --kind: market_intel | portfolio_audit
 
@@ -346,7 +346,10 @@ def main():
             errors.append(f"REGIME LABEL '{F['regime']['label']}' from the ledger never appears verbatim in the report")
 
         # web-research record (duck-duck-go MCP)
-        rpath = os.path.join(os.path.dirname(os.path.abspath(args.facts)), "..", "..", F.get("research_file", ""))
+        rf = F.get("research_file", "")
+        rpath = os.path.join(os.path.dirname(os.path.abspath(args.facts)), os.path.basename(rf))
+        if not os.path.isfile(rpath):
+            rpath = os.path.join(os.path.dirname(os.path.abspath(args.facts)), "..", "..", rf)
         if not os.path.isfile(rpath):
             errors.append(f"NO WEB RESEARCH RECORD at {F.get('research_file')} (use the duck-duck-go MCP for every research_needs item)")
         else:

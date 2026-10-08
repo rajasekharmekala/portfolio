@@ -23,7 +23,7 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
 4. **Write the Story Brief** (private, 6-8 bullets) before any HTML: regime verdict (verbatim `regime.label`), breadth verdict, the 2-3 leading and lagging sectors, the 3 themes that explain the bull and bear lists, what changed vs the previous report, and the single most important action. Every section must serve this brief.
 5. **Write the sections** from the ledger and the brief only (specialist subagents receive the ledger path and the brief; they must not search for prices independently).
 6. **Validate**: `python3 scripts/validate_report.py --report <file> --kind <market_intel|portfolio_audit> --facts scripts/.cache/facts_<MKT>_<date>.json`
-   The report may be saved to Drive and emailed **only when the result is `PASS`**. On `FAIL`, fix the report and re-run; do not lower thresholds.
+   The report may be saved to docs/ and emailed **only when the result is `PASS`**. On `FAIL`, fix the report and re-run; do not lower thresholds.
 
 ## 2. Data completeness
 
@@ -77,7 +77,7 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
 - **The narrative spine.**
   Market report: regime (1) -> which sectors lead and lag (2) -> the Bull List is drawn mainly from leading sectors and the Bear List from lagging ones; any exception is named and explained (3, 4) -> smart-money flow corroborates or dissents (5) -> the Top 3 come only from section 3, are sized by the regime table, and each cites the sector and flow evidence (6) -> section 7 ingests exactly those names and no others.
   Audit: Chapter 1 restates the market report's regime and sector map -> Chapter 2 verdicts cite that regime (a holding in a lagging sector below its 50-DMA is not "KEEP") -> Chapter 3 applies the same gates to the shortlist -> Chapter 4 explains every displacement or non-displacement -> Chapter 5 totals reconcile to the rupee/dollar with Chapter 2 and 3 -> Chapter 6 orders are exactly the Chapter 5 deltas, nothing more.
-- **Cross-report reconciliation.** Before writing, read the sibling report for the same market and date if it exists in `googledrive/newsletters/`. Any ticker in both must carry the same stage and price. A held name on today's Bull List gets a sentence in the audit ("also a Stage 2 breakout today, supports HOLD"); a held name on the Bear List must be addressed in Chapter 2 with an explicit action. Watchlist ingestion (market report section 7) must not include names the audit just EXITed.
+- **Cross-report reconciliation.** Before writing, read the sibling report for the same market and date if it exists in `docs/reports/`. Any ticker in both must carry the same stage and price. A held name on today's Bull List gets a sentence in the audit ("also a Stage 2 breakout today, supports HOLD"); a held name on the Bear List must be addressed in Chapter 2 with an explicit action. Watchlist ingestion (market report section 7) must not include names the audit just EXITed.
 - **Signposts.** Use explicit back/forward references ("see 3.2", "the regime set out in section 1") so a reader can follow the argument. The last sentence of each section is its bridge to the next.
 - **Conflicting evidence is stated, not hidden**: for example a high-ROCE compounder below its 50-DMA is described as "quality intact, timing unconfirmed", with the level that would change the verdict.
 

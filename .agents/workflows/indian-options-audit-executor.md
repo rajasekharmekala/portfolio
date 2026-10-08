@@ -33,7 +33,7 @@ Before executing any step, you MUST read and internalize the following governing
 3. **Long Build-up Detection**: Large call purchases (not covered calls) with OI building at strikes above current price. PCR declining = bullish positioning.
 4. **DTE Constraints**: Bull Call Spreads must be 30–75 DTE. LEAPS must be 180–720 DTE.
 5. **Top 3 Setups Only**: The screening phase must produce exactly 3 structured setups, ranked by conviction.
-6. **Report Output**: Final report must be written to `googledrive/newsletters/Options_Underwriting_NSE_<YYYY-MM-DD>.html`.
+6. **Report Output**: Final report must be written to `docs/reports/Options_Underwriting_NSE_<YYYY-MM-DD>.html`.
 7. **Validation Gate**: The report must pass `python3 scripts/validate_report.py --kind options` before dispatch.
 8. **Rupee Arithmetic**: All monetary values must be in INR. Use Indian number formatting (lakh/crore) where appropriate.
 
@@ -41,13 +41,13 @@ Before executing any step, you MUST read and internalize the following governing
 
 ## 1.5 Independent Reviewer Gate (mandatory before delivery)
 
-Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to Drive, published, or emailed.
+Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to docs/, published, or emailed.
 
 1. **Run the reviewer passes.** Read `../config/reviewer.json` and `../skills/_shared/REVIEWER_OPERATIONS.md`. Run each pass in the config as a separate fresh agent, using the model set in the config. Do not name a model in this workflow.
 2. **Give the reviewer only its inputs:** the report path, `<RUN_DIR>/cache/facts_<MKT>_<date>.json`, `<RUN_DIR>/cache/research_<MKT>_<date>.json`, the snapshots in `<RUN_DIR>/inputs/`, the sibling report if it exists, the three standards in `../skills/_shared/`, and the validator output. Do not pass the Story Brief, your drafts, or your reasoning.
 3. **Act on the result.** The reviewer writes `<RUN_DIR>/review_round_<N>.json`. On `REVISE` or `BLOCK`, fix every BLOCK and REVISE finding in the report, re-run `validate_report.py` until it shows `RESULT: PASS`, and send the report back to the reviewer. Address NOTE findings where practical.
 4. **Round limit.** Run at most two review rounds. If the report is still not `APPROVE` after round two, do not deliver. Keep `<RUN_DIR>`, and report the open findings to the user.
-5. **Delivery condition.** Save to Drive, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
+5. **Delivery condition.** Save to docs/, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
 
 ## 1. Execution Pipeline (Step-by-Step)
 
@@ -169,11 +169,11 @@ From the screened candidates, select the **Top 3** by conviction score and struc
    - **Section 1: Position Audit** — Table of all positions with action, rationale, and specific recommendations
    - **Section 2: Top 3 Setups** — Detailed structure for each setup with risk/reward
    - **Section 3: Market Context** — Brief note on overall IV environment, NSE F&O OI trends, PCR
-3. Write to `googledrive/newsletters/Options_Underwriting_NSE_<YYYY-MM-DD>.html`.
+3. Write to `docs/reports/Options_Underwriting_NSE_<YYYY-MM-DD>.html`.
 
 ```bash
 # Verify the output file was created
-ls -la googledrive/newsletters/Options_Underwriting_NSE_$(date +%Y-%m-%d).html
+ls -la docs/reports/Options_Underwriting_NSE_$(date +%Y-%m-%d).html
 ```
 
 ---
@@ -195,7 +195,7 @@ python3 scripts/validate_report.py --kind options
 2. Send the report via email using `scripts/send_email.py`.
 
 ```bash
-python3 scripts/send_email.py --report "googledrive/newsletters/Options_Underwriting_NSE_$(date +%Y-%m-%d).html" --subject "Indian Options Audit & Setup Structuring - $(date +%Y-%m-%d)"
+python3 scripts/send_email.py --report "docs/reports/Options_Underwriting_NSE_$(date +%Y-%m-%d).html" --subject "Indian Options Audit & Setup Structuring - $(date +%Y-%m-%d)"
 ```
 
 ---
@@ -215,7 +215,7 @@ python3 scripts/send_email.py --report "googledrive/newsletters/Options_Underwri
    - `scripts/config/aliases.json`
    - `Options_Positions.xlsx`
    - `Zerodha_Shortlist.xlsx`
-   - `googledrive/` directory structure
+   - `docs/` and data directory structure
 
 > [!NOTE]
 > The workflow is complete when the report is dispatched and the workspace is clean.

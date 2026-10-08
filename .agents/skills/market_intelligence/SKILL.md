@@ -17,7 +17,7 @@ Act as a **Senior Institutional Equity Research Analyst**, **Derivatives Strateg
 
 Execute the **Daily Market Intelligence & Watchlist Ingestion Engine**:
 1. Generate an exhaustive daily market intelligence briefing formatted in authentic **Wikipedia Design System** (NPOV encyclopedic tone, floating infobox, wikitables, footnotes, verified citations).
-2. Maintain and synchronize the deliverable in Google Drive at **`googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html`** (maintaining **strictly only the single latest generated report showing the run date on the page**, and automatically deleting all prior versions).
+2. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html`** (maintaining **strictly only the single latest generated report showing the run date on the page**, and automatically deleting all prior versions).
 3. Transmit the complete deliverable via Gmail to **`rajasekharreddymekala732@gmail.com`**.
 4. Synchronize and maintain **`watchlist/Zerodha_Watchlist.xlsx`** (feeding the top 1–3 standout setups of the day directly into the top of the deep research funnel).
 
@@ -32,7 +32,7 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
 1. **Data first:** run `python3 scripts/market_facts.py --market IN --date <session> --screen nifty500`. Every price, DMA, RSI, ATR, volume multiple, Weinstein stage, regime label, breadth figure, sector quadrant and both 30-name lists must come from `scripts/.cache/facts_IN_<date>.json`. `N/A` is a last resort after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results recorded in `scripts/.cache/research_IN_<date>.json` with source URL and as-of date) and a second source have all failed (max 5% of table cells). FII/DII flows, NSE option-chain OI/PCR, FII index futures, bulk/block deals, delivery %, results dates and catalysts come from that pass, not from memory. Use precise date-stamped queries, fetch and read the actual page (snippets are not evidence), try direct NSE archive URLs first, and cross-check headline figures with a second source. Never carry forward the previous report's names or publish a "revalidation pending" list; publish exactly `screen.bull_pick` and `screen.bear_pick` (10 per cap tier, company names and sectors from the pick rows, `qualifier` shown and explained).
 2. **Write it as a book for a beginner (section 3 and blueprint 7A of the standard):** append `.agents/skills/_shared/book_components.css` to the report's `<style>`; open with a 450+ word `primer` ("Start here": every key idea with an everyday analogy), then a 250-400 word lede; every section opens with a 200+ word essay and closes with a "what this means for you" paragraph; every table has a `howto` block before it (read one real row aloud) and a 120+ word `takeaway` after it; `casenote` stories (80+ words: what the company does, the numbers and what they mean, the verdict and the exact rule behind it, what would change it, with prices) for the Top 3 setups, three spotlights per list and each leading/lagging sector; at least one worked `example` with rupee arithmetic; a `triggers` if/then block per section; a glossary and a methodology/data-gaps note. Target 12,000+ words; the validator floor is 9,000. Never leave a number unexplained.
 3. **One story:** one regime label (ledger `regime.label`) used verbatim in the infobox, Section 1 and Section 6; the Bull List is drawn from leading sectors and the Bear List from lagging ones (exceptions named); the Section 6 Top 3 come only from Section 3 and are sized by the regime table; Section 7 ingests only those names. Read the same-date `Portfolio_Audit_*.html` first and reconcile every shared ticker's price and stage.
-4. **Gate:** `python3 scripts/validate_report.py --report googledrive/newsletters/Daily_Market_Intelligence_<date>.html --kind market_intel --facts scripts/.cache/facts_IN_<date>.json` must print `PASS` before the Drive save and email. The HTML skeleton below is table scaffolding only: every `{{NARRATIVE_*}}` slot, plus an intro `<p>` before and a takeaway `<p>` after every table, must be written as full prose.
+4. **Gate:** `python3 scripts/validate_report.py --report docs/reports/Daily_Market_Intelligence_<date>.html --kind market_intel --facts scripts/.cache/facts_IN_<date>.json` must print `PASS` before the Drive save and email. The HTML skeleton below is table scaffolding only: every `{{NARRATIVE_*}}` slot, plus an intro `<p>` before and a takeaway `<p>` after every table, must be written as full prose.
 
 ---
 
@@ -54,9 +54,9 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
 6. **MANDATORY INDEPENDENT REVIEWER AGENT & EXTENSIVE DUCK-DUCK-GO MCP WEB VERIFICATION:**
    - Double-check all closing prices (CMP), 52-week ranges, moving averages, 14-day RSI, volume expansion multiples, PCR, India VIX, and FII/DII net flows via live online search (the `duck-duck-go` MCP `search` then `fetch_content`, per section 6 of `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`).
 7. **MANDATORY GOOGLE DRIVE SYNCHRONIZATION, REPORT LIFECYCLE & IN-PLACE OVERWRITE:**
-   - Ingest `sheets/Zerodha_Holdings.xlsx` and `shortlist/Zerodha_Shortlist.xlsx` fresh from Google Drive.
+   - Ingest `sheets/Zerodha_Holdings.xlsx` and `shortlist/Zerodha_Shortlist.xlsx` fresh from sheets/ and shortlist/.
    - Modify and persist `watchlist/Zerodha_Watchlist.xlsx` strictly IN-PLACE.
-   - **Single Latest Report Maintenance in Google Drive:** Save the generated HTML briefing to `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html`. The document title, page header, and infobox must clearly display the session date (`YYYY-MM-DD`). Automatically scan `googledrive/newsletters/` and delete all previous `Daily_Market_Intelligence_*.html` files before/upon writing the new one, ensuring Google Drive holds strictly only the single latest generated report.
+   - **Single Latest Report Maintenance in docs/reports/:** Save the generated HTML briefing to `docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html`. The document title, page header, and infobox must clearly display the session date (`YYYY-MM-DD`). Automatically scan `docs/reports/` and delete all previous `Daily_Market_Intelligence_*.html` files before/upon writing the new one, ensuring Google Drive holds strictly only the single latest generated report.
 8. **MANDATORY AUTOMATED EMAIL DISPATCH (NO MANUAL CONFIRMATION / NO BLOCKED POLICY):**
    - Automated email dispatch of the generated newsletter to `rajasekharreddymekala732@gmail.com` via `scripts/send_email.py` is a **STRICT, MANDATORY PIPELINE REQUIREMENT** for every run.
    - You MUST programmatically run the `send_email.py` command in the terminal as the final automated step.
@@ -64,7 +64,7 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
 9. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE (NO RESIDUAL ARTIFACTS):**
    - Any one-off execution scripts created during this run (e.g., `generate_*.py`, `build_*_dossiers*.py`, `expand_*.py`, `update_*_workbooks.py`, `update_*_watchlist*.py`) are **transient pipeline artifacts**. IMMEDIATELY after the pipeline completes successfully (HTML written, workbooks updated, portal rebuilt, email dispatched), you MUST delete them in the terminal as the final step: `rm scripts/<one-off-script>.py`, and also remove any `scripts/__pycache__/` directory created during the run.
    - **Zero Prior-Session Bias & Cache Cleanup**: Stale cache artifacts from prior session dates in `scripts/.cache/` (e.g. `facts_*`, `research_*`, `audit_*`, `screen_*`) must be pruned. Every run starts from a clean, unbiased baseline. Only persistent configuration (`scripts/.cache/aliases.json`) is preserved across sessions.
-   - **PERMANENT INFRASTRUCTURE WHITELIST (NEVER DELETE):** `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `googledrive/blogs/dossier_nav.js`, `googledrive/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
+   - **PERMANENT INFRASTRUCTURE WHITELIST (NEVER DELETE):** `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `docs/blogs/dossier_nav.js`, `docs/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
    - **Pre-termination verification:** run `ls scripts/` and confirm ONLY whitelisted files remain. Leaving one-off generator/update scripts behind is a pipeline failure.
 
 ---
@@ -588,13 +588,13 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 - **Subject:** `Subject: Daily Market Pulse | [Session Date] — Nifty [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts`
 - **Pre-Send Audit:** Zero omissions across all 7 sections. Complete 30 longs + 30 shorts rendered.
 - **Google Drive Maintenance (Single Latest Version Lifecycle):**
-  - **Target Location:** `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html`
+  - **Target Location:** `docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html`
   - **Date Display:** The run date (`YYYY-MM-DD` / formatted session date) must be prominently displayed in the document title, subtitle, and Wikipedia Infobox metadata.
-  - **Prune Prior Versions:** Automatically scan `googledrive/newsletters/` and delete / remove all previous versions matching `Daily_Market_Intelligence_*.html` prior to or upon saving the new file, ensuring only the single latest report is maintained in Google Drive.
+  - **Prune Prior Versions:** Automatically scan `docs/reports/` and delete / remove all previous versions matching `Daily_Market_Intelligence_*.html` prior to or upon saving the new file, ensuring only the single latest report is maintained in docs/reports/.
 - **Automated Dispatch Execution (MANDATORY):**
-  - Persist the complete HTML newsletter to `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html`.
+  - Persist the complete HTML newsletter to `docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html`.
   - Dispatch the email immediately and automatically via `scripts/send_email.py` using credentials from `.env` (Do NOT prompt the user or request manual confirmation):
     ```bash
-    python3 scripts/send_email.py --subject "Daily Market Pulse | [Session Date] — Nifty [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts" --html-file "googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html" --recipient "rajasekharreddymekala732@gmail.com"
+    python3 scripts/send_email.py --subject "Daily Market Pulse | [Session Date] — Nifty [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts" --html-file "docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html" --recipient "rajasekharreddymekala732@gmail.com"
     ```
   - Confirm successful SMTP execution in the final turn summary.

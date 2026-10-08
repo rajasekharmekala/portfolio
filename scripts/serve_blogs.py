@@ -2,8 +2,8 @@
 """
 Master Institutional Research Portal & Intelligence Hub File Server
 ===================================================================
-Serves company research dossiers (googledrive/blogs) and the latest Market Intelligence
-and Portfolio Audit reports (googledrive/newsletters) on http://localhost:9050/.
+Serves company research dossiers (docs/blogs) and the latest Market Intelligence
+and Portfolio Audit reports (docs/reports) on http://localhost:9050/.
 Maintained as a persistent background daemon via macOS launchd (com.portfolio.blogs.fileserver).
 """
 
@@ -14,21 +14,22 @@ import urllib.parse
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-BLOGS_DIR = os.path.join(BASE_DIR, "googledrive/blogs")
-NEWSLETTERS_DIR = os.path.join(BASE_DIR, "googledrive/newsletters")
+BLOGS_DIR = os.path.join(BASE_DIR, "docs/blogs")
+NEWSLETTERS_DIR = os.path.join(BASE_DIR, "docs/reports")
 PORT = 9050
 
 def ensure_symlinks():
-    """Ensure relative symlink googledrive/blogs/newsletters -> ../newsletters exists."""
+    """Ensure relative symlink docs/blogs/reports -> ../reports and newsletters -> ../reports exist."""
     os.makedirs(BLOGS_DIR, exist_ok=True)
     os.makedirs(NEWSLETTERS_DIR, exist_ok=True)
-    symlink_path = os.path.join(BLOGS_DIR, "newsletters")
-    if not os.path.exists(symlink_path) and not os.path.islink(symlink_path):
-        try:
-            os.symlink("../newsletters", symlink_path)
-            print(f"🔗 Created symlink: {symlink_path} -> ../newsletters", flush=True)
-        except Exception as e:
-            print(f"⚠️ Could not create symlink {symlink_path}: {e}", flush=True)
+    for sym_name in ("newsletters", "reports"):
+        symlink_path = os.path.join(BLOGS_DIR, sym_name)
+        if not os.path.exists(symlink_path) and not os.path.islink(symlink_path):
+            try:
+                os.symlink("../reports", symlink_path)
+                print(f"🔗 Created symlink: {symlink_path} -> ../reports", flush=True)
+            except Exception as e:
+                print(f"⚠️ Could not create symlink {symlink_path}: {e}", flush=True)
 
 def get_latest_report(pattern):
     """Find the single latest report matching the glob pattern in newsletters dir."""

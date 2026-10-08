@@ -6,7 +6,7 @@ Dispatches rendered HTML research briefings, newsletters, and portfolio audits
 to the configured recipient using credentials stored in `.env`.
 
 Usage:
-  python3 scripts/send_email.py --subject "Daily Market Intelligence" --html-file "googledrive/newsletters/Daily_Market_Intelligence_2026-09-27.html"
+  python3 scripts/send_email.py --subject "Daily Market Intelligence" --html-file "docs/reports/Daily_Market_Intelligence_2026-09-27.html"
 """
 
 import os

@@ -16,7 +16,7 @@ You are a separate reviewer. You did not write this report and you have not seen
 - The facts ledger for the same session (`<RUN_DIR>/cache/facts_<MKT>_<date>.json`).
 - The research record (`<RUN_DIR>/cache/research_<MKT>_<date>.json`).
 - The holdings, watchlist, and shortlist snapshots in `<RUN_DIR>/inputs/`, when the report covers a portfolio.
-- The sibling report for the same market and date, if it exists in `googledrive/newsletters/`.
+- The sibling report for the same market and date, if it exists in `docs/reports/`.
 - The standards: `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`, `REPORT_VOICE.md`, and `REPORT_PALETTE.md`.
 - The validator output (`scripts/validate_report.py`). Treat it as a floor: a PASS does not mean the report is good.
 
@@ -89,7 +89,7 @@ Rules for findings:
 ## Limits
 
 - You review. You do not edit the report, the ledger, the research record, or any workbook.
-- You do not send email or touch Google Drive.
+- You do not send email or touch docs/.
 - If an input is missing or unreadable, return BLOCK with the missing input named. Do not guess at its contents.
 - Keep your reasoning in the findings. Do not ask the writer clarifying questions; the writer will act on the findings.
 

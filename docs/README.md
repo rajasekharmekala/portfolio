@@ -1,10 +1,20 @@
-# Published reports (GitHub Pages)
+# Published Research & Intelligence Portal (GitHub Pages)
 
-This folder is the only thing GitHub Pages serves. Nothing here is generated automatically.
+This directory (`docs/`) is the root of the published research portal hosted via GitHub Pages.
 
-Rules:
-1. Publish only a report that has passed `scripts/validate_report.py` in its run. Copy the HTML into `docs/reports/`. Do not copy workbooks, ledgers, research files, transcripts, or `.env`.
-2. All links inside a page must be relative. No `/Users/...` paths and no `file://` URLs.
-3. `docs/.nojekyll` must stay, so Pages serves the files as-is.
-4. Personal holdings and position sizes are in these reports. Publish only to a private repository (Pages from a private repo is limited to GitHub paid plans and to repository members), or only after the user has explicitly approved public publication. Confirm the repo's visibility before the first publish.
-5. Regenerate `docs/index.html` only from the files currently in `docs/reports/`.
+## Directory Structure
+- `docs/index.html`: Master Institutional Research Portal and Command Deck (GitHub Pages landing page with full-text search, multi-factor filtering, and direct links to reports and dossiers).
+- `docs/reports/`: Institutional daily briefings, portfolio forensic audits, and options underwriting reports:
+  - `Daily_Market_Intelligence_<YYYY-MM-DD>.html` (Indian Equities)
+  - `Daily_US_Market_Intelligence_<YYYY-MM-DD>.html` (US Equities)
+  - `Portfolio_Audit_<YYYY-MM-DD>.html` (Zerodha Demat Portfolio Audit)
+  - `US_Portfolio_Audit_<YYYY-MM-DD>.html` (US Brokerage Portfolio Audit)
+  - `Options_Underwriting_NSE_<YYYY-MM-DD>.html` / `Options_Underwriting_US_<YYYY-MM-DD>.html`
+- `docs/blogs/`: Standalone Wikipedia-style equity research dossiers (`<SYMBOL>_dossier.html`), shared navigator (`dossier_nav.js`), registry (`dossiers.json`), and blogs index (`index.html`).
+
+## Automated Publishing Workflow
+All `.agents/workflows` and skills persist deliverables directly into `docs/`:
+1. Market intelligence and portfolio audits write validated HTML briefings directly to `docs/reports/`.
+2. Watchlist underwriting deep dives write company dossiers directly to `docs/blogs/<SYMBOL>_dossier.html`.
+3. `scripts/build_dossier_portal.py` regenerates `docs/index.html`, `docs/blogs/index.html`, and `docs/blogs/dossiers.json`.
+4. Committing and pushing to `main` auto-deploys all research to GitHub Pages.

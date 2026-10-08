@@ -58,12 +58,12 @@ BENCH = {
 }
 
 WORKBOOKS = {
-    "US": [("googledrive/sheets/US_Portfolio_Holdings.xlsx", "Holdings", "holding"),
-           ("googledrive/shortlist/US_Shortlist.xlsx", "Master_Shortlist", "shortlist"),
-           ("googledrive/watchlist/US_Portfolio_Watchlist.xlsx", "Active_Watchlist", "watchlist")],
-    "IN": [("googledrive/sheets/Zerodha_Holdings.xlsx", "Holdings", "holding"),
-           ("googledrive/shortlist/Zerodha_Shortlist.xlsx", "Master_Shortlist", "shortlist"),
-           ("googledrive/watchlist/Zerodha_Watchlist.xlsx", "Active_Watchlist", "watchlist")],
+    "US": [("sheets/US_Portfolio_Holdings.xlsx", "Holdings", "holding"),
+           ("shortlist/US_Shortlist.xlsx", "Master_Shortlist", "shortlist"),
+           ("watchlist/US_Portfolio_Watchlist.xlsx", "Active_Watchlist", "watchlist")],
+    "IN": [("sheets/Zerodha_Holdings.xlsx", "Holdings", "holding"),
+           ("shortlist/Zerodha_Shortlist.xlsx", "Master_Shortlist", "shortlist"),
+           ("watchlist/Zerodha_Watchlist.xlsx", "Active_Watchlist", "watchlist")],
 }
 
 # Data Yahoo cannot supply: the agent fills these with the duck-duck-go MCP (search + fetch_content).

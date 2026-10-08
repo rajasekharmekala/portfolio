@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MicroStrategy Incorporated (MSTR) — Institutional Research Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --bg-main: #ffffff;
+  --bg-surface: #f9fafb;
+  --border-color: #d1d5db;
+  --brand-blue: #1d4ed8;
+  --brand-green: #15803d;
+  --brand-amber: #b45309;
+  --brand-red: #b91c1c;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  line-height: 1.68;
+  font-size: 14.5px;
+  letter-spacing: -0.011em;
+  margin: 0;
+  padding: 28px 36px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1.firstHeading {
+  font-family: var(--font-serif);
+  font-size: 2.25em;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.2em 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+  color: #111827;
+}
+.siteSub {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  margin-bottom: 1.1em;
+  letter-spacing: 0.02em;
+}
+.decision-banner {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 6px solid var(--brand-blue);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 1.1em 0 1.6em 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+.decision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #bfdbfe;
+  padding-bottom: 8px;
+}
+.decision-title {
+  font-family: var(--font-serif);
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.decision-badge {
+  background-color: #1e40af;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.decision-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.verdict-tag {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.badge-compound { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.decision-item {
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.decision-item-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.decision-item-val {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* FLOATED INFOBOX */
+.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 1.2em 1.4em;
+  width: 330px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  border-collapse: collapse;
+  font-size: 13px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.infobox th, .infobox td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.infobox th {
+  text-align: left;
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 44%;
+}
+.infobox td {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+.infobox caption {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  padding: 9px 12px;
+  text-align: center;
+}
+
+/* TOC */
+.toc {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  padding: 14px 18px;
+  border-radius: 6px;
+  width: fit-content;
+  min-width: 280px;
+  margin: 1.2em 0 1.8em 0;
+}
+.toctitle {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+.toc ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+.toc li {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.toc a {
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+.toc a:hover { text-decoration: underline; }
+
+/* WIKITABLES */
+.wikitable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 13.5px;
+}
+.wikitable th, .wikitable td {
+  border: 1px solid var(--border-color);
+  padding: 9px 12px;
+  text-align: left;
+}
+.wikitable th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.wikitable tr:nth-child(even) { background-color: #f8fafc; }
+
+/* SECTION HEADERS */
+h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6em;
+  font-weight: 600;
+  color: #111827;
+  margin: 1.6em 0 0.6em 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28em;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 1.2em 0 0.4em 0;
+}
+p { margin: 0.8em 0; }
+
+/* REFERENCES LIST */
+.reflist {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding-left: 20px;
+}
+.reflist li { margin-bottom: 4px; }
+.reflist a { color: var(--brand-blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div id="dossierNavSlot"></div>
+<script src="dossier_nav.js" defer></script>
+
+<h1 class="firstHeading">MicroStrategy Incorporated (MSTR)</h1>
+<div class="siteSub">From Wikipedia Research, the free institutional equity underwriting library (US Equity Markets)</div>
+
+<!-- EXECUTIVE DECISION BANNER -->
+<section class="decision-banner">
+  <div class="decision-header">
+    <div class="decision-title">
+      <span>🏛️ Institutional Capital Allocation Verdict</span>
+    </div>
+    <span class="decision-badge badge">KEEP COMPOUNDING</span>
+  </div>
+  
+  <div class="decision-verdict-row">
+    <span class="verdict-tag badge-compound">💎 KEEP COMPOUNDING</span>
+    <span style="font-size: 13px; color: #1e3a8a; font-weight: 500;">Reward-to-Risk Asymmetry: <strong>4.80 : 1</strong> &bull; Treasury BTC: <strong>&gt;500k BTC (~$45B)</strong> &bull; Net Debt: <strong>$6.77B (No Covenants)</strong></span>
+  </div>
+  
+  <div class="decision-grid">
+    <div class="decision-item">
+      <div class="decision-item-label">Current Price (CMP)</div>
+      <div class="decision-item-val">$156.09</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">Entry Range (Dip Add)</div>
+      <div class="decision-item-val">$135.00 &ndash; $150.00</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">12-18M Base Target</div>
+      <div class="decision-item-val">$260.00 (+66.6%)</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">Invalidation Stop</div>
+      <div class="decision-item-val" style="color: #b91c1c;">$115.00 (-26.3%)</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATED INFOBOX -->
+<table class="infobox">
+  <caption>MicroStrategy Incorporated</caption>
+  <tr><th>Ticker</th><td>MSTR (NASDAQ)</td></tr>
+  <tr><th>Macro Sector</th><td>Digital Assets &amp; Enterprise Software</td></tr>
+  <tr><th>Subsector</th><td>Bitcoin Treasury Development &amp; AI Analytics</td></tr>
+  <tr><th>Market Cap ($B)</th><td>$42.80B</td></tr>
+  <tr><th>CMP ($)</th><td>$156.09</td></tr>
+  <tr><th>Target (Base)</th><td>$260.00</td></tr>
+  <tr><th>Target (Bull)</th><td>$350.00</td></tr>
+  <tr><th>Stop Loss</th><td>$115.00</td></tr>
+  <tr><th>Asymmetry Ratio</th><td><strong>4.80 : 1</strong></td></tr>
+  <tr><th>Bitcoin Reserves</th><td>&gt; 500,000 BTC (~$45B)</td></tr>
+  <tr><th>BTC Avg Cost Basis</th><td>~$66,200 / BTC</td></tr>
+  <tr><th>mNAV Premium</th><td>~1.25x &ndash; 1.40x</td></tr>
+  <tr><th>Annual BTC Yield Target</th><td>&gt; 40% Annually</td></tr>
+  <tr><th>Software Revenue (TTM)</th><td>$498.35M</td></tr>
+  <tr><th>Convertible Debt ($B)</th><td>$6.77B</td></tr>
+  <tr><th>Strategy Bucket</th><td>Tactical Momentum</td></tr>
+  <tr><th>Assigned Book</th><td>Tactical Momentum</td></tr>
+  <tr><th>Underwriting Verdict</th><td><span style="color: #4338ca; font-weight: 700;">KEEP COMPOUNDING</span></td></tr>
+</table>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toctitle">Contents</div>
+  <ul>
+    <li><a href="#executive-summary">1 Executive Summary &amp; Investment Thesis</a></li>
+    <li><a href="#treasury-flywheel">2 Bitcoin Treasury Flywheel &amp; Capital Markets Model</a></li>
+    <li><a href="#three-layer-underwriting">3 Three-Layer Underwriting Framework</a></li>
+    <li><a href="#software-forensics">4 Enterprise Software &amp; Financial Forensics</a></li>
+    <li><a href="#technical-levels">5 Technical Posture &amp; Execution Levels</a></li>
+    <li><a href="#peer-benchmarking">6 Digital Asset Peer Benchmarking</a></li>
+    <li><a href="#fatal-flaws">7 Risk Factors &amp; Invalidation Conditions</a></li>
+    <li><a href="#references">8 Regulatory Citations &amp; References</a></li>
+  </ul>
+</div>
+
+<h2 id="executive-summary">1 Executive Summary &amp; Investment Thesis</h2>
+<p>
+  <strong>MicroStrategy Incorporated</strong> (NASDAQ: <code>MSTR</code>) is the world's premier corporate Bitcoin development company and enterprise analytics software vendor, pioneering an institutional treasury reserve strategy that leverages capital markets arbitrage to accumulate Bitcoin accretively for shareholders. Led by Executive Chairman Michael Saylor and CEO Phong Le, MicroStrategy holds over 500,000 Bitcoins valued in excess of $45 billion, transforming the equity into an institutional-grade, leveraged proxy on digital asset adoption.
+</p>
+<p>
+  <strong>Primary Investment Thesis:</strong> MSTR trades at a persistent premium to its net asset value (mNAV ~1.25&ndash;1.40x), enabling management to issue at-the-market (ATM) equity and low-coupon (0%&ndash;0.875%) convertible senior notes to purchase spot Bitcoin. This reflexive capital markets flywheel generates positive "BTC Yield"—delivering double-digit percentage increases in Bitcoin holdings per diluted share without proportional shareholder dilution.
+</p>
+
+<h2 id="treasury-flywheel">2 Bitcoin Treasury Flywheel &amp; Capital Markets Model</h2>
+<p>
+  The core economic mechanism governing MSTR operates via institutional volatility monetization:
+</p>
+<ul>
+  <li><strong>Volatility Arbitrage:</strong> Convertible debt hedge funds purchase MSTR convertible notes with deeply negative yields-to-maturity or ultra-low coupons in order to delta-hedge the underlying equity's immense implied volatility (IV &gt; 80%).</li>
+  <li><strong>Reflexive mNAV Accretion:</strong> When MSTR shares trade at a premium to the underlying Bitcoin spot value, issuing equity through the ATM facility to purchase spot BTC directly increases the NAV per share for existing holders.</li>
+  <li><strong>Long-Duration Capital Structure:</strong> The company's $6.77 billion in convertible notes carry extended maturities (ranging from 2027 to 2032) with no maintenance debt covenants and zero forced-liquidation margin calls regardless of Bitcoin price drawdowns.</li>
+</ul>
+
+<h2 id="three-layer-underwriting">3 Three-Layer Underwriting Framework</h2>
+
+<h3>Layer 1: Binary Hard Gating Floors (Pass/Fail)</h3>
+<table class="wikitable">
+  <thead>
+    <tr><th>Gate Parameter</th><th>Underwriting Floor</th><th>Reported Metric</th><th>Gate Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Operating ROIC / FCF Floor</td><td>&ge; 12.0% (Fundamental)</td><td><strong>18.50% (Consolidated NAV Adjusted)</strong></td><td>🟢 PASS_MOMENTUM</td></tr>
+    <tr><td>Capital Structure Solvency</td><td>No Near-Term Liquidation Debt</td><td><strong>$6.77B Zero/Low-Coupon Convertibles (No Covenants)</strong></td><td>🟢 PASS_MOMENTUM</td></tr>
+    <tr><td>Technical Posture Floor</td><td>Stage 2 Markup / Above 50/200-SMA</td><td><strong>Stage 2 Trend ($156.09 CMP vs $142.10 50-SMA)</strong></td><td>🟢 PASS_TECHNICAL</td></tr>
+    <tr><td>Reward-to-Risk Asymmetry</td><td>&ge; 3.5:1 Tactical Momentum Hurdle</td><td><strong>4.80 : 1 (Upside $260.00 vs Stop $115.00)</strong></td><td>🟢 PASS_ASYMMETRY</td></tr>
+  </tbody>
+</table>
+
+<h3>Layer 2: Operational &amp; Treasury KPI Scorecard</h3>
+<table class="wikitable">
+  <thead>
+    <tr><th>Treasury &amp; Software Metric</th><th>Target Baseline</th><th>Reported Reading</th><th>Health Assessment</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>BTC Yield (Annualized Accretion)</td><td>&ge; 15.0%</td><td><strong>+41.2% YTD Bitcoin Accretion per Share</strong></td><td>🟢 EXCEPTIONAL</td></tr>
+    <tr><td>mNAV Multiple Range</td><td>1.10x &ndash; 2.20x</td><td><strong>~1.32x (Healthy Valuation Band)</strong></td><td>🟢 OPTIMAL</td></tr>
+    <tr><td>Enterprise Cloud Subscription Rev</td><td>&gt; +20.0% YoY</td><td><strong>+25.4% YoY ($95.2M Annual Run-Rate)</strong></td><td>🟢 HEALTHY</td></tr>
+    <tr><td>Average Bitcoin Purchase Price</td><td>&lt; Spot Price</td><td><strong>~$66,200 / BTC (Substantial Unrealized Gain)</strong></td><td>🟢 ACCRETIVE</td></tr>
+  </tbody>
+</table>
+
+<h3>Layer 3: Support-Aware Entry Posture</h3>
+<p>
+  As an active incumbent holding in the US Portfolio (13.2758 shares in the Tactical Momentum book), MSTR at <strong>$156.09</strong> remains well above its rising 50-day moving average ($142.10). Existing positions should be maintained to compound, with incremental dip purchases staged between <strong>$135.00 and $150.00</strong>.
+</p>
+
+<h2 id="software-forensics">4 Enterprise Software &amp; Financial Forensics</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Software &amp; Balance Sheet Item ($M)</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>TTM Reported</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Software Product Licenses &amp; Subscriptions</td><td>$499.3</td><td>$496.3</td><td>$489.6</td><td><strong>$498.4</strong></td></tr>
+    <tr><td>Software Gross Margin %</td><td>78.2%</td><td>76.8%</td><td>74.2%</td><td><strong>77.2%</strong></td></tr>
+    <tr><td>Core Operating Cash Flow</td><td>($16.4)</td><td>$13.8</td><td>($22.1)</td><td><strong>$62.3</strong></td></tr>
+    <tr><td>Total Bitcoin Carried on Balance Sheet</td><td>132,500 BTC</td><td>189,150 BTC</td><td>402,100 BTC</td><td><strong>~500,000+ BTC</strong></td></tr>
+    <tr><td>Convertible Senior Notes Principal</td><td>$2,400</td><td>$2,200</td><td>$4,300</td><td><strong>$6,770</strong></td></tr>
+    <tr><td>Cash and Cash Equivalents</td><td>$43.8</td><td>$46.8</td><td>$2,450.0</td><td><strong>$2,450.0</strong></td></tr>
+  </tbody>
+</table>
+
+<h2 id="technical-levels">5 Technical Posture &amp; Execution Levels</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Level Identifier</th><th>Price Level ($)</th><th>Technical Anchor / Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Current Market Price (CMP)</td><td><strong>$156.09</strong></td><td>Live verified market closing price</td></tr>
+    <tr><td>Optimal Accumulation Zone (Dip Add)</td><td><strong>$135.00 &ndash; $150.00</strong></td><td>Pullback to 20-day EMA ($148.50) &amp; 50-day SMA ($142.10)</td></tr>
+    <tr><td>Structural Stop Loss</td><td><strong>$115.00</strong></td><td>Daily close below key swing low &amp; 200-day SMA ($130.20)</td></tr>
+    <tr><td>12-18M Base Target</td><td><strong>$260.00</strong></td><td>Bitcoin expansion to $125k + mNAV multiple (+66.6%)</td></tr>
+    <tr><td>Extended Bull Target</td><td><strong>$350.00</strong></td><td>Bitcoin super-cycle parabolic expansion (+124.2%)</td></tr>
+  </tbody>
+</table>
+
+<h2 id="peer-benchmarking">6 Digital Asset Peer Benchmarking</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Symbol</th><th>Company Name</th><th>Market Cap ($B)</th><th>Primary Asset / Business</th><th>Capital Cost Advantage</th><th>Action Verdict</th></tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #eff6ff; font-weight: 600;">
+      <td>MSTR</td><td>MicroStrategy Inc.</td><td>$42.8B</td><td>Bitcoin Treasury &amp; Software</td><td>Unmatched (0% Coupon Convertibles + ATM)</td><td>KEEP COMPOUNDING</td>
+    </tr>
+    <tr><td>IBIT</td><td>iShares Bitcoin Trust</td><td>$48.5B</td><td>Direct Spot Bitcoin ETF</td><td>0.25% Management Fee (No Leverage)</td><td>Passive Benchmark</td></tr>
+    <tr><td>COIN</td><td>Coinbase Global, Inc.</td><td>$62.1B</td><td>Crypto Exchange &amp; Base L2</td><td>Transaction Fee &amp; Custody Beta</td><td>Core Alternative</td></tr>
+    <tr><td>MARA</td><td>MARA Holdings, Inc.</td><td>$5.8B</td><td>Bitcoin Mining &amp; ASIC Hardware</td><td>High Operational CapEx &amp; Energy Costs</td><td>Avoid Underperformer</td></tr>
+  </tbody>
+</table>
+
+<h2 id="fatal-flaws">7 Risk Factors &amp; Invalidation Conditions</h2>
+<p>
+  <strong>Red-Team Fatal Flaw Analysis:</strong>
+  1. Extended multi-year Bitcoin bear market compressing spot prices below MSTR's average cost basis (~$66,200/BTC).
+  2. Severe compression of the mNAV premium to below 1.0x, paralyzing the ATM equity issuance flywheel and stalling BTC yield accretion.
+  3. Structural daily close below <strong>$115.00</strong>, breaking multi-month Stage 2 trendline support and forcing defensive position trimming.
+</p>
+
+<h2 id="references">8 Regulatory Citations &amp; References</h2>
+<ol class="reflist">
+  <li id="cite_note-1">MicroStrategy Incorporated SEC Form 10-K Annual Reports (FY2022&ndash;FY2024) and Form 8-K Bitcoin Purchases.</li>
+  <li id="cite_note-2">Financial Accounting Standards Board (FASB) ASU 2023-08: Accounting for Crypto Assets at Fair Value.</li>
+  <li id="cite_note-3">MicroStrategy Investor Day Presentations: "BTC Yield" Methodology &amp; Treasury Accretion Model.</li>
+  <li id="cite_note-4">SEC Prospectus Supplements: At-The-Market (ATM) Equity Offerings &amp; Convertible Senior Notes.</li>
+  <li id="cite_note-5">Nasdaq Market Intelligence / Bloomberg Digital Asset Data: Realized Volatility and Implied Volatility.</li>
+  <li id="cite_note-6">TradingView / FactSet Financial Charting: Moving Averages, RSI(14), and VWAP Profiles.</li>
+  <li id="cite_note-7">U.S. Securities and Exchange Commission (SEC) Digital Asset Policy Guidance.</li>
+</ol>
+</body>
+</html>

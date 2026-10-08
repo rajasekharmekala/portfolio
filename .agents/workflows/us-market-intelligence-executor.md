@@ -1,5 +1,5 @@
 ---
-description: Institutional daily execution workflow for US equity markets (NYSE/NASDAQ). Generates the Book-Edition Daily US Market Intelligence briefing, conducts targeted dual-source web research, synchronizes the US watchlist, validates zero-omission compliance (Blueprint 7A), maintains Google Drive single-latest versioning, and dispatches the HTML report via Gmail SMTP.
+description: Institutional daily execution workflow for US equity markets (NYSE/NASDAQ). Generates the Book-Edition Daily US Market Intelligence briefing, conducts targeted dual-source web research, synchronizes the US watchlist, validates zero-omission compliance (Blueprint 7A), maintains single-latest versioning, and dispatches the HTML report via Gmail SMTP.
 ---
 
 # US Equity Market Intelligence & Daily Watchlist Ingestion Workflow Executor
@@ -37,13 +37,13 @@ Before commencing execution, review and adhere strictly to:
 
 ## 1.5 Independent Reviewer Gate (mandatory before delivery)
 
-Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to Drive, published, or emailed.
+Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to docs/, published, or emailed.
 
 1. **Run the reviewer passes.** Read `../config/reviewer.json` and `../skills/_shared/REVIEWER_OPERATIONS.md`. Run each pass in the config as a separate fresh agent, using the model set in the config. Do not name a model in this workflow.
 2. **Give the reviewer only its inputs:** the report path, `<RUN_DIR>/cache/facts_<MKT>_<date>.json`, `<RUN_DIR>/cache/research_<MKT>_<date>.json`, the snapshots in `<RUN_DIR>/inputs/`, the sibling report if it exists, the three standards in `../skills/_shared/`, and the validator output. Do not pass the Story Brief, your drafts, or your reasoning.
 3. **Act on the result.** The reviewer writes `<RUN_DIR>/review_round_<N>.json`. On `REVISE` or `BLOCK`, fix every BLOCK and REVISE finding in the report, re-run `validate_report.py` until it shows `RESULT: PASS`, and send the report back to the reviewer. Address NOTE findings where practical.
 4. **Round limit.** Run at most two review rounds. If the report is still not `APPROVE` after round two, do not deliver. Keep `<RUN_DIR>`, and report the open findings to the user.
-5. **Delivery condition.** Save to Drive, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
+5. **Delivery condition.** Save to docs/, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
 
 ## 1. Execution Pipeline (Step-by-Step)
 
@@ -79,10 +79,10 @@ graph TD
      - `GMAIL_APP_PASSWORD` (or `EMAIL_PASSWORD`)
      - `GMAIL_RECIPIENT` (default: `rajasekharreddymekala732@gmail.com`)
    - Confirm target paths are accessible:
-     - `googledrive/newsletters/`
-     - `googledrive/watchlist/US_Portfolio_Watchlist.xlsx` (or symlink `watchlist/US_Portfolio_Watchlist.xlsx`)
-     - `googledrive/sheets/US_Portfolio_Holdings.xlsx`
-     - `googledrive/shortlist/US_Shortlist.xlsx`
+     - `docs/reports/`
+     - `watchlist/US_Portfolio_Watchlist.xlsx` (or symlink `watchlist/US_Portfolio_Watchlist.xlsx`)
+     - `sheets/US_Portfolio_Holdings.xlsx`
+     - `shortlist/US_Shortlist.xlsx`
 
 ---
 
@@ -156,7 +156,7 @@ Formulate a private 6–8 bullet analytical brief to align narrative coherence a
 ### Step 6: Synthesize the Book-Edition HTML Report
 
 Generate the standalone briefing at:
-`googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html`
+`docs/reports/US_Market_Intelligence_<YYYY-MM-DD>.html`
 
 #### Visual Design & Scaffolding:
 - **Typography:** Embed Google Fonts (`Inter`, `Newsreader`, `JetBrains Mono`).
@@ -184,7 +184,7 @@ Generate the standalone briefing at:
 
 ### Step 7: Synchronize US Portfolio Watchlist Workbook
 
-Update `googledrive/watchlist/US_Portfolio_Watchlist.xlsx` (or `watchlist/US_Portfolio_Watchlist.xlsx`):
+Update `watchlist/US_Portfolio_Watchlist.xlsx` (or `watchlist/US_Portfolio_Watchlist.xlsx`):
 1. Ingest the Top 1–3 standout setups identified in Section 6 into the `Active_Watchlist` sheet in-place.
 2. Populate all required columns:
    - `Symbol`: US ticker
@@ -207,7 +207,7 @@ Execute `scripts/validate_report.py` against the generated HTML report and facts
 
 ```bash
 python3 scripts/validate_report.py \
-  --report "googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html" \
+  --report "docs/reports/US_Market_Intelligence_<YYYY-MM-DD>.html" \
   --kind market_intel \
   --facts "<RUN_DIR>/cache/facts_US_<YYYY-MM-DD>.json"
 ```
@@ -236,7 +236,7 @@ python3 scripts/validate_report.py \
 Only after `validate_report.py` outputs `RESULT: PASS`:
 
 1. **Google Drive Single-Latest Version Lifecycle:**
-   - Scan `googledrive/newsletters/` for older versions matching `US_Market_Intelligence_*.html` (excluding the newly validated session file).
+   - Scan `docs/reports/` for older versions matching `US_Market_Intelligence_*.html` (excluding the newly validated session file).
    - Delete/prune all prior versions so Google Drive maintains strictly only the single latest report showing the current run date.
 2. **Automated Email Dispatch:**
    - Dispatch the newsletter to `rajasekharreddymekala732@gmail.com` via `scripts/send_email.py`:
@@ -244,7 +244,7 @@ Only after `validate_report.py` outputs `RESULT: PASS`:
 ```bash
 python3 scripts/send_email.py \
   --subject "📊 Daily US Market Pulse | <YYYY-MM-DD> — S&P <Regime/Status> | 30 Breakouts & 30 Breakdown Alerts" \
-  --html-file "googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html" \
+  --html-file "docs/reports/US_Market_Intelligence_<YYYY-MM-DD>.html" \
   --recipient "rajasekharreddymekala732@gmail.com"
 ```
 

@@ -2,7 +2,7 @@
 name: company_report
 description: >-
   Institutional-grade Wikipedia-style company equity research dossier and deep underwriting engine.
-  Produces an exhaustive, self-contained HTML blog dossier in googledrive/blogs/<SYMBOL>_dossier.html
+  Produces an exhaustive, self-contained HTML blog dossier in docs/blogs/<SYMBOL>_dossier.html
   matching Wikipedia's desktop interface (floated infobox, wikitables, numbered TOC, superscript citations,
   neutral point of view). Converges encyclopedic operational analysis with the rigorous 3-layer underwriting
   framework (Hard Gates, Sector KPIs, Support-Aware Entry Posture), peer benchmarking, active holding audit,
@@ -24,7 +24,7 @@ Compile an exhaustive, rigorous, and visually authentic Wikipedia-style research
 - **Specific Focus Areas / Underwriting Questions (Optional):** `{{OPTIONAL_SPECIFIC_FOCUS}}`
 
 Your deliverable is a standalone, self-contained HTML document saved directly in:
-`googledrive/blogs/<SYMBOL>_dossier.html` (e.g. `googledrive/blogs/AFCOM_dossier.html`).
+`docs/blogs/<SYMBOL>_dossier.html` (e.g. `docs/blogs/AFCOM_dossier.html`).
 
 ---
 
@@ -62,7 +62,7 @@ Deliver the complete output as a single, self-contained HTML document with inlin
   - Line height: `1.72`, font size `15px`, letter spacing `-0.011em`, standard paragraph margins with justified text.
 - **Mandatory Shared Navigation Registry (DO NOT embed per-file navigation):**
   - Immediately after `<body>`, insert exactly two lines: `<div id="dossierNavSlot"></div>` and `<script src="dossier_nav.js" defer></script>`.
-  - Do NOT write any inline navigation `<nav>`, navigation `<style>` block, dossier list, quick-jump select, or pager buttons into the dossier. The sticky research-library navigator (market flag, strategy/verdict badges, grouped quick-jump, prev/next pager, dynamic dossier count) is rendered client-side by the permanent `googledrive/blogs/dossier_nav.js` from the shared `googledrive/blogs/dossiers.json` registry.
+  - Do NOT write any inline navigation `<nav>`, navigation `<style>` block, dossier list, quick-jump select, or pager buttons into the dossier. The sticky research-library navigator (market flag, strategy/verdict badges, grouped quick-jump, prev/next pager, dynamic dossier count) is rendered client-side by the permanent `docs/blogs/dossier_nav.js` from the shared `docs/blogs/dossiers.json` registry.
   - Final pipeline step: run `python3 scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json` so the navigation registry always matches the blog folder.
 - **Mandatory Executive Capital Allocation Decision Banner:**
   - Placed prominently at the very top (above the infobox and main text) so high-level capital decisions are visible in 5 seconds.
@@ -171,7 +171,7 @@ Every company report must rigorously evaluate and state the outcome of the **3-L
 
 ## 4. Required HTML Dossier Document Structure
 
-The generated HTML document in `googledrive/blogs/<SYMBOL>_dossier.html` must follow this 12-section standardized architecture without omitting any section:
+The generated HTML document in `docs/blogs/<SYMBOL>_dossier.html` must follow this 12-section standardized architecture without omitting any section:
 
 ```html
 <!DOCTYPE html>
@@ -390,11 +390,11 @@ The generated HTML document in `googledrive/blogs/<SYMBOL>_dossier.html` must fo
 
 ## 5. Output Location & Google Drive Integration
 
-1. **Output Path:** The research dossier MUST be written directly to `googledrive/blogs/<SYMBOL>_dossier.html`.
+1. **Output Path:** The research dossier MUST be written directly to `docs/blogs/<SYMBOL>_dossier.html`.
 2. **In-Place Update:** If the file already exists, update it strictly in-place. Never create numbered copies like `<SYMBOL>_dossier (1).html`.
 3. **No `.docx` Output:** Do not generate Word documents. The self-contained Wikipedia HTML dossier is the sole authoritative company report.
 4. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE (NO RESIDUAL ARTIFACTS):**
    - Any one-off execution scripts created during this run (e.g., `generate_<SYMBOL>_dossier.py`, `generate_batch_*.py`, `build_*_dossiers*.py`) are **transient pipeline artifacts**. IMMEDIATELY after the dossier is persisted and the portal is rebuilt, you MUST delete them in the terminal as the final step: `rm scripts/<one-off-script>.py`, and also remove any `scripts/__pycache__/` directory created during the run.
    - **Zero Prior-Session Bias & Cache Cleanup**: Stale cache artifacts from prior session dates in `scripts/.cache/` (e.g. `facts_*`, `research_*`, `audit_*`, `screen_*`) must be pruned. Every run starts from a clean, unbiased baseline. Only persistent configuration (`scripts/.cache/aliases.json`) is preserved across sessions.
-   - **PERMANENT INFRASTRUCTURE WHITELIST (NEVER DELETE):** `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `googledrive/blogs/dossier_nav.js`, `googledrive/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
+   - **PERMANENT INFRASTRUCTURE WHITELIST (NEVER DELETE):** `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `docs/blogs/dossier_nav.js`, `docs/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
    - **Pre-termination verification:** run `ls scripts/` and confirm ONLY whitelisted files remain. Leaving one-off generator scripts behind is a pipeline failure.

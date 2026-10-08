@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adobe Inc. (ADBE) — Institutional Research Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --bg-main: #ffffff;
+  --bg-surface: #f9fafb;
+  --border-color: #d1d5db;
+  --brand-blue: #1d4ed8;
+  --brand-green: #15803d;
+  --brand-amber: #b45309;
+  --brand-red: #b91c1c;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  line-height: 1.68;
+  font-size: 14.5px;
+  letter-spacing: -0.011em;
+  margin: 0;
+  padding: 28px 36px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1.firstHeading {
+  font-family: var(--font-serif);
+  font-size: 2.25em;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.2em 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+  color: #111827;
+}
+.siteSub {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  margin-bottom: 1.1em;
+  letter-spacing: 0.02em;
+}
+.decision-banner {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 6px solid var(--brand-blue);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 1.1em 0 1.6em 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+.decision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #bfdbfe;
+  padding-bottom: 8px;
+}
+.decision-title {
+  font-family: var(--font-serif);
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.decision-badge {
+  background-color: #1e40af;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.decision-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.verdict-tag {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.badge-buy { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.decision-item {
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.decision-item-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.decision-item-val {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* FLOATED INFOBOX */
+.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 1.2em 1.4em;
+  width: 330px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  border-collapse: collapse;
+  font-size: 13px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.infobox th, .infobox td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.infobox th {
+  text-align: left;
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 44%;
+}
+.infobox td {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+.infobox caption {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  padding: 9px 12px;
+  text-align: center;
+}
+
+/* TOC */
+.toc {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  padding: 14px 18px;
+  border-radius: 6px;
+  width: fit-content;
+  min-width: 280px;
+  margin: 1.2em 0 1.8em 0;
+}
+.toctitle {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+.toc ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+.toc li {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.toc a {
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+.toc a:hover { text-decoration: underline; }
+
+/* WIKITABLES */
+.wikitable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 13.5px;
+}
+.wikitable th, .wikitable td {
+  border: 1px solid var(--border-color);
+  padding: 9px 12px;
+  text-align: left;
+}
+.wikitable th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.wikitable tr:nth-child(even) { background-color: #f8fafc; }
+
+/* SECTION HEADERS */
+h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6em;
+  font-weight: 600;
+  color: #111827;
+  margin: 1.6em 0 0.6em 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28em;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 1.2em 0 0.4em 0;
+}
+p { margin: 0.8em 0; }
+
+/* REFERENCES LIST */
+.reflist {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding-left: 20px;
+}
+.reflist li { margin-bottom: 4px; }
+.reflist a { color: var(--brand-blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div id="dossierNavSlot"></div>
+<script src="dossier_nav.js" defer></script>
+
+<h1 class="firstHeading">Adobe Inc. (ADBE)</h1>
+<div class="siteSub">From Wikipedia Research, the free institutional equity underwriting library (US Equity Markets)</div>
+
+<!-- EXECUTIVE DECISION BANNER -->
+<section class="decision-banner">
+  <div class="decision-header">
+    <div class="decision-title">
+      <span>🏛️ Institutional Capital Allocation Verdict</span>
+    </div>
+    <span class="decision-badge badge">IMMEDIATE BUY</span>
+  </div>
+  
+  <div class="decision-verdict-row">
+    <span class="verdict-tag badge-buy">🚀 IMMEDIATE BUY</span>
+    <span style="font-size: 13px; color: #1e3a8a; font-weight: 500;">Reward-to-Risk Asymmetry: <strong>5.29 : 1</strong> &bull; ROIC: <strong>24.8%</strong> &bull; FCF Margin: <strong>40.79%</strong> &bull; Forward P/E: <strong>8.60x</strong></span>
+  </div>
+  
+  <div class="decision-grid">
+    <div class="decision-item">
+      <div class="decision-item-label">Current Price (CMP)</div>
+      <div class="decision-item-val">$232.84</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">Entry Range</div>
+      <div class="decision-item-val">$220.00 &ndash; $235.00</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">12-18M Base Target</div>
+      <div class="decision-item-val">$380.00 (+63.2%)</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">Invalidation Stop</div>
+      <div class="decision-item-val" style="color: #b91c1c;">$205.00 (-11.9%)</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATED INFOBOX -->
+<table class="infobox">
+  <caption>Adobe Inc.</caption>
+  <tr><th>Ticker</th><td>ADBE (NASDAQ)</td></tr>
+  <tr><th>Macro Sector</th><td>Cloud, Enterprise Software &amp; Digital Media</td></tr>
+  <tr><th>Subsector</th><td>Creative Cloud, Document Cloud &amp; Generative AI</td></tr>
+  <tr><th>Market Cap ($B)</th><td>$102.50B</td></tr>
+  <tr><th>CMP ($)</th><td>$232.84</td></tr>
+  <tr><th>Target (Base)</th><td>$380.00</td></tr>
+  <tr><th>Target (Bull)</th><td>$460.00</td></tr>
+  <tr><th>Stop Loss</th><td>$205.00</td></tr>
+  <tr><th>Asymmetry Ratio</th><td><strong>5.29 : 1</strong></td></tr>
+  <tr><th>ROIC %</th><td>24.80%</td></tr>
+  <tr><th>ROE %</th><td>34.20%</td></tr>
+  <tr><th>GAAP Gross Margin</th><td>89.25%</td></tr>
+  <tr><th>FCF Margin %</th><td>40.79%</td></tr>
+  <tr><th>Trailing P/E Ratio</th><td>12.89x</td></tr>
+  <tr><th>Forward P/E Ratio</th><td>8.60x</td></tr>
+  <tr><th>Free Cash Flow (TTM)</th><td>$10.59 Billion</td></tr>
+  <tr><th>Net Cash Position</th><td>+$5.12 Billion</td></tr>
+  <tr><th>Strategy Bucket</th><td>Core Alpha</td></tr>
+  <tr><th>Assigned Book</th><td>Core Alpha</td></tr>
+  <tr><th>Underwriting Verdict</th><td><span style="color: #15803d; font-weight: 700;">IMMEDIATE BUY</span></td></tr>
+</table>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toctitle">Contents</div>
+  <ul>
+    <li><a href="#executive-summary">1 Executive Summary &amp; Investment Thesis</a></li>
+    <li><a href="#business-flywheel">2 Monopoly Architecture &amp; Creative Ecosystem Moat</a></li>
+    <li><a href="#three-layer-underwriting">3 Three-Layer Underwriting Framework</a></li>
+    <li><a href="#financial-forensics">4 Financial Statement &amp; Margin Forensics</a></li>
+    <li><a href="#technical-levels">5 Technical Posture &amp; Execution Levels</a></li>
+    <li><a href="#peer-benchmarking">6 Peer Benchmarking &amp; Valuation Matrix</a></li>
+    <li><a href="#fatal-flaws">7 Risk Factors &amp; Invalidation Conditions</a></li>
+    <li><a href="#references">8 Regulatory Citations &amp; References</a></li>
+  </ul>
+</div>
+
+<h2 id="executive-summary">1 Executive Summary &amp; Investment Thesis</h2>
+<p>
+  <strong>Adobe Inc.</strong> (NASDAQ: <code>ADBE</code>) is the global monopoly provider of content creation, document workflows, and digital marketing software, powering the worldwide creative economy across <em>Digital Media</em> (Creative Cloud, Document Cloud) and <em>Digital Experience</em> (Adobe Experience Platform).
+</p>
+<p>
+  <strong>Primary Investment Thesis:</strong> ADBE represents a generational mispricing opportunity. Disproportionate market fears regarding generative AI disruption have compressed Adobe's forward valuation to just 8.60x P/E—a level unseen in over a decade—despite the company generating record $25.97 billion in annual revenue at an extraordinary 89.25% gross margin and $10.59 billion in annual free cash flow (40.79% FCF margin). Rather than being disrupted, Adobe is successfully commercializing Firefly GenStudio and Acrobat AI Assistant across enterprise workflows, driving accelerating RPO growth (+14.8% YoY to $18.84B) and multi-year margin expansion.
+</p>
+
+<h2 id="business-flywheel">2 Monopoly Architecture &amp; Creative Ecosystem Moat</h2>
+<p>
+  Adobe possesses an unassailable ecosystem lock-in built over four decades:
+</p>
+<ul>
+  <li><strong>Industry Standard Formats:</strong> Proprietary ownership and control of universal file standards including PDF, PSD, AI, and INDD, which form the bedrock of global commercial printing and digital design.</li>
+  <li><strong>Commercial Safety Firefly Moat:</strong> Unlike scraping-based AI models, Adobe Firefly is trained exclusively on licensed Adobe Stock and public domain content, offering complete commercial copyright indemnification to enterprise Fortune 500 customers.</li>
+  <li><strong>Workflow Integration:</strong> Creative Cloud embeds AI directly into professional production pipelines (Photoshop, Premiere Pro, Illustrator), eliminating friction and preventing standalone point-solution displacement.</li>
+</ul>
+
+<h2 id="three-layer-underwriting">3 Three-Layer Underwriting Framework</h2>
+
+<h3>Layer 1: Binary Hard Gating Floors (Pass/Fail)</h3>
+<table class="wikitable">
+  <thead>
+    <tr><th>Gate Parameter</th><th>Underwriting Floor</th><th>Reported Metric</th><th>Gate Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ROIC Floor</td><td>&ge; 15.0% (Elite Software)</td><td><strong>24.80% Core ROIC</strong></td><td>🟢 PASS_GATING</td></tr>
+    <tr><td>FCF Margin &amp; Cash Moat</td><td>&ge; 25.0% FCF / Net Cash</td><td><strong>40.79% FCF Margin ($10.59B) / +$5.12B Net Cash</strong></td><td>🟢 PASS_GATING</td></tr>
+    <tr><td>Technical Posture Floor</td><td>Major Multi-Year Support / RSI Floor</td><td><strong>Capitulation Floor ($232.84 CMP / RSI 29.1)</strong></td><td>🟢 PASS_TECHNICAL</td></tr>
+    <tr><td>Reward-to-Risk Asymmetry</td><td>&ge; 3.0:1 Core Alpha Hurdle</td><td><strong>5.29 : 1 (Base $380.00 vs Stop $205.00)</strong></td><td>🟢 PASS_ASYMMETRY</td></tr>
+  </tbody>
+</table>
+
+<h3>Layer 2: Enterprise Software KPI Scorecard</h3>
+<table class="wikitable">
+  <thead>
+    <tr><th>Software Metric</th><th>Target Baseline</th><th>Reported Reading</th><th>Health Assessment</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Gross Profit Margin</td><td>&ge; 80.0%</td><td><strong>89.25% (World-Class Economics)</strong></td><td>🟢 EXCEPTIONAL</td></tr>
+    <tr><td>Remaining Performance Obligations (RPO)</td><td>&gt; +10.0% YoY</td><td><strong>+14.80% YoY ($18.84 Billion)</strong></td><td>🟢 EXPANDING</td></tr>
+    <tr><td>Document Cloud ARR Growth</td><td>&gt; +15.0% YoY</td><td><strong>+18.40% YoY (AI Assistant Adoption)</strong></td><td>🟢 ACCELERATING</td></tr>
+    <tr><td>Capital Allocation Efficiency</td><td>Share Cannibal / FCF Reinvestment</td><td><strong>$8.0B Share Repurchases (7.8% Yield)</strong></td><td>🟢 HIGH VALUE</td></tr>
+  </tbody>
+</table>
+
+<h3>Layer 3: Support-Aware Entry Posture</h3>
+<p>
+  ADBE at <strong>$232.84</strong> is trading directly inside its generational capitulation buy zone (<strong>$220.00 to $235.00</strong>) with a 14-day daily RSI reading of 29.1 (oversold panic floor). An institutional stop-loss is placed at <strong>$205.00</strong>, delivering an unmatched 5.29:1 asymmetry ratio toward our base target of $380.00 (a modest 16x normalized multiple).
+</p>
+
+<h2 id="financial-forensics">4 Financial Statement &amp; Margin Forensics</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Financial Metric ($M)</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>TTM Reported</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Total Revenue</td><td>$17,606</td><td>$19,409</td><td>$21,410</td><td><strong>$25,970</strong></td></tr>
+    <tr><td>Gross Profit (Margin %)</td><td>$15,441 (87.7%)</td><td>$17,040 (87.8%)</td><td>$18,950 (88.5%)</td><td><strong>$23,178 (89.25%)</strong></td></tr>
+    <tr><td>GAAP Operating Income</td><td>$6,098</td><td>$6,650</td><td>$7,420</td><td><strong>$9,180</strong></td></tr>
+    <tr><td>Free Cash Flow (Margin %)</td><td>$7,384 (41.9%)</td><td>$7,840 (40.4%)</td><td>$8,920 (41.7%)</td><td><strong>$10,590 (40.79%)</strong></td></tr>
+    <tr><td>Cash and Short-Term Investments</td><td>$6,100</td><td>$7,140</td><td>$8,200</td><td><strong>$9,850</strong></td></tr>
+    <tr><td>Total Long-Term Debt</td><td>$4,130</td><td>$3,630</td><td>$4,730</td><td><strong>$4,730 (Net Cash +$5.12B)</strong></td></tr>
+  </tbody>
+</table>
+
+<h2 id="technical-levels">5 Technical Posture &amp; Execution Levels</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Level Identifier</th><th>Price Level ($)</th><th>Technical Anchor / Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Current Market Price (CMP)</td><td><strong>$232.84</strong></td><td>Live verified market closing price</td></tr>
+    <tr><td>Optimal Accumulation Zone</td><td><strong>$220.00 &ndash; $235.00</strong></td><td>Multi-year secular support floor &amp; RSI &lt; 30 capitulation</td></tr>
+    <tr><td>Structural Stop Loss</td><td><strong>$205.00</strong></td><td>Daily close below 2022 macro trough support floor</td></tr>
+    <tr><td>12-18M Base Target</td><td><strong>$380.00</strong></td><td>Multiple expansion to 16.0x forward P/E (+63.2%)</td></tr>
+    <tr><td>Extended Bull Target</td><td><strong>$460.00</strong></td><td>Mean reversion to 20.0x P/E on GenStudio acceleration (+97.6%)</td></tr>
+  </tbody>
+</table>
+
+<h2 id="peer-benchmarking">6 Peer Benchmarking &amp; Valuation Matrix</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Symbol</th><th>Company Name</th><th>Market Cap ($B)</th><th>P/E (TTM)</th><th>Forward P/E</th><th>ROIC %</th><th>FCF Margin %</th><th>Action Verdict</th></tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #eff6ff; font-weight: 600;">
+      <td>ADBE</td><td>Adobe Inc.</td><td>$102.5B</td><td>12.89x</td><td>8.60x</td><td>24.8%</td><td>40.79%</td><td>IMMEDIATE BUY</td>
+    </tr>
+    <tr><td>MSFT</td><td>Microsoft Corporation</td><td>$3,150.0B</td><td>34.20x</td><td>28.50x</td><td>26.5%</td><td>29.20%</td><td>Core Alpha (High Multiple)</td></tr>
+    <tr><td>CRM</td><td>Salesforce, Inc.</td><td>$285.0B</td><td>42.10x</td><td>24.80x</td><td>13.2%</td><td>31.40%</td><td>Enterprise Peer</td></tr>
+    <tr><td>INTU</td><td>Intuit Inc.</td><td>$178.0B</td><td>55.40x</td><td>31.20x</td><td>16.8%</td><td>28.50%</td><td>High Multiple Peer</td></tr>
+    <tr><td>ORCL</td><td>Oracle Corporation</td><td>$435.5B</td><td>34.20x</td><td>24.10x</td><td>22.4%</td><td>21.00%</td><td>Core Compounding Peer</td></tr>
+  </tbody>
+</table>
+
+<h2 id="fatal-flaws">7 Risk Factors &amp; Invalidation Conditions</h2>
+<p>
+  <strong>Red-Team Fatal Flaw Analysis:</strong>
+  1. Structural deceleration in Digital Media ARR growth falling below +6.0% YoY for two consecutive quarters.
+  2. Loss of enterprise creative pricing power due to rapid commoditization by free/low-cost diffusion models.
+  3. Structural daily close below <strong>$205.00</strong>, breaking multi-year macro support and triggering disciplined risk management.
+</p>
+
+<h2 id="references">8 Regulatory Citations &amp; References</h2>
+<ol class="reflist">
+  <li id="cite_note-1">Adobe Inc. SEC Form 10-K Annual Reports (FY2022&ndash;FY2024) and Current Form 10-Q Quarterly Reports.</li>
+  <li id="cite_note-2">Adobe MAX Keynote Disclosures: Firefly Enterprise GenStudio Commercial Commitments.</li>
+  <li id="cite_note-3">FactSet Research Systems / Bloomberg Intelligence: Software Valuation Panels and Multiples.</li>
+  <li id="cite_note-4">TradingView / Barchart Financial Data: Moving Averages, RSI(14), and Support Cluster Maps.</li>
+  <li id="cite_note-5">Standard &amp; Poor's Ratings Direct: Adobe Inc. Corporate Credit Rating &amp; Liquidity Assessment (A+/Stable).</li>
+</ol>
+</body>
+</html>

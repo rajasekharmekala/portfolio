@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Master Portal Rebuild Script for googledrive/blogs/index.html
+Master Portal Rebuild Script for docs/index.html and docs/blogs/index.html
 """
 
 import os
@@ -300,7 +300,7 @@ def parse_dossier(filepath):
 
 
 
-def build_card_html(d):
+def build_card_html(d, prefix=""):
     # Format numbers nicely
     curr = d['curr']
     cmp_display = f"{curr}{d['cmp_val']:,.2f}" if d['cmp_val'] > 0 else "N/A"
@@ -403,21 +403,22 @@ def build_card_html(d):
 
       <div class="card-footer">
         <span class="card-filesize">📄 {d['filesize_kb']:.1f} KB Dossier</span>
-        <a href="{d['filename']}" class="card-cta">
+        <a href="{prefix}{d['filename']}" class="card-cta">
           <span>Read Research Dossier</span>
           <span class="cta-arrow">&rarr;</span>
         </a>
       </div>
     </article>"""
 
-def build_reports_hub_html(newsletters_dir):
+def build_reports_hub_html(newsletters_dir, is_root=False):
     def get_latest(pattern, default_name):
         matches = sorted(glob.glob(os.path.join(newsletters_dir, pattern)), reverse=True)
         if matches:
             fn = os.path.basename(matches[0])
             m = re.search(r'(\d{4}-\d{2}-\d{2})', fn)
             date_str = m.group(1) if m else 'Latest'
-            return f"newsletters/{fn}", date_str, "Available"
+            prefix = "reports/" if is_root else "../reports/"
+            return f"{prefix}{fn}", date_str, "Available"
         return default_name, "Dynamic / Latest", "Auto-Routing"
 
     in_mi_link, in_mi_date, in_mi_status = get_latest('Daily_Market_Intelligence_*.html', '/market-intelligence')
@@ -434,7 +435,7 @@ def build_reports_hub_html(newsletters_dir):
     </div>
     <div style="font-size: 12px; font-weight: 600; color: #166534; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 4px 10px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px;">
       <span style="display: inline-block; width: 8px; height: 8px; background: #22c55e; border-radius: 50%;"></span>
-      Live Google Drive Sync &bull; Single Latest Version
+      GitHub Pages &bull; Single Latest Version
     </div>
   </div>
 
@@ -516,9 +517,10 @@ def build_reports_hub_html(newsletters_dir):
 def main():
     
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    dossiers_dir = os.path.join(base_dir, 'googledrive/blogs')
-    newsletters_dir = os.path.join(base_dir, 'googledrive/newsletters')
+    dossiers_dir = os.path.join(base_dir, 'docs/blogs')
+    newsletters_dir = os.path.join(base_dir, 'docs/reports')
     index_path = os.path.join(dossiers_dir, 'index.html')
+    root_index_path = os.path.join(base_dir, 'docs/index.html')
     
     dossier_files = glob.glob(os.path.join(dossiers_dir, '*_dossier.html'))
     print(f"Total dossier files found: {len(dossier_files)}")
@@ -592,14 +594,13 @@ def main():
     
     print(f"Stats: Total={total_dossiers}, Actionable={actionable_buys}, InZone={in_buy_zone}, Core={core_alpha_count}, Tactical={tactical_count}, AvgAsym={avg_asym:.2f}:1")
     
-    # Generate all cards HTML
-    all_cards_html = "\n\n".join(build_card_html(d) for d in parsed_list)
+    # Generate cards HTML for blogs portal (prefix="")
+    all_cards_html = "\n\n".join(build_card_html(d, prefix="") for d in parsed_list)
     
     # Replace contents of #cardsGrid
     grid = soup.find('div', id='cardsGrid')
     if grid:
         grid.clear()
-        # Parse new cards into grid
         new_cards_soup = BeautifulSoup(all_cards_html, 'html.parser')
         for element in list(new_cards_soup.children):
             grid.append(element)
@@ -628,51 +629,65 @@ def main():
                     num.string = f"{avg_asym:.2f}:1"
         print("Updated stats grid.")
 
-    # Insert or update the Intelligence Hub section above marketSwitcher / controlsBar
-    hub_html = build_reports_hub_html(newsletters_dir)
+    # Insert or update the Intelligence Hub section for blogs index
+    hub_html = build_reports_hub_html(newsletters_dir, is_root=False)
     hub_soup = BeautifulSoup(hub_html, 'html.parser')
 
     existing_hub = soup.find('section', id='intelligenceHub')
     if existing_hub:
         existing_hub.replace_with(hub_soup)
-        print("Replaced existing #intelligenceHub section.")
     else:
-        # Insert before marketSwitcher or controlsBar
         target = soup.find('div', id='marketSwitcher') or soup.find('section', class_='controls-bar')
         if target:
             target.insert_before(hub_soup)
-            print("Inserted #intelligenceHub section before market switcher.")
-
-    # Update top breadcrumbs to include direct report links
-    top_breadcrumb = soup.find('div', class_='top-breadcrumb')
-    if top_breadcrumb:
-        top_breadcrumb.clear()
-        crumb_html = """<a href="../watchlist/Zerodha_Watchlist.xlsx">🇮🇳 Watchlist</a>
-<span class="sep">•</span>
-<a href="../watchlist/US_Portfolio_Watchlist.xlsx">🇺🇸 US Watchlist</a>
-<span class="sep">/</span>
-<a href="../shortlist/Zerodha_Shortlist.xlsx">🇮🇳 Shortlist</a>
-<span class="sep">•</span>
-<a href="../shortlist/US_Shortlist.xlsx">🇺🇸 US Shortlist</a>
-<span class="sep">/</span>
-<a href="../sheets/Zerodha_Holdings.xlsx">🇮🇳 Holdings</a>
-<span class="sep">•</span>
-<a href="../sheets/US_Portfolio_Holdings.xlsx">🇺🇸 US Holdings</a>
-<span class="sep">/</span>
-<a href="/market-intelligence" style="font-weight: 600; color: #1d4ed8;">📊 Market Intelligence</a>
-<span class="sep">•</span>
-<a href="/portfolio-audit" style="font-weight: 600; color: #16a34a;">💼 Portfolio Audit</a>
-<span class="sep">/</span>
-<span>Institutional Research Library</span>"""
-        crumb_soup = BeautifulSoup(crumb_html, 'html.parser')
-        for el in list(crumb_soup.children):
-            top_breadcrumb.append(el)
-        print("Updated top breadcrumb links.")
 
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(str(soup))
-        
-    print("Master portal index.html rebuilt and saved successfully.")
+    print(f"Blogs portal saved: {index_path}")
+
+    # Build Root Portal for GitHub Pages (docs/index.html)
+    root_soup = BeautifulSoup(html_content, 'html.parser')
+    root_cards_html = "\n\n".join(build_card_html(d, prefix="blogs/") for d in parsed_list)
+    r_grid = root_soup.find('div', id='cardsGrid')
+    if r_grid:
+        r_grid.clear()
+        r_new_cards = BeautifulSoup(root_cards_html, 'html.parser')
+        for el in list(r_new_cards.children):
+            r_grid.append(el)
+
+    r_stats = root_soup.find('div', class_='stats-grid')
+    if r_stats:
+        for sc in r_stats.find_all('div', class_='stat-card'):
+            lbl = sc.find('div', class_='stat-label')
+            num = sc.find('div', class_='stat-num')
+            if lbl and num:
+                l_text = lbl.text.strip().lower()
+                if 'total' in l_text:
+                    num.string = str(total_dossiers)
+                elif 'priority' in l_text or 'actionable' in l_text:
+                    num.string = str(actionable_buys)
+                elif 'in buy zone' in l_text or 'buy zone' in l_text:
+                    num.string = str(in_buy_zone)
+                elif 'core alpha' in l_text:
+                    num.string = str(core_alpha_count)
+                elif 'tactical momentum' in l_text:
+                    num.string = str(tactical_count)
+                elif 'asymmetry' in l_text:
+                    num.string = f"{avg_asym:.2f}:1"
+
+    r_hub_html = build_reports_hub_html(newsletters_dir, is_root=True)
+    r_hub_soup = BeautifulSoup(r_hub_html, 'html.parser')
+    r_existing_hub = root_soup.find('section', id='intelligenceHub')
+    if r_existing_hub:
+        r_existing_hub.replace_with(r_hub_soup)
+    else:
+        target = root_soup.find('div', id='marketSwitcher') or root_soup.find('section', class_='controls-bar')
+        if target:
+            target.insert_before(r_hub_soup)
+
+    with open(root_index_path, 'w', encoding='utf-8') as f:
+        f.write(str(root_soup))
+    print(f"Root portal saved for GitHub Pages: {root_index_path}")
 
 if __name__ == '__main__':
     main()

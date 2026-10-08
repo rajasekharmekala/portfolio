@@ -1,5 +1,5 @@
 ---
-description: Institutional daily execution workflow for Indian portfolio forensic audit and capital reallocation (NSE/BSE). Audits Zerodha holdings against shortlist opportunities, conducts unconstrained greenfield stock picking, validates zero-bias compliance (Blueprint 7B), enforces cross-report coherence, maintains Google Drive single-latest versioning, and dispatches via Gmail SMTP.
+description: Institutional daily execution workflow for Indian portfolio forensic audit and capital reallocation (NSE/BSE). Audits Zerodha holdings against shortlist opportunities, conducts unconstrained greenfield stock picking, validates zero-bias compliance (Blueprint 7B), enforces cross-report coherence, maintains single-latest versioning, and dispatches via Gmail SMTP.
 ---
 
 # Indian Equity Portfolio Forensic Audit & Capital Reallocation Workflow Executor
@@ -19,7 +19,7 @@ Before commencing execution, review and adhere strictly to:
 ### Core Non-Negotiables:
 1. **Cross-Report Coherence & Single Facts Ledger:**
    - This run builds its own ledger with `--run-dir`. Market regime, sector map, prices, DMAs, and Weinstein stages come only from that ledger. The same-day Market Intelligence report is a published sibling, used for reconciliation (next item), never as a substitute.
-   - If `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html` exists, read it first and reconcile: verbatim identical `regime.label`, identical prices and stages for every shared ticker.
+   - If `docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html` exists, read it first and reconcile: verbatim identical `regime.label`, identical prices and stages for every shared ticker.
    - **Mandatory Bear List Action:** Any held security appearing on today's Market Intelligence Bear List (Section 4) MUST receive an explicit defensive audit verdict in Chapter 2 (`EXIT`, `TRIM`, or ratcheted `HARD STOP`); it can never be passively ignored as `KEEP`.
    - **Pipeline Feedback Loop:** Watchlist ingestion must not include any ticker that this audit designates for `EXIT`.
 2. **Adversarial Decoupled Multi-Agent Architecture:**
@@ -50,13 +50,13 @@ Before commencing execution, review and adhere strictly to:
 
 ## 1.5 Independent Reviewer Gate (mandatory before delivery)
 
-Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to Drive, published, or emailed.
+Every report from this workflow must pass the `report_reviewer` skill (`../skills/report_reviewer/SKILL.md`) before it is saved to docs/, published, or emailed.
 
 1. **Run the reviewer passes.** Read `../config/reviewer.json` and `../skills/_shared/REVIEWER_OPERATIONS.md`. Run each pass in the config as a separate fresh agent, using the model set in the config. Do not name a model in this workflow.
 2. **Give the reviewer only its inputs:** the report path, `<RUN_DIR>/cache/facts_<MKT>_<date>.json`, `<RUN_DIR>/cache/research_<MKT>_<date>.json`, the snapshots in `<RUN_DIR>/inputs/`, the sibling report if it exists, the three standards in `../skills/_shared/`, and the validator output. Do not pass the Story Brief, your drafts, or your reasoning.
 3. **Act on the result.** The reviewer writes `<RUN_DIR>/review_round_<N>.json`. On `REVISE` or `BLOCK`, fix every BLOCK and REVISE finding in the report, re-run `validate_report.py` until it shows `RESULT: PASS`, and send the report back to the reviewer. Address NOTE findings where practical.
 4. **Round limit.** Run at most two review rounds. If the report is still not `APPROVE` after round two, do not deliver. Keep `<RUN_DIR>`, and report the open findings to the user.
-5. **Delivery condition.** Save to Drive, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
+5. **Delivery condition.** Save to docs/, publish, or send email only when the reviewer returns `APPROVE` and the validator returns `RESULT: PASS`. Record both results in `<RUN_DIR>/manifest.json`.
 
 ## 1. Execution Pipeline (Step-by-Step)
 
@@ -86,16 +86,16 @@ graph TD
      ```
    - Record `RUN_DIR` in `<RUN_DIR>/manifest.json`. The run ends by deleting it (Step 10).
 3. **Ingest Sibling Market Intelligence Report:**
-   - Read `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html` for the session date, if it exists. Reconcile it against this run's ledger; never use it in place of the ledger.
+   - Read `docs/reports/Daily_Market_Intelligence_<YYYY-MM-DD>.html` for the session date, if it exists. Reconcile it against this run's ledger; never use it in place of the ledger.
    - Record the verbatim `regime.label`, market breadth, sector quadrant map, and the 30 names on the Bear List.
    - If a market report exists for today, the audit's Chapter 1 must restate its regime and sector matrix verbatim.
 4. **Verify Environment & SMTP Credentials:**
    - Confirm `.env` exists with `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `GMAIL_RECIPIENT` (default: `rajasekharreddymekala732@gmail.com`).
    - Confirm target paths are accessible:
-     - `googledrive/sheets/Zerodha_Holdings.xlsx` (or `sheets/Zerodha_Holdings.xlsx`)
-     - `googledrive/shortlist/Zerodha_Shortlist.xlsx` (or `shortlist/Zerodha_Shortlist.xlsx`)
-     - `googledrive/watchlist/Zerodha_Watchlist.xlsx` (or `watchlist/Zerodha_Watchlist.xlsx`)
-     - `googledrive/newsletters/`
+     - `sheets/Zerodha_Holdings.xlsx` (or `sheets/Zerodha_Holdings.xlsx`)
+     - `shortlist/Zerodha_Shortlist.xlsx` (or `shortlist/Zerodha_Shortlist.xlsx`)
+     - `watchlist/Zerodha_Watchlist.xlsx` (or `watchlist/Zerodha_Watchlist.xlsx`)
+     - `docs/reports/`
 
 ---
 
@@ -166,7 +166,7 @@ Draft a private 8-bullet analytical brief to govern cross-chapter coherence:
 ### Step 6: Synthesize the Book-Edition HTML Report
 
 Generate the standalone HTML briefing at:
-`googledrive/newsletters/Portfolio_Audit_<YYYY-MM-DD>.html`
+`docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html`
 
 #### Visual Design & Scaffolding:
 - **Typography:** Embed Google Fonts (`Inter`, `Newsreader`, `JetBrains Mono`).
@@ -198,7 +198,7 @@ Execute `scripts/validate_report.py` against the generated HTML audit and facts 
 
 ```bash
 python3 scripts/validate_report.py \
-  --report "googledrive/newsletters/Portfolio_Audit_<YYYY-MM-DD>.html" \
+  --report "docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html" \
   --kind portfolio_audit \
   --facts "<RUN_DIR>/cache/facts_IN_<YYYY-MM-DD>.json"
 ```
@@ -226,7 +226,7 @@ python3 scripts/validate_report.py \
 Only after `validate_report.py` outputs `RESULT: PASS`:
 
 1. **Google Drive Single-Latest Version Lifecycle:**
-   - Scan `googledrive/newsletters/` for older versions matching `Portfolio_Audit_*.html` (excluding the newly validated session file).
+   - Scan `docs/reports/` for older versions matching `Portfolio_Audit_*.html` (excluding the newly validated session file).
    - Delete/prune all prior versions so Google Drive maintains strictly only the single latest audit report showing the current run date.
 2. **Automated Email Dispatch:**
    - Dispatch the audit report to `rajasekharreddymekala732@gmail.com` via `scripts/send_email.py`:
@@ -234,7 +234,7 @@ Only after `validate_report.py` outputs `RESULT: PASS`:
 ```bash
 python3 scripts/send_email.py \
   --subject "🏛️ Master Portfolio Forensic Audit & Capital Reallocation Blueprint | <YYYY-MM-DD> — Net Worth: ₹<Amount>" \
-  --html-file "googledrive/newsletters/Portfolio_Audit_<YYYY-MM-DD>.html" \
+  --html-file "docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html" \
   --recipient "rajasekharreddymekala732@gmail.com"
 ```
 

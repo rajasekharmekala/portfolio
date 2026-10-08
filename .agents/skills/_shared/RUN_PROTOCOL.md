@@ -23,7 +23,7 @@ mkdir -p "$RUN_DIR/cache" "$RUN_DIR/inputs" "$RUN_DIR/work"
 
 ## 3. What may carry over between runs
 
-Only the user's own state may carry over: holdings, watchlist, shortlist, and option positions. These are read from the workbooks in `googledrive/`.
+Only the user's own state may carry over: holdings, watchlist, shortlist, and option positions. These are read from the workbooks in `sheets/`, `watchlist/`, and `shortlist/`.
 
 These may NOT carry over: ledgers (`facts_*.json`), research records, prior report HTML, prior screen results, or any cached web result. Prior reports may be cited as history in a report, but never used as a data source for the current run.
 
