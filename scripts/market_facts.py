@@ -8,13 +8,20 @@ Usage:
   python3 scripts/market_facts.py --market US --date 2026-09-28 --screen sp1500 --run-dir <RUN_DIR>
   python3 scripts/market_facts.py --market IN --date 2026-10-08 --screen nifty500 --extra RELIANCE,TCS --run-dir <RUN_DIR>
   python3 scripts/market_facts.py --market US --show NVDA,VRT --out <RUN_DIR>/cache/facts_US_2026-09-28.json
+  python3 scripts/market_facts.py --market US --check-inputs [--run-dir <RUN_DIR>]   # validate sources only, no network
 
 Output: <RUN_DIR>/cache/facts_<MKT>_<YYYY-MM-DD>.json. Every run writes into its own run
 directory; nothing is read from a previous run. --date is required and is a hard requirement:
 if the benchmark's last bar is not on that date, the build exits non-zero (no silent relabel).
+
+Also written per run: cache/factpack_<MKT>_<date>.json (the compact subset that report sections are drafted
+from; the full ledger is too large to give every section) and manifest.json (inputs with SHA-256, and per-symbol
+freshness for every holding, shortlist and watchlist name). A holding that is not current on the session date
+aborts the build unless --allow-stale-holdings is given. Input sources live in .agents/config/portfolios.json.
 """
 import argparse
 import datetime as dt
+import hashlib
 import io
 import json
 import math
@@ -28,6 +35,8 @@ import yfinance as yf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "scripts", "config")  # version-controlled config only (aliases), never run output
+PORTFOLIOS_FILE = os.path.join(ROOT, ".agents", "config", "portfolios.json")  # input sources, see README in workflows
+INPUTS = []  # set by load_sources(): one record per declared source
 OPTION_RE = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
 TICKER_RE = re.compile(r"^[A-Z0-9][A-Z0-9&\-\.]{0,19}$")
 # Zerodha symbol -> Yahoo symbol where they differ; extend via scripts/config/aliases.json
@@ -55,15 +64,6 @@ BENCH = {
                     "Financial Services": "^CNXFIN"},
         "primary": "^NSEI",
     },
-}
-
-WORKBOOKS = {
-    "US": [("sheets/US_Portfolio_Holdings.xlsx", "Holdings", "holding"),
-           ("shortlist/US_Shortlist.xlsx", "Master_Shortlist", "shortlist"),
-           ("watchlist/US_Portfolio_Watchlist.xlsx", "Active_Watchlist", "watchlist")],
-    "IN": [("sheets/Zerodha_Holdings.xlsx", "Holdings", "holding"),
-           ("shortlist/Zerodha_Shortlist.xlsx", "Master_Shortlist", "shortlist"),
-           ("watchlist/Zerodha_Watchlist.xlsx", "Active_Watchlist", "watchlist")],
 }
 
 # Data Yahoo cannot supply: the agent fills these with the duck-duck-go MCP (search + fetch_content).
@@ -226,22 +226,89 @@ def yahoo_symbol(market: str, sym: str) -> str:
     return sym + ".NS" if market == "IN" else sym.replace(".", "-")
 
 
-def workbook_symbols(market: str):
-    import openpyxl
-    out = {}
-    for rel, sheet, role in WORKBOOKS[market]:
-        path = os.path.join(ROOT, rel)
-        if not os.path.exists(path):
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def md_table_column(path, symbol_header):
+    """Symbols from the first pipe table in a markdown file whose header row contains symbol_header."""
+    tables, cur = [], []
+    for line in open(path, encoding="utf-8"):
+        line = line.strip()
+        if line.startswith("|"):
+            cur.append(line)
+        elif cur:
+            tables.append(cur)
+            cur = []
+    if cur:
+        tables.append(cur)
+    for t in tables:
+        cells = [[c.strip() for c in ln.strip("|").split("|")] for ln in t]
+        header = [re.sub(r"\*+", "", c).strip() for c in cells[0]]
+        if symbol_header not in header:
             continue
-        ws = openpyxl.load_workbook(path, read_only=True, data_only=True)[sheet]
-        rows = ws.iter_rows(values_only=True)
-        header = next(rows)
-        col = header.index("Symbol")
-        for row in rows:
-            s = row[col]
-            if s and isinstance(s, str) and TICKER_RE.match(s.strip().upper()) and not is_option(s):
-                out.setdefault(s.strip().upper(), set()).add(role)
-    return out
+        col = header.index(symbol_header)
+        body = [r for r in cells[1:] if len(r) > col and not set(r[col]) <= set("-: ")]
+        return [re.sub(r"\*+", "", r[col]).strip().upper() for r in body]
+    raise SystemExit(f"{path}: no table with a '{symbol_header}' column")
+
+
+def load_sources(market: str):
+    """Read every source declared for this market. Returns (roles, sources). Aborts on a missing or mis-shaped input."""
+    import openpyxl
+    cfg = json.load(open(PORTFOLIOS_FILE, encoding="utf-8"))[market]
+    roles, sources = {}, []
+    for src in cfg["sources"]:
+        path = os.path.join(ROOT, src["path"])
+        rec = {"id": src["id"], "role": src["role"], "path": src["path"], "kind": src["kind"],
+               "sha256": None, "rows": 0, "symbols": 0, "status": "ok"}
+        if not os.path.exists(path):
+            if src.get("required", True):
+                raise SystemExit(f"INPUT MISSING: {src['path']} ({src['id']}). Aborting.")
+            rec["status"] = "missing (optional)"
+            sources.append(rec)
+            continue
+        rec["sha256"] = sha256(path)
+        if src["kind"] == "xlsx":
+            ws = openpyxl.load_workbook(path, read_only=True, data_only=True)[src["sheet"]]
+            rows = ws.iter_rows(values_only=True)
+            for _ in range(src.get("header_row", 1) - 1):
+                next(rows)
+            header_raw = [str(h).strip() if h is not None else "" for h in next(rows)]
+            header_upper = [h.upper() for h in header_raw]
+            
+            # Flexible lookup for symbol column
+            sym_targets = [src.get("symbol_header", "Symbol").upper(), "SYMBOL", "TICKER", "STOCK", "INSTRUMENT"]
+            col = next((i for target in sym_targets for i, h in enumerate(header_upper) if h == target), None)
+            if col is None:
+                col = next((i for i, h in enumerate(header_upper) if any(k in h for k in ("SYMBOL", "TICKER"))), None)
+            if col is None:
+                raise SystemExit(f"INPUT SCHEMA: {src['id']} ({src['path']}, sheet {src['sheet']}) lacks a Symbol/Ticker column. "
+                                 f"Found: {[h for h in header_raw if h][:20]}")
+            symbols = []
+            for row in rows:
+                rec["rows"] += 1
+                sym = row[col] if col < len(row) else None
+                if sym and isinstance(sym, str) and TICKER_RE.match(sym.strip().upper()) and not is_option(sym):
+                    symbols.append(sym.strip().upper())
+        else:
+            symbols = md_table_column(path, src["symbol_header"])
+            rec["rows"] = len(symbols)
+        for sym in set(symbols):
+            roles.setdefault(sym, set()).add(src["role"])
+        rec["symbols"] = len(set(symbols))
+        sources.append(rec)
+    return roles, sources
+
+
+def workbook_symbols(market: str):
+    global INPUTS
+    roles, INPUTS = load_sources(market)
+    return roles
 
 
 def load_universe(spec: str, market: str):
@@ -380,6 +447,24 @@ def build(args):
                  f"Source not yet updated or session not closed. Aborting; nothing written.")
     stale = sorted(k for k, v in inst.items() if v.get("asof_bar") and v["asof_bar"] < asof)
 
+    # Per-symbol freshness for every name a report will quote as a holding, shortlist or watchlist entry.
+    fetched_at = dt.datetime.now().isoformat(timespec="seconds")
+    freshness = []
+    for sym in sorted(roles):
+        rs = sorted(roles[sym])
+        m = inst.get(sym)
+        if not m or m.get("error") or not m.get("asof_bar"):
+            status, bar = "no_data", None
+        else:
+            bar = m["asof_bar"]
+            status = "current" if bar == asof else "STALE"
+        freshness.append({"symbol": sym, "roles": rs, "status": status, "asof_bar": bar, "fetched_at": fetched_at})
+    blocked = [f["symbol"] for f in freshness if "holding" in f["roles"] and f["status"] != "current"]
+    if blocked and not args.allow_stale_holdings:
+        sys.exit(f"HOLDINGS NOT CURRENT on {asof}: {', '.join(blocked[:40])}"
+                 f"{' ...' if len(blocked) > 40 else ''}. Aborting; nothing written. "
+                 "Re-run after the source updates, or pass --allow-stale-holdings and state the reason in the report.")
+
     # breadth from the screening universe when supplied, otherwise from the book/watchlist
     pool = [inst[s] for s in (universe or roles) if s in inst and inst[s].get("sma50")]
     breadth50 = num(100 * sum(1 for m in pool if m["close"] > m["sma50"]) / len(pool), 1) if pool else None
@@ -469,10 +554,41 @@ def build(args):
         "market": market, "asof": asof, "generated": dt.datetime.now().isoformat(timespec="seconds"),
         "source": "Yahoo Finance daily OHLCV via yfinance (SMA arithmetic; RSI/ATR Wilder 14)",
         "regime": regime, "macro": macro, "instruments": inst, "screen": screen,
-        "failures": sorted(failed), "stale_vs_asof": stale,
+        "failures": sorted(failed), "stale_vs_asof": stale, "freshness": freshness, "inputs": INPUTS,
         "research_needs": render_research(market, asof, roles),
         "research_file": f"<RUN_DIR>/cache/research_{market}_{asof}.json",
     }
+
+
+def factpack(facts):
+    """The compact subset that report sections are drafted from. Holdings and shortlist names keep full metrics;
+    watchlist names keep only the fields needed to mention them. Sized for a section agent, not the whole ledger."""
+    inst = facts["instruments"]
+    fresh = {f["symbol"]: f for f in facts["freshness"]}
+    names = {}
+    for sym, f in fresh.items():
+        m = inst.get(sym, {})
+        if "holding" in f["roles"] or "shortlist" in f["roles"]:
+            names[sym] = {**f, **m}
+        else:
+            names[sym] = {**f, "close": m.get("close"), "stage": m.get("stage"), "asof_bar": m.get("asof_bar")}
+    screen = facts.get("screen", {})
+    return {
+        "market": facts["market"], "asof": facts["asof"], "generated": facts["generated"], "source": facts["source"],
+        "regime": facts["regime"], "macro": facts["macro"],
+        "benchmarks_and_sectors": {k: v for k, v in inst.items() if v.get("kind") in ("index", "sector", "etf")},
+        "screen_universe": screen.get("universe"),
+        "bull_pick": screen.get("bull_pick"), "bear_pick": screen.get("bear_pick"),
+        "names": names, "failures": facts["failures"], "stale_vs_asof": facts["stale_vs_asof"],
+        "research_needs": facts["research_needs"], "research_file": facts["research_file"],
+    }
+
+
+def update_manifest(run_dir, section, payload):
+    path = os.path.join(run_dir, "manifest.json")
+    data = json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
+    data[section] = payload
+    json.dump(data, open(path, "w", encoding="utf-8"), indent=2)
 
 
 def main():
@@ -484,7 +600,21 @@ def main():
     ap.add_argument("--show", help="comma list of symbols to print from a ledger given by --out")
     ap.add_argument("--run-dir", help="this run's private directory; output goes to <run-dir>/cache/")
     ap.add_argument("--out", help="explicit ledger path (required with --show)")
+    ap.add_argument("--check-inputs", action="store_true", help="validate declared sources and exit (no network)")
+    ap.add_argument("--allow-stale-holdings", action="store_true", help="build even if a holding is not current; the reason must be stated in the report")
     args = ap.parse_args()
+
+    if args.check_inputs:
+        roles, sources = load_sources(args.market)
+        for src in sources:
+            print(f"{src['id']:<22} {src['status']:<18} rows {src['rows']:<5} symbols {src['symbols']:<5} sha256 {str(src['sha256'])[:12]}")
+        held = sorted(s for s, r in roles.items() if "holding" in r)
+        print(f"holdings across sources: {len(held)} unique symbols")
+        if args.run_dir:
+            os.makedirs(args.run_dir, exist_ok=True)
+            update_manifest(args.run_dir, "inputs", {"market": args.market, "sources": sources, "checked_at": dt.datetime.now().isoformat(timespec="seconds")})
+            print(f"recorded in {os.path.join(args.run_dir, 'manifest.json')}")
+        return
 
     if args.show:
         if not args.out:
@@ -502,6 +632,14 @@ def main():
     facts = build(args)
     out = os.path.join(cache, f"facts_{args.market}_{facts['asof']}.json")
     json.dump(facts, open(out, "w"), indent=1)
+    fp = os.path.join(cache, f"factpack_{args.market}_{facts['asof']}.json")
+    json.dump(factpack(facts), open(fp, "w"), indent=1)
+    update_manifest(os.path.abspath(args.run_dir), "ledger", {
+        "market": args.market, "asof": facts["asof"], "generated": facts["generated"],
+        "ledger_file": out, "ledger_sha256": sha256(out), "factpack_file": fp, "factpack_sha256": sha256(fp),
+        "screen": args.screen, "allow_stale_holdings": args.allow_stale_holdings,
+        "stale_vs_asof": facts["stale_vs_asof"], "failures": facts["failures"], "freshness": facts["freshness"]})
+    update_manifest(os.path.abspath(args.run_dir), "inputs", {"market": args.market, "sources": facts["inputs"]})
     print(f"wrote {out}\n  as-of {facts['asof']} | instruments {len(facts['instruments'])} | failed {len(facts['failures'])} | "
           f"stale {len(facts['stale_vs_asof'])} | regime: {facts['regime']['label']} | "
           f"breadth>50DMA: {facts['regime']['breadth_pct_above_50dma']} | distribution days: {facts['regime']['distribution_days_25']}")

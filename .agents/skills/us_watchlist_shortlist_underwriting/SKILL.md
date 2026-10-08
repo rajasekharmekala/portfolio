@@ -32,9 +32,9 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
 2. **STRICT VERBOSITY & ANALYTICAL DEPTH:** Every generated dossier must contain 3–4 dense, investigative narrative paragraphs per section, full 5-year GAAP financial statement wikitables, a peer comparison matrix, 3 fatal flaw scenarios, and 25–40+ granular SEC EDGAR citations (`<ol class="reflist">`).
 3. **MANDATORY USE OF `N/A`:** If any specific metric (e.g. historical short interest, institutional dark pool ratio, or insider cluster trades) is not deterministically verified, output **`N/A`** with a brief reason.
 4. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE:**
-   - Any one-off execution scripts created during this run (e.g., `generate_*.py`, `build_*_dossiers*.py`, `expand_*.py`, `update_*_workbooks.py`, `update_*_watchlist*.py`) are **transient pipeline artifacts**. IMMEDIATELY after the pipeline completes successfully, delete them: `rm scripts/<one-off-script>.py` and remove `scripts/__pycache__/`.
-   - **Zero Prior-Session Bias & Cache Cleanup**: Stale cache artifacts from prior session dates in `scripts/.cache/` (e.g. `facts_*`, `research_*`, `audit_*`, `screen_*`) must be pruned. Every run starts from a clean, unbiased baseline. Only persistent configuration (`scripts/.cache/aliases.json`) is preserved across sessions.
-   - Whitelist to preserve: `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/dossier_builder_template.py`, `scripts/com.portfolio.blogs.fileserver.plist`, `docs/blogs/dossier_nav.js`, `docs/blogs/dossiers.json`, `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`.
+   - Scratch code lives only in `<RUN_DIR>` and is deleted with it (RUN_PROTOCOL sections 1 and 5).
+   - **Run directory:** nothing from earlier runs is read. Cleanup follows `../_shared/RUN_PROTOCOL.md` section 5. Repository scripts are never deleted.
+   - Permanent repository scripts (never delete): `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/market_facts.py`, `scripts/validate_report.py`.
 
 ---
 

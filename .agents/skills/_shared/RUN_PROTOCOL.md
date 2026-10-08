@@ -42,7 +42,9 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 
 ## 6. Publication (GitHub Pages)
 
-- Reports are published only by copying a validated report into `docs/reports/` and regenerating `docs/index.html`.
-- Publication is an explicit user decision per repository. Reports contain personal holdings. Do not publish to a public repository or Pages site without the user's explicit approval.
-- `docs/` must contain only published reports and their index. Never copy workbooks, ledgers, research files, or `.env` into `docs/`.
+- `docs/` holds only the latest published report for each report type and market, plus the index that links them. Publishing a new report overwrites the old file in `docs/reports/`. History is kept by git commits, not by files in the folder.
+- Publish only a report that has passed both the validator (`RESULT: PASS`) and the reviewer gate (`APPROVE`). Copy the HTML into `docs/reports/` under its report name, and regenerate `docs/index.html` from the files that are present.
+- Publication is committed by the user. The run stages the files and reports the commit command; it does not commit or push.
+- Reports contain personal holdings. Publish only to a private repository, or only after the user has explicitly approved public publication for that repository.
+- `docs/` must contain only published reports and their index. Never copy workbooks, ledgers, research files, fact packs, or `.env` into `docs/`.
 - All links inside published pages must be relative. Do not embed absolute local paths such as `/Users/...` or `file://`.

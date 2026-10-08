@@ -1,20 +1,10 @@
-# Published Research & Intelligence Portal (GitHub Pages)
+# Published reports (GitHub Pages)
 
-This directory (`docs/`) is the root of the published research portal hosted via GitHub Pages.
+This folder is the only thing GitHub Pages serves.
 
-## Directory Structure
-- `docs/index.html`: Master Institutional Research Portal and Command Deck (GitHub Pages landing page with full-text search, multi-factor filtering, and direct links to reports and dossiers).
-- `docs/reports/`: Institutional daily briefings, portfolio forensic audits, and options underwriting reports:
-  - `Daily_Market_Intelligence_<YYYY-MM-DD>.html` (Indian Equities)
-  - `Daily_US_Market_Intelligence_<YYYY-MM-DD>.html` (US Equities)
-  - `Portfolio_Audit_<YYYY-MM-DD>.html` (Zerodha Demat Portfolio Audit)
-  - `US_Portfolio_Audit_<YYYY-MM-DD>.html` (US Brokerage Portfolio Audit)
-  - `Options_Underwriting_NSE_<YYYY-MM-DD>.html` / `Options_Underwriting_US_<YYYY-MM-DD>.html`
-- `docs/blogs/`: Standalone Wikipedia-style equity research dossiers (`<SYMBOL>_dossier.html`), shared navigator (`dossier_nav.js`), registry (`dossiers.json`), and blogs index (`index.html`).
-
-## Automated Publishing Workflow
-All `.agents/workflows` and skills persist deliverables directly into `docs/`:
-1. Market intelligence and portfolio audits write validated HTML briefings directly to `docs/reports/`.
-2. Watchlist underwriting deep dives write company dossiers directly to `docs/blogs/<SYMBOL>_dossier.html`.
-3. `scripts/build_dossier_portal.py` regenerates `docs/index.html`, `docs/blogs/index.html`, and `docs/blogs/dossiers.json`.
-4. Committing and pushing to `main` auto-deploys all research to GitHub Pages.
+- `docs/reports/` holds only the latest published report for each report type and market. Publishing overwrites the file of the same name. Earlier versions are in git history.
+- `docs/index.html` lists the files in `docs/reports/`. It is regenerated from that folder, never edited by hand.
+- `docs/.nojekyll` must stay, so Pages serves the files as they are.
+- Publish only a report that passed `validate_report.py` (`RESULT: PASS`) and the reviewer gate (`APPROVE`).
+- Reports contain personal holdings. Use a private repository, or publish publicly only after an explicit decision for that repository.
+- Commit and push are done by the user.

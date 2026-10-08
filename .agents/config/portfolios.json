@@ -1,0 +1,21 @@
+{
+  "_comment": "Input sources for the facts ledger and every report. One entry per file the run reads. kind: xlsx (header-name lookup) or md (first pipe table that contains symbol_header). A missing required source aborts the run. Add accounts here; do not change column positions in code.",
+  "IN": {
+    "currency": "INR",
+    "sources": [
+      {"id": "zerodha_holdings", "role": "holding", "kind": "xlsx", "path": "sheets/Zerodha_Holdings.xlsx", "sheet": "Holdings", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Strategy Bucket", "Quantity", "Avg Buy Price", "Current Price"]},
+      {"id": "zerodha_shortlist", "role": "shortlist", "kind": "xlsx", "path": "shortlist/Zerodha_Shortlist.xlsx", "sheet": "Master_Shortlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Action Verdict", "Strategy Bucket"]},
+      {"id": "zerodha_watchlist", "role": "watchlist", "kind": "xlsx", "path": "watchlist/Zerodha_Watchlist.xlsx", "sheet": "Active_Watchlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Status"]}
+    ]
+  },
+  "US": {
+    "currency": "USD",
+    "sources": [
+      {"id": "us_holdings_workbook", "role": "holding", "kind": "xlsx", "path": "sheets/US_Portfolio_Holdings.xlsx", "sheet": "Holdings", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Strategy Bucket", "Quantity", "Avg Buy Price", "Current Price"]},
+      {"id": "charles_schwab", "role": "holding", "kind": "md", "path": "sheets/charles_schwab.md", "symbol_header": "Symbol", "required": false},
+      {"id": "robinhood", "role": "holding", "kind": "md", "path": "sheets/robinhood_current_holdings.md", "symbol_header": "Ticker", "required": false},
+      {"id": "us_shortlist", "role": "shortlist", "kind": "xlsx", "path": "shortlist/US_Shortlist.xlsx", "sheet": "Master_Shortlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Action Verdict", "Strategy Book"]},
+      {"id": "us_watchlist", "role": "watchlist", "kind": "xlsx", "path": "watchlist/US_Portfolio_Watchlist.xlsx", "sheet": "Active_Watchlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Status"]}
+    ]
+  }
+}

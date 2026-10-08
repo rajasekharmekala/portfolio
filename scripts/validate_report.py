@@ -40,6 +40,10 @@ THRESH = {
     "portfolio_audit": dict(h2=500, total=9000, intro=50, take=120, casenotes=12, howto=6, triggers=8, primer=450),
 }
 CASE_MIN_WORDS = 80
+# Checks that are meaningful on one section fragment. Whole-report floors (total words, primer, glossary, list counts)
+# only run in full mode, on the assembled report.
+PARTIAL_CHECKS = ("BANNED", "THIN SUBSECTION", "REPETITIVE", "PRICE MISMATCH", "CASE NOTE", "TABLE WITHOUT",
+                  "COLOURS", "EMOJI", "DATE MISMATCH", "RESEARCH ITEM", "DUPLICATED", "HOLDINGS WITHOUT")
 
 
 class Doc(HTMLParser):
@@ -133,6 +137,8 @@ def main():
     ap.add_argument("--facts")
     ap.add_argument("--max-na-pct", type=float, default=5.0)
     ap.add_argument("--price-tol-pct", type=float, default=1.5)
+    ap.add_argument("--partial", action="store_true",
+                    help="check one section fragment: only the checks that make sense on part of a report (see PARTIAL_CHECKS). Run the full validator on the assembled report.")
     args = ap.parse_args()
     T = THRESH[args.kind]
     raw = open(args.report, encoding="utf-8").read()
@@ -398,6 +404,8 @@ def main():
     print(f"{args.report}\n  prose words: {total} | sections: {len(sections)} | data tables: {len(tables)} | "
           f"primer/howto/example/triggers/casenotes: {len(primers)}/{len(blocks_with('howto'))}/{len(blocks_with('example'))}/"
           f"{len(blocks_with('triggers'))}/{len(cases)} | N/A cells: {na}/{cells} ({pct:.1f}%)")
+    if args.partial:
+        errors = [e for e in errors if e.startswith(PARTIAL_CHECKS)]
     for w in warns:
         print("  WARN ", w)
     for e in dict.fromkeys(errors):

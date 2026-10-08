@@ -1,0 +1,65 @@
+{
+  "_comment": "Per-market parameters for the generic workflows in .agents/workflows/. Source files per account live in portfolios.json. Change a value here, not in a workflow. Report filenames use {date} (YYYY-MM-DD).",
+  "IN": {
+    "name": "India (NSE/BSE)",
+    "currency": "INR",
+    "amount_symbol": "₹",
+    "ledger_screen": "nifty500",
+    "primary_benchmark": "Nifty 50",
+    "research_key": "IN",
+    "skills": {
+      "market_intelligence": "market_intelligence",
+      "portfolio_audit": "portfolio_audit",
+      "options": "options_underwriting",
+      "watchlist_to_shortlist": "watchlist_shortlist_underwriting",
+      "reject_to_watchlist": "archive_resurrection_review",
+      "shortlist_allocator": "shortlist_capital_allocator",
+      "company_report": "company_report"
+    },
+    "output": {
+      "market_intelligence": "docs/reports/Daily_Market_Intelligence_{date}.html",
+      "portfolio_audit": "docs/reports/Portfolio_Audit_{date}.html",
+      "options": "docs/reports/Options_Underwriting_NSE_{date}.html",
+      "reject_to_watchlist": "docs/reports/IND_Archive_Resurrection_{date}.html",
+      "watchlist_to_shortlist": "docs/blogs/{symbol}_dossier.html"
+    },
+    "email_subject": {
+      "market_intelligence": "Daily Market Pulse | {date} | Nifty {regime}",
+      "portfolio_audit": "Master Portfolio Audit | {date} | Net Worth: ₹{net_worth}",
+      "options": "Indian Options Audit & Setup Structuring | {date}",
+      "reject_to_watchlist": "Indian Archive Resurrection Review | {date}",
+      "watchlist_to_shortlist": "Indian Watchlist to Shortlist | {date}"
+    }
+  },
+  "US": {
+    "name": "United States (NYSE/NASDAQ)",
+    "currency": "USD",
+    "amount_symbol": "$",
+    "ledger_screen": "sp1500",
+    "primary_benchmark": "S&P 500",
+    "research_key": "US",
+    "skills": {
+      "market_intelligence": "us_market_intelligence",
+      "portfolio_audit": "us_portfolio_audit",
+      "options": "us_options_underwriting",
+      "watchlist_to_shortlist": "us_watchlist_shortlist_underwriting",
+      "reject_to_watchlist": "us_archive_resurrection_review",
+      "shortlist_allocator": "us_shortlist_capital_allocator",
+      "company_report": "us_company_report"
+    },
+    "output": {
+      "market_intelligence": "docs/reports/US_Market_Intelligence_{date}.html",
+      "portfolio_audit": "docs/reports/US_Portfolio_Audit_{date}.html",
+      "options": "docs/reports/US_Options_Underwriting_{date}.html",
+      "reject_to_watchlist": "docs/reports/US_Archive_Resurrection_{date}.html",
+      "watchlist_to_shortlist": "docs/blogs/{symbol}_dossier.html"
+    },
+    "email_subject": {
+      "market_intelligence": "Daily US Market Pulse | {date} | S&P {regime}",
+      "portfolio_audit": "Master US Portfolio Audit | {date} | Net Worth: ${net_worth}",
+      "options": "US Options Audit & Setup Structuring | {date}",
+      "reject_to_watchlist": "US Archive Resurrection Review | {date}",
+      "watchlist_to_shortlist": "US Watchlist to Shortlist | {date}"
+    }
+  }
+}

@@ -14,15 +14,15 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
 1. **Build the facts ledger** (one per market per session, shared by the market report and the audit):
    `python3 scripts/market_facts.py --market <MKT> --date <YYYY-MM-DD> --screen <sp1500|nifty500>`
    Never rename or copy a ledger to another date; the validator fails a report whose date differs from its ledger's as-of. Build the ledger for the session the report is dated.
-   It writes `scripts/.cache/facts_<MKT>_<date>.json` with, for every benchmark, sector proxy, holding, shortlist name, watchlist name and universe constituent: close, 1D/1W/2W/1M %, SMA20/50/200, 50-DMA trend, RSI(14), ATR(14), volume multiple, 52-week range, distance to 50-DMA in ATRs, Weinstein stage; plus the regime label, breadth, sector quadrant, US Treasury curve (FRED) and pre-screened candidate lists (`bull`, `bull_near`, `bull_relaxed`, `bear`, `bear_near`, `bear_relaxed`) plus the ready-made **`bull_pick` / `bear_pick`**: 10 names per cap tier (Large/Mid/Small) with company name, sector/industry, close, averages, RSI, volume multiple and a `qualifier` saying how strongly each passes.
+   It writes `<RUN_DIR>/cache/facts_<MKT>_<date>.json` with, for every benchmark, sector proxy, holding, shortlist name, watchlist name and universe constituent: close, 1D/1W/2W/1M %, SMA20/50/200, 50-DMA trend, RSI(14), ATR(14), volume multiple, 52-week range, distance to 50-DMA in ATRs, Weinstein stage; plus the regime label, breadth, sector quadrant, US Treasury curve (FRED) and pre-screened candidate lists (`bull`, `bull_near`, `bull_relaxed`, `bear`, `bear_near`, `bear_relaxed`) plus the ready-made **`bull_pick` / `bear_pick`**: 10 names per cap tier (Large/Mid/Small) with company name, sector/industry, close, averages, RSI, volume multiple and a `qualifier` saying how strongly each passes.
    If a ledger for the session already exists, reuse it. Do not re-derive any of these numbers by hand or from memory.
-2. **Resolve failures.** Every symbol listed under `FAILED` must be retried (alias in `scripts/.cache/aliases.json`, alternate exchange suffix, web search) before any `N/A` is allowed for it.
+2. **Resolve failures.** Every symbol listed under `FAILED` must be retried (alias in `scripts/config/aliases.json`, alternate exchange suffix, web search) before any `N/A` is allowed for it.
 3. **Run the web-research pass (mandatory; protocol in section 6)** with the `duck-duck-go` MCP server (`search` + `fetch_content`) for everything in the ledger's `research_needs` list, and record results in the ledger's `research_file`. In outline:
    IN: FII/DII cash flows, NSE option-chain OI/PCR/max pain, FII index-futures long/short, bulk/block deals, promoter/SAST disclosures, results calendar.
    US: CBOE put/call ratio and SPY/QQQ/IWM option-chain walls, SEC Form 4 cluster buys, 13F notes, earnings calendar.
 4. **Write the Story Brief** (private, 6-8 bullets) before any HTML: regime verdict (verbatim `regime.label`), breadth verdict, the 2-3 leading and lagging sectors, the 3 themes that explain the bull and bear lists, what changed vs the previous report, and the single most important action. Every section must serve this brief.
 5. **Write the sections** from the ledger and the brief only (specialist subagents receive the ledger path and the brief; they must not search for prices independently).
-6. **Validate**: `python3 scripts/validate_report.py --report <file> --kind <market_intel|portfolio_audit> --facts scripts/.cache/facts_<MKT>_<date>.json`
+6. **Validate**: `python3 scripts/validate_report.py --report <file> --kind <market_intel|portfolio_audit> --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json`
    The report may be saved to docs/ and emailed **only when the result is `PASS`**. On `FAIL`, fix the report and re-run; do not lower thresholds.
 
 ## 2. Data completeness
@@ -90,7 +90,7 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
 - [ ] Bull/Bear lists built from the ledger screen, not carried forward; taxonomy filled.
 - [ ] Regime label, prices, stages identical to the ledger everywhere; sibling report reconciled.
 - [ ] `validate_report.py` returns `PASS`.
-- [ ] Only then: save to Drive, delete prior versions, dispatch email, clean up one-off scripts and stale cache files (keep `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/.cache/aliases.json`; prune prior-session `facts_*` and `research_*` cache files so stale data does not bias future runs).
+- [ ] Only then: save to Drive, delete prior versions, dispatch email, clean up one-off scripts and stale cache files (keep `scripts/market_facts.py`, `scripts/validate_report.py`, `scripts/config/aliases.json`; prune prior-session `facts_*` and `research_*` cache files so stale data does not bias future runs).
 
 ## 6. Web research protocol (duck-duck-go MCP): be street-smart
 
@@ -110,7 +110,7 @@ Everything the price ledger cannot supply comes from the **`duck-duck-go` MCP se
 
 ### Recording (mandatory)
 
-Write `scripts/.cache/research_<MKT>_<date>.json`:
+Write `<RUN_DIR>/cache/research_<MKT>_<date>.json`:
 ```json
 {"items": [
   {"key": "fii_dii_cash", "status": "found", "value": {"FII_net_cr": -5353.22, "DII_net_cr": 5189.02},
