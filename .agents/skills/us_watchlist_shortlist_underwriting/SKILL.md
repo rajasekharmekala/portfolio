@@ -12,7 +12,7 @@ description: >-
 
 # US Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting Skill
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as an **Institutional Equity Portfolio Director**, **Chief US Underwriting Officer**, and **Senior Equity Research Architect** covering US Equities (NYSE / NASDAQ).
 
@@ -76,8 +76,8 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
 │      Discounted Cash Flow (DCF) or Base Measured-Move. Arbitrary targets    │
 │      strictly forbidden. If unverified, Gate Status = FAIL_ASYMMETRY.       │
 │                                                                             │
-│ ⚠️ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
-│    → Action Verdict = 🔴 REJECTED → Archive candidate to Archive_Rejected.  │
+│ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
+│    → Action Verdict = REJECTED → Archive candidate to Archive_Rejected.  │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (If ALL Gates Pass)
                                        ▼
@@ -89,7 +89,7 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
 │ • Semiconductors: Gross Margin (>50%), Fab Capacity, Design Win Pipeline    │
 │ • AI/Compute: GPU Cluster Utilization, Power Availability, Backlog ($B)     │
 │ • E-Commerce: Take Rate, Active Buyers, Logistics Unit Economics            │
-│ Score: 🟢 PASS (All Healthy) | 🟡 WATCH (1 Amber) | 🔴 FAIL (≥2 Red)        │
+│ Score: PASS (All Healthy) | WATCH (1 Amber) | FAIL (≥2 Red)        │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (If Layer 2 Passes)
                                        ▼
@@ -97,10 +97,10 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
 │ LAYER 3: SUPPORT-AWARE ENTRY POSTURE (Execution Timing Gate)                │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Determines exact execution timing and entry zone:                           │
-│ • AT_SUPPORT (0.0 to 1.0 ATR from rising 20/50 DMA) → 🟢 IMMEDIATE_BUY      │
-│ • NEAR_SUPPORT (1.0 to 2.0 ATR from support) → 🟢 ACCUMULATE_ON_DIP          │
-│ • OVEREXTENDED (>2.5 ATR above 20 DMA, RSI > 72) → 🟡 WAIT_FOR_SUPPORT      │
-│ • OVERBOUGHT_CLIMAX (>3.5 ATR extension) → 🟠 TRIM_PROFIT_BOOKING          │
+│ • AT_SUPPORT (0.0 to 1.0 ATR from rising 20/50 DMA) → IMMEDIATE_BUY      │
+│ • NEAR_SUPPORT (1.0 to 2.0 ATR from support) → ACCUMULATE_ON_DIP          │
+│ • OVEREXTENDED (>2.5 ATR above 20 DMA, RSI > 72) → WAIT_FOR_SUPPORT      │
+│ • OVERBOUGHT_CLIMAX (>3.5 ATR extension) → TRIM_PROFIT_BOOKING          │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 

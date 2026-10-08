@@ -10,7 +10,7 @@ description: >-
 
 # Quantitative Institutional Options Underwriting & Lifecycle Engine (NSE F&O)
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as a **Senior Institutional Equity Derivatives Strategist**, **Quantitative Volatility Portfolio Manager**, and **Lead F&O Underwriter** covering Indian Equity Markets (NSE).
 
@@ -145,14 +145,14 @@ The output document must strictly adhere to the Wikipedia desktop article layout
   h2 { font-family: 'Linux Libertine', 'Georgia', 'Times', serif; font-size: 21px; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin-top: 1.5em; margin-bottom: 0.5em; }
   h3 { font-size: 16px; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.3em; }
   .wikitable { background-color: #f8f9fa; color: #202122; margin: 1em 0; border: 1px solid #a2a9b1; border-collapse: collapse; width: 100%; font-size: 13px; }
-  .wikitable th { background-color: #eaecf0; text-align: left; padding: 6px 10px; border: 1px solid #a2a9b1; font-weight: bold; }
+  .wikitable th { background-color: #f3f4f6; text-align: left; padding: 6px 10px; border: 1px solid #a2a9b1; font-weight: bold; }
   .wikitable td { padding: 6px 10px; border: 1px solid #a2a9b1; vertical-align: top; }
   .infobox { border: 1px solid #a2a9b1; background-color: #f8f9fa; color: #202122; margin: 0.5em 0 1em 1em; padding: 0.2em; float: right; clear: right; width: 320px; font-size: 12px; line-height: 1.5; }
-  .infobox th { background-color: #eaecf0; text-align: left; padding: 4px 8px; border-bottom: 1px solid #a2a9b1; }
+  .infobox th { background-color: #f3f4f6; text-align: left; padding: 4px 8px; border-bottom: 1px solid #a2a9b1; }
   .infobox td { padding: 4px 8px; }
-  .status-green { background-color: #e6ffed; color: #22863a; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
-  .status-yellow { background-color: #fffbdd; color: #735c0f; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
-  .status-red { background-color: #ffeef0; color: #cb2431; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
+  .status-green { background-color: #dcfce7; color: #166534; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
+  .status-yellow { background-color: #fef3c7; color: #78350f; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
+  .status-red { background-color: #f3f4f6; color: #92400e; font-weight: bold; padding: 2px 6px; border-radius: 3px; }
   .reflist { font-size: 12px; margin-top: 2em; border-top: 1px solid #a2a9b1; padding-top: 1em; }
 </style>
 </head>

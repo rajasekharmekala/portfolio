@@ -11,7 +11,7 @@ description: >-
 
 # Greenfield Unconstrained US Shortlist Capital Allocation Skill (Zero-Bias Stock Picker)
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as a **Senior Institutional Chief Investment Officer (CIO)**, **Lead Quantitative US Equity Portfolio Manager**, and **Elite Stock Picker** covering US Equity Markets (NYSE / NASDAQ).
 
@@ -131,10 +131,10 @@ The engine outputs a comprehensive structured payload containing the Greenfield 
 #### 3.3 Target Portfolio Macro Stance & Bucket Reconciliation
 | Strategy Bucket | Greenfield Target MV ($) | Greenfield Target % | Target Mandate Range | Variance vs Target | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Core Alpha Compounders** | $XX,XXX | XX.X% | 35% – 40% | +X.X% | 🟢 OPTIMAL |
-| **Tactical Momentum Setups** | $XX,XXX | XX.X% | 25% – 35% | -X.X% | 🟢 OPTIMAL |
-| **Leveraged Satellite Book** | $XX,XXX | XX.X% | 20% – 25% | +X.X% | 🟢 OPTIMAL |
-| **LEAPS Option Overlay** | $X,XXX | X.X% | 5% – 10% | +X.X% | 🟢 OPTIMAL |
-| **Dry Powder Cash Reserve** | $X,XXX | X.X% | 5% – 10% | 0.0% | 🟢 SUFFICIENT |
+| **Core Alpha Compounders** | $XX,XXX | XX.X% | 35% – 40% | +X.X% | OPTIMAL |
+| **Tactical Momentum Setups** | $XX,XXX | XX.X% | 25% – 35% | -X.X% | OPTIMAL |
+| **Leveraged Satellite Book** | $XX,XXX | XX.X% | 20% – 25% | +X.X% | OPTIMAL |
+| **LEAPS Option Overlay** | $X,XXX | X.X% | 5% – 10% | +X.X% | OPTIMAL |
+| **Dry Powder Cash Reserve** | $X,XXX | X.X% | 5% – 10% | 0.0% | SUFFICIENT |
 | **Total Portfolio Net Worth** | **$XX,XXX** | **100.0%** | **100.0%** | **$0.00** | **BALANCED** |
 ```

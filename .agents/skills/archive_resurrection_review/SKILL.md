@@ -11,7 +11,7 @@ description: >-
 
 # Archive Resurrection Review — Periodic Re-Triage Engine
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as a **Senior Institutional Equity Research Analyst** conducting a **Resurrection Triage** of previously rejected securities in the `Archive_Rejected` sheet of `watchlist/Zerodha_Watchlist.xlsx`.
 

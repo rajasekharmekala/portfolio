@@ -12,7 +12,7 @@ description: >-
 
 # Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting Engine
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as a **Senior Institutional Equity Research Analyst**, **Quantitative Strategist**, and **Chief Underwriting Architect** covering Indian Equity Markets (NSE/BSE).
 
@@ -70,12 +70,12 @@ Your objective is to process the broad watchlist in continuous, stateful batches
    - Any hallucination, discrepancy, or unverified estimation must be immediately corrected or marked with explicit verifiable `N/A`.
 9. **MANDATORY ZERO-OMISSION RESEARCH DOSSIER COMPLETENESS:**
    - In every generated/updated `googledrive/blogs/<SYMBOL>_dossier.html`, **NONE of the standard dossier template sections may be omitted or abbreviated**. The 3-layer gating, company-specific KPI scorecard, peer benchmarking wikitable, fatal flaws red-team, and clear verdict must be completely rendered with no placeholders.
-10. **⛔ MANDATORY DOSSIER-FIRST GATE — NO STOCK MAY BE MARKED `COMPLETED` WITHOUT A VERIFIED DOSSIER FILE:**
+10. **MANDATORY DOSSIER-FIRST GATE — NO STOCK MAY BE MARKED `COMPLETED` WITHOUT A VERIFIED DOSSIER FILE:**
    - **Hard Prerequisite:** A stock's `Status` in `watchlist/Zerodha_Watchlist.xlsx` MUST NEVER be set to `COMPLETED` unless the corresponding dossier file `googledrive/blogs/<SYMBOL>_dossier.html` has been physically written to disk and verified to exist.
    - **Verification Protocol:** Before the orchestrator writes any `Status = COMPLETED` row back to the watchlist XLSX, it MUST execute a filesystem check confirming `os.path.exists('googledrive/blogs/<SYMBOL>_dossier.html')` returns `True` AND the file size is ≥ 30 KB (a non-trivial, complete dossier).
    - **If the dossier file is missing or undersized:** The orchestrator MUST:
      1. Leave `Status = PENDING` for that stock — do NOT mark it `COMPLETED`.
-     2. Log a clear error in the run summary: `⛔ DOSSIER MISSING: <SYMBOL>_dossier.html not found or < 30 KB. Status remains PENDING.`
+     2. Log a clear error in the run summary: `DOSSIER MISSING: <SYMBOL>_dossier.html not found or < 30 KB. Status remains PENDING.`
      3. Re-queue the stock at the top of the next batch until the dossier is successfully generated.
    - **Applies to ALL source types:** `HOLDING_SEED`, `DEEP_RESEARCH_PEER`, `MARKET_INTELLIGENCE`, `TRANSCRIPT`, and `MANUAL` — no exceptions.
    - **Symbol vs. Filename Mismatch Rule:** If a company's legal name resolves to a different symbol than the watchlist ticker (e.g., watchlist has `MEDANTA` but dossier saved as `GLOBALHEALTH_dossier.html`), the orchestrator MUST update the watchlist `Symbol` column to match the dossier filename, OR rename the dossier to match the watchlist ticker. Both must be in sync before `COMPLETED` status is written.
@@ -116,23 +116,23 @@ All file operations reference these canonical Google Drive synchronized paths (`
 The Shortlist registry enforces strict capacity limits, source differentiation, and holding isolation:
 
 1. **Pipeline Strategy Book Capacity (Autowritten Challenger Slots):**
-   - **🛡️ Core Alpha:** Maximum **10 Autowritten Challenger Positions** (High ROCE >18%, durable moats, clean balance sheets, 1–3+ year compounding horizon).
-   - **🚀 Tactical Momentum:** Maximum **10 Autowritten Challenger Positions** (Stage 2 markup, 20/50/200 DMA alignment, relative strength leadership vs Nifty 500, volume expansion, turnaround/operating leverage, 3-week to 6-month horizon).
+   - **Core Alpha:** Maximum **10 Autowritten Challenger Positions** (High ROCE >18%, durable moats, clean balance sheets, 1–3+ year compounding horizon).
+   - **Tactical Momentum:** Maximum **10 Autowritten Challenger Positions** (Stage 2 markup, 20/50/200 DMA alignment, relative strength leadership vs Nifty 500, volume expansion, turnaround/operating leverage, 3-week to 6-month horizon).
 2. **Three Shortlist Source Types (Capacity Isolation):**
    - `AUTOWRITTEN` (or `DEEP_RESEARCH`): Automatically discovered, underwritten, and managed by this scheduled deep research engine. Strictly subject to the **10 Core / 10 Tactical challenger capacity cap** and competitive displacement.
    - `CURRENT_HOLDING`: Dedicated category for active portfolio holdings (from `sheets/Zerodha_Holdings.xlsx`) that undergo rigorous deep underwriting. **DOES NOT CONSUME or count against the 10+10 autowritten challenger slots.** Current holdings reside in the shortlist with explicit portfolio management verdicts (`KEEP_COMPOUNDING`, `ACCUMULATE_ON_DIP`, `TRIM_PROFIT_BOOKING`, `REPLACE_UNDERPERFORMER`) to benchmark active capital against new pipeline ideas.
    - `MANUAL`: Hand-curated securities manually added by the user. **Strictly immune and protected from automatic eviction or displacement.**
 3. **Action Verdict Taxonomy:**
    - **For `CURRENT_HOLDING` Positions:**
-     - 🟢 `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
-     - 🔵 `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available. Add to position.
-     - 🟡 `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration limit (>15–20%). Trim 30%–50% to harvest gains.
-     - 🔴 `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. **Immediate candidate for capital swap** into a top-ranked shortlist challenger.
+     - `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
+     - `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available. Add to position.
+     - `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration limit (>15–20%). Trim 30%–50% to harvest gains.
+     - `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. **Immediate candidate for capital swap** into a top-ranked shortlist challenger.
    - **For `AUTOWRITTEN` Pipeline Challengers:**
-     - 🟢 `IMMEDIATE_BUY` (at support with high asymmetry)
-     - 🔵 `ACCUMULATE_ON_DIP` (near support)
-     - 🟡 `WAIT_FOR_SUPPORT` (extended, do not chase)
-     - 🔴 `REJECTED` (failed gating hurdle)
+     - `IMMEDIATE_BUY` (at support with high asymmetry)
+     - `ACCUMULATE_ON_DIP` (near support)
+     - `WAIT_FOR_SUPPORT` (extended, do not chase)
+     - `REJECTED` (failed gating hurdle)
 
 ---
 
@@ -185,8 +185,8 @@ Every candidate must be processed through the following 3 layers sequentially:
 │      Technical Base Measured-Move. Arbitrary inflated targets strictly      │
 │      forbidden. If target unverified, Gate Status = FAIL_ASYMMETRY.          │
 │                                                                             │
-│ ⚠️ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
-│    → Action Verdict = 🔴 REJECTED → Do NOT evaluate Layer 2 or Layer 3.     │
+│ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
+│    → Action Verdict = REJECTED → Do NOT evaluate Layer 2 or Layer 3.     │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (If ALL Gates Pass)
                                        ▼
@@ -202,8 +202,8 @@ Every candidate must be processed through the following 3 layers sequentially:
 │   Commercialization, Gross Margin Stability.                                │
 │ • Consumer / Retail: Same-Store-Sales Growth (SSSG), Store Unit Economics.  │
 │                                                                             │
-│ Score each KPI: 🟢 PASS (Healthy) | 🟡 WATCH (Moderate Risk) | 🔴 FAIL      │
-│ ⚠️ DISPOSITION: Minimum 3/4 or 4/5 PASS required to qualify.                 │
+│ Score each KPI: PASS (Healthy) | WATCH (Moderate Risk) | FAIL      │
+│ DISPOSITION: Minimum 3/4 or 4/5 PASS required to qualify.                 │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (If KPI Health Qualified)
                                        ▼
@@ -212,13 +212,13 @@ Every candidate must be processed through the following 3 layers sequentially:
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Measure distance from nearest verified support anchor in `ATR(14)`:         │
 │ • AT_SUPPORT (≤ 0.5 × ATR): Price at 20/50-DMA / pivot base                 │
-│   → Action Verdict: 🟢 IMMEDIATE BUY                                        │
+│   → Action Verdict: IMMEDIATE BUY                                        │
 │ • NEAR_SUPPORT (0.5 – 1.0 × ATR): Minor pullback required                   │
-│   → Action Verdict: 🔵 ACCUMULATE ON DIP                                    │
+│   → Action Verdict: ACCUMULATE ON DIP                                    │
 │ • EXTENDED (> 1.0 × ATR or RSI > 70): Price overextended from base          │
-│   → Action Verdict: 🟡 WAIT FOR SUPPORT (Do not chase)                      │
+│   → Action Verdict: WAIT FOR SUPPORT (Do not chase)                      │
 │ • SUPPORT_BROKEN: Price closed below structural invalidation stop           │
-│   → Action Verdict: 🔴 REJECTED / BROKEN STRUCTURE                          │
+│   → Action Verdict: REJECTED / BROKEN STRUCTURE                          │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -302,7 +302,7 @@ Every candidate must be processed through the following 3 layers sequentially:
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ PHASE 6: DOSSIER GATE CHECK, REVIEWER AUDIT, STATE SYNC & GOOGLE DRIVE PUSH │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. ⛔ MANDATORY DOSSIER GATE (before ANY XLSX writes):                       │
+│ 1. MANDATORY DOSSIER GATE (before ANY XLSX writes):                       │
 │    For each of the 4 stocks in this batch:                                  │
 │    a. Confirm `googledrive/blogs/<SYMBOL>_dossier.html` exists on disk.      │
 │    b. Confirm file size ≥ 30 KB.                                            │
@@ -325,7 +325,7 @@ At the conclusion of each 4-stock run, print a clear console execution summary:
 
 ```text
 ================================================================================
-🚀 AUTONOMOUS UNDERWRITING RUN COMPLETE (Batch of 4)
+AUTONOMOUS UNDERWRITING RUN COMPLETE (Batch of 4)
 ================================================================================
 • Research Cycle: Cycle [X]
 • Candidates Processed (4 Securities):

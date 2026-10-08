@@ -11,6 +11,8 @@ description: >-
 
 # Wikipedia-Style Institutional Daily US Market Intelligence Newsletter Skill
 
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
+
 Act as a **Senior Institutional Equity Research Analyst**, **US Derivatives Strategist**, and **Wikipedia Financial Editor** covering US Equity Markets (NYSE / NASDAQ).
 
 Execute the **Daily US Market Intelligence & Watchlist Ingestion Engine**:
@@ -44,7 +46,7 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
      - **TradingView Chart:** `https://www.tradingview.com/chart/?symbol={PRIMARY_EXCHANGE}%3A{SYMBOL}`
      - **Finviz Profile:** `https://finviz.com/quote.ashx?t={SYMBOL}`
    - In all data tables, format the Symbol column with clickable sub-links:
-     `<b>{SYMBOL}</b><br><span style="font-size: 11px;"><a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3A{SYMBOL}" style="color: #1d4ed8;">Chart</a> • <a href="https://finviz.com/quote.ashx?t={SYMBOL}" style="color: #006600;">Finviz</a></span>`
+     `<b>{SYMBOL}</b><br><span style="font-size: 11px;"><a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3A{SYMBOL}" style="color: #0645ad;">Chart</a> • <a href="https://finviz.com/quote.ashx?t={SYMBOL}" style="color: #14532d;">Finviz</a></span>`
 5. **MANDATORY ZERO-OMISSION REPORT INTEGRITY (NO SECTIONS SKIPPED IN EMAIL NEWSLETTER):**
    - Every single section (Sections 1 through 7) and every table must be 100% fully rendered.
    - Strictly forbidden: Truncating sections, omitting tables, using placeholder comments (e.g. `<!-- rest of table omitted -->`, `[Remaining setups continue...]`), or skipping any breakout/breakdown candidates or sector heatmaps.
@@ -107,15 +109,15 @@ The newsletter is rendered as a standalone, self-contained HTML document with an
   - Headers Font Stack: `'Newsreader', Georgia, 'Times New Roman', serif;` (optical sizing 6..72, weights 500/600/700).
   - Body Font Stack: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;`
   - Monospace Font Stack: `'JetBrains Mono', monospace;` for stock prices, P/E ratios, tickers, and formulas.
-  - Color Palette: Body text `#1f2937` (soft obsidian), background `#ffffff`, subtle borders `#d1d5db`, table header gray `#f3f4f6`, hover background `#f0f7ff`.
+  - Color Palette: Body text `#202122` (soft obsidian), background `#ffffff`, subtle borders `#d1d5db`, table header gray `#f3f4f6`, hover background `#eff6ff`.
   - Line height: `1.72`, font size `15px`, letter spacing `-0.011em`, standard paragraph margins with justified text.
 - **Wikipedia Infobox (`table.infobox`):**
-  - Floated right with width `320px`, border `1px solid #d1d5db`, background `#f9fafb`.
+  - Floated right with width `320px`, border `1px solid #d1d5db`, background `#f8f9fa`.
   - Captures market internal vital statistics: Market Regime, CBOE VIX, S&P 500 / Nasdaq 100 Closes, US 10Y Yield, Total Put/Call Ratio, Breadth (% > 50-DMA), Distribution Days.
 - **Wikitables (`table.wikitable`):**
   - Width: `100%`, border collapse: `collapse`, border: `1px solid #d1d5db`, background: `#ffffff`, font-size: `89%`.
   - Header cells `th`: `#f3f4f6`, bold, border `1px solid #d1d5db`, padding `8px 12px`.
-  - Data cells `td`: padding `7px 12px`, border `1px solid #d1d5db`. Alternating rows `#fafbfc`. Hover `#f0f7ff`.
+  - Data cells `td`: padding `7px 12px`, border `1px solid #d1d5db`. Alternating rows `#f8f9fa`. Hover `#eff6ff`.
   - Numeric cells: `<td class="num">` right-aligned monospace.
   - Wrapped inside `<div class="table-wrapper">` for responsiveness.
 - **Callout & Forensic Alert Boxes:**
@@ -142,22 +144,22 @@ The newsletter is rendered as a standalone, self-contained HTML document with an
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
+  --text-primary: #202122;
+  --text-secondary: #54595d;
+  --text-muted: #54595d;
   --bg-main: #ffffff;
-  --bg-surface: #f9fafb;
+  --bg-surface: #f8f9fa;
   --bg-highlight: #f3f4f6;
   --border-color: #d1d5db;
-  --border-subtle: #e5e7eb;
-  --brand-blue: #1d4ed8;
+  --border-subtle: #dbeafe;
+  --brand-blue: #0645ad;
   --brand-blue-light: #eff6ff;
-  --brand-green: #15803d;
+  --brand-green: #166534;
   --brand-green-light: #f0fdf4;
-  --brand-amber: #b45309;
-  --brand-amber-light: #fffbeb;
-  --brand-red: #b91c1c;
-  --brand-red-light: #fef2f2;
+  --brand-amber: #92400e;
+  --brand-amber-light: #f8f9fa;
+  --brand-red: #92400e;
+  --brand-red-light: #f3f4f6;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
@@ -214,7 +216,7 @@ h3 {
   font-family: var(--font-sans);
   font-size: 1.18em;
   font-weight: 600;
-  color: #1f2937;
+  color: #202122;
   margin-top: 1.6em;
   margin-bottom: 0.5em;
 }
@@ -272,7 +274,7 @@ table.infobox .infobox-header {
   background-color: #f3f4f6;
   font-weight: 700;
   text-align: center;
-  color: #1f2937;
+  color: #202122;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   padding: 6px 10px;
@@ -291,7 +293,7 @@ table.wikitable {
 }
 table.wikitable th {
   background-color: var(--bg-highlight);
-  color: #1f2937;
+  color: #202122;
   font-weight: 600;
   text-align: left;
   padding: 8px 12px;
@@ -303,10 +305,10 @@ table.wikitable td {
   color: #374151;
 }
 table.wikitable tr:nth-child(even) td {
-  background-color: #fafbfc;
+  background-color: #f8f9fa;
 }
 table.wikitable tr:hover td {
-  background-color: #f0f7ff;
+  background-color: #eff6ff;
 }
 table.wikitable td.num, table.wikitable th.num {
   text-align: right;
@@ -347,8 +349,8 @@ table.wikitable td.num, table.wikitable th.num {
 }
 .pill-pass, .badge-green { background-color: #dcfce7; color: #166534; }
 .pill-watch, .badge-amber { background-color: #fef3c7; color: #92400e; }
-.pill-fail, .badge-red { background-color: #fee2e2; color: #991b1b; }
-.badge-blue { background-color: #dbeafe; color: #1e40af; }
+.pill-fail, .badge-red { background-color: #fee2e2; color: #7f1d1d; }
+.badge-blue { background-color: #dbeafe; color: #0645ad; }
 /* REFERENCES */
 ol.reflist {
   font-size: 0.84em;
@@ -586,7 +588,7 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 ### DELIVERABLES, GOOGLE DRIVE MAINTENANCE & EMAIL TRANSMISSION:
 
 - **Recipient:** `rajasekharreddymekala732@gmail.com`
-- **Subject:** `Subject: 📊 Daily US Market Pulse | [Session Date] — S&P [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts`
+- **Subject:** `Subject: Daily US Market Pulse | [Session Date] — S&P [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts`
 - **Pre-Send Audit:** Zero omissions across all 7 sections. Complete 30 longs + 30 shorts rendered.
 - **Google Drive Maintenance (Single Latest Version Lifecycle):**
   - **Target Location:** `googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html`
@@ -596,6 +598,6 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
   - Persist the complete HTML newsletter to `googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html`.
   - Dispatch the email immediately and automatically via `scripts/send_email.py` using credentials from `.env` (Do NOT prompt the user or request manual confirmation):
     ```bash
-    python3 scripts/send_email.py --subject "📊 Daily US Market Pulse | [Session Date] — S&P [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts" --html-file "googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html" --recipient "rajasekharreddymekala732@gmail.com"
+    python3 scripts/send_email.py --subject "Daily US Market Pulse | [Session Date] — S&P [Trend/Status] | 30 Breakouts & 30 Breakdown Alerts" --html-file "googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html" --recipient "rajasekharreddymekala732@gmail.com"
     ```
   - Confirm successful SMTP execution in the final turn summary.

@@ -11,6 +11,8 @@ description: >-
 
 # Wikipedia-Style Institutional Company Research Dossier & Underwriting Skill
 
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
+
 Act as an **Elite Institutional Equity Research Analyst**, **Chief Underwriting Architect**, and **Wikipedia Financial Editor** writing in the encyclopedic, objective, and neutral tone of a Wikipedia Featured Article (*Neutral Point of View — NPOV*).
 
 Compile an exhaustive, rigorous, and visually authentic Wikipedia-style research dossier and underwriting analysis on:
@@ -56,7 +58,7 @@ Deliver the complete output as a single, self-contained HTML document with inlin
   - Headers Font Stack: `'Newsreader', Georgia, 'Times New Roman', serif;` (optical sizing 6..72, weights 500/600/700).
   - Body Font Stack: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;`
   - Monospace Font Stack: `'JetBrains Mono', monospace;` for stock prices, P/E ratios, tickers, and formulas.
-  - Color Palette: Body text `#1f2937` (soft obsidian), background `#ffffff`, subtle borders `#d1d5db`, table header gray `#f3f4f6`, hover background `#f0f7ff`.
+  - Color Palette: Body text `#202122` (soft obsidian), background `#ffffff`, subtle borders `#d1d5db`, table header gray `#f3f4f6`, hover background `#eff6ff`.
   - Line height: `1.72`, font size `15px`, letter spacing `-0.011em`, standard paragraph margins with justified text.
 - **Mandatory Shared Navigation Registry (DO NOT embed per-file navigation):**
   - Immediately after `<body>`, insert exactly two lines: `<div id="dossierNavSlot"></div>` and `<script src="dossier_nav.js" defer></script>`.
@@ -64,18 +66,18 @@ Deliver the complete output as a single, self-contained HTML document with inlin
   - Final pipeline step: run `python3 scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json` so the navigation registry always matches the blog folder.
 - **Mandatory Executive Capital Allocation Decision Banner:**
   - Placed prominently at the very top (above the infobox and main text) so high-level capital decisions are visible in 5 seconds.
-  - Features an Action Badge (`🔵 ACCUMULATE ON DIP`, `🟢 KEEP COMPOUNDING`, `🟡 TRIM PROFIT BOOKING`, `🔴 REJECT`), along with a 4-card decision grid: Recommended Capital Action, Optimal Accumulation Band, Invalidation Stop Floor, and 12–18M Base Target & Asymmetry Ratio.
+  - Features an Action Badge (`ACCUMULATE ON DIP`, `KEEP COMPOUNDING`, `TRIM PROFIT BOOKING`, `REJECT`), along with a 4-card decision grid: Recommended Capital Action, Optimal Accumulation Band, Invalidation Stop Floor, and 12–18M Base Target & Asymmetry Ratio.
 - **Verbose, Investigative & Non-Robotic Editorial Voice:**
   - Avoid dry bulleted boilerplate or robotic summaries.
   - Detail the human motivations, operational dilemmas, field engineering realities, and market psychology. Explain *why* the business has pricing power, *why* customers choose them over rivals, and *why* technical consolidations occur.
 - **Floated Infobox (`table.infobox`):**
   - Width: `330px–340px`, floated right (`float: right; clear: right; margin: 0.6em 0 1.4em 1.8em;`).
-  - Fixed light background `#f9fafb`, thin gray border `1px solid #d1d5db`.
+  - Fixed light background `#f8f9fa`, thin gray border `1px solid #d1d5db`.
   - Top caption/header in bold centered text `#f3f4f6`.
   - Two-column data rows: Left column header `th` (width 42%, text-align left), right column data `td`.
   - **Must incorporate both Corporate Overview AND Underwriting Snapshot** (Strategy Bucket, Action Verdict, CMP, 52-Week Range, Entry Zone, Invalidation Stop, Targets, Asymmetry Ratio, ROCE, D/E, CFO/PAT).
 - **Table of Contents (`div.toc`):**
-  - Compact, numbered box before the main text (`background: #fcfcfd; border: 1px solid #d1d5db; padding: 14px 22px; display: table; margin: 1.2em 0 1.8em 0; font-size: 90%; min-width: 280px;`).
+  - Compact, numbered box before the main text (`background: #ffffff; border: 1px solid #d1d5db; padding: 14px 22px; display: table; margin: 1.2em 0 1.8em 0; font-size: 90%; min-width: 280px;`).
 - **Section Headers:**
   - `h1.firstHeading`: Serif font (`Newsreader`), `2.35em`, bottom border `1px solid #d1d5db`.
   - `h2`: Serif font (`Newsreader`), `1.65em`, bottom border `1px solid #d1d5db`, padding-bottom `6px`, margin-top `2.2em`.
@@ -83,11 +85,11 @@ Deliver the complete output as a single, self-contained HTML document with inlin
 - **Wikitables (`table.wikitable`):**
   - Width: `100%`, border collapse: `collapse`, border: `1px solid #d1d5db`, background: `#ffffff`, font-size: `89%`.
   - Header cells `th`: `#f3f4f6`, bold, border `1px solid #d1d5db`, padding `8px 12px`.
-  - Data cells `td`: padding `7px 12px`, border `1px solid #d1d5db`. Alternating rows `#fafbfc`. Hover `#f0f7ff`.
+  - Data cells `td`: padding `7px 12px`, border `1px solid #d1d5db`. Alternating rows `#f8f9fa`. Hover `#eff6ff`.
 - **Callout & Forensic Alert Boxes:**
-  - Investment Callout: `background-color: #f8fafc; border-left: 5px solid #1d4ed8; padding: 14px 18px; margin: 1.4em 0; font-size: 94%;`
-  - Forensic Accounting Alert: `background-color: #fffdfa; border-left: 5px solid #ea580c; padding: 14px 18px; margin: 1.4em 0; font-size: 94%;`
-  - Fatal Flaw Alert: `background-color: #fffafa; border-left: 5px solid #b91c1c; padding: 14px 18px; margin: 1.4em 0; font-size: 94%;`
+  - Investment Callout: `background-color: #f8f9fa; border-left: 5px solid #0645ad; padding: 14px 18px; margin: 1.4em 0; font-size: 94%;`
+  - Forensic Accounting Alert: `background-color: #ffffff; border-left: 5px solid #92400e; padding: 14px 18px; margin: 1.4em 0; font-size: 94%;`
+  - Fatal Flaw Alert: `background-color: #f8f9fa; border-left: 5px solid #92400e; padding: 14px 18px; margin: 1.4em 0; font-size: 94%;`
 - **Wikipedia Citations & Reference List (`ol.reflist`):**
   - In-text superscript tags: `<sup><a href="#cite_note-1">[1]</a></sup>`.
   - Two-column bottom reference list: `<ol class="reflist" style="column-count: 2; font-size: 84%;">`.
@@ -117,8 +119,8 @@ Every company report must rigorously evaluate and state the outcome of the **3-L
 │    - Target Anchoring: Must cite Forward EPS × 3Y Median P/E OR             │
 │      Technical Base Measured-Move. (Inflated/unanchored targets = REJECT)   │
 │                                                                             │
-│ ⚠️ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
-│    → Action Verdict = 🔴 REJECTED (Do NOT qualify for shortlist buy)        │
+│ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
+│    → Action Verdict = REJECTED (Do NOT qualify for shortlist buy)        │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (If ALL Gates Pass)
                                        ▼
@@ -133,7 +135,7 @@ Every company report must rigorously evaluate and state the outcome of the **3-L
 │ • BFSI / Lending: Net Interest Margin (NIM), GNPA/NNPA, CASA Ratio, CAR %   │
 │ • Consumer / Retail: Same-Store-Sales Growth (SSSG), Store Unit Payback     │
 │                                                                             │
-│ Score each KPI: 🟢 PASS | 🟡 WATCH | 🔴 FAIL (Minimum 3/4 or 4/5 required)  │
+│ Score each KPI: PASS | WATCH | FAIL (Minimum 3/4 or 4/5 required)  │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (If KPI Health Qualified)
                                        ▼
@@ -142,28 +144,28 @@ Every company report must rigorously evaluate and state the outcome of the **3-L
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Measure distance from nearest verified support anchor in ATR(14):           │
 │ • AT_SUPPORT (≤ 0.5 × ATR): At 20/50-DMA or pivot base                      │
-│   → Verdict: 🟢 IMMEDIATE BUY (or ACCUMULATE for holding)                   │
+│   → Verdict: IMMEDIATE BUY (or ACCUMULATE for holding)                   │
 │ • NEAR_SUPPORT (0.5 – 1.0 × ATR): Minor pullback needed                     │
-│   → Verdict: 🔵 ACCUMULATE ON DIP                                           │
+│   → Verdict: ACCUMULATE ON DIP                                           │
 │ • EXTENDED (> 1.0 × ATR or RSI > 70): Overextended from base                │
-│   → Verdict: 🟡 WAIT FOR SUPPORT (Do not chase)                             │
+│   → Verdict: WAIT FOR SUPPORT (Do not chase)                             │
 │ • SUPPORT_BROKEN: Price closed below structural invalidation stop           │
-│   → Verdict: 🔴 REJECTED / BROKEN STRUCTURE (or REPLACE for holding)        │
+│   → Verdict: REJECTED / BROKEN STRUCTURE (or REPLACE for holding)        │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Deterministic Action Verdict Taxonomy:
 
 - **For `CURRENT_HOLDING` Positions:**
-  - 🟢 `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
-  - 🔵 `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available.
-  - 🟡 `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration ceiling (>15–20%). Trim 30%–50% to harvest gains.
-  - 🔴 `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. Immediate candidate for capital swap into top shortlist challenger.
+  - `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
+  - `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available.
+  - `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration ceiling (>15–20%). Trim 30%–50% to harvest gains.
+  - `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. Immediate candidate for capital swap into top shortlist challenger.
 - **For `AUTOWRITTEN` Pipeline Challengers:**
-  - 🟢 `IMMEDIATE_BUY`: Passed all gates + KPIs, strictly `AT_SUPPORT` (≤0.5x ATR), Asymmetry ≥ 3.5:1.
-  - 🔵 `ACCUMULATE_ON_DIP`: Passed all gates + KPIs, `NEAR_SUPPORT` (0.5–1.0x ATR).
-  - 🟡 `WAIT_FOR_SUPPORT`: Passed gates + KPIs, but `EXTENDED` (>1.0x ATR or RSI >70). Do not chase.
-  - 🔴 `REJECTED`: Failed Layer 1 gate or Layer 2 KPIs.
+  - `IMMEDIATE_BUY`: Passed all gates + KPIs, strictly `AT_SUPPORT` (≤0.5x ATR), Asymmetry ≥ 3.5:1.
+  - `ACCUMULATE_ON_DIP`: Passed all gates + KPIs, `NEAR_SUPPORT` (0.5–1.0x ATR).
+  - `WAIT_FOR_SUPPORT`: Passed gates + KPIs, but `EXTENDED` (>1.0x ATR or RSI >70). Do not chase.
+  - `REJECTED`: Failed Layer 1 gate or Layer 2 KPIs.
 
 ---
 
@@ -194,7 +196,7 @@ The generated HTML document in `googledrive/blogs/<SYMBOL>_dossier.html` must fo
   <caption>{{COMPANY_NAME}}</caption>
   <tr>
     <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.3em; font-weight: bold; color: #0b3d68;">{{SYMBOL}}</div>
+      <div style="font-size: 1.3em; font-weight: bold; color: #1e3a8a;">{{SYMBOL}}</div>
       <div style="font-size: 0.85em; color: #555;">{{INDUSTRY_SECTOR}}</div>
     </td>
   </tr>

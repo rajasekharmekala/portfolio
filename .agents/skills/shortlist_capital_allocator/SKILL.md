@@ -12,7 +12,7 @@ description: >-
 
 # Greenfield Unconstrained Shortlist Capital Allocation Skill (Zero-Bias Stock Picker)
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as a **Senior Institutional Chief Investment Officer (CIO)**, **Lead Quantitative Equity Portfolio Manager**, and **Elite Stock Picker** covering Indian Equity Markets (NSE/BSE).
 
@@ -55,9 +55,9 @@ The unconstrained greenfield portfolio must strictly comply with the institution
 
 | Strategy Bucket | Target Allocation Band | Selection Criteria & Asset Profile | Investment Horizon |
 | :--- | :---: | :--- | :---: |
-| **🛡️ Core Alpha Book** | **30.0% – 40.0%** | High ROCE (>18–20%), durable economic moat, clean balance sheet (D/E <0.5), secular growth (>15% 3Y sales/PAT CAGR), pricing power. | 1 to 3+ Years |
-| **🚀 Tactical Momentum Book** | **50.0% – 65.0%** | Stage 2 markup, price above rising 20/50/200 DMAs, RS Rating >75 vs Nifty 500, volume expansion (>1.8x 20-DMA), high earnings acceleration. | 3 Weeks to 6 Months |
-| **💼 Liquid Cash / Dry Powder Reserve** | **5.0% – 10.0%+** | Unallocated liquid cash buffer to exploit asymmetric market pullbacks, sector panics, and limit buy fills. | Instant Liquidity |
+| **Core Alpha Book** | **30.0% – 40.0%** | High ROCE (>18–20%), durable economic moat, clean balance sheet (D/E <0.5), secular growth (>15% 3Y sales/PAT CAGR), pricing power. | 1 to 3+ Years |
+| **Tactical Momentum Book** | **50.0% – 65.0%** | Stage 2 markup, price above rising 20/50/200 DMAs, RS Rating >75 vs Nifty 500, volume expansion (>1.8x 20-DMA), high earnings acceleration. | 3 Weeks to 6 Months |
+| **Liquid Cash / Dry Powder Reserve** | **5.0% – 10.0%+** | Unallocated liquid cash buffer to exploit asymmetric market pullbacks, sector panics, and limit buy fills. | Instant Liquidity |
 
 ---
 
@@ -145,7 +145,7 @@ The skill returns the following comprehensive, self-contained Wikipedia-styled b
 
 ```html
 <!-- GREENFIELD UNCONSTRAINED SHORTLIST ALLOCATION CHAPTER -->
-<div style="background-color: #f0f4f8; border-left: 4px solid #3366cc; padding: 12px 16px; margin: 1.2em 0; font-size: 92%;">
+<div style="background-color: #f3f4f6; border-left: 4px solid #0645ad; padding: 12px 16px; margin: 1.2em 0; font-size: 92%;">
   <strong>Zero-Holding-Bias Mandate:</strong> This allocation represents a 100% clean-slate, unconstrained institutional portfolio designed by an elite stock picker deploying ₹{{NET_WORTH}} in pure cash across the curated candidate universe. It contains zero bias toward incumbent portfolio holdings, legacy purchase prices, or unrealized P&L. Capital is allocated strictly on fundamental quality, Stage 2 momentum, support proximity, and asymmetric risk/reward.
 </div>
 
@@ -153,7 +153,7 @@ The skill returns the following comprehensive, self-contained Wikipedia-styled b
 <div style="overflow-x: auto;">
 <table class="wikitable" style="width: 100%; border-collapse: collapse; border: 1px solid #a2a9b1; background-color: #f8f9fa; font-size: 88%;">
   <thead>
-    <tr style="background-color: #eaecf0;">
+    <tr style="background-color: #f3f4f6;">
       <th style="padding: 7px 10px; border: 1px solid #a2a9b1;">Rank</th>
       <th style="padding: 7px 10px; border: 1px solid #a2a9b1;">Security &amp; Subsector</th>
       <th style="padding: 7px 10px; border: 1px solid #a2a9b1;">Strategy Bucket</th>
@@ -172,13 +172,13 @@ The skill returns the following comprehensive, self-contained Wikipedia-styled b
     <!-- All selected Tier 1, Tier 2, and Tier 3 allocations -->
   </tbody>
   <tfoot>
-    <tr style="background-color: #eaecf0; font-weight: bold;">
+    <tr style="background-color: #f3f4f6; font-weight: bold;">
       <td colspan="4" style="padding: 7px 10px; border: 1px solid #a2a9b1; text-align: right;">Total Active Equities Deployed:</td>
       <td style="padding: 7px 10px; border: 1px solid #a2a9b1;">{{TOTAL_EQUITIES_WT}}%</td>
       <td style="padding: 7px 10px; border: 1px solid #a2a9b1;">₹{{TOTAL_EQUITIES_CAPITAL}}</td>
       <td colspan="6" style="padding: 7px 10px; border: 1px solid #a2a9b1;">--</td>
     </tr>
-    <tr style="background-color: #f0f4f8; font-weight: bold;">
+    <tr style="background-color: #f3f4f6; font-weight: bold;">
       <td colspan="4" style="padding: 7px 10px; border: 1px solid #a2a9b1; text-align: right;">Retained Dry Powder / Cash Buffer:</td>
       <td style="padding: 7px 10px; border: 1px solid #a2a9b1;">{{CASH_WT}}%</td>
       <td style="padding: 7px 10px; border: 1px solid #a2a9b1;">₹{{CASH_CAPITAL}}</td>
@@ -192,7 +192,7 @@ The skill returns the following comprehensive, self-contained Wikipedia-styled b
 <div style="overflow-x: auto;">
 <table class="wikitable" style="width: 100%; border-collapse: collapse; border: 1px solid #a2a9b1; background-color: #f8f9fa; font-size: 88%;">
   <thead>
-    <tr style="background-color: #eaecf0;">
+    <tr style="background-color: #f3f4f6;">
       <th style="padding: 7px 10px; border: 1px solid #a2a9b1;">Security &amp; Subsector</th>
       <th style="padding: 7px 10px; border: 1px solid #a2a9b1;">Strategy Bucket</th>
       <th style="padding: 7px 10px; border: 1px solid #a2a9b1;">CMP (₹)</th>

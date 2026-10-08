@@ -374,6 +374,18 @@ def main():
                     elif len(it.get("queries_tried", [])) < 3:
                         errors.append(f"RESEARCH ITEM '{need['key']}' marked not_found after <3 distinct queries/sources")
 
+    # 7b. colour palette: only the tokens defined in .agents/skills/_shared/REPORT_PALETTE.md
+    pal_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".agents", "skills", "_shared", "REPORT_PALETTE.md")
+    if os.path.isfile(pal_path):
+        allowed = {c.lower() for c in re.findall(r"#[0-9a-fA-F]{6}\b", open(pal_path, encoding="utf-8").read())}
+        allowed |= {"#ffffff", "#000000"}
+        used = {c.lower() for c in re.findall(r"#[0-9a-fA-F]{6}\b", raw)}
+        off = sorted(used - allowed)
+        if off:
+            warns.append(f"COLOURS OUTSIDE THE PALETTE: {', '.join(off[:12])} (use the tokens in REPORT_PALETTE.md)")
+    if re.search(r"[\U0001F300-\U0001FAFF\u2600-\u27BF\U0001F7E0-\U0001F7EB]", raw):
+        warns.append("EMOJI in report: use the verdict-* classes from REPORT_PALETTE.md instead")
+
     # 8. readability warning (average sentence length in prose)
     prose = " ".join(b["text"] for b in B if b["kind"] == "p")
     sents = [s for s in re.split(r"(?<=[.!?])\s+", prose) if len(s.split()) > 3]

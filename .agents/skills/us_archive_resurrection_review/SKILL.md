@@ -11,7 +11,7 @@ description: >-
 
 # US Archive Resurrection Review — Periodic Re-Triage Engine
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it.
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
 
 Act as a **Senior Institutional Equity Research Analyst** conducting a **Resurrection Triage** of previously rejected US securities in the `Archive_Rejected` sheet of `watchlist/US_Portfolio_Watchlist.xlsx`.
 
@@ -79,13 +79,13 @@ CHECK 3: CATALYST SPARK (Is there a reason to look now?)
 ┌─────────────────────────┬────────────────────────────────────────────────────┐
 │ Verdict                 │ XLSX Action                                        │
 ├─────────────────────────┼────────────────────────────────────────────────────┤
-│ 🟢 RESURRECT            │ Move row from Archive_Rejected -> Active_Watchlist:│
+│ RESURRECT            │ Move row from Archive_Rejected -> Active_Watchlist:│
 │ (All 3 checks pass)     │ - Set Status = 'RESEARCH_REQUIRED'                 │
 │                         │ - Set Deep Research Status = 'PENDING'             │
 │                         │ - Set Source Type = 'RESURRECTED'                  │
 │                         │ - Update Notes with resurrection rationale         │
 ├─────────────────────────┼────────────────────────────────────────────────────┤
-│ 🔴 MAINTAIN_REJECTION   │ Keep in Archive_Rejected:                          │
+│ MAINTAIN_REJECTION   │ Keep in Archive_Rejected:                          │
 │ (Check 1 fails or       │ - Append triage note to Notes:                     │
 │  Check 2 triggers)      │   "[YYYY-MM-DD Triage]: Confirmed rejected.        │
 │                         │    ROIC=X%, 200-DMA=falling. Next review: +90d"    │

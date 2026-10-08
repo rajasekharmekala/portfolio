@@ -1,0 +1,10 @@
+{
+  "_comment": "Reviewer gate configuration. Read by every report workflow (section 1.5) and documented in skills/_shared/REVIEWER_OPERATIONS.md. Change 'model' to any model id your runner supports; smaller models are expected to work with the focused passes below.",
+  "model": "Not a specific model, use the appropriate smallest model that can work for this task.",
+  "passes": ["source", "consistency", "tone"],
+  "max_rounds": 2,
+  "output_dir": "<RUN_DIR>/review",
+  "on_malformed_output": "rerun_once_then_revise",
+  "on_unavailable_reviewer": "block_delivery",
+  "require_validator_pass": true
+}

@@ -10,6 +10,8 @@ description: >-
 
 # Wikipedia-Style Institutional US Company Research Dossier & Underwriting Skill
 
+> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
+
 Act as an **Elite Institutional Equity Research Analyst**, **Chief Underwriting Architect**, and **Wikipedia Financial Editor** writing in the encyclopedic, objective, and neutral tone of a Wikipedia Featured Article (*Neutral Point of View — NPOV*) covering US Equity Markets (NYSE / NASDAQ).
 
 Compile an exhaustive, rigorous, and visually authentic Wikipedia-style research dossier and underwriting analysis on:
@@ -64,7 +66,7 @@ Deliver the complete output as a single, self-contained HTML document with an em
   - Headers Font Stack: `'Newsreader', Georgia, 'Times New Roman', serif;` (optical sizing 6..72, weights 500/600/700).
   - Body Font Stack: `'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;`
   - Monospace Font Stack: `'JetBrains Mono', monospace;` for stock prices, P/E ratios, tickers, and formulas.
-  - Color Palette: Body text `#1f2937` (soft obsidian), background `#ffffff`, subtle borders `#d1d5db`, table header gray `#f3f4f6`, hover background `#f0f7ff`.
+  - Color Palette: Body text `#202122` (soft obsidian), background `#ffffff`, subtle borders `#d1d5db`, table header gray `#f3f4f6`, hover background `#eff6ff`.
   - Line height: `1.72`, font size `15px`, letter spacing `-0.011em`, standard paragraph margins with justified text.
 - **Mandatory Shared Navigation Registry (DO NOT embed per-file navigation):**
   - Immediately after `<body>`, insert exactly two lines: `<div id="dossierNavSlot"></div>` and `<script src="dossier_nav.js" defer></script>`.
@@ -72,15 +74,15 @@ Deliver the complete output as a single, self-contained HTML document with an em
   - Final pipeline step: run `python3 scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json`.
 - **Mandatory Executive Capital Allocation Decision Banner:**
   - Placed prominently at the very top (above the infobox and main text) so high-level capital decisions are visible in 5 seconds.
-  - Features an Action Badge (`🔵 ACCUMULATE ON DIP`, `🟢 KEEP COMPOUNDING`, `🟡 TRIM PROFIT BOOKING`, `🔴 REJECT`), along with a 4-card decision grid: Recommended Capital Action, Optimal Accumulation Band, Invalidation Stop Floor, and 12–18M Base Target & Asymmetry Ratio.
+  - Features an Action Badge (`ACCUMULATE ON DIP`, `KEEP COMPOUNDING`, `TRIM PROFIT BOOKING`, `REJECT`), along with a 4-card decision grid: Recommended Capital Action, Optimal Accumulation Band, Invalidation Stop Floor, and 12–18M Base Target & Asymmetry Ratio.
 - **Floated Infobox (`table.infobox`):**
   - Width: `340px`, floated right (`float: right; clear: right; margin: 0.6em 0 1.4em 1.8em;`).
-  - Fixed light background `#f9fafb`, thin gray border `1px solid #d1d5db`.
+  - Fixed light background `#f8f9fa`, thin gray border `1px solid #d1d5db`.
   - Top caption/header in bold centered text `#f3f4f6`.
   - Two-column data rows: Left column header `th` (width 42%, text-align left), right column data `td`.
   - **Must incorporate Corporate Overview, Audited Financials, AND Underwriting Snapshot** (Strategy Bucket, Action Verdict, CMP, 52-Week Range, Entry Zone, Invalidation Stop, Targets, Asymmetry Ratio, ROIC, FCF Margin, Net Debt/EBITDA, SBC % of Rev).
 - **Table of Contents (`div.toc`):**
-  - Compact, numbered box before the main text (`background: #fcfcfd; border: 1px solid #d1d5db; padding: 14px 22px; display: table; margin: 1.2em 0 1.8em 0; font-size: 90%; min-width: 290px;`).
+  - Compact, numbered box before the main text (`background: #ffffff; border: 1px solid #d1d5db; padding: 14px 22px; display: table; margin: 1.2em 0 1.8em 0; font-size: 90%; min-width: 290px;`).
 - **Section Headers:**
   - `h1.firstHeading`: Serif font (`Newsreader`), `2.35em`, bottom border `1px solid #d1d5db`.
   - `h2`: Serif font (`Newsreader`), `1.65em`, bottom border `1px solid #d1d5db`, padding-bottom `6px`, margin-top `2.2em`.
@@ -88,7 +90,7 @@ Deliver the complete output as a single, self-contained HTML document with an em
 - **Wikitables (`table.wikitable`):**
   - Width: `100%`, border collapse: `collapse`, border: `1px solid #d1d5db`, background: `#ffffff`, font-size: `89%`.
   - Header cells `th`: `#f3f4f6`, bold, border `1px solid #d1d5db`, padding `8px 12px`.
-  - Data cells `td`: padding `7px 12px`, border `1px solid #d1d5db`. Alternating rows `#fafbfc`. Hover `#f0f7ff`.
+  - Data cells `td`: padding `7px 12px`, border `1px solid #d1d5db`. Alternating rows `#f8f9fa`. Hover `#eff6ff`.
   - Numeric cells: `<td class="num">` right-aligned monospace.
 - **Callout & Forensic Alert Boxes:**
   - Investment Callout: `class="callout-box"` (blue accent border).
@@ -155,15 +157,15 @@ Every US company report must rigorously evaluate and state the outcome of the **
 ### Deterministic Action Verdict Taxonomy:
 
 - **For `CURRENT_HOLDING` Positions:**
-  - 🟢 `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
-  - 🔵 `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available.
-  - 🟡 `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration ceiling (>15–20%). Trim 30%–50% to harvest gains.
-  - 🔴 `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. Immediate candidate for capital swap into top shortlist challenger.
+  - `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
+  - `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available.
+  - `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration ceiling (>15–20%). Trim 30%–50% to harvest gains.
+  - `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. Immediate candidate for capital swap into top shortlist challenger.
 - **For `PIPELINE_CHALLENGER` Candidates:**
-  - 🟢 `IMMEDIATE_BUY`: Passed all gates + KPIs, strictly `AT_SUPPORT` (≤0.5x ATR), Asymmetry ≥ 3.5:1.
-  - 🔵 `ACCUMULATE_ON_DIP`: Passed all gates + KPIs, `NEAR_SUPPORT` (0.5–1.0x ATR).
-  - 🟡 `WAIT_FOR_SUPPORT`: Passed gates + KPIs, but `EXTENDED` (>1.0x ATR or RSI >70). Do not chase.
-  - 🔴 `REJECTED`: Failed Layer 1 gate or Layer 2 KPIs.
+  - `IMMEDIATE_BUY`: Passed all gates + KPIs, strictly `AT_SUPPORT` (≤0.5x ATR), Asymmetry ≥ 3.5:1.
+  - `ACCUMULATE_ON_DIP`: Passed all gates + KPIs, `NEAR_SUPPORT` (0.5–1.0x ATR).
+  - `WAIT_FOR_SUPPORT`: Passed gates + KPIs, but `EXTENDED` (>1.0x ATR or RSI >70). Do not chase.
+  - `REJECTED`: Failed Layer 1 gate or Layer 2 KPIs.
 
 ---
 
@@ -183,22 +185,22 @@ The generated HTML document in `googledrive/blogs/<SYMBOL>_dossier.html` must fo
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
+  --text-primary: #202122;
+  --text-secondary: #54595d;
+  --text-muted: #54595d;
   --bg-main: #ffffff;
-  --bg-surface: #f9fafb;
+  --bg-surface: #f8f9fa;
   --bg-highlight: #f3f4f6;
   --border-color: #d1d5db;
-  --border-subtle: #e5e7eb;
-  --brand-blue: #1d4ed8;
+  --border-subtle: #dbeafe;
+  --brand-blue: #0645ad;
   --brand-blue-light: #eff6ff;
-  --brand-green: #15803d;
+  --brand-green: #166534;
   --brand-green-light: #f0fdf4;
-  --brand-amber: #b45309;
-  --brand-amber-light: #fffbeb;
-  --brand-red: #b91c1c;
-  --brand-red-light: #fef2f2;
+  --brand-amber: #92400e;
+  --brand-amber-light: #f8f9fa;
+  --brand-red: #92400e;
+  --brand-red-light: #f3f4f6;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
@@ -255,7 +257,7 @@ h3 {
   font-family: var(--font-sans);
   font-size: 1.18em;
   font-weight: 600;
-  color: #1f2937;
+  color: #202122;
   margin-top: 1.6em;
   margin-bottom: 0.5em;
 }
@@ -281,7 +283,7 @@ a:hover {
 /* DECISION BANNER */
 .decision-banner {
   background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-  border: 1px solid #bfdbfe;
+  border: 1px solid #dbeafe;
   border-left: 6px solid var(--brand-blue);
   border-radius: 8px;
   padding: 20px 24px;
@@ -295,14 +297,14 @@ a:hover {
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 16px;
-  border-bottom: 1px solid #bfdbfe;
+  border-bottom: 1px solid #dbeafe;
   padding-bottom: 12px;
 }
 .decision-title {
   font-family: var(--font-serif);
   font-size: 1.35em;
   font-weight: 700;
-  color: #1e40af;
+  color: #0645ad;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -325,7 +327,7 @@ a:hover {
 }
 .decision-card {
   background: #ffffff;
-  border: 1px solid #bfdbfe;
+  border: 1px solid #dbeafe;
   border-radius: 6px;
   padding: 12px 14px;
 }
@@ -340,7 +342,7 @@ a:hover {
 .decision-card-value {
   font-size: 1.15em;
   font-weight: 700;
-  color: #1e293b;
+  color: #202122;
   font-family: var(--font-mono);
 }
 .decision-card-sub {
@@ -391,7 +393,7 @@ table.infobox .infobox-header {
   background-color: #f3f4f6;
   font-weight: 700;
   text-align: center;
-  color: #1f2937;
+  color: #202122;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   padding: 6px 10px;
@@ -407,7 +409,7 @@ table.infobox .infobox-image {
 }
 /* TABLE OF CONTENTS */
 .toc {
-  background-color: #fcfcfd;
+  background-color: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 14px 22px;
@@ -458,7 +460,7 @@ table.wikitable {
 }
 table.wikitable th {
   background-color: var(--bg-highlight);
-  color: #1f2937;
+  color: #202122;
   font-weight: 600;
   text-align: left;
   padding: 8px 12px;
@@ -470,10 +472,10 @@ table.wikitable td {
   color: #374151;
 }
 table.wikitable tr:nth-child(even) td {
-  background-color: #fafbfc;
+  background-color: #f8f9fa;
 }
 table.wikitable tr:hover td {
-  background-color: #f0f7ff;
+  background-color: #eff6ff;
 }
 table.wikitable td.num, table.wikitable th.num {
   text-align: right;
@@ -489,7 +491,7 @@ table.wikitable tfoot tr {
   color: var(--text-secondary);
   padding: 8px 14px;
   background-color: var(--bg-surface);
-  border-left: 4px solid #9ca3af;
+  border-left: 4px solid #a2a9b1;
   margin: 12px 0;
   font-size: 0.92em;
 }
@@ -544,19 +546,19 @@ table.wikitable tfoot tr {
 }
 .pill-fail, .badge-red {
   background-color: #fee2e2;
-  color: #991b1b;
+  color: #7f1d1d;
 }
 .badge-blue {
   background-color: #dbeafe;
-  color: #1e40af;
+  color: #0645ad;
 }
 .badge-purple {
-  background-color: #f3e8ff;
-  color: #6b21a8;
+  background-color: #eaf3ff;
+  color: #1e3a8a;
 }
 .badge-gray {
   background-color: #f3f4f6;
-  color: #4b5563;
+  color: #54595d;
 }
 /* REFERENCES & CITATIONS */
 ol.reflist {
@@ -654,7 +656,7 @@ sup.reference a {
   <caption>{{COMPANY_NAME}}</caption>
   <tr>
     <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.3em; font-weight: bold; color: #0b3d68; font-family: var(--font-mono);">{{SYMBOL}}</div>
+      <div style="font-size: 1.3em; font-weight: bold; color: #1e3a8a; font-family: var(--font-mono);">{{SYMBOL}}</div>
       <div style="font-size: 0.85em; color: #555;">{{INDUSTRY_SECTOR}} &bull; {{PRIMARY_EXCHANGE}}</div>
     </td>
   </tr>
