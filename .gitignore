@@ -1,9 +1,25 @@
-# Environment & Secrets
+# Secrets and credentials (never commit)
 .env
 .env.*
 *.env
 
-# Python
+# Per-run scratch: ledgers, research, drafts, generated code (see .agents/skills/_shared/RUN_PROTOCOL.md)
+runs/
+scripts/.cache/
+scratch/
+*.tmp
+
+# Personal financial source data (holdings, watchlists, transcripts, working newsletters).
+# Publish only through docs/ after explicit approval; see docs/README.md.
+googledrive/
+sheets
+shortlist
+watchlist
+*.xlsx
+*.xls
+*.xlsm
+
+# Python / OS / editor
 __pycache__/
 *.py[cod]
 *$py.class
@@ -12,25 +28,17 @@ __pycache__/
 env/
 venv/
 ENV/
-
-# OS / Editor
 .DS_Store
 .vscode/
 .idea/
-scratch/
+
+# Logs and worktrees
 *.log
-*.tmp
+.worktrees/
 
-
-googledrive/*
-
-.agents/*
-
-scripts/.cache/*
-
-# LOCAL FILES
-
+# Local machine links and service config
 sheets
 shortlist
 watchlist
 com.portfolio.blogs*
+.fuse_hidden*

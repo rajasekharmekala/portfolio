@@ -5,13 +5,13 @@ RSI/ATR, volume multiple, Weinstein stage and regime label used by ALL report
 sections (market intelligence + portfolio audit) for one market and one session.
 
 Usage:
-  python3 scripts/market_facts.py --market US [--date 2026-09-28] [--screen sp500]
-  python3 scripts/market_facts.py --market IN --screen nifty500 --extra RELIANCE,TCS
-  python3 scripts/market_facts.py --market US --show NVDA,VRT      # print cached facts
+  python3 scripts/market_facts.py --market US --date 2026-09-28 --screen sp1500 --run-dir <RUN_DIR>
+  python3 scripts/market_facts.py --market IN --date 2026-10-08 --screen nifty500 --extra RELIANCE,TCS --run-dir <RUN_DIR>
+  python3 scripts/market_facts.py --market US --show NVDA,VRT --out <RUN_DIR>/cache/facts_US_2026-09-28.json
 
-Output: scripts/.cache/facts_<MKT>_<YYYY-MM-DD>.json  (reused by the audit and the
-market-intelligence run of the same date, and by scripts/validate_report.py --facts).
-A ledger is built from real bars up to the session date; never copy/rename one to another date.
+Output: <RUN_DIR>/cache/facts_<MKT>_<YYYY-MM-DD>.json. Every run writes into its own run
+directory; nothing is read from a previous run. --date is required and is a hard requirement:
+if the benchmark's last bar is not on that date, the build exits non-zero (no silent relabel).
 """
 import argparse
 import datetime as dt
@@ -27,10 +27,10 @@ import pandas as pd
 import yfinance as yf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CACHE = os.path.join(ROOT, "scripts", ".cache")
+CONFIG = os.path.join(ROOT, "scripts", "config")  # version-controlled config only (aliases), never run output
 OPTION_RE = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
 TICKER_RE = re.compile(r"^[A-Z0-9][A-Z0-9&\-\.]{0,19}$")
-# Zerodha symbol -> Yahoo symbol where they differ; extend via scripts/.cache/aliases.json
+# Zerodha symbol -> Yahoo symbol where they differ; extend via scripts/config/aliases.json
 ALIASES = {"IN": {"KALPATPOWR": "KPIL.NS", "VINATIORG": "VINATIORGA.NS", "HBLPOWER": "HBLENGINE.NS"}, "US": {}}
 
 BENCH = {
@@ -330,7 +330,7 @@ def ymap_rev(ymap, rep):
 def build(args):
     market = args.market
     cfg = BENCH[market]
-    alias_file = os.path.join(CACHE, "aliases.json")
+    alias_file = os.path.join(CONFIG, "aliases.json")
     if os.path.exists(alias_file):
         ALIASES[market].update(json.load(open(alias_file)).get(market, {}))
     roles = workbook_symbols(market)
@@ -372,7 +372,12 @@ def build(args):
         inst[rep] = m
 
     primary_name = ymap[cfg["primary"]]
-    asof = args.date or (inst.get(primary_name, {}).get("asof_bar")) or dt.date.today().isoformat()
+    # The session date is a requirement, not a label: the benchmark must have a bar on that date.
+    asof = args.date
+    bench_bar = inst.get(primary_name, {}).get("asof_bar")
+    if bench_bar != asof:
+        sys.exit(f"STALE DATA: benchmark {primary_name} last bar is {bench_bar}, session is {asof}. "
+                 f"Source not yet updated or session not closed. Aborting; nothing written.")
     stale = sorted(k for k, v in inst.items() if v.get("asof_bar") and v["asof_bar"] < asof)
 
     # breadth from the screening universe when supplied, otherwise from the book/watchlist
@@ -466,31 +471,36 @@ def build(args):
         "regime": regime, "macro": macro, "instruments": inst, "screen": screen,
         "failures": sorted(failed), "stale_vs_asof": stale,
         "research_needs": render_research(market, asof, roles),
-        "research_file": f"scripts/.cache/research_{market}_{asof}.json",
+        "research_file": f"<RUN_DIR>/cache/research_{market}_{asof}.json",
     }
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--market", required=True, choices=["US", "IN"])
-    ap.add_argument("--date")
+    ap.add_argument("--date", help="session date YYYY-MM-DD (required for a build)")
     ap.add_argument("--extra")
     ap.add_argument("--screen", help="US: sp1500 (500+400+600, recommended) | sp500 ; IN: nifty500 ; or file:<path>")
-    ap.add_argument("--show", help="comma list of symbols to print from the cached ledger")
-    ap.add_argument("--out")
+    ap.add_argument("--show", help="comma list of symbols to print from a ledger given by --out")
+    ap.add_argument("--run-dir", help="this run's private directory; output goes to <run-dir>/cache/")
+    ap.add_argument("--out", help="explicit ledger path (required with --show)")
     args = ap.parse_args()
-    os.makedirs(CACHE, exist_ok=True)
 
     if args.show:
-        path = args.out or sorted(f for f in os.listdir(CACHE) if f.startswith(f"facts_{args.market}_"))[-1]
-        path = path if os.path.isabs(path) else os.path.join(CACHE, path)
-        facts = json.load(open(path))
+        if not args.out:
+            sys.exit("--show requires an explicit --out path; no implicit 'latest file' lookup.")
+        facts = json.load(open(args.out))
         for s in args.show.split(","):
             print(s, json.dumps(facts["instruments"].get(s.strip().upper()), indent=1))
         return
 
+    if not args.date or not args.run_dir:
+        sys.exit("A build requires --date YYYY-MM-DD and --run-dir <RUN_DIR>.")
+    cache = os.path.join(os.path.abspath(args.run_dir), "cache")
+    os.makedirs(cache, exist_ok=True)
+
     facts = build(args)
-    out = args.out or os.path.join(CACHE, f"facts_{args.market}_{facts['asof']}.json")
+    out = os.path.join(cache, f"facts_{args.market}_{facts['asof']}.json")
     json.dump(facts, open(out, "w"), indent=1)
     print(f"wrote {out}\n  as-of {facts['asof']} | instruments {len(facts['instruments'])} | failed {len(facts['failures'])} | "
           f"stale {len(facts['stale_vs_asof'])} | regime: {facts['regime']['label']} | "

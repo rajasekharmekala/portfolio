@@ -11,12 +11,14 @@ This workflow governs the deterministic, end-to-end execution of the **Indian Po
 ## 0. Governing Standards & Non-Negotiable Rules
 
 Before commencing execution, review and adhere strictly to:
-- [portfolio_audit/SKILL.md](file:///Users/mereddy/Desktop/github/portfolio/.agents/skills/portfolio_audit/SKILL.md)
-- [_shared/REPORT_EDITORIAL_STANDARD.md](file:///Users/mereddy/Desktop/github/portfolio/.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md) (Binding specification: Pipeline order, Blueprint 7B, Book Edition narrative standard, and Coherence Protocol)
+- [portfolio_audit/SKILL.md](../skills/portfolio_audit/SKILL.md)
+- [_shared/REPORT_EDITORIAL_STANDARD.md](../skills/_shared/REPORT_EDITORIAL_STANDARD.md) (Binding specification: Pipeline order, Blueprint 7B, Book Edition narrative standard, and Coherence Protocol)
+- [_shared/RUN_PROTOCOL.md](../skills/_shared/RUN_PROTOCOL.md) (Binding: run isolation, freshness, cleanup, publication)
+- [_shared/REPORT_VOICE.md](../skills/_shared/REPORT_VOICE.md) (Binding: how every heading is explained; banned template phrases)
 
 ### Core Non-Negotiables:
 1. **Cross-Report Coherence & Single Facts Ledger:**
-   - Today's India Market Intelligence report (or its ledger `scripts/.cache/facts_IN_<date>.json`) is the definitive single source of truth for market regime, sector map, prices, DMAs, and Weinstein stages.
+   - This run builds its own ledger with `--run-dir`. Market regime, sector map, prices, DMAs, and Weinstein stages come only from that ledger. The same-day Market Intelligence report is a published sibling, used for reconciliation (next item), never as a substitute.
    - If `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html` exists, read it first and reconcile: verbatim identical `regime.label`, identical prices and stages for every shared ticker.
    - **Mandatory Bear List Action:** Any held security appearing on today's Market Intelligence Bear List (Section 4) MUST receive an explicit defensive audit verdict in Chapter 2 (`EXIT`, `TRIM`, or ratcheted `HARD STOP`); it can never be passively ignored as `KEEP`.
    - **Pipeline Feedback Loop:** Watchlist ingestion must not include any ticker that this audit designates for `EXIT`.
@@ -63,19 +65,18 @@ graph TD
 
 ---
 
-### Step 1: Session Date, Environment, Cache Hygiene & Sibling Coherence
+### Step 1: Session Date, Environment, Run Directory & Sibling Coherence
 
 1. **Determine Session Date (`<YYYY-MM-DD>`):**
    - Check the active NSE trading session date. If running after market hours on a weekday, use today's date. If on a weekend or holiday, use the most recent completed NSE trading session date.
-2. **Mandatory Cache Hygiene & Fresh-Run Guarantee (Zero Prior-Session Bias):**
-   - Every execution must operate with zero bias and zero historical state pollution. Before generating or loading files, prune all stale facts, research, and screen artifacts from prior session dates in `scripts/.cache/`:
+2. **Fresh Run Directory (see `../skills/_shared/RUN_PROTOCOL.md` §1):**
+   - Create this run's private directory. Nothing from earlier runs is read; ledgers, research, and prior report HTML are never inputs.
      ```bash
-     # Remove all prior session cache artifacts; preserve only persistent config (aliases.json)
-     find scripts/.cache/ -type f ! -name "aliases.json" -delete
+     RUN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/portfolio-<MKT>-<YYYY-MM-DD>-XXXX")" && mkdir -p "$RUN_DIR/cache" "$RUN_DIR/inputs" "$RUN_DIR/work"
      ```
-   - This ensures the run starts completely from scratch with a pristine cache environment.
+   - Record `RUN_DIR` in `<RUN_DIR>/manifest.json`. The run ends by deleting it (Step 10).
 3. **Ingest Sibling Market Intelligence Report:**
-   - Check `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html` or `scripts/.cache/facts_IN_<YYYY-MM-DD>.json`.
+   - Read `googledrive/newsletters/Daily_Market_Intelligence_<YYYY-MM-DD>.html` for the session date, if it exists. Reconcile it against this run's ledger; never use it in place of the ledger.
    - Record the verbatim `regime.label`, market breadth, sector quadrant map, and the 30 names on the Bear List.
    - If a market report exists for today, the audit's Chapter 1 must restate its regime and sector matrix verbatim.
 4. **Verify Environment & SMTP Credentials:**
@@ -114,18 +115,18 @@ graph TD
 1. **Generate Fresh Facts Ledger:**
    - Always generate a fresh facts ledger for the designated session date `<YYYY-MM-DD>` from live market data:
      ```bash
-     python3 scripts/market_facts.py --market IN --date <YYYY-MM-DD> --screen nifty500
+     python3 scripts/market_facts.py --market IN --date <YYYY-MM-DD> --screen nifty500 --run-dir "<RUN_DIR>"
      ```
    - Running from scratch guarantees zero prior-session bias and ensures all market breadth, moving averages, and prices reflect live, unpolluted exchange data.
 2. **Triage Holdings & Shortlist Failures:**
    - Verify that every ticker in `Zerodha_Holdings.xlsx` and `Zerodha_Shortlist.xlsx` has valid entries in `facts["instruments"]`.
-   - If any holding or shortlist symbol is listed in `facts["failures"]`, resolve it via `scripts/.cache/aliases.json` (e.g., broker code vs Yahoo `.NS` symbol) and re-run with `--extra <SYMBOL>` before proceeding.
+   - If any holding or shortlist symbol is listed in `facts["failures"]`, resolve it via `scripts/config/aliases.json` (e.g., broker code vs Yahoo `.NS` symbol) and re-run with `--extra <SYMBOL>` before proceeding.
 
 ---
 
 ### Step 4: Audit-Specific Targeted Web Research Pass (duck-duck-go MCP)
 
-Extend `scripts/.cache/research_IN_<YYYY-MM-DD>.json` using the `duck-duck-go` MCP tools (`search` + `fetch_content`) for portfolio-specific items:
+Extend `<RUN_DIR>/cache/research_IN_<YYYY-MM-DD>.json` using the `duck-duck-go` MCP tools (`search` + `fetch_content`) for portfolio-specific items:
 
 1. **Per-Symbol Research Requirements:**
    - `results_calendar`: Board meetings and quarterly earnings announcements over the next 14 days for every holding and top greenfield buy. (Crucial for pre-earnings defense rules).
@@ -134,7 +135,7 @@ Extend `scripts/.cache/research_IN_<YYYY-MM-DD>.json` using the `duck-duck-go` M
 2. **Protocol Compliance:**
    - Target queries with the session date (e.g., `{symbol} quarterly results board meeting date October 2026`).
    - Fetch the actual page content via `fetch_content` to confirm dates and figures.
-   - Append findings to `scripts/.cache/research_IN_<YYYY-MM-DD>.json` with `key`, `symbol`, `status: "found"`, `value`, `source_url`, and `as_of`. If not found, log $\ge 3$ distinct queries tried.
+   - Append findings to `<RUN_DIR>/cache/research_IN_<YYYY-MM-DD>.json` with `key`, `symbol`, `status: "found"`, `value`, `source_url`, and `as_of`. If not found, log $\ge 3$ distinct queries tried.
 
 ---
 
@@ -189,7 +190,7 @@ Execute `scripts/validate_report.py` against the generated HTML audit and facts 
 python3 scripts/validate_report.py \
   --report "googledrive/newsletters/Portfolio_Audit_<YYYY-MM-DD>.html" \
   --kind portfolio_audit \
-  --facts "scripts/.cache/facts_IN_<YYYY-MM-DD>.json"
+  --facts "<RUN_DIR>/cache/facts_IN_<YYYY-MM-DD>.json"
 ```
 
 #### Strict Pass Criteria for Portfolio Audit:
@@ -203,7 +204,7 @@ python3 scripts/validate_report.py \
 - **Holdings Case Note Completeness (STRICT):** **EVERY holding in `Zerodha_Holdings.xlsx` MUST have a case note** (`<div class="casenote" data-symbol="TICKER">`) with $\ge 80$ words, containing numbers and triggers. The validator will fail if even one holding is missing!
 - **N/A Budget:** $\le 5.0\%$ overall, $\le 25\%$ in any table
 - **Price & Stage Fidelity:** CMPs match ledger closes within 1.5%; stages match ledger exactly
-- **Research Coverage:** `scripts/.cache/research_IN_<YYYY-MM-DD>.json` covers all audit research needs
+- **Research Coverage:** `<RUN_DIR>/cache/research_IN_<YYYY-MM-DD>.json` covers all audit research needs
 
 > [!CAUTION]
 > If the validator outputs `FAIL`, you MUST inspect the errors, fix the HTML report in-place, and re-run the validator until it outputs `RESULT: PASS`. Never bypass the gate or lower thresholds.
@@ -239,11 +240,10 @@ python3 scripts/send_email.py \
      rm -f scripts/build_*.py scripts/generate_*.py scripts/audit_*.py scripts/update_*.py scripts/make_*.py scripts/fix_*.py scripts/apply_*.py
      rm -rf scripts/__pycache__/ __pycache__/
      ```
-2. **Mandatory Cache Cleanup (Strict Zero-Stale Artifact Policy):**
-   - After email dispatch completes, prune any intermediate files from `scripts/.cache/` older than the current session date, or wipe transient caches so stale files do not accumulate:
+2. **Run Directory Cleanup**
+   - After email dispatch completes, delete `<RUN_DIR>` (RUN_PROTOCOL §5).
      ```bash
-     # Remove all cache artifacts older than today's session, preserving aliases.json
-     find scripts/.cache/ -type f ! -name "aliases.json" ! -name "*<YYYY-MM-DD>*" -delete
+     rm -rf "<RUN_DIR>"
      ```
 3. **Preserve Permanent Infrastructure Whitelist:**
    - `scripts/market_facts.py`
@@ -253,6 +253,6 @@ python3 scripts/send_email.py \
    - `scripts/serve_blogs.py`
    - `scripts/dossier_builder_template.py`
    - `scripts/com.portfolio.blogs.fileserver.plist`
-   - `scripts/.cache/aliases.json`
+   - `scripts/config/aliases.json`
    - `.agents/`
 4. **Verify Clean Tree:** Run `ls scripts/` and confirm only whitelisted files remain.

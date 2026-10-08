@@ -515,7 +515,7 @@ def build_reports_hub_html(newsletters_dir):
 
 def main():
     
-    base_dir = '/Users/mereddy/Desktop/github/portfolio'
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     dossiers_dir = os.path.join(base_dir, 'googledrive/blogs')
     newsletters_dir = os.path.join(base_dir, 'googledrive/newsletters')
     index_path = os.path.join(dossiers_dir, 'index.html')

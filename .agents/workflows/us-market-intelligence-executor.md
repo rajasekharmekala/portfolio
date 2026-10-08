@@ -11,13 +11,15 @@ This workflow governs the deterministic, end-to-end execution of the **Daily US 
 ## 0. Governing Standards & Non-Negotiable Rules
 
 Before commencing execution, review and adhere strictly to:
-- [us_market_intelligence/SKILL.md](file:///Users/mereddy/Desktop/github/portfolio/.agents/skills/us_market_intelligence/SKILL.md)
-- [_shared/REPORT_EDITORIAL_STANDARD.md](file:///Users/mereddy/Desktop/github/portfolio/.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md) (Binding specification: Pipeline order, Blueprint 7A, Book Edition narrative standard, and Web Research Protocol)
+- [us_market_intelligence/SKILL.md](../skills/us_market_intelligence/SKILL.md)
+- [_shared/REPORT_EDITORIAL_STANDARD.md](../skills/_shared/REPORT_EDITORIAL_STANDARD.md) (Binding specification: Pipeline order, Blueprint 7A, Book Edition narrative standard, and Web Research Protocol)
+- [_shared/RUN_PROTOCOL.md](../skills/_shared/RUN_PROTOCOL.md) (Binding: run isolation, freshness, cleanup, publication)
+- [_shared/REPORT_VOICE.md](../skills/_shared/REPORT_VOICE.md) (Binding: how every heading is explained; banned template phrases)
 
 ### Core Non-Negotiables:
-1. **Single Source of Truth:** All prices, moving averages (SMA20/50/200), RSI(14), ATR(14), volume multiples, Weinstein stages, breadth figures, Treasury yields, and candidate picks (`screen.bull_pick` and `screen.bear_pick`) MUST come directly from `scripts/.cache/facts_US_<date>.json`. Never invent or quote numbers from memory.
+1. **Single Source of Truth:** All prices, moving averages (SMA20/50/200), RSI(14), ATR(14), volume multiples, Weinstein stages, breadth figures, Treasury yields, and candidate picks (`screen.bull_pick` and `screen.bear_pick`) MUST come directly from `<RUN_DIR>/cache/facts_US_<date>.json`. Never invent or quote numbers from memory.
 2. **Universe Requirement:** When building the ledger, always use `--screen sp1500` (S&P 500 + S&P 400 Midcap + S&P 600 Smallcap) so all 3 capitalization tiers (Large/Mid/Small) are populated.
-3. **Book Edition for Beginners:** Written as an accessible, front-to-back book for someone new to investing. Every financial term is defined with an everyday analogy. Prose carries the reasoning; tables serve as structured evidence.
+3. **Book Edition for Beginners:** Wikipedia structure, read like a patient textbook. Every H2 and H3 is explained in prose (what it is, why it matters, what the numbers show, what follows), each verdict names its rule, and each section ties to the next. Word floors are coverage requirements, never padding targets. Written as an accessible, front-to-back book for someone new to investing. Every financial term is defined with an everyday analogy. Prose carries the reasoning; tables serve as structured evidence.
 4. **Mandatory Scaffolding (Blueprint 7A):**
    - `<div class="primer">`: **450+ words** opening primer ("Start here") defining core market mechanics with analogies.
    - **Lede:** **250–400 words** executive summary immediately following the primer.
@@ -51,16 +53,16 @@ graph TD
 
 ---
 
-### Step 1: Session Date, Cache Hygiene & Environment Setup
+### Step 1: Session Date, Run Directory & Environment Setup
 
 1. **Determine Session Date (`<YYYY-MM-DD>`):**
    - Check the active US market session date (Eastern Time / ET). If running after 16:30 ET on a weekday, use today's date. If on a weekend, market holiday, or before market close, determine the most recent completed US trading session date.
-2. **Mandatory Cache Hygiene & Fresh-Run Guarantee (Zero Prior-Session Bias):**
-   - Every execution must operate with zero bias and zero historical state pollution. Before generating or loading files, prune all stale facts, research, and screen artifacts from prior session dates in `scripts/.cache/`:
+2. **Fresh Run Directory (see `../skills/_shared/RUN_PROTOCOL.md` §1):**
+   - Create this run's private directory. Nothing from earlier runs is read; ledgers, research, and prior report HTML are never inputs.
      ```bash
-     find scripts/.cache/ -type f ! -name "aliases.json" -delete
+     RUN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/portfolio-<MKT>-<YYYY-MM-DD>-XXXX")" && mkdir -p "$RUN_DIR/cache" "$RUN_DIR/inputs" "$RUN_DIR/work"
      ```
-   - This ensures the run starts completely from scratch with a pristine cache environment.
+   - Record `RUN_DIR` in `<RUN_DIR>/manifest.json`. The run ends by deleting it (Step 10).
 3. **Verify Credentials & Workbooks:**
    - Confirm `.env` exists and contains Gmail SMTP credentials:
      - `GMAIL_USER` (or `GMAIL_ADDRESS` / `EMAIL_USER`)
@@ -79,7 +81,7 @@ graph TD
 Run the facts ledger builder from scratch with the `sp1500` screen to capture Large-Cap, Mid-Cap, and Small-Cap candidates:
 
 ```bash
-python3 scripts/market_facts.py --market US --date <YYYY-MM-DD> --screen sp1500
+python3 scripts/market_facts.py --market US --date <YYYY-MM-DD> --screen sp1500 --run-dir "<RUN_DIR>"
 ```
 
 > [!NOTE]
@@ -98,10 +100,10 @@ Inspect the ledger output and record key macro parameters:
 
 ### Step 3: Triage Failed Symbols
 
-Examine the `failures` list in `scripts/.cache/facts_US_<YYYY-MM-DD>.json`:
+Examine the `failures` list in `<RUN_DIR>/cache/facts_US_<YYYY-MM-DD>.json`:
 1. If any symbols failed to resolve (e.g. share class ticker mismatches such as `BRK.B` vs `BRK-B`):
-   - Add mappings to `scripts/.cache/aliases.json` (e.g. `{"US": {"BRK.B": "BRK-B"}}`).
-   - Re-test resolution using `python3 scripts/market_facts.py --market US --date <YYYY-MM-DD> --screen sp1500 --extra <SYMBOL>`.
+   - Add mappings to `scripts/config/aliases.json` (e.g. `{"US": {"BRK.B": "BRK-B"}}`).
+   - Re-test resolution using `python3 scripts/market_facts.py --market US --date <YYYY-MM-DD> --screen sp1500 --run-dir "<RUN_DIR>" --extra <SYMBOL>`.
 2. Ensure no symbol is permitted to output `N/A` for price or stage if historical price data is available.
 
 ---
@@ -123,7 +125,7 @@ Before drafting any report text or HTML, execute the web research pass for all i
    - Dual-source confirmation: For `cboe_put_call`, both `source_url` and `confirmed_by` MUST be valid HTTP URLs.
    - If an item cannot be found after `>= 3` distinct queries/sources, record `status: "not_found"` with the list of `queries_tried`.
 3. **Persist Research File:**
-   - Save the completed record to `scripts/.cache/research_US_<YYYY-MM-DD>.json`.
+   - Save the completed record to `<RUN_DIR>/cache/research_US_<YYYY-MM-DD>.json`.
 
 ---
 
@@ -197,7 +199,7 @@ Execute `scripts/validate_report.py` against the generated HTML report and facts
 python3 scripts/validate_report.py \
   --report "googledrive/newsletters/US_Market_Intelligence_<YYYY-MM-DD>.html" \
   --kind market_intel \
-  --facts "scripts/.cache/facts_US_<YYYY-MM-DD>.json"
+  --facts "<RUN_DIR>/cache/facts_US_<YYYY-MM-DD>.json"
 ```
 
 #### Strict Pass Criteria:
@@ -212,7 +214,7 @@ python3 scripts/validate_report.py \
 - **N/A Budget:** $\le 5.0\%$ overall, $\le 25\%$ in any table
 - **Candidate Integrity:** Exactly 30 Bull and 30 Bear names matching `screen.bull_pick` and `screen.bear_pick`
 - **Price & Stage Fidelity:** CMPs match ledger closes within 1.5%; stages and regime match ledger exactly
-- **Research Coverage:** `scripts/.cache/research_US_<YYYY-MM-DD>.json` covers all needs with valid URLs and dual-source confirmation for headline metrics
+- **Research Coverage:** `<RUN_DIR>/cache/research_US_<YYYY-MM-DD>.json` covers all needs with valid URLs and dual-source confirmation for headline metrics
 
 > [!CAUTION]
 > If the validator outputs `FAIL`, you MUST fix the deficiencies in the report HTML and re-run the validator until it outputs `RESULT: PASS`. Never bypass the validator or lower threshold arguments.
@@ -248,10 +250,10 @@ python3 scripts/send_email.py \
      rm -f scripts/build_*.py scripts/generate_*.py
      rm -rf scripts/__pycache__/ __pycache__/
      ```
-2. **Mandatory Cache Cleanup (Strict Zero-Stale Artifact Policy):**
-   - Prune intermediate files from `scripts/.cache/` older than the current session date:
+2. **Run Directory Cleanup**
+   - Delete `<RUN_DIR>` once artifacts are saved (RUN_PROTOCOL §5).
      ```bash
-     find scripts/.cache/ -type f ! -name "aliases.json" ! -name "*<YYYY-MM-DD>*" -delete
+     rm -rf "<RUN_DIR>"
      ```
 3. **Preserve Permanent Infrastructure Whitelist:**
    - `scripts/market_facts.py`
@@ -261,6 +263,6 @@ python3 scripts/send_email.py \
    - `scripts/serve_blogs.py`
    - `scripts/dossier_builder_template.py`
    - `scripts/com.portfolio.blogs.fileserver.plist`
-   - `scripts/.cache/aliases.json`
+   - `scripts/config/aliases.json`
    - `.agents/`
 4. **Verify Clean Tree:** Run `ls scripts/` and confirm only whitelisted files remain.

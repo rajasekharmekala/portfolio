@@ -28,6 +28,11 @@ BANNED = [
     r"Symmetric (institutional )?(screening|coverage|forensic)", r"not asserted", r"intentionally N/A",
     r"\{\{[A-Z_0-9]+\}\}", r"rest of table", r"remaining .* continue", r"\bTODO\b", r"lorem ipsum",
     r"No row is a (trade|short) alert", r"heavy institutional institutional",
+    r"\bThis section\b", r"\bIn this section\b", r"\bThe following table\b", r"\bBelow is\b",
+    r"It is important to note", r"It should be noted", r"\bLet us (explore|examine)\b", r"\bWe will (explore|examine)\b",
+    r"\bFurthermore\b", r"\bMoreover\b", r"\bAdditionally\b", r"\bIn conclusion\b", r"\bIn summary\b",
+    r"Overall, it is clear", r"\bdelve\b", r"\blandscape\b", r"\brobust\b", r"game-changer", r"\bunlock\b",
+    r"speak(s)? for (it|them)self", r"pending revalidation", r"to be confirmed later",
 ]
 STOP = {"N/A", "ETF", "USD", "INR", "NSE", "BSE", "CFO", "NET", "PASS", "EXIT", "HOLD", "TRIM", "BUY", "CORE", "TOTAL"}
 THRESH = {
@@ -146,6 +151,45 @@ def main():
         elif b["kind"] == "p" and cur is not None:
             cur["words"] += words(b["text"])
     total = sum(s["words"] for s in sections) + sum(words(b["text"]) for b in B[: next((i for i, b in enumerate(B) if b["kind"] == "h2"), 0)] if b["kind"] == "p")
+    # 1b. every H3 explains itself (120+ prose words of its own) and H2s bridge forward
+    OPTIONAL = r"reference|disclosure|methodology|glossary|bibliograph|sources"
+    h3_cur, h3_words, h3_title = None, 0, None
+    subs = []
+    for b in B:
+        if b["kind"] == "h2":
+            if h3_title and not re.search(OPTIONAL, h3_title, re.I):
+                subs.append((h3_title, h3_words))
+            h3_title, h3_words = None, 0
+        elif b["kind"] == "h3":
+            if h3_title and not re.search(OPTIONAL, h3_title, re.I):
+                subs.append((h3_title, h3_words))
+            h3_title, h3_words = b["text"], 0
+        elif b["kind"] == "p" and h3_title is not None:
+            h3_words += words(b["text"])
+    if h3_title and not re.search(OPTIONAL, h3_title, re.I):
+        subs.append((h3_title, h3_words))
+    for title, n in subs:
+        if n < 120:
+            errors.append(f"THIN SUBSECTION '{title[:60]}': {n} prose words < 120 (explain what it is, why it matters, what follows)")
+    # bridge: the last prose paragraph before each H2 should point forward or name the consequence
+    last_p, bridge_re = None, re.compile(r"\b(next|later|below|above|section|chapter|what this means|for you|turn|watch|trigger|unless|until)\b", re.I)
+    for b in B:
+        if b["kind"] == "h2":
+            if last_p and not bridge_re.search(last_p) and not re.search(OPTIONAL, b["text"], re.I):
+                warns.append(f"NO BRIDGE before '{b['text'][:50]}': end the previous section by tying it to the next")
+        if b["kind"] == "p":
+            last_p = b["text"]
+    # repetitive openings (robotic cadence)
+    openers = {}
+    paras = [b["text"] for b in B if b["kind"] == "p" and words(b["text"]) > 8]
+    for t in paras:
+        k = " ".join(re.findall(r"[A-Za-z']+", t)[:2]).lower()
+        openers[k] = openers.get(k, 0) + 1
+    limit = max(6, int(0.12 * len(paras)))
+    for k, v in openers.items():
+        if v > limit:
+            errors.append(f"REPETITIVE OPENINGS: {v} paragraphs start with '{k}' (limit {limit}); vary the sentence openings")
+
     for s in sections:
         if not re.search(r"reference|disclosure|methodology|glossary", s["title"], re.I) and s["words"] < T["h2"]:
             errors.append(f"THIN SECTION '{s['title'][:60]}': {s['words']} prose words < {T['h2']}")

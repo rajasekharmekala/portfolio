@@ -18,8 +18,10 @@ Before executing any step, you MUST read and internalize the following governing
 
 | File | Purpose |
 |---|---|
-| [Archive Resurrection Review Skill](file:///Users/mereddy/Desktop/github/portfolio/.agents/skills/archive_resurrection_review/SKILL.md) | Resurrection triage criteria, batch processing rules, watchlist update format, 90-day review cycle |
-| [Report Editorial Standard](file:///Users/mereddy/Desktop/github/portfolio/.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md) | HTML report structure, typography, color palette, callout boxes, validation rules |
+| [Archive Resurrection Review Skill](../skills/archive_resurrection_review/SKILL.md) | Resurrection triage criteria, batch processing rules, watchlist update format, 90-day review cycle |
+| [Report Editorial Standard](../skills/_shared/REPORT_EDITORIAL_STANDARD.md) | HTML report structure, typography, color palette, callout boxes, validation rules |
+| [Run Protocol](../skills/_shared/RUN_PROTOCOL.md) | Run isolation, freshness, cleanup, publication |
+| [Report Voice](../skills/_shared/REPORT_VOICE.md) | Plain-English explanation of every heading; no template phrases |
 
 ### 0.2 Core Non-Negotiables
 
@@ -186,7 +188,7 @@ python3 scripts/send_email.py --report "googledrive/newsletters/IND_Archive_Resu
 ### Step 11: Workspace Hygiene & Cache Pruning
 
 1. Delete any transient scripts or temp files created during execution (`rm -f scripts/build_*.py scripts/generate_*.py` and `rm -rf scripts/__pycache__/`).
-2. Mandatory Cache Cleanup: Prune any stale prior-session cache files from `scripts/.cache/` (e.g. `find scripts/.cache/ -type f ! -name "aliases.json" -delete` for older session files) to ensure zero cross-session state pollution.
+2. Run Directory Cleanup: once the validation gate passes and artifacts are saved, delete this run's directory with `rm -rf "<RUN_DIR>"` (RUN_PROTOCOL §5). On failure, keep it and report its path.
 3. Preserve the permanent infrastructure whitelist:
    - `scripts/market_facts.py`
    - `scripts/validate_report.py`
@@ -195,7 +197,7 @@ python3 scripts/send_email.py --report "googledrive/newsletters/IND_Archive_Resu
    - `scripts/serve_blogs.py`
    - `scripts/dossier_builder_template.py`
    - `scripts/com.portfolio.blogs.fileserver.plist`
-   - `scripts/.cache/aliases.json`
+   - `scripts/config/aliases.json`
    - `watchlist/Zerodha_Watchlist.xlsx`
    - `watchlist/Zerodha_Archive.xlsx`
    - `googledrive/` directory structure
