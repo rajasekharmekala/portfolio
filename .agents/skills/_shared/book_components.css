@@ -1,20 +1,18 @@
-/* Append inside the report's <style> block, AFTER the :root palette in REPORT_PALETTE.md.
-   The validator keys on the class names. Colours are palette tokens only. */
-.primer, .howto, .casenote, .triggers, .example, .takeaway { padding: 14px 18px; margin: 1.3em 0; border-radius: 0 4px 4px 0; font-size: 0.97em; line-height: 1.75; color: var(--ink); }
-.primer   { background: var(--primer-tint);   border-left: 5px solid var(--primer-accent); }
-.howto    { background: var(--howto-tint);    border-left: 5px solid var(--howto-accent); }
-.casenote { background: var(--case-tint);     border: 1px solid var(--rule-soft); border-left: 5px solid var(--case-accent); }
-.triggers { background: var(--trigger-tint);  border-left: 5px solid var(--trigger-accent); }
-.example  { background: var(--example-tint);  border-left: 5px solid var(--example-accent); }
-.takeaway { background: var(--takeaway-tint); border-left: 5px solid var(--takeaway-accent); }
-.primer h3, .howto h4, .casenote h4, .triggers h4, .example h4 { margin: 0 0 .4em 0; font-family: 'Newsreader', Georgia, serif; color: var(--ink-strong); }
-.casenote .verdict { display: inline-block; margin-left: 8px; }
-.triggers ul { margin: .4em 0 0 1.2em; padding: 0; }
-.chapter-bridge { font-style: italic; color: var(--muted); border-top: 1px dashed var(--rule-soft); margin-top: 1.5em; padding-top: .8em; }
-.verdict { display: inline-block; padding: 2px 10px; border-radius: 12px; font-weight: 700; font-size: 0.9em; }
-.verdict-keep       { color: var(--keep-ink);       background: var(--keep-tint); }
-.verdict-accumulate { color: var(--accumulate-ink); background: var(--accumulate-tint); }
-.verdict-trim       { color: var(--trim-ink);       background: var(--trim-tint); }
-.verdict-exit       { color: var(--exit-ink);       background: var(--exit-tint); }
-.verdict-watch      { color: var(--watch-ink);      background: var(--watch-tint); }
-a { color: var(--link); } a:visited { color: var(--link-visited); }
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}

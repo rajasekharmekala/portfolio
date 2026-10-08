@@ -41,7 +41,24 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
 
 **Word floors are coverage requirements, not padding targets.** A floor is met when every subsection has enough explanation to stand alone. Never meet a floor by repeating the table, restating an earlier paragraph, or adding filler. If a subsection cannot reach its floor honestly, the honest fix is to explain the gap (what is missing and what would fill it), not to add words.
 
-### Required building blocks (CSS classes from `.agents/skills/_shared/book_components.css`; append that file to the report's `<style>`)
+### Layout (binding, every report)
+
+- **One stylesheet, built by the assembler.** The head `<style>` is the palette `:root` block from `REPORT_PALETTE.md`, then `report_base.css`, then `book_components.css`. Skeleton CSS inside the skill files is discarded. The stylesheet must contain the marker `report_base v2`.
+- **Wrapper.** The body is `<div class="report">`. Viewport meta tag is required.
+- **Key figures first.** Directly under the title, a `<dl class="key-figures">` with four to six headline numbers (for example net worth, day change, regime, breadth, cash, distribution days). Each value comes from the ledger or the positions file.
+- **Every table** sits inside `<div class="table-wrap">`, with `class="wikitable"`. Numeric cells use `class="num"`.
+- **No empty slots.** Every infobox row and every table cell has a value. A value that cannot be sourced is written as `N/A` with a reason in prose in the same section; a headline slot that cannot be filled is removed, not left blank. A heading with no content under it is removed.
+- **Phones.** The infobox stacks above the text and the tables scroll sideways inside their box. Nothing is positioned absolutely, and nothing is set to a fixed pixel width outside `report_base.css`.
+- **Typography.** System sans-serif, body 17px, prose lines about 72 characters, headings in ink-strong. No external web fonts.
+
+### Citations and ticker links (binding, every report)
+
+- **Every ticker links.** Each bold ticker (`<b>SYMBOL</b>`) carries a TradingView chart link and a Screener link (India: screener.in; US: Finviz). The assembler adds any that are missing, and the validator fails a report that still has one without both.
+- **Sources.** A report cites at least 12 distinct external sources. Each sourced figure is traceable to a `source_url` in the research record with its `as_of` date. The assembler builds the References list from the research record and from every link in the body, so the writer does not hand-maintain it.
+- **Dates.** Quote each sourced figure with its as-of date, for example "(as of 7 Oct 2026)".
+- **Figures without a source** are either removed or written as `N/A` with a reason, never stated as fact.
+
+### Required building blocks (CSS classes from `.agents/skills/_shared/book_components.css`; the head `<style>` is built as described in the Layout section below)
 
 1. **`<div class="primer">` "Start here" (450+ words), right after the title/infobox.** What this report is and is not; how to read it in 10 minutes vs 1 hour; the 8-10 ideas the rest of the report leans on, each with a one-line analogy: moving average (the market's average price over N days, like a trend line), Stage 1-4 (four seasons of a stock), RSI (speedometer: too fast/too slow), ATR (normal daily wobble, used to place stops), volume (how many people voted with their money), put/call ratio and option walls (fear gauge; ceilings and floors created by option sellers), stop-loss (a pre-decided exit), risk/reward (what you can win divided by what you can lose), position size (why no single stock should hurt you badly). Explain the report's own labels (regime names, EXIT/TRIM/KEEP/ACCUMULATE, Core vs Tactical) and the rule that triggers each.
 2. **Lede (250-400 words)** after the primer: the verdict of the session in plain English, the three facts that matter most with numbers, the one action that follows, and how the sections connect.

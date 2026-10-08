@@ -43,7 +43,8 @@ CASE_MIN_WORDS = 80
 # Checks that are meaningful on one section fragment. Whole-report floors (total words, primer, glossary, list counts)
 # only run in full mode, on the assembled report.
 PARTIAL_CHECKS = ("BANNED", "THIN SUBSECTION", "REPETITIVE", "PRICE MISMATCH", "CASE NOTE", "TABLE WITHOUT",
-                  "COLOURS", "EMOJI", "DATE MISMATCH", "RESEARCH ITEM", "DUPLICATED", "HOLDINGS WITHOUT")
+                  "COLOURS", "EMOJI", "DATE MISMATCH", "RESEARCH ITEM", "DUPLICATED", "HOLDINGS WITHOUT",
+                  "EMPTY CELLS", "EMPTY HEADINGS")
 
 
 class Doc(HTMLParser):
@@ -394,6 +395,40 @@ def main():
             warns.append(f"COLOURS OUTSIDE THE PALETTE: {', '.join(off[:12])} (use the tokens in REPORT_PALETTE.md)")
     if re.search(r"[\U0001F300-\U0001FAFF\u2600-\u27BF\U0001F7E0-\U0001F7EB]", raw):
         warns.append("EMOJI in report: use the verdict-* classes from REPORT_PALETTE.md instead")
+
+    # 7c. layout: empty slots, key figures, shared stylesheet, mobile-safe tables, viewport
+    empty_cells = len(re.findall(r"<t[dh][^>]*>\s*(?:&nbsp;)?\s*</t[dh]>", raw))
+    if empty_cells:
+        errors.append(f"EMPTY CELLS: {empty_cells} table cell(s) have no value; write N/A with a reason, or remove the slot")
+    empty_heads = 0
+    parts = re.split(r"(<h[23][^>]*>.*?</h[23]>)", re.sub(r"<style.*?</style>|<script.*?</script>", "", raw, flags=re.S), flags=re.S)
+    for i in range(1, len(parts) - 1, 2):
+        if len(re.sub(r"<[^>]+>", "", parts[i + 1]).strip()) < 20 and not re.search(r"<table", parts[i + 1]):
+            empty_heads += 1
+    if empty_heads:
+        errors.append(f"EMPTY HEADINGS: {empty_heads} heading(s) with no text under them; remove the heading or write the section")
+    if args.kind and not args.partial:
+        if not re.search(r'name="viewport"', raw):
+            errors.append("NO VIEWPORT META: the report will not scale on phones")
+        if "report_base v2" not in raw:
+            errors.append("STYLE NOT BUILT FROM report_base.css (marker 'report_base v2' missing); rebuild the head as SECTION_DRAFTING.md says")
+        if not re.search(r'<dl class="key-figures"', raw):
+            errors.append("NO KEY FIGURES strip (<dl class=\"key-figures\">): put 4-6 headline numbers under the title")
+        unwrapped = len(re.findall(r"<table(?![^>]*infobox)", raw)) - len(re.findall(r'<div class="table-wrap">\s*<table', raw))
+        if unwrapped > 0:
+            warns.append(f"{unwrapped} data table(s) not inside <div class=\"table-wrap\"> (they will break the layout on phones)")
+        # citations: every ticker linked, and enough distinct sources
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from report_links import body_sources, missing_ticker_links, symbol_universe
+        universe = symbol_universe(args.facts) if getattr(args, "facts", None) else set()
+        missing = missing_ticker_links(raw, universe)
+        if missing:
+            errors.append(f"TICKER LINKS MISSING for {len(missing)} ticker(s) ({', '.join(missing[:10])}): each needs a TradingView chart link and a Screener (IN) or Finviz (US) link; rebuild with scripts/assemble_report.py")
+        n_sources = len(body_sources(raw))
+        if n_sources < 12:
+            errors.append(f"TOO FEW SOURCES: {n_sources} distinct external source(s) cited; the standard needs at least 12. Cite the research record's source_url for each figure (the assembler adds a References list from the research file)")
+    if args.partial:
+        pass
 
     # 8. readability warning (average sentence length in prose)
     prose = " ".join(b["text"] for b in B if b["kind"] == "p")

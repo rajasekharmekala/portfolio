@@ -48,7 +48,7 @@ Fix any FAIL and re-run that section only. Partial mode checks banned phrases, t
 
 ## 5. Assembly and the full gate
 
-1. Concatenate `00_head` and the section files in plan order into `<RUN_DIR>/report.html`, with the `<style>` block (`:root` palette, then `book_components.css`) in the head.
+1. Concatenate `00_head` and the section files in plan order into `<RUN_DIR>/work/body.html`. Do not write a `<head>` or `<style>` block. Then run `python3 scripts/assemble_report.py --body <RUN_DIR>/work/body.html --out docs/reports/<Name>_<date>.html --market <IN|US> --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json --research <RUN_DIR>/cache/research_<MKT>_<date>.json`. The script builds the head from the palette `:root` block in `REPORT_PALETTE.md`, then `report_base.css`, then `book_components.css`, wraps the body in `<div class="report">`, wraps each bare `wikitable` in `<div class="table-wrap">`, adds the missing TradingView and Screener (IN) or Finviz (US) links next to every bold ticker, and appends a References list built from every link in the body plus every `source_url` in the research record.
 2. Run the full validator on `<RUN_DIR>/report.html`. This is the gate that matters. It must print `RESULT: PASS`.
 3. Run the reviewer gate on `report.html` (see the workflow's reviewer section). The reviewer reads the assembled report, not the fragments.
 

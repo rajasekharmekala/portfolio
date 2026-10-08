@@ -333,6 +333,7 @@ Every US company report must rigorously evaluate and state the outcome of the **
 The generated HTML document in `docs/blogs/<SYMBOL>_dossier.html` must follow this 12-section standardized architecture without omitting any section:
 
 ```html
+<!-- SKELETON NOTE: write only the body. Do not write this <head> or its <style>; scripts/assemble_report.py builds the head from REPORT_PALETTE.md, report_base.css and book_components.css, and wraps tables. Keep the <dl class="key-figures"> strip and every table inside .table-wrap. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
