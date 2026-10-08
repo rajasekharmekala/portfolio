@@ -1,2 +1,0 @@
-# TDLR
-Notes for ideas
