@@ -4,7 +4,7 @@ This file explains how the reviewer gate is run. The rubric (what to check) live
 
 ## 1. Choosing the model
 
-- The model is a setting, not part of the workflow. Set `"model"` in `.agents/config/reviewer.json`. It can be any model id your runner supports, including small and cheap models such as `haiku`.
+- The model is a setting, not part of the workflow. Set `"model"` in `.agents/config/reviewer.json` to the exact model id supported by your runner. Use a smaller, lower-cost model where it passes the calibration checks; `haiku` is the current default.
 - Workflows never name a model. If a workflow text names one, that text is wrong: fix the workflow, not the config.
 - A smaller model needs narrower work, not different work. That is why the review is split into passes (section 3). Keep the same rubric for every model. If a model cannot pass a spot-check on a known-good report, do not use it as the reviewer.
 - Calibrate a new model before trusting it: run the reviewer on a report already known to be good (APPROVE expected) and on one with a planted error (REVISE or BLOCK expected). Record both results in `<RUN_DIR>/manifest.json`.
