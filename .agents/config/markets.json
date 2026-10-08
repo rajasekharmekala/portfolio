@@ -1,5 +1,5 @@
 {
-  "_comment": "Per-market parameters for the generic workflows in .agents/workflows/. Source files per account live in portfolios.json. Change a value here, not in a workflow. Report filenames use {date} (YYYY-MM-DD).",
+  "_comment": "Per-market parameters for the generic workflows in .agents/workflows/. Source files per account live in portfolios.json. Change a value here, not in a workflow. Report filenames use {date} (YYYY-MM-DD). Skills are market-aware: the same skill name covers IN and US through its market blocks.",
   "IN": {
     "name": "India (NSE/BSE)",
     "currency": "INR",
@@ -39,13 +39,13 @@
     "primary_benchmark": "S&P 500",
     "research_key": "US",
     "skills": {
-      "market_intelligence": "us_market_intelligence",
-      "portfolio_audit": "us_portfolio_audit",
-      "options": "us_options_underwriting",
-      "watchlist_to_shortlist": "us_watchlist_shortlist_underwriting",
-      "reject_to_watchlist": "us_archive_resurrection_review",
-      "shortlist_allocator": "us_shortlist_capital_allocator",
-      "company_report": "us_company_report"
+      "market_intelligence": "market_intelligence",
+      "portfolio_audit": "portfolio_audit",
+      "options": "options_underwriting",
+      "watchlist_to_shortlist": "watchlist_shortlist_underwriting",
+      "reject_to_watchlist": "archive_resurrection_review",
+      "shortlist_allocator": "shortlist_capital_allocator",
+      "company_report": "company_report"
     },
     "output": {
       "market_intelligence": "docs/reports/US_Market_Intelligence_{date}.html",

@@ -14,7 +14,7 @@ Every workflow takes a market (`IN` or `US`) and reads its parameters from `../c
 
 ## Run directory
 
-Create it first, as RUN_PROTOCOL §1 says. Every file this run creates lives there. The only things that leave the run are the final report, the updated workbooks, the email, and the published copy in `docs/`.
+Create it first, as RUN_PROTOCOL §1 says. Every file this run creates lives there. The only things that leave the run are the final report, the updated JSON record files, the email, and the published copy in `docs/`.
 
 ## Preflight (every run)
 

@@ -6,7 +6,7 @@ description: Archive resurrection review for one market (IN or US). Re-examines 
 
 Read `_COMMON.md` first.
 
-**Input:** market `<MKT>`. The archive is the `Archive_Rejected` sheet of the market's watchlist workbook (declared in `config/portfolios.json`). Select names by header name. The batch size comes from the skill (`skills[reject_to_watchlist]`).
+**Input:** market `<MKT>`. The archive is the `watchlist.archive` array of the market's watchlist JSON record file (declared in `config/portfolios.json`). Select names by header name. The batch size comes from the skill (`skills[reject_to_watchlist]`).
 
 ## 1. Session date and run directory
 

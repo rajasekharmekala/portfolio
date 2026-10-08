@@ -14,7 +14,7 @@ As in `market_intelligence.md` §1–2.
 
 ## 2. Accounts and holdings
 
-Run the input check. The manifest lists every holding source with its row count and hash. If two sources list the same symbol, say so in the report's methodology note, and state which account the position is counted in. Do not add the same position twice. Use the account source the user has named as the record of truth.
+Run the input check. The manifest lists every holding source with its row count and hash. Positions that appear in more than one account are summed by the run and listed with their account split. Report the account split in the methodology note. For US, the consolidated snapshot (`cache/positions_US_<date>.json`) is the record of truth; see `../skills/_shared/HOLDINGS_UPDATE.md`.
 
 ## 3. Ledger
 
@@ -34,9 +34,9 @@ Follow `skills/_shared/SECTION_DRAFTING.md` with blueprint 7B from `REPORT_EDITO
 
 Assemble `<RUN_DIR>/report.html`, then run the full validator with `--kind portfolio_audit` and `--facts` pointing to the ledger. It must print `RESULT: PASS`.
 
-## 7. Orders and workbooks
+## 7. Orders and JSON record files
 
-Chapter 6 orders are exactly the deltas in Chapter 5. Update the holdings and shortlist workbooks for this market only with changes the audit approves, and only through header-name lookup.
+Chapter 6 orders are exactly the deltas in Chapter 5. Update the holdings and shortlist JSON record files for this market only with changes the audit approves, and only through header-name lookup.
 
 ## 8. Reviewer gate and delivery
 

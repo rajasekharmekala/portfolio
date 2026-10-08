@@ -542,19 +542,13 @@ def main():
     # --- Shared navigation registry (dossiers.json) for dossier_nav.js ---
     holdings = set()
     try:
-        from openpyxl import load_workbook
-        for xlsx in (os.path.join(base_dir, 'sheets/Zerodha_Holdings.xlsx'),
-                     os.path.join(base_dir, 'sheets/US_Portfolio_Holdings.xlsx')):
-            wb = load_workbook(xlsx, read_only=True, data_only=True)
-            ws = wb.active
-            rows = ws.iter_rows(values_only=True)
-            header = [str(c).strip().upper() if c is not None else '' for c in next(rows, ())]
-            sym_i = next((i for i, h in enumerate(header) if 'SYMBOL' in h or 'TICKER' in h), None)
-            if sym_i is not None:
-                for row in rows:
-                    if row and len(row) > sym_i and row[sym_i]:
-                        holdings.add(str(row[sym_i]).strip().upper())
-            wb.close()
+        import sys as _sys
+        _sys.path.insert(0, os.path.join(base_dir, 'scripts'))
+        import data_layer
+        for mkt in ('IN', 'US'):
+            for path in data_layer.accounts_for(mkt):
+                _, pos, _ = data_layer.account_state(path)
+                holdings |= {sym.upper() for sym, p in pos.items() if p['quantity'] > 0}
         print(f"Holdings symbols loaded: {len(holdings)}")
     except Exception as e:
         print(f"  [warn] holdings lookup skipped: {e}")

@@ -1,21 +1,22 @@
 {
-  "_comment": "Input sources for the facts ledger and every report. One entry per file the run reads. kind: xlsx (header-name lookup) or md (first pipe table that contains symbol_header). A missing required source aborts the run. Add accounts here; do not change column positions in code.",
+  "_comment": "Input sources for the ledger and every report. kind: transactions (an append-only account log; holdings are replayed from it), records (a list of workflow records inside a JSON file; key is a dotted path to the list, symbol_key names the symbol, value_key optionally gives a current value). A missing required source aborts the run. Metadata (strategy bucket, name) comes from data/metadata/symbols.json.",
   "IN": {
     "currency": "INR",
     "sources": [
-      {"id": "zerodha_holdings", "role": "holding", "kind": "xlsx", "path": "sheets/Zerodha_Holdings.xlsx", "sheet": "Holdings", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Strategy Bucket", "Quantity", "Avg Buy Price", "Current Price"]},
-      {"id": "zerodha_shortlist", "role": "shortlist", "kind": "xlsx", "path": "shortlist/Zerodha_Shortlist.xlsx", "sheet": "Master_Shortlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Action Verdict", "Strategy Bucket"]},
-      {"id": "zerodha_watchlist", "role": "watchlist", "kind": "xlsx", "path": "watchlist/Zerodha_Watchlist.xlsx", "sheet": "Active_Watchlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Status"]}
+      {"id": "zerodha", "role": "holding", "kind": "transactions", "path": "data/accounts/IN/zerodha.transactions.jsonl"},
+      {"id": "watchlist_active", "role": "watchlist", "kind": "records", "path": "data/watchlist/IN.json", "key": "active", "symbol_key": "symbol"},
+      {"id": "shortlist", "role": "shortlist", "kind": "records", "path": "data/shortlist/IN.json", "key": "sheets.Master_Shortlist", "symbol_key": "symbol"},
+      {"id": "options_book", "role": "options", "kind": "records", "path": "data/options/IN.json", "key": "positions", "symbol_key": "ticker"}
     ]
   },
   "US": {
     "currency": "USD",
     "sources": [
-      {"id": "us_holdings_workbook", "role": "holding", "kind": "xlsx", "path": "sheets/US_Portfolio_Holdings.xlsx", "sheet": "Holdings", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Strategy Bucket", "Quantity", "Avg Buy Price", "Current Price"]},
-      {"id": "charles_schwab", "role": "holding", "kind": "md", "path": "sheets/charles_schwab.md", "symbol_header": "Symbol", "required": false},
-      {"id": "robinhood", "role": "holding", "kind": "md", "path": "sheets/robinhood_current_holdings.md", "symbol_header": "Ticker", "required": false},
-      {"id": "us_shortlist", "role": "shortlist", "kind": "xlsx", "path": "shortlist/US_Shortlist.xlsx", "sheet": "Master_Shortlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Action Verdict", "Strategy Book"]},
-      {"id": "us_watchlist", "role": "watchlist", "kind": "xlsx", "path": "watchlist/US_Portfolio_Watchlist.xlsx", "sheet": "Active_Watchlist", "header_row": 1, "symbol_header": "Symbol", "required_headers": ["Symbol", "Company Name", "Status"]}
+      {"id": "schwab", "role": "holding", "kind": "transactions", "path": "data/accounts/US/schwab.transactions.jsonl"},
+      {"id": "robinhood", "role": "holding", "kind": "transactions", "path": "data/accounts/US/robinhood.transactions.jsonl"},
+      {"id": "watchlist_active", "role": "watchlist", "kind": "records", "path": "data/watchlist/US.json", "key": "active", "symbol_key": "symbol"},
+      {"id": "shortlist", "role": "shortlist", "kind": "records", "path": "data/shortlist/US.json", "key": "sheets.Master_Shortlist", "symbol_key": "symbol"},
+      {"id": "options_book", "role": "options", "kind": "records", "path": "data/options/US.json", "key": "positions", "symbol_key": "underlying", "value_key": "current_mv_usd"}
     ]
   }
 }

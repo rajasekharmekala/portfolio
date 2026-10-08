@@ -37,6 +37,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "scripts", "config")  # version-controlled config only (aliases), never run output
 PORTFOLIOS_FILE = os.path.join(ROOT, ".agents", "config", "portfolios.json")  # input sources, see README in workflows
 INPUTS = []  # set by load_sources(): one record per declared source
+META = {}  # symbol -> metadata columns from the metadata workbook
+POSITIONS = []  # per-account snapshots from md_positions sources
+OPTIONS_BOOK = []  # option rows with their current market value (options sources)
 OPTION_RE = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
 TICKER_RE = re.compile(r"^[A-Z0-9][A-Z0-9&\-\.]{0,19}$")
 # Zerodha symbol -> Yahoo symbol where they differ; extend via scripts/config/aliases.json
@@ -234,75 +237,108 @@ def sha256(path):
     return h.hexdigest()
 
 
-def md_table_column(path, symbol_header):
-    """Symbols from the first pipe table in a markdown file whose header row contains symbol_header."""
-    tables, cur = [], []
-    for line in open(path, encoding="utf-8"):
-        line = line.strip()
-        if line.startswith("|"):
-            cur.append(line)
-        elif cur:
-            tables.append(cur)
-            cur = []
-    if cur:
-        tables.append(cur)
-    for t in tables:
-        cells = [[c.strip() for c in ln.strip("|").split("|")] for ln in t]
-        header = [re.sub(r"\*+", "", c).strip() for c in cells[0]]
-        if symbol_header not in header:
-            continue
-        col = header.index(symbol_header)
-        body = [r for r in cells[1:] if len(r) > col and not set(r[col]) <= set("-: ")]
-        return [re.sub(r"\*+", "", r[col]).strip().upper() for r in body]
-    raise SystemExit(f"{path}: no table with a '{symbol_header}' column")
-
-
 def load_sources(market: str):
-    """Read every source declared for this market. Returns (roles, sources). Aborts on a missing or mis-shaped input."""
-    import openpyxl
+    """Read every source declared for this market from data/ (see .agents/config/portfolios.json).
+    Returns (roles, sources). Sets the globals INPUTS, META, POSITIONS and OPTIONS_BOOK. Aborts on a missing input."""
+    global META, POSITIONS, OPTIONS_BOOK
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import data_layer
     cfg = json.load(open(PORTFOLIOS_FILE, encoding="utf-8"))[market]
+    meta_path = os.path.join(ROOT, "data", "metadata", "symbols.json")
+    META = json.load(open(meta_path, encoding="utf-8")).get(market, {}).get("symbols", {}) if os.path.exists(meta_path) else {}
     roles, sources = {}, []
+    POSITIONS, OPTIONS_BOOK = [], []
     for src in cfg["sources"]:
         path = os.path.join(ROOT, src["path"])
         rec = {"id": src["id"], "role": src["role"], "path": src["path"], "kind": src["kind"],
                "sha256": None, "rows": 0, "symbols": 0, "status": "ok"}
         if not os.path.exists(path):
-            if src.get("required", True):
-                raise SystemExit(f"INPUT MISSING: {src['path']} ({src['id']}). Aborting.")
-            rec["status"] = "missing (optional)"
-            sources.append(rec)
-            continue
+            raise SystemExit(f"INPUT MISSING: {src['path']} ({src['id']}). Aborting.")
         rec["sha256"] = sha256(path)
-        if src["kind"] == "xlsx":
-            ws = openpyxl.load_workbook(path, read_only=True, data_only=True)[src["sheet"]]
-            rows = ws.iter_rows(values_only=True)
-            for _ in range(src.get("header_row", 1) - 1):
-                next(rows)
-            header_raw = [str(h).strip() if h is not None else "" for h in next(rows)]
-            header_upper = [h.upper() for h in header_raw]
-            
-            # Flexible lookup for symbol column
-            sym_targets = [src.get("symbol_header", "Symbol").upper(), "SYMBOL", "TICKER", "STOCK", "INSTRUMENT"]
-            col = next((i for target in sym_targets for i, h in enumerate(header_upper) if h == target), None)
-            if col is None:
-                col = next((i for i, h in enumerate(header_upper) if any(k in h for k in ("SYMBOL", "TICKER"))), None)
-            if col is None:
-                raise SystemExit(f"INPUT SCHEMA: {src['id']} ({src['path']}, sheet {src['sheet']}) lacks a Symbol/Ticker column. "
-                                 f"Found: {[h for h in header_raw if h][:20]}")
+        if src["kind"] == "transactions":
+            meta, pos, cash = data_layer.account_state(path)
+            if meta.get("market") not in (None, market):
+                raise SystemExit(f"{src['path']} is a {meta.get('market')} log but is listed under {market}")
+            positions = [{"symbol": sym, "quantity": p["quantity"],
+                          "cost_basis": p["cost_basis"] if p["cost_known"] else None,
+                          "realized_pl": p["realized_pl"]} for sym, p in sorted(pos.items())]
+            POSITIONS.append({"id": src["id"], "label": meta.get("account", src["id"]),
+                              "snapshot_date": meta.get("last_date"), "cash": cash, "positions": positions})
+            symbols = [p["symbol"] for p in positions]
+            rec["rows"] = meta.get("transactions", 0)
+        elif src["kind"] == "records":
+            data = json.load(open(path, encoding="utf-8"))
+            node = data
+            for part in src["key"].split("."):
+                node = node[part]
             symbols = []
-            for row in rows:
-                rec["rows"] += 1
-                sym = row[col] if col < len(row) else None
-                if sym and isinstance(sym, str) and TICKER_RE.match(sym.strip().upper()) and not is_option(sym):
-                    symbols.append(sym.strip().upper())
+            for r in node:
+                sym = r.get(src["symbol_key"])
+                if not sym or not isinstance(sym, str):
+                    continue
+                sym = sym.strip().upper()
+                symbols.append(sym)
+                if src["role"] == "options" and src.get("value_key") and isinstance(r.get(src["value_key"]), (int, float)):
+                    OPTIONS_BOOK.append({"source": src["id"], "underlying": sym, "market_value": float(r[src["value_key"]])})
+            rec["rows"] = len(node)
         else:
-            symbols = md_table_column(path, src["symbol_header"])
-            rec["rows"] = len(symbols)
+            raise SystemExit(f"Unknown source kind {src['kind']} for {src['id']}")
+        if not symbols and src.get("required", True) and src["role"] == "holding":
+            raise SystemExit(f"{src['id']} produced no positions. Check the transaction log.")
         for sym in set(symbols):
             roles.setdefault(sym, set()).add(src["role"])
         rec["symbols"] = len(set(symbols))
         sources.append(rec)
     return roles, sources
+
+
+def consolidate_positions(inst=None):
+    """One view per symbol across accounts, valued at the ledger close (inst) when available.
+    Cost basis comes from the transaction log; a missing cost stays None, never guessed."""
+    per_sym, cash_total = {}, 0.0
+    for acct in POSITIONS:
+        cash_total += acct["cash"] or 0
+        for p in acct["positions"]:
+            close = (inst or {}).get(p["symbol"], {}).get("close")
+            mv = round(p["quantity"] * close, 2) if close else None
+            d = per_sym.setdefault(p["symbol"], {"symbol": p["symbol"], "accounts": [], "quantity": 0.0,
+                                                 "market_value": 0.0, "cost_basis": 0.0, "cost_complete": True,
+                                                 "priced": True})
+            d["accounts"].append({"account": acct["id"], "quantity": p["quantity"], "cost_basis": p["cost_basis"],
+                                  "market_value": mv, "realized_pl": p["realized_pl"]})
+            d["quantity"] += p["quantity"] or 0
+            if mv is None:
+                d["priced"] = False
+            else:
+                d["market_value"] += mv
+            if p["cost_basis"] is None:
+                d["cost_complete"] = False
+            else:
+                d["cost_basis"] += p["cost_basis"]
+    for d in per_sym.values():
+        d["quantity"] = round(d["quantity"], 6)
+        d["market_value"] = round(d["market_value"], 2) if d["priced"] else None
+        d["cost_basis"] = round(d["cost_basis"], 2) if d["cost_complete"] else None
+        d["gain"] = round(d["market_value"] - d["cost_basis"], 2) if (d["cost_complete"] and d["priced"]) else None
+        d["metadata"] = META.get(d["symbol"])
+    equities = round(sum(d["market_value"] or 0 for d in per_sym.values()), 2)
+    options_value = round(sum(o["market_value"] for o in OPTIONS_BOOK), 2)
+    return {
+        "accounts": [{"id": a["id"], "label": a["label"], "last_transaction": a["snapshot_date"], "positions": len(a["positions"]),
+                      "cash": a["cash"], "market_value": round(sum((inst or {}).get(p["symbol"], {}).get("close", 0) * p["quantity"]
+                                                                  for p in a["positions"]), 2) if inst else None}
+                     for a in POSITIONS],
+        "consolidated": sorted(per_sym.values(), key=lambda d: -(d["market_value"] or 0)),
+        "equities_value": equities, "cash_total": round(cash_total, 2),
+        "options_value": options_value, "options_rows": OPTIONS_BOOK,
+        "net_worth": round(equities + cash_total + options_value, 2) if inst else None,
+        "reconciliation": {
+            "unclassified": sorted(s for s in per_sym if not META.get(s)),
+            "in_metadata_but_no_position": sorted(s for s in META if s not in per_sym),
+            "unpriced": sorted(s for s, d in per_sym.items() if not d["priced"]),
+            "cost_unknown": sorted(s for s, d in per_sym.items() if not d["cost_complete"]),
+        },
+    }
 
 
 def workbook_symbols(market: str):
@@ -581,6 +617,7 @@ def factpack(facts):
         "bull_pick": screen.get("bull_pick"), "bear_pick": screen.get("bear_pick"),
         "names": names, "failures": facts["failures"], "stale_vs_asof": facts["stale_vs_asof"],
         "research_needs": facts["research_needs"], "research_file": facts["research_file"],
+        "positions": consolidate_positions(facts["instruments"]) if POSITIONS else None,
     }
 
 
@@ -640,6 +677,12 @@ def main():
         "screen": args.screen, "allow_stale_holdings": args.allow_stale_holdings,
         "stale_vs_asof": facts["stale_vs_asof"], "failures": facts["failures"], "freshness": facts["freshness"]})
     update_manifest(os.path.abspath(args.run_dir), "inputs", {"market": args.market, "sources": facts["inputs"]})
+    pos = consolidate_positions(facts["instruments"])
+    pos_file = os.path.join(cache, f"positions_{args.market}_{facts['asof']}.json")
+    json.dump(pos, open(pos_file, "w"), indent=1)
+    update_manifest(os.path.abspath(args.run_dir), "positions", {"file": pos_file, "sha256": sha256(pos_file),
+                    "accounts": pos["accounts"], "net_worth": pos["net_worth"],
+                    "reconciliation": pos["reconciliation"]})
     print(f"wrote {out}\n  as-of {facts['asof']} | instruments {len(facts['instruments'])} | failed {len(facts['failures'])} | "
           f"stale {len(facts['stale_vs_asof'])} | regime: {facts['regime']['label']} | "
           f"breadth>50DMA: {facts['regime']['breadth_pct_above_50dma']} | distribution days: {facts['regime']['distribution_days_25']}")

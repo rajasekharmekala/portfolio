@@ -88,7 +88,7 @@ Rules for findings:
 
 ## Limits
 
-- You review. You do not edit the report, the ledger, the research record, or any workbook.
+- You review. You do not edit the report, the ledger, the research record, or any JSON record file.
 - You do not send email or touch docs/.
 - If an input is missing or unreadable, return BLOCK with the missing input named. Do not guess at its contents.
 - Keep your reasoning in the findings. Do not ask the writer clarifying questions; the writer will act on the findings.

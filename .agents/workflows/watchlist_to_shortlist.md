@@ -1,5 +1,5 @@
 ---
-description: Underwrites the next batch of watchlist names for one market (IN or US) through the shortlist underwriting skill, writes one dossier per name, updates the shortlist workbook, and delivers the batch summary.
+description: Underwrites the next batch of watchlist names for one market (IN or US) through the shortlist underwriting skill, writes one dossier per name, updates the shortlist JSON record file, and delivers the batch summary.
 ---
 
 # Watchlist to Shortlist Workflow (generic: IN or US)
@@ -26,7 +26,7 @@ Apply the underwriting skill to each name. Each name gets one dossier written in
 
 ## 5. Workbook updates
 
-Update the watchlist and shortlist workbooks with each name's verdict. Use header names, never column positions. A name that fails underwriting moves to the rejected list only as the skill describes.
+Update the watchlist and shortlist JSON record files with each name's verdict. Use header names, never column positions. A name that fails underwriting moves to the rejected list only as the skill describes.
 
 ## 6. Delivery and cleanup
 

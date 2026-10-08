@@ -6,7 +6,7 @@ description: Options position audit and setup structuring for one market (IN or 
 
 Read `_COMMON.md` first.
 
-**Input:** market `<MKT>`. The positions file is `sheets/Options_Positions.xlsx`. Its book sheets (for IN and US) have title rows above the table, so locate the header row by its header names (`Symbol` or `Underlying`, plus the expiry and strike columns) and stop if none is found. Do not assume a row number.
+**Input:** market `<MKT>`. The positions file is `data/options/<MKT>.json`. Its book sheets (for IN and US) have title rows above the table, so locate the header row by its header names (`Symbol` or `Underlying`, plus the expiry and strike columns) and stop if none is found. Do not assume a row number.
 
 ## 1. Session date and run directory
 

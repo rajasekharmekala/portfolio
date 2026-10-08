@@ -18,12 +18,12 @@ mkdir -p "$RUN_DIR/cache" "$RUN_DIR/inputs" "$RUN_DIR/work"
 
 ## 2. Inputs and manifest
 
-- Copy the portfolio workbooks needed for this run (holdings, watchlist, shortlist) into `<RUN_DIR>/inputs/` and record their SHA-256 in the manifest. Work from the copies, not the originals.
+- Copy the portfolio JSON record files needed for this run (holdings, watchlist, shortlist) into `<RUN_DIR>/inputs/` and record their SHA-256 in the manifest. Work from the copies, not the originals.
 - Write `<RUN_DIR>/manifest.json` at start with: market, session date, start time (ISO 8601 with timezone), input file hashes, and the ledger and research paths. Update it with output paths and the validation result at the end.
 
 ## 3. What may carry over between runs
 
-Only the user's own state may carry over: holdings, watchlist, shortlist, and option positions. These are read from the workbooks in `sheets/`, `watchlist/`, and `shortlist/`.
+Only the user's own state may carry over: holdings, watchlist, shortlist, and option positions. These are read from the JSON record files in `sheets/`, `watchlist/`, and `shortlist/`.
 
 These may NOT carry over: ledgers (`facts_*.json`), research records, prior report HTML, prior screen results, or any cached web result. Prior reports may be cited as history in a report, but never used as a data source for the current run.
 
@@ -36,7 +36,7 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 
 ## 5. Outputs and cleanup
 
-- Only final artifacts leave the run: the report HTML, the updated watchlist/shortlist/holdings workbooks, and the email. Everything else stays in `<RUN_DIR>`.
+- Only final artifacts leave the run: the report HTML, the updated watchlist/shortlist/holdings JSON record files, and the email. Everything else stays in `<RUN_DIR>`.
 - After the validation gate passes and artifacts are saved, delete the run directory: `rm -rf "$RUN_DIR"`.
 - If the run fails, keep `<RUN_DIR>` and report its path so the failure can be inspected. Do not delete it.
 
@@ -46,5 +46,5 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 - Publish only a report that has passed both the validator (`RESULT: PASS`) and the reviewer gate (`APPROVE`). Copy the HTML into `docs/reports/` under its report name, and regenerate `docs/index.html` from the files that are present.
 - Publication is committed by the user. The run stages the files and reports the commit command; it does not commit or push.
 - Reports contain personal holdings. Publish only to a private repository, or only after the user has explicitly approved public publication for that repository.
-- `docs/` must contain only published reports and their index. Never copy workbooks, ledgers, research files, fact packs, or `.env` into `docs/`.
+- `docs/` must contain only published reports and their index. Never copy JSON record files, ledgers, research files, fact packs, or `.env` into `docs/`.
 - All links inside published pages must be relative. Do not embed absolute local paths such as `/Users/...` or `file://`.

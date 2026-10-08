@@ -44,7 +44,7 @@ It must print `RESULT: PASS`.
 
 ## 8. Watchlist ingestion
 
-Update the watchlist workbook for this market with the names from the screen that the skill's section 7 allows. Use header names to find columns. Do not add a name the report does not name in its ingestion section.
+Update the watchlist JSON record file for this market with the names from the screen that the skill's section 7 allows. Use header names to find columns. Do not add a name the report does not name in its ingestion section.
 
 ## 9. Reviewer gate and delivery
 
