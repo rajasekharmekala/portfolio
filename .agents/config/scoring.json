@@ -1,0 +1,84 @@
+{
+  "$comment": "SINGLE SOURCE OF TRUTH for all portfolio threshold numbers. The constitution (Portfolio Research System/00_Investment_Philosophy_and_Portfolio_Operating_Constitution.md) states these rules in prose; this file is the machine-readable twin. Skills must reference this file and must not restate numbers that differ from it. Change a number here and in the matching constitution paragraph — nowhere else.",
+  "schema_version": 1,
+  "updated": "2026-10-08",
+  "buckets": {
+    "CORE_ALPHA": { "US": [35, 40], "IN": [30, 40] },
+    "TACTICAL_MOMENTUM": { "US": [50, 65], "IN": [50, 65] },
+    "LEVERAGED_SATELLITE": { "range_pct": [20, 25], "hard_max_pct": 30 },
+    "LEAPS_OPTIONS": { "range_pct": [5, 10], "hard_max_pct": 10, "note": "LEAPS only; short-dated options are outside this cap" },
+    "CASH": {
+      "range_pct": [5, 10],
+      "vix_ladder": [
+        { "vix_below": 15, "cash_pct": 5 },
+        { "vix_below": 22, "cash_pct": 7.5 },
+        { "vix_below": null, "cash_pct": 10 }
+      ]
+    }
+  },
+  "position_sizing": {
+    "hard_cap_pct": 15,
+    "core_names": [5, 10],
+    "total_names": [6, 12],
+    "tier_table": {
+      "TIER_1": { "min_pct": 7, "max_pct": 10 },
+      "TIER_2": { "min_pct": 4, "max_pct": 6.5 },
+      "TIER_3": { "min_pct": 2, "max_pct": 3.5 },
+      "TIER_4": { "min_pct": 1, "max_pct": 2 },
+      "TIER_0": { "min_pct": 0, "max_pct": 0 }
+    }
+  },
+  "asymmetry_floor": {
+    "CORE_ALPHA": 3.0,
+    "TACTICAL_MOMENTUM": 3.5,
+    "formula": "(target_base - cmp) / (cmp - stop_loss)"
+  },
+  "support_distance_ladder": [
+    { "band": "FULL_SIZE", "atr_below": 0.5, "action": "full tier size" },
+    { "band": "STANDARD", "atr_below": 1.0, "action": "standard size" },
+    { "band": "LIMIT_ORDER_REDUCE", "atr_below": 1.2, "action": "limit order only, reduced size" },
+    { "band": "NO_BUY", "atr_below": null, "action": "no buy — wait for pullback, retest, or new base" }
+  ],
+  "stop_placement": {
+    "CORE_ALPHA": "below min(swing low, 50/200-day MA) minus 1.0 x ATR(14)",
+    "TACTICAL_MOMENTUM": "below min(swing low, 20/50-day MA) minus 0.5 x ATR(14)"
+  },
+  "momentum_gate": {
+    "note": "Every candidate for any bucket must pass Test A or Test B, computed in code (scripts/momentum_gate.py) from the frozen price snapshot. Failing both = no allocation, however good the business. Thresholds below are defaults and are marked needs_calibration until reviewed against live data.",
+    "needs_calibration": true,
+    "benchmark": { "US": "SPY", "IN": "^NSEI" },
+    "atr_period": 14,
+    "test_a_in_momentum_now": {
+      "stage2": "price > SMA50 > SMA200",
+      "sma50_rising_window_days": 21,
+      "sma200_not_falling_window_days": 63,
+      "rs_window_days": 63,
+      "rs_min_excess_vs_benchmark_pct": 0.0,
+      "support_distance_atr_max": 1.2
+    },
+    "test_b_entering_momentum": {
+      "sma50_window_days": 21,
+      "sma50_max_decline_pct": 0.5,
+      "rs_rising_window_days": 28,
+      "rs_must_be_rising": true,
+      "base_window_days": 63,
+      "pivot_atr_max": 1.0,
+      "volume_dryup_ratio_max": 0.9,
+      "volume_expand_ratio_min": 1.0,
+      "conditional_entry": "allocated only on a confirmed breakout of the base pivot or a retest that holds; never before"
+    },
+    "horizon_tags": { "SHORT": "3-12 months", "LONG": "3-5 years" }
+  },
+  "data_hygiene": {
+    "stale_as_of_days": 30,
+    "as_of_formats": ["YYYY-MM-DD", "unknown"]
+  },
+  "citations": {
+    "dossier_min_sources": 25,
+    "other_reports_min_sources": 12,
+    "research_item_max_age_days": 60,
+    "not_found_min_queries": 3
+  },
+  "core_horizon_months": [36, 60],
+  "core_thesis_checkpoint_months": [6, 12]
+}

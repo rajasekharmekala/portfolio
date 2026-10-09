@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "portfolio/swap_decision.schema.json",
+  "title": "Swap decision record (shared IN + US)",
+  "description": "Canonical record for rows of the Swap_Decision_Matrix sheet. Free-text assessment fields are kept as strings; structural fields use the shared field names (strategy_book was renamed to strategy_bucket during normalization).",
+  "type": "object",
+  "required": [
+    "trade",
+    "incumbent_holding",
+    "top_challenger",
+    "swap_action_verdict",
+    "strategy_bucket"
+  ],
+  "properties": {
+    "trade": { "type": ["string", "integer"] },
+    "incumbent_holding": { "type": "string", "minLength": 1 },
+    "holding_posture": { "type": ["string", "null"] },
+    "holding_1w_2w_pct": { "type": ["string", "null"] },
+    "current_wt_pct": { "type": ["number", "string", "null"] },
+    "top_challenger": { "type": "string", "minLength": 1 },
+    "challenger_posture": { "type": ["string", "null"] },
+    "challenger_asymmetry": { "type": ["number", "string", "null"] },
+    "strategy_bucket": { "type": "string", "minLength": 1 },
+    "hurdle_evaluation": { "type": ["string", "null"] },
+    "swap_action_verdict": { "type": "string", "minLength": 1 },
+    "strategic_prescription": { "type": ["string", "null"] },
+    "timestamp": { "type": ["string", "null"] },
+    "action": { "type": ["string", "null"] },
+    "evicted_symbol": { "type": ["string", "null"] },
+    "evicted_name": { "type": ["string", "null"] },
+    "swapped_in_symbol": { "type": ["string", "null"] },
+    "swapped_in_name": { "type": ["string", "null"] },
+    "evicted_asymmetry": { "type": ["number", "string", "null"] },
+    "new_asymmetry": { "type": ["number", "string", "null"] },
+    "evicted_roce_pct": { "type": ["number", "string", "null"] },
+    "new_roce_pct": { "type": ["number", "string", "null"] },
+    "displacement_rationale": { "type": ["string", "null"] }
+  },
+  "additionalProperties": true
+}

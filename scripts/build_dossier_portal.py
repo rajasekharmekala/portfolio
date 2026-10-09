@@ -9,6 +9,23 @@ import re
 import json
 from bs4 import BeautifulSoup, Comment, NavigableString
 
+def fix_root_portal_links(soup):
+    """docs/index.html sits one directory shallower than docs/blogs/index.html.
+    Rewrite depth-dependent hrefs so the root portal resolves correctly, and
+    give bare dossier filenames the blogs/ prefix.
+    """
+    for a in soup.find_all('a', href=True):
+        href = a['href']
+        if href.startswith(('http', 'mailto:', 'javascript:', '#', 'data:')):
+            continue
+        if href.startswith('../../'):
+            a['href'] = '../' + href[len('../../'):]
+        elif href.startswith('../reports/'):
+            a['href'] = 'reports/' + href[len('../reports/'):]
+        elif re.fullmatch(r'[^/]+_dossier\.html', href):
+            a['href'] = 'blogs/' + href
+
+
 def parse_dossier(filepath):
     filename = os.path.basename(filepath)
     symbol = filename.replace('_dossier.html', '')
@@ -412,19 +429,19 @@ def build_card_html(d, prefix=""):
 
 def build_reports_hub_html(newsletters_dir, is_root=False):
     def get_latest(pattern, default_name):
+        prefix = "reports/" if is_root else "../reports/"
         matches = sorted(glob.glob(os.path.join(newsletters_dir, pattern)), reverse=True)
         if matches:
             fn = os.path.basename(matches[0])
             m = re.search(r'(\d{4}-\d{2}-\d{2})', fn)
             date_str = m.group(1) if m else 'Latest'
-            prefix = "reports/" if is_root else "../reports/"
             return f"{prefix}{fn}", date_str, "Available"
-        return default_name, "Dynamic / Latest", "Auto-Routing"
+        return f"{prefix}{default_name}", "Dynamic / Latest", "Auto-Routing"
 
-    in_mi_link, in_mi_date, in_mi_status = get_latest('Daily_Market_Intelligence_*.html', '/market-intelligence')
-    in_pa_link, in_pa_date, in_pa_status = get_latest('Portfolio_Audit_*.html', '/portfolio-audit')
-    us_mi_link, us_mi_date, us_mi_status = get_latest('Daily_US_Market_Intelligence_*.html', '/us-market-intelligence')
-    us_pa_link, us_pa_date, us_pa_status = get_latest('US_Portfolio_Audit_*.html', '/us-portfolio-audit')
+    in_mi_link, in_mi_date, in_mi_status = get_latest('Daily_Market_Intelligence_*.html', 'Daily_Market_Intelligence_2026-10-07.html')
+    in_pa_link, in_pa_date, in_pa_status = get_latest('Portfolio_Audit_*.html', 'Portfolio_Audit_2026-10-07.html')
+    us_mi_link, us_mi_date, us_mi_status = get_latest('US_Market_Intelligence_*.html', 'US_Market_Intelligence_2026-10-05.html')
+    us_pa_link, us_pa_date, us_pa_status = get_latest('US_Portfolio_Audit_*.html', 'US_Portfolio_Audit_2026-10-01.html')
 
     return f"""<!-- MASTER INSTITUTIONAL INTELLIGENCE & AUDITS COMMAND DECK -->
 <section class="intelligence-hub-section" id="intelligenceHub" style="margin-bottom: 28px;">
@@ -688,6 +705,8 @@ def main():
         target = root_soup.find('div', id='marketSwitcher') or root_soup.find('section', class_='controls-bar')
         if target:
             target.insert_before(r_hub_soup)
+
+    fix_root_portal_links(root_soup)
 
     with open(root_index_path, 'w', encoding='utf-8') as f:
         f.write(str(root_soup))

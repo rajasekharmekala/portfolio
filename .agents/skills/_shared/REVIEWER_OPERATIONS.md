@@ -32,6 +32,8 @@ Run the passes listed in `config/reviewer.json`, one fresh agent per pass. Each 
 - its own section of the rubric (source, consistency, or tone) from `report_reviewer/SKILL.md`
 - the instruction to write `<RUN_DIR>/review/round_<N>_<pass>.json` and nothing else
 
+The `red_team` pass (Stage 9d) is different: it does not use the reviewer rubric. It is run with `.agents/skills/red_team/SKILL.md`, which defines its own method, output contract, and verdict rules. Its output file is `<RUN_DIR>/review/round_<N>_red_team.json` and must contain the `bear_case` block. A round without a red-team bear case for a full report is incomplete.
+
 Why split the passes: a small model that checks sourcing, consistency, and tone in one pass tends to skim all three. One focused pass per concern gets a real read.
 
 Presentation and completeness checks are covered by `validate_report.py` and by the writer's own pre-send checklist. Do not ask a reviewer pass to count table rows or words; ask it to judge what the counts cannot show.
@@ -51,7 +53,7 @@ If a reviewer is unavailable (the model is not reachable, or the runner fails), 
 
 ## 5. Combining the passes and the strict round cap
 
-- `max_rounds` is a strict hard cap of **4 complete rounds** for every skill and workflow. A round consists of all configured reviewer passes (`source`, `consistency`, and `tone`). Never increase the cap for a run, split a round into extra reviews, or launch a fifth round.
+- `max_rounds` is a strict hard cap of **4 complete rounds** for every skill and workflow. A round consists of all configured reviewer passes (`source`, `consistency`, `tone`, and `red_team`). Never increase the cap for a run, split a round into extra reviews, or launch a fifth round.
 - The round is APPROVE only when every pass returns APPROVE, or returns NOTE findings only.
 - For findings in rounds 1–3, consolidate and fix every BLOCK and REVISE finding, rerun the validator until it shows `RESULT: PASS`, then begin the next full round.
 - Round 4 is the final independent review. If it returns REVISE or BLOCK findings, apply every fix that can be made from the approved evidence; remove or clearly qualify unsupported claims; rerun the validator and the writer's pre-delivery checklist. Do not launch another reviewer round.

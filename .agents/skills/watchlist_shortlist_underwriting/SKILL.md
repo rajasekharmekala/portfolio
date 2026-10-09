@@ -164,8 +164,8 @@ The Shortlist registry enforces strict capacity limits, source differentiation, 
 3. **Action Verdict Taxonomy:**
    - **For `CURRENT_HOLDING` Positions:**
      - `KEEP_COMPOUNDING`: All gates passed, operational KPIs healthy (≥3/4), Stage 2 uptrend intact. Maintain full position.
-     - `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (`AT_SUPPORT` ≤0.5x ATR), allocation headroom available. Add to position.
-     - `TRIM_PROFIT_BOOKING`: Extended (>1.5x ATR above support, RSI >75), hit Bull Target, or exceeds single-stock concentration limit (>15–20%). Trim 30%–50% to harvest gains.
+     - `ACCUMULATE_ON_DIP`: High-conviction compounder pulling back to verified support (inside the `support_distance_ladder` buyable bands in `scoring.json`), allocation headroom available. Add to position.
+     - `TRIM_PROFIT_BOOKING`: Extended (outside the `support_distance_ladder`, RSI >75), hit Bull Target, or exceeds the hard single-name cap in `scoring.json` (`position_sizing.hard_cap_pct`). Trim 30%–50% to harvest gains.
      - `REPLACE_UNDERPERFORMER`: Broken structural support (closed below stop / Stage 4), or failed ≥2 operational KPIs, or fundamental thesis impairment. **Immediate candidate for capital swap** into a top-ranked shortlist challenger.
    - **For `AUTOWRITTEN` Pipeline Challengers:**
      - `IMMEDIATE_BUY` (at support with high asymmetry)
@@ -180,7 +180,7 @@ The Shortlist registry enforces strict capacity limits, source differentiation, 
 - **Leveraged Satellite Book:** Exactly 5 autowritten slots maximum.
 - **Displacement Economics:** When a book is full, incoming challengers are evaluated against the weakest incumbent in that book based on:
   1. Layer 2 KPI Pass Rate (e.g. 4/4 vs 2/4)
-  2. Support Proximity (e.g. $\le 0.5\times \text{ATR}$ vs $>1.5\times \text{ATR}$)
+  2. Support Proximity (distance from verified support, relative to the `support_distance_ladder` in `scoring.json`)
   3. Catalyst Proximity (upcoming catalyst vs distant/stale catalyst)
   4. Reward/Risk Asymmetry Ratio ($R:R$)
   - If Challenger is superior: Evict weakest incumbent and insert challenger.
@@ -250,8 +250,8 @@ Every candidate must be processed through the following 3 layers sequentially:
 <!-- MARKET US -->
 │ 3. Asymmetry Floor & Target Anchoring:                                      │
 <!-- /MARKET -->
-│    - Tactical: Reward-to-Risk Asymmetry Ratio ≥ 3.5:1                        │
-│    - Core: Reward-to-Risk Asymmetry Ratio ≥ 3.0:1                            │
+│    - Floors per `asymmetry_floor` in `.agents/config/scoring.json`           │
+│      (TACTICAL_MOMENTUM / CORE_ALPHA entries).                               │
 │    - Mandatory Target Anchoring: Must cite Forward EPS × 3Y Median P/E OR   │
 <!-- MARKET IN -->
 │      Technical Base Measured-Move. Arbitrary inflated targets strictly      │
@@ -313,22 +313,25 @@ Every candidate must be processed through the following 3 layers sequentially:
 │ LAYER 3: SUPPORT-AWARE ENTRY POSTURE (Execution Timing Gate)                │
 ├─────────────────────────────────────────────────────────────────────────────┤
 <!-- MARKET IN -->
-│ Measure distance from nearest verified support anchor in `ATR(14)`:         │
-│ • AT_SUPPORT (≤ 0.5 × ATR): Price at 20/50-DMA / pivot base                 │
-│   → Action Verdict: IMMEDIATE BUY                                        │
-│ • NEAR_SUPPORT (0.5 – 1.0 × ATR): Minor pullback required                   │
-│   → Action Verdict: ACCUMULATE ON DIP                                    │
-│ • EXTENDED (> 1.0 × ATR or RSI > 70): Price overextended from base          │
-│   → Action Verdict: WAIT FOR SUPPORT (Do not chase)                      │
+│ Map distance from nearest verified support anchor (in `ATR(14)`) onto the   │
+│ single `support_distance_ladder` in `.agents/config/scoring.json` (one      │
+│ ladder, both markets; bands are restated there, not here):                  │
+│ • AT_SUPPORT (FULL_SIZE band): Price at 20/50-DMA / pivot base               │
+│   → Action Verdict: IMMEDIATE BUY                                         │
+│ • NEAR_SUPPORT (STANDARD band): Minor pullback required                     │
+│   → Action Verdict: ACCUMULATE ON DIP                                     │
+│ • EXTENDED (NO_BUY band, or RSI > 70): Price overextended from base         │
+│   → Action Verdict: WAIT FOR SUPPORT (Do not chase)                       │
 │ • SUPPORT_BROKEN: Price closed below structural invalidation stop           │
-│   → Action Verdict: REJECTED / BROKEN STRUCTURE                          │
+│   → Action Verdict: REJECTED / BROKEN STRUCTURE                           │
 <!-- /MARKET -->
 <!-- MARKET US -->
-│ Determines exact execution timing and entry zone:                           │
-│ • AT_SUPPORT (0.0 to 1.0 ATR from rising 20/50 DMA) → IMMEDIATE_BUY      │
-│ • NEAR_SUPPORT (1.0 to 2.0 ATR from support) → ACCUMULATE_ON_DIP          │
-│ • OVEREXTENDED (>2.5 ATR above 20 DMA, RSI > 72) → WAIT_FOR_SUPPORT      │
-│ • OVERBOUGHT_CLIMAX (>3.5 ATR extension) → TRIM_PROFIT_BOOKING          │
+│ Determines exact execution timing and entry zone, mapped onto the single   │
+│ `support_distance_ladder` in `.agents/config/scoring.json`:                 │
+│ • AT_SUPPORT (FULL_SIZE / STANDARD band) → IMMEDIATE_BUY                   │
+│ • NEAR_SUPPORT (STANDARD / LIMIT_ORDER_REDUCE band) → ACCUMULATE_ON_DIP    │
+│ • OVEREXTENDED (NO_BUY band, RSI > 72) → WAIT_FOR_SUPPORT                  │
+│ • OVERBOUGHT_CLIMAX (NO_BUY band, RSI > 80) → TRIM_PROFIT_BOOKING          │
 <!-- /MARKET -->
 └─────────────────────────────────────────────────────────────────────────────┘
 ```

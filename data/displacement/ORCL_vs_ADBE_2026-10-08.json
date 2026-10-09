@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-08",
+  "market": "US",
+  "input_file": "data/displacement/ORCL_vs_ADBE_2026-10-08.json",
+  "holding": {
+    "symbol": "ORCL",
+    "name": "Oracle Corporation",
+    "bucket": "CORE_ALPHA",
+    "theme": "Enterprise software & cloud",
+    "price": 135.69,
+    "weight_pct": 6.62,
+    "gate_verdict": "NO_MOMENTUM",
+    "support_distance_atr": 3.27,
+    "expected_return_pct_12m": {
+      "low": -18.93,
+      "base": 75.38,
+      "high": 194.79
+    },
+    "scorecard": { "quality": 70, "valuation": 65, "momentum": 20 },
+    "source_note": "price and gate: frozen facts ledger scripts/.cache/facts_US_2026-10-08.json, momentum_gate run 2026-10-08; expected return: analyst target low $110 / average $237.97 / high $400 vs $135.69 from stockanalysis.com/stocks/ORCL/forecast/ (retrieved 2026-10-08); weight: 35 shares, $4,858.62 of $73,423.49 known US market value"
+  },
+  "candidate": {
+    "symbol": "ADBE",
+    "name": "Adobe Inc.",
+    "bucket": "TACTICAL_MOMENTUM",
+    "theme": "Creative & document software",
+    "price": 241.05,
+    "proposed_weight_pct": 4.0,
+    "weight_pct": 0.0,
+    "gate_verdict": "NO_MOMENTUM",
+    "support_distance_atr": 3.41,
+    "expected_return_pct_12m": {
+      "low": -19.1,
+      "base": 11.98,
+      "high": 36.94
+    },
+    "scorecard": { "quality": 85, "valuation": 78, "momentum": 20 },
+    "source_note": "docs/blogs/ADBE_dossier.html (2026-10-08): scenario prices bear $195 / base $270 / bull $330 vs $241.05; gate: momentum_gate run on the same frozen ledger; proposed 4.0% = TIER_2 of .agents/config/scoring.json"
+  },
+  "costs": {
+    "sell_bps": 2,
+    "buy_bps": 2,
+    "slippage_bps": 5,
+    "notional_usd": 4858.62,
+    "tax_note": "US accounts: the sell leg is subject to capital-gains tax if the lot is long-term; tax is not included in the bps figure"
+  },
+  "params": {
+    "reversal_threshold_pp": 5.0
+  }
+}

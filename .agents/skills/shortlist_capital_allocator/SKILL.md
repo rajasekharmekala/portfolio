@@ -38,7 +38,7 @@ Execute the **Greenfield Unconstrained US Shortlist Capital Allocation Engine**:
 1. Take the complete investable universe of vetted securities from **`data/shortlist/US.json`** (Core Alpha, Tactical Momentum, and Leveraged Satellite candidates) and the **Total US Portfolio Net Worth ($)**.
 <!-- /MARKET -->
 2. Formulate a **100% clean-slate, unconstrained greenfield portfolio allocation** as if you were deploying 100% liquid cash today—**completely agnostic to and blind from any existing incumbent holdings, purchase prices, or unrealized P&L**.
-3. Apply the **Selective Concentration Principle**: A world-class stock picker does **NOT** allocate to every shortlisted stock. Allocate capital only to the highest-conviction, highest-asymmetry opportunities ($R:R \ge 3.0:1$ Core, $\ge 3.5:1$ Tactical) that are strictly **at or near verified technical support** ($\le 0.5\times \text{ATR}(14)$). Assign **0.0% weight (PASS / WATCH)** to lower-tier, lower-conviction, or technically extended candidates with explicit institutional justification.
+3. Apply the **Selective Concentration Principle**: A world-class stock picker does **NOT** allocate to every shortlisted stock. Allocate capital only to the highest-conviction, highest-asymmetry opportunities that clear the `asymmetry_floor` and sit inside the `support_distance_ladder` — both defined once in `.agents/config/scoring.json` (single source of truth; do not restate the numbers here). Assign **0.0% weight (PASS / WATCH)** to lower-tier, lower-conviction, or technically extended candidates with explicit institutional justification.
 <!-- MARKET IN -->
 4. Output an institutional-grade, Wikipedia-formatted allocation payload including target weights (%), capital deployed (₹), target share counts, conviction tiers, entry zones, stops, targets, risk/reward asymmetry, and a formal **0% Allocation Pass Ledger**.
 <!-- /MARKET -->
@@ -68,11 +68,11 @@ Execute the **Greenfield Unconstrained US Shortlist Capital Allocation Engine**:
 <!-- MARKET US -->
 | Strategy Bucket | Target Net Worth Band | Mandate & Asset Characteristics | Minimum Entry Hurdle |
 | :--- | :--- | :--- | :--- |
-| **`CORE_ALPHA`** | **35.0% – 40.0%** | Concentrated 3–5 year high-ROIC compounders ($>15\%$), secular market power, pricing dominance, structural free cash flow conversion. | $R:R \ge 3.0:1$, at/near rising 50/200-DMA support ($\le 0.5\times \text{ATR}$). |
-| **`TACTICAL_MOMENTUM`** | **25.0% – 35.0%** | Catalyst-driven multi-month Stage 2 breakouts, earnings acceleration, sector rotation tailwinds. | $R:R \ge 3.5:1$, clean pivot/base breakout retest ($\le 0.5\times \text{ATR}$). |
-| **`LEVERAGED_SATELLITE`** | **20.0% – 25.0%** (Max 30%) | High-beta 2X/3X leveraged ETFs & single-stock proxies. Trend following with strict invalidation stops. | Underlying in confirmed Stage 2, daily stop strictly defined. |
-| **`LEAPS_OPTIONS`** | **5.0% – 10.0%** (Max 10%) | Defined-risk asymmetric multi-year call options (1–2+ year DTE) on high-conviction compounders. | Maximum risk strictly capped at premium paid. |
-| **`CASH_BUFFER`** | **5.0% – 10.0%** | Unallocated liquid cash/margin buffer dynamically adjusted to CBOE VIX volatility regime. | VIX $<15$: 5% Cash • VIX $15–22$: 7.5% Cash • VIX $>22$: 10%+ Cash. |
+| **`CORE_ALPHA`** | `scoring.json` → `buckets.CORE_ALPHA.US` | Concentrated 3–5 year high-ROIC compounders ($>15\%$), secular market power, pricing dominance, structural free cash flow conversion. | `asymmetry_floor` + `support_distance_ladder` per `scoring.json`, at/near rising 50/200-DMA support. |
+| **`TACTICAL_MOMENTUM`** | `scoring.json` → `buckets.TACTICAL_MOMENTUM.US` | Catalyst-driven multi-month Stage 2 breakouts, earnings acceleration, sector rotation tailwinds. | `asymmetry_floor` + `support_distance_ladder` per `scoring.json`, clean pivot/base breakout retest. |
+| **`LEVERAGED_SATELLITE`** | `scoring.json` → `buckets.LEVERAGED_SATELLITE` | High-beta 2X/3X leveraged ETFs & single-stock proxies. Trend following with strict invalidation stops. | Underlying in confirmed Stage 2, daily stop strictly defined. |
+| **`LEAPS_OPTIONS`** | `scoring.json` → `buckets.LEAPS_OPTIONS` | Defined-risk asymmetric multi-year call options (1–2+ year DTE) on high-conviction compounders. | Maximum risk strictly capped at premium paid. |
+| **`CASH_BUFFER`** | `scoring.json` → `buckets.CASH` (VIX ladder) | Unallocated liquid cash/margin buffer dynamically adjusted to CBOE VIX volatility regime. | VIX ladder per `scoring.json`. |
 
 **Band Reconciliation Rule:** The five bands are individually flexible ranges, not simultaneous maxima. The buckets must sum to **exactly 100.0%** of net worth: if the sum of chosen target weights exceeds 100%, scale positions down proportionally within their bands and settle the remainder into `CASH_BUFFER`.
 <!-- /MARKET -->
@@ -98,9 +98,8 @@ Execute the **Greenfield Unconstrained US Shortlist Capital Allocation Engine**:
 1. **NO ENDOWMENT BIAS:** Zero preference for incumbent holdings. If an unheld shortlist candidate offers superior growth, cleaner support proximity, or higher asymmetry than a current holding, the candidate takes full target allocation without hesitation.
 2. **SUPPORT-AWARE ENTRY DISCIPLINE IS MANDATORY:**
    - **Strict Distance-from-Support Gating:**
-     - $\le 0.5\times \text{ATR}(14)$ from support: **ELIGIBLE FOR IMMEDIATE ALLOCATION**.
-     - $0.5\times$ to $1.2\times \text{ATR}(14)$: **TIER-REDUCED / TRANCHED ALLOCATION** (Limit order only).
-     - $> 1.2\times \text{ATR}(14)$ (Extended): **0.0% ALLOCATION (PASS / WAIT FOR PULLBACK)**.
+     - Apply the single `support_distance_ladder` in `.agents/config/scoring.json` (one ladder for all markets; its bands are restated there, not here).
+     - A candidate beyond the ladder's buyable band: **0.0% ALLOCATION (PASS / WAIT FOR PULLBACK)**.
 3. **MANDATORY TWO-STEP SEARCH & DEEP FETCH PROTOCOL (ZERO-SNIPPET RELIANCE):**
    - **Never Stop at Search Snippets:** Subagents MUST NEVER rely solely on high-level search snippets. High-level snippets omit options OI, full cash flow numbers, and rolling moving averages.
    - **Mandatory Deep Fetch Execution:**
@@ -131,18 +130,20 @@ The unconstrained greenfield portfolio must strictly comply with the institution
 
 | Strategy Bucket | Target Allocation Band | Selection Criteria & Asset Profile | Investment Horizon |
 | :--- | :---: | :--- | :---: |
-| **Core Alpha Book** | **30.0% – 40.0%** | High ROCE (>18–20%), durable economic moat, clean balance sheet (D/E <0.5), secular growth (>15% 3Y sales/PAT CAGR), pricing power. | 1 to 3+ Years |
-| **Tactical Momentum Book** | **50.0% – 65.0%** | Stage 2 markup, price above rising 20/50/200 DMAs, RS Rating >75 vs Nifty 500, volume expansion (>1.8x 20-DMA), high earnings acceleration. | 3 Weeks to 6 Months |
-| **Liquid Cash / Dry Powder Reserve** | **5.0% – 10.0%+** | Unallocated liquid cash buffer to exploit asymmetric market pullbacks, sector panics, and limit buy fills. | Instant Liquidity |
+| **Core Alpha Book** | `scoring.json` → `buckets.CORE_ALPHA.IN` | High ROCE (>18–20%), durable economic moat, clean balance sheet (D/E <0.5), secular growth (>15% 3Y sales/PAT CAGR), pricing power. | 1 to 3+ Years |
+| **Tactical Momentum Book** | `scoring.json` → `buckets.TACTICAL_MOMENTUM.IN` | Stage 2 markup, price above rising 20/50/200 DMAs, RS Rating >75 vs Nifty 500, volume expansion (>1.8x 20-DMA), high earnings acceleration. | 3 Weeks to 6 Months |
+| **Liquid Cash / Dry Powder Reserve** | `scoring.json` → `buckets.CASH` (VIX ladder) | Unallocated liquid cash buffer to exploit asymmetric market pullbacks, sector panics, and limit buy fills. | Instant Liquidity |
 <!-- /MARKET -->
 <!-- MARKET US -->
-| Conviction Tier | Strategy Fit | Target Sizing Band (% of Net Worth) | Max Position Cap ($) | Technical Prerequisite |
-| :--- | :--- | :--- | :--- | :--- |
-| **Tier 1: High Conviction Compounder** | Core Alpha / Leading Tech | **7.0% – 10.0%** | Max $10,000 / position | At major rising 50-DMA or multi-month cup-and-handle base support. |
-| **Tier 2: High Conviction Tactical** | Tactical Momentum | **4.0% – 6.5%** | Max $6,500 / position | Breakout retest holding rising 20-DMA with heavy institutional volume. |
-| **Tier 3: Standard Tactical / Satellite** | Tactical / Leveraged ETF | **2.0% – 3.5%** | Max $3,500 / position | Stage 2 momentum setup with strict daily trailing stop. |
-| **Tier 4: Micro-Satellite / Catalyst** | Leveraged / Thematic | **1.0% – 2.0%** | Max $2,000 / position | High-beta volatility play with predefined max loss. |
-| **Tier 0: 0.0% Pass Ledger** | Overextended / Impaired | **0.0% (EXCLUDED)** | $0.00 | Failed Layer 1 gates, broken support, or extended $>1.2\times \text{ATR}$. |
+| Conviction Tier | Strategy Fit | Target Sizing Band | Technical Prerequisite |
+| :--- | :--- | :--- | :--- |
+| **Tier 1: High Conviction Compounder** | Core Alpha / Leading Tech | `scoring.json` → `position_sizing.tier_table.TIER_1` | At major rising 50-DMA or multi-month cup-and-handle base support. |
+| **Tier 2: High Conviction Tactical** | Tactical Momentum | `scoring.json` → `position_sizing.tier_table.TIER_2` | Breakout retest holding rising 20-DMA with heavy institutional volume. |
+| **Tier 3: Standard Tactical / Satellite** | Tactical / Leveraged ETF | `scoring.json` → `position_sizing.tier_table.TIER_3` | Stage 2 momentum setup with strict daily trailing stop. |
+| **Tier 4: Micro-Satellite / Catalyst** | Leveraged / Thematic | `scoring.json` → `position_sizing.tier_table.TIER_4` | High-beta volatility play with predefined max loss. |
+| **Tier 0: 0.0% Pass Ledger** | Overextended / Impaired | 0.0% (EXCLUDED) | Failed Layer 1 gates, broken support, or outside the `support_distance_ladder` in `scoring.json`. |
+
+Position caps: no per-position dollar caps; the hard single-name cap in `scoring.json` (`position_sizing.hard_cap_pct`) applies to every name in every market.
 <!-- /MARKET -->
 
 ---
@@ -171,18 +172,18 @@ Capital allocation per security is determined by **Conviction Tiering**, **Suppo
 +-------------------+--------------------+-----------------------------------------------------------+
 | Conviction Tier   | Target Weight (%)  | Quantitative & Qualitative Profile                        |
 +-------------------+--------------------+-----------------------------------------------------------+
-| Tier 1: Anchor    | 8.0% – 12.5%       | Dominant sector leader, ROCE >25%, secular runway,         |
-| High Conviction   | (Max 15.0%)        | Stage 2 at support (≤0.5x ATR), Asymmetry ≥ 4.0:1.        |
+| Tier 1: Anchor    | tier_table.TIER_1   | Dominant sector leader, ROCE >25%, secular runway,         |
+| High Conviction   | (scoring.json)     | Stage 2 at support; asymmetry ≥ bucket floor (scoring.json)|
 +-------------------+--------------------+-----------------------------------------------------------+
-| Tier 2: Core      | 4.0% – 7.5%        | Robust compounder or proven Stage 2 breakout leader,      |
-| Compounder/Lead   |                    | strong balance sheet, Asymmetry ≥ 3.0:1 (Core) / 3.5:1 (Tac).|
+| Tier 2: Core      | tier_table.TIER_2   | Robust compounder or proven Stage 2 breakout leader,      |
+| Compounder/Lead   | (scoring.json)     | strong balance sheet; asymmetry ≥ bucket floor (scoring.json)|
 +-------------------+--------------------+-----------------------------------------------------------+
-| Tier 3: Tactical  | 2.5% – 4.0%        | High-beta explosive momentum or event catalyst, tight stop|
-| Satellite / Asym  |                    | setup (≤5-7% risk), Asymmetry ≥ 4.0:1.                    |
+| Tier 3: Tactical  | tier_table.TIER_3   | High-beta explosive momentum or event catalyst, tight stop|
+| Satellite / Asym  | (scoring.json)     | setup; asymmetry ≥ bucket floor (scoring.json).            |
 +-------------------+--------------------+-----------------------------------------------------------+
-| Tier 0: Excluded  | 0.0%               | Shortlisted but currently: extended (>1.5x ATR from       |
-| (PASS / WATCH)    | (Zero Allocation)  | support), inferior asymmetry (<3.0:1), or displaced by    |
-|                   |                    | higher-quality peers in the same subsector.               |
+| Tier 0: Excluded  | 0.0% (EXCLUDED)    | Shortlisted but currently outside the support_distance_   |
+| (PASS / WATCH)    |                    | ladder (scoring.json), below the bucket asymmetry floor,  |
+|                   |                    | or displaced by higher-quality peers in the same subsector|
 +-------------------+--------------------+-----------------------------------------------------------+
 ```
 <!-- /MARKET -->
@@ -191,7 +192,7 @@ Capital allocation per security is determined by **Conviction Tiering**, **Suppo
 - Eliminate any candidate failing Layer 1 Hard Gating Floors (ROIC $<12\%$, negative CFO conversion, Net Debt/EBITDA $>3.0\times$).
 - Measure Distance from Support in ATR units:
   $$\text{Distance to Support (ATR)} = \frac{\text{CMP} - \text{Support Level}}{\text{ATR}(14)}$$
-- Route candidates with $\text{Distance} > 1.2\times \text{ATR}$ directly to the **0.0% Pass Ledger**.
+- Route candidates outside the `support_distance_ladder` in `.agents/config/scoring.json` directly to the **0.0% Pass Ledger**.
 <!-- /MARKET -->
 
 <!-- MARKET IN -->
@@ -203,18 +204,15 @@ Capital allocation per security is determined by **Conviction Tiering**, **Suppo
 3. **Effective Capital Outlay ($₹$):**
    $$\text{Effective Outlay}_i = \text{Target Shares}_i \times \text{Target Entry Price}_i$$
 4. **Invalidation Stop-Loss Methodology:**
-   - **Core Alpha:** $\text{Stop} = \min(\text{Recent Swing Low}, \text{50/200-DMA}) - 1.0 \times \text{ATR}(14)$
-   - **Tactical Momentum:** $\text{Stop} = \min(\text{Recent Swing Low}, \text{20/50-DMA}) - 0.5 \times \text{ATR}(14)$
+   - Stops per `stop_placement` in `.agents/config/scoring.json` (one formula per strategy bucket; do not restate here).
 5. **Upside Target Methodology:**
    - Anchored to Forward EPS $\times$ 3-Year Median P/E OR Technical Base Measured-Move.
 6. **Risk/Reward Asymmetry Ratio:**
-   $$\text{Asymmetry Ratio} = \frac{\text{Target Price} - \text{Target Entry Price}}{\text{Target Entry Price} - \text{Stop Loss}} \quad (\text{Must be } \ge 3.0:1 \text{ for Core, } \ge 3.5:1 \text{ for Tactical})$$
+   $$\text{Asymmetry Ratio} = \frac{\text{Target Price} - \text{Target Entry Price}}{\text{Target Entry Price} - \text{Stop Loss}} \quad (\text{floors per } asymmetry_floor \text{ in scoring.json})$$
 7. **Support Proximity Ratio (ATR Distance):**
    $$\text{Support Distance (ATR)} = \frac{|\text{CMP} - \text{Key Support DMA}|}{\text{ATR}(14)}$$
-   - $\le 0.5\times \text{ATR}$: **Ideal Entry Zone (Full Tier Sizing)**
-   - $0.5\times – 1.0\times \text{ATR}$: **Acceptable (Standard Tier Sizing)**
-   - $1.0\times – 1.5\times \text{ATR}$: **Wait for Dip (Reduced Sizing / Limit Only)**
-   - $> 1.5\times \text{ATR}$: **Extended — 0.0% Allocation (PASS / WAIT_FOR_SUPPORT)**
+   - Size per the single `support_distance_ladder` in `.agents/config/scoring.json` (one ladder, both markets; its bands are restated there, not here).
+   - Beyond the ladder's buyable band: **0.0% Allocation (PASS / WAIT_FOR_SUPPORT)**.
 <!-- /MARKET -->
 <!-- MARKET US -->
 #### Step 3: Conviction Ranking & Asymmetry Sizing
@@ -290,11 +288,11 @@ The engine outputs a comprehensive structured payload containing the Greenfield 
 <!-- MARKET IN -->
 1. **Step 1: Universe Ingestion:** Read all candidate rows from `data/shortlist/IN.json` (sheets.Master_Shortlist, Core_Alpha_Challengers, and Tactical_Momentum sheets).
 2. **Step 2: Live Market & Metric Verification:** Perform live verification of CMP, DMAs, RSI, ROCE, Debt, Growth CAGR, and Earnings Catalysts.
-3. **Step 3: Conviction & Support Screening:** Filter candidates through the Support-Aware Gate and Asymmetry Gate ($\ge 3.0:1$ Core, $\ge 3.5:1$ Tactical).
+3. **Step 3: Conviction & Support Screening:** Filter candidates through the Support-Aware Gate and Asymmetry Gate, both defined in `.agents/config/scoring.json` (`support_distance_ladder`, `asymmetry_floor`).
 4. **Step 4: Conviction Tier Assignment & Capital Sizing:**
-   - Select top 3–5 Core Alpha candidates (allocating 30–40% total).
-   - Select top 4–7 Tactical Momentum candidates (allocating 50–65% total).
-   - Retain 5–10%+ in Liquid Cash / Dry Powder.
+   - Select top 3–5 Core Alpha candidates (allocating within the `buckets.CORE_ALPHA.IN` band in `scoring.json`).
+   - Select top 4–7 Tactical Momentum candidates (allocating within the `buckets.TACTICAL_MOMENTUM.IN` band in `scoring.json`).
+   - Retain the `buckets.CASH` band (VIX ladder) in Liquid Cash / Dry Powder.
    - Assign 0.0% allocation to remaining candidates.
 5. **Step 5: Mathematical Reconciliation:** Verify that $\sum \text{Target Weights} + \text{Cash Buffer} = 100.0\%$.
 6. **Step 6: Payload Assembly:** Generate clean HTML/Markdown wikitables matching the Wikipedia design system.

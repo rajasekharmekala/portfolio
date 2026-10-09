@@ -425,8 +425,11 @@ def main():
         if missing:
             errors.append(f"TICKER LINKS MISSING for {len(missing)} ticker(s) ({', '.join(missing[:10])}): each needs a TradingView chart link and a Screener (IN) or Finviz (US) link; rebuild with scripts/assemble_report.py")
         n_sources = len(body_sources(raw))
-        if n_sources < 12:
-            errors.append(f"TOO FEW SOURCES: {n_sources} distinct external source(s) cited; the standard needs at least 12. Cite the research record's source_url for each figure (the assembler adds a References list from the research file)")
+        # A full company report (dossier) needs at least 25 distinct primary
+        # sources; other report kinds keep the 12-source floor.
+        source_floor = 25 if args.report.endswith('_dossier.html') else 12
+        if n_sources < source_floor:
+            errors.append(f"TOO FEW SOURCES: {n_sources} distinct external source(s) cited; the standard needs at least {source_floor}. Cite the research record's source_url for each figure (the assembler adds a References list from the research file). Run scripts/citation_check.py for the full citation gate (URL-in-cache, value-in-cached-text, as-of).")
     if args.partial:
         pass
 

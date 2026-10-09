@@ -19,6 +19,8 @@ You are a separate reviewer. You did not write this report and you have not seen
 - The sibling report for the same market and date, if it exists in `docs/reports/`.
 - The standards: `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`, `REPORT_VOICE.md`, and `REPORT_PALETTE.md`.
 - The validator output (`scripts/validate_report.py`). Treat it as a floor: a PASS does not mean the report is good.
+- The citation-check output (`scripts/citation_check.py` run on the report with the research record).
+- The readability-check output (`scripts/readability_check.py --glossary .agents/config/glossary.json --max-grade 13.0`).
 
 Do not read anything outside these inputs, and do not fetch new market data. If a claim needs a source that is not in the record, that is a finding.
 
@@ -32,6 +34,7 @@ Score each area as PASS, REVISE, or BLOCK. A BLOCK marks a quoted claim or secti
 - Every verdict (KEEP, TRIM, EXIT, ACCUMULATE, WATCH, Bull or Bear placement, Top-3 setup) cites the rule and the number that triggered it, and that number matches the ledger.
 - Any figure whose `as_of` is not the session date is labelled as prior-session in the report.
 - Any claim about a company (business, catalyst, guidance, pledge, order book) that does not appear in the research record is a finding. "Known" facts from memory are not sources.
+- The citation check is a mechanical floor: every FAIL line from `citation_check.py` (missing source in the fetch cache, `as_of` older than 60 days, a research-record value that does not match the cached text) is a BLOCK finding that quotes the checker's line. A report with a failed citation check can never receive APPROVE from the source pass.
 - BLOCK if any figure is invented, or a verdict contradicts the ledger.
 
 ### B. Completeness
@@ -58,6 +61,7 @@ Score each area as PASS, REVISE, or BLOCK. A BLOCK marks a quoted claim or secti
 - No repeated sentence patterns across consecutive paragraphs. Paragraph openings that are identical in cadence are a finding.
 - Sentences are readable by a newcomer. Flag runs of long sentences that stack technical terms without explanation.
 - Tone is neutral and explanatory, not hyped, not condescending, and not robotic.
+- The readability check is a mechanical floor for this pass: every finding from `readability_check.py` (banned phrase, Flesch-Kincaid grade above 13.0 in any chapter, a glossary term whose first use is not defined at first use, a bare table with no interpretation, a missing estimate part, missing ch-7 triggers, malformed primer or notes) is a REVISE finding that quotes the checker's line. A report with a failed readability check cannot receive APPROVE from the tone pass.
 
 ### E. Presentation
 - Colours come only from REPORT_PALETTE.md. Verdicts use the `verdict-*` classes. No emoji status markers.
@@ -96,6 +100,6 @@ Rules for findings:
 
 ## Running a pass
 
-The workflow runs you as one of several focused passes (source, consistency, or tone), each in a fresh context, as set in `.agents/config/reviewer.json`. Your pass name is given in the prompt. Read only the rubric section for that pass (A for source, C for consistency, D for tone; E is checked by the validator and by you only as a NOTE). Write `<RUN_DIR>/review/round_<N>_<pass>.json`, and nothing else. The procedure for bundles, output checks, and combining passes is in `.agents/skills/_shared/REVIEWER_OPERATIONS.md`.
+The workflow runs you as one of several focused passes (source, consistency, tone, or red_team), each in a fresh context, as set in `.agents/config/reviewer.json`. Your pass name is given in the prompt. Read only the rubric section for that pass (A for source, C for consistency, D for tone; E is checked by the validator and by you only as a NOTE). The `red_team` pass is a separate skill with its own rubric and output contract: `.agents/skills/red_team/SKILL.md` (Stage 9d) - the reviewer rubric does not apply to it. For the source pass, run `scripts/citation_check.py` on the report with the research record before judging; for the tone pass, run `scripts/readability_check.py` with the shared glossary before judging; treat both outputs as floors, exactly like the validator. Write `<RUN_DIR>/review/round_<N>_<pass>.json`, and nothing else. The procedure for bundles, output checks, and combining passes is in `.agents/skills/_shared/REVIEWER_OPERATIONS.md`.
 
 Smaller models: work through the rubric in order, quote before you judge, and write findings as you go rather than at the end. Stay inside your pass. If you notice a problem outside it, add a NOTE with its location.

@@ -60,10 +60,12 @@ The portfolio is divided into four distinct investment engines. These categories
 
 | Portfolio Engine | Target Allocation | Primary Role |
 | --- | --- | --- |
-| Core Alpha | ~40% | 3-5 year high-conviction wealth compounding |
-| Short-Term / Momentum / Tactical | ~25% | 3-12 month catalyst and momentum opportunities |
-| Leveraged Holdings | ~20% | Amplified exposure to strong trends/themes |
-| Options / Asymmetric Bets | ~15% | Defined-risk, high-upside time-bound hypotheses |
+| Core Alpha | 35-40% (US); 30-40% (IN) | 3-5 year high-conviction wealth compounding |
+| Short-Term / Momentum / Tactical | 50-65% (US and IN) | 3-12 month catalyst and momentum opportunities |
+| Leveraged Holdings | 20-25%, hard max 30% | Amplified exposure to strong trends/themes |
+| Options / Asymmetric Bets (LEAPS) | 5-10%, hard max 10% (LEAPS only) | Defined-risk, high-upside time-bound hypotheses |
+
+The machine-readable twin of every number in this architecture lives in `.agents/config/scoring.json`; that file is the single source of truth and the skills reference it.
 
 
 These are target ranges rather than rigid requirements. Capital may temporarily move between buckets when unusually attractive opportunities emerge.
@@ -82,13 +84,15 @@ Attractive or improving fundamentals
 
 Credible earnings growth
 
-A favorable valuation/risk-reward relationship
+A favorable valuation/risk-reward relationship (Core requires at least 3.0:1 target-vs-stop asymmetry at CMP, per `.agents/config/scoring.json`)
 
 Identifiable catalysts or business developments capable of producing meaningful progress within roughly 6-12 months
 
+The 3-5 year horizon carries a 6-12 month thesis checkpoint: if a Core name leaves momentum for a sustained period, the review flags it and the thesis must be re-confirmed before it is held
+
 ## Concentration
 
-The Core portfolio should remain concentrated, typically around 5-10 companies. Maximum normal position size is approximately 10% of total portfolio.
+The Core portfolio holds 5-10 companies; the total portfolio holds 6-12 names. Maximum position size is a hard cap of 15% of total portfolio for any single name, in any market and any bucket. Position sizes follow the tier table in `.agents/config/scoring.json` (Tier 1 7-10%, Tier 2 4-6.5%, Tier 3 2-3.5%, Tier 4 1-2%).
 
 ## Core Decision Standard
 
@@ -206,7 +210,7 @@ Multiple strikes or contracts on the same underlying should generally be treated
 
 My investment decisions place substantial weight on market behavior. Working priority:
 
-1.  Price momentum / technical structure
+1.  Price momentum / technical structure (a GATE, not just a priority)
 
 2.  Valuation and risk/reward
 
@@ -216,7 +220,34 @@ My investment decisions place substantial weight on market behavior. Working pri
 
 5.  Relative opportunity / alternative use of capital
 
-These factors should not be interpreted mechanically. For Core positions, fundamentals remain essential. A technical decline accompanied by intact fundamentals and improving valuation can create an opportunity. Conversely, strong fundamentals do not require indefinite holding when momentum deteriorates, valuation becomes excessive, growth expectations weaken, or a superior opportunity exists.
+Momentum is a gate before allocation. Every candidate for any bucket must pass
+one of two momentum tests, computed in code from the frozen price snapshot
+(`scripts/momentum_gate.py`), with thresholds defined in
+`.agents/config/scoring.json`:
+
+- **Test A — in momentum now:** confirmed Stage 2 uptrend (price above a
+  rising 50-day and 200-day average, 50-day above the 200-day), relative
+  strength at or above the configured benchmark-rank threshold, and price
+  inside the support-distance ladder.
+- **Test B — entering momentum:** Stage 1 base turning up — the 50-day
+  average has stopped falling, relative strength is rising over the last 4-8
+  weeks, price is within about 1 ATR of the base pivot, volume is drying up
+  in the base and expanding on the approach. A Test B pass earns a
+  *conditional* entry only: allocation happens on a confirmed breakout or a
+  retest of the pivot, never before.
+
+A stock that fails both tests is not allocated, however good its business. The
+company report is still written and records what would have to happen for the
+stock to pass. Fundamentals still have to pass their own floors — momentum does
+not excuse weak business quality, and a technical decline with intact
+fundamentals and improving valuation can create an opportunity. Conversely, strong
+fundamentals do not require indefinite holding when momentum deteriorates,
+valuation becomes excessive, growth expectations weaken, or a superior
+opportunity exists.
+
+Horizon is a separate tag, not a different rule: each name is tagged `SHORT`
+(expected 3-12 months) or `LONG` (3-5 years). A `LONG` name must still pass
+Test A or B on every review.
 
 # 10. Capital Efficiency
 
@@ -253,12 +284,20 @@ prior breakout/base support, a rising 20/50/200-day moving average appropriate
 to the strategy bucket, and/or a recent swing low. The entry zone, support
 anchor, distance from support, and data-as-of timestamp must be recorded.
 
-Operationally, “near support” means within approximately `0.5 × ATR(14)` of
-the selected verified support anchor, unless a different instrument-specific
-zone is justified and documented. Do not chase a sharp extension, convert a
+Operationally, entry sizing follows the single support-distance ladder in
+`.agents/config/scoring.json`, measured from the selected verified support
+anchor: within `0.5 × ATR(14)` → full tier size; `0.5–1.0 × ATR(14)` →
+standard size; `1.0–1.2 × ATR(14)` → limit order only, at reduced size;
+beyond `1.2 × ATR(14)` → no buy. Do not chase a sharp extension, convert a
 breakout into an automatic market buy, or catch a falling knife. If price is
 extended, wait for a controlled pullback, a valid breakout retest, or a new
 base; if support has failed, mark the setup `NO TRADE / WATCH`.
+
+Asymmetry floor: a Core position must offer at least 3.0:1 and a Tactical
+position at least 3.5:1 target-vs-stop asymmetry at CMP (formula:
+`(target_base − cmp) / (cmp − stop_loss)`). Stops: Core below the lower of
+the swing low and the 50/200-day MA, minus 1.0 × ATR(14); Tactical below the
+lower of the swing low and the 20/50-day MA, minus 0.5 × ATR(14).
 
 The stop must sit below the support structure with the applicable volatility
 buffer, and the target must be independently supported by resistance,
@@ -339,7 +378,7 @@ The portfolio should track: Position -> Bucket -> Sector -> Theme -> Underlying 
 
 # 15. Cash
 
-Normal cash allocation: approximately 0-5%. Cash may rise toward approximately 5-10% when attractive opportunities are scarce, market risk/reward becomes unfavorable, significant profits have recently been harvested, or I am intentionally waiting for better entries.
+Cash allocation: 5-10% of total portfolio, scaled to the VIX ladder in `.agents/config/scoring.json` (VIX < 15 → 5%; VIX 15-22 → 7.5%; VIX > 22 → 10%+). Cash rises toward the top of the band when attractive opportunities are scarce, market risk/reward becomes unfavorable, significant profits have recently been harvested, or I am intentionally waiting for better entries.
 
 Cash is tactical ammunition, not a permanent investment allocation.
 

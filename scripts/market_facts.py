@@ -189,6 +189,12 @@ def metrics(df: pd.DataFrame) -> dict:
     s50v, s200v, s50p = at(s50), at(s200), at(s50, 10)
     stage = classify_stage(close, s50v, s200v, s50p)
     atrv = at(a)
+    # momentum gate (scoring.json): SMA history over the test windows, 63-day base pivot, volume dryup
+    s50_21, s200_63 = at(s50, 21), at(s200, 63)
+    low63 = df["Low"].iloc[-63:]
+    base_low_63d = num(low63.min()) if low63.notna().any() else None
+    vol63 = vol.iloc[-63:]
+    vol_dryup = num(vol63.min() / vol63.mean()) if len(vol63) >= 20 and vol63.notna().any() and vol63.mean() > 0 else None
     # distribution days: down >= 0.2% on higher volume than the prior session, last 25 sessions
     dist = None
     if vol.iloc[-25:].sum() > 0:
@@ -208,6 +214,10 @@ def metrics(df: pd.DataFrame) -> dict:
         "hi52": num(hi52), "lo52": num(lo52),
         "pct_from_52w_high": num((close / hi52 - 1) * 100),
         "delta_50dma_atr": num((close - s50v) / atrv) if s50v and atrv else None,
+        "sma50_21d_ago": s50_21, "sma200_63d_ago": s200_63,
+        "base_low_63d": base_low_63d,
+        "base_pivot_atr": num((close - base_low_63d) / atrv) if (base_low_63d is not None and atrv) else None,
+        "vol_dryup_ratio_63d": vol_dryup,
         "dist_days_25": dist,
         "stage": stage,
         "stage_label": {1: "Stage 1 (Basing)", 2: "Stage 2 (Markup)", 3: "Stage 3 (Topping / Pullback)",
@@ -464,6 +474,7 @@ def build(args):
                     failed.remove(old)
 
     inst = {}
+    closes = {}  # report symbol -> filtered Close series (for momentum-gate RS vs benchmark)
     for yt, df in frames.items():
         if args.date:  # replay a past session: drop bars after the requested date
             df = df[df.index <= pd.Timestamp(args.date)]
@@ -473,6 +484,24 @@ def build(args):
         m["kind"] = ("index" if rep in cfg["indices"] else "sector" if rep in cfg["sectors"] else
                      "etf" if rep in cfg["etfs"] else "stock")
         inst[rep] = m
+        if m["kind"] == "stock" and not m.get("error"):
+            closes[rep] = df["Close"]
+
+    # momentum gate: 63d / 28d relative strength (excess return) vs the scoring.json benchmark
+    scoring = json.load(open(os.path.join(ROOT, ".agents", "config", "scoring.json")))
+    mg_bench = scoring["momentum_gate"]["benchmark"][market]
+    if mg_bench in frames:
+        bc = frames[mg_bench]["Close"]
+        if args.date:
+            bc = bc[bc.index <= pd.Timestamp(args.date)]
+        for rep, c in closes.items():
+            j = pd.DataFrame({"s": c, "b": bc}).dropna()
+            if len(j) >= 64:
+                inst[rep]["rs_63d_pct"] = num((j["s"].iloc[-1] / j["s"].iloc[-64] - 1) * 100
+                                               - (j["b"].iloc[-1] / j["b"].iloc[-64] - 1) * 100)
+            if len(j) >= 29:
+                inst[rep]["rs_28d_pct"] = num((j["s"].iloc[-1] / j["s"].iloc[-29] - 1) * 100
+                                               - (j["b"].iloc[-1] / j["b"].iloc[-29] - 1) * 100)
 
     primary_name = ymap[cfg["primary"]]
     # The session date is a requirement, not a label: the benchmark must have a bar on that date.

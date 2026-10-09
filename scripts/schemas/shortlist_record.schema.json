@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "portfolio/shortlist_record.schema.json",
+  "title": "Shortlist / Holdings record (shared IN + US)",
+  "description": "Canonical record for every row of the shortlist sheets (Master_Shortlist, Holdings_Audit, Core_Alpha_Challengers, Tactical_Momentum, Leveraged_Satellite). One field set is shared by both markets; the file-level 'market' field disambiguates currency and units (US: USD, market_cap in USD billions; IN: INR, market_cap in INR crores).",
+  "type": "object",
+  "required": [
+    "symbol",
+    "company_name",
+    "strategy_bucket",
+    "cmp",
+    "stop_loss",
+    "target_base",
+    "asymmetry_ratio",
+    "action_verdict",
+    "weinstein_stage",
+    "kpi_health",
+    "gate_status",
+    "as_of_date"
+  ],
+  "properties": {
+    "symbol": { "type": "string", "minLength": 1 },
+    "company_name": { "type": "string", "minLength": 1 },
+    "source_type": { "type": ["string", "null"] },
+
+    "strategy_bucket": {
+      "enum": ["CORE_ALPHA", "TACTICAL_MOMENTUM", "LEVERAGED_SATELLITE", "LEAPS_OPTIONS", "REJECTED", "PENDING", "UNKNOWN"]
+    },
+    "macro_sector": { "type": ["string", "null"] },
+    "fine_subsector": { "type": ["string", "null"] },
+    "cap_tier": { "enum": ["Large-Cap", "Mid-Cap", "Small-Cap", "Micro-Cap", "Mega-Cap"] },
+
+    "cmp": { "type": "number", "minimum": 0 },
+    "entry_zone_low": { "type": ["number", "null"], "minimum": 0 },
+    "entry_zone_high": { "type": ["number", "null"], "minimum": 0 },
+    "stop_loss": { "type": ["number", "null"], "minimum": 0 },
+    "target_base": { "type": ["number", "null"], "minimum": 0 },
+    "target_bull": { "type": ["number", "null"], "minimum": 0 },
+
+    "distance_from_support_atr": { "type": ["number", "null"] },
+    "dist_from_20dma_pct": { "type": ["number", "null"] },
+    "rsi_14": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+    "rs_rating": { "type": ["number", "null"], "minimum": 0, "maximum": 99 },
+    "1d_return_pct": { "type": ["number", "null"] },
+    "1w_return_pct": { "type": ["number", "null"] },
+    "2w_return_pct": { "type": ["number", "null"] },
+
+    "asymmetry_ratio": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+
+    "p_e": { "type": ["number", "null"] },
+    "market_cap": { "type": ["number", "null"], "minimum": 0 },
+    "roe_pct": { "type": ["number", "null"] },
+    "roic_pct": { "type": ["number", "null"] },
+    "roce_pct": { "type": ["number", "null"] },
+    "debt_to_equity": { "type": ["number", "null"] },
+    "debt_to_ebitda": { "type": ["number", "null"] },
+    "gross_margin_pct": { "type": ["number", "null"] },
+    "fcf_margin_pct": { "type": ["number", "null"] },
+    "opm_pct": { "type": ["number", "null"] },
+    "cfo_to_pat": { "type": ["number", "null"] },
+    "3y_revenue_cagr_pct": { "type": ["number", "null"] },
+    "3y_sales_cagr_pct": { "type": ["number", "null"] },
+    "3y_pat_cagr_pct": { "type": ["number", "null"] },
+
+    "leverage_multiplier": { "type": ["number", "null"], "minimum": 0 },
+    "underlying_ticker": { "type": ["string", "null"] },
+    "underlying_posture": { "type": ["string", "null"] },
+
+    "action_verdict": {
+      "enum": ["IMMEDIATE_BUY", "ACCUMULATE_ON_DIP", "KEEP_COMPOUNDING", "WAIT_FOR_SUPPORT", "TRIM_PROFIT_BOOKING", "REPLACE_UNDERPERFORMER", "REJECTED", "QUALIFIED", "PENDING", "RESEARCH_REQUIRED"]
+    },
+    "action_verdict_detail": { "type": ["string", "null"] },
+    "weinstein_stage": { "enum": ["STAGE_1", "STAGE_2", "STAGE_3", "STAGE_4", "UNKNOWN"] },
+    "weinstein_stage_detail": { "type": ["string", "null"] },
+    "kpi_health": { "enum": ["PASS", "PASS_WITH_WATCH", "FAIL", "PENDING", "UNKNOWN"] },
+    "kpi_score": { "type": ["string", "null"], "pattern": "^\\d+/\\d+$" },
+    "gate_status": { "enum": ["PASSED", "PASSED_CONDITIONAL", "PARTIAL", "FAIL", "PENDING", "UNKNOWN"] },
+    "gate_status_detail": { "type": ["string", "null"] },
+    "entry_posture": { "type": ["string", "null"] },
+    "momentum_state": { "type": ["string", "null"] },
+
+    "as_of_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$|^unknown$" },
+    "stale_as_of": { "type": "boolean" },
+    "last_researched_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$|^unknown$" },
+    "research_dossier_path": { "type": ["string", "null"] },
+
+    "moat_description": { "type": ["string", "null"] },
+    "primary_catalyst": { "type": ["string", "null"] },
+    "primary_kpi_summary": { "type": ["string", "null"] },
+    "invalidation_condition": { "type": ["string", "null"] }
+  },
+  "additionalProperties": true
+}
