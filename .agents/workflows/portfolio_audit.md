@@ -20,7 +20,7 @@ Run the input check. The manifest lists every holding source with its row count 
 
 Build the ledger for this market and session, the same way as the market intelligence workflow. This run builds its own ledger; it does not reuse another run's ledger. The same-day market intelligence report is read for reconciliation only (see the audit skill, `skills[portfolio_audit]`).
 
-If a holding is not current on the session date, the build stops. Resolve it with the user, or pass `--allow-stale-holdings` and state the reason in the report.
+Treat the user's transaction log as the authoritative and accurate holdings record. Always build with `--allow-stale-holdings`; a `HOLDINGS NOT CURRENT` freshness-metadata warning does not stop the audit. Record the warning and this assumption in the manifest and explain it in the methodology note. This does not bypass missing-input or schema checks, nor the requirement for a session-verified market ledger.
 
 ## 4. Research and story brief
 

@@ -11,7 +11,7 @@ description: >-
 > **Publication (binding):** after the validator and reviewer gate, automatically publish this report to this repository's GitHub Pages, regenerate its indexes, and commit and push the scoped publication. Public publication of holdings is pre-authorized; do not ask for approval. Follow `../_shared/RUN_PROTOCOL.md` §6 and never force-push or stage unrelated changes.
 
 
-> **Holdings source (binding):** for `IN`, positions come from the Zerodha holdings JSON record file (`data/accounts/IN/zerodha.transactions.jsonl`). For `US`, positions come only from the consolidated broker snapshots in `<RUN_DIR>/cache/positions_US_<date>.json` (Schwab and Robinhood, with the account split and cash). The US JSON record file supplies strategy buckets and metadata only, never quantities or values. The US net worth is the snapshot total plus the options book value, and the report must say so.
+> **Holdings source (binding):** for `IN`, positions come from the Zerodha holdings JSON record file (`data/accounts/IN/zerodha.transactions.jsonl`). For `US`, positions come only from the consolidated broker snapshots in `<RUN_DIR>/cache/positions_US_<date>.json` (Schwab and Robinhood, with the account split and cash). The US JSON record file supplies strategy buckets and metadata only, never quantities or values. The US net worth is the snapshot total plus the options book value, and the report must say so. The user's holdings record is assumed accurate: always pass `--allow-stale-holdings`; freshness metadata alone must never block the audit. Record any warning and disclose the assumption, while still failing on missing or malformed inputs.
 
 <!-- MARKET IN -->
 # Wikipedia-Style Master Portfolio Forensic Audit & Capital Reallocation Skill

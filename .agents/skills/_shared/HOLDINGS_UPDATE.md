@@ -15,6 +15,10 @@ A position with `"amount": null` in its opening line has no known cost. The repo
 
 The current US openings for GOOGL, BE, and ANET have no cost, and the Schwab snapshot showed "—" for them. The Robinhood openings for BE and ANET carry costs derived from gain and loss, and those derivations are recorded in the `note` field.
 
+## Accuracy and freshness assumption
+
+The user's transaction log is the authoritative holdings record and is assumed accurate for portfolio workflows. A `HOLDINGS NOT CURRENT` warning from market-facts freshness metadata does not invalidate the positions or block a run; workflows should pass `--allow-stale-holdings`, record the warning, and disclose the assumption. This does not excuse malformed or missing transaction records, or change the need to verify market prices against the requested session.
+
 ## Checking
 
 - `.venv/bin/python scripts/data_layer.py --market <MKT> --positions` prints each account's replayed positions and cash.

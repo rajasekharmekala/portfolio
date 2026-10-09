@@ -45,6 +45,7 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 ## 4. Freshness
 
 - The ledger's `asof` must equal the resolved latest completed session date under §0. `market_facts.py` exits non-zero if the benchmark's last bar is on another date. Do not rename, copy, or relabel a ledger. If the current calendar day's session is incomplete, resolve the prior session. If its completed close is missing, retry once, then use the most recent earlier completed session with a verified benchmark close. If that exact-date build fails, stop and report.
+- **Holdings accuracy assumption:** The user's holdings transaction log is the authoritative record and is assumed accurate. Always pass `--allow-stale-holdings` to `market_facts.py`; a `HOLDINGS NOT CURRENT` freshness-metadata warning is not a run blocker. Record the warning and assumption in the manifest and disclose them in the report. This does not waive input readability/schema checks or the market-price ledger freshness requirements above.
 - Every web-sourced value needs `source_url`, `as_of` (the date the value describes), and `retrieved_at` (ISO 8601 time of retrieval). A value whose `as_of` is not the session date must be labeled as prior-session in the report.
 - Never fall back to "latest file" lookup. Every file path is explicit.
 - Never use the system date as a stand-in for the session date. Use the latest completed, data-verified market session (ET for US, IST for India), even when it is earlier than the run date.
