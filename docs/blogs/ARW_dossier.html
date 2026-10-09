@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrow Electronics, Inc. (ARW): the company, the numbers, the price, and the decision</title>
+<style>
+:root {
+  /* Neutral base, taken from the Wikipedia desktop palette */
+  --ink:          #202122;  /* body text: 16.1:1 on white */
+  --ink-strong:   #111827;  /* headings: 18.7:1 on white */
+  --muted:        #54595d;  /* captions, sources, secondary text: 7.1:1 on white */
+  --rule:         #a2a9b1;  /* table borders, dividers */
+  --rule-soft:    #d1d5db;  /* card borders, dashed bridges */
+  --surface:      #ffffff;  /* page background */
+  --surface-alt:  #f8f9fa;  /* table header rows, howto blocks */
+  --link:         #0645ad;  /* links: 8.5:1 on white */
+  --link-visited: #0b0080;
+
+  /* Verdict and status colours. Each has a text colour and a tint, both AA on each other. */
+  --keep-ink:        #14532d;  /* 8.3:1 on --keep-tint */
+  --keep-tint:       #dcfce7;
+  --accumulate-ink:  #1e3a8a;  /* 8.5:1 on --accumulate-tint */
+  --accumulate-tint: #dbeafe;
+  --trim-ink:        #78350f;  /* 8.2:1 on --trim-tint */
+  --trim-tint:       #fef3c7;
+  --exit-ink:        #7f1d1d;  /* 8.2:1 on --exit-tint */
+  --exit-tint:       #fee2e2;
+  --watch-ink:       #374151;  /* 9.4:1 on --watch-tint */
+  --watch-tint:      #f3f4f6;
+
+  /* Callout blocks */
+  --primer-accent:   #0645ad;  --primer-tint:   #eaf3ff;
+  --howto-accent:    #54595d;  --howto-tint:    #f8f9fa;
+  --case-accent:     #1e3a8a;  --case-tint:     #ffffff;
+  --trigger-accent:  #92400e;  --trigger-tint:  #fef3c7;
+  --example-accent:  #166534;  --example-tint:  #f0fdf4;
+  --takeaway-accent: #1e3a8a;  --takeaway-tint: #eff6ff;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+</style>
+</head>
+<body>
+<main class="report">
+<h1>Arrow Electronics, Inc. (ARW) — the book report, as of 8 October 2026</h1>
+<p class="sitesub">NYSE: ARW · United States · Technology distribution and value-added services · verified market ledger session: 2026-10-08</p>
+<dl class="key-figures">
+<div><dt>Exchange</dt><dd>NYSE</dd></div><div><dt>Price</dt><dd>$226.75</dd></div><div><dt>As-of session</dt><dd>2026-10-08</dd></div><div><dt>Strategy bucket</dt><dd>CORE_ALPHA</dd></div>
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span></dd></div><div><dt>Asymmetry</dt><dd>N/A</dd></div><div><dt>Stage</dt><dd>Stage 2</dd></div><div><dt>Support distance</dt><dd>1.22 ATR</dd></div>
+</dl>
+<section class="primer" id="primer"><h2>Before you read</h2>
+<p>Arrow Electronics distributes electronic components and enterprise computing products to manufacturers and technology customers. The verified market ledger places ARW in Stage 2 markup at $226.75, above its 50-day average of $217.42 and 200-day average of $182.64, but 1.22 ATR above the nearest 50-day support anchor.<sup><a href="#cite_note-1">[1]</a></sup> This report therefore rejects a shortlist entry today: the support-distance rule is missed, and the available run evidence does not include a fresh, source-fetched financial record for ROIC, free-cash-flow margin, net debt or dilution. The decision changes only after a fresh filing record verifies the financial floors and price returns inside the permitted support band.</p></section>
+<section class="chapter" id="ch-1"><h2>What the company does</h2>
+<p>Arrow is a business-to-business distributor. It buys components and computing products from manufacturers, holds inventory, and sells them to equipment makers, contract manufacturers, and commercial technology customers. Its economic job is coordination: customers use Arrow's catalogue, logistics, engineering help, credit terms, and supply-chain reach instead of negotiating separately with every component maker.<sup><a href="#cite_note-2">[2]</a></sup> The company reports two broad operating activities, electronic components and enterprise computing solutions, but the precise segment mix for the current underwriting date is not available in the verified run cache.</p>
+<p>Distribution is a volume and working-capital business. Revenue can be large while the margin on each dollar is modest, so turns in inventory, receivables collection, supplier terms, and operating expense discipline matter. A distributor can grow sales and still destroy cash if it buys too much stock before demand arrives. That is why the financial test here requires current cash-flow and net-debt evidence, not a sales headline.</p>
+<p>Customers pay for availability and execution as well as the physical product. Arrow's value-added services can include design assistance, configuration, software and cloud procurement, and lifecycle support; the available evidence set does not verify a current percentage split between distribution margin and services margin.<sup><a href="#cite_note-3">[3]</a></sup> The missing split matters because recurring or service-like revenue usually behaves differently from spot component demand.</p>
+<p>Component distribution is cyclical. Customer orders, semiconductor inventories, product launches, industrial production, and data-centre spending can all change the order rate before the distributor's reported income statement catches up. A strong quarter can therefore contain inventory replenishment, while a weak quarter can reflect a correction rather than permanent franchise damage. The report does not infer a cycle position without a cited filing.</p>
+<h3>Glossary</h3><p><dfn>Working capital</dfn> means cash tied up in inventory and unpaid customer invoices, less supplier credit. <dfn>Gross margin</dfn> is the share of sales left after the direct cost of products. <dfn>ROIC</dfn>, or return on invested capital, asks how much operating profit the business earns for the money invested in it. <dfn>Free cash flow</dfn> is cash left after operating needs and capital spending. <dfn>Book-to-bill</dfn> compares new orders with the revenue billed in a period. <dfn>Relative strength index (RSI)</dfn> is a bounded momentum gauge; a reading near 50 means neither unusually strong nor unusually weak price movement.</p></section>
+<section class="chapter" id="ch-2"><h2>Why the business is strong or weak</h2>
+<p>Arrow's potential strength is its network. A broad catalogue, supplier relationships, logistics capability and technical support can reduce the friction of buying many parts from many manufacturers. Those are useful capabilities, but they are not automatically a moat: a distributor must earn an adequate return after inventory, credit losses, freight, and the cost of capital. The current evidence package does not verify the return earned by each operating segment.</p>
+<p>The first Layer 2 KPI is gross margin because distribution economics are sensitive to mix and pricing. <strong>WATCH — not verified.</strong> The second is inventory turns or inventory weeks because excess stock can consume cash and lead to write-downs. <strong>WATCH — not verified.</strong> The third is book-to-bill or order backlog because it tests whether future shipments are supported by demand. <strong>WATCH — not published in the available run record.</strong> The fourth is operating margin because small changes in selling and administrative costs can matter when gross margin is narrow. <strong>WATCH — not verified.</strong> A minimum three-of-four KPI pass cannot be awarded.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>KPI</th><th>Why it matters</th><th>Score</th><th>Evidence state</th></tr><tr><td>Gross margin</td><td>Shows product mix and pricing after product cost</td><td>WATCH</td><td>Not verified in run cache</td></tr><tr><td>Inventory turns</td><td>Tests whether stock is moving without cash stress</td><td>WATCH</td><td>Not verified in run cache</td></tr><tr><td>Book-to-bill / backlog</td><td>Tests demand visibility</td><td>WATCH</td><td>Not published in available record</td></tr><tr><td>Operating margin</td><td>Tests expense discipline</td><td>WATCH</td><td>Not verified in run cache</td></tr></table></div>
+<p>The matrix is deliberately conservative. A WATCH is not a claim that Arrow is weak; it is a statement that this run cannot prove the KPI. The evidence deficit is itself decision-relevant because the hard gate asks for current ROIC, FCF margin, net debt to EBITDA and stock-based compensation dilution. Until those records are fetched and matched to text, the Layer 1 financial gate remains unproven.</p>
+<p>Competitive risk comes from manufacturer direct sales, large cloud and enterprise resellers, price competition, obsolescence, and supplier concentration. Customer design wins can support long relationships, but the available evidence does not verify current customer concentration or supplier concentration. A future report should test both against the latest 10-K risk factors and segment note.</p></section>
+<section class="chapter" id="ch-3"><h2>The numbers, in plain words</h2>
+<p>The five-year financial table is intentionally marked N/A rather than filled with an estimate. The run contains a verified market-price ledger, not a source-fetched Arrow 10-K or 10-Q record. The zero-placeholder rule means a missing figure is stated as not available, because substituting a remembered or aggregator number would make the report look more precise than the evidence permits.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Fiscal measure</th><th>FY-2021</th><th>FY-2022</th><th>FY-2023</th><th>FY-2024</th><th>FY-2025</th><th>Status</th></tr><tr><td>Revenue ($m)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Not verified</td></tr><tr><td>Net income ($m)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Not verified</td></tr><tr><td>Operating cash flow ($m)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Not verified</td></tr><tr><td>Free cash flow ($m)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Not verified</td></tr><tr><td>Total debt ($m)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Not verified</td></tr></table></div>
+<p>What the table means: no fundamental trend is admitted into the decision. What it does not show: it does not say that revenue, profit, cash flow or debt are poor; it says the current evidence path is incomplete. The next analyst pass must use the latest SEC 10-K and 10-Q, quote the relevant rows, fetch each URL into the execution cache, and record one research item per metric before writing a number.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Verified market metric</th><th>Value</th><th>Interpretation</th></tr><tr><td>Close</td><td>$226.75</td><td>Latest completed session, 2026-10-08</td></tr><tr><td>20-day average</td><td>$226.47</td><td>Price is close to short-term mean</td></tr><tr><td>50-day average</td><td>$217.42</td><td>Price is above medium trend</td></tr><tr><td>200-day average</td><td>$182.64</td><td>Price is above long trend</td></tr><tr><td>RSI(14)</td><td>51.62</td><td>Neutral momentum reading</td></tr><tr><td>ATR(14)</td><td>$7.67</td><td>Typical daily movement proxy</td></tr><tr><td>52-week range</td><td>$101.79–$249.43</td><td>Close is 9.09% below high</td></tr></table></div>
+<p>The market table is usable for posture, not for valuation. The price is $9.33 above the 50-day average, or about 1.22 times the $7.67 ATR. The ledger also reports two distribution days in the last 25 sessions and volume at 0.60 times its 20-day average. These figures support a Stage 2 label but do not prove the fundamental gate.</p>
+<h3>Peer matrix</h3><p>Direct peer financial values are not available in the verified ARW run record. The correct comparison set should include electronic-component distributors and enterprise technology distributors, selected by revenue mix and customer exposure rather than by a superficial ticker list. The table records the required comparison fields without fabricating them.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Company</th><th>Business relation</th><th>ROIC</th><th>FCF margin</th><th>Net debt / EBITDA</th><th>Gross margin</th></tr><tr><td>Arrow Electronics (ARW)</td><td>Subject company</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>Avnet (AVT)</td><td>Electronic components distribution</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>WESCO International (WCC)</td><td>Electrical and supply-chain distribution</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr><tr><td>TD SYNNEX (SNX)</td><td>Technology distribution</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr></table></div>
+<p>That peer matrix does not imply the companies are identical. It identifies the operating questions: how much margin remains after product cost, how much cash the model releases, and how much debt sits against earnings. A verified peer comparison could improve or weaken the case, but it cannot be inferred from market price alone.</p></section>
+<section class="chapter" id="ch-4"><h2>What the price is doing</h2>
+<p>The frozen momentum output passes the broad Stage 2 condition: price $226.75 is above the 50-day average $217.42, which is above the 200-day average $182.64, and the 50-day average is rising from $212.91 ten sessions earlier.<sup><a href="#cite_note-4">[4]</a></sup> Relative strength against the benchmark is positive over 63 days at 7.34% and over 28 days at 10.60%.<sup><a href="#cite_note-5">[5]</a></sup> RSI is 51.62, so the stock is not in an overbought condition.</p>
+<p>The support test fails for a new core entry. The ledger's distance from the 50-day support anchor is 1.22 ATR; the scoring ladder permits a standard buy only inside 1.0 ATR and a reduced limit-order band only inside 1.2 ATR.<sup><a href="#cite_note-6">[6]</a></sup> The consequence is WAIT FOR SUPPORT, not a bearish call on the company. A pullback toward roughly $217.42, or a fresh base that creates a closer verified pivot, would improve posture. A close below the relevant swing low or a Stage 4 transition would reject the technical thesis.</p>
+<p>Volume is 0.60 times the 20-day average, and the 52-week high is $249.43. The combination says the trend is intact but the current price is not offering the rule-defined entry location. The report weights the explicit support ladder over an attractive chart label because the ladder controls capital deployment.</p></section>
+<section class="chapter" id="ch-5"><h2>What could happen next</h2>
+<p>The scenarios below are conditional, not forecasts. The current report has no verified forward earnings or cash-flow inputs, so valuation targets are N/A and the expected value is not calculated. That is a deliberate refusal to manufacture asymmetry.</p>
+<section class="estimate"><h3>Scenario probability and entry posture</h3><h4>The number</h4><p>Base, bull and bear target prices are N/A until a source-fetched filing supplies verified earnings or cash-flow inputs.</p><h4>How it was calculated</h4><p>No calculation is admissible. The prescribed target requires forward EPS times a verified median P/E, a DCF, or a measured move anchored to a verified base.</p><h4>The inputs</h4><p>Verified inputs are the $226.75 close, $217.42 50-day average, $182.64 200-day average and $7.67 ATR.<sup><a href="#cite_note-7">[7]</a></sup> Forward EPS, peer multiple and debt are not in the available research record.</p><h4>The range</h4><p>Bull and bear dollar targets are N/A. The observable range is the 52-week high of $249.43 and low of $101.79, which describes history rather than a target.</p><h4>If the number is off</h4><p>There is no numeric target to be wrong. The decision remains rejected until the missing evidence is obtained; a later verified target with at least 3.0:1 core asymmetry could change the verdict.</p></section>
+<p><strong>Bull case:</strong> electronic-component demand improves, inventory normalizes, and enterprise technology spending supports volume. The driver is operating leverage, but the dollar outcome and probability are N/A because the current cache lacks verified revenue, margin, debt and EPS inputs.</p>
+<p><strong>Base case:</strong> the Stage 2 trend consolidates while the distributor works through an ordinary demand cycle. The driver is stable customer demand and disciplined inventory. Price outcome and probability are N/A without a valuation anchor.</p>
+<p><strong>Bear case:</strong> a technology spending pause, inventory correction, supplier pressure, or higher financing cost reduces earnings and cash conversion. The driver is working-capital stress. The report cannot quantify the effect without current balance-sheet and cash-flow records.</p></section>
+<section class="chapter" id="ch-6"><h2>Why these estimates might be wrong</h2>
+<p>The weakest assumption is not a growth rate; it is the assumption that a market trend can stand in for a verified financial underwriting record. Distribution businesses can look technically strong while inventory, receivables or debt worsen. The evidence that would disprove a benign view is a filing showing falling gross margin, rising inventory days, weak operating cash flow, or net debt above the core threshold.</p>
+<p>The next evidence checkpoint is the next SEC filing and the company's next earnings release. The reviewer should record the filing date, quote the consolidated statements and segment note, and match every figure to a fetched page. If those records show ROIC below 12%, FCF margin below 12%, net debt-to-EBITDA at or above 3.0x, or SBC dilution at or above 5.0% of revenue, the Layer 1 financial gate remains failed.</p>
+<p>Technical estimates can also be wrong. The 50-day average can flatten, the stock can close below support, or a high-volume sell-off can convert Stage 2 into Stage 3 or Stage 4. The market ledger should be rebuilt on the next completed exchange session rather than used as a substitute. A verified price close inside the support ladder is necessary but not sufficient: the financial and KPI gates still have to pass.</p></section>
+<section class="chapter" id="ch-7"><h2>What we would do, and when</h2>
+<p>Action verdict: <span class="verdict verdict-exit">REJECTED</span>. The rule is deterministic for a pipeline challenger: a Layer 1 gate failure or an unverified hard gate rejects the candidate, and the current support distance of 1.22 ATR is outside the permitted 1.2 ATR reduced-entry band. The posture is WAIT FOR SUPPORT, with no allocation.</p>
+<p>Entry zone: not active today. A technically acceptable review zone would begin near the verified 50-day average of $217.42, but the final entry must use a newly verified support anchor and a fresh ledger. Stop: N/A until a valid swing low and core stop formula can be calculated from current data. Targets: N/A until forward EPS, DCF or measured-move inputs are verified.</p>
+<p class="trigger">The decision changes to a reviewable ACCUMULATE_ON_DIP only if ARW closes inside the support ladder, the latest filing verifies ROIC of at least 12%, FCF margin of at least 12%, net debt-to-EBITDA below 3.0x and SBC dilution below 5.0% of revenue, and at least three of four operating KPIs pass. A close below the verified swing low or a Stage 4 breakdown keeps the verdict REJECTED.</p>
+<p>Position sizing is therefore 0%. If all gates later pass and asymmetry is at least 3.0:1, the core tier table would determine size, subject to the 15% hard single-name cap. The current report does not allocate capital because missing evidence and distance from support are both actionable failures.</p></section>
+<section id="notes"><h2>Notes and sources</h2><p>Sources 1–8 are the verified run ledger and methodology/configuration records used for the decision. Sources 9–30 are canonical filing and investor-relations destinations identified for the next evidence pass; no un-fetched value from them is used in this report.</p><ol class="sources">
+<li id="cite_note-1">Verified facts ledger, ARW row, 2026-10-08. <a aria-disabled="true">run cache facts_US_2026-10-08.json</a></li><li id="cite_note-2">Run fact pack, ARW role and as-of bar. <a aria-disabled="true">run cache factpack_US_2026-10-08.json</a></li><li id="cite_note-3">US scoring configuration, support ladder. <a aria-disabled="true">/.agents/config/scoring.json</a></li><li id="cite_note-4">US scoring configuration, momentum gate. <a aria-disabled="true">/.agents/config/scoring.json</a></li><li id="cite_note-5">Verified ARW relative strength fields. <a aria-disabled="true">run cache facts_US_2026-10-08.json</a></li><li id="cite_note-6">Verified ARW ATR and support distance. <a aria-disabled="true">run cache facts_US_2026-10-08.json</a></li><li id="cite_note-7">Verified ARW price and moving averages. <a aria-disabled="true">run cache facts_US_2026-10-08.json</a></li><li id="cite_note-8">Run manifest and market date. <a aria-disabled="true">run manifest.json</a></li><li id="cite_note-9">Arrow Electronics SEC filings search. <a href="https://www.sec.gov/edgar/browse/?CIK=7536">https://www.sec.gov/edgar/browse/?CIK=7536</a></li><li id="cite_note-10">Arrow Electronics investor relations. <a href="https://investor.arrow.com/">https://investor.arrow.com/</a></li><li id="cite_note-11">Arrow Electronics annual reports. <a href="https://investor.arrow.com/financial-information/annual-reports">https://investor.arrow.com/financial-information/annual-reports</a></li><li id="cite_note-12">Arrow Electronics quarterly results. <a href="https://investor.arrow.com/financial-information/quarterly-results">https://investor.arrow.com/financial-information/quarterly-results</a></li><li id="cite_note-13">Arrow Electronics SEC 10-K filing index. <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0000075366&amp;type=10-K">https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000075366&type=10-K</a></li><li id="cite_note-14">Arrow Electronics SEC 10-Q filing index. <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0000075366&amp;type=10-Q">https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000075366&type=10-Q</a></li><li id="cite_note-15">Arrow company overview. <a href="https://www.arrow.com/">https://www.arrow.com/</a></li><li id="cite_note-16">NYSE ARW quote page. <a href="https://www.nyse.com/quote/XNYS:ARW">https://www.nyse.com/quote/XNYS:ARW</a></li><li id="cite_note-17">Avnet annual reports. <a href="https://ir.avnet.com/financial-information/annual-reports">https://ir.avnet.com/financial-information/annual-reports</a></li><li id="cite_note-18">Avnet SEC filings. <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0000008858&amp;type=10-K">https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000008858&type=10-K</a></li><li id="cite_note-19">WESCO annual reports. <a href="https://investors.wesco.com/financial-information/annual-reports">https://investors.wesco.com/financial-information/annual-reports</a></li><li id="cite_note-20">WESCO SEC filings. <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0000929008&amp;type=10-K">https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000929008&type=10-K</a></li><li id="cite_note-21">TD SYNNEX annual reports. <a href="https://ir.tdsynnex.com/financial-information/annual-reports">https://ir.tdsynnex.com/financial-information/annual-reports</a></li><li id="cite_note-22">TD SYNNEX SEC filings. <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0001645590&amp;type=10-K">https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001645590&type=10-K</a></li><li id="cite_note-23">SEC company facts API destination. <a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0000075366.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0000075366.json</a></li><li id="cite_note-24">SEC filing search home. <a href="https://www.sec.gov/edgar/search/">https://www.sec.gov/edgar/search/</a></li><li id="cite_note-25">Arrow governance filings. <a href="https://investor.arrow.com/governance/">https://investor.arrow.com/governance/</a></li><li id="cite_note-26">Arrow earnings releases. <a href="https://investor.arrow.com/news-releases">https://investor.arrow.com/news-releases</a></li><li id="cite_note-27">Arrow presentations. <a href="https://investor.arrow.com/events-and-presentations">https://investor.arrow.com/events-and-presentations</a></li><li id="cite_note-28">Arrow risk factors source family. <a href="https://www.sec.gov/edgar/browse/?CIK=7536&amp;owner=exclude">https://www.sec.gov/edgar/browse/?CIK=7536&owner=exclude</a></li><li id="cite_note-29">NYSE listing standards. <a href="https://www.nyse.com/regulation/nyse-listed-company-manual">https://www.nyse.com/regulation/nyse-listed-company-manual</a></li><li id="cite_note-30">US GAAP taxonomy reference. <a href="https://www.sec.gov/oca/">https://www.sec.gov/oca/</a></li><li id="cite_note-31">S&P 500 benchmark methodology destination. <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/">https://www.spglobal.com/spdji/en/indices/equity/sp-500/</a></li></ol></section></main></body>
+</html>
