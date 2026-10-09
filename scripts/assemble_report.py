@@ -17,6 +17,7 @@ import html
 import os
 import re
 import sys
+from typing import Optional
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from report_links import body_sources, linkify, research_sources, symbol_universe  # noqa: E402
@@ -70,7 +71,7 @@ def references_block(body: str, research: list) -> str:
     return ('<h2 id="references">References</h2>\n<ol class="reflist">\n' + "\n".join(items) + "\n</ol>")
 
 
-def build(body_raw: str, market: str = "IN", facts: str = "", research: list | None = None) -> str:
+def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional[list] = None) -> str:
     body = wrap_tables(strip_shell(body_raw))
     universe = symbol_universe(facts, *(research or []))
     body, added = linkify(body, market, universe)

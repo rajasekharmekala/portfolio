@@ -34,8 +34,8 @@ GMAIL_RECIPIENT=where-reports-are-sent@example.com
 Check that the setup works:
 
 ```bash
-python3 scripts/data_layer.py --market US --validate
-python3 scripts/data_layer.py --market IN --validate
+.venv/bin/python scripts/data_layer.py --market US --validate
+.venv/bin/python scripts/data_layer.py --market IN --validate
 ```
 
 Both should print `RESULT: PASS`.
@@ -109,7 +109,7 @@ When you trade:
    - `fee`: a charge that isn't part of a trade. `symbol` may be `null`.
 
 2. If the symbol is new, add it to `data/metadata/symbols.json` under its market, with its company name and strategy bucket.
-3. Validate: `python3 scripts/data_layer.py --market US --validate`
+3. Validate: `.venv/bin/python scripts/data_layer.py --market US --validate`
 4. Commit the change.
 
 The full format is in `.agents/skills/_shared/DATA_LAYER.md`. The update routine is in `.agents/skills/_shared/HOLDINGS_UPDATE.md`.
@@ -132,28 +132,28 @@ The workflow sets the steps. The rules it refers to are in `_COMMON.md`. Every r
 2. **Run directory.** Each run creates a private temporary directory. Nothing from an earlier run is read. Cleanup happens at the end.
 3. **Input check.**
    ```bash
-   python3 scripts/market_facts.py --market US --check-inputs --run-dir "$RUN_DIR"
+   .venv/bin/python scripts/market_facts.py --market US --check-inputs --run-dir "$RUN_DIR"
    ```
 4. **Facts ledger.** This is the only source for prices, averages, RSI, ATR and stages.
    ```bash
-   python3 scripts/market_facts.py --market US --date 2026-10-08 --screen sp1500 --run-dir "$RUN_DIR"
+   .venv/bin/python scripts/market_facts.py --market US --date 2026-10-08 --screen sp1500 --run-dir "$RUN_DIR"
    ```
    For IN, use `--market IN --screen nifty500`. If the output says `STALE DATA` or `HOLDINGS NOT CURRENT`, stop. Don't rename or copy an old ledger. Re-run once the source has updated. You can override a stale holding with `--allow-stale-holdings`, but the report must say why.
 5. **Research.** Facts the ledger can't provide (flows, option walls, insider buying, company catalysts) come from web research through the `duck-duck-go` tools. Each result is recorded with its source URL and as-of date.
 6. **Writing.** Reports are drafted section by section from the fact pack (`factpack_<MKT>_<date>.json`). Each section agent sees only the names it needs. The voice and layout rules are in `.agents/skills/_shared/REPORT_VOICE.md`, `REPORT_PALETTE.md` and `REPORT_EDITORIAL_STANDARD.md`.
 7. **Partial check.** After each section:
    ```bash
-   python3 scripts/validate_report.py --report "$RUN_DIR/work/sections/<id>.html" --kind market_intel --facts "$RUN_DIR/cache/facts_US_2026-10-08.json" --partial
+   .venv/bin/python scripts/validate_report.py --report "$RUN_DIR/work/sections/<id>.html" --kind market_intel --facts "$RUN_DIR/cache/facts_US_2026-10-08.json" --partial
    ```
 8. **Full gate.** After assembling `report.html`:
    ```bash
-   python3 scripts/validate_report.py --report "$RUN_DIR/report.html" --kind market_intel --facts "$RUN_DIR/cache/facts_US_2026-10-08.json"
+   .venv/bin/python scripts/validate_report.py --report "$RUN_DIR/report.html" --kind market_intel --facts "$RUN_DIR/cache/facts_US_2026-10-08.json"
    ```
    Use `--kind portfolio_audit` for audits and option reviews. The result must be `RESULT: PASS`. Don't lower a threshold to pass a report.
 9. **Reviewer gate.** An independent agent reviews the report for source support, consistency and plain language. The reviewer's model is set in `.agents/config/reviewer.json`. A report can only be delivered with `APPROVE` from the reviewer and `RESULT: PASS` from the validator. At most two review rounds. If the report still isn't approved, nothing is delivered, and the run directory is kept for inspection.
 10. **Delivery.**
     ```bash
-    python3 scripts/send_email.py --report "googledrive/newsletters/US_Market_Intelligence_2026-10-08.html" --subject "Daily US Market Pulse | 2026-10-08 | S&P Uptrend"
+    .venv/bin/python scripts/send_email.py --report "googledrive/newsletters/US_Market_Intelligence_2026-10-08.html" --subject "Daily US Market Pulse | 2026-10-08 | S&P Uptrend"
     ```
     The recipient comes from `GMAIL_RECIPIENT`. The filename and subject for each market and report type are in `.agents/config/markets.json`.
 11. **Publish (optional).** Copy the approved report into `docs/reports/` and regenerate `docs/index.html`. Then commit it yourself.
@@ -203,7 +203,7 @@ The `docs/` folder is the only folder GitHub Pages serves.
 ## 7. Viewing locally
 
 ```bash
-python3 scripts/serve_blogs.py
+.venv/bin/python scripts/serve_blogs.py
 ```
 
 Then open `http://localhost:9050/`. It serves the reports and dossiers from `googledrive/`.
