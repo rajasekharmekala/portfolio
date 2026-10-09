@@ -94,6 +94,10 @@ each name's gate verdict so the user can see both.
 Footer: stored-input path, `--verify` instruction, and the reminder that the
 user decides and logs the outcome in `data/decisions/`.
 
+## Email Alerts
+
+Follow `_COMMON.md` delivery policy. Send no routine or failed-gate displacement emails. A notification qualifies only when a shortlisted candidate newly passes all deterministic displacement gates against an actual current holding, compared with the frozen prior eligibility state. Record the candidate, holding, gate verdicts and changed eligibility in the manifest. This alerts eligibility, not an executed trade. Publish a complete HTML report under `docs/` and push successfully before email; a Markdown-only memo is not the HTML email source. Send a short digest with `.venv/bin/python scripts/send_email.py --html-file "<published HTML report>" --subject "Holding displacement eligible" --report-type displacement --displacement "CANDIDATE replaces HOLDING: passed gates and reason" --summary "<decision overview>" --highlight "<key risk or cost>"`. Preserve the deterministic memo and verification requirements above; do not label a tentative or unchanged replacement newly eligible.
+
 ## Run
 
 ```bash

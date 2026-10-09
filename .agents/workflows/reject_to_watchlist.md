@@ -31,3 +31,7 @@ Write the review in sections (`skills/_shared/SECTION_DRAFTING.md`). The report 
 ## 6. Workbook updates
 
 Move the names that pass to the watchlist, and leave the rest in the archive. Use header names only.
+
+## Email Delivery Policy
+
+Do not email routine archive resurrection reports or archive-to-watchlist promotions. Always publish the validated report and refresh the homepage catalog as `_COMMON.md` requires. Send only if this run also completes full underwriting and a company newly qualifies for the shortlist, or a shortlisted candidate newly passes all displacement gates against an actual current holding. Compare against the frozen starting state and retain evidence in the manifest; unchanged eligibility is not a new alert. After successful publication, use `--report-type archive` with verified `--shortlisted SYMBOL` or `--displacement "CANDIDATE replaces HOLDING: gate evidence"` flags, a short summary and highlights. Never email the full report. Without qualifying events, record email as intentionally skipped and complete normal publication/cleanup.

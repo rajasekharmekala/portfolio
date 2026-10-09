@@ -44,16 +44,25 @@ Use the `duck-duck-go` MCP server (`search` and `fetch_content`), as the market 
 
 ## Delivery
 
-Only after the validator shows `RESULT: PASS` and either the reviewer returns APPROVE within four rounds or the writer records `BEST_EFFORT_AFTER_REVIEW_LIMIT` following the round-4 procedure:
+Only after `RESULT: PASS` and reviewer APPROVE or recorded `BEST_EFFORT_AFTER_REVIEW_LIMIT`:
 
-1. Save the final report to the path named in `markets.json` under `output` (e.g. `docs/reports/`), replacing and removing any superseded report for the same market and report type (historical versions remain in git history).
-2. Send the email with `.venv/bin/python scripts/send_email.py --html-file "<report path>" --subject "<email_subject from markets.json, filled in>"`. The recipient is read from `.env`.
-3. Run `.venv/bin/python scripts/build_dossier_portal.py` to update `docs/index.html` and `docs/blogs/index.html` with links to the latest reports.
-4. Verify that each index link resolves to an existing report and that published HTML uses relative links only.
-5. Automatically commit and push the publication to the configured `origin` branch. Do not ask the user to commit, push, or approve publication. Stage only this run's report additions/deletions, generated indexes, and skill/workflow/config changes made for this run; leave unrelated working-tree changes unstaged. Never force-push. If a push is rejected, fetch and integrate safely and retry once; if that still fails, report the blocker and keep the local commit.
-6. Record the commit hash and push result in `manifest.json`. Delivery is incomplete until the push succeeds.
+1. Save the final report under the published `docs/` output path and remove superseded reports for the same market/type. Continue publishing every report, even when email is skipped.
+2. Record completion and refresh the catalog with `.venv/bin/python scripts/build_dossier_portal.py --completed "<published HTML path>" --workflow "<stable workflow name>" --market "<IN or US>" --summary "<one-sentence decision overview>" --highlight "<key change or risk>" --repair-links`. Include updated dossiers as separate `--completed` arguments. Never mark failed runs completed.
+3. Verify published destinations and stage only this run's reports, deletions, public catalog JSON files and relevant workflow changes. Never stage unrelated work or private research records.
+4. Commit and push publication to the configured origin branch, without force-pushing or asking for per-run approval. If rejected, fetch/integrate safely and retry once. Record the commit and push result in the manifest. Do not email links when publication fails.
+5. After successful publication, apply the email policy below. All emails are short digests: one decision summary, up to five highlights, qualifying events when present, and an absolute GitHub Pages link to the full report. Never email the complete HTML report.
+6. Send with `.venv/bin/python scripts/send_email.py --html-file "<published HTML path>" --subject "<configured subject>" --report-type "<type>" --summary "<decision overview>" --highlight "<key change>"`, adding event flags only when verified. Repeat `--highlight`, `--shortlisted`, and `--displacement` as needed. Record sent/skipped/failed status and qualifying evidence in the manifest. An email failure must retain the run for retry; an intentional skip is successful delivery.
 
-Publication to this repository's GitHub Pages, including portfolio holdings, is pre-authorized by the user and mandatory after the gates above. Do not add per-run approval prompts.
+### Email Policy
+
+- `market-intelligence` and `portfolio-audit`: always send a summary email after successful publication.
+- `watchlist`, `archive`, and `displacement`: no routine emails. Send only when a company newly becomes eligible for the shortlist (`--shortlisted SYMBOL`) or a shortlisted candidate newly becomes eligible to replace an actual current holding (`--displacement "CANDIDATE replaces HOLDING: passed gate and reason"`).
+- Compare validated results with the frozen starting state. Already-shortlisted companies, unchanged previously eligible replacements, archive-to-watchlist promotions, tentative ideas and failed gates do not qualify. Do not fabricate events to bypass the sender. Displacement must pass the deterministic displacement gates, including bucket, transaction costs, return hurdle and portfolio caps; this is an eligibility alert, not an executed trade.
+- Archive resurrection alone remains silent. If that workflow also completes full shortlist underwriting and newly qualifies a company, send the shortlist event; otherwise only publish the report.
+- Preserve existing email eligibility for other report types, but send only a digest and the published report link.
+- Use `--dry-run` to preview the policy/digest without accessing credentials or sending mail. The sender centrally skips conditional types without qualifying event flags.
+
+Publication, including portfolio holdings, remains pre-authorized after the validation gates.
 
 ## Cleanup
 

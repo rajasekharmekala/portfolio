@@ -15,6 +15,8 @@ import argparse
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from portal_publish import rewrite_published_links
+from email_digest import TYPES, report_type, should_email, build_digest
 
 def load_env(env_path='.env'):
     """Load key-value pairs from .env into os.environ if present."""
@@ -36,8 +38,17 @@ def load_env(env_path='.env'):
                 if k and k not in os.environ:
                     os.environ[k] = v
 
-def send_email_html(subject, html_content, recipient=None, text_fallback=None):
-    """Send an HTML email via smtp.gmail.com:587 using GMAIL_USER and GMAIL_APP_PASSWORD."""
+def send_email_html(subject, html_content, recipient=None, text_fallback=None, *, source_path=None, kind=None, summary=None, highlights=(), shortlisted=(), displacements=(), dry_run=False):
+    """Send a short published-report digest, subject to the report/event policy."""
+    kind = kind or report_type(subject, source_path)
+    if not should_email(kind, shortlisted, displacements):
+        print(f"EMAIL SKIPPED: {kind}; no new shortlist qualification or eligible holding displacement.")
+        return False
+    html_content, text_fallback = build_digest(subject, html_content, source_path, summary, highlights, shortlisted, displacements)
+    if dry_run:
+        print(f"EMAIL WOULD SEND: {kind}\n{text_fallback}")
+        return True
+    html_content = rewrite_published_links(html_content)
     load_env()
 
     gmail_user = os.getenv('GMAIL_USER') or os.getenv('GMAIL_ADDRESS') or os.getenv('EMAIL_USER')
@@ -93,6 +104,12 @@ def main():
     parser.add_argument('--subject', required=True, help="Email Subject line")
     parser.add_argument('--html-file', required=True, help="Path to HTML newsletter/report file")
     parser.add_argument('--recipient', default=None, help="Recipient email address (defaults to .env or rajasekharreddymekala732@gmail.com)")
+    parser.add_argument('--report-type', choices=TYPES, default=None)
+    parser.add_argument('--summary', help='One-sentence decision overview')
+    parser.add_argument('--highlight', action='append', default=[], help='Repeat for decision-relevant highlights')
+    parser.add_argument('--shortlisted', action='append', default=[], help='Repeat for each company newly eligible for the shortlist')
+    parser.add_argument('--displacement', action='append', default=[], help='Repeat for each eligible candidate-to-holding replacement')
+    parser.add_argument('--dry-run', action='store_true', help='Show delivery decision and digest without sending')
     
     args = parser.parse_args()
 
@@ -101,10 +118,12 @@ def main():
         sys.exit(1)
 
     with open(args.html_file, 'r', encoding='utf-8') as f:
-        html_content = f.read()
+        html_content = rewrite_published_links(f.read(), args.html_file)
 
     try:
-        send_email_html(args.subject, html_content, recipient=args.recipient)
+        send_email_html(args.subject, html_content, recipient=args.recipient, source_path=args.html_file,
+                        kind=args.report_type, summary=args.summary, highlights=args.highlight,
+                        shortlisted=args.shortlisted, displacements=args.displacement, dry_run=args.dry_run)
     except Exception as e:
         print(f"❌ Failed to send email: {e}", file=sys.stderr)
         sys.exit(1)
