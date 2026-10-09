@@ -31,8 +31,8 @@ Holdings are replayed with the average-cost method. A position whose cost is unk
 - Column names in older text map to JSON keys: lowercase the name and replace spaces and punctuation with underscores. For example, "Action Verdict" is `action_verdict`, "Deep Research Status" is `deep_research_stat`, and "Strategy Bucket" is `strategy_bucket`.
 - The watchlist file has two arrays: `active` (names being researched or held as candidates) and `archive` (rejected names). Moving a name between them means moving the whole record.
 - The shortlist file has one array per former sheet under `sheets`. The workflows read `sheets.Master_Shortlist` unless the skill says otherwise.
-- After any edit, run `python3 scripts/data_layer.py --market <MKT> --validate`. It must print `RESULT: PASS` before the run continues.
+- After any edit, run `.venv/bin/python scripts/data_layer.py --market <MKT> --validate`. It must print `RESULT: PASS` before the run continues.
 
 ## Where the workflows read from
 
-The ledger reads all of these in one step, and the manifest records the hash of every file it read. Checks: `python3 scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"`.
+The ledger reads all of these in one step, and the manifest records the hash of every file it read. Checks: `.venv/bin/python scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"`.

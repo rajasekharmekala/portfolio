@@ -12,7 +12,7 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
 ## 1. Mandatory pipeline order
 
 1. **Build the facts ledger** (one per market per session, shared by the market report and the audit):
-   `python3 scripts/market_facts.py --market <MKT> --date <YYYY-MM-DD> --screen <sp1500|nifty500>`
+   `.venv/bin/python scripts/market_facts.py --market <MKT> --date <YYYY-MM-DD> --screen <sp1500|nifty500>`
    Resolve the report date as the latest completed market session under `RUN_PROTOCOL.md` §0, not the current calendar date by default. Never rename or copy a ledger to another date; the validator fails a report whose date differs from its ledger's as-of. Build the ledger for the exact session date shown by the report.
    It writes `<RUN_DIR>/cache/facts_<MKT>_<date>.json` with, for every benchmark, sector proxy, holding, shortlist name, watchlist name and universe constituent: close, 1D/1W/2W/1M %, SMA20/50/200, 50-DMA trend, RSI(14), ATR(14), volume multiple, 52-week range, distance to 50-DMA in ATRs, Weinstein stage; plus the regime label, breadth, sector quadrant, US Treasury curve (FRED) and pre-screened candidate lists (`bull`, `bull_near`, `bull_relaxed`, `bear`, `bear_near`, `bear_relaxed`) plus the ready-made **`bull_pick` / `bear_pick`**: 10 names per cap tier (Large/Mid/Small) with company name, sector/industry, close, averages, RSI, volume multiple and a `qualifier` saying how strongly each passes.
    If a ledger for the session already exists, reuse it. Do not re-derive any of these numbers by hand or from memory.
@@ -22,7 +22,7 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
    US: CBOE put/call ratio and SPY/QQQ/IWM option-chain walls, SEC Form 4 cluster buys, 13F notes, earnings calendar.
 4. **Write the Story Brief** (private, 6-8 bullets) before any HTML: regime verdict (verbatim `regime.label`), breadth verdict, the 2-3 leading and lagging sectors, the 3 themes that explain the bull and bear lists, what changed vs the previous report, and the single most important action. Every section must serve this brief.
 5. **Write the sections** from the ledger and the brief only (specialist subagents receive the ledger path and the brief; they must not search for prices independently).
-6. **Validate**: `python3 scripts/validate_report.py --report <file> --kind <market_intel|portfolio_audit> --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json`
+6. **Validate**: `.venv/bin/python scripts/validate_report.py --report <file> --kind <market_intel|portfolio_audit> --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json`
    The report may be saved to docs/ and emailed **only when the result is `PASS`**. On `FAIL`, fix the report and re-run; do not lower thresholds.
 
 ## 2. Data completeness

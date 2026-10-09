@@ -24,7 +24,7 @@ Do not read anything outside these inputs, and do not fetch new market data. If 
 
 ## Review rubric
 
-Score each area as PASS, REVISE, or BLOCK. BLOCK means the report must not be delivered under any circumstances.
+Score each area as PASS, REVISE, or BLOCK. A BLOCK marks a quoted claim or section that must not be carried forward unchanged: the writer must correct it, remove it, or state the evidence gap. The overall review process has a strict cap of four complete rounds; after round 4, the writer applies remaining fixes best-effort, reruns the validator, and discloses any unresolved finding without launching another review.
 
 ### A. Source-based assessment
 - Every number in prose and tables is either in the ledger (same value, same as-of date) or in the research record with a `source_url`, `as_of`, and `retrieved_at`. Flag every number you cannot trace, with its location.

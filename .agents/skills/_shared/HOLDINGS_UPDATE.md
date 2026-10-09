@@ -6,7 +6,7 @@ Holdings are recorded as transactions, one JSON line per trade. The run replays 
 
 1. Append one line to the account's log: `data/accounts/US/schwab.transactions.jsonl`, `data/accounts/US/robinhood.transactions.jsonl`, or `data/accounts/IN/zerodha.transactions.jsonl`. Use the format in `DATA_LAYER.md`. A buy's `amount` is the total cost including fees; a sell's `amount` is the proceeds net of fees.
 2. If the symbol is new, add it to `data/metadata/symbols.json` under its market, with its company name and strategy bucket.
-3. Run `python3 scripts/data_layer.py --market US --validate` (or `IN`). It must print `RESULT: PASS`.
+3. Run `.venv/bin/python scripts/data_layer.py --market US --validate` (or `IN`). It must print `RESULT: PASS`.
 4. Commit the log with the trade. The git history is the audit trail.
 
 ## Positions with unknown cost
@@ -17,9 +17,9 @@ The current US openings for GOOGL, BE, and ANET have no cost, and the Schwab sna
 
 ## Checking
 
-- `python3 scripts/data_layer.py --market <MKT> --positions` prints each account's replayed positions and cash.
-- `python3 scripts/data_layer.py --market <MKT> --view` writes `data/views/holdings_<MKT>.md`, a readable table for GitHub.
-- `python3 scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"` confirms every declared source is readable.
+- `.venv/bin/python scripts/data_layer.py --market <MKT> --positions` prints each account's replayed positions and cash.
+- `.venv/bin/python scripts/data_layer.py --market <MKT> --view` writes `data/views/holdings_<MKT>.md`, a readable table for GitHub.
+- `.venv/bin/python scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"` confirms every declared source is readable.
 
 ## Options
 

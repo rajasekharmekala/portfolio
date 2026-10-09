@@ -30,4 +30,4 @@ Write the report in sections using `skills/_shared/SECTION_DRAFTING.md`. Each po
 
 ## 6. Gate, reviewer, delivery, cleanup
 
-Assemble, run the full validator with `--kind portfolio_audit` (options reports use the audit floors), run the reviewer gate, deliver, and clean up, as in `_COMMON.md`.
+Assemble, run the full validator with `--kind portfolio_audit` (options reports use the audit floors), run up to four reviewer rounds, then follow `_COMMON.md` best-effort finalization if round 4 is not approved. Delivery includes mandatory GitHub Pages publication, index regeneration, and automatic commit and push; then clean up as specified there.

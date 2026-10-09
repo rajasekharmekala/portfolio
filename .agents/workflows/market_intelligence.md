@@ -38,7 +38,7 @@ The writing rules for the skill (`skills[market_intelligence]`) apply to every s
 
 Assemble `<RUN_DIR>/report.html`, then run the full validator:
 
-`python3 scripts/validate_report.py --report "<RUN_DIR>/report.html" --kind market_intel --facts "<RUN_DIR>/cache/facts_<MKT>_<date>.json"`
+`.venv/bin/python scripts/validate_report.py --report "<RUN_DIR>/report.html" --kind market_intel --facts "<RUN_DIR>/cache/facts_<MKT>_<date>.json"`
 
 It must print `RESULT: PASS`.
 
@@ -48,7 +48,7 @@ Update the watchlist JSON record file for this market with the names from the sc
 
 ## 9. Reviewer gate and delivery
 
-Follow `_COMMON.md`. The report file name is `output.market_intelligence` in `markets.json`, filled with the session date.
+Follow `_COMMON.md`, including its strict four-round maximum, best-effort finalization after round 4, and mandatory GitHub Pages publication with automatic commit and push. The report file name is `output.market_intelligence` in `markets.json`, filled with the session date.
 
 ## 10. Cleanup
 

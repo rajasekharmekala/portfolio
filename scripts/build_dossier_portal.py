@@ -7,7 +7,7 @@ import os
 import glob
 import re
 import json
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Comment, NavigableString
 
 def parse_dossier(filepath):
     filename = os.path.basename(filepath)
@@ -627,6 +627,11 @@ def main():
     hub_html = build_reports_hub_html(newsletters_dir, is_root=False)
     hub_soup = BeautifulSoup(hub_html, 'html.parser')
 
+    for marker in soup.find_all(string=lambda value: isinstance(value, Comment) and str(value).strip() == "MASTER INSTITUTIONAL INTELLIGENCE & AUDITS COMMAND DECK"):
+        for sibling in (marker.previous_sibling, marker.next_sibling):
+            if isinstance(sibling, NavigableString) and not str(sibling).strip():
+                sibling.extract()
+        marker.extract()
     existing_hub = soup.find('section', id='intelligenceHub')
     if existing_hub:
         existing_hub.replace_with(hub_soup)
@@ -671,6 +676,11 @@ def main():
 
     r_hub_html = build_reports_hub_html(newsletters_dir, is_root=True)
     r_hub_soup = BeautifulSoup(r_hub_html, 'html.parser')
+    for marker in root_soup.find_all(string=lambda value: isinstance(value, Comment) and str(value).strip() == "MASTER INSTITUTIONAL INTELLIGENCE & AUDITS COMMAND DECK"):
+        for sibling in (marker.previous_sibling, marker.next_sibling):
+            if isinstance(sibling, NavigableString) and not str(sibling).strip():
+                sibling.extract()
+        marker.extract()
     r_existing_hub = root_soup.find('section', id='intelligenceHub')
     if r_existing_hub:
         r_existing_hub.replace_with(r_hub_soup)

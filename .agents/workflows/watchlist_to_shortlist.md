@@ -22,7 +22,7 @@ Build the ledger, as in the market intelligence workflow, so every name has its 
 
 ## 4. Underwrite and write dossiers
 
-Apply the underwriting skill to each name. Each name gets one dossier written in sections (`skills/_shared/SECTION_DRAFTING.md`). The output path for each dossier is `output.watchlist_to_shortlist` in `markets.json`, with `{symbol}` filled in. Each dossier passes the full validator and the reviewer gate before it is accepted.
+Apply the underwriting skill to each name. Each name gets one dossier written in sections (`skills/_shared/SECTION_DRAFTING.md`). The output path for each dossier is `output.watchlist_to_shortlist` in `markets.json`, with `{symbol}` filled in. Each dossier must pass the full validator and complete up to four reviewer rounds. If round 4 is still REVISE or BLOCK, make the remaining evidence-backed fixes best-effort, rerun the validator, and record unresolved findings; do not start a fifth review.
 
 ## 5. Workbook updates
 
@@ -30,4 +30,4 @@ Update the watchlist and shortlist JSON record files with each name's verdict. U
 
 ## 6. Delivery and cleanup
 
-Send one summary email for the batch, with the links to the dossiers. Clean up as in `_COMMON.md`.
+Send one summary email for the batch, with the links to the dossiers. Publish the dossier updates to GitHub Pages and commit and push them automatically after the validation/reviewer gate, as required by `_COMMON.md`. Clean up as specified there.

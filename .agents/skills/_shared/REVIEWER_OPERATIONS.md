@@ -47,14 +47,16 @@ Each pass must return JSON matching the shape in `report_reviewer/SKILL.md`. Che
 
 If the output is malformed, rerun that pass once (`on_malformed_output`). If it is still malformed, treat the pass as REVISE and say so in the report notes. Never treat a malformed pass as APPROVE.
 
-If the reviewer is unavailable (the model is not reachable, or the runner fails), do not deliver. Set the gate to block delivery (`on_unavailable_reviewer`), keep the run directory, and tell the user.
+If a reviewer is unavailable (the model is not reachable, or the runner fails), record the failed pass and continue the remaining configured passes. Do not exceed the four-round cap. At the cap, use best judgment, run the validator, and disclose the unavailable pass in the manifest and delivery note.
 
-## 5. Combining the passes
+## 5. Combining the passes and the strict round cap
 
+- `max_rounds` is a strict hard cap of **4 complete rounds** for every skill and workflow. A round consists of all configured reviewer passes (`source`, `consistency`, and `tone`). Never increase the cap for a run, split a round into extra reviews, or launch a fifth round.
 - The round is APPROVE only when every pass returns APPROVE, or returns NOTE findings only.
-- Any BLOCK from any pass blocks delivery.
-- Otherwise the round is REVISE. Fix every BLOCK and REVISE finding from every pass, re-run the validator until it shows `RESULT: PASS`, and start the next round with all passes again.
-- Stop after `max_rounds`. If still not APPROVE, do not deliver.
+- For findings in rounds 1–3, consolidate and fix every BLOCK and REVISE finding, rerun the validator until it shows `RESULT: PASS`, then begin the next full round.
+- Round 4 is the final independent review. If it returns REVISE or BLOCK findings, apply every fix that can be made from the approved evidence; remove or clearly qualify unsupported claims; rerun the validator and the writer's pre-delivery checklist. Do not launch another reviewer round.
+- After round 4, finish on a best-effort basis when the validator passes. Record `BEST_EFFORT_AFTER_REVIEW_LIMIT` in the manifest, list unresolved findings and any edits made after the final review, and disclose that the report did not receive reviewer APPROVE. Do not describe this state as APPROVE.
+- A BLOCK finding means the quoted claim or section must not be carried forward unchanged. Correct it, omit it, or state the evidence gap. If a reviewer pass is malformed or unavailable after its prescribed handling, record that status; do not exceed the four-round cap. Finish best-effort after the cap with validator PASS and disclose the unavailable/malformed pass.
 
 ## 6. Writer rules
 

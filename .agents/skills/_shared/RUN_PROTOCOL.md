@@ -3,6 +3,12 @@
 This protocol exists because earlier runs leaked state into later ones: prior-day ledgers, prior-day research,
 and hardcoded dates produced reports that looked current but were not. These rules apply to every run.
 
+## 7. Python environment (binding for every script invocation)
+
+- Every Python command in this repository runs through the repository's own virtual environment: use `.venv/bin/python` from the repo root. Never use bare `python3`, `pip`, or a system/conda Python. Any command written as `python3 scripts/...` in a skill or shared document means `.venv/bin/python scripts/...`.
+- If `.venv` is missing (e.g., after a fresh clone), recreate it before any other step: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`, then rerun the command.
+- Do not add packages outside `requirements.txt` silently. If a script needs a new dependency, add it to `requirements.txt` and install it into `.venv`, and tell the user.
+
 ## 0. Report session date (binding for every skill and workflow)
 
 Date every report and its data to the **latest completed market session**, not automatically to the calendar date on which the run starts. Resolve the session separately for the target exchange:
@@ -52,8 +58,10 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 ## 6. Publication (GitHub Pages)
 
 - `docs/` holds only the latest published report for each report type and market, plus the index that links them. Publishing a new report overwrites the old file in `docs/reports/`. History is kept by git commits, not by files in the folder.
-- Publish only a report that has passed both the validator (`RESULT: PASS`) and the reviewer gate (`APPROVE`). Copy the HTML into `docs/reports/` under its report name, and regenerate `docs/index.html` from the files that are present.
-- Publication is committed by the user. The run stages the files and reports the commit command; it does not commit or push.
-- Reports contain personal holdings. Publish only to a private repository, or only after the user has explicitly approved public publication for that repository.
+- Publication to this repository's GitHub Pages is mandatory for every completed report run. Do not ask for separate permission to publish, commit, or push; the user has authorized this repository's reports, including personal holdings, to be published publicly as part of the normal workflow.
+- Publish only after the validator prints `RESULT: PASS` and the reviewer process is complete. Reviewer `APPROVE` is preferred. The strict maximum is four complete review rounds; after round 4, apply all evidence-backed fixes best-effort, rerun the validator, and record any remaining findings and the `BEST_EFFORT_AFTER_REVIEW_LIMIT` status in the manifest. Never launch a fifth round or call best-effort status APPROVE.
+- Copy the final HTML into `docs/reports/` only after this gate. Keep exactly one latest report for each report type and market; remove the superseded page for that same type/market. Regenerate the indexes with `.venv/bin/python scripts/build_dossier_portal.py` and verify the published links are relative and point to existing files.
+- Commit and push the publication automatically. Stage only the report files, superseded report deletion, generated indexes, and skill/workflow/config changes made for this run; never include unrelated working-tree changes. Use a descriptive commit message. Push to the configured `origin` branch. Never force-push. If the push is rejected, fetch and integrate the remote update safely, then retry once; if it still fails or conflicts, leave the local commit intact and report the exact blocker.
+- Record the commit hash and push result in the manifest. The run is complete only after the push succeeds; then remove the run directory as specified above.
 - `docs/` must contain only published reports and their index. Never copy JSON record files, ledgers, research files, fact packs, or `.env` into `docs/`.
 - All links inside published pages must be relative. Do not embed absolute local paths such as `/Users/...` or `file://`.

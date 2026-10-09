@@ -40,7 +40,7 @@ Chapter 6 orders are exactly the deltas in Chapter 5. Update the holdings and sh
 
 ## 8. Reviewer gate and delivery
 
-Follow `_COMMON.md`. The report file name is `output.portfolio_audit` in `markets.json`.
+Follow `_COMMON.md`, including its strict four-round maximum, best-effort finalization after round 4, and mandatory GitHub Pages publication with automatic commit and push. The report file name is `output.portfolio_audit` in `markets.json`.
 
 ## 9. Cleanup
 

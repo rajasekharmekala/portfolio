@@ -7,6 +7,10 @@ description: >-
 
 > **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
 
+> **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Four complete rounds is a strict maximum. After round 4, fix remaining findings best-effort, rerun the validator, record and disclose unresolved items, and do not launch a fifth round.
+> **Publication (binding):** after the validator and reviewer gate, automatically publish this report to this repository's GitHub Pages, regenerate its indexes, and commit and push the scoped publication. Public publication is pre-authorized; do not ask for approval. Follow `../_shared/RUN_PROTOCOL.md` §6 and never force-push or stage unrelated changes.
+
+
 <!-- MARKET IN -->
 # Wikipedia-Style Institutional Company Research Dossier & Underwriting Skill
 <!-- /MARKET -->
@@ -127,11 +131,11 @@ Deliver the complete output as a single, self-contained HTML document with an em
   - Immediately after `<body>`, insert exactly two lines: `<div id="dossierNavSlot"></div>` and `<script src="dossier_nav.js" defer></script>`.
 <!-- MARKET IN -->
   - Do NOT write any inline navigation `<nav>`, navigation `<style>` block, dossier list, quick-jump select, or pager buttons into the dossier. The sticky research-library navigator (market flag, strategy/verdict badges, grouped quick-jump, prev/next pager, dynamic dossier count) is rendered client-side by the permanent `docs/blogs/dossier_nav.js` from the shared `docs/blogs/dossiers.json` registry.
-  - Final pipeline step: run `python3 scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json` so the navigation registry always matches the blog folder.
+  - Final pipeline step: run `.venv/bin/python scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json` so the navigation registry always matches the blog folder.
 <!-- /MARKET -->
 <!-- MARKET US -->
   - Do NOT write any inline navigation `<nav>`, navigation `<style>` block, dossier list, quick-jump select, or pager buttons into the dossier. The sticky research-library navigator is rendered client-side by `docs/blogs/dossier_nav.js` from `docs/blogs/dossiers.json`.
-  - Final pipeline step: run `python3 scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json`.
+  - Final pipeline step: run `.venv/bin/python scripts/build_dossier_portal.py` to rebuild `index.html` AND regenerate `dossiers.json`.
 <!-- /MARKET -->
 - **Mandatory Executive Capital Allocation Decision Banner:**
   - Placed prominently at the very top (above the infobox and main text) so high-level capital decisions are visible in 5 seconds.
@@ -1420,7 +1424,7 @@ sup.reference a {
 <!-- MARKET US -->
 4. **Mandatory Portal Rebuild:** Immediately after saving or updating any dossier, run:
    ```bash
-   python3 scripts/build_dossier_portal.py
+   .venv/bin/python scripts/build_dossier_portal.py
    ```
 5. **Immediate Localhost Verification:** Ensure the dossier is served immediately on **`http://localhost:9050/<SYMBOL>_dossier.html`**.
 6. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE (NO RESIDUAL ARTIFACTS):**
