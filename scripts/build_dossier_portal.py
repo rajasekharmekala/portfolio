@@ -124,6 +124,9 @@ def parse_dossier(filepath):
     # Extract Banner and Infobox Verdict text
     banner = soup.find('div', class_=lambda x: x and ('executive-banner' in x or 'executive-summary' in x or 'banner' in x))
     badge_el = banner.find(class_='badge') if banner else None
+    # Some dossiers expose the verdict as a dedicated span rather than inside a banner.
+    if badge_el is None:
+        badge_el = soup.find(class_='verdict')
     badge_text = badge_el.text.strip().upper() if badge_el else ''
     banner_text = banner.text.strip() if banner else ''
     
