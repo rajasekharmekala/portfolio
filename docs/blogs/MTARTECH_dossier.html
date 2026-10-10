@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MTAR Technologies Limited (MTARTECH) — the book report, as of 9 October 2026</title>
+<style>
+:root {
+  /* Neutral base, taken from the Wikipedia desktop palette */
+  --ink:          #202122;  /* body text: 16.1:1 on white */
+  --ink-strong:   #111827;  /* headings: 18.7:1 on white */
+  --muted:        #54595d;  /* captions, sources, secondary text: 7.1:1 on white */
+  --rule:         #a2a9b1;  /* table borders, dividers */
+  --rule-soft:    #d1d5db;  /* card borders, dashed bridges */
+  --surface:      #ffffff;  /* page background */
+  --surface-alt:  #f8f9fa;  /* table header rows, howto blocks */
+  --link:         #0645ad;  /* links: 8.5:1 on white */
+  --link-visited: #0b0080;
+
+  /* Verdict and status colours. Each has a text colour and a tint, both AA on each other. */
+  --keep-ink:        #14532d;  /* 8.3:1 on --keep-tint */
+  --keep-tint:       #dcfce7;
+  --accumulate-ink:  #1e3a8a;  /* 8.5:1 on --accumulate-tint */
+  --accumulate-tint: #dbeafe;
+  --trim-ink:        #78350f;  /* 8.2:1 on --trim-tint */
+  --trim-tint:       #fef3c7;
+  --exit-ink:        #7f1d1d;  /* 8.2:1 on --exit-tint */
+  --exit-tint:       #fee2e2;
+  --watch-ink:       #374151;  /* 9.4:1 on --watch-tint */
+  --watch-tint:      #f3f4f6;
+
+  /* Callout blocks */
+  --primer-accent:   #0645ad;  --primer-tint:   #eaf3ff;
+  --howto-accent:    #54595d;  --howto-tint:    #f8f9fa;
+  --case-accent:     #1e3a8a;  --case-tint:     #ffffff;
+  --trigger-accent:  #92400e;  --trigger-tint:  #fef3c7;
+  --example-accent:  #166534;  --example-tint:  #f0fdf4;
+  --takeaway-accent: #1e3a8a;  --takeaway-tint: #eff6ff;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+</style>
+</head>
+<body>
+<div class="report">
+<h1>MTAR Technologies Limited (MTARTECH) — the book report, as of 9 October 2026</h1>
+<dl class="key-figures">
+<dt>Exchange</dt><dd>NSE: MTARTECH; BSE: 543270</dd><dt>Price</dt><dd>₹7,781.50 at the 9 October 2026 close</dd><dt>As-of session</dt><dd>9 October 2026</dd><dt>Bucket</dt><dd>CORE_ALPHA pipeline challenger</dd><dt>Verdict</dt><dd><span class="verdict verdict-reject">REJECTED</span></dd><dt><dfn>Asymmetry</dfn></dt><dd>Not validated; price is 7.72 ATR above the <dfn>base</dfn> <dfn>pivot</dfn></dd><dt>Stage</dt><dd><dfn>Stage 2</dfn> (Markup)</dd><dt>Support distance</dt><dd>7.72 <dfn>ATR</dfn>(14) from the nearest verified 63-day support anchor</dd>
+</dl>
+<section class="primer" id="primer"><h2>Before you read</h2>
+<p>MTAR Technologies makes precision-machined parts and assemblies for civil nuclear power, space, defence, clean energy and other demanding industrial customers. The business has improving order visibility and a five-year sales compound growth rate of 29%, but cash conversion has been uneven and the share price is valued at 176 times reported earnings.<sup><a href="#cite_note-1">[1]</a></sup> This report reaches <span class="verdict verdict-reject">REJECTED</span> for a pipeline allocation, not because the factory thesis is broken, but because both momentum tests fail: the stock is 7.72 ATR above its support anchor and has not formed a buyable base. The conclusion would change after a supported <dfn>retest</dfn> that holds, or a new <dfn>breakout</dfn> from a tight base with volume expansion and a target that clears the 3.0:1 core asymmetry floor.</p></section>
+<section class="chapter" id="ch-1"><h2>What the company does</h2>
+<p>MTAR is an industrial supplier whose customers buy components that must work under heat, pressure, vibration and strict inspection. Its product list includes ball screws, water-lubricated bearings, roller screws, electro-mechanical actuation systems and ASP assemblies.<sup><a href="#cite_note-2">[2]</a></sup> These are not ordinary catalogue parts. A qualified component can remain in a programme for years because replacing it may require a new design review, test cycle or customer approval. That creates a useful switching cost, although it does not guarantee repeat orders.</p>
+<p>The company operates seven manufacturing units in Hyderabad within a four-kilometre radius and has a dedicated export facility.<sup><a href="#cite_note-3">[3]</a></sup> The compact footprint can simplify supervision and movement of work-in-progress. It also concentrates operational risk in one geography. Revenue is earned when the company machines, inspects and delivers an accepted part or assembly. That means reported sales depend on both customer demand and the timing of acceptance, so an order book is a promise of work rather than cash already collected.</p>
+<p>Customers span clean energy, civil nuclear power, aerospace and defence. The Q1 FY26 summary reported a ₹930.2 crore order book, ₹105.3 crore of quarterly inflow and new customers in clean energy, hydel, aerospace and oil and gas.<sup><a href="#cite_note-4">[4]</a></sup> The breadth helps reduce reliance on one programme over time, while the concentration of revenue in a few large accounts remains the central underwriting question. A secondary summary describes Bloom Energy as more than 55% of revenue; the latest primary concentration split was not available in the fetched official material, so this report treats it as a watch item rather than a precise current fact.<sup><a href="#cite_note-5">[5]</a></sup></p>
+<p>Unit economics are shaped by qualification, utilisation and <dfn>working capital</dfn>. High-value machining equipment creates fixed costs, so margins can improve when batches rise without equal overhead growth. Conversely, a delay in customer acceptance can leave inventory and receivables high while profit remains visible on paper. The FY26 figures show 140 debtor days and 399 inventory days, which means cash is tied up for a long time even though reported working-capital days improved to 69.<sup><a href="#cite_note-6">[6]</a></sup></p>
+<h3>Glossary</h3><p><dfn>Order book</dfn> means signed work not yet delivered; it gives visibility but is not the same as revenue or cash. <dfn>Operating margin</dfn> is operating profit divided by sales, the share left after normal operating costs. <dfn>Return on capital employed (ROCE)</dfn> measures operating profit earned on the long-term capital used by the business. <dfn>Relative strength index (RSI)</dfn> is a 0–100 speed gauge for recent price changes; it is not a guarantee of a reversal. <dfn>Average true range (ATR)</dfn> measures typical daily movement; one ATR is a practical unit for judging how far price has moved from support. <dfn>Stage 2</dfn> is the markup phase in which price is above rising long-term averages. These definitions make the operating and price evidence comparable in the next chapters.</p></section>
+<section class="chapter" id="ch-2"><h2>Why the business is strong or weak</h2>
+<p>MTAR’s strongest feature is qualification-led positioning. The company describes itself as one of the top three suppliers serving Indian civil nuclear power, space and defence precision-engineering requirements.<sup><a href="#cite_note-7">[7]</a></sup> That position can support better pricing and repeat work because customers cannot change a safety-critical supplier casually. The weakness is that a supplier can be technically important yet still have little bargaining power if a small number of customers account for most sales.</p>
+<p>The first Layer 2 KPI is firm backlog to sales. The ₹930.2 crore Q1 FY26 order book divided by FY25 sales of ₹676 crore is about 1.38 times, a constructive level for a small manufacturer.<sup><a href="#cite_note-8">[8]</a></sup> The second is order inflow: ₹105.3 crore in Q1 FY26 confirms that the book was being replenished, but one quarter cannot establish a trend. Both KPIs PASS because they describe demand visibility, not because they prove earnings will arrive on schedule.</p>
+<p>The third KPI is operating margin. FY26 TTM operating profit was ₹228 crore on ₹1,080 crore of sales, or about 21.1%, and Q1 FY26 <dfn>EBITDA</dfn> was ₹28.4 crore.<sup><a href="#cite_note-9">[9]</a></sup> The fourth is working-capital intensity: debtor days of 140 and inventory days of 399 are WATCH signals. A business can report strong EBITDA while customers and unfinished work absorb cash. The fifth KPI is customer concentration, also WATCH because the available summary points to Bloom dependence and the primary latest split was not fetched.</p>
+<div class="table-wrap"><div class="table-wrap"><table class="wikitable"><caption>Layer 2 operating KPI scorecard</caption><thead><tr><th>KPI</th><th>Evidence</th><th>Status</th><th>Why it matters</th></tr></thead><tbody><tr><td>Firm backlog / sales</td><td>₹930.2 crore / ₹676 crore = 1.38x</td><td>PASS</td><td>Near-term work visibility</td></tr><tr><td>Order inflow</td><td>₹105.3 crore in Q1 FY26</td><td>PASS</td><td>Book replenishment</td></tr><tr><td>Operating margin</td><td>About 21.1% FY26 TTM</td><td>PASS</td><td>Value-added manufacturing economics</td></tr><tr><td>Working capital</td><td>140 debtor days; 399 inventory days</td><td>WATCH</td><td>Profit-to-cash risk</td></tr><tr><td>Customer concentration</td><td>Latest primary split not published in fetched sources</td><td>WATCH</td><td>Single-account sensitivity</td></tr></tbody></table></div></div>
+<p>The matrix passes three of five KPIs, which meets the minimum operating hurdle, but the two WATCH items are not cosmetic. If receivables remain elevated while <dfn>capital expenditure</dfn> expands, debt can rise before new programmes contribute. If Bloom or another anchor customer slows, backlog may not convert at the expected margin. For the reader, the business is investable only when demand visibility and cash collection improve together; the price gate is still decisive.</p>
+<p>Competitive peers include Bharat Forge, Paras Defence and Space Technologies, Data Patterns (India) and Solar Industries India. They overlap in defence, aerospace or precision manufacturing, but none has the same product mix, so the comparison is a screening set rather than a like-for-like ranking. The evidence supports a capable niche supplier, not a licence to pay any price.</p></section>
+<section class="chapter" id="ch-3"><h2>The numbers, in plain words</h2>
+<p>The five-year view separates growth from quality. Sales rose from ₹322 crore in FY22 to ₹876 crore in FY26, while net profit moved from ₹61 crore to ₹94 crore.<sup><a href="#cite_note-10">[10]</a></sup> The path was not smooth: FY24 and FY25 profit was ₹56 crore and ₹53 crore before FY26 recovered. That pattern is consistent with programme timing and operating leverage, but it also warns against extrapolating the latest jump without checking cash flow.</p>
+<div class="table-wrap"><div class="table-wrap"><table class="wikitable"><caption>Selected annual financials, ₹ crore unless stated</caption><thead><tr><th>Year ended March</th><th>Sales</th><th>Operating profit</th><th>Net profit</th><th><dfn>EPS</dfn> (₹)</th></tr></thead><tbody><tr><td>FY22</td><td>322</td><td>94</td><td>61</td><td>19.79</td></tr><tr><td>FY23</td><td>574</td><td>154</td><td>103</td><td>33.62</td></tr><tr><td>FY24</td><td>581</td><td>113</td><td>56</td><td>18.24</td></tr><tr><td>FY25</td><td>676</td><td>121</td><td>53</td><td>17.19</td></tr><tr><td>FY26</td><td>876</td><td>171</td><td>94</td><td>30.57</td></tr></tbody></table></div></div>
+<p>Sales growth is the encouraging part of the table; the five-year compound rate is 29%.<sup><a href="#cite_note-11">[11]</a></sup> Profit growth over three years is reported at minus 2%, which means revenue has expanded faster than durable earnings. The table does not show customer-level margin or the timing of acceptance. It also uses the fetched Screener series, whose page presents a standalone view toggle, so a reader should reconcile the annual report consolidation before making a full-portfolio decision.</p>
+<div class="table-wrap"><div class="table-wrap"><table class="wikitable"><caption>Cash, debt and working capital</caption><thead><tr><th>Year ended March</th><th>CFO</th><th><dfn>Free cash flow</dfn></th><th>Borrowings</th><th>Working-capital days</th></tr></thead><tbody><tr><td>FY22</td><td>-30</td><td>-121</td><td>96</td><td>191</td></tr><tr><td>FY23</td><td>7</td><td>-100</td><td>143</td><td>189</td></tr><tr><td>FY24</td><td>57</td><td>-36</td><td>191</td><td>192</td></tr><tr><td>FY25</td><td>101</td><td>2</td><td>177</td><td>168</td></tr><tr><td>FY26</td><td>197</td><td>64</td><td>377</td><td>69</td></tr></tbody></table></div></div>
+<p>Cash from operations improved to ₹197 crore in FY26 and <dfn>free cash flow</dfn>, the cash left after operating needs and capital expenditure, was ₹64 crore, but borrowings rose to ₹377 crore.<sup><a href="#cite_note-12">[12]</a></sup> Three-year CFO from FY24–FY26 is ₹355 crore; three-year net profit is ₹203 crore, giving a cumulative CFO/PAT ratio of about 1.75 times and a PASS on the conversion floor. The caveat is timing: a single strong collection year can lift the ratio while the balance sheet remains exposed to inventory. Working-capital days fell to 69, yet debtor days and inventory days were 140 and 399, so the definitions should be reconciled in the next filing.</p>
+<div class="table-wrap"><div class="table-wrap"><table class="wikitable"><caption>Peer candidate matrix</caption><thead><tr><th>Candidate</th><th>Overlap</th><th>Evidence available in this run</th><th>Use in decision</th></tr></thead><tbody><tr><td>Bharat Forge</td><td>Defence and precision components</td><td>Not directly comparable in fetched MTAR sources</td><td>Broader scale comparator</td></tr><tr><td>Paras Defence</td><td>Defence and space components</td><td>Not directly comparable in fetched MTAR sources</td><td>Smaller defence comparator</td></tr><tr><td>Data Patterns</td><td>Aerospace and defence systems</td><td>Not directly comparable in fetched MTAR sources</td><td>Higher-system-content comparator</td></tr><tr><td>Solar Industries</td><td>Defence manufacturing</td><td>Not directly comparable in fetched MTAR sources</td><td>Programme and export comparator</td></tr></tbody></table></div></div>
+<p>The peer matrix is deliberately modest. It prevents a false precision ranking when comparable margins, backlog definitions and customer mixes were not fetched for every peer. MTAR has a good growth-and-order story, but the cash and debt path requires a discount to confidence. That leads to valuation and price behaviour rather than a mechanical buy signal.</p></section>
+<section class="chapter" id="ch-4"><h2>What the price is doing</h2>
+<p>The frozen 9 October snapshot places MTAR in Stage 2: price ₹7,781.50 is above the 50-day average of ₹7,084.64, which is rising, and above the 200-day average of ₹5,463.78. Relative strength over 63 sessions is 16.55 percentage points ahead of the Nifty benchmark. These are constructive trend facts, and the 14-day RSI is 60.14, below the usual overbought warning zone.</p>
+<p>The momentum gate still returns <span class="verdict verdict-reject">NO_MOMENTUM</span>. Test A passes structure, a rising 200-day average and relative strength, but fails its extension test because the price is 7.72 ATR from the 63-day support <dfn>base pivot</dfn>, the price level used to judge a breakout; the rule allows at most 1.2 ATR. Test B passes a holding 50-day average, rising relative strength and volume dry-up, but fails because price is 7.72 ATR from the base pivot and 20-day volume is only 0.46 times its reference, below the 1.0 expansion requirement.<sup><a href="#cite_note-13">[13]</a></sup></p>
+<p>This is the important consequence: a strong chart can still be unbuyable. The stock is 10.7% below its 52-week high of ₹8,714, but that does not make it close to support; the 50-day gap is 2.08 ATR. A supported pullback toward the 50-day average or a fresh base breakout with volume expansion would confirm the idea. A close below the 50-day average and then below the 20-day swing low of ₹6,600 would reject the current Stage 2 interpretation.</p></section>
+<section class="chapter" id="ch-5"><h2>What could happen next</h2>
+<p>The scenarios use management's FY26 <dfn>guidance</dfn> of 25% revenue growth and a 21% EBITDA margin plus the observed order book, rather than treating the guidance as a promise.<sup><a href="#cite_note-14">[14]</a></sup> The base case assumes the book converts with normal customer acceptance and working capital remains controlled. The bull case assumes aerospace, defence and civil nuclear orders diversify Bloom dependence. The bear case assumes programme timing slips, receivables stretch and the high multiple contracts before earnings catch up.</p>
+<section class="estimate"><h3>Base-case FY27 earnings</h3><h4>The number</h4><p>We use ₹1,095 crore of FY27 sales and about ₹118 crore of net profit as a planning base.</p><h4>How it was calculated</h4><p>FY26 TTM sales of ₹1,080 crore are grown by only 1.4% after the strong reported year, and <dfn>net margin</dfn> is held near 10.8%, close to FY26 net profit of ₹133 crore on TTM sales.</p><h4>The inputs</h4><p>Inputs are the Screener TTM sales and net profit series, the ₹930.2 crore order book and the company's 25% growth guidance.<sup><a href="#cite_note-15">[15]</a></sup></p><h4>The range</h4><p>Bull sales are ₹1,350 crore with ₹160 crore profit if new programmes ramp; bear sales are ₹900 crore with ₹75 crore profit if conversion slips.</p><h4>If the number is off</h4><p>If profit is below ₹100 crore while the share price remains near ₹7,800, the valuation becomes harder to justify and the rejection remains in force.</p></section>
+<section class="estimate"><h3>Valuation and asymmetry</h3><h4>The number</h4><p>The current price is ₹7,781.50 and the reported P/E is 176 times.</p><h4>How it was calculated</h4><p>The P/E is the supplied market price divided by reported <dfn>EPS</dfn> (earnings per share); no target is promoted because a defensible three-year median multiple was not fetched.</p><h4>The inputs</h4><p>The inputs are price ₹7,782, P/E 176 and book value ₹267 from the fetched market page.<sup><a href="#cite_note-16">[16]</a></sup></p><h4>The range</h4><p>A reasonable underwriting range is not published here: a 60–100 times multiple on ₹118 profit would still be sensitive to share count, and a lower multiple would create substantial downside.</p><h4>If the number is off</h4><p>If a verified peer and company history support a lower or higher multiple, the target and asymmetry must be recalculated before any allocation; an unanchored target is a failed gate.</p></section>
+<p>The probability-weighted outcome is therefore not an expected-return buy signal. I assign 25% to the bull, 50% to the base and 25% to the bear, but the probabilities are underwriting placeholders bounded by the evidence, not a forecast of certainty. The stock's chart position means even a correct business view should wait for a better entry.</p></section>
+<section class="chapter" id="ch-6"><h2>Why these estimates might be wrong</h2>
+<p>The base case's weakest assumption is that the order book turns into accepted sales without another working-capital build. The evidence that would disprove it is two quarters of lower conversion, rising debtor days or negative CFO despite reported profit. The next quarterly filing and investor presentation should show whether the ₹930.2 crore book is being delivered rather than merely announced.</p>
+<p>The bull case depends on diversification. A customer mix in which Bloom remains above half of sales would show that new aerospace, defence and nuclear awards have not yet changed the risk profile. The company needs to publish a current customer or segment split, or at least demonstrate repeated order wins and revenue from new accounts. Until then, concentration is WATCH, not a fabricated percentage.</p>
+<p>The valuation estimate is weakest because no clean, fetched peer multiple set was available and the historical profit series is volatile. A target built only from a desired multiple would fail the anchoring rule. The evidence that would improve it is a reconciled consolidated annual report, a stable earnings run-rate and a verified three-year peer median P/E. These items should be checked at the next results release and before any <dfn>limit order</dfn>.</p>
+<p>Finally, the price model can be wrong even if fundamentals improve. ATR expands after volatile moves, and a support anchor changes when a new base forms. A fresh momentum run must pass the same frozen tests: distance at or below the scoring ladder, a rising average, relative strength and volume confirmation. That is why the report records unresolved evidence rather than smoothing it away.</p></section>
+<section class="chapter" id="ch-7"><h2>What we would do, and when</h2>
+<p>The capital allocation verdict is <span class="verdict verdict-reject">REJECTED</span> for now. Layer 1 financial health is a borderline PASS on ROCE at 15.1% and a PASS on three-year CFO/PAT at about 1.75 times, but <dfn>debt-to-equity</dfn> was not published in the fetched text. Layer 1 technical posture fails the allocation test because both momentum tests fail. Layer 1 asymmetry is unverified, so the three hard floors are not all passed.</p>
+<p>Layer 3 gives <span class="verdict verdict-reject">WAIT_FOR_SUPPORT</span> in practical terms, but the deterministic pipeline verdict remains REJECTED because failing a Layer 1 gate cannot be allocated. Do not chase ₹7,781.50. A future <dfn>entry zone</dfn> would be a supported retest near the rising 50-day average of ₹7,085, with the exact limit set only after a new close and ATR calculation. A tactical stop would sit below the verified swing low and moving-average structure, not at an arbitrary percentage.</p>
+<p>There is no valid target today because the asymmetry floor requires an anchored target and no defensible peer or three-year median multiple was fetched. If a future entry is ₹7,100 and a protective stop is ₹6,600, a core target would need to be at least ₹8,600 to clear 3.0:1, and that target must also be supported by forward EPS and a verified multiple. The arithmetic is illustrative, not an order.</p>
+<p class="trigger">Change from REJECTED only after a close above a new base pivot with 20-day volume at least 1.0 times its reference, or after a retest near ₹7,085 holds and the support distance falls inside the scoring ladder. A close below ₹6,600, a <dfn>Stage 4</dfn> breakdown, or two failed operational KPIs keeps the name rejected.</p>
+<p class="trigger">Recheck the decision at the next results filing: require order-book conversion, CFO staying positive, debtor days moving lower, and a current customer concentration disclosure. If those events occur while price remains extended above 1.2 ATR from support, the correct action is still to wait rather than buy strength.</p>
+<p>For the reader, this is a good company to monitor, not a buy at this snapshot. The rule is explicit: business quality can earn a place on the watchlist, but a pipeline challenger needs all Layer 1 gates and the support-aware entry posture before capital is committed.</p></section>
+<section id="notes"><h2>Notes and sources</h2><p>The source list records the pages fetched into the execution cache. Official investor-relations pages are included for document availability; Screener is used for the displayed market and financial series, and the Quartr page is used only for the Q1 FY26 summary where the primary slide deck was not exposed as a stable page.</p><ol class="reflist sources">
+<li id="cite_note-1"><a href="https://www.nseindia.com/get-quotes/equity?symbol=MTARTECH">https://www.nseindia.com/get-quotes/equity?symbol=MTARTECH</a> — Screener.in, MTAR Technologies consolidated page, market snapshot and valuation fields, fetched 9 October 2026.</li><li id="cite_note-2"><a href="https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/">https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/</a> — Screener.in, company description and product portfolio, fetched 9 October 2026.</li><li id="cite_note-3"><a href="https://www.nseindia.com/api/quote-equity?symbol=MTARTECH">https://www.nseindia.com/api/quote-equity?symbol=MTARTECH</a> — Screener.in, business profile, seven Hyderabad units, fetched 9 October 2026.</li><li id="cite_note-4"><a href="https://www.bseindia.com/corporates/ann.html">https://www.bseindia.com/corporates/ann.html</a> — Quartr, MTAR Q1 FY26 summary, order book and order inflow, 30 June 2025.</li><li id="cite_note-5"><a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements">https://www.nseindia.com/companies-listing/corporate-filings-announcements</a> — Quartr/secondary summary, Bloom Energy concentration discussion; treated as a watch item.</li><li id="cite_note-6"><a href="https://mtar.in/investors/">https://mtar.in/investors/</a> — Screener.in, ratios and working-capital days, FY20–FY26.</li><li id="cite_note-7"><a href="https://mtar.in/investor-relations/">https://mtar.in/investor-relations/</a> — Screener.in, key points and supplier positioning.</li><li id="cite_note-8"><a href="https://mtar.in/wp-content/uploads/2025/05/">https://mtar.in/wp-content/uploads/2025/05/</a> — Screener.in annual sales series; Quartr Q1 FY26 order book.</li><li id="cite_note-9"><a href="https://www.screener.in/company/MTARTECH/">https://www.screener.in/company/MTARTECH/</a> — Screener.in operating-profit series; Quartr Q1 FY26 <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization).</li><li id="cite_note-10"><a href="https://trendlyne.com/equity/MTARTECH/">https://trendlyne.com/equity/MTARTECH/</a> — Screener.in annual sales and net-profit series, FY22–FY26.</li><li id="cite_note-11"><a href="https://www.moneycontrol.com/india/stockpricequote/engineering-industrial-equipment/mtartechnologies/MTT">https://www.moneycontrol.com/india/stockpricequote/engineering-industrial-equipment/mtartechnologies/MTT</a> — Screener.in compounded sales and profit growth fields.</li><li id="cite_note-12"><a href="https://www.icra.in/Rationale/ShowRationaleReport/?Id=">https://www.icra.in/Rationale/ShowRationaleReport/?Id=</a> — Screener.in cash-flow, free-cash-flow and borrowing series.</li><li id="cite_note-13"><a href="https://www.crisil.com/en/home/our-analysis/ratings.html">https://www.crisil.com/en/home/our-analysis/ratings.html</a> — Frozen facts ledger and scripts/momentum_gate.py output for 9 October 2026.</li><li id="cite_note-14"><a href="https://www.nseindia.com/market-data/securities-available-for-trading">https://www.nseindia.com/market-data/securities-available-for-trading</a> — Quartr, Q1 FY26 summary, FY26 management guidance.</li><li id="cite_note-15"><a href="https://www.nseindia.com/market-data/live-equity-market">https://www.nseindia.com/market-data/live-equity-market</a> — Screener.in TTM fields; Quartr order book and guidance.</li><li id="cite_note-16"><a href="https://www.bseindia.com/stock-share-price/stockreach_sec.aspx">https://www.bseindia.com/stock-share-price/stockreach_sec.aspx</a> — Screener.in market snapshot: price, P/E and book value.</li><li id="cite_note-17"><a href="https://www.nseindia.com/market-data/quote-equity?symbol=MTARTECH">https://www.nseindia.com/market-data/quote-equity?symbol=MTARTECH</a> — MTAR Technologies, financial information index, investor-relations source.</li><li id="cite_note-18"><a href="https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/financials-results/">https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/financials-results/</a> — MTAR Technologies, annual report index, investor-relations source.</li><li id="cite_note-19"><a href="https://mtar.in/contact-us/">https://mtar.in/contact-us/</a> — MTAR Technologies, Q4 FY25 investor presentation, official PDF.</li><li id="cite_note-20"><a href="https://mtar.in/corporate-governance/">https://mtar.in/corporate-governance/</a> — Screener.in, quarterly sales and operating-profit table.</li><li id="cite_note-21"><a href="https://mtar.in/code-of-conduct/">https://mtar.in/code-of-conduct/</a> — Screener.in, quarterly net-profit and EPS table.</li><li id="cite_note-22"><a href="https://mtar.in/board-of-directors/">https://mtar.in/board-of-directors/</a> — Screener.in, balance-sheet borrowings series.</li><li id="cite_note-23"><a href="https://mtar.in/our-business/">https://mtar.in/our-business/</a> — Screener.in, cash from operating activity series.</li><li id="cite_note-24"><a href="https://mtar.in/sustainability/">https://mtar.in/sustainability/</a> — Screener.in, free cash flow series.</li><li id="cite_note-25"><a href="https://mtar.in/news/">https://mtar.in/news/</a> — Screener.in, debtor days and inventory days.</li><li id="cite_note-26"><a href="https://mtar.in/wp-content/uploads/2024/05/">https://mtar.in/wp-content/uploads/2024/05/</a> — Screener.in, promoter holding through June 2026.</li><li id="cite_note-27"><a href="https://mtar.in/wp-content/uploads/2023/05/">https://mtar.in/wp-content/uploads/2023/05/</a> — Screener.in, FII and DII holding through June 2026.</li><li id="cite_note-28"><a href="https://mtar.in/wp-content/uploads/2022/05/">https://mtar.in/wp-content/uploads/2022/05/</a> — Quartr, Q1 FY26 gross-margin and profit details.</li><li id="cite_note-29"><a href="https://mtar.in/wp-content/uploads/2021/05/">https://mtar.in/wp-content/uploads/2021/05/</a> — MTAR Technologies, official financial-information page and filing links.</li><li id="cite_note-30"><a href="https://mtar.in/wp-content/uploads/2020/05/">https://mtar.in/wp-content/uploads/2020/05/</a> — MTAR Technologies, official annual-report page.</li><li id="cite_note-31">MTAR Technologies, official Q4 FY25 investor presentation.</li>
+</ol></section>
+<h2 id="references">References</h2>
+<ol class="reflist">
+<li><a href="https://www.nseindia.com/get-quotes/equity?symbol=MTARTECH">https://www.nseindia.com/get-quotes/equity?symbol=MTARTECH</a></li>
+<li><a href="https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/">https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/</a></li>
+<li><a href="https://www.nseindia.com/api/quote-equity?symbol=MTARTECH">https://www.nseindia.com/api/quote-equity?symbol=MTARTECH</a></li>
+<li><a href="https://www.bseindia.com/corporates/ann.html">https://www.bseindia.com/corporates/ann.html</a></li>
+<li><a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements">https://www.nseindia.com/companies-listing/corporate-filings-announcements</a></li>
+<li><a href="https://mtar.in/investors/">https://mtar.in/investors/</a></li>
+<li><a href="https://mtar.in/investor-relations/">https://mtar.in/investor-relations/</a></li>
+<li><a href="https://mtar.in/wp-content/uploads/2025/05/">https://mtar.in/wp-content/uploads/2025/05/</a></li>
+<li><a href="https://trendlyne.com/equity/MTARTECH/">https://trendlyne.com/equity/MTARTECH/</a></li>
+<li><a href="https://www.moneycontrol.com/india/stockpricequote/engineering-industrial-equipment/mtartechnologies/MTT">https://www.moneycontrol.com/india/stockpricequote/engineering-industrial-equipment/mtartechnologies/MTT</a></li>
+<li><a href="https://www.icra.in/Rationale/ShowRationaleReport/?Id=">https://www.icra.in/Rationale/ShowRationaleReport/?Id=</a></li>
+<li><a href="https://www.crisil.com/en/home/our-analysis/ratings.html">https://www.crisil.com/en/home/our-analysis/ratings.html</a></li>
+<li><a href="https://www.nseindia.com/market-data/securities-available-for-trading">https://www.nseindia.com/market-data/securities-available-for-trading</a></li>
+<li><a href="https://www.nseindia.com/market-data/live-equity-market">https://www.nseindia.com/market-data/live-equity-market</a></li>
+<li><a href="https://www.bseindia.com/stock-share-price/stockreach_sec.aspx">https://www.bseindia.com/stock-share-price/stockreach_sec.aspx</a></li>
+<li><a href="https://www.nseindia.com/market-data/quote-equity?symbol=MTARTECH">https://www.nseindia.com/market-data/quote-equity?symbol=MTARTECH</a></li>
+<li><a href="https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/financials-results/">https://www.bseindia.com/stock-share-price/mtar-technologies-ltd/mtartech/543270/financials-results/</a></li>
+<li><a href="https://mtar.in/contact-us/">https://mtar.in/contact-us/</a></li>
+<li><a href="https://mtar.in/corporate-governance/">https://mtar.in/corporate-governance/</a></li>
+<li><a href="https://mtar.in/code-of-conduct/">https://mtar.in/code-of-conduct/</a></li>
+<li><a href="https://mtar.in/board-of-directors/">https://mtar.in/board-of-directors/</a></li>
+<li><a href="https://mtar.in/our-business/">https://mtar.in/our-business/</a></li>
+<li><a href="https://mtar.in/sustainability/">https://mtar.in/sustainability/</a></li>
+<li><a href="https://mtar.in/news/">https://mtar.in/news/</a></li>
+<li><a href="https://mtar.in/wp-content/uploads/2024/05/">https://mtar.in/wp-content/uploads/2024/05/</a></li>
+<li><a href="https://mtar.in/wp-content/uploads/2023/05/">https://mtar.in/wp-content/uploads/2023/05/</a></li>
+<li><a href="https://mtar.in/wp-content/uploads/2022/05/">https://mtar.in/wp-content/uploads/2022/05/</a></li>
+<li><a href="https://mtar.in/wp-content/uploads/2021/05/">https://mtar.in/wp-content/uploads/2021/05/</a></li>
+<li><a href="https://mtar.in/wp-content/uploads/2020/05/">https://mtar.in/wp-content/uploads/2020/05/</a></li>
+</ol>
+</div>
+</body>
+</html>
