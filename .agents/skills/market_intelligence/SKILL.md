@@ -1,9 +1,11 @@
 ---
 name: market_intelligence
 description: >-
-  Daily market intelligence briefing for one market (IN = NSE/BSE, US = NYSE/NASDAQ). Builds the facts ledger, runs the research pass, and writes a Wikipedia-style book report in beginner-friendly prose with sections, tables, options and sector analysis, Stage 2 breakouts and Stage 4 breakdowns, and a tactical playbook. Market-specific blocks are marked; figures, currency and sources differ by market.
+  Daily market intelligence briefing for one market (IN = NSE/BSE, US = NYSE/NASDAQ). Builds the facts ledger, runs the research pass, and writes a modern Research Desk book report in beginner-friendly prose with sections, tables, options and sector analysis, Stage 2 breakouts and Stage 4 breakdowns, and a tactical playbook. Market-specific blocks are marked; figures, currency and sources differ by market.
 
 ---
+
+> **Design (binding):** read `../_shared/REPORT_DESIGN.md`. Older Wikipedia heads, styles and encyclopedia subtitles below are obsolete presentation examples, not output templates. Write the complete research body and assemble it using `scripts/assemble_report.py --market <MKT> --kind report --workflow "Market intelligence" --as-of <session-date>` before unchanged research-quality checks and publication. Use stable future output `docs/reports/<MKT>_Market_Intelligence.html`. Do not remove any analysis, tables, citations or references. Newly completed publication rejects reports missing the versioned Research Desk shell and Pacific generation header.
 
 > **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
 

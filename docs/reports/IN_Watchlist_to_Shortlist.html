@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="report">
+<meta name="report-workflow" content="Watchlist underwriting">
+<meta name="research-as-of" content="2026-10-09">
+<meta name="layout-updated-at" content="2026-10-10T00:47:42.521591-07:00">
+<title>Indian Watchlist to Shortlist</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Watchlist underwriting</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report">
+<header class="report-header"><h1>Indian Watchlist to Shortlist</h1><p class="report-generated">Layout updated <time datetime="2026-10-10T00:47:42.521591-07:00">10 Oct 2026, 12:47 AM PDT</time></p><p class="report-as-of">Generated Date: not recorded for the original research. Presentation update only.</p><p class="report-as-of">Research as of 2026-10-09</p></header><p><strong>Verified market session:</strong> 9 October 2026   <strong>Run date:</strong> 9 October 2026   <strong>Market:</strong> NSE/BSE</p>
+<dl class="key-figures"><div><dt>Batch</dt><dd>4 securities</dd></div><div><dt>Accepted</dt><dd>0</dd></div><div><dt>Rejected</dt><dd>4</dd></div><div><dt>Autowritten books</dt><dd>unchanged</dd></div></dl>
+<section class="primer"><p><strong>How to read this report:</strong> Four names were tested in queue order. Layer 1 is a yes-or-no gate, and every applicable floor must pass before a name can receive shortlist capital. ROCE means return on capital employed: it asks how much operating profit a business makes from the money tied up in it. Debt-to-equity compares borrowed money with shareholder capital. Cash flow from operations divided by profit checks whether reported earnings turn into cash. Stage 2 means a sustained markup; Stage 4 means a sustained markdown. Support distance measures how far the price sits from a level where buyers previously defended the stock. N/A means the value was not deterministically verified, not that it was assumed safe. The report uses the same session date for the ledger, same-day alternate sources and dossier as-of labels, while disclosing where a ledger alias or bar needed repair.</p></section>
+<p>The batch produced four standalone dossiers through four dedicated company agents. None cleared the binding Layer 1 hurdle. The market regime was Downtrend on the 9 October ledger. HGINFRA failed returns, leverage, cash conversion and structure; MTARTECH had a constructive business record but failed the momentum and support gates; DISA failed the latest cash-conversion window and had unverified technical fields after the ticker-alias failure; METROBRAND had sound operating KPIs but remained in Stage 4 with no defensible target asymmetry. That is a useful result because the system records why a promising story still cannot receive capital.</p>
+<h2 id="batch-decisions">Batch decisions</h2><p>The table answers one question per row: what evidence stopped the candidate from moving into the shortlist? Prices and technical fields come from the same-date ledger where available, while the alternate same-day records are labeled in the dossiers. N/A is a fail-closed evidence state. Read from left to right: price structure, financial floors, gate outcome, action and then the full dossier.</p><div class="table-wrap"><table><thead><tr><th>Symbol and company</th><th>Technical session facts</th><th>Financial floors</th><th>Layer 1 gate</th><th>Decision and revisit rule</th><th>Dossier</th></tr></thead><tbody><tr><td><strong>HGINFRA</strong><br/>H.G. Infra Engineering Limited</td><td>₹401.75<br/>50-DMA: 485.83<br/>200-DMA: 570.55<br/>RSI: 27.21<br/>Stage 4 (Markdown)</td><td>ROCE 11.30%<br/>D/E 1.54<br/>3Y CFO/PAT -0.68<br/>Asymmetry N/A</td><td>FAIL_FINANCIAL_HEALTH;FAIL_TECHNICAL_POSTURE;FAIL_ASYMMETRY</td><td><span class="verdict verdict-exit">REJECTED</span><br/>SUPPORT_BROKEN / NO_BUY<br/>Fails multiple Layer 1 floors; negative FY24-FY26 CFO/PAT and Stage 4 structure outweigh low valuation. Re-underwrite only after cash conversion, leverage, ROCE and trend repair.</td><td><a href="../blogs/HGINFRA_dossier.html">HGINFRA dossier</a></td></tr><tr><td><strong>MTARTECH</strong><br/>MTAR Technologies Limited</td><td>₹7781.50<br/>50-DMA: 7084.64<br/>200-DMA: 5463.78<br/>RSI: 60.14<br/>Stage 2 (Markup)</td><td>ROCE 15.1%<br/>D/E N/A<br/>3Y CFO/PAT 1.8<br/>Asymmetry N/A</td><td>{'financial_health': 'PASS borderline: ROCE 15.1%; debt/equity not directly published in fetched page; CFO/PAT 3Y 1.8x', 'technical_posture': 'FAIL allocation gate: NO_MOMENTUM despite Stage 2; extended 7.72 ATR above support', 'asymmetry': 'FAIL/UNVERIFIED: price is extended and no defensible anchored target at this valuation', 'layer_2': 'WATCH: 4 KPIs selected; backlog and growth pass, customer concentration and working capital watch', 'layer_3': 'NO_BUY: support distance outside ladder'}</td><td><span class="verdict verdict-exit">REJECTED</span><br/>WAIT_FOR_SUPPORT<br/>Layer 1 technical momentum gate fails both tests and Layer 3 is NO_BUY at 7.72 ATR from support. Business KPIs are constructive but cannot override a failed allocation gate. Revisit after a retest that holds near the 50-DMA/base support or a confirmed breakout from a fresh base with volume expansion.</td><td><a href="../blogs/MTARTECH_dossier.html">MTARTECH dossier</a></td></tr><tr><td><strong>DISA</strong><br/>Disa India Limited</td><td>₹11385<br/>50-DMA: N/A<br/>200-DMA: N/A<br/>RSI: N/A<br/>N/A</td><td>ROCE 26.60%<br/>D/E 0.00<br/>3Y CFO/PAT 0.69<br/>Asymmetry N/A</td><td>{'financial_health': 'PASS_ROCE_DEBT; FAIL_CFO_PAT_LATEST_WINDOW', 'technical': 'FAIL_TECHNICAL_UNVERIFIED', 'asymmetry': 'FAIL_ASYMMETRY_UNVERIFIED', 'overall': 'FAIL_LAYER_1'}</td><td><span class="verdict verdict-exit">REJECTED</span><br/>NO_BUY_UNVERIFIED<br/>Strong returns and near-zero debt do not overcome latest three-year CFO/PAT of 0.69x, and dated DMA/RSI/ATR/Stage-2 evidence is unavailable after ledger failure. Do not allocate until both cash conversion and technical structure are verified.</td><td><a href="../blogs/DISA_dossier.html">DISA dossier</a></td></tr><tr><td><strong>METROBRAND</strong><br/>Metro Brands Limited</td><td>₹864.65<br/>50-DMA: 929.77<br/>200-DMA: 1012.88<br/>RSI: 32.70<br/>Stage 4 (Markdown)</td><td>ROCE 20.10%<br/>D/E N/A<br/>3Y CFO/PAT 1.33 for FY23-FY25; FY26 unavailable<br/>Asymmetry N/A</td><td>{'layer1_financial': 'PROVISIONAL_PASS', 'layer1_technical': 'FAIL_STAGE4_BELOW_FALLING_MA', 'layer1_asymmetry': 'FAIL_ASYMMETRY_UNVERIFIED', 'layer2_kpis': 'QUALIFIED_3_PASS_1_WATCH', 'layer3_entry': 'SUPPORT_BROKEN'}</td><td><span class="verdict verdict-exit">REJECTED</span><br/>SUPPORT_BROKEN / WAIT_FOR_SUPPORT<br/>Fails the required technical posture and lacks verified target asymmetry despite good operating KPIs.</td><td><a href="../blogs/METROBRAND_dossier.html">METROBRAND dossier</a></td></tr></tbody></table></div><div class="takeaway"><p>The four rows tell one consistent story. HGINFRA and METROBRAND are not rejected because their businesses are meaningless; they are rejected because Stage 4 structures make timing and capital protection fail. MTARTECH shows why a Stage 2 label alone is not enough when price is 7.72 ATR above the support anchor and volume is 0.46 times its 20-day reference. DISA shows the other side of the rule: strong ROCE and zero debt cannot rescue a CFO/PAT ratio of 0.69 when the floor is 0.70, and missing technical fields must remain N/A. The consequence is no shortlist insertion and no displacement.</p></div>
+<h2 id="kpis">Company-specific KPI scorecards</h2><p>Layer 2 is only meaningful after Layer 1. It asks whether the business has the operating health that could justify a position once price and risk are admissible. The scorecards below preserve the agent evidence even when a hard gate has already stopped allocation; that makes the next re-underwriting cycle faster and prevents a good KPI from being mistaken for a current buy signal.</p><div class="howto"><p><strong>How to read this table:</strong> PASS means the cited operating measure is healthy for the business; WATCH means the measure needs monitoring; FAIL means it weakens the thesis. A candidate with a strong score can still be rejected when a Layer 1 floor fails. The final column states the consequence, so the reader does not have to infer why the scorecard did not create a shortlist row.</p></div><div class="table-wrap"><table><thead><tr><th>Candidate</th><th>Sector KPIs</th><th>Decision consequence</th></tr></thead><tbody><tr><td><strong>HGINFRA</strong></td><td>order_book_coverage: WATCH; working_capital_days: PASS; cash_conversion: FAIL; operating_margin: WATCH; diversification: WATCH</td><td>Not qualified: Layer 1 failure stops the scorecard from creating shortlist capital.</td></tr><tr><td><strong>MTARTECH</strong></td><td>firm backlog to sales: PASS; order inflow: PASS; operating margin: PASS; working capital days: WATCH; customer concentration: WATCH</td><td>Not qualified: Layer 1 failure stops the scorecard from creating shortlist capital.</td></tr><tr><td><strong>DISA</strong></td><td>sales_growth: PASS; opm_stability: PASS; debtor_days: WATCH; cfo_pat: FAIL_WATCH; order_book_to_bill: N/A; service_mix: N/A</td><td>Not qualified: Layer 1 failure stops the scorecard from creating shortlist capital.</td></tr><tr><td><strong>METROBRAND</strong></td><td>Network expansion: PASS; E-commerce: PASS; Own-brand mix: PASS; Inventory/cash cycle: WATCH</td><td>Not qualified: Layer 1 failure stops the scorecard from creating shortlist capital.</td></tr></tbody></table></div><div class="takeaway"><p>The scorecards prevent two common errors. The first is treating an order book, store count or margin as a substitute for cash generation. The second is treating technical weakness as a temporary inconvenience. HGINFRA's working-capital days pass but cash conversion fails. Metro's store and e-commerce measures pass but its cash cycle remains a watch item while the chart is Stage 4. MTARTECH's backlog and margin evidence are constructive, yet the support ladder still says no buy. DISA's return metrics pass but its latest CFO/PAT and missing technical pack leave the evidence below the qualification line.</p></div>
+<h2 id="cases">Four case notes</h2><div class="casenote"><h3>HGINFRA: the rule that stopped allocation</h3><p>H.G. Infra Engineering Limited was tested as the next queue name, not treated as a recommendation. The verified close was ₹401.75 on 9 October 2026. The technical and financial figures belong to that session where a same-day source was available; DISA and METROBRAND required alternate deep fetches after the ledger alias or stale-bar failure. That distinction matters because an unverified figure cannot be converted into a pass.</p><p>Fails multiple Layer 1 floors; negative FY24-FY26 CFO/PAT and Stage 4 structure outweigh low valuation. Re-underwrite only after cash conversion, leverage, ROCE and trend repair. The action is REJECTED because the binding Layer 1 framework requires every applicable floor to pass. The revisit rule is explicit: repair the named gate, then underwrite again; a low RSI, a low P/E or a strong business description does not waive the gate.</p></div><div class="casenote"><h3>MTARTECH: the rule that stopped allocation</h3><p>MTAR Technologies Limited was tested as the next queue name, not treated as a recommendation. The verified close was ₹7781.50 on 9 October 2026. The technical and financial figures belong to that session where a same-day source was available; DISA and METROBRAND required alternate deep fetches after the ledger alias or stale-bar failure. That distinction matters because an unverified figure cannot be converted into a pass.</p><p>Layer 1 technical momentum gate fails both tests and Layer 3 is NO_BUY at 7.72 ATR from support. Business KPIs are constructive but cannot override a failed allocation gate. Revisit after a retest that holds near the 50-DMA/base support or a confirmed breakout from a fresh base with volume expansion. The action is REJECTED because the binding Layer 1 framework requires every applicable floor to pass. The revisit rule is explicit: repair the named gate, then underwrite again; a low RSI, a low P/E or a strong business description does not waive the gate.</p></div><div class="casenote"><h3>DISA: the rule that stopped allocation</h3><p>Disa India Limited was tested as the next queue name, not treated as a recommendation. The verified close was ₹11385 on 9 October 2026. The technical and financial figures belong to that session where a same-day source was available; DISA and METROBRAND required alternate deep fetches after the ledger alias or stale-bar failure. That distinction matters because an unverified figure cannot be converted into a pass.</p><p>Strong returns and near-zero debt do not overcome latest three-year CFO/PAT of 0.69x, and dated DMA/RSI/ATR/Stage-2 evidence is unavailable after ledger failure. Do not allocate until both cash conversion and technical structure are verified. The action is REJECTED because the binding Layer 1 framework requires every applicable floor to pass. The revisit rule is explicit: repair the named gate, then underwrite again; a low RSI, a low P/E or a strong business description does not waive the gate.</p></div><div class="casenote"><h3>METROBRAND: the rule that stopped allocation</h3><p>Metro Brands Limited was tested as the next queue name, not treated as a recommendation. The verified close was ₹864.65 on 9 October 2026. The technical and financial figures belong to that session where a same-day source was available; DISA and METROBRAND required alternate deep fetches after the ledger alias or stale-bar failure. That distinction matters because an unverified figure cannot be converted into a pass.</p><p>Fails the required technical posture and lacks verified target asymmetry despite good operating KPIs. The action is REJECTED because the binding Layer 1 framework requires every applicable floor to pass. The revisit rule is explicit: repair the named gate, then underwrite again; a low RSI, a low P/E or a strong business description does not waive the gate.</p></div>
+<h2 id="registry">Registry action and capacity</h2><p>All four dossiers passed the hard filesystem gate: each canonical path exists and is at least 30 KB. The four candidates were therefore removed from <code>watchlist.active</code> and appended to <code>watchlist.archive</code> with dated gate evidence, their canonical dossier paths and explicit re-entry conditions. The active queue moved from 170 to 166 and the archive moved from 118 to 122. The documented active ceiling is 150; it was already exceeded before this run, so this run does not silently delete unrelated names. The shortlist is unchanged: zero Core Alpha or Tactical Momentum entries were added, and no incumbent was displaced. Manual and current-holding records were not touched.</p><div class="triggers"><p><strong>Re-entry triggers:</strong> HGINFRA needs ROCE at or above 15%, debt-to-equity below 0.70, CFO/PAT at or above 0.70 and Stage 1/2 repair. MTARTECH needs a support retest that holds inside the scoring ladder or a confirmed fresh-base breakout with volume. DISA needs a verified CFO/PAT window at or above 0.70 plus a complete same-date technical pack and target anchor. METROBRAND needs Stage 1/2 repair, a target anchor and an updated FY26 cash-flow check. None of these triggers is met by a lower price alone.</p></div>
+<h2 id="review">Data, validator and reviewer gate</h2><p>The inputs were snapshotted before underwriting. Holdings were treated as the authoritative transaction record and the ledger was built with <code>--allow-stale-holdings</code>; the holdings-freshness warning is disclosed and does not waive market-price freshness. The ledger used 9 October 2026, the latest completed NSE session. DISA and METROBRAND required same-day deep-fetch repairs because the bulk ledger had an alias failure or a stale bar.</p><p>The dossier gate returned PASS for all four files: sizes were 33,071, 39,218, 30,335 and 37,976 bytes, with 37, 60, 37 and 38 formal references respectively. The dedicated reviewer configuration was loaded with four passes—source, consistency, tone and red_team—and a strict maximum of four complete rounds. The configured Qwen endpoint timed out after its retry budget for the reviewer passes in round 1. Under the configured unavailable-reviewer policy, the run continues with <strong>BEST_EFFORT_WITH_DISCLOSURE</strong>; no reviewer approval is claimed, and no fifth round is launched. Manual source, consistency, tone and bear-case checks remain recorded in the run manifest and diagnostics.</p>
+<h2 id="glossary">Glossary and decision rules</h2><p>ROCE is operating profit divided by capital employed. CFO/PAT is operating cash flow divided by profit after tax over the specified three-year window. ATR is average true range, a way to express price distance in units of normal movement. RSI is a speed indicator; an oversold reading can occur during a continuing decline. A target anchor is a cited forward-EPS times median P/E or a measured move. Asymmetry is target minus close divided by close minus stop. The rules change only when the cited metric crosses its floor and the new technical evidence passes the momentum and support tests.</p>
+<h2 id="references">References and retrieval record</h2><p>The dossiers hold the full source lists; the batch record links the main primary and market references used by the agents. The research cache contains 154 source records with URLs, as-of dates and retrieval timestamps. Older annual reports are used for historical context and are not relabeled as current data.</p><ol class="reflist"><li id="cite_note-1"><a href="https://www.screener.in/company/HGINFRA/consolidated/">https://www.screener.in/company/HGINFRA/consolidated/</a></li><li id="cite_note-2"><a href="https://www.screener.in/company/HGINFRA/consolidated/#quarters">https://www.screener.in/company/HGINFRA/consolidated/#quarters</a></li><li id="cite_note-3"><a href="https://www.screener.in/company/HGINFRA/consolidated/#profit-loss">https://www.screener.in/company/HGINFRA/consolidated/#profit-loss</a></li><li id="cite_note-4"><a href="https://www.screener.in/company/HGINFRA/consolidated/#balance-sheet">https://www.screener.in/company/HGINFRA/consolidated/#balance-sheet</a></li><li id="cite_note-5"><a href="https://www.screener.in/company/HGINFRA/consolidated/#cash-flow">https://www.screener.in/company/HGINFRA/consolidated/#cash-flow</a></li><li id="cite_note-6"><a href="https://www.screener.in/company/HGINFRA/consolidated/#ratios">https://www.screener.in/company/HGINFRA/consolidated/#ratios</a></li><li id="cite_note-7"><a href="https://stockanalysis.com/quote/nse/HGINFRA/financials/">https://stockanalysis.com/quote/nse/HGINFRA/financials/</a></li><li id="cite_note-8"><a href="https://stockanalysis.com/filings/NSE:HGINFRA/">https://stockanalysis.com/filings/NSE:HGINFRA/</a></li><li id="cite_note-9"><a href="https://hginfra.com/annual-report.php">https://hginfra.com/annual-report.php</a></li><li id="cite_note-10"><a href="https://www.hginfra.com/pdf/annual_report_fy_2024_25.pdf">https://www.hginfra.com/pdf/annual_report_fy_2024_25.pdf</a></li><li id="cite_note-11"><a href="https://www.bseindia.com/bseplus/AnnualReport/541019/69488541019.pdf">https://www.bseindia.com/bseplus/AnnualReport/541019/69488541019.pdf</a></li><li id="cite_note-12"><a href="https://hginfra.com/financial-results.php">https://hginfra.com/financial-results.php</a></li><li id="cite_note-13"><a href="https://www.hginfra.com/pdf/earnings_call_transcripts_q4_and_fy26.pdf">https://www.hginfra.com/pdf/earnings_call_transcripts_q4_and_fy26.pdf</a></li><li id="cite_note-14"><a href="https://hginfra.com/investor-presentation.php">https://hginfra.com/investor-presentation.php</a></li><li id="cite_note-15"><a href="https://hginfra.com/corporate-announcements.php">https://hginfra.com/corporate-announcements.php</a></li><li id="cite_note-16"><a href="https://hginfra.com/pdf/shareholding_pattern_as_on_mar_31_2025_1.pdf">https://hginfra.com/pdf/shareholding_pattern_as_on_mar_31_2025_1.pdf</a></li><li id="cite_note-17"><a href="https://www.nseindia.com/get-quotes/equity?symbol=HGINFRA">https://www.nseindia.com/get-quotes/equity?symbol=HGINFRA</a></li><li id="cite_note-18"><a href="https://www.bseindia.com/stock-share-price/hg-infra-engineering-ltd/hginfra/541019/">https://www.bseindia.com/stock-share-price/hg-infra-engineering-ltd/hginfra/541019/</a></li><li id="cite_note-19"><a href="https://www.icra.in/Rating/GetRationalReportFilePdf?Id=135034">https://www.icra.in/Rating/GetRationalReportFilePdf?Id=135034</a></li><li id="cite_note-20"><a href="https://www.icra.in/Rating/RatingDetails?CompanyId=14871&amp;CompanyName=H.G.%20Infra%20Engineering%20Limited">https://www.icra.in/Rating/RatingDetails?CompanyId=14871&amp;CompanyName=H.G.%20Infra%20Engineering%20Limited</a></li><li id="cite_note-21"><a href="https://www.careratings.com/upload/CompanyFiles/PR/202504130440_H.G._Infra_Engineering_Limited.pdf">https://www.careratings.com/upload/CompanyFiles/PR/202504130440_H.G._Infra_Engineering_Limited.pdf</a></li><li id="cite_note-22"><a href="https://trendlyne.com/fundamentals/financials/78664/HGINFRA/hg-infra-engineering-ltd/">https://trendlyne.com/fundamentals/financials/78664/HGINFRA/hg-infra-engineering-ltd/</a></li><li id="cite_note-23"><a href="https://trendlyne.com/fundamentals/documents-annual-reports/78664/HGINFRA/hg-infra-engineering-ltd/">https://trendlyne.com/fundamentals/documents-annual-reports/78664/HGINFRA/hg-infra-engineering-ltd/</a></li><li id="cite_note-24"><a href="https://trendlyne.com/fundamentals/documents-credit-ratings/78664/HGINFRA/hg-infra-engineering-ltd/">https://trendlyne.com/fundamentals/documents-credit-ratings/78664/HGINFRA/hg-infra-engineering-ltd/</a></li><li id="cite_note-25"><a href="https://hginfra.com/about-us.php">https://hginfra.com/about-us.php</a></li><li id="cite_note-26"><a href="https://hginfra.com/projects.php">https://hginfra.com/projects.php</a></li><li id="cite_note-27"><a href="https://hginfra.com/sustainability.php">https://hginfra.com/sustainability.php</a></li><li id="cite_note-28"><a href="https://nhai.gov.in/#/reports">https://nhai.gov.in/#/reports</a></li><li id="cite_note-29"><a href="https://morth.nic.in/annual-report">https://morth.nic.in/annual-report</a></li><li id="cite_note-30"><a href="https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&amp;id=0,1,304,366,537">https://indianrailways.gov.in/railwayboard/view_section.jsp?lang=0&amp;id=0,1,304,366,537</a></li><li id="cite_note-31"><a href="https://mnre.gov.in/annual-report">https://mnre.gov.in/annual-report</a></li><li id="cite_note-32"><a href="https://www.sebi.gov.in/legal/regulations/jan-2024/sebi-listing-obligations-and-disclosure-requirements-regulations-2015-last-amended-on-january-17-2024_81031.html">https://www.sebi.gov.in/legal/regulations/jan-2024/sebi-listing-obligations-and-disclosure-requirements-regulations-2015-last-amended-on-january-17-2024_81031.html</a></li><li id="cite_note-33"><a href="https://www.nseindia.com/report-detail/eq_security">https://www.nseindia.com/report-detail/eq_security</a></li><li id="cite_note-34"><a href="https://www.bseindia.com/markets/equity/EQReports/StockPrcHistori.aspx">https://www.bseindia.com/markets/equity/EQReports/StockPrcHistori.aspx</a></li><li id="cite_note-35"><a href="https://finance.yahoo.com/quote/HGINFRA.NS/history/">https://finance.yahoo.com/quote/HGINFRA.NS/history/</a></li><li id="cite_note-36"><a href="https://www.screener.in/company/HGINFRA/consolidated/#peers">https://www.screener.in/company/HGINFRA/consolidated/#peers</a></li><li id="cite_note-37"><a href="https://www.indiaratings.co.in/">https://www.indiaratings.co.in/</a></li><li id="cite_note-38"><a href="https://www.screener.in/company/MTARTECH/consolidated/">https://www.screener.in/company/MTARTECH/consolidated/</a></li><li id="cite_note-39"><a href="https://quartr.com/events/mtar-technologies-limited-mtartech-q1-25-26_FRVSJ2rQ">https://quartr.com/events/mtar-technologies-limited-mtartech-q1-25-26_FRVSJ2rQ</a></li><li id="cite_note-40"><a href="https://mtar.in/financial-information/">https://mtar.in/financial-information/</a></li><li id="cite_note-41"><a href="https://mtar.in/annual-report/">https://mtar.in/annual-report/</a></li><li id="cite_note-42"><a href="https://mtar.in/wp-content/uploads/2025/05/Investor-Presentation-Q4-FY25.pdf">https://mtar.in/wp-content/uploads/2025/05/Investor-Presentation-Q4-FY25.pdf</a></li><li id="cite_note-43"><a href="https://www.screener.in/company/DISAQ/consolidated/">https://www.screener.in/company/DISAQ/consolidated/</a></li><li id="cite_note-44"><a href="https://www.screener.in/company/DISAQ/">https://www.screener.in/company/DISAQ/</a></li><li id="cite_note-45"><a href="https://www.disa-india.com/investor-relations/financials/annual-reports/">https://www.disa-india.com/investor-relations/financials/annual-reports/</a></li><li id="cite_note-46"><a href="https://www.bseindia.com/stock-share-price/disa-india-ltd/disaq/500068/">https://www.bseindia.com/stock-share-price/disa-india-ltd/disaq/500068/</a></li><li id="cite_note-47"><a href="https://beta.bseindia.com/stock-share-price/disa-india-ltd/disaq/500068/financials-results/">https://beta.bseindia.com/stock-share-price/disa-india-ltd/disaq/500068/financials-results/</a></li><li id="cite_note-48"><a href="https://www.bseindia.com/bseplus/AnnualReport/500068/73824500068.pdf">https://www.bseindia.com/bseplus/AnnualReport/500068/73824500068.pdf</a></li></ol><p class="metadata">Workflow: watchlist_to_shortlist · Market: IN · Session date: 2026-10-09 · Active queue: 166/150 (pre-existing ceiling breach disclosed) · Archive: 122 · Shortlist additions: 0 · Reviewer status: BEST_EFFORT_WITH_DISCLOSURE</p>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>

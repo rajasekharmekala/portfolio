@@ -8,36 +8,33 @@ Every text colour is checked against its background for WCAG 2.1 AA (at least 4.
 
 ```css
 :root {
-  /* Neutral base, taken from the Wikipedia desktop palette */
-  --ink:          #202122;  /* body text: 16.1:1 on white */
-  --ink-strong:   #111827;  /* headings: 18.7:1 on white */
-  --muted:        #54595d;  /* captions, sources, secondary text: 7.1:1 on white */
-  --rule:         #a2a9b1;  /* table borders, dividers */
-  --rule-soft:    #d1d5db;  /* card borders, dashed bridges */
-  --surface:      #ffffff;  /* page background */
-  --surface-alt:  #f8f9fa;  /* table header rows, howto blocks */
-  --link:         #0645ad;  /* links: 8.5:1 on white */
-  --link-visited: #0b0080;
-
-  /* Verdict and status colours. Each has a text colour and a tint, both AA on each other. */
-  --keep-ink:        #14532d;  /* 8.3:1 on --keep-tint */
-  --keep-tint:       #dcfce7;
-  --accumulate-ink:  #1e3a8a;  /* 8.5:1 on --accumulate-tint */
-  --accumulate-tint: #dbeafe;
-  --trim-ink:        #78350f;  /* 8.2:1 on --trim-tint */
-  --trim-tint:       #fef3c7;
-  --exit-ink:        #7f1d1d;  /* 8.2:1 on --exit-tint */
-  --exit-tint:       #fee2e2;
-  --watch-ink:       #374151;  /* 9.4:1 on --watch-tint */
-  --watch-tint:      #f3f4f6;
-
-  /* Callout blocks */
-  --primer-accent:   #0645ad;  --primer-tint:   #eaf3ff;
-  --howto-accent:    #54595d;  --howto-tint:    #f8f9fa;
-  --case-accent:     #1e3a8a;  --case-tint:     #ffffff;
-  --trigger-accent:  #92400e;  --trigger-tint:  #fef3c7;
-  --example-accent:  #166534;  --example-tint:  #f0fdf4;
-  --takeaway-accent: #1e3a8a;  --takeaway-tint: #eff6ff;
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
 }
 ```
 

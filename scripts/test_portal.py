@@ -11,6 +11,56 @@ import portal_publish as portal
 from portal_publish import published_url, rewrite_published_links
 from email_digest import report_type, should_email, build_digest
 import send_email
+from assemble_report import build
+from bs4 import BeautifulSoup
+from datetime import datetime, timezone
+
+
+class ReportDesignTests(unittest.TestCase):
+    def test_new_report_has_pacific_header_and_embedded_design(self):
+        result = build('<h1>Report</h1>', generated_at=datetime(2026, 10, 9, 20, 30, tzinfo=timezone.utc))
+        self.assertIn('2026-10-09T13:30:00-07:00', result)
+        self.assertIn('01:30 PM PDT', result)
+        self.assertIn('research-desk-v1', result)
+        self.assertIn('Generated Date:', result)
+        winter = build('<h1>Report</h1>', generated_at=datetime(2026, 1, 9, 20, 30, tzinfo=timezone.utc))
+        self.assertIn('12:30 PM PST', winter)
+        with self.assertRaises(ValueError):
+            build('<h1>Report</h1>', generated_at=datetime(2026, 1, 9))
+
+    def test_named_reports_preserve_all_research_on_reassembly(self):
+        root = Path(__file__).resolve().parents[1] / 'docs'
+        paths = [root / 'reports/US_Market_Intelligence.html', root / 'reports/IN_Watchlist_to_Shortlist.html']
+        paths += [root / 'blogs' / (symbol + '_dossier.html') for symbol in ('STLNETWORK', 'STLTECH', 'TBOTEK', 'TDPOWERSYS')]
+        for path in paths:
+            with self.subTest(report=path.name):
+                original = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
+                content = original.select_one('main.report') or original.select_one('.report') or original.body
+                for decoration in content.select('.report-generated, .report-as-of, script, style, link'):
+                    decoration.decompose()
+                rendered = BeautifulSoup(build(str(content), layout_only=True), 'html.parser')
+                for decoration in rendered.main.select('.report-generated, .report-as-of'):
+                    decoration.decompose()
+                self.assertEqual(content.get_text(' ', strip=True), rendered.main.get_text(' ', strip=True))
+                self.assertEqual([anchor['href'] for anchor in content.select('a[href]')],
+                                 [anchor['href'] for anchor in rendered.main.select('a[href]')])
+                self.assertEqual([table.get_text(' ', strip=True) for table in content.select('table')],
+                                 [table.get_text(' ', strip=True) for table in rendered.main.select('table')])
+                self.assertTrue({node['id'] for node in content.select('[id]')} <= {node['id'] for node in rendered.main.select('[id]')})
+                self.assertIsNone(rendered.select_one('meta[name="generated-at"]'))
+
+    def test_layout_check_rejects_legacy_and_accepts_assembled_report(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'report.html'
+            path.write_text('<h1>Old shell</h1>')
+            with self.assertRaisesRegex(ValueError, 'assemble'):
+                portal.require_modern_report(path)
+            path.write_text(build('<h1>Modern report</h1>'))
+            portal.require_modern_report(path, require_generated=True)
+            path.write_text(build('<h1>Existing research</h1>', layout_only=True))
+            portal.require_modern_report(path)
+            with self.assertRaisesRegex(ValueError, 'not newly completed'):
+                portal.require_modern_report(path, require_generated=True)
 
 
 class PortalTests(unittest.TestCase):
@@ -22,7 +72,7 @@ class PortalTests(unittest.TestCase):
         (self.docs / "reports").mkdir()
         self.dossier = self.docs / "blogs" / "TEST_dossier.html"
         self.dossier.write_text('<h1>Test Company (NASDAQ: TEST)</h1><table class="infobox"><tr><th>Verdict</th><td>WATCH</td></tr></table>')
-        self.report = self.docs / "reports" / "US_Audit_2026-10-09.html"
+        self.report = self.docs / "reports" / "US_Audit.html"
         self.report.write_text('<h1>US Audit</h1>')
 
     def test_resolve_paths_and_fragments(self):
@@ -52,6 +102,9 @@ class PortalTests(unittest.TestCase):
             self.assertEqual(dossier["market"], "US")
             self.assertEqual(dossier["verdict"], "WATCH")
             self.assertEqual(dossier["timestampSource"], "git")
+            with self.assertRaisesRegex(ValueError, "assemble"):
+                portal.build_catalog([self.report], "Portfolio audit", "US", "Two positions need review")
+            self.report.write_text(build('<h1>US Audit</h1>', market='US', workflow='Portfolio audit'))
             completed = portal.build_catalog([self.report], "Portfolio audit", "US", "Two positions need review", ["Review concentration"])
             entry = next(entry for entry in completed["entries"] if entry["kind"] == "report")
             self.assertEqual(entry["timestampSource"], "workflow")
@@ -60,6 +113,14 @@ class PortalTests(unittest.TestCase):
             again = portal.build_catalog()
             self.assertEqual(next(item for item in again["entries"] if item["kind"] == "report")["updatedAt"], entry["updatedAt"])
             self.assertTrue(all((self.docs / item["url"]).is_file() for item in again["entries"]))
+
+    def test_redirect_pages_are_not_catalog_entries(self):
+        alias = self.docs / 'reports' / 'dated_report.html'
+        alias.write_text('<meta name="report-redirect" content="US_Audit_2026-10-09.html"><a href="US_Audit_2026-10-09.html">Report</a>')
+        with patch.object(portal, 'DOCS', self.docs), patch.object(portal, 'CATALOG', self.docs / 'portal-data.json'), patch.object(portal, 'UPDATES', self.docs / 'portal-updates.json'), patch.object(portal, 'git_dates', return_value={}):
+            catalog = portal.build_catalog()
+        self.assertEqual(len(catalog['entries']), 2)
+        self.assertNotIn('reports/dated_report.html', [entry['url'] for entry in catalog['entries']])
 
 
 class EmailDigestTests(unittest.TestCase):
@@ -82,7 +143,7 @@ class EmailDigestTests(unittest.TestCase):
             smtp.assert_not_called()
 
     def test_digest_is_summary_only(self):
-        source = Path(__file__).resolve().parents[1] / "docs" / "reports" / "US_Portfolio_Audit_2026-10-08.html"
+        source = Path(__file__).resolve().parents[1] / "docs" / "reports" / "US_Market_Intelligence_2026-10-09.html"
         body, plain = build_digest("Portfolio audit", "FULL REPORT CONTENT", source,
                                    summary="Concentration needs review", highlights=["Review <risk>"],
                                    shortlisted=["TEST"], displacements=["TEST replaces HELD"])

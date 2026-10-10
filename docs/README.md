@@ -1,8 +1,18 @@
 # Published reports (GitHub Pages)
 
+## Research Desk Generation
+
+All new reports and dossiers use the homepage-matched Research Desk shell. Read `.agents/skills/_shared/REPORT_DESIGN.md` and assemble the complete body with `.venv/bin/python scripts/assemble_report.py --body <body.html> --out <output.html> --market IN|US --kind report|dossier --workflow <label> --as-of <verified-session-date>`. Older skill Wikipedia heads/styles are obsolete. New completion commands reject missing modern layout or generation headers.
+
+Generation time is the actual assembly time in Pacific time (PDT/PST), separately from the research-session cutoff. All analysis, tables, calculations, citations and end references remain required, as do all research-quality gates. JavaScript only enhances navigation, table access, reading progress and printing; complete research remains readable without it.
+
+Future workflow filenames are stable, such as `US_Market_Intelligence.html`; dossiers keep `SYMBOL_dossier.html`. Explicit restyling of existing research uses `--layout-only`, which labels the header date "Layout updated", records the original generation time as unknown, and must not mark research newly completed or email it.
+
+## Catalog
+
 This folder is the only thing GitHub Pages serves.
 
-- `docs/reports/` holds only the latest published report for each report type and market. Publishing overwrites the file of the same name. Earlier versions are in git history.
+- `docs/reports/` uses stable future workflow filenames per market. Successive generations overwrite those stable files; previous versions remain in Git history. Older dated output names may still exist and are not automatically migrated.
 - `docs/index.html` is the stable vanilla-JavaScript homepage. `portal.js` fetches `portal-data.json` to render recent activity, latest workflow reports, and a searchable dossier library. `portal.css` owns its responsive layout. Rebuild commands regenerate data, not the homepage HTML.
 - Run `.venv/bin/python scripts/build_dossier_portal.py` to rebuild the catalog from existing published files. All generated destinations must exist under `docs/`. Older reports use last Git commit timestamps, labeled as such; unknown timestamps stay unknown. Read status is local to each browser and resets for a report when its update timestamp changes.
 - After a successful workflow, run `.venv/bin/python scripts/build_dossier_portal.py --completed docs/reports/<report>.html --workflow "Portfolio audit" --market US --summary "One-sentence decision overview" --highlight "Key change or risk" --repair-links`. `--completed` accepts multiple report/dossier paths; repeat `--highlight` as needed. Use stable workflow names. Include `portal-data.json` and `portal-updates.json` in publication commits. Do not stamp existing reports as newly completed merely to seed the homepage.

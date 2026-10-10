@@ -5,6 +5,8 @@ description: >-
 
 ---
 
+> **Design (binding):** read `../_shared/REPORT_DESIGN.md`. Every new dossier must be assembled using `scripts/assemble_report.py --market <MKT> --kind dossier --workflow "Company research" --as-of <session-date>`. Never copy an old dossier head or emit Wikipedia styling. Summary reports use `--kind report --workflow "Watchlist underwriting"` and stable `docs/reports/<MKT>_Watchlist_to_Shortlist.html`. Preserve every underwriting section, table, citation and reference, then run all existing quality gates. Newly completed publication rejects missing Research Desk layout and Pacific generation headers.
+
 > **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
 
 > **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Four complete rounds is a strict maximum. After round 4, fix remaining findings best-effort, rerun the validator, record and disclose unresolved items, and do not launch a fifth round.

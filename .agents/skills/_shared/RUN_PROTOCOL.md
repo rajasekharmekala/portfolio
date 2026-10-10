@@ -1,5 +1,9 @@
 # Run Protocol (binding for every workflow and skill)
 
+## Report Design (Binding)
+
+Read REPORT_DESIGN.md for every new report and dossier. Assemble the full research body through scripts/assemble_report.py with --market, --kind, --workflow and --as-of. Older Wikipedia HTML head/style examples in skills are obsolete presentation templates; preserve their analysis requirements, not their page shell. Generation time belongs in the Pacific header, separate from the verified session cutoff. New workflow output filenames are stable as specified in REPORT_DESIGN.md; this supersedes dated published-output naming instructions only. Evidence files and freshness checks remain session-dated. Newly completed publication rejects old-style output. All citations, references and quality gates remain mandatory.
+
 This protocol exists because earlier runs leaked state into later ones: prior-day ledgers, prior-day research,
 and hardcoded dates produced reports that looked current but were not. These rules apply to every run.
 

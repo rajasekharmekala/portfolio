@@ -9,6 +9,8 @@ description: >-
   data sources differ by market.
 ---
 
+> **Design (binding):** read `../_shared/REPORT_DESIGN.md`. Write the complete research body, then assemble with `scripts/assemble_report.py --market <MARKET> --kind dossier --workflow "Company research" --as-of <verified-session-date>`. Older Wikipedia heads and styles are obsolete; never copy a prior dossier shell. The renderer owns the homepage-matched design, Pacific generation header and interactions. Retain every research chapter, table, calculation, citation and end reference. All existing quality gates remain mandatory, and newly completed publication rejects missing Research Desk layout.
+
 > **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
 
 > **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Four complete rounds is a strict maximum. After round 4, fix remaining findings best-effort, rerun the validators, record and disclose unresolved items, and do not launch a fifth round.

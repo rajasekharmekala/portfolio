@@ -72,6 +72,14 @@ def git_dates():
 
 def read_entry(path, dates, updates):
     soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+    metadata = {tag.get("name"): tag.get("content", "") for tag in soup.select("meta[name]")}
+    generated_at = None
+    try:
+        generated = datetime.fromisoformat(metadata.get("generated-at", ""))
+        if generated.tzinfo is not None and generated.utcoffset() is not None:
+            generated_at = generated.isoformat()
+    except ValueError:
+        pass
     for decoration in soup.select(".glossary-tip, .glossary-tooltip, .tooltip-text, .tooltiptext, .sr-only"):
         decoration.decompose()
     heading = soup.find("h1") or soup.find("title")
@@ -85,7 +93,7 @@ def read_entry(path, dates, updates):
                 info.setdefault(label, cells[1].get_text(" ", strip=True))
     relative = path.relative_to(DOCS).as_posix()
     completion = updates.get(relative, {})
-    kind = "dossier" if path.name.endswith("_dossier.html") else "report"
+    kind = metadata.get("report-kind") or ("dossier" if path.name.endswith("_dossier.html") else "report")
     exchange = " ".join(value for key, value in info.items() if any(word in key for word in ("exchange", "ticker", "listing")))
     evidence = path.stem + " " + title + " " + exchange + " " + soup.get_text(" ", strip=True)[:3500]
     symbol_market = None
@@ -93,7 +101,7 @@ def read_entry(path, dates, updates):
     if registry_path.exists():
         registry = json.loads(registry_path.read_text(encoding="utf-8"))
         symbol_market = next((name for name in ("IN", "US") if path.stem.replace("_dossier", "") in registry.get(name, {}).get("symbols", {})), None)
-    market = completion.get("market") or symbol_market or ("US" if re.search(r"\b(US|NASDAQ|NYSE|OTCQX)\b", evidence.replace("_", " ")) else "IN" if re.search(r"\b(Indian|India|NSE|BSE)\b", evidence.replace("_", " ")) else "Other")
+    market = completion.get("market") or metadata.get("report-market") or symbol_market or ("US" if re.search(r"\b(US|NASDAQ|NYSE|OTCQX)\b", evidence.replace("_", " ")) else "IN" if re.search(r"\b(Indian|India|NSE|BSE)\b", evidence.replace("_", " ")) else "Other")
     verdict = next((value for key, value in info.items() if any(word in key for word in ("verdict", "decision", "recommendation"))), "")
     badge = soup.select_one(".verdict-badge, .decision-badge")
     verdict = verdict or (badge.get_text(" ", strip=True) if badge else "Not specified")
@@ -118,11 +126,32 @@ def read_entry(path, dates, updates):
     return {"id": relative, "url": relative, "title": title[:220], "kind": kind,
             "symbol": path.stem.replace("_dossier", "") if kind == "dossier" else "", "market": market,
             "sector": info.get("macro sector", info.get("sector", "Not specified")), "verdict": verdict[:150], "summary": summary[:360],
-            "updatedAt": completion.get("completedAt") or dates.get(relative),
-            "timestampSource": "workflow" if completion else "git" if dates.get(relative) else "unknown",
-            "reportDate": report_date.group() if report_date else None,
-            "workflow": completion.get("workflow") or ("Company research" if kind == "dossier" else workflow),
+            "generatedAt": generated_at,
+            "layoutUpdatedAt": metadata.get("layout-updated-at") or None,
+            "researchAsOf": metadata.get("research-as-of") or None,
+            "updatedAt": completion.get("completedAt") or (datetime.fromisoformat(generated_at).astimezone(timezone.utc).isoformat() if generated_at else dates.get(relative)),
+            "timestampSource": "workflow" if completion.get("completedAt") else "generated" if generated_at else "git" if dates.get(relative) else "unknown",
+            "reportDate": metadata.get("research-as-of") or (report_date.group() if report_date else None),
+            "workflow": completion.get("workflow") or metadata.get("report-workflow") or ("Company research" if kind == "dossier" else workflow),
             "highlights": completion.get("highlights", []), "completed": bool(completion)}
+
+
+def require_modern_report(path, require_generated=False):
+    soup = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+    design = soup.find("meta", attrs={"name": "report-design", "content": "research-desk-v1"})
+    stamp = soup.select_one('.report-header time[datetime]')
+    if not design or not stamp or not soup.select_one('.desk-masthead') or not soup.select_one('script[data-report-desk]'):
+        raise ValueError(f"{path.name}: assemble with scripts/assemble_report.py before publishing; Research Desk layout and Pacific generation header are required")
+    generated = datetime.fromisoformat(stamp["datetime"])
+    if generated.tzinfo is None or generated.utcoffset() is None:
+        raise ValueError(f"{path.name}: generation time must include a timezone")
+    if require_generated:
+        generation = soup.find("meta", attrs={"name": "generated-at"})
+        if generation is None or generation.get("content") != stamp["datetime"]:
+            raise ValueError(f"{path.name}: layout-only updates are not newly completed research; reassemble the final research body")
+        if soup.select_one('meta[name="report-kind"][content="report"]') and re.search(r"20\d{2}-\d{2}-\d{2}", path.stem):
+            raise ValueError(f"{path.name}: new workflow reports must use a stable filename without a date")
+    return True
 
 
 def build_catalog(completed=(), workflow=None, market=None, summary=None, highlights=(), repair_links=False):
@@ -133,8 +162,10 @@ def build_catalog(completed=(), workflow=None, market=None, summary=None, highli
         relative = path.relative_to(DOCS).as_posix()
         if not path.is_file() or path.suffix != ".html" or not relative.startswith(("blogs/", "reports/")):
             raise ValueError("Completion must reference an existing published HTML report")
+        require_modern_report(path, require_generated=True)
         updates[relative] = {"completedAt": now, "workflow": workflow, "market": market, "summary": summary, "highlights": list(highlights)}
     paths = sorted(set(DOCS.glob("blogs/*_dossier.html")) | set(DOCS.glob("reports/**/*.html")))
+    paths = [path for path in paths if not BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser").select_one('meta[name="report-redirect"]')]
     updates = {key: value for key, value in updates.items() if (DOCS / key).is_file()}
     dates = git_dates()
     entries = [read_entry(path, dates, updates) for path in paths]

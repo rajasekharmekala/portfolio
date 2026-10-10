@@ -8,6 +8,7 @@ Autonomous Dossier Generator for Underwriting Batch:
 
 import os
 import sys
+from assemble_report import build
 
 def build_dossier_html(
     symbol, company_name, bse_code, isin, macro_sector, fine_subsector, founded, hq,
@@ -743,4 +744,4 @@ sup.reference a:hover {
 </body>
 </html>
 """
-    return html
+    return build(html, market="IN", kind="dossier", workflow="Company research")
