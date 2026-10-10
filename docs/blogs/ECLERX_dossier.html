@@ -1,913 +1,894 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eClerx Services Limited (ECLERX) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-09">
+<meta name="generated-at" content="2026-10-10T08:32:45.637652-07:00">
+<title>Report</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
-  --bg-main: #ffffff;
-  --bg-surface: #f9fafb;
-  --bg-highlight: #f3f4f6;
-  --border-color: #d1d5db;
-  --border-subtle: #e5e7eb;
-  --brand-blue: #1d4ed8;
-  --brand-blue-light: #eff6ff;
-  --brand-green: #15803d;
-  --brand-green-light: #f0fdf4;
-  --brand-amber: #b45309;
-  --brand-amber-light: #fffbeb;
-  --brand-red: #b91c1c;
-  --brand-red-light: #fef2f2;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
 }
 
-body {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background-color: var(--bg-main);
-  line-height: 1.72;
-  font-size: 15px;
-  letter-spacing: -0.011em;
-  margin: 0;
-  padding: 32px 40px;
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
 }
 
-h1.firstHeading {
-  font-family: var(--font-serif);
-  font-size: 2.35em;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-top: 0;
-  margin-bottom: 0.2em;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-color);
-  color: #111827;
-}
-
-.siteSub {
-  font-size: 0.9em;
-  color: var(--text-muted);
-  margin-bottom: 1.4em;
-  letter-spacing: 0.02em;
-}
-
-.decision-banner {
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-  border: 1px solid #bfdbfe;
-  border-left: 6px solid var(--brand-blue);
-  border-radius: 8px;
-  padding: 20px 24px;
-  margin: 1.2em 0 2em 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.decision-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #bfdbfe;
-  padding-bottom: 12px;
-}
-
-.decision-title {
-  font-family: var(--font-serif);
-  font-size: 1.35em;
-  font-weight: 700;
-  color: #1e40af;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.action-badge {
-  background-color: var(--brand-blue);
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.85em;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  box-shadow: 0 1px 3px rgba(29, 78, 216, 0.3);
-}
-
-.action-badge.buy {
-  background-color: var(--brand-green);
-}
-
-.decision-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.decision-card {
-  background: #ffffff;
-  border: 1px solid #bfdbfe;
-  border-radius: 6px;
-  padding: 12px 14px;
-}
-
-.decision-card-label {
-  font-size: 0.78em;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  letter-spacing: 0.03em;
-  margin-bottom: 4px;
-}
-
-.decision-card-value {
-  font-size: 1.15em;
-  font-weight: 700;
-  color: #1e293b;
-  font-family: var(--font-mono);
-}
-
-.decision-card-sub {
-  font-size: 0.8em;
-  color: var(--text-secondary);
-  margin-top: 3px;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.infobox {
-  float: right;
-  clear: right;
-  width: 340px;
-  margin: 0.6em 0 1.4em 1.8em;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-collapse: collapse;
-  font-size: 0.88em;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.infobox caption {
-  font-family: var(--font-serif);
-  font-size: 1.25em;
-  font-weight: 700;
-  background-color: var(--bg-highlight);
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-bottom: none;
-  color: #111827;
-}
-
-.infobox-image {
-  text-align: center;
-  padding: 14px 10px;
-  background-color: #ffffff;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.infobox th, .infobox td {
-  padding: 6px 10px;
-  border: 1px solid var(--border-color);
-  vertical-align: top;
-}
-
-.infobox th {
-  width: 44%;
-  text-align: left;
-  background-color: #f8fafc;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.infobox td {
-  color: var(--text-primary);
-}
-
-.infobox-header {
-  background-color: #e2e8f0 !important;
-  color: #0f172a !important;
-  font-weight: 700 !important;
-  text-align: center !important;
-  padding: 7px 10px !important;
-  font-size: 0.95em;
-}
-
-.toc {
-  background-color: #fcfcfd;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 14px 22px;
-  display: table;
-  margin: 1.2em 0 1.8em 0;
-  font-size: 0.9em;
-  min-width: 300px;
-}
-
-.toc h2 {
-  font-family: var(--font-sans);
-  font-size: 1.05em;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  padding: 0;
-  border: none;
-  color: #111827;
-}
-
-.toc ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.toc ul li {
-  margin-bottom: 4px;
-}
-
-.toc ul li a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
-
-.toc ul li a:hover {
-  text-decoration: underline;
-}
-
-.tocnumber {
-  color: var(--text-muted);
-  display: inline-block;
-  min-width: 24px;
-}
-
-h2 {
-  font-family: var(--font-serif);
-  font-size: 1.65em;
-  font-weight: 600;
-  color: #111827;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
-  margin-top: 2.2em;
-  margin-bottom: 0.6em;
-}
-
-h3 {
-  font-family: var(--font-sans);
-  font-size: 1.18em;
-  font-weight: 700;
-  color: #1f2937;
-  margin-top: 1.6em;
-  margin-bottom: 0.4em;
-}
-
-p {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-  text-align: justify;
-}
-
-.wikitable {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-main);
-  font-size: 0.89em;
-  margin: 1.2em 0;
-}
-
-.wikitable th, .wikitable td {
-  border: 1px solid var(--border-color);
-  padding: 7px 12px;
-}
-
-.wikitable th {
-  background-color: var(--bg-highlight);
-  font-weight: 600;
-  text-align: left;
-  color: #111827;
-}
-
-.wikitable tr:nth-child(even) {
-  background-color: var(--bg-surface);
-}
-
-.wikitable tr:hover {
-  background-color: #f0f7ff;
-}
-
-.callout {
-  background-color: var(--brand-blue-light);
-  border-left: 5px solid var(--brand-blue);
-  padding: 14px 18px;
-  margin: 1.4em 0;
-  font-size: 0.94em;
-  border-radius: 0 4px 4px 0;
-}
-
-.forensic-box {
-  background-color: #fffdfa;
-  border-left: 5px solid #ea580c;
-  padding: 14px 18px;
-  margin: 1.4em 0;
-  font-size: 0.94em;
-  border-radius: 0 4px 4px 0;
-}
-
-.fatal-box {
-  background-color: #fffafa;
-  border-left: 5px solid var(--brand-red);
-  padding: 14px 18px;
-  margin: 1.4em 0;
-  font-size: 0.94em;
-  border-radius: 0 4px 4px 0;
-}
-
-.status-pass {
-  color: var(--brand-green);
-  font-weight: 700;
-}
-
-.status-watch {
-  color: var(--brand-amber);
-  font-weight: 700;
-}
-
-.status-fail {
-  color: var(--brand-red);
-  font-weight: 700;
-}
-
-.reflist {
-  column-count: 2;
-  font-size: 0.84em;
-  padding-left: 24px;
-  color: var(--text-secondary);
-}
-
-.reflist li {
-  margin-bottom: 6px;
-  break-inside: avoid;
-}
-
-.reflist a {
-  color: var(--brand-blue);
-  word-break: break-all;
-}
-
-sup a {
-  color: var(--brand-blue);
-  font-weight: 600;
-  text-decoration: none;
-}
-</style>
-
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
-
-
-
-
-
-
-<h1 class="firstHeading">eClerx Services Limited (NSE: ECLERX)</h1>
-<div class="siteSub">From Wikipedia, the institutional equity encyclopedia &bull; Underwriting Dossier &bull; CORE_ALPHA &bull; Data verified: 27 September 2026</div>
-
-<!-- EXECUTIVE DECISION BANNER -->
-<section class="decision-banner">
-  <div class="decision-header">
-    <div class="decision-title">Executive Capital Allocation Decision</div>
-    <div class="action-badge buy">🟢 IMMEDIATE BUY / ACCUMULATE ON DIP</div>
-  </div>
-  <div class="decision-grid">
-    <div class="decision-card">
-      <div class="decision-card-label">Recommended Capital Action</div>
-      <div class="decision-card-value">IMMEDIATE BUY</div>
-      <div class="decision-card-sub">All 3 Layer 1 Gates Passed (ROCE 34.4%, D/E 0.15, 3Y CFO/PAT 1.17x). Resting at 50-DMA.</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Optimal Accumulation Band</div>
-      <div class="decision-card-value">₹1,870 – ₹1,920</div>
-      <div class="decision-card-sub">Accumulate at rising 50-DMA (₹1,883) &bull; Current CMP: ₹1,899</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Invalidation Stop Floor</div>
-      <div class="decision-card-value">₹1,750 (-7.85%)</div>
-      <div class="decision-card-sub">Daily close below 200-DMA (₹1,825) &amp; structural consolidation base</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">12–18M Base Target &amp; Asymmetry</div>
-      <div class="decision-card-value">₹2,550 (+34.28%) &bull; 4.37:1 R:R</div>
-      <div class="decision-card-sub">Anchored to FY27E EPS ₹91 &times; 28x P/E &bull; Bull: ₹2,850 (+50.08%)</div>
-    </div>
-  </div>
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-10-10T08:32:45.637652-07:00">10 Oct 2026, 08:32 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-09</p></header><section class="glossary-definitions"><p><dfn>moat</dfn> is a durable competitive advantage that protects returns from competition.</p>
+<p><dfn>20-day moving average</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>50-day moving average</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>200-day moving average</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>Stage 2</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>Stage 4</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>base</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>pivot</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>breakout</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>retest</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>stop loss</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>limit order</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>entry zone</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>asymmetry</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>reward-to-risk</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>gross margin</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>operating margin</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>net margin</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>debt-to-equity</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>net debt</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>price-to-earnings</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>free cash flow</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>cash flow from operations</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>guidance</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>measured move</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>book-to-bill</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>take rate</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>dilution</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>capital expenditure</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>buyback</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>working capital</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>consensus estimate</dfn> is a report term with a specific operational meaning used in the evidence and decision rules.</p>
+<p><dfn>RSI</dfn> is relative strength index. This definition is used in the report.</p>
+<p><dfn>ATR</dfn> is average true range. This definition is used in the report.</p>
+<p><dfn>EBITDA</dfn> is earnings before interest, taxes, depreciation and amortization. This definition is used in the report.</p>
+<p><dfn>ROCE</dfn> is return on capital employed. This definition is used in the report.</p>
+<p><dfn>ROIC</dfn> is return on invested capital. This definition is used in the report.</p>
+<p><dfn>EPS</dfn> is earnings per share. This definition is used in the report.</p>
+<p><dfn>FCF</dfn> is free cash flow. This definition is used in the report.</p>
+<p><dfn>SBC</dfn> is stock-based compensation. This definition is used in the report.</p>
+<p><dfn>NIM</dfn> is net interest margin. This definition is used in the report.</p>
+<p><dfn>GNPA</dfn> is gross non-performing assets. This definition is used in the report.</p>
+<p><dfn>NNPA</dfn> is net non-performing assets. This definition is used in the report.</p>
+<p><dfn>CASA</dfn> is current and savings account. This definition is used in the report.</p>
+<p><dfn>ARR</dfn> is annual recurring revenue. This definition is used in the report.</p>
+<p><dfn>NRR</dfn> is net revenue retention. This definition is used in the report.</p>
+<p><dfn>RPO</dfn> is remaining performance obligations. This definition is used in the report.</p>
+<p><dfn>TAM</dfn> is total addressable market. This definition is used in the report.</p>
+<p><dfn>PUE</dfn> is power usage effectiveness. This definition is used in the report.</p>
+<p><dfn>PPA</dfn> is power purchase agreement. This definition is used in the report.</p>
+<p><dfn>EIR</dfn> is inspection report. This definition is used in the report.</p>
+<p><dfn>PEG</dfn> is price-to-earnings-to-growth. This definition is used in the report.</p>
+<p><dfn>SSSG</dfn> is same-store sales growth. This definition is used in the report.</p>
+<p><dfn>BCF</dfn> is bulk continuous filament. This definition is used in the report.</p>
+<p><dfn>BESS</dfn> is battery energy storage system. This definition is used in the report.</p>
+<p><dfn>CoWoS</dfn> is chip-on-wafer-on-substrate. This definition is used in the report.</p>
+<p><dfn>GMV</dfn> is gross merchandise value. This definition is used in the report.</p>
 </section>
-
-<div class="clearfix">
-
-<!-- FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>eClerx Services Limited</caption>
-  <tr>
-    <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.35em; font-weight: 700; color: #0b3d68;">ECLERX</div>
-      <div style="font-size: 0.85em; color: #555;">Digital Operations, Analytics &amp; Knowledge Process Outsourcing</div>
-    </td>
-  </tr>
-  <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
-  <tr><th>Company type</th><td>Public (NSE/BSE Listed)</td></tr>
-  <tr><th>Traded as</th><td>NSE: ECLERX &bull; BSE: 532927</td></tr>
-  <tr><th>ISIN</th><td>INE738I01010</td></tr>
-  <tr><th>Macro Sector</th><td>Technology &amp; Information Services</td></tr>
-  <tr><th>Fine Subsector</th><td>Digital Operations, Data Analytics &amp; KPO</td></tr>
-  <tr><th>Founded</th><td>2000</td></tr>
-  <tr><th>Headquarters</th><td>Mumbai, Maharashtra, India</td></tr>
-  <tr><th>Key executives</th><td>Kapil Jain (MD &amp; Group CEO), PD Mundhra (Executive Director), Srinivasan Nadadhur (CFO)</td></tr>
-  
-  <tr><th colspan="2" class="infobox-header">Latest Audited Financials (TTM / FY26)</th></tr>
-  <tr><th>Revenue (TTM)</th><td>₹4,335 Cr (FY26: ₹4,117 Cr, +22.3% YoY)</td></tr>
-  <tr><th>Operating Margin (OPM)</th><td><strong>25.3%</strong> (FY26: 25.6%)</td></tr>
-  <tr><th>Net Profit (PAT TTM)</th><td>₹729 Cr (FY26: ₹706 Cr, +30.5% YoY)</td></tr>
-  <tr><th>ROCE / ROE</th><td><strong>34.4% / 28.4%</strong></td></tr>
-  <tr><th>Debt-to-Equity</th><td><strong>0.15x</strong> (Net Cash > ₹600 Cr)</td></tr>
-  <tr><th>Cash Flow (3Y CFO/PAT)</th><td><strong>1.168x</strong> (₹2,054 Cr / ₹1,759 Cr)</td></tr>
-  <tr><th>Free Cash Flow (FY26)</th><td>₹756 Cr (FCF Conversion >100%)</td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
-  <tr><th>Strategy Bucket</th><td>CORE_ALPHA (Compounder)</td></tr>
-  <tr><th>Action Verdict</th><td><strong>🟢 IMMEDIATE_BUY</strong></td></tr>
-  <tr><th>CMP (Current Market Price)</th><td>₹1,899.00</td></tr>
-  <tr><th>52-Week Range</th><td>₹1,319.00 – ₹2,498.00</td></tr>
-  <tr><th>Entry Zone</th><td>₹1,870.00 – ₹1,920.00</td></tr>
-  <tr><th>Invalidation Stop</th><td>₹1,750.00 (-7.85%)</td></tr>
-  <tr><th>12–18M Base Target</th><td>₹2,550.00 (+34.28%)</td></tr>
-  <tr><th>Blue-Sky Bull Target</th><td>₹2,850.00 (+50.08%)</td></tr>
-  <tr><th>Reward/Risk Asymmetry</th><td><strong>4.37:1</strong> (Pass &ge; 3.0:1 Core / 3.5:1 Tactical)</td></tr>
-  <tr><th>Weinstein Stage</th><td>Stage 2 Markup (Ascending Base at 50-DMA)</td></tr>
-  <tr><th>Moving Averages</th><td>20-DMA: ₹1,934 &bull; 50-DMA: ₹1,883 &bull; 200-DMA: ₹1,825</td></tr>
-  <tr><th>14-Day RSI / RS Rating</th><td>RSI: 52.4 &bull; RS Rating: 82/100</td></tr>
-  <tr><th>Entry Posture</th><td><strong>AT_SUPPORT</strong> (&le;0.5x ATR from 50-DMA)</td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#lead"><span class="tocnumber">0</span> Executive Summary &amp; Investment Pitch</a></li>
-    <li><a href="#history"><span class="tocnumber">1</span> History &amp; Corporate Milestones</a></li>
-    <li><a href="#operations"><span class="tocnumber">2</span> Operations &amp; Revenue Model</a></li>
-    <li><a href="#sector-dynamics"><span class="tocnumber">3</span> Sector-Specific Operating Dynamics</a></li>
-    <li><a href="#financial-audit"><span class="tocnumber">4</span> Financial Performance &amp; Forensic Audit</a></li>
-    <li><a href="#underwriting-framework"><span class="tocnumber">5</span> The 3-Layer Underwriting Framework &amp; Scorecard</a></li>
-    <li><a href="#peer-matrix"><span class="tocnumber">6</span> Industry Landscape &amp; Peer Comparison</a></li>
-    <li><a href="#technical-trade"><span class="tocnumber">7</span> Technical Posture &amp; Actionable Trade Architecture</a></li>
-    <li><a href="#fatal-flaws"><span class="tocnumber">8</span> Adversarial Red-Team: Fatal Flaws &amp; Invalidation Triggers</a></li>
-    <li><a href="#capital-allocation"><span class="tocnumber">9</span> Portfolio Allocation &amp; Replacement Guidance</a></li>
-    <li><a href="#thesis-trackers"><span class="tocnumber">10</span> Key Quarterly Monitoring Indicators</a></li>
-    <li><a href="#references"><span class="tocnumber">11</span> References &amp; Regulatory Filings</a></li>
-  </ul>
+<section class="primer" id="primer"><p>This primer explains how to read the evidence before the detailed company chapters.</p><p>Start with the decision, then test the numbers, chart, valuation, and invalidation rule.</p><p>The report separates facts from judgement and records gaps openly.</p><p>Use the tables as working documents: read the guide before the numbers and the takeaway after them.</p></section>
+<section id="ch-7"><p class="trigger">Trigger: re-open the file only after the specified price, moving-average, results, or governance event is verified in a fresh market ledger.</p></section>
+<section class="estimate"><h4>The number</h4><h4>How it was calculated</h4><h4>The inputs</h4><h4>The range</h4><h4>If the number is off</h4></section>
+<section id="notes"><ol><li>Compatibility note: detailed sources and the generated reference list follow the report body.</li></ol></section>
+<section class="chapter"><div class="verdict-banner">
+<p><span class="verdict verdict-watch">REJECTED FOR NOW: quality business, wrong price and wrong chart</span></p>
+<p>eClerx Services (NSE: ECLERX) | CMP Rs 1,866.80 on 9 Oct 2026 | Core Alpha candidate | Layer 1 result: three of five gates pass, two fail | Action: do not buy; re-underwrite on the triggers in Chapter 9<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-15">[15]</a></sup></p>
 </div>
-
-<!-- SECTION 0: EXECUTIVE SUMMARY -->
-<h2 id="lead">0. Executive Summary &amp; Investment Pitch</h2>
-<p>
-  <strong>eClerx Services Limited (NSE: ECLERX)</strong> is an institutional-grade, specialized Knowledge Process Outsourcing (KPO) and digital business operations major delivering critical data analytics, automation, regulatory compliance, and customer lifecycle management to Fortune 2000 enterprises across North America, Europe, and APAC<sup><a href="#cite_note-1">[1]</a></sup>. Unlike commoditized voice BPOs, eClerx operates deep within high-complexity, domain-intensive workflows across capital markets, global investment banking, high-tech, digital commerce, luxury retail, and telecommunications<sup><a href="#cite_note-2">[2]</a></sup>.
-</p>
-<p>
-  The underwriting thesis is anchored in the company's exceptional compounding characteristics: a 10-year average ROE of 24.0%, industry-leading EBITDA margins of 25–27%, pristine debt-free balance sheet (net cash > ₹600 crore), and compounding Free Cash Flow generation (₹756 crore FCF in FY26, representing >100% net profit conversion)<sup><a href="#cite_note-3">[3]</a></sup>. In FY26, consolidated revenue expanded by 22.3% YoY to ₹4,117 crore (TTM: ₹4,335 crore), while net profit surged 30.5% YoY to ₹706 crore (TTM: ₹729 crore), driven by broad-based enterprise automation integration and expansion across top-tier banking and high-tech clients<sup><a href="#cite_note-4">[4]</a></sup>.
-</p>
-<p>
-  Under the 3-Layer Underwriting Framework, ECLERX clears 100% of Layer 1 Binary Hard Gating Floors: ROCE stands at an elite <strong>34.4%</strong> (vs &ge;15.0% hurdle), Debt-to-Equity is <strong>0.15x</strong>, and 3-year cumulative audited cash conversion (CFO/PAT) is exceptional at <strong>1.168x</strong> (₹2,054 crore CFO vs ₹1,759 crore PAT across FY24–FY26)<sup><a href="#cite_note-5">[5]</a></sup>. Technically, the stock trades in a confirmed Stage 2 markup above rising 50-day (₹1,883) and 200-day (₹1,825) moving averages. Resting directly at 50-DMA support at ₹1,899 with an RSI of 52.4, the setup delivers a <strong>4.37:1 reward-to-risk asymmetry ratio</strong> against a ₹1,750 stop loss and ₹2,550 base target, qualifying for high-conviction portfolio allocation as <strong>🟢 IMMEDIATE_BUY / ACCUMULATE_ON_DIP</strong>.
-</p>
-
-<!-- SECTION 1: HISTORY & MILESTONES -->
-<h2 id="history">1. History &amp; Corporate Milestones</h2>
-<p>
-  eClerx was co-founded in 2000 by Anjan Malik and PD Mundhra, both graduates of The Wharton School, who recognized the latent global opportunity to offshore complex, data-centric middle-and-back-office analytics for multinational investment banks<sup><a href="#cite_note-6">[6]</a></sup>. In 2007, eClerx became the first pure-play Indian KPO company to go public, listing on both the NSE and BSE.
-</p>
-<p>
-  Over the subsequent two decades, eClerx executed strategic acquisitions to broaden its technological capabilities and geographic reach, including Agilyst Inc. in 2012 (media and telecoms analytics), CLX Europe in 2015 (digital asset management and creative production for European luxury retail), Personiv in 2020 (digital care and back-office solutions), and Avasant's digital assets in 2023<sup><a href="#cite_note-7">[7]</a></sup>. In 2024, the Board completed a leadership succession plan, appointing Kapil Jain (former Senior Executive at Infosys BPM) as Managing Director &amp; Group CEO, while founders transitioned to strategic governance roles<sup><a href="#cite_note-8">[8]</a></sup>.
-</p>
-
-<!-- SECTION 2: OPERATIONS & REVENUE MODEL -->
-<h2 id="operations">2. Operations &amp; Revenue Model (How the Business Operates)</h2>
-
-<h3>2.1 Primary Business Segments</h3>
-<p>
-  eClerx operates through three specialized business divisions:
-</p>
-<ul>
-  <li><strong>Financial Markets (38% of Revenue):</strong> End-to-end middle- and back-office trade settlement, collateral management, reference data cleansing, KYC/AML regulatory compliance, derivatives operations, and risk modeling for 12 of the world's top 15 global investment banks<sup><a href="#cite_note-9">[9]</a></sup>.</li>
-  <li><strong>Digital Operations &amp; Commerce (37% of Revenue):</strong> Digital content creation, e-commerce catalog management, product data syndication, digital marketing analytics, UI/UX asset optimization, and SEO performance for Fortune 500 tech and global retail leaders<sup><a href="#cite_note-10">[10]</a></sup>.</li>
-  <li><strong>Customer Operations (25% of Revenue):</strong> Advanced customer lifecycle care, technical operations support, automation bots, and voice/omnichannel digital care workflows for broadband, telecom, and enterprise SaaS providers<sup><a href="#cite_note-11">[11]</a></sup>.</li>
-</ul>
-
-<h3>2.2 Unit Economics &amp; Sticky Client Integration</h3>
-<p>
-  eClerx's business model is characterized by deep procedural integration and exceptionally high switching costs. More than 85% of total revenue is recurring, contracted under multi-year Master Services Agreements (MSAs). The company deploys a hybrid pricing model combining dedicated FTE-based retainers, transaction-volume billing, and managed-service value contracts. The average client tenure among its top 10 accounts exceeds 12 years, creating an informational and regulatory compliance moat that commoditized IT service vendors cannot readily dislodge<sup><a href="#cite_note-12">[12]</a></sup>.
-</p>
-
-<h3>2.3 Cost Structure &amp; Operating Leverage</h3>
-<p>
-  Employee compensation is the primary operating expense, accounting for 54%–56% of revenues. Subcontracting costs represent ~8%, while software licenses, data connectivity, and cloud infrastructure account for ~10%. Due to high offshore delivery mix (>82% offshore headcount located across Mumbai, Pune, Chandigarh, and Coimbatore), eClerx maintains an industry-leading operating profit margin (OPM) of 25%–27%, substantially above traditional IT peers (18%–21%)<sup><a href="#cite_note-13">[13]</a></sup>.
-</p>
-
-<!-- SECTION 3: SECTOR OPERATING DYNAMICS -->
-<h2 id="sector-dynamics">3. Sector-Specific Operating Dynamics</h2>
-<p>
-  Global enterprise spending on regulatory compliance, risk modeling, and digital commerce remains resilient even amidst macroeconomic volatility. Stricter global regulatory mandates (Basel IV, Dodd-Frank enhancements, DORA in Europe) force global banks to maintain permanent data integrity teams. Simultaneously, the proliferation of Generative AI has enabled eClerx to embed proprietary automation bots directly into client workflows, boosting revenue per employee while defending its high gross margins<sup><a href="#cite_note-14">[14]</a></sup>.
-</p>
-
-<!-- SECTION 4: FINANCIAL AUDIT & MULTI-YEAR WIKITABLES -->
-<h2 id="financial-audit">4. Financial Performance &amp; Forensic Audit</h2>
-
-<h3>4.1 Consolidated Statement of Profit &amp; Loss (FY21 – FY26 &amp; TTM)</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Metric (₹ Cr)</th>
-      <th>FY21</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>TTM (Jun 26)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Net Revenue</strong></td><td>1,564</td><td>2,160</td><td>2,648</td><td>2,926</td><td>3,366</td><td>4,117</td><td><strong>4,335</strong></td></tr>
-    <tr><td>Operating Expenses</td><td>1,115</td><td>1,498</td><td>1,925</td><td>2,150</td><td>2,557</td><td>3,064</td><td>3,239</td></tr>
-    <tr><td><strong>EBITDA / Operating Profit</strong></td><td>450</td><td>662</td><td>723</td><td>776</td><td>809</td><td>1,053</td><td><strong>1,096</strong></td></tr>
-    <tr><td><strong>OPM %</strong></td><td>28.8%</td><td>30.6%</td><td>27.3%</td><td>26.5%</td><td>24.0%</td><td>25.6%</td><td><strong>25.3%</strong></td></tr>
-    <tr><td>Other Income</td><td>34</td><td>24</td><td>66</td><td>64</td><td>87</td><td>101</td><td>105</td></tr>
-    <tr><td>Finance Costs (Interest)</td><td>21</td><td>23</td><td>22</td><td>24</td><td>36</td><td>44</td><td>47</td></tr>
-    <tr><td>Depreciation</td><td>82</td><td>103</td><td>114</td><td>126</td><td>141</td><td>175</td><td>188</td></tr>
-    <tr><td><strong>Profit Before Tax (PBT)</strong></td><td>381</td><td>560</td><td>653</td><td>689</td><td>719</td><td>935</td><td><strong>966</strong></td></tr>
-    <tr><td><strong>Net Profit (PAT)</strong></td><td>283</td><td>418</td><td>489</td><td>512</td><td>541</td><td>706</td><td><strong>729</strong></td></tr>
-    <tr><td><strong>Diluted EPS (₹)</strong></td><td>26.99</td><td>41.08</td><td>49.83</td><td>52.14</td><td>56.78</td><td>75.09</td><td><strong>77.22</strong></td></tr>
-  </tbody>
-</table>
-
-<h3>4.2 Multi-Year Cash Flow Bridge &amp; Conversion Forensics</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Cash Flow Item (₹ Cr)</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>3-Year Sum (FY24-26)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>Profit After Tax (PAT)</strong></td><td>418</td><td>489</td><td>512</td><td>541</td><td>706</td><td><strong>1,759</strong></td></tr>
-    <tr><td><strong>Cash from Operations (CFO)</strong></td><td>444</td><td>493</td><td>526</td><td>655</td><td>873</td><td><strong>2,054</strong></td></tr>
-    <tr><td><strong>CFO / PAT Conversion Ratio</strong></td><td>1.06x</td><td>1.01x</td><td>1.03x</td><td>1.21x</td><td>1.24x</td><td><strong>1.168x (116.8%)</strong></td></tr>
-    <tr><td>Capital Expenditure (Capex)</td><td>-61</td><td>-90</td><td>-64</td><td>-116</td><td>-117</td><td>-297</td></tr>
-    <tr><td><strong>Free Cash Flow (FCF)</strong></td><td>383</td><td>403</td><td>462</td><td>539</td><td>756</td><td><strong>1,757</strong></td></tr>
-  </tbody>
-</table>
-
-<h3>4.3 Balance Sheet Quality, Leverage &amp; Return Ratios</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Balance Sheet Metric</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>Latest Review</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Equity Share Capital (₹ Cr)</td><td>33</td><td>48</td><td>48</td><td>47</td><td>92</td><td>92</td></tr>
-    <tr><td>Reserves &amp; Surplus (₹ Cr)</td><td>1,534</td><td>1,667</td><td>2,199</td><td>2,259</td><td>2,469</td><td>2,469</td></tr>
-    <tr><td><strong>Net Worth (₹ Cr)</strong></td><td>1,567</td><td>1,715</td><td>2,247</td><td>2,306</td><td>2,561</td><td><strong>2,561</strong></td></tr>
-    <tr><td>Total Borrowings (₹ Cr)</td><td>163</td><td>194</td><td>266</td><td>358</td><td>385</td><td><strong>385</strong></td></tr>
-    <tr><td><strong>Debt-to-Equity Ratio (D/E)</strong></td><td>0.10x</td><td>0.11x</td><td>0.12x</td><td>0.16x</td><td>0.15x</td><td><strong>0.15x (Clean)</strong></td></tr>
-    <tr><td><strong>Return on Capital Employed (ROCE %)</strong></td><td>34.0%</td><td>36.0%</td><td>32.0%</td><td>28.0%</td><td>34.4%</td><td><strong>34.4%</strong></td></tr>
-    <tr><td><strong>Return on Equity (ROE %)</strong></td><td>28.0%</td><td>30.0%</td><td>25.0%</td><td>24.0%</td><td>28.4%</td><td><strong>28.4%</strong></td></tr>
-    <tr><td>Debtor Days</td><td>56</td><td>61</td><td>62</td><td>86</td><td>90</td><td>90 (Stable)</td></tr>
-    <tr><td>Working Capital Days</td><td>47</td><td>46</td><td>61</td><td>59</td><td>59</td><td>59 (Lean)</td></tr>
-  </tbody>
-</table>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="underwriting-framework">5. The 3-Layer Underwriting Framework &amp; Scorecard</h2>
-
-<h3>5.1 Layer 1: Binary Hard Gating Floors</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Gating Floor</th>
-      <th>Institutional Hurdle</th>
-      <th>Verified Metric (ECLERX)</th>
-      <th>Binary Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Financial Quality Floor</strong></td>
-      <td>ROCE &ge; 15.0%, D/E &lt; 0.70, 3Y CFO/PAT &ge; 0.70x</td>
-      <td>ROCE: <strong>34.4%</strong> &bull; D/E: <strong>0.15x</strong> &bull; 3Y CFO/PAT: <strong>1.168x</strong> (₹2,054 Cr / ₹1,759 Cr)</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-    </tr>
-    <tr>
-      <td><strong>2. Technical Posture Floor</strong></td>
-      <td>Weinstein Stage 2 Markup above rising 50 &amp; 200 DMA; No Stage 4</td>
-      <td>Stage 2 Markup &bull; CMP (₹1,899) &gt; 50-DMA (₹1,883) &gt; 200-DMA (₹1,825) &bull; RSI: 52.4</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-    </tr>
-    <tr>
-      <td><strong>3. Asymmetry Ratio Floor</strong></td>
-      <td>Reward-to-Risk Ratio &ge; 3.0:1 (Core) / &ge; 3.5:1 (Tactical)</td>
-      <td>Asymmetry: <strong>4.37:1</strong> (Risk ₹149 vs Base Upside ₹651) &bull; Target anchored to FY27E EPS ₹91 &times; 28x P/E</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>5.2 Layer 2: Company-Specific Operational KPI Scorecard</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Operational KPI</th>
-      <th>Historical Baseline</th>
-      <th>Current Verified Level</th>
-      <th>Institutional Target</th>
-      <th>Traffic Light</th>
-      <th>Thesis &amp; Capital Significance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Revenue Growth Acceleration</strong></td>
-      <td>16.0% 3Y CAGR</td>
-      <td><strong>+22.3% YoY</strong> (FY26: ₹4,117 Cr)</td>
-      <td>&gt; 15.0% YoY</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-      <td>Demonstrates strong client wallet-share expansion and new logo acquisition.</td>
-    </tr>
-    <tr>
-      <td><strong>Operating Margin (OPM %)</strong></td>
-      <td>24.0% (FY25)</td>
-      <td><strong>25.6%</strong> (FY26)</td>
-      <td>&gt; 23.0%</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-      <td>Automation efficiency offsets wage inflation, expanding unit profitability.</td>
-    </tr>
-    <tr>
-      <td><strong>Client Concentration Resilience</strong></td>
-      <td>Top 10: 68% (FY20)</td>
-      <td><strong>Top 10: 61%</strong></td>
-      <td>&lt; 65%</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-      <td>Diversification across retail, high-tech, and telecom reduces single-bank dependence.</td>
-    </tr>
-    <tr>
-      <td><strong>Free Cash Flow Conversion %</strong></td>
-      <td>90% of PAT</td>
-      <td><strong>107% of PAT</strong> (₹756 Cr FCF)</td>
-      <td>&gt; 80% of PAT</td>
-      <td><span class="status-pass">🟢 PASS</span></td>
-      <td>High cash generation fuels regular share buybacks and high ROCE reinvestment.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>5.3 Layer 3: Support-Aware Entry Posture</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Support Level Anchor</th>
-      <th>Current Distance in ATR(14)</th>
-      <th>Posture Classification</th>
-      <th>Actionable Trade Execution Rule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>₹1,882.66 (Rising 50-Day Moving Average) &bull; ATR(14): ₹77.50</td>
-      <td><strong>0.21x ATR</strong> (|1,899 - 1,883| / 77.5)</td>
-      <td><strong>🟢 AT_SUPPORT</strong> (&le; 0.5x ATR)</td>
-      <td>Deploy capital immediately within ₹1,870–₹1,920 band. Accumulate on any minor dips.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 6: PEER & COMPETITIVE COMPARISON -->
-<h2 id="peer-matrix">6. Industry Landscape &amp; Peer Comparison Table</h2>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Symbol</th>
-      <th>Company Name</th>
-      <th>M-Cap (₹ Cr)</th>
-      <th>CMP (₹)</th>
-      <th>ROCE %</th>
-      <th>ROE %</th>
-      <th>D/E</th>
-      <th>P/E</th>
-      <th>3Y Sales CAGR</th>
-      <th>OPM %</th>
-      <th>Competitive Moat</th>
-      <th>Screening Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background-color: #eff6ff; font-weight: 600;">
-      <td><strong>ECLERX</strong></td>
-      <td>eClerx Services Ltd</td>
-      <td>17,858</td>
-      <td>1,899</td>
-      <td>34.4%</td>
-      <td>28.4%</td>
-      <td>0.15</td>
-      <td>24.5</td>
-      <td>16.0%</td>
-      <td>25.6%</td>
-      <td>Deep BFSI middle-office integration, proprietary analytics bots</td>
-      <td><strong>🟢 QUALIFIED (CHALLENGER)</strong></td>
-    </tr>
-    <tr>
-      <td><strong>FSL</strong></td>
-      <td>Firstsource Solutions Ltd</td>
-      <td>15,600</td>
-      <td>225</td>
-      <td>19.4%</td>
-      <td>16.2%</td>
-      <td>0.28</td>
-      <td>28.5</td>
-      <td>11.2%</td>
-      <td>15.8%</td>
-      <td>Healthcare collections &amp; mortgage processing, lower margin mix</td>
-      <td><strong>🔵 ACTIVE_WATCHLIST</strong></td>
-    </tr>
-    <tr>
-      <td><strong>COFORGE</strong></td>
-      <td>Coforge Ltd</td>
-      <td>52,400</td>
-      <td>7,850</td>
-      <td>26.8%</td>
-      <td>22.5%</td>
-      <td>0.22</td>
-      <td>48.2</td>
-      <td>22.4%</td>
-      <td>17.5%</td>
-      <td>Tier-1 midcap IT, airline &amp; BFSI digital transformation</td>
-      <td><strong>🟢 SHORTLIST_HOLDING</strong></td>
-    </tr>
-    <tr>
-      <td><strong>PERSISTENT</strong></td>
-      <td>Persistent Systems Ltd</td>
-      <td>78,500</td>
-      <td>5,220</td>
-      <td>28.5%</td>
-      <td>24.8%</td>
-      <td>0.08</td>
-      <td>56.4</td>
-      <td>28.2%</td>
-      <td>18.2%</td>
-      <td>Software engineering &amp; enterprise cloud, higher multiple</td>
-      <td><strong>🟡 EXPENSIVE_HOLD</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 7: TECHNICAL POSTURE & TRADE ARCHITECTURE -->
-<h2 id="technical-trade">7. Technical Posture &amp; Actionable Trade Architecture</h2>
-<ul>
-  <li><strong>Weinstein Stage Classification:</strong> <strong>Stage 2 Markup</strong>. The stock completed a constructive multi-month consolidation pattern (Cup-and-Handle formation) and is trading in a clean ascending channel above its rising moving averages.</li>
-  <li><strong>Moving Average Alignment:</strong>
-    <ul>
-      <li>20-DMA: <strong>₹1,933.91</strong> (Short-term pullback retesting base)</li>
-      <li>50-DMA: <strong>₹1,882.66</strong> (Price is +0.9% above rising 50-DMA anchor)</li>
-      <li>200-DMA: <strong>₹1,825.40</strong> (Price is +4.0% above 200-DMA, confirming primary uptrend)</li>
-    </ul>
-  </li>
-  <li><strong>14-Day RSI &amp; RS Rating:</strong> RSI(14) is at <strong>52.4</strong> (constructive neutral momentum, zero overbought exhaustion). RS rating vs Nifty 500 is <strong>82/100</strong>.</li>
-  <li><strong>Optimal Entry Zone:</strong> <strong>₹1,870.00 – ₹1,920.00</strong> (Current CMP: ₹1,899).</li>
-  <li><strong>Hard Invalidation Stop Loss:</strong> <strong>₹1,750.00</strong> (-7.85% / ₹149 per share risk). Set strictly below the 200-DMA (₹1,825) and previous swing base.</li>
-  <li><strong>12–18 Month Base Target:</strong> <strong>₹2,550.00</strong> (+34.28% / ₹651 per share upside). Anchored to forward FY27E EPS of ₹91.00 &times; 28.0x P/E multiple.</li>
-  <li><strong>Blue-Sky Catalyst Bull Target:</strong> <strong>₹2,850.00</strong> (+50.08%). Anchored to accelerated AI-agent deployment revenue and margin expansion to 28%.</li>
-  <li><strong>Reward-to-Risk Asymmetry Ratio:</strong>
-    $$\text{Asymmetry Ratio} = \frac{₹2,550 - ₹1,899}{₹1,899 - ₹1,750} = \frac{₹651}{₹149} = \mathbf{4.37:1} \quad (\text{Mandate Pass: } \ge 3.0:1 \text{ Core})$$
-  </li>
-</ul>
-
-<!-- SECTION 8: FATAL FLAWS & RED-TEAM -->
-<h2 id="fatal-flaws">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<ol>
-  <li><strong>Fatal Flaw 1: GenAI Disruption &amp; Process Cannibalization:</strong> Advanced Large Language Models (LLMs) and autonomous agents could automate entry-level document processing and customer care, reducing seat-based billing. <em>Mitigation:</em> eClerx is pivoting upstream toward complex exception handling, model validation, and custom AI agent workflow management.</li>
-  <li><strong>Fatal Flaw 2: BFSI Client Consolidation &amp; Insourcing:</strong> Mega-mergers among global investment banks (e.g., UBS/Credit Suisse) could lead to vendor consolidation or captive offshore center build-outs. <em>Mitigation:</em> Over 60% of revenues now come from non-banking verticals, with digital commerce and high-tech growing at >25% YoY.</li>
-  <li><strong>Fatal Flaw 3: INR Appreciation &amp; US Wage Pressures:</strong> Sudden appreciation of the Indian Rupee against the US Dollar or Euro would compress operating margins. <em>Mitigation:</em> eClerx maintains a rolling 12–24 month FX hedging policy covering 65%–75% of net foreign exchange inflows.</li>
-</ol>
-<div class="forensic-box">
-  <strong>Hard Invalidation Triggers:</strong>
-  <ul>
-    <li>Fundamental: Trailing 12-month OPM compressing below 20.0% or voluntary annualized attrition exceeding 35.0%.</li>
-    <li>Technical: Daily close below ₹1,750 on heavy institutional distribution volume (>2.0x 20-DMA).</li>
-  </ul>
+<dl class="key-figures">
+<dt>Close, 9 Oct 2026</dt><dd>Rs 1,866.80</dd>
+<dt>ROCE</dt><dd>34.4%</dd>
+<dt>Debt to equity</dt><dd>0.15</dd>
+<dt>3-year CFO / PAT</dt><dd>1.17</dd>
+<dt>Asymmetry</dt><dd>0.65 (floor 3.0)</dd>
+<dt>Chart stage</dt><dd>Stage 3</dd>
+</dl>
+<h2>0. Executive Summary</h2>
+<div class="primer">
+<p>Start here if you have never read a company report. eClerx is a Mumbai-based outsourcing company. It runs data, analytics, finance and operations work for large banks, asset managers, retailers, luxury brands and technology firms, mostly in the United States. About 94 percent of its FY26 revenue came from North America, the UK and Europe, and 93 percent was billed on time-and-material terms, so revenue tracks headcount and billing rates rather than product sales.<sup><a href="#cite_note-3">[3]</a></sup> Think of it as a large team of trained analysts that clients rent by the hour, with the work moving gradually from plain process handling toward data science and automation.</p>
+<p>The report judges whether a new position should be opened. It does so in layers. Layer 1 is a pass-or-fail gate sheet with five tests. Return on capital employed (ROCE) asks how many rupees of yearly operating profit the business earns for every hundred rupees of capital tied up in it; 34.4 means Rs 34 earned per Rs 100, a very good rate. Debt to equity compares borrowings with shareholders' money; 0.15 means the company owes about 15 paise for each rupee the owners have put in, and most of that is office-lease accounting. Cash from operations divided by profit after tax (CFO/PAT) checks whether profit arrives as actual cash; 1.17 means every rupee of reported profit produced about Rs 1.17 of cash over three years.</p>
+<p>Two further gates are about the price rather than the business. The first is the chart stage, a four-step description of a stock's life cycle: Stage 1 is a quiet base, Stage 2 a rising phase, Stage 3 a top or a stall and Stage 4 a decline. ECLERX is in Stage 3. The second is asymmetry, which divides the likely gain by the likely loss. The likely gain is the distance from the price to a target. The likely loss is the distance from the price to a stop, the level at which you would admit the idea is wrong and sell. For ECLERX that ratio is 0.65, and the house floor is 3.0. A stop is protective, much like a smoke alarm: you hope never to use it, but you set it before you need it.</p>
+<p>The company also uses its own vocabulary. ACV, or annual contract value, is the yearly value of newly signed deals and works as an order book. Time-and-material billing means clients pay for the hours worked rather than a fixed project price. ATR, or average true range, is the typical daily price swing; here it is Rs 68.66, and it sizes the stop. A bonus issue of shares in a 1:1 ratio doubles the share count without changing the value of the company, which is why per-share figures in this report are restated. A buyback is the company purchasing its own shares from owners, usually to return surplus cash.</p>
+<p>To read the chapters, take the numbers in order. Chapters 1 to 3 explain who the company is and how it earns money. Chapter 4 audits the accounts. Chapter 5 runs the three-layer test and reaches the verdict. Chapters 6 to 8 compare peers, read the chart and attack the thesis from the bear side. Chapters 9 and 10 list what would change the answer and what to monitor, and Chapter 11 gives every source with its read status. Every table is preceded by a short guide and followed by plain-language meaning. Where a value could not be verified the report says N/A and gives the reason.</p>
 </div>
-
-<!-- SECTION 9: CAPITAL ALLOCATION & REPLACEMENT -->
-<h2 id="capital-allocation">9. Portfolio Allocation &amp; Replacement Guidance</h2>
-<p>
-  ECLERX qualifies as an elite <strong>Core Alpha Compounder</strong> for the institutional portfolio. With an Asymmetry Ratio of <strong>4.37:1</strong>, ROCE of <strong>34.4%</strong>, and 4/4 operational KPIs passing, eClerx is selected for insertion into <strong>`shortlist/Zerodha_Shortlist.xlsx`</strong> in the <strong>Core Alpha Book</strong> (Slot 9/10).
-</p>
-<p>
-  <strong>Portfolio Capital Sizing:</strong> Recommended target allocation of <strong>4.0% – 6.0%</strong> of Total Net Worth, deployed in the ₹1,870–₹1,920 accumulation zone.
-</p>
-
-<!-- SECTION 10: QUARTERLY MONITORING INDICATORS -->
-<h2 id="thesis-trackers">10. Key Quarterly Monitoring Indicators (Thesis Trackers)</h2>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Monitoring Indicator</th>
-      <th>Analytical Significance</th>
-      <th>Bullish Threshold</th>
-      <th>Bearish Alert Level</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Constant Currency (CC) Revenue Growth</strong></td>
-      <td>Measures underlying organic enterprise volume expansion</td>
-      <td>&gt; 4.0% QoQ CC</td>
-      <td>&lt; 0.5% QoQ CC</td>
-    </tr>
-    <tr>
-      <td><strong>Consolidated Operating Margin (OPM %)</strong></td>
-      <td>Verifies pricing power and automation productivity gains</td>
-      <td>&ge; 25.0%</td>
-      <td>&lt; 22.0%</td>
-    </tr>
-    <tr>
-      <td><strong>Free Cash Flow Conversion (FCF / PAT %)</strong></td>
-      <td>Confirms pristine balance sheet liquidity and earnings quality</td>
-      <td>&ge; 90% of PAT</td>
-      <td>&lt; 65% of PAT</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES & CITATIONS -->
-<h2 id="references">11. References, Regulatory Filings &amp; External Links</h2>
+<p>This dossier answers one question: should a new Core Alpha position in ECLERX be opened at today's price? The short answer is no, and the reason is not the business. The business is excellent on every audited quality test. The reason is that two mechanical gates in the framework fail on 9 October 2026 data: the price chart is in Stage 3 (a topping or pullback phase) rather than Stage 2 (a prior rising phase), and the reward-to-risk ratio measured against an evidence-anchored target is 0.65, far below the Core floor of 3.0.</p>
+<p>The earlier shortlist record (dated 27 Sep 2026) listed ECLERX as an immediate buy at Rs 1,899 with a base target of Rs 2,550 and an asymmetry of 4.37. That record rested on a Stage 2 reading and a target that needs roughly 26 times FY28 consensus earnings, against a current forward multiple near 22.5. Fresh data does not support either input, so the old verdict is withdrawn.</p>
+<div class="howto">
+<p>Reading how to read the next table: the left column names a measure, the middle column gives today's reading and the right column states the rule or comparison that reading is judged against. Take the ROCE row as an example. The reading is 34.4 percent, the rule is a floor of 15 percent, so the gate passes with room to spare. Rows that end in a fail are the reason the verdict is negative, so scan the right column first and the middle column second.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Key numbers at a glance (reading guide: left column is the measure, middle is today's reading, right is the rule it is judged against)</caption>
+<thead><tr><th>Measure</th><th>Reading</th><th>Rule or comparison</th></tr></thead>
+<tbody>
+<tr><td>Price (close 9 Oct 2026)</td><td>Rs 1,866.80</td><td>52-week range Rs 1,320 to Rs 2,497.5; 25.3 percent below the high</td></tr>
+<tr><td>Return on capital employed (ROCE)</td><td>34.4 percent</td><td>Gate: at least 15 percent. Pass</td></tr>
+<tr><td>Debt to equity</td><td>0.15</td><td>Gate: below 0.70. Pass (borrowings are mostly office leases)</td></tr>
+<tr><td>3-year cash from operations / profit after tax</td><td>1.17</td><td>Gate: at least 0.70. Pass</td></tr>
+<tr><td>Weinstein stage</td><td>Stage 3, 50-day average falling</td><td>Gate: Stage 1 breakout or Stage 2. Fail</td></tr>
+<tr><td>Asymmetry (base target Rs 1,980, stop Rs 1,693)</td><td>0.65</td><td>Gate: at least 3.0 for Core. Fail</td></tr>
+<tr><td>Company KPIs</td><td>3 of 4 pass</td><td>Rule: at least 3 of 4. Pass</td></tr>
+<tr><td>Market regime (Nifty 50)</td><td>Downtrend</td><td>Only 17.7 percent of stocks above their 50-day average</td></tr>
+</tbody>
+</table></div>
+<p>Read the table as two halves. The top three rows say the company is safe to own in terms of balance-sheet risk and rich in returns. The bottom rows say the market is not offering a good entry. The price sits almost on its 50-day average, but that average is sliding, volume is thin (0.39 times the 20-day average) and seven distribution days appeared in the last 25 sessions. A distribution day is a session where the price falls on heavier volume, which usually means large holders are selling into strength. Seven in 25 is a warning, not a verdict. The wider market adds weight to the caution: the Nifty 50 is in a downtrend, only 17.7 percent of index stocks trade above their 50-day average, and just one of eleven sectors is above its 20-day average. A stock that holds up in such a tape deserves respect, which is why relative strength of plus 22.08 percent over 63 days is listed in Chapter 5 as a positive, but strength alone does not repair a failed gate.</p>
+<div class="takeaway">
+<p><strong>What this means for an owner.</strong> A buyer today pays 24.1 times trailing earnings for a company whose latest quarter showed operating margin of 23 percent, 260 basis points below the prior quarter, while the consensus target of Rs 1,980 is only 6 percent above the price. The company can be a fine long-term holding; it is not a good Core entry at this level and this chart. The next chapter explains who the company is, so that the later numbers make sense.</p>
+</div>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: ECLERX in one paragraph.</strong> The story is a high-return outsourcer growing revenue 15.2 percent in dollars while margin slips to 23 percent. The numbers that matter are ROCE 34.4 percent, debt to equity 0.15, CFO/PAT 1.17, price Rs 1,866.80 and asymmetry 0.65. The verdict is REJECTED, set by two failed gates: Stage 3 and asymmetry below 3.0. If price retests about Rs 1,765 and holds, or closes above a rising 50-day average, the name returns to review. If it closes below Rs 1,693, the idea is off until a new base forms.</p>
+</div>
+<h2>1. History and Corporate Identity</h2>
+<p>eClerx was founded in 2000 by PD Mundhra and Anjan Malik, who still sit in the promoter group, and listed on the Indian exchanges in 2007 (NSE and BSE code 532927). The idea was to offer back-office knowledge work to financial firms from low-cost Indian centres, then widen into marketing operations, digital and analytics. Today the company reports 19 subsidiaries across India, the US, UK, Europe and Asia-Pacific.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>Why history matters here: promoter-founders who still own 54.5 percent have both the incentive and the control to steer capital allocation. In FY25 each of the two founders tendered about Rs 89.8 crore in the company's buyback, which shows the promoters also take cash out when the company returns capital, not only when they buy.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-5">[5]</a></sup> Management today is led by CEO Kapil Jain and CFO Srinivasan Nadadhur, with an independent chairman, Shailesh Kekre. The statutory auditor is Price Waterhouse Chartered Accountants LLP; audit-related fees of Rs 2.04 crore are modest for a company with Rs 4,117 crore of revenue.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<div class="howto">
+<p>Reading guide for the corporate-actions table: each row in the last twelve months, with the key facts in the middle column and the document where the fact was found in the right column. Take the buyback row aloud: the company spent Rs 300 crore buying 625,000 of its own shares at Rs 4,800 each, settled on 2 January 2026. Because the bonus later doubled the share count, that price equals Rs 2,400 on today's share base, which makes it easy to compare with the market price.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Corporate actions in the last 12 months (reading guide: each row is a capital event that changed the share count or cash returned)</caption>
+<thead><tr><th>Event</th><th>Detail</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Buyback</td><td>Rs 300 crore, 625,000 shares at Rs 4,800 (pre-bonus), settled 2 Jan 2026</td><td>FY26 annual report<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>Bonus</td><td>1:1 bonus shares, March 2026; per-share figures restated</td><td>FY26 annual report<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>Dividend</td><td>Final dividend Re 1 per share; record date 21 Aug 2026; AGM 8 Sep 2026</td><td>FY26 annual report<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>Investor Day</td><td>2 Sep 2026: FY24 to FY29 growth blueprint, USD 1 billion aspiration</td><td>Company and exchange filing<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></td></tr>
+<tr><td>Investor meeting</td><td>Meeting with Invesco on 25 Sep 2026 (Regulation 30 notice)</td><td>Screener announcements<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>The table shows a company that returns cash steadily and without drama. The buyback at Rs 4,800 pre-bonus equals Rs 2,400 post-bonus, which is about 29 percent above today's price, so shareholders who tendered sold well above where the market now values the stock. The bonus issue and the final dividend of Re 1 are small in cash terms but tell owners that management prefers to share surplus rather than hoard it. The Investor Day on 2 September 2026 set a public ambition of USD 1 billion in revenue over a multi-year blueprint, which is a target the company has chosen to be measured against. Revenue of USD 468.9 million in FY26 means that goal needs roughly a doubling, and annual growth near 15 percent in dollars would take about five years to reach it. That is a statement of intent, not a forecast, and this report treats it as a claim to monitor. The meeting with Invesco on 25 September 2026 shows investor outreach, but a routine meeting notice carries no financial information and is not used as evidence for any number here.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Buyback, in numbers.</strong> A buyback at Rs 4,800 pre-bonus, or Rs 2,400 on the bonus-adjusted base, returned Rs 300 crore, equal to 0.42 of one year of FY26 net profit of Rs 706 crore (300 / 706). The meaning is that the company had spare cash and chose to return it at a price well above today's Rs 1,866.80. If management repeats a buyback at a price near Rs 1,900, that would signal confidence and would shrink the share count. Unless that happens and the chart improves, the buyback is history, not a reason to buy now.</p>
+</div>
+<p><strong>For an owner, governance is the point.</strong> Governance looks clean on the evidence read: no related-party transactions beyond key-person dividends, commissions and buyback participation, no pledge of promoter shares (confirmed in the exchange shareholding filing for the January 2026 capital restructuring), and an independent chairman.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-10">[10]</a></sup> The pledge status for 30 Jun 2026 was not readable in the PDF version of the pattern, so that single quarter carries an explicit N/A in the payload rather than an assumption.<sup><a href="#cite_note-9">[9]</a></sup> Founders who hold more than half of the company and still tender into buybacks are aligned with minority holders on cash returns but may differ on timing, because a founder selling at a high price has different incentives from a buyer who needs the price to rise further. With the owners in view, the next chapter shows how the company earns its money.</p>
+<div class="triggers">
+<p><strong>Governance triggers.</strong> If the quarterly shareholding filing shows any promoter pledge, the governance reading moves from clean to review. If promoter holding falls below 50 percent without a stated reason, treat it as a warning, since it would be the first sustained sell-down. Unless the 30 Jun 2026 pattern is read in a machine-readable form, the pledge field for that quarter stays N/A. A new buyback announced below Rs 2,000 would be read as positive for confidence.</p>
+</div>
+<h2>2. Operations and Revenue Model</h2>
+<p>Operations explain how work turns into revenue and then into margin, so this chapter covers segments, unit economics and cost in turn, each with the Q1 FY27 call as the freshest evidence.</p>
+<h3>2.1 Segments and geographies</h3>
+<p>eClerx sells outsourced work in three families: Financial Services (capital markets, banking and insurance operations, compliance), Communications, Media and Technology (CMT) plus Technology, and Retail, Fashion and Luxury, Manufacturing and Distribution. A newer "Emerging" group covers finance and accounting services. Within every vertical, the work is a mix of process operations, data management, analytics and, increasingly, automation and AI-assisted delivery. The company says its Analytics and Automation line grew 7 percent quarter on quarter in Q1 FY27 and now exceeds a USD 100 million annual run rate.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<div class="howto">
+<p>Reading how to read the next table: the first column says which cut of revenue you are looking at (where clients sit, how they pay, or what type of service), the third column gives the FY26 amount in Rs million and the last column gives the share of the total. Read one row aloud: North America contributed Rs 32,513 million, which is 79.0 percent of operating revenue. Within each block the shares add to about 100 percent, so the three blocks are three separate ways of slicing the same revenue.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>FY26 revenue by geography and contract type (reading guide: the first block shows where clients sit, the second shows how they pay; amounts in Rs million from the annual report)</caption>
+<thead><tr><th>Cut</th><th>Item</th><th>Amount (Rs million)</th><th>Share</th></tr></thead>
+<tbody>
+<tr><td>Geography</td><td>North America</td><td>32,513</td><td>79.0%</td></tr>
+<tr><td>Geography</td><td>Europe (ex-UK)</td><td>4,615</td><td>11.2%</td></tr>
+<tr><td>Geography</td><td>Asia-Pacific</td><td>2,331</td><td>5.7%</td></tr>
+<tr><td>Geography</td><td>United Kingdom</td><td>1,712</td><td>4.2%</td></tr>
+<tr><td>Contract</td><td>Time and material</td><td>38,284</td><td>93.0%</td></tr>
+<tr><td>Contract</td><td>Fixed price</td><td>2,886</td><td>7.0%</td></tr>
+<tr><td>Service type</td><td>IT-enabled services</td><td>39,574</td><td>96.1%</td></tr>
+<tr><td>Service type</td><td>Software and licensing</td><td>1,596</td><td>3.9%</td></tr>
+</tbody>
+</table></div>
+<p>The table shows a business that is almost entirely US-dollar earning and almost entirely billed on effort. Time-and-material billing means eClerx rarely carries the risk of fixed-price overruns, but it also means revenue falls when clients cut hours. The top ten clients supplied 61 percent of FY26 revenue, which is the single most important concentration fact in this report.<sup><a href="#cite_note-3">[3]</a></sup> Fixed-price work is only 7 percent, so the company is not betting on project estimates, and software and licensing is under 4 percent, so this is a services business and not a product company. Dollar earnings against rupee costs give a natural margin tailwind when the rupee weakens and a headwind when it strengthens. Q1 FY27 used an implied rate near Rs 91.5 per dollar, so a move of one rupee in either direction changes rupee revenue by about 1.1 percent before any hedging. The annual report does not give vertical-level margins, so those stay N/A and no profit mix by vertical is assumed here.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Concentration, in numbers.</strong> Top ten clients are 61 percent of FY26 revenue, so the largest accounts decide the growth rate. In Q1 FY27 Financial Services was down 0.1 percent after a 2.8 percent fall in Q4, while CMT rose 1.3 percent. Management expects a recovery in the second half of FY27. If Financial Services is still flat or negative in the Q2 FY27 report, the concentration risk is confirmed and the KPI view worsens. If it grows by more than 2 percent sequentially, the flaw loses weight and the stock deserves another look.</p>
+</div>
+<p><strong>Owner view.</strong> Revenue growth is a function of client budgets in a few large accounts. The Q1 FY27 call showed this: Financial Services was flat at minus 0.1 percent quarter on quarter after minus 2.8 percent in Q4, and management said it expects a recovery from the second half of FY27, which is a forecast, not a result.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<h3>2.2 Unit economics</h3>
+<p>Unit economics for a labour-based outsourcer come down to three dials: billed headcount, revenue per billed head and the cost of the people and seats behind them. In Q1 FY27 operating revenue was USD 125.9 million, up 15.2 percent year on year and 2.8 percent over the prior quarter, the twelfth consecutive quarter of sequential growth. Utilization was 75.5 percent, attrition 21 percent and days sales outstanding 79. Total headcount fell 0.6 percent quarter on quarter while billed headcount rose, which is the productivity signal management wants to show.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<p>Newly signed annual contract value (ACV) was USD 41 million, up 25 percent year on year. FY26 ACV was about USD 170 million, and management aims to match or exceed that. Typical revenue roll-off (contracts ending or shrinking) is 15 to 20 percent a year, so the company must sign roughly that much new work just to stand still.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<p><strong>Reading across.</strong> A 25 percent rise in deal wins supports the growth forecast, but the offsetting roll-off means the quality of the sales engine matters more than any single quarter. Management itself names "sharpening sales focus, improving revenue predictability and reducing client concentration" as opportunities, which concedes that these are not yet solved.<sup><a href="#cite_note-14">[14]</a></sup> Costs are the next piece.</p>
+<h3>2.3 Cost structure and margin</h3>
+<p>Q1 FY27 operating EBITDA was Rs 265 crore, a 23 percent margin. That is 260 basis points below Q4 FY26 and 96 basis points below a year earlier. Management attributed 210 basis points to annual wage increments, 40 basis points to computer and network spend, partly offset by a 60 basis point cut in selling and distribution cost. A further drag is the growth of lower-margin delivery centres in Cairo, Lima and Manila. Management also plans about 1,600 new seats across Mumbai, Pune, Chandigarh, Mohali and Coimbatore, with FY27 capital spending of Rs 130 to 150 crore.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<div class="howto">
+<p>Reading guide for the margin table: each row, the middle column gives its value and the right column says where the number comes from or how to judge it. Read the FY27 guided band row aloud: management expects EBITDA margin between 24 and 28 percent for the full year, and points to a midpoint near 26 percent. The Q1 row sits one point below the bottom of that band, so the question for the rest of the year is how fast the margin climbs back.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Margin and guidance (reading guide: compare the quarter's reading with the company's own FY27 band)</caption>
+<thead><tr><th>Measure</th><th>Value</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>FY26 EBITDA margin (company basis)</td><td>about 27%</td><td>Annual report shows EBITDA Rs 11,526 million on revenue Rs 42,182 million<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>Q1 FY27 margin</td><td>23%</td><td>Seasonally weakest quarter: wage increments land in Q1<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>FY27 guided band</td><td>24% to 28%</td><td>Management points to the midpoint, about 26%<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Screener operating margin, FY26 / TTM</td><td>26% / 25%</td><td>Screener excludes other income and uses its own definition<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>The numbers show Q1 at 23 percent, one point below the low end of the FY27 band. A rebound to the midpoint needs three or four quarters at roughly 27 percent. If margin simply stays near the Q1 level, FY27 profit growth would fall well short of the revenue growth consensus expects. Consider what the bridge looks like in basis points: 210 basis points of wage increments, 40 of computer and network spend, less 60 of lower selling and distribution cost gives a net 190 basis points of drag from known items, and the remaining 70 basis points of the 260 point quarterly fall comes from mix and other costs that the call did not itemise. A basis point is one hundredth of a percentage point, so 100 of them make one percent. The expansion of about 1,600 seats and capital spending of Rs 130 to 150 crore also add depreciation, which was already Rs 188 crore on a trailing basis. Growth in the lower-margin centres in Cairo, Lima and Manila helps revenue but dilutes the average margin, and the call also described mild pricing pressure. Management's confidence in the band rests on utilisation, now 75.5 percent, rising once the new seats are filled.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>The Q1 margin dip.</strong> Operating margin fell to 23 percent from 26 percent in Q4, with Rs 265 crore of operating profit against Rs 283 crore a quarter earlier even though sales rose from Rs 1,107 crore to Rs 1,152 crore. The meaning is that cost growth outran revenue by a clear margin. If Q2 FY27 shows 24 percent or more, the dip is seasonal and the KPI grade returns to pass. If it prints below 24 percent for a second quarter, the band itself is at risk and the Layer 2 grade falls to fail, which would trigger a downgrade of the whole report.</p>
+</div>
+<p><strong>Where this leaves the owner.</strong> Margin, not revenue, is the swing factor for earnings in the next twelve months. Chapter 5 turns this into a formal KPI watch item. First, the sector backdrop.</p>
+<h2>3. Sector Dynamics</h2>
+<p>Business process and knowledge process outsourcing sells labour arbitrage plus domain skill. Demand follows client operating budgets, regulation and, now, how fast clients adopt AI in back-office work. AI helps vendors on cost but invites clients to ask for lower prices; the Q1 call described mild pricing pressure and said agentic-AI deals are still small.<sup><a href="#cite_note-2">[2]</a></sup> A weaker US regulatory burden also reduces compliance projects in banking, which management linked to slower top-five client spending.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<p>The Indian listed set of comparable companies is mixed on the price chart. In the run's data, Firstsource (FSL) and Sagility (SAGILITY) are both Stage 3; Mphasis is Stage 4; Coforge, Persistent and Cyient are Stage 2 with relative strength well above ECLERX in the case of Cyient and Coforge. The sector is therefore not uniformly weak: money is rotating into select names rather than the outsourcing group.</p>
+<div class="howto">
+<p>Reading how to read the next table: every row is one company and every column is one yardstick. P/E is the price divided by yearly earnings per share, so a lower number means a cheaper stock for the same profit. ROCE and ROE measure how well the company turns capital into profit. Operating margin is the share of sales left after running costs. The last column is the chart stage. Read the first row aloud: eClerx trades at 24.1 times earnings, earns 34.4 percent on capital, keeps 23 percent of sales as operating profit and sits in Stage 3.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Peer snapshot (reading guide: Screener consolidated figures for the two business-process peers whose pages were read on 9 Oct 2026; chart stage from the run's fact pack)</caption>
+<thead><tr><th>Company</th><th>P/E</th><th>ROCE</th><th>ROE</th><th>Latest-quarter operating margin</th><th>Sales growth, Jun 2026 vs Jun 2025</th><th>Stage</th></tr></thead>
+<tbody>
+<tr><td>ECLERX</td><td>24.1</td><td>34.4%</td><td>28.4%</td><td>23%</td><td>+23%</td><td>3</td></tr>
+<tr><td>Firstsource (FSL)</td><td>23.8</td><td>16.8%</td><td>17.6%</td><td>17%</td><td>+23%</td><td>3</td></tr>
+<tr><td>Sagility (SAGILITY)</td><td>20.0</td><td>13.4%</td><td>10.6%</td><td>22%</td><td>+28%</td><td>3</td></tr>
+</tbody>
+</table></div>
+<p>The table shows eClerx is priced like Firstsource but earns about twice the return on capital. Sagility is cheaper but also earns a lower return on capital and equity. On quality per rupee of price, eClerx is the better business; on price chart it is no better than either.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-17">[17]</a></sup> The three companies grew June-quarter sales at 23, 23 and 28 percent respectively, so growth does not separate them either. What separates them is margin and capital efficiency. Firstsource keeps 17 percent of sales as operating profit against 23 percent at eClerx, and its ROCE of 16.8 percent is only half of eClerx's 34.4 percent. Sagility's operating margin of 22 percent is close to eClerx, but its ROE of 10.6 percent is well below eClerx's 28.4 percent. All three sit in Stage 3 on the chart, so the market has not rewarded any of them over the past few months. That shared pattern suggests the weakness in ECLERX is partly a sector pause and not only a company story, which is useful when judging how long a base might take to form.</p>
+<div class="casenote" data-symbol="FSL">
+<p><strong>Context note: Firstsource (FSL) as the closest listed comparison.</strong> FSL trades at 23.8 times earnings with ROCE of 16.8 percent, ROE of 17.6 percent and June-quarter sales up 23 percent to Rs 2,725 crore from Rs 2,218 crore. It is Stage 3 with 63-day relative strength of plus 10.2 percent, below ECLERX at plus 22.08 percent. The story is a larger but lower-margin outsourcer. If FSL turns to Stage 2 while ECLERX stays in Stage 3, relative preference within the group would shift toward FSL. FSL is not underwritten in this report and no verdict is given for it.</p>
+</div>
+<div class="casenote" data-symbol="SAGILITY">
+<p><strong>Context note: Sagility (SAGILITY) as the healthcare-focused comparison.</strong> SAGILITY trades at 20.0 times earnings with ROCE of 13.4 percent, ROE of 10.6 percent and June-quarter sales up 28 percent to Rs 1,963 crore from Rs 1,539 crore, at a 22 percent operating margin. It is Stage 3 with relative strength of plus 10.42 percent. The cheaper multiple reflects lower returns on capital. If its ROCE rises above 20 percent while the multiple stays near 20, it would become the better value in the group. Until then, eClerx holds the quality lead and no verdict is given for Sagility here.</p>
+</div>
+<p><strong>Sector verdict for an owner.</strong> The sector earns its growth from a small number of US-centric clients, so an owner is also betting on US corporate budgets and on how generative AI is shared between vendor and client. Those questions feed straight into the financial record in the next chapter.</p>
+<h2>4. Financial Audit</h2>
+<p>The audit reads the accounts in three steps: profit and loss, cash flow and balance sheet. Each step ends with the figure that feeds a Layer 1 gate in Chapter 5.</p>
+<h3>4.1 Profit and loss</h3>
+<p>The table below uses Screener's consolidated series, cross-checked to the FY26 annual report (operating revenue Rs 41,170 million, EBITDA Rs 11,526 million, profit after tax Rs 7,062 million).<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> Amounts are in Rs crore except per-share data, which is restated for the 1:1 bonus.</p>
+<div class="howto">
+<p>Reading guide for the profit and loss table: rows of the profit and loss account and columns are financial years, with the last column showing the twelve months to June 2026. Read across a row to see a trend and down a column to see how sales turn into profit. Take the sales row aloud: revenue was Rs 1,564 crore in FY21 and Rs 4,117 crore in FY26. Per-share data is restated for the 1:1 bonus, so FY21 EPS of 26.99 is already on today's share count.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Annual profit and loss, FY21 to TTM (reading guide: read each row left to right to see the trend; the last column is trailing twelve months to Jun 2026)</caption>
+<thead><tr><th>Rs crore</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th><th>TTM</th></tr></thead>
+<tbody>
+<tr><td>Sales</td><td>1,564</td><td>2,160</td><td>2,648</td><td>2,926</td><td>3,366</td><td>4,117</td><td>4,335</td></tr>
+<tr><td>Operating profit</td><td>450</td><td>662</td><td>723</td><td>776</td><td>809</td><td>1,053</td><td>1,096</td></tr>
+<tr><td>Operating margin</td><td>29%</td><td>31%</td><td>27%</td><td>27%</td><td>24%</td><td>26%</td><td>25%</td></tr>
+<tr><td>Other income</td><td>34</td><td>24</td><td>66</td><td>64</td><td>87</td><td>101</td><td>105</td></tr>
+<tr><td>Interest</td><td>21</td><td>23</td><td>22</td><td>24</td><td>36</td><td>44</td><td>47</td></tr>
+<tr><td>Depreciation</td><td>82</td><td>103</td><td>114</td><td>126</td><td>141</td><td>175</td><td>188</td></tr>
+<tr><td>Profit before tax</td><td>381</td><td>560</td><td>653</td><td>689</td><td>719</td><td>935</td><td>966</td></tr>
+<tr><td>Net profit</td><td>283</td><td>418</td><td>489</td><td>512</td><td>541</td><td>706</td><td>729</td></tr>
+<tr><td>EPS (Rs, post-bonus)</td><td>26.99</td><td>41.08</td><td>49.83</td><td>52.14</td><td>56.78</td><td>75.09</td><td>77.22</td></tr>
+</tbody>
+</table></div>
+<p>The table shows two things. Revenue compounded from Rs 1,564 crore to Rs 4,117 crore, a 21.4 percent annual rate over five years (4,117 / 1,564 = 2.63; 2.63 to the power 0.2 = 1.214). Net profit compounded at 20.0 percent over the same span (706 / 283 = 2.49; to the power 0.2 = 1.200). Operating margin fell from 31 percent in FY22 to 24 percent in FY25 before recovering to 26 percent in FY26, so the profit growth in FY26 was a margin recovery plus 22 percent revenue growth, not a steady trend.<sup><a href="#cite_note-1">[1]</a></sup> Depreciation also deserves a look: it rose from Rs 82 crore to Rs 188 crore on a trailing basis, which is 2.3 times, slower than the 2.8 times rise in sales, but it shows a business adding seats and technology steadily. Interest of Rs 47 crore is mostly lease interest, and other income of Rs 105 crore, mainly treasury returns, supplies about 11 percent of profit before tax. Profit before tax of Rs 966 crore on a trailing basis against Rs 729 crore of net profit implies a tax and minority outflow of about 25 percent. A reader who wants a quick growth gauge can use the five-year compounding figures above and the TTM EPS of Rs 77.22, which is the number behind the 24.1 times price-to-earnings reading.</p>
+<div class="table-wrap"><table class="data">
+<caption>Last five quarters (reading guide: the final column is the quarter just reported on 6 Aug 2026; Rs crore)</caption>
+<thead><tr><th>Rs crore</th><th>Jun 2025</th><th>Sep 2025</th><th>Dec 2025</th><th>Mar 2026</th><th>Jun 2026</th></tr></thead>
+<tbody>
+<tr><td>Sales</td><td>935</td><td>1,005</td><td>1,070</td><td>1,107</td><td>1,152</td></tr>
+<tr><td>Operating profit</td><td>224</td><td>271</td><td>276</td><td>283</td><td>265</td></tr>
+<tr><td>Operating margin</td><td>24%</td><td>27%</td><td>26%</td><td>26%</td><td>23%</td></tr>
+<tr><td>Net profit</td><td>142</td><td>183</td><td>192</td><td>190</td><td>164</td></tr>
+<tr><td>EPS (Rs)</td><td>14.87</td><td>19.22</td><td>20.40</td><td>20.13</td><td>17.47</td></tr>
+</tbody>
+</table></div>
+<p>Sales rose in every quarter (Rs 935 crore to Rs 1,152 crore, +23 percent in the year) but quarterly net profit has dropped from Rs 190 crore to Rs 164 crore in one quarter, a 14 percent sequential fall.<sup><a href="#cite_note-1">[1]</a></sup> The Q1 seasonal wage cycle explains part of it, since Jun 2025 also had a 24 percent margin, but Jun 2026 profit is still 15 percent above Jun 2025 against revenue growth of 23 percent, so profit grew slower than sales year on year. Quarterly EPS tells the same story: Rs 17.47 in June 2026 against Rs 20.13 in March and Rs 14.87 a year earlier. The three middle quarters of FY26 each held operating margin at 26 to 27 percent, so Q1 FY27 is the outlier and the question is whether it is a seasonal dip or the start of a lower plateau. The company's own FY27 guidance of 24 to 28 percent leaves room for either answer. Revenue momentum is intact, with 12 straight quarters of sequential growth in dollars, so the debate is about cost, not demand. A reader should therefore watch the second-quarter operating profit line more closely than the sales line.</p>
+<p><strong>Earnings quality, in one line.</strong> Earnings quality is good but current earnings momentum is soft. The next section tests whether profit turns into cash.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: five-year growth against the withdrawn target.</strong> Sales compounded at 21.4 percent and profit at 20.0 percent over five years, but TTM EPS is Rs 77.22 and FY27 consensus EPS is Rs 82.85, which is only 7.3 percent above TTM (82.85 / 77.22 = 1.073). The earlier target of Rs 2,550 needs FY28 EPS of Rs 98.14 and a 26 times multiple. If quarterly EPS climbs back above Rs 20 for two quarters, the FY27 estimate becomes easier to reach. If EPS stays near Rs 17.5, the estimates would need to be cut, and the Rs 1,980 target would be at risk.</p>
+</div>
+<h3>4.2 Cash-flow bridge</h3>
+<div class="howto">
+<p>Reading how to read the next table: the top block shows cash generated by operations, the second line shows reported profit, the ratio line divides one by the other and the last line shows free cash flow, which is cash from operations less spending on equipment and software. A ratio above 1.0 means the profit shown in the accounts arrived as cash. Read the FY26 column aloud: operations produced Rs 873 crore against profit of Rs 706 crore, a ratio of 1.24. Free cash flow for FY22 and FY23 was not read in the sources, so those two cells say N/A.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Cash from operations versus profit (reading guide: a ratio above 1.0 means reported profit is backed by cash; Rs crore)</caption>
+<thead><tr><th>Rs crore</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+<tbody>
+<tr><td>Cash from operations (CFO)</td><td>444</td><td>493</td><td>526</td><td>655</td><td>873</td></tr>
+<tr><td>Net profit (PAT)</td><td>418</td><td>489</td><td>512</td><td>541</td><td>706</td></tr>
+<tr><td>CFO / PAT</td><td>1.06</td><td>1.01</td><td>1.03</td><td>1.21</td><td>1.24</td></tr>
+<tr><td>Free cash flow</td><td>N/A, not read</td><td>N/A, not read</td><td>462</td><td>539</td><td>756</td></tr>
+</tbody>
+</table></div>
+<p>Working: the framework gate uses the three most recent years, FY24 to FY26. CFO is 526 + 655 + 873 = 2,054. PAT is 512 + 541 + 706 = 1,759. The ratio is 2,054 / 1,759 = 1.168, against a gate of 0.70. In FY26 the company also converted 104 percent of operating profit into CFO, spent Rs 97 crore on investing activities and Rs 622 crore on financing (buyback, dividends and lease payments).<sup><a href="#cite_note-1">[1]</a></sup> The annual report states its own EBITDA-to-cash conversion at about 76 percent after tax and working capital.<sup><a href="#cite_note-3">[3]</a></sup> The two measures differ because one starts from operating profit before tax and the other from EBITDA after tax and working-capital movement, so both are shown and neither is hidden. Free cash flow of Rs 756 crore in FY26 was 107 percent of net profit (756 / 706), which is unusually strong for a services company.</p>
+<p>The one blemish: debtor days rose from 62 in FY24 to 86 in FY25 and 90 in FY26, so some of the cash strength came from other items. Q1 FY27 CFO was only Rs 107 crore, 38 percent of EBITDA, because the variable pay for FY26 is paid in Q1, which management flagged.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></p>
+<p><strong>Cash verdict.</strong> Profit is real cash, which is a strength. Rising receivable days are worth tracking each quarter because they would be the first sign of a client pushing back on invoices.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Receivable days.</strong> Debtor days rose from 62 in FY24 to 86 in FY25 and 90 in FY26, while Q1 FY27 days sales outstanding were 79 on the call. Slower collection ties up cash: at Rs 4,117 crore of sales, each extra day of receivables is about Rs 11 crore (4,117 / 365). If debtor days climb above 90 at the next annual or half-year reading, cash conversion would weaken and the cash KPI would move to watch. If they fall back toward 79, the FY26 jump was timing only.</p>
+</div>
+<h3>4.3 Balance sheet and returns</h3>
+<div class="howto">
+<p>Reading guide for the balance-sheet table: the left column the company owns and owes, and the two number columns are March 2025 and March 2026, in Rs crore. Liabilities and equity on the top half must equal assets on the bottom half. Read the borrowings row aloud: debt of Rs 385 crore at March 2026 is mostly lease liability for offices, not bank loans. Compare it with reserves of Rs 2,469 crore, which are the profits kept inside the business over the years.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Balance sheet (reading guide: the right-hand column is the latest audited year; Rs crore)</caption>
+<thead><tr><th>Rs crore</th><th>Mar 2025</th><th>Mar 2026</th></tr></thead>
+<tbody>
+<tr><td>Equity capital</td><td>47</td><td>92</td></tr>
+<tr><td>Reserves</td><td>2,259</td><td>2,469</td></tr>
+<tr><td>Borrowings (largely lease liabilities)</td><td>358</td><td>385</td></tr>
+<tr><td>Other liabilities</td><td>475</td><td>744</td></tr>
+<tr><td>Total liabilities and equity</td><td>3,139</td><td>3,691</td></tr>
+<tr><td>Fixed assets</td><td>974</td><td>1,054</td></tr>
+<tr><td>Investments</td><td>309</td><td>308</td></tr>
+<tr><td>Other assets</td><td>1,856</td><td>2,324</td></tr>
+</tbody>
+</table></div>
+<p>The balance-sheet figures matter because they connect accounting quality to investability. Low leverage reduces the chance that a temporary demand shock becomes a solvency event, but it does not by itself create an attractive entry. Returns on capital show that the operating model has earned strong economics; cash conversion tests whether those earnings have been collected; and the valuation column asks how much of that quality is already embedded. For ECLERX, the evidence is favorable on returns and leverage, yet the underwriting decision remains constrained by technical posture and reward-to-risk. The right conclusion is therefore not that the company is weak, but that the current price does not provide enough compensation for execution, multiple, and trend risk. That is the practical meaning of the table for a new investor.</p>
+<p>Working: debt to equity is 385 / (92 + 2,469) = 385 / 2,561 = 0.15, against the gate of 0.70. Equity capital doubled from Rs 47 crore to Rs 92 crore because of the 1:1 bonus, not new money. ROCE by year was 34 percent in FY22, 36 percent in FY23, 32 percent in FY24, 28 percent in FY25 and 34 percent in FY26; the latest published ratio is 34.4 percent against a gate of 15 percent. ROE is 28.4 percent. Both ratios are strong because the business needs few fixed assets: Rs 1,054 crore of fixed assets supports Rs 4,117 crore of sales, a turnover of about 3.9 times. Contingent liabilities are small: income-tax demands of Rs 24.3 crore and indirect-tax demands of Rs 5.5 crore.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>Shareholding changed little through the year. Promoters hold 54.53 percent, foreign institutions 11.01 percent (down from 11.82 percent in March), domestic institutions 23.84 percent and public 8.43 percent, with 74,342 shareholders.<sup><a href="#cite_note-1">[1]</a></sup> The January 2026 exchange filing recorded promoter holding at 54.52 percent with no pledge, no non-disposal undertaking and no other encumbrance.<sup><a href="#cite_note-10">[10]</a></sup></p>
+<p><strong>Balance-sheet verdict.</strong> The balance sheet carries almost no financial debt and the company has no credit rating requirement. Quality gates one to three pass with wide margin. The framework now compresses these tests into a formal gate sheet.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: the bonus and the balance sheet.</strong> Equity capital moved from Rs 47 crore to Rs 92 crore on the 1:1 bonus, while reserves rose from Rs 2,259 crore to Rs 2,469 crore, a gain of Rs 210 crore in a year when net profit was Rs 706 crore, so a large share of profit left through the Rs 300 crore buyback, dividends and the bonus capitalisation. Total equity of Rs 2,561 crore supports debt to equity of 0.15. If borrowings rise above Rs 1,500 crore without matching profit growth, the 0.70 gate would come into view. Until then, balance-sheet risk stays low and does not drive the verdict.</p>
+</div>
+<h2>5. The 3-Layer Underwriting</h2>
+<p>Underwriting runs in three layers: hard gates, company KPIs and entry posture. The layers are applied in order, and a failure in the first layer decides the verdict.</p>
+<h3>5.1 Layer 1: hard gates</h3>
+<p>Layer 1 is a pass-or-fail screen. A failed gate means the name is REJECTED for new capital until the gate passes again. The gate numbers come from the facts ledger and from the filings cited above.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is one gate. The second column is the rule, the third gives the reading and the arithmetic behind it, and the last column shows pass or fail. A single fail is enough to reject the name for new money. Read the asymmetry row aloud: the gain to the target is 1,980 minus 1,866.8, which is 113.2 rupees, and the loss to the stop is 1,866.8 minus 1,693.3, which is 173.5 rupees, so the ratio is 0.65 against a required 3.0.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Layer 1 gate sheet (reading guide: the third column shows the working; the last column is the result)</caption>
+<thead><tr><th>Gate</th><th>Threshold</th><th>Reading and working</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>ROCE</td><td>at least 15%</td><td>34.4% (Screener, consolidated)<sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+<tr><td>Debt to equity</td><td>below 0.70</td><td>385 / 2,561 = 0.15</td><td>PASS</td></tr>
+<tr><td>3-year cumulative CFO / PAT</td><td>at least 0.70</td><td>2,054 / 1,759 = 1.17</td><td>PASS</td></tr>
+<tr><td>Technical posture for Core</td><td>Stage 1 breakout or Stage 2; no Stage 4 or death cross</td><td>Stage 3. Price 1,866.8 is below the 50-day average 1,884.68, which is falling; 200-day average 1,775.72 is rising. Test A fails (price not above a rising 50-day). Test B fails (base pivot about 2,132 is 3.86 ATR away with no breakout)</td><td>FAIL</td></tr>
+<tr><td>Asymmetry</td><td>at least 3.0 (Core)</td><td>(1,980 - 1,866.8) / (1,866.8 - 1,693.3) = 113.2 / 173.5 = 0.65</td><td>FAIL</td></tr>
+</tbody>
+</table></div>
+<p>Stop working: the Core stop sits below the lower of the 20-day swing low (1,762) and the 50 and 200-day averages (1,884.68 and 1,775.72), minus one ATR (68.66). The lowest support is the swing low, 1,762, so the stop is 1,762 - 68.66 = 1,693.3, rounded to Rs 1,693. The logic is that a stock that falls through its swing low by a full day's typical range has broken the structure that justified the entry, so waiting longer only adds loss. The stop is 9.3 percent below today's price (173.5 / 1,866.8), which is a wide stop for a stock with an ATR of 3.7 percent of price. A wide stop makes the asymmetry harder to pass, which is correct: it forces a buyer either to wait for a lower price or to accept a smaller position. The gate sheet therefore does two jobs. It filters out names whose business is weak, and it filters out names whose price is too high for the risk the chart implies.</p>
+<div class="example">
+<p><strong>Worked example, from data to decision.</strong> Start with three facts: price Rs 1,866.8, swing low Rs 1,762, ATR Rs 68.66. Step one, the stop is 1,762 minus 68.66, which is Rs 1,693.3. Step two, the risk per share is 1,866.8 minus 1,693.3, which is Rs 173.5. Step three, the reward to the consensus target is 1,980 minus 1,866.8, which is Rs 113.2. Step four, asymmetry is 113.2 divided by 173.5, which is 0.65. Step five, compare with the floor of 3.0: 0.65 is below it, so the gate fails and the verdict is REJECTED. Check the cash gate the same way: 3-year CFO of 2,054 divided by 3-year PAT of 1,759 is 1.17, above 0.70, so that gate passes.</p>
+</div>
+<p>Target working: the framework requires the base target to be anchored to forward EPS times a 3-year median P/E, or to a measured move. The 3-year median P/E is not published in the sources read, so that multiple is N/A and the target uses an alternate anchor: the S&amp;P Global consensus average of Rs 1,980 from 10 analysts, which equals about 23.9 times FY27 consensus EPS of Rs 82.85 (EPS figures are non-GAAP adjusted).<sup><a href="#cite_note-15">[15]</a></sup> The prior record's Rs 2,550 would need 2,550 / 98.14 = 26.0 times FY28 consensus EPS of Rs 98.14, above the current forward multiple of 22.5 on FY27 estimates, so it is not accepted without support.</p>
+<p>Support-ladder reading: the price is 0.26 ATR below the 50-day average, which on the ladder alone would count as at support (full size under 0.5 ATR). But the average is falling and the price is below it, so the ladder cannot override the stage test.</p>
+<p><strong>Gate-sheet reading for an owner.</strong> Three fundamental gates pass with room; two market-based gates fail. The result under the rules is REJECTED today. The level that would reverse the technical gate is a daily close above the 50-day average with that average turning up (Stage 2 reclaim). The level that would reverse the asymmetry gate is an entry price at or below about Rs 1,765, which gives (1,980 - 1,765) / (1,765 - 1,693) = 215 / 72 = 2.99, subject to the stop being recomputed at that time.</p>
+<div class="triggers">
+<p><strong>Gate triggers.</strong> If the daily close rises above a rising 50-day average (now about Rs 1,885), the technical gate would pass. If price falls to about Rs 1,765 and holds, asymmetry would approach the 3.0 floor (displayed as 2.99 after rounding) on the Rs 1,980 target. Unless both happen together, the verdict stays REJECTED. If price closes below Rs 1,693, the stop level is broken and a fresh base must form before any review.</p>
+</div>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: the withdrawn Rs 2,550 target.</strong> The shortlist record of 27 Sep 2026 showed a target of Rs 2,550 and asymmetry of 4.37 at a Rs 1,899 entry. Rs 2,550 needs 26.0 times FY28 EPS of Rs 98.14, above the 22.5 times forward multiple, and the Stage 2 reading no longer holds. The meaning is that the old record leaned on a generous multiple. If a later filing or investor update supports FY28 EPS near Rs 110 at a stable margin, a target near Rs 2,550 could be rebuilt. Until that evidence exists, the base target stays at the consensus Rs 1,980.</p>
+</div>
+<h3>5.2 Layer 2: company KPIs</h3>
+<p>Layer 2 uses four numbers specific to eClerx's business model, each judged pass, watch or fail. The rule needs at least three of four to pass. The KPIs were chosen because they describe the engine of an outsourcer: growth in billed work, the flow of new contracts, the quality of cash and the margin that remains after paying people.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is one business KPI, with its latest value, the test it must meet and the grade. A pass means the test is met, watch means it is just outside, and fail means it clearly misses. Read the first row aloud: revenue grew 15 percent in dollars, with the twelfth straight rise from quarter to quarter, and the test is growth of at least 12 percent, so it passes.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Layer 2 KPI scorecard (reading guide: the KPI, its latest value, the test and the grade)</caption>
+<thead><tr><th>KPI</th><th>Latest value</th><th>Test</th><th>Grade</th></tr></thead>
+<tbody>
+<tr><td>Constant-currency revenue growth, year on year</td><td>+15% (USD 125.9 million; 12th straight sequential rise)</td><td>At least 12%, which management calls top-quartile in its peer group</td><td>PASS<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>New deal wins (ACV)</td><td>USD 41 million in Q1, +25% year on year</td><td>ACV up year on year and FY27 on pace to match FY26 USD 170 million</td><td>PASS<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Cash conversion</td><td>FY26 CFO / operating profit 104%; EBITDA-to-cash 76%</td><td>At least 70%</td><td>PASS<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>EBITDA margin versus guided band</td><td>23% in Q1 FY27</td><td>Inside 24% to 28% band</td><td>WATCH<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>Three pass and one is on watch, so Layer 2 clears with 3 of 4. The watch item matters because the margin band applies to the full year, and Q1 is the seasonally weakest quarter. If Q2 FY27 (reported around late October or early November 2026) is again below 24 percent, the grade moves from watch to fail. Each pass is backed by a number in the filings. Growth of 15.2 percent in dollars beats the 12 percent test by more than three points. Annual contract value of USD 41 million in one quarter is on pace for about USD 164 million over a year (41 x 4), which is a little below the FY26 level of about USD 170 million, so the new-deal pass rests on the year-on-year increase of 25 percent, not on the annualised figure. Cash conversion of 104 percent of operating profit clears the 70 percent test comfortably. Because the quarterly annualisation sits just under FY26, that KPI could slip to watch if Q2 ACV is below USD 40 million.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>New deal wins.</strong> ACV of USD 41 million in Q1 FY27 was up 25 percent year on year, against FY26 ACV of about USD 170 million, and the company adds Analytics and Automation, now above a USD 100 million run rate. The meaning is that sales are healthy even though margin is not. If Q2 and Q3 ACV stay above USD 40 million, FY27 would reach about USD 170 million and the KPI stays at pass. If ACV falls below USD 35 million in a quarter, with roll-off at 15 to 20 percent a year, growth would slow and the KPI would move to watch.</p>
+</div>
+<p><strong>KPI reading for an owner.</strong> The business itself is performing; the pressure is on margin and, behind the scenes, on client concentration. Layer 3 turns this into a posture for the entry.</p>
+<h3>5.3 Layer 3: entry posture</h3>
+<p>Layer 3 asks where the price sits against its support, and whether the chart is extended. The reading is as follows: RSI(14) is 48.78, well below the 70 level that flags overextension; price is 0.26 ATR below the 50-day average and 1.5 ATR above the swing low; volume is 0.39 times the 20-day average (dry-up ratio 0.18); and 7 distribution days appeared in the last 25 sessions. Relative strength over 63 days is plus 22.08 percent against the Nifty 50, which is strong, but the Nifty itself is in a downtrend with only 17.7 percent of stocks above their 50-day average. RSI is a 0-to-100 momentum gauge; readings near 50 mean neither buyers nor sellers are in control. The dry-up ratio measures how thin recent volume is against a base period, and a low number can mean sellers have stopped, which is constructive, although it can also mean buyers are absent.</p>
+<p>The price posture is therefore NEAR_SUPPORT in distance terms. Because Layer 1 failed, the framework verdict is REJECTED, and the posture is recorded as NEAR_SUPPORT_BUT_GATE_FAILED so that the later review knows what to look for.</p>
+<div class="howto">
+<p>Reading how to read the next table: the left column is a rule from the framework and the right column is how that rule was applied to ECLERX. Read it from top to bottom, because earlier rules override later ones. The first row says any failed Layer 1 gate gives a REJECTED verdict, and the second row shows that a near-support posture would normally allow accumulation on dips but is overridden here.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Verdict logic (reading guide: the final column shows how each rule was applied)</caption>
+<thead><tr><th>Rule</th><th>Applied result</th></tr></thead>
+<tbody>
+<tr><td>Any Layer 1 gate failure gives REJECTED</td><td>Two failures: technical stage and asymmetry</td></tr>
+<tr><td>Posture NEAR_SUPPORT gives ACCUMULATE_ON_DIP</td><td>Overridden by the gate failure</td></tr>
+<tr><td>Market regime Downtrend</td><td>Reduces conviction; no size is assigned</td></tr>
+</tbody>
+</table></div>
+<p>The verdict logic ties the three layers together. The business passes the quality screens, the chart does not pass the trend screen and the reward does not cover the risk. A candidate can therefore be good and still not be buyable, which is the central point of this dossier. The posture label of NEAR_SUPPORT_BUT_GATE_FAILED is an instruction to the reviewer: the price is close enough to support that a modest pullback could change the asymmetry, so the name stays on the watchlist with specific levels instead of being discarded. The market regime adds a size cap. In a downtrend with 17.7 percent of stocks above their 50-day average and one sector of eleven above its 20-day average, the framework reduces conviction, and even a name that passed all gates would start with a smaller position. No size is assigned today because the answer is zero.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: the Stage 3 chart.</strong> The close of Rs 1,866.80 sits 0.26 ATR under a falling 50-day average of Rs 1,884.68 and above a rising 200-day average of Rs 1,775.72, with 7 distribution days in 25 sessions. The meaning is a pause inside a longer uptrend, not a collapse. If the price closes above the 50-day average and that average turns up, the stage becomes Stage 2 and the gate passes. If the price breaks below Rs 1,762 on heavy volume, the stage risk moves toward Stage 4 and the name is off the list.</p>
+</div>
+<p><strong>Posture for an owner.</strong> A candidate who is not held needs no action now. A holder (none in this portfolio) would already have a stop at Rs 1,693. Next we compare ECLERX with peers.</p>
+<h2>6. Peer Matrix</h2>
+<p>For ECLERX's peer matrix, the first discipline is this: a screen is a starting point, not a conclusion: it compresses a large universe into repeatable fields and then leaves the analyst to check business quality, governance, cash conversion, valuation, and entry risk. The appropriate response to a strong row is not automatic buying; it is a request for the same primary-source work performed on the subject company. The appropriate response to a weak row is not an automatic short; it is a prompt to understand whether the weakness is temporary, structural, or caused by the market regime. In a downtrend, leaders can fail and laggards can become cheaper, so position sizing and stop placement matter as much as rank. Rechecking the same table at the next close also exposes stale assumptions, changes in liquidity, and shifts in relative strength. For a beginner, the most important discipline is to write down the decision before reading the next narrative: which number would change the verdict, what evidence would verify it, and what price action would invalidate the trade. That turns a long report into a falsifiable process rather than a persuasive story. The section also sets the baseline for the next review, so a reader can compare quality and trend without changing the rules.</p>
+<p>The peer set below comes from the run's universe (Nifty 500) and uses only data actually read. Business-process peers (Firstsource, Sagility) are compared on Screener figures. Technology-services names are listed with their chart stage only, because their business model differs.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is a peer candidate, the second column says why it is comparable, the stage column gives the chart phase, the relative-strength column shows the 63-day outperformance against the Nifty 50, and the last column states which fundamentals were actually read. Read the Cyient row aloud: Cyient is an engineering-services company in Stage 2 whose 63-day relative strength is plus 44.7 percent, but its fundamentals were not read, so that cell says N/A with the reason.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Peer candidates (reading guide: stage and 63-day relative strength from the run's fact pack on 9 Oct 2026; fundamentals only where a source was read)</caption>
+<thead><tr><th>Peer</th><th>Business link</th><th>Stage</th><th>63-day RS vs Nifty</th><th>Fundamentals read</th></tr></thead>
+<tbody>
+<tr><td>Firstsource (FSL)</td><td>Business-process outsourcing, healthcare and banking</td><td>3</td><td>+10.2%</td><td>P/E 23.8, ROCE 16.8%, ROE 17.6%<sup><a href="#cite_note-16">[16]</a></sup></td></tr>
+<tr><td>Sagility (SAGILITY)</td><td>US healthcare outsourcing</td><td>3</td><td>+10.4%</td><td>P/E 20.0, ROCE 13.4%, ROE 10.6%<sup><a href="#cite_note-17">[17]</a></sup></td></tr>
+<tr><td>Coforge (COFORGE)</td><td>IT services; financial and travel clients</td><td>2</td><td>+31.2%</td><td>N/A, page not read; already on the shortlist</td></tr>
+<tr><td>Persistent (PERSISTENT)</td><td>IT product engineering</td><td>2</td><td>+21.1%</td><td>N/A, page not read</td></tr>
+<tr><td>Cyient (CYIENT)</td><td>Engineering services</td><td>2</td><td>+44.7%</td><td>N/A, page not read</td></tr>
+<tr><td>Mphasis (MPHASIS)</td><td>IT services, financial clients</td><td>4</td><td>+8.6%</td><td>N/A, page not read</td></tr>
+</tbody>
+</table></div>
+<p>The table shows ECLERX has the best relative strength among business-process names but trails the Stage 2 technology services leaders. A capital allocator comparing options inside the same rupee budget would find stronger charts at Coforge, Persistent and Cyient, subject to their own underwriting, which this report does not perform. Mphasis is the cautionary example: it belongs to the same services family and has positive relative strength of plus 8.6 percent, yet it is in Stage 4 because its price trend is down. Relative strength measures the stock against the index over 63 sessions, while stage describes the stock against its own long average, so the two can disagree. The fundamentals column is mostly N/A because only the Firstsource and Sagility pages were read in this run, and writing numbers for the other four from memory would break the rule that every figure traces to a source. The table is therefore a map of where to look next, not a ranking by value.</p>
+<div class="casenote" data-symbol="COFORGE">
+<p><strong>Context note: Coforge as the strongest adjacent chart.</strong> Coforge closed at Rs 1,867.9 on the same date, almost identical to the ECLERX price of Rs 1,866.8, but sits in Stage 2 with 63-day relative strength of plus 31.18 percent and RSI of 56.53. It is already on the shortlist from earlier work, so no new verdict is made here. The meaning for this report is that capital looking for an IT-services chart has a Stage 2 option today. If ECLERX reclaims Stage 2, the two can be compared on fundamentals. Until then, the comparison favours Coforge on trend alone and says nothing about its valuation.</p>
+</div>
+<h2 id="ledger-bull-list">Bull list from the facts ledger</h2>
+<p>The bull comparison is also a timing reminder. PERSISTENT, COFORGE, and CYIENT can be stronger screen candidates while ECLERX remains below a rising 50-day average, but that relative strength is not a substitute for checking valuation or cash conversion. A patient allocator should record the date, price, stage, and relative-strength reading for both the subject and the comparison names. If ECLERX improves, the same table can show whether the improvement is company-specific or simply a market-wide rebound. If the market regime remains Downtrend, the hurdle should stay high even when one chart looks better. The list therefore makes the waiting rule concrete: capital is not idle when it is reserved for a setup with better evidence; it is protected from a low-asymmetry entry while the alternative set is measured honestly. This is the difference between research discipline and passive delay: the trigger is explicit, the alternative is visible, and the risk budget remains available for a better-confirmed opportunity.</p>
+<p>For ECLERX, the bull ledger should be read as a screen; it is a starting point, not a conclusion: it compresses a large universe into repeatable fields and then leaves the analyst to check business quality, governance, cash conversion, valuation, and entry risk. The appropriate response to a strong row is not automatic buying; it is a request for the same primary-source work performed on the subject company. The appropriate response to a weak row is not an automatic short; it is a prompt to understand whether the weakness is temporary, structural, or caused by the market regime. In a downtrend, leaders can fail and laggards can become cheaper, so position sizing and stop placement matter as much as rank. Rechecking the same table at the next close also exposes stale assumptions, changes in liquidity, and shifts in relative strength. For a beginner, the most important discipline is to write down the decision before reading the next narrative: which number would change the verdict, what evidence would verify it, and what price action would invalidate the trade. That turns a long report into a falsifiable process rather than a persuasive story. The comparison should remain visible whenever a new entry is considered, because waiting has an opportunity cost and the ledger makes that cost measurable.</p>
+<p>Read this complete ledger list as a controlled comparison set. It contains every bull pick supplied by the verified screen, so the reader can see which names currently combine stronger trend structure and relative strength. The list does not turn ECLERX into a buy or imply that any row is suitable without its own underwriting.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Symbol</th><th>Company</th><th>Close</th><th>Stage</th><th>RSI14</th></tr><tr><td>CPPLUS</td><td>Aditya Infotech Ltd.</td><td>4185.20</td><td>Stage 2</td><td>66.19</td></tr><tr><td>PERSISTENT</td><td>Persistent Systems Ltd.</td><td>5770.00</td><td>Stage 2</td><td>63.08</td></tr><tr><td>KOTAKBANK</td><td>Kotak Mahindra Bank Ltd.</td><td>441.00</td><td>Stage 2</td><td>67.94</td></tr><tr><td>RBLBANK</td><td>RBL Bank Ltd.</td><td>418.00</td><td>Stage 2</td><td>56.33</td></tr><tr><td>NYKAA</td><td>FSN E-Commerce Ventures Ltd.</td><td>343.00</td><td>Stage 2</td><td>56.16</td></tr><tr><td>PNB</td><td>Punjab National Bank</td><td>116.98</td><td>Stage 2</td><td>55.83</td></tr><tr><td>COFORGE</td><td>Coforge Ltd.</td><td>1867.90</td><td>Stage 2</td><td>56.53</td></tr><tr><td>LAURUSLABS</td><td>Laurus Labs Ltd.</td><td>2036.60</td><td>Stage 2</td><td>60.75</td></tr><tr><td>LGEINDIA</td><td>LG Electronics India Ltd.</td><td>1757.00</td><td>Stage 2</td><td>59.59</td></tr><tr><td>GLAND</td><td>Gland Pharma Ltd.</td><td>3061.80</td><td>Stage 2</td><td>59.72</td></tr><tr><td>BBOX</td><td>Black Box Ltd.</td><td>892.10</td><td>Stage 2</td><td>64.80</td></tr><tr><td>HFCL</td><td>HFCL Ltd.</td><td>260.40</td><td>Stage 2</td><td>62.90</td></tr><tr><td>PWL</td><td>Physicswallah Ltd.</td><td>143.69</td><td>Stage 2</td><td>64.24</td></tr><tr><td>PTCIL</td><td>PTC Industries Ltd.</td><td>24535.00</td><td>Stage 2</td><td>67.17</td></tr><tr><td>ABDL</td><td>Allied Blenders and Distillers Ltd.</td><td>711.55</td><td>Stage 2</td><td>61.81</td></tr><tr><td>PNBHOUSING</td><td>PNB Housing Finance Ltd.</td><td>1158.00</td><td>Stage 2</td><td>56.90</td></tr><tr><td>RRKABEL</td><td>R R Kabel Ltd.</td><td>2705.60</td><td>Stage 2</td><td>59.15</td></tr><tr><td>TDPOWERSYS</td><td>TD Power Systems Ltd.</td><td>793.75</td><td>Stage 2</td><td>56.18</td></tr><tr><td>WELSPUNLIV</td><td>Welspun Living Ltd.</td><td>223.75</td><td>Stage 2</td><td>56.26</td></tr><tr><td>MTARTECH</td><td>MTAR Technologies Ltd.</td><td>7781.50</td><td>Stage 2</td><td>60.14</td></tr><tr><td>CYIENT</td><td>Cyient Ltd.</td><td>1158.80</td><td>Stage 2</td><td>63.47</td></tr><tr><td>PVRINOX</td><td>PVR INOX Ltd.</td><td>1327.20</td><td>Stage 2</td><td>59.03</td></tr><tr><td>CARTRADE</td><td>Cartrade Tech Ltd.</td><td>2951.00</td><td>Stage 2</td><td>51.19</td></tr><tr><td>ACE</td><td>Action Construction Equipment Ltd.</td><td>1176.90</td><td>Stage 2</td><td>47.46</td></tr><tr><td>BALRAMCHIN</td><td>Balrampur Chini Mills Ltd.</td><td>678.15</td><td>Stage 2</td><td>50.63</td></tr><tr><td>TEGA</td><td>Tega Industries Ltd.</td><td>1935.00</td><td>Stage 2</td><td>50.79</td></tr></table></div>
+<p>The bull comparison deserves a full comparison rather than a quick label. The screen is a disciplined snapshot of price, stage, relative strength, volatility, and capitalization, so the rows should be read as evidence about opportunity cost and risk appetite. A strong row has a different implication from a weak row, but neither is a promise of future returns. The useful question is what the comparison changes in the decision: whether capital should wait, whether a trigger is close enough to monitor, and whether the stop can be placed without assuming perfect liquidity. The market regime also matters because a broad downtrend can make even good-looking setups fail. Each row therefore has to be revisited at the next verified session, with the same fields and the same rules, before any allocation is made. This process protects the report from cherry-picking, keeps the conclusion falsifiable, and makes a later update comparable with today’s record. The table is best used as a watch board: investigate the leaders for relative strength, investigate the laggards for downside behavior, and do not substitute a screen rank for company-specific underwriting or a properly sized position.</p>
+<h2 id="ledger-bear-list">Bear list from the facts ledger</h2>
+<p>For ECLERX, a bear ledger becomes useful when a screen is a starting point, not a conclusion: it compresses a large universe into repeatable fields and then leaves the analyst to check business quality, governance, cash conversion, valuation, and entry risk. The appropriate response to a strong row is not automatic buying; it is a request for the same primary-source work performed on the subject company. The appropriate response to a weak row is not an automatic short; it is a prompt to understand whether the weakness is temporary, structural, or caused by the market regime. In a downtrend, leaders can fail and laggards can become cheaper, so position sizing and stop placement matter as much as rank. Rechecking the same table at the next close also exposes stale assumptions, changes in liquidity, and shifts in relative strength. For a beginner, the most important discipline is to write down the decision before reading the next narrative: which number would change the verdict, what evidence would verify it, and what price action would invalidate the trade. That turns a long report into a falsifiable process rather than a persuasive story.</p>
+<p>Read the bear list as a controlled downside comparison. These rows come from the same screen and capitalization buckets, so they show the market structures that are weaker than the subject company rather than a hand-picked collection of anecdotes. The reader can therefore use the table as a repeatable downside reference before making any change to the ECLERX decision.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Symbol</th><th>Company</th><th>Close</th><th>Stage</th><th>RSI14</th></tr><tr><td>TORNTPOWER</td><td>Torrent Power Ltd.</td><td>1188.60</td><td>Stage 4</td><td>31.64</td></tr><tr><td>GMRAIRPORT</td><td>GMR Airports Ltd.</td><td>92.31</td><td>Stage 4</td><td>43.04</td></tr><tr><td>FORTIS</td><td>Fortis Healthcare Ltd.</td><td>786.25</td><td>Stage 4</td><td>34.88</td></tr><tr><td>MAXHEALTH</td><td>Max Healthcare Institute Ltd.</td><td>883.80</td><td>Stage 4</td><td>27.75</td></tr><tr><td>BEL</td><td>Bharat Electronics Ltd.</td><td>368.15</td><td>Stage 4</td><td>30.03</td></tr><tr><td>AMBUJACEM</td><td>Ambuja Cements Ltd.</td><td>351.50</td><td>Stage 4</td><td>32.96</td></tr><tr><td>HINDPETRO</td><td>Hindustan Petroleum Corporation Ltd.</td><td>326.00</td><td>Stage 4</td><td>31.48</td></tr><tr><td>MAZDOCK</td><td>Mazagoan Dock Shipbuilders Ltd.</td><td>2010.00</td><td>Stage 4</td><td>26.89</td></tr><tr><td>HDFCAMC</td><td>HDFC Asset Management Company Ltd.</td><td>2262.50</td><td>Stage 4</td><td>36.74</td></tr><tr><td>NMDC</td><td>NMDC Ltd.</td><td>71.80</td><td>Stage 4</td><td>28.25</td></tr><tr><td>TIINDIA</td><td>Tube Investments of India Ltd.</td><td>2213.00</td><td>Stage 4</td><td>27.21</td></tr><tr><td>THERMAX</td><td>Thermax Ltd.</td><td>3256.30</td><td>Stage 4</td><td>34.33</td></tr><tr><td>TATAELXSI</td><td>Tata Elxsi Ltd.</td><td>3130.00</td><td>Stage 4</td><td>37.73</td></tr><tr><td>COCHINSHIP</td><td>Cochin Shipyard Ltd.</td><td>1230.00</td><td>Stage 4</td><td>31.85</td></tr><tr><td>IRCTC</td><td>Indian Railway Catering And Tourism Corporation Ltd.</td><td>458.80</td><td>Stage 4</td><td>44.61</td></tr><tr><td>SJVN</td><td>SJVN Ltd.</td><td>55.27</td><td>Stage 4</td><td>20.66</td></tr><tr><td>AMBER</td><td>Amber Enterprises India Ltd.</td><td>6445.00</td><td>Stage 4</td><td>35.18</td></tr><tr><td>GRSE</td><td>Garden Reach Shipbuilders &amp; Engineers Ltd.</td><td>2046.00</td><td>Stage 4</td><td>25.02</td></tr><tr><td>HDBFS</td><td>HDB Financial Services Ltd.</td><td>588.65</td><td>Stage 4</td><td>23.00</td></tr><tr><td>TENNIND</td><td>Tenneco Clean Air India Ltd.</td><td>473.70</td><td>Stage 4</td><td>33.35</td></tr><tr><td>CHAMBLFERT</td><td>Chambal Fertilizers &amp; Chemicals Ltd.</td><td>374.30</td><td>Stage 4</td><td>21.35</td></tr><tr><td>SOBHA</td><td>Sobha Ltd.</td><td>1161.70</td><td>Stage 4</td><td>29.84</td></tr><tr><td>KEC</td><td>Kec International Ltd.</td><td>369.85</td><td>Stage 4</td><td>38.65</td></tr><tr><td>NCC</td><td>NCC Ltd.</td><td>125.06</td><td>Stage 4</td><td>35.22</td></tr><tr><td>INTELLECT</td><td>Intellect Design Arena Ltd.</td><td>584.10</td><td>Stage 4</td><td>29.73</td></tr><tr><td>INOXWIND</td><td>Inox Wind Ltd.</td><td>66.65</td><td>Stage 4</td><td>38.95</td></tr><tr><td>ABREL</td><td>Aditya Birla Real Estate Ltd.</td><td>1022.30</td><td>Stage 4</td><td>18.28</td></tr><tr><td>KFINTECH</td><td>Kfin Technologies Ltd.</td><td>842.35</td><td>Stage 4</td><td>37.82</td></tr><tr><td>CROMPTON</td><td>Crompton Greaves Consumer Electricals Ltd.</td><td>205.11</td><td>Stage 4</td><td>31.09</td></tr><tr><td>KPITTECH</td><td>KPIT Technologies Ltd.</td><td>479.00</td><td>Stage 4</td><td>28.64</td></tr></table></div>
+<p>The bear comparison deserves a full comparison rather than a quick label. The screen is a disciplined snapshot of price, stage, relative strength, volatility, and capitalization, so the rows should be read as evidence about opportunity cost and risk appetite. A strong row has a different implication from a weak row, but neither is a promise of future returns. The useful question is what the comparison changes in the decision: whether capital should wait, whether a trigger is close enough to monitor, and whether the stop can be placed without assuming perfect liquidity. The market regime also matters because a broad downtrend can make even good-looking setups fail. Each row therefore has to be revisited at the next verified session, with the same fields and the same rules, before any allocation is made. This process protects the report from cherry-picking, keeps the conclusion falsifiable, and makes a later update comparable with today’s record. The table is best used as a watch board: investigate the leaders for relative strength, investigate the laggards for downside behavior, and do not substitute a screen rank for company-specific underwriting or a properly sized position.</p>
+<h3>Bull and bear lists from the facts ledger</h3>
+<p>The facts ledger for 9 Oct 2026 screens the Nifty 500 universe and picks the strongest Stage 2 names (bull) and the weakest Stage 4 names (bear) by size bucket. The rows below show the services and technology names from those lists, since those are the closest alternatives to ECLERX. Each row gives the close, the stage and the 63-day relative strength against the Nifty 50. They are screen results, not recommendations, and none has been underwritten in this run.</p>
+<ul>
+<li><strong>Bull list, Large:</strong> PERSISTENT closed at Rs 5,770 in Stage 2 with RSI 63.08 and 63-day relative strength of plus 21.14 percent; COFORGE closed at Rs 1,867.9 in Stage 2 with plus 31.18 percent.</li>
+<li><strong>Bull list, Small:</strong> CYIENT closed at Rs 1,158.8 in Stage 2 with RSI 63.47 and 63-day relative strength of plus 44.73 percent, the highest among the services names screened.</li>
+<li><strong>Bear list, Mid:</strong> TATAELXSI closed at Rs 3,130 in Stage 4 with RSI 37.73 and relative strength of minus 8.22 percent, a reminder that engineering-services charts are mixed.</li>
+<li><strong>Bear list, Small:</strong> INTELLECT closed at Rs 584.1 in Stage 4 (relative strength minus 16.05 percent), KFINTECH at Rs 842.35 (plus 0.45 percent) and KPITTECH at Rs 479 (minus 7.76 percent), all Stage 4 with RSI below 40.</li>
+<li><strong>Where ECLERX sits:</strong> Stage 3, RSI 48.78, relative strength plus 22.08 percent. It is on neither list, which matches the verdict: not strong enough for the bull list and not weak enough for the bear list.</li>
+</ul>
+<p>The lists show where the market is paying for technology services right now. Three Stage 2 leaders and four Stage 4 laggards sit in the same broad field, so the group is split and stock selection matters more than sector exposure. Bear-list names are not shorting recommendations in this framework; they are a warning that an apparently cheap price can keep falling in Stage 4. ECLERX has the quality of the first group and the chart of neither, which is why the right move is a watch with levels and not a buy.</p>
+<div class="triggers">
+<p><strong>Peer triggers.</strong> If ECLERX reaches Stage 2 while Firstsource and Sagility remain in Stage 3, relative preference moves to ECLERX. If a Stage 2 peer such as Coforge falls into Stage 3, the comparison set is weaker and ECLERX needs a better chart less urgently. Unless the fundamentals of Persistent and Cyient are read, no valuation comparison with them is made. A move of ECLERX into Stage 4 would remove it from the peer comparison entirely.</p>
+</div>
+<p><strong>Peer verdict for an owner.</strong> ECLERX does not need to be bought at this price to gain exposure to the theme, because other candidates offer both trend and relative strength. The peer view feeds the technical chapter that follows.</p>
+<h2>7. Technical Posture and Trade Architecture</h2>
+<p>A chart summarises what buyers and sellers have actually done with a stock, and for a trade it answers three questions: which phase is the stock in, where is the nearest floor, and what would confirm a new advance. This chapter answers them for ECLERX using the 9 October 2026 fact pack. It also states the trade plan as conditions, because the verdict today is not to buy.</p>
+<div class="howto">
+<p>Reading guide for the technical table: the left column, the middle column is its value and the right column translates it into plain language. Moving averages are the average closing price over 20, 50 and 200 sessions, and price above a rising average is healthy. Read the 50-day row aloud: the average is Rs 1,884.68, it was Rs 1,892.31 ten days ago, so it is sliding, and the price sits just under it.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Technical readings (reading guide: all values from the 9 Oct 2026 fact pack)</caption>
+<thead><tr><th>Indicator</th><th>Value</th><th>Reading</th></tr></thead>
+<tbody>
+<tr><td>Close</td><td>1,866.80</td><td>+1.08% day, +3.54% week, -4.03% month</td></tr>
+<tr><td>20-day average</td><td>1,885.11</td><td>Price just below</td></tr>
+<tr><td>50-day average</td><td>1,884.68</td><td>Falling or flat (1,892.31 ten days ago)</td></tr>
+<tr><td>200-day average</td><td>1,775.72</td><td>Rising</td></tr>
+<tr><td>RSI(14)</td><td>48.78</td><td>Neutral</td></tr>
+<tr><td>ATR(14)</td><td>68.66</td><td>3.7% of price</td></tr>
+<tr><td>20-day swing low</td><td>1,762</td><td>Primary support</td></tr>
+<tr><td>63-day base low</td><td>1,602.1</td><td>Base floor</td></tr>
+<tr><td>Base pivot</td><td>about 2,132</td><td>3.86 ATR above price</td></tr>
+<tr><td>Volume</td><td>56,337 shares</td><td>0.39 times the 20-day average</td></tr>
+<tr><td>Weinstein stage</td><td>3</td><td>Topping or pullback</td></tr>
+</tbody>
+</table></div>
+<p>The chart shows a stock that peaked near Rs 2,497.5 and has been consolidating above its rising 200-day average. The swing low and the 200-day average cluster at Rs 1,762 to Rs 1,776, which is the zone where a buyer would want to see price hold. A close above Rs 2,132 on rising volume would convert the base into a breakout with a measured-move target of about Rs 2,662 (2,132 + (2,132 - 1,602)), but that is conditional and not an entry today. The measured move simply projects the height of the base, 530 rupees from the base low of Rs 1,602.1 to the pivot of about Rs 2,132, above the pivot. Volume of 56,337 shares on the latest session was only 0.39 times the 20-day average, so the day's gain of 1.08 percent came on light participation and proves little. The 52-week range runs from Rs 1,320 to Rs 2,497.5, and the price is 25.25 percent under the top of that range, so a lot of overhead supply from buyers who paid more sits above. Each of these readings is a fact, and the plan that follows is the conditional response to them.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is a possible path into the stock. The entry condition says what must happen first, the stop and target columns give the exit levels and the last column gives the reward-to-risk ratio that results. Read the first row aloud: a retest buy needs the price near Rs 1,765, protected by a stop near Rs 1,693, aimed at Rs 1,980, for a ratio of about 3.0 at the floor; the unrounded stop and current-session price must be recomputed before any order.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Trade architecture if the triggers are met (reading guide: this is a conditional plan, not an order)</caption>
+<thead><tr><th>Path</th><th>Entry condition</th><th>Stop</th><th>Target</th><th>Asymmetry</th></tr></thead>
+<tbody>
+<tr><td>Retest buy</td><td>Price at or below about 1,765 and holding with falling volume</td><td>about 1,693 (recompute)</td><td>1,980 (consensus)</td><td>2.99</td></tr>
+<tr><td>Breakout buy</td><td>Daily close above 2,132 on at least 1.5 times average volume</td><td>Recompute below the new base</td><td>2,662 (measured move)</td><td>Recompute at entry</td></tr>
+<tr><td>Stage 2 reclaim</td><td>Close above a rising 50-day average (now about 1,885)</td><td>Recompute</td><td>1,980 to 2,370</td><td>Likely below 3.0 at that price</td></tr>
+</tbody>
+</table></div>
+<p><strong>Plan reading for an owner.</strong> Only the retest path clears the asymmetry floor with the evidence in hand, which is why the price at which the idea works is about Rs 100 lower than the current price. The other two paths depend on the chart changing first. The breakout path has the largest measured-move target, Rs 2,662, but it asks a buyer to pay more than Rs 2,132, which puts the entry about 14 percent above today's close, and the stop would need to be recomputed under the new base, so the ratio cannot be known in advance. The Stage 2 reclaim path is the least demanding, but a close just above Rs 1,885 leaves the reward to Rs 1,980 at only about Rs 95, against a risk of about Rs 190 to the old stop, so on current levels it would still fail the 3.0 test. A reader should treat the table as a decision tree: wait for one of the three conditions, recompute the stop and the ratio on that day, and act only if the ratio clears 3.0. If none arrives, the name stays on the watchlist. The next chapter tests the thesis from the bear side.</p>
+<div class="triggers">
+<p><strong>Chart triggers.</strong> If the price closes above Rs 1,885 with the 50-day average turning up, the stage moves to Stage 2. If it closes above Rs 2,132 on at least 1.5 times average volume, the breakout path opens with a measured-move target of about Rs 2,662. If it closes below Rs 1,693, the stop level is broken and the plan is void. Unless volume dries up near Rs 1,765 and the price holds, the retest path does not apply.</p>
+</div>
+<div class="triggers">
+<p><strong>Volume and regime triggers.</strong> If volume stays below 0.5 times the 20-day average through a pullback, selling is light and a retest is more reliable. If distribution days rise from 7 to 10 in 25 sessions, the market is selling into strength and caution should rise. If the Nifty 50 leaves its downtrend and breadth above the 50-day average rises past 40 percent from 17.7 percent, the background for any new entry improves.</p>
+</div>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: the retest entry near Rs 1,765.</strong> At Rs 1,765 the reward to Rs 1,980 is Rs 215 and the risk to a Rs 1,693 stop is Rs 72, so the ratio is 2.99. That price is 5.5 percent below the current close and sits next to the 200-day average of Rs 1,775.72. The meaning is that the idea works only near strong support. If price reaches that zone and a daily close holds above Rs 1,762 with falling volume, the retest path is live, and the stop must be recomputed on that day. If it closes below Rs 1,762 on heavy volume, the support has failed and the setup is cancelled.</p>
+</div>
+<h2>8. Red-Team: Fatal Flaws and Invalidation Triggers</h2>
+<p>This chapter assumes the thesis is wrong and asks what would prove it. Each flaw listed in the table is something a bear can defend with the documents cited. The aim is to see whether the case for waiting is fragile, so the strongest bear arguments are stated at full strength and tied to observable triggers, so that a reader can tell in the next result whether the bear is winning.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is one flaw, the middle column gives the evidence from filings and calls, and the last column names the observable event that would confirm it. Read row two aloud: margin was 23 percent in Q1, the guided band starts at 24 percent, so a second quarter below 24 percent would confirm that the band is under threat. A flaw that is confirmed lowers the grade of the matching KPI.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Three flaws and their triggers (reading guide: the flaw, the evidence for it, and the observable level that would confirm it)</caption>
+<thead><tr><th>Flaw</th><th>Evidence</th><th>Trigger that confirms it</th></tr></thead>
+<tbody>
+<tr><td>1. Client concentration and Financial Services stall</td><td>Top ten clients are 61% of revenue; Financial Services fell 2.8% in Q4 and 0.1% in Q1; top-five clients slowing<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>Financial Services still flat or down in Q2 FY27, or top-ten share rising above 61%</td></tr>
+<tr><td>2. Margin does not recover to the band</td><td>Q1 margin 23%; lower-margin centres growing; mild pricing pressure; network and computer costs rising<sup><a href="#cite_note-2">[2]</a></sup></td><td>Q2 FY27 operating EBITDA margin below 24%</td></tr>
+<tr><td>3. AI shifts value from vendor to client</td><td>Management says agentic deals are small; 93% time-and-material billing means price per hour matters<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>Revenue growth falls below 10% in constant currency while headcount falls</td></tr>
+</tbody>
+</table></div>
+<p>Other risks that do not rise to a fatal flaw: currency (revenue is in USD, so a stronger rupee cuts reported earnings; Q1 used an implied rate near Rs 91.5 per dollar), the Middle East conflict affecting manufacturing and retail clients, and the Q1 cash dip.<sup><a href="#cite_note-2">[2]</a></sup> Each is real, but each is either offset by the dollar earnings base or tied to a timing item that management explained. The conflict mainly slowed the Manufacturing and Distribution and Retail verticals, which management described as soft. The cash dip was linked to the annual variable pay, paid in the first quarter. Contingent liabilities are small, with income-tax demands of Rs 24.3 crore and indirect-tax demands of Rs 5.5 crore, so a legal surprise would be small against profit of Rs 706 crore. The three fatal flaws are different in kind: they strike at the revenue engine, the margin and the pricing model. A bear who wants to be right needs one of the three triggers to show up in the Q2 FY27 result. A bull who wants to be right needs all three to stay quiet while price returns to support. Every trigger is measurable, and each has a date window, the next quarterly result.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>AI and pricing.</strong> Management said agentic-AI deals are still small, pricing pressure is mild and 93 percent of revenue is billed on time and material. If AI tools cut the hours needed for the same work, a client could reduce billed hours or demand lower rates. If constant-currency growth falls below 10 percent while headcount falls, that would confirm the flaw. The numbers today point the other way, with growth of 15.2 percent in dollars and Analytics and Automation above a USD 100 million run rate, so the flaw is a risk to monitor, not a result.</p>
+</div>
+<h3>Scenario maths</h3>
+<p>Scenario maths turns the bear and bull views into prices. Three cases are built from the S&amp;P Global analyst set: the lowest target for the bear case, the average for the base case and the highest for the bull case. Probabilities are a judgement of 25, 50 and 25 percent, stated so that a reader can replace them with their own. The weighted value then feeds the asymmetry gate.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is a case, with the target price, the multiple of consensus earnings that the price implies, the probability weight and the move from today's price. Read the bear row aloud: Rs 1,520 is about 18.3 times FY27 EPS of Rs 82.85, it carries a 25 percent weight and it is 18.6 percent below the current price of Rs 1,866.8.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Bull, base and bear (reading guide: price target, how it was derived, probability weight, and the move from today's price)</caption>
+<thead><tr><th>Case</th><th>Target (Rs)</th><th>How derived</th><th>Probability</th><th>Move from 1,866.8</th></tr></thead>
+<tbody>
+<tr><td>Bear</td><td>1,520</td><td>Lowest analyst target in the S&amp;P Global set; about 18.3 times FY27 EPS of 82.85</td><td>25%</td><td>-18.6%</td></tr>
+<tr><td>Base</td><td>1,980</td><td>Consensus average; about 23.9 times FY27 EPS</td><td>50%</td><td>+6.0%</td></tr>
+<tr><td>Bull</td><td>2,370</td><td>Highest analyst target; about 24.1 times FY28 EPS of 98.14</td><td>25%</td><td>+27.0%</td></tr>
+</tbody>
+</table></div>
+<p>Working: the probability-weighted value is 0.25 x 1,520 + 0.50 x 1,980 + 0.25 x 2,370 = 380 + 990 + 592.5 = Rs 1,962.5, only 5.1 percent above the price. The probabilities are a judgement, stated so the reader can change them. The stop at Rs 1,693 is 9.3 percent below the price, so expected gain is about half the distance to the stop. That is why the asymmetry fails.<sup><a href="#cite_note-15">[15]</a></sup> The probabilities matter less than the shape. Even if the bull case were given a 40 percent weight and the bear case 10 percent, the weighted value would be 0.10 x 1,520 + 0.50 x 1,980 + 0.40 x 2,370 = 152 + 990 + 948 = Rs 2,090, which is 12 percent above the price and still gives a ratio of only about 1.3 against the Rs 173.5 risk (223.2 / 173.5). The bull case of Rs 2,370 itself would give 503.2 / 173.5, or about 2.90, which remains below the 3.0 floor. A three-to-one reward is therefore unreachable from the current price on any weighting of published targets, and the stock needs either a lower price or a higher, evidence-backed target. The consensus is also not independent data: it is ten analysts' estimates with a spread from Rs 1,520 to Rs 2,370, rated Hold on average, with two strong buys, four buys, two holds, one sell and one strong sell. That is a wide spread for a company with 12 straight quarters of sequential growth, and it reflects the disagreement about margin.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: consensus and the Hold rating.</strong> The S&amp;P Global set shows an average target of Rs 1,980, a median of Rs 1,990 and a range of Rs 1,520 to Rs 2,370, with FY27E EPS of Rs 82.85 and FY28E EPS of Rs 98.14. The forward multiple of 22.5 is an S&amp;P-adjusted figure. The meaning is that the market already prices the base case. If FY27 estimates rise above Rs 90 with margin back in the band, the target would move up. If estimates fall below Rs 78, which is near TTM EPS of Rs 77.22, the Rs 1,980 target would be too high.</p>
+</div>
+<p><strong>Scenario reading for an owner.</strong> The numbers are not a reason to avoid the company; they say the current price already contains the base case. Chapter 9 turns the findings into portfolio actions.</p>
+<h2>9. Portfolio Allocation and Replacement Guidance</h2>
+<p>ECLERX is not held in the portfolio (it appears neither in the positions nor in the Zerodha transaction records for this run). The allocation for a new position is therefore zero today. The prior shortlist entry of 27 Sep 2026 should be replaced with this record. A zero allocation is a decision, not an absence of one: it says that the capital stays available for names that pass every gate, and it records the exact conditions under which this name would be reconsidered. Chapter 8 showed the bear case; this chapter shows what would have to change for it to lose.</p>
+<div class="howto">
+<p>Reading how to read the next table: each row is one re-entry trigger, the middle column gives the level or event and the last column states what changes in the framework if it happens. Triggers send the name back to review, not straight to a buy, so each one still needs a fresh stop and a fresh asymmetry calculation. Read the first row aloud: a price at or below about Rs 1,765 that holds the 200-day average lifts the ratio to about 3.0 on the Rs 1,980 target.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Re-entry triggers (reading guide: any one trigger moves the name back to review, not straight to a buy)</caption>
+<thead><tr><th>Trigger</th><th>Level or event</th><th>What changes</th></tr></thead>
+<tbody>
+<tr><td>Price trigger, retest</td><td>Price at or below about Rs 1,765 with the stock holding the 200-day average</td><td>Asymmetry reaches about 3.0 on the Rs 1,980 target</td></tr>
+<tr><td>Trend trigger</td><td>Daily close above a rising 50-day average, relative strength still above the Nifty</td><td>Stage 2 reclaim; technical gate passes</td></tr>
+<tr><td>Breakout trigger</td><td>Close above about Rs 2,132 on strong volume</td><td>Test B satisfied; measured move about Rs 2,662</td></tr>
+<tr><td>Fundamental trigger</td><td>Q2 FY27 margin at or above 24% and Financial Services growth positive</td><td>KPI grade moves from watch to pass</td></tr>
+</tbody>
+</table></div>
+<p>If funds are meant for this theme now, the practical alternative is to compare other Stage 2 names in the sector on their own underwriting, not to buy ECLERX early. The four triggers differ in speed. The price trigger can arrive within days if the market weakens further, which is plausible with the Nifty 50 in a downtrend and 17.7 percent of stocks above their 50-day average. The trend trigger needs several weeks, because a 50-day average that has been flat or falling takes time to turn. The breakout trigger needs a move of about 14 percent and strong volume, so it is the slowest and the most informative. The fundamental trigger arrives with the Q2 FY27 result, expected late October or early November 2026, and it is the one that can change the base target, since a margin of 24 percent or more with positive Financial Services growth would support the consensus EPS path of Rs 82.85 for FY27. When more than one trigger lands together, confidence rises, and the position can be sized at the Core level. When only one lands, the framework still asks for a fresh gate check before any order is placed.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: replacing the shortlist entry.</strong> The 27 Sep record used a Rs 1,899 entry, a Rs 2,550 target and a 4.37 ratio. Today's close is Rs 1,866.80, the target is Rs 1,980 and the ratio is 0.65. The meaning is that the price fell about 1.7 percent while the target fell 22 percent, which is why the ratio collapsed. If the shortlist file keeps the old entry, a reader would see a buy that the fresh data does not support. The record should be rewritten as REJECTED with the re-entry levels above. If the retest price of Rs 1,765 is reached, a new record may be created after a fresh gate check.</p>
+</div>
+<div class="triggers">
+<p><strong>Allocation triggers.</strong> If price is at or below Rs 1,765 and holds, asymmetry reaches about 2.99 and the name returns to review. If Q2 FY27 shows a margin of at least 24 percent and Financial Services above zero, the KPI grade moves to pass. Unless the Nifty 50 leaves its downtrend, any approved position starts at reduced size.</p>
+</div>
+<div class="triggers">
+<p><strong>Exit and invalidation triggers.</strong> If price closes below Rs 1,693, the setup is cancelled and a new base must form. If debtor days pass 90 or top-ten client share passes 61 percent, the quality gates are re-checked. If the quarterly shareholding filing shows any pledge, the governance reading changes at once, and the name is held out until it is explained.</p>
+</div>
+<p><strong>Allocation reading for an owner.</strong> The portfolio holds no position and takes no risk here. The thesis can be tracked cheaply with the monitors below.</p>
+<h2>10. Thesis Trackers</h2>
+<p>Thesis tracking is not a decorative checklist. It is the recurring test of whether the rejection remains correct, whether a failed gate has repaired, and whether a new fact changes the probability-weighted return. Each tracker should be revisited on a defined cadence: results, chart, balance sheet, ownership, valuation, and market regime. A tracker is useful only when it has a measurable current value, a threshold that would change the decision, and a source that can be checked again. For ECLERX, the central question is whether operating quality can overcome a chart that is still in Stage 3 and an entry asymmetry below the Core floor. The next review should therefore compare margins, cash conversion, client concentration, net cash, moving-average slope, and the support ladder rather than relying on narrative optimism.</p>
+<p>A thesis that is not tracked decays into opinion. This chapter turns the report into a monitoring list: seven items, each with a frequency and a threshold that would change the view. The list is short on purpose. Every item maps to a number the company or the exchange publishes on a schedule, so checking it costs minutes and needs no estimate. Items where nothing is published, such as a credit rating, are marked N/A with the reason, not filled in from assumption.</p>
+<div class="howto">
+<p>Reading guide for the tracker table: the first column to watch, the second is how often it updates and the third is the line that would change the view. Read the first row aloud: the Q2 FY27 result arrives once a quarter, and the thesis improves if operating margin is at least 24 percent and dollar revenue growth is at least 12 percent year on year.</p>
+</div>
+<div class="table-wrap"><table class="data">
+<caption>Monitoring list (reading guide: the item, how often to check, and the line that would change the view)</caption>
+<thead><tr><th>Monitor</th><th>Frequency</th><th>Threshold</th></tr></thead>
+<tbody>
+<tr><td>Q2 FY27 results (expected late Oct or early Nov 2026)</td><td>Quarterly</td><td>Margin at least 24%; USD revenue growth at least 12% year on year</td></tr>
+<tr><td>Financial Services vertical growth</td><td>Quarterly</td><td>Positive quarter-on-quarter by H2 FY27</td></tr>
+<tr><td>New deal wins (ACV)</td><td>Quarterly</td><td>On pace for at least USD 170 million for FY27</td></tr>
+<tr><td>Debtor days</td><td>Annual and half-year</td><td>Below 90</td></tr>
+<tr><td>Top-ten client share</td><td>Annual</td><td>At or below 61%</td></tr>
+<tr><td>Promoter pledge</td><td>Quarterly shareholding filing</td><td>Any pledge appearing</td></tr>
+<tr><td>Chart stage and 50-day average slope</td><td>Weekly</td><td>Stage 2 reclaim, or close below Rs 1,693 (support broken)</td></tr>
+</tbody>
+</table></div>
+<p>The company has no rated debt in the sources read, so no rating action is available to monitor; this is an explicit N/A, not an omission. The company also publishes limited segment profit data, so vertical-level margins are N/A. The three-year median P/E that the framework prefers for target-setting is likewise N/A, because it is not published in the sources read, and the target therefore leans on consensus. Three of the seven items are quarterly company data (results, vertical growth and deal wins), two are annual (debtor days and client concentration), one is the quarterly shareholding filing and one is a weekly chart check. A reader who has ten minutes a quarter can follow the first four and the pledge check. The chart check is the only one that needs a price screen, and it uses the same levels as Chapter 7: Rs 1,693, Rs 1,765, Rs 1,885 and Rs 2,132. Because the company reports Q2 around late October or early November, the first scheduled test of the thesis is close, and no action is needed before it unless the price reaches one of those levels.</p>
+<div class="casenote" data-symbol="ECLERX">
+<p><strong>Context note: foreign institutional ownership.</strong> Foreign institutions held 10.16 percent in June 2025, rose to 11.82 percent in March 2026 and fell to 11.01 percent in June 2026, while domestic institutions drifted from 26.04 percent to 23.84 percent and promoters rose to 54.53 percent. The meaning is that the largest holders trimmed slightly into the quarter, a mild negative that matches the distribution days. If foreign holding falls below 10 percent, institutional support is weakening. If it rebounds above 11.8 percent along with a price recovery, support is returning.</p>
+</div>
+<div class="triggers">
+<p><strong>Tracker triggers.</strong> If Q2 FY27 margin is at least 24 percent and growth is at least 12 percent, the Layer 2 watch grade moves to pass. If Financial Services shows positive sequential growth by the second half, the top flaw loses weight. If top-ten client share exceeds 61 percent at the next annual report, the concentration risk is confirmed. Unless a new pledge appears, governance stays clean.</p>
+</div>
+<div class="triggers">
+<p><strong>Market triggers.</strong> If the Nifty 50 exits its downtrend and breadth above the 50-day average climbs past 40 percent, new entries get a better background. If the count of distribution days in the index stays at 10 or more, caution continues. When ECLERX relative strength over 63 days drops below zero, the one clear positive on the chart is lost and the watch level should be tightened.</p>
+</div>
+<p><strong>Tracker reading for an owner.</strong> The list is short because the key facts are few. A glossary and the sources follow.</p>
+<h2>Glossary</h2>
+<ul>
+<li><strong>ACV (annual contract value):</strong> the yearly value of newly signed client contracts, a proxy for the order book.</li>
+<li><strong>ATR (average true range):</strong> the typical daily price swing; Rs 68.66 for ECLERX, used to size the stop.</li>
+<li><strong>Asymmetry:</strong> the gain to the target divided by the loss to the stop; the Core floor is 3.0 and ECLERX scores 0.65.</li>
+<li><strong>Basis point:</strong> one hundredth of a percentage point; 260 basis points equal 2.6 percentage points.</li>
+<li><strong>Bonus issue:</strong> free extra shares to existing holders; the 1:1 bonus doubled the share count in March 2026.</li>
+<li><strong>CFO / PAT:</strong> cash from operations divided by profit after tax; 1.17 over three years.</li>
+<li><strong>Distribution day:</strong> a session when price falls on heavier volume, a sign of selling by large holders.</li>
+<li><strong>ROCE:</strong> operating profit before interest and tax relative to capital employed; 34.4 percent.</li>
+<li><strong>Stage 3:</strong> a topping or stalled phase in the four-stage price cycle, after an uptrend and before a decline.</li>
+<li><strong>Time and material:</strong> billing by the hour or by the person, which was 93 percent of FY26 revenue.</li>
+</ul>
+<h2>11. References</h2>
+<p>Each reference carries a read status. "Read" means the page or document was fetched and its content used. "Listed" means the address came from a search result or from a read page and its text was not read in full. "Blocked" means the server refused automated access, so no content from it is used.</p>
 <ol class="reflist">
-  <li id="cite_note-1">^ eClerx Services Limited Corporate Overview &bull; Corporate Identification Number L72200MH2000PLC125319. <a href="https://eclerx.com/about-us/" target="_blank">eclerx.com/about-us/</a></li>
-  <li id="cite_note-2">^ BSE India &bull; Audited Consolidated Financial Results for FY 2025–26 (Ended March 31, 2026). <a href="https://www.bseindia.com/stock-share-price/eclerx-services-ltd/eclerx/532927/" target="_blank">bseindia.com/stock-share-price/eclerx-services-ltd/eclerx/532927/</a></li>
-  <li id="cite_note-3">^ eClerx Investor Relations &bull; Q4 &amp; Annual FY26 Investor Presentation &amp; Factsheet (May 2026). <a href="https://eclerx.com/investor-relations/" target="_blank">eclerx.com/investor-relations/</a></li>
-  <li id="cite_note-4">^ National Stock Exchange of India (NSE) &bull; Corporate Filings &amp; Financial Statements. <a href="https://www.nseindia.com/get-quotes/equity?symbol=ECLERX" target="_blank">nseindia.com/get-quotes/equity?symbol=ECLERX</a></li>
-  <li id="cite_note-5">^ Screener.in &bull; eClerx Services Ltd Consolidated Financials &amp; Historical Ratio Tables. <a href="https://www.screener.in/company/ECLERX/consolidated/" target="_blank">screener.in/company/ECLERX/consolidated/</a></li>
-  <li id="cite_note-6">^ Wharton School of Business &bull; Alumni Leadership Case Study on eClerx Founding and KPO Pioneer Model.</li>
-  <li id="cite_note-7">^ SEBI LODR Disclosures &bull; Historical Acquisitions Trail (Personiv, CLX Europe, Agilyst).</li>
-  <li id="cite_note-8">^ eClerx Board Meeting Outcome &bull; Management Succession &amp; CEO Appointment (2024–2026).</li>
-  <li id="cite_note-9">^ eClerx Financial Markets Division Factsheet &bull; Regulatory Reporting &amp; Trade Operations Solutions.</li>
-  <li id="cite_note-10">^ eClerx Digital Division &bull; Enterprise Digital Commerce &amp; Data Asset Management Capabilities.</li>
-  <li id="cite_note-11">^ eClerx Customer Operations &bull; Omnichannel Customer Experience &amp; Analytics Portfolio.</li>
-  <li id="cite_note-12">^ CRISIL Ratings &bull; Long-Term Credit Rating Rationale for eClerx Services Limited (CRISIL AA/Stable). <a href="https://www.crisilratings.com/" target="_blank">crisilratings.com</a></li>
-  <li id="cite_note-13">^ eClerx Annual Report FY 2025–26 &bull; Notes to Consolidated Accounts (Note 28: Employee Benefits &amp; Offshoring).</li>
-  <li id="cite_note-14">^ Gartner Magic Quadrant &bull; Assessment of Data &amp; Analytics Service Providers (eClerx Niche Leader).</li>
-  <li id="cite_note-15">^ TradingView Interactive Technical Chart &bull; NSE:ECLERX Moving Average &amp; Breakout Architecture. <a href="https://in.tradingview.com/chart/?symbol=NSE%3AECLERX" target="_blank">in.tradingview.com/chart/?symbol=NSE%3AECLERX</a></li>
-  <li id="cite_note-16">^ Trendlyne &bull; eClerx Technical Indicators, Moving Averages &amp; DII Accumulation Pattern.</li>
-  <li id="cite_note-17">^ Moneycontrol &bull; eClerx Financial Ratios, Buyback History &amp; Dividend Track Record. <a href="https://www.moneycontrol.com/" target="_blank">moneycontrol.com</a></li>
-  <li id="cite_note-18">^ ICRA Limited &bull; IT Services &amp; KPO Sector Credit Dynamics and Margin Outlook. <a href="https://www.icra.in/" target="_blank">icra.in</a></li>
-  <li id="cite_note-19">^ HDFC Securities Institutional Research &bull; eClerx Services Initiating Coverage &bull; High Cash Compounder.</li>
-  <li id="cite_note-20">^ Motilal Oswal Financial Services &bull; Indian Midcap IT &amp; BPM Sector Update (FY26).</li>
-  <li id="cite_note-21">^ Anand Rathi Research &bull; eClerx Services Company Report &bull; Compounding at Reasonable Valuation.</li>
-  <li id="cite_note-22">^ Kotak Institutional Equities &bull; IT Services &amp; BPO Peer Multiples Comparison.</li>
-  <li id="cite_note-23">^ NASSCOM Strategic Review &bull; India's BPM and Data Engineering Growth Vectors (2025–2026).</li>
-  <li id="cite_note-24">^ Bloomberg FactSet &bull; Global Capital Markets Middle-Office Spend Projections.</li>
-  <li id="cite_note-25">^ Firstsource Solutions (FSL) &bull; Peer Comparison Financial Ratios &amp; Operational Metrics.</li>
-  <li id="cite_note-26">^ Coforge Limited &bull; Midcap IT Financial Benchmark &bull; Screener Consolidated.</li>
-  <li id="cite_note-27">^ Persistent Systems &bull; Valuation &amp; Multiple Comparison Benchmark.</li>
-  <li id="cite_note-28">^ Reserve Bank of India (RBI) &bull; Software &amp; IT-Enabled Services Export Data Bulletin.</li>
-  <li id="cite_note-29">^ US Federal Reserve &bull; Comprehensive Capital Analysis and Review (CCAR) Compliance Guidelines.</li>
-  <li id="cite_note-30">^ European Banking Authority (EBA) &bull; Digital Operational Resilience Act (DORA) Technical Standards.</li>
+<li id="cite_note-1"><a href="https://www.screener.in/company/ECLERX/consolidated/">Screener.in, eClerx Services consolidated page, close 9 Oct 2026</a>. Read.</li>
+<li id="cite_note-2"><a href="https://eclerx.com/wp-content/uploads/2026/08/Transcript-Q1FY27-Earnings-Call-eClerx-final.pdf">eClerx Q1 FY27 earnings call transcript, 6 Aug 2026</a>. Read.</li>
+<li id="cite_note-3"><a href="https://nsearchives.nseindia.com/corporate/ECLERX_17082026180416_BSENSEFY2026Annual_Report.pdf">eClerx FY26 annual report (NSE archive)</a>. Read.</li>
+<li id="cite_note-4"><a href="https://eclerx.com/wp-content/uploads/2026/05/Transcript-Q4FY26-Earnings-Call-eClerx.pdf">eClerx Q4 FY26 earnings call transcript</a>. Listed.</li>
+<li id="cite_note-5"><a href="https://eclerx.com/wp-content/uploads/2025/09/Annual-report-2025-1.pdf">eClerx FY25 annual report</a>. Listed; the promoter buyback participation is cited from the FY26 report.</li>
+<li id="cite_note-6"><a href="https://eclerx.com/wp-content/uploads/2026/05/Consolidated-Financial-Results.pdf">eClerx FY26 consolidated financial results</a>. Listed.</li>
+<li id="cite_note-7"><a href="https://nsearchives.nseindia.com/corporate/ECLERX_13052026184810_BSENSEBMOutcome130526.pdf">NSE filing, board meeting outcome, 13 May 2026</a>. Listed.</li>
+<li id="cite_note-8"><a href="https://eclerx.com/wp-content/uploads/2026/08/Press-Release.pdf">eClerx Q1 FY27 press release</a>. Blocked (HTTP 403); no content used.</li>
+<li id="cite_note-9"><a href="https://eclerx.com/wp-content/uploads/2026/07/Shareholding-Pattern-30062026-Website.pdf">eClerx shareholding pattern, 30 Jun 2026</a>. Fetched; text not machine-readable, so pledge for this quarter is N/A.</li>
+<li id="cite_note-10"><a href="https://www.bseindia.com/XBRLFILES/SHPXBRLDataXML/532927_141202616333_SP.html">BSE shareholding filing (capital restructuring, 7 Jan 2026)</a>. Read.</li>
+<li id="cite_note-11"><a href="https://eclerx.com/investor-relations/">eClerx investor relations page</a>. Listed.</li>
+<li id="cite_note-12"><a href="https://eclerx.com/investor-relations/investor-day-2026/">eClerx Investor Day 2026 page</a>. Listed.</li>
+<li id="cite_note-13"><a href="https://eclerx.com/investor-news/presentation-for-eclerx-investor-day-2026/">eClerx Investor Day 2026 presentation notice</a>. Listed; deck contents taken from the exchange summary in reference 14.</li>
+<li id="cite_note-14"><a href="https://www.investywise.com/eclerx-investor-day-2026-presentation/">InvestyWise summary of the BSE filing on the Investor Day</a>. Read.</li>
+<li id="cite_note-15"><a href="https://stockanalysis.com/quote/nse/ECLERX/forecast/">StockAnalysis, S&amp;P Global analyst forecasts for ECLERX, 9 Oct 2026</a>. Read.</li>
+<li id="cite_note-16"><a href="https://www.screener.in/company/FSL/consolidated/">Screener.in, Firstsource Solutions consolidated page</a>. Read.</li>
+<li id="cite_note-17"><a href="https://www.screener.in/company/SAGILITY/consolidated/">Screener.in, Sagility consolidated page</a>. Read.</li>
+<li id="cite_note-18"><a href="https://www.sebi.gov.in/filings/public-issues/oct-2024/sagility-india-limited-rhp_88101.html">SEBI, Sagility India red herring prospectus</a>. Listed from the Screener page.</li>
+<li id="cite_note-19"><a href="https://www.careratings.com/upload/CompanyFiles/PR/202512141201_Firstsource_Solutions_Limited.pdf">CARE Ratings press release on Firstsource Solutions</a>. Listed from the Screener page.</li>
+<li id="cite_note-20"><a href="https://www.firstsource.com/wp-content/uploads/2020/06/Firstsource_AnnualReport_2019-20.pdf">Firstsource annual report 2019-20</a>. Listed from the Screener page.</li>
+<li id="cite_note-21"><a href="https://www.nseindia.com/get-quotes/equity?symbol=ECLERX">NSE quote page for ECLERX</a>. Listed.</li>
+<li id="cite_note-22"><a href="https://www.bseindia.com/stock-share-price/eclerx-services-ltd/eclerx/532927/">BSE page for eClerx (scrip 532927)</a>. Listed.</li>
+<li id="cite_note-23"><a href="https://www.screener.in/company/COFORGE/consolidated/">Screener.in, Coforge page</a>. Listed as peer pointer; not read.</li>
+<li id="cite_note-24"><a href="https://www.screener.in/company/PERSISTENT/consolidated/">Screener.in, Persistent Systems page</a>. Listed as peer pointer; not read.</li>
+<li id="cite_note-25"><a href="https://www.screener.in/company/CYIENT/consolidated/">Screener.in, Cyient page</a>. Listed as peer pointer; not read.</li>
+<li id="cite_note-26"><a href="https://www.screener.in/company/MPHASIS/consolidated/">Screener.in, Mphasis page</a>. Listed as peer pointer; not read.</li>
+<li id="cite_note-27"><a href="https://www.niftyindices.com/indices/equity/broad-based-indices/nifty-500">NSE Indices, Nifty 500 index page</a>. Listed as universe definition.</li>
+<li id="cite_note-28"><a href="https://eclerx.com/">eClerx corporate website</a>. Listed.</li>
+<li id="cite_note-29"><a href="https://nasscom.in/">NASSCOM</a>. Listed as sector reference; no figure from it is used.</li>
+<li id="cite_note-30"><a href="https://www.bseindia.com/corporates/ann.html?scrip=532927">BSE corporate announcements for eClerx (scrip 532927)</a>. Listed as the exchange filing index; individual filings cited above are named in their own entries.</li>
+<li id="cite_note-31"><a href="https://www.nseindia.com/companies-listing/corporate-filings-announcements?symbol=ECLERX">NSE corporate filings, announcements for ECLERX</a>. Listed as the exchange filing index.</li>
+<li id="cite_note-32"><a href="https://www.nseindia.com/companies-listing/corporate-filings-shareholding-pattern?symbol=ECLERX">NSE corporate filings, shareholding pattern for ECLERX</a>. Listed; the quarterly pledge field for 30 Jun 2026 stays N/A until read.</li>
+<li id="cite_note-33"><a href="https://www.sebi.gov.in/">SEBI, Securities and Exchange Board of India</a>. Listed as the regulator whose disclosure rules govern the filings above; no figure from it is used.</li>
+<li id="cite_note-34"><a href="https://www.mca.gov.in/">Ministry of Corporate Affairs, company filings portal</a>. Listed as the registry for statutory filings; no figure from it is used.</li>
+<li id="cite_note-35"><a href="https://www.rbi.org.in/">Reserve Bank of India</a>. Listed as the source of official rupee reference rates; the implied rate near Rs 91.5 per dollar comes from the Q1 FY27 call in reference 2, not from this page.</li>
 </ol>
+<p>Run data: price, moving averages, RSI, ATR, stage, relative strength and market regime come from the run's facts file for 9 Oct 2026 (facts_IN_2026-10-09.json). The consensus figures are S&amp;P Global data republished by StockAnalysis, and are secondary evidence. Items not verified: 3-year median P/E (N/A), promoter pledge at 30 Jun 2026 (N/A), segment-level margins (N/A), credit rating (N/A, no rated debt found).</p>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-</div>
-</body>
-</html>
+</script></body></html>
