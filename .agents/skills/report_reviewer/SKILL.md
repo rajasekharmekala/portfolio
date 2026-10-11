@@ -34,7 +34,7 @@ Score each area as PASS, REVISE, or BLOCK. A BLOCK marks a quoted claim or secti
 - Every verdict (KEEP, TRIM, EXIT, ACCUMULATE, WATCH, Bull or Bear placement, Top-3 setup) cites the rule and the number that triggered it, and that number matches the ledger.
 - Any figure whose `as_of` is not the session date is labelled as prior-session in the report.
 - Any claim about a company (business, catalyst, guidance, pledge, order book) that does not appear in the research record is a finding. "Known" facts from memory are not sources.
-- The citation check is a mechanical floor: every FAIL line from `citation_check.py` (missing source in the fetch cache, `as_of` older than 60 days, a research-record value that does not match the cached text) is a BLOCK finding that quotes the checker's line. A report with a failed citation check can never receive APPROVE from the source pass.
+- The citation check is a mechanical floor: every FAIL line from `citation_check.py` (missing source in the fetch cache, `as_of` older than 60 days, a research-record value that does not match the cached text) is a BLOCK finding that quotes the checker's line. A report with a failed citation check can never receive APPROVE from the source pass. Exception: a `citation_check.py --allow-stale-asof` run that prints `PASS WITH EXCEPTIONS` is not a failure when every `EXCEPTION AS-OF` line is listed, with its age and cure date, in the report's `gate-exceptions` section; raise those lines as NOTE findings. An exception that is missing from that section is a BLOCK finding.
 - BLOCK if any figure is invented, or a verdict contradicts the ledger.
 
 ### B. Completeness

@@ -19,7 +19,11 @@ Usage:
   .venv/bin/python scripts/citation_check.py docs/blogs/ADBE_dossier.html
       [--research scripts/.cache/research_US_*.json ...]
       [--cache-dir scripts/.cache/fetched]
-      [--min-sources 25] [--max-age-days 60]
+      [--min-sources 25] [--max-age-days 60] [--allow-stale-asof]
+
+--allow-stale-asof turns check 4 failures into listed "EXCEPTION AS-OF" lines
+(result "PASS WITH EXCEPTIONS"); every exception must then be disclosed in the
+report's gate-exceptions section.
 
 Exit 1 on any error.
 """
@@ -147,7 +151,11 @@ def value_variants(v):
     return out
 
 
-def check(report, research_paths, cache_dir, min_sources, max_age_days):
+def check(report, research_paths, cache_dir, min_sources, max_age_days,
+          allow_stale_asof=False):
+    """Return (errors, warns). With allow_stale_asof, a stale as_of is not an
+    error: it is listed in warns with an "EXCEPTION AS-OF" prefix so the
+    report can disclose it (see _COMMON.md, Gate exceptions)."""
     errors, warns = [], []
     html = open(report, encoding='utf-8').read()
     count, urls, refs = source_count(html)
@@ -190,9 +198,13 @@ def check(report, research_paths, cache_dir, min_sources, max_age_days):
             errors.append(f"AS-OF {label}: missing or unparseable as_of "
                           f"({it.get('as_of')!r})")
         elif (ref - asof).days > max_age_days:
-            errors.append(f"AS-OF {label}: {it.get('as_of')} is "
-                          f"{(ref - asof).days} days older than report date "
-                          f"{ref.isoformat()} (max {max_age_days})")
+            msg = (f"AS-OF {label}: {it.get('as_of')} is "
+                   f"{(ref - asof).days} days older than report date "
+                   f"{ref.isoformat()} (max {max_age_days})")
+            if allow_stale_asof:
+                warns.append("EXCEPTION " + msg)
+            else:
+                errors.append(msg)
 
         u = (it.get('source_url') or '').split('#')[0].split('?')[0].rstrip('/')
         if not u.startswith('http'):
@@ -233,6 +245,10 @@ def main():
     ap.add_argument('--cache-dir', default=os.path.join('scripts', '.cache', 'fetched'))
     ap.add_argument('--min-sources', type=int, default=25)
     ap.add_argument('--max-age-days', type=int, default=60)
+    ap.add_argument('--allow-stale-asof', action='store_true',
+                    help='list stale as_of dates as disclosed EXCEPTIONs instead of failing '
+                         '(use when the latest periodic filing is older than --max-age-days; '
+                         'every exception must be disclosed in the report)')
     args = ap.parse_args()
 
     # auto-detect research files when none given
@@ -241,7 +257,8 @@ def main():
         research = sorted(glob.glob(os.path.join('scripts', '.cache', 'research_*.json')))
 
     errors, warns = check(args.report, research, args.cache_dir,
-                          args.min_sources, args.max_age_days)
+                          args.min_sources, args.max_age_days,
+                          allow_stale_asof=args.allow_stale_asof)
     count, urls, refs = source_count(open(args.report, encoding='utf-8').read())
     print(f"cited distinct sources: {count} ({refs} bibliography, "
           f"{len(urls)} URLs; floor {args.min_sources})")
@@ -249,7 +266,8 @@ def main():
         print(f"  WARN  {w}")
     for e in errors:
         print(f"  FAIL  {e}")
-    print("CITATION CHECK: " + ("FAIL" if errors else "PASS"))
+    excepted = any(w.startswith("EXCEPTION") for w in warns)
+    print("CITATION CHECK: " + ("FAIL" if errors else "PASS WITH EXCEPTIONS" if excepted else "PASS"))
     sys.exit(1 if errors else 0)
 
 

@@ -281,6 +281,10 @@ The report is not finished until, in this order:
 2. `python3 scripts/citation_check.py docs/blogs/<SYMBOL>_dossier.html --research scripts/.cache/research_<MARKET>_<date>.json`
    — source floor (25 for dossiers), every found record's URL in the fetch
    cache, every value present in the cached text, as-of freshness (60 days).
+   When the latest periodic filing is older than 60 days and no newer one
+   exists, add `--allow-stale-asof`; the stale records then print as
+   `EXCEPTION AS-OF` lines and must be listed in the dossier's
+   `gate-exceptions` section (`../../workflows/_COMMON.md`).
 3. `python3 scripts/validate_report.py docs/blogs/<SYMBOL>_dossier.html` — the
    shared structural and voice validator.
 4. The reviewer cycle (`../_shared/REVIEWER_OPERATIONS.md`), including the

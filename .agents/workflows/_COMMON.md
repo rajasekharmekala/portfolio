@@ -41,10 +41,30 @@ Use the `duck-duck-go` MCP server (`search` and `fetch_content`), as the market 
 3. On REVISE or BLOCK in rounds 1–3, consolidate and fix all findings, rerun the validator until `RESULT: PASS`, then rerun all configured passes. Four rounds is a strict cap; never run a fifth round or increase `max_rounds`.
 4. If round 4 is not APPROVE, fix all evidence-backed findings best-effort, remove or qualify unsupported claims, rerun the validator and pre-delivery checklist, then continue with status `BEST_EFFORT_AFTER_REVIEW_LIMIT`. Record unresolved findings and post-round-4 edits; do not label the report APPROVE.
 5. Record each pass's verdict per round in `manifest.json`. If a pass is malformed or unavailable after the configured handling, record that status and disclose it; do not exceed four rounds.
+6. If the configured reviewer model cannot be run, try it once, then run the same passes with the runner's default agent, record the substitution in the manifest and in the report's gate-exceptions section, and continue. An unavailable model is an exception, never a reason to skip the gate or to stop.
+
+## Gate exceptions and mandatory publication (binding)
+
+Every run that completes its research publishes its reports. A gate that the existing evidence cannot satisfy is a recorded and disclosed **exception**, not a stop. The user has pre-approved this; never ask again.
+
+**Hard stops (the only reasons not to publish):** a missing or mis-shaped input file; no completed session with a verified benchmark close, or a failed ledger build for the selected date; a figure that would have to be invented; a failed Research Desk layout check (fix the assembly, never bypass it); a secret that would be published. Everything else is an exception.
+
+**Exception classes and how each is handled:**
+
+| Class | Handling |
+|---|---|
+| Stale `as_of` (the latest periodic filing, results release or guidance is more than 60 days old and no newer one exists) | Run `citation_check.py ... --allow-stale-asof`. Keep every `as_of` true; never edit one to dodge the gate. The result `PASS WITH EXCEPTIONS` is acceptable. Every other citation failure (URL not in cache, value not in cached text, source floor) is still fixed, not excepted. |
+| Reviewer model unavailable | Section Reviewer gate, item 6. Still at most four rounds. |
+| Reviewer round 4 not APPROVE | `BEST_EFFORT_AFTER_REVIEW_LIMIT` as above. |
+| Short batch (fewer eligible names than the batch size) | Process the eligible names and say so. Do not widen eligibility to fill the batch. |
+| Source blocked or unfetchable (403, paywall, bot wall) | Show N/A with the reason; never fill from memory. |
+| Residual readability or validator finding after best-effort fixes | Fix what can be fixed, list the rest. |
+
+**Disclosure (mandatory):** every affected report and dossier carries a `<section class="chapter" id="gate-exceptions"><h2>Run notes and gate exceptions</h2>` immediately before its notes/sources, in plain English: what failed, the checker's own line, why it cannot be cured now, how it lowers confidence, and what would cure it and when. The batch or run summary report repeats the list. The first screen of each report (primer or key figures) states the status `PUBLISHED_WITH_GATE_EXCEPTIONS`. The manifest records a `gate_exceptions` list and the status. Never describe an excepted gate as passed, and never describe the report as APPROVE unless every reviewer pass approved. Status words may combine, for example `BEST_EFFORT_AFTER_REVIEW_LIMIT` with `PUBLISHED_WITH_GATE_EXCEPTIONS`.
 
 ## Delivery
 
-Only after `RESULT: PASS` and reviewer APPROVE or recorded `BEST_EFFORT_AFTER_REVIEW_LIMIT`:
+Only after the validator and reviewer process are complete, with every unmet gate recorded under **Gate exceptions** (`RESULT: PASS` plus reviewer APPROVE is preferred; `BEST_EFFORT_AFTER_REVIEW_LIMIT` and `PUBLISHED_WITH_GATE_EXCEPTIONS` are both acceptable final states):
 
 1. Save the final report under the published `docs/` output path and remove superseded reports for the same market/type. Continue publishing every report, even when email is skipped.
 2. Record completion and refresh the catalog with `.venv/bin/python scripts/build_dossier_portal.py --completed "<published HTML path>" --workflow "<stable workflow name>" --market "<IN or US>" --summary "<one-sentence decision overview>" --highlight "<key change or risk>" --repair-links`. Include updated dossiers as separate `--completed` arguments. Never mark failed runs completed.

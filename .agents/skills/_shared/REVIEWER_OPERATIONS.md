@@ -49,7 +49,7 @@ Each pass must return JSON matching the shape in `report_reviewer/SKILL.md`. Che
 
 If the output is malformed, rerun that pass once (`on_malformed_output`). If it is still malformed, treat the pass as REVISE and say so in the report notes. Never treat a malformed pass as APPROVE.
 
-If a reviewer is unavailable (the model is not reachable, or the runner fails), record the failed pass and continue the remaining configured passes. Do not exceed the four-round cap. At the cap, use best judgment, run the validator, and disclose the unavailable pass in the manifest and delivery note.
+If a reviewer is unavailable (the model is not reachable, or the runner fails), try the configured model once, then run the same pass with the runner's default agent and record the substitution (configured model, substitute, reason) in the manifest and in the report's `gate-exceptions` section. Continue the remaining configured passes. Do not exceed the four-round cap. At the cap, use best judgment, run the validator, and disclose the unavailable pass in the manifest and delivery note. An unavailable reviewer never blocks publication.
 
 ## 5. Combining the passes and the strict round cap
 
