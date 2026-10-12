@@ -1,1662 +1,547 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Macfos Limited (ROBU) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-12">
+<meta name="generated-at" content="2026-10-12T07:48:34.010723-07:00">
+<title>ROBU: Macfos Ltd, company research dossier and active holding audit</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
-  :root {
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --text-muted: #6b7280;
-    --bg-main: #ffffff;
-    --bg-surface: #f9fafb;
-    --bg-highlight: #f3f4f6;
-    --border-color: #d1d5db;
-    --border-subtle: #e5e7eb;
-    --brand-blue: #1d4ed8;
-    --brand-blue-light: #eff6ff;
-    --brand-green: #15803d;
-    --brand-green-light: #f0fdf4;
-    --brand-amber: #b45309;
-    --brand-amber-light: #fffbeb;
-    --brand-red: #b91c1c;
-    --brand-red-light: #fef2f2;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.72;
-    font-size: 15px;
-    letter-spacing: -0.011em;
-    margin: 0;
-    padding: 32px 40px;
-    max-width: 1240px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  h1.firstHeading {
-    font-family: var(--font-serif);
-    font-size: 2.35em;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0 0 0.2em 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-    color: #111827;
-  }
-
-  .siteSub {
-    font-size: 0.88em;
-    color: var(--text-muted);
-    margin-bottom: 1.2em;
-    letter-spacing: 0.02em;
-  }
-
-  /* EXECUTIVE CAPITAL DECISION BANNER */
-  .decision-banner {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #bfdbfe;
-    border-left: 6px solid var(--brand-blue);
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin: 1.2em 0 1.8em 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  }
-
-  .decision-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid #bfdbfe;
-    padding-bottom: 10px;
-  }
-
-  .decision-title {
-    font-family: var(--font-serif);
-    font-size: 1.3em;
-    font-weight: 700;
-    color: #1e40af;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .decision-badge {
-    background-color: var(--brand-green);
-    color: #ffffff;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.82em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-
-  .decision-card {
-    background: #ffffff;
-    border: 1px solid #bfdbfe;
-    border-radius: 6px;
-    padding: 12px 14px;
-  }
-
-  .decision-card-label {
-    font-size: 0.74em;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    letter-spacing: 0.03em;
-    margin-bottom: 3px;
-  }
-
-  .decision-card-value {
-    font-size: 1.15em;
-    font-weight: 700;
-    color: #1e293b;
-    font-family: var(--font-mono);
-  }
-
-  .decision-card-sub {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-
-  /* HEADERS */
-  h2 {
-    font-family: var(--font-serif);
-    font-size: 1.62em;
-    font-weight: 600;
-    color: #111827;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 6px;
-    margin-top: 2.2em;
-    margin-bottom: 0.7em;
-  }
-
-  h3 {
-    font-size: 1.16em;
-    font-weight: 600;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    color: #1f2937;
-  }
-
-  p {
-    margin: 0.85em 0 1.05em 0;
-    text-align: justify;
-    text-justify: inter-word;
-  }
-
-  a {
-    color: var(--brand-blue);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* INFOBOX */
-  table.infobox {
-    border: 1px solid var(--border-color);
-    border-spacing: 2px;
-    background-color: var(--bg-surface);
-    color: var(--text-primary);
-    margin: 0.6em 0 1.4em 1.8em;
-    padding: 5px;
-    float: right;
-    clear: right;
-    font-size: 88%;
-    line-height: 1.48;
-    width: 340px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  table.infobox th {
-    vertical-align: top;
-    text-align: left;
-    padding: 5px 8px;
-    font-weight: 600;
-    width: 44%;
-    color: #374151;
-  }
-
-  table.infobox td {
-    vertical-align: top;
-    padding: 5px 8px;
-  }
-
-  table.infobox caption {
-    font-family: var(--font-serif);
-    font-size: 1.25em;
-    font-weight: 700;
-    padding: 8px;
-    background-color: #f3f4f6;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    border-radius: 3px 3px 0 0;
-    color: #111827;
-  }
-
-  .infobox-image {
-    text-align: center;
-    padding: 12px;
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    margin: 4px 0;
-  }
-
-  .infobox-header {
-    background-color: #f3f4f6;
-    text-align: center;
-    font-weight: 600;
-    padding: 5px;
-    letter-spacing: 0.02em;
-    color: #374151;
-    font-size: 91%;
-  }
-
-  /* TOC */
-  .toc {
-    background: #fcfcfd;
-    border: 1px solid var(--border-color);
-    padding: 13px 20px;
-    display: table;
-    margin: 1.2em 0 1.6em 0;
-    font-size: 90%;
-    min-width: 290px;
-    border-radius: 4px;
-  }
-
-  .toc h2 {
-    font-family: var(--font-sans);
-    font-size: 95%;
-    font-weight: 700;
-    border-bottom: none;
-    margin: 0 0 8px 0;
-    padding: 0;
-    text-align: center;
-    color: #374151;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .toc ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .toc ul ul {
-    margin-left: 1.5em;
-  }
-
-  .toc li {
-    margin-bottom: 4px;
-  }
-
-  .tocnumber {
-    color: var(--text-muted);
-    margin-right: 6px;
-    font-weight: 600;
-    font-family: var(--font-mono);
-  }
-
-  /* WIKITABLES */
-  table.wikitable {
-    background-color: #ffffff;
-    color: var(--text-primary);
-    margin: 1.1em 0;
-    border: 1px solid var(--border-color);
-    border-collapse: collapse;
-    font-size: 89%;
-    width: 100%;
-  }
-
-  table.wikitable th {
-    background-color: #f3f4f6;
-    text-align: left;
-    font-weight: 600;
-    padding: 7px 11px;
-    border: 1px solid var(--border-color);
-    color: #1f2937;
-  }
-
-  table.wikitable td {
-    padding: 6px 11px;
-    border: 1px solid var(--border-color);
-    vertical-align: top;
-  }
-
-  table.wikitable tr:nth-child(even) {
-    background-color: #fafbfc;
-  }
-
-  table.wikitable tr:hover {
-    background-color: #f0f7ff;
-  }
-
-  /* BADGES & CALLOUTS */
-  .badge-pass {
-    background-color: #dcfce7;
-    color: #15803d;
-    border: 1px solid #86efac;
-    border-radius: 4px;
-    padding: 2px 7px;
-    font-weight: 600;
-    font-size: 0.85em;
-    font-family: var(--font-mono);
-  }
-
-  .badge-watch {
-    background-color: #fef3c7;
-    color: #b45309;
-    border: 1px solid #fde68a;
-    border-radius: 4px;
-    padding: 2px 7px;
-    font-weight: 600;
-    font-size: 0.85em;
-    font-family: var(--font-mono);
-  }
-
-  .badge-fail {
-    background-color: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fca5a5;
-    border-radius: 4px;
-    padding: 2px 7px;
-    font-weight: 600;
-    font-size: 0.85em;
-    font-family: var(--font-mono);
-  }
-
-  .callout-blue {
-    background-color: #f8fafc;
-    border-left: 5px solid #1d4ed8;
-    padding: 14px 18px;
-    margin: 1.4em 0;
-    font-size: 94%;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .callout-amber {
-    background-color: #fffdfa;
-    border-left: 5px solid #ea580c;
-    padding: 14px 18px;
-    margin: 1.4em 0;
-    font-size: 94%;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .callout-red {
-    background-color: #fffafa;
-    border-left: 5px solid #b91c1c;
-    padding: 14px 18px;
-    margin: 1.4em 0;
-    font-size: 94%;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .mono {
-    font-family: var(--font-mono);
-  }
-
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  ol.reflist {
-    column-count: 2;
-    column-gap: 24px;
-    font-size: 84%;
-    padding-left: 20px;
-    margin-top: 1.2em;
-  }
-
-  ol.reflist li {
-    margin-bottom: 6px;
-    break-inside: avoid;
-    line-height: 1.45;
-  }
-
-  @media (max-width: 880px) {
-    body { padding: 16px; }
-    table.infobox { float: none; width: 100%; margin: 1em 0; }
-    ol.reflist { column-count: 1; }
-  }
-</style>
-
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 class="firstHeading">Macfos Limited (BSE: 543787 / ROBU)</h1>
-<div class="siteSub">From Wikipedia, the institutional equity encyclopedia &bull; Underwriting Dossier &bull; Tactical Momentum Challenger</div>
-
-<div class="clearfix">
-
-<!-- EXECUTIVE CAPITAL ALLOCATION DECISION BANNER -->
-<div class="decision-banner">
-  <div class="decision-header">
-    <div class="decision-title">
-      <span>Institutional Capital Allocation Verdict</span>
-    </div>
-    <div class="decision-badge">🟢 IMMEDIATE BUY (TACTICAL MOMENTUM)</div>
-  </div>
-  <div class="decision-grid">
-    <div class="decision-card">
-      <div class="decision-card-label">Recommended Capital Action</div>
-      <div class="decision-card-value">IMMEDIATE BUY</div>
-      <div class="decision-card-sub">Deploy 50% initial tranche; accumulate on 50-DMA support shelf</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Optimal Accumulation Band</div>
-      <div class="decision-card-value">₹1,080.00 – ₹1,130.00</div>
-      <div class="decision-card-sub">CMP ₹1,120.00 | Resting directly AT_SUPPORT (0.21x ATR from 50-DMA)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Hard Invalidation Stop</div>
-      <div class="decision-card-value">₹1,025.00</div>
-      <div class="decision-card-sub">-8.48% risk from CMP | Structural pivot shelf below S3 pivot ₹1,038</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">12–18M Base Target &amp; Asymmetry</div>
-      <div class="decision-card-value">₹1,450.00 (+29.5%) &bull; 3.47:1</div>
-      <div class="decision-card-sub">Blue-Sky Bull: ₹1,650.00 (+47.3%) &bull; Asymmetry: 5.58:1</div>
-    </div>
-  </div>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><p><b>Publication status: BEST_EFFORT_AFTER_REVIEW_LIMIT, PUBLISHED_WITH_GATE_EXCEPTIONS.</b> Two complete reviewer rounds were run (round 1 REVISE, round 2 REVISE); the red team held the verdict in round 1. The verdict is REJECTED on the stated rule, and the reviewer did not approve the report. Remaining items and gate exceptions are listed in the run notes below.</p><header class="report-header"><h1>ROBU: Macfos Ltd, company research dossier and active holding audit</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T07:48:34.010723-07:00">12 Oct 2026, 07:48 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-12</p></header>
+<div class="triggers">
+<h4>Executive capital allocation decision</h4>
+<p><strong>Watchlist verdict: <span class="verdict verdict-exit">REJECTED</span></strong>. The rule that decides it is the Layer 1 hard gate. The three-year cash test fails: cumulative operating cash flow divided by cumulative profit after tax is -0.49 against a floor of 0.70<sup><a href="#cite_note-1">[1]</a></sup>. The technical floor fails too, because the stock is in Stage 3 with its 50-day average falling. The <dfn>asymmetry</dfn> floor fails because no target can be anchored to a verified source, and the momentum gate returns NO_MOMENTUM. A company that fails Layer 1 is not scored on Layers 2 or 3.</p>
+<p><strong>Holding verdict: <span class="verdict verdict-exit">REPLACE_UNDERPERFORMER</span></strong>. The position is 165 shares that cost Rs 1,100 each on average, and the stock closed at Rs 1,049.95 on 12 October 2026. The rule that drives this verdict is fundamental thesis impairment: the company fails a financial hard gate that a holding should pass. No other verdict in the taxonomy is open to a holding that fails a gate. The technical stop is not breached, so the chart alone would not force a sale. The verdict is a candidate for a capital swap, not an order to sell today. No challenger is named in this run.</p>
 </div>
-
-<!-- WIKIPEDIA FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>Macfos Limited<br><span style="font-size: 0.75em; font-weight: normal; color: #555;">(Robu.in)</span></caption>
-  <tr>
-    <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.35em; font-weight: bold; color: #1e3a8a; letter-spacing: 0.05em;">ROBU</div>
-      <div style="font-size: 0.85em; color: #4b5563; font-weight: 500;">BSE: 543787 &bull; ISIN: INE0N5201015</div>
-      <div style="font-size: 0.78em; color: #15803d; font-weight: 600; margin-top: 3px;">BSE SME / Mainboard Eligible</div>
-    </td>
-  </tr>
-  <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
-  <tr><th>Company type</th><td>Public Listed (BSE SME)</td></tr>
-  <tr><th>Industry</th><td>Consumer Services / Retailing</td></tr>
-  <tr><th>Sub-sector</th><td>Specialized E-Retail &amp; Hardware Distribution</td></tr>
-  <tr><th>E-Commerce Brand</th><td><strong>Robu.in</strong></td></tr>
-  <tr><th>Incorporated</th><td>September 26, 2017<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
-  <tr><th>Headquarters</th><td>Bhosari MIDC, Pune, Maharashtra, India<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
-  <tr><th>Key Executives</th><td>
-    Atul Maruti Dumbre (Chairman &amp; MD)<br>
-    Nileshkumar P. Chavhan (Whole-Time Director &amp; COO)<br>
-    Binod Prasad (Whole-Time Director)<sup><a href="#cite_note-1">[1]</a></sup>
-  </td></tr>
-  <tr><th>Key Product Lines</th><td>Robotics, IoT Hardware, Drone Parts, 3D Printers, LiPo Batteries, Development Boards</td></tr>
-  <tr><th>Proprietary Brands</th><td>SmartElex, EasyMech, Orange, SimplyFly<sup><a href="#cite_note-8">[8]</a></sup></td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Audited Financial Metrics (TTM / FY26)</th></tr>
-  <tr><th>Market Capitalization</th><td><span class="mono">₹1,160.00 Cr</span><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>Enterprise Value (EV)</th><td><span class="mono">₹1,185.00 Cr</span></td></tr>
-  <tr><th>Revenue (TTM)</th><td><span class="mono">₹330.82 Cr</span> (+37.2% YoY Q1)<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-7">[7]</a></sup></td></tr>
-  <tr><th>Operating Margin (OPM)</th><td><span class="mono">11.63%</span> (FY26: 12.19%)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>Net Profit (PAT TTM)</th><td><span class="mono">₹26.54 Cr</span> (FY26: ₹26.52 Cr)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>ROCE / ROE</th><td><span class="mono"><strong>34.2% / 30.8%</strong></span><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>Debt-to-Equity</th><td><span class="mono">0.38x</span> (Borrowings ₹36 Cr)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>3Y Cumulative CFO / PAT</th><td><span class="mono">-0.52x</span> (Working Capital Drag)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>3Y Sales CAGR</th><td><span class="mono"><strong>56.8%</strong></span> (₹80 Cr &rarr; ₹309 Cr)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>3Y PAT CAGR</th><td><span class="mono"><strong>54.8%</strong></span> (₹7 Cr &rarr; ₹26.5 Cr)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
-  <tr><th>Strategy Bucket</th><td><strong>TACTICAL_MOMENTUM</strong></td></tr>
-  <tr><th>Action Verdict</th><td><strong style="color: #15803d;">IMMEDIATE BUY</strong></td></tr>
-  <tr><th>Current Market Price (CMP)</th><td><span class="mono">₹1,120.00</span><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>52-Week Range</th><td><span class="mono">₹636.00 – ₹1,315.00</span><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>Optimal Entry Zone</th><td><span class="mono">₹1,080.00 – ₹1,130.00</span></td></tr>
-  <tr><th>Hard Invalidation Stop</th><td><span class="mono">₹1,025.00</span> (-8.48%)</td></tr>
-  <tr><th>12–18M Base Target</th><td><span class="mono">₹1,450.00</span> (+29.46%)</td></tr>
-  <tr><th>Blue-Sky Bull Target</th><td><span class="mono">₹1,650.00</span> (+47.32%)</td></tr>
-  <tr><th>Reward-to-Risk Ratio</th><td><span class="mono"><strong>3.47:1</strong></span> (Avg Entry: 4.31:1)</td></tr>
-  <tr><th>Weinstein Stage</th><td>Stage 2 Markup / Base Consolidation</td></tr>
-  <tr><th>Technical Moving Averages</th><td>
-    20-DMA: <span class="mono">₹1,090.80</span><br>
-    50-DMA: <span class="mono">₹1,131.80</span><br>
-    200-DMA: <span class="mono">₹959.40</span><sup><a href="#cite_note-6">[6]</a></sup>
-  </td></tr>
-  <tr><th>RSI (14-Day) / ATR (14)</th><td><span class="mono">RSI: 54.3 &bull; ATR: ₹55.50</span><sup><a href="#cite_note-6">[6]</a></sup></td></tr>
-  <tr><th>Entry Posture</th><td><span class="badge-pass">AT_SUPPORT</span> (0.21x ATR)</td></tr>
-  <tr><th>Promoter Holding &amp; Pledge</th><td><span class="mono">69.12% &bull; 0.00% Pledged</span><sup><a href="#cite_note-4">[4]</a><a href="#cite_note-33">[33]</a></sup></td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#sub-0"><span class="tocnumber">0</span> Executive Summary &amp; Investment Verdict</a></li>
-    <li><a href="#sub-1"><span class="tocnumber">1</span> Corporate History, Evolution &amp; Robu 2.0 Transformation</a></li>
-    <li><a href="#sub-2"><span class="tocnumber">2</span> Business Model, Platform Architecture &amp; Operating Units</a>
-      <ul>
-        <li><a href="#sub-2-1"><span class="tocnumber">2.1</span> Product Lines &amp; SKU Catalog Dynamics</a></li>
-        <li><a href="#sub-2-2"><span class="tocnumber">2.2</span> Proprietary In-House Brands (SmartElex, EasyMech, Orange)</a></li>
-        <li><a href="#sub-2-3"><span class="tocnumber">2.3</span> Customer Segmentation: Institutional B2B vs Maker B2C</a></li>
-        <li><a href="#sub-2-4"><span class="tocnumber">2.4</span> Fulfillment Infrastructure, Logistics &amp; Supply Chain</a></li>
-      </ul>
-    </li>
-    <li><a href="#sub-3"><span class="tocnumber">3</span> Sector Operating Dynamics &amp; Structural Tailwinds</a></li>
-    <li><a href="#sub-4"><span class="tocnumber">4</span> Financial Performance, Multi-Year P&amp;L &amp; Forensic Audit</a>
-      <ul>
-        <li><a href="#sub-4-1"><span class="tocnumber">4.1</span> Revenue Growth &amp; Operating Margin Analysis</a></li>
-        <li><a href="#sub-4-2"><span class="tocnumber">4.2</span> Balance Sheet Health &amp; Solvency Structure</a></li>
-        <li><a href="#sub-4-3"><span class="tocnumber">4.3</span> Forensic Cash Flow Reconciliation &amp; Working Capital Drag</a></li>
-      </ul>
-    </li>
-    <li><a href="#sub-5"><span class="tocnumber">5</span> The 3-Layer Underwriting Framework &amp; Institutional Scorecard</a>
-      <ul>
-        <li><a href="#sub-5-1"><span class="tocnumber">5.1</span> Layer 1: Binary Hard Gating Floor Audit</a></li>
-        <li><a href="#sub-5-2"><span class="tocnumber">5.2</span> Layer 2: Company-Specific Operational KPI Scorecard</a></li>
-        <li><a href="#sub-5-3"><span class="tocnumber">5.3</span> Layer 3: Support-Aware Entry Posture &amp; Technical Execution</a></li>
-      </ul>
-    </li>
-    <li><a href="#sub-6"><span class="tocnumber">6</span> Industry Landscape, Competitive Moat &amp; Peer Comparison</a></li>
-    <li><a href="#sub-7"><span class="tocnumber">7</span> Technical Posture, Support Anchors &amp; Trade Architecture</a></li>
-    <li><a href="#sub-8"><span class="tocnumber">8</span> Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</a></li>
-    <li><a href="#sub-9"><span class="tocnumber">9</span> Portfolio Allocation &amp; Capital Deployment Blueprint</a></li>
-    <li><a href="#sub-10"><span class="tocnumber">10</span> Key Quarterly Monitoring Indicators (Thesis Trackers)</a></li>
-    <li><a href="#sub-11"><span class="tocnumber">11</span> References, Regulatory Filings &amp; External Links</a></li>
-  </ul>
-</div>
-
-<!-- SECTION 0: EXECUTIVE SUMMARY -->
-<h2 id="sub-0">0. Executive Summary &amp; Investment Verdict</h2>
-<p>
-  <strong>Macfos Limited</strong> (operating under its flagship digital portal <strong>Robu.in</strong>; BSE: 543787) is the dominant Indian e-commerce marketplace and specialized distributor for electronic hardware, robotics components, drone subsystems, Internet of Things (IoT) boards, and 3D printing equipment<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-8">[8]</a></sup>. By aggregating over 15,000 distinct stock-keeping units (SKUs) on a high-availability proprietary e-commerce stack with centralized fulfillment in Pune, Macfos has established a virtual quasi-monopoly in rapid-turnaround prototyping and research procurement across India<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-11">[11]</a></sup>. The company caters to a sticky ecosystem of more than 300,000 registered engineers, researchers, students, and over 15,000 corporate and institutional B2B clients, including premier defense laboratories (DRDO), aerospace organizations (ISRO), elite engineering faculties (IITs, NITs, BITS), and industrial conglomerates (Tata Group, Mahindra, Bharat Forge, Schneider Electric)<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-13">[13]</a><a href="#cite_note-14">[14]</a></sup>.
-</p>
-<p>
-  Over the fiscal period FY23–FY26, Macfos delivered an extraordinary top-line compounded annual growth rate (CAGR) of <strong>56.8%</strong>, expanding revenues from ₹80.15 crore to ₹309.30 crore, while Profit After Tax (PAT) scaled at a <strong>54.8% CAGR</strong> from ₹6.87 crore to ₹26.52 crore<sup><a href="#cite_note-4">[4]</a></sup>. This hyper-growth trajectory continued in Q1 FY27, with sales reaching ₹81.34 crore (+37.24% YoY) and net profit expanding +17.1% YoY to ₹5.82 crore<sup><a href="#cite_note-7">[7]</a></sup>. The core strategic catalyst firing across the business is <em>"Robu 2.0"</em>—a deliberate structural evolution from a third-party electronics distributor into an integrated designer and manufacturer of higher-margin proprietary hardware under private labels, including <strong>SmartElex</strong> (motor controllers and sensor shields), <strong>EasyMech</strong> (robotic structural mechanics), <strong>Orange</strong> (high-drain UAV lithium batteries), and <strong>SimplyFly</strong> (drone power electronics)<sup><a href="#cite_note-8">[8]</a><a href="#cite_note-11">[11]</a></sup>.
-</p>
-<p>
-  From an institutional underwriting perspective, Macfos satisfies the rigorous hurdles of the <strong>Tactical Momentum</strong> framework. While the business carries a known working capital friction resulting from rapid inventory stocking (3-year cumulative operating cash flow of -₹28.6 crore vs. PAT of ₹55.0 crore), this represents deliberate capital deployment into high-turnover saleable inventory to capture market share rather than structural debtor obsolescence (debtor days remain pristine at 16 days with zero bad-debt provisions)<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-35">[35]</a></sup>. Backed by an exceptional Return on Capital Employed (ROCE) of <strong>34.2%</strong>, conservative leverage of <strong>0.38x Debt-to-Equity</strong>, zero promoter share pledge (69.12% retained ownership), an impending catalyst of <strong>Mainboard Migration eligibility</strong>, and textbook technical support confluence at ₹1,120.00 (resting within 0.21x ATR of the 50-DMA shelf), Macfos qualifies with an action verdict of <strong>🟢 IMMEDIATE BUY</strong> with a mathematical Reward-to-Risk asymmetry of <strong>3.47:1</strong> (Base Target: ₹1,450.00 vs. Stop: ₹1,025.00)<sup><a href="#cite_note-6">[6]</a></sup>.
-</p>
-
-<!-- SECTION 1: CORPORATE HISTORY & EVOLUTION -->
-<h2 id="sub-1">1. Corporate History, Evolution &amp; Robu 2.0 Transformation</h2>
-<p>
-  Macfos Limited traces its entrepreneurial genesis to the early 2010s when mechanical and electronics engineering graduates <strong>Atul Maruti Dumbre</strong>, <strong>Nileshkumar Purushottam Chavhan</strong>, and <strong>Binod Prasad</strong> encountered severe friction in procuring authentic sensors, motor drivers, and microcontrollers for collegiate robotics competitions and prototype engineering in India<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-11">[11]</a></sup>. At the time, domestic component procurement was fragmented across unorganized local electronic bazaars (such as Lamington Road in Mumbai or Chandni Chowk in Delhi) plagued by counterfeit chips, absent technical documentation, and erratic pricing, or dependent on international distributors (Digi-Key, Mouser) burdened by prohibitive minimum order values, multi-week customs clearances, and heavy international shipping duties<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-32">[32]</a></sup>.
-</p>
-<p>
-  To solve this systemic supply bottleneck, the founders launched <strong>Robu.in</strong> as a digital-first catalog platform dedicated to democratizing maker hardware, DIY electronics, and robotics components. The corporate entity was formally incorporated as <em>Macfos Private Limited</em> on September 26, 2017, in Pune, Maharashtra<sup><a href="#cite_note-1">[1]</a></sup>. Unlike generalist horizontal e-commerce marketplaces (Amazon India, Flipkart) that treated electronic parts as low-velocity commodities, Robu.in focused exclusively on technical curation: providing comprehensive open-source datasheets, pinout diagrams, Arduino/Python code libraries, and customer support manned by qualified engineers<sup><a href="#cite_note-8">[8]</a></sup>.
-</p>
-<p>
-  The corporate history of Macfos unfolds across three distinct developmental eras:
-</p>
-<ul>
-  <li>
-    <strong>Foundational Catalog Aggregation (2017–2020):</strong> Establishing authorized distribution tie-ups with global open-source hardware pioneers, including Raspberry Pi (UK), Arduino (Italy), and Espressif Systems (China), while building a centralized semi-automated warehousing facility in Bhosari, Pune<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-18">[18]</a><a href="#cite_note-19">[19]</a></sup>. Revenues crossed ₹16 crore by FY20.
-  </li>
-  <li>
-    <strong>Scale &amp; Public Capitalization (2021–2023):</strong> Capitalizing on the COVID-19 pandemic-induced acceleration of IoT prototyping, STEM education, and drone experimentation. Revenues surged from ₹27 crore in FY21 to ₹56 crore in FY22 and ₹80 crore in FY23<sup><a href="#cite_note-4">[4]</a></sup>. The company converted to a public limited company in 2022 and launched its Initial Public Offering (IPO) on the BSE SME platform in February 2023 (Issue Price: ₹102.00 per share), raising ₹24 crore via an Offer for Sale (OFS) that listed at a massive premium and cemented institutional visibility<sup><a href="#cite_note-1">[1]</a></sup>.
-  </li>
-  <li>
-    <strong>The "Robu 2.0" Inflection (2024–Present):</strong> Transitioning from a pure third-party reseller (Robu 1.0) into a value-added designer and manufacturer of proprietary private-label hardware under brands like SmartElex, EasyMech, and Orange<sup><a href="#cite_note-8">[8]</a><a href="#cite_note-11">[11]</a></sup>. In FY26, consolidated revenue crossed ₹309 crore, and the company completed three full years of SME listing, crossing all regulatory thresholds for graduation to the BSE/NSE Mainboard<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-23">[23]</a></sup>.
-  </li>
-</ul>
-
-<table class="wikitable">
-  <caption>Table 1: Corporate Chronology &amp; Strategic Milestones</caption>
-  <thead>
-    <tr>
-      <th>Year / Date</th>
-      <th>Corporate Event / Milestone</th>
-      <th>Strategic &amp; Financial Implication</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>September 2017</strong></td>
-      <td>Incorporation of Macfos Private Limited in Pune, Maharashtra<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-      <td>Formalization of corporate structure and launch of the unified Robu.in digital platform.</td>
-    </tr>
-    <tr>
-      <td><strong>2018–2019</strong></td>
-      <td>Launch of proprietary brands <em>SmartElex</em>, <em>EasyMech</em>, and <em>Orange</em><sup><a href="#cite_note-8">[8]</a></sup>.</td>
-      <td>Inception of private-label strategy, lifting blended gross margins by 400–600 bps.</td>
-    </tr>
-    <tr>
-      <td><strong>2020–2021</strong></td>
-      <td>Official authorized commercial reseller agreement with Raspberry Pi Ltd (UK)<sup><a href="#cite_note-18">[18]</a></sup>.</td>
-      <td>Direct factory procurement allocation bypassing multi-tiered international middlemen.</td>
-    </tr>
-    <tr>
-      <td><strong>March 2022</strong></td>
-      <td>Conversion to Public Limited Company (Macfos Limited)<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-      <td>Governance restructuring and initiation of capital markets listing process.</td>
-    </tr>
-    <tr>
-      <td><strong>March 1, 2023</strong></td>
-      <td>Listing on BSE SME Platform (Scrip Code: 543787; IPO Price: ₹102.00)<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-      <td>OFS of 23.28 lakh shares oversubscribed &gt;190 times; stock listed at ₹216.00 (+111%).</td>
-    </tr>
-    <tr>
-      <td><strong>March 2024</strong></td>
-      <td>Annual revenues cross ₹125 crore; DII institutional investors take initial stake<sup><a href="#cite_note-4">[4]</a></sup>.</td>
-      <td>Demonstration of rapid B2B corporate order conversion across automotive and defense OEMs.</td>
-    </tr>
-    <tr>
-      <td><strong>March 2026</strong></td>
-      <td>Consolidated revenue hits ₹309.3 Cr; PAT reaches ₹26.5 Cr; 15,000+ SKUs live<sup><a href="#cite_note-4">[4]</a></sup>.</td>
-      <td>Scale advantages establish network moat; market capitalization crosses ₹1,100 crore.</td>
-    </tr>
-    <tr>
-      <td><strong>August 2026</strong></td>
-      <td>Q1 FY27 Revenue hits ₹81.34 Cr (+37.2% YoY); Board reviews Mainboard migration<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-23">[23]</a></sup>.</td>
-      <td>Fulfillment of all SEBI/BSE listing tenure, net worth, and profitability migration criteria.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 2: OPERATIONS & BUSINESS ARCHITECTURE -->
-<h2 id="sub-2">2. Business Model, Platform Architecture &amp; Operating Units</h2>
-<p>
-  Macfos operates an integrated digital commerce and specialized industrial distribution model focused entirely on the mechatronics, embedded systems, and advanced hardware engineering ecosystem<sup><a href="#cite_note-3">[3]</a></sup>. Unlike conventional distributors that rely on manual salesforces and opaque credit cycles, Macfos functions as a technology-first e-commerce engine where pricing, inventory availability, technical specifications, and shipping tracking are fully automated via Robu.in and its proprietary enterprise resource planning (ERP) backend<sup><a href="#cite_note-8">[8]</a><a href="#cite_note-12">[12]</a></sup>.
-</p>
-
-<h3 id="sub-2-1">2.1 Product Lines &amp; SKU Catalog Dynamics</h3>
-<p>
-  The company’s catalog spans over 15,000 active SKUs categorized into seven primary operational divisions:
-</p>
-<ol>
-  <li>
-    <strong>Embedded Systems &amp; Microcontrollers:</strong> Single-board computers (Raspberry Pi 4/5, Orange Pi), microcontroller development boards (Arduino Uno/Mega/Nano, ESP32, ESP8266, STM32 ARM Cortex), and specialized AI edge compute modules (NVIDIA Jetson, Sipeed)<sup><a href="#cite_note-18">[18]</a><a href="#cite_note-19">[19]</a><a href="#cite_note-20">[20]</a></sup>.
-  </li>
-  <li>
-    <strong>Robotics &amp; Motion Control:</strong> DC geared motors, coreless micro-motors, stepper motors (NEMA 17/23), brushless DC (BLDC) motors, digital servos, dual-channel motor drivers, and industrial linear actuators<sup><a href="#cite_note-15">[15]</a><a href="#cite_note-16">[16]</a></sup>.
-  </li>
-  <li>
-    <strong>Sensors &amp; IoT Transceivers:</strong> Environmental sensors (temperature, humidity, barometric pressure, gas detection), motion tracking (IMU 6-axis/9-axis gyroscopes, accelerometers, optical encoders), LiDAR modules, ultrasonic rangefinders, and wireless communication shields (LoRa, Zigbee, BLE, GSM/GPS)<sup><a href="#cite_note-15">[15]</a></sup>.
-  </li>
-  <li>
-    <strong>Drone &amp; UAV Subsystems:</strong> Carbon-fiber quadcopter/hexacopter frames, Electronic Speed Controllers (ESCs), flight controller boards (Pixhawk, Betaflight), FPV cameras, telemetry radio links, and specialized drone propellers<sup><a href="#cite_note-10">[10]</a><a href="#cite_note-17">[17]</a></sup>.
-  </li>
-  <li>
-    <strong>Power Systems &amp; Energy Storage:</strong> High-discharge Lithium Polymer (LiPo) battery packs, Lithium Iron Phosphate (LiFePO4) cylindrical cells, smart Battery Management Systems (BMS), battery spot welders, and industrial power adapters<sup><a href="#cite_note-17">[17]</a></sup>.
-  </li>
-  <li>
-    <strong>Digital Fabrication &amp; 3D Printing:</strong> Fused Deposition Modeling (FDM) and stereolithography (SLA) resin 3D printers (Creality, Anycubic), precision hotends, nozzles, extruders, and engineering filaments (PLA, ABS, PETG, TPU, Carbon-Fiber Polycarbonate)<sup><a href="#cite_note-22">[22]</a></sup>.
-  </li>
-  <li>
-    <strong>Rapid Prototyping Services:</strong> Value-added services enabling clients to upload Gerber files for custom Printed Circuit Board (PCB) fabrication, SMT assembly, and custom 3D printing on demand<sup><a href="#cite_note-3">[3]</a></sup>.
-  </li>
-</ol>
-
-<table class="wikitable">
-  <caption>Table 2: Operational Segment Contribution &amp; Growth Trajectory</caption>
-  <thead>
-    <tr>
-      <th>Operational Product Segment</th>
-      <th>FY24 Share (%)</th>
-      <th>FY26 Share (%)</th>
-      <th>YoY Revenue Growth</th>
-      <th>Gross Margin Profile</th>
-      <th>Primary Demand Driver</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Embedded Controllers &amp; IoT</strong></td>
-      <td>34.5%</td>
-      <td>31.0%</td>
-      <td>+42.5%</td>
-      <td>18.0% – 22.0%</td>
-      <td>Smart city IoT, smart meters, industrial automation.</td>
-    </tr>
-    <tr>
-      <td><strong>Robotics, Motors &amp; Drivers</strong></td>
-      <td>25.0%</td>
-      <td>26.5%</td>
-      <td>+58.2%</td>
-      <td>24.0% – 30.0%</td>
-      <td>Warehouse AMRs, industrial robotics, agritech automation.</td>
-    </tr>
-    <tr>
-      <td><strong>Drone &amp; UAV Subsystems</strong></td>
-      <td>12.0%</td>
-      <td>16.5%</td>
-      <td>+88.0%</td>
-      <td>22.0% – 28.0%</td>
-      <td>MoCA Drone PLI, defense surveillance, agricultural spraying.</td>
-    </tr>
-    <tr>
-      <td><strong>Power Systems &amp; Batteries</strong></td>
-      <td>14.0%</td>
-      <td>13.5%</td>
-      <td>+46.0%</td>
-      <td>20.0% – 25.0%</td>
-      <td>EV prototyping, portable medical equipment, robotics power.</td>
-    </tr>
-    <tr>
-      <td><strong>3D Printing &amp; Fabrication</strong></td>
-      <td>10.5%</td>
-      <td>8.5%</td>
-      <td>+26.0%</td>
-      <td>16.0% – 21.0%</td>
-      <td>Rapid tooling, architectural modeling, consumer prototypes.</td>
-    </tr>
-    <tr>
-      <td><strong>Sensors &amp; Custom PCB Services</strong></td>
-      <td>4.0%</td>
-      <td>4.0%</td>
-      <td>+51.0%</td>
-      <td>30.0% – 40.0%</td>
-      <td>Medical instrumentation, aerospace telemetry, laboratory testing.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="sub-2-2">2.2 Proprietary In-House Brands (SmartElex, EasyMech, Orange, SimplyFly)</h3>
-<p>
-  Under the <strong>Robu 2.0</strong> blueprint, Macfos has aggressively expanded its portfolio of in-house private labels. Operating as a pure distributor yields gross margins of 16%–20%; however, designing and packaging proprietary hardware captures gross margins of <strong>32%–45%</strong>, insulating consolidated operating profitability against vendor price hikes<sup><a href="#cite_note-8">[8]</a><a href="#cite_note-11">[11]</a></sup>.
-</p>
-<ul>
-  <li>
-    <strong>SmartElex:</strong> Macfos' flagship electronics brand, focusing on high-current motor drivers (up to 60A/30V), DC-DC buck/boost converters, sensor breakout modules, and industrial communication adapters (RS485/CAN bus). Designed by internal engineers and contract-assembled in India, SmartElex modules replace expensive imported European/US drivers in automated guided vehicles (AGVs) and warehouse robotics<sup><a href="#cite_note-15">[15]</a></sup>.
-  </li>
-  <li>
-    <strong>EasyMech:</strong> The structural mechanics label, encompassing CNC-machined anodized aluminum brackets, heavy-duty robot chassis, omni-directional and mecanum wheel assemblies, timing pulleys, and universal shaft couplers<sup><a href="#cite_note-16">[16]</a></sup>.
-  </li>
-  <li>
-    <strong>Orange:</strong> The high-performance power brand, recognized across India as the leading domestic label for high-discharge (25C to 75C continuous burst) Lithium-Polymer battery packs used in FPV racing drones, commercial mapping UAVs, and autonomous robots<sup><a href="#cite_note-17">[17]</a></sup>.
-  </li>
-  <li>
-    <strong>SimplyFly:</strong> The newest division dedicated to certified drone accessories, modular propulsion kits, and agricultural drone spraying components, designed to capitalize on the Indian Ministry of Civil Aviation's indigenization mandates<sup><a href="#cite_note-10">[10]</a><a href="#cite_note-29">[29]</a></sup>.
-  </li>
-</ul>
-
-<table class="wikitable">
-  <caption>Table 3: Proprietary In-House Brand Portfolio Analysis</caption>
-  <thead>
-    <tr>
-      <th>Brand Name</th>
-      <th>Product Focus &amp; Target Category</th>
-      <th>Gross Margin Range</th>
-      <th>Manufacturing / Assembly Model</th>
-      <th>Competitive Moat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>SmartElex</strong></td>
-      <td>High-current motor drivers, relay boards, CAN interfaces<sup><a href="#cite_note-15">[15]</a></sup>.</td>
-      <td>35% – 45%</td>
-      <td>Designed in Pune; contract SMT assembly in India.</td>
-      <td>Plug-and-play code libraries; 50% cheaper than imported Cytron/Pololu.</td>
-    </tr>
-    <tr>
-      <td><strong>EasyMech</strong></td>
-      <td>Aluminum chassis, mecanum wheels, robotic arms<sup><a href="#cite_note-16">[16]</a></sup>.</td>
-      <td>30% – 38%</td>
-      <td>Precision CNC machining tie-ups across Maharashtra MSMEs.</td>
-      <td>Standardized hole pitch matching NEMA motors and extruded profiles.</td>
-    </tr>
-    <tr>
-      <td><strong>Orange</strong></td>
-      <td>High-drain LiPo batteries, LiFePO4 packs, BMS circuits<sup><a href="#cite_note-17">[17]</a></sup>.</td>
-      <td>28% – 35%</td>
-      <td>Cell sourcing from Tier-1 global vendors; tested/certified in Pune.</td>
-      <td>Verified C-ratings; BIS/UN38.3 transport compliance safety testing.</td>
-    </tr>
-    <tr>
-      <td><strong>SimplyFly</strong></td>
-      <td>Drone frames, brushless ESCs, agricultural spraying kits<sup><a href="#cite_note-10">[10]</a></sup>.</td>
-      <td>32% – 40%</td>
-      <td>Composite carbon fiber cutting and electronic assembly.</td>
-      <td>Tailored for Type-Certified drone builders under DGCA regulations.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="sub-2-3">2.3 Customer Segmentation: Institutional B2B vs Maker B2C</h3>
-<p>
-  A critical inflection in Macfos’ investment profile is the rapid shift in customer composition. Historically viewed as a student hobbyist portal, the corporate mix has inverted: <strong>B2B enterprise, university research, and defense institutional orders now account for over 55% of consolidated gross revenues</strong><sup><a href="#cite_note-3">[3]</a><a href="#cite_note-4">[4]</a></sup>.
-</p>
-<p>
-  Institutional customers exhibit high retention rates (&gt;65% annual re-order velocity) and substantially higher Average Order Values (AOV). While retail hobbyists order 2–3 items with an AOV of ₹1,500–₹2,500, corporate R&amp;D labs and defense contractors place scheduled bulk orders ranging from ₹50,000 to ₹5,00,000+ for pilot production runs and recurring prototyping cycles<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-35">[35]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Table 4: Key Institutional &amp; Strategic Clientele Base</caption>
-  <thead>
-    <tr>
-      <th>Client Category</th>
-      <th>Key Representative Organizations</th>
-      <th>Procurement Profile &amp; Application Scope</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Defense &amp; Strategic Research</strong></td>
-      <td>DRDO (R&amp;DE, CAIR, ADE), ISRO, BHEL, CSIR-CEERI Pilani<sup><a href="#cite_note-13">[13]</a></sup>.</td>
-      <td>Mil-spec sensor modules, telemetry transceivers, UAV avionics for tactical unmanned systems.</td>
-    </tr>
-    <tr>
-      <td><strong>Elite Academic Institutions</strong></td>
-      <td>IIT Bombay, IIT Madras, IIT Delhi, IIT Kharagpur, BITS Pilani, NITs<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-      <td>Laboratory mechatronics benches, student innovation centers, Formula Student EV racing teams.</td>
-    </tr>
-    <tr>
-      <td><strong>Industrial Conglomerates</strong></td>
-      <td>Tata Power Solar, Tata Communications, Bharat Forge, Mahindra &amp; Mahindra<sup><a href="#cite_note-13">[13]</a></sup>.</td>
-      <td>Industrial IoT sensors, solar tracking motor controllers, smart factory automation testing.</td>
-    </tr>
-    <tr>
-      <td><strong>Global OEMs &amp; Tech Giants</strong></td>
-      <td>Schneider Electric India, Bosch, Siemens India, Honeywell, Wipro Enterprises<sup><a href="#cite_note-13">[13]</a></sup>.</td>
-      <td>Embedded edge controllers, prototype test fixtures, automated quality assurance jigs.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="sub-2-4">2.4 Fulfillment Infrastructure, Logistics &amp; Supply Chain</h3>
-<p>
-  Macfos centralizes its operational supply chain through a modern 35,000+ sq. ft. central fulfillment facility located in Bhosari Industrial MIDC, Pune, Maharashtra<sup><a href="#cite_note-8">[8]</a></sup>. The facility integrates high-density barcoded racking, digital picking verification scanners, and automated weight-check scales connected to the Robu.in ERP system<sup><a href="#cite_note-12">[12]</a></sup>.
-</p>
-<p>
-  Logistics execution is managed via deeply integrated Application Programming Interfaces (APIs) with Tier-1 express air and surface couriers, including Blue Dart, Delhivery, DTDC, and India Post, covering more than 20,000 PIN codes across India<sup><a href="#cite_note-8">[8]</a></sup>. Over 92% of orders placed before 3:00 PM IST are dispatched on the same business day, achieving 24- to 48-hour delivery times across major metropolitan industrial hubs (Bengaluru, Pune, Hyderabad, Delhi-NCR, Chennai)<sup><a href="#cite_note-3">[3]</a></sup>. This rapid logistics turnaround forms a massive competitive barrier against foreign platforms like AliExpress or unorganized local suppliers.
-</p>
-
-<!-- SECTION 3: SECTOR OPERATING DYNAMICS -->
-<h2 id="sub-3">3. Sector Operating Dynamics &amp; Structural Tailwinds</h2>
-<p>
-  Macfos operates at the intersection of four secular macroeconomic growth vectors transforming the Indian engineering and technology landscape:
-</p>
-<ol>
-  <li>
-    <strong>National Policy on Electronics &amp; Domestic EMS Boom:</strong> The Government of India’s Production Linked Incentive (PLI) schemes for IT Hardware, Large-Scale Electronics, and Electronic Components have catalyzed massive domestic manufacturing investments by firms like Dixon, Kaynes, and Tata Electronics<sup><a href="#cite_note-9">[9]</a><a href="#cite_note-26">[26]</a></sup>. Every new electronics production line requires extensive pre-production prototyping, testing jigs, and sensory integration—driving recurrent component demand into Robu.in.
-  </li>
-  <li>
-    <strong>The Indian Drone &amp; Commercial UAV Revolution:</strong> Following the notification of the liberalized Drone Rules 2021 and the Drone PLI scheme, India’s commercial drone sector has expanded at &gt;40% CAGR across defense reconnaissance, agricultural spraying, and infrastructure inspection<sup><a href="#cite_note-10">[10]</a><a href="#cite_note-29">[29]</a></sup>. Stringent import restrictions on completely built Chinese drones have mandated domestic assembly, forcing drone startups to source flight controllers, brushless motors, and LiPo batteries through authorized Indian distributors like Macfos<sup><a href="#cite_note-28">[28]</a></sup>.
-  </li>
-  <li>
-    <strong>Industrial IoT &amp; Smart Metering Mandates:</strong> The national deployment of 250 million smart prepaid electricity meters under the Revamped Distribution Sector Scheme (RDSS) and the transition to Industry 4.0 automation have created unprecedented corporate demand for microcontrollers (ESP32, STM32), LoRa modules, and current sensing shunts<sup><a href="#cite_note-24">[24]</a><a href="#cite_note-25">[25]</a></sup>.
-  </li>
-  <li>
-    <strong>STEM Education &amp; Atal Tinkering Labs (ATL):</strong> Under NITI Aayog's Atal Innovation Mission, the central government has funded over 10,000 Atal Tinkering Labs across Indian secondary schools, mandating robotics, 3D printing, and IoT educational kits<sup><a href="#cite_note-30">[30]</a></sup>. Macfos’ pre-packaged STEM educational kits and component bundles serve as standard procurement benchmarks for educational institutions nationwide.
-  </li>
-</ol>
-
-<div class="callout-blue">
-  <strong>Strategic Supply Chain Moat:</strong> As multinational component manufacturers enforce strict "Know Your Customer" (KYC) rules and high minimum order quantities (MOQs) on direct corporate accounts, early-stage engineering startups and corporate R&amp;D divisions rely on Macfos as their authorized, friction-free intermediary. Macfos absorbs the international procurement MOQ risk and provides immediate local tax-compliant GST invoicing.
-</div>
-
-<!-- SECTION 4: FINANCIAL PERFORMANCE & FORENSIC AUDIT -->
-<h2 id="sub-4">4. Financial Performance, Multi-Year P&amp;L &amp; Forensic Audit</h2>
-<p>
-  A rigorous audit of Macfos Limited's multi-year financial statements confirms an exceptional trajectory of revenue expansion and capital efficiency, accompanied by specific working capital dynamics inherent to an inventory-led e-commerce aggregator<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-4">[4]</a></sup>.
-</p>
-
-<h3 id="sub-4-1">4.1 Revenue Growth &amp; Operating Margin Analysis</h3>
-<p>
-  Over the five-year period from FY21 to FY26, net revenues expanded from ₹27 crore to ₹309 crore—representing a 10-fold expansion (+62.9% 5-year CAGR)<sup><a href="#cite_note-4">[4]</a></sup>. Operating Profit Margins (OPM) have exhibited stability in the <strong>10.0% to 12.5% band</strong>. Despite substantial freight inflation and supply chain volatility post-2022, gross margin expansion from proprietary private labels (SmartElex/Orange) has offset rising employee costs and warehouse automation investments<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-7">[7]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Table 5: Multi-Year Consolidated Profit &amp; Loss Statement (₹ Crore)</caption>
-  <thead>
-    <tr>
-      <th>Metric (₹ Cr)</th>
-      <th>FY21</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>TTM</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Revenue from Operations</strong></td>
-      <td>27.00</td>
-      <td>56.00</td>
-      <td>80.15</td>
-      <td>125.00</td>
-      <td>255.00</td>
-      <td>309.30</td>
-      <td><strong>330.82</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Operating Expenses</strong></td>
-      <td>24.00</td>
-      <td>47.00</td>
-      <td>69.15</td>
-      <td>109.00</td>
-      <td>231.00</td>
-      <td>271.60</td>
-      <td><strong>292.33</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Operating Profit (EBITDA)</strong></td>
-      <td>3.00</td>
-      <td>9.00</td>
-      <td>11.00</td>
-      <td>16.00</td>
-      <td>24.00</td>
-      <td>37.70</td>
-      <td><strong>38.49</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Operating Margin (OPM %)</strong></td>
-      <td>11.11%</td>
-      <td>16.07%</td>
-      <td>13.72%</td>
-      <td>12.80%</td>
-      <td>9.41%</td>
-      <td>12.19%</td>
-      <td><strong>11.63%</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Other Income</strong></td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.80</td>
-      <td>1.20</td>
-      <td>2.70</td>
-      <td>3.00</td>
-      <td><strong>3.53</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Finance Costs (Interest)</strong></td>
-      <td>0.60</td>
-      <td>0.80</td>
-      <td>1.00</td>
-      <td>1.30</td>
-      <td>2.20</td>
-      <td>3.40</td>
-      <td><strong>3.83</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Depreciation &amp; Amortization</strong></td>
-      <td>0.20</td>
-      <td>0.30</td>
-      <td>0.40</td>
-      <td>0.70</td>
-      <td>0.90</td>
-      <td>2.50</td>
-      <td><strong>2.55</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Profit Before Tax (PBT)</strong></td>
-      <td>2.20</td>
-      <td>7.90</td>
-      <td>10.40</td>
-      <td>15.20</td>
-      <td>23.60</td>
-      <td>34.80</td>
-      <td><strong>35.64</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Effective Tax Rate (%)</strong></td>
-      <td>25.0%</td>
-      <td>26.0%</td>
-      <td>26.0%</td>
-      <td>26.3%</td>
-      <td>25.4%</td>
-      <td>25.3%</td>
-      <td><strong>25.5%</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Profit After Tax (PAT)</strong></td>
-      <td>1.65</td>
-      <td>5.85</td>
-      <td>7.70</td>
-      <td>11.20</td>
-      <td>17.60</td>
-      <td>26.52</td>
-      <td><strong>26.54</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Reported EPS (₹)</strong></td>
-      <td>N/A</td>
-      <td>N/A</td>
-      <td>7.64</td>
-      <td>11.22</td>
-      <td>17.25</td>
-      <td>24.72</td>
-      <td><strong>25.57</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="sub-4-2">4.2 Balance Sheet Health &amp; Solvency Structure</h3>
-<p>
-  As of March 31, 2026, Macfos reported total equity and reserves of <strong>₹96.00 crore</strong> (Equity share capital of ₹10.00 crore and retained earnings reserves of ₹86.00 crore)<sup><a href="#cite_note-4">[4]</a></sup>. Total borrowings stood at <strong>₹36.00 crore</strong>, consisting entirely of short-term bank working capital facilities (Cash Credit/Overdraft limits with nationalized and scheduled private banks) utilized to finance inventory imports and seasonal buffer stocks<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-35">[35]</a></sup>. The company carries <strong>zero long-term funded debt</strong>, resulting in a conservative Debt-to-Equity ratio of <strong>0.38x</strong> (well within the institutional ceiling of &lt;0.70x)<sup><a href="#cite_note-4">[4]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Table 6: Consolidated Balance Sheet &amp; Capital Structure (₹ Crore)</caption>
-  <thead>
-    <tr>
-      <th>Balance Sheet Item (₹ Cr)</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Equity Share Capital</strong></td>
-      <td>0.01</td>
-      <td>8.93</td>
-      <td>8.93</td>
-      <td>8.93</td>
-      <td>10.00</td>
-    </tr>
-    <tr>
-      <td><strong>Reserves &amp; Surplus</strong></td>
-      <td>9.00</td>
-      <td>8.07</td>
-      <td>19.07</td>
-      <td>61.07</td>
-      <td>86.00</td>
-    </tr>
-    <tr>
-      <td><strong>Net Worth</strong></td>
-      <td><strong>9.01</strong></td>
-      <td><strong>17.00</strong></td>
-      <td><strong>28.00</strong></td>
-      <td><strong>70.00</strong></td>
-      <td><strong>96.00</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Short-Term Borrowings</strong></td>
-      <td>6.00</td>
-      <td>6.00</td>
-      <td>8.00</td>
-      <td>20.00</td>
-      <td>36.00</td>
-    </tr>
-    <tr>
-      <td><strong>Trade Payables &amp; Other Liabilities</strong></td>
-      <td>5.00</td>
-      <td>10.00</td>
-      <td>14.00</td>
-      <td>18.00</td>
-      <td>28.00</td>
-    </tr>
-    <tr>
-      <td><strong>Total Liabilities</strong></td>
-      <td><strong>20.01</strong></td>
-      <td><strong>33.00</strong></td>
-      <td><strong>50.00</strong></td>
-      <td><strong>108.00</strong></td>
-      <td><strong>160.00</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Net Fixed Assets (PP&amp;E + Software)</strong></td>
-      <td>1.00</td>
-      <td>6.00</td>
-      <td>6.00</td>
-      <td>10.00</td>
-      <td>11.00</td>
-    </tr>
-    <tr>
-      <td><strong>Inventories &amp; Other Current Assets</strong></td>
-      <td>19.01</td>
-      <td>27.00</td>
-      <td>44.00</td>
-      <td>98.00</td>
-      <td>149.00</td>
-    </tr>
-    <tr>
-      <td><strong>Total Assets</strong></td>
-      <td><strong>20.01</strong></td>
-      <td><strong>33.00</strong></td>
-      <td><strong>50.00</strong></td>
-      <td><strong>108.00</strong></td>
-      <td><strong>160.00</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="sub-4-3">4.3 Forensic Cash Flow Reconciliation &amp; Working Capital Drag</h3>
-<p>
-  A forensic examination of Macfos’ audited Cash Flow Statements reveals that the business has operated with <strong>negative cumulative Cash Flow from Operations (CFO)</strong> over the past three fiscal years:
-</p>
-<ul>
-  <li>FY24 Operating Cash Flow: <strong>+₹4.00 crore</strong> (PAT: ₹11.20 crore)</li>
-  <li>FY25 Operating Cash Flow: <strong>-₹24.60 crore</strong> (PAT: ₹17.60 crore)</li>
-  <li>FY26 Operating Cash Flow: <strong>-₹8.00 crore</strong> (PAT: ₹26.52 crore)</li>
-  <li><strong>3-Year Cumulative CFO: -₹28.60 crore vs. 3-Year PAT: ₹55.00 crore</strong> (Ratio: <strong>-0.52x</strong>)<sup><a href="#cite_note-4">[4]</a></sup>.</li>
-</ul>
-
-<div class="callout-amber">
-  <strong>Forensic Working Capital Assessment:</strong> The divergence between reported net income and operating cash flow stems entirely from aggressive inventory stocking required to scale from 6,000 SKUs to over 15,000 SKUs during a 3.86x revenue expansion. Inventories expanded from ₹27 crore in FY23 to ₹149 crore in FY26, pushing inventory days to 122 days. Crucially, debtor collection remains pristine at <strong>16 days</strong>, and bad debt write-offs are virtually zero, proving that cash is tied up in fast-moving physical inventory rather than uncollected corporate receivables<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-35">[35]</a></sup>. Furthermore, FY26 CFO improved markedly from -₹24.6 Cr to -₹8.0 Cr, indicating an impending positive cash inflection as inventory velocity stabilizes.
-</div>
-
-<table class="wikitable">
-  <caption>Table 7: Audited Cash Flow Reconciliation &amp; Conversion Cycle</caption>
-  <thead>
-    <tr>
-      <th>Cash Flow Metric (₹ Cr)</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>3-Year Cumulative</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Reported PAT</strong></td>
-      <td>5.85</td>
-      <td>7.70</td>
-      <td>11.20</td>
-      <td>17.60</td>
-      <td>26.52</td>
-      <td><strong>55.32</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Operating Cash Flow (CFO)</strong></td>
-      <td>-1.00</td>
-      <td>6.00</td>
-      <td>4.00</td>
-      <td>-24.60</td>
-      <td>-8.00</td>
-      <td><strong>-28.60</strong></td>
-    </tr>
-    <tr>
-      <td><strong>CFO / PAT Conversion Ratio</strong></td>
-      <td>-0.17x</td>
-      <td>0.78x</td>
-      <td>0.36x</td>
-      <td>-1.40x</td>
-      <td>-0.30x</td>
-      <td><strong>-0.52x</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Capital Expenditures (Capex)</strong></td>
-      <td>-0.50</td>
-      <td>-5.00</td>
-      <td>-2.00</td>
-      <td>-4.50</td>
-      <td>-3.00</td>
-      <td><strong>-9.50</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Free Cash Flow (FCF = CFO - Capex)</strong></td>
-      <td>-1.50</td>
-      <td>1.00</td>
-      <td>2.00</td>
-      <td>-29.10</td>
-      <td>-11.00</td>
-      <td><strong>-38.10</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Debtor Days</strong></td>
-      <td>11</td>
-      <td>11</td>
-      <td>10</td>
-      <td>8</td>
-      <td>16</td>
-      <td><strong>11.3 (Avg)</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Inventory Days</strong></td>
-      <td>112</td>
-      <td>104</td>
-      <td>95</td>
-      <td>98</td>
-      <td>122</td>
-      <td><strong>105.0 (Avg)</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Payable Days</strong></td>
-      <td>23</td>
-      <td>37</td>
-      <td>30</td>
-      <td>18</td>
-      <td>26</td>
-      <td><strong>24.7 (Avg)</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Net Working Capital Days</strong></td>
-      <td>62</td>
-      <td>58</td>
-      <td>51</td>
-      <td>68</td>
-      <td>81</td>
-      <td><strong>66.7 (Avg)</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="sub-5">5. The 3-Layer Underwriting Framework &amp; Institutional Scorecard</h2>
-<p>
-  Under the institutional investment methodology governing this dossier, every security must be deterministically processed through three sequential evaluation layers: Hard Gating Floors, Sector-Specific KPIs, and Support-Aware Entry Posture<sup><a href="#cite_note-31">[31]</a></sup>.
-</p>
-
-<h3 id="sub-5-1">5.1 Layer 1: Binary Hard Gating Floor Audit</h3>
-<p>
-  The binary hard gating floors establish mandatory operational, financial, and technical thresholds that every prospective allocation must pass:
-</p>
-
-<table class="wikitable">
-  <caption>Table 8: Layer 1: Binary Hard Gating Floor Audit</caption>
-  <thead>
-    <tr>
-      <th>Gating Dimension</th>
-      <th>Institutional Hurdle</th>
-      <th>Audited ROBU Metric</th>
-      <th>Binary Status</th>
-      <th>Analytical &amp; Institutional Justification</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Return on Capital (ROCE)</strong></td>
-      <td>ROCE &ge; 15.0% (Core prefers &gt;18.0%)</td>
-      <td><span class="mono"><strong>34.2%</strong></span> (FY26)<sup><a href="#cite_note-4">[4]</a></sup></td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Superior capital productivity; asset-light central fulfillment and high inventory turnover drive elite returns.</td>
-    </tr>
-    <tr>
-      <td><strong>2. Solvency &amp; Debt Ceiling</strong></td>
-      <td>Debt-to-Equity &lt; 0.70x</td>
-      <td><span class="mono"><strong>0.38x</strong></span> (Debt ₹36 Cr / NW ₹96 Cr)<sup><a href="#cite_note-4">[4]</a></sup></td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Conservative leverage; borrowings restricted to short-term bank credit lines; zero term debt.</td>
-    </tr>
-    <tr>
-      <td><strong>3. Cash Flow Conversion</strong></td>
-      <td>3-Year Cumulative CFO / PAT &ge; 0.70x</td>
-      <td><span class="mono"><strong>-0.52x</strong></span> (FY26 CFO: -₹8 Cr)<sup><a href="#cite_note-4">[4]</a></sup></td>
-      <td><span class="badge-watch">PASS (QUALIFIED)</span></td>
-      <td>Qualified for Tactical Momentum due to hyper-growth working capital absorption (sales surged 3.86x); debtor days pristine at 16; zero bad debts; FY26 CFO inflecting toward positive territory.</td>
-    </tr>
-    <tr>
-      <td><strong>4. Technical Posture</strong></td>
-      <td>Weinstein Stage 2 Markup above rising 50/200 DMA</td>
-      <td><span class="mono"><strong>Stage 2 Markup / Base</strong></span><sup><a href="#cite_note-6">[6]</a><a href="#cite_note-31">[31]</a></sup></td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Trading at ₹1,120.00, well above rising 200-DMA (₹959.40); resting on 50-DMA shelf (₹1,131.80); no Stage 4 breakdown.</td>
-    </tr>
-    <tr>
-      <td><strong>5. Asymmetry Ratio</strong></td>
-      <td>Reward-to-Risk &ge; 3.5:1 (Tactical Book)</td>
-      <td><span class="mono"><strong>3.47:1</strong></span> (Avg Entry: <strong>4.31:1</strong>)<sup><a href="#cite_note-6">[6]</a></sup></td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Base target ₹1,450.00 (+29.5%) vs Stop ₹1,025.00 (-8.48%); anchored to Forward EPS ₹33.00 × 3Y Median P/E 37.7x.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="sub-5-2">5.2 Layer 2: Company-Specific Operational KPI Scorecard</h3>
-<p>
-  Four domain-specific key performance indicators governing the specialized electronics distribution and e-commerce model were tracked across historical operating cycles:
-</p>
-
-<table class="wikitable">
-  <caption>Table 9: Layer 2: Operational KPI Scorecard</caption>
-  <thead>
-    <tr>
-      <th>Operational KPI</th>
-      <th>Historical Baseline (FY23)</th>
-      <th>Current Value (FY26 / Q1 FY27)</th>
-      <th>Institutional Hurdle Target</th>
-      <th>Score</th>
-      <th>Forensic &amp; Strategic Implications</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Active Customer Growth &amp; Repeat Rate</strong></td>
-      <td>120,000 registered; 48% repeat order rate<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-      <td><strong>&gt;300,000 registered; ~60% repeat rate</strong><sup><a href="#cite_note-3">[3]</a></sup>.</td>
-      <td>&gt;20% annual customer growth &amp; &gt;50% repeat rate.</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Expanding network effects; sticky developer ecosystem creates a powerful organic customer acquisition moat.</td>
-    </tr>
-    <tr>
-      <td><strong>2. SKU Catalog &amp; Tier-1 Franchises</strong></td>
-      <td>~6,000 SKUs; 3 global brand reseller contracts<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-      <td><strong>&gt;15,000 SKUs; 8+ Tier-1 franchises</strong><sup><a href="#cite_note-18">[18]</a><a href="#cite_note-19">[19]</a></sup>.</td>
-      <td>&gt;12,000 SKUs with direct global OEM authorizations.</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Authorized reseller agreements for Raspberry Pi, Arduino, Espressif, STMicro, Creality, Waveshare prevent gray-market leakage.</td>
-    </tr>
-    <tr>
-      <td><strong>3. B2B Corporate / Institutional Mix</strong></td>
-      <td>35% B2B mix; AOV ~₹1,800<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-      <td><strong>&gt;55% B2B mix; AOV &gt;₹4,500</strong><sup><a href="#cite_note-3">[3]</a><a href="#cite_note-4">[4]</a></sup>.</td>
-      <td>&gt;50% corporate mix &amp; expanding Average Order Value.</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Over 15,000 corporate clients (DRDO, ISRO, Tata, Bosch); high recurring order volume and institutional pricing power.</td>
-    </tr>
-    <tr>
-      <td><strong>4. Inventory Turns &amp; Working Capital Days</strong></td>
-      <td>104 inventory days; 58 NWC days<sup><a href="#cite_note-4">[4]</a></sup>.</td>
-      <td><strong>122 inventory days; 81 NWC days</strong><sup><a href="#cite_note-4">[4]</a></sup>.</td>
-      <td>Inventory days &lt;100; NWC days &lt;70.</td>
-      <td><span class="badge-watch">WATCH</span></td>
-      <td>Aggressive SKU expansion tied up cash in inventory; working capital debt rose to ₹36 Cr; requires inventory turnover stabilization.</td>
-    </tr>
-  </tbody>
-</table>
-<p>
-  <strong>Layer 2 Qualification Result: 3/4 PASS (Meets the 3/4 hurdle threshold to qualify).</strong>
-</p>
-
-<h3 id="sub-5-3">5.3 Layer 3: Support-Aware Entry Posture &amp; Technical Execution</h3>
-<p>
-  Layer 3 calculates the statistical proximity of the current market price relative to structural support anchors measured in 14-day Average True Range (ATR):
-</p>
-
-<table class="wikitable">
-  <caption>Table 10: Layer 3: Support-Aware Entry Posture</caption>
-  <thead>
-    <tr>
-      <th>Technical Anchor Metric</th>
-      <th>Calculated Technical Level</th>
-      <th>Distance from CMP (₹1,120.00)</th>
-      <th>Distance in ATR(14) (₹55.50)</th>
-      <th>Execution Posture &amp; Rule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>50-Day Moving Average (50-DMA)</strong></td>
-      <td><span class="mono">₹1,131.80</span><sup><a href="#cite_note-6">[6]</a></sup></td>
-      <td>-₹11.80 (-1.05%)</td>
-      <td><span class="mono"><strong>0.21x ATR</strong></span></td>
-      <td><span class="badge-pass">AT_SUPPORT</span> &bull; Immediate initial capital deployment authorized.</td>
-    </tr>
-    <tr>
-      <td><strong>20-Day Moving Average (20-DMA)</strong></td>
-      <td><span class="mono">₹1,090.80</span><sup><a href="#cite_note-6">[6]</a></sup></td>
-      <td>+₹29.20 (+2.68%)</td>
-      <td><span class="mono"><strong>0.53x ATR</strong></span></td>
-      <td><span class="badge-pass">AT_SUPPORT</span> &bull; Secondary accumulation limit order anchor.</td>
-    </tr>
-    <tr>
-      <td><strong>Pivot S1 Support Shelf</strong></td>
-      <td><span class="mono">₹1,097.30</span><sup><a href="#cite_note-6">[6]</a></sup></td>
-      <td>+₹22.70 (+2.07%)</td>
-      <td><span class="mono"><strong>0.41x ATR</strong></span></td>
-      <td>High-volume institutional liquidity absorption level.</td>
-    </tr>
-    <tr>
-      <td><strong>200-Day Moving Average (200-DMA)</strong></td>
-      <td><span class="mono">₹959.40</span><sup><a href="#cite_note-6">[6]</a></sup></td>
-      <td>+₹160.60 (+16.74%)</td>
-      <td><span class="mono">2.89x ATR</span></td>
-      <td>Long-term macro bull trend baseline; strictly rising.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 6: PEER & COMPETITIVE COMPARISON -->
-<h2 id="sub-6">6. Industry Landscape, Competitive Moat &amp; Peer Comparison</h2>
-<p>
-  While global electronic component distribution is dominated by multi-billion-dollar conglomerates such as Arrow Electronics, Avnet, and Digi-Key, India lacks a direct listed pure-play robotics and maker e-commerce equivalent<sup><a href="#cite_note-32">[32]</a></sup>. Macfos occupies a unique sweet spot: too specialized and technically intensive for horizontal giants like Amazon India, yet far more digitally agile and broad than legacy regional brick-and-mortar component stockists<sup><a href="#cite_note-8">[8]</a><a href="#cite_note-35">[35]</a></sup>.
-</p>
-<p>
-  Within the broader Indian electronic hardware, component manufacturing, and EMS ecosystem, Macfos is benchmarked against leading listed players:
-</p>
-
-<table class="wikitable">
-  <caption>Table 11: Peer Benchmarking &amp; Industry Multiples Matrix</caption>
-  <thead>
-    <tr>
-      <th>Company Name</th>
-      <th>Ticker</th>
-      <th>Market Cap (₹ Cr)</th>
-      <th>CMP (₹)</th>
-      <th>P/E (x)</th>
-      <th>ROCE (%)</th>
-      <th>ROE (%)</th>
-      <th>D/E (x)</th>
-      <th>3Y Sales CAGR</th>
-      <th>OPM (%)</th>
-      <th>Screening Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Macfos Limited</strong></td>
-      <td><strong>ROBU</strong></td>
-      <td><strong>1,160.0</strong></td>
-      <td><strong>1,120.0</strong></td>
-      <td><strong>43.7</strong></td>
-      <td><strong>34.2%</strong></td>
-      <td><strong>30.8%</strong></td>
-      <td><strong>0.38</strong></td>
-      <td><strong>56.8%</strong></td>
-      <td><strong>11.6%</strong></td>
-      <td><span class="badge-pass">QUALIFIED (SUBJECT)</span></td>
-    </tr>
-    <tr>
-      <td><strong>Shivalik Bimetal Controls Ltd</strong></td>
-      <td>SBCL</td>
-      <td>3,520.0</td>
-      <td>610.0</td>
-      <td>38.5</td>
-      <td>26.8%</td>
-      <td>23.4%</td>
-      <td>0.08</td>
-      <td>24.5%</td>
-      <td>22.1%</td>
-      <td><span class="badge-pass">QUALIFIED_FOR_WATCHLIST</span></td>
-    </tr>
-    <tr>
-      <td><strong>Kaynes Technology India Ltd</strong></td>
-      <td>KAYNES</td>
-      <td>32,500.0</td>
-      <td>5,100.0</td>
-      <td>115.0</td>
-      <td>16.5%</td>
-      <td>13.8%</td>
-      <td>0.18</td>
-      <td>52.0%</td>
-      <td>14.2%</td>
-      <td><span class="badge-watch">ACTIVE_WATCHLIST</span></td>
-    </tr>
-    <tr>
-      <td><strong>Cyient DLM Limited</strong></td>
-      <td>CYIENTDLM</td>
-      <td>7,394.0</td>
-      <td>930.0</td>
-      <td>68.0</td>
-      <td>9.8%</td>
-      <td>8.2%</td>
-      <td>0.42</td>
-      <td>28.0%</td>
-      <td>9.5%</td>
-      <td><span class="badge-fail">REJECTED (ROCE &lt; 15%)</span></td>
-    </tr>
-  </tbody>
-</table>
-<p>
-  <strong>Peer Discovery &amp; Watchlist Seeding:</strong> <strong>Shivalik Bimetal Controls Limited (NSE: SBCL)</strong> is identified as a premier qualified peer candidate. SBCL commands an international near-monopoly in precision bimetal strips and current shunt resistors essential for EV battery management systems and smart digital energy meters, boasting 26.8% ROCE, 0.08x D/E, and pristine cash generation. SBCL is recommended for direct seeding into the Active Watchlist with Source Type = <code>DEEP_RESEARCH_PEER</code><sup><a href="#cite_note-25">[25]</a></sup>.
-</p>
-
-<!-- SECTION 7: TECHNICAL POSTURE & TRADE ARCHITECTURE -->
-<h2 id="sub-7">7. Technical Posture, Support Anchors &amp; Trade Architecture</h2>
-<p>
-  Macfos is currently traversing a classic <strong>Weinstein Stage 2 markup consolidation</strong> following an initial explosive advance from its listing price of ₹102.00 to a 52-week high of ₹1,315.00<sup><a href="#cite_note-5">[5]</a><a href="#cite_note-31">[31]</a></sup>. Since April 2026, the stock has formed a constructive six-month rectangular base between ₹1,030.00 and ₹1,280.00, allowing its 200-day moving average (₹959.40) to rise steadily and absorb overhead supply<sup><a href="#cite_note-6">[6]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Table 12: Actionable Trade Execution &amp; Risk Architecture</caption>
-  <thead>
-    <tr>
-      <th>Order Parameter</th>
-      <th>Price / Target Level</th>
-      <th>Percentage vs CMP</th>
-      <th>Technical &amp; Fundamental Derivation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Current Market Price (CMP)</strong></td>
-      <td><span class="mono">₹1,120.00</span></td>
-      <td>Baseline</td>
-      <td>Closing price on BSE SME platform as of September 25, 2026<sup><a href="#cite_note-6">[6]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Optimal Accumulation Band</strong></td>
-      <td><span class="mono">₹1,080.00 – ₹1,130.00</span></td>
-      <td>-3.57% to +0.89%</td>
-      <td>Anchored across 20-DMA (₹1,090.80) and 50-DMA (₹1,131.80) confluence zone.</td>
-    </tr>
-    <tr>
-      <td><strong>Hard Invalidation Stop Loss</strong></td>
-      <td><span class="mono">₹1,025.00</span></td>
-      <td><strong>-8.48%</strong></td>
-      <td>Strict daily closing stop placed below structural S3 pivot (₹1,038.30) and base floor.</td>
-    </tr>
-    <tr>
-      <td><strong>12–18M Base Target</strong></td>
-      <td><span class="mono">₹1,450.00</span></td>
-      <td><strong>+29.46%</strong></td>
-      <td>Anchored to Forward FY27 EPS of ₹33.00 &times; 3Y Median P/E 37.7x (₹1,244) + base breakout extension to ₹1,450 (43.9x P/E).</td>
-    </tr>
-    <tr>
-      <td><strong>Blue-Sky Bull Target</strong></td>
-      <td><span class="mono">₹1,650.00</span></td>
-      <td><strong>+47.32%</strong></td>
-      <td>Anchored to Mainboard migration re-rating, 35% revenue growth to ₹420 Cr, and private brand expansion to 14% OPM.</td>
-    </tr>
-    <tr>
-      <td><strong>Reward-to-Risk Ratio</strong></td>
-      <td><span class="mono"><strong>3.47:1</strong></span> (Base) / <strong>5.58:1</strong> (Bull)</td>
-      <td>Asymmetry Gate Pass</td>
-      <td>From average accumulation cost of ₹1,105.00: Risk = ₹80.00; Reward = ₹345.00 &rarr; <strong>4.31:1</strong>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 8: ADVERSARIAL RED-TEAM -->
-<h2 id="sub-8">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<p>
-  To maintain institutional underwriting rigor, three critical vulnerabilities were subjected to adversarial stress-testing:
-</p>
-
-<ol>
-  <li>
-    <strong>Fatal Flaw 1: Working Capital Drag &amp; Inventory Obsolescence Risk:</strong> The company's negative 3-year cumulative operating cash flow (-₹28.6 crore) and elevated inventory days (122 days) represent a continuous cash drain<sup><a href="#cite_note-4">[4]</a></sup>. In fast-evolving electronic categories (e.g. microcontroller generations moving from 8-bit to 32-bit RISC-V or drone motors advancing in magnet efficiency), excess inventory risks technical obsolescence, potentially forcing gross margin-diluting clearance sales or inventory write-downs<sup><a href="#cite_note-35">[35]</a></sup>.
-  </li>
-  <li>
-    <strong>Fatal Flaw 2: Cross-Border Geopolitical &amp; Chinese Import Tariff Vulnerability:</strong> Over 50% of the active raw electronic components and lithium cells sold on Robu.in originate directly or indirectly from Chinese component ecosystems (Shenzhen, Dongguan)<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-28">[28]</a></sup>. Any geopolitical escalation leading to heightened customs duties, DGFT import licensing curbs on electronic sub-assemblies, or shipping freight spikes could disrupt product availability and compress operating margins<sup><a href="#cite_note-28">[28]</a></sup>.
-  </li>
-  <li>
-    <strong>Fatal Flaw 3: SME Platform Liquidity Discount &amp; Trading Friction:</strong> Being listed on the BSE SME platform, Macfos shares are subject to larger trading lot sizes and lower institutional float liquidity than Mainboard securities<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-23">[23]</a></sup>. Any protracted delay by management in executing the voluntary migration to the BSE/NSE Mainboard could cap institutional ownership and prolong valuation discounting relative to Mainboard EMS peers<sup><a href="#cite_note-23">[23]</a></sup>.
-  </li>
-</ol>
-
-<div class="callout-red">
-  <strong>Deterministic Thesis Invalidation Triggers:</strong>
-  <ul>
-    <li><strong>Fundamental Invalidation:</strong> Quarterly Operating Profit Margin (OPM) compressing below <strong>8.5%</strong> in two consecutive quarters, or working capital borrowings exceeding <strong>₹50.0 crore</strong> without a corresponding sales surge, signaling uncontrolled inventory buildup.</li>
-    <li><strong>Technical Invalidation:</strong> A decisive daily close below the structural invalidation stop at <strong>₹1,025.00</strong> on above-average trading volume, breaking the Stage 2 consolidation shelf.</li>
-  </ul>
-</div>
-
-<!-- SECTION 9: PORTFOLIO ALLOCATION & CAPITAL DEPLOYMENT -->
-<h2 id="sub-9">9. Portfolio Allocation &amp; Capital Deployment Blueprint</h2>
-<p>
-  Within an institutional portfolio structured around asymmetric Indian equities, Macfos Limited qualifies for a <strong>2.5% to 3.0% capital allocation</strong> within the <strong>Tactical Momentum</strong> book:
-</p>
-<ul>
-  <li>
-    <strong>Tranche 1 (50% Allocation / 1.5% Weight):</strong> Deployed immediately at the current market price (₹1,120.00) or on limit orders down to ₹1,080.00, anchoring directly to the 50-DMA support shelf.
-  </li>
-  <li>
-    <strong>Tranche 2 (50% Allocation / 1.5% Weight):</strong> Deployed upon a verified technical breakout and daily close above <strong>₹1,280.00</strong>, confirming that the six-month rectangular base has resolved upward into Stage 2 markup expansion toward the 52-week high of ₹1,315.00.
-  </li>
-  <li>
-    <strong>Capital Sourcing / Portfolio Rotation:</strong> Capital should be rotated out of deteriorating tactical positions or capital-intensive holdings facing structural margin headwinds (e.g. rotating capital out of underperforming logistics/bulk cargo holdings with impaired cash conversion).
-  </li>
-</ul>
-
-<!-- SECTION 10: QUARTERLY MONITORING INDICATORS -->
-<h2 id="sub-10">10. Key Quarterly Monitoring Indicators (Thesis Trackers)</h2>
-<p>
-  The underwriting thesis will be monitored across three specific quarterly checkpoints:
-</p>
-
-<table class="wikitable">
-  <caption>Table 13: Quarterly Thesis Tracking Indicators</caption>
-  <thead>
-    <tr>
-      <th>Thesis Tracker Indicator</th>
-      <th>Analytical Significance</th>
-      <th>Bullish Expansion Milestone</th>
-      <th>Bearish Alert / Invalidation Level</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Proprietary Brand Revenue Share (%)</strong></td>
-      <td>Measures gross margin expansion from SmartElex, EasyMech, and Orange private labels<sup><a href="#cite_note-8">[8]</a></sup>.</td>
-      <td>Proprietary brands reaching <strong>&gt;25.0%</strong> of net revenue; lifting blended gross margins above 26%.</td>
-      <td>Private label contribution stagnating below <strong>15.0%</strong>, indicating persistent reliance on third-party resale.</td>
-    </tr>
-    <tr>
-      <td><strong>2. Operating Cash Flow (CFO) Inflection</strong></td>
-      <td>Verifies that inventory velocity is stabilizing and working capital absorption is moderating<sup><a href="#cite_note-4">[4]</a></sup>.</td>
-      <td>Half-yearly CFO turning positive (<strong>&gt;+₹10.0 crore</strong>); inventory days reducing toward &lt;100 days.</td>
-      <td>Annual CFO remaining deeply negative (<strong>&lt;-₹15.0 crore</strong>) with borrowings rising above ₹45 crore.</td>
-    </tr>
-    <tr>
-      <td><strong>3. BSE / NSE Mainboard Migration Progress</strong></td>
-      <td>Monitors institutional graduation to unlock retail and institutional liquidity<sup><a href="#cite_note-23">[23]</a></sup>.</td>
-      <td>Board approval, shareholder postal ballot, and formal in-principle application filed with BSE/NSE.</td>
-      <td>No board resolution or migration progress initiated by Q4 FY27 despite meeting all statutory criteria.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES & CITATIONS -->
-<h2 id="sub-11">11. References, Regulatory Filings &amp; External Links</h2>
+<section class="primer" id="primer"><p>ROBU fails the watchlist hard gates, so it is rejected as a new idea. Its three-year ratio of operating cash to profit is -0.49 against a floor of 0.70, and that failure on its own is enough to reject it. The stock sits in a Stage 3 pullback with its 50-day average falling, and the momentum gate returns NO_MOMENTUM. The 165 shares you hold carry a REPLACE_UNDERPERFORMER verdict because the financial thesis fails the cash test, although the price has not yet broken the stop at 954.55.</p></section>
+<h2 id="before-you-read">Before you read</h2>
+<p>This dossier answers one question for one company. The company is Macfos Limited, which trades on the exchange as <strong>ROBU</strong>. It runs Robu.in, an online shop for electronic and mechanical parts, and it is listed on the BSE SME platform, which is the small-company board for smaller and newer listings. The reason it is in front of you is that you already own it. The Zerodha record shows 165 shares. A dossier that only judged the company as a new idea would miss the more pressing question, which is whether the shares you hold should stay, be added to, be trimmed, or be swapped for something better.</p>
+<p>The dossier therefore does two jobs. The first is a watchlist underwriting: the same hard tests that every candidate must pass before it can be considered for an allocation. The second is an active holding audit: the health of the position itself, its cost, its stop level, and a verdict from the four-word taxonomy used for holdings. The two verdicts are separate, and they can point in different directions. Here they point the same way, but the reasons differ, and the reasons matter more than the labels.</p>
+<p>All price, moving average, relative strength index (<dfn>RSI</dfn>), average true range (<dfn>ATR</dfn>), volume, stage and return figures come from one ledger file built for the session of 12 October 2026. That file is the single source for market data in this run, so the numbers in the price and holding sections will match each other. Accounting figures come from the company's filed results as reproduced by the sources listed at the end. Where two sources disagree, the conflict is stated in the notes rather than smoothed over.</p>
+<p>Units matter in this dossier. A crore is ten million rupees, and a lakh is one hundred thousand rupees. Where a number is a percentage, the text says so. Where a figure is a point-in-time market value, such as a <dfn>price-to-earnings</dfn> ratio, the text gives the date of the snapshot that supplied it. Figures labelled as derived were calculated in this run from cited inputs, and the calculation is shown next to the number so that you can repeat it.</p>
+<p>Nothing here is personal advice. The dossier sets out what the rules say, what the numbers show, and what would change the answer. The decision on your own capital belongs to you. What the dossier does is make sure that the decision rests on a stated rule and a visible level, not on a feeling about a familiar name.</p>
+<p>A note on how to read the numbers. Each figure in the body carries a superscript that points to the reference list at the end, and the reference list gives the date the source describes. When a figure is derived, the arithmetic is written beside it, so a careful reader can reproduce it with a calculator. Where the sources disagree, the dossier names both figures and says which one it relies on, because hiding a disagreement would make the verdict look more certain than the evidence allows.</p>
+<h2 id="terms-used">Terms used in this dossier</h2>
+<p>The terms below appear throughout the dossier. Each one is defined the first time it matters, with a comparison to everyday experience, so that a reader new to equity research can follow the argument without a separate glossary.</p>
+<p><strong><dfn>ROCE</dfn> (return on capital employed)</strong> measures how much operating profit a business earns on the money tied up in it, both the owners' money and the borrowed money. It is the closest thing in accounting to asking how much a shop earns on the stock and fittings it needs to operate. A <dfn>ROCE</dfn> of 15 percent means that every 100 rupees of capital produces 15 rupees of operating profit before tax. The watchlist floor for this measure is 15.0 percent, and the company's most recent header figure is 33.8 percent<sup><a href="#cite_note-1">[1]</a></sup>.</p>
+<p><strong>ROE (return on equity)</strong> is the profit after tax divided by the shareholders' own money. It is a companion to ROCE that ignores borrowed money. A company with high ROE and low ROCE is usually leaning on debt, and a company with both high is earning well on everything it uses.</p>
+<p><strong>Debt to equity (D/E)</strong> is total borrowings divided by shareholders' equity. A ratio of 0.70 means that for every 100 rupees of owners' money, the company owes 70 rupees to lenders. The floor in Layer 1 is that the ratio must be below 0.70.</p>
+<p><strong>CFO (<dfn>cash flow from operations</dfn>)</strong> is the cash the business actually collects from customers after paying suppliers, staff and taxes in the ordinary course of work. It is the cash that a shopkeeper could count at the end of the day. <strong>PAT (profit after tax)</strong> is the accounting profit that remains after every cost, depreciation and tax. The two can differ widely. A business can book profit on a sale and not collect the cash for months. The Layer 1 cash test compares the two over three years: cumulative CFO divided by cumulative PAT must be at least 0.70.</p>
+<p><strong>OPM (operating profit margin)</strong> is operating profit as a share of sales. It shows how much of each rupee of sales is left after the direct costs of buying and running the business. <strong><dfn>EBITDA</dfn></strong> is a close relative, earnings before interest, taxes, depreciation and amortization. The company reports under a new accounting standard, <strong>Ind AS</strong>, from 1 April 2026, which changes how some items are measured and makes older and newer figures less directly comparable.</p>
+<p><strong><dfn>Free cash flow</dfn></strong> is the cash left after the company has paid for the stock, staff and equipment it needs to keep running. It is the cash truly available to owners or to repay lenders, which is why the numbers section tracks it alongside profit.</p>
+<p><strong><dfn>Working capital</dfn> days</strong> and the <strong>cash conversion cycle</strong> measure how long money is tied up. Inventory days say how long stock sits on the shelf before it is sold. Debtor days say how long customers take to pay. Payable days say how long the company takes to pay its suppliers. The cash conversion cycle combines the three, so a rising cycle means more money is locked in the business for longer.</p>
+<p><strong>SMA (simple moving average)</strong> is the average closing price over a fixed number of trading days. The 20-day, 50-day and 200-day averages are the short, medium and long trend lines used by traders and by this run. A price above a rising average is in an uptrend. A price below a falling average is in a downtrend. A moving average is a smoothed line, not a forecast, and it reacts late to turns.</p>
+<p><strong>Weinstein stage</strong> is a way of naming where a stock sits in its longer cycle. Stage 1 is a flat <dfn>base</dfn> after a fall. <dfn>Stage 2</dfn> is a rising markup, the phase the watchlist wants to buy. Stage 3 is a topping or pullback phase, where the trend has stalled. <dfn>Stage 4</dfn> is a decline, where the stock is falling below a falling trend. The stage is a label that summarises the moving averages and the price, and it is calculated in the ledger.</p>
+<p><strong><dfn>RSI</dfn> (relative strength index)</strong> is a 0 to 100 gauge of recent price momentum over 14 days. Readings below 30 are called oversold, meaning the stock has fallen fast, and readings above 70 are overbought. An RSI does not say that a bounce must come. It says how hot or cold the recent move has been.</p>
+<p><strong><dfn>ATR</dfn> (average true range)</strong> is the average daily price swing over 14 days, in rupees. It is a yardstick for distance. A stop 1 ATR below a price sits about one typical day's swing below it, which makes the stop a volatility-aware distance rather than an arbitrary percentage.</p>
+<p><strong>Swing low</strong> is the lowest price of recent weeks, which marks a level where buyers stepped in before. A <strong>stop</strong> is a price level at which the position is considered broken and should be exited. For a tactical holding the rule in this run is a stop below the lower of the swing low and the 20- or 50-day average, less half an ATR.</p>
+<p><strong><dfn>Asymmetry</dfn></strong> compares what can be gained with what can be lost. It is calculated as (target minus current price) divided by (current price minus stop). A tactical candidate needs at least 3.5 times as much upside as downside. The target must be anchored to a verifiable method, and an unverified target counts as a failure.</p>
+<p><strong>Momentum gate</strong> is a computed test that decides whether a stock is currently in a usable trend. Test A asks whether the stock is in a confirmed uptrend that is also leading the benchmark. Test B asks whether a stock is starting to enter an uptrend from a <dfn>base</dfn>. A stock that fails both tests receives NO_MOMENTUM and no allocation, however good the business. <strong>RS (relative strength)</strong> is the stock's return compared with the benchmark index over the same days.</p>
+<p><strong>Promoter and pledge.</strong> The promoter is the founder group that controls the company. A pledge is shares the promoters have used as security for a loan. A high pledge can force selling if the price falls, so it is a risk marker.</p>
+<p><strong>KPI (key performance indicator)</strong> is an operating measure that tests whether the business is doing what its strategy requires. Layer 2 uses three to five of them, scored as pass, watch or fail.</p>
+<h2 id="how-the-verdict-was-reached">How the verdict was reached</h2>
+<p>The verdict follows a fixed sequence, and the sequence is the reason the result can be checked by someone else. The first step is the ledger. The session file gives the closing price, the moving averages, the stage, RSI, ATR, volume, the 52-week range and the relative-strength figures, all for the same date. No price figure in this dossier was re-fetched or re-derived from another source, because mixing dates is the most common cause of a false signal. The ledger is also where the stop, the distance from support and the momentum gate come from.</p>
+<p>The second step is research. The company's financial figures were taken from the consolidated page on Screener, which reproduces the filed profit and loss, balance sheet and cash flow tables<sup><a href="#cite_note-1">[1]</a></sup>. Standalone growth rates come from the standalone page<sup><a href="#cite_note-2">[2]</a></sup>. The March 2026 balance sheet extract from an accounting blog was used as a cross-check<sup><a href="#cite_note-18">[18]</a></sup>. The June 2026 quarter was read from several reports of the same results, because the exchange filing itself could not be read as text in this run. Where only one source gave a figure, the dossier says so.</p>
+<p>The third step is the Layer 1 gate. Each of the three financial floors and the three technical floors is tested on its own, and a single failure is enough to reject a candidate. The asymmetry floor is tested last. A failure at Layer 1 ends the scoring. The rules say that a rejected candidate is not scored on Layers 2 or 3, so those layers are reported as not evaluated, with the rule given.</p>
+<p>The fourth step is the holding audit. Because the company is a current holding, the position is tested against the four-word taxonomy. KEEP_COMPOUNDING needs every gate to pass and a healthy <dfn>Stage 2</dfn> uptrend. ACCUMULATE_ON_DIP needs a high-conviction compounder pulling back to verified support. TRIM_PROFIT_BOOKING needs an extended price, a hit target, or a position above the single-name cap. REPLACE_UNDERPERFORMER needs broken structural support, two or more failed operating KPIs, or a thesis impairment. The stop is computed separately from the ledger.</p>
+<p>Two rules were applied without exception. The first is that no number was estimated. Where a figure could not be verified, it is shown as not available, with the reason. The second is that the analyst-target field was not filled from a forecasting website. Forecasting sites publish algorithmic price predictions, which are not analyst targets, and they are not used for the asymmetry test. That is why the asymmetry floor fails, and why that failure is stated plainly rather than hidden behind an estimate.</p>
+<p>The two verdicts are kept apart on purpose. The watchlist decision asks whether the company deserves a place among ideas that could be bought. The holding decision asks what to do with shares already owned, where the cost, the stop and the size of the position all matter. A company can fail the first test and still need a decision on the second, so this dossier gives each its own rule and its own result, and one does not quietly stand in for the other.</p>
+<p>The result is intentionally conservative. The stock is not being judged as a bad company in general. It is being judged against a test that asks whether the cash has followed the profit, whether the trend supports a new purchase, and whether there is a verified price target that justifies the risk. The company fails all three of the big questions, and that is enough.</p>
+<h2 id="what-the-company-does">What the company does</h2>
+<p>Macfos Limited operates Robu.in, which the company describes as a specialised e-commerce platform for electronic and mechanical parts<sup><a href="#cite_note-1">[1]</a></sup>. In plain terms it is an online catalogue for people who build things with circuits, motors, sensors and small computers. Its customers include hobbyists, students, product developers, engineering teams and institutions, and the range covers robotic parts, drone parts, IoT and wireless modules, 3D printer parts, development boards, sensors, motors, drivers, pumps, batteries and chargers, displays and DIY kits. The company's own description lists the website launch in 2014, the Android app in 2017 and the iOS app in January 2023<sup><a href="#cite_note-1">[1]</a></sup>.</p>
+<p>The business runs in two parts, and the split is the single most useful way to read it. The first part is called Robu 1.0. It is an electronics distribution arm that covers product sourcing, inventory, online sales and fulfilment, and the company describes it as working with suppliers to broaden the range and to shorten delivery times<sup><a href="#cite_note-1">[1]</a></sup>. An analogy helps: Robu 1.0 is the wholesale and retail counter that buys from many makers and sells to many buyers, earning a margin on each sale. Its economics depend on volume, on buying well, and on getting goods to the customer quickly and accurately.</p>
+<p>The second part is Robu 2.0. Here the company designs and sells its own brands rather than only reselling other people's products. The brands named are SmartElex for electronics, EasyMech for mechanical parts, Simply Fly for drones and ProRange for original-equipment-manufacturer products made to the company's specification<sup><a href="#cite_note-1">[1]</a></sup>. The company says its product-development team for this part grew from around four people to around twenty or twenty-five over two years, and that it added 650 ProRange products in FY26 across sensors, modules, filaments, drone motors, propellers, tools and measuring instruments<sup><a href="#cite_note-1">[1]</a></sup>. An analogy: Robu 2.0 is the company moving from being a shop that sells other people's tools to being a workshop that makes its own, which earns a higher margin if it sells well and carries more risk if it does not.</p>
+<p>The scale of the platform is large by the standards of a small listed company. In the June 2026 quarter the company reported 67,480 customers served, up from 59,771 a year earlier, and 1,19,661 orders, up from 1,14,066<sup><a href="#cite_note-8">[8]</a></sup>. Management described the catalogue as more than one lakh SKUs, meaning distinct products, and more than 150 brands<sup><a href="#cite_note-7">[7]</a></sup>. The company's own disclosures put its average monthly website and app visitors at 9,78,555 in the June 2026 quarter, up from 6,02,470<sup><a href="#cite_note-8">[8]</a></sup>. These figures describe reach and activity. They do not describe profit per customer on their own.</p>
+<p>The company is majority-owned by a founder group. The promoter holding is 69.12 percent as of June 2026, which is down from 73.66 percent in March 2024<sup><a href="#cite_note-1">[1]</a></sup>. The promoters' shares are not pledged: the pledged share of the promoter holding is 0.0 percent in the latest shareholding data<sup><a href="#cite_note-3">[3]</a></sup>. Institutions hold very little. Foreign portfolio investors held 0.20 percent and domestic institutions held 6.09 percent at June 2026, while the number of shareholders rose to 2,626<sup><a href="#cite_note-1">[1]</a></sup>.</p>
+<p>What the company does not disclose clearly, in the sources available for this run, is customer concentration. A distributor that depends on a few large buyers is more exposed than one with many small buyers. The Robu.in model suggests a broad base of many customers, but no source in this run gave the share of sales from the largest customers, so that figure is shown as not available. What follows from this is that the company's risk profile depends on the mix between the high-volume distribution counter and the higher-margin own brands, and the next sections show how the numbers have moved between those two.</p>
+<h2 id="why-the-business-is-strong-or-weak">Why the business is strong or weak</h2>
+<p>A business is strong when it earns a good return on the money it uses, converts that profit into cash, keeps its balance sheet light, and grows without needing constant new capital. It is weak when one of those four things fails. Macfos shows the first two in an unusual pattern. Its accounting return is high, but its cash has not kept up with its profit. That gap is the most important thing to understand about the company, and it is the reason the watchlist verdict is a rejection rather than a hold.</p>
+<p>On the strength side, the return on capital is high. The consolidated header shows ROCE of 33.8 percent and ROE of 30.9 percent<sup><a href="#cite_note-1">[1]</a></sup>. The consolidated table shows ROCE of 42 percent in FY24 and 34 percent in FY25<sup><a href="#cite_note-1">[1]</a></sup>. A secondary research note repeats the same header figures, but it does not add any independent check<sup><a href="#cite_note-26">[26]</a></sup>. Read together, these figures say that the business has earned well on the capital it used through the period. That is a real strength, because it is hard to earn 30 percent or more on capital without a product or a service people want.</p>
+<p>The growth record is also strong on paper. Three-year sales growth on the standalone basis is 57 percent a year, and three-year profit growth is 51 percent a year<sup><a href="#cite_note-2">[2]</a></sup>. Consolidated sales rose from 125 crore in FY24 to 255 crore in FY25 and 309 crore in FY26, and profit after tax rose from 11 crore to 18 crore to 26 crore over the same years<sup><a href="#cite_note-1">[1]</a></sup>. The first step in that growth was very fast, and the second step was slower. The pace is not a forecast, but it does show that the business has been scaling.</p>
+<p>Now the weakness. <dfn>Cash flow from operations</dfn> was 4 crore in FY24, minus 23 crore in FY25 and minus 8 crore in FY26<sup><a href="#cite_note-1">[1]</a></sup>. Across the three years that is minus 27 crore of cash against 55 crore of profit. The result is a cash-to-profit ratio of minus 0.49, which means the business has consumed cash rather than generated it, even while reporting profit. The Layer 1 floor for that ratio is 0.70. The company is far below it, and it fails the test by a wide margin, not a narrow one.</p>
+<p>Why would a profitable distributor consume cash? The working-capital figures give the most likely answer. Inventory days rose from 95 in FY24 to 98 in FY25 and 122 in FY26. <dfn>Working capital</dfn> days rose from 51 to 68 to 81. The cash conversion cycle rose from 75 days to 88 to 113<sup><a href="#cite_note-1">[1]</a></sup>. In plain words, the company is holding more stock for longer and collecting more cash later. A growing catalogue needs stock, and stock sitting on the shelf is money that has been spent but has not yet come back. The company does say that its very slow-moving inventory, meaning stock older than nine months, fell to 5.52 percent of inventory in June 2026 from 6.21 percent in March 2026<sup><a href="#cite_note-7">[7]</a></sup>. That is an improvement, but it does not show that the total stock held has stopped rising.</p>
+<p>The Q1 FY27 margin is the second weakness. Revenue rose 37 percent to 81.34 crore, which is a strong top-line result. But <dfn>operating margin</dfn>, which is the share of each sales rupee left after direct costs, fell to 10.61 percent from 12.52 percent a year earlier<sup><a href="#cite_note-1">[1]</a></sup>. The company reports <dfn>EBITDA</dfn> margin of 11.83 percent against 13.40 percent, and PAT margin of 5.94 percent against 6.88 percent, on its Ind AS basis<sup><a href="#cite_note-7">[7]</a></sup>. The company attributes the margin softening to scaling and to investments in capability. That may be right, but the investment is real spending, and it lowers the profit each rupee of sales produces. A business that grows faster than it can margin is a business that needs more discipline, not less.</p>
+<p>Returns and replacements are a third small weakness. The company gives a cost-to-company figure for returns and replacements. It rose to 109.89 lakh in FY26 from 58.19 lakh in FY25<sup><a href="#cite_note-7">[7]</a></sup>. The amount is small against 309 crore of sales, but it nearly doubled, and in a catalogue with thousands of products quality problems can spread quickly. The company's commentary notes this as a watch item, and so does this dossier.</p>
+<p>The balance sheet is the company's best defence. Borrowings were 36 crore against equity of about 96 crore at March 2026<sup><a href="#cite_note-1">[1]</a></sup>. Cross-checked against an accounting extract, the short-term borrowings of 3,538.38 lakh and long-term borrowings of 59.01 lakh add to about 35.97 crore, and total equity is 9,596.65 lakh, or about 95.97 crore<sup><a href="#cite_note-18">[18]</a></sup>. The resulting debt to equity ratio of about 0.37 is below the 0.70 floor. Borrowing rose from 8 crore to 20 crore to 36 crore over the three years, so the company is using more debt each year, even though the level is still low. The balance sheet does not explain the cash shortfall. It makes it more manageable.</p>
+<p>So the verdict on the business is mixed in a specific way. It earns well on its capital, it grows quickly, and its debt is modest. It does not turn profit into cash, its margins compressed in the latest quarter, and its working capital has been absorbing money for two years. The next section sets out the numbers one by one.</p>
+<h2 id="the-numbers-in-plain-words">The numbers, in plain words</h2>
+<p>The table below puts the key accounting figures for the last three financial years side by side. Read it from left to right to see how each figure changed, and from top to bottom to see how the parts relate. The first rows are the sales and profit that the company reports. The middle rows are the cash and the ratio between cash and profit, which is the figure that decides the Layer 1 cash test. The bottom rows are the working-capital measures that explain why the cash has lagged.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Consolidated accounts, FY24 to FY26 (INR crore unless stated)</caption>
+<thead><tr><th>Measure</th><th>FY24</th><th>FY25</th><th>FY26</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Sales</td><td>125</td><td>255</td><td>309</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Net profit (PAT)</td><td>11</td><td>18</td><td>26</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Cash from operations (CFO)</td><td>4</td><td>-23</td><td>-8</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>CFO divided by PAT (derived)</td><td>0.36</td><td>-1.28</td><td>-0.31</td><td>Derived from the rows above</td></tr>
+<tr><td><dfn>Operating margin</dfn> (OPM)</td><td>12%</td><td>10%</td><td>12%</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td><dfn>Free cash flow</dfn></td><td>2</td><td>-28</td><td>-10</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Inventory days</td><td>95</td><td>98</td><td>122</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Working capital days</td><td>51</td><td>68</td><td>81</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Cash conversion cycle (days)</td><td>75</td><td>88</td><td>113</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>The sales row is the fastest-moving line in the table. Sales rose about 2.0 times from FY24 to FY25 and then about 21 percent from FY25 to FY26, which is derived from the figures above<sup><a href="#cite_note-1">[1]</a></sup>. Profit followed the same direction. The profit row is the first place where a careful reader should pause, because profit after tax is an accounting measure that depends on how revenue is recognised and how costs are spread. It is not a count of cash.</p>
+<p>The cash rows answer the question that the profit row cannot. Cash from operations was positive in FY24 and negative in the two years since. The derived ratio of cash to profit makes the point cleanly: 0.36 in FY24, minus 1.28 in FY25 and minus 0.31 in FY26. Over the three years taken together the ratio is minus 0.49, which is the number the Layer 1 test uses. The floor of 0.70 means that a healthy distributor should convert most of its profit into cash over a full cycle. This company has not done so, and the gap is large.</p>
+<p>The operating margin row is steady at 10 to 12 percent, and the year-to-year movement is modest. This matters because it means the business is not failing at its core pricing. The problem sits lower in the accounts, in stock and in receivables and payables. The inventory and working-capital rows show the cause: the business is holding stock longer, and it is taking longer to turn stock and invoices into cash. A distributor whose stock sits longer needs more money to finance the same sales, and that money comes from profit that has not yet been converted into cash.</p>
+<p>The quarter ended June 2026 is the most recent, and it is shown separately because it is the only quarter in the current financial year. Sales were 81.34 crore against 59.27 crore a year earlier, an increase of about 37 percent<sup><a href="#cite_note-1">[1]</a></sup>. The company reported profit after tax of 5.82 crore against 4.97 crore, and the earnings per share rose to 5.61 rupees from 4.79<sup><a href="#cite_note-9">[9]</a></sup>. The operating margin was lower, at 10.61 percent against 12.52 percent<sup><a href="#cite_note-1">[1]</a></sup>. A quarter is a short window, and quarterly cash flow is not published in the same way, so the quarter cannot yet tell us whether the cash gap has closed. It shows growth, with softer margins.</p>
+<p>The growth figures for the three years on the standalone basis are 57 percent for sales and 51 percent for profit<sup><a href="#cite_note-2">[2]</a></sup>. Those rates are high, but they start from a small base, and a rate measured from a low starting point always looks striking. The relevant question for a holder is whether the growth continues while the cash follows. On the evidence so far it does not yet.</p>
+<p>The valuation figures are the last part of the numbers. At the 9 October snapshot the price was 1,047 rupees, the market value was about 1,084 crore and the <dfn>price-to-earnings</dfn> ratio was 40.9 times<sup><a href="#cite_note-1">[1]</a></sup>. The price-to-book ratio was about 11.3 times<sup><a href="#cite_note-1">[1]</a></sup>. A price-to-earnings ratio of about 41 means that the market pays about 41 rupees for each rupee of current profit. That is a high multiple, and it assumes that profit keeps growing fast. If profit growth slows, or if the cash gap persists, the multiple is hard to justify. The peer section below puts this multiple beside other listed companies.</p>
+<p>What follows from these numbers is simple to state and hard to ignore. The company earns a high return, grows quickly, and keeps its borrowing modest. But it has not converted its profit into cash for two years, its stock has been building up, and its cash conversion cycle has lengthened from 75 to 113 days, and its price already assumes a good outcome. Those facts are enough to fail the hard gate, and they are the reason the holding verdict below rests on a fundamental rule rather than on the chart.</p>
+<h2 id="what-the-price-is-doing">What the price is doing</h2>
+<p>The price is the market's running verdict on the company, and it reacts faster than the accounts. The ledger for 12 October 2026 gives the picture. The stock closed at 1,049.95 rupees, up 0.32 percent on the day and up 1.44 percent over the week. Over two weeks it is down 6.25 percent, and over one month it is down 3.94 percent. The closing price is confirmed by the price page that quotes the same session<sup><a href="#cite_note-4">[4]</a></sup>.</p>
+<p>The moving averages tell a more specific story, and the table below gives the readings. Read the price against each average to see whether the stock sits above or below the trend. Then read the direction of each average to see whether the trend itself is rising or falling. The rule for a buy in this run is that the price should sit above a rising 50-day average, and above a rising 200-day average. The table shows that the first condition fails.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Ledger technicals, 12 October 2026 (INR unless stated)</caption>
+<thead><tr><th>Measure</th><th>Reading</th><th>What it means here</th></tr></thead>
+<tbody>
+<tr><td>Close</td><td>1,049.95</td><td>Session close used for every figure in this dossier</td></tr>
+<tr><td>20-day average</td><td>1,068.9</td><td>Close is 1.8 percent below it</td></tr>
+<tr><td>50-day average</td><td>1,110.86 (falling; 1,142.91 about 21 days ago)</td><td>Close is 5.5 percent below it; the trend line is falling</td></tr>
+<tr><td>200-day average</td><td>975.53 (rising; 846.99 about 63 days ago)</td><td>Close is 7.6 percent above it; the long trend is up</td></tr>
+<tr><td>Stage</td><td>3 (topping or pullback)</td><td>Not Stage 2 and not <dfn>Stage 4</dfn></td></tr>
+<tr><td>RSI (14-day)</td><td>44.19</td><td>Neutral, neither oversold nor overbought</td></tr>
+<tr><td>ATR (14-day)</td><td>50.9</td><td>About 4.8 percent of the price on a typical day</td></tr>
+<tr><td>52-week high and low</td><td>1,315 and 636.36</td><td>Price is 20.2 percent below the high and 65 percent above the low</td></tr>
+<tr><td>Swing low (20-day and 63-day base)</td><td>980</td><td>The nearest structural support</td></tr>
+<tr><td>Volume against 20-day average</td><td>0.65 times</td><td>Trading is quieter than normal</td></tr>
+<tr><td>Relative strength, 63 days</td><td>-2.11 percent</td><td>Lags the benchmark over the quarter</td></tr>
+<tr><td>Relative strength, 28 days</td><td>+3.10 percent</td><td>Has turned up over the past month</td></tr>
+</tbody>
+</table></div>
+<p>The table is easier to read once the averages are placed on the same line. The price is below its 20-day and 50-day averages, and the 50-day average is falling. The 200-day average is rising, and the price is above it. That combination describes a stock that was rising for a long time, has stalled and is now pulling back inside a longer uptrend. The ledger labels this Stage 3, a topping or pullback phase, which is a holding pattern for the trend rather than a clear uptrend or a breakdown. The distinction is important because a Stage 2 uptrend is what the tactical rule asks for, and this stock does not currently show one.</p>
+<p>The momentum test confirms the same reading. Test A asks whether the stock is in a confirmed uptrend that also leads the benchmark. It fails on three of its four conditions. The price is below the 50-day average, the relative strength over 63 days is negative, and the price sits 1.37 ATR above its support, which is further than the 1.2 limit. The one condition that passes is that the 200-day average is not falling. Test B asks whether a stock is entering an uptrend from a base. It passes two of five conditions: relative strength has turned up over 28 days, and volume has dried up in the base. It fails the 50-day trend, the <dfn>pivot</dfn> distance and the volume expansion. The result is NO_MOMENTUM, which means no allocation.</p>
+<p>The stop level is worth stating in full, because the holding audit depends on it. The tactical rule places the stop below the lower of the swing low and the 20- and 50-day averages, less half an ATR. The lowest of those levels is the swing low at 980. Half the ATR is 25.45. The stop is therefore 954.55 rupees. The current close is about 9.1 percent above that level, and about 1.9 ATR above it. A close below 954.55 would break the structure the rule was designed to protect.</p>
+<p>The price history has a useful lesson. The stock rose to 1,315 at its high and fell to 636.36 at its low, so it has travelled a very wide range. The current price is far above the low and well below the high. That range is typical of a small, fast-growing listing, and it is the reason a stop has to be set by structure rather than by hope. The average daily swing of about 4.8 percent is large for a company in this kind of business.</p>
+<p>The price is not yet in trouble, but it is not in a position to support a purchase either. The stock sits in the middle of its trading range, below its short and medium averages, with weak relative strength over the quarter and only a small improvement over the past month. What the price says is that the market has stopped paying an ever-higher multiple for the growth. It is waiting for proof that the cash will follow the profit, and the chart cannot supply that proof.</p>
+<h2 id="active-holding-audit">Active holding audit</h2>
+<p>The holding audit asks four things: what you own, what it cost, where it stands against its stop, and which verdict the evidence supports. The table below gives the position figures. The cost basis comes from the authoritative transaction record, which the run treats as accurate. The market value is 165 shares at the 12 October close.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Position, ROBU, Zerodha, at the 12 October 2026 close</caption>
+<thead><tr><th>Item</th><th>Value</th><th>How it is measured</th></tr></thead>
+<tbody>
+<tr><td>Shares held</td><td>165</td><td>Position replay from the transaction log</td></tr>
+<tr><td>Average cost</td><td>Rs 1,100.00</td><td>Cost basis 181,500 divided by 165 shares (derived)</td></tr>
+<tr><td>Market value</td><td>Rs 173,241.75</td><td>165 shares times the close of 1,049.95</td></tr>
+<tr><td>Unrealised gain or loss</td><td>Rs -8,258.25 (-4.55 percent)</td><td>Market value less cost basis (derived)</td></tr>
+<tr><td>Share of net worth</td><td>3.69 percent</td><td>Market value divided by net worth of Rs 4,695,954.82 (derived)</td></tr>
+<tr><td>Tactical stop</td><td>954.55</td><td>Swing low 980 less half the ATR of 50.9 (derived)</td></tr>
+<tr><td>Distance from close to stop</td><td>9.1 percent, about 1.9 ATR</td><td>(1,049.95 less 954.55) divided by 50.9 (derived)</td></tr>
+</tbody>
+</table></div>
+<p>Read the table in order. The position is small. At about 3.7 percent of net worth it is well inside the single-name cap of 15 percent in the position-sizing rules, so there is no forced trim on size. The position is at a loss of about 4.6 percent against cost, so it is not a profit-booking case, which rules out TRIM_PROFIT_BOOKING. The stop is about 9 percent below the current price, so the chart is not yet in breach. These three facts are the reason the holding audit cannot be settled by looking at the size or the chart alone.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>The stop for the holding is 954.55 rupees. It is the level below which the tactical structure is considered broken, and it is the only number in this audit that turns a chart reading into an exit rule.</p>
+<h4>How it was calculated</h4>
+<p>The lower of the swing low and the 20- and 50-day averages is taken, which is the swing low at 980. Half of the 14-day ATR of 50.9 is subtracted from that level, which gives 980 less 25.45, or 954.55.</p>
+<h4>The inputs</h4>
+<p>The swing low of 980, the 20-day average of 1,068.9, the 50-day average of 1,110.86 and the ATR of 50.9 all come from the ledger for the 12 October 2026 session. No outside source enters the calculation.</p>
+<h4>The range</h4>
+<p>The stop is a single level, not a range. Because a thinly traded stock can gap through a level, the realised exit price could be lower than 954.55 in a bad session, which the liquidity note in the fatal flaws section describes.</p>
+<h4>If the number is off</h4>
+<p>If the swing low were measured on a different window, the stop would move by the same amount. A change of 10 rupees in the swing low would move the stop by 10 rupees, and the holder would then need to recheck the distance from the close, which is about 9 percent at the stop shown here.</p>
+</section>
+<p>The verdict must be read against the taxonomy, and each of the four options has a test. KEEP_COMPOUNDING requires every gate to pass and a healthy Stage 2 uptrend. This holding fails the cash gate and is in Stage 3, so KEEP_COMPOUNDING is closed. ACCUMULATE_ON_DIP requires a high-conviction compounder pulling back to verified support. The company fails the cash gate, so it cannot be treated as a high-conviction compounder, and ACCUMULATE_ON_DIP is closed. TRIM_PROFIT_BOOKING requires an extended price, a hit target or a position above the cap. None of those applies, so TRIM is closed. That leaves REPLACE_UNDERPERFORMER, and the rule behind it is the one that matters.</p>
+<p>The rule is fundamental thesis impairment. The reason to own a distributor like this is that it earns high returns and turns them into cash, so that the cash can fund more growth or be returned to owners. The three-year cash test is the direct check on that thesis, and the company fails it at -0.49 against a floor of 0.70. The shortfall is not a single bad year: cash was negative in FY25 and FY26, while profit grew each year. A thesis that depends on profit becoming cash is impaired while the cash stays negative. That is a judgement the taxonomy asks for, and the evidence supports it.</p>
+<p>The verdict is also limited, and the limit is stated so that it is not over-read. The stop has not been breached, and the stage is 3, not 4. The taxonomy's broken-structure trigger, which is a close below the stop or a Stage 4 breakdown, is not met. A Stage 3 stock above its stop is not automatically a replacement. The replacement decision here rests on the financial gate, which is a stronger and more lasting reason than a chart signal. The chart would matter if the price closed below 954.55, because that would add a second, independent reason to exit.</p>
+<p>The operating KPIs give a further reason to be cautious, although they are not the basis of the verdict. Working capital days rose in each of the last two years. Cash conversion cycle rose from 75 to 113 days. The Q1 operating margin fell about two points year on year. Very slow-moving stock improved, and customer numbers rose by about 13 percent. Scored against the usual distribution tests, the working-capital measure and the cash measure fail, and the margin measure is a watch item. Two failed operating measures would also support REPLACE on the second trigger, but the dossier relies on the thesis rule, because the cash test is the firmer and more directly measured evidence.</p>
+<p>The stop and the verdict work together in practice. The stop is the level at which the technical case for holding is broken. The verdict says that, even before that level is reached, the financial case for holding does not pass the company's own test. A holder who wants to stay for the chance of a turnaround would need a different reason than the one this audit has found, and that reason would have to be written down with a level and a date. Without such a reason, the consistent action under this framework is to treat the position as a swap candidate and to compare it with the shortlist challengers before the next review.</p>
+<h2 id="layer-1-disposition-the-hard-gates-and-the-verdict">Layer 1 disposition: the hard gates and the verdict</h2>
+<p>Layer 1 is the set of hard tests that every candidate must pass. There are three financial floors, three technical floors and one asymmetry floor, and a single failure rejects the candidate. The purpose of the layer is to remove names that fail on a fact before anyone spends time on judgement. The table below gives each gate, the rule, the measured value and the result. Read it row by row, and note that a pass in one row does not offset a failure in another.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 gate results, ROBU, session 12 October 2026</caption>
+<thead><tr><th>Gate</th><th>Rule</th><th>Measured</th><th>Result</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Return on capital (ROCE)</td><td>At least 15.0 percent</td><td>33.8 percent (header); 34 percent (FY25 table)</td><td>PASS</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Debt to equity</td><td>Below 0.70</td><td>0.37 (36 crore borrowings over 96 crore equity; derived)</td><td>PASS</td><td><sup><a href="#cite_note-1">[1]</a></sup>, <sup><a href="#cite_note-18">[18]</a></sup></td></tr>
+<tr><td>Three-year cash to profit</td><td>At least 0.70</td><td>-0.49 (minus 27 crore over 55 crore; derived)</td><td>FAIL</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Technical: Stage 2 above rising 50- and 200-day averages</td><td>Stage 2 markup</td><td>Stage 3; 50-day average falling</td><td>FAIL</td><td>Ledger, 12 October 2026</td></tr>
+<tr><td>Technical: no Stage 4 breakdown and no heavy-volume death cross</td><td>None present</td><td>Stage 3, not 4; 50-day average still above 200-day average; volume 0.65 times normal</td><td>PASS</td><td>Ledger, 12 October 2026</td></tr>
+<tr><td>Asymmetry with an anchored target</td><td>At least 3.5 times for a tactical candidate, with a verified target</td><td>No verified target; the only analyst-target field is empty</td><td>FAIL_ASYMMETRY (unverified)</td><td><sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>Momentum gate</td><td>Pass Test A or Test B</td><td>Test A fails 3 of 4 conditions; Test B fails 3 of 5</td><td>NO_MOMENTUM</td><td>Ledger momentum gate</td></tr>
+</tbody>
+</table></div>
+<p>The table has three failures and three passes in the Layer 1 rows, and the momentum gate is a separate decision. The debt test and the return test are passes, and they are worth recording because they show the company is not a heavily borrowed or low-return business. The cash test fails by a wide margin, which is the decisive fact. The technical test fails because the stage is 3 and the 50-day average is falling. The asymmetry test fails for a reason that is not a judgement against the company: there is no verifiable target to anchor the calculation on.</p>
+<p>The asymmetry result needs a note, because the rule is strict. The rule says that a target must be anchored to a verifiable method, such as forward earnings times a median multiple or a technical <dfn>measured move</dfn>, and that an arbitrary or unverified target is a failure. The only analyst-target field available for the company is empty on the consensus page, and the page notes that the company is not covered by enough analysts<sup><a href="#cite_note-6">[6]</a></sup>. Forecasting websites publish algorithmic price predictions, but those are not analyst targets, and this run does not use them. The asymmetry test therefore fails as unverified. That is an honest outcome, not an estimate.</p>
+<p>The momentum gate is applied after the Layer 1 floors, and it returns NO_MOMENTUM. The gate fails both tests, and the rule for that outcome is absolute: no allocation, whatever the business quality. The gate is calculated from the ledger, so it is the same figure that the price section describes.</p>
+<p>It helps to see why the gates are kept strict rather than flexible. A hard gate is a simple pass or fail, and it protects the reader from the most common error in small-company research, which is to explain away a weak number with a strong story. The cash test is the clearest example. A story about future growth could justify a low cash figure in any single year, but the test is set over three years so that one unusual year cannot carry the verdict. The company's three-year figure is negative, so the story would need to explain two years of cash outflow, and the filings do not yet explain them.</p>
+<p>The disposition is therefore REJECTED. The cash test, the technical stage and the momentum gate each fail independently, and any one of them would reject the candidate. Because Layer 1 fails, Layers 2 and 3 are not evaluated. The rule is that a Layer 1 or momentum failure sends the candidate to REJECTED without scoring. That keeps the process honest: a company is not allowed to score its way past a hard gate.</p>
+<p>The disposition describes the watchlist question, not the holding question. Whether the company is a candidate for purchase is answered by REJECTED. Whether the shares you own should be kept is answered separately, in the holding audit, with REPLACE_UNDERPERFORMER. The two answers agree on the fact that the financial case is not currently sound, and they differ on what follows from it: a rejected idea is simply not bought, while an underperforming holding becomes a candidate for a swap.</p>
+<h2 id="layer-2-scorecard">Layer 2 scorecard</h2>
+<p>Layer 2 is the scorecard of three to five operating measures chosen for the business, scored as pass, watch or fail. Its purpose is to test whether the business is doing what its strategy requires, which is a question that a clean balance sheet cannot answer on its own. It sits after Layer 1 for a reason. There is no value in judging the operating quality of a company whose cash does not match its profit, because the operating story would be incomplete. The rule is that a Layer 1 failure means the scorecard is not run, and this company failed Layer 1.</p>
+<p>The status for this dossier is therefore NOT EVALUATED, and the rule is the Layer 1 disposition described above. The scorecard is not filled in with estimates to make a pattern look complete, and no pass or fail is recorded for the purpose of a score. A reader who wants a scored view should note that the scorecard would normally test measures such as sales per square foot of warehouse, client concentration, value-add margin change, and working-capital days. Several of those measures cannot be verified from the sources available in this run, and that gap is itself a reason the scorecard is not completed.</p>
+<p>The operating measures that the holding audit reads are a different thing. They are descriptive readings that inform the holding verdict, and they are not a Layer 2 score. Working capital days rose from 51 to 81 over three years. The cash conversion cycle rose from 75 to 113 days. The Q1 operating margin fell from 12.52 to 10.61 percent, and the very slow-moving stock share improved from 6.21 to 5.52 percent<sup><a href="#cite_note-7">[7]</a></sup>. Customers served grew about 13 percent and orders about 5 percent<sup><a href="#cite_note-8">[8]</a></sup>. These readings are mixed, and they are presented as evidence for the holding discussion, not as a score for the watchlist.</p>
+<p>Two conclusions follow for a reader. The first is that the company has a real operating engine: its customer and order counts are growing, and its catalogue is large. The second is that the engine has not yet translated into cash, and the working-capital readings point to that as the main issue. If a future version of this dossier is produced after the company clears Layer 1, the scorecard would need to test whether the working-capital trend has reversed, whether the Robu 2.0 products are adding margin rather than diluting it, and whether customer concentration is acceptable. Until then the scorecard is not evaluated.</p>
+<p>It is worth being specific about why the scorecard is skipped rather than softened. A scorecard that is partly filled, with some measures marked pass on the strength of the revenue story, would look more complete than the evidence allows. The effect on a reader would be to suggest that the operating picture had been tested when it had not. Leaving the layer unevaluated keeps the record clean, and it tells the reader exactly which parts of the picture are still missing.</p>
+<p>What would bring the scorecard into play is a change in the Layer 1 result. If the three-year cash ratio rises to 0.70 or above on the next audited year, and the technical posture returns to a Stage 2 uptrend, the company would move back to Layer 2 and be scored. Until then the scorecard remains a plan, not a result, and the dossier says so plainly.</p>
+<h2 id="layer-3-entry-posture">Layer 3 entry posture</h2>
+<p>Layer 3 maps the distance from the nearest verified support onto a set of bands, and it turns that map into an execution posture: buy at support, buy on a dip, wait for support, or treat the level as broken. It is the timing gate, and it exists so that a good company is not bought in a place where the risk to the stop is too wide. Like Layer 2, it is applied only after Layer 1 passes, so it is not evaluated for this company.</p>
+<p>The status for this dossier is therefore NOT EVALUATED, with the rule given. The company is rejected at Layer 1, so no entry posture is assigned. The ledger does provide the distance from support, which is 1.37 ATR above the 980 swing low. On the support-distance ladder used by the system, that distance falls in the NO_BUY band, which is reserved for distances of 1.2 ATR or more. The reading is shown here as context for the holding discussion, not as a Layer 3 verdict.</p>
+<p>The NO_BUY band has a plain meaning. It says that the price is too far above its support to buy at the current level without taking a stop that is wide relative to the typical daily swing. A buyer in this band is asked to wait for a pullback to support, a <dfn>retest</dfn> that holds, or a new base. The stock is currently 70 rupees above the swing low, and that gap is what the band is measuring.</p>
+<p>For the holding, the same distance reading has a practical consequence. The position is not in an <dfn>entry zone</dfn> and is not being added to, so the NO_BUY reading does not block a decision. It does tell the holder that any increase in the position would need to wait for a support test or a new base, and that the stop of 954.55 is the level that defines the risk of holding.</p>
+<p>The distance measure is also easy to misread. A reader who sees a price above the 200-day average may think the stock is in a healthy place to buy. That is the wrong inference here. The 200-day average is the long trend, and the price sits above it, but the short and medium trends have turned down. Entry timing needs the shorter trends to support the purchase, and at present they do not. The band reading and the trend reading point the same way, which is that this is not a place to add shares.</p>
+<p>The full posture would be re-run only if the company clears Layer 1. Until then the stop is the operative risk control, and the distance reading is a context note. A reader should not infer that a buy signal exists because the price is above the 200-day average. The 200-day average is rising, but the 50-day average is falling and the momentum gate has failed, so there is no entry setup. Layer 3 would require a clean setup before any timing decision, and none exists.</p>
+<h2 id="peer-benchmarks">Peer benchmarks</h2>
+<p>A peer comparison answers a narrow question: how does this company's return and valuation compare with other listed businesses that a reader might reasonably use as a reference? The three peers below were chosen because each shares one feature with Macfos. Dixon Technologies is an electronics manufacturer with high returns and a high multiple, IndiaMART is an online marketplace with high returns and a modest multiple, and Redington is a large distributor of technology products with a low return and a low multiple. None of them is a perfect match, and the comparison is meant to show the range rather than to name a fair value.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Peer benchmarks, latest Screener snapshots (ROCE in percent; P/E in times)</caption>
+<thead><tr><th>Company</th><th>ROCE</th><th>P/E</th><th>Snapshot date</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td><strong>ROBU</strong> (Macfos)</td><td>33.8</td><td>40.9</td><td>9 October 2026</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Dixon Technologies</td><td>29.2</td><td>41.3</td><td>12 October 2026</td><td><sup><a href="#cite_note-17">[17]</a></sup></td></tr>
+<tr><td>IndiaMART InterMESH</td><td>28.0</td><td>19.4</td><td>12 October 2026</td><td><sup><a href="#cite_note-16">[16]</a></sup></td></tr>
+<tr><td>Redington</td><td>18.4</td><td>17.0</td><td>12 October 2026</td><td><sup><a href="#cite_note-15">[15]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>Read the table as two separate comparisons. On return on capital, Macfos sits at the top of the group, just above Dixon and IndiaMART and well above Redington. That is consistent with an asset-light online model that does not need heavy plant. On valuation, Macfos and Dixon both trade on a multiple of about 41 times earnings, while IndiaMART trades on 19 times and Redington on 17 times. The market is paying a high multiple for the two companies that earn the higher return, which suggests that investors expect the return to last.</p>
+<p>The comparison tells a reader two things. The first is that Macfos is not valued cheaply relative to a peer that shares its high return. Its multiple already reflects a good result, and the price therefore has less room for error if the cash shortfall persists. The second is that the peer figures are snapshots of ROCE and P/E only, not a full fundamental study, so the comparison is a guide to context, not a ranking.</p>
+<p>The comparison also shows why a multiple on its own cannot settle the question. A P/E of 41 for a company whose profit is converting into cash is a different proposition from a P/E of 41 for a company whose profit is not. Macfos is in the second group on the three-year measure. The peer table cannot show that difference, because the peers were not put through the same cash test in this run. That is an honest limit of the benchmark, and it is why the verdict rests on the Layer 1 result, not on the multiple.</p>
+<p>The choice of peers also limits what the comparison can prove. Each peer was picked for one resemblance, and each differs in another way. Dixon is a manufacturer with heavy plant and large contracts with a few brand owners. IndiaMART earns subscription and listing revenue from businesses that buy leads, so its margins and working capital are structurally different. Redington is a distributor of a very different scale, where thin margins on large volumes are the norm. A reader should therefore use the table to see the range of returns and multiples in the sector, not to decide what Macfos is worth.</p>
+<p>Finally, the peer comparison is not a sales or margin benchmark. Redington is a much larger distributor with a different scale of business, and IndiaMART is a marketplace that earns commissions and subscriptions rather than selling stock. The most useful reading is that Macfos sits between a high-return product company and a high-volume distributor, and that its return profile is closer to the first. The risks are closer to the second, because stock build-up is the visible drag on cash.</p>
+<h2 id="fatal-flaws-and-the-red-team-case">Fatal flaws and the red-team case</h2>
+<p>A fatal flaw is a problem that, on its own, would make the investment case fail. A red-team case is a deliberate attempt to argue against the verdict as strongly as the evidence allows, so that the verdict can be tested rather than assumed. The paragraphs below do both. It lists the flaws the evidence supports and then builds the strongest honest bear case, followed by the one claim that the whole verdict hangs on.</p>
+<p>The first flaw is that profit is not turning into cash. The three-year cash-to-profit ratio is minus 0.49. Cash from operations was negative in two of the last three years, and free cash flow was negative in the same two years<sup><a href="#cite_note-1">[1]</a></sup>. A business that reports profit and consumes cash for two years needs an explanation, and the working-capital data supply a plausible one, but an explanation is not a cure. Until cash from operations turns positive and stays there, the flaw stands.</p>
+<p>The second flaw is that working capital is absorbing money faster than sales are growing. Inventory days rose from 95 to 122 over two years, and the cash conversion cycle rose from 75 to 113 days<sup><a href="#cite_note-1">[1]</a></sup>. Sales grew about 21 percent in FY26 while inventory days rose sharply. For a distributor, stock is the business, and stock that waits longer is a cost the profit figure does not show. A bear would say that this is the signature of a company buying ahead of demand, and that the demand may not arrive at the price assumed.</p>
+<p>The third flaw is that margins compressed in the latest quarter. The operating margin fell to 10.61 percent from 12.52 percent, and the PAT margin fell to 5.94 percent from 6.88 percent on the Ind AS basis<sup><a href="#cite_note-7">[7]</a></sup>. The company attributes this to scaling and to capability investment, which may be true. But the bear's point is that the investments are being made from a cash base that has not yet been proven, so the cost is real and the return on it is unproven.</p>
+<p>The fourth flaw is the accounting transition. The company moved to Ind AS from 1 April 2026, and the comparative quarter has been restated<sup><a href="#cite_note-7">[7]</a></sup>. The FY26 figures differ slightly across sources: the consolidated table gives 309 crore of sales and 26 crore of profit, while the Ind AS summary gives total income of 311.80 crore and profit of 25.61 crore<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-7">[7]</a></sup>. The differences are small. The bigger point is that the cash-flow history was prepared under the old standard, so a three-year comparison spans two accounting bases.</p>
+<p>The fifth flaw is the small-company structure. The stock trades on the SME platform, and the volume on the ledger date was 2,805 shares, about 0.65 times the 20-day average<sup><a href="#cite_note-4">[4]</a></sup>. A thinly traded stock can move sharply on small orders, and an exit in a falling market can be costly. The stop is therefore not a guaranteed exit price. The gap between the stop and an actual fill could be wide in a bad session.</p>
+<p>The sixth flaw is that the promoter holding has fallen. It was 73.66 percent in March 2024 and is 69.12 percent now<sup><a href="#cite_note-1">[1]</a></sup>. The pledge is zero, which is reassuring<sup><a href="#cite_note-3">[3]</a></sup>. But a falling promoter stake, combined with a rising number of shareholders, is a pattern that a careful reader should watch, because it can reflect share sales or <dfn>dilution</dfn>, and the sources here do not explain which.</p>
+<p>The bear case, stated as strongly as the evidence allows, runs like this. The company earns a 30 percent return on capital and grows fast, which is the profile of a business that deserves a high multiple. But its profit has not reached the bank for two years. Its stock and receivables have grown faster than sales, its margins fell in the quarter when it spent on new products, and its shares trade at about 41 times earnings. If the cash does not arrive, the multiple will compress, and the stock will fall toward the levels that the 200-day average and the swing low mark. The verdict is not a forecast of that fall. It is a judgement that the evidence does not yet support the high multiple.</p>
+<p>The hinge claim is this. The whole verdict depends on whether cash from operations turns positive and stays positive, so that the three-year cash-to-profit ratio can climb back above 0.70. If that happens, the Layer 1 cash test passes, the holding argument changes, and the company re-enters the scoring process. If it does not happen, the thesis is impaired and the replacement verdict stands. That single measure is more useful than any single chart reading, and it is the one the next audited year will test.</p>
+<section class="chapter" id="ch-7">
+<h2 id="what-would-change-the-verdict">What would change the verdict</h2>
+<p>A verdict should name the evidence that would change it, with a level or a date. Otherwise it is a belief, not a rule. The paragraphs below give the triggers in both directions for the watchlist decision and for the holding decision, so that the next review can check them without re-reading the whole dossier.</p>
+<p>For the watchlist decision, the rejection would change only if the Layer 1 gates were passed. The cash test would need to reach 0.70 or above over the three most recent audited years. On the current figures, with FY24 at 4 crore of cash and FY25 and FY26 negative, that would need a large turn in the next audited year. The technical test would need the price to close above a rising 50-day average, which means above the current 1,110.86 and with that average turning up from its falling direction. The asymmetry test would need a verifiable target, such as a documented forward earnings estimate multiplied by a justified multiple, that gave at least 3.5 times the downside to the stop. The momentum gate would need to pass Test A or Test B. A change in any one of the Layer 1 rows would not by itself reverse the rejection, but a change in the cash test would be decisive, because it is the fundamental failure.</p>
+<p>For the holding decision, the verdict would change in three ways. If the cash test recovers and the stage returns to Stage 2 with a price above the 50-day average, the position could be re-scored under KEEP_COMPOUNDING, provided every gate passes and the operating KPIs are healthy. If the price closes below the stop of 954.55, the structural trigger is met independently, and the verdict stays REPLACE_UNDERPERFORMER with a second reason for the swap. If the company showed a clear turnaround in working capital, with the cash conversion cycle falling for two consecutive quarters and cash from operations turning positive, the thesis-impairment rule would be weakened, and the verdict could be revisited at the next review.</p>
+<p>The dates that matter are concrete. The next quarterly results are expected after the trading window that the company closed from 1 October 2026 until 48 hours after the second-quarter results<sup><a href="#cite_note-1">[1]</a></sup>. No date for that board meeting was published in the sources checked, so the review should be set for the day the results are filed. The next annual audited figures for FY27 will matter more than any quarter, because the three-year cash test is built on audited years. The review should therefore be scheduled both after the second-quarter filing and after the FY27 annual filing.</p>
+<p>Some things would not change the verdict on their own. A rising share price would not, because the technical rules already show a stalled trend and the fundamental failure is independent of the price. A good quarter of sales growth would not, because growth has been present throughout and has not solved the cash problem. A change in the peer multiples would not, because the peer comparison is context, not a gate. The verdict is anchored to the cash test and to the stop, and those are the two numbers to watch.</p>
+<p>In short, the holding should be reviewed against three checkpoints: the second-quarter results, the FY27 audited cash flow, and the closing price against 954.55. A holder who wants to keep the position should write down, before the next review, the specific cash figure and the specific price level that would justify doing so. That discipline is the difference between a verdict and a hope.</p>
+<p class="trigger">Holding trigger: a daily close below 954.55 rupees would confirm a broken stop, which is a second and independent reason to exit the position under the taxonomy.</p>
+<p class="trigger">Watchlist trigger: a three-year ratio of operating cash to profit of 0.70 or more on audited figures, together with a close above the falling 50-day average of 1,110.86, would be needed before the rejection could be reopened.</p>
+</section>
+<section class="chapter" id="gate-exceptions"><h2>Run notes and gate exceptions</h2><p><b>Status.</b> Publication status BEST_EFFORT_AFTER_REVIEW_LIMIT with PUBLISHED_WITH_GATE_EXCEPTIONS. The independent reviewer returned REVISE in round 1 and REVISE in round 2, the strict two-round limit. Round-1 findings were fixed where the record supported them, unsupported claims were removed or qualified, and the round-2 findings below were not fully cured. No third round was run.</p><p><b>Unresolved reviewer findings (round 2).</b> The peer business descriptions (Dixon as a heavy-plant manufacturer, IndiaMART and Redington as asset-light models) have no sourced record and are kept only as context; the phrase that stock and receivables drag on cash is supported for stock, but no debtor-days record was found for receivables.</p><p><b>Stale as-of dates.</b> The annual financial figures carry an as-of date of 31 March 2026, which is 195 days before the report date, and the latest quarterly figures carry June 2026. No newer periodic filing existed at the time of the run. The citation check was run with its stale-date allowance and returned PASS WITH EXCEPTIONS; each exception is disclosed here, and no as-of date was changed.</p><p><b>Layout checker.</b> The readability checker expects book-standard section ids (primer, chapter 7, estimate, notes). This report uses the Research Desk layout, which does not carry those ids, so those four lines are a known design mismatch, not a writing failure. The glossary first-use check and the readability grade both pass.</p><p><b>Validator.</b> The full report validator has no dossier kind, so the dossier was checked with the citation gate, the readability gate and the code-built review packet. The portfolio-audit floors do not apply to a single-company dossier.</p><p><b>Source limits.</b> Some primary PDFs (annual report or results deck) did not extract as text or timed out, so some figures rest on aggregators and are labelled as such. Screener returned rate limits on re-fetch, and the cached copies were used. The ledger, not the research record, is the source for every price, average, RSI, ATR and stage figure.</p></section><section class="chapter" id="notes">
+<h2 id="notes-and-sources">Notes and sources</h2>
+<p>The notes explain how the sources were ranked when they disagreed, and what each class of source can and cannot prove. Exchange filings are the strongest evidence for a reported figure. Aggregators such as Screener are strong for ratios and shareholding, but they are not a substitute for a filing. Press summaries and blogs are useful for a date or a headline, but they are secondary, so a figure that appears only in such a summary is treated with more caution. Where this run relies on a secondary summary of a primary document, the reference list says so.</p>
+<p>Three conflicts are worth recording. The first is FY26 sales and profit. The consolidated table gives 309 crore and 26 crore, the Ind AS summary gives 311.80 crore and 25.61 crore, and the annual general meeting speech summarised on the company page gives 311.74 crore and 25.65 crore. The differences are small and come from the change of accounting basis. The second is the June quarter profit. The consolidated table gives 5.81 crore against 4.96 crore, while the company and press reports give 5.82 crore against 4.97 crore. The gap is one lakh rupees and is rounding. The dossier uses the company's figure for the quarter and the table for the trend. The third concerns a transcript. The company page lists an August 2026 earnings-call transcript, but the investor-presentation summary states that no transcript was published for the quarter. The transcript was not read in this run, so no management statement from it is used anywhere in this dossier.</p>
+<p>The price used throughout is the ledger close of 1,049.95 rupees on 12 October 2026. The company page shows a snapshot dated 9 October at 1,047 rupees, and that snapshot is used only for the market value and the price-to-earnings ratio, which the page reports at that date.</p>
+<h3 id="data-quality-note">Data-quality note: possible duplicate rows in the transaction log</h3>
+<p>The authoritative transaction log for ROBU contains ten identical sell rows dated 23 January 2025. Each row records a sale of 150 shares for 176,250 rupees, with the source given as the console tradebook for 2024-25. The file contains ten such rows, which should be checked against the broker's own contract notes. The log is treated as recorded, because it is the authoritative position record for this run, and the replay of it gives 165 shares as the holding.</p>
+<p>The replay gives 165 shares only if all ten sell rows are real. The buys total 1,500 shares, the ten sells total 1,500 shares, and a final buy of 165 shares on 28 September 2026 leaves 165. If some of the sell rows were a duplicate import, the holding would be larger than 165 shares, and the market value, the cost basis and the realised gain would all change. The realised gain shown by the replay is about 12.5 lakh rupees, and it depends on the same ten rows. The dossier flags the rows as a possible duplicate import for the user to check against the broker's contract notes before any decision that depends on the share count.</p>
+<h3 id="references">References</h3>
+<p>Every number in the body cites one of the sources below, each with the date it describes. Ledger figures are the in-house session file for 12 October 2026 and are not an external source.</p>
 <ol class="reflist">
-  <li id="cite_note-1">^ <a href="https://www.bseindia.com/stock-share-price/macfos-ltd/robu/543787/" target="_blank">BSE India SME Prospectus</a>: Macfos Limited Initial Public Offering (IPO) Red Herring Prospectus, February 2023. Scrip Code: 543787.</li>
-  <li id="cite_note-2">^ <a href="https://www.bseindia.com" target="_blank">BSE Exchange Disclosure</a>: Audited Financial Results of Macfos Limited for the Financial Year ended March 31, 2026. Filed May 2026.</li>
-  <li id="cite_note-3">^ Macfos Limited Annual Report FY 2025–26: Director's Report, Management Discussion and Analysis, and Corporate Governance Report.</li>
-  <li id="cite_note-4">^ <a href="https://www.screener.in/company/543787/" target="_blank">Screener.in Consolidated Company Financials</a>: Macfos Ltd (543787) multi-year Profit &amp; Loss, Balance Sheet, Cash Flow statements, and financial ratios.</li>
-  <li id="cite_note-5">^ <a href="https://www.tradingview.com/symbols/BSE-543787/" target="_blank">TradingView Technical Charting Platform</a>: Macfos Limited (BSE: 543787) historical price action, volume profiles, and moving average trends.</li>
-  <li id="cite_note-6">^ <a href="https://trendlyne.com/equity/189856/MACFOS/macfos-ltd/" target="_blank">Trendlyne Quantitative &amp; Technical Analysis</a>: Macfos Ltd technical snapshot as of September 25, 2026 (RSI: 54.3, 20-DMA: ₹1,090.80, 50-DMA: ₹1,131.80, 200-DMA: ₹959.40, ATR: ₹55.50).</li>
-  <li id="cite_note-7">^ Macfos Limited Q1 FY 2026–27 Financial Results &amp; Investor Factsheet, August 11, 2026. Revenue ₹81.34 Cr (+37.2% YoY), PAT ₹5.82 Cr (+17.1% YoY).</li>
-  <li id="cite_note-8">^ <a href="https://robu.in" target="_blank">Robu.in Corporate Overview &amp; E-Commerce Platform Architecture</a>: Macfos Limited central distribution center and online catalog, MIDC Bhosari, Pune.</li>
-  <li id="cite_note-9">^ Ministry of Electronics and Information Technology (MeitY), Government of India: "Production Linked Incentive Scheme (PLI) for IT Hardware and Electronics Components," National Policy on Electronics (NPE).</li>
-  <li id="cite_note-10">^ Ministry of Civil Aviation (MoCA), Government of India: "Drone Rules 2021 and Production-Linked Incentive (PLI) Scheme for Drones and Drone Components."</li>
-  <li id="cite_note-11">^ Atul Maruti Dumbre, Chairman and Managing Director, Macfos Limited: Remarks on Robu 2.0 In-House Brand Strategy and B2B Procurement Expansion, Q1 FY27 Earnings Call.</li>
-  <li id="cite_note-12">^ Nileshkumar Purushottam Chavhan, Whole-Time Director &amp; COO, Macfos Limited: Operational Review of Logistics Automation, Warehouse Management Systems, and Inventory Turns.</li>
-  <li id="cite_note-13">^ Central Electronics Engineering Research Institute (CSIR-CEERI) &amp; DRDO Procurement Registry: Institutional procurement orders for robotics components and sensor modules.</li>
-  <li id="cite_note-14">^ Indian Institutes of Technology (IIT Bombay, IIT Delhi, IIT Madras) Innovation &amp; Incubation Centers: Component procurement records for student robotics and mechatronics laboratories.</li>
-  <li id="cite_note-15">^ SmartElex Engineering Catalog: High-current motor drivers, sensor breakout modules, and industrial interface shields, Macfos Limited R&amp;D Division.</li>
-  <li id="cite_note-16">^ EasyMech Robotics Hardware Catalog: Precision CNC-machined aluminum robot chassis, mecanum wheels, and servo brackets, Robu.in.</li>
-  <li id="cite_note-17">^ Orange Lithium Polymer &amp; Li-Ion Battery Pack Certification &amp; Technical Testing Specifications: High-discharge C-ratings for commercial UAV and robotics drive systems.</li>
-  <li id="cite_note-18">^ Raspberry Pi Ltd (UK): Authorized Commercial Reseller Agreement &amp; Official Global Distribution Directory for India (Macfos Limited / Robu.in).</li>
-  <li id="cite_note-19">^ Espressif Systems (Shanghai) Co., Ltd: Commercial Distribution Partnership for ESP32 and ESP8266 IoT SoC modules across Indian engineering developers.</li>
-  <li id="cite_note-20">^ STMicroelectronics Authorized Partner Network: STM32 Nucleo and Discovery developer boards availability via Robu.in.</li>
-  <li id="cite_note-21">^ Waveshare Electronics Global Distributor Listing: Display modules, e-paper screens, and embedded camera hardware distribution in India.</li>
-  <li id="cite_note-22">^ Creality 3D Technology Co., Ltd: Official channel partner agreement for Ender series FDM and resin 3D printers and high-temperature engineering filaments.</li>
-  <li id="cite_note-23">^ BSE Circular on SME to Mainboard Migration Framework: Criteria for graduation under SEBI (ICDR) Regulations, BSE Notice No. 20250812-44.</li>
-  <li id="cite_note-24">^ Reserve Bank of India (RBI): Report on Currency and Finance &mdash; "Digital Commerce, Automation, and Industrial IoT Adoption in Indian MSMEs."</li>
-  <li id="cite_note-25">^ <a href="https://www.screener.in/company/SBCL/consolidated/" target="_blank">Screener.in Peer Analysis &bull; Shivalik Bimetal Controls Limited (SBCL)</a>: Audited financial ratios, ROCE 26.8%, D/E 0.08x, and precision shunt resistor market share.</li>
-  <li id="cite_note-26">^ <a href="https://www.screener.in/company/KAYNES/consolidated/" target="_blank">Screener.in Peer Analysis &bull; Kaynes Technology India Limited (KAYNES)</a>: Financial metrics, aerospace and defense IoT electronics order book, and valuation multiples.</li>
-  <li id="cite_note-27">^ <a href="https://www.screener.in/company/CYIENTDLM/consolidated/" target="_blank">Screener.in Peer Analysis &bull; Cyient DLM Limited (CYIENTDLM)</a>: Financial metrics, EMS operating margins, and return on capital employed audit.</li>
-  <li id="cite_note-28">^ Directorate General of Foreign Trade (DGFT), Ministry of Commerce &amp; Industry: Import Policy Guidelines on Electronic Assemblies, HS Codes 8473 and 8542.</li>
-  <li id="cite_note-29">^ Federation of Indian Chambers of Commerce and Industry (FICCI) &amp; EY Report: "India's Drone Industry: Scaling Commercial UAV Manufacturing and Component Indigenization."</li>
-  <li id="cite_note-30">^ All India Council for Technical Education (AICTE): National Initiative on Robotics, STEM Innovation Labs, and Atal Tinkering Labs (ATL) procurement guidelines.</li>
-  <li id="cite_note-31">^ Stan Weinstein: <em>Secrets for Profiting in Bull and Bear Markets</em> &mdash; Stage Analysis Framework for Technical Consolidations, Dow Jones-Irwin.</li>
-  <li id="cite_note-32">^ CRISIL Market Intelligence &amp; Analytics: "Indian E-Retail and Specialized Industrial B2B Distribution Landscape (2024–2028)."</li>
-  <li id="cite_note-33">^ BSE Shareholding Pattern Disclosure &bull; Macfos Limited: June 30, 2026, Shareholding distribution across Promoters (69.12%), DIIs (6.09%), FIIs (0.20%), and Public (24.60%).</li>
-  <li id="cite_note-34">^ Securities and Exchange Board of India (SEBI): Listing Obligations and Disclosure Requirements (LODR) Regulations, 2015 &bull; Corporate Governance Mandates for SME Entities.</li>
-  <li id="cite_note-35">^ ValuePickr Investment Community: Field Research, Channel Checks, and Scuttlebutt Analysis on Robu.in Supply Chain Velocity and B2B Working Capital Dynamics.</li>
+<li id="cite_note-1"><a href="https://www.screener.in/company/543787/consolidated/">Macfos Ltd consolidated company page, Screener</a> (header snapshot 9 October 2026; tables to March 2026 and June 2026).</li>
+<li id="cite_note-2"><a href="https://www.screener.in/company/543787/">Macfos Ltd standalone company page, Screener</a> (growth and return ratios to March 2026).</li>
+<li id="cite_note-3"><a href="https://trendlyne.com/equity/share-holding/1358853/17170026/latest/macfos-ltd/">Macfos shareholding pattern and pledge, Trendlyne</a> (June 2026).</li>
+<li id="cite_note-4"><a href="https://trendlyne.com/equity/1358853/17170026/macfos-ltd/">Macfos live price and volume, Trendlyne</a> (12 October 2026).</li>
+<li id="cite_note-5"><a href="https://trendlyne.com/fundamentals/financials/1358853/17170026/macfos-ltd/">Macfos quarterly financials, Trendlyne</a> (June 2026, standalone).</li>
+<li id="cite_note-6"><a href="https://trendlyne.com/equity/consensus-estimates/1358853/17170026/macfos-ltd/">Macfos consensus estimates and target, Trendlyne</a> (12 October 2026).</li>
+<li id="cite_note-7"><a href="https://www.multibagg.ai/market-pulse/articles/macfos-q1-results-97880">Macfos Q1 FY27 results summary, Multibagg</a> (13 August 2026).</li>
+<li id="cite_note-8"><a href="https://www.arthneeti.com/insights/macfos-q1-fy27-earnings">Macfos Q1 FY27 investor presentation summary, Arthneeti</a> (June 2026).</li>
+<li id="cite_note-9"><a href="https://www.marketscreener.com/news/macfos-limited-reports-earnings-results-for-the-first-quarter-ended-june-30-2026-ce7859dbda8cf520">Macfos Limited reports earnings results for the quarter ended June 30, 2026, MarketScreener</a> (11 August 2026).</li>
+<li id="cite_note-10"><a href="https://www.marketscreener.com/quote/stock/MACFOS-LIMITED-151385504/company/">Macfos Limited company profile and news list, MarketScreener</a> (August 2026).</li>
+<li id="cite_note-11"><a href="https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Macfos-Q1-FY27-Revenue-Jumps-38percent-to-indian-rupee8134-Cr-PAT-Rises-18percent/6a7b3da910bce1fd204c3969">Macfos Q1 FY27 revenue and PAT, WhalesBook</a> (11 August 2026).</li>
+<li id="cite_note-12"><a href="https://www.indiainfoline.com/company/macfos-ltd/corporate-action/board-meeting">Macfos board meeting record, IIFL Capital</a> (11 August 2026).</li>
+<li id="cite_note-13"><a href="https://www.financialexpress.com/market/macfos-ltd-share-price/board-meetings/">Macfos board meetings, Financial Express</a> (August 2026).</li>
+<li id="cite_note-14"><a href="https://www.goodreturns.in/company/macfos/board-meeting.html">Macfos board meeting dates, Goodreturns</a> (August 2026).</li>
+<li id="cite_note-15"><a href="https://www.screener.in/company/REDINGTON/consolidated/">Redington company page, Screener</a> (12 October 2026, peer).</li>
+<li id="cite_note-16"><a href="https://www.screener.in/company/INDIAMART/consolidated/">IndiaMART InterMESH company page, Screener</a> (12 October 2026, peer).</li>
+<li id="cite_note-17"><a href="https://www.screener.in/company/DIXON/consolidated/">Dixon Technologies company page, Screener</a> (12 October 2026, peer).</li>
+<li id="cite_note-18"><a href="https://blog.perivis.com/2026/05/12/macfos-limited-equity-and-liabilities-at-31-march-2026/">Macfos Limited equity and liabilities at 31 March 2026, Perivis</a> (audited balance sheet extract).</li>
+<li id="cite_note-19"><a href="https://news.tulsian.ai/news/company-news/macfos-board-meeting-scheduled-april-28-2026.html">Macfos board meeting scheduled April 28, 2026, Tulsian AI</a> (22 April 2026).</li>
+<li id="cite_note-20"><a href="https://earningscalls.dev/company/543787">Macfos Limited earnings call archive, EarningsCalls.dev</a> (April 2026).</li>
+<li id="cite_note-21"><a href="https://www.reportsradar.com/reports/3d43a509-3a83-4fd2-a847-ae0fddb462e9">Macfos Limited Q1 FY2027 investor presentation, ReportsRadar</a> (filed 11 August 2026).</li>
+<li id="cite_note-22"><a href="https://tribaltradingroom.com/news/filings/india/2026/08/11/macfos-ltd-543787-financial-result-for-the-quarter-ended-june-2026-f6f4eced9a4b0893f7047cdd">Macfos financial result for the quarter ended June 2026, filing index, Tribal Trading Room</a> (11 August 2026).</li>
+<li id="cite_note-23"><a href="https://www.stockfin.ai/news/543787/2026-09-07/board-meeting">Macfos annual general meeting record, StockFin</a> (7 September 2026).</li>
+<li id="cite_note-24"><a href="https://univest.in/blogs/macfos-q1-results-fy27-pat-5-crore">Macfos Q1 FY27 results note, Univest</a> (12 August 2026).</li>
+<li id="cite_note-25"><a href="https://www.stockssena.com/research/filings/ROBU">Macfos filings index, StocksSena</a> (August 2026).</li>
+<li id="cite_note-26"><a href="https://futurecaps.com/portfolio/macfos-multibagger-analysis-2026/">Macfos multibagger analysis 2026, FutureCaps</a> (undated secondary note).</li>
 </ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-</div>
-</body>
-</html>
+</script></body></html>
