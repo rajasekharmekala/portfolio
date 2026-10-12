@@ -1,1443 +1,555 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RNIT AI Solutions Limited (RNITAI) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-12">
+<meta name="generated-at" content="2026-10-12T10:04:35.465875-07:00">
+<title>RNIT AI Solutions Limited (RNITAI): company research dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
---text-primary: #1f2937;
---text-secondary: #4b5563;
---text-muted: #6b7280;
---bg-main: #ffffff;
---bg-surface: #f9fafb;
---border-color: #d1d5db;
---brand-blue: #1d4ed8;
---brand-green: #15803d;
---brand-amber: #b45309;
---brand-red: #b91c1c;
---font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
---font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
---font-mono: 'JetBrains Mono', monospace;
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
 }
-body {
-font-family: var(--font-sans);
-color: var(--text-primary);
-background-color: var(--bg-main);
-line-height: 1.68;
-font-size: 15px;
-letter-spacing: -0.011em;
-margin: 0;
-padding: 28px 34px;
-max-width: 1220px;
-margin-left: auto;
-margin-right: auto;
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
 }
-h1.firstHeading {
-font-family: var(--font-serif);
-font-size: 2.25em;
-font-weight: 600;
-line-height: 1.2;
-margin: 0 0 0.2em 0;
-padding-bottom: 7px;
-border-bottom: 1px solid var(--border-color);
-color: #111827;
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
 }
-.siteSub {
-font-size: 0.88em;
-color: var(--text-muted);
-margin-bottom: 1.2em;
-letter-spacing: 0.02em;
-}
-.decision-banner {
-background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-border: 1px solid #fde68a;
-border-left: 6px solid var(--brand-amber);
-border-radius: 8px;
-padding: 16px 20px;
-margin: 1.1em 0 1.7em 0;
-box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-}
-.decision-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-flex-wrap: wrap;
-gap: 10px;
-margin-bottom: 12px;
-border-bottom: 1px solid #fef08a;
-padding-bottom: 9px;
-}
-.decision-title {
-font-family: var(--font-serif);
-font-size: 1.25em;
-font-weight: 700;
-color: #92400e;
-display: flex;
-align-items: center;
-gap: 7px;
-}
-.decision-badge {
-background-color: #d97706;
-color: #ffffff;
-padding: 4px 12px;
-border-radius: 20px;
-font-size: 0.8em;
-font-weight: 700;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-}
-.decision-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 12px;
-}
-.decision-card {
-background: #ffffff;
-border: 1px solid #fde68a;
-border-radius: 6px;
-padding: 10px 12px;
-}
-.decision-card-label {
-font-size: 0.74em;
-font-weight: 600;
-text-transform: uppercase;
-color: var(--text-muted);
-letter-spacing: 0.03em;
-margin-bottom: 2px;
-}
-.decision-card-value {
-font-size: 1.1em;
-font-weight: 700;
-color: #1e293b;
-font-family: var(--font-mono);
-}
-.decision-card-sub {
-font-size: 0.78em;
-color: var(--text-secondary);
-margin-top: 2px;
-}
-h2 {
-font-family: var(--font-serif);
-font-size: 1.55em;
-font-weight: 600;
-color: #111827;
-border-bottom: 1px solid var(--border-color);
-padding-bottom: 5px;
-margin-top: 2em;
-margin-bottom: 0.6em;
-}
-h3 {
-font-size: 1.12em;
-font-weight: 600;
-margin-top: 1.4em;
-margin-bottom: 0.4em;
-color: #1f2937;
-}
-p {
-margin: 0.8em 0 1em 0;
-text-align: justify;
-text-justify: inter-word;
-}
-a {
-color: var(--brand-blue);
-text-decoration: none;
-}
-a:hover {
-text-decoration: underline;
-}
-table.infobox {
-border: 1px solid var(--border-color);
-border-spacing: 2px;
-background-color: var(--bg-surface);
-color: var(--text-primary);
-margin: 0.6em 0 1.3em 1.7em;
-padding: 4px;
-float: right;
-clear: right;
-font-size: 87%;
-line-height: 1.46;
-width: 335px;
-border-radius: 4px;
-box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-}
-table.infobox th {
-vertical-align: top;
-text-align: left;
-padding: 4px 6px;
-font-weight: 600;
-width: 42%;
-color: #374151;
-}
-table.infobox td {
-vertical-align: top;
-padding: 4px 6px;
-}
-table.infobox caption {
-font-family: var(--font-serif);
-font-size: 1.22em;
-font-weight: 700;
-padding: 6px;
-background-color: #f3f4f6;
-border: 1px solid var(--border-color);
-text-align: center;
-border-radius: 3px 3px 0 0;
-color: #111827;
-}
-.infobox-image {
-text-align: center;
-padding: 9px;
-background-color: #ffffff;
-border: 1px solid #e5e7eb;
-margin: 3px 0;
-}
-.infobox-header {
-background-color: #f3f4f6;
-text-align: center;
-font-weight: 600;
-padding: 4px;
-letter-spacing: 0.02em;
-color: #374151;
-font-size: 90%;
-}
-.toc {
-background: #fcfcfd;
-border: 1px solid var(--border-color);
-padding: 11px 18px;
-display: table;
-margin: 1em 0 1.5em 0;
-font-size: 89%;
-min-width: 285px;
-border-radius: 4px;
-}
-.toc h2 {
-font-family: var(--font-sans);
-font-size: 94%;
-font-weight: 700;
-border-bottom: none;
-margin: 0 0 7px 0;
-padding: 0;
-text-align: center;
-color: #374151;
-text-transform: uppercase;
-letter-spacing: 0.04em;
-}
-.toc ul {
-list-style-type: none;
-margin: 0;
-padding: 0;
-}
-.toc ul ul {
-margin-left: 1.4em;
-}
-.toc li {
-margin-bottom: 3px;
-}
-.tocnumber {
-color: var(--text-muted);
-margin-right: 5px;
-font-weight: 600;
-font-family: var(--font-mono);
-}
-table.wikitable {
-background-color: #ffffff;
-color: var(--text-primary);
-margin: 1em 0;
-border: 1px solid var(--border-color);
-border-collapse: collapse;
-font-size: 88%;
-width: 100%;
-}
-table.wikitable th {
-background-color: #f3f4f6;
-text-align: left;
-font-weight: 600;
-padding: 6px 10px;
-border: 1px solid var(--border-color);
-color: #1f2937;
-}
-table.wikitable td {
-padding: 5px 10px;
-border: 1px solid var(--border-color);
-vertical-align: top;
-}
-table.wikitable tr:nth-child(even) {
-background-color: #fafbfc;
-}
-table.wikitable tr:hover {
-background-color: #f0f7ff;
-}
-.callout-box {
-background-color: #f8fafc;
-border: 1px solid #cbd5e1;
-border-left: 5px solid var(--brand-blue);
-border-radius: 4px;
-padding: 11px 15px;
-margin: 1.2em 0;
-font-size: 93%;
-}
-.forensic-box {
-background-color: #fffdfa;
-border: 1px solid #fed7aa;
-border-left: 5px solid var(--brand-amber);
-border-radius: 4px;
-padding: 11px 15px;
-margin: 1.2em 0;
-font-size: 93%;
-}
-.fatal-box {
-background-color: #fffafa;
-border: 1px solid #fecaca;
-border-left: 5px solid var(--brand-red);
-border-radius: 4px;
-padding: 11px 15px;
-margin: 1.2em 0;
-font-size: 93%;
-}
-.reflist {
-font-size: 83%;
-column-count: 2;
--webkit-column-count: 2;
-list-style-type: decimal;
-padding-left: 20px;
-line-height: 1.48;
-}
-.reflist li {
-margin-bottom: 6px;
-word-break: break-word;
-}
-.clearfix::after {
-content: "";
-clear: both;
-display: table;
-}
-.mono { font-family: var(--font-mono); }
-.r { text-align: right; }
-.badge-pass { color: var(--brand-green); font-weight: 700; }
-.badge-fail { color: var(--brand-red); font-weight: 700; }
-</style>
 
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
 
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 class="firstHeading">RNIT AI Solutions Limited</h1>
-<div class="siteSub">From Wikipedia, the institutional financial encyclopedia &bull; Equity Underwriting Dossier &bull; 🚀 TACTICAL_MOMENTUM &bull; 🟡 TRIM_PROFIT_BOOKING</div>
-
-<!-- HIGH-LEVEL EXECUTIVE CAPITAL ALLOCATION DECISION BANNER -->
-<div class="decision-banner">
- <div class="decision-header">
- <div class="decision-title">
- <span>🏛️ EXECUTIVE CAPITAL ALLOCATION VERDICT</span>
- </div>
- <div class="decision-badge">
- 🟡 TRIM PROFIT BOOKING &bull; CONCENTRATION CEILING BREACH
- </div>
- </div>
- <div class="decision-grid">
- <div class="decision-card">
- <div class="decision-card-label">Recommended Capital Action</div>
- <div class="decision-card-value" style="color: #b45309;">TRIM 4,000 – 5,000 SH</div>
- <div class="decision-card-sub">Liberate ₹4.24L – ₹5.30L; redeploy to Core Alpha</div>
- </div>
- <div class="decision-card">
- <div class="decision-card-label">Optimal Harvest Band</div>
- <div class="decision-card-value">&#8377;105.00 – &#8377;108.00</div>
- <div class="decision-card-sub">CMP &#8377;105.42 sits +90.54% above buy price (&#8377;55.33)</div>
- </div>
- <div class="decision-card">
- <div class="decision-card-label">Trailing Support Stop</div>
- <div class="decision-card-value" style="color: #b91c1c;">&#8377;94.00</div>
- <div class="decision-card-sub">Downside risk: -10.83% (Anchored below 20-DMA shelf)</div>
- </div>
- <div class="decision-card">
- <div class="decision-card-label">12–18M Base Target &amp; Asymmetry</div>
- <div class="decision-card-value" style="color: #1e293b;">&#8377;125.00 <span style="font-size: 0.8em; color: #b91c1c;">(1.72 : 1)</span></div>
- <div class="decision-card-sub">+18.57% upside; fails tactical buy hurdle (&ge;3.5:1)</div>
- </div>
- </div>
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>RNIT AI Solutions Limited (RNITAI): company research dossier</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T10:04:35.465875-07:00">12 Oct 2026, 10:04 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-12</p></header>
+<dl class="key-figures">
+<div><dt>Close, 12 Oct 2026</dt><dd>108.00<sup><a href="#cite_note-16">[16]</a></sup></dd></div>
+<div><dt>Layer 1 gate</dt><dd>FAIL</dd></div>
+<div><dt>Share of net worth</dt><dd>23.0%<sup><a href="#cite_note-31">[31]</a></sup> against a 15% cap<sup><a href="#cite_note-32">[32]</a></sup></dd></div>
+<div><dt>Action verdict</dt><dd><span class="verdict verdict-trim">TRIM_PROFIT_BOOKING</span></dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Publication status: PUBLISHED_WITH_GATE_EXCEPTIONS, and this dossier decides what the Zerodha account should do with its 10,000 RNITAI shares<sup><a href="#cite_note-31">[31]</a></sup>, and whether the company belongs on the shortlist. The answer is trim, not sell and not add: the stock fails our buy tests, but the position is too large for our single-stock cap, so we sell half of it. Status: Reviewer APPROVE and red-team APPROVE on round 2 (the final independent review); residual NOTE items are listed in the run notes, and the cheap ones were applied, with every unmet gate listed there too. The watchlist label of PASSED is superseded by the evidence in this report, which shows several failed tests. Read the chapters in order, because each one ends with a bridge to the next.</p>
+</section>
+<section class="chapter" id="company">
+<h2>What the company does</h2>
+<p>This chapter explains the business before any number is tested. The company describes itself as the largest AI-based facial recognition software provider to the Indian government<sup><a href="#cite_note-1">[1]</a></sup>. It sells that software as a subscription, which is called software as a service, or SaaS. The buyer rents the software on a recurring basis rather than buying a one-time licence, which means revenue repeats as long as the contract runs. The company says it has processed more than 3 billion facial templates across more than 300 departments<sup><a href="#cite_note-12">[12]</a></sup>.</p>
+<p>Recurring fees are a good model if the government keeps renewing. The demand comes from identity checks that the state already runs. UIDAI, which runs India's Aadhaar identity system, describes face authentication as one step in an identity flow on its website<sup><a href="#cite_note-22">[22]</a></sup>. The national AI and digital government portals describe the wider programme that funds this kind of work<sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-24">[24]</a></sup>. These pages confirm the category, not the company's share of it.</p>
+<h3>Where the revenue comes from</h3>
+<p>Revenue is the first number to check, because everything else depends on it. Revenue for FY26 was ₹51.50 crore, against ₹32.23 crore in FY25, which is growth of 59.81 percent<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-4">[4]</a></sup>. Profit after tax (PAT) for FY26 was ₹12.02 crore<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-12">[12]</a></sup>. We could not verify the split between government and private clients, because no retrieved filing gives that breakdown.</p>
+<p>The company's investor presentation for the year ended March 31, 2026 is indexed on Trendlyne<sup><a href="#cite_note-9">[9]</a></sup>, and StocksSena's filings index covers the company's annual reports and earnings material<sup><a href="#cite_note-11">[11]</a></sup>. The company has a corporate history that matters for this read. Eduinvesting says the company was until recently Autopal Industries Limited, and that the name changed alongside a restructuring<sup><a href="#cite_note-12">[12]</a></sup>. Brickwork's rating note uses the same former name<sup><a href="#cite_note-15">[15]</a></sup>. The second tranche was issued under an NCLT plan, and the National Company Law Tribunal is the forum that handles insolvency and restructuring cases<sup><a href="#cite_note-12">[12]</a></sup>.</p>
+<h3>The share count changed shape</h3>
+<p>The share count is the reason the restructuring matters for an investor. In March 2026 the company allotted 52,66,537 new shares in a preferential issue for ₹26.33 crore, which Eduinvesting describes as the second tranche under an NCLT plan<sup><a href="#cite_note-12">[12]</a></sup>. The share count moved from 4.17 lakh in March 2025 to 8.48 crore a year later<sup><a href="#cite_note-12">[12]</a></sup>. A count that grew this much means older per-share figures do not compare with newer ones, so we use only FY26 and later per-share numbers.</p>
+<p>What this means for an owner: the business has grown fast on paper, but its history is short and its share structure was rebuilt in the last year. The next chapter tests whether the profits are real and strong enough to justify the price.</p>
+</section>
+<section class="chapter" id="strength">
+<h2>Why the business is strong or weak</h2>
+<p>This chapter sorts the company's strengths from its weaknesses, using the numbers that the gates and the scorecard will test. The first measure is <dfn>ROCE</dfn> (return on capital employed), which shows how much profit the business earns on the money tied up in it. A higher ROCE means the company needs less money to grow.</p>
+<h3>What is strong</h3>
+<p>The company's Screener header prints ROCE of 20.2 percent<sup><a href="#cite_note-1">[1]</a></sup>. The Value Research annual table gives 14.29 percent for FY26<sup><a href="#cite_note-6">[6]</a></sup>, and that is the published figure we use. Our own rebuild from Value Research's EBIT of ₹16.77 crore against equity plus borrowings gives 10.7 to 13.7 percent, depending on whether closing or average capital is used<sup><a href="#cite_note-6">[6]</a></sup>. Every version we can build sits below 15 percent. We do not accept the 20.2 percent header until a filing shows how it is built, because the same page's balance sheet does not reproduce it.</p>
+<p>The second measure is <dfn>operating margin</dfn>, which is the share of each rupee of sales left after the running costs of the business are paid. For this company, the cleanest version is <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization) divided by sales. EBITDA for FY26 was ₹20.77 crore on sales of ₹51.50 crore, which is about 40 percent<sup><a href="#cite_note-6">[6]</a></sup>. Screener's FY26 operating margin of 40 percent agrees<sup><a href="#cite_note-1">[1]</a></sup>.</p>
+<p>The latest quarter is the best test of whether that margin is holding. In the June 2026 quarter, sales were ₹7.85 crore, up 25.67 percent on the year before, and profit after tax was ₹1.27 crore, up 53.59 percent<sup><a href="#cite_note-5">[5]</a></sup>. Screener's operating margin for the same quarter is 35.29 percent<sup><a href="#cite_note-1">[1]</a></sup>. Mint shows an operating margin of 22.23 percent for the same quarter<sup><a href="#cite_note-5">[5]</a></sup>. The two differ because Mint's operating income appears to deduct depreciation: Screener's operating profit of ₹2.77 crore less depreciation of ₹1.03 crore is about ₹1.74 crore<sup><a href="#cite_note-1">[1]</a></sup>. Our scorecard uses Screener's basis, which matches the FY26 definition. On Mint's after-depreciation basis the June quarter would fall below the 25 percent test, and that is disclosed rather than hidden.</p>
+<p>Net cash is the third strength. Cash and bank balances were ₹28.68 crore, against borrowings of ₹18.04 crore at the end of FY26<sup><a href="#cite_note-12">[12]</a></sup>. The company is not carrying a heavy debt load on those figures, whatever its history.</p>
+<h3>What is weak</h3>
+<p>Four weaknesses matter more than the strengths. The first is cash conversion, which the numbers chapter measures: profit has not turned into cash consistently over three years. The second is ownership. Promoter holding fell from 73.74 percent in September 2025 to 67.42 percent in March 2026, and to 63.24 percent in June 2026<sup><a href="#cite_note-1">[1]</a></sup>. The June quarter alone cut it by 4.19 percentage points<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-10">[10]</a></sup>. BSE granted a no-objection for three promoter-group members to be reclassified as public on 6 October 2026<sup><a href="#cite_note-1">[1]</a></sup>, and the Economic Times announcements list carries the same filing<sup><a href="#cite_note-13">[13]</a></sup>. A reclassification lowers the reported promoter stake without any sale, so the next shareholding filing is likely to show a lower figure again. The record does not show how much of the earlier fall came from sales and how much from reclassifications. Pledged shares are reported at 0.0 percent<sup><a href="#cite_note-8">[8]</a></sup>.</p>
+<p>The third weakness is credit. Brickwork Ratings reaffirmed the bank loan rating at BWR D, which is its default category, for ₹14.44 crore of facilities<sup><a href="#cite_note-15">[15]</a></sup>. Brickwork gave the reason as the issuer not cooperating, and said the company had not provided monthly No Default Statements<sup><a href="#cite_note-15">[15]</a></sup>. Screener lists the same rating track back to December 2024<sup><a href="#cite_note-1">[1]</a></sup>. The fourth is disclosure. Screener's consolidated page shows the header but no tables<sup><a href="#cite_note-2">[2]</a></sup>, and no earnings call transcript could be retrieved<sup><a href="#cite_note-29">[29]</a></sup>.</p>
+<p>What this means for an owner: the strengths are in the income statement, and the weaknesses are in the cash, the ownership and the credit file. The scorecard below puts the weak points into the same scale as the strong ones.</p>
+<h3>Layer 2: the operating scorecard</h3>
+<p>Layer 2 scores five company-specific measures, each as PASS, WATCH or FAIL. The rule in our framework is that a name needs four PASS results out of five to qualify. Layer 2 is shown for information here, because Layer 1 has already failed. Each row names the reading that was scored, so the result can be checked.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Measure</th><th>Reading scored</th><th>Test used</th><th>Score</th></tr>
+<tr><td>Revenue growth</td><td class="num">59.81%<sup><a href="#cite_note-6">[6]</a></sup> in FY26; 25.67%<sup><a href="#cite_note-5">[5]</a></sup> in Q1 FY27</td><td>PASS at 20% or more, year on year, on the FY26 figure</td><td>PASS</td></tr>
+<tr><td>Operating margin</td><td class="num">40%<sup><a href="#cite_note-1">[1]</a></sup> in FY26; 35.29%<sup><a href="#cite_note-1">[1]</a></sup> in Q1 FY27 on Screener's basis</td><td>PASS at 25% or more, on Screener's basis</td><td>PASS</td></tr>
+<tr><td>Cash conversion, three-year operating cash flow to PAT</td><td class="num">0.23<sup><a href="#cite_note-6">[6]</a></sup> over FY24 to FY26; FY26 alone is 0.93<sup><a href="#cite_note-6">[6]</a></sup> for context</td><td>PASS at 0.70 or more; WATCH from 0.50 to 0.69; FAIL below 0.50</td><td>FAIL</td></tr>
+<tr><td>Net cash</td><td class="num">₹28.68 crore<sup><a href="#cite_note-12">[12]</a></sup> cash against ₹18.04 crore<sup><a href="#cite_note-12">[12]</a></sup> borrowings at 31 March 2026</td><td>PASS if cash is above borrowings</td><td>PASS</td></tr>
+<tr><td>Promoter holding trend</td><td class="num">73.74%<sup><a href="#cite_note-1">[1]</a></sup> in Sep 2025, 63.24%<sup><a href="#cite_note-1">[1]</a></sup> in Jun 2026</td><td>PASS if stable or rising; FAIL if down 3 points or more in one quarter</td><td>FAIL</td></tr>
+</table></div>
+<p>The result is 3 PASS and 2 FAIL, so 3 of 5. That falls short of the four needed to qualify, so the scorecard blocks a buy on its own. The cash row is scored on the three-year total, because that is the measure the gate uses, and the FY26 figure of 0.93 is shown only for context. The two passes that carry weight are revenue growth and net cash. The two fails are the cash record and the promoter trend, and the promoter trend is the reading that most needs an answer from the company's next filing.</p>
+<h3>Peers</h3>
+<p>A peer table shows whether the valuation and returns look normal next to other listed Indian software and digital-platform companies. We retrieved four peers from Screener's company pages<sup><a href="#cite_note-25">[25]</a></sup><sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-28">[28]</a></sup>. The RNITAI row uses the ROCE we use and the Screener market cap.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Company</th><th>Market cap (₹ crore)</th><th>P/E</th><th>ROCE %</th><th>ROE %</th><th>3-year sales CAGR %</th></tr>
+<tr><td>RNITAI</td><td class="num">916<sup><a href="#cite_note-1">[1]</a></sup></td><td class="num">73.4<sup><a href="#cite_note-1">[1]</a></sup></td><td class="num">14.3<sup><a href="#cite_note-6">[6]</a></sup></td><td class="num">11.1<sup><a href="#cite_note-6">[6]</a></sup></td><td>not published<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Newgen Software</td><td class="num">6,362<sup><a href="#cite_note-25">[25]</a></sup></td><td class="num">18.6<sup><a href="#cite_note-25">[25]</a></sup></td><td class="num">25.0<sup><a href="#cite_note-25">[25]</a></sup></td><td class="num">19.6<sup><a href="#cite_note-25">[25]</a></sup></td><td class="num">17%<sup><a href="#cite_note-25">[25]</a></sup></td></tr>
+<tr><td>Tanla Platforms</td><td class="num">6,646<sup><a href="#cite_note-26">[26]</a></sup></td><td class="num">12.5<sup><a href="#cite_note-26">[26]</a></sup></td><td class="num">26.3<sup><a href="#cite_note-26">[26]</a></sup></td><td class="num">21.4<sup><a href="#cite_note-26">[26]</a></sup></td><td class="num">10%<sup><a href="#cite_note-26">[26]</a></sup></td></tr>
+<tr><td>Intellect Design Arena</td><td class="num">8,230<sup><a href="#cite_note-27">[27]</a></sup></td><td class="num">22.2<sup><a href="#cite_note-27">[27]</a></sup></td><td class="num">16.0<sup><a href="#cite_note-27">[27]</a></sup></td><td class="num">12.4<sup><a href="#cite_note-27">[27]</a></sup></td><td class="num">11%<sup><a href="#cite_note-27">[27]</a></sup></td></tr>
+<tr><td>Route Mobile</td><td class="num">2,633<sup><a href="#cite_note-28">[28]</a></sup></td><td class="num">7.44<sup><a href="#cite_note-28">[28]</a></sup></td><td class="num">17.4<sup><a href="#cite_note-28">[28]</a></sup></td><td class="num">12.6<sup><a href="#cite_note-28">[28]</a></sup></td><td class="num">7%<sup><a href="#cite_note-28">[28]</a></sup></td></tr>
+</table></div>
+<p>RNITAI trades at a P/E of 73.4<sup><a href="#cite_note-1">[1]</a></sup> against 18.6 for Newgen<sup><a href="#cite_note-25">[25]</a></sup> and 12.5 for Tanla<sup><a href="#cite_note-26">[26]</a></sup>, so the market pays several times the peer multiple for the same kind of software. Its ROCE of 14.3 percent<sup><a href="#cite_note-6">[6]</a></sup> is below every peer in the table, and its ROE of 11.1 percent<sup><a href="#cite_note-6">[6]</a></sup> is below the peers' 12.4 to 21.4 percent range<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-26">[26]</a></sup>. The company is also the smallest by market value. Its three-year sales growth cannot be computed from the retrieved pages, which is why that cell reads "not published". The premium is only justified if the cash and the ownership questions resolve in its favour, and the verdict section below shows what the premium is worth if it does not.</p>
+<p>What this means for an owner: on the peer test the company looks expensive and less profitable than the names it is compared with. That raises the bar for the next quarter. The numbers chapter turns the figures into the gate tests.</p>
+</section>
+<section class="chapter" id="numbers">
+<h2>The numbers, in plain words</h2>
+<p>This chapter turns the financial statements into the figures the gates test. Each figure carries its source in brackets. Where two sources disagree, we say so and state which one we use, because a gate can only pass on a number that the record supports.</p>
+<h3>Returns: ROCE and ROE</h3>
+<p>ROCE is defined in the strength chapter. Return on equity (ROE) measures profit against the shareholders' own money, so it shows how well the owners' capital is used. Value Research gives ROE of 11.13 percent for FY26<sup><a href="#cite_note-6">[6]</a></sup>, and StocksSena gives 11.5 percent<sup><a href="#cite_note-10">[10]</a></sup>. Screener's header prints 16.6 percent<sup><a href="#cite_note-1">[1]</a></sup>. That figure does not match the page's own numbers: FY26 profit of ₹12.02 crore on equity of ₹139.04 crore is about 8.6 percent<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-3">[3]</a></sup>, and Rediff's return on average equity is 8.64 percent<sup><a href="#cite_note-3">[3]</a></sup>. ROE is not a gate, but it confirms that the returns are weaker than the header suggests.</p>
+<h3>Debt: borrowings against equity</h3>
+<p><dfn>debt-to-equity</dfn> is the company's borrowings divided by its shareholders' equity. A value below 0.70 is the gate. Borrowings were ₹18.04 crore and equity was ₹139.04 crore at the end of FY26<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-12">[12]</a></sup>, which gives a debt-to-equity of 0.13<sup><a href="#cite_note-6">[6]</a></sup>. Screener's balance sheet agrees, with borrowings of ₹18 crore, equity capital of ₹85 crore and reserves of ₹54 crore<sup><a href="#cite_note-1">[1]</a></sup>. This gate passes easily, and the net cash position supports it. The cash figure is as at 31 March 2026, the FY26 year end, and it is not a live balance. That is the reason the credit rating discussed in the weaknesses chapter still matters.</p>
+<h3>Cash: three years of operating cash flow against profit</h3>
+<p>The cash gate asks whether profit has turned into cash over three years. Operating cash flow (CFO) is the cash the business generates from running itself. Profit after tax (PAT) is the profit left after tax. The gate is the total CFO divided by the total PAT, which must be 0.70 or higher. The table below uses the annual figures as printed by Value Research, cross-checked against Trendlyne and Eduinvesting.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Year</th><th>Operating cash flow (₹ crore)</th><th>PAT (₹ crore)</th></tr>
+<tr><td>FY24</td><td class="num">-0.10<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></td><td class="num">-0.32<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>FY25</td><td class="num">-6.82<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></td><td class="num">7.21<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></td></tr>
+<tr><td>FY26</td><td class="num">11.23<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></td><td class="num">12.02<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+<tr><td><b>Three-year total</b></td><td class="num">4.31 (our sum)<sup><a href="#cite_note-6">[6]</a></sup></td><td class="num">18.91 (our sum)<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+</table></div>
+<p>Three-year cash conversion is 4.31 divided by 18.91, which is 0.23<sup><a href="#cite_note-6">[6]</a></sup>. That fails the 0.70 floor by a wide margin. Read it this way: the company has booked about ₹19 crore of profit over the period<sup><a href="#cite_note-6">[6]</a></sup> but has turned only about ₹4 crore of it into operating cash. Operating cash flow was negative in FY24 and FY25, and it only caught up in FY26, when FY26 alone reached 0.93. The three-year total is still only 0.23. To pass the gate, FY24 would have needed operating cash flow of about ₹8.8 crore<sup><a href="#cite_note-6">[6]</a></sup>, and every source shows it as close to nil<sup><a href="#cite_note-7">[7]</a></sup>. A single good year does not cure a three-year gate.</p>
+<h3>Growth: three-year sales and profit</h3>
+<p>The gate table does not require growth, but a long-term holder needs to know whether the company has grown over a full cycle. We could not compute three-year sales or profit growth. The fiscal year 2023 figures do not appear on Screener, Value Research or Trendlyne, and FY24 revenue is recorded as nil<sup><a href="#cite_note-6">[6]</a></sup>. Without a starting year, a three-year growth rate would be invented, so the cell reads "not published" in the record. What we can show is FY26 revenue growth of 59.81 percent<sup><a href="#cite_note-6">[6]</a></sup> and FY26 profit growth of about 67 percent<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-12">[12]</a></sup>.</p>
+<p>The latest quarter is weaker on the same measures. Sales grew 25.67 percent in the June 2026 quarter<sup><a href="#cite_note-5">[5]</a></sup>, against 59.81 percent for the full year FY26<sup><a href="#cite_note-6">[6]</a></sup>. The two growth rates measure different periods, so they are not a like-for-like trend. The margin also moved from 40 percent for FY26<sup><a href="#cite_note-1">[1]</a></sup> to 35.29 percent for the June quarter<sup><a href="#cite_note-1">[1]</a></sup>. Both points are reported as they stand, and the next quarterly filing will show whether the slower pace continues.</p>
+<h3>Valuation: P/E, market value and the target anchor</h3>
+<p>Valuation asks what price the market pays for the profit. The <dfn>EPS</dfn> (earnings per share) is the profit divided by the number of shares. On FY26 EPS of ₹1.42<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> and a trailing twelve-month EPS of ₹1.54<sup><a href="#cite_note-20">[20]</a></sup>, the P/E, which is the price divided by earnings per share, is about 70 times at ₹108.00<sup><a href="#cite_note-16">[16]</a></sup>. Screener's P/E is 73.4<sup><a href="#cite_note-1">[1]</a></sup>, Value Research's is 73.51<sup><a href="#cite_note-6">[6]</a></sup>, and Blinkx's is 74.6<sup><a href="#cite_note-19">[19]</a></sup>. Eduinvesting's 43.80 uses a different price and profit basis from the other sources, so we set it aside<sup><a href="#cite_note-12">[12]</a></sup>.</p>
+<p>The gate also needs a target that can be checked. A target must rest on a <dfn>consensus estimate</dfn>, which is the average forecast of the analysts who follow a company, or on a <dfn>measured move</dfn>. A measured move is a price target set by adding the height of a past trading range to the level where that range ended. A <dfn>base</dfn> is the flat, sideways period a stock spends before a new advance. Neither route is available. Sharpely shows no active analyst estimates, so there is no consensus forward EPS<sup><a href="#cite_note-20">[20]</a></sup>. Blinkx shows no historical P/E data, so the three-year median P/E cannot be built<sup><a href="#cite_note-19">[19]</a></sup>. Value Research shows only a FY25 P/E of 41.18<sup><a href="#cite_note-6">[6]</a></sup>, which is one year and not a median.</p>
+<p>The market value also varies by source. Screener shows ₹916 crore<sup><a href="#cite_note-1">[1]</a></sup>, ScanX shows ₹915.78 crore<sup><a href="#cite_note-17">[17]</a></sup>, and Rediff shows ₹775.44 crore<sup><a href="#cite_note-3">[3]</a></sup>. The 8.48 crore shares at ₹108.00 give about ₹916 crore, which is our arithmetic and matches Screener<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-16">[16]</a></sup>. We use ₹916 crore<sup><a href="#cite_note-1">[1]</a></sup>.</p>
+<p>What this means for an owner: without a checkable target, nobody can say what the stock is worth on the gate's terms. That is the reason the target test below fails. The next section sets out the six hard gates in one table.</p>
+<h3>Layer 1: the hard gates</h3>
+<p>Layer 1 is a set of pass-or-fail tests that must all pass before a name can be bought. Four terms appear in the technical test. A <dfn>Stage 2</dfn> is the uptrend phase, when a stock rises above rising moving averages. A <dfn>Stage 4</dfn> is the downtrend phase, when the price falls below falling averages. A <dfn>50-day moving average</dfn> is the average closing price over the last 50 sessions, and a <dfn>200-day moving average</dfn> is the same measure over 200 sessions. A <dfn>death cross</dfn> is when the 50-day average falls below the 200-day average. The target test uses an <dfn>asymmetry</dfn> ratio, which is the reward from the target divided by the risk to the stop. The risk is measured from a <dfn>stop loss</dfn>, which is a price set in advance at which the position is sold to cap the loss.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Gate</th><th>Test</th><th>RNITAI reading</th><th>Result</th></tr>
+<tr><td>Return on capital</td><td>ROCE of 15.0% or more</td><td>14.3%<sup><a href="#cite_note-6">[6]</a></sup> published; 10.7 to 13.7% on our rebuild<sup><a href="#cite_note-6">[6]</a></sup>; header 20.2%<sup><a href="#cite_note-1">[1]</a></sup> not reproduced</td><td>FAIL_ROCE</td></tr>
+<tr><td>Leverage</td><td>Debt-to-equity below 0.70</td><td>0.13<sup><a href="#cite_note-6">[6]</a></sup></td><td>PASS</td></tr>
+<tr><td>Cash conversion</td><td>Three-year operating cash flow to PAT of 0.70 or more</td><td>0.23<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></td><td>FAIL_CFO_PAT</td></tr>
+<tr><td>Technical posture</td><td>Stage 2 or Stage 1 base, above a rising 50-day and a 200-day average</td><td>Stage 2<sup><a href="#cite_note-30">[30]</a></sup>; 50-day 92.17<sup><a href="#cite_note-30">[30]</a></sup>, rising from 81.93<sup><a href="#cite_note-30">[30]</a></sup>; 200-day 66.17<sup><a href="#cite_note-30">[30]</a></sup></td><td>PASS</td></tr>
+<tr><td>No breakdown</td><td>No Stage 4 breakdown and no death cross</td><td>50-day above 200-day<sup><a href="#cite_note-30">[30]</a></sup></td><td>PASS</td></tr>
+<tr><td>Asymmetry with a checkable target</td><td>Ratio of 3.5 or more on forward EPS times three-year median P/E, or on a base measured move<sup><a href="#cite_note-32">[32]</a></sup></td><td>No checkable target<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup>; at the shortlist's unverified target of 125, the ratio is 0.70<sup><a href="#cite_note-33">[33]</a></sup></td><td>FAIL_ASYMMETRY</td></tr>
+</table></div>
+<p>Overall result: FAIL_ROCE_CFO_PAT_ASYMMETRY. Three of six tests fail, and the failures are of different kinds. The return test fails on the published figure and on our rebuild, the cash test fails on three years of records, and the valuation test fails because no target can be checked. The leverage and technical tests pass. Under the framework, a failed Layer 1 means the name is rejected for buying, so Layers 2 and 3 are informational only. The asymmetry floor for a tactical name is 3.5<sup><a href="#cite_note-32">[32]</a></sup>, and the required minimum ROCE is 15.0 percent<sup><a href="#cite_note-34">[34]</a></sup>.</p>
+<div class="takeaway"><p>Three gates fail, and each one is evidence in its own right. The return gate fails on the published 14.3 percent and on our rebuild of 10.7 to 13.7 percent, so only a filing that shows how the 20.2 percent header is built could change it. The cash gate needs a clean three-year record, which takes years to rebuild. The valuation gate needs an analyst forecast or a published multiple history, which the company does not yet have. Even if the 20.2 percent ROCE turned out to be right, the gate would still fail on cash and on the target, so the result does not depend on the disputed header figure.</p></div>
+</section>
+<section class="chapter" id="price">
+<h2>What the price is doing</h2>
+<p>This chapter reads the price from the facts ledger built for this run, which uses Yahoo Finance daily bars, so that the moving averages and volume match one another<sup><a href="#cite_note-30">[30]</a></sup>. The close of ₹108.00 is confirmed by Yahoo's quote page<sup><a href="#cite_note-16">[16]</a></sup>. The <dfn>RSI</dfn> (relative strength index) is a 0 to 100 gauge of recent price speed, where a reading above 70 is called overbought and below 30 oversold. The <dfn>ATR</dfn> (average true range) is the typical daily price swing, and it is the unit used to measure distance from support. The <dfn>20-day moving average</dfn> is the average closing price over the last 20 sessions, and it is the nearest support in this report.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Measure</th><th>Value</th><th>What it says</th></tr>
+<tr><td>Close, 12 Oct 2026</td><td class="num">108.00<sup><a href="#cite_note-16">[16]</a></sup></td><td>Down 1.55% on the day from 109.70<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>Change over 1 week and 1 month</td><td class="num">-1.59%<sup><a href="#cite_note-30">[30]</a></sup>; +8.4%<sup><a href="#cite_note-30">[30]</a></sup></td><td>Flat in the short run, strong over the month</td></tr>
+<tr><td>20-day moving average</td><td class="num">103.64<sup><a href="#cite_note-30">[30]</a></sup></td><td>Close is about 4.2% above it<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>50-day moving average</td><td class="num">92.17<sup><a href="#cite_note-30">[30]</a></sup></td><td>Rising, from 81.93 ten sessions earlier<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>200-day moving average</td><td class="num">66.17<sup><a href="#cite_note-30">[30]</a></sup></td><td>Almost flat, from 66.22 sixty-three sessions earlier<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>RSI, 14-day</td><td class="num">59.84<sup><a href="#cite_note-30">[30]</a></sup></td><td>Neither overbought nor oversold</td></tr>
+<tr><td>ATR, 14-day</td><td class="num">4.24<sup><a href="#cite_note-30">[30]</a></sup></td><td>One typical day's swing</td></tr>
+<tr><td>Volume against its 20-day average</td><td class="num">0.29×<sup><a href="#cite_note-30">[30]</a></sup></td><td>Very thin trading</td></tr>
+<tr><td>52-week range, ledger</td><td class="num">37.00 to 130.20<sup><a href="#cite_note-30">[30]</a></sup></td><td>Vendor pages show a high of 114.10<sup><a href="#cite_note-5">[5]</a></sup>; the ledger high is used in this report</td></tr>
+<tr><td>Swing low, last 20 sessions</td><td class="num">85.69<sup><a href="#cite_note-30">[30]</a></sup></td><td>The first level below which the trend would be questioned</td></tr>
+<tr><td>Stage</td><td>Stage 2 (markup)<sup><a href="#cite_note-30">[30]</a></sup></td><td>The uptrend phase is intact on the ledger</td></tr>
+</table></div>
+<p>The table shows an uptrend that is young and thinly traded. The price sits above a rising 50-day average and a 200-day average that is no longer falling<sup><a href="#cite_note-30">[30]</a></sup>. The RSI of 59.84<sup><a href="#cite_note-30">[30]</a></sup> is in the healthy middle, which means the move is not stretched. The volume reading of 0.29<sup><a href="#cite_note-30">[30]</a></sup> is the weakest feature: it means the buying is coming from few people. The wider market is not helping. The ledger labels the regime as Downtrend, with 19.9 percent of stocks above their 50-day average and 10 distribution days in the last 25 sessions<sup><a href="#cite_note-30">[30]</a></sup>.</p>
+<h3>Layer 3: entry posture</h3>
+<p>Layer 3 tells you whether to act now or wait. A <dfn>limit order</dfn> is an instruction to buy or sell only at a stated price or better. An <dfn>entry zone</dfn> is the price band in which a new position would be built. We measure the distance from the nearest support, which here is the 20-day moving average at 103.64<sup><a href="#cite_note-30">[30]</a></sup>. The close of 108.00 is 4.36 rupees above that level, which is 1.03 ATR<sup><a href="#cite_note-30">[30]</a></sup>.</p>
+<p>The support ladder places that distance in the limit-order band, which runs from 1.0 to 1.2 ATR<sup><a href="#cite_note-32">[32]</a></sup>. Full size applies only within half an ATR of support, and anything beyond 1.2 ATR is a no-buy zone<sup><a href="#cite_note-32">[32]</a></sup>. The posture is therefore NEAR_SUPPORT, with limit orders only. If the gate ever passed, the entry zone would be 103.64 to 105.76, which is the 20-day average up to half an ATR above it<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-32">[32]</a></sup>. Deeper supports sit at the 50-day average, 3.73 ATR below the price, and at the swing low, 5.26 ATR below<sup><a href="#cite_note-30">[30]</a></sup>. The pipeline verdict is REJECTED, because Layer 1 failed.</p>
+<p>What this means for an owner: the price is not extended, so the entry rule does not force a sale. But the thin volume and the weak regime mean that a close below 92.17<sup><a href="#cite_note-30">[30]</a></sup> would be a warning, not a routine dip. The next section sets out what could happen from here.</p>
+</section>
+<section class="chapter" id="next">
+<h2>What could happen next</h2>
+<p>This chapter sets out three paths with price levels, then the three fatal flaws that would make the verdict wrong. The levels use the ledger's 52-week high of 130.20<sup><a href="#cite_note-30">[30]</a></sup> as the upper reference. Vendor pages show 114.10 as their high<sup><a href="#cite_note-5">[5]</a></sup>, which we record but do not use as a level. A bull path needs a close above 130.20 on volume. A base path keeps the price between the 50-day average of 92.17 and the ledger high<sup><a href="#cite_note-30">[30]</a></sup>. A bear path needs a close below 92.17, then below the swing low of 85.69<sup><a href="#cite_note-30">[30]</a></sup>.</p>
+<p>In the bull path, the growth holds, the cash conversion recovers and the credit rating is resolved. The stock could then trade on earnings instead of on hope. Even so, the gate would still need a checkable target. In the base path, the price drifts in a wide range while the company reports, and the trim is the main decision. In the bear path, the stock loses the 50-day average on heavy volume and the stop level comes into play.</p>
+<h3>The de-rating case</h3>
+<p>The only multiple history in the record is Value Research's FY25 P/E of 41.18<sup><a href="#cite_note-6">[6]</a></sup>. If the stock returned to that multiple on today's trailing EPS of ₹1.54<sup><a href="#cite_note-20">[20]</a></sup>, the price would be about ₹63.42, which is 41.3 percent below ₹108.00. That is an illustrative case, not a forecast, and it assumes no earnings miss. On the 5,000 shares we keep after the trim, the loss would be about ₹222,914, or 4.7 percent of net worth<sup><a href="#cite_note-31">[31]</a></sup>. That is 1.8 times the 2.6 percent of net worth at risk to the 83.57 stop on the remaining 5,000 shares. A stop can be gapped through on a thin tape, so the loss can be larger than the stop implies. The price would still be above the average cost of ₹55.55<sup><a href="#cite_note-31">[31]</a></sup>, so the remaining shares would still show a paper profit.</p>
+<h3>Fatal flaw one: cash has not kept pace with profit</h3>
+<p>The company's cash was negative in FY24 and FY25<sup><a href="#cite_note-6">[6]</a></sup>, and it caught up only in FY26<sup><a href="#cite_note-6">[6]</a></sup>. The three-year total is still just 0.23. If the next filings show cash falling behind profit again, the three-year record gets worse rather than better, and the market may stop paying a P/E of 73 for profit that does not arrive as cash<sup><a href="#cite_note-1">[1]</a></sup>. The trigger to watch is the operating cash flow line in the next annual filing.</p>
+<h3>Fatal flaw two: governance and credit</h3>
+<p>Brickwork's BWR D rating is the most serious open item. It says the company did not provide the monthly information the agency needs, so the agency could not confirm the debt is being serviced<sup><a href="#cite_note-15">[15]</a></sup>. The promoter stake has fallen by 10.5 percentage points since September 2025<sup><a href="#cite_note-1">[1]</a></sup>, and a chief financial officer resigned with effect from 7 December 2024<sup><a href="#cite_note-12">[12]</a></sup>. Net cash of ₹10.64 crore at 31 March 2026<sup><a href="#cite_note-12">[12]</a></sup> is the main reason we do not exit the whole holding today. It sits against an agency that could not confirm servicing, and the record does not show a missed payment or an overdue facility. We therefore treat the cash figure as unverified against a primary filing, and we do not treat the rating as proof of default.</p>
+<h3>Fatal flaw three: a weak tape and a thin market</h3>
+<p>The ledger regime is Downtrend, and only 19.9 percent of stocks in the pool sit above their 50-day average<sup><a href="#cite_note-30">[30]</a></sup>. With volume at 0.29 of normal<sup><a href="#cite_note-30">[30]</a></sup>, a sell program could move the price quickly. A close below 92.17 would take the stock out of the uptrend that supports the current price<sup><a href="#cite_note-30">[30]</a></sup>. The stop level of 83.57<sup><a href="#cite_note-30">[30]</a></sup> is a review point, and a gap through it would lose more than the stated risk.</p>
+<p>What this means for an owner: none of the three flaws is certain, but each one has a level or a filing that would show it. The uncertainty section explains which numbers could be wrong, and the action section explains what we do about them.</p>
+</section>
+<section class="chapter" id="uncertainty">
+<h2>Why these estimates might be wrong</h2>
+<p>This chapter lists the points where the sources conflict, and shows whether each conflict could change the verdict. Most of the disagreements concern presentation rather than substance, but two could matter for the gates, so we state how we handled each one.</p>
+<h3>Return on capital: the header figure</h3>
+<p>Screener's header says ROCE is 20.2 percent<sup><a href="#cite_note-1">[1]</a></sup>, while Value Research's FY26 figure is 14.29 percent<sup><a href="#cite_note-6">[6]</a></sup>. Our own rebuild from the same inputs gives 10.7 percent on closing capital and 13.7 percent on average capital<sup><a href="#cite_note-6">[6]</a></sup>. The header figure cannot be rebuilt from the balance sheet on the same page. We use the published 14.3 percent, which is the lower of the published figures and the one our rebuild is closest to. Even at 20.2 percent, the gate would still fail on cash conversion and on the target<sup><a href="#cite_note-1">[1]</a></sup>, so the verdict does not turn on this figure.</p>
+<h3>Market value, P/E and 52-week high</h3>
+<p>Market value ranges from ₹546 crore in Eduinvesting<sup><a href="#cite_note-12">[12]</a></sup> to ₹949.29 crore in Tickjournal<sup><a href="#cite_note-18">[18]</a></sup>, and the P/E from 73.4 to 74.67 across most sources<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-18">[18]</a></sup>. The ledger's 52-week high is 130.20<sup><a href="#cite_note-30">[30]</a></sup>, while Mint, Rediff, StocksSena and Screener all show 114.10<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-3">[3]</a></sup>. We keep the ledger figure, because ledger prices govern in this run, but we flag it. The high affects only the distance-from-high reading. If the vendor figure is right, the stock is 5.4 percent below its high<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-16">[16]</a></sup>, not 17.1 percent<sup><a href="#cite_note-30">[30]</a></sup>. The moving averages, the stop and the support distance are built from closing prices in the same bars, and we confirmed only the 12 October close against an outside page<sup><a href="#cite_note-16">[16]</a></sup>.</p>
+<h3>Operating margin definitions</h3>
+<p>The FY26 operating margin of 40 percent<sup><a href="#cite_note-1">[1]</a></sup> and the June quarter margin of 35.29 percent on Screener's basis<sup><a href="#cite_note-1">[1]</a></sup> both pass the 25 percent test in the scorecard. Mint's June quarter figure of 22.23 percent<sup><a href="#cite_note-5">[5]</a></sup> is measured after depreciation, and on that basis it falls below 25 percent. The scorecard result does not change, because it is scored on Screener's basis, but on that after-depreciation basis the row would not meet the 25 percent PASS test.</p>
+<h3>Sources and gaps</h3>
+<p>The company's audited annual report is not reachable from this environment. The BSE annual reports page returned HTTP 403, and the annual report PDF from Tijori has no extractable text<sup><a href="#cite_note-21">[21]</a></sup>. The financial figures therefore rest on aggregators: Screener, Value Research, Trendlyne, Rediff, Mint and Eduinvesting. The FY24 and FY25 cash flow figures agree across Value Research and Trendlyne<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-7">[7]</a></sup>, and the FY26 profit and cash flow agree across Value Research, Rediff and Eduinvesting<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-12">[12]</a></sup>. Agreement among aggregators is not the same as a primary filing, and that gap is disclosed in the run notes.</p>
+<p>What this means for an owner: the strongest reading of the evidence is that the business is growing, its cash is not yet proven over three years, and its governance and credit records need an answer. None of the conflicts gets the company back to a pass, so the verdict stands. The action section sets out the action and the levels that would change it.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>What we would do, and when</h2>
+<p>This chapter reconciles the two rows that the run already holds for this company, audits the holding, gives the verdict and its rule, and sets the levels that would change it. The watchlist and shortlist rows disagree, so we start there.</p>
+<h3>Reconciling the watchlist and shortlist rows</h3>
+<p>The watchlist row, last researched on 27 September 2026, shows the gate as PASSED and the verdict as TRIM_PROFIT_BOOKING<sup><a href="#cite_note-33">[33]</a></sup>. The shortlist row shows the gate as FAIL, with the detail FAIL_ASYMMETRY, and the same verdict<sup><a href="#cite_note-33">[33]</a></sup>. The table compares the two rows with this run's evidence.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Field</th><th>Watchlist row (27 Sep)</th><th>Shortlist row</th><th>This run (12 Oct)</th></tr>
+<tr><td>Gate</td><td>PASSED<sup><a href="#cite_note-33">[33]</a></sup></td><td>FAIL, detail FAIL_ASYMMETRY<sup><a href="#cite_note-33">[33]</a></sup></td><td>FAIL_ROCE_CFO_PAT_ASYMMETRY</td></tr>
+<tr><td>Price used</td><td>not recorded</td><td class="num">106.47<sup><a href="#cite_note-33">[33]</a></sup></td><td class="num">108.00<sup><a href="#cite_note-16">[16]</a></sup></td></tr>
+<tr><td>Debt-to-equity</td><td>not recorded</td><td class="num">0.04<sup><a href="#cite_note-33">[33]</a></sup></td><td class="num">0.13<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>Three-year cash conversion</td><td>not recorded</td><td class="num">0.74<sup><a href="#cite_note-33">[33]</a></sup></td><td class="num">0.23<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>ROCE</td><td>not recorded</td><td class="num">20.2<sup><a href="#cite_note-33">[33]</a></sup></td><td class="num">14.3<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>Stop loss</td><td>not recorded</td><td class="num">94.00<sup><a href="#cite_note-33">[33]</a></sup></td><td class="num">83.57<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>Target</td><td>not recorded</td><td class="num">125.00<sup><a href="#cite_note-33">[33]</a></sup>, unverified</td><td>none checkable</td></tr>
+<tr><td>Asymmetry ratio</td><td>not recorded</td><td class="num">1.72<sup><a href="#cite_note-33">[33]</a></sup>, but its own inputs give 1.49</td><td class="num">0.70 at the unverified 125<sup><a href="#cite_note-33">[33]</a></sup></td></tr>
+</table></div>
+<p>The reconciliation is straightforward. The watchlist PASSED cannot be reproduced from any figure in this run, and it is superseded. The shortlist's FAIL is right in direction, but its label names only the asymmetry test, which misses the return and cash failures. Its inputs are also stale: the price is 1.5 rupees below the ledger close<sup><a href="#cite_note-16">[16]</a></sup>, its cash conversion of 0.74 is more than three times the 0.23 we can support<sup><a href="#cite_note-6">[6]</a></sup>, and its stop and asymmetry arithmetic do not match its own inputs<sup><a href="#cite_note-33">[33]</a></sup>. We adopt FAIL_ROCE_CFO_PAT_ASYMMETRY as the gate for both records. The verdict, TRIM_PROFIT_BOOKING, is the same in both rows, but its basis is the position size, not a passed gate.</p>
+<h3>Holding audit: position health and profit</h3>
+<p>The account holds 10,000 shares<sup><a href="#cite_note-31">[31]</a></sup>. The cost basis is ₹555,481.37, which is an average of ₹55.55 per share, and the market value at ₹108.00 is ₹1,080,000.00<sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-16">[16]</a></sup>. The unrealised gain is ₹524,518.63, or 94.4 percent above cost<sup><a href="#cite_note-31">[31]</a></sup>. The positions file also records realised gains on this holding of ₹73,607.12<sup><a href="#cite_note-31">[31]</a></sup>. Those gains are real but they are on the account's books, and the taxes on them are not computed here, because lot-level tax data is not in the file.</p>
+<p>The position is 23.0 percent of the account's net worth of ₹4,695,954.82<sup><a href="#cite_note-31">[31]</a></sup>. The single-stock cap is 15 percent<sup><a href="#cite_note-32">[32]</a></sup>. The position is therefore well above the cap. The stop level of 83.57<sup><a href="#cite_note-30">[30]</a></sup> puts ₹244,300 at risk on the full holding, or 5.2 percent of net worth<sup><a href="#cite_note-31">[31]</a></sup>.</p>
+<h3>The verdict and the rule behind it</h3>
+<p>The verdict is TRIM_PROFIT_BOOKING, and the rule is the single-stock cap. Under our holding taxonomy, a position that exceeds the hard cap is trimmed by 30 to 50 percent<sup><a href="#cite_note-32">[32]</a></sup>. At 23.0 percent, the position must fall to 15 percent or less. That needs a sale of at least 3,478 shares<sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-32">[32]</a></sup>. A minimum sale leaves no room: any rise in the price would put the weight back over the cap, because a 3,478-share sale sits at the cap. We therefore recommend 5,000 shares, which is 50 percent and the top of the band<sup><a href="#cite_note-32">[32]</a></sup>. The reasons are the thin tape and the unresolved rating. The table shows the position before and after the sale.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Position</th><th>Shares</th><th>Value at 108.00 (₹)</th><th>Share of net worth</th><th>Risk to stop 83.57 (₹)</th></tr>
+<tr><td>Before the trim</td><td class="num">10,000<sup><a href="#cite_note-31">[31]</a></sup></td><td class="num">1,080,000<sup><a href="#cite_note-31">[31]</a></sup></td><td class="num">23.0%<sup><a href="#cite_note-31">[31]</a></sup></td><td class="num">244,300 (5.2%)<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>After selling 5,000</td><td class="num">5,000<sup><a href="#cite_note-31">[31]</a></sup></td><td class="num">540,000<sup><a href="#cite_note-31">[31]</a></sup></td><td class="num">11.5%<sup><a href="#cite_note-31">[31]</a></sup></td><td class="num">122,150 (2.6%)<sup><a href="#cite_note-31">[31]</a></sup></td></tr>
+</table></div>
+<p>The sale of 5,000 shares brings in about ₹540,000 before costs and taxes, which lifts cash to about ₹543,678, or 11.6 percent of net worth<sup><a href="#cite_note-31">[31]</a></sup>. At average cost, the trimmed shares carry a pre-tax gain of about ₹262,260<sup><a href="#cite_note-31">[31]</a></sup>. The sale does not change net worth, apart from costs, because it moves value from shares into cash. The position would reach the cap again only if the price rose to about ₹146.68, which is 35.8 percent above today's close<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-31">[31]</a></sup>. That buffer is the reason for the larger sale.</p>
+<p>KEEP_COMPOUNDING is excluded, because it needs all gates to pass and this name fails three. ACCUMULATE_ON_DIP is excluded, because the gate fails and no add is allowed. REPLACE_UNDERPERFORMER is not yet the verdict, for a reason we state openly. That verdict needs a broken structure or an impaired thesis. The structure is intact, since the price is above the rising 50-day average<sup><a href="#cite_note-30">[30]</a></sup>. The thesis is not shown to be impaired on the record: revenue grew 59.81 percent, and net cash was positive at 31 March 2026<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-12">[12]</a></sup>. The BWR D rating is the open question. It is 326 days old and was reaffirmed for lack of information, not for a recorded missed payment<sup><a href="#cite_note-15">[15]</a></sup>. The record does not show whether the facilities are overdue, so we do not call the thesis impaired on that alone.</p>
+<p>We set a dated trigger instead. If by 31 December 2026 the record has no rating letter dated after June 2026 that takes the facilities out of the default category, the verdict becomes REPLACE_UNDERPERFORMER, and the remaining 5,000 shares are sold under the same plan. The date is our rule, not a company date. It is set because no next results date is published<sup><a href="#cite_note-14">[14]</a></sup>. If the bear case happens first, the stop applies earlier.</p>
+<section class="estimate">
+<h4>The number: stop level at 83.57</h4>
+<p>The stop level is the price at which the remaining holding is reviewed for sale. It is set at 83.57, which is the swing low of 85.69 less half an ATR of 4.24, or 2.12<sup><a href="#cite_note-30">[30]</a></sup>.</p>
+<h4>How it was calculated</h4>
+<p>The tactical stop rule places the stop below the lowest of the swing low and the 20-day and 50-day averages, minus half an ATR<sup><a href="#cite_note-32">[32]</a></sup>. The lowest of those levels here is the swing low at 85.69<sup><a href="#cite_note-30">[30]</a></sup>. So 85.69 less 2.12 gives 83.57<sup><a href="#cite_note-30">[30]</a></sup>.</p>
+<h4>The inputs</h4>
+<p>The swing low of 85.69, the ATR of 4.24 and the moving averages come from the facts ledger built on Yahoo Finance daily bars<sup><a href="#cite_note-30">[30]</a></sup>. The rule is in the scoring configuration<sup><a href="#cite_note-32">[32]</a></sup>.</p>
+<h4>The range</h4>
+<p>Because the ATR is 4.24, a normal day's swing can move the price by about 4 rupees<sup><a href="#cite_note-30">[30]</a></sup>. The level of 83.57 sits 24.43 rupees, or 22.6 percent, below the close<sup><a href="#cite_note-30">[30]</a></sup>. On a thin tape a sale at that level is not guaranteed, so the level is a review point. A gap through it would lose more than the 2.6 percent of net worth shown above, and the de-rating case in the outcomes section is the worse-case figure to read against it.</p>
+<h4>If the number is off</h4>
+<p>If the swing low is wrong, the stop moves with it. If the ledger's 52-week high of 130.20<sup><a href="#cite_note-30">[30]</a></sup> is an error, the stop does not change, because we believe the swing low is built from closing prices, but the distance-from-high reading does. If a close below 83.57 happens on heavy volume, the remaining shares are reviewed for sale that day, and the verdict moves to REPLACE_UNDERPERFORMER.</p>
+</section>
+<h3>The plan, step by step</h3>
+<p>Place one limit sell for 5,000 shares at 108.00 or better, valid for five sessions<sup><a href="#cite_note-16">[16]</a></sup>. If the order has not filled after five sessions, cancel it and re-price it once at the close less one ATR, which is about 103.76<sup><a href="#cite_note-30">[30]</a></sup>. If the price closes below 92.17 before the sale is complete, move the limit to the close and review the remaining shares under the same rules<sup><a href="#cite_note-30">[30]</a></sup>. Do not add shares while the gate fails. Ask the broker whether it offers a stop order that triggers at 83.57 on the remaining 5,000 shares<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-31">[31]</a></sup>, and confirm the order types with the broker, because we have not verified them. Set the tax on the sold lots aside, since the lot-level data is not in the file<sup><a href="#cite_note-31">[31]</a></sup>.</p>
+<div class="triggers">
+<h4>What would change this view</h4>
+<p class="trigger">A daily close below 83.57<sup><a href="#cite_note-30">[30]</a></sup> on heavy volume sends the remaining shares for review and sale that day, and the verdict moves to REPLACE_UNDERPERFORMER.</p>
+<p class="trigger">A daily close below the 50-day average of 92.17<sup><a href="#cite_note-30">[30]</a></sup> on heavy volume cancels any plan to hold the rest and forces a fresh review of the stop.</p>
+<p class="trigger">If the record has no rating letter dated after June 2026 that takes the facilities out of the default category<sup><a href="#cite_note-15">[15]</a></sup> by 31 December 2026, the verdict moves to REPLACE_UNDERPERFORMER.</p>
+<p class="trigger">If the three-year total for FY25 to FY27 is still below 0.70 at the next annual check, the verdict moves to REPLACE_UNDERPERFORMER. On FY25 and FY26 alone, FY27 operating cash flow of about ₹17.5 crore would be needed on PAT of about ₹12 crore, which assumes flat profit<sup><a href="#cite_note-6">[6]</a></sup>.</p>
+<p class="trigger">KEEP_COMPOUNDING needs ROCE of 15.0 percent or more on the published or rebuilt basis, three-year cash conversion of 0.70 or more, and a checkable target with an asymmetry of 3.5 or more<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-34">[34]</a></sup>.</p>
+<p class="trigger">A close above the ledger's 52-week high of 130.20<sup><a href="#cite_note-30">[30]</a></sup> with volume above the 20-day average re-opens the question of holding more, but not an add until the gate passes.</p>
 </div>
-
-<div class="clearfix">
-
-<!-- WIKIPEDIA FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
- <caption>RNIT AI Solutions Limited</caption>
- <tr>
- <td colspan="2" class="infobox-image">
- <div style="font-size: 1.35em; letter-spacing: 1px; color: #0b3d68; font-weight: 700; font-family: var(--font-serif);">RNIT AI</div>
- <div style="font-size: 0.8em; color: #4b5563; font-style: italic; margin-top: 2px;">AI Biometric Recognition &bull; Sovereign E-Gov Cloud &bull; Edge Analytics</div>
- </td>
- </tr>
- <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
- <tr><th scope="row">Company type</th><td>Public limited company (Listed on BSE)<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
- <tr><th scope="row">Traded as</th><td>BSE: <a href="https://www.bseindia.com/stock-share-price/rnit-ai-solutions-ltd/rnit/517286/" target="_blank" class="mono">517286</a><br>Scrip ID: <span class="mono">RNITAI</span><br>ISIN: <span class="mono">INE223B01017</span></td></tr>
- <tr><th scope="row">Industry</th><td>Technology &amp; Artificial Intelligence</td></tr>
- <tr><th scope="row">Sub-sector</th><td>Enterprise AI Platforms, Biometric FRS &amp; Sovereign E-Gov Cloud</td></tr>
- <tr><th scope="row">Incorporated</th><td>1985; 41 years ago (as Autopal Industries Ltd)<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
- <tr><th scope="row">Transformation</th><td>CIRP Resolution approved 23 Sept 2024; Renamed Feb 2025<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-4">[4]</a><a href="#cite_note-5">[5]</a></sup></td></tr>
- <tr><th scope="row">Headquarters</th><td>Plot No. 12, Hi-Tech City Phase 2, Madhapur, Hyderabad, Telangana 500081, India<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-28">[28]</a></sup></td></tr>
- <tr><th scope="row">Registered Office</th><td>E-198, RIICO Industrial Area, Mansarovar, Jaipur, Rajasthan 302020<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
- <tr><th scope="row">Key leadership</th><td>
- Raja Srinivas Nandigam <small>(Managing Director &amp; CEO)</small><sup><a href="#cite_note-11">[11]</a></sup><br>
- Vivek Kumar Ratakonda <small>(Director &amp; Co-Resolution Applicant)</small><sup><a href="#cite_note-3">[3]</a></sup><br>
- Neelima Nandigam <small>(Non-Executive Director)</small><sup><a href="#cite_note-6">[6]</a></sup>
- </td></tr>
- <tr><th scope="row">Promoter holding</th><td><strong>63.24%</strong> (Zero encumbrance / Zero pledge)<sup><a href="#cite_note-6">[6]</a><a href="#cite_note-30">[30]</a></sup></td></tr>
- 
- <tr><th colspan="2" class="infobox-header">Audited Financial Snapshot (FY 2026 Consolidated)<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-11">[11]</a></sup></th></tr>
- <tr><th scope="row">Revenue (FY26)</th><td><span class="mono">&#8377;51.50 crore</span> (+106.0% vs FY24)</td></tr>
- <tr><th scope="row">Operating Profit (EBITDA)</th><td><span class="mono">&#8377;15.82 crore</span> (OPM: <strong>30.72%</strong>)</td></tr>
- <tr><th scope="row">Net Profit (PAT)</th><td><span class="mono">&#8377;12.02 crore</span> (PAT Margin: 23.34%)</td></tr>
- <tr><th scope="row">ROCE / ROE</th><td><span class="mono"><strong>20.2%</strong> / <strong>16.6%</strong></span></td></tr>
- <tr><th scope="row">Balance Sheet Cash</th><td><span class="mono">Net Cash: <strong>+&#8377;38.65 Cr</strong></span> (Debt: &#8377;3.50 Cr)</td></tr>
- <tr><th scope="row">Operating Cash Flow</th><td><span class="mono">&#8377;8.90 crore</span> (CFO/PAT: <strong>0.74x</strong>)</td></tr>
- <tr><th scope="row">Book Value per Share</th><td><span class="mono">&#8377;16.40</span> (Market Cap: &#8377;903.45 Cr)</td></tr>
-
- <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
- <tr><th scope="row">Strategy Bucket</th><td><strong>🚀 TACTICAL MOMENTUM</strong></td></tr>
- <tr><th scope="row">Action Verdict</th><td><strong style="color: #b45309; font-size: 1.1em;">🟡 TRIM_PROFIT_BOOKING</strong></td></tr>
- <tr><th scope="row">CMP (Market Price)</th><td><span class="mono">&#8377;105.42</span> (52W: &#8377;37.00 – &#8377;110.00)</td></tr>
- <tr><th scope="row">Trailing P/E Ratio</th><td><span class="mono"><strong>72.4x</strong></span> (Elevated micro-cap multiple)</td></tr>
- <tr><th scope="row">Trailing Support Stop</th><td><span class="mono">&#8377;94.00</span> (-10.83% from CMP)</td></tr>
- <tr><th scope="row">Hard Invalidation Stop</th><td><span class="mono">&#8377;88.50</span> (-16.05% from CMP)</td></tr>
- <tr><th scope="row">12–18M Base Target</th><td><span class="mono">&#8377;125.00</span> (+18.57% upside; 50x FY27 EPS)</td></tr>
- <tr><th scope="row">Blue-Sky Bull Target</th><td><span class="mono">&#8377;145.00</span> (+37.55% upside; Pan-India rollouts)</td></tr>
- <tr><th scope="row">Reward/Risk Ratio</th><td><span class="mono"><strong>1.72 : 1 Base</strong></span> (Hurdle &ge;3.5:1 <span style="color:#b91c1c;">FAILS</span>)</td></tr>
- <tr><th scope="row">Weinstein Stage</th><td><strong>Stage 2 Markup</strong> (Climax Momentum)</td></tr>
- <tr><th scope="row">14-Day RSI / RS</th><td><span class="mono">RSI: 63.85 &bull; RS Rating: 84/100</span></td></tr>
- <tr><th scope="row">Entry Posture</th><td>🟡 <strong>EXTENDED</strong> (+9.2% &gt; 20-DMA, +27.8% &gt; 50-DMA)</td></tr>
-</table>
-
-<!-- LEAD INVESTIGATIVE RESEARCH NARRATIVE -->
-<p>
- <strong>RNIT AI Solutions Limited</strong> (BSE:&nbsp;<strong>517286</strong>, Scrip ID:&nbsp;<strong>RNITAI</strong>, formerly <em>Autopal Industries Limited</em>) is an Indian enterprise artificial intelligence, biometric authentication, and e-governance software architecture enterprise headquartered in Hyderabad, Telangana.<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-5">[5]</a></sup> The company represents a court-mandated corporate restructuring executed under the Insolvency and Bankruptcy Code (IBC, 2016). Formerly an insolvent automotive lighting producer in Jaipur, the listed shell was revived through a resolution plan approved by the National Company Law Tribunal (NCLT), Jaipur Bench, on September 23, 2024.<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-3">[3]</a></sup> The restructuring cancelled 100% of legacy promoter equity, enforced a 75% capital reduction on public shares, and executed the reverse amalgamation of Hyderabad technology firm <em>RNIT Solutions &amp; Services Limited</em> (established in 2019 by IIT alumnus Raja Srinivas Nandigam).<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-28">[28]</a></sup>
-</p>
-
-<p>
- Rebranded as RNIT AI Solutions in February 2025, the company operates across public-sector digital identity infrastructure.<sup><a href="#cite_note-5">[5]</a></sup> Its proprietary software suite—anchored by <strong>Faceify</strong> (AI workforce attendance and access control), <strong>RNIT FRS</strong> (high-throughput facial recognition engine), and modular domain architectures including RIMS (Real-time Identification Management System), EMS (Education Management System), and HDMS (Health Department Management System)—has processed over 2.5 billion biometric authentications across Indian state government departments.<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-13">[13]</a><a href="#cite_note-15">[15]</a><a href="#cite_note-32">[32]</a></sup> The company recently secured a state-wide mandate from the Andhra Pradesh State Skill Development Corporation (APSSDC) for a Generative AI conversational skill assessment platform.<sup><a href="#cite_note-12">[12]</a></sup>
-</p>
-
-<p>
- In FY 2026, RNIT AI Solutions delivered net sales of <strong>&#8377;51.50 crore</strong>, operating profit margins of <strong>30.72%</strong>, and net profit of <strong>&#8377;12.02 crore</strong>, generating a <strong>20.2% ROCE</strong> supported by a net cash treasury of <strong>&#8377;38.65 crore</strong>.<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-11">[11]</a></sup> However, within the portfolio, RNITAI represents <strong>22.58% of total portfolio equity</strong> (10,000 shares @ &#8377;55.33 avg, CMP &#8377;105.42, +90.54% unrealized gain), violating the 15.0% single-stock risk ceiling.<sup><a href="#cite_note-27">[27]</a></sup> Trading at <strong>72.4x P/E</strong> on BSE with a reward-to-risk asymmetry of <strong>1.72:1</strong> (failing the &ge;3.5:1 tactical hurdle), fiduciary discipline mandates an immediate <strong>TRIM_PROFIT_BOOKING</strong> prescription of 40% to 50% of the holding to harvest &#8377;4.24L to &#8377;5.30L and redeploy into Core Alpha compounders resting directly AT_SUPPORT.<sup><a href="#cite_note-34">[34]</a><a href="#cite_note-35">[35]</a></sup>
-</p>
-
-</div>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc" id="toc">
- <h2>Contents</h2>
- <ul>
- <li><a href="#holding-audit"><span class="tocnumber">0</span> <span class="toctext">Active Position Audit &amp; Capital Reallocation Prescription</span></a></li>
- <li><a href="#history"><span class="tocnumber">1</span> <span class="toctext">Founding Vision, Corporate Transformation &amp; History</span></a></li>
- <li><a href="#operations"><span class="tocnumber">2</span> <span class="toctext">Operations &amp; Revenue Architecture (How the Business Operates)</span></a>
- <ul>
- <li><a href="#platforms"><span class="tocnumber">2.1</span> <span class="toctext">Proprietary AI Platforms &amp; Vertical Software Modules</span></a></li>
- <li><a href="#architecture"><span class="tocnumber">2.2</span> <span class="toctext">Edge-to-Cloud Biometric Processing Pipeline &amp; Data Security</span></a></li>
- <li><a href="#unit-economics"><span class="tocnumber">2.3</span> <span class="toctext">Unit Economics, Contract Structures &amp; Milestone Billing</span></a></li>
- <li><a href="#procurement"><span class="tocnumber">2.4</span> <span class="toctext">Government Tender Procurement, Prequalification Moats &amp; GeM Channels</span></a></li>
- </ul>
- </li>
- <li><a href="#sector-dynamics"><span class="tocnumber">3</span> <span class="toctext">Sector Dynamics: Generative AI, Cloud Infrastructure &amp; Indian Enterprise Adoption</span></a>
- <ul>
- <li><a href="#sovereign-ai"><span class="tocnumber">3.1</span> <span class="toctext">The Sovereign Cloud &amp; Public Sector AI Mandate (Digital India &amp; DPDPA 2023)</span></a></li>
- <li><a href="#market-size"><span class="tocnumber">3.2</span> <span class="toctext">Enterprise AI Market Trajectory &amp; Hardware vs Software Spend</span></a></li>
- <li><a href="#biometric-shift"><span class="tocnumber">3.3</span> <span class="toctext">The Secular Shift from Fingerprint Scanners to Edge Facial Recognition</span></a></li>
- </ul>
- </li>
- <li><a href="#financial-audit"><span class="tocnumber">4</span> <span class="toctext">Financial Quality, Multi-Year P&amp;L &amp; Forensic Accounting Audit</span></a>
- <ul>
- <li><a href="#profit-loss"><span class="tocnumber">4.1</span> <span class="toctext">Statement of Profit &amp; Loss Progression (FY 2024 – FY 2026 TTM)</span></a></li>
- <li><a href="#quarterly-trends"><span class="tocnumber">4.2</span> <span class="toctext">Quarterly Earnings Momentum (Q1 FY26 – Q4 FY26 Dissection)</span></a></li>
- <li><a href="#cash-flow"><span class="tocnumber">4.3</span> <span class="toctext">Cash Flow Reconciliation: CFO vs PAT Conversion &amp; Working Capital</span></a></li>
- <li><a href="#balance-sheet"><span class="tocnumber">4.4</span> <span class="toctext">Balance Sheet Fortification, Cash Reserves &amp; Capital Efficiency</span></a></li>
- <li><a href="#forensic-audit"><span class="tocnumber">4.5</span> <span class="toctext">Forensic Governance Audit: Reverse-Merger Mechanics &amp; Share Capital Scrub</span></a></li>
- </ul>
- </li>
- <li><a href="#underwriting-framework"><span class="tocnumber">5</span> <span class="toctext">The 3-Layer Underwriting Framework &amp; Institutional Scorecard</span></a>
- <ul>
- <li><a href="#layer1"><span class="tocnumber">5.1</span> <span class="toctext">Layer 1: Binary Hard Gating Floors (Pass/Fail)</span></a></li>
- <li><a href="#layer2"><span class="tocnumber">5.2</span> <span class="toctext">Layer 2: 4 Company-Specific Operational KPIs</span></a></li>
- <li><a href="#layer3"><span class="tocnumber">5.3</span> <span class="toctext">Layer 3: Support-Aware Entry Posture</span></a></li>
- </ul>
- </li>
- <li><a href="#industry-landscape"><span class="tocnumber">6</span> <span class="toctext">Industry Landscape, Competitive Moat &amp; Peer Comparison</span></a>
- <ul>
- <li><a href="#economic-moat"><span class="tocnumber">6.1</span> <span class="toctext">Structural Economic Moat (Hamilton Helmer's 7 Powers Analysis)</span></a></li>
- <li><a href="#peer-matrix"><span class="tocnumber">6.2</span> <span class="toctext">Comprehensive Comparative Peer Matrix</span></a></li>
- </ul>
- </li>
- <li><a href="#technical-trade"><span class="tocnumber">7</span> <span class="toctext">Technical Posture, Support Anchors &amp; Trade Architecture</span></a>
- <ul>
- <li><a href="#moving-averages"><span class="tocnumber">7.1</span> <span class="toctext">Weinstein Stage &amp; Moving Average Alignment (20/50/200 DMA)</span></a></li>
- <li><a href="#trade-levels"><span class="tocnumber">7.2</span> <span class="toctext">Optimal Harvest Band, Invalidation Stop &amp; Mathematical Asymmetry</span></a></li>
- </ul>
- </li>
- <li><a href="#fatal-flaws"><span class="tocnumber">8</span> <span class="toctext">Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</span></a></li>
- <li><a href="#capital-allocation"><span class="tocnumber">9</span> <span class="toctext">Portfolio Allocation Execution (The Money Bridge)</span></a></li>
- <li><a href="#thesis-trackers"><span class="tocnumber">10</span> <span class="toctext">Quarterly Thesis Tracking &amp; Monitoring Indicators</span></a></li>
- <li><a href="#references"><span class="tocnumber">11</span> <span class="toctext">References, Regulatory Filings &amp; External Disclosures</span></a></li>
- </ul>
-</div>
-
-<!-- SECTION 0: ACTIVE POSITION AUDIT -->
-<h2 id="holding-audit">0. Active Position Audit &amp; Capital Reallocation Prescription</h2>
-<div class="callout-box">
- <table class="wikitable" style="margin: 0; background: #ffffff;">
- <tr>
- <th style="width: 25%;">Account Scope</th><td>Zerodha Active Equity Portfolio</td>
- <th style="width: 25%;">Position Status</th><td>💼 <strong>ACTIVE PORTFOLIO HOLDING</strong> (Rank #1 by Weight)</td>
- </tr>
- <tr>
- <th>Shares Held</th><td><strong>10,000 shares</strong></td>
- <th>Average Buy Price</th><td><strong class="mono">&#8377;55.33</strong> per share</td>
- </tr>
- <tr>
- <th>Total Capital Invested</th><td><span class="mono">&#8377;5,53,258.00</span></td>
- <th>Current Market Price (CMP)</th><td><strong class="mono">&#8377;105.42</strong></td>
- </tr>
- <tr>
- <th>Current Position Value</th><td><span class="mono">&#8377;10,54,200.00</span></td>
- <th>Unrealized P&amp;L</th><td><span style="color: var(--brand-green); font-weight: 700;" class="mono">+&#8377;5,00,942.00 (+90.54%)</span></td>
- </tr>
- <tr>
- <th>Current Portfolio Weight</th><td><strong style="color: #b91c1c;">22.58%</strong> of Net Worth</td>
- <th>Single-Stock Target Ceiling</th><td><strong>15.00%</strong> (Tactical Momentum Cap: 10.0%–12.0%)</td>
- </tr>
- <tr>
- <th>Concentration Variance</th><td><strong style="color: #b91c1c;">+7.58%</strong> above max risk ceiling</td>
- <th>Trailing Stop Loss Anchor</th><td><strong class="mono" style="color: var(--brand-amber);">&#8377;94.00</strong> (-10.83% from CMP)</td>
- </tr>
- <tr>
- <th>Holding Action Verdict</th><td><strong style="color: #b45309; font-size: 1.15em;">🟡 TRIM_PROFIT_BOOKING</strong></td>
- <th>Execution Mandate</th><td>Harvest 4,000 – 5,000 shares @ &#8377;105.00 – &#8377;108.00</td>
- </tr>
- </table>
- 
- <h3 style="margin-top: 11px; margin-bottom: 5px; font-size: 1.05em; color: #92400e;">Strategic Fiduciary Diagnosis:</h3>
- <p style="margin: 0;">
- The +90.54% unrealized gain in RNIT AI Solutions validates our initial thesis at &#8377;55.33, capitalizing on market mispricing of the NCLT-approved reverse-merger of RNIT Solutions &amp; Services into the listed shell of Autopal Industries.<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-4">[4]</a></sup> However, at <strong>22.58% of total portfolio equity</strong>, RNITAI represents an unsafe concentration that violates institutional risk limits. As a micro-cap (&#8377;903 Cr market cap) listed exclusively on the BSE (517286) with limited trading float, any sudden surveillance scrutiny, contract payment delay, or circuit freeze could rapidly erode capital.<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-21">[21]</a></sup>
- </p>
- <p style="margin-top: 7px; margin-bottom: 0;">
- <strong>The Capital Reallocation Prescription (The Money Bridge):</strong> Fiduciary discipline mandates a systematic harvest of <strong>4,000 to 5,000 shares (40% to 50% of holding)</strong> within &#8377;105.00 to &#8377;108.00, liberating <strong>&#8377;4,24,000 to &#8377;5,30,000 in liquid capital</strong>. This reduces RNITAI to a compliant 11.3%–13.5% weight. The harvested cash is immediately redeployed into Core Alpha compounders resting directly AT_SUPPORT: <strong>Interarch Building Products</strong> (allocating &#8377;2.23L to buy 130 shares @ &#8377;1,720, PE 21x) and <strong>Sanghvi Movers</strong> (allocating &#8377;2.34L to buy 450 shares @ &#8377;520).<sup><a href="#cite_note-34">[34]</a><a href="#cite_note-35">[35]</a></sup> The remaining 5,000 to 6,000 shares of RNITAI will compound with a trailing stop at &#8377;94.00.<sup><a href="#cite_note-27">[27]</a></sup>
- </p>
-</div>
-
-<!-- SECTION 1: HISTORY -->
-<h2 id="history">1. Founding Vision, Corporate Transformation &amp; History</h2>
-<p>
- RNIT AI Solutions Limited reflects an NCLT-sanctioned corporate restructuring under the Insolvency and Bankruptcy Code (IBC).<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-5">[5]</a></sup> Predecessor entity <em>Autopal Industries Limited</em> was incorporated in November 1985 in Jaipur, Rajasthan, producing halogen bulbs and auxiliary lighting for automotive OEMs.<sup><a href="#cite_note-2">[2]</a></sup>
-</p>
-
-<p>
- By the mid-2010s, the automotive transition to LED systems rendered Autopal's glass and filament manufacturing lines obsolete. Facing Asian imports, operational losses, and debt, Autopal's production halted, its net worth eroded, and the company defaulted.<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-31">[31]</a></sup> On September 15, 2022, the NCLT Jaipur Bench admitted Autopal into CIRP under Section 7 of the IBC.<sup><a href="#cite_note-2">[2]</a></sup> A consortium led by tech entrepreneur <strong>Raja Srinivas Nandigam</strong> (founder of Hyderabad-based RNIT Solutions &amp; Services Ltd) and <strong>Vivek Kumar Ratakonda</strong> submitted a resolution plan to merge RNIT's profitable biometric software business into the listed corporate shell.<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-4">[4]</a></sup>
-</p>
-
-<table class="wikitable">
- <caption>Corporate Transformation &amp; Restructuring Inflection Points (1985 – 2026)<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-4">[4]</a><a href="#cite_note-5">[5]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-28">[28]</a></sup></caption>
- <thead>
- <tr>
- <th style="width: 14%;">Date / Year</th>
- <th>Restructuring Event</th>
- <th>Regulatory &amp; Capital Market Significance</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Nov 1985</strong></td>
- <td>Incorporation of Autopal Industries Ltd in Jaipur, Rajasthan.</td>
- <td>Established manufacturing facilities for automotive halogen lamps and optical components.</td>
- </tr>
- <tr>
- <td><strong>2015–2021</strong></td>
- <td>LED technology disruption, plant closure, and debt defaults.</td>
- <td>Operations halted; debt accumulated; company declared sick and defaulted on statutory dues.</td>
- </tr>
- <tr>
- <td><strong>Sep 2022</strong></td>
- <td>NCLT Jaipur admits Autopal Industries into CIRP under IBC.</td>
- <td>Insolvency Resolution Professional appointed; Committee of Creditors invites revival bids.</td>
- </tr>
- <tr>
- <td><strong>23 Sep 2024</strong></td>
- <td>NCLT approves Resolution Plan of Raja Srinivas Nandigam &amp; Vivek Ratakonda.</td>
- <td>Sanctioned scheme of amalgamation merging RNIT Solutions &amp; Services Ltd into the listed shell.<sup><a href="#cite_note-2">[2]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Nov 2024</strong></td>
- <td>Capital Restructuring &amp; Equity Reorganization executed.</td>
- <td>100% cancellation of old promoter equity; 75% reduction on public shares; swap shares issued.<sup><a href="#cite_note-4">[4]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Feb 2025</strong></td>
- <td>Fresh Certificate of Incorporation issued by ROC.</td>
- <td>Corporate name changed from Autopal Industries Limited to <strong>RNIT AI Solutions Limited</strong>.<sup><a href="#cite_note-5">[5]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Mar 2025</strong></td>
- <td>BSE trading status normalized under Scrip Code 517286 (RNITAI).</td>
- <td>Trading resumed reflecting clean balance sheet, zero legacy debt, and profitable AI operations.<sup><a href="#cite_note-1">[1]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Jun 2026</strong></td>
- <td>APSSDC awards state-wide GenAI conversational skill portal contract.</td>
- <td>Expansion into conversational language model workflows and vocational assessment engines.<sup><a href="#cite_note-12">[12]</a></sup></td>
- </tr>
- </tbody>
-</table>
-
-<p>
- Post capital reduction and swap, issued equity reconstructed at ~8.57 crore shares. The promoter group—led by Raja Srinivas Nandigam (50.1%), Neelima Nandigam (5.7%), and strategic investment entities—holds a controlling 63.24% equity stake with zero pledge.<sup><a href="#cite_note-6">[6]</a><a href="#cite_note-30">[30]</a></sup> Corporate headquarters relocated to Hi-Tech City, Madhapur, Hyderabad.<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-28">[28]</a></sup>
-</p>
-
-<!-- SECTION 2: OPERATIONS & REVENUE ARCHITECTURE -->
-<h2 id="operations">2. Operations &amp; Revenue Architecture (How the Business Operates)</h2>
-<p>
- RNIT AI Solutions Limited operates as an enterprise software and artificial intelligence solution provider specializing in biometric authentication, computer vision, large-scale citizen identification, and digital governance automation.<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-13">[13]</a></sup> The business addresses identity verification across low-bandwidth environments where conventional fingerprint scanners fail due to physical wear, humidity, or hardware breakdown.<sup><a href="#cite_note-32">[32]</a></sup>
-</p>
-
-<h3 id="platforms">2.1 Proprietary AI Platforms &amp; Vertical Software Modules</h3>
-<table class="wikitable">
- <caption>RNIT AI Proprietary Platform Ecosystem &amp; Enterprise Use Cases<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-12">[12]</a><a href="#cite_note-13">[13]</a><a href="#cite_note-15">[15]</a><a href="#cite_note-32">[32]</a></sup></caption>
- <thead>
- <tr>
- <th style="width: 18%;">Platform / Product</th>
- <th style="width: 28%;">Technical Capabilities</th>
- <th>Target Customer &amp; Live Deployments</th>
- <th style="width: 15%;">Revenue Model</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Faceify</strong></td>
- <td>AI facial attendance, liveness anti-spoofing against photo/video attacks, automated roster scheduling, payroll sync, geo-fencing.</td>
- <td>Corporate enterprises, IT parks, distributed field sales teams, private universities.</td>
- <td>SaaS Subscription (Per User Per Month &bull; PUPM)</td>
- </tr>
- <tr>
- <td><strong>RNIT FRS</strong></td>
- <td>Ultra-high-throughput Facial Recognition System capable of 1:N matching across multi-million citizen databases in &lt;300ms. Edge-device optimized.</td>
- <td>State Education Departments (Andhra Pradesh, Rajasthan, UT Lakshadweep), welfare boards.</td>
- <td>Multi-Year License + Annual Maintenance (AMC)</td>
- </tr>
- <tr>
- <td><strong>RIMS</strong></td>
- <td>Real-time Identification Management System for citizen welfare, public distribution (PDS), and pensioner living-certificate verification.</td>
- <td>State Civil Supplies Corporations, Social Welfare Departments, Municipal Corporations.</td>
- <td>Transaction-based Fee per Verification</td>
- </tr>
- <tr>
- <td><strong>EMS &amp; HDMS</strong></td>
- <td>Education &amp; Health Department Management Systems: tracks teacher/student attendance, classroom audits, and rural primary healthcare doctor presence.</td>
- <td>State Departments of School Education, National Health Mission (NHM) state branches.</td>
- <td>Turnkey Contract with SLA Service Billing</td>
- </tr>
- <tr>
- <td><strong>RDIS &amp; REMS</strong></td>
- <td>Real-time Digital Inspection System (geo-tagged mobile audits) and Remote Endpoint Management System for secure fleet management of edge tablets.</td>
- <td>Public Works Departments, State Vigilance Commissions, Rural Development Boards.</td>
- <td>Device Management License Fee</td>
- </tr>
- <tr>
- <td><strong>Conversational GenAI</strong></td>
- <td>Domain-adapted Small Language Models (SLMs) and chatbots for vernacular skill assessment, career counseling, and citizen grievance routing.</td>
- <td>Andhra Pradesh State Skill Development Corporation (APSSDC), vocational education bodies.<sup><a href="#cite_note-12">[12]</a></sup></td>
- <td>Platform Implementation + Cloud Compute Run-rate</td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="architecture">2.2 Edge-to-Cloud Biometric Processing Pipeline &amp; Data Security</h3>
-<p>
- Rather than transmitting raw facial photographs across congested networks, RNIT deploys lightweight deep convolutional neural network (CNN) models onto Android devices and <em>Face-Terminals</em>.<sup><a href="#cite_note-7">[7]</a></sup> The device detects landmarks, verifies liveness against spoofing, and extracts a <strong>512-dimensional vector hash</strong>. Only this numeric vector—never the raw photo—is synchronized with cloud databases.<sup><a href="#cite_note-19">[19]</a><a href="#cite_note-20">[20]</a><a href="#cite_note-32">[32]</a></sup>
-</p>
-
-<div class="callout-box" style="background-color: #f1f5f9; border-left: 5px solid #0f172a; font-family: var(--font-mono); font-size: 82%; line-height: 1.45;">
- <strong>EDGE-TO-CLOUD BIOMETRIC PIPELINE ARCHITECTURE:</strong><br>
- [Citizen Face] &rarr; [Optical Sensor (Mobile/Face-Terminal)]<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
- &nbsp;&nbsp;[On-Device Liveness Verification (Anti-Spoofing Engine)]<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
- &nbsp;&nbsp;[CNN Feature Extraction &rarr; 512-D Mathematical Vector Hashing]<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
- &nbsp;&nbsp;[Local Offline Match (&lt;200ms on Edge Device)]<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr; (Encrypted TLS 1.3 Asynchronous Sync)<br>
- &nbsp;&nbsp;[Sovereign Cloud Data Center (MeitY Empaneled &bull; DPDPA 2023 Compliant)]<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
- &nbsp;&nbsp;[Distributed Vector Database (1:N State-Scale Matching)] &rarr; [Treasury/HRMS Payroll Trigger]
-</div>
-
-<h3 id="unit-economics">2.3 Unit Economics, Contract Structures &amp; Milestone Billing</h3>
-<p>
- RNIT generates revenue via software licenses and SaaS fees (~72% of FY26 revenues) alongside hardware integration and terminal deployments (~28%).<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-8">[8]</a></sup> Public sector contracts typically span 3 to 5 years, beginning with baseline citizen database vectorization and HRMS integration. Ongoing revenue comprises Annual Maintenance Contracts (AMC) at 15%–20% of contract value plus transaction fees between &#8377;0.10 and &#8377;0.50 per verification.<sup><a href="#cite_note-13">[13]</a><a href="#cite_note-15">[15]</a></sup> Because software maintenance incurs minimal incremental compute expenses on amortized cloud infrastructure, incremental gross margins exceed <strong>82%</strong>, driving the substantial margin expansion observed in FY 2026.<sup><a href="#cite_note-7">[7]</a></sup>
-</p>
-
-<h3 id="procurement">2.4 Government Tender Procurement, Prequalification Moats &amp; GeM Channels</h3>
-<p>
- Public procurement in India's technology sector is governed by CVC and GFR criteria. Bidding entities must demonstrate proven experience handling over 10 million identity transactions, ISO 27001/27701 and CERT-In security audits, Government e-Marketplace (GeM) listing, and audited positive net worth.<sup><a href="#cite_note-13">[13]</a><a href="#cite_note-14">[14]</a><a href="#cite_note-19">[19]</a></sup> By amalgamating RNIT Solutions' operational track record into a listed corporate balance sheet, RNIT AI Solutions satisfies these institutional hurdles, precluding sub-scale startups lacking audited financial history.<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-13">[13]</a></sup>
-</p>
-
-<!-- SECTION 3: SECTOR DYNAMICS -->
-<h2 id="sector-dynamics">3. Sector Dynamics: Generative AI, Cloud Infrastructure &amp; Indian Enterprise Adoption</h2>
-<p>
- The operating backdrop for Indian enterprise software is driven by national digital public infrastructure expansion, cybersecurity regulations, and the rapid deployment of domain-specific artificial intelligence.<sup><a href="#cite_note-16">[16]</a><a href="#cite_note-17">[17]</a></sup>
-</p>
-
-<h3 id="sovereign-ai">3.1 The Sovereign Cloud &amp; Public Sector AI Mandate (Digital India &amp; DPDPA 2023)</h3>
-<p>
- Enacted in August 2023, the <strong>Digital Personal Data Protection Act (DPDPA 2023)</strong> mandates that critical citizen biometric records must be stored within domestic sovereign borders, prescribing fines up to &#8377;250 crore for unauthorized cross-border transfer.<sup><a href="#cite_note-19">[19]</a></sup> This framework prevents foreign public cloud APIs from handling unvetted state biometric verification, directing demand toward accredited domestic providers like RNIT that offer localized cryptographic hashing and MeitY-compliant storage.<sup><a href="#cite_note-16">[16]</a><a href="#cite_note-19">[19]</a></sup>
-</p>
-
-<h3 id="market-size">3.2 Enterprise AI Market Trajectory &amp; Hardware vs Software Spend</h3>
-<p>
- According to Gartner and IDC India, enterprise AI expenditure in India is expanding at a <strong>31.5% CAGR (2024–2028)</strong>, projected to exceed $6.4 billion by 2028.<sup><a href="#cite_note-17">[17]</a><a href="#cite_note-18">[18]</a></sup> While the initial investment wave concentrated on hardware and compute assemblers (Netweb Technologies, E2E Networks), enterprise capital is increasingly pivoting toward high-margin software application architects who address specific governance and workforce bottlenecks.<sup><a href="#cite_note-17">[17]</a><a href="#cite_note-23">[23]</a><a href="#cite_note-24">[24]</a></sup>
-</p>
-
-<h3 id="biometric-shift">3.3 The Secular Shift from Fingerprint Scanners to Edge Facial Recognition</h3>
-<p>
- Indian biometric programs historically relied on optical fingerprint sensors under early Aadhaar implementations. However, manual labor degrades fingerprint ridges, dust fouls optical glass, and hardware maintenance on millions of fragile USB dongles drained state budgets.<sup><a href="#cite_note-13">[13]</a><a href="#cite_note-32">[32]</a></sup> Contactless facial recognition software operating on existing camera smartphones and tablets has emerged as the replacement technology, cutting total cost of ownership by over 60% and increasing verification speed from 4–5 to over 25 citizens per minute.<sup><a href="#cite_note-15">[15]</a><a href="#cite_note-32">[32]</a></sup>
-</p>
-
-<!-- SECTION 4: FINANCIAL PERFORMANCE -->
-<h2 id="financial-audit">4. Financial Quality, Multi-Year P&amp;L &amp; Forensic Accounting Audit</h2>
-<p>
- An institutional underwriting analysis requires disaggregating the financial accounts to isolate the operational performance of the amalgamated software business from the dormant legacy entity.<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-11">[11]</a><a href="#cite_note-29">[29]</a></sup>
-</p>
-
-<h3 id="profit-loss">4.1 Statement of Profit &amp; Loss Progression (FY 2024 – FY 2026 TTM)</h3>
-<table class="wikitable">
- <caption>Consolidated Statement of Profit &amp; Loss (&#8377; Crore, except per share data)<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-8">[8]</a><a href="#cite_note-11">[11]</a></sup></caption>
- <thead>
- <tr>
- <th>Financial Line Item</th>
- <th class="r">FY 2024 (Baseline)</th>
- <th class="r">FY 2025 (Transition)</th>
- <th class="r">FY 2026 (Audited Full Year)</th>
- <th class="r">YoY Growth (%)</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Revenue from Operations</strong></td>
- <td class="r mono">25.00</td>
- <td class="r mono">34.20</td>
- <td class="r mono"><strong>51.50</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+50.58%</strong></td>
- </tr>
- <tr>
- <td>Software License &amp; SaaS Revenue</td>
- <td class="r mono">16.50</td>
- <td class="r mono">24.60</td>
- <td class="r mono">37.08</td>
- <td class="r mono">+50.73%</td>
- </tr>
- <tr>
- <td>Hardware &amp; System Integration</td>
- <td class="r mono">8.50</td>
- <td class="r mono">9.60</td>
- <td class="r mono">14.42</td>
- <td class="r mono">+50.21%</td>
- </tr>
- <tr>
- <td>Direct Technical &amp; Cloud Hosting</td>
- <td class="r mono">9.80</td>
- <td class="r mono">12.10</td>
- <td class="r mono">16.85</td>
- <td class="r mono">+39.26%</td>
- </tr>
- <tr>
- <td>Employee Benefit Expenses</td>
- <td class="r mono">8.20</td>
- <td class="r mono">10.40</td>
- <td class="r mono">13.25</td>
- <td class="r mono">+27.40%</td>
- </tr>
- <tr>
- <td>Other Operating &amp; Admin Costs</td>
- <td class="r mono">2.88</td>
- <td class="r mono">4.10</td>
- <td class="r mono">5.58</td>
- <td class="r mono">+36.10%</td>
- </tr>
- <tr>
- <td><strong>Operating Profit (EBITDA)</strong></td>
- <td class="r mono"><strong>4.12</strong></td>
- <td class="r mono"><strong>7.60</strong></td>
- <td class="r mono"><strong>15.82</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+108.16%</strong></td>
- </tr>
- <tr>
- <td><em>Operating Profit Margin (OPM %)</em></td>
- <td class="r mono"><em>16.48%</em></td>
- <td class="r mono"><em>22.22%</em></td>
- <td class="r mono"><strong>30.72%</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+850 bps</strong></td>
- </tr>
- <tr>
- <td>Depreciation &amp; Amortization</td>
- <td class="r mono">0.65</td>
- <td class="r mono">0.82</td>
- <td class="r mono">1.15</td>
- <td class="r mono">+40.24%</td>
- </tr>
- <tr>
- <td>Finance Costs (Interest)</td>
- <td class="r mono">1.45</td>
- <td class="r mono">0.55</td>
- <td class="r mono">0.32</td>
- <td class="r mono" style="color: var(--brand-green);">-41.82%</td>
- </tr>
- <tr>
- <td>Other Income (Treasury/Interest)</td>
- <td class="r mono">0.45</td>
- <td class="r mono">1.10</td>
- <td class="r mono">1.95</td>
- <td class="r mono">+77.27%</td>
- </tr>
- <tr>
- <td><strong>Profit Before Tax (PBT)</strong></td>
- <td class="r mono"><strong>2.47</strong></td>
- <td class="r mono"><strong>7.33</strong></td>
- <td class="r mono"><strong>16.30</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+122.37%</strong></td>
- </tr>
- <tr>
- <td>Tax Expense</td>
- <td class="r mono">0.62</td>
- <td class="r mono">1.85</td>
- <td class="r mono">4.28</td>
- <td class="r mono">+131.35%</td>
- </tr>
- <tr>
- <td><strong>Profit After Tax (PAT)</strong></td>
- <td class="r mono"><strong>1.85</strong></td>
- <td class="r mono"><strong>5.48</strong></td>
- <td class="r mono"><strong>12.02</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+119.34%</strong></td>
- </tr>
- <tr>
- <td><em>Net Profit Margin (PAT %)</em></td>
- <td class="r mono"><em>7.40%</em></td>
- <td class="r mono"><em>16.02%</em></td>
- <td class="r mono"><strong>23.34%</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+732 bps</strong></td>
- </tr>
- <tr>
- <td>Basic &amp; Diluted EPS (&#8377;)</td>
- <td class="r mono">0.22</td>
- <td class="r mono">0.64</td>
- <td class="r mono"><strong>1.40</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>+118.75%</strong></td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="quarterly-trends">4.2 Quarterly Earnings Momentum (Q1 FY26 – Q4 FY26 Dissection)</h3>
-<table class="wikitable">
- <caption>Quarterly Financial Trajectory (FY 2026 Unaudited Disclosures in &#8377; Crore)<sup><a href="#cite_note-8">[8]</a><a href="#cite_note-9">[9]</a><a href="#cite_note-10">[10]</a></sup></caption>
- <thead>
- <tr>
- <th>Metric</th>
- <th class="r">Q1 FY26 (Jun 25)</th>
- <th class="r">Q2 FY26 (Sep 25)</th>
- <th class="r">Q3 FY26 (Dec 25)</th>
- <th class="r">Q4 FY26 (Mar 26)</th>
- <th class="r">Full Year FY26</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Net Sales</strong></td>
- <td class="r mono">8.83</td>
- <td class="r mono">11.20</td>
- <td class="r mono">13.85</td>
- <td class="r mono"><strong>17.62</strong></td>
- <td class="r mono"><strong>51.50</strong></td>
- </tr>
- <tr>
- <td>QoQ Growth (%)</td>
- <td class="r mono">&mdash;</td>
- <td class="r mono">+26.84%</td>
- <td class="r mono">+23.66%</td>
- <td class="r mono"><strong>+27.22%</strong></td>
- <td class="r mono">&mdash;</td>
- </tr>
- <tr>
- <td><strong>EBITDA</strong></td>
- <td class="r mono">2.45</td>
- <td class="r mono">3.35</td>
- <td class="r mono">4.40</td>
- <td class="r mono"><strong>5.62</strong></td>
- <td class="r mono"><strong>15.82</strong></td>
- </tr>
- <tr>
- <td>EBITDA Margin (%)</td>
- <td class="r mono">27.75%</td>
- <td class="r mono">29.91%</td>
- <td class="r mono">31.77%</td>
- <td class="r mono"><strong>31.89%</strong></td>
- <td class="r mono"><strong>30.72%</strong></td>
- </tr>
- <tr>
- <td><strong>Net Profit (PAT)</strong></td>
- <td class="r mono">1.80</td>
- <td class="r mono">2.45</td>
- <td class="r mono">3.42</td>
- <td class="r mono"><strong>4.35</strong></td>
- <td class="r mono"><strong>12.02</strong></td>
- </tr>
- <tr>
- <td>QoQ PAT Growth (%)</td>
- <td class="r mono">&mdash;</td>
- <td class="r mono">+36.11%</td>
- <td class="r mono">+39.59%</td>
- <td class="r mono"><strong>+27.19%</strong></td>
- <td class="r mono">&mdash;</td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="cash-flow">4.3 Cash Flow Reconciliation: CFO vs PAT Conversion &amp; Working Capital</h3>
-<p>
- A key hazard in government software contracting is accrual profits trapped in unpaid receivables.<sup><a href="#cite_note-33">[33]</a></sup> Forensic cash flow analysis confirms that RNIT AI Solutions generated <strong>&#8377;8.90 crore in Cash Flow from Operations (CFO)</strong> in FY 2026 against Net Profit of &#8377;12.02 crore, delivering a CFO/PAT ratio of <strong>0.74x</strong> (passing our &ge;0.70x hurdle).<sup><a href="#cite_note-7">[7]</a></sup> Working capital debtor days compressed from 118 days to <strong>88 days</strong>, facilitated by automated milestone clearance via state e-treasury systems.<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-13">[13]</a></sup>
-</p>
-
-<h3 id="balance-sheet">4.4 Balance Sheet Fortification, Cash Reserves &amp; Capital Efficiency</h3>
-<table class="wikitable">
- <caption>Balance Sheet Capital Structure &amp; Efficiency Ratios (As of 31 March 2026)<sup><a href="#cite_note-7">[7]</a><a href="#cite_note-11">[11]</a></sup></caption>
- <thead>
- <tr>
- <th style="width: 35%;">Balance Sheet Metric</th>
- <th style="width: 25%;" class="r">Audited Value</th>
- <th>Analytical Assessment &amp; Institutional Quality</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Total Equity Share Capital</strong></td>
- <td class="r mono">&#8377;8.57 crore</td>
- <td>8.57 Cr equity shares of face value &#8377;1.00 each post-reduction.</td>
- </tr>
- <tr>
- <td><strong>Reserves &amp; Surplus</strong></td>
- <td class="r mono">&#8377;131.98 crore</td>
- <td>Comprises preferential allotment securities premium and retained earnings.</td>
- </tr>
- <tr>
- <td><strong>Total Net Worth (Book Value)</strong></td>
- <td class="r mono"><strong>&#8377;140.55 crore</strong></td>
- <td>Book value per share stands at <span class="mono"><strong>&#8377;16.40</strong></span>.</td>
- </tr>
- <tr>
- <td><strong>Total Financial Debt</strong></td>
- <td class="r mono">&#8377;3.50 crore</td>
- <td>Working capital facility; Debt-to-Equity is negligible at <strong>0.04x</strong>.</td>
- </tr>
- <tr>
- <td><strong>Cash &amp; Liquid Investments</strong></td>
- <td class="r mono"><strong>&#8377;42.15 crore</strong></td>
- <td>Held in bank fixed deposits and liquid mutual fund investments.</td>
- </tr>
- <tr>
- <td><strong>Net Financial Position</strong></td>
- <td class="r mono" style="color: var(--brand-green);"><strong>Net Cash: +&#8377;38.65 Cr</strong></td>
- <td>Zero debt stress; cash provides self-funded growth capital.</td>
- </tr>
- <tr>
- <td><strong>Return on Capital Employed (ROCE)</strong></td>
- <td class="r mono"><strong>20.2%</strong></td>
- <td>Strong capital productivity on asset-light software infrastructure.</td>
- </tr>
- <tr>
- <td><strong>Return on Equity (ROE)</strong></td>
- <td class="r mono"><strong>16.6%</strong></td>
- <td>Sound equity compounding driven by 23.3% net profit margins.</td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="forensic-audit">4.5 Forensic Governance Audit: Reverse-Merger Mechanics &amp; Share Capital Scrub</h3>
-<div class="forensic-box">
- <div style="font-weight: 700; color: #92400e; font-size: 1.05em; margin-bottom: 5px;">
- 🔍 FORENSIC ACCOUNTING &amp; GOVERNANCE SCRUTINY:
- </div>
- <p style="margin: 0;">
- Under Section 32A of the IBC, approval of the resolution plan by the NCLT grants absolute statutory immunity from offenses and liabilities prior to CIRP.<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-22">[22]</a></sup> Historical tax claims, vendor litigations, and debts of Autopal Industries were extinguished by court decree.<sup><a href="#cite_note-2">[2]</a></sup> The 75% reduction in public shareholding and cancellation of old promoter equity removed historical overhang.<sup><a href="#cite_note-4">[4]</a></sup> Statutory audit for FY26 was conducted by an independent chartered accountancy firm with an <em>Unmodified Opinion</em>, and the 63.24% promoter holding carries zero pledges with statutory lock-in periods under SEBI ICDR rules.<sup><a href="#cite_note-6">[6]</a><a href="#cite_note-29">[29]</a><a href="#cite_note-30">[30]</a></sup>
- </p>
-</div>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="underwriting-framework">5. The 3-Layer Underwriting Framework &amp; Institutional Scorecard</h2>
-<p>
- Our proprietary 3-layer underwriting framework evaluates RNIT AI Solutions through a deterministic decision engine:<sup><a href="#cite_note-27">[27]</a></sup>
-</p>
-
-<h3 id="layer1">5.1 Layer 1: Binary Hard Gating Floors</h3>
-<table class="wikitable">
- <caption>Layer 1: Binary Hard Gating Floors (Pass / Fail Execution Engine)</caption>
- <thead>
- <tr>
- <th style="width: 25%;">Gating Floor</th>
- <th style="width: 30%;">Institutional Hurdle Requirement</th>
- <th style="width: 25%;">Verified Empirical Metric</th>
- <th style="width: 20%;">Gate Status</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>1. Financial Quality Floor</strong></td>
- <td>ROCE &ge; 15.0%, D/E &lt; 0.70x, and 3-Year CFO/PAT &ge; 0.70x</td>
- <td>ROCE: <strong>20.2%</strong> &bull; D/E: <strong>0.04x</strong> &bull; CFO/PAT: <strong>0.74x</strong></td>
- <td><span class="badge-pass">🟢 PASS</span></td>
- </tr>
- <tr>
- <td><strong>2. Technical Posture Floor</strong></td>
- <td>Weinstein Stage 2 Markup above rising 50-DMA and 200-DMA</td>
- <td>Stage 2 Markup &bull; CMP (&#8377;105.42) &gt; 50-DMA (&#8377;82.50) &gt; 200-DMA (&#8377;64.20)</td>
- <td><span class="badge-pass">🟢 PASS</span></td>
- </tr>
- <tr>
- <td><strong>3. Asymmetry Hurdle Floor</strong></td>
- <td>Tactical Reward-to-Risk Asymmetry Ratio &ge; <strong>3.50 : 1</strong></td>
- <td>Target: &#8377;125.00 &bull; Stop: &#8377;94.00 &bull; Ratio: <strong>1.72 : 1</strong></td>
- <td><span class="badge-fail">🔴 FAIL (Triggers Trim)</span></td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="layer2">5.2 Layer 2: 4 Company-Specific Operational KPIs</h3>
-<table class="wikitable">
- <caption>Layer 2: Operational KPI Scorecard &amp; Hurdle Outcomes</caption>
- <thead>
- <tr>
- <th>Operational KPI</th>
- <th>Historical Baseline</th>
- <th>Current Value (FY26)</th>
- <th>Hurdle Target</th>
- <th>Status</th>
- <th>Strategic Thesis Implication</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Annualized E-Gov AI &amp; SaaS Revenue</strong></td>
- <td>&#8377;25.00 Cr (FY24)</td>
- <td><strong>&#8377;51.50 Cr</strong></td>
- <td>&gt; &#8377;45.00 Cr</td>
- <td><span class="badge-pass">🟢 PASS</span></td>
- <td>Commercial scaling of biometric verification portals across state departments.</td>
- </tr>
- <tr>
- <td><strong>Operating Profit Margin (OPM)</strong></td>
- <td>16.48% (FY24)</td>
- <td><strong>30.72%</strong></td>
- <td>&gt; 20.00%</td>
- <td><span class="badge-pass">🟢 PASS</span></td>
- <td>Software operating leverage expanding as fixed cloud algorithms scale over volume.</td>
- </tr>
- <tr>
- <td><strong>Receivables Debtor Days Cycle</strong></td>
- <td>118 Days (FY24)</td>
- <td><strong>88 Days</strong></td>
- <td>&lt; 95 Days</td>
- <td><span class="badge-pass">🟢 PASS</span></td>
- <td>Automated electronic fund settlement with state treasuries compressing working capital.</td>
- </tr>
- <tr>
- <td><strong>Balance Sheet Leverage &amp; Cash Cushion</strong></td>
- <td>0.18x D/E (FY24)</td>
- <td><strong>0.04x D/E (+&#8377;38.7 Cr Net Cash)</strong></td>
- <td>&lt; 0.10x D/E</td>
- <td><span class="badge-pass">🟢 PASS</span></td>
- <td>Zero debt stress; ample liquidity to fund AI model development and terminal inventory.</td>
- </tr>
- </tbody>
-</table>
-<div style="font-size: 91%; margin-top: -5px; color: var(--text-secondary);">
- <em>Layer 2 Scorecard Outcome: <strong>4 of 4 Operational KPIs Qualified (100% Pass Rate).</strong></em>
-</div>
-
-<h3 id="layer3">5.3 Layer 3: Support-Aware Entry Posture</h3>
-<table class="wikitable">
- <caption>Layer 3: Support-Aware Entry Posture &amp; Execution Gate</caption>
- <thead>
- <tr>
- <th>Support Anchor Level</th>
- <th>Distance from CMP (&#8377;105.42)</th>
- <th>ATR Distance [ATR = &#8377;4.20]</th>
- <th>Posture Classification</th>
- <th>Deterministic Action Verdict</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>20-DMA Shelf (&#8377;96.50)</strong></td>
- <td>-&#8377;8.92 (-8.46%)</td>
- <td><strong>2.12 &times; ATR</strong></td>
- <td>🟡 <strong>EXTENDED</strong></td>
- <td>Overextended from short-term trendline; high climax risk.</td>
- </tr>
- <tr>
- <td><strong>50-DMA Structural Base (&#8377;82.50)</strong></td>
- <td>-&#8377;22.92 (-21.74%)</td>
- <td><strong>5.46 &times; ATR</strong></td>
- <td>🟡 <strong>EXTENDED</strong></td>
- <td>Deeply extended from institutional accumulation base.</td>
- </tr>
- <tr>
- <td><strong>Execution Synthesis</strong></td>
- <td colspan="4">
- Because the stock is classified as <strong>EXTENDED</strong> (&gt;1.0x ATR from nearest support) and trades at 72.4x P/E while representing an excessive <strong>22.58% portfolio weight</strong>, fresh buying is prohibited. The position triggers a mandatory <strong>🟡 TRIM_PROFIT_BOOKING</strong> verdict to harvest gains.
- </td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 6: PEER COMPARISON -->
-<h2 id="industry-landscape">6. Industry Landscape, Competitive Moat &amp; Peer Comparison</h2>
-<h3 id="economic-moat">6.1 Structural Economic Moat (Hamilton Helmer's 7 Powers Analysis)</h3>
-<ul style="margin: 0.6em 0 1em 1.5em; line-height: 1.6;">
- <li><strong>Cornered Resource (Demographic Datasets):</strong> RNIT's algorithms have trained on over 2.5 billion authentications across Indian demographic skin tones, ambient rural lighting, and low-resolution edge cameras, establishing an algorithmic accuracy edge over generic foreign vision models.<sup><a href="#cite_note-32">[32]</a></sup></li>
- <li><strong>High Switching Costs (State HRMS Integration):</strong> Once a state government integrates RNIT's platforms into civil service payroll and attendance servers, replacing the vendor entails severe operational and administrative friction.<sup><a href="#cite_note-13">[13]</a></sup></li>
- <li><strong>Process Power (CERT-In &amp; GeM Empanelment):</strong> Sovereign data regulations under DPDPA 2023 and pre-qualification covenants prevent unvetted startups from bidding on state contracts.<sup><a href="#cite_note-14">[14]</a><a href="#cite_note-19">[19]</a></sup></li>
-</ul>
-
-<h3 id="peer-matrix">6.2 Comprehensive Comparative Peer Matrix</h3>
-<table class="wikitable">
- <caption>Comparative Peer Valuation, Operating Quality &amp; Screening Matrix (FY 2026 TTM Data)<sup><a href="#cite_note-11">[11]</a><a href="#cite_note-23">[23]</a><a href="#cite_note-24">[24]</a><a href="#cite_note-25">[25]</a></sup></caption>
- <thead>
- <tr>
- <th>Company Name</th>
- <th>Ticker</th>
- <th class="r">M-Cap (&#8377; Cr)</th>
- <th class="r">CMP (&#8377;)</th>
- <th class="r">ROCE (%)</th>
- <th class="r">ROE (%)</th>
- <th class="r">D/E</th>
- <th class="r">P/E</th>
- <th class="r">OPM (%)</th>
- <th>Moat &amp; Core Strategic Competency</th>
- <th>Institutional Underwriting Verdict</th>
- </tr>
- </thead>
- <tbody>
- <tr style="background-color: #fffbeb; font-weight: 600;">
- <td><strong>RNIT AI Solutions Ltd</strong></td>
- <td>BSE: 517286</td>
- <td class="r mono">903</td>
- <td class="r mono">105.42</td>
- <td class="r mono">20.2%</td>
- <td class="r mono">16.6%</td>
- <td class="r mono">0.04</td>
- <td class="r mono">72.4x</td>
- <td class="r mono">30.7%</td>
- <td>Sovereign e-gov biometric FRS, Edge AI algorithms, APSSDC GenAI.</td>
- <td><span style="color: #b45309;">🟡 TRIM_PROFIT_BOOKING</span></td>
- </tr>
- <tr>
- <td><strong>Netweb Technologies India</strong></td>
- <td>NSE: NETWEB</td>
- <td class="r mono">14,520</td>
- <td class="r mono">2,580.00</td>
- <td class="r mono">36.4%</td>
- <td class="r mono">29.8%</td>
- <td class="r mono">0.08</td>
- <td class="r mono">115.2x</td>
- <td class="r mono">14.8%</td>
- <td>High-performance AI supercomputing servers, Nvidia OEM partnership.</td>
- <td><span style="color: var(--brand-amber);">🟡 WATCHLIST (Extended Multiple)</span></td>
- </tr>
- <tr>
- <td><strong>E2E Networks Limited</strong></td>
- <td>NSE: E2E</td>
- <td class="r mono">6,240</td>
- <td class="r mono">3,850.00</td>
- <td class="r mono">26.5%</td>
- <td class="r mono">22.1%</td>
- <td class="r mono">0.42</td>
- <td class="r mono">82.0x</td>
- <td class="r mono">52.3%</td>
- <td>Cloud GPU infrastructure, sovereign accelerated AI compute clusters.</td>
- <td><span style="color: var(--brand-amber);">🟡 WATCHLIST (Heavy Capex Drag)</span></td>
- </tr>
- <tr>
- <td><strong>Tata Elxsi Limited</strong></td>
- <td>NSE: TATAELXSI</td>
- <td class="r mono">42,150</td>
- <td class="r mono">6,780.00</td>
- <td class="r mono">38.5%</td>
- <td class="r mono">29.1%</td>
- <td class="r mono">0.00</td>
- <td class="r mono">52.5x</td>
- <td class="r mono">27.5%</td>
- <td>Autonomous driving AI, healthcare embedded systems, Tata brand power.</td>
- <td><span style="color: var(--brand-green);">🟢 QUALIFIED CORE COMPOUNDER</span></td>
- </tr>
- <tr>
- <td><strong>Cyient Limited</strong></td>
- <td>NSE: CYIENT</td>
- <td class="r mono">19,200</td>
- <td class="r mono">1,740.00</td>
- <td class="r mono">18.2%</td>
- <td class="r mono">15.4%</td>
- <td class="r mono">0.25</td>
- <td class="r mono">28.4x</td>
- <td class="r mono">16.2%</td>
- <td>Engineering design, digital geospatial AI, aerospace engineering.</td>
- <td><span style="color: var(--brand-green);">🟢 QUALIFIED (Moderate Growth)</span></td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 7: TECHNICAL TRADE ARCHITECTURE -->
-<h2 id="technical-trade">7. Technical Posture, Support Anchors &amp; Trade Architecture</h2>
-<h3 id="moving-averages">7.1 Weinstein Stage &amp; Moving Average Alignment (20/50/200 DMA)</h3>
-<p>
- Following restructuring, RNIT AI Solutions (BSE: 517286) entered a Weinstein Stage 2 markup advance, rising from &#8377;37.00 to a 52-week peak of &#8377;110.00.<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-26">[26]</a></sup> Key moving averages are stacked bullishly: CMP &#8377;105.42 vs 20-DMA (&#8377;96.50), 50-DMA (&#8377;82.50), and 200-DMA (&#8377;64.20). However, CMP sits <strong>+9.24% above the 20-DMA</strong> and <strong>+27.78% above the 50-DMA</strong>, reflecting climax extension. The 14-day RSI is <strong>63.85</strong>, and Relative Strength (RS Rating) vs Nifty 500 is 84/100.<sup><a href="#cite_note-26">[26]</a></sup>
-</p>
-
-<h3 id="trade-levels">7.2 Optimal Harvest Band, Invalidation Stop &amp; Mathematical Asymmetry</h3>
-<table class="wikitable">
- <caption>Actionable Trade Architecture Levels (BSE: 517286)</caption>
- <thead>
- <tr>
- <th style="width: 30%;">Trade Parameter</th>
- <th style="width: 25%;">Price Level (&#8377;)</th>
- <th>Technical &amp; Fundamental Derivation</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Current Market Price (CMP)</strong></td>
- <td><span class="mono"><strong>&#8377;105.42</strong></span></td>
- <td>Trading near upper boundary of 52-week range (&#8377;37.00 – &#8377;110.00).</td>
- </tr>
- <tr>
- <td><strong>Optimal Profit Harvest Band</strong></td>
- <td><span class="mono"><strong>&#8377;105.00 – &#8377;108.00</strong></span></td>
- <td>Immediate distribution band to execute partial profit harvest (4,000–5,000 shares).</td>
- </tr>
- <tr>
- <td><strong>Trailing Support Stop</strong></td>
- <td><span class="mono" style="color: var(--brand-amber);"><strong>&#8377;94.00</strong></span> (-10.83%)</td>
- <td>Anchored directly below the 20-DMA shelf (&#8377;96.50) to protect residual runner.</td>
- </tr>
- <tr>
- <td><strong>Hard Invalidation Floor</strong></td>
- <td><span class="mono" style="color: var(--brand-red);"><strong>&#8377;88.50</strong></span> (-16.05%)</td>
- <td>Structural prior breakout resistance turned support; breach triggers full exit.</td>
- </tr>
- <tr>
- <td><strong>12–18M Base Target</strong></td>
- <td><span class="mono" style="color: var(--brand-blue);"><strong>&#8377;125.00</strong></span> (+18.57%)</td>
- <td>Anchored to Forward FY27 EPS of &#8377;2.50 &times; conservative P/E multiple of 50.0x.</td>
- </tr>
- <tr>
- <td><strong>Blue-Sky Bull Target</strong></td>
- <td><span class="mono" style="color: var(--brand-green);"><strong>&#8377;145.00</strong></span> (+37.55%)</td>
- <td>Anchored to aggressive pan-India state e-governance rollouts and APSSDC expansion.</td>
- </tr>
- <tr>
- <td><strong>Reward-to-Risk Asymmetry</strong></td>
- <td colspan="2">
- <div style="font-family: var(--font-mono); font-size: 1.02em; padding: 3px 0;">
- Asymmetry Ratio = (Target &#8377;125.00 - CMP &#8377;105.42) / (CMP &#8377;105.42 - Stop &#8377;94.00) = &#8377;19.58 / &#8377;11.42 = <strong>1.72 : 1</strong>
- </div>
- <div style="font-size: 89%; color: var(--brand-red); margin-top: 2px;">
- ⚠️ <em>Tactical Momentum Entry Hurdle (&ge;3.50 : 1) FAILS. Confirms fresh buying is prohibited and capital must be trimmed.</em>
- </div>
- </td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 8: FATAL FLAWS -->
-<h2 id="fatal-flaws">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<div class="fatal-box">
- <div style="font-weight: 700; color: #b91c1c; font-size: 1.02em; margin-bottom: 5px;">
- ⚠️ FATAL FLAW 1: REVERSE-MERGER EXECUTION &amp; CORPORATE SHELL LEGACY RISK
- </div>
- <p style="margin: 0;">
- While Section 32A of the IBC provides immunity from historical liabilities, reviving an insolvent shell carries friction.<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-22">[22]</a></sup> The company trades exclusively on the BSE (517286) without NSE normalization. Indian micro-cap reverse mergers face elevated surveillance (ASM / Trade-for-Trade settlement restrictions).<sup><a href="#cite_note-21">[21]</a></sup> Circuit limits could restrict liquidity during adverse market shifts.
- </p>
-</div>
-
-<div class="fatal-box">
- <div style="font-weight: 700; color: #b91c1c; font-size: 1.02em; margin-bottom: 5px;">
- ⚠️ FATAL FLAW 2: STATE GOVERNMENT RECEIVABLES &amp; BUDGETARY CLEARANCE DELAYS
- </div>
- <p style="margin: 0;">
- RNIT's growth is heavily anchored in state government contracts (Andhra Pradesh, Rajasthan).<sup><a href="#cite_note-12">[12]</a><a href="#cite_note-13">[13]</a></sup> Public sector procurement is vulnerable to bureaucratic delays, political shifts, or fiscal audits. If a state government delays software sign-offs, debtor days could expand beyond 130 days, locking up operating cash flows.<sup><a href="#cite_note-33">[33]</a></sup>
- </p>
-</div>
-
-<div class="fatal-box">
- <div style="font-weight: 700; color: #b91c1c; font-size: 1.02em; margin-bottom: 5px;">
- ⚠️ FATAL FLAW 3: VALUATION CLIMAX &amp; ABSENCE OF MULTIPLE COMPRESSION SAFETY MARGIN
- </div>
- <p style="margin: 0;">
- At CMP &#8377;105.42, RNIT AI Solutions trades at <strong>72.4x trailing P/E</strong> and ~6.4x Book Value.<sup><a href="#cite_note-11">[11]</a></sup> This multiple discounts uninterrupted execution. Any minor quarterly deceleration or margin compression could trigger sharp multiple de-rating.
- </p>
-</div>
-
-<div class="forensic-box">
- <strong>Deterministic Invalidation Triggers:</strong>
- <ul style="margin: 0.3em 0 0 1.5em; line-height: 1.5;">
- <li><strong>Fundamental:</strong> Quarterly Operating Profit Margin compressing below <strong>18.0%</strong> or debtor days exceeding <strong>130 days</strong>.</li>
- <li><strong>Technical:</strong> Daily closing print below the hard invalidation stop floor of <strong class="mono">&#8377;88.50</strong> on heavy volume.</li>
- </ul>
-</div>
-
-<!-- SECTION 9: CAPITAL ALLOCATION (MONEY BRIDGE) -->
-<h2 id="capital-allocation">9. Portfolio Allocation Execution (The Money Bridge)</h2>
-<p>
- Holding a 22.58% allocation in a high-multiple micro-cap restricts portfolio capacity from funding Core Alpha compounders resting directly AT_SUPPORT.<sup><a href="#cite_note-27">[27]</a><a href="#cite_note-34">[34]</a></sup>
-</p>
-
-<table class="wikitable">
- <caption>The Capital Reallocation Blueprint (The Money Bridge Execution)<sup><a href="#cite_note-27">[27]</a><a href="#cite_note-34">[34]</a><a href="#cite_note-35">[35]</a></sup></caption>
- <thead>
- <tr>
- <th style="width: 28%;">Portfolio Parameter</th>
- <th style="width: 22%;">Pre-Execution State</th>
- <th style="width: 25%;">Execution Transaction</th>
- <th style="width: 25%;">Post-Execution State</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>RNITAI Holding Sizing</strong></td>
- <td class="mono">10,000 shares (&#8377;10,54,200)</td>
- <td><strong>SELL 4,500 shares</strong> @ &#8377;105.50</td>
- <td class="mono"><strong>5,500 shares</strong> (&#8377;5,79,810)</td>
- </tr>
- <tr>
- <td><strong>RNITAI Portfolio Weight</strong></td>
- <td><span style="color: var(--brand-red); font-weight: 700;">22.58%</span> (Over-concentrated)</td>
- <td>Liberates <span class="mono"><strong>&#8377;4,74,750</strong></span> gross cash</td>
- <td><span style="color: var(--brand-green); font-weight: 700;">12.42%</span> (Prudent &amp; Compliant)</td>
- </tr>
- <tr>
- <td><strong>Capital Deployment: INTERARCH</strong></td>
- <td class="mono">250 shares (8.99% weight)</td>
- <td><strong>BUY 130 shares</strong> @ &#8377;1,720.00 (&#8377;2,23,600)</td>
- <td class="mono"><strong>380 shares</strong> (13.68% Core Alpha)</td>
- </tr>
- <tr>
- <td><strong>Capital Deployment: SANGHVIMOV</strong></td>
- <td class="mono">0 shares (Pipeline Challenger)</td>
- <td><strong>BUY 450 shares</strong> @ &#8377;520.00 (&#8377;2,34,000)</td>
- <td class="mono"><strong>450 shares</strong> (5.01% Core Alpha)</td>
- </tr>
- <tr>
- <td><strong>Residual Cash Buffer</strong></td>
- <td class="mono">&#8377;0.00</td>
- <td>Retain in liquid margin</td>
- <td class="mono"><strong>&#8377;17,150</strong> (Friction cushion)</td>
- </tr>
- </tbody>
-</table>
-
-<p>
- <strong>Portfolio Risk-Return Optimization:</strong> Executing this rebalancing reduces single-stock vulnerability, establishing a diversified tripartite posture: a 12.4% residual stake in RNITAI (riding the government AI wave with house money), a 13.7% position in debt-free PEB leader Interarch Building Products (order book &#8377;1,452 Cr, PE 21x), and a 5.0% allocation in heavy crane market leader Sanghvi Movers.<sup><a href="#cite_note-34">[34]</a><a href="#cite_note-35">[35]</a></sup>
-</p>
-
-<!-- SECTION 10: QUARTERLY MONITORING INDICATORS -->
-<h2 id="thesis-trackers">10. Key Quarterly Monitoring Indicators (Thesis Trackers)</h2>
-<table class="wikitable">
- <caption>Quarterly Thesis Trackers &amp; Actionable Monitoring Thresholds</caption>
- <thead>
- <tr>
- <th style="width: 25%;">Monitoring Indicator</th>
- <th>Analytical Significance &amp; Thesis Role</th>
- <th style="width: 22%;">Bullish Continuation Threshold</th>
- <th style="width: 22%;">Bearish Deficit Alert Level</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>1. Net New Contract Inflow &amp; State Work Orders</strong></td>
- <td>Measures commercial scaling of the APSSDC GenAI project and expansion into adjacent state departments.<sup><a href="#cite_note-12">[12]</a></sup></td>
- <td><span class="badge-pass">&gt; &#8377;25.0 Crore</span> net new confirmed work orders per quarter.</td>
- <td><span class="badge-fail">&lt; &#8377;10.0 Crore</span> in new bookings; signs of tender conversion stall.</td>
- </tr>
- <tr>
- <td><strong>2. Receivables Debtor Days &amp; Cash Conversion</strong></td>
- <td>Verifies that accelerating top-line revenue converts into treasury cash rather than delinquent accounts.<sup><a href="#cite_note-7">[7]</a></sup></td>
- <td>Debtor days maintained <span class="badge-pass">&lt; 85 Days</span> and CFO/PAT conversion &ge; <strong>0.75x</strong>.</td>
- <td>Debtor days ballooning <span class="badge-fail">&gt; 115 Days</span> or CFO/PAT dipping below 0.50x.</td>
- </tr>
- <tr>
- <td><strong>3. Gross Software License vs Hardware Mix</strong></td>
- <td>Ensures that operating margins remain elevated (&gt;28%) by preventing low-margin hardware pass-through from diluting SaaS mix.<sup><a href="#cite_note-8">[8]</a></sup></td>
- <td>Software &amp; SaaS recurring fees comprise <span class="badge-pass">&gt; 72.0%</span> of quarterly revenue.</td>
- <td>Hardware reselling expands to <span class="badge-fail">&gt; 40.0%</span> of revenue; OPM compresses &lt; 22%.</td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES -->
-<h2 id="references">11. References, Regulatory Filings &amp; External Disclosures</h2>
-<ol class="reflist">
- <li id="cite_note-1">^ BSE India Corporate Profile &amp; Listing Disclosures: RNIT AI Solutions Limited (Scrip Code: 517286, Security ID: RNITAI). <a href="https://www.bseindia.com/stock-share-price/rnit-ai-solutions-ltd/rnit/517286/" target="_blank">bseindia.com/stock-share-price/rnit-ai-solutions-ltd/rnit/517286/</a></li>
- <li id="cite_note-2">^ National Company Law Tribunal (NCLT), Jaipur Bench: Final Order in CP No. (IB) - 152/7/JPR/2022 dated 23 September 2024 approving Resolution Plan of Autopal Industries Limited.</li>
- <li id="cite_note-3">^ Insolvency and Bankruptcy Board of India (IBBI): Public Disclosure of Approved Resolution Plan submitted jointly by Mr. Raja Srinivas Nandigam and Mr. Vivek Kumar Ratakonda (September 2024).</li>
- <li id="cite_note-4">^ BSE Corporate Announcement (Regulation 30): Implementation of NCLT Resolution Plan, 100% Cancellation of Old Promoter Equity, 75% Capital Reduction on Public Equity, and Share Swap Allotment for RNIT Solutions &amp; Services Ltd (Nov 2024).</li>
- <li id="cite_note-5">^ Ministry of Corporate Affairs, Registrar of Companies: Issuance of Fresh Certificate of Incorporation Consequent upon Change of Name from Autopal Industries Limited to RNIT AI Solutions Limited (Feb 2025).</li>
- <li id="cite_note-6">^ SEBI (LODR) Regulations 2015, Regulation 31: Shareholding Pattern for Quarter ended June 30, 2026 (Promoter Group holding 63.24%, Public 36.76%, Zero Pledged Shares).</li>
- <li id="cite_note-7">^ RNIT AI Solutions Limited: Audited Financial Statements and Annual Results for Financial Year ended March 31, 2026 (Balance Sheet, Statement of Profit &amp; Loss, and Cash Flow Statement).</li>
- <li id="cite_note-8">^ BSE Corporate Disclosure: Unaudited Financial Results for Fourth Quarter and Financial Year ended March 31, 2026 (Form 33 under SEBI LODR).</li>
- <li id="cite_note-9">^ BSE Corporate Disclosure: Unaudited Financial Results for Third Quarter ended December 31, 2025.</li>
- <li id="cite_note-10">^ BSE Corporate Disclosure: Unaudited Financial Results for Second Quarter ended September 30, 2025.</li>
- <li id="cite_note-11">^ Screener.in Consolidated Financial Profile: RNIT AI Solutions Ltd (BSE: 517286). <a href="https://www.screener.in/company/RNIT/consolidated/" target="_blank">screener.in/company/RNIT/consolidated/</a></li>
- <li id="cite_note-12">^ Andhra Pradesh State Skill Development Corporation (APSSDC): Work Order &amp; Master Service Agreement for Generative AI Conversational Assessment and Career Guidance Engine (June 2026).</li>
- <li id="cite_note-13">^ Government of Andhra Pradesh (School Education Dept): Implementation Order for AI-Enabled Facial Recognition System (APHEP / FRS) for Staff and Student Attendance.</li>
- <li id="cite_note-14">^ Government of Telangana (IT, Electronics &amp; Communications Dept): Public Procurement Eligibility Tender Covenants for E-Governance Biometric Verification Engines.</li>
- <li id="cite_note-15">^ Union Territory of Lakshadweep (Directorate of Education): Deployment Confirmation and Service Level Agreement for RNIT Face-Terminals and Biometric Attendance Software.</li>
- <li id="cite_note-16">^ NITI Aayog, Government of India: National Strategy on Artificial Intelligence (#AIforAll), Policy Discussion Paper on Sovereign Cloud and Public Sector Deployment.</li>
- <li id="cite_note-17">^ Gartner Research (2025): "Enterprise AI Adoption in Emerging Economies &mdash; Public Sector E-Governance and Biometric Infrastructure Forecast 2024–2028".</li>
- <li id="cite_note-18">^ International Data Corporation (IDC India): "India Artificial Intelligence Market Forecast: Cloud-Native Software vs Hardware Capex Analysis (2024–2028)".</li>
- <li id="cite_note-19">^ Digital Personal Data Protection Act, 2023 (Act No. 22 of 2023), Ministry of Law and Justice, Government of India: Provisions on Biometric Vector Storage and Cross-Border Transfers.</li>
- <li id="cite_note-20">^ Indian Computer Emergency Response Team (CERT-In): Guidelines for Information Security Emplacement and Vulnerability Audits for Cloud-Hosted Government SaaS Applications.</li>
- <li id="cite_note-21">^ BSE Surveillance Clarification Letter: Clarification on Significant Price Movement under Regulation 30 of SEBI (LODR) Regulations, 2015 for Scrip Code 517286.</li>
- <li id="cite_note-22">^ Securities and Exchange Board of India (SEBI): Master Circular on Corporate Restructuring, Scheme of Arrangements, and Asset Injections under IBC Resolution Frameworks.</li>
- <li id="cite_note-23">^ Netweb Technologies India Limited (NSE: NETWEB): Annual Report FY 2025-26 &amp; Investor Presentation on High-Performance Supercomputing Infrastructure.</li>
- <li id="cite_note-24">^ E2E Networks Limited (NSE: E2E): Audited Financial Statements and Management Discussion &amp; Analysis on Sovereign Cloud GPU Infrastructure.</li>
- <li id="cite_note-25">^ Tata Elxsi Limited (NSE: TATAELXSI): Audited Financial Results and Management Concall Transcript on Enterprise AI Systems Integration (FY26).</li>
- <li id="cite_note-26">^ TradingView Technical Chart &amp; Oscillator Library: Moving Average Alignment, 20/50/200 DMA Levels, and Volume Spread Analysis for BSE: 517286 (RNITAI).</li>
- <li id="cite_note-27">^ Zerodha Kite Active Portfolio Statement: Master Holdings Ledger and Tax Lot Accounting as of September 2026 (Account Holding: 10,000 shares of RNITAI @ &#8377;55.33 avg).</li>
- <li id="cite_note-28">^ Ministry of Corporate Affairs (MCA-21 Database): Incorporation Filings and Articles of Association for RNIT Solutions and Services Private Limited (CIN: U72900TG2019PTC132456).</li>
- <li id="cite_note-29">^ Independent Statutory Auditor's Report for RNIT AI Solutions Limited: Notes on Amalgamation Accounting, Going Concern Assumption, and Intangible Asset Recognition (FY 2025-26).</li>
- <li id="cite_note-30">^ SEBI (Prohibition of Insider Trading) Regulations, 2015: Promoter Group Trading Window Closure Disclosures and Non-Encumbrance Affirmation.</li>
- <li id="cite_note-31">^ Reserve Bank of India (RBI): Financial Stability Report &mdash; Chapter on Corporate Insolvency Resolution Outcomes, Recovery Rates, and Restructuring Yields.</li>
- <li id="cite_note-32">^ RNIT AI Whitepaper: "Deep Convolutional Neural Network Feature Vector Extraction on Low-Cost Edge Devices in High-Latency Distributed Environments" (Hyderabad, 2025).</li>
- <li id="cite_note-33">^ CRISIL Ratings Research: "Public Sector Software Contracting in India &mdash; Receivables Ageing, Working Capital Stress, and Liquidity Management in Small-Cap IT Vendors" (2026).</li>
- <li id="cite_note-34">^ Interarch Building Products Limited (NSE: INTERARCH): Institutional Equity Research Dossier &amp; Underwriting Report. <a href="INTERARCH_dossier.html">googledrive/blogs/INTERARCH_dossier.html</a></li>
- <li id="cite_note-35">^ Sanghvi Movers Limited (NSE: SANGHVIMOV): Institutional Equity Research Dossier &amp; Capital Reallocation Analysis. <a href="SANGHVIMOV_dossier.html">googledrive/blogs/SANGHVIMOV_dossier.html</a></li>
+<p>What this means for an owner: the sale reduces a concentration risk that the rules say must be reduced, and it keeps the company in the account at a smaller and more defensible size. The run notes that follow list everything we could not fully verify.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>The Layer 1 gate failed on three tests, so the stock is not eligible for buying. Those failures are results, not exceptions. The list below covers the checks that could not be fully satisfied. Each entry names the check, why it cannot be cured now, and what would cure it. No check listed here is described as passed.</p>
+<ol>
+<li>Age of the sources. The age check flags each record older than 60 days before 12 October 2026<sup><a href="#cite_note-32">[32]</a></sup>. Examples are the FY26 figures from Value Research and Screener, dated March 2026, which are 225 days old<sup><a href="#cite_note-6">[6]</a></sup>; the June 2026 quarter and shareholding figures, 133 days old<sup><a href="#cite_note-5">[5]</a></sup>; the board meeting list, dated July 2026, 103 days old<sup><a href="#cite_note-14">[14]</a></sup>; the Brickwork rating dated 20 November 2025, 326 days old<sup><a href="#cite_note-15">[15]</a></sup>; and the CFO resignation dated December 2024<sup><a href="#cite_note-12">[12]</a></sup>. Each date is the true period of its figure and none was altered. The age check passes only with these exceptions disclosed. They cannot be cured until the September 2026 quarter, its shareholding pattern and the FY26 annual report are retrieved.</li>
+<li>Primary filings not retrieved. The BSE annual reports page returned HTTP 403, and the annual report PDF from Tijori has no extractable text<sup><a href="#cite_note-21">[21]</a></sup>. Financial figures therefore rest on aggregators and one rating agency. Several aggregators agree on the main figures, but none is a primary filing. The cure is retrieval of the FY26 annual report and the June 2026 results from BSE.</li>
+<li>Return on capital, Layer 1. The gate requires ROCE of 15.0 percent or more<sup><a href="#cite_note-34">[34]</a></sup>. The published figure is 14.3 percent<sup><a href="#cite_note-6">[6]</a></sup>, our rebuild gives 10.7 to 13.7 percent<sup><a href="#cite_note-6">[6]</a></sup>, and the header 20.2 percent<sup><a href="#cite_note-1">[1]</a></sup> cannot be rebuilt. This is a failed gate. It can be cured only by a filing that shows how the 20.2 percent is built, or by a rise in reported returns.</li>
+<li>Asymmetry target, Layer 1. The gate requires a checkable target. No forward EPS consensus exists, and no three-year median P/E is published<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup>. No base measured move can be built, because no level for the base is recorded. This is a failed gate. It is cured by a published analyst estimate or a verifiable history of multiples, or by a documented level for the base.</li>
+<li>Ledger 52-week high. The ledger high of 130.20<sup><a href="#cite_note-30">[30]</a></sup> disagrees with 114.10 on four vendor pages<sup><a href="#cite_note-5">[5]</a></sup>. The ledger value is used and the disagreement is disclosed. The cure is a corrected price history from the exchange.</li>
+<li>Ledger-computed technicals. Moving averages, RSI, ATR and volume multiples come from the facts ledger, not from a page that prints them. The cited Yahoo page confirms only the close<sup><a href="#cite_note-16">[16]</a></sup>. The cure is an exchange price file.</li>
+<li>Consolidated financials. The Screener consolidated page renders no tables, so standalone figures are used throughout<sup><a href="#cite_note-2">[2]</a></sup>. The cure is a consolidated filing from BSE, if the company has subsidiaries.</li>
+<li>Three-year sales and profit growth. Not computable, because the fiscal year 2023 figures appear on no retrieved page<sup><a href="#cite_note-6">[6]</a></sup>. The cell reads "not published". The cure is the FY23 annual report.</li>
+<li>Current credit rating. The latest rating action retrieved is the Brickwork rationale of 20 November 2025, which reaffirms BWR D<sup><a href="#cite_note-15">[15]</a></sup>. No later rating action was found. The cure is a rating letter dated after the June 2026 quarter.</li>
+<li>Earnings call transcript. No transcript text could be retrieved. The concall.in page returned no text, and the Trendlyne conference page lists calls without text<sup><a href="#cite_note-29">[29]</a></sup>. The cure is a transcript of the June 2026 call.</li>
+<li>Next results date. No upcoming board-meeting date is published on the retrieved pages. The latest meetings listed are 29 July 2026 for quarterly results and 29 April 2026 for audited results<sup><a href="#cite_note-14">[14]</a></sup>. The cure is the company's board-meeting notice.</li>
+<li>Review status. Final outcome: Reviewer APPROVE and red-team APPROVE on round 2 (the final independent review). Round 1 returned REVISE, and its findings were addressed before round 2. Post-review edits after round 2: the status statements above were updated; the de-rating sentence now states the 1.8 ratio as arithmetic on the 2.6 percent of net worth at risk to the 83.57 stop on the remaining 5,000 shares; the sale sentence now says any rise in the price would put the weight back over the cap; the credit-rating cross-reference now points to the weaknesses chapter; the operating-margin sentence now says the after-depreciation basis would not meet the 25 percent PASS test; and the stop paragraph now says we believe the swing low is built from closing prices.</li>
+<li>Residual NOTE items not applied: the red team's suggestion to add the ledger's absolute share volume to show that 5,000 shares can fill within five sessions, because that volume is not held in the run files.</li>
 </ol>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="reflist">
+<li id="cite_note-1"><a href="https://www.screener.in/company/517286/">Screener, RNIT AI Solutions standalone company page (BSE 517286), accessed 12 Oct 2026</a></li>
+<li id="cite_note-2"><a href="https://www.screener.in/company/517286/consolidated/">Screener, RNIT AI Solutions consolidated page (header only; no tables rendered)</a></li>
+<li id="cite_note-3"><a href="https://money.rediff.com/companies/Rnit-Ai-Solutions-Ltd/10620003">Rediff Money, Rnit AI Solutions Ltd. company page</a></li>
+<li id="cite_note-4"><a href="https://money.rediff.com/companies/Rnit-Ai-Solutions-Ltd/10620003/financials">Rediff Money, Rnit AI Solutions Ltd. financial results table</a></li>
+<li id="cite_note-5"><a href="https://www.livemint.com/market/market-stats/rnit-ai-solutions-q1-results-s0002005">Mint, Rnit Ai Solutions Q1 results (June 2026 quarter)</a></li>
+<li id="cite_note-6"><a href="https://www.valueresearchonline.com/stocks/41190/rnit-ai-solutions-ltd/company-financial/">Value Research, Rnit Ai Solutions Ltd. financials (annual income, cash flow and ratios)</a></li>
+<li id="cite_note-7"><a href="https://trendlyne.com/fundamentals/financials/82274/517286/rnit-ai-solutions-ltd/">Trendlyne, RNIT AI annual financials (cash from operating activities)</a></li>
+<li id="cite_note-8"><a href="https://trendlyne.com/equity/share-holding/82274/517286/latest/rnit-ai-solutions-ltd/">Trendlyne, RNIT AI latest shareholding pattern and pledge data</a></li>
+<li id="cite_note-9"><a href="https://trendlyne.com/investor-presentations/82274/517286/rnit-ai-solutions-ltd/">Trendlyne, RNIT AI investor presentations (BSE filings index)</a></li>
+<li id="cite_note-10"><a href="https://www.stockssena.com/stocks/RNITAI/investors">StocksSena, RNITAI shareholding, pledge and key ratios</a></li>
+<li id="cite_note-11"><a href="https://www.stockssena.com/research/filings/RNITAI">StocksSena, RNIT AI Solutions filings list</a></li>
+<li id="cite_note-12"><a href="https://eduinvesting.in/rnit-ai/">Eduinvesting, RNIT AI Solutions Q1 FY27 article (secondary commentary)</a></li>
+<li id="cite_note-13"><a href="https://economictimes.indiatimes.com/rnit-ai-solutions-ltd/stocks/companyid-11354.cms">Economic Times, Rnit AI Solutions share price and announcements</a></li>
+<li id="cite_note-14"><a href="https://economictimes.indiatimes.com/rnit-ai-solutions-ltd/infocompanyboardmeetings/companyid-11354.cms">Economic Times, Rnit AI Solutions board meeting schedule</a></li>
+<li id="cite_note-15"><a href="https://bcrisp.in/BLRHTML/HTMLDocument/ViewRatingRationaleINCNew?id=190903">Brickwork Ratings, rating rationale for RNIT AI Solutions Ltd., 20 Nov 2025 (BWR D, issuer not cooperating)</a></li>
+<li id="cite_note-16"><a href="https://finance.yahoo.com/quote/RNITAI.BO/">Yahoo Finance, RNIT Al Solutions Limited (RNITAI.BO) quote</a></li>
+<li id="cite_note-17"><a href="https://scanx.trade/company/rnit-ai-solutions-ltd">ScanX, RNITAI share price, market cap and P/E</a></li>
+<li id="cite_note-18"><a href="https://tickjournal.com/stock-screener/rnit-ai-solutions-ltd/">Tickjournal, Rnit Ai Solutions share price and TTM P/E</a></li>
+<li id="cite_note-19"><a href="https://blinkx.in/insights/pe/rnit-ai-solutions-ltd-pe-ratio">BlinkX, Rnit Ai Solutions P/E ratio (historical P/E: no data available)</a></li>
+<li id="cite_note-20"><a href="https://sharpely.in/stocks/autopalind/forecast">Sharpely, RNIT AI Solutions analyst estimates (no active estimates) and TTM EPS</a></li>
+<li id="cite_note-21"><a href="https://www.reportjunction.com/Downloads/Rnit-Ai-Solutions-Limited-2026-164750.htm">ReportJunction, Rnit Ai Solutions Limited annual reports listing (BSE code 517286; NSE code AUTOPALIND)</a></li>
+<li id="cite_note-22"><a href="https://uidai.gov.in/">UIDAI, Aadhaar website (face authentication step in app flow)</a></li>
+<li id="cite_note-23"><a href="https://indiaai.gov.in/">IndiaAI, national AI programme portal (government context)</a></li>
+<li id="cite_note-24"><a href="https://www.digitalindia.gov.in/">Digital India, MeitY programme portal (government context)</a></li>
+<li id="cite_note-25"><a href="https://www.screener.in/company/NEWGEN/consolidated/">Screener, Newgen Software Technologies company page (peer)</a></li>
+<li id="cite_note-26"><a href="https://www.screener.in/company/TANLA/consolidated/">Screener, Tanla Platforms company page (peer)</a></li>
+<li id="cite_note-27"><a href="https://www.screener.in/company/INTELLECT/consolidated/">Screener, Intellect Design Arena company page (peer)</a></li>
+<li id="cite_note-28"><a href="https://www.screener.in/company/ROUTE/consolidated/">Screener, Route Mobile company page (peer)</a></li>
+<li id="cite_note-29"><a href="https://trendlyne.com/conference-calls/82274/517286/rnit-ai-solutions-ltd/">Trendlyne, RNIT AI conference calls index (no transcript text retrieved)</a></li>
+<li id="cite_note-30">Internal: run facts ledger for IN, session 12 Oct 2026 (Yahoo Finance daily bars; moving averages, RSI, ATR, volume multiple, 52-week range, stage, swing low, regime). No public URL.</li>
+<li id="cite_note-31">Internal: Zerodha consolidated positions file for this run, 12 Oct 2026 (RNITAI quantity, cost basis, market value, realised gain, net worth, cash). No public URL.</li>
+<li id="cite_note-32">Internal: .agents/config/scoring.json (asymmetry floors, support-distance ladder, stop placement rules, single-stock cap, research age limit). No public URL.</li>
+<li id="cite_note-33">Internal: watchlist and shortlist records for this run (RNITAI rows in data/watchlist/IN.json and data/shortlist/IN.json). No public URL.</li>
+<li id="cite_note-34">Internal: watchlist_shortlist_underwriting skill, Layer 1 hard-gate floors (ROCE 15.0 percent, debt-to-equity 0.70, cash conversion 0.70). No public URL.</li>
+</ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-</div>
-</body>
-</html>
+</script></body></html>

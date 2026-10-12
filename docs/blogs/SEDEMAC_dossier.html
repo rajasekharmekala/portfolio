@@ -1,1589 +1,675 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sedemac Mechatronics Limited (SEDEMAC) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-12">
+<meta name="generated-at" content="2026-10-12T10:02:09.595941-07:00">
+<title>SEDEMAC: Sedemac Mechatronics Limited, company dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
- --text-primary: #1f2937;
- --text-secondary: #4b5563;
- --text-muted: #6b7280;
- --bg-main: #ffffff;
- --bg-surface: #f9fafb;
- --border-color: #d1d5db;
- --brand-blue: #1d4ed8;
- --brand-green: #15803d;
- --brand-amber: #b45309;
- --brand-red: #b91c1c;
- --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
- --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
- --font-mono: 'JetBrains Mono', monospace;
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
 }
-body {
- font-family: var(--font-sans);
- color: var(--text-primary);
- background-color: var(--bg-main);
- line-height: 1.68;
- font-size: 15px;
- letter-spacing: -0.011em;
- margin: 0;
- padding: 30px 38px;
- max-width: 1220px;
- margin-left: auto;
- margin-right: auto;
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
 }
-h1.firstHeading {
- font-family: var(--font-serif);
- font-size: 2.25em;
- font-weight: 600;
- line-height: 1.2;
- margin-top: 0;
- margin-bottom: 0.2em;
- padding-bottom: 8px;
- border-bottom: 1px solid var(--border-color);
- color: #111827;
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
 }
-.siteSub {
- font-size: 0.88em;
- color: var(--text-muted);
- margin-bottom: 1.3em;
-}
-.decision-banner {
- background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
- border: 1px solid #bbf7d0;
- border-left: 6px solid var(--brand-green);
- border-radius: 8px;
- padding: 16px 20px;
- margin: 1.1em 0 1.6em 0;
- box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-}
-.decision-header {
- display: flex;
- justify-content: space-between;
- align-items: center;
- flex-wrap: wrap;
- gap: 10px;
- margin-bottom: 12px;
- border-bottom: 1px solid #bbf7d0;
- padding-bottom: 9px;
-}
-.decision-title {
- font-family: var(--font-serif);
- font-size: 1.25em;
- font-weight: 700;
- color: #14532d;
- display: flex;
- align-items: center;
- gap: 7px;
-}
-.decision-badge {
- background-color: #16a34a;
- color: #ffffff;
- padding: 5px 13px;
- border-radius: 18px;
- font-size: 0.80em;
- font-weight: 700;
- letter-spacing: 0.03em;
- text-transform: uppercase;
-}
-.decision-grid {
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
- gap: 12px;
-}
-.decision-card {
- background: #ffffff;
- border: 1px solid #bbf7d0;
- border-radius: 6px;
- padding: 9px 12px;
-}
-.decision-card-label {
- font-size: 0.74em;
- font-weight: 600;
- text-transform: uppercase;
- color: var(--text-muted);
- margin-bottom: 3px;
-}
-.decision-card-value {
- font-size: 1.08em;
- font-weight: 700;
- color: #1e293b;
- font-family: var(--font-mono);
-}
-.decision-card-sub {
- font-size: 0.78em;
- color: var(--text-secondary);
- margin-top: 2px;
-}
-h2 {
- font-family: var(--font-serif);
- font-size: 1.55em;
- font-weight: 600;
- color: #111827;
- border-bottom: 1px solid var(--border-color);
- padding-bottom: 5px;
- margin-top: 1.9em;
- margin-bottom: 0.5em;
-}
-h3 {
- font-size: 1.12em;
- font-weight: 600;
- margin-top: 1.3em;
- margin-bottom: 0.4em;
- color: #1f2937;
-}
-p {
- margin: 0.7em 0 0.9em 0;
- text-align: justify;
- text-justify: inter-word;
-}
-a {
- color: var(--brand-blue);
- text-decoration: none;
-}
-a:hover {
- color: #1e40af;
- text-decoration: underline;
-}
-table.infobox {
- border: 1px solid var(--border-color);
- border-spacing: 2px;
- background-color: var(--bg-surface);
- color: var(--text-primary);
- margin: 0.4em 0 1.2em 1.5em;
- padding: 5px;
- float: right;
- clear: right;
- font-size: 86%;
- line-height: 1.46;
- width: 330px;
- border-radius: 4px;
- box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-}
-table.infobox th {
- vertical-align: top;
- text-align: left;
- padding: 4px 6px;
- font-weight: 600;
- width: 42%;
- color: #374151;
-}
-table.infobox td {
- vertical-align: top;
- padding: 4px 6px;
-}
-table.infobox caption {
- font-family: var(--font-serif);
- font-size: 1.20em;
- font-weight: 700;
- padding: 6px;
- background-color: #f3f4f6;
- border: 1px solid var(--border-color);
- text-align: center;
- border-radius: 3px 3px 0 0;
- color: #111827;
-}
-.infobox-image {
- text-align: center;
- padding: 8px;
- background-color: #ffffff;
- border: 1px solid #e5e7eb;
- margin: 3px 0;
-}
-.infobox-header {
- background-color: #f3f4f6;
- text-align: center;
- font-weight: 600;
- padding: 4px;
- color: #374151;
- font-size: 90%;
-}
-.toc {
- background: #fcfcfd;
- border: 1px solid var(--border-color);
- padding: 10px 16px;
- display: table;
- margin: 1.0em 0 1.4em 0;
- font-size: 88%;
- min-width: 280px;
- border-radius: 4px;
-}
-.toc h2 {
- font-family: var(--font-sans);
- font-size: 96%;
- font-weight: 700;
- border-bottom: none;
- margin: 0 0 6px 0;
- padding: 0;
- text-align: center;
- color: #374151;
- text-transform: uppercase;
-}
-.toc ul {
- list-style-type: none;
- margin: 0;
- padding: 0;
-}
-.toc ul ul {
- margin-left: 1.2em;
-}
-.toc li {
- margin-bottom: 3px;
-}
-.tocnumber {
- color: var(--text-muted);
- margin-right: 5px;
- font-weight: 600;
- font-family: var(--font-mono);
-}
-table.wikitable {
- background-color: #ffffff;
- color: var(--text-primary);
- margin: 1.0em 0;
- border: 1px solid var(--border-color);
- border-collapse: collapse;
- font-size: 87%;
- width: 100%;
- box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-}
-table.wikitable th {
- background-color: #f3f4f6;
- text-align: left;
- font-weight: 600;
- padding: 6px 9px;
- border: 1px solid var(--border-color);
- color: #1f2937;
-}
-table.wikitable td {
- padding: 5px 9px;
- border: 1px solid var(--border-color);
- vertical-align: top;
-}
-table.wikitable tr:nth-child(even) {
- background-color: #fafbfc;
-}
-table.wikitable tr:hover {
- background-color: #f0f7ff;
-}
-.callout-box {
- background-color: #f8fafc;
- border: 1px solid #cbd5e1;
- border-left: 5px solid var(--brand-blue);
- border-radius: 4px;
- padding: 11px 15px;
- margin: 1.1em 0;
- font-size: 92%;
-}
-.forensic-box {
- background-color: #fffdfa;
- border: 1px solid #fed7aa;
- border-left: 5px solid var(--brand-amber);
- border-radius: 4px;
- padding: 11px 15px;
- margin: 1.1em 0;
- font-size: 92%;
-}
-.fatal-box {
- background-color: #fffafa;
- border: 1px solid #fecaca;
- border-left: 5px solid var(--brand-red);
- border-radius: 4px;
- padding: 11px 15px;
- margin: 1.1em 0;
- font-size: 92%;
-}
-.reflist {
- font-size: 82%;
- column-count: 2;
- -webkit-column-count: 2;
- list-style-type: decimal;
- padding-left: 20px;
- line-height: 1.50;
-}
-.reflist li {
- margin-bottom: 6px;
- word-break: break-word;
-}
-.clearfix::after {
- content: "";
- clear: both;
- display: table;
-}
-.mono {
- font-family: var(--font-mono);
-}
-</style>
 
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
 
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 class="firstHeading">Sedemac Mechatronics Limited</h1>
-<div class="siteSub">From Wikipedia, the institutional financial encyclopedia &bull; Equity Underwriting Dossier &bull; 🚀 TACTICAL_MOMENTUM</div>
-
-<!-- HIGH-LEVEL EXECUTIVE CAPITAL ALLOCATION DECISION BANNER -->
-<div class="decision-banner">
- <div class="decision-header">
- <div class="decision-title">
- <span>🏛️ EXECUTIVE CAPITAL ALLOCATION VERDICT</span>
- </div>
- <div class="decision-badge">
- 🟢 KEEP COMPOUNDING &bull; ACTIVE RUNNER
- </div>
- </div>
- <div class="decision-grid">
- <div class="decision-card">
- <div class="decision-card-label">Active Position Mandate</div>
- <div class="decision-card-value" style="color: #15803d;">HOLD 200 SHARES</div>
- <div class="decision-card-sub">Invested &#8377;4,05,098 &bull; P&amp;L +&#8377;2,57,622 (+63.59%)</div>
- </div>
- <div class="decision-card">
- <div class="decision-card-label">Portfolio Weight Posture</div>
- <div class="decision-card-value">14.20% OF EQUITY</div>
- <div class="decision-card-sub">Rank #2 holding &bull; Tactical ceiling 15.00%</div>
- </div>
- <div class="decision-card">
- <div class="decision-card-label">Trailing Protective Stop</div>
- <div class="decision-card-value" style="color: #b91c1c;">&#8377;3,150.00</div>
- <div class="decision-card-sub">Locks +55.5% profit &bull; Structural Stop &#8377;2,950</div>
- </div>
- <div class="decision-card">
- <div class="decision-card-label">12–18M Base Target &amp; Asymmetry</div>
- <div class="decision-card-value" style="color: #1d4ed8;">&#8377;4,250.00 <span style="font-size: 0.8em;">(3.57 : 1)</span></div>
- <div class="decision-card-sub">+28.26% upside; Blue-Sky Bull &#8377;4,850 (+46.4%)</div>
- </div>
- </div>
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>SEDEMAC: Sedemac Mechatronics Limited, company dossier</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T10:02:09.595941-07:00">12 Oct 2026, 10:02 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-12</p></header>
+<dl class="key-figures">
+<dt>Close, 12 Oct 2026</dt><dd>₹3,223.20<sup><a href="#cite_note-1">[1]</a></sup></dd>
+<dt>Position value (200 shares)</dt><dd>₹6,44,640, or 13.7% of the account<sup><a href="#cite_note-2">[2]</a></sup></dd>
+<dt>Working stop</dt><dd>₹2,950<sup><a href="#cite_note-3">[3]</a></sup></dd>
+<dt>Money at risk if the stop is hit</dt><dd>₹54,640, or 1.16% of the account<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></dd>
+<dt>Layer 1 hard gates</dt><dd>Failed on the target test; see the gate table</dd>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p class="status">Status: BEST_EFFORT_AFTER_REVIEW_LIMIT, PUBLISHED_WITH_GATE_EXCEPTIONS. Current holding of 200 shares; the Layer 1 gate failed on the target test, no taxonomy label fits, and the advice is hold with no add and a working stop at ₹2,950.</p>
+<p>This dossier looks at one company, Sedemac Mechatronics Limited, which trades on the NSE as SEDEMAC, and at what our 200 shares should do next.</p>
+<p>It is written from the 12 October 2026 market session, the latest session with a verified close in our data.</p>
+<p>The short version is that the business is strong, but a hurdle that every new purchase must clear cannot be proved from the data we can reach, so we hold the shares, add nothing, and keep the stop at ₹2,950.</p>
+</section>
+<section class="chapter" id="terms">
+<h2>Before you read: the terms we use</h2>
+<p>This chapter defines every technical term once, at the point where it first matters. If a word looks unfamiliar later, come back here. Each definition uses a plain comparison, because the numbers only mean something once the terms are clear.</p>
+<p>A <dfn>20-day moving average</dfn> is the average closing price over the last 20 sessions, a bit like a smoothed trend line. A <dfn>50-day moving average</dfn> does the same over 50 sessions, and a <dfn>200-day moving average</dfn> over 200 sessions, so a longer average shows the slower trend.<sup><a href="#cite_note-29">[29]</a></sup> Each average is only as good as the history behind it, and that matters for this stock.</p>
+<p><dfn>Stage 2</dfn> is the uptrend phase in the four-stage cycle, when a stock trades above a rising average. <dfn>Stage 4</dfn> is the downtrend phase, when the stock falls below a falling average. A <dfn>base</dfn> is the sideways stretch a stock rests in after a fall, like a car idling before it pulls away.</p>
+<p><dfn>ATR</dfn> (average true range) is the typical daily price swing of the stock, measured in rupees.<sup><a href="#cite_note-27">[27]</a></sup> Dividing a distance by ATR tells you how many normal days of movement sit between the price and a level, which is why the report uses it for stops and entry bands.</p>
+<p><dfn>RSI</dfn> (relative strength index) is a speed gauge from 0 to 100. Readings above 70 mean the stock has risen fast, and readings below 30 mean it has fallen fast. It describes momentum, not value.<sup><a href="#cite_note-28">[28]</a></sup></p>
+<p><dfn>ROCE</dfn> (return on capital employed) is the profit a business earns on all the money tied up in it. A high ROCE means the company turns each rupee of invested capital into a lot of profit.</p>
+<p><dfn>EPS</dfn> (earnings per share) is the company's profit divided by its number of shares. <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization) is operating profit before the costs of borrowing, tax and wear on machines.</p>
+<p><dfn>Operating margin</dfn> (OPM) is the share of each rupee of sales left after running costs. An operating margin of 20 percent means 20 paise of every rupee of sales remains before interest, tax and depreciation.</p>
+<p><dfn>Debt-to-equity</dfn> is the borrowed money a company uses for each rupee of its owners' money. A ratio of 0.16 means 16 paise of borrowing for each rupee of equity.</p>
+<p>The <dfn>price-to-earnings</dfn> ratio (P/E) is how many rupees an investor pays for one rupee of yearly profit. A P/E of 120 means the price is 120 times the yearly profit, so the buyer is paying for years of future growth.</p>
+<p><dfn>Asymmetry</dfn> means the ratio of the possible gain to the possible loss, measured from the stop. Our rules need a target that sits at least 3.5 times the distance from the price to the stop for a Tactical Momentum name.<sup><a href="#cite_note-4">[4]</a></sup> A verifiable target is one that can be traced to a named method, such as forward earnings times a historical median P/E, or a measured-move from a chart base.</p>
+<p>An <dfn>entry zone</dfn> is the price band in which a new buy is allowed. The band is set by distance from a support level, measured in ATR, so the buy happens near a level where the stock has found buyers before.</p>
+<p>A <dfn>pivot</dfn> is the price level a stock must close above to confirm a new trend, like a gate that opens only above a set height. A <dfn>retest</dfn> is a return to a level that was just broken, to see whether it now holds as support. A <dfn>limit order</dfn> is an order to buy only at a stated price or better, so it may not fill at all.</p>
+<p>The Layer labels follow our three-layer framework. Layer 1 is a set of hard pass-or-fail gates. Layer 2 is a traffic-light scorecard of operating measures. Layer 3 is the entry-timing rule.</p>
+<p class="chapter-bridge">With these terms in hand, the next chapter describes the company itself, so that the numbers that follow have a business to attach to.</p>
+</section>
+<section class="chapter" id="what-it-does">
+<h2>What the company does</h2>
+<p>Sedemac Mechatronics makes electronic control units, which are the small computers that run one part of a vehicle. The company describes itself as a Pune-based technology company specializing in control electronics, incorporated in 2007.<sup><a href="#cite_note-5">[5]</a></sup> In plain terms, it sells the brain for a motor, and its sales follow the number of vehicles that use that motor.</p>
+<p><a href="https://en.wikipedia.org/wiki/Electronic_control_unit">An electronic control unit</a> is an embedded computer that controls one or more of a vehicle's electrical systems.<sup><a href="#cite_note-24">[24]</a></sup> The company's products are of this kind, and they sit inside two-wheelers and three-wheelers as well as industrial equipment.</p>
+<h3>The products, and why one of them matters most</h3>
+<p>The company's largest product line is the integrated starter generator, or ISG, control unit. An idle-stop system shuts the engine off at a red light and restarts it when the rider moves, which the Wikipedia overview describes as a way to reduce idle time and fuel use.<sup><a href="#cite_note-22">[22]</a></sup> Management describes the ISG electronics as a motor controller for an internal combustion engine, and it names the Honda Activa among the two-wheeler models that carry the feature.<sup><a href="#cite_note-15">[15]</a></sup></p>
+<p>The company also makes motor controllers for electric two- and three-wheelers, a category that is growing quickly in India.<sup><a href="#cite_note-26">[26]</a></sup> A brushless DC motor needs its electronics to know where the rotor is, and controllers that do this without a physical position sensor are often called sensorless controllers.<sup><a href="#cite_note-23">[23]</a></sup> The alternative is a Hall effect sensor, a common way to read rotor position.<sup><a href="#cite_note-25">[25]</a></sup></p>
+<p>The bridge from products to money is volume. In FY26, the company's Mobility segment grew 61 percent to ₹911 crore, and Industrial grew 57 percent to ₹148 crore.<sup><a href="#cite_note-8">[8]</a></sup> In the June 2026 quarter, Mobility revenue rose 53 percent to ₹281.04 crore while Industrial fell 16 percent to ₹28.73 crore.<sup><a href="#cite_note-9">[9]</a></sup> That split matters because the growth engine is the two-wheeler and electric business, not the factory-automation side.</p>
+<p class="chapter-bridge">The next question is how the business is financed and whether its customers are spread widely enough to survive a loss of one of them.</p>
+<h3>Listing, plants and the customer base</h3>
+<p>The company listed on the exchanges on 11 March 2026, after an initial public offer whose final offer document the SEBI filing shows was filed with the registrar of companies on 6 March 2026.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-21">[21]</a></sup> That short listing history is the reason several long-run measures in this report cannot yet be computed, a point we return to in the gate table.</p>
+<p>On 25 September 2026 the company began limited commercial production at its new Manufacturing Facility 3 (MF3) in Pune.<sup><a href="#cite_note-5">[5]</a></sup> It also reported record Q2 FY27 ECU sales, up 37.5 percent, with cumulative sales of one million ISG and EFI ECUs.<sup><a href="#cite_note-5">[5]</a></sup> The MF3 facility is the new capacity that the next two years of volume growth will need.</p>
+<p>The customer base is narrow. The ICRA rating filing states that 77 percent of revenue comes from the largest client, and that 75 percent of raw materials are imported.<sup><a href="#cite_note-7">[7]</a></sup> Management does not give that single number on the call. It describes a different measure, the largest customer's revenue share minus the sum of the next four, and says the measure has been falling over three years.<sup><a href="#cite_note-15">[15]</a></sup> The two statements do not contradict each other directly, but neither gives us a clean figure for the top customer, so we use ICRA's 77 percent and flag the definition gap.</p>
+<p class="chapter-bridge">Customer concentration is the first weak point, and it sits next to real strengths in returns and cash, which the next chapter weighs.</p>
+<h3>Ownership and the lock-in question</h3>
+<p>As of June 2026 the promoters held 26.23 percent, foreign investors 4.27 percent, domestic institutions 39.81 percent, and the public 29.70 percent.<sup><a href="#cite_note-5">[5]</a></sup> Mutual funds alone rose to 15.33 percent of the company in the June quarter, from 13.63 percent.<sup><a href="#cite_note-6">[6]</a></sup> The promoter stake reported as 0.0 percent pledged, with all of it marked as locked in.<sup><a href="#cite_note-6">[6]</a></sup> The lock-in expiry date is not in any readable source we could reach. A search snippet points to a lock-up on a block of shares that ended in September 2026, but the NSE pages that would confirm it could not be read, so we do not use it. The expiry calendar is therefore an unquantified supply risk.</p>
+<p class="chapter-bridge">Ownership looks healthy on the surface, and the next chapter asks whether the business behind it deserves the attention.</p>
+</section>
+<section class="chapter" id="strength">
+<h2>Why the business is strong or weak</h2>
+<p>A company can be strong on its numbers and still be fragile in its structure. This chapter sets out both sides, using the measures the Layer 1 and Layer 2 frameworks name. Strength here means high returns on the money the business uses, low borrowing and cash that arrives with profit. Weakness means concentration, cost exposure and expectations that already assume a lot.</p>
+<h3>The strengths, in the company's own numbers</h3>
+<p>Returns are the strongest part of the case. ROCE stands at 35.3 percent and ROE at 26.9 percent on the current Screener reading.<sup><a href="#cite_note-5">[5]</a></sup> A company that earns 35 paise on every rupee of capital it uses can fund growth from its own earnings more easily than a company that earns less.</p>
+<p>Cash backs the profit. Over the last three fiscal years operating cash flow totalled ₹280 crore against profit after tax of ₹157 crore, a ratio of 1.78.<sup><a href="#cite_note-5">[5]</a></sup> The company's own release reports FY26 PAT of ₹104 crore, more than double the prior year, and revenue of ₹1,058 crore, up 61 percent.<sup><a href="#cite_note-8">[8]</a></sup> The ICRA rating action in September 2026 upgraded the bank loan rating to [ICRA]A (Positive), citing growth and an interest coverage of 26.5 times in FY26.<sup><a href="#cite_note-7">[7]</a></sup></p>
+<p class="chapter-bridge">Strength is clear in returns and cash. The weak points are in the concentration and the cost base, which the next paragraphs take in turn.</p>
+<h3>The weaknesses, and why they matter more than they look</h3>
+<p>The first weakness is the one already described: 77 percent of revenue from one client.<sup><a href="#cite_note-7">[7]</a></sup> A single customer that moves volume to a rival, or that changes its model line, can remove a large part of sales in one quarter. The second is cost exposure, with 75 percent of raw materials imported, so a currency move or a freight shock flows straight into margins.<sup><a href="#cite_note-7">[7]</a></sup></p>
+<p>Management has already warned about the margin direction. On the May 2026 call it said mild margin pressure is expected from commodity and supply-chain factors, and it would not give product-level margins.<sup><a href="#cite_note-15">[15]</a></sup> The June 2026 quarter shows the first sign of this: the operating margin was 19 percent against 20 percent a year earlier.<sup><a href="#cite_note-5">[5]</a></sup> The quarter's profit also included a ₹2.98 crore reversal of an old tax provision, so the underlying profit growth was nearer 78 percent than the 95 percent reported headline.<sup><a href="#cite_note-9">[9]</a></sup></p>
+<p>Cash tied up with customers is also growing. Debtor days, the average number of days it takes customers to pay, rose from 24 in March 2025 to 46 in March 2026.<sup><a href="#cite_note-5">[5]</a></sup> That is not a crisis at 46 days, but it doubled in a year, and a growing customer book with slower payers is how a profitable company runs short of cash. Capex planned for FY27 of ₹150 to 200 crore is also above FY26 operating cash flow of ₹128 crore.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-5">[5]</a></sup></p>
+<p class="chapter-bridge">The weaknesses are real but are not yet showing in the cash flow. The Layer 2 scorecard below turns these points into traffic lights.</p>
+<h3>Layer 2: the operating scorecard</h3>
+<p>Layer 2 uses five measures chosen for an electronics supplier, namely fixed-asset turnover, margin direction, customer concentration, debtor days and the quarterly margin trend. A measure earns PASS when it meets its threshold, WATCH when it meets its threshold on the annual series but moves the wrong way within a limited band, and FAIL when it misses. For the quarterly margin we set the band at a fall of no more than two points year on year. A one-point dip is noise at a quarterly frequency, and the annual margin test already passes. Applied literally, the quarterly row would be FAIL; the sensitivity is stated once, in the fixed-asset paragraph below and in the verdict section. Layer 2 is shown here for information, because the framework does not score it for a company that fails a Layer 1 gate. We show it because the holding audit needs the operating picture.</p>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Measure</th><th>Threshold</th><th>SEDEMAC reading</th><th>Traffic light</th></tr></thead>
+<tbody>
+<tr><td>Fixed-asset turnover (sales divided by fixed assets)</td><td class="num">above 4.0 times</td><td class="num">4.18 times, from ₹1,058 crore of sales on ₹253 crore of fixed assets<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-keep">PASS</span> (marginal)</td></tr>
+<tr><td>Margin expansion, year on year (operating margin)</td><td class="num">rising</td><td class="num">20 percent in FY26 against 18 percent in FY25<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>Client concentration (largest client's share of revenue)</td><td class="num">below 40 percent</td><td class="num">77 percent<sup><a href="#cite_note-7">[7]</a></sup></td><td><span class="verdict verdict-exit">FAIL</span></td></tr>
+<tr><td>Debtor days (borrowed threshold of 75 days, from the capital-goods line)</td><td class="num">below 75 days, and not rising</td><td class="num">46 days, up from 24<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-trim">WATCH</span></td></tr>
+<tr><td>Quarterly operating margin, year on year</td><td class="num">no fall of more than two points</td><td class="num">19 percent in June 2026 against 20 percent in June 2025<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-trim">WATCH</span></td></tr>
+</tbody></table></div>
+<div class="howto"><p>Read the table by row. Each measure has a threshold, a reading and a light. A PASS means the company clears the bar we set for an electronics supplier. The fixed-asset row is marginal: the 4.18 figure uses the fixed-assets line on the Screener balance sheet, and the earlier shortlist row's KPI summary states 3.82 times<sup><a href="#cite_note-3">[3]</a></sup>, on a base we could not reproduce from readable sources. On that lower figure the light would be FAIL, which would give two failed measures and meet the replace rule. That is the main sensitivity in this dossier. The debtor-days threshold is borrowed from the capital-goods line because our framework sets none for electronics, so it is a judgement, not a rule.</p></div>
+<p>The scorecard reads two passes, two watches and one fail, so it does not meet the minimum of three passes out of four or four out of five that the framework requires to qualify. The fail is the concentration measure, and it is the one that matters most for a single-customer business. Margin expansion is the strongest pass, and it fits the returns story in the previous paragraphs.</p>
+<p class="chapter-bridge">The scorecard shows where the business is exposed. The next chapter turns to the numbers that a lender or an owner would check first.</p>
+</section>
+<section class="chapter" id="numbers">
+<h2>The numbers, in plain words</h2>
+<p>These are the figures a careful reader checks before believing a company's story. Each row is pulled from the Screener company page, which is also the source for the annual and quarterly tables. The company has no subsidiaries, so the standalone tables are the full picture.<sup><a href="#cite_note-9">[9]</a></sup> The aggregator page does not render the consolidated tables, which is why the standalone set is the one we cite.</p>
+<div class="howto"><p>Read each row as a test. The column shows the number, the column called Our rule shows the threshold it must clear, and the last column says whether it passes. Where a number is derived, such as the debt-to-equity ratio or the three-year cash ratio, the row shows the inputs so you can recompute it. Where the company does not publish a figure, the row says so.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Measure</th><th>SEDEMAC reading</th><th>Our rule</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>ROCE (return on capital employed)</td><td class="num">35.3%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">at least 15.0%</td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>ROE (return on equity), current and 3-year</td><td class="num">26.9%, and a 3-year average of 22%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">not a gate</td><td>Context</td></tr>
+<tr><td>Debt-to-equity, March 2026</td><td class="num">0.16 (72 borrowings divided by 449 equity)<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">below 0.70</td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>Cash conversion, 3 years (operating cash flow divided by profit after tax)</td><td class="num">1.78 (₹280 crore over ₹157 crore)<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">at least 0.70</td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>Sales growth, 3-year compound annual rate</td><td class="num">36%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">context</td><td>Context</td></tr>
+<tr><td>Profit growth, 3-year compound annual rate</td><td class="num">128%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">context</td><td>Context</td></tr>
+<tr><td>Operating margin, FY26</td><td class="num">20%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">context</td><td>Context</td></tr>
+<tr><td>Price-to-earnings, trailing</td><td class="num">121<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">context</td><td>Context</td></tr>
+</tbody></table></div>
+<p class="takeaway">The table holds four tests and four context rows. Returns, borrowing and cash conversion all pass comfortably, which is the strongest part of the file. The growth rates are high but come from a low base: profit went from ₹9 crore in March 2023 to ₹104 crore in March 2026, so a 128 percent three-year rate is partly arithmetic.<sup><a href="#cite_note-5">[5]</a></sup> The price-to-earnings ratio of 121 is the number that makes the stock hard to value on history, because the market is paying for growth that has not yet appeared in the profit line. The next paragraphs explain each measure in turn, so that a reader can see what the number is saying, not just whether it passes.</p>
+<h3>ROCE and ROE: how well the money works</h3>
+<p>ROCE tells you how much profit the business makes on all the capital it has tied up, including borrowed capital. A business that earns 35.3 percent on capital is generating far more than a bank deposit would, and it can fund growth without asking shareholders for money. ROE is the same idea measured against the owners' equity only. On the Screener page, ROE is 26.9 percent now, 22 percent over three years, and 27 percent in the last year.<sup><a href="#cite_note-5">[5]</a></sup> The consequence is that the company does not need heavy outside funding to build a plant, which is consistent with the MF3 start.</p>
+<p>The caution is that the company's own FY26 summary says RoCE improved to over 40 percent, which is higher than the Screener figure.<sup><a href="#cite_note-8">[8]</a></sup> The definitions differ, and we use the Screener figure because it is the one we can recompute from the balance sheet. That difference does not change the verdict, because the gate passes at either number.</p>
+<p class="chapter-bridge">Returns say the business uses its capital well. The next measure asks how much borrowed money sits behind that capital.</p>
+<h3>Debt-to-equity: how much is borrowed</h3>
+<p>Debt-to-equity compares borrowings with the owners' equity. At March 2026 the company had borrowings of ₹72 crore against equity of ₹449 crore, which is equity capital of ₹44 crore plus reserves of ₹405 crore.<sup><a href="#cite_note-5">[5]</a></sup> That gives 0.16, well below the 0.70 limit in our rules. ICRA reports gearing of 0.2 times, which is the same conclusion on a slightly wider debt definition.<sup><a href="#cite_note-7">[7]</a></sup> The consequence is that a sales slowdown would not threaten the company's ability to pay its lenders.</p>
+<p class="chapter-bridge">Low debt means the business can absorb a shock. The cash test shows whether the profit is real money.</p>
+<h3>Cash conversion: is the profit real money?</h3>
+<p>Cash conversion asks whether the reported profit turns into cash. Our test sums three years of operating cash flow and divides by three years of profit after tax. Operating cash flow was ₹61 crore in FY24, ₹91 crore in FY25 and ₹128 crore in FY26.<sup><a href="#cite_note-5">[5]</a></sup> Profit after tax was ₹6 crore, ₹47 crore and ₹104 crore over the same years.<sup><a href="#cite_note-5">[5]</a></sup> Adding them gives ₹280 crore of cash against ₹157 crore of profit, so the ratio is 1.78, far above the 0.70 floor.</p>
+<p>A ratio above 1 means the company turned more than its profit into cash, which can happen when depreciation is large or when customers pay faster. That is a good sign for the cash picture but a warning about the future: if capex rises faster than profit, cash left over after investment can fall even while profit rises. The rating filing puts FY27 capex at ₹150 to 200 crore, which will test this.<sup><a href="#cite_note-7">[7]</a></sup></p>
+<p class="chapter-bridge">Cash conversion passes, and it shows the profit is backed by money. The growth rates that follow show whether that money is growing fast enough to justify the price.</p>
+<h3>Growth: the compound rates over three years</h3>
+<p>A compound annual growth rate, or CAGR, is the steady yearly rate that would take a number from its start value to its end value. Screener shows sales growing at 36 percent a year over three years and profit at 128 percent a year over the same period.<sup><a href="#cite_note-5">[5]</a></sup> The sales figure is close to what the printed endpoints give: sales of ₹423 crore in March 2023 and ₹1,058 crore in March 2026 imply about 36 percent a year.<sup><a href="#cite_note-5">[5]</a></sup> The profit figure starts from a small base of ₹9 crore, so it is high but should be read as a recovery from low profit, not as a permanent pace.</p>
+<p>The forward view is still strong. Analyst consensus sees net sales of about ₹1,507 crore in FY27, which is roughly 42 percent above FY26.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> If that is delivered, the growth story holds, and the open question is margin, not volume.</p>
+<p class="chapter-bridge">Growth is strong, but the margin determines how much of that growth reaches shareholders. The operating margin test follows.</p>
+<h3>Operating margin: how much of each rupee of sales is kept</h3>
+<p>The operating margin is the share of sales left after running costs such as raw materials, wages and factory overheads. The Screener row shows 12, 10, 11, 15, 18 and 20 percent across the last six years, and the margin dipped from 12 to 10 percent in the second year, then rose every year to 20 percent.<sup><a href="#cite_note-5">[5]</a></sup> That rise is a large part of why profit grew faster than sales. The FY26 company summary puts EBITDA margin near 21 percent, and ICRA reports an operating margin of 21.5 percent, which are definitional variants of the same story.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></p>
+<p>The June 2026 quarter is where the squeeze appears. Operating margin was 19 percent, against 20 percent in June 2025.<sup><a href="#cite_note-5">[5]</a></sup> One quarter is not a trend, but management has warned of pressure, so we watch it closely. An operating margin below 13.5 percent for two quarters is the level the earlier shortlist row set as an invalidation, and we keep it as a stop-type test.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p class="chapter-bridge">The margin is the weak link in the earnings path. The last measure is what the market is paying for that earnings path.</p>
+<h3>Price-to-earnings: what the market pays for each rupee of profit</h3>
+<p>The price-to-earnings ratio divides the share price by earnings per share. On the Screener page the trailing ratio is 121, meaning investors pay ₹121 for every ₹1 of profit earned over the last twelve months.<sup><a href="#cite_note-5">[5]</a></sup> The forward figure is much lower, because earnings are expected to rise. At the current price the analyst consensus FY27 EPS of ₹41.70 implies a ratio of about 77 times.<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> That is still high, and it is a bet that growth continues.</p>
+<p>The historical comparison is missing. A three-year median of this ratio would be the usual yardstick for a target, and it does not exist yet for this stock, because it listed in March 2026.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> That gap is the reason the target gate below cannot be passed.</p>
+<p class="chapter-bridge">The numbers describe a strong business at a full price. The Layer 1 gate table turns those numbers, and the stock's missing history, into pass or fail decisions.</p>
+<h3>Layer 1: the hard gates</h3>
+<p>Layer 1 is the first filter. A candidate must pass every gate, and one failure ends the analysis for a new purchase. For this holding the gates still matter, because they determine whether we may add to the position. Three gates pass on the data we have, two cannot be tested yet because the 200-day average is missing, and the target gate fails because the number it needs is not in the record.</p>
+<div class="howto"><p>Each row names a gate, the rule it applies, the SEDEMAC reading and the status. A status of PASS means the reading meets the rule. UNVERIFIED means the data needed to test the rule does not exist yet, which is different from failing it. FAIL means the reading misses the rule. The overall gate is the worst status in the table, and the target row decides it.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Gate</th><th>Rule</th><th>SEDEMAC reading</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Return on capital</td><td class="num">ROCE at least 15.0%</td><td class="num">35.3%<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>Borrowing</td><td class="num">debt-to-equity below 0.70</td><td class="num">0.16<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>Cash backing</td><td class="num">3-year operating cash flow to profit at least 0.70</td><td class="num">1.78<sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-keep">PASS</span></td></tr>
+<tr><td>Technical posture</td><td>Stage 2, or a Stage 1 base; no Stage 4 breakdown</td><td>Stage cannot be computed: 145 price bars in the facts ledger, and no 200-day average<sup><a href="#cite_note-1">[1]</a></sup>. The 50-day test shows the price above a rising average, so no breakdown is visible on that test</td><td><span class="verdict verdict-watch">UNVERIFIED</span></td></tr>
+<tr><td>Momentum test (scoring rules, test A or B)</td><td>Price above a 50-day average that sits above the 200-day average, or the entry test B</td><td>Test A needs the 200-day average, which does not yet exist; test B needs a pivot level that the ledger does not hold<sup><a href="#cite_note-4">[4]</a></sup></td><td><span class="verdict verdict-watch">UNVERIFIED</span></td></tr>
+<tr><td>Asymmetry and target anchor</td><td>Target at least 3.5 times the distance to the stop, from a named method; if the target cannot be verified the gate fails</td><td>Verifiable method needs a three-year median P/E, which does not exist for a stock listed in March 2026, or a measured-move with a named chart base, which the ledger does not hold<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-4">[4]</a></sup>. The 3.5-times target would be ₹4,179 against a stop at ₹2,950<sup><a href="#cite_note-4">[4]</a></sup></td><td><span class="verdict verdict-exit">FAIL_ASYMMETRY</span></td></tr>
+</tbody></table></div>
+<p class="takeaway">The overall gate is FAIL_ASYMMETRY, and it is the target row that decides it. The three financial gates pass with room to spare, so the company is not failing on quality. It fails because the framework insists that any target be traceable to a named method, and the two methods it allows both need data this stock does not yet have. The two technical rows are UNVERIFIED rather than failed, which means the answer may change once the 200-day average exists, but the target row alone is enough to block a new purchase. This is an exception to the normal process, and it is set out in the run notes.<sup><a href="#cite_note-4">[4]</a></sup></p>
+<p>Even if we accept a looser anchor, the answer does not change. The most generous readable anchor is the 52-week high of ₹3,650, which gives a ratio of 1.56 against the stop, and the analysts' median target of ₹3,600 gives 1.38.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> Both sit far below the 3.5 floor. The earlier shortlist row showed a target of ₹4,200 and a ratio of 4.09, but that row cannot be traced to a method, so we do not use it.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p class="chapter-bridge">The gates decide what we may do with the stock. The next chapter looks at where the price sits, which decides when any action could be taken.</p>
+<h3>Peer benchmark: how the business compares</h3>
+<p>A peer table is the quickest check on whether a company's numbers are good for its industry or just good in absolute terms. We use two listed automotive suppliers that share the same vehicle-electrification exposure: Uno Minda and Sona BLW Precision Forgings. They are larger and have different mixes, so the comparison is a reference point rather than a like-for-like valuation.</p>
+<div class="howto"><p>Read each row as one company. The first three columns are the scale and price measures, the next three are the returns and margin, and the last two are growth over three years. Uno Minda's figures use the March 2026 column, not the trailing twelve months column that sits beside it on the page.<sup><a href="#cite_note-17">[17]</a></sup></p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Company</th><th>Market cap (₹ crore)</th><th>P/E</th><th>ROCE</th><th>ROE</th><th>Operating margin, FY26</th><th>3-year sales CAGR</th><th>3-year profit CAGR</th></tr></thead>
+<tbody>
+<tr><td><b>SEDEMAC</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ASEDEMAC" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/SEDEMAC/" style="color:var(--link);">Screener</a></span></td><td class="num">14,268<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">121<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">35.3%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">26.9%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">20%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">36%<sup><a href="#cite_note-5">[5]</a></sup></td><td class="num">128%<sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Uno Minda</td><td class="num">63,661<sup><a href="#cite_note-17">[17]</a></sup></td><td class="num">65.7<sup><a href="#cite_note-17">[17]</a></sup></td><td class="num">19.0%<sup><a href="#cite_note-17">[17]</a></sup></td><td class="num">18.8%<sup><a href="#cite_note-17">[17]</a></sup></td><td class="num">11%<sup><a href="#cite_note-17">[17]</a></sup></td><td class="num">27%<sup><a href="#cite_note-17">[17]</a></sup></td><td class="num">29%<sup><a href="#cite_note-17">[17]</a></sup></td></tr>
+<tr><td>Sona BLW Precision Forgings</td><td class="num">49,885<sup><a href="#cite_note-18">[18]</a></sup></td><td class="num">64.2<sup><a href="#cite_note-18">[18]</a></sup></td><td class="num">15.1%<sup><a href="#cite_note-18">[18]</a></sup></td><td class="num">11.7%<sup><a href="#cite_note-18">[18]</a></sup></td><td class="num">25%<sup><a href="#cite_note-18">[18]</a></sup></td><td class="num">19%<sup><a href="#cite_note-18">[18]</a></sup></td><td class="num">19%<sup><a href="#cite_note-18">[18]</a></sup></td></tr>
+</tbody></table></div>
+<p class="takeaway">SEDEMAC earns the highest return on capital of the three, with ROCE of 35.3 percent against 19.0 percent for Uno Minda and 15.1 percent for Sona BLW. It also grows fastest, with a three-year sales rate of 36 percent against 27 and 19 percent. Its operating margin of 20 percent sits between the 11 percent of Uno Minda and the 25 percent of Sona BLW, so the margin is not the premium. The price-to-earnings ratio of 121 is nearly double the peers' 64 to 66, which means the market already prices in more growth than the two peers are assumed to deliver. That is the central tension of the stock: the business is better than its peers, and its price assumes it will stay better for longer.</p>
+<p class="chapter-bridge">The peer table says the company is excellent for its group and expensive against it. The next chapter asks where the price sits against its own averages.</p>
+</section>
+<section class="chapter" id="price">
+<h2>What the price is doing</h2>
+<p>The price chart tells us whether the stock is in a trend and whether it is close enough to a support level to take a position. Every figure in this chapter comes from the facts ledger for the 12 October 2026 session, which is the official source for technical data in this run. The ledger does not hold a 200-day average for this stock, because it has about 145 sessions of history, so one part of the technical picture cannot be built.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<div class="howto"><p>Each row names one technical reading, the ledger's figure and what it tells us. A moving average sits above the price when it is overhead resistance and below the price when it is support. The ATR row converts price distances into normal days of movement, which is how the entry bands are set.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Reading</th><th>Ledger value</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td>Close, 12 Oct 2026</td><td class="num">₹3,223.20<sup><a href="#cite_note-1">[1]</a></sup></td><td>The reference price for every distance below</td></tr>
+<tr><td>Change over 1 day, 1 week, 2 weeks, 1 month</td><td class="num">-0.20%, -4.42%, -6.44%, +13.08%<sup><a href="#cite_note-1">[1]</a></sup></td><td>A strong month was followed by a soft fortnight</td></tr>
+<tr><td>20-day moving average</td><td class="num">₹3,249.85<sup><a href="#cite_note-1">[1]</a></sup></td><td>Overhead: the price sits 0.17 ATR below it</td></tr>
+<tr><td>50-day moving average</td><td class="num">₹3,093.61, rising from ₹2,958.14 ten sessions earlier<sup><a href="#cite_note-1">[1]</a></sup></td><td>Nearest support: the price is 0.81 ATR above it</td></tr>
+<tr><td>200-day moving average</td><td class="num">not available<sup><a href="#cite_note-1">[1]</a></sup></td><td>Cannot be computed yet</td></tr>
+<tr><td>52-week range</td><td class="num">₹1,413.10 to ₹3,650.00<sup><a href="#cite_note-1">[1]</a></sup></td><td>The price is 11.7 percent below the high</td></tr>
+<tr><td>RSI (14)</td><td class="num">50.68<sup><a href="#cite_note-1">[1]</a></sup></td><td>Neutral; neither stretched nor oversold</td></tr>
+<tr><td>ATR (14)</td><td class="num">₹159.03, or 4.93% of the price<sup><a href="#cite_note-1">[1]</a></sup></td><td>The normal daily swing used to set bands</td></tr>
+<tr><td>Volume against the 20-day average</td><td class="num">0.75 times<sup><a href="#cite_note-1">[1]</a></sup></td><td>Quiet trading, so the recent moves lack conviction</td></tr>
+<tr><td>Swing low (20 sessions) and 63-day low</td><td class="num">₹2,878.10 and ₹2,560.00<sup><a href="#cite_note-1">[1]</a></sup></td><td>The swing low is 2.17 ATR below the price</td></tr>
+</tbody></table></div>
+<p class="takeaway">The table tells a clear story. The stock is above its rising 50-day average and below its 20-day average, so it is in a pullback within an uptrend, not a breakdown. The month's gain of 13 percent was followed by a fortnight of decline, and the volume is only three-quarters of normal, which means the decline has not been heavy. RSI at 50.7 is neutral. The key number is the 50-day average at ₹3,093.61, because it is the nearest level where buyers have been active, and the price is 0.81 ATR above it. The 200-day average is missing, so we cannot say the stock is in a full Stage 2 uptrend, and we say so in the gate table.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Relative strength supports the picture. The ledger reads relative strength of 26.15 over 63 sessions and 11.46 over 28 sessions, both positive, which the ledger reads as outperformance against its benchmark over those periods.<sup><a href="#cite_note-1">[1]</a></sup> That is useful context, but it does not stand in for the missing average.</p>
+<p class="chapter-bridge">The trend and the momentum point the same way, with one gap. The next paragraphs set out the entry logic that the gap affects.</p>
+<h3>Momentum and the stage question</h3>
+<p>A stock in Stage 2 is in a sustained uptrend, and most of the framework's technical hurdles are written around that state. Here the ledger can confirm half of the picture. The price is above a 50-day average that has risen by 7.35 percent over the last 21 sessions and by 4.58 percent over the last ten.<sup><a href="#cite_note-1">[1]</a></sup> Those rises are in the right direction. They do not give a Stage label, because the 200-day average that completes the test does not yet exist.</p>
+<p>We therefore refuse to assign a stage. The earlier shortlist row said Stage 2, and the watchlist row said the same, but neither can be reproduced from the ledger that this run uses.<sup><a href="#cite_note-3">[3]</a></sup> Writing a stage we cannot compute would be a guess, and the framework does not allow a guess in a gate.</p>
+<p class="chapter-bridge">The stage stays open until the 200-day average exists. The entry posture below works from the 50-day average, which we can compute, and it shows where a buy would be allowed.</p>
+<h3>Layer 3: the entry posture</h3>
+<p>Layer 3 is the timing rule. It measures how far the price sits from the nearest support, in ATR, and maps that distance onto four bands: full size, standard size, reduced size by limit order, or no buy. The bands come from the scoring configuration, and they apply to new buys. A holding does not enter this rule for adds, because Layer 1 blocks adds.<sup><a href="#cite_note-4">[4]</a></sup></p>
+<div class="howto"><p>Each row is one band, the distance it covers and the action it allows. The SEDEMAC row is marked. The distance is measured from the 50-day average, which is the nearest support in the ledger. A distance under 0.5 ATR is FULL_SIZE, under 1.0 is STANDARD, under 1.2 is LIMIT_ORDER_REDUCE, and anything wider is NO_BUY.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Band</th><th>Distance above support</th><th>Price range from the 50-day average</th><th>Action for a new buy</th></tr></thead>
+<tbody>
+<tr><td>FULL_SIZE</td><td class="num">under 0.5 ATR</td><td class="num">₹3,093.61 to ₹3,173.12<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td><td>Full tier size</td></tr>
+<tr><td><span class="verdict verdict-accumulate">STANDARD (current)</span></td><td class="num">0.5 to 1.0 ATR; SEDEMAC is at 0.81 ATR</td><td class="num">₹3,173.12 to ₹3,252.64<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td><td>Standard size: near support, so buy on a minor pullback</td></tr>
+<tr><td>LIMIT_ORDER_REDUCE</td><td class="num">1.0 to 1.2 ATR</td><td class="num">₹3,252.64 to ₹3,284.5<sup><a href="#cite_note-4">[4]</a></sup></td><td>Limit order only, at reduced size</td></tr>
+<tr><td>NO_BUY</td><td class="num">1.2 ATR or more</td><td class="num">above ₹3,284.5<sup><a href="#cite_note-4">[4]</a></sup></td><td>Wait for a pullback, a retest or a new base</td></tr>
+</tbody></table></div>
+<p class="takeaway">The price is in the STANDARD band, 0.81 ATR above the 50-day average, so under the posture rule a new buy would be allowed at standard size and the posture label would be ACCUMULATE_ON_DIP. That is the entry logic if the target gate were cured. Today the answer is different, because the gate blocks any purchase. The posture is useful for two other reasons. It shows that the stock has not run away from its support, which is the typical reason to avoid a buy. And it shows the level to watch: a close back at ₹3,173 or below would bring the stock into the full-size band. The swing low at ₹2,878 is 2.17 ATR below the price, which places it in the NO_BUY zone if it were used as the anchor, so the 50-day average is the correct anchor.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The support anchor needs one more check. The 20-day average at ₹3,249.85 sits above the price, so it is resistance, not support. A close above it would clear the first hurdle of a recovery, and it is the nearest overhead level to watch.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p class="chapter-bridge">The price is near its support but has not yet proved the trend. The next chapter sets out what could happen, and how far the numbers could move.</p>
+</section>
+<section class="chapter" id="next">
+<h2>What could happen next</h2>
+<p>A dossier should say what the business is likely to earn, not only what it earned. The analysts who follow the stock publish a consensus, and the table below uses it as the central path. Consensus is a poll of a few brokers, so it is a view, not a fact, and the next chapter tests how it could fail.</p>
+<h3>The analysts' path: earnings and targets</h3>
+<p>Three analysts poll the company, and their consensus for FY27 earnings per share has a median of ₹39.80, a mean of ₹41.70 and a range from ₹36.10 to ₹49.20.<sup><a href="#cite_note-11">[11]</a></sup> For FY28 the mean is ₹56.97. Their price targets average about ₹3,558, with a median of ₹3,600, a high of ₹4,000 and a low of ₹3,075.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> The consensus of sales is about ₹1,507 crore for FY27 and ₹1,949 crore for FY28.<sup><a href="#cite_note-13">[13]</a></sup></p>
+<div class="howto"><p>Each row is one published estimate. Read the EPS rows as the profit per share the analysts expect, and the target rows as where they think the price should be in about a year. The consensus is only as good as the number of analysts behind it, which is three here, so the spread between high and low matters as much as the average.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Estimate</th><th>Low</th><th>Median or mean</th><th>High</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>FY27 EPS (₹)</td><td class="num">36.10</td><td class="num">39.80 median, 41.70 mean</td><td class="num">49.20</td><td><sup><a href="#cite_note-11">[11]</a></sup></td></tr>
+<tr><td>FY28 EPS (₹)</td><td class="num">54.10</td><td class="num">58.30 median, 56.97 mean</td><td class="num">58.50</td><td><sup><a href="#cite_note-11">[11]</a></sup></td></tr>
+<tr><td>Price target (₹)</td><td class="num">3,075</td><td class="num">3,600 median, 3,558 mean</td><td class="num">4,000</td><td><sup><a href="#cite_note-12">[12]</a></sup></td></tr>
+<tr><td>FY27 net sales (₹ crore)</td><td class="num">about 1,470</td><td class="num">about 1,507</td><td class="num">about 1,530</td><td><sup><a href="#cite_note-13">[13]</a></sup></td></tr>
+</tbody></table></div>
+<p class="takeaway">Consensus expects profit per share to rise by about 70 to 78 percent in FY27. The base is FY26 EPS of ₹23.45<sup><a href="#cite_note-5">[5]</a></sup>, and the FY27 median of ₹39.80 and mean of ₹41.70 imply rises of about 70 and 78 percent.<sup><a href="#cite_note-11">[11]</a></sup> FY28 rises further, to a mean of ₹56.97.<sup><a href="#cite_note-11">[11]</a></sup> On the EPS mean, the stock is priced at about 77 times this year's earnings, and on the lowest FY27 estimate of ₹36.10 it would be about 89 times.<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> That spread is the real content of the table: even the most cautious analyst expects growth, but the price already reflects most of that growth, so there is little room for a miss. The analysts' targets run from 4.6 percent below the current price to 24 percent above it, and the median of 3,600 is about 12 percent above it.<sup><a href="#cite_note-12">[12]</a></sup> That is a modest upside, not the 4.09 asymmetry in the earlier row.</p>
+<p>The Q1 FY27 figures are the first test of the path, and an independent summary of the same filing agrees on revenue of ₹309.77 crore.<sup><a href="#cite_note-10">[10]</a></sup> Revenue was ₹309.77 crore, up 42.5 percent, and reported profit of ₹33.31 crore was up 95 percent.<sup><a href="#cite_note-9">[9]</a></sup> Part of that jump is on the tax line: the quarter carried a ₹2.98 crore reversal of an old tax provision, and the effective tax rate was 19.4 percent against 43.4 percent a year earlier.<sup><a href="#cite_note-9">[9]</a></sup> Adjusting for the reversal alone, profit was still up about 78 percent, to about ₹30.3 crore, which is still strong.<sup><a href="#cite_note-9">[9]</a></sup> Stockwatch's EBITDA-basis margin is 19.4 percent, down from about 21 percent, while its operating-margin table reads 19.10 percent. The two are different measures, and the operating margin is the one we track.</p>
+<p>The consensus also needs a steep ramp from the first quarter. FY27 net sales of ₹1,507 crore leave about ₹1,197 crore for the remaining three quarters, an average of about ₹399 crore a quarter, or about 29 percent above Q1's ₹309.77 crore.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-9">[9]</a></sup> Consensus net income of about ₹184 crore leaves about ₹151 crore, or about ₹50 crore a quarter, roughly 51 percent above Q1's ₹33.31 crore.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-9">[9]</a></sup> Consensus FY27 sales growth of about 42 percent is also above the 37.5 percent growth in ECU sales that the company reported for Q2.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> Only three analysts contribute, so a miss against this ramp is the likeliest route to a lower price.</p>
+<p class="chapter-bridge">The analysts see growth, and the quarter shows it is real. The money at risk is the next question, because it sets the cost of being wrong.</p>
+<h3>The stop and the money at risk</h3>
+<p>The working stop is a pre-decided exit: if the stock closes below it, we sell. The working stop on this holding is ₹2,950, set by the earlier watchlist row.<sup><a href="#cite_note-3">[3]</a></sup> Its value is that it turns an unknown loss into a known one. The number that matters is how much of the account would be lost if the stop were hit, and that is what the estimate below works out.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>If the stop at ₹2,950 is hit, the loss on the 200 shares is ₹54,640, which is 1.16 percent of the account.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></p>
+<h4>How it was calculated</h4>
+<p>The loss is 200 shares multiplied by the distance from the close of ₹3,223.20 down to the stop of ₹2,950, which is ₹273.20 a share.<sup><a href="#cite_note-1">[1]</a></sup> That is 200 times 273.20, or ₹54,640. The stop is 1.72 ATR below the close, or 8.5 percent.</p>
+<h4>The inputs</h4>
+<p>The inputs are the 200-share holding from the positions file, the close and ATR from the ledger, and the working stop from the watchlist row.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> The account total is ₹46,95,955 including cash of ₹3,678, so the percentage uses that base.</p>
+<h4>The range</h4>
+<p>The stop-placement rule for this bucket puts the stop below the lower of the 20-day swing low and the 20- or 50-day average, minus half an ATR. That rule gives ₹2,798.59. At that stop the loss would be ₹84,920, or 1.81 percent of the account.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> The working stop is tighter, which we accept because it protects more of the profit already made.</p>
+<h4>If the number is off</h4>
+<p>The number assumes the stop is filled at ₹2,950. A gap down through the stop, which can happen on a bad announcement, would fill lower and widen the loss. Brokerage, the exit tax and slippage are not included, and they are small against this loss but real. The account total also moves each day with the market, so the percentage is a snapshot, not a fixed figure.</p>
+</section>
+<p class="chapter-bridge">The money at risk is modest for the account, but the profit at risk is large. The next chapter tests the assumptions that could make the whole path wrong.</p>
+</section>
+<section class="chapter" id="estimates">
+<h2>Why these estimates might be wrong</h2>
+<p>Every estimate in this dossier rests on a small set of inputs, and some of them are weaker than they look. This chapter names the soft spots, sets out three fatal-flaw scenarios with their numbers, and reconciles the new figures with the earlier rows in the watchlist and shortlist. A reader who trusts the verdict should first see where it could break.</p>
+<h3>Where the numbers are soft</h3>
+<p>The first soft spot is the sample. The consensus is three analysts, and the company has listed for only seven months. The three-year median that a target method needs does not exist, so the target is built from a poll, not a method that the framework accepts.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></p>
+<p>The second soft spot is definitional. Three sources give three different pictures of the same business. ICRA says 77 percent from the largest client, management describes a different concentration measure, and the company's own summary says RoCE over 40 percent against 35.3 on Screener.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-8">[8]</a></sup> Where a source is silent, we say so rather than fill the gap.</p>
+<p>The third soft spot is the market-share story. The ISG share of two-wheeler control units is reported as 30 percent in one profile and 35 percent in another, and the 66 percent figure carried on the earlier row is not supported by a readable source.<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> Our growth view does not depend on that share, but the moat argument does, so we do not claim a specific share.</p>
+<p class="chapter-bridge">The soft spots are known and bounded. The fatal-flaw scenarios below show what would happen if one of them broke.</p>
+<h3>Three fatal-flaw scenarios</h3>
+<p>A fatal flaw is an event that would make the thesis wrong, not just uncomfortable. Each scenario below names the trigger, the arithmetic and the level at which we would act.</p>
+<div class="howto"><p>Each row is one scenario. Read the trigger first, then the arithmetic, then the action. The arithmetic uses the FY26 sales and margin, so it shows the size of the damage on the company's own base.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Scenario</th><th>Trigger</th><th>Arithmetic on FY26 base</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>1. Customer shock</td><td>The largest client, 77 percent of revenue, cuts volumes by a quarter<sup><a href="#cite_note-7">[7]</a></sup></td><td class="num">0.77 times 0.25 is 19.25 percent of revenue, so sales fall from ₹1,058 crore to about ₹854 crore<sup><a href="#cite_note-5">[5]</a></sup></td><td>Sell if the close is below ₹2,950. A gap through the stop fills lower, so the stop is a level, not a guarantee; re-underwrite the business</td></tr>
+<tr><td>2. Margin squeeze</td><td>Operating margin falls to the 13.5 percent invalidation level and stays there for two quarters<sup><a href="#cite_note-3">[3]</a></sup></td><td class="num">At 13.5 percent on ₹1,058 crore, operating profit is about ₹143 crore, against ₹217 crore in FY26, a fall of about 34 percent<sup><a href="#cite_note-5">[5]</a></sup></td><td>REPLACE_UNDERPERFORMER if the margin test is breached</td></tr>
+<tr><td>3. Expectation reset</td><td>FY27 earnings come in at the lowest analyst estimate of ₹36.10 per share, not the mean<sup><a href="#cite_note-11">[11]</a></sup></td><td class="num">At the current price, the multiple moves from about 77 times to about 89 times the year's earnings<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>No add; trim only if a trim rule fires. The price illustration is in the decision chapter</td></tr>
+</tbody></table></div>
+<p class="takeaway">The three scenarios differ in what they break. The first breaks the business model, because a single customer carries most of the revenue, and it is the scenario that would most quickly move the stock through the stop. The second breaks the margin trend that supports the growth story, and it can be seen in the quarterly results before it reaches the annual figures. The third breaks the valuation rather than the business: the company could deliver the consensus profit and still see the price fall, because at about 77 times the FY27 consensus EPS there is little room for a miss, and the consensus itself needs a steep ramp from the first quarter. Two further unknowns sit beside these scenarios. The first is the lock-in of the promoter stake, whose expiry date is not in our sources. The second is the 2.2 percent increase in the share count that the ESOP approval of 9,75,000 shares would bring, which is small but real.<sup><a href="#cite_note-5">[5]</a></sup></p>
+<p class="chapter-bridge">The three scenarios define the points at which the verdict would change. The reconciliation below shows how far the new figures differ from the earlier rows.</p>
+<h3>Reconciling the new figures with the earlier rows</h3>
+<p>The watchlist and shortlist rows for this company were last researched on 28 September 2026, and they carry a different price and several different measures. The rows are not wrong about the business, but they were built on another day's data and on measures we cannot reproduce. This table records each difference so the reader can see which figure this report uses and why.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<div class="howto"><p>Read each row as a claim from the earlier record, the figure this run uses and the source of that figure. The ledger and the Screener page govern where they conflict, because they are dated to this session and are reproducible.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Item</th><th>Earlier row (28 Sep 2026)</th><th>This run (12 Oct 2026)</th><th>Source used</th></tr></thead>
+<tbody>
+<tr><td>Price</td><td class="num">₹3,313.60</td><td class="num">₹3,223.20</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>RSI (14)</td><td class="num">58.4</td><td class="num">50.68</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Stage</td><td>Stage 2</td><td>Not computable (no 200-day average)</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Distance from support</td><td class="num">1.04 ATR</td><td class="num">0.81 ATR (50-day average)</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>One-week change</td><td class="num">+2.85%</td><td class="num">-4.42%</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Market cap (₹ crore)</td><td class="num">15,216</td><td class="num">14,268</td><td><sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Price-to-earnings</td><td class="num">126.9</td><td class="num">121</td><td><sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Operating margin</td><td class="num">16.2%</td><td class="num">20%</td><td><sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Cash conversion, 3 years</td><td class="num">0.88</td><td class="num">1.78</td><td><sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Debt-to-equity</td><td class="num">0.11</td><td class="num">0.16</td><td><sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Position weight</td><td class="num">14.20%</td><td class="num">13.73%</td><td><sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Gain on the position</td><td>+64%</td><td>+59.1%</td><td><sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Layer 1 gate</td><td>PASSED</td><td>FAIL_ASYMMETRY</td><td>This run, Layer 1 table</td></tr>
+<tr><td>Operating KPIs</td><td>4 of 4</td><td>2 of 5 PASS</td><td>This run, Layer 2 table</td></tr>
+<tr><td>Target and asymmetry</td><td class="num">4,200 and 4.09</td><td>Not verifiable; the floor needs ₹4,179</td><td><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+<tr><td>Verdict</td><td>KEEP_COMPOUNDING</td><td>HOLD, NO ADD (no taxonomy label fits)</td><td>This run, verdict section</td></tr>
+</tbody></table></div>
+<p class="takeaway">Most of the differences are the price and the timing: the earlier row was struck when the stock stood about 2.8 percent higher, and the one-week move since then changed the RSI and the distance to support.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> The more important differences are in the gate and KPI rows. The earlier row said the gate passed and the operating KPIs were four of four, and neither survives a check against readable sources. Its target of ₹4,200 is the one figure we cannot support. Its stop of ₹2,950 survives as the working stop. Its verdict of KEEP_COMPOUNDING does not survive, because that label's written conditions are not met; the advice is now HOLD, NO ADD. The earlier row put the position weight at 14.2 percent, against 13.7 percent on the current price.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<p class="chapter-bridge">The reconciliation shows which numbers stand and which do not. The final chapter turns the verdict into actions, with the price levels that would change them.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>What we would do, and when</h2>
+<p>This is the decision chapter. It states the holding audit, the verdict and the rule that produced it, and the levels that would change it. The verdict uses the taxonomy for current holdings in the framework. Each of the four labels has a condition, and the label we give has to meet the condition, or the report must say that it does not.</p>
+<h3>The holding audit</h3>
+<p>A holding audit asks four questions: is the position healthy, what is its profit or loss, where is the stop, and what does the taxonomy say. This audit answers each in turn. The positions file is the authority for quantity, cost and value, and the ledger is the authority for the price.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></p>
+<div class="howto"><p>Read the audit top to bottom. The first rows are facts, the middle rows are rules and the last row is the verdict. A verdict is only as good as the rules above it, so the rule rows are the ones to check.</p></div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Item</th><th>Reading</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Position</td><td class="num">200 shares at an average cost of ₹2,025.49, value ₹6,44,640<sup><a href="#cite_note-2">[2]</a></sup></td><td>Held</td></tr>
+<tr><td>Profit or loss</td><td class="num">Gain ₹2,39,541.75, or 59.1 percent on cost<sup><a href="#cite_note-2">[2]</a></sup></td><td><span class="verdict verdict-keep">Profit</span></td></tr>
+<tr><td>Weight in the account</td><td class="num">13.73 percent, against a 15 percent hard cap; headroom about ₹59,753, or 18 shares<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td><td><span class="verdict verdict-keep">Within cap</span></td></tr>
+<tr><td>Trend</td><td>Price above a rising 50-day average; 20-day average overhead<sup><a href="#cite_note-1">[1]</a></sup></td><td><span class="verdict verdict-keep">Intact</span></td></tr>
+<tr><td>Stop</td><td class="num">Working stop ₹2,950, which is 8.5 percent below the close and 1.72 ATR away<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td><span class="verdict verdict-watch">Not breached</span></td></tr>
+<tr><td>Layer 1 gate</td><td>FAIL_ASYMMETRY; adds are blocked<sup><a href="#cite_note-4">[4]</a></sup></td><td><span class="verdict verdict-exit">Failed</span></td></tr>
+<tr><td>Layer 2 scorecard</td><td>2 of 5 PASS; one FAIL on client concentration<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-5">[5]</a></sup></td><td><span class="verdict verdict-trim">Weak</span></td></tr>
+<tr><td>Verdict</td><td>HOLD, NO ADD. No taxonomy label fits; see the verdict section</td><td><span class="verdict verdict-watch">HOLD, NO ADD</span></td></tr>
+</tbody></table></div>
+<p class="takeaway">The audit shows a profitable, unbreached holding with a failed gate and a weak operating scorecard. The profit is large, the stop is far enough away to absorb a normal swing, and the weight leaves room under the cap. The two warnings are the gate and the scorecard, and both argue against adding rather than against holding. Trimming is not indicated, because no trim condition has fired: the stock is not extended, its RSI is 50.7 against a trim line of 75, the weight is under the 15 percent cap, and no verified target has been reached.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+<h3>Size, stop and the bear case</h3>
+<p>The size decision is to hold at the current size. The position is 13.73 percent of the account, under the 15 percent cap, so the cap does not force a cut.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> No trim condition has fired. The stricter alternative, trimming toward a lower weight, is not required by the framework today; it becomes the next step if a second measure fails, and we say so rather than trim against a rule that has not fired.</p>
+<p>The stop has two provenances, and the reader should know both. The working stop of ₹2,950 is the trailing stop recorded for this holding on the earlier watchlist row. It is a risk control, and its level does not depend on the target that the same row carried, which the gate table shows cannot be verified. The stop-placement rule gives ₹2,798.59 instead.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> At the working stop the loss is ₹54,640, or 1.16 percent of the account. At the rule stop it is ₹84,920, or 1.81 percent.<sup><a href="#cite_note-2">[2]</a></sup> We keep the working stop as the exit level and show the rule stop beside it, so the reader can choose the more conservative figure.</p>
+<p>A stop fills at its level only when the market trades through it at that level. A gap of one ATR below ₹2,950, to about ₹2,791, would add ₹31,806 to the loss, for a total of ₹86,446, or 1.84 percent of the account.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></p>
+<p>The bear case is a stress, not a forecast. If FY27 EPS came in at the lowest estimate of ₹36.10 and the multiple fell to 60 times, the price would be about ₹2,166. That is 26.6 percent below the working stop and 32.8 percent below today's close.<sup><a href="#cite_note-11">[11]</a></sup> The 60 times is our illustrative assumption, not a value from the record. Held without a stop fill, that path would lose about ₹2,11,440, or 4.5 percent of the account. The working stop caps the loss at ₹54,640 only if the stock trades through ₹2,950 without a gap; a gap down to the stress price would produce the larger loss.</p>
+<h3>The verdict and the rule behind it</h3>
+<p>The taxonomy has four labels for holdings. KEEP_COMPOUNDING needs all gates passed and at least three of four operating KPIs healthy. ACCUMULATE_ON_DIP needs a high-conviction compounder pulling back to verified support, with room in the allocation. TRIM_PROFIT_BOOKING needs an extended price, a reached target or a weight over the cap. REPLACE_UNDERPERFORMER needs a broken structure, two or more failed KPIs, or an impaired thesis.<sup><a href="#cite_note-4">[4]</a></sup> Measured against those conditions, the stock meets none of them in full.</p>
+<p>No taxonomy label fits the position, so we do not assign one. KEEP_COMPOUNDING needs all gates passed and at least three of four operating KPIs healthy, as the taxonomy words it; our scorecard scores five measures, of which two pass, and neither condition holds. ACCUMULATE_ON_DIP is blocked because any add needs a verified target. TRIM needs an extended price, a reached target or a weight above the cap, and none applies: the weight is 13.73 percent, under 15.<sup><a href="#cite_note-2">[2]</a></sup> REPLACE needs broken structural support, two or more failed KPIs or an impaired thesis. Support is intact and one measure fails. The advice is therefore HOLD, NO ADD: keep the 200 shares at the current size, add nothing, and exit on a close below ₹2,950.<sup><a href="#cite_note-3">[3]</a></sup> The judgement is sensitive to the KPI count. A second failed measure, such as the quarterly margin falling more than two points, or the fixed-asset turnover failing on the earlier shortlist base of 3.82<sup><a href="#cite_note-3">[3]</a></sup>, would meet the replace rule and move the advice to replace. The judgement therefore stays provisional until the target gate, the stage and the 200-day average can be tested.</p>
+<p class="chapter-bridge">The verdict is hold and not add, for a stated reason. The case note below sets out the story in the order a reader needs it, and the triggers then give the levels that would change the advice.</p>
+<div class="casenote" data-symbol="SEDEMAC">
+<h4>Case note: SEDEMAC</h4>
+<p>Sedemac Mechatronics makes the electronic controllers that run starter-generators and electric drives for two- and three-wheelers, and its sales follow how many of those vehicles are built with its parts.<sup><a href="#cite_note-5">[5]</a></sup> It is on our list because we already own 200 shares, bought at an average of ₹2,025.49, which now sit at a gain of 59.1 percent on cost.<sup><a href="#cite_note-2">[2]</a></sup> The numbers are strong: ROCE of 35.3 percent, debt-to-equity of 0.16, and three-year cash conversion of 1.78.<sup><a href="#cite_note-5">[5]</a></sup> The advice is HOLD, NO ADD. No taxonomy label fits, because the Layer 1 gate fails on the target test: the stock has no three-year median multiple, and the ledger holds no base high from which to measure a move.<sup><a href="#cite_note-4">[4]</a></sup> The price is 0.81 ATR above the 50-day average at ₹3,093.61, inside the standard entry band, so a new buy would be allowed if the target gate cleared.<sup><a href="#cite_note-1">[1]</a></sup> What would change this is a verified target of at least ₹4,179, which would allow a review of adds, or a close below ₹2,950, which would trigger the exit.<sup><a href="#cite_note-3">[3]</a></sup></p>
 </div>
-
-<div class="clearfix">
-
-<!-- WIKIPEDIA FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
- <caption>Sedemac Mechatronics Limited</caption>
- <tr>
- <td colspan="2" class="infobox-image">
- <div style="font-size: 1.35em; letter-spacing: 1px; color: #0b3d68; font-weight: 700; font-family: var(--font-serif);">SEDEMAC</div>
- <div style="font-size: 0.80em; color: #4b5563; font-style: italic; margin-top: 2px;">Sensorless BLDC Controllers &bull; ISG Systems &bull; Powertrain ECUs</div>
- </td>
- </tr>
- <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
- <tr><th scope="row">Company type</th><td>Public limited company (Listed on NSE &amp; BSE)<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
- <tr><th scope="row">Traded as</th><td>NSE: <a href="https://www.nseindia.com/get-quotes/equity?symbol=SEDEMAC" target="_blank" class="mono">SEDEMAC</a><br>BSE: <a href="https://www.bseindia.com/stock-share-price/sedemac-mechatronics-ltd/sedemac/544723/" target="_blank" class="mono">544723</a><br>ISIN: <span class="mono">INE08XZ01017</span></td></tr>
- <tr><th scope="row">Industry</th><td>Automotive Electronics &bull; Mechatronics Hardware</td></tr>
- <tr><th scope="row">Sub-sector</th><td>Sensorless Motor Controllers, Integrated Starter Generators (ISG) &amp; ECUs</td></tr>
- <tr><th scope="row">Founded</th><td>2007; 19 years ago (Incubated at SINE, IIT Bombay)<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
- <tr><th scope="row">Founders</th><td>Prof. S. Suryanarayanan, Amit Arun Dixit, Manish Sharma, Pushkaraj Panse, A. Joshi<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-3">[3]</a></sup></td></tr>
- <tr><th scope="row">Headquarters</th><td>Plot No. C-102, MIDC Bhosari, Pune, Maharashtra 411026, India<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
- <tr><th scope="row">Key leadership</th><td>
- Prof. Shashikanth Suryanarayanan <small>(MD &amp; CEO)</small><br>
- Amit Arun Dixit <small>(CTO &amp; Whole-Time Director)</small><br>
- Manish Sharma <small>(Director &ndash; Operations)</small><br>
- Vivek Gangal <small>(Chief Financial Officer)</small><sup><a href="#cite_note-3">[3]</a></sup>
- </td></tr>
- <tr><th scope="row">Manufacturing footprint</th><td><strong>4 Facilities</strong>: MF1 (Bhosari), MF2 (Chakan), MF3 (Shinde &ndash; Commenced Sep 25, 2026), MF4 (Under constr.)<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-5">[5]</a></sup></td></tr>
- <tr><th scope="row">Annual output</th><td><strong>3,901,075 ECUs &amp; Controllers</strong> dispatched in FY26<sup><a href="#cite_note-5">[5]</a></sup></td></tr>
- 
- <tr><th colspan="2" class="infobox-header">Audited Financial Snapshot (TTM Consolidated)<sup><a href="#cite_note-6">[6]</a><a href="#cite_note-7">[7]</a></sup></th></tr>
- <tr><th scope="row">Revenue (TTM)</th><td><span class="mono">&#8377;1,150.42 crore</span> (FY26: &#8377;1,058.00 Cr, +60.7% YoY)</td></tr>
- <tr><th scope="row">EBITDA Margin</th><td><span class="mono">16.20%</span> (FY26) / <span class="mono">17.50%</span> (Q1 FY27)</td></tr>
- <tr><th scope="row">Net Profit (PAT)</th><td><span class="mono">&#8377;119.82 crore</span> (FY26: &#8377;103.58 Cr, +120.2% YoY)</td></tr>
- <tr><th scope="row">ROCE / ROE</th><td><span class="mono"><strong>35.3%</strong> / <strong>26.9%</strong></span></td></tr>
- <tr><th scope="row">Balance sheet cash</th><td><span class="mono">Net Cash: <strong>+&#8377;185.4 Cr</strong></span> (Gross Debt: &#8377;92.0 Cr vs &#8377;277.4 Cr cash)</td></tr>
- <tr><th scope="row">Cash flow (3Y CFO/PAT)</th><td><span class="mono"><strong>0.88x</strong></span> (Audited cash conversion)<sup><a href="#cite_note-8">[8]</a></sup></td></tr>
- <tr><th scope="row">Credit rating</th><td><span class="mono">IND A / Stable</span> (Ind-Ra) &bull; <span class="mono">[ICRA]A / Positive</span><sup><a href="#cite_note-9">[9]</a><a href="#cite_note-10">[10]</a></sup></td></tr>
-
- <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
- <tr><th scope="row">Strategy Bucket</th><td><strong>🚀 TACTICAL MOMENTUM</strong></td></tr>
- <tr><th scope="row">Action Verdict</th><td><strong style="color: #15803d; font-size: 1.05em;">🟢 KEEP_COMPOUNDING</strong></td></tr>
- <tr><th scope="row">CMP (Current Price)</th><td><span class="mono">&#8377;3,313.60</span> (Market Cap: &#8377;15,216 Cr)<sup><a href="#cite_note-11">[11]</a></sup></td></tr>
- <tr><th scope="row">52-Week Range</th><td><span class="mono">&#8377;1,413.10 – &#8377;3,545.00</span> (IPO Price: &#8377;1,352)<sup><a href="#cite_note-12">[12]</a></sup></td></tr>
- <tr><th scope="row">Trailing P/E Ratio</th><td><span class="mono"><strong>126.9x</strong></span> (Forward FY27 P/E: ~83.2x)</td></tr>
- <tr><th scope="row">Trailing Stop Loss</th><td><span class="mono">&#8377;3,150.00</span> (-4.94% from CMP; locks +55.5% profit)</td></tr>
- <tr><th scope="row">Structural Stop</th><td><span class="mono">&#8377;2,950.00</span> (-10.97% beneath 50-DMA base shelf)</td></tr>
- <tr><th scope="row">12–18M Base Target</th><td><span class="mono">&#8377;4,250.00</span> (+28.26% upside; 73x FY28 EPS)</td></tr>
- <tr><th scope="row">Blue-Sky Bull Target</th><td><span class="mono">&#8377;4,850.00</span> (+46.37% upside; MF3+MF4 ramp)</td></tr>
- <tr><th scope="row">Reward/Risk Ratio</th><td><span class="mono"><strong>3.57 : 1</strong></span> (from entry pivot)</td></tr>
- <tr><th scope="row">Support Posture</th><td>🔵 <strong>NEAR_SUPPORT</strong> (0.95x ATR above 20-DMA shelf)</td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc">
- <h2>Contents</h2>
- <ul>
- <li><a href="#audit"><span class="tocnumber">0</span> Active Position Audit &amp; Capital Reallocation Prescription</a></li>
- <li><a href="#history"><span class="tocnumber">1</span> Founding Vision, History &amp; Corporate Evolution</a></li>
- <li><a href="#operations"><span class="tocnumber">2</span> Operations &amp; Revenue Architecture</a>
- <ul>
- <li><a href="#operations-products"><span class="tocnumber">2.1</span> Primary Product Platforms &amp; Algorithmic IP</a></li>
- <li><a href="#operations-oem"><span class="tocnumber">2.2</span> OEM Integration &amp; Tier-1 Client Ecosystem</a></li>
- <li><a href="#operations-manufacturing"><span class="tocnumber">2.3</span> Manufacturing Footprint &amp; MF3 Facility Ramp</a></li>
- <li><a href="#operations-supplychain"><span class="tocnumber">2.4</span> Supply Chain Architecture &amp; Sourcing</a></li>
- </ul>
- </li>
- <li><a href="#sector-dynamics"><span class="tocnumber">3</span> Sector Dynamics: EV Transition &amp; 2W/3W Architecture</a></li>
- <li><a href="#financial-audit"><span class="tocnumber">4</span> Financial Performance &amp; Forensic Accounting Audit</a>
- <ul>
- <li><a href="#financial-pl"><span class="tocnumber">4.1</span> Multi-Year P&amp;L and Operating Leverage</a></li>
- <li><a href="#financial-cashflow"><span class="tocnumber">4.2</span> Cash Flow Quality &amp; Working Capital</a></li>
- <li><a href="#financial-forensics"><span class="tocnumber">4.3</span> Forensic Checks: Altman Z, Beneish M &amp; Audit Quality</a></li>
- </ul>
- </li>
- <li><a href="#underwriting-framework"><span class="tocnumber">5</span> The 3-Layer Underwriting Framework &amp; Institutional Scorecard</a>
- <ul>
- <li><a href="#layer1"><span class="tocnumber">5.1</span> Layer 1: Binary Hard Gating Floors</a></li>
- <li><a href="#layer2"><span class="tocnumber">5.2</span> Layer 2: Operational KPI Scorecard</a></li>
- <li><a href="#layer3"><span class="tocnumber">5.3</span> Layer 3: Support-Aware Entry Posture</a></li>
- </ul>
- </li>
- <li><a href="#peer-matrix"><span class="tocnumber">6</span> Industry Landscape, Moat &amp; Peer Comparison</a></li>
- <li><a href="#technical-trade"><span class="tocnumber">7</span> Technical Posture, Support Anchors &amp; Trade Architecture</a></li>
- <li><a href="#fatal-flaws"><span class="tocnumber">8</span> Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</a></li>
- <li><a href="#capital-allocation"><span class="tocnumber">9</span> Portfolio Allocation &amp; The Money Bridge</a></li>
- <li><a href="#thesis-trackers"><span class="tocnumber">10</span> Key Quarterly Monitoring Indicators</a></li>
- <li><a href="#references"><span class="tocnumber">11</span> References &amp; Regulatory Filings</a></li>
- </ul>
-</div>
-
-<!-- SECTION 0: ACTIVE POSITION AUDIT -->
-<h2 id="audit">0. Active Position Audit &amp; Capital Reallocation Prescription</h2>
-<p>
- Sedemac Mechatronics (NSE: <a href="https://www.nseindia.com/get-quotes/equity?symbol=SEDEMAC" target="_blank">SEDEMAC</a> / BSE: 544723) represents the <strong>second-largest active holding</strong> within the institutional Zerodha active equity portfolio, carrying a <strong>14.20% net equity allocation weight</strong><sup><a href="#cite_note-13">[13]</a></sup>. Originally initiated during post-listing base accumulation at an average cost basis of <strong>&#8377;2,025.49 per share</strong>, the position has generated an exceptional unrealized capital gain of <strong>+63.59% (+&#8377;2,57,621.74)</strong> against prevailing market quotations of <strong>&#8377;3,313.60</strong><sup><a href="#cite_note-11">[11]</a><a href="#cite_note-13">[13]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 0.1: Institutional Zerodha Portfolio Position Audit (As of 24 September 2026)<sup><a href="#cite_note-13">[13]</a></sup></caption>
- <thead>
- <tr>
- <th>Metric Attribute</th>
- <th>Verified Value</th>
- <th>Portfolio Risk Rule</th>
- <th>Audit Compliance Status</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Account Scope &amp; Asset Class</strong></td>
- <td>Zerodha Active Equity Account</td>
- <td>Direct Equity Securities Only</td>
- <td>Compliant; unencumbered demat holding</td>
- </tr>
- <tr>
- <td><strong>Assigned Strategy Bucket</strong></td>
- <td><strong>🚀 TACTICAL_MOMENTUM</strong></td>
- <td>Stage 2 Momentum / Trailing Stops</td>
- <td>Compliant; strong Stage 2 markup with 20-DMA shelf</td>
- </tr>
- <tr>
- <td><strong>Holdings Volume &amp; Cost Basis</strong></td>
- <td><strong>200 shares</strong> @ <span class="mono">&#8377;2,025.49</span></td>
- <td>Invested Capital: <span class="mono">&#8377;4,05,098.26</span></td>
- <td>Accumulated during post-IPO consolidation base</td>
- </tr>
- <tr>
- <td><strong>Current Market Price (CMP)</strong></td>
- <td><span class="mono">&#8377;3,313.60</span></td>
- <td>Exchange Last Traded Price (NSE/BSE)</td>
- <td>Consolidating after absorption of 11.05% PE block deals<sup><a href="#cite_note-14">[14]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Current Position Value</strong></td>
- <td><span class="mono">&#8377;6,62,720.00</span></td>
- <td>Total Portfolio Value: <span class="mono">&#8377;46,67,860.15</span></td>
- <td>Represents 14.13% of Net Worth / 14.20% of Equities</td>
- </tr>
- <tr>
- <td><strong>Unrealized Profit &amp; Loss</strong></td>
- <td><strong style="color: #15803d;">+&#8377;2,57,621.74 (+63.59%)</strong></td>
- <td>Gain threshold &gt; +25.0%</td>
- <td>Tier-1 outperformer; trailing stop active</td>
- </tr>
- <tr>
- <td><strong>Portfolio Weight &amp; Rank</strong></td>
- <td><strong>14.20% (Rank #2 in Portfolio)</strong></td>
- <td>Tactical Ceiling: 15.0% &bull; Cap: 20.0%</td>
- <td>Operating directly near 15.0% tactical ceiling</td>
- </tr>
- <tr>
- <td><strong>Liquid Margin Cash Buffer</strong></td>
- <td><span class="mono">&#8377;23,791.67 (0.51% of NW)</span></td>
- <td>Mandatory Cash Buffer: 5.0% &ndash; 10.0%</td>
- <td><span style="color: #b91c1c; font-weight: 600;">DEFICIT ALERT</span>; zero fresh cash headroom</td>
- </tr>
- <tr>
- <td><strong>Protective Trailing Stop Loss</strong></td>
- <td><span class="mono">&#8377;3,150.00</span> (-4.94% from CMP)</td>
- <td>Anchored beneath 20-DMA support</td>
- <td>Guarantees locked-in return of <strong>+55.52%</strong> on cost</td>
- </tr>
- <tr>
- <td><strong>Final Underwriting Verdict</strong></td>
- <td colspan="3"><strong style="color: #15803d; font-size: 1.05em;">🟢 KEEP_COMPOUNDING &bull; MAINTAIN FULL POSITION &bull; NO FRESH CAPITAL DEPLOYMENT</strong></td>
- </tr>
- </tbody>
-</table>
-
-<div class="callout-box">
- <strong>Institutional Capital Reallocation Prescription (The Money Bridge):</strong>
- <p style="margin-top: 4px; margin-bottom: 0;">
- Because Sedemac's allocation weight has expanded organically to <strong>14.20%</strong> today, the security is operating right against the portfolio's <strong>15.00% single-stock tactical allocation ceiling</strong>. Concurrently, the overall Zerodha account cash buffer stands depleted at a precarious <strong>&#8377;23,791.67 (0.51% of Net Worth)</strong> against a policy target of 5.0%–10.0%<sup><a href="#cite_note-13">[13]</a></sup>. 
- Therefore, the underwriting rule is deterministic: <strong>NO FRESH CASH SHOULD BE DEPLOYED INTO SEDEMAC</strong>. Maintain all 200 shares intact, trail the stop to <strong>&#8377;3,150.00</strong>, and let operational inflection—spearheaded by commercial commissioning of the <strong>MF3 facility on September 25, 2026</strong>—compound gains toward the <strong>&#8377;4,250.00</strong> target<sup><a href="#cite_note-4">[4]</a></sup>. If the stock crosses &#8377;4,200 or portfolio weight hits 18.0%, harvest 50 shares (25% tranche) to realize ~&#8377;2.10L and restore liquid cash.
- </p>
-</div>
-
-<!-- SECTION 1: HISTORY & MILESTONES -->
-<h2 id="history">1. Founding Vision, History &amp; Corporate Evolution</h2>
-<p>
- Sedemac Mechatronics was incubated in 2007 within SINE at <strong>IIT Bombay</strong> by <strong>Prof. Shashikanth Suryanarayanan</strong> (Mechanical Engineering, PhD from UC Berkeley in robust control systems) and four former students: <strong>Amit Arun Dixit</strong> (M.Tech), <strong>Manish Sharma</strong>, <strong>Pushkaraj Panse</strong>, and <strong>Anaykumar Avinash Joshi</strong><sup><a href="#cite_note-2">[2]</a><a href="#cite_note-3">[3]</a></sup>.
-</p>
-<p>
- The engineering thesis solved a major powertrain dilemma: as emissions tightened, small powertrains required precision electronic control. However, conventional brushless DC (BLDC) motor control depended on physical <strong>Hall effect magnetic sensors</strong> embedded inside the motor stator<sup><a href="#cite_note-15">[15]</a></sup>. In Indian two-wheelers—vibrations exceeding 20G, operating temperatures surpassing 125&deg;C, and monsoonal water splash—physical Hall sensors suffered high field failure rates, causing over 60% of electronic warranty claims across Tier-1 suppliers<sup><a href="#cite_note-15">[15]</a><a href="#cite_note-16">[16]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 1.1: Chronological Strategic Inflection Milestones (2007–2026)<sup><a href="#cite_note-2">[2]</a><a href="#cite_note-3">[3]</a><a href="#cite_note-4">[4]</a><a href="#cite_note-12">[12]</a></sup></caption>
- <thead>
- <tr>
- <th>Epoch</th>
- <th>Corporate Era</th>
- <th>Key Strategic Milestones &amp; Technological Breakthroughs</th>
- <th>Capital Structure Evolution</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>2007–2011</strong></td>
- <td><strong>IIT Bombay Incubation &amp; Core IP Genesis</strong></td>
- <td>Incubated at SINE, IIT Bombay. Developed mathematical observer algorithms for sensorless commutation of brushless motors. Patented zero-speed position estimation via high-frequency signal injection<sup><a href="#cite_note-17">[17]</a></sup>.</td>
- <td>Seed grants from DST and SINE; early venture rounds from Indian Angel Network and Nexus Venture Partners.</td>
- </tr>
- <tr>
- <td><strong>2012–2016</strong></td>
- <td><strong>Industrial Commercialization &amp; Genset Mastery</strong></td>
- <td>Commercialized electronic speed governors and digital genset controllers. Secured sole-source supply contracts with Cummins India, Kirloskar Oil Engines, and Briggs &amp; Stratton (USA)<sup><a href="#cite_note-3">[3]</a></sup>.</td>
- <td>Series A &amp; B rounds led by Nexus Venture Partners; incorporated Sedemac Mechatronics Pvt Ltd; established Bhosari facility (MF1).</td>
- </tr>
- <tr>
- <td><strong>2017–2020</strong></td>
- <td><strong>The ISG Revolution &amp; Automotive Penetration</strong></td>
- <td>Pioneered Integrated Starter Generator (ISG) systems for two-wheelers, replacing separate starter motors and alternators. Signed co-development agreements with TVS Motor and Hero MotoCorp for BS-VI silent-start<sup><a href="#cite_note-18">[18]</a></sup>.</td>
- <td>Series C growth round led by Montane Ventures and A91 Emerging Fund II; expanded manufacturing with Chakan facility (MF2).</td>
- </tr>
- <tr>
- <td><strong>2021–2025</strong></td>
- <td><strong>EV Inverter Scaling &amp; Pre-IPO Growth</strong></td>
- <td>Scaled sensorless BLDC traction controllers for electric 2W/3Ws. Secured controller contracts for Bajaj Chetak EV and export platforms. Annual dispatches crossed 3.0M units in FY25<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-5">[5]</a></sup>.</td>
- <td>Growth investments by Xponentia Opportunities Fund II, NRJN Family Trust, and HDFC Life; converted to Public Limited.</td>
- </tr>
- <tr>
- <td><strong>March 2026</strong></td>
- <td><strong>Landmark Public Listing on NSE &amp; BSE</strong></td>
- <td>Executed an IPO of &#8377;1,087.45 crore (OFS of 8,043,300 equity shares) at <strong>&#8377;1,352.00 per share</strong>. Stock debuted on March 11, 2026 at a premium and initiated a massive Stage 2 markup<sup><a href="#cite_note-1">[1]</a><a href="#cite_note-12">[12]</a></sup>.</td>
- <td>Listed on NSE (SEDEMAC) and BSE (544723); institutional book oversubscribed 48.2x; PE investors partially crystallized returns.</td>
- </tr>
- <tr>
- <td><strong>September 2026</strong></td>
- <td><strong>MF3 Commissioning &amp; Block Deal Absorption</strong></td>
- <td><strong>September 25, 2026:</strong> Commenced commercial production at <strong>Manufacturing Facility 3 (MF3)</strong> in Shinde, Pune under SEBI Reg 30 disclosure, adding 2.5M units capacity<sup><a href="#cite_note-4">[4]</a></sup>. Absorbed 11.05% secondary block deals by A91, Xponentia, and NRJN Trust seamlessly into domestic mutual funds<sup><a href="#cite_note-14">[14]</a></sup>.</td>
- <td>Equity base 45.92M shares; domestic mutual funds absorb secondary PE sales; stock establishes multi-week shelf at &#8377;3,180–&#8377;3,313.</td>
- </tr>
- </tbody>
-</table>
-
-<p>
- Sedemac's algorithms measure instantaneous terminal voltages and currents across stator phases at microsecond intervals. An embedded digital signal processor (DSP) calculates the exact rotor angle in real time, eliminating physical Hall sensors, five-wire harnesses, and connector assemblies. Sedemac's firmware solved both <strong>zero-speed high-torque starting</strong> and <strong>fault-tolerant high-speed commutation</strong> in extreme thermal conditions<sup><a href="#cite_note-17">[17]</a></sup>.
-</p>
-
-<!-- SECTION 2: OPERATIONS & REVENUE ARCHITECTURE -->
-<h2 id="operations">2. Operations &amp; Revenue Architecture</h2>
-<p>
- Sedemac operates as a control-intensive electronics and mechatronics Tier-1 supplier. The business model features deep algorithmic IP, multi-year design wins, automated SMT manufacturing, and formulaic raw material cost pass-through agreements<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-6">[6]</a></sup>.
-</p>
-
-<h3 id="operations-products">2.1 Primary Product Platforms &amp; Algorithmic IP</h3>
+<h3>What would change the verdict</h3>
+<p>The triggers below name the price and the event that would move the advice. Each one is set so that a reader can act on it without re-running the analysis. The first group moves the verdict toward more action, the second toward less.</p>
+<div class="triggers">
+<h4>Moves the verdict up or toward adds</h4>
 <ul>
- <li><strong>Integrated Starter Generator (ISG) Systems &amp; Controllers (64.2% of FY26 Revenues):</strong> Core volume and margin driver. Replaces starter motor, Bendix gears, and alternator with a unified brushless stator/rotor on the crankshaft. Executes: (1) <em>Instant Silent Start</em> in &lt;350ms, (2) <em>High-Efficiency Power Generation</em> (150W–250W DC), and (3) <em>Micro-Hybrid Torque Assist</em> (2.5 to 4.5 Nm assist, cutting city fuel burn by 7%–10%)<sup><a href="#cite_note-18">[18]</a></sup>.</li>
- <li><strong>Electronic Control Units (ECUs) for Mobility (18.5% of FY26 Revenues):</strong> Embedded powertrain controllers for small displacement ICE (50cc to 350cc), executing closed-loop fuel injection, throttle-by-wire calibration, and OBD-II Stage 2 diagnostics.</li>
- <li><strong>Sensorless EV Traction Motor Controllers (11.1% of FY26 Revenues):</strong> Traction controllers for 48V–96V electric 2W/3Ws. Utilizing sensorless field-oriented control (FOC), Sedemac enables completely sealed, IP69K-rated motors, saving &#8377;800 to &#8377;1,400 in BOM cost per vehicle<sup><a href="#cite_note-3">[3]</a></sup>.</li>
- <li><strong>Industrial Genset Controllers &amp; Governors (6.2% of FY26 Revenues):</strong> Digital speed governors and automatic mains failure (AMF) controllers exported to North America, Europe, and East Asia.</li>
+<li>Adds need a verifiable target of at least ₹4,179 from a named method. If one is published and the gate clears, a review of an add may begin in the standard band, between ₹3,094 and ₹3,253.<sup><a href="#cite_note-4">[4]</a></sup></li>
+<li>If the 200-day average becomes available, which the ledger should reach in about 55 more sessions, the Stage and momentum tests can be computed; a close above that average would support a Stage 2 label.<sup><a href="#cite_note-1">[1]</a></sup></li>
+<li>If the largest-client share falls below 40 percent in a future filing, the client-concentration measure moves from FAIL to PASS. The scorecard then reaches three of five, one short of the minimum, so a second measure would also need to pass.<sup><a href="#cite_note-7">[7]</a></sup></li>
 </ul>
-
-<h3 id="operations-oem">2.2 OEM Integration &amp; Tier-1 Client Ecosystem</h3>
-<p>
- Design-win lifecycles span 18 to 36 months of bench testing, HIL simulation, thermal shock cycling (-40&deg;C to +125&deg;C), and fleet durability testing, creating steep supplier switching barriers<sup><a href="#cite_note-15">[15]</a><a href="#cite_note-16">[16]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 2.1: Key OEM Platform Integrations &amp; Commercial Programs<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-5">[5]</a><a href="#cite_note-18">[18]</a></sup></caption>
- <thead>
- <tr>
- <th>Automotive / Industrial OEM</th>
- <th>Key Vehicle / Engine Platforms</th>
- <th>Supplied Product Technology</th>
- <th>Estimated Platform Share</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>TVS Motor Company</strong></td>
- <td>Jupiter 110/125, Raider 125, Apache Series, iQube Hybrid</td>
- <td>ISG Controllers, Micro-Hybrid ECUs</td>
- <td><strong>75% &ndash; 85%</strong> (Primary supplier)</td>
- </tr>
- <tr>
- <td><strong>Hero MotoCorp</strong></td>
- <td>Splendor Plus, HF Deluxe, Destini 125, Pleasure Plus, Xoom</td>
- <td>ISG Electronic Controllers, i3S Automated Modules</td>
- <td><strong>55% &ndash; 65%</strong> (Co-developed platform)</td>
- </tr>
- <tr>
- <td><strong>Bajaj Auto Limited</strong></td>
- <td>Chetak EV, Commercial 3W Electric Rickshaw / Cargo</td>
- <td>48V/72V Sensorless BLDC Motor Controllers</td>
- <td><strong>30% &ndash; 40%</strong> (Expanding in EV 3W)</td>
- </tr>
- <tr>
- <td><strong>HMSI (Honda)</strong></td>
- <td>Activa 6G, Activa 125, Shine 100/125 (ACG starter interfaces)</td>
- <td>Custom electronic controllers &amp; driver sub-assemblies</td>
- <td><strong>20% &ndash; 30%</strong> (Second-source tier)</td>
- </tr>
- <tr>
- <td><strong>Briggs &amp; Stratton (USA)</strong></td>
- <td>Vanguard commercial engines, standby generators</td>
- <td>Digital Electronic Governors, Variable Ignition Modules</td>
- <td><strong>80% &ndash; 90%</strong> (Global long-term contract)</td>
- </tr>
- <tr>
- <td><strong>Cummins India / Kirloskar</strong></td>
- <td>Stationary diesel generator sets (15 kVA to 250 kVA)</td>
- <td>Automatic Genset Controllers, Electronic Speed Governors</td>
- <td><strong>40% &ndash; 50%</strong> (Preferred domestic vendor)</td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="operations-manufacturing">2.3 Manufacturing Footprint &amp; MF3 Facility Ramp</h3>
+<h4>Moves the verdict down or toward exit</h4>
 <ul>
- <li><strong>MF1 (Bhosari, Pune):</strong> 4 high-speed SMT lines with 3D SPI, automated pick-and-place mounting 01005 components, 10-zone reflow ovens, and dual-track AOI<sup><a href="#cite_note-3">[3]</a></sup>.</li>
- <li><strong>MF2 (Chakan, Pune):</strong> High-volume ISG assembly, conformal coating, vacuum potting (IP67/IP69K sealing), and robotic end-of-line dyno test cells.</li>
- <li><strong>MF3 (Shinde, Pune &ndash; Commenced Sep 25, 2026):</strong> On <strong>September 25, 2026</strong>, Sedemac notified exchanges under SEBI Reg 30 that it commenced commercial production at <strong>MF3</strong><sup><a href="#cite_note-4">[4]</a></sup>. Relieving capacity constraints (MF1/MF2 ran at 94.2% utilization in FY26), MF3 features automated robotic lines for 48V–96V EV traction inverters and ISG units, adding <strong>2.50M units/yr capacity</strong> upon full ramp, elevating total capacity to over 6.5M units/yr<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-5">[5]</a></sup>.</li>
- <li><strong>MF4 (Under Construction):</strong> Greenfield export-oriented facility slated for civil completion by H2 FY27<sup><a href="#cite_note-4">[4]</a></sup>.</li>
+<li>A daily close below ₹2,950, the working stop, triggers the exit, and the position is sold in full.<sup><a href="#cite_note-3">[3]</a></sup></li>
+<li>An operating margin below 13.5 percent for two consecutive quarters, or cash conversion below 0.50, would breach the invalidation written on the earlier shortlist row, and would move the stock to REPLACE_UNDERPERFORMER.<sup><a href="#cite_note-3">[3]</a></sup></li>
+<li>A quarterly operating margin below 18 percent, a fall of more than two points against the same quarter a year earlier would make the quarterly measure FAIL. The record does not show the September 2025 quarter, so the June 2025 level of 20 percent is the latest comparison available. With client concentration also failing, that is two failed measures, which meets the replace rule.<sup><a href="#cite_note-5">[5]</a></sup></li>
+<li>A downgrade by ICRA, which the rating filing says could follow if the debt-to-operating-profit ratio exceeds 1.8 times, would be a fundamental warning.<sup><a href="#cite_note-7">[7]</a></sup></li>
 </ul>
-
-<h3 id="operations-supplychain">2.4 Supply Chain Architecture &amp; Semiconductor Sourcing</h3>
-<p>
- Sedemac mitigates semiconductor risk through hardware abstraction layers (HAL) allowing cross-compilation across microcontrollers from <strong>STMicroelectronics, Infineon, Texas Instruments, and NXP</strong><sup><a href="#cite_note-3">[3]</a><a href="#cite_note-15">[15]</a></sup>. All Tier-1 OEM contracts feature <strong>quarterly formulaic price adjustment mechanisms</strong> that automatically index and pass through copper, aluminum, and semiconductor costs with a 90-day lag, safeguarding gross margins.
-</p>
-
-<!-- SECTION 3: SECTOR DYNAMICS -->
-<h2 id="sector-dynamics">3. Sector Dynamics: EV Transition &amp; 2W/3W Architecture</h2>
-<p>
- India's 2W/3W market (&gt;21 million units produced annually in FY26) is undergoing dual-track electrification: mainstream ICE adoption of micro-hybrid ISG systems for CAFE-II/OBD-2 compliance, and accelerated light EV adoption in commercial fleets and urban scooters<sup><a href="#cite_note-19">[19]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 3.1: Content Per Vehicle (CPV) Evolution Across Powertrain Paradigms (2018–2028E)<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-19">[19]</a><a href="#cite_note-20">[20]</a></sup></caption>
- <thead>
- <tr>
- <th>Powertrain Architecture</th>
- <th>Regulatory &amp; Market Regime</th>
- <th>Typical Powertrain Electronic Hardware</th>
- <th>Sedemac Addressable CPV (&#8377;)</th>
- <th>Market Penetration (FY26)</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Legacy ICE (Carbureted)</strong></td>
- <td>BS-III / BS-IV (Pre-2020)</td>
- <td>Basic CDI unit, mechanical starter motor</td>
- <td><span class="mono">&#8377;350 &ndash; &#8377;600</span></td>
- <td>&lt; 5% (Discontinued)</td>
- </tr>
- <tr>
- <td><strong>Standard ICE (Fuel Injection)</strong></td>
- <td>BS-VI Phase 1 (2020–2023)</td>
- <td>Basic Electronic Control Unit (ECU), starter relay</td>
- <td><span class="mono">&#8377;1,200 &ndash; &#8377;1,800</span></td>
- <td>~25% (Base commuter models)</td>
- </tr>
- <tr>
- <td><strong>Micro-Hybrid ICE (ISG Equipped)</strong></td>
- <td>BS-VI Phase 2 / OBD-2 (Current)</td>
- <td>Smart Starter Generator (ISG) controller, silent-start, torque assist</td>
- <td><span class="mono"><strong>&#8377;2,400 &ndash; &#8377;3,600</strong></span></td>
- <td><strong>~55%</strong> (Rapidly becoming standard)</td>
- </tr>
- <tr>
- <td><strong>Electric 2-Wheeler (Mid Speed)</strong></td>
- <td>EMPS / PM E-DRIVE</td>
- <td>48V–60V BLDC/PMSM motor controller, DC-DC converter</td>
- <td><span class="mono"><strong>&#8377;4,500 &ndash; &#8377;6,500</strong></span></td>
- <td>~10% (Urban premium segments)</td>
- </tr>
- <tr>
- <td><strong>Electric 3W &amp; High-Perf 2W</strong></td>
- <td>Commercial Fleet &amp; Premium EV</td>
- <td>72V–96V High-power FOC traction inverter</td>
- <td><span class="mono"><strong>&#8377;7,500 &ndash; &#8377;11,500</strong></span></td>
- <td>~5% (Cargo/auto rickshaw surge)</td>
- </tr>
- </tbody>
-</table>
-
-<p>
- This provides Sedemac with a structural tailwind: <strong>Content Per Vehicle (CPV) expansion</strong>. Migrating a commuter bike from standard EFI to an ISG micro-hybrid doubles Sedemac's content to &#8377;2,400–&#8377;3,600. Transitioning to pure EV expands content further to &#8377;4,500–&#8377;11,500, guaranteeing that corporate revenues outpace broader automotive production growth.
-</p>
-
-<!-- SECTION 4: FINANCIAL PERFORMANCE & FORENSIC AUDIT -->
-<h2 id="financial-audit">4. Financial Performance &amp; Forensic Accounting Audit</h2>
-<p>
- Sedemac presents an exceptional financial profile characterized by high growth, expanding operating leverage, zero net debt, and disciplined working capital.
-</p>
-
-<h3 id="financial-pl">4.1 Multi-Year P&amp;L and Operating Leverage</h3>
-<p>
- From FY22 to FY26, consolidated revenue expanded from <strong>&#8377;312.40 crore</strong> to <strong>&#8377;1,058.00 crore</strong> (3-year CAGR <strong>35.7%</strong>). PAT surged from &#8377;4.20 crore to <strong>&#8377;103.58 crore</strong> (+120.2% YoY in FY26) as automated SMT lines achieved optimal asset utilization<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-5">[5]</a><a href="#cite_note-6">[6]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 4.1: Consolidated Multi-Year Financial Performance (FY22–Q1 FY27 TTM in &#8377; Crore)<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-5">[5]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-7">[7]</a></sup></caption>
- <thead>
- <tr>
- <th>Financial Metric</th>
- <th>FY22</th>
- <th>FY23</th>
- <th>FY24</th>
- <th>FY25</th>
- <th>FY26</th>
- <th>Q1 FY27</th>
- <th>TTM Trailing</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Revenue from Operations</strong></td>
- <td><span class="mono">312.40</span></td>
- <td><span class="mono">423.00</span></td>
- <td><span class="mono">535.80</span></td>
- <td><span class="mono">658.36</span></td>
- <td><span class="mono"><strong>1,058.00</strong></span></td>
- <td><span class="mono">309.77</span></td>
- <td><span class="mono"><strong>1,150.42</strong></span></td>
- </tr>
- <tr>
- <td><em>YoY Growth Rate (%)</em></td>
- <td><em>&ndash;</em></td>
- <td><em>+35.4%</em></td>
- <td><em>+26.7%</em></td>
- <td><em>+22.9%</em></td>
- <td><em><strong>+60.7%</strong></em></td>
- <td><em>+42.5%</em></td>
- <td><em><strong>+51.8%</strong></em></td>
- </tr>
- <tr>
- <td>Cost of Goods Sold (COGS)</td>
- <td><span class="mono">228.05</span></td>
- <td><span class="mono">306.67</span></td>
- <td><span class="mono">377.74</span></td>
- <td><span class="mono">456.24</span></td>
- <td><span class="mono">719.44</span></td>
- <td><span class="mono">208.17</span></td>
- <td><span class="mono">777.68</span></td>
- </tr>
- <tr>
- <td><strong>Gross Profit</strong></td>
- <td><span class="mono">84.35</span></td>
- <td><span class="mono">116.33</span></td>
- <td><span class="mono">158.06</span></td>
- <td><span class="mono">202.12</span></td>
- <td><span class="mono"><strong>338.56</strong></span></td>
- <td><span class="mono">101.60</span></td>
- <td><span class="mono"><strong>372.74</strong></span></td>
- </tr>
- <tr>
- <td><em>Gross Margin (%)</em></td>
- <td><em>27.00%</em></td>
- <td><em>27.50%</em></td>
- <td><em>29.50%</em></td>
- <td><em>30.70%</em></td>
- <td><em><strong>32.00%</strong></em></td>
- <td><em>32.80%</em></td>
- <td><em><strong>32.40%</strong></em></td>
- </tr>
- <tr>
- <td>Employee Benefit Expenses</td>
- <td><span class="mono">32.80</span></td>
- <td><span class="mono">44.42</span></td>
- <td><span class="mono">53.58</span></td>
- <td><span class="mono">65.84</span></td>
- <td><span class="mono">95.22</span></td>
- <td><span class="mono">26.33</span></td>
- <td><span class="mono">102.50</span></td>
- </tr>
- <tr>
- <td>Other Operating Expenses</td>
- <td><span class="mono">25.35</span></td>
- <td><span class="mono">33.01</span></td>
- <td><span class="mono">41.28</span></td>
- <td><span class="mono">47.40</span></td>
- <td><span class="mono">71.94</span></td>
- <td><span class="mono">21.06</span></td>
- <td><span class="mono">77.80</span></td>
- </tr>
- <tr>
- <td><strong>Operating EBITDA</strong></td>
- <td><span class="mono">26.20</span></td>
- <td><span class="mono">38.90</span></td>
- <td><span class="mono">63.20</span></td>
- <td><span class="mono">88.88</span></td>
- <td><span class="mono"><strong>171.40</strong></span></td>
- <td><span class="mono">54.21</span></td>
- <td><span class="mono"><strong>192.44</strong></span></td>
- </tr>
- <tr>
- <td><em>EBITDA Margin (%)</em></td>
- <td><em>8.39%</em></td>
- <td><em>9.20%</em></td>
- <td><em>11.79%</em></td>
- <td><em>13.50%</em></td>
- <td><em><strong>16.20%</strong></em></td>
- <td><em><strong>17.50%</strong></em></td>
- <td><em><strong>16.73%</strong></em></td>
- </tr>
- <tr>
- <td>Depreciation &amp; Amortization</td>
- <td><span class="mono">14.50</span></td>
- <td><span class="mono">18.20</span></td>
- <td><span class="mono">19.50</span></td>
- <td><span class="mono">22.10</span></td>
- <td><span class="mono">28.40</span></td>
- <td><span class="mono">7.80</span></td>
- <td><span class="mono">30.80</span></td>
- </tr>
- <tr>
- <td>Finance Costs (Interest)</td>
- <td><span class="mono">6.20</span></td>
- <td><span class="mono">8.90</span></td>
- <td><span class="mono">7.40</span></td>
- <td><span class="mono">6.80</span></td>
- <td><span class="mono">8.10</span></td>
- <td><span class="mono">2.10</span></td>
- <td><span class="mono">8.40</span></td>
- </tr>
- <tr>
- <td>Other Income</td>
- <td><span class="mono">1.10</span></td>
- <td><span class="mono">2.40</span></td>
- <td><span class="mono">3.80</span></td>
- <td><span class="mono">4.90</span></td>
- <td><span class="mono">7.20</span></td>
- <td><span class="mono">2.45</span></td>
- <td><span class="mono">8.50</span></td>
- </tr>
- <tr>
- <td><strong>Profit Before Tax (PBT)</strong></td>
- <td><span class="mono">6.60</span></td>
- <td><span class="mono">14.20</span></td>
- <td><span class="mono">40.10</span></td>
- <td><span class="mono">64.88</span></td>
- <td><span class="mono"><strong>142.10</strong></span></td>
- <td><span class="mono">46.76</span></td>
- <td><span class="mono"><strong>161.74</strong></span></td>
- </tr>
- <tr>
- <td>Tax Expense</td>
- <td><span class="mono">2.40</span></td>
- <td><span class="mono">5.60</span></td>
- <td><span class="mono">11.70</span></td>
- <td><span class="mono">17.84</span></td>
- <td><span class="mono">38.52</span></td>
- <td><span class="mono">13.45</span></td>
- <td><span class="mono">41.92</span></td>
- </tr>
- <tr>
- <td><strong>Profit After Tax (PAT)</strong></td>
- <td><span class="mono">4.20</span></td>
- <td><span class="mono">8.60</span></td>
- <td><span class="mono">28.40</span></td>
- <td><span class="mono">47.04</span></td>
- <td><span class="mono"><strong>103.58</strong></span></td>
- <td><span class="mono">33.31</span></td>
- <td><span class="mono"><strong>119.82</strong></span></td>
- </tr>
- <tr>
- <td><em>PAT Margin (%)</em></td>
- <td><em>1.34%</em></td>
- <td><em>2.03%</em></td>
- <td><em>5.30%</em></td>
- <td><em>7.15%</em></td>
- <td><em><strong>9.79%</strong></em></td>
- <td><em><strong>10.75%</strong></em></td>
- <td><em><strong>10.42%</strong></em></td>
- </tr>
- <tr>
- <td><strong>Diluted EPS (&#8377;)</strong></td>
- <td><span class="mono">&#8377;0.91</span></td>
- <td><span class="mono">&#8377;1.87</span></td>
- <td><span class="mono">&#8377;6.18</span></td>
- <td><span class="mono">&#8377;10.24</span></td>
- <td><span class="mono"><strong>&#8377;22.56</strong></span></td>
- <td><span class="mono">&#8377;7.25</span></td>
- <td><span class="mono"><strong>&#8377;26.09</strong></span></td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="financial-cashflow">4.2 Cash Flow Quality &amp; Working Capital</h3>
-<p>
- Sedemac generated cumulative CFO of <strong>&#8377;157.62 crore</strong> against cumulative PAT of <strong>&#8377;179.02 crore</strong> over FY23–FY26, achieving a cash conversion ratio of <strong>0.88x</strong> (beating the institutional hurdle floor of 0.70x)<sup><a href="#cite_note-8">[8]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 4.2: Audited Cash Flow Conversion &amp; Working Capital (&#8377; Crore)<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-8">[8]</a></sup></caption>
- <thead>
- <tr>
- <th>Cash Flow &amp; Capital Metric</th>
- <th>FY23</th>
- <th>FY24</th>
- <th>FY25</th>
- <th>FY26</th>
- <th>3-Year Aggregate</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td>Reported Net Profit (PAT)</td>
- <td><span class="mono">8.60</span></td>
- <td><span class="mono">28.40</span></td>
- <td><span class="mono">47.04</span></td>
- <td><span class="mono">103.58</span></td>
- <td><span class="mono"><strong>179.02</strong></span></td>
- </tr>
- <tr>
- <td>Non-Cash Adjustments (Depr. + Other)</td>
- <td><span class="mono">19.20</span></td>
- <td><span class="mono">21.80</span></td>
- <td><span class="mono">24.50</span></td>
- <td><span class="mono">32.60</span></td>
- <td><span class="mono">78.90</span></td>
- </tr>
- <tr>
- <td>Working Capital Changes</td>
- <td><span class="mono">-18.40</span></td>
- <td><span class="mono">-19.60</span></td>
- <td><span class="mono">-26.30</span></td>
- <td><span class="mono">-39.20</span></td>
- <td><span class="mono">-85.10</span></td>
- </tr>
- <tr>
- <td>Direct Taxes Paid</td>
- <td><span class="mono">-4.80</span></td>
- <td><span class="mono">-9.80</span></td>
- <td><span class="mono">-15.60</span></td>
- <td><span class="mono">-34.80</span></td>
- <td><span class="mono">-60.20</span></td>
- </tr>
- <tr>
- <td><strong>Cash Flow from Operations (CFO)</strong></td>
- <td><span class="mono"><strong>4.60</strong></span></td>
- <td><span class="mono"><strong>20.80</strong></span></td>
- <td><span class="mono"><strong>29.64</strong></span></td>
- <td><span class="mono"><strong>107.18</strong></span></td>
- <td><span class="mono"><strong>157.62</strong></span></td>
- </tr>
- <tr>
- <td><em>Cash Conversion Ratio (CFO / PAT)</em></td>
- <td><em>0.53x</em></td>
- <td><em>0.73x</em></td>
- <td><em>0.63x</em></td>
- <td><em><strong>1.03x</strong></em></td>
- <td><em><strong>0.88x (PASS)</strong></em></td>
- </tr>
- <tr>
- <td>Capital Expenditures (MF2 &amp; MF3 Capex)</td>
- <td><span class="mono">-16.50</span></td>
- <td><span class="mono">-22.40</span></td>
- <td><span class="mono">-31.20</span></td>
- <td><span class="mono">-58.60</span></td>
- <td><span class="mono">-112.20</span></td>
- </tr>
- <tr>
- <td><strong>Free Cash Flow (FCF = CFO &ndash; Capex)</strong></td>
- <td><span class="mono">-11.90</span></td>
- <td><span class="mono">-1.60</span></td>
- <td><span class="mono">-1.56</span></td>
- <td><span class="mono"><strong>+48.58</strong></span></td>
- <td><span class="mono"><strong>+45.42</strong></span></td>
- </tr>
- <tr>
- <td><strong>Debtor Collection Days (DSO)</strong></td>
- <td><span class="mono">68 days</span></td>
- <td><span class="mono">64 days</span></td>
- <td><span class="mono">61 days</span></td>
- <td><span class="mono"><strong>58 days</strong></span></td>
- <td><em>Tight Tier-1 discipline</em></td>
- </tr>
- <tr>
- <td><strong>Inventory Holding Days (DIO)</strong></td>
- <td><span class="mono">56 days</span></td>
- <td><span class="mono">52 days</span></td>
- <td><span class="mono">49 days</span></td>
- <td><span class="mono"><strong>46 days</strong></span></td>
- <td><em>Lean SMT manufacturing</em></td>
- </tr>
- <tr>
- <td><strong>Payables Outstanding Days (DPO)</strong></td>
- <td><span class="mono">54 days</span></td>
- <td><span class="mono">51 days</span></td>
- <td><span class="mono">53 days</span></td>
- <td><span class="mono"><strong>52 days</strong></span></td>
- <td><em>Semiconductor terms</em></td>
- </tr>
- <tr>
- <td><strong>Net Cash Conversion Cycle (Days)</strong></td>
- <td><span class="mono">70 days</span></td>
- <td><span class="mono">65 days</span></td>
- <td><span class="mono">57 days</span></td>
- <td><span class="mono"><strong>52 days</strong></span></td>
- <td><em>18-day efficiency gain</em></td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="financial-forensics">4.3 Forensic Checks: Altman Z, Beneish M &amp; Audit Quality</h3>
-<table class="wikitable">
- <caption>Table 4.3: Forensic Balance Sheet Health Scorecard<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-21">[21]</a><a href="#cite_note-22">[22]</a></sup></caption>
- <thead>
- <tr>
- <th>Forensic Test Parameter</th>
- <th>Benchmark Standard</th>
- <th>Sedemac Calculated Value</th>
- <th>Institutional Audit Interpretation</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Modified Altman Z-Score</strong></td>
- <td>&gt; 2.99 = Safe Green Zone</td>
- <td><strong style="color: #15803d;" class="mono">6.84</strong></td>
- <td>Pristine solvency; zero bankruptcy risk</td>
- </tr>
- <tr>
- <td><strong>Beneish M-Score</strong></td>
- <td>&lt; -1.78 = Low manipulation probability</td>
- <td><strong style="color: #15803d;" class="mono">-2.86</strong></td>
- <td>Unmanipulated zone; normal accruals</td>
- </tr>
- <tr>
- <td><strong>Statutory Auditor Profile</strong></td>
- <td>Big-4 or Top-Tier National Firm</td>
- <td><strong>Price Waterhouse Chartered Accountants LLP</strong></td>
- <td>Unqualified audit opinion; zero adverse remarks<sup><a href="#cite_note-6">[6]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Related-Party Transactions (RPT)</strong></td>
- <td>&lt; 5.0% of Annual Revenues</td>
- <td><strong>&lt; 1.2%</strong> (&#8377;12.4 Cr)</td>
- <td>Arm's-length factory rentals and IIT Bombay R&amp;D grants</td>
- </tr>
- <tr>
- <td><strong>Contingent Liabilities / Net Worth</strong></td>
- <td>&lt; 10.0% of Net Worth</td>
- <td><strong>0.51%</strong> (&#8377;4.20 Cr)</td>
- <td>Disputed tax classifications backed by bank guarantees</td>
- </tr>
- <tr>
- <td><strong>Promoter Equity Pledging</strong></td>
- <td>Strictly 0.0% Pledged</td>
- <td><strong style="color: #15803d;">0.00% Pledged</strong></td>
- <td>Zero encumbrances on founder equity stakes<sup><a href="#cite_note-23">[23]</a></sup></td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="underwriting-framework">5. The 3-Layer Underwriting Framework &amp; Institutional Scorecard</h2>
-<h3 id="layer1">5.1 Layer 1: Binary Hard Gating Floors</h3>
-<table class="wikitable">
- <caption>Table 5.1: Layer 1 Binary Hard Gating Floors Evaluation<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-8">[8]</a><a href="#cite_note-11">[11]</a></sup></caption>
- <thead>
- <tr>
- <th>Gating Dimension</th>
- <th>Institutional Hurdle Floor</th>
- <th>Sedemac Verified Metric</th>
- <th>Binary Status</th>
- <th>Underwriting Commentary</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>ROCE Hurdle</strong></td>
- <td>ROCE &ge; 15.0% (Core prefers &gt; 18.0%)</td>
- <td><strong style="color: #15803d;" class="mono">35.3%</strong></td>
- <td><span style="color: #15803d; font-weight: 700;">PASS</span></td>
- <td>High asset turnover SMT lines generating elite returns</td>
- </tr>
- <tr>
- <td><strong>Solvency Leverage Floor</strong></td>
- <td>Debt-to-Equity &lt; 0.70</td>
- <td><strong style="color: #15803d;" class="mono">0.11 (Net Cash)</strong></td>
- <td><span style="color: #15803d; font-weight: 700;">PASS</span></td>
- <td>Gross debt &#8377;92.0 Cr vs Cash/Investments &#8377;277.4 Cr (Net Cash +&#8377;185.4 Cr)</td>
- </tr>
- <tr>
- <td><strong>Cash Conversion Hurdle</strong></td>
- <td>3-Year Cumulative CFO / PAT &ge; 0.70</td>
- <td><strong style="color: #15803d;" class="mono">0.88x</strong></td>
- <td><span style="color: #15803d; font-weight: 700;">PASS</span></td>
- <td>CFO &#8377;157.6 Cr vs PAT &#8377;179.0 Cr (FY23–FY26); verified collection</td>
- </tr>
- <tr>
- <td><strong>Technical Posture Floor</strong></td>
- <td>Stage 2 Markup above 50-DMA &amp; 200-DMA</td>
- <td><strong>Stage 2 Markup</strong></td>
- <td><span style="color: #15803d; font-weight: 700;">PASS</span></td>
- <td>CMP (&#8377;3,313.60) trading well above 50-DMA (&#8377;2,880) and 200-DMA (&#8377;2,100)</td>
- </tr>
- <tr>
- <td><strong>Reward/Risk Asymmetry</strong></td>
- <td>Asymmetry Ratio &ge; 3.5:1 (Tactical Hurdle)</td>
- <td><strong style="color: #15803d;" class="mono">3.57 : 1</strong></td>
- <td><span style="color: #15803d; font-weight: 700;">PASS</span></td>
- <td>From entry pivot zone (&#8377;3,250), Base Target &#8377;4,250 vs Stop &#8377;2,950 yields 3.57:1</td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="layer2">5.2 Layer 2: Company-Specific Operational KPI Scorecard</h3>
-<table class="wikitable">
- <caption>Table 5.2: Layer 2 Company-Specific Operational KPI Scorecard<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-4">[4]</a><a href="#cite_note-5">[5]</a><a href="#cite_note-18">[18]</a></sup></caption>
- <thead>
- <tr>
- <th>Key Performance Indicator</th>
- <th>Historical Baseline (FY24)</th>
- <th>Current Value (FY26/Q1 FY27)</th>
- <th>Target Hurdle</th>
- <th>KPI Status</th>
- <th>Analytical Thesis &amp; Impact</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>ISG Market Share in Indian 2W</strong></td>
- <td>42.5%</td>
- <td><strong>66.0%</strong></td>
- <td>&gt; 50.0%</td>
- <td><strong style="color: #15803d;">🟢 PASS</strong></td>
- <td>Dominant design-win grip across TVS and Hero micro-hybrid lineups</td>
- </tr>
- <tr>
- <td><strong>MF3 Production Ramp Execution</strong></td>
- <td>0.0% (Planning phase)</td>
- <td><strong>Commercialized Sep 25, 2026</strong></td>
- <td>Commercial run by Q3 FY27</td>
- <td><strong style="color: #15803d;">🟢 PASS</strong></td>
- <td>On-time execution; unlocks 2.5M units/yr EV capacity<sup><a href="#cite_note-4">[4]</a></sup></td>
- </tr>
- <tr>
- <td><strong>Export Revenue Contribution (%)</strong></td>
- <td>6.8%</td>
- <td><strong>12.8%</strong></td>
- <td>&gt; 10.0%</td>
- <td><strong style="color: #15803d;">🟢 PASS</strong></td>
- <td>Diversifying beyond domestic cycles via Briggs &amp; Stratton/Piaggio</td>
- </tr>
- <tr>
- <td><strong>Fixed Asset Turnover Ratio</strong></td>
- <td>2.92x</td>
- <td><strong>3.82x</strong></td>
- <td>&gt; 3.00x</td>
- <td><strong style="color: #15803d;">🟢 PASS</strong></td>
- <td>High-velocity SMT line throughput generating elite asset productivity</td>
- </tr>
- </tbody>
-</table>
-
-<h3 id="layer3">5.3 Layer 3: Support-Aware Entry Posture</h3>
+</div>
+<p class="trigger">Exit trigger: a daily close below ₹2,950 sells the whole holding, because the working stop has been breached and the framework's rule for a broken structure applies.</p>
+<p class="trigger">Trim trigger: a close at or above a verified target, once one exists, a 14-day RSI above 75, or a weight above 15 percent of the account would each allow a trim of 30 to 50 percent of the position. The ₹4,179 figure is the least target that would pass the asymmetry gate; it is not a trim level.</p>
+<p class="trigger">Review trigger: the next quarterly result, once the September 2026 quarter is filed, must show an operating margin of at least 19 percent; a fall below that level sends the position to a fresh review. The largest-client share is checked at the next rating action or annual report, not in the quarterly figures.</p>
+<p class="chapter-bridge">Hold the 200 shares, add nothing, and keep the stop at ₹2,950. The gate exceptions below explain why this verdict is provisional and what would cure each one.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>This chapter lists every gate this dossier could not fully satisfy, the checker line that applies, why it cannot be cured in this run, and what would cure it. No excepted gate is described as passed. Where a source could not be read, the reference is labelled and no figure is taken from it.</p>
 <ul>
- <li><strong>14-Day ATR:</strong> <span class="mono">&#8377;128.50</span></li>
- <li><strong>Nearest Support Anchor:</strong> <span class="mono">&#8377;3,180.00</span> (20-DMA shelf &amp; block deal floor)<sup><a href="#cite_note-14">[14]</a></sup>.</li>
- <li><strong>Distance Calculation:</strong> <span class="mono">(&#8377;3,313.60 &ndash; &#8377;3,180.00) / &#8377;128.50 = 1.04 &times; ATR</span>.</li>
- <li><strong>Posture Classification:</strong> <strong style="color: #1d4ed8;">🔵 NEAR_SUPPORT</strong>. Digesting the 11.05% secondary block deals smoothly above its 20-DMA shelf.</li>
+<li><strong>Layer 1, asymmetry and target anchor (FAIL_ASYMMETRY).</strong> The checker line reads: a target must cite forward EPS times three-year median P/E, or a technical base measured-move; if the target is unverified, the gate is FAIL_ASYMMETRY. The stock listed on 11 March 2026, so no three-year median P/E exists, and the ledger holds no base high from which to measure a move. This cannot be cured now. It would be cured by a named, documented method for newly listed stocks, or by a three-year P/E series, which would not exist until about March 2029.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></li>
+<li><strong>Layer 1, technical posture (UNVERIFIED).</strong> The checker line reads: the stock must be Stage 2 or a Stage 1 base, with no Stage 4 breakdown. The ledger holds 145 bars and no 200-day average, so the stage cannot be computed. This is a data gap, not a failure. It would be cured in about 55 more sessions, around early January 2027.<sup><a href="#cite_note-1">[1]</a></sup></li>
+<li><strong>Momentum test (UNVERIFIED).</strong> The checker line reads: price above the 50-day average, which sits above the 200-day average, or test B with a pivot level. Test A needs the 200-day average, and test B needs a pivot the ledger does not hold. It would be cured by the same 200-day data, and by a defined pivot field in the ledger.<sup><a href="#cite_note-4">[4]</a></sup></li>
+<li><strong>Source count.</strong> The citation gate counts 27 distinct external sources. The notes list 31 external references: 25 were read through the run cache. Six are listed as located or blocked and are not used for any figure: the ICRA rating PDF, the prospectus PDF, the annual report PDF, the BSE announcements page (HTTP 403), an empty transcript listing, and the SEBI filing page, which was read through search only.<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-21">[21]</a></sup></li>
+<li><strong>Consolidated tables not rendered.</strong> The Screener consolidated page returned a shell with empty table cells, so the standalone page is used. The company reports no subsidiary or joint venture, so the standalone figures are the whole company.<sup><a href="#cite_note-9">[9]</a></sup></li>
+<li><strong>Stale as-of dates (citation check, PASS WITH EXCEPTIONS).</strong> The checker line reads: AS-OF is more than 60 days older than the report date. Ages are counted from each period end to the report date: the FY26 annual figures for the year to 31 March 2026 are 195 days old, and the June 2026 quarter, pledge and shareholding figures for 30 June 2026 are 104 days old. The checker counts month-only dates from the first of the month, which gives 225 and 133 days; both counts exceed the 60-day limit, and the Q4 FY26 call of 18 May 2026 is 147 days old. No newer periodic filing existed at the report date. The filing that would cure each is the September 2026 quarter, which had not been filed, and then the FY27 annual report. The dates are kept true, not edited.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-15">[15]</a></sup></li>
+<li><strong>Management commentary for the current quarter.</strong> The transcript for the June 2026 quarter could not be retrieved; the transcript listing returned no content. The May 2026 call is the latest transcript read.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-35">[35]</a></sup></li>
+<li><strong>Pledge and ISG share.</strong> The pledge figure of 0.0 percent comes from an aggregator page and covers shareholding only. The ISG share is not established: two profiles give 30 and 35 percent, and the 66 percent figure on the earlier row has no readable source. The 66 percent is not used.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></li>
+<li><strong>Three-year median P/E.</strong> Not published, because the stock listed in March 2026. The record is marked not found, with the reason stated.<sup><a href="#cite_note-16">[16]</a></sup></li>
+<li><strong>Promoter lock-in expiry.</strong> Not found in readable sources. A search snippet points to a lock-up ending in September 2026, but the NSE pages that would confirm it could not be read, so the figure is not used. The expiry calendar is an unquantified supply risk.<sup><a href="#cite_note-6">[6]</a></sup></li>
+<li><strong>Independent review.</strong> This dossier did not receive an unconditional reviewer approval. Its reviewer returned REVISE on the final round, and the red team approved the verdict; the open points are the ones listed in this chapter. Status: BEST_EFFORT_AFTER_REVIEW_LIMIT.</li>
 </ul>
-
-<!-- SECTION 6: PEER & COMPETITIVE COMPARISON -->
-<h2 id="peer-matrix">6. Industry Landscape, Competitive Moat &amp; Peer Comparison</h2>
-<table class="wikitable">
- <caption>Table 6.1: Automotive Electronics &amp; Mechatronics Peer Matrix<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-6">[6]</a><a href="#cite_note-24">[24]</a><a href="#cite_note-25">[25]</a></sup></caption>
- <thead>
- <tr>
- <th>Company Name</th>
- <th>Ticker</th>
- <th>M-Cap (&#8377; Cr)</th>
- <th>CMP (&#8377;)</th>
- <th>P/E (TTM)</th>
- <th>3Y Sales CAGR</th>
- <th>OPM (%)</th>
- <th>ROCE (%)</th>
- <th>D/E</th>
- <th>Primary Moat &amp; Product Niche</th>
- <th>Institutional Verdict</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Sedemac Mechatronics</strong></td>
- <td><strong>SEDEMAC</strong></td>
- <td><span class="mono">15,216</span></td>
- <td><span class="mono">3,313.60</span></td>
- <td><span class="mono"><strong>126.9x</strong></span></td>
- <td><span class="mono"><strong>35.7%</strong></span></td>
- <td><span class="mono"><strong>16.2%</strong></span></td>
- <td><span class="mono"><strong>35.3%</strong></span></td>
- <td><span class="mono"><strong>0.11</strong></span></td>
- <td>Sensorless BLDC algorithms; 66% 2W ISG share; zero Hall failure</td>
- <td><strong style="color: #15803d;">🟢 KEEP_COMPOUNDING</strong></td>
- </tr>
- <tr>
- <td><strong>Sona BLW Precision</strong></td>
- <td>SONACOMS</td>
- <td><span class="mono">40,850</span></td>
- <td><span class="mono">698.40</span></td>
- <td><span class="mono">72.4x</span></td>
- <td><span class="mono">28.2%</span></td>
- <td><span class="mono">28.5%</span></td>
- <td><span class="mono">22.8%</span></td>
- <td><span class="mono">0.18</span></td>
- <td>Global EV differential bevel gears, traction motors; 32% EV mix</td>
- <td><strong>WATCHLIST_CORE</strong></td>
- </tr>
- <tr>
- <td><strong>Uno Minda Limited</strong></td>
- <td>UNOMINDA</td>
- <td><span class="mono">64,200</span></td>
- <td><span class="mono">1,118.50</span></td>
- <td><span class="mono">58.2x</span></td>
- <td><span class="mono">24.6%</span></td>
- <td><span class="mono">11.4%</span></td>
- <td><span class="mono">21.4%</span></td>
- <td><span class="mono">0.26</span></td>
- <td>Tier-1 switchgear, lighting, acoustic horns, EV charging hardware</td>
- <td><strong>FULLY_VALUED</strong></td>
- </tr>
- <tr>
- <td><strong>Bosch Limited</strong></td>
- <td>BOSCHLTD</td>
- <td><span class="mono">92,400</span></td>
- <td><span class="mono">31,340.00</span></td>
- <td><span class="mono">48.6x</span></td>
- <td><span class="mono">14.8%</span></td>
- <td><span class="mono">13.2%</span></td>
- <td><span class="mono">18.6%</span></td>
- <td><span class="mono">0.02</span></td>
- <td>Multinational leader in diesel injection, ABS, industrial mobility</td>
- <td><strong>MATURE_COMPOUNDER</strong></td>
- </tr>
- <tr>
- <td><strong>Pricol Limited</strong></td>
- <td>PRICOLLTD</td>
- <td><span class="mono">5,840</span></td>
- <td><span class="mono">479.20</span></td>
- <td><span class="mono">34.8x</span></td>
- <td><span class="mono">18.4%</span></td>
- <td><span class="mono">12.8%</span></td>
- <td><span class="mono">22.1%</span></td>
- <td><span class="mono">0.14</span></td>
- <td>Leader in 2W digital instrument clusters, telematics, fuel pumps</td>
- <td><strong>TACTICAL_HOLD</strong></td>
- </tr>
- <tr>
- <td><strong>Subros Limited</strong></td>
- <td>SUBROS</td>
- <td><span class="mono">4,420</span></td>
- <td><span class="mono">677.50</span></td>
- <td><span class="mono">38.2x</span></td>
- <td><span class="mono">13.2%</span></td>
- <td><span class="mono">8.2%</span></td>
- <td><span class="mono">14.8%</span></td>
- <td><span class="mono">0.19</span></td>
- <td>Thermal management systems, bus AC, locomotive HVAC, Denso tie-up</td>
- <td><strong>LOW_MARGIN_PEER</strong></td>
- </tr>
- </tbody>
-</table>
-
-<p>
- Sedemac commands a premium valuation multiple (126.9x TTM P/E) owing to its <strong>highest revenue CAGR (35.7%)</strong>, <strong>highest ROCE (35.3%)</strong>, and hardware-software IP moat, separating it from traditional mechanical build-to-print assemblers.
-</p>
-
-<!-- SECTION 7: TECHNICAL TRADE ARCHITECTURE -->
-<h2 id="technical-trade">7. Technical Posture, Support Anchors &amp; Trade Architecture</h2>
-<p>
- Sedemac displays an authoritative <strong>Weinstein Stage 2 markup</strong>, characterized by ascending moving averages and strong relative strength vs Nifty 500<sup><a href="#cite_note-11">[11]</a><a href="#cite_note-26">[26]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 7.1: Key Technical &amp; Execution Parameters (As of September 2026)<sup><a href="#cite_note-11">[11]</a><a href="#cite_note-12">[12]</a><a href="#cite_note-26">[26]</a></sup></caption>
- <thead>
- <tr>
- <th>Technical Parameter</th>
- <th>Observed Level / Reading</th>
- <th>Structural Significance &amp; Execution Interpretation</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Current Market Price (CMP)</strong></td>
- <td><span class="mono">&#8377;3,313.60</span></td>
- <td>Consolidating within 6.5% of all-time high (&#8377;3,545.00)</td>
- </tr>
- <tr>
- <td><strong>52-Week Range</strong></td>
- <td><span class="mono">&#8377;1,413.10 – &#8377;3,545.00</span></td>
- <td>+145.1% advance from March 2026 IPO price (&#8377;1,352.00)</td>
- </tr>
- <tr>
- <td><strong>20-Day Moving Avg (20-EMA)</strong></td>
- <td><span class="mono">&#8377;3,180.00</span></td>
- <td>Immediate dynamic support shelf; tested post-block deals</td>
- </tr>
- <tr>
- <td><strong>50-Day Moving Avg (50-DMA)</strong></td>
- <td><span class="mono">&#8377;2,880.00</span></td>
- <td>Primary intermediate structural trendline; rising at ~&#8377;12/day</td>
- </tr>
- <tr>
- <td><strong>200-Day Moving Avg (200-DMA)</strong></td>
- <td><span class="mono">&#8377;2,100.00</span></td>
- <td>Long-term secular baseline anchored near initial IPO listing base</td>
- </tr>
- <tr>
- <td><strong>14-Day RSI / RS Rating</strong></td>
- <td><span class="mono"><strong>RSI: 58.40</strong> &bull; <strong>RS: 88/100</strong></span></td>
- <td>Constructive mid-range; top-decile outperformer vs Nifty 500</td>
- </tr>
- <tr>
- <td><strong>14-Day Average True Range (ATR)</strong></td>
- <td><span class="mono">&#8377;128.50 (3.88%)</span></td>
- <td>Normal volatility bandwidth for high-beta mid-cap growth stocks</td>
- </tr>
- <tr>
- <td><strong>Optimal Accumulation Band</strong></td>
- <td><span class="mono">&#8377;3,180.00 – &#8377;3,250.00</span></td>
- <td>Upper limit of the 20-DMA support shelf for secondary rebalancing</td>
- </tr>
- <tr>
- <td><strong>Hard Invalidation Stop Loss</strong></td>
- <td><span class="mono"><strong>&#8377;2,950.00</strong> (-10.97%)</span></td>
- <td>Structural invalidation; daily close below prior multi-week pivot</td>
- </tr>
- <tr>
- <td><strong>Tight Trailing Stop (Active Position)</strong></td>
- <td><span class="mono"><strong>&#8377;3,150.00</strong> (-4.94%)</span></td>
- <td>Protects accrued capital gains, locking in +55.52% on cost basis</td>
- </tr>
- <tr>
- <td><strong>12–18 Month Base Target</strong></td>
- <td><span class="mono"><strong>&#8377;4,250.00</strong> (+28.26%)</span></td>
- <td>Anchored to 73.0x FY28 estimated EPS of &#8377;58.20 (MF3 volume ramp)</td>
- </tr>
- <tr>
- <td><strong>Blue-Sky Bull Target</strong></td>
- <td><span class="mono"><strong>&#8377;4,850.00</strong> (+46.37%)</span></td>
- <td>Anchored to full MF3+MF4 ramp, EV 3W penetration &amp; export surge</td>
- </tr>
- <tr>
- <td><strong>Reward-to-Risk Asymmetry Ratio</strong></td>
- <td><strong style="color: #15803d;" class="mono">3.57 : 1 (Base Target)</strong></td>
- <td>(&#8377;4,250 &ndash; &#8377;3,250) / (&#8377;3,250 &ndash; &#8377;2,950) = &#8377;1,000 / &#8377;300 = <strong>3.33 to 3.57:1</strong></td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 8: FATAL FLAWS & RED-TEAM -->
-<h2 id="fatal-flaws">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<div class="fatal-box">
- <h3 style="margin-top: 0; color: #b91c1c;">Fatal Flaw 1: Private Equity Secondary Block Deal Supply Overhang</h3>
- <p>
- Although Sedemac's IPO was an &#8377;1,087.45 crore Offer for Sale, venture investors—principally <strong>A91 Emerging Fund II, Xponentia Opportunities Fund II, Montane Ventures, and NRJN Family Trust</strong>—retained post-listing stakes exceeding 28.5%<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-14">[14]</a></sup>. In September 2026, these funds divested <strong>11.05% equity</strong> via secondary block deals. While absorbed smoothly by domestic mutual funds, remaining PE holdings (~17.5%–19.0%) pose recurring secondary supply overhang that could cap multiple expansion during market corrections.
- </p>
-</div>
-
-<div class="fatal-box">
- <h3 style="margin-top: 0; color: #b91c1c;">Fatal Flaw 2: Tier-1 OEM Pricing Pressure &amp; Annual "Cost-Down" Demands</h3>
- <p>
- TVS Motor, Hero MotoCorp, and Bajaj Auto account for ~<strong>78% of consolidated corporate revenues</strong><sup><a href="#cite_note-3">[3]</a><a href="#cite_note-5">[5]</a></sup>. Indian auto OEMs wield immense monopsonistic leverage, routinely demanding annual "cost-down" price cuts of <strong>2.0% to 3.5%</strong> on mature component platforms. Failure to continuously launch higher-value software features or optimize MF3 manufacturing cycle times risks gross margin compression.
- </p>
-</div>
-
-<div class="fatal-box">
- <h3 style="margin-top: 0; color: #b91c1c;">Fatal Flaw 3: In-House R&amp;D and Captive Electronics Development by Megatier Suppliers</h3>
- <p>
- Global Tier-1 giants (Bosch, Denso, Continental, Valeo) possess multi-billion-dollar balance sheets and thousands of embedded software engineers. If Bosch or Denso develops comparable sensorless algorithms for small engines, or if an OEM like TVS decides to in-house firmware development once architectures mature, Sedemac's addressable TAM and pricing power would face erosion.
- </p>
-</div>
-
-<div class="forensic-box">
- <strong>Hard Invalidation Triggers (Immediate Thesis Exit Criteria):</strong>
- <ul style="margin-top: 4px; margin-bottom: 0;">
- <li><strong>Fundamental Invalidation:</strong> Consolidated Operating EBITDA margin compressing below <strong>13.50%</strong> for two consecutive quarters, or CFO/PAT dropping below <strong>0.50x</strong>, or loss of a key vehicle platform (e.g. TVS Jupiter or Hero Splendor).</li>
- <li><strong>Technical Invalidation:</strong> A daily closing breakdown below the structural floor of <strong>&#8377;2,950.00</strong> on heavy volume (&gt;1.5x 20-DMA volume), confirming Stage 2 trend termination.</li>
- </ul>
-</div>
-
-<!-- SECTION 9: PORTFOLIO ALLOCATION & MONEY BRIDGE -->
-<h2 id="capital-allocation">9. Portfolio Allocation &amp; The Money Bridge</h2>
-<p>
- Single-stock tactical allocations must not exceed <strong>15.00% of total portfolio equity</strong>, while the liquid cash reserve must be systematically maintained between <strong>5.0% and 10.0% of net worth</strong><sup><a href="#cite_note-13">[13]</a></sup>.
-</p>
-
-<table class="wikitable">
- <caption>Table 9.1: Portfolio Rebalancing &amp; Capital Allocation Blueprint<sup><a href="#cite_note-13">[13]</a></sup></caption>
- <thead>
- <tr>
- <th>Portfolio Dimension</th>
- <th>Current Status</th>
- <th>Policy Hurdle / Mandate</th>
- <th>Prescribed Rebalancing Execution Action</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Sedemac Capital Weight</strong></td>
- <td><span class="mono"><strong>14.20% (&#8377;6,62,720.00)</strong></span></td>
- <td>Tactical Ceiling: 15.00%</td>
- <td><strong>FREEZE FRESH BUYS</strong>; headroom is negligible (0.80% / &#8377;37,000)</td>
- </tr>
- <tr>
- <td><strong>Active Position Action</strong></td>
- <td>Hold 200 shares @ cost &#8377;2,025.49</td>
- <td>Maintain active winning runners</td>
- <td><strong style="color: #15803d;">🟢 KEEP_COMPOUNDING</strong>; let operational leverage run</td>
- </tr>
- <tr>
- <td><strong>Trailing Risk Management</strong></td>
- <td>Trailing stop set at &#8377;3,150.00</td>
- <td>Protect +55.5% minimum gain</td>
- <td>Trail stop weekly beneath rising 20-DMA dynamic shelf</td>
- </tr>
- <tr>
- <td><strong>Liquid Cash Reserve Buffer</strong></td>
- <td><span class="mono">&#8377;23,791.67 (0.51% of NW)</span></td>
- <td>Target Range: 5.00% &ndash; 10.00%</td>
- <td><strong>CRITICAL CASH RESTORATION MANDATE</strong> (Target &#8377;2.35L &ndash; &#8377;4.70L)</td>
- </tr>
- <tr>
- <td><strong>Harvesting Milestone</strong></td>
- <td>Price reaches &#8377;4,200 &ndash; &#8377;4,500</td>
- <td>Trim 25% to 30% of position</td>
- <td>Sell 50 shares to harvest ~&#8377;2.10L&ndash;&#8377;2.25L; redeploy into cash buffer</td>
- </tr>
- </tbody>
-</table>
-
-<p>
- <strong>The Money Bridge Synthesis:</strong> Sedemac represents an exemplar of modern Indian engineering. Because our active holding is sitting on substantial unrealized profits (+63.59%) and operating right against the 15.00% portfolio tactical ceiling, our capital strategy is disciplined: we refuse to chase the stock at current extended levels, trail our stop loss to &#8377;3,150.00 to eliminate downside risk, and allow the newly commissioned MF3 facility to drive earnings toward our base target of &#8377;4,250.00<sup><a href="#cite_note-4">[4]</a><a href="#cite_note-13">[13]</a></sup>.
-</p>
-
-<!-- SECTION 10: QUARTERLY MONITORING INDICATORS -->
-<h2 id="thesis-trackers">10. Key Quarterly Monitoring Indicators</h2>
-<p>
- Institutional underwriters track three quantitative operating metrics every quarter to verify thesis continuity:
-</p>
-
-<table class="wikitable">
- <caption>Table 10.1: Institutional Quarterly Monitoring Indicators (Thesis Trackers)<sup><a href="#cite_note-3">[3]</a><a href="#cite_note-4">[4]</a><a href="#cite_note-5">[5]</a><a href="#cite_note-7">[7]</a></sup></caption>
- <thead>
- <tr>
- <th>Monitoring Indicator</th>
- <th>Analytical Significance &amp; Rationale</th>
- <th>Bullish Expansion Threshold</th>
- <th>Bearish Alert / Invalidation Level</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>1. MF3 Monthly Dispatch Volume</strong></td>
- <td>Measures commercial absorption of the newly commissioned Shinde plant</td>
- <td><strong>&gt; 250,000 units / month</strong> by Q4 FY27</td>
- <td>&lt; 100,000 units / month (Signaling OEM ramp delays)</td>
- </tr>
- <tr>
- <td><strong>2. Consolidated EBITDA Margin (%)</strong></td>
- <td>Verifies pricing power and operating leverage amidst semiconductor mix</td>
- <td><strong>&ge; 17.00%</strong></td>
- <td>&lt; 13.50% (Indicating uncompensated OEM price downs)</td>
- </tr>
- <tr>
- <td><strong>3. Export Revenue Share (%)</strong></td>
- <td>Validates geographic diversification and non-domestic client adoption</td>
- <td><strong>&ge; 15.00%</strong> of net revenues</td>
- <td>&lt; 8.00% (Indicates stagnation in US/EU small engine programs)</td>
- </tr>
- </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES & CITATIONS -->
-<h2 id="references">11. References &amp; Regulatory Filings</h2>
+<p>The layer-two and layer-three results are shown for information. The framework does not score them for a company that fails a Layer 1 gate, and we present them because the holding audit needs them. The verdict is provisional for the reasons in this chapter, and it would change on the triggers in the decision chapter.</p>
+</section>
+<section id="notes">
+<h2>Notes and sources</h2>
+<p>Internal records are cited by file name. External sources are listed with the date we read them. A source marked as located, or blocked, is listed for traceability only.</p>
 <ol class="reflist">
- <li id="cite_note-1">^ National Stock Exchange of India (NSE) &amp; BSE India: Circular on Listing of Equity Shares of Sedemac Mechatronics (Symbol: SEDEMAC, Scrip Code: 544723), dated March 10, 2026.</li>
- <li id="cite_note-2">^ IIT Bombay SINE: Portfolio Company Profile &amp; Incubation Milestone Report &ndash; Sedemac Mechatronics, IIT Bombay Archives, 2024.</li>
- <li id="cite_note-3">^ SEBI: Red Herring Prospectus (RHP) of Sedemac Mechatronics, filed with Registrar of Companies, Maharashtra at Pune, February 2026, pp. 1&ndash;384.</li>
- <li id="cite_note-4">^ BSE/NSE Corporate Announcement: Disclosure under Regulation 30 of SEBI (LODR) Regulations, 2015 &ndash; Commencement of Commercial Production at Manufacturing Facility 3 (MF3) in Shinde, Pune, dated September 25, 2026.</li>
- <li id="cite_note-5">^ Sedemac Mechatronics: Annual Report for the Financial Year 2025–26, Director's Report &amp; Management Discussion and Analysis, pp. 24&ndash;68.</li>
- <li id="cite_note-6">^ Price Waterhouse: Independent Auditor's Report on Consolidated Audited Financial Results of Sedemac Mechatronics for Year Ended March 31, 2026, Notes to Accounts 14, 22, 28.</li>
- <li id="cite_note-7">^ Sedemac Mechatronics: Unaudited Financial Results (Consolidated) for First Quarter Ended June 30, 2026 (Q1 FY27), filed with NSE/BSE on August 12, 2026.</li>
- <li id="cite_note-8">^ Screener.in: Consolidated Financial Database and Cash Flow Statement Analysis for Sedemac Mechatronics, accessed September 2026. <a href="https://www.screener.in/company/SEDEMAC/" target="_blank">screener.in/company/SEDEMAC/</a></li>
- <li id="cite_note-9">^ India Ratings (Ind-Ra): Press Release on Rating Action &ndash; Sedemac Mechatronics Bank Loan Facilities Upgraded to 'IND A' (Stable); Short-Term Rating Affirmed at 'IND A1', dated August 17, 2026.</li>
- <li id="cite_note-10">^ ICRA Limited: Credit Rating Upgrade Announcement for Sedemac Mechatronics &ndash; Long-Term Rating Assigned [ICRA]A (Positive Outlook), dated September 2026.</li>
- <li id="cite_note-11">^ TradingView: Interactive Technical Charting &amp; Real-Time Quote Engine for NSE: SEDEMAC, accessed September 26, 2026. <a href="https://www.tradingview.com/chart/?symbol=NSE%3ASEDEMAC" target="_blank">tradingview.com/chart/?symbol=NSE:SEDEMAC</a></li>
- <li id="cite_note-12">^ Chittorgarh &amp; Groww IPO Research: Sedemac Mechatronics IPO Allotment, Basis of Allotment, and Listing Performance Report, March 2026.</li>
- <li id="cite_note-13">^ Zerodha Active Equity Portfolio Database: Master Position &amp; Holdings Ledger (sheets/Zerodha_Holdings.xlsx), synced as of September 24, 2026.</li>
- <li id="cite_note-14">^ BSE India: Block Deal Window Transaction Disclosures &ndash; Secondary Sale of 5.07 Million Shares (11.05% Equity) in Sedemac Mechatronics by A91 Emerging Fund II, Xponentia Opportunities Fund, and NRJN Family Trust, September 18–22, 2026.</li>
- <li id="cite_note-15">^ SAE International: Technical Paper 2021-01-0734 &ndash; "Thermal and Mechanical Failure Mechanisms of Hall Effect Sensors in Small-Engine Integrated Starter Generators", Detroit, MI.</li>
- <li id="cite_note-16">^ ACMA: Annual Auto Electronics Warranty &amp; Reliability Benchmarking Whitepaper, New Delhi, 2025.</li>
- <li id="cite_note-17">^ Indian Patent Office (IPO): Patent No. IN341982 &ndash; "Method and Apparatus for Sensorless Position and Velocity Estimation of Brushless Permanent Magnet Motors at Standstill and Low Speed", Inventors: S. Suryanarayanan, A. Dixit; Granted to Sedemac.</li>
- <li id="cite_note-18">^ TVS Motor Company Limited &amp; Hero MotoCorp Limited: Annual Reports (FY24–FY26) &ndash; Management Disclosures on BS-VI Micro-Hybridization and Integrated Starter Generator Sourcing Architecture.</li>
- <li id="cite_note-19">^ CRISIL: Sector Report &ndash; "Indian Two-Wheeler Electronics and Electrification Roadmap 2025–2030", Mumbai, 2025.</li>
- <li id="cite_note-20">^ NITI Aayog: Fast Tracking Freight and Personal Mobility Electrification in India &ndash; Component Level Value Chain Analysis, Government of India, 2025.</li>
- <li id="cite_note-21">^ Beneish, Messod: "The Detection of Earnings Manipulation", Financial Analysts Journal, Applied Forensic Methodology to Indian Auto Ancillary Corporates, 2024.</li>
- <li id="cite_note-22">^ Altman, Edward I.: "Predicting Financial Distress of Companies: Revisiting the Z-Score Model in Emerging Market Manufacturing", NYU Stern Working Paper Series, 2023.</li>
- <li id="cite_note-23">^ BSE/NSE Shareholding Pattern Disclosure for the Quarter Ended June 30, 2026: Statement showing shareholding of Promoter and Promoter Group, Category I &amp; II.</li>
- <li id="cite_note-24">^ Sona BLW Precision Forgings Limited: Audited Financial Results and Investor Presentation for FY26, Gurugram, May 2026.</li>
- <li id="cite_note-25">^ Uno Minda Limited: Annual Report FY26 &ndash; Auto Electrical &amp; Electronics Segmental Review, Manesar, June 2026.</li>
- <li id="cite_note-26">^ Weinstein, Stan: "Secrets For Profiting in Bull and Bear Markets" &ndash; Applied 4-Stage Analysis to Indian Post-IPO Momentum Leaders, Institutional Study, 2024.</li>
- <li id="cite_note-27">^ USPTO: US Patent 10,848,092 B2 &ndash; "Sensorless Control of Electric Machines with Rotor Saliency Tracking", Assigned to Sedemac Mechatronics Inc. / Ltd., November 2020.</li>
- <li id="cite_note-28">^ EPO: Patent Specification EP3518392A1 &ndash; "Sensorless Starting and Commutation Method for Brushless Machines in Automotive Applications", Published August 2019.</li>
- <li id="cite_note-29">^ Briggs &amp; Stratton Corporation: Global Supplier Excellence Awards 2025 &ndash; Tier-1 Recognition for Electronic Engine Governors &amp; Controls, Milwaukee, WI.</li>
- <li id="cite_note-30">^ Ministry of Heavy Industries (MHI): Notification on Electric Mobility Promotion Scheme (EMPS) and PM E-DRIVE Phased Manufacturing Programme (PMP) Guidelines for EV Powertrain Electronics, New Delhi, 2025.</li>
- <li id="cite_note-31">^ Bajaj Auto Limited: Corporate Presentation &ndash; EV Powertrain Localization &amp; Chetak Scale-up Roadmap, Pune, July 2026.</li>
- <li id="cite_note-32">^ STMicroelectronics &amp; Infineon Technologies: Automotive Microcontroller &amp; Silicon Carbide/MOSFET Solution Guides for Two-Wheeler Inverters, Munich &amp; Geneva, 2025.</li>
+<li id="cite_note-1">Market facts ledger, India session 12 Oct 2026 (run cache, facts_IN_2026-10-12.json). Internal record: close, moving averages, RSI, ATR, 52-week range, volume and base low. No URL.</li>
+<li id="cite_note-2">Positions file, consolidated position for SEDEMAC and Zerodha account totals, 12 Oct 2026 (run cache, positions_IN_2026-10-12.json). Internal record. No URL.</li>
+<li id="cite_note-3">Watchlist and shortlist rows for SEDEMAC, dated 28 Sep 2026 (inputs/watchlist_IN.json and inputs/shortlist_IN.json). Internal record used for the working stop and reconciliation. No URL.</li>
+<li id="cite_note-4">Scoring configuration (.agents/config/scoring.json): asymmetry floors, support-distance ladder, stop placement, momentum test and position cap. Internal configuration. No URL.</li>
+<li id="cite_note-5"><a href="https://www.screener.in/company/SEDEMAC/">Screener, Sedemac Mechatronics Ltd, standalone company page</a> (read 12 Oct 2026, 09:24 IST): ratios, profit and loss, balance sheet, cash flow, shareholding, announcements.</li>
+<li id="cite_note-6"><a href="https://trendlyne.com/equity/share-holding/3443160/SEDEMAC/latest/sedemac-mechatronics-ltd/">Trendlyne, SEDEMAC latest shareholding pattern</a> (read 12 Oct 2026, 09:29 IST): pledge, lock-in and mutual fund holding.</li>
+<li id="cite_note-7"><a href="https://indianstockalerts.com/news/sedemac-intimation-of-credit-rating-of-the-company-27309">Indian Stock Alerts, BSE filing summary: ICRA credit rating upgrade, filed 15 Sep 2026</a> (read 12 Oct 2026): rating action, customer concentration, import dependence, capex range and downgrade trigger.</li>
+<li id="cite_note-8"><a href="https://indianstockalerts.com/news/sedemac-annual-report-of-the-company-for-fy-2025-26-19792">Indian Stock Alerts, BSE filing summary: FY2025-26 press release, filed 17 Aug 2026</a> (read 12 Oct 2026): FY26 revenue, EBITDA, PAT, RoCE claim and dividend status.</li>
+<li id="cite_note-9"><a href="https://www.stockwatch.live/in/results/sedemac-mechatronics-544723/2027/1">StockWatch, SEDEMAC Q1 FY27 results</a> (read 12 Oct 2026): quarter to 30 June 2026, adjusted profit, segment revenue, listing date, no subsidiary note.</li>
+<li id="cite_note-10"><a href="https://www.stockssena.com/research/sedemac-mechatronics-reports-q1-fy2027-results-290726">StockSena, SEDEMAC Mechatronics reports Q1 FY2027 results, 29 Jul 2026</a> (read 12 Oct 2026): quarter revenue and profit, cross-check.</li>
+<li id="cite_note-11"><a href="https://sharpely.in/stocks/sedemac/forecast">Sharpely, SEDEMAC analyst estimates (consensus EPS, three analysts)</a> (read 12 Oct 2026).</li>
+<li id="cite_note-12"><a href="https://stockanalysis.com/quote/nse/SEDEMAC/forecast/">StockAnalysis, SEDEMAC stock forecast and price targets (S&amp;P Global, three analysts)</a> (read 12 Oct 2026).</li>
+<li id="cite_note-13"><a href="https://www.marketscreener.com/quote/stock/SEDEMAC-MECHATRONICS-LIMI-205305998/finances/">MarketScreener, SEDEMAC financial estimates (net sales and net income consensus)</a> (read 12 Oct 2026).</li>
+<li id="cite_note-14"><a href="https://www.marketscreener.com/quote/stock/SEDEMAC-MECHATRONICS-LIMI-205305998/consensus/">MarketScreener, SEDEMAC target price consensus</a> (read 12 Oct 2026): average target and recommendation count, cross-check.</li>
+<li id="cite_note-15"><a href="https://stockanalysis.com/quote/nse/SEDEMAC/transcripts/737875-q4-25-26/">StockAnalysis, SEDEMAC Q4 FY26 earnings call transcript, 18 May 2026</a> (read 12 Oct 2026): management commentary on customer concentration, margins and product margins.</li>
+<li id="cite_note-16"><a href="https://stockanalysis.com/quote/nse/SEDEMAC/financials/ratios/">StockAnalysis, SEDEMAC financial ratios and market capitalization history</a> (read 12 Oct 2026): ratio history begins in FY2026.</li>
+<li id="cite_note-17"><a href="https://www.screener.in/company/UNOMINDA/">Screener, Uno Minda Ltd, standalone company page</a> (read 12 Oct 2026): peer ratios and March 2026 column.</li>
+<li id="cite_note-18"><a href="https://www.screener.in/company/SONACOMS/">Screener, Sona BLW Precision Forgings Ltd, standalone company page</a> (read 12 Oct 2026): peer ratios and March 2026 column.</li>
+<li id="cite_note-19"><a href="https://ipocentral.in/two-wheelers-ecu-genset-maker-to-launch-ipo/">IPOCentral, two-wheeler ECU and genset maker IPO profile</a> (read 12 Oct 2026): the 30 percent domestic ISG share claim.</li>
+<li id="cite_note-20"><a href="https://startuply.vc/article/sedemac-s-ipo-caps-a-35-market-share-in-the-two-wheeler-ecu-stack-1ut75d">Startuply, Sedemac IPO and two-wheeler ECU market share article</a> (read 12 Oct 2026): the 35 percent headline share claim.</li>
+<li id="cite_note-21"><a href="https://www.sebi.gov.in/filings/public-issues/mar-2026/sedemac-mechatronics-limited_100214.html">SEBI, Sedemac Mechatronics Limited public issue filing (final offer document filed with the registrar, 6 Mar 2026)</a>. Read through the search tool only; not in the run cache because the cache tool could not verify the certificate.</li>
+<li id="cite_note-22"><a href="https://en.wikipedia.org/wiki/Start-stop_system">Wikipedia, Start-stop system</a> (read 12 Oct 2026): definition of idle-stop systems.</li>
+<li id="cite_note-23"><a href="https://en.wikipedia.org/wiki/Brushless_DC_electric_motor">Wikipedia, Brushless DC electric motor</a> (read 12 Oct 2026): sensorless controllers.</li>
+<li id="cite_note-24"><a href="https://en.wikipedia.org/wiki/Electronic_control_unit">Wikipedia, Electronic control unit</a> (read 12 Oct 2026): definition.</li>
+<li id="cite_note-25"><a href="https://en.wikipedia.org/wiki/Hall_effect_sensor">Wikipedia, Hall effect sensor</a> (read 12 Oct 2026): background on position sensing.</li>
+<li id="cite_note-26"><a href="https://en.wikipedia.org/wiki/Electric_motorcycles_and_scooters">Wikipedia, Electric motorcycles and scooters</a> (read 12 Oct 2026): market background.</li>
+<li id="cite_note-27"><a href="https://en.wikipedia.org/wiki/Average_true_range">Wikipedia, Average true range</a> (read 12 Oct 2026): definition of ATR.</li>
+<li id="cite_note-28"><a href="https://en.wikipedia.org/wiki/Relative_strength_index">Wikipedia, Relative strength index</a> (read 12 Oct 2026): definition of RSI.</li>
+<li id="cite_note-29"><a href="https://en.wikipedia.org/wiki/Moving_average">Wikipedia, Moving average</a> (read 12 Oct 2026): definition of a moving average.</li>
+<li id="cite_note-30"><a href="https://www.icra.in/Rating/ShowRationalReportFilePdfViewer/145585">ICRA, rating rationale report 145585</a>. Located; the PDF returned no readable text in this run. No figure taken from it.</li>
+<li id="cite_note-31"><a href="https://www.sedemac.com/static/media/SEDEMACMECHATRONICSLIMITEDRHP.86f5227defffbdeb10ea.pdf">Sedemac Mechatronics, red herring prospectus (PDF)</a>. Located; the PDF returned raw bytes in this run. No figure taken from it.</li>
+<li id="cite_note-32"><a href="https://www.sedemac.com/static/media/SEDEMAC_AnnualReport_2024-25.1e8736c84c62450d11d1.pdf">Sedemac Mechatronics, annual report 2024-25 (PDF)</a>. Located; not text-readable in this run. No figure taken from it.</li>
+<li id="cite_note-33"><a href="https://www.bseindia.com/stock-share-price/sedemac-mechatronics-ltd/SEDEMAC/544723/corp-announcements/">BSE, SEDEMAC corporate announcements page</a>. Blocked (HTTP 403) in this run. No figure taken from it.</li>
+<li id="cite_note-34"><a href="https://concall.in/company/249675/updates/documents">Concall.in, SEDEMAC transcript listing</a>. Blocked or empty in this run. No figure taken from it.</li>
+<li id="cite_note-35"><a href="https://www.marketscreener.com/quote/stock/SEDEMAC-MECHATRONICS-LIMI-205305998/news-call-transcripts/">MarketScreener, SEDEMAC transcripts page</a>. Read in this run; no transcripts were listed. No figure taken from it.</li>
 </ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-</div>
-</body>
-</html>
+</script></body></html>
