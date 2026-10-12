@@ -114,13 +114,14 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
    - Every single section (Sections 1 through 7) and every table must be 100% fully rendered.
    - Strictly forbidden: Truncating sections, omitting tables, using placeholder comments (e.g. `<!-- rest of table omitted -->`, `[Remaining setups continue...]`), or skipping any breakout/breakdown candidates or sector heatmaps.
    - The full 30 breakout alerts and 30 breakdown alerts, all sector movers, and top tactical setups must be completely populated.
-6. **MANDATORY INDEPENDENT REVIEWER AGENT & EXTENSIVE DUCK-DUCK-GO MCP WEB VERIFICATION:**
+6. **MANDATORY INDEPENDENT REVIEW (ONE REVIEWER, CODE-BUILT PACKET) AND DUCK-DUCK-GO MCP RESEARCH:**
 <!-- MARKET IN -->
-   - Double-check all closing prices (CMP), 52-week ranges, moving averages, 14-day RSI, volume expansion multiples, PCR, India VIX, and FII/DII net flows via live online search (the `duck-duck-go` MCP `search` then `fetch_content`, per section 6 of `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`).
+   - Closing prices (CMP), 52-week ranges, moving averages, 14-day RSI and volume expansion multiples come from the ledger. PCR, India VIX and FII/DII net flows come from the research pass: gather and confirm them with the `duck-duck-go` MCP (`search` then `fetch_content`, per section 6 of `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`) before writing, and record them in the research record.
 <!-- /MARKET -->
 <!-- MARKET US -->
-   - Double-check all closing prices (CMP), 52-week ranges, moving averages, 14-day RSI, volume expansion multiples, PCR, CBOE VIX, and Treasury yields via live online search (the `duck-duck-go` MCP `search` then `fetch_content`, per section 6 of `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`).
+   - Closing prices (CMP), 52-week ranges, moving averages, 14-day RSI and volume expansion multiples come from the ledger. PCR, CBOE VIX and Treasury yields come from the research pass: gather and confirm them with the `duck-duck-go` MCP (`search` then `fetch_content`, per section 6 of `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`) before writing, and record them in the research record.
 <!-- /MARKET -->
+   - Review follows `../_shared/REVIEWER_OPERATIONS.md`: `scripts/review_packet.py` traces every number to the ledger and research record in code, then one reviewer agent judges what code could not settle. The reviewer does not search the web. The daily market intelligence report does not get a red-team pass.
 7. **MANDATORY GOOGLE DRIVE SYNCHRONIZATION, REPORT LIFECYCLE & IN-PLACE OVERWRITE:**
 <!-- MARKET IN -->
    - Ingest `data/accounts/IN/zerodha.transactions.jsonl` and `data/shortlist/IN.json` fresh from sheets/ and shortlist/.

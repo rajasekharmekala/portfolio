@@ -59,6 +59,7 @@ Both should print `RESULT: PASS`.
 │   ├── market_facts.py         Builds the daily facts ledger and fact pack for one market
 │   ├── data_layer.py           Validates the data, replays positions, writes the holdings views
 │   ├── validate_report.py      Pre-send gate for every report (structure, language, data)
+│   ├── review_packet.py        Builds the review packet (mechanical review in code) and checks reviewer output
 │   ├── send_email.py           Sends a report by email
 │   ├── build_dossier_portal.py Rebuilds the company dossier index
 │   ├── serve_blogs.py          Serves the reports and dossiers on localhost:9050
@@ -68,7 +69,7 @@ Both should print `RESULT: PASS`.
 │   ├── config/
 │   │   ├── markets.json        Per-market parameters: screen, skills, output file names, email subjects
 │   │   ├── portfolios.json     Which data files each market reads
-│   │   └── reviewer.json       Reviewer model, passes and round limit
+│   │   └── reviewer.json       Reviewer model, red-team scope and round limit
 │   ├── workflows/             Step-by-step runs. Start here for a daily run.
 │   │   ├── _COMMON.md          Rules that apply to every workflow
 │   │   ├── market_intelligence.md, portfolio_audit.md, options_audit.md,
@@ -76,7 +77,8 @@ Both should print `RESULT: PASS`.
 │   └── skills/                Analysis and writing rules, one folder per skill
 │       ├── _shared/           Shared standards: run protocol, voice, palette, data layer,
 │       │                      section drafting, holdings update, editorial standard
-│       ├── report_reviewer/   The independent reviewer's rubric
+│       ├── report_reviewer/   The single reviewer's rubric (judgment only)
+│       ├── red_team/          The conditional bear-case pass
 │       └── market_intelligence, portfolio_audit, options_underwriting, company_report,
 │           watchlist_shortlist_underwriting, archive_resurrection_review,
 │           shortlist_capital_allocator   (each covers both markets)
@@ -150,7 +152,7 @@ The workflow sets the steps. The rules it refers to are in `_COMMON.md`. Every r
    .venv/bin/python scripts/validate_report.py --report "$RUN_DIR/report.html" --kind market_intel --facts "$RUN_DIR/cache/facts_US_2026-10-08.json"
    ```
    Use `--kind portfolio_audit` for audits and option reviews. The result must be `RESULT: PASS`. Don't lower a threshold to pass a report.
-9. **Reviewer gate.** An independent agent reviews the report for source support, consistency and plain language. The reviewer's model is set in `.agents/config/reviewer.json`. A report can only be delivered with `APPROVE` from the reviewer and `RESULT: PASS` from the validator. At most two review rounds. If the report still isn't approved, nothing is delivered, and the run directory is kept for inspection.
+9. **Reviewer gate.** Code first builds a review packet (`scripts/review_packet.py`): it traces every number to the ledger and research record, checks tickers, dates, totals and verdict conflicts, and runs the validators. One independent reviewer agent then judges what code could not settle: untraced numbers, verdicts against their evidence, company claims, consistency and plain language. A red team challenges the conclusions for decision-driving reports (not the daily market intelligence). The reviewer's model is set in `.agents/config/reviewer.json`. At most two review rounds, and round 2 only looks at the sections that changed. A report is delivered with `APPROVE` and `RESULT: PASS`, or best-effort after round 2 with the unresolved findings disclosed.
 10. **Delivery.**
     ```bash
     .venv/bin/python scripts/send_email.py --report "googledrive/newsletters/US_Market_Intelligence_2026-10-08.html" --subject "Daily US Market Pulse | 2026-10-08 | S&P Uptrend"

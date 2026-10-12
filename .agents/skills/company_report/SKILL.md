@@ -287,8 +287,9 @@ The report is not finished until, in this order:
    `gate-exceptions` section (`../../workflows/_COMMON.md`).
 3. `python3 scripts/validate_report.py docs/blogs/<SYMBOL>_dossier.html` — the
    shared structural and voice validator.
-4. The reviewer cycle (`../_shared/REVIEWER_OPERATIONS.md`), including the
-   red-team bear case for full reports.
+4. The reviewer cycle (`../_shared/REVIEWER_OPERATIONS.md`): the review packet
+   (`scripts/review_packet.py build --kind dossier --symbol <SYMBOL>`), one reviewer,
+   and the red-team bear case for full reports.
 
 Fix findings, rerun, and only then publish.
 

@@ -89,15 +89,11 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
      7. Industry Associations & Government Reports (e.g. CRISIL MI&A, SIAM, CEA, DGTR, Ministry of Heavy Industries).
      8. Interactive Technical & Fundamental Platforms (Screener.in consolidated financials, TradingView charts).
    - In-text superscript tags (`<sup>[X]</sup>`) must be densely distributed across EVERY section—corporate history, operating segments, unit economics, supply chain inputs, forensic cash flows, peer multiples, and technical levels. Zero uncited figures or floating assertions.
-8. **MANDATORY INDEPENDENT REVIEWER AGENT & EXTENSIVE GOOGLE SEARCH VERIFICATION:**
-   - Before writing or persisting the final research dossiers `docs/blogs/<SYMBOL>_dossier.html`, `data/watchlist/IN.json`, and `data/shortlist/IN.json`, an **Independent Reviewer Agent** (dual-pass verification audit) must double-check all analysis, data values, calculations, and financial metrics.
-   - The reviewer agent must **extensively perform live Google searches** (Screener.in, TradingView, BSE/NSE exchange disclosures) to cross-verify:
-     - Real-time / closing market prices (CMP)
-     - 52-week ranges, 20/50/200 DMAs, 14-day RSI, volume multiples
-     - Financial fundamentals: ROCE, ROE, Debt/Equity, CFO/PAT, P/E, Sales & PAT CAGR, OPM %
-     - Exact mathematical calculations for Asymmetry Ratios, stop losses, and target prices.
+8. **MANDATORY INDEPENDENT REVIEW (ONE REVIEWER, CODE-BUILT PACKET):**
+   - Before writing or persisting the final research dossiers `docs/blogs/<SYMBOL>_dossier.html`, `data/watchlist/IN.json`, and `data/shortlist/IN.json`, run the shared reviewer gate (`../_shared/REVIEWER_OPERATIONS.md`, `../../workflows/_COMMON.md`): `scripts/review_packet.py` traces the dossier's numbers in code, then one reviewer agent judges the untraced items, the verdict against its evidence and the tone, and the red team challenges the verdict.
+   - The live verification (CMP, 52-week ranges, 20/50/200 DMAs, 14-day RSI, volume multiples, ROCE, ROE, Debt/Equity, CFO/PAT, P/E, Sales & PAT CAGR, OPM %) belongs to the research stage: gather it with the `duck-duck-go` MCP (Screener.in, TradingView, BSE/NSE disclosures) and record it in the research record with `source_url`, `as_of` and `retrieved_at`. The reviewer checks claims against that record and the ledger and does not search the web.
    - Any hallucination, discrepancy, or unverified estimation must be immediately corrected or marked with explicit verifiable `N/A`.
-   - This two-pass verification is one reviewer round. Across all iterative reviews for a batch or dossier, obey the shared strict two-round maximum; after round 2, apply remaining fixes best-effort, rerun the validator, and record unresolved items without another review.
+   - Across all iterative reviews for a batch or dossier, obey the shared strict two-round maximum (round 2 is a delta review of the changed sections); after round 2, apply remaining fixes best-effort, rerun the validator, and record unresolved items without another review.
 9. **MANDATORY ZERO-OMISSION RESEARCH DOSSIER COMPLETENESS:**
    - In every generated/updated `docs/blogs/<SYMBOL>_dossier.html`, **NONE of the standard dossier template sections may be omitted or abbreviated**. The 3-layer gating, company-specific KPI scorecard, peer benchmarking wikitable, fatal flaws red-team, and clear verdict must be completely rendered with no placeholders.
 10. **MANDATORY DOSSIER-FIRST GATE — NO STOCK MAY BE MARKED `COMPLETED` WITHOUT A VERIFIED DOSSIER FILE:**
@@ -428,7 +424,7 @@ Every candidate must be processed through the following 3 layers sequentially:
 │    c. If MISSING or undersized → Status stays PENDING. Log error. Skip      │
 │       JSON update for that stock. Re-queue at top of next batch.             │
 │    d. If OK → Proceed to JSON update for that stock only.                   │
-│ 2. Independent Reviewer Audit: Double-check all metrics via live search.    │
+│ 2. Independent Reviewer Audit: review packet + one reviewer (no web search).│
 │ 3. Update `data/watchlist/IN.json` strictly IN-PLACE.             │
 │    - Only write `Status = COMPLETED` for stocks that PASSED step 1.         │
 │ 4. Update `data/shortlist/IN.json` strictly IN-PLACE.             │

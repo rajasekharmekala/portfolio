@@ -1,72 +1,72 @@
 # Reviewer Operations (how the reviewer gate runs)
 
-This file explains how the reviewer gate is run. The rubric (what to check) lives in `skills/report_reviewer/SKILL.md`. The model and limits live in `config/reviewer.json`. Read both before running a review.
+This file explains how the reviewer gate is run. The rubric (what to judge) lives in `skills/report_reviewer/SKILL.md`; the red team's method lives in `skills/red_team/SKILL.md`. The model, red-team scope and limits live in `config/reviewer.json`. Read both before running a review.
+
+The design in one paragraph: code does the mechanical review once, in `scripts/review_packet.py`. One reviewer agent reads the small packet it produces and does only the judgment. A red team runs only for decision-driving reports and reads a short conclusions digest. Round 2 reviews only what changed. Nobody re-reads the raw report, ledger and research record to re-derive what code already checked.
 
 ## 1. Choosing the model
 
-- The model is a setting, not part of the workflow. Set `"model"` in `.agents/config/reviewer.json`. It can be any model id your runner supports, including small and cheap models such as `haiku or luna-high, or gemini-flash 3.8 e.t.c`.
+- The model is a setting, not part of the workflow. Set `"model"` in `.agents/config/reviewer.json` (default `ao-claude-lc/claude-sonnet-5-5`). Any model id the runner supports works.
 - Workflows never name a model. If a workflow text names one, that text is wrong: fix the workflow, not the config.
-- A smaller model needs narrower work, not different work. That is why the review is split into passes (section 3). Keep the same rubric for every model. If a model cannot pass a spot-check on a known-good report, do not use it as the reviewer.
-- Calibrate a new model before trusting it: run the reviewer on a report already known to be good (APPROVE expected) and on one with a planted error (REVISE or BLOCK expected). Record both results in `<RUN_DIR>/manifest.json`.
+- The red team uses the same model unless `red_team.model` is set.
+- Calibrate a new model before trusting it: run the reviewer on a report already known to be good (APPROVE expected) and on one with a planted error (REVISE or BLOCK expected).
 
-## 2. Preparing the review bundle
+## 2. Building the packet (code, before any agent)
 
-The reviewer must see only what it needs. Before the first pass, the writer copies these into `<RUN_DIR>/review/`:
+After the full validator prints `RESULT: PASS`, build the round's packet:
 
-- the report HTML, under its original file name
-- `cache/facts_<MKT>_<date>.json` and `cache/research_<MKT>_<date>.json`
-- the snapshots in `inputs/`
-- the sibling report for the same session, if one exists
-- the standards `REPORT_EDITORIAL_STANDARD.md`, `REPORT_VOICE.md`, `REPORT_PALETTE.md`
-- the validator output, saved as `validator.txt`
+```
+.venv/bin/python scripts/review_packet.py build --report <report.html> --kind <market_intel|portfolio_audit|dossier> \
+  --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json --research <RUN_DIR>/cache/research_<MKT>_<date>.json \
+  --out-dir <RUN_DIR>/review/round_<N> --round <N> [--sibling <sibling report>] [--inputs-dir <RUN_DIR>/inputs] \
+  [--allow-stale-asof] [--symbol <TICKER>]
+```
 
-Write `<RUN_DIR>/review/bundle.json` listing each file with its SHA-256. The reviewer records the hashes it read. A review whose hashes do not match the current report is stale and must be re-run.
+Use `--kind portfolio_audit` for audits, options reviews, the capital allocation and archive/watchlist batches that are not single-company dossiers; use `--kind dossier` for a single-company dossier. Pass `--sibling` when a sibling report for the same session exists. Pass `--allow-stale-asof` exactly when the citation check was run with it.
 
-Do not include the story brief, drafts, earlier reviews, or the writer's notes. The reviewer is independent only if it has not seen the writer's reasoning.
+It writes `review_packet.md`, `conclusions_digest.md`, `report_text.md` and `packet.json` (item ids, the SHA-256 of the report, ledger, research record and sibling, and section hashes for round 2). A review whose report hash does not match the current report is stale and must be re-run.
 
-## 3. Running the passes
+What it does in code, so no agent does it: traces every number to the ledger, the research record, the positions replay from `data/accounts/` and simple arithmetic on them; checks Stage, RSI and close claims, session date, table totals, asymmetry ratios, verdict conflicts and sibling differences; and runs the validator, citation check and readability check. It lists only what code could not settle.
 
-Run the passes listed in `config/reviewer.json`, one fresh agent per pass. Each pass gets:
+The reviewer is independent only if it has not seen the writer's reasoning. Do not put the story brief, drafts, earlier reviews or the writer's notes in the run's `review/` folder.
 
-- the bundle
-- its own section of the rubric (source, consistency, or tone) from `report_reviewer/SKILL.md`
-- the instruction to write `<RUN_DIR>/review/round_<N>_<pass>.json` and nothing else
+## 3. Running the review
 
-The `red_team` pass (Stage 9d) is different: it does not use the reviewer rubric. It is run with `.agents/skills/red_team/SKILL.md`, which defines its own method, output contract, and verdict rules. Its output file is `<RUN_DIR>/review/round_<N>_red_team.json` and must contain the `bear_case` block. A round without a red-team bear case for a full report is incomplete.
+1. Start one reviewer agent with the configured model. Its prompt names the pass (`review`), points it at `<RUN_DIR>/review/round_<N>/`, and says to follow `report_reviewer/SKILL.md`. It writes `round_<N>/round_<N>_review.json`.
+2. If the workflow is not in `red_team.skip_for`, start the red team at the same time, pointing it at the same folder and `red_team/SKILL.md`. It reads `conclusions_digest.md` and writes `round_<N>/round_<N>_red_team.json`.
+3. Check each output before acting on it:
+   `.venv/bin/python scripts/review_packet.py check --review <round_<N>_review.json> --packet <packet.json> --report <report.html>`
+   It verifies JSON shape, verdict words, that every BLOCK/REVISE finding has `location`, `quote`, `fix` and `kind`, that every quote is really in the report, that every packet item has a disposition, that the verdict rows were all reviewed, and that the report has not changed since the packet. The red team output is checked by reading it: it must contain the `bear_case` block.
+4. If the output is malformed, rerun that agent once (`on_malformed_output`). If it is still malformed, treat it as REVISE and say so in the report notes. Never treat a malformed output as APPROVE.
+5. If a reviewer is unavailable (the model is not reachable, or the runner fails), try the configured model once, then run the same pass with the runner's default agent and record the substitution (configured model, substitute, reason) in the manifest and in the report's `gate-exceptions` section. An unavailable reviewer never blocks publication.
 
-Why split the passes: a small model that checks sourcing, consistency, and tone in one pass tends to skim all three. One focused pass per concern gets a real read.
+## 4. Rounds: a strict cap of two, round 2 is a delta
 
-Presentation and completeness checks are covered by `validate_report.py` and by the writer's own pre-send checklist. Do not ask a reviewer pass to count table rows or words; ask it to judge what the counts cannot show.
+- `max_rounds` is a strict hard cap of **2 complete rounds** for every skill and workflow. Never increase it, split a round into extra reviews, or launch a third round.
+- Round 1 is APPROVE when the reviewer returns APPROVE (NOTE findings only) and the red team, if run, is `verdict_holds` with NOTE findings only.
+- On REVISE or BLOCK, consolidate the findings, fix them in the sections that own the quoted text (`SECTION_DRAFTING.md`), re-assemble, rerun the validator until `RESULT: PASS`, then build the **round 2 packet as a delta**:
 
-## 4. Output contract
+  ```
+  .venv/bin/python scripts/review_packet.py build ... --round 2 \
+    --prev-packet <RUN_DIR>/review/round_1/packet.json --prev-review <RUN_DIR>/review/round_1/round_1_review.json
+  ```
 
-Each pass must return JSON matching the shape in `report_reviewer/SKILL.md`. Check it before acting on it:
+  It lists only items in sections that changed, marks each previous finding as fixed (its quote is gone) or still present, and carries the sections' prose. It prints `AGENT NEEDED: True|False`.
+- **Skip the agent** when it prints `False`: every open round-1 finding was `mechanical`, every quote is gone, and the code checks show no items. The fixes are verified by code. Count round 2 as APPROVE and record `round_2: code_verified` in the manifest.
+- Otherwise run the round 2 reviewer on the delta packet. Continue the round-1 reviewer's session when the runner can (`continue_round_1_session`); it already holds the context. If it cannot, start a fresh agent with the delta packet.
+- The red team runs in round 2 only if its round-1 assessment was `verdict_should_be_stricter` or `verdict_unsupported`, or it had a BLOCK/REVISE finding. It checks only that the writer's answer is present, cites bundle evidence and shows its arithmetic.
+- Round 2 is the final independent review. If it returns REVISE or BLOCK, apply every fix the approved evidence supports; remove or clearly qualify unsupported claims; rerun the validator and the writer's pre-delivery checklist. Do not launch another round.
+- After round 2, finish best-effort when the validator passes. Record `BEST_EFFORT_AFTER_REVIEW_LIMIT` in the manifest, list unresolved findings and any edits made after the final review, and disclose that the report did not receive reviewer APPROVE. Do not describe that state as APPROVE.
+- A BLOCK finding means the quoted claim or section must not be carried forward unchanged. Correct it, omit it, or state the evidence gap.
 
-- It parses as JSON.
-- It has `verdict`, `round`, `pass`, and `findings`.
-- Every BLOCK or REVISE finding has a `location`, a `quote`, and a `fix`.
-- The source pass lists at least 10 numbers it spot-checked against the ledger, with the result of each. A source pass with no spot-checks is malformed.
-
-If the output is malformed, rerun that pass once (`on_malformed_output`). If it is still malformed, treat the pass as REVISE and say so in the report notes. Never treat a malformed pass as APPROVE.
-
-If a reviewer is unavailable (the model is not reachable, or the runner fails), try the configured model once, then run the same pass with the runner's default agent and record the substitution (configured model, substitute, reason) in the manifest and in the report's `gate-exceptions` section. Continue the remaining configured passes. Do not exceed the two-round cap. At the cap, use best judgment, run the validator, and disclose the unavailable pass in the manifest and delivery note. An unavailable reviewer never blocks publication.
-
-## 5. Combining the passes and the strict round cap
-
-- `max_rounds` is a strict hard cap of **2 complete rounds** for every skill and workflow. A round consists of all configured reviewer passes (`source`, `consistency`, `tone`, and `red_team`). Never increase the cap for a run, split a round into extra reviews, or launch a third round.
-- The round is APPROVE only when every pass returns APPROVE, or returns NOTE findings only.
-- For findings in round 1, consolidate and fix every BLOCK and REVISE finding, rerun the validator until it shows `RESULT: PASS`, then begin the next full round.
-- Round 2 is the final independent review. If it returns REVISE or BLOCK findings, apply every fix that can be made from the approved evidence; remove or clearly qualify unsupported claims; rerun the validator and the writer's pre-delivery checklist. Do not launch another reviewer round.
-- After round 2, finish on a best-effort basis when the validator passes. Record `BEST_EFFORT_AFTER_REVIEW_LIMIT` in the manifest, list unresolved findings and any edits made after the final review, and disclose that the report did not receive reviewer APPROVE. Do not describe this state as APPROVE.
-- A BLOCK finding means the quoted claim or section must not be carried forward unchanged. Correct it, omit it, or state the evidence gap. If a reviewer pass is malformed or unavailable after its prescribed handling, record that status; do not exceed the two-round cap. Finish best-effort after the cap with validator PASS and disclose the unavailable/malformed pass.
-
-## 6. Writer rules
+## 5. Writer rules
 
 - The writer fixes findings. The writer does not argue with them in the report. If a finding is wrong, record why in `<RUN_DIR>/review/disputes.md`, fix what is right, and let the next round judge the rest.
 - The writer never edits the reviewer's output files.
-- Record in `manifest.json`: the reviewer model, each pass's verdict per round, the validator result per round, and the final decision.
+- Record in `manifest.json`: the reviewer model, each agent's verdict per round, the validator result per round, whether round 2 was an agent, a delta review or `code_verified`, and the final decision.
 
-## 7. Cost and limits
+## 6. Cost and limits
 
-- A review reads the whole report, so it is the largest input in a run. Keep reports within the size the chosen model handles. If the source pass cannot fit the report, split the source pass by section (one agent per H2) and merge the findings by location.
-- The reviewer does not fetch data. Anything it cannot verify from the bundle is a finding, not a silent pass.
+- The reviewer does not fetch data and does not search the web. Live web research belongs to the research stage (`RESEARCH_CONTRACT.md`) and is recorded in the research record; the reviewer judges claims against that record. Anything it cannot verify from the packet and the files the packet points to is a finding, not a silent pass.
+- Do not ask any agent to count table rows or words, recompute totals, re-run the validators or re-trace numbers. That is code.
+- If the packet itself is too large for the chosen model (a long batch of dossiers), build one packet per dossier or per H2 group and merge the findings by location.

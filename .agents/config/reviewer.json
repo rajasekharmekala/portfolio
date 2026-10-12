@@ -1,14 +1,26 @@
 {
-  "_comment": "Reviewer gate configuration. max_rounds is a strict hard cap of 2; after the second round, fix findings best-effort without launching another reviewer round. See skills/_shared/REVIEWER_OPERATIONS.md.",
-  "model": "ao-sonnet-5-5-sc",
-  "fallbackModels": ["ao-haiku-5-5-sc", "Qwen/Qwen-latest (ehl)"],
+  "_comment": "Reviewer gate. One reviewer agent (judgment only) reads a code-built packet; a conditional red team reads a conclusions digest. max_rounds is a strict hard cap of 2; round 2 is a delta review of changed sections. See skills/_shared/REVIEWER_OPERATIONS.md.",
+  "model": "ao-claude-lc/claude-sonnet-5-5",
   "passes": [
-    "source",
-    "consistency",
-    "tone",
-    "red_team"
+    "review"
   ],
+  "red_team": {
+    "_comment": "Runs unless the workflow is listed in skip_for. Round 2 runs only if round 1 asked for changes.",
+    "model": null,
+    "skip_for": [
+      "market_intelligence",
+      "reject_to_watchlist",
+      "displacement"
+    ],
+    "round_2": "only_if_round_1_asked_for_changes"
+  },
   "max_rounds": 2,
+  "round_2_mode": "delta",
+  "continue_round_1_session": true,
+  "packet": {
+    "script": "scripts/review_packet.py",
+    "dir": "<RUN_DIR>/review/round_<N>"
+  },
   "output_dir": "<RUN_DIR>/review",
   "on_malformed_output": "rerun_once_then_revise",
   "on_unavailable_reviewer": "best_effort_with_disclosure",

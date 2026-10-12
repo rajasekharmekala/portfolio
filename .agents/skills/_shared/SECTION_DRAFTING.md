@@ -52,13 +52,13 @@ Fix any FAIL and re-run that section only. Partial mode checks banned phrases, t
 
 1. Concatenate `00_head` and the section files in plan order into `<RUN_DIR>/work/body.html`. Do not write a `<head>` or `<style>` block. Then run `.venv/bin/python scripts/assemble_report.py --body <RUN_DIR>/work/body.html --out docs/reports/<Name>_<date>.html --market <IN|US> --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json --research <RUN_DIR>/cache/research_<MKT>_<date>.json`. The script builds the head from the palette `:root` block in `REPORT_PALETTE.md`, then `report_base.css`, then `book_components.css`, wraps the body in `<div class="report">`, wraps each bare `wikitable` in `<div class="table-wrap">`, adds the missing TradingView and Screener (IN) or Finviz (US) links next to every bold ticker, and appends a References list built from every link in the body plus every `source_url` in the research record.
 2. Run the full validator on `<RUN_DIR>/report.html`. This is the gate that matters. It must print `RESULT: PASS`.
-3. Run the reviewer gate on `report.html` (see the workflow's reviewer section). The reviewer reads the assembled report, not the fragments.
+3. Run the reviewer gate on `report.html` (see `_COMMON.md`, Reviewer gate). Code builds a review packet from the assembled report; the reviewer reads the packet, not the fragments.
 
-Findings from the reviewer go back to the section that owns the quoted text. Re-draft that section only, re-run its partial check, re-assemble, and re-run the full gate. Apply the strict two-round cap in `REVIEWER_OPERATIONS.md`: after round 2, fix findings best-effort, rerun the full validator and pre-delivery checklist, record any remaining findings, and do not start another review.
+Findings from the reviewer go back to the section that owns the quoted text. Re-draft that section only, re-run its partial check, re-assemble, and re-run the full gate. Round 2 is a delta review of exactly the sections that changed, so keep edits local. Apply the strict two-round cap in `REVIEWER_OPERATIONS.md`: after round 2, fix findings best-effort, rerun the full validator and pre-delivery checklist, record any remaining findings, and do not start another review.
 
 ## 6. Cost rules
 
 - Pass only the fact-pack entries a section names. Never pass the full ledger or the full fact pack to a section agent.
 - Re-draft a section, not the report, when a single finding is local.
 - Keep section outputs as files in `<RUN_DIR>/work/`. Agents pass paths, not contents, between steps.
-- Use the smallest model the reviewer calibration has accepted for drafting checks, and the chosen writer model for the head and the lede.
+- Use the chosen writer model for the head and the lede.
