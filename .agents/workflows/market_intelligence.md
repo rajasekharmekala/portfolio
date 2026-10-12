@@ -48,7 +48,7 @@ Update the watchlist JSON record file for this market with the names from the sc
 
 ## 9. Reviewer gate and delivery
 
-Follow `_COMMON.md`, including its strict four-round maximum, best-effort finalization after round 4, and mandatory GitHub Pages publication with automatic commit and push. The report file name is `output.market_intelligence` in `markets.json`, filled with the session date.
+Follow `_COMMON.md`, including its strict two-round maximum, best-effort finalization after round 2, and mandatory GitHub Pages publication with automatic commit and push. The report file name is `output.market_intelligence` in `markets.json`, filled with the session date.
 
 ## 10. Cleanup
 

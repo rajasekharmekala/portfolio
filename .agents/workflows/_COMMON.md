@@ -10,7 +10,7 @@ Every workflow takes a market (`IN` or `US`) and reads its parameters from `../c
 - `../skills/_shared/REPORT_EDITORIAL_STANDARD.md`: structure, data completeness, floors.
 - `../skills/_shared/SECTION_DRAFTING.md`: how long reports are drafted in sections.
 - `../skills/_shared/REVIEWER_OPERATIONS.md` and `../skills/report_reviewer/SKILL.md`: the reviewer gate.
-- `../config/reviewer.json`: the reviewer model and strict maximum of four rounds. Do not raise the cap or name a model in a workflow.
+- `../config/reviewer.json`: the reviewer model and strict maximum of two rounds. Do not raise the cap or name a model in a workflow.
 
 ## Run directory
 
@@ -38,9 +38,9 @@ Use the `duck-duck-go` MCP server (`search` and `fetch_content`), as the market 
 
 1. Read `../config/reviewer.json`. Run each pass it lists (`source`, `consistency`, `tone`) as a separate fresh agent, using the model it names, following `../skills/_shared/REVIEWER_OPERATIONS.md`.
 2. Give each pass only the review bundle described in REVIEWER_OPERATIONS §2. Do not pass drafts, the story brief, or reasoning.
-3. On REVISE or BLOCK in rounds 1–3, consolidate and fix all findings, rerun the validator until `RESULT: PASS`, then rerun all configured passes. Four rounds is a strict cap; never run a fifth round or increase `max_rounds`.
-4. If round 4 is not APPROVE, fix all evidence-backed findings best-effort, remove or qualify unsupported claims, rerun the validator and pre-delivery checklist, then continue with status `BEST_EFFORT_AFTER_REVIEW_LIMIT`. Record unresolved findings and post-round-4 edits; do not label the report APPROVE.
-5. Record each pass's verdict per round in `manifest.json`. If a pass is malformed or unavailable after the configured handling, record that status and disclose it; do not exceed four rounds.
+3. On REVISE or BLOCK in round 1, consolidate and fix all findings, rerun the validator until `RESULT: PASS`, then rerun all configured passes. Two rounds is a strict cap; never run a third round or increase `max_rounds`.
+4. If round 2 is not APPROVE, fix all evidence-backed findings best-effort, remove or qualify unsupported claims, rerun the validator and pre-delivery checklist, then continue with status `BEST_EFFORT_AFTER_REVIEW_LIMIT`. Record unresolved findings and post-round-2 edits; do not label the report APPROVE.
+5. Record each pass's verdict per round in `manifest.json`. If a pass is malformed or unavailable after the configured handling, record that status and disclose it; do not exceed two rounds.
 6. If the configured reviewer model cannot be run, try it once, then run the same passes with the runner's default agent, record the substitution in the manifest and in the report's gate-exceptions section, and continue. An unavailable model is an exception, never a reason to skip the gate or to stop.
 
 ## Gate exceptions and mandatory publication (binding)
@@ -54,8 +54,8 @@ Every run that completes its research publishes its reports. A gate that the exi
 | Class | Handling |
 |---|---|
 | Stale `as_of` (the latest periodic filing, results release or guidance is more than 60 days old and no newer one exists) | Run `citation_check.py ... --allow-stale-asof`. Keep every `as_of` true; never edit one to dodge the gate. The result `PASS WITH EXCEPTIONS` is acceptable. Every other citation failure (URL not in cache, value not in cached text, source floor) is still fixed, not excepted. |
-| Reviewer model unavailable | Section Reviewer gate, item 6. Still at most four rounds. |
-| Reviewer round 4 not APPROVE | `BEST_EFFORT_AFTER_REVIEW_LIMIT` as above. |
+| Reviewer model unavailable | Section Reviewer gate, item 6. Still at most two rounds. |
+| Reviewer round 2 not APPROVE | `BEST_EFFORT_AFTER_REVIEW_LIMIT` as above. |
 | Short batch (fewer eligible names than the batch size) | Process the eligible names and say so. Do not widen eligibility to fill the batch. |
 | Source blocked or unfetchable (403, paywall, bot wall) | Show N/A with the reason; never fill from memory. |
 | Residual readability or validator finding after best-effort fixes | Fix what can be fixed, list the rest. |

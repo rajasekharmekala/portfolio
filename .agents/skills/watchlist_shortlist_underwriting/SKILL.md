@@ -9,7 +9,7 @@ description: >-
 
 > **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
 
-> **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Four complete rounds is a strict maximum. After round 4, fix remaining findings best-effort, rerun the validator, record and disclose unresolved items, and do not launch a fifth round.
+> **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Two complete rounds is a strict maximum. After round 2, fix remaining findings best-effort, rerun the validator, record and disclose unresolved items, and do not launch a third round.
 > **Publication (binding):** after the validator and reviewer gate, automatically publish reports and dossier updates from this workflow to this repository's GitHub Pages, regenerate its indexes, and commit and push the scoped publication. Public publication is pre-authorized; do not ask for approval. Follow `../_shared/RUN_PROTOCOL.md` §6 and never force-push or stage unrelated changes.
 
 
@@ -97,7 +97,7 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
      - Financial fundamentals: ROCE, ROE, Debt/Equity, CFO/PAT, P/E, Sales & PAT CAGR, OPM %
      - Exact mathematical calculations for Asymmetry Ratios, stop losses, and target prices.
    - Any hallucination, discrepancy, or unverified estimation must be immediately corrected or marked with explicit verifiable `N/A`.
-   - This two-pass verification is one reviewer round. Across all iterative reviews for a batch or dossier, obey the shared strict four-round maximum; after round 4, apply remaining fixes best-effort, rerun the validator, and record unresolved items without another review.
+   - This two-pass verification is one reviewer round. Across all iterative reviews for a batch or dossier, obey the shared strict two-round maximum; after round 2, apply remaining fixes best-effort, rerun the validator, and record unresolved items without another review.
 9. **MANDATORY ZERO-OMISSION RESEARCH DOSSIER COMPLETENESS:**
    - In every generated/updated `docs/blogs/<SYMBOL>_dossier.html`, **NONE of the standard dossier template sections may be omitted or abbreviated**. The 3-layer gating, company-specific KPI scorecard, peer benchmarking wikitable, fatal flaws red-team, and clear verdict must be completely rendered with no placeholders.
 10. **MANDATORY DOSSIER-FIRST GATE — NO STOCK MAY BE MARKED `COMPLETED` WITHOUT A VERIFIED DOSSIER FILE:**

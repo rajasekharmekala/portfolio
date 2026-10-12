@@ -20,7 +20,7 @@ This folder is the only thing GitHub Pages serves.
 - Preview with `.venv/bin/python -m http.server 8765 --directory docs` and open `http://localhost:8765/`. JSON fetching requires HTTP rather than opening the page with `file://`.
 - Verify with `.venv/bin/python -m unittest discover -s scripts -p test_portal.py` and `node --check docs/portal.js`.
 - `docs/.nojekyll` must stay, so Pages serves the files as they are.
-- Publish only after `validate_report.py` returns `RESULT: PASS` and the reviewer process is complete: APPROVE within four rounds, or best-effort fixes and a passing validator after the strict fourth-round limit.
+- Publish only after `validate_report.py` returns `RESULT: PASS` and the reviewer process is complete: APPROVE within two rounds, or best-effort fixes and a passing validator after the strict second-round limit.
 - Publishing reports, including personal holdings, to this repository's public GitHub Pages is pre-authorized and mandatory after those gates. Keep one latest report per report type and market; older versions remain in git history.
 - Regenerate the indexes, then commit and push the reports and indexes automatically to the configured `origin` branch. Never force-push or stage unrelated working-tree changes.
 

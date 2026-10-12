@@ -26,7 +26,7 @@ Apply the archive resurrection skill (`skills[reject_to_watchlist]`) to each nam
 
 ## 5. Report and delivery
 
-Write the review in sections (`skills/_shared/SECTION_DRAFTING.md`). The report file name is `output.reject_to_watchlist` in `markets.json`. Run the validator and reviewer process as in `_COMMON.md`; the reviewer cap is four rounds, followed by best-effort fixes and validator pass without a fifth review. Delivery includes mandatory GitHub Pages publication, index regeneration, and automatic commit and push.
+Write the review in sections (`skills/_shared/SECTION_DRAFTING.md`). The report file name is `output.reject_to_watchlist` in `markets.json`. Run the validator and reviewer process as in `_COMMON.md`; the reviewer cap is two rounds, followed by best-effort fixes and validator pass without a third review. Delivery includes mandatory GitHub Pages publication, index regeneration, and automatic commit and push.
 
 ## 6. Workbook updates
 

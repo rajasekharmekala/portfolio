@@ -54,7 +54,7 @@ Fix any FAIL and re-run that section only. Partial mode checks banned phrases, t
 2. Run the full validator on `<RUN_DIR>/report.html`. This is the gate that matters. It must print `RESULT: PASS`.
 3. Run the reviewer gate on `report.html` (see the workflow's reviewer section). The reviewer reads the assembled report, not the fragments.
 
-Findings from the reviewer go back to the section that owns the quoted text. Re-draft that section only, re-run its partial check, re-assemble, and re-run the full gate. Apply the strict four-round cap in `REVIEWER_OPERATIONS.md`: after round 4, fix findings best-effort, rerun the full validator and pre-delivery checklist, record any remaining findings, and do not start another review.
+Findings from the reviewer go back to the section that owns the quoted text. Re-draft that section only, re-run its partial check, re-assemble, and re-run the full gate. Apply the strict two-round cap in `REVIEWER_OPERATIONS.md`: after round 2, fix findings best-effort, rerun the full validator and pre-delivery checklist, record any remaining findings, and do not start another review.
 
 ## 6. Cost rules
 
