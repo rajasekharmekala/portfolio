@@ -22,6 +22,7 @@ Create it first, as RUN_PROTOCOL §1 says. Every file this run creates lives the
 1. Resolve the **latest completed market session** under `../skills/_shared/RUN_PROTOCOL.md` §0. Do not default to the calendar date of the run. Check exchange holidays and close time, then confirm the benchmark's final daily bar; if today's session is incomplete or its final bar is not available, date the report to the most recent earlier completed session with a verified close. Record `run_date` and `session_date` separately when they differ.
 2. Check inputs: `.venv/bin/python scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"`. A missing or mis-shaped source stops the run. The manifest records the SHA-256 of every input.
 3. Read `.env` for the email settings: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `GMAIL_RECIPIENT`. The recipient comes from `.env`, not from this document.
+4. Sync before selecting anything. Run `git fetch origin`, then `git merge --ff-only origin/main` on `main`. Stop and report if the working tree holds unrelated changes or `main` cannot fast-forward. Read every JSON record file (watchlist, shortlist, holdings) only after this sync, and record the synced commit hash in the manifest. Eligibility and batch selection come from the synced files, so a name that origin already holds as `COMPLETED` is not eligible for a new batch.
 
 ## The ledger
 
@@ -87,6 +88,16 @@ Only after the validator and reviewer process are complete, with every unmet gat
 - Use `--dry-run` to preview the policy/digest without accessing credentials or sending mail. The sender centrally skips conditional types without qualifying event flags.
 
 Publication, including portfolio holdings, remains pre-authorized after the validation gates.
+
+## Overriding earlier publications (binding)
+
+A later run may replace a published dossier, report or record written by an earlier run. Fresher evidence is the normal way the catalog moves forward, and it is not a failure. The rule compares freshness with the metadata every published page carries (`research-as-of` and `generated-at` in its `<meta>` tags) and with the record's own dates.
+
+1. **Allowed override.** A run may overwrite an earlier output for the same symbol or report when its own `research-as-of` (ledger session date) is the same as or later than the earlier output's, and its `generated-at` time is later. The run may then overwrite the file in place and update the records in place.
+2. **Refused override.** Never overwrite an output whose `research-as-of` is later than this run's, or whose `generated-at` is later than this run's, even when the session dates match. Stop, report both commits and both dates, and leave the existing output alone.
+3. **Concurrent runs.** Before committing, run `git fetch origin` again. If `origin/main` has advanced, read the new commits that touched the same files. For each affected symbol apply rules 1 and 2. For an allowed override, rebase this run's publication onto `origin/main` and rebuild the record edits from the freshly synced JSON files; never copy an old record file over a newer one. Record the superseded commit hash in the manifest and in the commit message. For a refused override, stop before any push and keep the run directory.
+4. **Eligibility after an override.** A name whose newer output is already on origin is not re-selected for a new batch. Its next underwriting waits for a later round-robin cycle, as the workflow's selection rule states.
+5. **Push.** Always fast-forward. Never force-push. If the push is rejected, repeat step 3 once and then report the blocker.
 
 ## Cleanup
 
