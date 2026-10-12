@@ -1,824 +1,447 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Computer Age Management Services Ltd (CAMS) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-09">
+<meta name="generated-at" content="2026-10-12T03:57:05.077687-07:00">
+<title>Computer Age Management Services Limited (CAMS): company dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
-  --bg-main: #ffffff;
-  --bg-surface: #f9fafb;
-  --border-color: #d1d5db;
-  --brand-blue: #1d4ed8;
-  --brand-green: #15803d;
-  --brand-amber: #b45309;
-  --brand-red: #b91c1c;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
 }
-body {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background-color: var(--bg-main);
-  line-height: 1.68;
-  font-size: 14.5px;
-  letter-spacing: -0.011em;
-  margin: 0;
-  padding: 28px 36px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
 }
-h1.firstHeading {
-  font-family: var(--font-serif);
-  font-size: 2.25em;
-  font-weight: 600;
-  margin: 0.2em 0 0.1em 0;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border-color);
-  color: #111827;
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
 }
-.siteSub {
-  font-size: 0.88em;
-  color: var(--text-muted);
-  margin-bottom: 1.2em;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-navnavnav.executive-banner {
-  border-left: 6px solid #b91c1c;
-  background-color: #fef2f2;
-  padding: 16px 20px;
-  margin: 1.4em 0 1.8em 0;
-  border-radius: 0 6px 6px 0;
-}
-.executive-banner .badge {
-  display: inline-block;
-  padding: 4px 10px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border-radius: 4px;
-  color: #ffffff;
-  background-color: #b91c1c;
-  margin-bottom: 8px;
-}
-.decision-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-top: 10px;
-}
-.decision-card {
-  background-color: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 10px 14px;
-}
-.decision-card-title {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-.decision-card-value {
-  font-family: var(--font-mono);
-  font-size: 15px;
-  font-weight: 600;
-  color: #111827;
-}
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-table.infobox {
-  width: 330px;
-  float: right;
-  clear: right;
-  margin: 0.6em 0 1.4em 1.8em;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-spacing: 0;
-  font-size: 13px;
-  border-collapse: collapse;
-}
-table.infobox caption {
-  background-color: #e5e7eb;
-  color: #111827;
-  font-weight: 700;
-  padding: 8px 10px;
-  font-size: 14px;
-  border-bottom: 1px solid var(--border-color);
-}
-table.infobox th {
-  text-align: left;
-  padding: 6px 10px;
-  border-bottom: 1px solid #e5e7eb;
-  color: var(--text-secondary);
-  font-weight: 600;
-  width: 44%;
-}
-table.infobox td {
-  padding: 6px 10px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #111827;
-  font-family: var(--font-mono);
-}
-div.toc {
-  background: #fafbfc;
-  border: 1px solid var(--border-color);
-  padding: 14px 20px;
-  display: table;
-  margin: 1.2em 0 1.8em 0;
-  font-size: 90%;
-  min-width: 290px;
-  border-radius: 4px;
-}
-div.toc h2 {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  border: none;
-  padding: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-div.toc ul {
-  margin: 0;
-  padding-left: 20px;
-  list-style-type: decimal;
-}
-div.toc li {
-  margin-bottom: 4px;
-}
-div.toc a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
-div.toc a:hover {
-  text-decoration: underline;
-}
-h2 {
-  font-family: var(--font-serif);
-  font-size: 1.65em;
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 6px;
-  margin-top: 2.2em;
-  color: #111827;
-}
-h3 {
-  font-family: var(--font-sans);
-  font-size: 1.18em;
-  font-weight: 600;
-  margin-top: 1.6em;
-  color: #1f2937;
-}
-table.wikitable {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid var(--border-color);
-  background: #ffffff;
-  font-size: 13.5px;
-  margin: 1.2em 0;
-}
-table.wikitable th {
-  background-color: #f3f4f6;
-  font-weight: 600;
-  border: 1px solid var(--border-color);
-  padding: 8px 12px;
-  text-align: left;
-  color: #111827;
-}
-table.wikitable td {
-  padding: 7px 12px;
-  border: 1px solid var(--border-color);
-}
-table.wikitable tr:nth-child(even) {
-  background-color: #fafbfc;
-}
-table.wikitable tr:hover {
-  background-color: #f0f7ff;
-}
-.callout-blue {
-  background-color: #f0f4f8;
-  border-left: 4px solid var(--brand-blue);
-  padding: 12px 16px;
-  margin: 1.2em 0;
-  font-size: 94%;
-  border-radius: 0 4px 4px 0;
-}
-.callout-amber {
-  background-color: #fffdfa;
-  border-left: 4px solid var(--brand-amber);
-  padding: 12px 16px;
-  margin: 1.2em 0;
-  font-size: 94%;
-  border-radius: 0 4px 4px 0;
-}
-.callout-red {
-  background-color: #fffafa;
-  border-left: 4px solid var(--brand-red);
-  padding: 12px 16px;
-  margin: 1.2em 0;
-  font-size: 94%;
-  border-radius: 0 4px 4px 0;
-}
-.callout-green {
-  background-color: #f0fdf4;
-  border-left: 4px solid var(--brand-green);
-  padding: 12px 16px;
-  margin: 1.2em 0;
-  font-size: 94%;
-  border-radius: 0 4px 4px 0;
-}
-ol.reflist {
-  column-count: 2;
-  font-size: 12.5px;
-  line-height: 1.55;
-  padding-left: 20px;
-  color: var(--text-secondary);
-}
-ol.reflist li {
-  margin-bottom: 6px;
-  word-break: break-word;
-}
-ol.reflist a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
-ol.reflist a:hover {
-  text-decoration: underline;
-}
-sup {
-  font-size: 10px;
-  font-family: var(--font-mono);
-}
-sup a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
-</style>
-</head>
-<body>
 
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
 
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
 
-<h1 class="firstHeading">Computer Age Management Services Ltd (NSE: CAMS)</h1>
-<div class="siteSub">From Wikipedia, the institutional financial encyclopedia &bull; Underwriting Dossier &bull; Core Alpha Book</div>
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Computer Age Management Services Limited (CAMS): company dossier</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T03:57:05.077687-07:00">12 Oct 2026, 03:57 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-09</p></header>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<dl class="key-figures"><div><dt>Publication status</dt><dd>BEST_EFFORT_AFTER_REVIEW_LIMIT, PUBLISHED_WITH_GATE_EXCEPTIONS</dd></div>
+<div><dt>Close, 9 Oct 2026</dt><dd>₹672.50 <a class="cite" href="https://groww.in/stocks/computer-age-management-services-ltd">[1]</a></dd></div>
+<div><dt>Momentum test</dt><dd>NO_MOMENTUM</dd></div>
+<div><dt>Layer 1 gate</dt><dd>FAIL_TECHNICAL</dd></div>
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span></dd></div>
+</dl>
+<p>CAMS keeps the official records of who owns India's mutual fund units, and it charges fees for that work. Its three financial tests pass on Screener figures, because the primary filings could not be read. The stock closed at ₹672.50, below its <dfn>50-day moving average</dfn> and its <dfn>200-day moving average</dfn>, both falling, which puts it in <dfn>Stage 4</dfn>, the phase of sustained decline. The verdict is REJECTED because a failed technical floor ends the evaluation. The failure is about timing and trend, and quality beyond the passing Layer 1 financial tests was not underwritten.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>What the company does</h2>
+<p>CAMS is a <dfn>registrar and transfer agent</dfn>, which the industry calls an RTA. An RTA is the back office behind a mutual fund: it keeps the register of who owns each unit, records every purchase, sale and switch, and sends the statements. Think of it as the ledger behind a shop counter. The fund manager decides what to buy, but the RTA keeps the books that say who owns what. Screener describes the company as a mutual funds transfer agency that serves investors, distributors and asset management companies, the firms that run the funds <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. It was founded in 1988 and is headquartered in Chennai <a class="cite" href="https://www.tradingview.com/symbols/NSE-CAMS/">[3]</a>.</p>
+<p>Most of the money comes from mutual funds. In FY26, 86 percent of revenue came from the mutual fund segment and 14 percent from everything else <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. The other businesses include the KYC registration agency, which holds identity records for investors, electronic payment collection, insurance and alternative investment funds <a class="cite" href="https://www.tradingview.com/symbols/NSE-CAMS/">[3]</a>. Management said the non-mutual-fund side grew faster than the core in the latest quarter, which chapter 2 explains <a class="cite" href="https://alphastreet.com/india/computer-age-management-services-ltd-cams-q1-2027-earnings-call-transcript/">[4]</a>.</p>
+<p>Scale is the company's largest asset. In the quarter ended March 2026, CAMS serviced about ₹55.1 trillion of <dfn>average assets under management</dfn>, which is the average value of the fund assets it keeps records for (its AAuM). That is around 68 percent of the mutual fund assets served across the Indian industry <a class="cite" href="https://www.multibagg.ai/market-pulse/articles/cams-q4-fy26-93302">[5]</a> <a class="cite" href="https://www.sahi.com/news/cams-reports-q1-consolidated-net-profit-of-1-28b-vs-1-26b-qoq-4244-PE1_COR">[6]</a>. The company is paid for records and transactions, so its income grows with the number of folios and the volume of trades rather than with the market index. The other large registrar, KFintech, gives a mutual fund AAuM figure of ₹26.4 trillion on its website, which is less than half the CAMS number, though the two figures may not be from the same date <a class="cite" href="https://www.kfintech.com/about-us/">[7]</a>. A comparison published by Bull Run puts CAMS at 67.2 percent of serviced assets and KFintech at 32.8 percent of AAuM, which points the same way as the 68 percent figure <a class="cite" href="https://www.bullrun.co.in/blog/cams-vs-kfin-technologies">[8]</a>. The FY26 annual report lists 114.1 million live investor folios and 285 service centres across 25 states and five union territories <a class="cite" href="https://www.camsonline.com/Annual_Report/FY2025-26/">[9]</a>.</p>
+<p>Ownership is simple to describe. Screener shows the promoter holding at zero since March 2024 <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>, and Trendlyne shows no shares pledged by the promoter at any quarter-end from September 2023 to June 2026 <a class="cite" href="https://trendlyne.com/equity/share-holding/297909/CAMS/computer-age-management-services-ltd/">[10]</a>. So there is no founding family or parent group holding a large block that could be pledged as security for a loan. The shares are held by foreign funds, Indian funds, insurers and the public. Chapter 5 returns to the one large holder change that matters for the price, a JPMorgan stake increase disclosed in October.</p>
+<p>What this means for an owner: the business works like a toll road on mutual fund activity. It earns money when investors keep investing, switching and paying through funds, not when the market goes up or down on a given day. That is why the company is worth understanding, even though the price test rejects it for now.</p>
+</section>
+<section class="chapter" id="ch-2">
+<h2>Why the business is strong or weak</h2>
+<p>The main test of a business like this is whether each new rupee of revenue turns into profit. <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization) is a common measure of that, and it is the number the company itself highlights. In the June 2026 quarter, operating revenue grew 11.5 percent to ₹395 crore, and EBITDA grew more than 18 percent to ₹183 crore, which management called the highest ever, giving a margin of 46.4 percent <a class="cite" href="https://alphastreet.com/india/computer-age-management-services-ltd-cams-q1-2027-earnings-call-transcript/">[4]</a>. Profit after tax reached ₹127.10 crore, up 17.63 percent from a year earlier <a class="cite" href="https://www.niftytrader.in/markets/cams-q1-fy27-results-strong-profit/">[11]</a>. A news summary of the results gives ₹128.02 crore on a consolidated basis <a class="cite" href="https://www.sahi.com/news/cams-reports-q1-consolidated-net-profit-of-1-28b-vs-1-26b-qoq-4244-PE1_COR">[6]</a>. The sources differ and we could not reconcile them. The gap does not change the picture.</p>
+<p>The returns on capital are the strongest feature. Return on equity, which is profit divided by shareholders' money, was 36.3 percent <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. <dfn>ROCE</dfn> (return on capital employed), which measures profit against all the money tied up in the business, was 47.0 percent <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. A business that needs little capital to earn each rupee of profit can return most of that profit to owners, and TradingView lists its last dividend per share at ₹2.50 <a class="cite" href="https://www.tradingview.com/symbols/NSE-CAMS/financials-dividends/">[12]</a>. The company's own FY26 annual report gives an EBITDA margin of 45.11 percent for the full year and a return on net worth of 39.03 percent on its own measure <a class="cite" href="https://www.camsonline.com/Annual_Report/FY2025-26/">[9]</a>.</p>
+<p>The weak spots are in the mix of growth. Management said absolute mutual fund revenue grew under 10 percent in the quarter, while non-mutual-fund businesses grew more than 28 percent <a class="cite" href="https://alphastreet.com/india/computer-age-management-services-ltd-cams-q1-2027-earnings-call-transcript/">[4]</a>. Management also said the equity assets it serviced grew 17.6 percent against an industry figure of about 16 percent, which is good, but that overall asset growth had lagged the company's usual pace in recent years, and that a one-time pricing adjustment made about a year earlier was still part of the story <a class="cite" href="https://alphastreet.com/india/computer-age-management-services-ltd-cams-q1-2027-earnings-call-transcript/">[4]</a>. The company's own commentary therefore points to pricing and mix as the things to watch, rather than volume alone. On Screener's figures, FY26 sales grew 6.6 percent while net profit grew 1.5 percent <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. Profit is lagging revenue, which is a reason to watch the quality of growth closely, and it is one more reason this dossier stops at the financial tests.</p>
+<p>There is also a shareholder story. Foreign portfolio investors held 57.63 percent of the shares in December 2024, and their holding fell to 44.88 percent by June 2026 <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. The price weakness has not come from the business losing money, since reported profit has kept rising. Competition is real, but the market is narrow. KFintech is the other large registrar in the record, and its own website claims a 52.3 percent share of the corporate registrar market and 31 of the 59 Indian mutual fund houses as clients <a class="cite" href="https://www.kfintech.com/about-us/">[7]</a>. Those are the company's own claims, not audited figures.</p>
+<p>The rules around the business are set by SEBI, the market regulator. Its master circular for registrars to an issue and share transfer agents, dated 6 February 2026, gathers the rules for this business in one place <a class="cite" href="https://www.sebi.gov.in/legal/master-circulars/feb-2026/master-circular-for-registrars-to-an-issue-and-share-transfer-agents_99567.html">[13]</a>. A separate SEBI master circular for mutual funds took effect on 1 April 2026 and replaces the June 2024 version <a class="cite" href="https://www.theexcelist.com/blog/sebi-master-circular-for-mutual-funds-on-20-mar-2026">[14]</a>. For investors, the practical protection is the arbitration route. AMFI, the industry body, says that if a registrar delays or fails to process a request, the investor can file for arbitration with the stock exchange under a SEBI circular dated 30.05.2022 <a class="cite" href="https://www.amfiindia.com/">[15]</a>. That route matters here because service reliability is part of the company's franchise. A rule change that cut fees or added service duties would hit revenue, which is why any proposed fee change is worth watching.</p>
+<p>What follows for the verdict: the Layer 1 financial tests support a long-term reading of the business, but quality beyond them was not underwritten. The price is the issue for now. A strong business in a falling trend is exactly the case the technical floor is designed to stop, so chapter 4 takes the price test next.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>The numbers, in plain words</h2>
+<p>The Layer 1 financial floor has three tests, and each one has a fixed threshold. <dfn>Debt-to-equity</dfn> is the company's borrowings divided by its shareholders' equity, so a lower number means less borrowed money behind the business. Under the rule, debt-to-equity must be below 0.70. <dfn>Cash flow from operations</dfn> is the cash a business brings in from its normal activity, before buying equipment or paying dividends. Over three fiscal years, that cash must be at least 0.70 times the reported net profit. The return on capital employed (ROCE) must be at least 15.0 percent. The table below shows each test, its threshold, the company's figure and the arithmetic behind it. Each input comes from the Screener consolidated table <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Test</th><th>Threshold</th><th>CAMS figure</th><th>Arithmetic</th><th>Result</th></tr>
+<tr><td>ROCE</td><td>at least 15.0%</td><td>47.0%</td><td>Reported figure, year to 31 March 2026</td><td>PASS</td></tr>
+<tr><td>Debt-to-equity</td><td>below 0.70</td><td>0.05</td><td>64 ÷ (50 + 1,271) = 64 ÷ 1,321 = 0.048</td><td>PASS</td></tr>
+<tr><td>Three-year cash flow from operations ÷ profit</td><td>at least 0.70</td><td>1.14</td><td>(401 + 477 + 584) ÷ (351 + 465 + 472) = 1,462 ÷ 1,288 = 1.135</td><td>PASS</td></tr>
+</table></div>
+<p>Start with what the table says. Borrowings were ₹64 crore at March 2026, against equity of ₹1,321 crore made up of ₹50 crore of share capital and ₹1,271 crore of reserves <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. That is a company that funds itself almost entirely from its own profits. The cash test asks whether reported profit is turned into cash, and the answer is yes: the three-year cash figure is 1,462 crore against profit of 1,288 crore, a ratio of 1.14. Cash from operations was higher than profit in all three years.</p>
+<p>The table is the rule, and the result is that all three financial tests pass on Screener figures. The financial floor does not reject this company. It also shows where the margin of safety is thinnest, which is in the cash test, because profit grew faster in FY25 than cash did. The table below shows each year.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Year to 31 March</th><th>Cash from operations (₹ crore)</th><th>Net profit (₹ crore)</th><th>Ratio</th></tr>
+<tr><td>2024</td><td>401</td><td>351</td><td>1.14</td></tr>
+<tr><td>2025</td><td>477</td><td>465</td><td>1.03</td></tr>
+<tr><td>2026</td><td>584</td><td>472</td><td>1.24</td></tr>
+<tr><td>Three years combined</td><td>1,462</td><td>1,288</td><td>1.14</td></tr>
+</table></div>
+<p>The year-by-year view shows the ratio never fell below 1.0 in these three years. Each year's cash came in above that year's profit, so the combined figure is not carried by one strong year. The FY26 ratio of 1.24 is the highest of the three, which is a good sign for cash quality, while the FY25 ratio of 1.03 is the closest to the limit. The company's FY26 sales were ₹1,516 crore, up 6.6 percent from ₹1,422 crore, while profit rose only 1.5 percent, from ₹465 crore to ₹472 crore <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. Sales grew faster than profit, which is worth watching in the next results.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Over the three years to March 2026, cash from operations was 1.14 times reported profit.</p>
+<h4>How it was calculated</h4>
+<p>Add the three years of cash from operations: 401 + 477 + 584 = 1,462 crore. Add the three years of profit: 351 + 465 + 472 = 1,288 crore. Divide: 1,462 ÷ 1,288 = 1.135, which rounds to 1.14.</p>
+<h4>The inputs</h4>
+<p>Both sets of figures come from the consolidated tables on Screener <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. Screener is a third-party presentation of the company's filings, so this is a cross-check of the reported numbers rather than a primary filing check.</p>
+<h4>The range</h4>
+<p>The threshold is 0.70. The yearly ratios were 1.14, 1.03 and 1.24, so no single year came close to the floor. The lowest year is still 47 percent above the threshold.</p>
+<h4>If the number is off</h4>
+<p>If the March 2026 cash figure were the 578 crore reported on a Trendlyne page instead of 584, the combined ratio would be 1,456 ÷ 1,288 = 1.13, which still passes. A cash figure would have to fall by more than 500 crore across the three years before the test failed, so the verdict is not sensitive to this source question.</p>
+</section>
+<p>One figure in circulation differs. A Trendlyne page gives cash from operations of ₹578 crore for March 2026, while Screener shows ₹584 crore. We could not read the Trendlyne table itself, so we use Screener's figure. If the lower number were right, the three-year ratio would be 1.13, which still passes. The result does not depend on the difference. The verdict does not depend on any of these figures either, because the technical floor fails first.</p>
+<p>Quarter to June 2026: revenue of ₹395 crore and profit of ₹127 crore, with operating profit at 46 percent of revenue, were reported in the consolidated quarterly table <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. Those numbers are the latest in the record. They are also more than 100 days old at the date of this dossier, which is why the gate notes flag them.</p>
+<p>The financial tests PASS on Screener figures. In plain words, the reported numbers show high returns on the capital used, little debt, and profit turned into cash. The primary filings were not read, so this is a pass on the available data. The technical test, in chapter 4, is the one that fails.</p>
+<p>A short note on <dfn>asymmetry</dfn>, the ratio of how much the price could rise to how much it could fall before a stop is hit. The skill's asymmetry floor is 3.0 for the core bucket and 3.5 for the tactical bucket. Because the technical floor failed, the asymmetry test is not evaluated, and the dossier does not compute a target or a ratio for CAMS.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>What the price is doing</h2>
+<p>The technical floor asks a simple question: is the stock in an uptrend that has not broken? The ledger answers it with moving averages, which smooth out daily noise. A stock above a rising 50-day and 200-day average is in an uptrend. A stock below falling averages is in <dfn>Stage 4</dfn>, the phase of decline, and the skill's rule is that a Stage 4 breakdown fails the floor. The second measure is the <dfn>RSI</dfn> (relative strength index), a 0 to 100 gauge of recent price momentum, where readings below 30 are called oversold and above 70 overbought. The third is <dfn>ATR</dfn> (average true range), the typical size of a daily price move. The table below uses the ledger figures for 9 October 2026, the latest completed session.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Measure</th><th>Ledger value</th><th>What it means</th></tr>
+<tr><td>Close</td><td>₹672.50 (up 1.5% on the day)</td><td>Down 7.8% over one month and 5.4% over two weeks</td></tr>
+<tr><td>50-day average</td><td>₹738.18, down from ₹771.20 21 sessions earlier (down 4.3%)</td><td>The short-term trend average is falling, and the close sits 8.9% below it</td></tr>
+<tr><td>200-day average</td><td>₹738.32, down from ₹747.35 63 sessions earlier (down 1.2%)</td><td>The long-term trend average is also falling</td></tr>
+<tr><td>20-day average</td><td>₹696.59</td><td>The close is below the recent short-term average too</td></tr>
+<tr><td>RSI (14)</td><td>37.9</td><td>Neither oversold nor overbought; the fall has been steady, not sharp</td></tr>
+<tr><td>ATR (14)</td><td>₹18.28</td><td>A typical day moves about ₹18, or 2.7 percent of the price</td></tr>
+<tr><td>52-week high and low</td><td>₹844.90 and ₹611.40</td><td>The close is 20.4 percent below the high and 10.0 percent above the low</td></tr>
+</table></div>
+<p>Read the table as a chain. The close sits below both averages, and both averages are falling, which is the signature of Stage 4 rather than a pause in an uptrend. The RSI of 37.9 is not oversold, so the fall has not run to an extreme that often precedes a bounce. The ATR of ₹18.28 means the stock moves roughly 2.7 percent on a normal day, so a few sessions of recovery would only move the price a small distance relative to the gap to the 50-day average, which is ₹65.68 or about 3.6 ATR. The second source agrees with the direction: TradingView's technical summary rates the stock as a sell <a class="cite" href="https://www.tradingview.com/symbols/NSE-CAMS/technicals/">[16]</a>, and the previous close shown on Groww matches the ledger's ₹672.50 <a class="cite" href="https://groww.in/stocks/computer-age-management-services-ltd">[1]</a>.</p>
+<p>The momentum gate then applies two tests. Test A asks whether the stock is in a clean uptrend with relative strength against the market over the last 63 sessions. Test B asks whether a stock that is not yet trending has the right <dfn>base</dfn>, meaning a sideways pause after a fall, together with volume and relative strength that support an entry. A stock must pass one of them to receive any allocation. The table below lists each condition.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Test</th><th>Condition</th><th>Measured</th><th>Result</th></tr>
+<tr><td>A</td><td>Price above the 50-day average, which sits above the 200-day average</td><td>672.50 against 738.18 and 738.32</td><td>FAIL</td></tr>
+<tr><td>A</td><td>200-day average not falling over 63 sessions</td><td>738.32 against 747.35</td><td>FAIL</td></tr>
+<tr><td>A</td><td>Relative strength against the Indian benchmark at least zero over 63 sessions</td><td>-7.96 percent</td><td>FAIL</td></tr>
+<tr><td>A</td><td>Close no more than 1.2 ATR above the recent low</td><td>0.64 ATR</td><td>PASS</td></tr>
+<tr><td>B</td><td>50-day average not down more than 0.5 percent over 21 sessions</td><td>down 4.28 percent</td><td>FAIL</td></tr>
+<tr><td>B</td><td>Relative strength against the benchmark rising over 28 sessions</td><td>-4.9 percent</td><td>FAIL</td></tr>
+<tr><td>B</td><td>Close within 1.0 ATR of the base level</td><td>0.64 ATR</td><td>PASS</td></tr>
+<tr><td>B</td><td>Volume drying up before the move (ratio of 0.9 or below)</td><td>0.37</td><td>PASS</td></tr>
+<tr><td>B</td><td>Volume expanding (ratio of 1.0 or above over 20 sessions)</td><td>0.84</td><td>FAIL</td></tr>
+</table></div>
+<p>The table shows why the gate says NO_MOMENTUM. Test A fails three of its four conditions, including the two that matter most: the price is below the averages, and the long average is falling. Test B fails three of its five conditions: the 50-day average is falling far faster than the 0.5 percent allowed, relative strength is still negative, and volume is not expanding. Passing the proximity checks (the stock sits close to its recent low) does not rescue either test, because the trend conditions are the ones that count. So the momentum gate returns NO_MOMENTUM, and the technical floor FAILS.</p>
+<p>Put together: CAMS is a company whose price has been falling for months, with a long average still turning down, a negative relative strength reading, and no volume expansion. That is the fact pattern the skill calls a breakdown. The verdict does not say the business is bad, and it does not predict the price. It says the entry test is not met today.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>What could happen next</h2>
+<p>The next company event is in the calendar. The board meets on 29 October 2026 to approve the results for the quarter and half-year ending September 2026 and to consider a further interim dividend, with a record date of 13 November 2026 <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. An earnings call follows on 30 October 2026 <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. Results can move the price, but they cannot pass the technical floor alone. A strong quarter that leaves the 50-day average falling and the price below the 200-day average would still be rejected.</p>
+<p>Shareholding offers a second signal. JPMorgan entities raised their stake from 5.05 percent to 7.06 percent on 11 September 2026 through open-market purchases, and the disclosure followed on 1 October <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. Over a longer period, Screener shows foreign institutional holding falling from 57.63 percent in December 2024 to 44.88 percent in June 2026 <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. The record gives no reason for either movement, and this dossier does not infer one. A single disclosed stake change is one data point, and it does not by itself reverse a Stage 4 trend.</p>
+<p>The levels define three scenarios. The first, and the most likely on the current trend, is that the price stays below ₹738.32 while the 50-day average keeps falling. In that case the verdict stands. The second is a recovery: a close above ₹738.32 with the 50-day average rising and above the 200-day average would start to clear Test A, but Test A also needs the 63-session relative strength to turn positive, which at minus 7.96 percent could take months. The third is a breakdown: a close below the 20-day swing low of ₹660.80 would be a fresh short-term low, with the 52-week low of ₹611.40 as the next reference point. Each level is a rule-based reference, not a forecast that we would act on today.</p>
+<p>What follows for the reader: the most useful thing to watch is the 50-day average. As long as it falls, the stock cannot pass the trend test, whatever the results. The first sign of a change is the average flattening, and the confirmation is a close above it.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>Why these estimates might be wrong</h2>
+<p>Every number in this dossier has a source and a date, but several sources are weaker than we would like. The financial figures come from Screener's consolidated table, which is a third-party presentation of the company's filings <a class="cite" href="https://www.screener.in/company/CAMS/consolidated/">[2]</a>. We could not read the primary filings: the Q1 FY27 investor presentation and consolidated financial statements are PDF documents on the NSE website, and the research tools in this run could not extract their text. A mistake in the aggregator would carry into our three financial tests. The tests have comfortable margins, though: ROCE is more than three times its threshold, and the debt ratio is less than a tenth of its limit.</p>
+<p>The profit figures vary a little between sources. Screener shows ₹127 crore for the June 2026 quarter, one news summary reports ₹127.10 crore, and another reports ₹128.02 crore on a consolidated basis <a class="cite" href="https://www.niftytrader.in/markets/cams-q1-fy27-results-strong-profit/">[11]</a> <a class="cite" href="https://www.sahi.com/news/cams-reports-q1-consolidated-net-profit-of-1-28b-vs-1-26b-qoq-4244-PE1_COR">[6]</a>. We use each figure only for the point it supports, and we say which one. Market share is also a secondary figure. The 68 percent AAuM share comes from results summaries and news and analysis articles, not from a CAMS filing <a class="cite" href="https://www.multibagg.ai/market-pulse/articles/cams-q4-fy26-93302">[5]</a> <a class="cite" href="https://www.sahi.com/news/cams-reports-q1-consolidated-net-profit-of-1-28b-vs-1-26b-qoq-4244-PE1_COR">[6]</a>. The KFintech numbers are the company's own statements <a class="cite" href="https://www.kfintech.com/about-us/">[7]</a>. Any rough share calculation from them mixes dates, so we do not treat it as a reported share.</p>
+<p>The price data needs a caution too. The ledger closes are authoritative for this dossier, but several public pages show later intraday quotes, and the Screener header changed during the day on which we checked it. Those live figures include market capitalization and valuation ratios, which we do not use as gate inputs. The stage classification depends on the ledger's definitions of the averages and the relative strength windows. A different definition could move a borderline case, but CAMS is not borderline: both averages are falling and both momentum tests fail on several conditions at once.</p>
+<p>The strongest challenge to the verdict is that a quality business may recover faster than the trend suggests. A stock in a long decline can turn quickly, especially when large buyers return. We cannot rule that out. What the record supports is narrower: on 9 October 2026 the rules said no, and a small set of observable conditions, listed in chapter 7, would say yes.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>What we would do, and when</h2>
+<p>Final Action Verdict: REJECTED (archive), because the Layer 1 technical floor fails. Layers 2 and 3 are not evaluated. The verdict is REJECTED, and the action is to archive the candidate. No position is taken, and the record should move to the archive sheet, so it does not sit in the active queue. Archiving does not mean the company is discarded. It means the case is closed until a specific condition is met, and the condition is written down so that it can be checked without debate.</p>
+<p class="trigger">Reopen the case only after a full re-run of the ledger momentum gate passes Test A: a daily close above the 50-day average, with the 50-day average above the 200-day average (₹738.32 on 9 October 2026), the 200-day average not falling over 63 sessions, the 50-day average higher than it was 21 sessions earlier, the close within 1.2 ATR of the recent low, and relative strength against the benchmark over 63 sessions at zero or above.</p>
+<p>That trigger is deliberately narrow. The 200-day average on the ledger is ₹738.32, and the 50-day average has to move above it, which confirms the trend has turned. The relative strength condition matters because CAMS has lagged the benchmark for months, and a price bounce alone would not show that the stock is leading again. Until every Test A condition is met, the dossier stays archived, even if the results are strong.</p>
+<p>The review points are the 29 October results and the next ledger refresh. At each point, the question is whether the price test has changed. A good quarter by itself does not reopen the case. A break below ₹660.80 would confirm the decline, so the case stays archived and the reopen trigger above is unchanged.</p>
+</section>
+<section class="chapter gate-exceptions" id="gate-exceptions"><h2>Run notes and gate exceptions</h2>
+<p>Status: BEST_EFFORT_AFTER_REVIEW_LIMIT, PUBLISHED_WITH_GATE_EXCEPTIONS. The citation check passes with exceptions. It counts 31 distinct cited sources against the floor of 25, and it lists 20 as-of exceptions, each named in the list below. Each exception is a figure whose latest filing or release is more than 60 days old as of 12 October 2026. Each keeps the date its source gives, and none has been changed to pass the check.</p>
+<p>What failed: each exception is a figure whose as-of date is more than 60 days before the check's report date of 12 October 2026. The annual figures (ROCE, ROE, borrowings and reserves, cash from operations and profit, FY26 sales, the revenue split and the AAuM share) are dated 31 March 2026, which is 195 days before the check date. The quarter figures (Q1 FY27 results, management commentary, segment growth, consolidated profit, equity growth, non-MF share, cost impact, promoter pledge and the FII holding) are dated 30 June 2026, which is 104 days before. Each of these records has its own line in the list below.</p>
+<p>Why these cannot be cured now: the newest periodic results are the quarter to 30 June 2026 and the year to 31 March 2026. The quarter to 30 September 2026 is reported on 29 October 2026, after this session and after the check date, so no newer filing exists. The dates are true, and no as-of date was edited to pass the gate.</p>
+<p>How this lowers confidence: the three financial tests use the March 2026 annual figures, so their age matters. It does not change the outcome, because the verdict rests on the technical floor, which uses the 9 October 2026 ledger close and momentum results. The pledge and holding figures are 104 days old, which is why the pledge is recorded as 0.0 percent at 30 June 2026 and not as a current position. The equity growth and cost figures come from the management call and describe the June quarter only.</p>
+<p>What would cure it: the results for the quarter to 30 September 2026 (board meeting 29 October 2026) and the shareholding pattern for September 2026. Re-run the citation check after those are filed, so the newest figures fall inside 60 days.</p>
+<p>Source quality: the primary filings could not be read in this run. The Q1 FY27 investor presentation, the consolidated financial statements, the NSE-hosted earnings call transcript and the annual report are PDF documents that the tools could not extract. The financial figures therefore rest on Screener's consolidated table, a third-party presentation of the company's filings. Filings are the preferred source, and a single aggregator is not enough on its own for a financial claim, so the three financial tests pass on Screener figures only. Trendlyne's figure of ₹578 crore for March 2026 cash from operations could not be verified from its text, so Screener's ₹584 crore is used, and chapter 3 shows that the result is the same either way.</p>
+<p>Other notes: (a) The Screener page was re-read during the day. Its live market capitalization and valuation ratios differ between snapshots, so they are not used as gate inputs. (b) Profit for the June 2026 quarter is ₹127 crore on Screener, ₹127.10 crore in Niftytrader and ₹128.02 crore on a consolidated basis in the Sahi summary. Each is used only where its source is named. (c) The face value of the share is ₹2 on Screener and ₹5 in the Sahi summary, and the dossier uses neither. (d) The pledge figure of 0.0 percent comes from Trendlyne, an aggregator; no BSE shareholding filing could be read. (e) The promoter holding is zero, so there is no promoter group whose pledge could be tested.</p>
+<p>The SEBI page yielded only its title and date, so the SEBI rules described in chapter 2 come from secondary summaries.</p>
+<p>Unverified items: CAMS's own share of mutual fund assets is taken from secondary summaries that quote about 68 percent, and the KFintech figures are the company's own claims. The Trendlyne cash figure is unverified. A secondary article reports management's FY27 cost outlook, but no figure from it is used in this dossier.</p>
+<p>The word-count validator, validate_report.py, sets its floors for market reports and portfolio audits and has no dossier kind, so it was not run on this dossier. The checks that apply to a company dossier were run instead: the citation check, the readability check, the code-built review packet and the modern-layout check.</p><h3>Stale as-of exceptions</h3><p>The list below gives each figure dated more than 60 days before the report date. Dates are kept as the sources state them. The cure is the next filing that covers each period.</p><ul class="stale-asof"><li>CAMS:roce: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:roe: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:borrowings_reserves: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:cfo_inputs_3y: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:pat_inputs_3y: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:sales_fy26: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_results: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_management_commentary: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_segment_growth: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_pat_consolidated: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:promoter_pledge: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:fii_holding_jun2026: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:business_revenue_split: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:aum_serviced_market_share: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:aum_market_share_second_source: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_pat_niftytrader: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_equity_aum_growth: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_nonmf_share: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:q1_fy27_cost_impact: 2026-06-30 is 104 days older than report date 2026-10-12 (max 60).</li>
+<li>CAMS:ar_fy26_highlights: 2026-03-31 is 195 days older than report date 2026-10-12 (max 60).</li></ul></section>
+<section class="chapter" id="sources-note">
+<section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="sources-note"><section class="chapter" id="notes"><h2>Notes and sources</h2>
+<p>This dossier uses the research record in the run folder. Every figure in the body traces to one record, and each record links to a page the research tools fetched and read. Most of the sources are aggregators or secondary summaries, because the primary filings could not be extracted by the tools available in this run. The list below gives the pages read. Some carried little CAMS-specific content, and the list says so.</p>
+<p>Pages used for a figure, a quotation or a regulatory point:</p>
+<p>Pages checked that gave only context, a duplicate of another page, or no CAMS figure. None is used for a stated figure:</p>
+<p>Further sources read for this dossier: <a href="https://www.business-standard.com/markets/computer-age-management-services-ltd-share-price-47716.html">Business Standard, CAMS share price page</a>, <a href="https://www.business-standard.com/topic/cams">Business Standard, CAMS topic page</a>, <a href="https://scanx.trade/stock-market-news/companies/cams-q1-results-net-profit-rises-17-3-yoy-to-128-crore/47300401">ScanX, CAMS Q1 FY27 results</a>, <a href="https://markets.ft.com/data/equities/tearsheet/profile?s=CAMS:NSI">Financial Times, CAMS profile</a>, <a href="https://economictimes.indiatimes.com/topic/cams-market-share-mutual-fund-rta-india-nse-market-cap">Economic Times, CAMS market share topic</a>, <a href="https://www.stockmarketislive.com/other/mutual-fund-amc-registrar-rta-list-in-india-cams-vs-kfintech/">Stock Market Is Live, registrar list CAMS vs KFinTech</a>, <a href="https://bachhat.money/list-of-mutual-funds-managed-by-cams-and-kfintech/">Bachhat, funds managed by CAMS and KFinTech</a>, <a href="https://www.stockmarketislive.com/uncategorized/amc-list-for-kfintech-cams/">Stock Market Is Live, AMC list for KFinTech and CAMS</a>, <a href="https://www.business-standard.com/companies/news/cams-ai-tool-lens-asset-managers-expansion-125111201545_1.html">Business Standard, CAMS AI tool for asset managers</a>, <a href="https://www.camsonline.com/Annual_Report/FY2023-2024/about-cams.html">CAMS annual report FY2023-24, about CAMS</a>, <a href="https://www.bullrun.co.in/blog/cams-vs-kfin-technologies">Bull Run, CAMS vs KFin Technologies</a>, <a href="https://investor.kfintech.com/kfintech-in-numbers/">KFintech investor page, KFintech in numbers</a>, <a href="https://www.feedzop.com/en-us/news/business-and-economy/mutual-fund-savings-surge-cams-vs-kfin-technologies">Feedzop, mutual fund savings and CAMS vs KFin</a>, <a href="https://www.camsonline.com/Annual_Report/FY2025-26/">CAMS annual report FY2025-26, highlights</a>, <a href="https://www.camsonline.com/Annual_Report/FY2025-26/about-the-report.html">CAMS annual report FY2025-26, about the report</a>, <a href="https://www.stockssena.com/research/filings/CAMS">StockSSena, CAMS filings</a>, <a href="https://www.investywise.com/cams-annual-report-dispatch-notification/">InvestyWise, CAMS annual report dispatch notice</a>, <a href="https://www.stockwatch.live/in/results/computer-age-management-services-543232/2027/1">StockWatch, CAMS Q1 FY27 results and transcript</a>, <a href="https://economictimes.indiatimes.com/computer-age-management-services-ltd/stocks/companyid-49545.cms">Economic Times, CAMS company page</a>, <a href="https://economictimes.indiatimes.com/topic/cams-rta/news">Economic Times, CAMS RTA news</a>, <a href="https://www.livemint.com/market/market-stats/computer-age-management-services-q4-results-s0003252">Mint, CAMS Q4 results</a>, <a href="https://arkives.substack.com/p/cams-dominates-indias-mf-industry">Arkives, CAMS and the mutual fund industry</a>.</p>
+<ol class="reflist"><li><a href="https://groww.in/stocks/computer-age-management-services-ltd">groww.in/stocks/computer-age-management-services-ltd.</a></li><li><a href="https://www.screener.in/company/CAMS/consolidated">www.screener.in/company/CAMS/consolidated.</a></li><li><a href="https://alphastreet.com/india/computer-age-management-services-ltd-cams-q1-2027-earnings-call-transcript">alphastreet.com/india/computer-age-management-services-ltd-cams-q1-2027-earnings-call-transcript.</a></li><li><a href="https://www.multibagg.ai/market-pulse/articles/cams-q4-fy26-93302">www.multibagg.ai/market-pulse/articles/cams-q4-fy26-93302.</a></li><li><a href="https://www.sahi.com/news/cams-reports-q1-consolidated-net-profit-of-1-28b-vs-1-26b-qoq-4244-PE1_COR">www.sahi.com/news/cams-reports-q1-consolidated-net-profit-of-1-28b-vs-1-26b-qoq-4244-PE1_COR.</a></li><li><a href="https://www.kfintech.com/about-us">www.kfintech.com/about-us.</a></li><li><a href="https://www.bullrun.co.in/blog/cams-vs-kfin-technologies">www.bullrun.co.in/blog/cams-vs-kfin-technologies.</a></li><li><a href="https://www.camsonline.com/Annual_Report/FY2025-26">www.camsonline.com/Annual_Report/FY2025-26.</a></li><li><a href="https://trendlyne.com/equity/share-holding/297909/CAMS/computer-age-management-services-ltd">trendlyne.com/equity/share-holding/297909/CAMS/computer-age-management-services-ltd.</a></li><li><a href="https://www.niftytrader.in/markets/cams-q1-fy27-results-strong-profit">www.niftytrader.in/markets/cams-q1-fy27-results-strong-profit.</a></li><li><a href="https://www.sebi.gov.in/legal/master-circulars/feb-2026/master-circular-for-registrars-to-an-issue-and-share-transfer-agents_99567.html">www.sebi.gov.in/legal/master-circulars/feb-2026/master-circular-for-registrars-to-an-issue-and-share-transfer-agents_99567.html.</a></li><li><a href="https://www.theexcelist.com/blog/sebi-master-circular-for-mutual-funds-on-20-mar-2026">www.theexcelist.com/blog/sebi-master-circular-for-mutual-funds-on-20-mar-2026.</a></li><li><a href="https://www.amfiindia.com">www.amfiindia.com.</a></li><li><a href="https://www.business-standard.com/markets/computer-age-management-services-ltd-share-price-47716.html">www.business-standard.com/markets/computer-age-management-services-ltd-share-price-47716.html.</a></li><li><a href="https://www.business-standard.com/topic/cams">www.business-standard.com/topic/cams.</a></li><li><a href="https://scanx.trade/stock-market-news/companies/cams-q1-results-net-profit-rises-17-3-yoy-to-128-crore/47300401">scanx.trade/stock-market-news/companies/cams-q1-results-net-profit-rises-17-3-yoy-to-128-crore/47300401.</a></li><li><a href="https://markets.ft.com/data/equities/tearsheet/profile">markets.ft.com/data/equities/tearsheet/profile.</a></li><li><a href="https://economictimes.indiatimes.com/topic/cams-market-share-mutual-fund-rta-india-nse-market-cap">economictimes.indiatimes.com/topic/cams-market-share-mutual-fund-rta-india-nse-market-cap.</a></li><li><a href="https://www.stockmarketislive.com/other/mutual-fund-amc-registrar-rta-list-in-india-cams-vs-kfintech">www.stockmarketislive.com/other/mutual-fund-amc-registrar-rta-list-in-india-cams-vs-kfintech.</a></li><li><a href="https://bachhat.money/list-of-mutual-funds-managed-by-cams-and-kfintech">bachhat.money/list-of-mutual-funds-managed-by-cams-and-kfintech.</a></li><li><a href="https://www.stockmarketislive.com/uncategorized/amc-list-for-kfintech-cams">www.stockmarketislive.com/uncategorized/amc-list-for-kfintech-cams.</a></li><li><a href="https://www.business-standard.com/companies/news/cams-ai-tool-lens-asset-managers-expansion-125111201545_1.html">www.business-standard.com/companies/news/cams-ai-tool-lens-asset-managers-expansion-125111201545_1.html.</a></li><li><a href="https://www.camsonline.com/Annual_Report/FY2023-2024/about-cams.html">www.camsonline.com/Annual_Report/FY2023-2024/about-cams.html.</a></li><li><a href="https://investor.kfintech.com/kfintech-in-numbers">investor.kfintech.com/kfintech-in-numbers.</a></li><li><a href="https://www.feedzop.com/en-us/news/business-and-economy/mutual-fund-savings-surge-cams-vs-kfin-technologies">www.feedzop.com/en-us/news/business-and-economy/mutual-fund-savings-surge-cams-vs-kfin-technologies.</a></li><li><a href="https://www.camsonline.com/Annual_Report/FY2025-26/about-the-report.html">www.camsonline.com/Annual_Report/FY2025-26/about-the-report.html.</a></li><li><a href="https://www.stockssena.com/research/filings/CAMS">www.stockssena.com/research/filings/CAMS.</a></li><li><a href="https://www.investywise.com/cams-annual-report-dispatch-notification">www.investywise.com/cams-annual-report-dispatch-notification.</a></li><li><a href="https://www.stockwatch.live/in/results/computer-age-management-services-543232/2027/1">www.stockwatch.live/in/results/computer-age-management-services-543232/2027/1.</a></li><li><a href="https://economictimes.indiatimes.com/computer-age-management-services-ltd/stocks/companyid-49545.cms">economictimes.indiatimes.com/computer-age-management-services-ltd/stocks/companyid-49545.cms.</a></li><li><a href="https://economictimes.indiatimes.com/topic/cams-rta/news">economictimes.indiatimes.com/topic/cams-rta/news.</a></li><li><a href="https://www.livemint.com/market/market-stats/computer-age-management-services-q4-results-s0003252">www.livemint.com/market/market-stats/computer-age-management-services-q4-results-s0003252.</a></li><li><a href="https://arkives.substack.com/p/cams-dominates-indias-mf-industry">arkives.substack.com/p/cams-dominates-indias-mf-industry.</a></li></ol></section></section></section></section></section></section></section></section></section></section></section></section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-<div class="executive-banner">
-  <div class="badge">REJECTED (TECHNICAL GATE)</div>
-  <div style="font-size: 15px; font-weight: 600; color: #111827; margin-bottom: 6px;">
-    Executive Capital Allocation Verdict: Elite Financial Monopoly Gated by Technical Breakdown
-  </div>
-  <div style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;">
-    World-class 48.3% ROCE and 68% mutual fund RTA market share, but fails Layer 1 Technical Posture Gate due to price trading beneath declining 50-DMA and 200-DMA moving averages in active Stage 4 trend. Deferred until Stage 2 base recovery above ₹755.00.
-  </div>
-  <div class="decision-grid">
-    <div class="decision-card">
-      <div class="decision-card-title">Recommended Action</div>
-      <div class="decision-card-value" style="color: #b91c1c;">REJECTED (TECHNICAL GATE)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-title">Optimal Accumulation Band</div>
-      <div class="decision-card-value">₹695.00 – ₹715.00 (Conditional)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-title">Invalidation Stop Floor</div>
-      <div class="decision-card-value">₹650.00 (Structural Swing Floor)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-title">12–18M Base Target &amp; Asymmetry</div>
-      <div class="decision-card-value">₹900.00 (3.36:1 R:R)</div>
-    </div>
-  </div>
-</div>
-
-<div class="clearfix">
-
-<!-- WIKIPEDIA FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>Computer Age Management Services Ltd</caption>
-  <tr><th colspan="2" style="background-color: #f3f4f6; text-align: center; font-weight: bold;">Corporate Identity</th></tr>
-  <tr><th>Exchange Tickers</th><td>NSE: CAMS &bull; BSE: 543232</td></tr>
-  <tr><th>Incorporated / Listed</th><td>1988 / 2020</td></tr>
-  <tr><th>Headquarters</th><td>Chennai, Tamil Nadu, India</td></tr>
-  <tr><th>Leadership</th><td>Dinesh Kumar Mehrotra (Chairman), Anuj Kumar (MD)</td></tr>
-  <tr><th>Macro Sector</th><td>Financial Services</td></tr>
-  <tr><th>Fine Subsector</th><td>Capital Markets Infrastructure & FinTech Rails</td></tr>
-  
-  <tr><th colspan="2" style="background-color: #f3f4f6; text-align: center; font-weight: bold;">Market &amp; Technical Vitals</th></tr>
-  <tr><th>Market Capitalization</th><td>₹17,572 Cr (Mid-to-Large Cap)</td></tr>
-  <tr><th>Current Market Price (CMP)</th><td>₹707.35</td></tr>
-  <tr><th>52-Week High / Low</th><td>₹844.90 / ₹611.40</td></tr>
-  <tr><th>Moving Averages</th><td>20D: ₹728.40 &bull; 50D: ₹747.00 &bull; 200D: ₹753.80</td></tr>
-  <tr><th>RSI (14-Day) / ATR(14)</th><td>39.6 &bull; ₹17.80</td></tr>
-  <tr><th>Weinstein Stage</th><td>Stage 4 / Stage 1 Base Repair</td></tr>
-  <tr><th>Entry Posture</th><td>WAIT_FOR_SUPPORT (Below 50/200 DMA)</td></tr>
-  
-  <tr><th colspan="2" style="background-color: #f3f4f6; text-align: center; font-weight: bold;">Fundamental Forensics</th></tr>
-  <tr><th>Trailing P/E &bull; P/B</th><td>35.8x &bull; 13.2x</td></tr>
-  <tr><th>ROCE &bull; ROE</th><td>48.3% &bull; 37.0%</td></tr>
-  <tr><th>Debt-to-Equity</th><td>0.05x</td></tr>
-  <tr><th>3Y Cumulative CFO / PAT</th><td>1.14x</td></tr>
-  <tr><th>3Y Sales CAGR &bull; PAT CAGR</th><td>14.4% &bull; 14.4%</td></tr>
-  <tr><th>Operating Margin (OPM)</th><td>46.3%</td></tr>
-  
-  <tr><th colspan="2" style="background-color: #f3f4f6; text-align: center; font-weight: bold;">Underwriting Decision</th></tr>
-  <tr><th>Layer 1 Gate Status</th><td>FAIL_TECHNICAL</td></tr>
-  <tr><th>Layer 2 KPI Health</th><td>5/5_PASS</td></tr>
-  <tr><th>Layer 3 Entry Posture</th><td>WAIT_FOR_SUPPORT (Below 50/200 DMA)</td></tr>
-  <tr><th>Strategy Bucket</th><td>CORE_ALPHA</td></tr>
-  <tr><th>Shortlist Disposition</th><td>REJECTED_BELOW_HURDLE (Technical Gate)</td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc" role="navigation">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#section-1">1. Corporate Architecture, Capital History &amp; Ownership Structure</a></li>
-    <li><a href="#section-2">2. Operating Segments, Business Model &amp; Unit Economics</a></li>
-    <li><a href="#section-3">3. Industry Dynamics, Competitive Landscape &amp; Structural Moat</a></li>
-    <li><a href="#section-4">4. Operational Sector KPIs &amp; Traffic-Light Scorecard (Layer 2)</a></li>
-    <li><a href="#section-5">5. Forensic Financial Analysis, Capital Allocation &amp; Cash Flows</a></li>
-    <li><a href="#section-6">6. Peer Benchmarking &amp; Valuation Multiples Analysis</a></li>
-    <li><a href="#section-7">7. Technical Analysis, Stage Dynamics &amp; Support Mapping (Layer 3)</a></li>
-    <li><a href="#section-8">8. Three-Layer Underwriting Framework Summary</a></li>
-    <li><a href="#section-9">9. Strategic Catalysts, Growth Drivers &amp; Re-Rating Triggers</a></li>
-    <li><a href="#section-10">10. Adversarial Red-Team &amp; Key Investment Risks</a></li>
-    <li><a href="#section-11">11. Capital Allocation Verdict &amp; Execution Roadmap</a></li>
-    <li><a href="#section-12">12. Formal References &amp; Regulatory Citations</a></li>
-  </ul>
-</div>
-
-</div>
-
-
-<h2 id="section-1">1. Corporate Architecture, Capital History &amp; Ownership Structure</h2>
-<p>
-  <b>Computer Age Management Services Limited</b> (NSE: <code>CAMS</code>, BSE: <code>543232</code>) operates as India's premier technology-driven financial infrastructure and mutual fund Registrar and Transfer Agency (RTA)<sup><a href="#cite_note-1">[1]</a></sup>. Established in 1988 by V. Shankar and headquartered in Chennai, Tamil Nadu, CAMS has developed the mission-critical digital operating rails that process over 68% of the Indian mutual fund industry's Assets Under Management (AUM)<sup><a href="#cite_note-3">[3]</a></sup>. The company operates under strict regulatory oversight from the Securities and Exchange Board of India (SEBI) as a Qualified Registrar and Transfer Agent (Q-RTA)<sup><a href="#cite_note-2">[2]</a></sup>.
-</p>
-<p>
-  The ownership structure of CAMS represents a model institutional register. Following its highly successful Initial Public Offering (IPO) in September 2020—which was executed as a complete Offer for Sale (OFS) by Great Terrain Investment Ltd (an affiliate of Warburg Pincus) and the National Stock Exchange of India (NSE Investments)<sup><a href="#cite_note-1">[1]</a></sup>—CAMS transitioned into a professionally managed, board-run enterprise with zero promoter encumbrance. As of the quarter ended June 30, 2026, Foreign Institutional Investors (FIIs) hold approximately 38.2% of total equity, while Domestic Mutual Funds and Insurance Institutions hold 22.5%, creating an institutional anchor exceeding 60% of total free float<sup><a href="#cite_note-14">[14]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Table 1.1: CAMS Consolidated Corporate &amp; Capital Structure Overview</caption>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Specification / Historical Value</th>
-      <th>Regulatory &amp; Market Context</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Incorporation / IPO Date</b></td>
-      <td>May 25, 1988 / September 2020</td>
-      <td>Listed on BSE (September 2020) and subsequently on NSE</td>
-    </tr>
-    <tr>
-      <td><b>Share Capital &amp; Face Value</b></td>
-      <td>₹49.12 Cr (4.91 Cr shares of FV ₹10 each)</td>
-      <td>Zero equity dilution post-IPO; clean equity structure</td>
-    </tr>
-    <tr>
-      <td><b>Institutional Ownership</b></td>
-      <td>FII: 38.2% &bull; DII: 22.5% &bull; Public: 39.3%</td>
-      <td>Anchor institutions include Fidelity, SBI MF, Vanguard, HDFC MF</td>
-    </tr>
-    <tr>
-      <td><b>Board Governance Structure</b></td>
-      <td>Professionally run board; Majority Independent</td>
-      <td>Led by Dinesh Kumar Mehrotra (Chairman) &amp; Anuj Kumar (MD)</td>
-    </tr>
-    <tr>
-      <td><b>Core Regulatory Licenses</b></td>
-      <td>SEBI Q-RTA, KRA, CRA, IRDAI Repository, RBI AA</td>
-      <td>High regulatory moat; multi-vertical financial infrastructure</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="section-2">2. Operating Segments, Business Model &amp; Unit Economics</h2>
-<p>
-  CAMS operates an asset-light, mission-critical technology services model. Its core economic engine derives from long-term, multi-year contracts with 10 of the top 15 Asset Management Companies (AMCs) in India, including HDFC Mutual Fund, ICICI Prudential Mutual Fund, SBI Mutual Fund, Aditya Birla Sun Life Mutual Fund, and Kotak Mahindra Mutual Fund<sup><a href="#cite_note-3">[3]</a></sup>. The RTA fee structure is mathematically indexed as a basis-point fee on aggregate Asset Under Management (AUM), structured across tiered slabs where equity funds yield higher realization (3.5–5.0 bps) compared to debt and liquid funds (1.0–2.0 bps)<sup><a href="#cite_note-16">[16]</a></sup>.
-</p>
-
-<div class="callout-blue">
-  <strong>Operating Leverage &amp; Marginal Cost Economics:</strong>
-  Because mutual fund records, transaction processing, and investor servicing are executed over proprietary core software platforms, CAMS exhibits extraordinary operating leverage. Processing incremental Systematic Investment Plan (SIP) transactions requires virtually zero incremental variable cost, allowing Operating Profit Margins (OPM) to consistently hover between 44.0% and 47.0%<sup><a href="#cite_note-5">[5]</a></sup>.
-</div>
-
-<p>
-  The business model is segmented into four distinct operational verticals:
-</p>
-<ul>
-  <li><b>Mutual Fund RTA Operations (86% of Revenue):</b> Investor record keeping, dividend processing, KYC compliance, redemptions, Systematic Investment Plans (SIP), distributor brokerage calculation, and compliance reporting<sup><a href="#cite_note-3">[3]</a></sup>.</li>
-  <li><b>Alternatives &amp; Wealth Solutions (6% of Revenue):</b> Servicing Alternative Investment Funds (AIFs) Category I, II, and III, Portfolio Management Services (PMS), and family offices via the <i>WealthSpectrum</i> platform<sup><a href="#cite_note-8">[8]</a></sup>.</li>
-  <li><b>Payments &amp; Digital Rails (5% of Revenue):</b> <i>CAMSPay</i> operates as an RBI-authorized Payment Aggregator specialized in automated recurring mandate registration via e-NACH and UPI AutoPay for AMCs, NBFCs, and BFSI clients<sup><a href="#cite_note-10">[10]</a></sup>.</li>
-  <li><b>Data, KYC &amp; Insurance Repository (3% of Revenue):</b> CAMS KRA operates one of India's major KYC repositories, while CAMSRep holds a dominant position in the electronic insurance policy storage market<sup><a href="#cite_note-9">[9]</a>, <a href="#cite_note-20">[20]</a></sup>.</li>
-</ul>
-
-<h2 id="section-3">3. Industry Dynamics, Competitive Landscape &amp; Structural Moat</h2>
-<p>
-  The Indian RTA industry is a classic, impregnable <b>duopoly</b> between CAMS (68.2% market share) and KFin Technologies Ltd (31.8% market share)<sup><a href="#cite_note-15">[15]</a></sup>. No third player possesses the technological architecture, PAN-India physical branch footprint (over 280 customer service centers), or regulatory clearance to challenge this incumbency.
-</p>
-<p>
-  The structural moat of CAMS is fortified by four key competitive pillars:
-</p>
-<ol>
-  <li><b>Astronomical Switching Costs:</b> For an Asset Management Company with ₹5,00,000 Cr in AUM and millions of active folios, migrating to a competing RTA introduces severe operational and fiduciary risk. In the history of the Indian capital markets, fewer than three AMC migrations have ever occurred.</li>
-  <li><b>Network Effects &amp; Unified Ecosystem:</b> Independent Financial Advisors (IFAs), national distributors, wealth managers, and mutual fund platforms (Zerodha Coin, Groww, Angel One) are deeply integrated into CAMS APIs (such as <i>myCAMS</i> and <i>CAMS MF Central</i>)<sup><a href="#cite_note-3">[3]</a></sup>.</li>
-  <li><b>Secular Financialization Tailwind:</b> Monthly gross SIP inflows across India have surpassed ₹24,000 Cr per month in FY26, compounding aggregate mutual fund AUM at >18% CAGR over the last five years<sup><a href="#cite_note-6">[6]</a></sup>.</li>
-  <li><b>Pristine Balance Sheet &amp; Negative Working Capital:</b> Operating with negative working capital, CAMS converts over 100% of its operating profits into pure free cash flow, carrying zero debt and maintaining an unencumbered treasury surplus of over ₹850 Cr<sup><a href="#cite_note-21">[21]</a></sup>.</li>
-</ol>
-
-<h2 id="section-4">4. Operational Sector KPIs &amp; Traffic-Light Scorecard (Layer 2)</h2>
-<p>
-  Evaluating CAMS against institutional FinTech &amp; Capital Market Infrastructure benchmarks confirms pristine operational vitality:
-</p>
-
-<table class="wikitable">
-  <caption>Table 4.1: CAMS Operational Sector KPI Scorecard (Layer 2)</caption>
-  <thead>
-    <tr>
-      <th>Operational Metric</th>
-      <th>Reported Performance (FY26 / Q1 FY27)</th>
-      <th>Institutional Benchmark</th>
-      <th>Traffic-Light Status</th>
-      <th>Analytical Assessment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Mutual Fund AUM Market Share</b></td>
-      <td>68.2% Consolidated Share</td>
-      <td>&gt; 65.0% Industry Dominance</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>Undisputed leader; services 10 of top 15 AMCs with zero client churn.</td>
-    </tr>
-    <tr>
-      <td><b>Equity AUM % Contribution</b></td>
-      <td>52.4% of Serviced AUM</td>
-      <td>&gt; 45.0% (Higher Margin Mix)</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>High equity mix insulates realization yields from low-margin liquid fund fluctuations.</td>
-    </tr>
-    <tr>
-      <td><b>Operating Profit Margin (OPM)</b></td>
-      <td>46.26% (Q1 FY27)</td>
-      <td>&gt; 40.0% Sustainable Floor</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>Exceptional operating leverage; marginal cost of processing SIP transactions is near zero.</td>
-    </tr>
-    <tr>
-      <td><b>Non-MF Revenue Growth Rate</b></td>
-      <td>+21.4% YoY Growth</td>
-      <td>&gt; 18.0% Diversification Target</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>AIF/PMS (WealthSpectrum) and CAMSPay scaling rapidly to reduce pure MF reliance.</td>
-    </tr>
-    <tr>
-      <td><b>Cash Conversion Ratio (CFO/PAT)</b></td>
-      <td>1.14x (3-Year Average)</td>
-      <td>&gt; 0.70x Mandatory Floor</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>Zero bad debts, negative working capital, and upfront billing ensure &gt;100% cash conversion.</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="callout-green">
-  <strong>Layer 2 Operational Health: 5/5_PASS</strong> &mdash; CAMS qualifies on 100% of sector-specific operating KPIs with top-tier economic returns and widening digital competitive advantages.
-</div>
-
-<h2 id="section-5">5. Forensic Financial Analysis, Capital Allocation &amp; Cash Flows</h2>
-<p>
-  CAMS exhibits the financial characteristics of a global market infrastructure monopoly (comparable to Verisign or S&amp;P Global). Return on Capital Employed (ROCE) stands at an astounding <b>44.2% – 48.3%</b>, while Return on Equity (ROE) consistently delivers <b>37.0% – 39.8%</b><sup><a href="#cite_note-5">[5]</a></sup>. Debt-to-Equity is virtually zero at <b>0.05x</b> (representing minor statutory lease liabilities under Ind AS 116)<sup><a href="#cite_note-1">[1]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Table 5.1: CAMS 5-Year Consolidated Financial History (FY22 – FY26)</caption>
-  <thead>
-    <tr>
-      <th>Metric (₹ Cr)</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>CAGR (%)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Revenue from Operations</b></td>
-      <td>909.7</td>
-      <td>971.8</td>
-      <td>1,136.5</td>
-      <td>1,348.2</td>
-      <td>1,557.4</td>
-      <td><b>+14.4%</b></td>
-    </tr>
-    <tr>
-      <td><b>Operating EBITDA</b></td>
-      <td>425.4</td>
-      <td>427.8</td>
-      <td>514.8</td>
-      <td>618.5</td>
-      <td>720.8</td>
-      <td><b>+14.1%</b></td>
-    </tr>
-    <tr>
-      <td><b>EBITDA Margin (%)</b></td>
-      <td>46.8%</td>
-      <td>44.0%</td>
-      <td>45.3%</td>
-      <td>45.9%</td>
-      <td>46.3%</td>
-      <td><b>Stable</b></td>
-    </tr>
-    <tr>
-      <td><b>Profit After Tax (PAT)</b></td>
-      <td>286.9</td>
-      <td>284.6</td>
-      <td>351.2</td>
-      <td>425.8</td>
-      <td>491.5</td>
-      <td><b>+14.4%</b></td>
-    </tr>
-    <tr>
-      <td><b>Cash Flow from Operations (CFO)</b></td>
-      <td>312.4</td>
-      <td>328.6</td>
-      <td>412.0</td>
-      <td>488.2</td>
-      <td>561.4</td>
-      <td><b>+15.8%</b></td>
-    </tr>
-    <tr>
-      <td><b>CFO / PAT Ratio</b></td>
-      <td>1.09x</td>
-      <td>1.15x</td>
-      <td>1.17x</td>
-      <td>1.15x</td>
-      <td>1.14x</td>
-      <td><b>&gt;1.0x</b></td>
-    </tr>
-    <tr>
-      <td><b>ROCE (%)</b></td>
-      <td>52.8%</td>
-      <td>45.2%</td>
-      <td>46.8%</td>
-      <td>47.5%</td>
-      <td>48.3%</td>
-      <td><b>Industry Best</b></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="section-6">6. Peer Benchmarking &amp; Valuation Multiples Analysis</h2>
-<p>
-  Benchmarking CAMS against its immediate listed competitor (KFin Technologies) and related capital market infrastructure providers (CDSL, BSE, MCX) underscores its premium cash generation and operational stability:
-</p>
-
-<table class="wikitable">
-  <caption>Table 6.1: Capital Market Infrastructure Peer Comparison</caption>
-  <thead>
-    <tr>
-      <th>Company</th>
-      <th>Market Cap (₹ Cr)</th>
-      <th>CMP (₹)</th>
-      <th>P/E (TTM)</th>
-      <th>ROCE (%)</th>
-      <th>ROE (%)</th>
-      <th>D/E Ratio</th>
-      <th>OPM (%)</th>
-      <th>CFO/PAT</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background-color: #f0f7ff; font-weight: bold;">
-      <td>CAMS</td>
-      <td>17,572</td>
-      <td>707.35</td>
-      <td>35.8x</td>
-      <td>48.3%</td>
-      <td>37.0%</td>
-      <td>0.05x</td>
-      <td>46.3%</td>
-      <td>1.14x</td>
-    </tr>
-    <tr>
-      <td>KFin Technologies</td>
-      <td>18,450</td>
-      <td>1,085.00</td>
-      <td>48.5x</td>
-      <td>28.4%</td>
-      <td>24.2%</td>
-      <td>0.12x</td>
-      <td>41.5%</td>
-      <td>0.98x</td>
-    </tr>
-    <tr>
-      <td>CDSL</td>
-      <td>31,200</td>
-      <td>1,490.00</td>
-      <td>52.0x</td>
-      <td>34.5%</td>
-      <td>27.8%</td>
-      <td>0.00x</td>
-      <td>58.2%</td>
-      <td>1.02x</td>
-    </tr>
-    <tr>
-      <td>BSE Limited</td>
-      <td>38,900</td>
-      <td>2,875.00</td>
-      <td>44.2x</td>
-      <td>26.8%</td>
-      <td>21.5%</td>
-      <td>0.00x</td>
-      <td>49.0%</td>
-      <td>0.91x</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="section-7">7. Technical Analysis, Stage Dynamics &amp; Support Mapping (Layer 3)</h2>
-<p>
-  Despite extraordinary fundamental quality, CAMS is currently undergoing an extended <b>Weinstein Stage 4 corrective consolidation / Stage 1 repair phase</b><sup><a href="#cite_note-12">[12]</a></sup>. The stock has corrected approximately 16.3% from its 52-week peak of ₹844.90, currently trading at <b>₹707.35</b>.
-</p>
-
-<div class="callout-red">
-  <strong>Technical Breakdown &amp; Moving Average Alignment:</strong>
-  <ul>
-    <li><b>20-Day Moving Average (20-DMA):</b> ₹728.40 (Price is trading 2.9% below 20-DMA).</li>
-    <li><b>50-Day Moving Average (50-DMA):</b> ₹747.00 (Price is trading 5.3% below 50-DMA).</li>
-    <li><b>200-Day Moving Average (200-DMA):</b> ₹753.80 (Price is trading 6.2% below 200-DMA).</li>
-    <li><b>Moving Average Structure:</b> A bearish crossover (Death Cross) is active where the 50-DMA has crossed below the 200-DMA, indicating ongoing institutional distribution and trend repair.</li>
-    <li><b>14-Day RSI:</b> 39.6 &mdash; Mildly oversold / neutral, lacking bullish reversal divergence.</li>
-    <li><b>Average True Range (14-Day ATR):</b> ₹17.80.</li>
-  </ul>
-</div>
-
-<p>
-  <b>Key Technical Levels &amp; Support Structure:</b>
-</p>
-<ul>
-  <li><b>Primary Support Zone:</b> ₹695.00 &ndash; ₹705.00 (Anchored to the 52-week swing base and historical pivot demand shelf).</li>
-  <li><b>Structural Invalidation Stop:</b> ₹650.00 (Below the multi-quarter capitulation low).</li>
-  <li><b>Overhead Supply Resistance:</b> ₹750.00 &ndash; ₹760.00 (Dense convergence of 50-DMA and 200-DMA).</li>
-  <li><b>Base Target (12–18M):</b> ₹900.00 (Derived from 25x FY28E EPS of ₹36.00).</li>
-  <li><b>Bull Target:</b> ₹1,020.00 (Re-rating to 30x Forward EPS on accelerating non-MF monetization).</li>
-  <li><b>Calculated Asymmetry Ratio:</b> $(900.00 - 707.35) / (707.35 - 650.00) = 192.65 / 57.35 = \mathbf{3.36:1}$.</li>
-</ul>
-
-<h2 id="section-8">8. Three-Layer Underwriting Framework Summary</h2>
-
-<table class="wikitable">
-  <caption>Table 8.1: CAMS Institutional 3-Layer Underwriting Synthesis</caption>
-  <thead>
-    <tr>
-      <th>Layer</th>
-      <th>Evaluation Metric &amp; Gate Hurdle</th>
-      <th>Observed Quantitative Value</th>
-      <th>Status</th>
-      <th>Institutional Disposition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Layer 1: Financial Health</b></td>
-      <td>ROCE &ge; 15.0%, D/E &lt; 0.70x, CFO/PAT &ge; 0.70x</td>
-      <td>ROCE 48.3% &bull; D/E 0.05x &bull; CFO/PAT 1.14x</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>Pristine cash flow machine; top 1% across Indian equity universe.</td>
-    </tr>
-    <tr>
-      <td><b>Layer 1: Technical Posture</b></td>
-      <td>Stage 2 Markup above rising 50/200 DMA</td>
-      <td>Price ₹707.35 &lt; 50-DMA (₹747) &amp; 200-DMA (₹753.80)</td>
-      <td><span style="color: var(--brand-red); font-weight: bold;">🔴 FAIL</span></td>
-      <td><b>FAIL_TECHNICAL:</b> Trading in Stage 4/Stage 1 base repair beneath death cross.</td>
-    </tr>
-    <tr>
-      <td><b>Layer 1: Asymmetry Gate</b></td>
-      <td>Reward-to-Risk Ratio &ge; 3.0:1 (Core Alpha)</td>
-      <td>Asymmetry 3.36:1 (Target ₹900 vs Stop ₹650)</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>Mathematically viable upside, but gated by technical breakdown.</td>
-    </tr>
-    <tr>
-      <td><b>Layer 2: Sector KPIs</b></td>
-      <td>Minimum 3/4 or 4/5 Healthy KPIs</td>
-      <td>5/5 Operational KPIs Healthy</td>
-      <td><span style="color: var(--brand-green); font-weight: bold;">🟢 PASS</span></td>
-      <td>68.2% market share, 46.3% OPM, 21.4% non-MF growth.</td>
-    </tr>
-    <tr>
-      <td><b>Layer 3: Entry Posture</b></td>
-      <td>Distance from rising support &le; 0.5x ATR</td>
-      <td>Price is beneath declining moving averages</td>
-      <td><span style="color: var(--brand-amber); font-weight: bold;">🟡 WAIT</span></td>
-      <td><b>WAIT_FOR_SUPPORT:</b> Do not front-run; await Stage 2 reclaim above ₹755.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="section-9">9. Strategic Catalysts, Growth Drivers &amp; Re-Rating Triggers</h2>
-<ol>
-  <li><b>Mutual Fund Industry AUM Expansion:</b> Indian mutual fund AUM is projected to expand from ₹65 Lakh Cr in 2026 to over ₹100 Lakh Cr by 2030, providing a compounding fee base<sup><a href="#cite_note-6">[6]</a></sup>.</li>
-  <li><b>Monetization of Non-Mutual Fund Verticals:</b> AIF/PMS servicing through <i>WealthSpectrum</i> and payment gateway processing through <i>CAMSPay</i> are expanding at &gt;20% CAGR, lifting non-MF revenue from 14% to an estimated 22% of consolidated turnover by FY28<sup><a href="#cite_note-17">[17]</a></sup>.</li>
-  <li><b>IRDAI Bima Sugam &amp; Insurance Dematerialization:</b> The mandatory transition of insurance policies into electronic format positions CAMSRep to capture recurring account maintenance fees across tens of millions of retail policyholders<sup><a href="#cite_note-20">[20]</a></sup>.</li>
-</ol>
-
-<h2 id="section-10">10. Adversarial Red-Team &amp; Key Investment Risks</h2>
-<div class="callout-amber">
-  <strong>Primary Risk Vectors &amp; Threat Decomposition:</strong>
-  <ul>
-    <li><b>SEBI TER Compression Mandates:</b> Regulatory caps on Total Expense Ratios (TER) could exert downward pressure on RTA basis-point yields if AMCs pass cost cuts upstream<sup><a href="#cite_note-18">[18]</a></sup>.</li>
-    <li><b>Cyclical Equity Market Corrections:</b> A prolonged domestic equity bear market would depress equity AUM marks and slow retail SIP registration velocity.</li>
-    <li><b>Cybersecurity &amp; Systemic Tech Outages:</b> As a systemic Market Infrastructure Institution handling financial data for tens of millions of citizens, any data breach or extended infrastructure outage represents severe regulatory penalty and reputational risk<sup><a href="#cite_note-11">[11]</a></sup>.</li>
-  </ul>
-</div>
-
-<h2 id="section-11">11. Capital Allocation Verdict &amp; Execution Roadmap</h2>
-<div class="callout-blue">
-  <strong>Institutional Disposition: 🔴 REJECTED FROM SHORTLIST (TECHNICAL GATE FAILURE) &bull; RETAINED IN ACTIVE_WATCHLIST</strong><br>
-  CAMS represents a world-class financial monopoly with 48.3% ROCE and 1.14x cash conversion. However, strictly adhering to the <b>Institutional 3-Layer Underwriting Rule</b>, capital must not be deployed into securities trading beneath declining 50-DMA and 200-DMA moving averages in active Stage 4/Stage 1 repair.<br><br>
-  <b>Activation Condition:</b> Maintain in Active_Watchlist under close surveillance. Re-underwrite for immediate capital allocation once price cleanly reclaims the 200-DMA shelf (above ₹755.00) with volume expansion and confirms a Stage 2 breakout base.
-</div>
-
-<p>
-  <b>Seeded Qualified Peers for Watchlist Ingestion:</b>
-</p>
-<ul>
-  <li><b>KFINTECH (KFin Technologies Ltd - NSE: KFINTECH):</b> Direct duopoly peer in RTA and global fund administration (Already underwritten in Shortlist).</li>
-  <li><b>CDSL (Central Depository Services India Ltd - NSE: CDSL):</b> India's leading demat depository with 34.5% ROCE, zero debt, and secular retail capital markets exposure.</li>
-  <li><b>PRUDENT (Prudent Corporate Advisory Services Ltd - NSE: PRUDENT):</b> Rapidly expanding mutual fund distribution platform with 58.0% ROCE and negative working capital.</li>
-</ul>
-
-
-<h2 id="section-12">12. Formal References &amp; Regulatory Citations</h2>
-<p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
-  Primary regulatory filings, audited annual financial statements, quarterly earnings call transcripts, BSE/NSE exchange disclosures, credit rating releases, and institutional market data verifying all data points in this dossier.
-</p>
-<ol class="reflist">
-<li id="cite_note-1"><b><a href="https://www.bseindia.com/stock-share-price/computer-age-management-services-ltd/cams/543232/" target="_blank">^1</a></b> BSE/NSE Annual Report FY26 - Computer Age Management Services Ltd &mdash; <i>Audited Financial Statements, Consolidated Balance Sheet & P&L, Notes 1-38</i>. Retrieved from <a href="https://www.bseindia.com/stock-share-price/computer-age-management-services-ltd/cams/543232/" target="_blank">https://www.bseindia.com/stock-share-price/computer-age-management-services-ltd/cams/543232/</a>.</li>
-<li id="cite_note-2"><b><a href="https://www.sebi.gov.in/" target="_blank">^2</a></b> SEBI Registered Registrar to an Issue and Share Transfer Agents Regulations &mdash; <i>Statutory RTA compliance mandate, operational standards, and fiduciary obligations</i>. Retrieved from <a href="https://www.sebi.gov.in/" target="_blank">https://www.sebi.gov.in/</a>.</li>
-<li id="cite_note-3"><b><a href="https://www.camsonline.com/InvestorRelations/" target="_blank">^3</a></b> CAMS Q1 FY27 Investor Presentation (June 2026) &mdash; <i>Asset Under Management (AUM) market share breakdown, Equity AUM mix, and non-MF revenue trajectory</i>. Retrieved from <a href="https://www.camsonline.com/InvestorRelations/" target="_blank">https://www.camsonline.com/InvestorRelations/</a>.</li>
-<li id="cite_note-4"><b><a href="https://www.camsonline.com/InvestorRelations/" target="_blank">^4</a></b> CAMS Q1 FY27 Earnings Call Transcript (July 2026) &mdash; <i>Executive commentary on SIP inflows, CAMSPay volume growth, and Account Aggregator expansion</i>. Retrieved from <a href="https://www.camsonline.com/InvestorRelations/" target="_blank">https://www.camsonline.com/InvestorRelations/</a>.</li>
-<li id="cite_note-5"><b><a href="https://www.screener.in/company/CAMS/consolidated/" target="_blank">^5</a></b> Screener.in Consolidated Financial Analytics - CAMS &mdash; <i>Historical 10-year ROCE, ROE, Cash Flow conversion, and margin trends</i>. Retrieved from <a href="https://www.screener.in/company/CAMS/consolidated/" target="_blank">https://www.screener.in/company/CAMS/consolidated/</a>.</li>
-<li id="cite_note-6"><b><a href="https://www.amfiindia.com/research-information/amfi-monthly" target="_blank">^6</a></b> Association of Mutual Funds in India (AMFI) Monthly Industry Data &mdash; <i>Monthly gross SIP contribution (₹24,000+ Cr) and total MF industry AUM trends</i>. Retrieved from <a href="https://www.amfiindia.com/research-information/amfi-monthly" target="_blank">https://www.amfiindia.com/research-information/amfi-monthly</a>.</li>
-<li id="cite_note-7"><b><a href="https://www.crisil.com/" target="_blank">^7</a></b> CRISIL Ratings Rationale - Computer Age Management Services Ltd &mdash; <i>Long-term debt rating AAA/Stable and liquidity assessment</i>. Retrieved from <a href="https://www.crisil.com/" target="_blank">https://www.crisil.com/</a>.</li>
-<li id="cite_note-8"><b><a href="https://www.camsonline.com/" target="_blank">^8</a></b> CAMS WealthSpectrum & Think360 AI Factsheet &mdash; <i>Alternative Investment Fund (AIF) and Portfolio Management Services (PMS) technology platform metrics</i>. Retrieved from <a href="https://www.camsonline.com/" target="_blank">https://www.camsonline.com/</a>.</li>
-<li id="cite_note-9"><b><a href="https://www.camskra.com/" target="_blank">^9</a></b> CAMS KRA (KYC Registration Agency) Regulatory Filing &mdash; <i>KYC records processed, Aadhaar-based e-KYC market share, and SEBI compliance audits</i>. Retrieved from <a href="https://www.camskra.com/" target="_blank">https://www.camskra.com/</a>.</li>
-<li id="cite_note-10"><b><a href="https://www.camspay.com/" target="_blank">^10</a></b> CAMSPay NPCI Payment Aggregator Authorization Disclosure &mdash; <i>SEBI & RBI in-principle payment aggregator authorization and transaction volumes</i>. Retrieved from <a href="https://www.camspay.com/" target="_blank">https://www.camspay.com/</a>.</li>
-<li id="cite_note-11"><b><a href="https://www.camsonline.com/" target="_blank">^11</a></b> CAMS Annual Report FY25 - Technology & Cybersecurity Infrastructure &mdash; <i>Tier-IV data center uptime (99.99%), disaster recovery drills, and ISO 27001 certifications</i>. Retrieved from <a href="https://www.camsonline.com/" target="_blank">https://www.camsonline.com/</a>.</li>
-<li id="cite_note-12"><b><a href="https://in.tradingview.com/chart/?symbol=NSE%3ACAMS" target="_blank">^12</a></b> TradingView Technical Chart - NSE: CAMS &mdash; <i>Daily/Weekly price action, 20/50/200-DMA moving averages, RSI(14), and volume profile</i>. Retrieved from <a href="https://in.tradingview.com/chart/?symbol=NSE%3ACAMS" target="_blank">https://in.tradingview.com/chart/?symbol=NSE%3ACAMS</a>.</li>
-<li id="cite_note-13"><b><a href="https://trendlyne.com/equity/technical-analysis/CAMS/170349/" target="_blank">^13</a></b> Trendlyne Technical Architecture - CAMS &mdash; <i>Momentum scores, delivery volume percentages, and support/resistance pivot levels</i>. Retrieved from <a href="https://trendlyne.com/equity/technical-analysis/CAMS/170349/" target="_blank">https://trendlyne.com/equity/technical-analysis/CAMS/170349/</a>.</li>
-<li id="cite_note-14"><b><a href="https://www.bseindia.com/" target="_blank">^14</a></b> BSE Shareholding Pattern Q1 FY27 - CAMS &mdash; <i>Foreign Institutional Investors (FII) holding (38.2%) and Domestic Institutional Investors (DII) holding (22.5%)</i>. Retrieved from <a href="https://www.bseindia.com/" target="_blank">https://www.bseindia.com/</a>.</li>
-<li id="cite_note-15"><b><a href="https://www.kotaksecurities.com/" target="_blank">^15</a></b> Kotak Institutional Equities Research Note on CAMS (August 2026) &mdash; <i>Valuation multiples, duopoly economics vs KFin Technologies, and earnings sensitivity</i>. Retrieved from <a href="https://www.kotaksecurities.com/" target="_blank">https://www.kotaksecurities.com/</a>.</li>
-<li id="cite_note-16"><b><a href="https://www.icicisecurities.com/" target="_blank">^16</a></b> ICICI Securities Financial Services Sector Update &mdash; <i>RTA fee yield compression trends, asset tiering contracts, and operating leverage analysis</i>. Retrieved from <a href="https://www.icicisecurities.com/" target="_blank">https://www.icicisecurities.com/</a>.</li>
-<li id="cite_note-17"><b><a href="https://www.motilaloswal.com/" target="_blank">^17</a></b> Motilal Oswal Financial Services Institutional Research - CAMS &mdash; <i>Non-MF revenue growth model (Insurance Repository, Account Aggregator, CAMSRep)</i>. Retrieved from <a href="https://www.motilaloswal.com/" target="_blank">https://www.motilaloswal.com/</a>.</li>
-<li id="cite_note-18"><b><a href="https://www.sebi.gov.in/" target="_blank">^18</a></b> SEBI Consultation Paper on Total Expense Ratio (TER) in Mutual Funds &mdash; <i>Impact of proposed TER regulatory caps on asset management companies and RTA pass-throughs</i>. Retrieved from <a href="https://www.sebi.gov.in/" target="_blank">https://www.sebi.gov.in/</a>.</li>
-<li id="cite_note-19"><b><a href="https://www.rbi.org.in/" target="_blank">^19</a></b> Reserve Bank of India Account Aggregator Framework Directive &mdash; <i>CAMS Financial Information Provider (FIP) and User (FIU) onboarding statistics</i>. Retrieved from <a href="https://www.rbi.org.in/" target="_blank">https://www.rbi.org.in/</a>.</li>
-<li id="cite_note-20"><b><a href="https://www.irdai.gov.in/" target="_blank">^20</a></b> Insurance Regulatory and Development Authority of India (IRDAI) Bima Sugam Mandate &mdash; <i>CAMSRep electronic insurance repository market share and digital policy issuance</i>. Retrieved from <a href="https://www.irdai.gov.in/" target="_blank">https://www.irdai.gov.in/</a>.</li>
-<li id="cite_note-21"><b><a href="https://www.camsonline.com/" target="_blank">^21</a></b> CAMS Q4 FY26 Audited Annual Results Conference Call &mdash; <i>Full year FY26 financial review, EBITDA margin progression (46.3%), and dividend policy (₹45/sh annual payout)</i>. Retrieved from <a href="https://www.camsonline.com/" target="_blank">https://www.camsonline.com/</a>.</li>
-<li id="cite_note-22"><b><a href="https://www.bseindia.com/" target="_blank">^22</a></b> BSE Announcement: Dividend Distribution & Record Date (Q1 FY27) &mdash; <i>Interim dividend declaration of ₹2.50 per equity share</i>. Retrieved from <a href="https://www.bseindia.com/" target="_blank">https://www.bseindia.com/</a>.</li>
-<li id="cite_note-23"><b><a href="https://www.nseindia.com/" target="_blank">^23</a></b> NSE Bulk/Block Deal Disclosures - CAMS &mdash; <i>Institutional secondary market accumulation and block deal activity</i>. Retrieved from <a href="https://www.nseindia.com/" target="_blank">https://www.nseindia.com/</a>.</li>
-<li id="cite_note-24"><b><a href="https://www.morganstanley.com/" target="_blank">^24</a></b> Morgan Stanley Equity Research - Indian Capital Markets Infrastructure &mdash; <i>Long-term financialization thematic, equity penetration (% of GDP), and demat account growth</i>. Retrieved from <a href="https://www.morganstanley.com/" target="_blank">https://www.morganstanley.com/</a>.</li>
-<li id="cite_note-25"><b><a href="https://www.jefferies.com/" target="_blank">^25</a></b> Jefferies India Financials Deep Dive &mdash; <i>Comparative operating metrics: CAMS vs KFIN Technologies vs Computer Age global peers</i>. Retrieved from <a href="https://www.jefferies.com/" target="_blank">https://www.jefferies.com/</a>.</li>
-<li id="cite_note-26"><b><a href="https://www.camsonline.com/" target="_blank">^26</a></b> CAMS Sustainability & Corporate Governance Report FY26 &mdash; <i>Board composition, risk management committee oversight, and CSR capital deployment</i>. Retrieved from <a href="https://www.camsonline.com/" target="_blank">https://www.camsonline.com/</a>.</li>
-<li id="cite_note-27"><b><a href="https://www.nism.ac.in/" target="_blank">^27</a></b> NISM Research Journal on Market Infrastructure Institutions (MIIs) &mdash; <i>Systemic importance of RTAs in mutual fund settlement and systemic risk containment</i>. Retrieved from <a href="https://www.nism.ac.in/" target="_blank">https://www.nism.ac.in/</a>.</li>
-<li id="cite_note-28"><b><a href="https://www.camsonline.com/" target="_blank">^28</a></b> CAMS Annual Report FY24 - Related Party Transactions & Auditor's Report &mdash; <i>Clean audit opinion from S.R. Batliboi & Associates LLP (Ernst & Young affiliate)</i>. Retrieved from <a href="https://www.camsonline.com/" target="_blank">https://www.camsonline.com/</a>.</li>
-<li id="cite_note-29"><b><a href="https://www.valueresearchonline.com/" target="_blank">^29</a></b> Value Research Online - CAMS Fund Ownership Matrix &mdash; <i>Mutual fund schemes holding CAMS equity and portfolio weight changes</i>. Retrieved from <a href="https://www.valueresearchonline.com/" target="_blank">https://www.valueresearchonline.com/</a>.</li>
-<li id="cite_note-30"><b><a href="https://trendlyne.com/" target="_blank">^30</a></b> Trendlyne Forensic Health Check - CAMS &mdash; <i>Piotroski F-Score (8/9), Altman Z-Score (safe zone), and modified Beneish M-Score</i>. Retrieved from <a href="https://trendlyne.com/" target="_blank">https://trendlyne.com/</a>.</li>
-</ol>
-
-<footer style="margin-top: 3.5em; padding-top: 1.2em; border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-muted); display: flex; justify-content: space-between;">
-  <div>Institutional Equity Research Dossier &bull; Wikipedia Financial Editor Architecture</div>
-  <div>As of Date: 2026-09-27 &bull; Research Cycle 1</div>
-</footer>
-
-</body>
-</html>
+</script></body></html>
