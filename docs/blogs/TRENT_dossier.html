@@ -1,698 +1,573 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trent Limited (TRENT) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-12">
+<meta name="generated-at" content="2026-10-12T08:40:00.528501-07:00">
+<title>Trent Limited ( TRENT Chart • Screener ): company dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
-  --bg-main: #ffffff;
-  --bg-surface: #f9fafb;
-  --bg-highlight: #f3f4f6;
-  --border-color: #d1d5db;
-  --brand-blue: #1d4ed8;
-  --brand-green: #15803d;
-  --brand-amber: #b45309;
-  --brand-red: #b91c1c;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
 }
-body {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background-color: var(--bg-main);
-  line-height: 1.68;
-  font-size: 14.5px;
-  letter-spacing: -0.011em;
-  margin: 0;
-  padding: 28px 36px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
 }
-h1.firstHeading {
-  font-family: var(--font-serif);
-  font-size: 2.25em;
-  font-weight: 600;
-  margin: 0.2em 0 0.1em 0;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border-color);
-  color: #111827;
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
 }
-.siteSub {
-  font-size: 0.88em;
-  color: var(--text-muted);
-  margin-bottom: 18px;
-}
-h2 {
-  font-family: var(--font-serif);
-  font-size: 1.45em;
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 5px;
-  margin-top: 32px;
-  margin-bottom: 14px;
-  color: #111827;
-}
-h3 {
-  font-family: var(--font-sans);
-  font-size: 1.15em;
-  font-weight: 600;
-  margin-top: 22px;
-  margin-bottom: 10px;
-  color: #1f2937;
-}
-p {
-  margin: 0.8em 0;
-}
-a {
-  color: #2563eb;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-.infobox {
-  float: right;
-  clear: right;
-  margin: 0 0 1.2em 1.4em;
-  width: 330px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 14px;
-  font-size: 0.88em;
-  line-height: 1.5;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-.infobox-title {
-  font-family: var(--font-serif);
-  font-size: 1.3em;
-  font-weight: bold;
-  text-align: center;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--border-color);
-  color: #111827;
-}
-.infobox table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
-}
-.infobox th {
-  text-align: left;
-  padding: 5px 6px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  width: 45%;
-  border-bottom: 1px solid #f3f4f6;
-}
-.infobox td {
-  padding: 5px 6px;
-  font-family: var(--font-mono);
-  font-size: 0.95em;
-  text-align: right;
-  border-bottom: 1px solid #f3f4f6;
-}
-.toc {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  padding: 14px 18px;
-  display: table;
-  margin: 1.2em 0;
-  border-radius: 6px;
-  font-size: 0.88em;
-}
-.toctitle {
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 8px;
-}
-.toc ul {
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-}
-.toc ul ul {
-  padding-left: 1.5em;
-}
-.wikitable {
-  background-color: #ffffff;
-  color: var(--text-primary);
-  margin: 1.2em 0;
-  border: 1px solid var(--border-color);
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 0.9em;
-}
-.wikitable th {
-  background-color: #f3f4f6;
-  text-align: left;
-  padding: 8px 10px;
-  border: 1px solid var(--border-color);
-  font-weight: 600;
-}
-.wikitable td {
-  padding: 7px 10px;
-  border: 1px solid var(--border-color);
-}
-.banner {
-  padding: 16px 20px;
-  border-radius: 6px;
-  margin-bottom: 24px;
-  border: 1px solid transparent;
-}
-.banner-verdict-green {
-  background-color: #f0fdf4;
-  border-color: #bbf7d0;
-  color: #166534;
-}
-.banner-verdict-blue {
-  background-color: #eff6ff;
-  border-color: #bfdbfe;
-  color: #1e40af;
-}
-.banner-verdict-amber {
-  background-color: #fffbeb;
-  border-color: #fde68a;
-  color: #92400e;
-}
-.banner-verdict-red {
-  background-color: #fef2f2;
-  border-color: #fecaca;
-  color: #991b1b;
-}
-.badge {
-  display: inline-block;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.8em;
-  font-family: var(--font-mono);
-}
-.badge-pass { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
-.badge-fail { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
-.badge-watch { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
-ol.reflist {
-  font-size: 0.85em;
-  line-height: 1.5;
-  column-count: 2;
-  column-gap: 28px;
-  padding-left: 20px;
-}
-ol.reflist li {
-  margin-bottom: 6px;
-  word-break: break-word;
-}
-.mono { font-family: var(--font-mono); }
-</style>
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
 
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
 
-<h1 class="firstHeading">Trent Limited <span style="font-size: 0.6em; color: var(--text-muted); font-weight: normal;">(NSE: TRENT)</span></h1>
-<div class="siteSub">From Wikipedia-Style Institutional Equity Research Repository | Portfolio Underwriting System | As of September 28, 2026</div>
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
 
-
-<div class="banner banner-verdict-blue">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-    <span style="font-size: 1.15em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">🔵 EXECUTIVE CAPITAL ALLOCATION VERDICT: ACCUMULATE ON DIP (QUALIFIED CORE ALPHA CHALLENGER)</span>
-    <span class="badge badge-pass">PASS ALL GATES (5/5 KPIs)</span>
-  </div>
-  <div style="font-size: 0.92em; line-height: 1.55;">
-    <b>Institutional Underwriting Verdict:</b> Evaluated as a high-conviction candidate from deep research peer discoveries. Trent Limited represents the gold standard of Indian consumer discretionary compounding, delivering a 5-year sales CAGR of 51.0%, 5-year PAT CAGR of 69.0%, ROCE of <b>28.3%</b>, and 3-year operating cash flow conversion of <b>1.20x</b> (cumulative CFO of ₹5,678 Cr vs PAT of ₹4,732 Cr). The Zudio value-fashion engine (963+ stores) exhibits extreme inventory turns (74 days) and 100% private-label gross margin defensibility (49%). Following a healthy 23% valuation pullback from its peak of ₹3,400 to the 200-DMA retest zone at ₹2,620, the stock offers a verified reward-to-risk asymmetry of <b>3.25:1</b> against an invalidation stop at ₹2,380. Action: <b>Inserted as an Autowritten Challenger in Core Alpha (`shortlist/Zerodha_Shortlist.xlsx`) with an ACCUMULATE_ON_DIP mandate</b>.
-  </div>
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Trent Limited (<b>TRENT</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATRENT" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/TRENT/" style="color:var(--link);">Screener</a></span>): company dossier</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T08:40:00.528501-07:00">12 Oct 2026, 08:40 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-12</p></header>
+<section class="banner" id="decision">
+<p><strong>Verdict: REJECTED</strong> for the Core Alpha book (shown as <span class="verdict verdict-exit">REJECTED</span>). Gate Status: FAIL_TECHNICAL_STAGE; <dfn>FAIL_ASYMMETRY</dfn> means the target for the ratio could not be verified. Layer 2 is shown for information only, and Layer 3 is not evaluated.</p>
+<p><strong>The earlier shortlist verdict:</strong> the stored row reads <span class="verdict verdict-accumulate">ACCUMULATE_ON_DIP</span> with a stored close of 2,620, dated 28 September 2026. Today's ledger close is 2,913, and the trend tests now fail. The earlier verdict is not kept. Chapter 4 explains what changed.</p>
+<p><strong>Status:</strong> PUBLISHED_WITH_GATE_EXCEPTIONS. The exceptions are listed in the section titled Run notes and gate exceptions.</p>
+</section>
+<dl class="key-figures">
+<div><dt>Close (ledger, 12 Oct 2026)</dt><dd>2,913.00</dd></div>
+<div><dt>Stop (CORE rule)</dt><dd>2,471.7</dd></div>
+<div><dt>Analyst average target (reference only)</dt><dd>3,390</dd></div>
+<div><dt>Ratio at reference target</dt><dd>1.08 (floor 3.0)</dd></div>
+<div><dt>Layer 1 tests passed</dt><dd>3 of 5</dd></div>
+<div><dt>Layer 2 KPIs passed (information only)</dt><dd>4 of 4 verifiable (5 defined; like-for-like store sales N/A)</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Trent is the Tata Group retailer behind the Zudio value-fashion chain and the Westside department-store chain. This report concludes that the stock fails our buy rules today, so the verdict is REJECTED for the Core Alpha book. The business itself passes the cash and return tests, which is why it has stayed on the watchlist. The conclusion would be wrong if the price recovers above a rising trend line and the valuation can be checked at a level that clears our return floor.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>What the company does</h2>
+<p>Think of Trent as a chain of shops that sells clothes and home goods to people who want the newest look at a low price. The biggest shop brand is Zudio, a value-fashion chain that sells cheap, fast-changing clothes in small stores. Westside is the older and more expensive department-store chain. Trent also runs grocery and other formats, which the company calls Star Bazaar and other lifestyle concepts. All of these sit under one listed company, Trent Limited, which trades on the National Stock Exchange (NSE) and the Bombay Stock Exchange (BSE). The company publishes its results, presentations and filings on its investor page.<sup><a href="#cite_note-26">[26]</a></sup></p>
+<p>The company makes money in a simple way. It buys clothes in large volumes, sells them through its stores, and keeps the difference between the cost and the price after running the shops. Its profit therefore depends on three things: how many stores it opens, how much each store sells, and how much of the price it keeps. The company's own reports show that most new stores are now in smaller towns. Storyboard18 reported that more than 80 percent of the Zudio stores opened in the June 2026 quarter were in Tier II and Tier III cities, meaning towns outside the largest metropolitan areas.<sup><a href="#cite_note-5">[5]</a></sup> That matters because a store in a smaller town usually costs less to fit out and to run, so each new store adds volume at a lower cost.</p>
+<p>The store network is the clearest way to see the business. The table below uses the company's store count as at 30 June 2026. The Zudio and Westside numbers come from InvestyWise's summary of the company's June 2026 investor presentation. The row marked "other formats" is not printed in the source. It is the total minus Westside and Zudio, and we calculated it ourselves.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is a store format. The first column is the format name. The second column is the number of stores open on 30 June 2026. The last row adds the formats together. A store count is a plain measure of reach: more stores mean more places where a customer can buy, but it does not show how much each store sells. That is the job of the like-for-like measure, which this report could not verify.</p></div>
+<div class="table-wrap">
+<table class="wikitable">
+<thead><tr><th>Format</th><th class="num">Stores at 30 Jun 2026</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Westside</td><td class="num">301</td><td>InvestyWise<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Zudio</td><td class="num">982</td><td>InvestyWise<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Other formats (calculated)</td><td class="num">29</td><td>1,312 minus 301 minus 982</td></tr>
+<tr><td><strong>Total</strong></td><td class="num"><strong>1,312</strong></td><td>InvestyWise<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+</tbody>
+</table>
 </div>
-
-
-
-<div class="infobox">
-  <div class="infobox-title">Trent Limited (Tata Group)</div>
-  <div style="text-align: center; font-size: 0.82em; color: var(--text-muted); margin-bottom: 6px;">Mumbai, Maharashtra, India</div>
-  <table>
-    <tr><th colspan="2" style="background-color: var(--bg-highlight); text-align: center; font-weight: 600;">Market &amp; Corporate Identity</th></tr>
-    <tr><th>Ticker Symbol</th><td>NSE: TRENT<br>BSE: 500251</td></tr>
-    <tr><th>Macro Sector</th><td>Consumer Discretionary</td></tr>
-    <tr><th>Fine Subsector</th><td>Specialty Retail &amp; Fast Fashion</td></tr>
-    <tr><th>Market Cap Tier</th><td>Large Cap (Nifty 50)</td></tr>
-    <tr><th>Market Cap (Cr)</th><td>₹ 1,39,733 Cr</td></tr>
-    <tr><th>Current Market Price</th><td>₹ 2,620.00</td></tr>
-    <tr><th>52-Week Range</th><td>₹ 2,184.00 – ₹ 3,400.00</td></tr>
-    <tr><th colspan="2" style="background-color: var(--bg-highlight); text-align: center; font-weight: 600;">3-Layer Underwriting Summary</th></tr>
-    <tr><th>Layer 1 Gate Status</th><td><span class="badge badge-pass">PASS_ALL_GATES</span></td></tr>
-    <tr><th>Layer 2 KPI Scorecard</th><td><span class="badge badge-pass">5/5 PASS (100%)</span></td></tr>
-    <tr><th>Layer 3 Entry Posture</th><td><span class="badge badge-pass">NEAR_SUPPORT (0.6x ATR)</span></td></tr>
-    <tr><th>Action Verdict</th><td><span class="badge badge-pass">🔵 ACCUMULATE_ON_DIP</span></td></tr>
-    <tr><th>Strategy Fit</th><td>Core Alpha (Autowritten Challenger)</td></tr>
-    <tr><th colspan="2" style="background-color: var(--bg-highlight); text-align: center; font-weight: 600;">Key Financial Metrics (FY26)</th></tr>
-    <tr><th>Stock P/E (TTM)</th><td>76.4x</td></tr>
-    <tr><th>Book Value / Share</th><td>₹ 131.00</td></tr>
-    <tr><th>Price to Book (P/B)</th><td>20.0x</td></tr>
-    <tr><th>ROCE % (TTM)</th><td>28.3% (Core Hurdle: &gt;18%)</td></tr>
-    <tr><th>ROE % (TTM)</th><td>27.7%</td></tr>
-    <tr><th>Debt to Equity (D/E)</th><td>0.37x (Incl. Lease Liabilities)</td></tr>
-    <tr><th>3Y CFO / PAT Ratio</th><td>1.20x (Cash Realization)</td></tr>
-    <tr><th>3Y Sales CAGR %</th><td>35.0%</td></tr>
-    <tr><th>3Y PAT CAGR %</th><td>71.0%</td></tr>
-    <tr><th>Operating Margin %</th><td>18.7% (Consolidated)</td></tr>
-    <tr><th colspan="2" style="background-color: var(--bg-highlight); text-align: center; font-weight: 600;">Technical Levels &amp; Support</th></tr>
-    <tr><th>Weinstein Stage</th><td>Stage 2 Consolidation / 200-DMA Retest</td></tr>
-    <tr><th>20-Day DMA</th><td>₹ 2,720.00</td></tr>
-    <tr><th>50-Day DMA</th><td>₹ 2,899.00</td></tr>
-    <tr><th>200-Day DMA</th><td>₹ 2,776.00</td></tr>
-    <tr><th>14-Day RSI</th><td>48.34 (Neutral)</td></tr>
-    <tr><th>14-Day ATR</th><td>₹ 78.00</td></tr>
-    <tr><th>Key Support Shelf</th><td>₹ 2,500 – ₹ 2,580</td></tr>
-    <tr><th>Recommended Entry Zone</th><td>₹ 2,520 – ₹ 2,640</td></tr>
-    <tr><th>Structural Stop Loss</th><td>₹ 2,380.00</td></tr>
-    <tr><th>Base Target</th><td>₹ 3,400.00 (+29.8%)</td></tr>
-    <tr><th>Bull Target</th><td>₹ 3,950.00 (+50.8%)</td></tr>
-    <tr><th>Asymmetry Ratio</th><td>3.25:1 (Core Qualified &ge; 3.0:1)</td></tr>
-    <tr><th>Promoter Holding</th><td>37.01% (Tata Sons - 0% Pledge)</td></tr>
-  </table>
+<p class="takeaway">The network grew from 1,286 stores at the end of March 2026 to 1,312 by 30 June 2026, which is 26 net additions in one quarter.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> Zudio is about three quarters of the store count, so the value-fashion chain is the engine of the network. The other formats are a small share and do not change the picture.</p>
+<p>Two more facts shape the story. The first is ownership. The Tata Group's promoter holding was 37.01 percent at 30 June 2026, the same figure that appears in every quarter of the table on the Screener page.<sup><a href="#cite_note-1">[1]</a></sup> Foreign institutions held 15.14 percent and domestic institutions held 23.07 percent over the same quarter.<sup><a href="#cite_note-1">[1]</a></sup> A stable promoter stake means the group, not the market, sets the long-run direction. The second fact is leadership. Kalkine reported in July 2026 that Noel Tata, the chairman, would step down after a near three-decade association with the business.<sup><a href="#cite_note-6">[6]</a></sup> A leadership change is not a financial fact, but it is a risk that the reader should weigh.</p>
+<p>Trent also carries debt in an unusual form. Under the accounting rule Ind AS 116, which brings store rent onto the balance sheet, the company records most of its shop leases as a liability. Such leases are called <dfn>lease liabilities</dfn>, which means the amount the company owes under long-term rental contracts. Chapter 3 shows how the lease figure changes the leverage test.</p>
+<p>What the company does not do is make most of its money from one product. It sells across many categories and a wide range of prices. That is an advantage in a downturn, because a customer who cuts back on premium clothes may still buy at a value shop. It is also a source of risk, because the company has to keep finding fresh designs and well-placed stores to keep customers returning.</p>
+<p>What this means for an owner: the business is a large, fast-growing shop network with a Tata Group parent and a rising share of stores in smaller towns. The next chapter asks whether the economics of that network are strong enough to pass our tests.</p>
+<p class="chapter-bridge">The network is large and growing. Chapter 2 asks whether the business earns enough on the money it uses to be called a strong business.</p>
+<h3>Glossary for this chapter</h3>
+<ul>
+<li><strong>Promoter:</strong> the founding group or family that controls the company and holds the largest stake.</li>
+<li><strong>Non-convertible debenture (NCD):</strong> a loan the company raises from investors, paid back on a fixed schedule. Trent's NCD is rated AA+ by CARE.</li>
+<li><strong>Tier II and Tier III cities:</strong> towns smaller than the large metropolitan cities, which are the company's fastest-growing market for new stores.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>Why the business is strong or weak</h2>
+<p>A business is strong when it earns a high return on the money tied up in it, and when that return does not depend on one lucky year. The main test used here is <dfn>ROCE, which stands for return on capital employed</dfn>. ROCE measures how much operating profit the company earns for every rupee of capital it uses to run the business, including money from shareholders and lenders. The Screener page prints Trent's ROCE at 28.3 percent, and its return on equity (ROE) at 27.7 percent.<sup><a href="#cite_note-1">[1]</a></sup> The threshold in our rules is 15 percent for the financial test and 18 percent for a preferred Core Alpha name. Trent clears both.</p>
+<p>ROCE has risen from a low starting point. The fiscal-year row on the same Screener page shows 7 percent in March 2022, 12 percent in March 2023, 24 percent in March 2024, 31 percent in March 2025 and 28 percent in March 2026.<sup><a href="#cite_note-1">[1]</a></sup> The rise is real. It came from a low starting point: FY22 profit was 35 crore and ROCE was 7 percent. The drop from 31 to 28 percent in the last year is worth noting. One possible reason is that the capital being added, mostly new stores, earns less in its first year than the older stores did. We could not verify this from the sources, so we present it only as a possibility.</p>
+<p>The company's competitive edge is price and reach. Zudio sells at low prices and opens stores quickly in places where other fashion chains have not yet arrived. The market it serves is large: the Indian textile and apparel market was valued at US$194 billion in FY2025-26, growing about 5 percent a year, and domestic consumption makes up nearly 80 percent of it.<sup><a href="#cite_note-25">[25]</a></sup> The company says most new Zudio stores go to Tier II and III cities.<sup><a href="#cite_note-5">[5]</a></sup> The evidence for the edge is the store count, the fast growth in revenue, and the way the company converts its profit into cash, which is covered in Chapter 3. Our test is not whether the brand is popular. It is whether the company keeps more of each rupee of sales than its rivals do. The peer table below answers that question on return measures.</p>
+<p>Operating performance is improving. The company's <dfn>operating margin (OPM)</dfn> is the share of sales left after paying for goods, staff and running costs but before interest, tax and depreciation. The OPM was 17 percent in the June 2025 quarter and 19 percent in the June 2026 quarter.<sup><a href="#cite_note-1">[1]</a></sup> The company also reported that its <dfn>operating earnings before interest, taxes, depreciation and amortization (EBITDA)</dfn> grew 36 percent in the June 2026 quarter.<sup><a href="#cite_note-4">[4]</a></sup> EBITDA is a measure of earnings before the cost of debt, tax and the wearing down of assets. It shows how much cash the shops produce before those items.</p>
+<p>The Layer 2 scorecard that follows is information only. The rules make Layer 2 a gate only after Layer 1 passes, and Trent fails Layer 1. The scorecard shows the operating picture anyway, so the reader can see the business clearly. Each KPI is scored PASS, WATCH or FAIL. The other pass rules are set in this report, and each one is stated in the table. The pass rule for cash conversion is 70 percent, the same bar as our cash gate. Like-for-like store sales is the most important retail measure, but we could not verify a number for it. The source we reached says the number is premium data.<sup><a href="#cite_note-1">[1]</a></sup> It is therefore marked N/A rather than estimated.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is one operating test that matters for a fashion and value retailer. The second column shows the latest reading and its period. The third column is the pass or fail mark. A PASS means the reading is healthy against the pass rule in the last column. N/A means the number could not be verified from a source we could read, so it is not counted. The scorecard does not decide the verdict, because Layer 1 has already failed.</p></div>
+<div class="table-wrap">
+<table class="wikitable">
+<thead><tr><th>KPI</th><th>Latest reading (period)</th><th>Mark</th><th>Pass rule</th></tr></thead>
+<tbody>
+<tr><td>Revenue growth</td><td class="num">19% standalone (June 2026 quarter)</td><td>PASS</td><td>Growth above 15%</td></tr>
+<tr><td>Operating margin (OPM)</td><td class="num">19% (June 2026), 17% (June 2025)</td><td>PASS</td><td>Not falling year on year</td></tr>
+<tr><td>Cash conversion (CFO to operating profit)</td><td class="num">86% (FY26)</td><td>PASS</td><td>70% or more</td></tr>
+<tr><td>Inventory days</td><td class="num">74 days (FY26), 77 days (FY25)</td><td>PASS</td><td>Not rising year on year</td></tr>
+<tr><td>Like-for-like store sales</td><td class="num">N/A</td><td>N/A</td><td>Not verified: premium data</td></tr>
+</tbody>
+</table>
 </div>
-
-
-<p><b>Trent Limited</b> (NSE: TRENT, BSE: 500251) is a Mumbai-headquartered retail retail powerhouse of the Tata Group, operating proprietary lifestyle and value-fashion retail ecosystems including <b>Westside</b>, <b>Zudio</b>, <b>Star Hypermarket</b>, <b>Misbu</b>, and <b>Utsa</b> across more than 1,300 aggregate retail stores spanning 17.7+ million square feet in India and the Middle East<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup>.</p>
-
-
-<div class="toc">
-  <div class="toctitle">Contents</div>
-  <ul>
-    <li><a href="#sec1">1. Executive Summary &amp; The Zudio Phenomenon</a></li>
-    <li><a href="#sec2">2. Corporate Evolution &amp; Tata Ownership Heritage</a></li>
-    <li><a href="#sec3">3. Operating Architecture &amp; Brand Concepts</a>
-      <ul>
-        <li><a href="#sec3_1">3.1 Zudio: The Ultra-Fast Value Fashion Flywheel</a></li>
-        <li><a href="#sec3_2">3.2 Westside: Premium Lifestyle &amp; Exclusive In-House Brands</a></li>
-        <li><a href="#sec3_3">3.3 Star Hypermarket (Trent Hypermarket Pvt Ltd - Tesco JV)</a></li>
-        <li><a href="#sec3_4">3.4 Emerging Formulations: Misbu, Utsa &amp; Zudio Beauty</a></li>
-      </ul>
-    </li>
-    <li><a href="#sec4">4. Retail Unit Economics &amp; Supply Chain Velocity</a>
-      <ul>
-        <li><a href="#sec4_1">4.1 100% Private Label Economics &amp; Gross Margin Moat</a></li>
-        <li><a href="#sec4_2">4.2 12-Day Design-to-Store Fast-Fashion Sourcing Engine</a></li>
-      </ul>
-    </li>
-    <li><a href="#sec5">5. Financial Forensics, Cash Conversion &amp; Lease Accounting</a>
-      <ul>
-        <li><a href="#sec5_1">5.1 Immaculate Operating Cash Flow Conversion</a></li>
-        <li><a href="#sec5_2">5.2 Balance Sheet Health &amp; Ind AS 116 Lease Forensics</a></li>
-      </ul>
-    </li>
-    <li><a href="#sec6">6. The 3-Layer Underwriting Framework &amp; Scorecard</a>
-      <ul>
-        <li><a href="#sec6_1">6.1 Layer 1: Binary Hard Gating Floors</a></li>
-        <li><a href="#sec6_2">6.2 Layer 2: Company-Specific Operational KPI Scorecard</a></li>
-        <li><a href="#sec6_3">6.3 Layer 3: Support-Aware Entry Posture</a></li>
-      </ul>
-    </li>
-    <li><a href="#sec7">7. Peer Comparison Matrix &amp; Structural Retail Benchmarking</a></li>
-    <li><a href="#sec8">8. Technical Posture &amp; Moving Average Architecture</a></li>
-    <li><a href="#sec9">9. Adversarial Red-Team: 3 Fatal Flaws</a></li>
-    <li><a href="#sec10">10. Capital Allocation, Portfolio Insertion &amp; Execution Orders</a></li>
-    <li><a href="#sec11">11. Key Quarterly Monitoring Indicators</a></li>
-    <li><a href="#sec12">12. References, Regulatory Filings &amp; Primary Sources</a></li>
-  </ul>
+<p class="takeaway">Four of four verifiable operating KPIs pass, and the fifth could not be verified. The company shows growth, rising margins, strong cash conversion and falling stock days. Those are the signs of a healthy shop chain. The missing like-for-like number matters most for a shop business, because it shows whether old stores are still growing. The Q2 FY27 results on 29 October 2026 are the next chance to see whether growth holds.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The peer table tests the same idea against four rivals, using two measures. The second measure is the <dfn>price-to-earnings (P/E) ratio</dfn>, which is the share price divided by the company's earnings per share, meaning the profit for each share. A high P/E means investors pay a lot for each rupee of profit. Trent's P/E of 84.9 is above every peer that reports one.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is a company. ROCE shows the return the company earns on its capital. A higher number is better. P/E shows how many years of current profit investors pay for. A high P/E is only justified when the growth is also high. Where Screener did not print a P/E, the cell says N/A. We do not estimate the missing values.</p></div>
+<div class="table-wrap">
+<table class="wikitable">
+<thead><tr><th>Company</th><th class="num">ROCE (%)</th><th class="num">P/E (times)</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td><strong>Trent (TRENT)</strong></td><td class="num">28.3</td><td class="num">84.9</td><td>Screener, 12 Oct 2026<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Vedant Fashions</td><td class="num">22.8</td><td class="num">31.0</td><td>Screener, 12 Oct 2026<sup><a href="#cite_note-21">[21]</a></sup></td></tr>
+<tr><td>V-Mart Retail</td><td class="num">13.2</td><td class="num">46.9</td><td>Screener, 12 Oct 2026<sup><a href="#cite_note-22">[22]</a></sup></td></tr>
+<tr><td>Shoppers Stop</td><td class="num">7.03</td><td class="num">N/A</td><td>Screener, 12 Oct 2026; P/E not printed<sup><a href="#cite_note-23">[23]</a></sup></td></tr>
+<tr><td>Aditya Birla Fashion and Retail</td><td class="num">-3.76</td><td class="num">N/A</td><td>Screener, 12 Oct 2026; P/E not printed<sup><a href="#cite_note-24">[24]</a></sup></td></tr>
+</tbody>
+</table>
 </div>
-
-
-
-<h2 id="sec1">1. Executive Summary &amp; The Zudio Phenomenon</h2>
-<p>Trent Limited (TRENT) is widely regarded by institutional allocators as the most potent modern retail flywheel in emerging markets. Founded under the aegis of the Tata Group, Trent has engineered a revolutionary retail paradigm that combines 100% proprietary brand ownership (private label), extreme supply chain responsiveness (12-to-15 day concept-to-shelf lead times), and hyper-standardized store unit economics to generate industry-shattering capital return ratios (ROCE of 28.3% and ROE of 27.7%)<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup>.</p>
-<p>While traditional department stores (Shoppers Stop, Lifestyle) and multi-brand apparel retailers (Aditya Birla Fashion) struggle with inventory markdowns, high concession fees, and sluggish inventory turnover (110–135 days), Trent's flagship formats—<b>Westside</b> (300 stores) and <b>Zudio</b> (963+ stores)—operate with rapid inventory velocity (74 days) and virtually zero third-party brand dilution<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>. Following an extraordinary multi-year rally that culminated in an all-time high of ₹3,400 in mid-2025, the stock has completed a healthy, institutional-grade 23% correction down to its 200-day moving average support base around ₹2,550–₹2,640. Under our strict 3-Layer Underwriting Framework, Trent passes 100% of Layer 1 Hard Gating Floors, qualifies on 5 out of 5 Layer 2 operational KPIs, and offers an asymmetric reward-to-risk entry of 3.25:1, warranting immediate insertion into the <b>Core Alpha</b> pipeline as an active challenger position<sup><a href="#cite_note-6">[6]</a></sup>.</p>
-
-<h2 id="sec2">2. Corporate Evolution &amp; Tata Ownership Heritage</h2>
-<p>Trent's origins trace back to 1998, when Tata Sons acquired the UK-based Littlewoods department store chain in India and rebranded it as Westside, establishing India's first organized, purely private-label fashion retailer<sup><a href="#cite_note-2">[2]</a></sup>. Under the visionary leadership of Chairman Noel Tata and Managing Director P. Venkatesalu, Trent resisted the capital-destructive multi-brand department store model, opting instead to build an agile, vertically integrated design-to-retail supply chain<sup><a href="#cite_note-7">[7]</a></sup>.</p>
-<p>In 2016, Trent launched <b>Zudio</b>, a value-fashion concept aimed at Tier 2, Tier 3, and metro youth offering contemporary apparel, footwear, and cosmetics strictly priced under ₹999 (with over 75% of SKUs below ₹499)<sup><a href="#cite_note-8">[8]</a></sup>. Zudio's explosive expansion—from 7 stores in 2017 to 963 stores by FY26—has driven a 10-fold expansion in corporate profitability. Tata Sons and Tata Investment Corporation hold an unencumbered 37.01% promoter stake, backed by the AAA-rated corporate governance pedigree of the Tata Group<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-9">[9]</a></sup>.</p>
-
-<h2 id="sec3">3. Operating Architecture &amp; Brand Concepts</h2>
-
-<h3 id="sec3_1">3.1 Zudio: The Ultra-Fast Value Fashion Flywheel</h3>
-<p>Zudio is Trent's primary growth engine, contributing over 62% of standalone revenue and scaling at an annualized rate of 150–200 net new stores per year<sup><a href="#cite_note-4">[4]</a></sup>. Operating across standardized 7,000–10,000 sq. ft. footprints with low capex per store (~₹1.8–2.2 Cr per store including fit-outs and initial inventory), a new Zudio store achieves store-level EBITDA breakeven within 3–6 months and full cash payback within 18–24 months<sup><a href="#cite_note-10">[10]</a></sup>. By offering trendy fast fashion at price points competitive with unorganized street markets (₹299–₹799), Zudio acts as an unstoppable formalization magnet across Indian urban and semi-urban centers<sup><a href="#cite_note-11">[11]</a></sup>.</p>
-
-<h3 id="sec3_2">3.2 Westside: Premium Lifestyle &amp; Exclusive In-House Brands</h3>
-<p>Westside operates as a premium lifestyle destination across 300 department stores (averaging 18,000–25,000 sq. ft.) in 90+ cities<sup><a href="#cite_note-4">[4]</a></sup>. Unlike traditional multi-brand department stores that surrender 25–35% of their floor space to external concessionaires, Westside sells 100% exclusive in-house brands across diverse consumer demographics: <i>Nuon</i> (youth streetwear), <i>Wardrobe</i> (women's formalwear), <i>Utsa</i> (ethnic wear), <i>Westport</i> (men's casual), and <i>Studiowest</i> (beauty and personal care)<sup><a href="#cite_note-12">[12]</a></sup>. Westside generates consistent Like-For-Like (LFL) sales growth of 10–12% and EBITDA margins of 14–16%, providing steady cash flow to fund Zudio's aggressive rollout<sup><a href="#cite_note-13">[13]</a></sup>.</p>
-
-<h3 id="sec3_3">3.3 Star Hypermarket (Trent Hypermarket Pvt Ltd - Tesco JV)</h3>
-<p>Star Hypermarket is a 50:50 joint venture between Trent and UK retail giant Tesco PLC, operating 70+ omni-channel supermarkets focused on fresh food, grocery, and FMCG in Maharashtra, Karnataka, and Telangana<sup><a href="#cite_note-14">[14]</a></sup>. By leveraging Tesco's world-class planogramming, direct farm sourcing, and private-label grocery curation (Star Fresh, Fabsta, Klia), Star has achieved store-level EBITDA profitability and positive cash flow, serving as an attractive long-term grocery adjacency<sup><a href="#cite_note-15">[15]</a></sup>.</p>
-
-<h3 id="sec3_4">3.4 Emerging Formulations: Misbu, Utsa &amp; Zudio Beauty</h3>
-<p>Trent is actively incubating several high-margin concept stores to capture adjacent consumer wallets: <b>Misbu</b> (beauty, personal care, and fashion accessories targeted at Gen-Z women), standalone <b>Utsa</b> ethnic wear boutiques, <b>Samoh</b> (luxury occasion and bridal wear), and independent <b>Zudio Beauty</b> outlets<sup><a href="#cite_note-16">[16]</a></sup>. In beauty alone, Trent sold over 35 million units in FY26, establishing a rapidly scaling high-margin cosmetics vertical<sup><a href="#cite_note-4">[4]</a></sup>.</p>
-
-<h2 id="sec4">4. Retail Unit Economics &amp; Supply Chain Velocity</h2>
-
-<h3 id="sec4_1">4.1 100% Private Label Economics &amp; Gross Margin Moat</h3>
-<p>The foundational secret to Trent's superior capital efficiency is its 100% private-label operating architecture. Multi-brand retailers (Shoppers Stop, ABFRL) typically realize gross margins of 34–38% because they must share margins with brand owners. Trent captures the entire manufacturer-to-retailer spread, generating gross margins of <b>48.5%–51.2%</b> across Westside and <b>38.0%–41.0%</b> across Zudio, despite Zudio's ultra-low retail pricing<sup><a href="#cite_note-17">[17]</a></sup>.</p>
-
+<p class="takeaway">Trent has the highest return on capital in this group and the highest P/E among the peers that report one. Vedant Fashions earns a return of 22.8 percent, above the 15 percent threshold, and trades at about a third of Trent's P/E. The table says Trent is the strongest operator of the group and also the most expensive. For a buyer, that combination means the price already assumes a great deal of future growth. Shoppers Stop and Aditya Birla Fashion and Retail earn returns well below the threshold, so they are weaker businesses on this test.</p>
+<p>Vedant Fashions is the only peer in the group that passes the return test on the same basis. It is a candidate for the peer list in the shortlist record, which is a name-only suggestion. We did not underwrite it here, so it has no verdict in this report.</p>
+<p>What this means for you: the business is one of the strongest operators in Indian apparel retail on the return test. The question is not whether the business is good. It is whether the price already reflects the good news, and Chapter 4 shows the price test that answers that.</p>
+<p class="chapter-bridge">Returns and operations look strong. Chapter 3 shows the numbers behind them: five years of sales, profit, cash and debt.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>The numbers, in plain words</h2>
+<p>Five years of figures show whether the strong return is built on cash or on accounting. Revenue shows the size of the business. Profit shows what is left after all costs and tax. Cash from operations shows the money the business actually collected. Borrowings show what the company owes to banks and debt holders. The table below uses the consolidated figures on the Screener page, for the fiscal years ending in March.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Sales in the Screener table are the company's total sales line, and they are higher than the company's own FY26 revenue from operations of Rs 19,701 crore reported by ET Now.<sup><a href="#cite_note-10">[10]</a></sup> The two figures use slightly different definitions, and this report uses Screener's table for consistency across years.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is a financial year, ending in March. Sales, profit and cash are in rupees crore, where one crore is ten million rupees. Borrowings include lease liabilities, because Screener's borrowings line includes them. Net worth is shareholders' equity: the share capital plus the reserves that the company has built up from past profit. A rising net worth with falling debt is the sign of a business that pays its way from its own earnings.</p></div>
+<div class="table-wrap">
 <table class="wikitable">
-  <thead>
-    <tr>
-      <th>Retail Parameter</th>
-      <th>Trent (Zudio / Westside)</th>
-      <th>Shoppers Stop</th>
-      <th>Aditya Birla Fashion (Pantaloons)</th>
-      <th>V-Mart Retail</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Private Label Share</b></td>
-      <td style="color: var(--brand-green); font-weight: 600;">99.5%</td>
-      <td>16.2%</td>
-      <td>62.0%</td>
-      <td>72.0%</td>
-    </tr>
-    <tr>
-      <td><b>Gross Margin %</b></td>
-      <td style="color: var(--brand-green); font-weight: 600;">49.2%</td>
-      <td>39.5%</td>
-      <td>44.8%</td>
-      <td>34.2%</td>
-    </tr>
-    <tr>
-      <td><b>Inventory Days</b></td>
-      <td style="color: var(--brand-green); font-weight: 600;">74 days</td>
-      <td>118 days</td>
-      <td>128 days</td>
-      <td>132 days</td>
-    </tr>
-    <tr>
-      <td><b>Sales / Sq. Ft. / Year</b></td>
-      <td style="color: var(--brand-green); font-weight: 600;">₹ 18,400</td>
-      <td>₹ 8,900</td>
-      <td>₹ 10,200</td>
-      <td>₹ 7,800</td>
-    </tr>
-    <tr>
-      <td><b>ROCE % (TTM)</b></td>
-      <td style="color: var(--brand-green); font-weight: 600;">28.3%</td>
-      <td>7.2%</td>
-      <td>1.4%</td>
-      <td>4.8%</td>
-    </tr>
-  </tbody>
+<thead><tr><th>Year (ending March)</th><th class="num">Sales (Rs crore)</th><th class="num">Net profit (Rs crore)</th><th class="num">Cash from operations (Rs crore)</th><th class="num">Borrowings incl. leases (Rs crore)</th><th class="num">Net worth (Rs crore)</th><th class="num">ROCE (%)</th></tr></thead>
+<tbody>
+<tr><td>FY22</td><td class="num">4,498</td><td class="num">35</td><td class="num">58</td><td class="num">4,725</td><td class="num">2,364</td><td class="num">7</td></tr>
+<tr><td>FY23</td><td class="num">8,242</td><td class="num">394</td><td class="num">595</td><td class="num">4,464</td><td class="num">2,596</td><td class="num">12</td></tr>
+<tr><td>FY24</td><td class="num">12,375</td><td class="num">1,477</td><td class="num">1,349</td><td class="num">1,753</td><td class="num">4,068</td><td class="num">24</td></tr>
+<tr><td>FY25</td><td class="num">17,135</td><td class="num">1,534</td><td class="num">1,661</td><td class="num">2,237</td><td class="num">5,462</td><td class="num">31</td></tr>
+<tr><td>FY26</td><td class="num">20,074</td><td class="num">1,721</td><td class="num">2,668</td><td class="num">2,561</td><td class="num">6,985</td><td class="num">28</td></tr>
+</tbody>
 </table>
-
-<h3 id="sec4_2">4.2 12-Day Design-to-Store Fast-Fashion Sourcing Engine</h3>
-<p>Modeled after Inditex (Zara) and Fast Retailing (Uniqlo), Trent operates a highly responsive vendor ecosystem based in Tirupur, Surat, Ludhiana, and Bangladesh. Designs are tested in micro-batches (500–1,000 units per style) across select flagship stores; styles that achieve high sell-through rates are re-ordered and dispatched nationwide within 12–15 days<sup><a href="#cite_note-18">[18]</a></sup>. This rapid feedback loop virtually eliminates end-of-season markdown provisions and dead inventory write-offs.</p>
-
-<h2 id="sec5">5. Financial Forensics, Cash Conversion &amp; Lease Accounting</h2>
-
-<h3 id="sec5_1">5.1 Immaculate Operating Cash Flow Conversion</h3>
-<p>Unlike asset-heavy capital goods contractors or long-cycle infrastructure developers, Trent operates with negative working capital in its core standalone business (-2 days working capital cycle in FY26)<sup><a href="#cite_note-1">[1]</a></sup>. Customers pay instantly via card/UPI/cash, while trade payables (39 days) fully finance inventory (74 days) when combined with high inventory turnover. Reported accounting profits convert seamlessly into cash:</p>
-
+</div>
+<p class="takeaway">Sales grew about 4.5 times in four years, from 4,498 to 20,074 crore. Net profit rose from 35 crore to 1,721 crore, and cash from operations rose from 58 crore to 2,668 crore. Borrowings fell from 4,725 crore to 2,561 crore while the company kept opening stores. Net worth nearly tripled. The pattern is a company that grew, cut its debt and built equity from its own profit. The one soft spot is the small dip in ROCE in FY26.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The sales line tells the story of expansion. The company added stores every year, and each new store added to the total. Sales growth over three years is 35 percent on Screener's own measure, and our calculation from the table gives 34.5 percent.<sup><a href="#cite_note-1">[1]</a></sup> That is fast growth for a business of this size. Growth of this speed usually comes with some risk that new stores will not be as profitable as the old ones, which is why the ROCE trend in Chapter 2 matters.</p>
+<p>Profit shows a sharper picture. Net profit rose from 394 crore in FY23 to 1,721 crore in FY26. Screener prints the three-year profit growth at 71 percent, but the table gives a figure of 63.5 percent for the same three years, when we compute it ourselves from FY23 to FY26.<sup><a href="#cite_note-1">[1]</a></sup> We use the table figure. The gap comes from the starting year and Screener's own window, and it does not change any verdict. The low FY23 profit starting point is one reason the growth rate looks so high. In the March 2026 quarter alone, net profit rose 32.5 percent year on year to 413 crore.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>Cash is the test that matters most for quality. Our Layer 1 rule uses <dfn>cash flow from operations (CFO)</dfn>, which is the cash the business collects from its sales after paying its running costs. The rule compares three years of CFO with three years of profit. If cash is well below profit, the reported profit may be on paper only.</p>
+<p>Debt is the second test. The <dfn>debt-to-equity ratio</dfn> is the company's borrowings divided by its net worth. A ratio below 0.70 passes our rule. Both CARE and ICRA rate the company's debt AA+ with a stable outlook, and CARE's reaffirmation covers a 500 crore non-convertible debenture.<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> Trent's borrowings of 2,561 crore include lease liabilities. The company's own ratio notes define its debt capital to include lease liabilities.<sup><a href="#cite_note-13">[13]</a></sup> The financial debt alone, which is the non-convertible debenture, is about 500 crore.<sup><a href="#cite_note-15">[15]</a></sup> The lease liabilities are about 2,061 crore, calculated from the balance-sheet lines for current and long-term leases.<sup><a href="#cite_note-14">[14]</a></sup> The two parts add to the 2,561 crore total on the Screener page.</p>
+<p>The financial gate table that follows shows each input. We count lease liabilities in the debt-to-equity test, because that is the stricter reading and the one the company itself uses. We also show the result without leases so the reader can see how much the lease choice matters.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is one test from our Layer 1 rules. The second column is the pass rule. The third column is the input used, with its period. The last column is the result. A PASS means the company clears the rule. The cash test adds three years of CFO and three years of profit. The debt test uses the balance sheet at 31 March 2026.</p></div>
+<div class="table-wrap">
 <table class="wikitable">
-  <thead>
-    <tr>
-      <th>Fiscal Year</th>
-      <th>Consolidated Revenue (₹ Cr)</th>
-      <th>Reported PAT (₹ Cr)</th>
-      <th>Operating Cash Flow (CFO, ₹ Cr)</th>
-      <th>CFO / PAT Ratio</th>
-      <th>Free Cash Flow (FCF, ₹ Cr)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>FY24</b></td>
-      <td>₹ 12,375 Cr</td>
-      <td>₹ 1,477 Cr</td>
-      <td>₹ 1,349 Cr</td>
-      <td>0.91x</td>
-      <td>₹ 955 Cr</td>
-    </tr>
-    <tr>
-      <td><b>FY25</b></td>
-      <td>₹ 17,135 Cr</td>
-      <td>₹ 1,534 Cr</td>
-      <td>₹ 1,661 Cr</td>
-      <td>1.08x</td>
-      <td>₹ 799 Cr</td>
-    </tr>
-    <tr>
-      <td><b>FY26</b></td>
-      <td>₹ 20,074 Cr</td>
-      <td>₹ 1,721 Cr</td>
-      <td>₹ 2,668 Cr</td>
-      <td style="color: var(--brand-green); font-weight: 600;">1.55x</td>
-      <td>₹ 931 Cr</td>
-    </tr>
-    <tr style="background-color: var(--bg-highlight); font-weight: 600;">
-      <td><b>3-Year Cumulative</b></td>
-      <td><b>₹ 49,584 Cr</b></td>
-      <td><b>₹ 4,732 Cr</b></td>
-      <td style="color: var(--brand-green);"><b>₹ 5,678 Cr</b></td>
-      <td style="color: var(--brand-green);"><b>1.20x (Pass)</b></td>
-      <td><b>₹ 2,685 Cr</b></td>
-    </tr>
-  </tbody>
+<thead><tr><th>Layer 1 financial test</th><th>Pass rule</th><th>Input (period)</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Return on capital (ROCE)</td><td>15.0% or more</td><td>28.3% (Screener header, 12 Oct 2026; FY26 row 28%)</td><td>PASS</td></tr>
+<tr><td>Debt-to-equity, leases counted</td><td>Below 0.70</td><td>2,561 / 6,985 = 0.37 (31 Mar 2026)</td><td>PASS</td></tr>
+<tr><td>Debt-to-equity, leases not counted (reference)</td><td>Below 0.70</td><td>500 / 6,985 = 0.07 (31 Mar 2026)</td><td>PASS (reference only)</td></tr>
+<tr><td>Three-year cash conversion (CFO / profit)</td><td>0.70 or more</td><td>(1,349 + 1,661 + 2,668) / (1,477 + 1,534 + 1,721) = 5,678 / 4,732 = 1.20 (FY24 to FY26)</td><td>PASS</td></tr>
+</tbody>
 </table>
-
-<h3 id="sec5_2">5.2 Balance Sheet Health &amp; Ind AS 116 Lease Forensics</h3>
-<p>Consolidated total borrowings stand at ₹2,561 Cr against net worth of ₹6,985 Cr (Debt/Equity = 0.37x). Crucially, forensic review confirms that virtually all debt consists of capitalized lease liabilities recognized under Ind AS 116 accounting rules for store rental contracts, rather than financial bank loans<sup><a href="#cite_note-19">[19]</a></sup>. Standalone bank borrowings are negligible, and the company maintains ₹1,385 Cr in liquid investments, ensuring robust solvency<sup><a href="#cite_note-1">[1]</a></sup>.</p>
-
-<h2 id="sec6">6. The 3-Layer Underwriting Framework &amp; Scorecard</h2>
-
-<h3 id="sec6_1">6.1 Layer 1: Binary Hard Gating Floors</h3>
+</div>
+<p class="takeaway">All three financial tests pass with room to spare. The return is 28.3 percent against a 15 percent floor. Debt is 0.37 times equity against a 0.70 ceiling, and it would take roughly 2,330 crore more borrowing before the lease-inclusive ratio reached 0.70. Cash conversion is 1.20 times profit against a 0.70 floor. The company turns its profit into cash, which means the reported profit is not only on paper.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The lease choice does not change the verdict. Counting leases, the ratio is 0.37. Leaving them out, it is 0.07. Both pass. The lease choice would matter only if the lease total rose sharply, which is the risk described in Chapter 6. The peers' debt ratios were not calculated in this report, so the peer table does not compare leverage. We applied the same Screener borrowings line that covers Trent's leases, but we did not check each peer's lease split, and we say so in the run notes.</p>
+<p>What this means for you: the company is not short of cash. It collects more than it earns, it has been paying down its debt from its own profit, and its leases are the largest debt item. The financial test is a clear pass. The problem lies in the chart and the price, which is the subject of Chapter 4.</p>
+<p class="chapter-bridge">The financial record passes. Chapter 4 asks the harder question: is the price doing what our rules require?</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>What the price is doing</h2>
+<p>Price tells us what other buyers and sellers think about the business today. Our rules use the ledger, which is the record of closing prices and the indicators calculated from them, as of the latest completed session. The ledger's close for 12 October 2026 is 2,913.00 rupees, and it is the only source for the figures below. The Screener page shows the same close, so the two sources agree.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The first indicator is the <dfn>relative strength index (RSI)</dfn>, a number from 0 to 100 that measures how fast a stock has moved up or down recently. Below 30 is called oversold, which means the stock has fallen unusually fast. Above 70 is called overbought. Trent's RSI is 60.5, which is in the middle range. It shows the recent rally has some strength, but it is not extreme.</p>
+<p>The second indicator is the <dfn>average true range (ATR)</dfn>, which measures the normal daily wobble in the price. The ATR is 74.09 rupees. We use it as a ruler. A distance of one ATR is roughly one normal day's move, so a stop or a support level expressed in ATRs is easier to compare across stocks. Trent's close is 4.96 ATRs above its lowest level of the last 63 sessions, which is 2,545.80 rupees. That gap is large.</p>
+<p>The third idea is the <dfn>Stage</dfn> reading. A <dfn>Stage 2</dfn> stock is in a markup phase, meaning a sustained uptrend in which the price is above a rising 50-day average and the 200-day average is not falling. A <dfn>Stage 3</dfn> stock is topping or pulling back. The price may be above some averages, but the trend has stopped rising. A <dfn>Stage 4</dfn> stock is in decline, with the price below falling averages. A <dfn>base</dfn> is a period of sideways trading after a fall, and a <dfn>breakout</dfn> is a move above the top of that range on strong volume. The Core Alpha rules want either a base breakout or a Stage 2 markup. The Tactical rules want a Stage 2 markup with rising 50-day and 200-day averages.</p>
+<p>Trent's ledger reads <strong>Stage 3 (Topping / Pullback)</strong>. The table shows why. The price is above the 20-day, 50-day and 200-day averages, but the 50-day average has been falling, and the 200-day average is also falling. That combination fails both technical tests in our rules.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is one ledger value as of the close on 12 October 2026. The middle column gives the level. Where a moving average appears, the note in brackets shows how it has moved over the last 21 or 63 sessions. A line that falls over time means the trend is weakening. The last column says what the level means for the rule. The ledger values are the only source for these numbers.</p></div>
+<div class="table-wrap">
 <table class="wikitable">
-  <thead>
-    <tr>
-      <th>Gate Metric</th>
-      <th>Institutional Floor Requirement</th>
-      <th>Trent Limited Reported Value</th>
-      <th>Binary Gate Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>1. ROCE Gating Floor</b></td>
-      <td>ROCE ≥ 15.0% (Core prefers &gt; 18.0%)</td>
-      <td class="mono">28.3% (Core Alpha Tier 1)</td>
-      <td><span class="badge badge-pass">PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>2. Debt-to-Equity Floor</b></td>
-      <td>Debt-to-Equity &lt; 0.70x (Non-Financials)</td>
-      <td class="mono">0.37x (Lease Liabilities Included)</td>
-      <td><span class="badge badge-pass">PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>3. Cash Conversion Floor</b></td>
-      <td>3-Year Cumulative CFO / PAT ≥ 0.70x</td>
-      <td class="mono">1.20x (Cumulative CFO ₹5,678 Cr)</td>
-      <td><span class="badge badge-pass">PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>4. Technical Posture Floor</b></td>
-      <td>Stage 2 Markup / Base Breakout</td>
-      <td class="mono">Testing rising 200-DMA (₹2,776 / ₹2,550 base)</td>
-      <td><span class="badge badge-pass">PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>5. Asymmetry Hurdle Floor</b></td>
-      <td>Reward-to-Risk Ratio ≥ 3.0:1 (Core)</td>
-      <td class="mono">3.25:1 (Target ₹3,400 vs Stop ₹2,380)</td>
-      <td><span class="badge badge-pass">PASS</span></td>
-    </tr>
-  </tbody>
+<thead><tr><th>Ledger item (12 Oct 2026)</th><th>Level</th><th>What it means for the rule</th></tr></thead>
+<tbody>
+<tr><td>Close</td><td class="num">2,913.00</td><td>Up 12.91% over one week; down 0.18% on the day</td></tr>
+<tr><td>20-session average</td><td class="num">2,760.16</td><td>Close is above it</td></tr>
+<tr><td>50-session average</td><td class="num">2,866.75 (21 sessions ago: 2,953.25)</td><td>Falling, so the trend test fails</td></tr>
+<tr><td>200-session average</td><td class="num">2,835.19 (63 sessions ago: 3,353.25)</td><td>Falling, so the trend test fails</td></tr>
+<tr><td>Relative strength index (RSI)</td><td class="num">60.5</td><td>Middle range; not extreme</td></tr>
+<tr><td>Average true range (ATR)</td><td class="num">74.09</td><td>One normal day's move</td></tr>
+<tr><td>52-week high and low</td><td class="num">4,908.00 and 2,183.67</td><td>Close is 40.65% below the high</td></tr>
+<tr><td>Swing low and base low</td><td class="num">2,545.80</td><td>Structural support; 4.96 ATRs below the close</td></tr>
+<tr><td>Volume multiple (20 sessions)</td><td class="num">0.57</td><td>Light volume on the recent move</td></tr>
+<tr><td>Relative strength over 63 sessions</td><td class="num">+8.08%</td><td>Positive over three months (ledger relative-strength measure)</td></tr>
+<tr><td>Weinstein stage</td><td class="num">Stage 3 (Topping / Pullback)</td><td>Core fails; Tactical fails; no Stage 4 breakdown</td></tr>
+</tbody>
 </table>
-<p><b>Layer 1 Disposition:</b> 100% Pass across all 5 Hard Gating Floors.</p>
-
-<h3 id="sec6_2">6.2 Layer 2: Company-Specific Operational KPI Scorecard</h3>
+</div>
+<p class="takeaway">The price has recovered sharply over one week, but the averages have not turned up. The 50-day average fell from 2,953 to 2,867 over 21 sessions, and the 200-day average fell from 3,353 to 2,835 over 63 sessions. A rally inside a falling trend is not the same as a new uptrend. The light volume on the recent move points the same way: fewer buyers are pushing the price than in the earlier fall.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Over a longer span the picture is weaker. The shares reached an all-time high of 8,234.95 rupees in October 2024 and fell to 3,500 by March 2026 and has since fallen further; the ledger's 52-week low is now 2,183.67.<sup><a href="#cite_note-8">[8]</a></sup> About a month before the ledger date, the close was 2,802.40 rupees on 11 September 2026.<sup><a href="#cite_note-9">[9]</a></sup> The broad market is also weak. The ledger labels the regime Downtrend. Only about one in five stocks in the index pool trades above its 50-day average.<sup><a href="#cite_note-1">[1]</a></sup> When the market is in a downtrend, a single stock's rally is more likely to fade. This is context, not a verdict on Trent. It is one reason we prefer to wait for the trend to turn rather than buy a bounce.</p>
+<p>The fourth test is <dfn>asymmetry</dfn>, which compares what you can gain with what you can lose. The ratio is the distance from today's price to the target, divided by the distance from today's price to the stop. The stop is a pre-set price at which we would sell to limit the loss. A <dfn>stop loss</dfn> is that price, placed so that a normal move does not trigger it. The ratio is also called the <dfn>reward-to-risk</dfn> ratio, meaning the gain you could make for each rupee you could lose. Our floor for a Core Alpha name is 3.0.</p>
+<p>The stop follows the Core Alpha rule. It sits below the lowest of the swing low and the 50-day and 200-day averages, minus one ATR. The lowest of those three levels is the swing low at 2,545.80. Taking one ATR (74.09) off that level gives a stop of 2,471.71 rupees. The stop is 15.1 percent below the close. A target has to be verified before the ratio can be trusted, and that is where Trent fails. We discuss the target in Chapter 5.</p>
+<p>Layer 3 is the entry-timing test. It is not evaluated here, because Layer 1 failed. For information, the support ladder places Trent in the NO_BUY band, which is any distance of 1.2 ATRs or more above support. Trent is 4.96 ATRs above its base low, and 1.05 ATRs above its 200-day average. The ladder would call the stock extended, and so would not allow a buy at this price even if the other gates passed.</p>
+<p>The stored shortlist row reads Stage 2, a close of 2,620, and an entry posture of AT_SUPPORT. That reading was right for its own date, but it does not match today's ledger. The close is 11.2 percent higher than the stored close. The price has moved up, but the averages have not, so the stock has moved from the uptrend reading to a topping reading. The stored row also describes the stock as testing its 200-day support at 2,620. Today's 200-day average is 2,835, which sits 77.8 rupees below the close.</p>
+<p>What this means for you: the price has rallied off its lows, but the trend tests have not been met. Under our rules, a rally inside a falling trend is not a buy signal. We would need the averages to turn up before the technical test passes, and we would need a verified target before the asymmetry test passes.</p>
+<p class="chapter-bridge">The price test fails on trend and the asymmetry test fails on the target. Chapter 5 shows what the numbers could be, and why the target cannot yet be used.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>What could happen next</h2>
+<p>Our rules need a target that can be traced to its inputs. The two allowed anchors are forward earnings multiplied by a three-year median P/E, or a technical target measured from a verified base. Trent has a forward earnings figure, but it does not have a verified three-year median P/E. The available sources give a five-year average of 164.66 times and a five-year low of 68.11 times in March 2026, but not the three-year median.<sup><a href="#cite_note-19">[19]</a></sup> There is also no verified base, because the stock is in Stage 3, not in a base, so a technical target cannot be measured from one. So the target is not anchored, and the asymmetry test fails by rule.</p>
+<p>The scenarios below show what the market has been saying. They are not forecasts used in the decision. They use the 27-analyst target range as the outside marker, and they use the close and stop from the ledger. The probabilities are judgements, and each one has a reason.</p>
+<div class="howto"><h4>How to read this table</h4><p>Each row is a scenario. The price is the level the stock would reach, and the change is measured from the 2,913 close. The probability is our judgement of how likely that path is over the next twelve months, with the reason in the last column. The expected outcome weights each price by its probability. It is shown only to size the risk. It is not a target.</p></div>
+<div class="table-wrap">
 <table class="wikitable">
-  <thead>
-    <tr>
-      <th>Operational KPI Metric</th>
-      <th>Strategic Significance &amp; Threshold</th>
-      <th>FY26 Actual Performance</th>
-      <th>Traffic-Light Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>1. Zudio Expansion Velocity</b></td>
-      <td>Target &gt; 150 net new stores added / year</td>
-      <td><b>180+ stores added</b> (963 total stores live)</td>
-      <td><span class="badge badge-pass">🟢 PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>2. Like-for-Like (LFL) Sales Growth</b></td>
-      <td>Target &gt; 10.0% YoY across mature stores</td>
-      <td><b>12.4% LFL growth</b> in fashion concepts</td>
-      <td><span class="badge badge-pass">🟢 PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>3. Private-Label Gross Margin Moat</b></td>
-      <td>Target &gt; 45.0% gross margin on fashion</td>
-      <td><b>49.2% gross margin</b> (100% in-house brands)</td>
-      <td><span class="badge badge-pass">🟢 PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>4. Inventory Cycle Efficiency</b></td>
-      <td>Target &lt; 85 days inventory turnaround</td>
-      <td><b>74 days</b> (Industry benchmark)</td>
-      <td><span class="badge badge-pass">🟢 PASS</span></td>
-    </tr>
-    <tr>
-      <td><b>5. New Format Incubation Scaling</b></td>
-      <td>Emerging verticals &gt; 10% standalone revenue</td>
-      <td>Misbu, Utsa, Zudio Beauty &gt; 12% contribution</td>
-      <td><span class="badge badge-pass">🟢 PASS</span></td>
-    </tr>
-  </tbody>
+<thead><tr><th>Scenario</th><th class="num">Price (rupees)</th><th class="num">Change from close</th><th class="num">Probability</th><th>Driver and reason for the probability</th></tr></thead>
+<tbody>
+<tr><td>Bull</td><td class="num">4,455</td><td class="num">+52.9%</td><td class="num">25%</td><td>Store growth holds near 20 percent, margins keep widening, and the market pays the top of the analyst range. The 2026 pattern of sharp moves on growth news makes this possible, but it needs every driver to hold at once, so it is not the reference case.</td></tr>
+<tr><td>Base</td><td class="num">3,390</td><td class="num">+16.4%</td><td class="num">45%</td><td>Illustrative and reference only: the analysts' average target, which is not a valid anchor. The +16.4% comes entirely from multiple expansion. Implied FY27 earnings are 40.84 rupees (3,390 / 83), close to the consensus 40.61. The stock trades at 71.3 times that figure (2,913 / 40.84), so a flat multiple gives 0%, and 83 times gives 3,390.</td></tr>
+<tr><td>Bear</td><td class="num">2,471.7 (stop)</td><td class="num">-15.1%</td><td class="num">30%</td><td>The price closes below the swing low and the stop is hit. The -15.1% is the stop-loss loss, not a price floor, and a gap through the stop would lose more. The stop is about 6 ATRs from the close (441.29 / 74.09 = 5.96). The stock is in Stage 3 and the market is in a downtrend. The stock fell about 32 percent over the year to early July 2026.<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>Stress: back to the 52-week low</td><td class="num">2,183.67</td><td class="num">-25.0%</td><td class="num">Not weighted</td><td>A <dfn>retest</dfn> is a return to a level the price has already reached. Here it means a fall back to the ledger's 52-week low, 25.0 percent below the close. It is not in the weighted outcome. It shows the downside if the stop is gapped through or the trend breaks further.</td></tr>
+</tbody>
 </table>
-<p><b>Layer 2 Health:</b> 5/5 PASS (100% Exceptional Scorecard).</p>
-
-<h3 id="sec6_3">6.3 Layer 3: Support-Aware Entry Posture</h3>
-<p>Trent is currently trading at ₹2,620.00, positioned within an attractive accumulation band right at the test of its 200-day DMA (₹2,776) and prior multi-month structural shelf (₹2,500–₹2,580)<sup><a href="#cite_note-20">[20]</a></sup>. With 14-day ATR at ₹78.00, the stock sits within 0.6x ATR of verified base support. 14-day RSI is normalized at 48.34, removing prior overbought froth. Entry Zone: <b>₹2,520 – ₹2,640</b>. Posture Classification: <b>NEAR_SUPPORT (0.6x ATR)</b>.</p>
-
-<h2 id="sec7">7. Peer Comparison Matrix &amp; Structural Retail Benchmarking</h2>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Company Name</th>
-      <th>Ticker</th>
-      <th>Market Cap (₹ Cr)</th>
-      <th>P/E (TTM)</th>
-      <th>ROCE %</th>
-      <th>3Y Sales CAGR</th>
-      <th>Store Count</th>
-      <th>Gross Margin</th>
-      <th>Underwriting Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background-color: var(--bg-highlight); font-weight: 600;">
-      <td>Trent Limited</td>
-      <td>TRENT</td>
-      <td>₹ 1,39,733</td>
-      <td>76.4x</td>
-      <td>28.3%</td>
-      <td>35.0%</td>
-      <td>1,300+</td>
-      <td>49.2%</td>
-      <td><span class="badge badge-pass">🔵 ACCUMULATE</span></td>
-    </tr>
-    <tr>
-      <td>Avenue Supermarts</td>
-      <td>DMART</td>
-      <td>₹ 2,98,000</td>
-      <td>105.0x</td>
-      <td>19.8%</td>
-      <td>24.2%</td>
-      <td>370+</td>
-      <td>14.8%</td>
-      <td><span class="badge badge-pass">🟢 QUALIFIED PEER</span></td>
-    </tr>
-    <tr>
-      <td>Aditya Birla Fashion</td>
-      <td>ABFRL</td>
-      <td>₹ 28,400</td>
-      <td>N/A (Loss)</td>
-      <td>1.4%</td>
-      <td>12.8%</td>
-      <td>4,200+</td>
-      <td>44.8%</td>
-      <td><span class="badge badge-fail">🔴 REJECTED</span></td>
-    </tr>
-    <tr>
-      <td>Shoppers Stop</td>
-      <td>SHOPERSTOP</td>
-      <td>₹ 7,800</td>
-      <td>68.2x</td>
-      <td>7.2%</td>
-      <td>14.1%</td>
-      <td>110+</td>
-      <td>39.5%</td>
-      <td><span class="badge badge-fail">🔴 REJECTED</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="sec8">8. Technical Posture &amp; Moving Average Architecture</h2>
-<p>On weekly charts, Trent has completed an orderly 3-wave retracement from its all-time high of ₹3,400 to find institutional bids at the 50-week EMA and 200-day SMA confluence zone (₹2,550–₹2,650)<sup><a href="#cite_note-20">[20]</a></sup>. The 14-day RSI printed a bullish divergence near 42 before curling back to 48.34. Volume during down-weeks has steadily contracted, signifying seller exhaustion. Recommended Execution: <b>Accumulate on dips between ₹2,520 and ₹2,640 with a hard stop loss at ₹2,380</b> (below the major swing low)<sup><a href="#cite_note-21">[21]</a></sup>.</p>
-
-<h2 id="sec9">9. Adversarial Red-Team: 3 Fatal Flaws</h2>
+</div>
+<p class="takeaway">The probability-weighted figure is about +468 rupees per share, which is +16 percent. It is not an expected return. It depends on analyst targets that our rules do not accept as an anchor, so it is not a decision input. The table's real message is the spread: a loss of 441 rupees to the stop against a gain of 477 rupees to the average target. That spread is 1.08 to 1, far below the 3.0 floor.<sup><a href="#cite_note-17">[17]</a></sup></p>
+<p>The bull case relies on growth. The company opened 26 net stores in the June quarter, and revenue grew 19 percent.<sup><a href="#cite_note-2">[2]</a></sup> If that pace holds and profit grows as the market expects, the stock can move toward the top of the analyst range. The analyst range is wide, from 2,950 to 4,455 rupees, which shows how much the forecasters disagree.<sup><a href="#cite_note-16">[16]</a></sup> The bear case relies on the trend. Stage 3 stocks often fall further before they rise again. The stock fell about 32 percent over the year to early July 2026.<sup><a href="#cite_note-6">[6]</a></sup></p>
+<p>The base row is the analysts' average and is shown for reference only. The analyst average target of 3,390 implies about 83 times the FY27 earnings estimate.<sup><a href="#cite_note-16">[16]</a></sup> A July 2026 press article put the stock at 87 times the FY27 estimate and 74 times the FY28 estimate, which shows how sharply the multiple falls as earnings rise.<sup><a href="#cite_note-20">[20]</a></sup> The stock trades at about 72 times the same earnings estimate today.<sup><a href="#cite_note-18">[18]</a></sup> Its +16.4% comes entirely from multiple expansion, because the implied earnings of 40.84 rupees are almost the consensus figure. A flat multiple would leave the price where it is.</p>
+<p>Probabilities are where the report is least certain. We gave the bear case 30 percent because the trend is down, the broad market is weak, and the stock has a history of sharp falls on growth disappointments. In January 2026 the shares fell about 8 percent after the company projected flat revenue growth for October to December.<sup><a href="#cite_note-7">[7]</a></sup> The market reacts strongly to growth signals, and the trend gives no support to the case for a quick rebound.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>The reference target is 3,390 rupees, which gives a reward-to-risk ratio of 1.08. That is the analyst average, shown only so the reader can see the size of the gap. It is not a verified anchor under our rules, so the Layer 1 asymmetry test fails.</p>
+<h4>How it was calculated</h4>
+<p>The ratio is (target minus close) divided by (close minus stop). The target needed for the 3.0 floor is therefore close plus 3.0 times (close minus stop), which is 2,913.00 + 3.0 x 441.29 = 4,236.87. Here that is (3,390 minus 2,913) divided by (2,913 minus 2,471.71), which is 477 divided by 441.29, or 1.08. The stop uses the Core Alpha rule: the lowest of the swing low and the 50-day and 200-day averages, minus one ATR.</p>
+<h4>The inputs</h4>
+<p>The close of 2,913.00, the swing low of 2,545.80, the 50-day average of 2,866.75, the 200-day average of 2,835.19 and the ATR of 74.09 come from the ledger for 12 October 2026. The analyst average target of 3,390 comes from the StockAnalysis forecast page, which polls 27 analysts.<sup><a href="#cite_note-16">[16]</a></sup> The FY27 earnings per share estimate of 40.61 rupees comes from the MarketScreener consensus table.<sup><a href="#cite_note-18">[18]</a></sup> The three-year median P/E, which would be needed to anchor the target, was not found in any source we could read.</p>
+<h4>The range</h4>
+<p>The highest analyst target, 4,455 rupees, gives a ratio of 3.49, which would pass the floor. The lowest analyst target, 2,950 rupees, gives a ratio of 0.08 and would fail. If the stock hits the stop, the loss is 441.29 rupees per share, which is 15.1 percent of the close. That is a stop-loss loss, not a price floor: the 52-week-low retest at 2,183.67 would be 25.0 percent below the close. The range is therefore very wide, and the verdict depends on which target is accepted.</p>
+<h4>If the number is off</h4>
+<p>For the asymmetry test to pass with a verified anchor, the target would need to be at least 4,236.87 rupees (2,913.00 + 3.0 x 441.29). On the FY27 earnings estimate of 40.61 rupees, that is about 104.3 times earnings. The highest analyst target, 4,455 rupees, clears this level, but it is a reference only and is not a verified anchor. If the verified three-year median P/E turns out lower than that, the test fails. If it turns out higher, the test passes, but only if the Layer 1 technical gate is also met, which it is not today.</p>
+</section>
+<p>The worked example below applies the same arithmetic to a 100-share holding.</p>
+<div class="example"><h4>Worked example: the reader's own money</h4><p>If you buy 100 shares at 2,913 (cost 2,91,300 rupees) and the stop is 2,471.7, the most you can lose is 100 times 441.29, which is 44,129 rupees. The reference target of 3,390 would make the possible gain 47,700 rupees. The reward is 1.08 times the risk. Under our floor of 3.0, the same trade would need a target of about 4,237 rupees before we would consider it.</p></div>
+<p class="chapter-bridge">The numbers show a wide range and a thin reward. Chapter 6 asks which assumption is weakest, and what would show it to be wrong.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>Why these estimates might be wrong</h2>
+<p>Every estimate in this report depends on an assumption. The weakest one here is the forward earnings path. The consensus expects profit to grow about 26 percent in FY27, and it expects revenue growth near 21 percent.<sup><a href="#cite_note-17">[17]</a></sup> That path assumes the store roll-out continues at its current pace and that the new stores earn the same return as the old ones. The Q1 FY27 growth is consistent with that path, but one quarter is a short record. A slowdown in like-for-like sales would break the link between store count and profit.</p>
+<p>The second weak point is the valuation. The consensus earnings estimate is verified, but the three-year median P/E is not. Without that median, the target cannot be anchored, and the verdict cannot be proven either way. The sources we could read show the stock at 84.8 times its latest earnings on the 11 Oct 2026 Smart-Investing page, and a five-year average of 164.66 times.<sup><a href="#cite_note-19">[19]</a></sup> The five-year figures are not the same window as the three-year median the rule requires, so we did not substitute them.</p>
+<p>The evidence that would show the forward path to be wrong is the next results release. The company will report its Q2 FY27 numbers on 29 October 2026, according to the Screener announcement list.<sup><a href="#cite_note-1">[1]</a></sup> If revenue growth stays near 19 percent and the operating margin holds at 19 percent or better, the earnings path is intact. If growth falls below 15 percent, the forward earnings number and the bull case both weaken. The evidence for the valuation test would come from a verified three-year P/E history, which we did not find in readable sources.</p>
+<p>The fatal-flaw red-team list below names the three ways this verdict could be wrong, or the business could fail the rules later.</p>
+<div class="howto"><h4>How to read this list</h4><p>Each item is a scenario that would break the thesis. For each one we name the sign to watch, the level that would confirm it and the date we would know. A red-team list is useful because it names failure paths before they happen, not after.</p></div>
 <ol>
-  <li><b>Fatal Flaw 1: Premium Valuation Multiple Compression Risk:</b> At 76.4x trailing P/E and 20x Book Value, Trent demands relentless 25–30% net profit compounding. If consumer spending slows or new store openings dilute LFL metrics, multiple compression toward 50x P/E would pose downside risk<sup><a href="#cite_note-22">[22]</a></sup>.</li>
-  <li><b>Fatal Flaw 2: Cannibalization in Tier 2 &amp; Tier 3 Clusters:</b> As Zudio expands past 1,000 stores, opening multiple stores in single Tier 2 cities (e.g. 8+ stores in Jaipur, Lucknow, Coimbatore) could cannibalize existing store revenue and compress store-level EBITDA margins<sup><a href="#cite_note-4">[4]</a></sup>.</li>
-  <li><b>Fatal Flaw 3: Value-Fashion Competitive Counterattacks:</b> Competitors are aggressively copying the Zudio playbook—Reliance Trends launched <i>Yousta</i>, Max Fashion introduced <i>InTune</i>, and Shoppers Stop launched <i>Intune</i>. While Trent's 12-day supply chain provides lead time, pricing wars could erode gross margins<sup><a href="#cite_note-23">[23]</a></sup>.</li>
+<li><strong>Growth stalls and the multiple falls.</strong> The store roll-out continues, but like-for-like sales stay flat. Revenue growth then falls toward the low teens, the earnings estimate is cut, and the multiple compresses. The sign would be a quarterly revenue growth rate below 15 percent. We would know on the Q2 FY27 release on 29 October 2026.<sup><a href="#cite_note-1">[1]</a></sup></li>
+<li><strong>Leadership change leads to a strategy change.</strong> The chairman is stepping down.<sup><a href="#cite_note-6">[6]</a></sup> A new leader could slow the store roll-out to protect cash, or change the capital plan. The sign would be a change in the expansion pace or a new capital allocation policy. The earliest evidence is the next annual report and the first board statements after the change.</li>
+<li><strong>Lease growth pushes leverage up.</strong> If the company keeps adding stores at this pace, lease liabilities rise with them. Borrowings including leases would reach the 0.70 ceiling only if they rose by about 2,330 crore from 2,561 crore to about 4,890 crore. That is not expected in the next year, but it is the way the financial pass could be lost. We would know it from each quarterly balance sheet.</li>
 </ol>
-
-<h2 id="sec10">10. Capital Allocation, Portfolio Insertion &amp; Execution Orders</h2>
-<p>Trent Limited qualifies as a <b>Core Alpha Autowritten Challenger</b>. Because `shortlist/Zerodha_Shortlist.xlsx` has open capacity in the Core Alpha book (0/10 positions filled), Trent is directly inserted as an active challenger with an <b>ACCUMULATE_ON_DIP</b> action verdict. Target Weight in Greenfield Allocation: <b>6.0%–8.0% of Core Equity Capital</b>.</p>
-
-<h3 id="sec10_1">Actionable Order Specifications:</h3>
-<ul>
-  <li><b>Order Type:</b> Limit Buy on Dip (Tranche 1: 50% at CMP ₹2,620; Tranche 2: 50% at Limit ₹2,540).</li>
-  <li><b>Recommended Entry Range:</b> ₹2,520.00 – ₹2,640.00.</li>
-  <li><b>Hard Stop Loss (GTT):</b> ₹2,380.00 (Daily close basis).</li>
-  <li><b>Base Target Price:</b> ₹3,400.00 (+29.8% upside, retest of prior ATH).</li>
-  <li><b>Bull Target Price:</b> ₹3,950.00 (+50.8% upside, 30x FY28 EPS).</li>
-  <li><b>Mathematical Reward-to-Risk Asymmetry:</b> 3.25:1.</li>
-</ul>
-
-<h2 id="sec11">11. Key Quarterly Monitoring Indicators</h2>
-<ul>
-  <li>Quarterly net store additions across Zudio (Target: ≥ 40 stores/quarter) and Westside (≥ 8 stores/quarter).</li>
-  <li>Fashion portfolio Like-for-Like (LFL) sales growth maintaining ≥ 10.0% YoY.</li>
-  <li>Standalone gross margins holding stable above 47.0% despite competitive launches.</li>
-  <li>Star Hypermarket positive EBITDA progression and store expansion.</li>
-</ul>
-
-
-<h2>12. References, Regulatory Filings &amp; Primary Sources</h2>
-<ol class="reflist">
-<li id="cite_note-1"><span class="mw-cite-backlink"><a href="#cite_ref-1">↑</a></span> <span class="reference-text"><a href="https://www.screener.in/company/TRENT/consolidated/" class="external text" rel="nofollow" target="_blank">Trent Limited Screener Consolidated Financials</a>. Ten-year audited financial statements, P&L, balance sheet, and ratios FY15-FY26.</span></li>
-<li id="cite_note-2"><span class="mw-cite-backlink"><a href="#cite_ref-2">↑</a></span> <span class="reference-text"><a href="https://trentlimited.com/pages/about-tata-group-1" class="external text" rel="nofollow" target="_blank">Trent Limited Corporate History & Tata Heritage</a>. Origins of Westside, Tata Group shareholding, and governance structure.</span></li>
-<li id="cite_note-3"><span class="mw-cite-backlink"><a href="#cite_ref-3">↑</a></span> <span class="reference-text"><a href="https://docs.trent-tata.com/Investor_Presentation_Q4_FY26.pdf" class="external text" rel="nofollow" target="_blank">Trent Investor Presentation Q4 FY26 Highlights</a>. Operational KPIs, store count disclosures, retail footprint, and EBITDA performance.</span></li>
-<li id="cite_note-4"><span class="mw-cite-backlink"><a href="#cite_ref-4">↑</a></span> <span class="reference-text"><a href="https://www.bseindia.com/bseplus/AnnualReport/500251/68577500251.pdf" class="external text" rel="nofollow" target="_blank">BSE Annual Report Filing - Trent Limited FY25-26</a>. Detailed segment financials, Westside and Zudio store footprint (17.7M sq. ft.).</span></li>
-<li id="cite_note-5"><span class="mw-cite-backlink"><a href="#cite_ref-5">↑</a></span> <span class="reference-text"><a href="https://www.screener.in/company/SHOPERSTOP/consolidated/" class="external text" rel="nofollow" target="_blank">Shoppers Stop vs. Trent Retail Benchmarking Report</a>. Comparative study of inventory turns, private label mix, and ROCE.</span></li>
-<li id="cite_note-6"><span class="mw-cite-backlink"><a href="#cite_ref-6">↑</a></span> <span class="reference-text"><a href="https://trendlyne.com/equity/consensus-estimates/1412/TRENT/trent-ltd/" class="external text" rel="nofollow" target="_blank">Trent Valuation & P/E Band Analysis - Trendlyne</a>. Historical multiple expansion, forward EPS projections, and analyst consensus.</span></li>
-<li id="cite_note-7"><span class="mw-cite-backlink"><a href="#cite_ref-7">↑</a></span> <span class="reference-text"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/305e1656-360b-4f28-b00d-fd6b152723b5.pdf" class="external text" rel="nofollow" target="_blank">Tata Sons Corporate Shareholding Disclosure</a>. Promoter group shareholding breakdown: Tata Sons (32.5%), Tata Investment (4.3%).</span></li>
-<li id="cite_note-8"><span class="mw-cite-backlink"><a href="#cite_ref-8">↑</a></span> <span class="reference-text"><a href="https://trentlimited.com/pages/zudio" class="external text" rel="nofollow" target="_blank">Zudio Business Model & Fast-Fashion Case Study</a>. Fast-fashion pricing architecture, target demographics, and product assortment.</span></li>
-<li id="cite_note-9"><span class="mw-cite-backlink"><a href="#cite_ref-9">↑</a></span> <span class="reference-text"><a href="https://www.icra.in/Ratings/Rationale/ShowRationaleReport/?Id=118450" class="external text" rel="nofollow" target="_blank">ICRA Credit Rating Report - Trent Limited</a>. AAA rating rationale highlighting liquidity, low leverage, and Tata sponsorship.</span></li>
-<li id="cite_note-10"><span class="mw-cite-backlink"><a href="#cite_ref-10">↑</a></span> <span class="reference-text"><a href="https://www.kotaksecurities.com/research-reports/" class="external text" rel="nofollow" target="_blank">Kotak Institutional Equities Retail Deep Dive - Trent</a>. Unit economics analysis of Zudio store capex, payback period, and store EBITDA.</span></li>
-<li id="cite_note-11"><span class="mw-cite-backlink"><a href="#cite_ref-11">↑</a></span> <span class="reference-text"><a href="https://www.crisil.com/en/home/our-businesses/market-intelligence-and-analytics.html" class="external text" rel="nofollow" target="_blank">CRISIL MI&A - Indian Apparel Retail Sector Outlook</a>. Value-fashion formalization trends and consumer shift in Tier 2/3 cities.</span></li>
-<li id="cite_note-12"><span class="mw-cite-backlink"><a href="#cite_ref-12">↑</a></span> <span class="reference-text"><a href="https://www.mywestside.com/pages/about-us" class="external text" rel="nofollow" target="_blank">Westside Brand Portfolio & Lifestyle Architecture</a>. Review of in-house brands: Nuon, Wardrobe, Utsa, Studiowest.</span></li>
-<li id="cite_note-13"><span class="mw-cite-backlink"><a href="#cite_ref-13">↑</a></span> <span class="reference-text"><a href="https://trentlimited.com/pages/financial-results" class="external text" rel="nofollow" target="_blank">Trent Q1 FY27 Operational Update Filing</a>. Quarterly store additions, LFL revenue trajectory, and EBITDA margins.</span></li>
-<li id="cite_note-14"><span class="mw-cite-backlink"><a href="#cite_ref-14">↑</a></span> <span class="reference-text"><a href="https://trentlimited.com/pages/star-bazaar" class="external text" rel="nofollow" target="_blank">Trent Hypermarket & Tesco Joint Venture Agreement</a>. 50:50 retail partnership with Tesco PLC and multi-format supermarket rollout.</span></li>
-<li id="cite_note-15"><span class="mw-cite-backlink"><a href="#cite_ref-15">↑</a></span> <span class="reference-text"><a href="https://www.starquick.com/about-us" class="external text" rel="nofollow" target="_blank">Star Hypermarket Unit Economics & Grocery Planograms</a>. Omni-channel grocery delivery, private-label share, and store-level profitability.</span></li>
-<li id="cite_note-16"><span class="mw-cite-backlink"><a href="#cite_ref-16">↑</a></span> <span class="reference-text"><a href="https://www.bseindia.com/corporates/ann.aspx?scrip=500251" class="external text" rel="nofollow" target="_blank">Misbu & Zudio Beauty Emerging Vertical Report</a>. Expansion of beauty and personal care stores across metro malls.</span></li>
-<li id="cite_note-17"><span class="mw-cite-backlink"><a href="#cite_ref-17">↑</a></span> <span class="reference-text"><a href="https://www.motilaloswal.com/stock-market-research-reports/" class="external text" rel="nofollow" target="_blank">Motilal Oswal Financial Services - Trent Research Note</a>. Gross margin decomposition and 100% private label operating moat.</span></li>
-<li id="cite_note-18"><span class="mw-cite-backlink"><a href="#cite_ref-18">↑</a></span> <span class="reference-text"><a href="https://hbsp.harvard.edu/product/703497-PDF-ENG" class="external text" rel="nofollow" target="_blank">Harvard Business School Case Study: Zara vs. Fast Fashion Agility</a>. Fast-fashion inventory velocity principles applied to Trent's 12-day supply chain.</span></li>
-<li id="cite_note-19"><span class="mw-cite-backlink"><a href="#cite_ref-19">↑</a></span> <span class="reference-text"><a href="https://www.mca.gov.in/Ministry/notification/pdf/INDAS116_30032019.pdf" class="external text" rel="nofollow" target="_blank">Ind AS 116 Leases Accounting Impact on Retailers</a>. Capitalization of store lease contracts and interest expense recognition.</span></li>
-<li id="cite_note-20"><span class="mw-cite-backlink"><a href="#cite_ref-20">↑</a></span> <span class="reference-text"><a href="https://in.tradingview.com/symbols/NSE-TRENT/" class="external text" rel="nofollow" target="_blank">TradingView India - TRENT Technical Chart & 200-DMA Support</a>. Multi-year price action, moving average confluence, and volume profile.</span></li>
-<li id="cite_note-21"><span class="mw-cite-backlink"><a href="#cite_ref-21">↑</a></span> <span class="reference-text"><a href="https://www.nseindia.com/get-quotes/equity?symbol=TRENT" class="external text" rel="nofollow" target="_blank">NSE India - TRENT Historical Quotations & Delivery Percentages</a>. Daily delivery volume, block deals, and institutional liquidity data.</span></li>
-<li id="cite_note-22"><span class="mw-cite-backlink"><a href="#cite_ref-22">↑</a></span> <span class="reference-text"><a href="https://www.niftyindices.com/indices/equity/broad-based-indices/nifty-50" class="external text" rel="nofollow" target="_blank">Nifty 50 Index Weighting & Valuation Profile</a>. Trent's index inclusion, free-float market cap weighting, and FII flows.</span></li>
-<li id="cite_note-23"><span class="mw-cite-backlink"><a href="#cite_ref-23">↑</a></span> <span class="reference-text"><a href="https://www.technopak.com/retail-consumer-products/" class="external text" rel="nofollow" target="_blank">Technopak Indian Fast Fashion Competitive Landscape</a>. Competitive launch of Yousta (Reliance), InTune (Max), and market share dynamics.</span></li>
-<li id="cite_note-24"><span class="mw-cite-backlink"><a href="#cite_ref-24">↑</a></span> <span class="reference-text"><a href="https://www.bseindia.com/corporates/shpSec.aspx?scrip=500251" class="external text" rel="nofollow" target="_blank">BSE Shareholding Pattern - TRENT Q1 FY27</a>. Promoter, FII, DII, and public holding distribution.</span></li>
-<li id="cite_note-25"><span class="mw-cite-backlink"><a href="#cite_ref-25">↑</a></span> <span class="reference-text"><a href="https://trentlimited.com/pages/board-of-directors" class="external text" rel="nofollow" target="_blank">Trent Limited Board of Directors & Corporate Governance</a>. Profiles of Noel Tata, P. Venkatesalu, and independent board oversight.</span></li>
-<li id="cite_note-26"><span class="mw-cite-backlink"><a href="#cite_ref-26">↑</a></span> <span class="reference-text"><a href="https://www.niftyindices.com/indices/equity/thematic-indices/nifty-india-consumption" class="external text" rel="nofollow" target="_blank">Nifty India Consumption Index Factsheet</a>. Index performance and retail constituent multiples.</span></li>
-<li id="cite_note-27"><span class="mw-cite-backlink"><a href="#cite_ref-27">↑</a></span> <span class="reference-text"><a href="https://www.nuvamawealth.com/research-reports/" class="external text" rel="nofollow" target="_blank">Edelweiss / Nuvama Wealth Consumer Sector Research</a>. Discretionary spending resilience and value-fashion market sizing.</span></li>
-<li id="cite_note-28"><span class="mw-cite-backlink"><a href="#cite_ref-28">↑</a></span> <span class="reference-text"><a href="https://www.mca.gov.in/" class="external text" rel="nofollow" target="_blank">Ministry of Corporate Affairs - Trent Annual Filings</a>. Statutory balance sheet audits and related-party transaction disclosures.</span></li>
-<li id="cite_note-29"><span class="mw-cite-backlink"><a href="#cite_ref-29">↑</a></span> <span class="reference-text"><a href="https://dhan.co/stocks/trent-ltd-share-price/" class="external text" rel="nofollow" target="_blank">Dhan / INDmoney TRENT Live Technical Analysis</a>. Moving average ribbons, ATR calculations, and relative strength rating.</span></li>
-<li id="cite_note-30"><span class="mw-cite-backlink"><a href="#cite_ref-30">↑</a></span> <span class="reference-text"><a href="https://www.capitaline.com/" class="external text" rel="nofollow" target="_blank">Capital Line Corporate Database - Trent Limited</a>. Comprehensive 15-year financial ratios, debt schedule, and operating cash flows.</span></li>
+<p class="chapter-bridge">The weakest link is the valuation path and the growth path that feeds it. Chapter 7 gives the decision, the trigger that would reopen it, and the shortlist action.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>What we would do, and when</h2>
+<p>The decision is REJECTED for the Core Alpha book. The reason is the rule, not a view on the business. Trent fails the Layer 1 technical test, because the stock is in Stage 3 and both the 50-day and 200-day averages are falling. Trent also fails the asymmetry test, because the target cannot be verified. Under the rules, a failed Layer 1 test means no Layer 2 or Layer 3 decision is taken. The verdict stands until one of the two failed tests is cured.</p>
+<p>Two things would change the verdict. The first is a change in trend. The rule would need the 50-day average to turn up and the price to hold above it. The ledger's 50-day average was 2,953 twenty-one sessions ago, so a close above that level, followed by a rising average, is the first sign the trend is turning.</p>
+<div class="triggers"><h4>What would change this view</h4><ul>
+<li>If the close moves above 2,953.25 (the 50-day average 21 sessions ago) and the 50-day average starts rising for 21 sessions, we would re-run the technical gate.</li>
+<li>If a verified three-year median P/E allows a target of at least 4,236.87 rupees (2,913.00 + 3.0 x 441.29), the asymmetry test would pass on the FY27 earnings estimate, which is about 104.3 times 40.61.</li>
+<li>If the close falls below the swing low of 2,545.80, the stop region comes into play. A close below 2,471.7 would confirm the bear case and end this idea.</li>
+</ul></div>
+<p class="trigger">A daily close above 2,953.25, with the 50-day average rising for 21 sessions, is the price event that would reopen the technical test for Trent.</p>
+<p>The second change is the valuation. If a three-year median P/E can be verified and it supports a target of 4,236.87 rupees or higher, the asymmetry gate would pass on the consensus earnings estimate. That alone would not be enough. Trent would also need the Stage 2 technical reading and an <dfn>entry zone</dfn>, which is the price range where the support ladder allows a first purchase. Until then, there is no entry zone. Under the support ladder, a buy needs the price within 1.2 ATRs of support. Trent is 4.96 ATRs above its base low, so the NO_BUY band would still apply even if the gates passed, until the price pulls back into that band. The rules would define an entry zone only after the gates pass.</p>
+<p>If the verdict later changes to a buy, the stop would be set by the Core Alpha rule at 2,471.7 rupees, and the target would have to be anchored before a size is chosen. Today there is no entry zone, no target that passes, and no position size. Shown only for the reader's understanding, a buy at the current close would carry a stop 15.1 percent below the price. The rules do not allow that trade today.</p>
+<p>The shortlist row for TRENT should move from ACCUMULATE_ON_DIP to REJECTED, with the reason recorded as a failed Layer 1 technical test and an unverified asymmetry target. That frees one autowritten Core Alpha slot. This report does not write the shortlist file; the orchestrator records the change.</p>
+<p>On peers, Vedant Fashions passes the return test on the same basis, with ROCE of 22.8 percent and P/E of 31.0 times.<sup><a href="#cite_note-21">[21]</a></sup> It is suggested as a name-only peer candidate for the watchlist. It has not been underwritten here.</p>
+<p>What this means for you: the verdict is clear and the reason is specific. You should not buy Trent on this report. You should watch for the two triggers above, and for the Q2 FY27 release on 29 October 2026, which will show whether the growth path still holds.<sup><a href="#cite_note-1">[1]</a></sup></p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>This report carries exceptions that a reader should know about. Each one is listed in plain English, with the checker's own line, why it cannot be cured now, how it lowers confidence, and what would cure it.</p>
+<ol>
+<li><strong>Stale annual and quarterly figures.</strong> The checker line reads, for example, "EXCEPTION AS-OF TRENT:roce_history: 2026-03 is 225 days older than report date 2026-10-12 (max 60)". Twenty-nine records are flagged this way: the fiscal-year fundamentals (31 March 2026), the June 2026 quarter, the May 2026 ratings and the July 2026 items. The figures are the latest published, so they cannot be made newer today. Confidence in the financial test is moderate to high, because the numbers tie across three sources. The sales difference of about 1.9 percent (20,074 against 19,701 crore) does not enter the three financial tests, which use ROCE, borrowings, net worth, cash and profit. The next quarterly release, on 29 October 2026, would cure it.</li>
+<li><strong>Annual report not readable.</strong> The FY26 annual report and the Q1 FY27 press release are PDFs, and the tool returned raw file bytes, not text. The figures therefore come from the Screener tables, the company's news summaries and the StockAnalysis and Smart-Investing balance-sheet pages. The lease split was cross-checked across two sources. It would be cured by a readable filing.</li>
+<li><strong>Three-year median P/E not verified.</strong> The checker line is the asymmetry failure. No readable source gave a three-year median. The five-year figures are not a substitute. The gate fails on this item alone, together with the technical stage.</li>
+<li><strong>Promoter pledge not found.</strong> The shareholding pages reached showed the promoter holding of 37.01 percent, but no pledge figure.<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-28">[28]</a></sup> The pledge line is therefore N/A.</li>
+<li><strong>Like-for-like store sales not verified.</strong> The retail KPI that matters most is N/A. The source reached marks it as premium data. This lowers confidence in the store-level picture.</li>
+<li><strong>Conflicting 52-week range.</strong> The Screener header prints a 52-week high of 3,400 and a low of 2,184. The ledger shows a high of 4,908 and a low of 2,183.67. The run protocol makes the ledger the governing source for technical figures, so the ledger is used. The discrepancy is flagged to the data owner and does not change the verdict.</li>
+<li><strong>Peer P/E not printed.</strong> Shoppers Stop and Aditya Birla Fashion and Retail show no P/E on their Screener pages, so those cells are N/A. Peer debt ratios were not calculated.</li>
+<li><strong>Source rate limits.</strong> Two Screener peer pages returned an HTTP 429 response during the run. Their earlier copies from the same run were used, and their fetch times are on the same day.</li>
+<li><strong>Sales definition.</strong> The Screener sales figure for FY26 is 20,074 crore. The company's revenue from operations is 19,701 crore. The two definitions differ, and this report uses the Screener table throughout.</li>
 </ol>
+</section>
+<section id="notes">
+<h2>Notes and sources</h2>
+<p>Each source is numbered and listed with its address and the date the figure describes. Where a page gives a fetch time, that time is the one stored in the execution cache.</p>
+<ol class="sources" id="references-list">
+<li id="cite_note-1">Screener.in, Trent Ltd consolidated company page. <a href="https://www.screener.in/company/TRENT/consolidated/">https://www.screener.in/company/TRENT/consolidated/</a> (price header as of 12 Oct 2026; annual tables to March 2026; shareholding to June 2026).</li>
+<li id="cite_note-2">InvestyWise, "Trent: Q1 FY27 Revenue Grows 18-19% to Rs 5,666 Cr", 6 Aug 2026. <a href="https://www.investywise.com/trent-investor-presentation-on-unaudited-financial-results/">https://www.investywise.com/trent-investor-presentation-on-unaudited-financial-results/</a> (quarter to 30 Jun 2026).</li>
+<li id="cite_note-3">CNBC-TV18, "Trent's Q1 revenue climbs 19% as Zudio network nears 1,000 stores". <a href="https://www.cnbctv18.com/market/trent-share-price-q1-revenue-climbs-19-pc-zudio-network-nears-1000-stores-19939542.htm">https://www.cnbctv18.com/market/trent-share-price-q1-revenue-climbs-19-pc-zudio-network-nears-1000-stores-19939542.htm</a> (quarter to 30 Jun 2026).</li>
+<li id="cite_note-4">BW Retailworld, "Trent Q1 profit rises 26% with Zudio driving expansion". <a href="https://bwretailworld.com/companies/trent-q1-profit-rises-26-with-zudio-driving-expansion">https://bwretailworld.com/companies/trent-q1-profit-rises-26-with-zudio-driving-expansion</a> (quarter to 30 Jun 2026).</li>
+<li id="cite_note-5">Storyboard18, "Trent adds 22 Zudio stores in Q1; over 80% of new outlets in Tier II, III markets". <a href="https://www.storyboard18.com/brand-marketing/trent-adds-22-zudio-stores-in-q1-over-80-of-new-outlets-in-tier-ii-iii-markets-ws-l-106875.htm">https://www.storyboard18.com/brand-marketing/trent-adds-22-zudio-stores-in-q1-over-80-of-new-outlets-in-tier-ii-iii-markets-ws-l-106875.htm</a> (quarter to 30 Jun 2026).</li>
+<li id="cite_note-6">Kalkine, "Trent (NSE:TRENT) revenue rises 19% in Q1 FY27 as Zudio store count crosses 980", 7 Jul 2026. <a href="https://www.kalkine.co.in/article/retail/trent-nsetrent-revenue-rises-19-in-q1-fy27-as-zudio-store-count-crosses-980">https://www.kalkine.co.in/article/retail/trent-nsetrent-revenue-rises-19-in-q1-fy27-as-zudio-store-count-crosses-980</a></li>
+<li id="cite_note-7">Hindustan Times, "Trent shares drop ~8% after revenue growth stays flat even during festive months", 6 Jan 2026. <a href="https://www.hindustantimes.com/business/trent-share-price-drops-8-after-revenue-growth-stays-flat-sequentially-101767672253011.html">https://www.hindustantimes.com/business/trent-share-price-drops-8-after-revenue-growth-stays-flat-sequentially-101767672253011.html</a></li>
+<li id="cite_note-8">Whalesbook, "Trent Stock Hits 52-Week Low", 16 Mar 2026. <a href="https://www.whalesbook.com/news/English/consumer-products/Trent-Stock-Hits-52-Week-Low-Zudios-Growth-Stalls-Amid-Competition/69b76eb58a7d0a3f923d67de">https://www.whalesbook.com/news/English/consumer-products/Trent-Stock-Hits-52-Week-Low-Zudios-Growth-Stalls-Amid-Competition/69b76eb58a7d0a3f923d67de</a></li>
+<li id="cite_note-9">Whalesbook, "Trent Stock Sees Weakness Despite 1,000-Store Zudio Milestone", 13 Sep 2026. <a href="https://www.whalesbook.com/news/English/brokerage-reports/Trent-Stock-Sees-Weakness-Despite-1000-Store-Zudio-Milestone/6aa646d075fe79b492e56a0b">https://www.whalesbook.com/news/English/brokerage-reports/Trent-Stock-Sees-Weakness-Despite-1000-Store-Zudio-Milestone/6aa646d075fe79b492e56a0b</a> (close as of 11 Sep 2026).</li>
+<li id="cite_note-10">ET Now, "'Will touch 10x revenue mark' - Why Noel Tata sees long-term growth potential", 31 May 2026. <a href="https://www.etnownews.com/companies/will-touch-10x-revenue-mark-why-noel-tata-sees-long-term-growth-potential-in-this-tata-group-firm-after-zudio-and-star-article-154435606">https://www.etnownews.com/companies/will-touch-10x-revenue-mark-why-noel-tata-sees-long-term-growth-potential-in-this-tata-group-firm-after-zudio-and-star-article-154435606</a> (FY26).</li>
+<li id="cite_note-11">InvestyWise, "Trent Limited CARE Ratings reaffirms credit ratings across debt instruments", 5 May 2026. <a href="https://www.investywise.com/trent-limited-reaffirmation-of-credit-ratings/">https://www.investywise.com/trent-limited-reaffirmation-of-credit-ratings/</a> (reaffirmed 4 May 2026).</li>
+<li id="cite_note-12">ICRA, Trent Limited entity-specific rating rationale. <a href="https://www.icra.in/Credit_Perspective/Details?Id=36923">https://www.icra.in/Credit_Perspective/Details?Id=36923</a> (7 May 2026).</li>
+<li id="cite_note-13">Trendlyne, Trent Ltd quarterly results notes, quarter to 31 Mar 2026. <a href="https://trendlyne.com/fundamentals/results-notes/1412/31-mar-2026/quarterly-notes/trent-ltd/">https://trendlyne.com/fundamentals/results-notes/1412/31-mar-2026/quarterly-notes/trent-ltd/</a></li>
+<li id="cite_note-14">StockAnalysis, Trent (NSE:TRENT) balance sheet, S&amp;P Global data, updated 6 Aug 2026. <a href="https://stockanalysis.com/quote/nse/TRENT/financials/balance-sheet/">https://stockanalysis.com/quote/nse/TRENT/financials/balance-sheet/</a> (FY26, millions of rupees).</li>
+<li id="cite_note-15">Smart-Investing, Trent balance sheet history, consolidated, March 2026. <a href="https://www.smart-investing.in/balance-sheet.php?Company=TRENT+LTD">https://www.smart-investing.in/balance-sheet.php?Company=TRENT+LTD</a></li>
+<li id="cite_note-16">StockAnalysis, Trent (NSE:TRENT) stock forecast, 27 analysts, S&amp;P Global poll. <a href="https://stockanalysis.com/quote/nse/TRENT/forecast/">https://stockanalysis.com/quote/nse/TRENT/forecast/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-17">Trendlyne, Trent consensus estimates for FY27, 27 analyst calls. <a href="https://trendlyne.com/equity/consensus-estimates/1412/TRENT/trent-ltd/">https://trendlyne.com/equity/consensus-estimates/1412/TRENT/trent-ltd/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-18">MarketScreener, Trent Limited financial data and consensus forecasts. <a href="https://www.marketscreener.com/quote/stock/TRENT-LIMITED-31311737/finances/">https://www.marketscreener.com/quote/stock/TRENT-LIMITED-31311737/finances/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-19">Smart-Investing, Trent price-to-earnings history, 11 Oct 2026. <a href="https://www.smart-investing.in/pe-ratio.php?Company=TRENT+LTD">https://www.smart-investing.in/pe-ratio.php?Company=TRENT+LTD</a></li>
+<li id="cite_note-20">Rediff, "Trent's retail expansion: new stores, formats and LFL growth key to future", 3 Jul 2026. <a href="https://www.rediff.com/business/report/trents-retail-expansion-new-stores-formats--lfl-growth-key-to-future/20260703.htm">https://www.rediff.com/business/report/trents-retail-expansion-new-stores-formats--lfl-growth-key-to-future/20260703.htm</a></li>
+<li id="cite_note-21">Screener.in, Vedant Fashions company page. <a href="https://www.screener.in/company/MANYAVAR/">https://www.screener.in/company/MANYAVAR/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-22">Screener.in, V-Mart Retail company page. <a href="https://www.screener.in/company/VMART/">https://www.screener.in/company/VMART/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-23">Screener.in, Shoppers Stop consolidated company page. <a href="https://www.screener.in/company/532638/consolidated/">https://www.screener.in/company/532638/consolidated/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-24">Screener.in, Aditya Birla Fashion and Retail consolidated company page. <a href="https://www.screener.in/company/ABFRL/consolidated/">https://www.screener.in/company/ABFRL/consolidated/</a> (as of 12 Oct 2026).</li>
+<li id="cite_note-25">Textile Value Chain, summary of Wazir Advisors' Annual Indian Textile and Apparel Industry Report 2026, 28 Jan 2026. <a href="https://textilevaluechain.in/annual-indian-textile--apparel-industry-report-2026-by-wazir-advisors">https://textilevaluechain.in/annual-indian-textile--apparel-industry-report-2026-by-wazir-advisors</a> (FY2025-26).</li>
+<li id="cite_note-26">Trent Limited investor relations, financial information index. <a href="https://trentlimited.com/pages/financial-information">https://trentlimited.com/pages/financial-information</a></li>
+<li id="cite_note-27">Trendlyne, Trent latest shareholding pattern. <a href="https://trendlyne.com/equity/share-holding/1412/TRENT/latest/trent-ltd/">https://trendlyne.com/equity/share-holding/1412/TRENT/latest/trent-ltd/</a> (pledge line not found on this page).</li>
+<li id="cite_note-28">Stockssena, Trent shareholding and investors page. <a href="https://www.stockssena.com/stocks/TRENT/investors">https://www.stockssena.com/stocks/TRENT/investors</a> (latest filing 30 Jun 2026; pledge figure not shown).</li>
+</ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-<hr style="margin-top: 40px; border: 0; border-top: 1px solid var(--border-color);">
-<div style="font-size: 0.8em; color: var(--text-muted); text-align: center; margin-top: 12px;">
-  Autonomous Institutional Underwriting Engine • Formatted in Wikipedia Design System • Strict 3-Layer Gating Audit Completed • In-Place Synced
-</div>
-
-</body>
-</html>
+</script></body></html>
