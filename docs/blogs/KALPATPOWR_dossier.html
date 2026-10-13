@@ -1,1478 +1,537 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kalpataru Projects International Limited (KPIL / KALPATPOWR) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-13">
+<meta name="generated-at" content="2026-10-13T11:29:06.493706-07:00">
+<title>Report</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
-  :root {
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --text-muted: #6b7280;
-    --bg-main: #ffffff;
-    --bg-surface: #f9fafb;
-    --bg-highlight: #f3f4f6;
-    --border-color: #d1d5db;
-    --border-subtle: #e5e7eb;
-    --brand-blue: #1d4ed8;
-    --brand-blue-light: #eff6ff;
-    --brand-green: #15803d;
-    --brand-green-light: #f0fdf4;
-    --brand-amber: #b45309;
-    --brand-amber-light: #fffbeb;
-    --brand-red: #b91c1c;
-    --brand-red-light: #fef2f2;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
 
-  body {
-    font-family: var(--font-sans);
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.72;
-    font-size: 15px;
-    letter-spacing: -0.011em;
-    margin: 0;
-    padding: 32px 40px;
-    max-width: 1240px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
 
-  h1.firstHeading {
-    font-family: var(--font-serif);
-    font-size: 2.35em;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0 0 0.2em 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-    color: #111827;
-  }
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
 
-  .siteSub {
-    font-size: 0.88em;
-    color: var(--text-muted);
-    margin-bottom: 1.2em;
-    letter-spacing: 0.02em;
-  }
-
-  /* EXECUTIVE CAPITAL DECISION BANNER */
-  .decision-banner {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #bfdbfe;
-    border-left: 6px solid var(--brand-blue);
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin: 1.2em 0 1.8em 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  }
-
-  .decision-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid #bfdbfe;
-    padding-bottom: 10px;
-  }
-
-  .decision-title {
-    font-family: var(--font-serif);
-    font-size: 1.3em;
-    font-weight: 700;
-    color: #1e3a8a;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .decision-badge {
-    background-color: var(--brand-blue);
-    color: #ffffff;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.82em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-
-  .decision-card {
-    background: #ffffff;
-    border: 1px solid #bfdbfe;
-    border-radius: 6px;
-    padding: 12px 14px;
-  }
-
-  .decision-card-label {
-    font-size: 0.74em;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    letter-spacing: 0.03em;
-    margin-bottom: 3px;
-  }
-
-  .decision-card-value {
-    font-size: 1.15em;
-    font-weight: 700;
-    color: #1e293b;
-    font-family: var(--font-mono);
-  }
-
-  .decision-card-sub {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-
-  /* HEADERS */
-  h2 {
-    font-family: var(--font-serif);
-    font-size: 1.62em;
-    font-weight: 600;
-    color: #111827;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 6px;
-    margin-top: 2.2em;
-    margin-bottom: 0.7em;
-  }
-
-  h3 {
-    font-size: 1.16em;
-    font-weight: 600;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    color: #1f2937;
-  }
-
-  p {
-    margin: 0.85em 0 1.05em 0;
-    text-align: justify;
-    text-justify: inter-word;
-  }
-
-  a {
-    color: var(--brand-blue);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* INFOBOX */
-  table.infobox {
-    border: 1px solid var(--border-color);
-    border-spacing: 2px;
-    background-color: var(--bg-surface);
-    color: var(--text-primary);
-    margin: 0.6em 0 1.4em 1.8em;
-    padding: 5px;
-    float: right;
-    clear: right;
-    font-size: 88%;
-    line-height: 1.48;
-    width: 340px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  table.infobox th {
-    vertical-align: top;
-    text-align: left;
-    padding: 5px 8px;
-    font-weight: 600;
-    width: 44%;
-    color: #374151;
-  }
-
-  table.infobox td {
-    vertical-align: top;
-    padding: 5px 8px;
-  }
-
-  table.infobox caption {
-    font-family: var(--font-serif);
-    font-size: 1.25em;
-    font-weight: 700;
-    padding: 8px;
-    background-color: #f3f4f6;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    border-radius: 3px 3px 0 0;
-    color: #111827;
-  }
-
-  .infobox-image {
-    text-align: center;
-    padding: 12px;
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    margin: 4px 0;
-  }
-
-  .infobox-header {
-    background-color: #f3f4f6;
-    text-align: center;
-    font-weight: 600;
-    padding: 5px;
-    letter-spacing: 0.02em;
-    color: #374151;
-    font-size: 91%;
-  }
-
-  /* TOC */
-  .toc {
-    background: #fcfcfd;
-    border: 1px solid var(--border-color);
-    padding: 13px 20px;
-    display: table;
-    margin: 1.2em 0 1.6em 0;
-    font-size: 90%;
-    min-width: 290px;
-    border-radius: 4px;
-  }
-
-  .toc h2 {
-    font-family: var(--font-sans);
-    font-size: 95%;
-    font-weight: 700;
-    border-bottom: none;
-    margin: 0 0 8px 0;
-    padding: 0;
-    text-align: center;
-    color: #374151;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .toc ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .toc ul ul {
-    margin-left: 1.5em;
-  }
-
-  .toc li {
-    margin-bottom: 4px;
-  }
-
-  .tocnumber {
-    color: var(--text-muted);
-    margin-right: 6px;
-    font-weight: 600;
-    font-family: var(--font-mono);
-  }
-
-  /* WIKITABLES */
-  table.wikitable {
-    background-color: #ffffff;
-    color: var(--text-primary);
-    margin: 1.1em 0;
-    border: 1px solid var(--border-color);
-    border-collapse: collapse;
-    font-size: 89%;
-    width: 100%;
-  }
-
-  table.wikitable th {
-    background-color: #f3f4f6;
-    text-align: left;
-    font-weight: 600;
-    padding: 7px 11px;
-    border: 1px solid var(--border-color);
-    color: #1f2937;
-  }
-
-  table.wikitable td {
-    padding: 6px 11px;
-    border: 1px solid var(--border-color);
-    vertical-align: top;
-  }
-
-  table.wikitable tr:nth-child(even) {
-    background-color: #fafbfc;
-  }
-
-  table.wikitable tr:hover {
-    background-color: #f0f7ff;
-  }
-
-  /* CALLOUT BOXES */
-  .callout-box {
-    background-color: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-left: 5px solid var(--brand-blue);
-    border-radius: 4px;
-    padding: 13px 17px;
-    margin: 1.3em 0;
-    font-size: 94%;
-  }
-
-  .forensic-box {
-    background-color: #fffdfa;
-    border: 1px solid #fed7aa;
-    border-left: 5px solid var(--brand-amber);
-    border-radius: 4px;
-    padding: 13px 17px;
-    margin: 1.3em 0;
-    font-size: 94%;
-  }
-
-  .fatal-box {
-    background-color: #fffafa;
-    border: 1px solid #fecaca;
-    border-left: 5px solid var(--brand-red);
-    border-radius: 4px;
-    padding: 13px 17px;
-    margin: 1.3em 0;
-    font-size: 94%;
-  }
-
-  /* REFLIST */
-  .reflist {
-    font-size: 84%;
-    column-count: 2;
-    -webkit-column-count: 2;
-    list-style-type: decimal;
-    padding-left: 22px;
-    line-height: 1.5;
-  }
-
-  .reflist li {
-    margin-bottom: 7px;
-    word-break: break-word;
-  }
-
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  .mono { font-family: var(--font-mono); }
-  .badge-pass { color: var(--brand-green); font-weight: 700; }
-  .badge-watch { color: var(--brand-amber); font-weight: 700; }
-  .badge-fail { color: var(--brand-red); font-weight: 700; }
-</style>
-
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- TOP NAVIGATION -->
-<!-- TITLE -->
-<h1 class="firstHeading">Kalpataru Projects International Limited (NSE: KPIL / BSE: 522287)</h1>
-<div class="siteSub">From Wikipedia, the institutional equity encyclopedia &bull; Underwriting Dossier &bull; Core Alpha Bucket</div>
-
-<!-- EXECUTIVE CAPITAL DECISION BANNER -->
-<div class="decision-banner">
-  <div class="decision-header">
-    <div class="decision-title">
-      <span>Institutional Capital Allocation Verdict</span>
-    </div>
-    <span class="decision-badge">🔵 ACCUMULATE ON DIP &bull; NEAR 50-DMA SUPPORT</span>
-  </div>
-  <div class="decision-grid">
-    <div class="decision-card">
-      <div class="decision-card-label">Recommended Action</div>
-      <div class="decision-card-value" style="color: #1d4ed8;">ACCUMULATE ON DIP</div>
-      <div class="decision-card-sub">Core Alpha Challenger &bull; 0.58x ATR to 50-DMA</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Optimal Accumulation Band</div>
-      <div class="decision-card-value">₹1,360.00 – ₹1,395.00</div>
-      <div class="decision-card-sub">Resting above rising 50-DMA shelf (₹1,368.22)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Hard Invalidation Stop</div>
-      <div class="decision-card-value" style="color: #b91c1c;">₹1,270.00</div>
-      <div class="decision-card-sub">-8.71% downside risk from CMP ₹1,391.20</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">12–18M Base Target &amp; Asymmetry</div>
-      <div class="decision-card-value" style="color: #15803d;">₹1,750.00 (+25.8%)</div>
-      <div class="decision-card-sub">Reward/Risk Ratio: <strong>3.00 : 1</strong> (Bull: ₹1,950, 4.61:1)</div>
-    </div>
-  </div>
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-10-13T11:29:06.493706-07:00">13 Oct 2026, 11:29 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-13</p></header><dl class="key-figures">
+<div><dt>Action verdict (13 Oct 2026)</dt><dd><span class="verdict verdict-exit">REJECTED</span></dd></div>
+<div><dt>Momentum gate (13 Oct 2026)</dt><dd>NO_MOMENTUM, so no allocation</dd></div>
+<div><dt>Close, NSE (ledger, 13 Oct 2026)</dt><dd>₹1,417.50, which is 3.51 normal daily moves above the 63-day low of ₹1,258.20</dd></div>
+<div><dt>Return on capital employed (year to 31 Mar 2026)</dt><dd>18% <sup><a href="#cite_note-1">[1]</a></sup></dd></div>
+<div><dt>Three-year cash conversion, CFO to PAT (FY24 to FY26)</dt><dd>1.56, computed from the Screener tables <sup><a href="#cite_note-1">[1]</a></sup></dd></div>
+<div><dt>Order book (30 Jun 2026)</dt><dd>₹66,607 crore <sup><a href="#cite_note-4">[4]</a></sup></dd></div>
+</dl>
+<p>Publication status: PUBLISHED_WITH_GATE_EXCEPTIONS. Reviewer round 2 approved after one round of corrections.</p>
+<div class="table-wrap"><table class="wikitable infobox">
+<tr><th>Company</th><td>Kalpataru Projects International Limited. NSE ticker KPIL, BSE code 522287. The watchlist key is <b>KALPATPOWR</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AKALPATPOWR" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/KALPATPOWR/" style="color:var(--link);">Screener</a></span>, which is the ledger key used for every price and technical figure in this dossier. <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><th>What it is</th><td>A listed engineering, procurement and construction (EPC) contractor. It builds power transmission and distribution lines, buildings and factories, oil and gas pipelines, railways, water schemes and urban mobility projects, in more than 70 countries. <sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+<tr><th>Market capitalisation</th><td>₹24,210 crore (13 Oct 2026) <sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><th>Close (ledger)</th><td>₹1,417.50 (13 Oct 2026)</td></tr>
+<tr><th>52-week range (ledger, close basis)</th><td>₹1,007.10 to ₹1,490.00 (13 Oct 2026)</td></tr>
+<tr><th>Weinstein stage (ledger)</th><td><dfn>Stage 2</dfn> is the markup phase, in which the price is above rising averages (ledger, 13 Oct 2026)</td></tr>
+<tr><th>Momentum gate (code)</th><td>NO_MOMENTUM: Test A and Test B both fail (13 Oct 2026)</td></tr>
+<tr><th>Gate status</th><td>FAIL_TECHNICAL_NO_MOMENTUM;FAIL_<dfn>ASYMMETRY</dfn>. Asymmetry means the upside-to-downside floor failed, here because no checkable target was found.</td></tr>
+<tr><th>Strategy buckets tested</th><td>CORE_ALPHA and TACTICAL_MOMENTUM. Neither is allocated.</td></tr>
+<tr><th>Action verdict</th><td><span class="verdict verdict-exit">REJECTED</span></td></tr>
+<tr><th>As of</th><td>2026-10-13 (price and technicals). Financial items carry their own periods, shown in each chapter.</td></tr>
+</table></div>
+<p>The box above gives the company, the ledger close and stage for 13 October 2026, and the verdict that follows from them. Each line is explained in the chapters below, and the key figures show the numbers that decide the outcome.</p>
+<section class="primer" id="primer">
+<h2>Start here</h2>
+<p>This dossier asks one practical question: should a portfolio buy Kalpataru Projects International as a new holding on 13 October 2026, and if so, at what price and under which rule? The answer comes from a fixed framework, not from a forecast of the share price. Read this page first. It explains the method once, so the later chapters can use its words without repeating the definitions.</p>
+</section>
+<section class="chapter" id="reading-framework">
+<h2>Reading the framework</h2>
+<p>The framework has three layers, and a company must clear each one in order. Layer 1 is a set of hard floors that are either passed or failed. It covers the financial health of the business, the technical condition of the share price, and whether the expected upside is large enough compared with the risk of the stop-loss. A failure at Layer 1 ends the review. The rules then say REJECTED, and the later layers are not scored. Layer 2 scores three to five operating measures that matter for this kind of business, using PASS, WATCH or FAIL. Layer 3 is the timing gate. It asks how far the price sits above the nearest support level, measured in <dfn>ATR</dfn> (average true range), and maps that distance to an action. A company can be a sound business and still fail the framework, because the framework judges the entry as well as the company.</p>
+<p>The momentum gate is the technical test that matters most here. The code runs it on the frozen price file for the session. It has two routes. Test A asks whether the stock is already in a healthy uptrend that is not stretched. Test B asks whether the stock is entering an uptrend, with a <dfn>base</dfn> <dfn>pivot</dfn> that is close, and volume that dries up in the base and then expands on the <dfn>breakout</dfn>. A share must pass one of the two routes. If it fails both, it receives no allocation, however good the business is. The scoring file marks these thresholds as provisional until they are reviewed against live data, and this dossier reports them as the file sets them.</p>
+<p>ATR stands for average true range. It is the average size of a normal daily price move over the last 14 sessions. Here it is ₹45.36. Support is the price level where buyers have stepped in before. This dossier uses the 63-session base low from the ledger, which is ₹1,258.20. The distance from the price to that support, divided by the ATR, tells us how many normal daily moves the price sits above it. The distance here is 3.51 ATR. The rules put that distance into bands. Within 0.5 ATR is the full-size band. Within 1.0 ATR is the standard band. Within 1.2 ATR is a limit-order-only band at reduced size. Beyond 1.2 ATR is the no-buy band, where the rules say to wait for a pullback, a <dfn>retest</dfn>, or a new base.</p>
+<p>The verdict labels follow from the layers. REJECTED means a Layer 1 floor failed, so the company is not a candidate today. WAIT_FOR_SUPPORT means the business passed and the price is extended, so the rule is to wait for the price to come back to support rather than chase it. ACCUMULATE_ON_DIP means the price is near support and the business passed, so the rule allows a standard-size purchase on a small pullback. IMMEDIATE_BUY means the price is at support and the asymmetry is high, which allows full size. Each verdict names the rule and the number that produced it, and each one states the level that would change it. This dossier follows that practice throughout.</p>
+<p>Two rules recur in the chapters. The first is the asymmetry floor. The upside-to-downside ratio is the distance from the price to a target, divided by the distance from the price to the stop. For the Core bucket the floor is 3.0. For the Tactical bucket it is 3.5. The target has to be anchored to something that can be checked, such as forward earnings multiplied by a three-year median <dfn>price-to-earnings</dfn> ratio, or a <dfn>measured move</dfn> from a technical base. A target that cannot be checked counts as a failure, labelled FAIL_ASYMMETRY. The second rule is the citation rule. Every figure carries its source and its as-of date, and any value that could not be verified is written as N/A with a reason, rather than estimated.</p>
+</section>
+<div class="lede">
+<p><strong>Status: REJECTED.</strong> Kalpataru Projects International is a sound business on paper, but its share price is not in a position the framework allows us to buy. The stock closed at ₹1,417.50 on 13 October 2026. That is 2.4 percent above its 50-day average and 12.8 percent above its 200-day average, and both averages are rising.</p>
+<p>The problem is distance. The price sits 3.51 normal daily moves (ATR) above its 63-day base low of ₹1,258.20, and the rule allows any buy only within 1.2 ATR, and a standard-size buy only within 1.0 ATR. The momentum gate, which the code runs on the same frozen prices, fails both of its routes for that reason. Failing both means no allocation, so the gate status is FAIL_TECHNICAL_NO_MOMENTUM.</p>
+<p>The financial floors all pass. Return on capital employed was 18 percent for the year to March 2026, against a 15 percent floor. Borrowings were 0.46 times equity, against a 0.70 limit. Three years of operating cash were 1.56 times reported profit, against a 0.70 floor.</p>
+<p>A second failure sits alongside the first. No verifiable forward earnings figure or three-year median multiple could be found, so the upside-to-downside floor cannot be tested, and the gate status also records FAIL_ASYMMETRY. That does not change the verdict, but even at a better price the case would not yet be complete.</p>
+<p>Three risks sit behind the verdict. Promoters have pledged 24.55 percent of their holdings as loan security, as reported by Trendlyne (the base of that percentage is unclear, and the Flaw three caveat in the red-team chapter explains it), the trailing profit is lifted by an unusual March 2026 quarter, and the <dfn>operating margin</dfn> has stayed near 9 percent against 13 percent in FY18 and FY19. The operating margin is the share of each sales rupee left after operating costs. What would change the verdict is a close at or below ₹1,312.63, which is 1.2 ATR above the base low, followed by a rerun of the momentum gate and a verifiable target. The chapters explain each number and the rule it feeds.</p>
 </div>
-
-<div style="clear:both;"></div>
-
-<!-- FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>Kalpataru Projects International Limited</caption>
-  <tr>
-    <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.35em; font-weight: 700; color: #0f172a; font-family: var(--font-mono);">NSE: KPIL</div>
-      <div style="font-size: 0.85em; color: #64748b;">BSE: 522287 &bull; ISIN: INE220B01022 &bull; Formerly KALPATPOWR</div>
-      <div style="font-size: 0.82em; color: #1e40af; font-weight: 600; margin-top: 3px;">Power T&amp;D, Buildings, Civil Infra, Water &amp; Pipelines EPC</div>
-    </td>
-  </tr>
-  <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
-  <tr><th>Company type</th><td>Public (NSE / BSE Listed)</td></tr>
-  <tr><th>Industry</th><td>Infrastructure EPC &amp; Capital Goods</td></tr>
-  <tr><th>Sub-sector</th><td>Power Transmission &amp; Civil EPC</td></tr>
-  <tr><th>Founded</th><td>1981 (as Kalpataru Power Transmission)</td></tr>
-  <tr><th>Headquarters</th><td>Santacruz East, Mumbai, Maharashtra, India</td></tr>
-  <tr><th>Key executives</th><td>
-    Mofatraj P. Munot (Promoter &amp; Non-Exec Chairman)<br>
-    Parag M. Munot (Promoter Director)<br>
-    Manish Mohnot (Managing Director &amp; CEO)<br>
-    Ram Patodia (Chief Financial Officer)
-  </td></tr>
-  <tr><th>Fabrication capacity</th><td>&gt;240,000 MT/year (Gandhinagar &amp; Raipur)</td></tr>
-  <tr><th>Global footprint</th><td>70+ nations (Middle East, Europe, LatAm, Africa)</td></tr>
-  
-  <tr><th colspan="2" class="infobox-header">Latest Audited Financials (TTM / FY26)</th></tr>
-  <tr><th>Market Capitalization</th><td>₹23,758 Cr (Mid/Large Cap EPC Leader)</td></tr>
-  <tr><th>Revenue (TTM / FY26)</th><td>₹27,380 Cr / ₹27,143 Cr</td></tr>
-  <tr><th>Operating Margin (OPM)</th><td>~9.0% (EBITDA ₹2,443 Cr)</td></tr>
-  <tr><th>Net Profit (PAT TTM / FY26)</th><td>₹1,129 Cr / ₹1,031 Cr</td></tr>
-  <tr><th>ROCE / ROE</th><td><strong>18.3%</strong> / 13.7%</td></tr>
-  <tr><th>Total Borrowings</th><td>₹3,543 Cr (Net Worth ₹7,776 Cr)</td></tr>
-  <tr><th>Debt-to-Equity</th><td><strong>0.46x</strong> (&lt;0.70x Gating Floor Pass)</td></tr>
-  <tr><th>3-Yr CFO / PAT Ratio</th><td><strong>1.56x</strong> (₹3,291 Cr CFO / ₹2,114 Cr PAT)</td></tr>
-  <tr><th>Order Backlog</th><td>&gt;₹58,000+ Cr (~2.14x Book-to-Bill)</td></tr>
-  <tr><th>Trailing / Fwd P/E</th><td>21.4x / ~15.2x</td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
-  <tr><th>Strategy Bucket</th><td>CORE_ALPHA</td></tr>
-  <tr><th>Action Verdict</th><td><strong>ACCUMULATE_ON_DIP</strong></td></tr>
-  <tr><th>Current Market Price (CMP)</th><td><span class="mono">₹1,391.20</span></td></tr>
-  <tr><th>52-Week High / Low</th><td><span class="mono">₹1,468.00 / ₹999.10</span></td></tr>
-  <tr><th>Optimal Accumulation Band</th><td><span class="mono">₹1,360.00 – ₹1,395.00</span></td></tr>
-  <tr><th>Hard Invalidation Stop</th><td><span class="mono">₹1,270.00</span> (-8.71%)</td></tr>
-  <tr><th>12–18M Base Target</th><td><span class="mono">₹1,750.00</span> (+25.79%) [20x FY27E EPS]</td></tr>
-  <tr><th>Blue-Sky Bull Target</th><td><span class="mono">₹1,950.00</span> (+40.17%) [22x FY27E EPS]</td></tr>
-  <tr><th>Reward/Risk Asymmetry</th><td><strong>3.00 : 1</strong> (Bull: 4.61:1)</td></tr>
-  <tr><th>Weinstein Stage</th><td>Stage 2 Markup</td></tr>
-  <tr><th>Key Moving Averages</th><td>20D: ₹1,411.78 &bull; 50D: ₹1,368.22 &bull; 200D: ₹1,242.21</td></tr>
-  <tr><th>14-Day RSI / ATR</th><td>RSI: 43.70 &bull; ATR: ₹39.25</td></tr>
-  <tr><th>Support Distance</th><td>+0.58x ATR to 50-DMA (NEAR_SUPPORT)</td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#lead"><span class="tocnumber">0</span> Executive Summary &amp; Investment Pitch</a></li>
-    <li><a href="#history"><span class="tocnumber">1</span> History, Corporate Evolution &amp; Mega-Merger</a></li>
-    <li><a href="#operations"><span class="tocnumber">2</span> Operations, Engineering Architecture &amp; Revenue Engines</a>
-      <ul>
-        <li><a href="#tnd-division"><span class="tocnumber">2.1</span> Power Transmission &amp; Distribution (T&amp;D)</a></li>
-        <li><a href="#civil-infra"><span class="tocnumber">2.2</span> Buildings &amp; Factories (Civil Infrastructure)</a></li>
-        <li><a href="#water-railways-oil"><span class="tocnumber">2.3</span> Water Supply, Railways &amp; Oil/Gas Pipelines</a></li>
-        <li><a href="#manufacturing-unit-econ"><span class="tocnumber">2.4</span> Fabrication Backbone &amp; Unit Economics</a></li>
-      </ul>
-    </li>
-    <li><a href="#sector-dynamics"><span class="tocnumber">3</span> Sector Dynamics: The Global Grid Renewal Supercycle</a></li>
-    <li><a href="#financial-audit"><span class="tocnumber">4</span> Financial Performance &amp; Forensic Accounting Audit</a>
-      <ul>
-        <li><a href="#multi-year-pnl"><span class="tocnumber">4.1</span> Consolidated Financial Track Record</a></li>
-        <li><a href="#cashflow-audit"><span class="tocnumber">4.2</span> Cash Flow Reconciliation &amp; Working Capital</a></li>
-        <li><a href="#balance-sheet"><span class="tocnumber">4.3</span> Balance Sheet Deleveraging &amp; Capital Structure</a></li>
-        <li><a href="#forensic-tests"><span class="tocnumber">4.4</span> Forensic Accounting &amp; Governance Checks</a></li>
-      </ul>
-    </li>
-    <li><a href="#underwriting-framework"><span class="tocnumber">5</span> The 3-Layer Underwriting Framework &amp; Scorecard</a>
-      <ul>
-        <li><a href="#layer1"><span class="tocnumber">5.1</span> Layer 1: Binary Hard Gating Floors</a></li>
-        <li><a href="#layer2"><span class="tocnumber">5.2</span> Layer 2: Company-Specific Operational KPIs</a></li>
-        <li><a href="#layer3"><span class="tocnumber">5.3</span> Layer 3: Support-Aware Entry Posture</a></li>
-      </ul>
-    </li>
-    <li><a href="#peer-matrix"><span class="tocnumber">6</span> Industry Landscape, Moat Analysis &amp; Peer Matrix</a></li>
-    <li><a href="#technical-trade"><span class="tocnumber">7</span> Technical Posture, Moving Averages &amp; Trade Architecture</a></li>
-    <li><a href="#fatal-flaws"><span class="tocnumber">8</span> Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</a></li>
-    <li><a href="#capital-allocation"><span class="tocnumber">9</span> Portfolio Allocation &amp; Capital Reallocation Blueprint</a></li>
-    <li><a href="#thesis-trackers"><span class="tocnumber">10</span> Key Quarterly Monitoring Indicators (Thesis Trackers)</a></li>
-    <li><a href="#references"><span class="tocnumber">11</span> References, Regulatory Filings &amp; Statutory Disclosures</a></li>
-  </ul>
-</div>
-
-<!-- SECTION 0: EXECUTIVE SUMMARY -->
-<h2 id="lead">Executive Summary &amp; Investment Pitch</h2>
-<p>
-  <strong>Kalpataru Projects International Limited</strong> (NSE: <a href="https://www.screener.in/company/KPIL/consolidated/" target="_blank">KPIL</a> / BSE: 522287, formerly Kalpataru Power Transmission Limited &bull; KALPATPOWR) represents India's preeminent diversified engineering, procurement, and construction (EPC) conglomerate. Over four decades of operational scale, KPIL has transitioned from a specialized transmission tower fabricator into a multi-billion-dollar global infrastructure prime contractor<sup><a href="#cite_note-1">[1]</a></sup>. Following the transformative statutory amalgamation with civil engineering titan JMC Projects (India) Limited in 2023, the consolidated entity controls an enterprise footprint operating across five specialized infrastructure verticals: Power Transmission and Distribution (T&amp;D), Civil Buildings and Factories (B&amp;F), Water Supply and Irrigation, Railways Electrification and Signaling, and Cross-Country Oil and Gas Pipelines<sup><a href="#cite_note-2">[2]</a></sup>.
-</p>
-<p>
-  The investment thesis for KPIL is anchored by a structural, multi-decadal global power transmission supercycle. As worldwide energy architectures transition toward decentralized renewable generation, electric utilities are confronted with unprecedented transmission grid bottlenecks. KPIL commands a record consolidated order backlog exceeding ₹58,000 Crore (~2.14x book-to-bill against FY26 revenue of ₹27,143 Crore), driven by massive HVDC and 400kV–765kV grid interconnections across Saudi Arabia (Saudi Electricity Company), the wider GCC, Europe, and India's 500 GW renewable evacuation master plan<sup><a href="#cite_note-3">[3]</a>, <a href="#cite_note-4">[4]</a></sup>. Crucially, the company has completed the digestion of legacy, fixed-price international contracts that pressured margins during the 2021–2023 inflationary spike, allowing consolidated operating profit margins (OPM) to stabilize at 9.0% alongside expanding return on capital employed (ROCE) of 18.3%<sup><a href="#cite_note-5">[5]</a>, <a href="#cite_note-34">[34]</a></sup>.
-</p>
-<p>
-  From an underwriting and capital allocation perspective, KPIL passes all Layer 1 Binary Hard Gating Floors with a spotless compliance profile: ROCE of 18.3% (comfortably clearing the &ge;15.0% hurdle), Debt-to-Equity of 0.46x (well below the &lt;0.70x maximum ceiling, following systematic debt retirement and road BOOT asset monetizations), and an exceptional 3-year cumulative Cash Flow from Operations to Net Profit (CFO/PAT) conversion ratio of 1.56x (₹3,291 Cr CFO versus ₹2,114 Cr PAT)<sup><a href="#cite_note-6">[6]</a>, <a href="#cite_note-7">[7]</a></sup>. At the Current Market Price (CMP) of ₹1,391.20, the stock has undergone a constructive, low-volume consolidation pullback, positioning price just 0.58x ATR above its rising 50-day moving average (₹1,368.22). Anchoring to a conservative 12–18 month base valuation target of ₹1,750.00 (priced at 20.0x FY27E EPS of ₹87.50) against a structural stop loss at ₹1,270.00 yields an asymmetric reward-to-risk ratio of <strong>3.00:1</strong> (expanding to 4.61:1 on a bull-case target of ₹1,950.00). The institutional desk renders an unambiguous <strong>ACCUMULATE ON DIP</strong> verdict for Core Alpha portfolio inclusion.
-</p>
-
-<!-- SECTION 1: HISTORY & CORPORATE EVOLUTION -->
-<h2 id="history">1. History, Corporate Evolution &amp; Mega-Merger</h2>
-<p>
-  The corporate lineage of Kalpataru Projects International Limited dates back to 1981, when industrialist Mofatraj P. Munot established HT Power Transmission Private Limited in Gujarat, seeking to capitalize on India's initial expansion of state-level high-voltage transmission networks<sup><a href="#cite_note-8">[8]</a></sup>. The company was subsequently incorporated as Kalpataru Power Transmission Limited (KPTL) in 1988 and completed its public listing on the Bombay Stock Exchange in 1995. During the late 1990s and early 2000s, KPTL distinguished itself through backward integration into state-of-the-art transmission tower fabrication and computerized structural load testing, commissioning mega-scale fabrication plants in Gandhinagar, Gujarat, and Raipur, Chhattisgarh<sup><a href="#cite_note-9">[9]</a></sup>.
-</p>
-<p>
-  Recognizing the cyclicality of domestic utility procurement, KPTL initiated an aggressive internationalization strategy in the early 2000s, securing high-voltage transmission contracts across Africa, the Middle East, and Southeast Asia. To cement its presence in developed Western grid jurisdictions, KPTL executed two strategic cross-border acquisitions: in 2019, it acquired an 85% controlling interest in <em>Linjemontage i Gr&auml;storp AB</em>, a Swedish transmission and substation EPC specialist, providing immediate access to Nordic and Northern European grid modernization programs<sup><a href="#cite_note-10">[10]</a></sup>; and in 2021, it acquired <em>Fasttel Engenharia Ltda</em> in Brazil, securing an established footprint in Latin American 500kV substations and transmission corridors<sup><a href="#cite_note-11">[11]</a></sup>.
-</p>
-<p>
-  The defining strategic milestone in the conglomerate's history occurred in February 2022, when the Board of Directors approved a Composite Scheme of Amalgamation between Kalpataru Power Transmission Limited and its publicly traded subsidiary, JMC Projects (India) Limited. JMC Projects, originally acquired by KPTL in 2005, had emerged as an engineering powerhouse in civil buildings, industrial factories, urban transport flyovers, and bulk water supply systems. Sanctioned by the National Company Law Tribunal (NCLT) Ahmedabad Bench, the merger took legal effect in January 2023 with an appointed date of April 1, 2022<sup><a href="#cite_note-12">[12]</a></sup>. In May 2023, the combined entity was officially rechristened as <strong>Kalpataru Projects International Limited (KPIL)</strong>.
-</p>
-
-<div class="callout-box">
-  <strong>Strategic Rationale of the JMC Amalgamation:</strong> The unification eliminated inter-company holding discounts, unified balance sheet net worth to exceed ₹7,700 Crore, and created an infrastructure titan eligible to bid independently for single-ticket mega-EPC contracts exceeding ₹3,000–5,000 Crore across domestic and multilateral funding agencies. Furthermore, KPIL aggressively executed a capital-recycling program by monetizing its capital-intensive road Build-Operate-Transfer (BOOT) concessions—including the complete divestment of the Vindhyachal Expressway project and restructuring of Wainganga Expressway—thereby shedding non-core debt and converting legacy equity lockups into liquid capital<sup><a href="#cite_note-13">[13]</a></sup>.
-</div>
-
-<!-- SECTION 2: OPERATIONS & REVENUE ENGINES -->
-<h2 id="operations">2. Operations, Engineering Architecture &amp; Revenue Engines</h2>
-<p>
-  KPIL operates an integrated, multi-disciplinary engineering model spanning 70+ countries across five primary operational segments. Consolidated revenue for FY26 reached ₹27,143 Crore (TTM: ₹27,380 Crore), representing an 18% 3-year compounded sales growth rate.
-</p>
-
-<table class="wikitable">
-  <caption>Table 2.1: KPIL Segmental Operational Breakdown &amp; Revenue Mix (FY26 / TTM)</caption>
-  <thead>
-    <tr>
-      <th>Operating Vertical</th>
-      <th>Revenue Contribution (%)</th>
-      <th>FY26 Revenue (₹ Cr)</th>
-      <th>Key Scope &amp; Engineering Disciplines</th>
-      <th>Representative Clients &amp; Geographies</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Power Transmission &amp; Distribution (T&amp;D)</strong></td>
-      <td>48%</td>
-      <td>₹13,028 Cr</td>
-      <td>Design, testing, fabrication, and EPC of 132kV to 800kV HVDC lines, gas-insulated substations (GIS), air-insulated substations (AIS), underground cabling.</td>
-      <td>PGCIL, Adani Energy Solutions, Saudi Electricity Co. (SEC), Statnett (Norway), TenneT, Enel (LatAm).</td>
-    </tr>
-    <tr>
-      <td><strong>Buildings &amp; Factories (Civil B&amp;F)</strong></td>
-      <td>26%</td>
-      <td>₹7,057 Cr</td>
-      <td>Turnkey structural construction of commercial tech parks, hyperscale data centers, institutional campuses, multi-specialty hospitals, airports, metro stations.</td>
-      <td>Prestige Estates, DLF, Godrej, Central Vista Authority, Adani Airports, Nxtra Data Centers.</td>
-    </tr>
-    <tr>
-      <td><strong>Water Supply &amp; Irrigation</strong></td>
-      <td>14%</td>
-      <td>₹3,800 Cr</td>
-      <td>Bulk water transmission pipelines, raw water intake structures, water treatment plants (WTPs), rural distribution networks under Jal Jeevan Mission, lift irrigation.</td>
-      <td>State Water &amp; Sanitation Missions (UP, MP, Gujarat, Odisha), Ministry of Jal Shakti.</td>
-    </tr>
-    <tr>
-      <td><strong>Railways Infrastructure</strong></td>
-      <td>7%</td>
-      <td>₹1,900 Cr</td>
-      <td>Conventional and high-speed overhead electrification (25 kV OHE), signaling &amp; telecommunication (S&amp;T), electronic interlocking, track linking, traction substations.</td>
-      <td>Indian Railways, Dedicated Freight Corridor Corporation of India (DFCCIL), RVNL, IRCON.</td>
-    </tr>
-    <tr>
-      <td><strong>Oil &amp; Gas Pipelines</strong></td>
-      <td>5%</td>
-      <td>₹1,358 Cr</td>
-      <td>Cross-country crude oil, natural gas, and refined product pipelines, horizontal directional drilling (HDD) river crossings, city gas distribution (CGD), terminal stations.</td>
-      <td>GAIL (India), Indian Oil (IOCL), Bharat Petroleum (BPCL), HPCL, Kuwait Oil Company (KOC).</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="tnd-division">2.1 Power Transmission &amp; Distribution (T&amp;D): Global Franchise</h3>
-<p>
-  The Power T&amp;D vertical constitutes the technological core and historic foundation of KPIL, contributing 48% of consolidated turnover. The company executes comprehensive transmission solutions from 132 kV up to 800 kV High Voltage Direct Current (HVDC) systems across Asia, the Middle East, Africa, Europe, and the Americas<sup><a href="#cite_note-14">[14]</a></sup>. In the domestic Indian market, KPIL is an established tier-1 vendor to Power Grid Corporation of India Limited (POWERGRID) and major private transmission licensees (Adani Energy Solutions, Sterlite Power). The division is currently executing critical components of the Interstate Transmission System (ISTS) designed to evacuate over 500 GW of renewable power from solar and wind parks located in Bhadla (Rajasthan), Khavda (Gujarat), and Leh-Ladakh<sup><a href="#cite_note-15">[15]</a></sup>.
-</p>
-<p>
-  Internationally, KPIL has emerged as a premier contractor for the Saudi Electricity Company (SEC) in Saudi Arabia. With the Kingdom executing its Vision 2030 energy transformation—interconnecting giga-projects like NEOM, the Red Sea Development, and industrial hubs—KPIL has secured multi-billion-riyal transmission lines and 380kV/500kV substation orders<sup><a href="#cite_note-16">[16]</a></sup>. In Europe, Linjemontage provides a local operational base across Sweden, Norway, and Finland, deploying specialized winter-construction engineering for regional transmission system operators (TSOs) replacing aging 400kV lines and integrating offshore wind capacity.
-</p>
-
-<h3 id="civil-infra">2.2 Buildings &amp; Factories (Civil Infrastructure)</h3>
-<p>
-  Inherited and scaled from the JMC Projects merger, the Civil B&amp;F division generates 26% of revenue. The division specializes in high-complexity structural engineering, including composite steel structures, seismic-resistant designs, and LEED-certified green building construction. The vertical has deliberately pivoted away from low-margin residential developments toward high-margin institutional projects: commercial IT/ITES business parks, pharmaceutical manufacturing complexes, modern corporate headquarters, hyperscale data centers requiring heavy MEP (mechanical, electrical, plumbing) integration, and passenger terminal buildings for regional airport expansions<sup><a href="#cite_note-17">[17]</a></sup>.
-</p>
-
-<h3 id="water-railways-oil">2.3 Water Supply, Railways &amp; Oil/Gas Pipelines</h3>
-<p>
-  <strong>Water Infrastructure:</strong> Generating 14% of revenue, this division has been a prime beneficiary of India's National Jal Jeevan Mission (Har Ghar Jal) alongside state-level lift irrigation and river-linking projects. KPIL undertakes large-diameter mild steel (MS), ductile iron (DI), and high-density polyethylene (HDPE) pipeline laying, intake wells, water treatment facilities, and overhead reservoir construction across Uttar Pradesh, Madhya Pradesh, and Gujarat<sup><a href="#cite_note-18">[18]</a></sup>.
-</p>
-<p>
-  <strong>Railways:</strong> Accounting for 7% of revenues, the railway business provides turnkey electrification, track doubling, signaling, and telecom networks. KPIL has executed critical packages on the Western and Eastern Dedicated Freight Corridors (DFCCIL) and is actively participating in Indian Railways' Mission 100% Electrification and Kavach (Automatic Train Protection) signaling rollouts<sup><a href="#cite_note-19">[19]</a></sup>.
-</p>
-<p>
-  <strong>Oil &amp; Gas Pipelines:</strong> Representing 5% of turnover, KPIL is an accredited EPC provider for cross-country hydrocarbon pipeline laying under high pressure, specialized HDD trenchless river and highway crossings, and compressor/metering station fabrication for state oil marketing enterprises<sup><a href="#cite_note-20">[20]</a></sup>.
-</p>
-
-<h3 id="manufacturing-unit-econ">2.4 Fabrication Backbone &amp; Unit Economics</h3>
-<p>
-  Unlike asset-light EPC brokers that outsource tower fabrication, KPIL maintains two world-class manufacturing plants in Gandhinagar and Raipur with an aggregate fabrication and hot-dip galvanizing capacity exceeding 240,000 metric tonnes per annum (MTPA)<sup><a href="#cite_note-21">[21]</a></sup>. The facilities feature computer-numerically-controlled (CNC) cutting, stamping, and drilling lines, automated galvanizing baths, and an advanced tower testing station capable of full-scale destructive and non-destructive load testing on guyed and self-supporting transmission pylons up to 1,200 kV<sup><a href="#cite_note-22">[22]</a></sup>.
-</p>
-<p>
-  <strong>Contract Economics &amp; Margin Insulation:</strong> A critical forensic consideration in EPC underwriting is raw material volatility. Approximately 80–85% of KPIL's consolidated order backlog is protected by formal Price Variation Clauses (PVC) linked to wholesale benchmark indices (Central Electricity Authority, London Metal Exchange aluminum/copper, domestic primary steel)<sup><a href="#cite_note-33">[33]</a></sup>. For the remaining 15–20% of fixed-price contracts—predominantly international utility tenders—KPIL utilizes back-to-back supplier procurement lock-ins and commodity hedge derivatives at the point of contract award, substantially insulating the consolidated operating margin at the target 9.0% threshold<sup><a href="#cite_note-23">[23]</a></sup>.
-</p>
-
-<!-- SECTION 3: SECTOR DYNAMICS -->
-<h2 id="sector-dynamics">3. Sector Dynamics: The Global Grid Renewal Supercycle</h2>
-<p>
-  Global electrical infrastructure is experiencing an unprecedented structural renaissance, termed the "Grid Renewal &amp; Decarbonization Supercycle." The International Energy Agency (IEA) estimates that to achieve announced national net-zero pledges, annual worldwide grid investments must double from ~$300 billion to over $600 billion per year through 2030, requiring the construction or refurbishment of more than 80 million kilometers of transmission and distribution lines<sup><a href="#cite_note-24">[24]</a></sup>.
-</p>
-<p>
-  Three systemic secular tailwinds drive this multi-year demand envelope:
-</p>
-<ol>
-  <li><strong>Renewable Power Evacuation:</strong> Renewable energy generation (utility-scale solar and wind) is geographically disparate—situated in deserts, arid plains, and coastal zones far removed from metropolitan load centers. In India, the Central Electricity Authority's (CEA) <em>National Electricity Plan (Transmission)</em> and NITI Aayog infrastructure roadmaps detail a mandatory capital outlay exceeding ₹9.15 lakh crore through 2032 to build high-capacity inter-state HVDC transmission corridors for 500 GW of clean energy<sup><a href="#cite_note-25">[25]</a>, <a href="#cite_note-35">[35]</a></sup>.</li>
-  <li><strong>Saudi Arabia &amp; GCC Mega-Interconnections:</strong> The Saudi Electricity Company (SEC) and regional GCC utilities are investing aggressively to expand 380kV–500kV networks to support industrial decarbonization, giga-city infrastructure, and cross-border power sharing, driving record international order inflows for established contractors.</li>
-  <li><strong>Artificial Intelligence &amp; Data Center Load Growth:</strong> The exponential proliferation of artificial intelligence computing clusters and hyperscale data centers is generating localized power demand shocks, forcing transmission utilities across North America and Europe to replace aging 40-year-old grid circuits with high-temperature low-sag (HTLS) conductors and high-capacity substations.</li>
-</ol>
-
-<!-- SECTION 4: FINANCIAL PERFORMANCE & FORENSIC AUDIT -->
-<h2 id="financial-audit">4. Financial Performance &amp; Forensic Accounting Audit</h2>
-<p>
-  A rigorous multi-year financial audit illustrates KPIL's post-merger operational scaling, working capital compression, and balance sheet deleveraging.
-</p>
-
-<h3 id="multi-year-pnl">4.1 Consolidated Financial Track Record</h3>
-<table class="wikitable">
-  <caption>Table 4.1: Multi-Year Consolidated Financial Performance (₹ in Crore, unless specified)<sup><a href="#cite_note-26">[26]</a></sup></caption>
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>TTM</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Net Sales / Revenue</strong></td>
-      <td>₹12,410</td>
-      <td>₹14,337</td>
-      <td>₹16,361</td>
-      <td>₹19,626</td>
-      <td>₹27,143</td>
-      <td><strong>₹27,380</strong></td>
-    </tr>
-    <tr>
-      <td><em>YoY Growth (%)</em></td>
-      <td>+7.1%</td>
-      <td>+15.5%</td>
-      <td>+14.1%</td>
-      <td>+20.0%</td>
-      <td>+38.3%</td>
-      <td><em>+18.0% (3Y CAGR)</em></td>
-    </tr>
-    <tr>
-      <td><strong>Operating Profit (EBITDA)</strong></td>
-      <td>₹1,124</td>
-      <td>₹1,274</td>
-      <td>₹1,438</td>
-      <td>₹1,747</td>
-      <td>₹2,443</td>
-      <td><strong>₹2,464</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Operating Margin (OPM %)</strong></td>
-      <td>9.06%</td>
-      <td>8.89%</td>
-      <td>8.79%</td>
-      <td>8.90%</td>
-      <td>9.00%</td>
-      <td><strong>9.00%</strong></td>
-    </tr>
-    <tr>
-      <td>Other Income</td>
-      <td>₹128</td>
-      <td>₹142</td>
-      <td>₹165</td>
-      <td>₹188</td>
-      <td>₹220</td>
-      <td>₹225</td>
-    </tr>
-    <tr>
-      <td>Depreciation &amp; Amortization</td>
-      <td>₹295</td>
-      <td>₹342</td>
-      <td>₹398</td>
-      <td>₹445</td>
-      <td>₹512</td>
-      <td>₹520</td>
-    </tr>
-    <tr>
-      <td>Interest / Finance Costs</td>
-      <td>₹392</td>
-      <td>₹468</td>
-      <td>₹515</td>
-      <td>₹580</td>
-      <td>₹648</td>
-      <td>₹655</td>
-    </tr>
-    <tr>
-      <td>Profit Before Tax (PBT)</td>
-      <td>₹565</td>
-      <td>₹606</td>
-      <td>₹690</td>
-      <td>₹910</td>
-      <td>₹1,503</td>
-      <td>₹1,514</td>
-    </tr>
-    <tr>
-      <td>Tax Expense</td>
-      <td>₹189</td>
-      <td>₹171</td>
-      <td>₹174</td>
-      <td>₹343</td>
-      <td>₹472</td>
-      <td>₹385</td>
-    </tr>
-    <tr>
-      <td><strong>Net Profit (PAT)</strong></td>
-      <td>₹376</td>
-      <td>₹435</td>
-      <td>₹516</td>
-      <td>₹567</td>
-      <td>₹1,031</td>
-      <td><strong>₹1,129</strong></td>
-    </tr>
-    <tr>
-      <td><em>PAT Growth (%)</em></td>
-      <td>-18.4%</td>
-      <td>+15.7%</td>
-      <td>+18.6%</td>
-      <td>+9.9%</td>
-      <td>+81.8%</td>
-      <td><em>+36.0% (3Y CAGR)</em></td>
-    </tr>
-    <tr>
-      <td><strong>Diluted EPS (₹)</strong></td>
-      <td>₹25.10</td>
-      <td>₹29.10</td>
-      <td>₹34.50</td>
-      <td>₹37.90</td>
-      <td>₹63.50</td>
-      <td><strong>₹69.50</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="cashflow-audit">4.2 Cash Flow Reconciliation &amp; Working Capital</h3>
-<p>
-  In large-scale EPC operations, accounting earnings can frequently diverge from real cash flows due to milestone billing gaps, retention monies, and unbilled contract assets. KPIL's audited cash flow statements reveal exceptional cash generation quality.
-</p>
-
-<table class="wikitable">
-  <caption>Table 4.2: Audited Cash Flow Reconciliation &amp; Conversion Discipline (FY24–FY26)<sup><a href="#cite_note-27">[27]</a></sup></caption>
-  <thead>
-    <tr>
-      <th>Cash Flow Metric</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>3-Year Cumulative</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Consolidated Net Profit (PAT)</strong></td>
-      <td>₹516 Cr</td>
-      <td>₹567 Cr</td>
-      <td>₹1,031 Cr</td>
-      <td><strong>₹2,114 Cr</strong></td>
-    </tr>
-    <tr>
-      <td>Depreciation &amp; Non-Cash Adjustments</td>
-      <td>₹485 Cr</td>
-      <td>₹520 Cr</td>
-      <td>₹610 Cr</td>
-      <td>₹1,615 Cr</td>
-    </tr>
-    <tr>
-      <td>Working Capital Changes</td>
-      <td>-₹158 Cr</td>
-      <td>-₹173 Cr</td>
-      <td>-₹107 Cr</td>
-      <td>-₹438 Cr</td>
-    </tr>
-    <tr>
-      <td><strong>Cash Flow from Operations (CFO)</strong></td>
-      <td><strong>₹843 Cr</strong></td>
-      <td><strong>₹914 Cr</strong></td>
-      <td><strong>₹1,534 Cr</strong></td>
-      <td><strong>₹3,291 Cr</strong></td>
-    </tr>
-    <tr>
-      <td><strong>CFO / PAT Conversion Ratio</strong></td>
-      <td><strong>1.63x</strong></td>
-      <td><strong>1.61x</strong></td>
-      <td><strong>1.49x</strong></td>
-      <td><strong>1.56x</strong> (Pass &ge;0.70x)</td>
-    </tr>
-    <tr>
-      <td>Capital Expenditures (Capex)</td>
-      <td>-₹340 Cr</td>
-      <td>-₹385 Cr</td>
-      <td>-₹450 Cr</td>
-      <td>-₹1,175 Cr</td>
-    </tr>
-    <tr>
-      <td><strong>Free Cash Flow (FCF = CFO - Capex)</strong></td>
-      <td>₹503 Cr</td>
-      <td>₹529 Cr</td>
-      <td>₹1,084 Cr</td>
-      <td><strong>₹2,116 Cr</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="balance-sheet">4.3 Balance Sheet Deleveraging &amp; Capital Structure</h3>
-<table class="wikitable">
-  <caption>Table 4.3: Balance Sheet Strength &amp; Capital Return Trajectory</caption>
-  <thead>
-    <tr>
-      <th>Balance Sheet Item</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Share Capital</td>
-      <td>₹32 Cr</td>
-      <td>₹32 Cr</td>
-      <td>₹32 Cr</td>
-      <td>₹32 Cr</td>
-    </tr>
-    <tr>
-      <td>Reserves &amp; Surplus</td>
-      <td>₹4,680 Cr</td>
-      <td>₹5,150 Cr</td>
-      <td>₹5,808 Cr</td>
-      <td>₹7,744 Cr</td>
-    </tr>
-    <tr>
-      <td><strong>Total Net Worth</strong></td>
-      <td><strong>₹4,712 Cr</strong></td>
-      <td><strong>₹5,182 Cr</strong></td>
-      <td><strong>₹5,840 Cr</strong></td>
-      <td><strong>₹7,776 Cr</strong></td>
-    </tr>
-    <tr>
-      <td>Long-Term Borrowings</td>
-      <td>₹1,850 Cr</td>
-      <td>₹1,720 Cr</td>
-      <td>₹1,580 Cr</td>
-      <td>₹1,490 Cr</td>
-    </tr>
-    <tr>
-      <td>Short-Term Working Capital Debt</td>
-      <td>₹2,140 Cr</td>
-      <td>₹2,125 Cr</td>
-      <td>₹2,040 Cr</td>
-      <td>₹2,053 Cr</td>
-    </tr>
-    <tr>
-      <td><strong>Total Gross Borrowings</strong></td>
-      <td><strong>₹3,990 Cr</strong></td>
-      <td><strong>₹3,845 Cr</strong></td>
-      <td><strong>₹3,620 Cr</strong></td>
-      <td><strong>₹3,543 Cr</strong></td>
-    </tr>
-    <tr>
-      <td>Cash, Bank &amp; Liquid Investments</td>
-      <td>₹760 Cr</td>
-      <td>₹890 Cr</td>
-      <td>₹1,050 Cr</td>
-      <td>₹1,412 Cr</td>
-    </tr>
-    <tr>
-      <td><strong>Net Debt</strong></td>
-      <td>₹3,230 Cr</td>
-      <td>₹2,955 Cr</td>
-      <td>₹2,570 Cr</td>
-      <td>₹2,131 Cr</td>
-    </tr>
-    <tr>
-      <td><strong>Debt-to-Equity Ratio</strong></td>
-      <td><strong>0.85x</strong></td>
-      <td><strong>0.74x</strong></td>
-      <td><strong>0.62x</strong></td>
-      <td><strong>0.46x</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Return on Capital Employed (ROCE %)</strong></td>
-      <td>13.2%</td>
-      <td>13.8%</td>
-      <td>14.6%</td>
-      <td><strong>18.3%</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Return on Equity (ROE %)</strong></td>
-      <td>9.8%</td>
-      <td>10.5%</td>
-      <td>10.3%</td>
-      <td><strong>13.7%</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="forensic-tests">4.4 Forensic Accounting &amp; Governance Checks</h3>
-<p>
-  To verify corporate governance integrity and identify potential financial statement stress, the forensic research desk executed five institutional accounting tests:
-</p>
-<div class="forensic-box">
-  <strong>Forensic Accounting Health Audit:</strong>
-  <ul>
-    <li><strong>Promoter Encumbrance / Pledge:</strong> Exactly <strong>0.00%</strong> of promoter holdings are pledged. The promoter group, led by the Munot family, holds 40.54% of equity, completely free of lien or encumbrances<sup><a href="#cite_note-28">[28]</a></sup>.</li>
-    <li><strong>Auditor Independence &amp; Opinion:</strong> Audited independently by <em>M/s B S R &amp; Co. LLP</em> (Chartered Accountants, KPMG affiliate). The FY26 Independent Auditor's Report issued an unqualified, unmodified clean opinion with no adverse remarks or material internal control weaknesses<sup><a href="#cite_note-29">[29]</a></sup>.</li>
-    <li><strong>Debtor Days &amp; Unbilled Revenue Trajectory:</strong> Trade receivables normalized to 89 days in FY26 (versus 98 days in FY24). Contract assets (unbilled revenue under Ind AS 115) expanded at a rate strictly proportional to top-line execution (+21% vs +38% sales growth), indicating no artificial billing deferrals.</li>
-    <li><strong>Contingent Liabilities &amp; Bank Guarantees:</strong> Contingent liabilities comprise predominantly performance bank guarantees (BGs) and letters of credit (LCs) totaling ₹12,400 Crore issued in the normal course of project execution. KPIL maintains over ₹18,500 Crore in sanctioned non-fund bank limits with an average commission cost of &lt;0.50% per annum, reflecting tier-1 banking consortium confidence.</li>
-    <li><strong>Related Party Transactions (RPT):</strong> Operating transactions with promoter entities (Kalpataru Limited real estate arm) are conducted on an arm's-length basis, subject to prior audit committee approvals, and accounted for less than 1.8% of consolidated revenues in FY26, in full compliance with SEBI LODR regulations<sup><a href="#cite_note-32">[32]</a></sup>.</li>
-  </ul>
-</div>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="underwriting-framework">5. The 3-Layer Underwriting Framework &amp; Scorecard</h2>
-<p>
-  In compliance with institutional mandates, KPIL is evaluated through the deterministic 3-Layer Underwriting Architecture:
-</p>
-
-<h3 id="layer1">5.1 Layer 1: Binary Hard Gating Floors (Pass / Fail)</h3>
-<p>
-  All three quantitative safety floors must pass unconditionally. A single gating failure mandates immediate rejection.
-</p>
-
-<table class="wikitable">
-  <caption>Table 5.1: Layer 1 Binary Hard Gating Scorecard</caption>
-  <thead>
-    <tr>
-      <th>Gating Floor</th>
-      <th>Institutional Requirement</th>
-      <th>KPIL Verified Metric</th>
-      <th>Gate Verdict</th>
-      <th>Analytical Assessment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Capital Return Floor</strong></td>
-      <td>ROCE &ge; 15.0% (Core preference &gt; 18.0%)</td>
-      <td><strong>18.3%</strong></td>
-      <td><span class="badge-pass">PASS (100%)</span></td>
-      <td>Operating leverage from JMC merger and higher asset turns in transmission projects elevated ROCE from 13.8% to 18.3%.</td>
-    </tr>
-    <tr>
-      <td><strong>2. Solvency &amp; Leverage Floor</strong></td>
-      <td>Debt-to-Equity &lt; 0.70x</td>
-      <td><strong>0.46x</strong> (Borrowings ₹3,543 Cr / Net Worth ₹7,776 Cr)</td>
-      <td><span class="badge-pass">PASS (100%)</span></td>
-      <td>Systematic debt reduction and net worth accumulation lowered D/E from 0.85x to 0.46x, creating significant borrowing headroom.</td>
-    </tr>
-    <tr>
-      <td><strong>3. Cash Conversion Floor</strong></td>
-      <td>3-Year Cumulative CFO / PAT &ge; 0.70x</td>
-      <td><strong>1.56x</strong> (CFO ₹3,291 Cr / PAT ₹2,114 Cr)</td>
-      <td><span class="badge-pass">PASS (100%)</span></td>
-      <td>Superb working capital cash collections; CFO exceeded PAT in each of the past three fiscal years (FY24: 1.63x, FY25: 1.61x, FY26: 1.49x).</td>
-    </tr>
-    <tr>
-      <td><strong>4. Technical Posture Floor</strong></td>
-      <td>Weinstein Stage 2 Markup above rising 50-DMA &amp; 200-DMA</td>
-      <td>CMP ₹1,391.20 &gt; 50-DMA (₹1,368.22) &amp; &gt; 200-DMA (₹1,242.21)</td>
-      <td><span class="badge-pass">PASS (100%)</span></td>
-      <td>Constructive base markup; 50-DMA (+1.68%) and 200-DMA (+11.99%) both positively sloped with no death cross distribution.</td>
-    </tr>
-    <tr>
-      <td><strong>5. Asymmetry Floor</strong></td>
-      <td>Reward-to-Risk Asymmetry Ratio &ge; 3.0:1 (Core Alpha)</td>
-      <td><strong>3.00 : 1</strong> (Base Target ₹1,750 / Stop ₹1,270)</td>
-      <td><span class="badge-pass">PASS (100%)</span></td>
-      <td>Reward of ₹358.80 (+25.8%) versus risk of ₹121.20 (-8.71%) strictly meets the 3.0:1 institutional minimum (Bull Target: 4.61:1).</td>
-    </tr>
-    <tr>
-      <td colspan="3"><strong>OVERALL LAYER 1 DISPOSITION</strong></td>
-      <td colspan="2"><strong><span class="badge-pass">ALL_GATES_PASSED (100% COMPLIANT)</span></strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="layer2">5.2 Layer 2: Company-Specific Operational KPI Scorecard</h3>
-<table class="wikitable">
-  <caption>Table 5.2: Layer 2 Operational Performance Indicators</caption>
-  <thead>
-    <tr>
-      <th>Key Performance Indicator</th>
-      <th>Historical Baseline</th>
-      <th>Current Verified Value</th>
-      <th>Hurdle Target</th>
-      <th>Status</th>
-      <th>Thesis &amp; Capital Implication</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Order Book-to-Bill Ratio</strong></td>
-      <td>1.75x (FY23)</td>
-      <td><strong>2.14x</strong> (&gt;₹58,000 Cr / ₹27,143 Cr)</td>
-      <td>&gt; 2.00x</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Provides multi-year revenue visibility through FY28, allowing selective margin-accretive project bidding.</td>
-    </tr>
-    <tr>
-      <td><strong>2. Global T&amp;D Execution &amp; Margin Trajectory</strong></td>
-      <td>8.79% OPM (FY24)</td>
-      <td><strong>9.00% OPM</strong> (FY26 / TTM)</td>
-      <td>&ge; 8.80% (Expanding)</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Legacy low-margin international fixed-price EPC contracts completed; higher international T&amp;D mix supporting margin expansion.</td>
-    </tr>
-    <tr>
-      <td><strong>3. Working Capital &amp; Debtor Days Discipline</strong></td>
-      <td>122 days NWC (FY23)</td>
-      <td><strong>104 days NWC</strong> (Debtors: 89 days)</td>
-      <td>&le; 115 days</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Strict customer credit governance and prompt collection of milestone advances from sovereign utilities.</td>
-    </tr>
-    <tr>
-      <td><strong>4. ROCE Expansion &amp; Debt Deleveraging</strong></td>
-      <td>13.8% ROCE / 0.74 D/E</td>
-      <td><strong>18.3% ROCE / 0.46 D/E</strong></td>
-      <td>ROCE &ge; 15% / D/E &lt; 0.60</td>
-      <td><span class="badge-pass">PASS</span></td>
-      <td>Demonstrates synergy extraction from JMC Projects and capital reallocation away from illiquid road assets.</td>
-    </tr>
-    <tr>
-      <td colspan="4"><strong>OVERALL LAYER 2 SCORECARD RESULT</strong></td>
-      <td colspan="2"><strong><span class="badge-pass">4 / 4 OPERATIONAL KPIS PASSED (EXCELLENT)</span></strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="layer3">5.3 Layer 3: Support-Aware Entry Posture</h3>
-<p>
-  Execution timing is evaluated by measuring the price distance from verified structural support anchors in 14-day Average True Range (ATR = ₹39.25) multiples:
-</p>
-
-<table class="wikitable">
-  <caption>Table 5.3: Layer 3 Execution Timing &amp; Posture Determination</caption>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Quantitative Value</th>
-      <th>Technical Significance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Current Market Price (CMP)</td>
-      <td><strong>₹1,391.20</strong></td>
-      <td>Current live trading price.</td>
-    </tr>
-    <tr>
-      <td>Nearest Structural Support Anchor</td>
-      <td><strong>₹1,368.22</strong></td>
-      <td>Rising 50-day moving average (50-DMA) dynamic trend shelf.</td>
-    </tr>
-    <tr>
-      <td>Distance to Support (Absolute Points)</td>
-      <td><strong>+22.98 pts</strong> (+1.68%)</td>
-      <td>Tight distance above dynamic institutional baseline.</td>
-    </tr>
-    <tr>
-      <td>14-Day Average True Range (ATR)</td>
-      <td><strong>₹39.25</strong></td>
-      <td>Daily normalized trading volatility.</td>
-    </tr>
-    <tr>
-      <td>Distance in ATR Multiples</td>
-      <td><strong>0.585x ATR</strong></td>
-      <td>Falls strictly within the <strong>0.50x to 1.00x ATR</strong> band (NEAR_SUPPORT).</td>
-    </tr>
-    <tr>
-      <td>14-Day Relative Strength Index (RSI)</td>
-      <td><strong>43.70</strong></td>
-      <td>Healthy cooling from overbought territory; no distribution exhaustion.</td>
-    </tr>
-    <tr>
-      <td>20-Day Volume Multiplier</td>
-      <td><strong>0.85x</strong></td>
-      <td>Consolidation occurring on declining, below-average volume.</td>
-    </tr>
-    <tr>
-      <td><strong>Layer 3 Entry Classification</strong></td>
-      <td><strong>NEAR_SUPPORT</strong></td>
-      <td>Minor pullback into the 50-DMA accumulation pocket.</td>
-    </tr>
-    <tr>
-      <td><strong>Final Deterministic Action Verdict</strong></td>
-      <td colspan="2"><strong><span class="badge-pass">🔵 ACCUMULATE ON DIP</span></strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 6: PEER COMPARISON & MOAT -->
-<h2 id="peer-matrix">6. Industry Landscape, Moat Analysis &amp; Peer Matrix</h2>
-<p>
-  KPIL competes in the global capital goods and infrastructure EPC landscape alongside specialized engineering peers.
-</p>
-
-<table class="wikitable">
-  <caption>Table 6.1: Comprehensive Industry Peer Comparison Matrix<sup><a href="#cite_note-30">[30]</a></sup></caption>
-  <thead>
-    <tr>
-      <th>Symbol</th>
-      <th>Company Name</th>
-      <th>M-Cap (₹ Cr)</th>
-      <th>CMP (₹)</th>
-      <th>ROCE %</th>
-      <th>ROE %</th>
-      <th>D/E</th>
-      <th>P/E</th>
-      <th>3Y Sales CAGR</th>
-      <th>OPM %</th>
-      <th>Competitive Moat &amp; Edge</th>
-      <th>Screening Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background-color: #eff6ff; font-weight: 600;">
-      <td><strong>KALPATPOWR / KPIL</strong></td>
-      <td>Kalpataru Projects International</td>
-      <td>₹23,758</td>
-      <td>₹1,391.20</td>
-      <td>18.3%</td>
-      <td>13.7%</td>
-      <td>0.46</td>
-      <td>21.4x</td>
-      <td>18.0%</td>
-      <td>9.0%</td>
-      <td>Integrated tower manufacturing (&gt;240k MT), multi-disciplinary civil+T&amp;D scale, global pre-qualifications in 70+ nations.</td>
-      <td><span class="badge-pass">QUALIFIED (ACCUMULATE)</span></td>
-    </tr>
-    <tr>
-      <td><strong>KEC</strong></td>
-      <td>KEC International Ltd</td>
-      <td>₹23,450</td>
-      <td>₹915.00</td>
-      <td>14.5%</td>
-      <td>10.2%</td>
-      <td>0.85</td>
-      <td>32.0x</td>
-      <td>14.2%</td>
-      <td>6.8%</td>
-      <td>RPG flagship; vast global footprint in transmission and railway electrification; captive cable manufacturing.</td>
-      <td><span class="badge-fail">REJECTED (High D/E &gt;0.70x, Sub-15% ROCE)</span></td>
-    </tr>
-    <tr>
-      <td><strong>TECHNOE</strong></td>
-      <td>Techno Electric &amp; Engineering</td>
-      <td>₹17,800</td>
-      <td>₹1,550.00</td>
-      <td>21.5%</td>
-      <td>15.8%</td>
-      <td>0.05</td>
-      <td>34.5x</td>
-      <td>24.0%</td>
-      <td>13.5%</td>
-      <td>High-voltage substation engineering niche, data center EPC, Advanced Metering Infrastructure (smart meters).</td>
-      <td><span class="badge-pass">QUALIFIED (WATCHLIST PEER)</span></td>
-    </tr>
-    <tr>
-      <td><strong>LT</strong></td>
-      <td>Larsen &amp; Toubro Limited</td>
-      <td>₹4,95,000</td>
-      <td>₹3,600.00</td>
-      <td>16.8%</td>
-      <td>15.2%</td>
-      <td>0.62</td>
-      <td>35.0x</td>
-      <td>17.2%</td>
-      <td>10.5%</td>
-      <td>India's uncontested mega-contractor; unassailable execution balance sheet across defense, energy, civil &amp; IT services.</td>
-      <td><span style="color:#4b5563; font-weight:600;">CORE BENCHMARK</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="callout-box">
-  <strong>Moat Analysis via Helmer's 7 Powers:</strong>
-  <ul>
-    <li><strong>Scale Economies:</strong> With captive manufacturing exceeding 240,000 MTPA, KPIL extracts ~250–300 bps cost savings in tower steel fabrication and hot-dip galvanizing relative to asset-light peers that purchase fabricated structures from third-party vendors.</li>
-    <li><strong>Cornered Resource (Pre-Qualifications &amp; Approvals):</strong> Utility pre-qualification criteria at entities like POWERGRID, Saudi Electricity Company, TenneT, and Statnett require 7–10 years of unblemished operational field performance at 400kV–765kV voltages. These certifications operate as severe regulatory entry barriers against new competitors.</li>
-    <li><strong>Process Power:</strong> Decades of proprietary engineering know-how in complex river-crossing towers, live-line reconductoring under charged conditions, and mechanized stringing in extreme deserts and Nordic sub-zero terrains.</li>
-  </ul>
-</div>
-
-<!-- SECTION 7: TECHNICAL POSTURE & TRADE ARCHITECTURE -->
-<h2 id="technical-trade">7. Technical Structure, Support Anchor &amp; Trade Architecture</h2>
-<p>
-  KPIL is trading within a verified <strong>Weinstein Stage 2 Markup</strong> phase, supported by healthy long-term structural volume characteristics<sup><a href="#cite_note-31">[31]</a></sup>. The stock registered an all-time high of ₹1,468.00 before entering a healthy, orderly multi-week consolidation pattern characterized by diminishing daily volumes (20-day volume multiplier of 0.85x).
-</p>
-
-<table class="wikitable">
-  <caption>Table 7.1: Technical Indicator Summary &amp; Moving Average Spectrum</caption>
-  <thead>
-    <tr>
-      <th>Technical Metric</th>
-      <th>Verified Value</th>
-      <th>Current Price Position</th>
-      <th>Technical Interpretation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Current Market Price (CMP)</td>
-      <td><strong>₹1,391.20</strong></td>
-      <td>&mdash;</td>
-      <td>Consolidating in upper quartile of 52-week range (₹999.10 – ₹1,468.00).</td>
-    </tr>
-    <tr>
-      <td>20-Day Moving Average (20-DMA)</td>
-      <td>₹1,411.78</td>
-      <td>-1.46% (Below)</td>
-      <td>Short-term momentum pause; common during multi-week accumulation pullbacks.</td>
-    </tr>
-    <tr>
-      <td>50-Day Moving Average (50-DMA)</td>
-      <td><strong>₹1,368.22</strong></td>
-      <td><strong>+1.68% (Above)</strong></td>
-      <td>Primary institutional trend anchor; price resting 0.58x ATR above this key shelf.</td>
-    </tr>
-    <tr>
-      <td>200-Day Moving Average (200-DMA)</td>
-      <td><strong>₹1,242.21</strong></td>
-      <td><strong>+11.99% (Above)</strong></td>
-      <td>Structural long-term bull market anchor; rising strongly.</td>
-    </tr>
-    <tr>
-      <td>14-Day Relative Strength Index (RSI)</td>
-      <td><strong>43.70</strong></td>
-      <td>Neutral-Bullish</td>
-      <td>RSI has reset from overbought levels (&gt;70) to low 40s without breaking structural price support.</td>
-    </tr>
-    <tr>
-      <td>14-Day Average True Range (ATR)</td>
-      <td><strong>₹39.25</strong></td>
-      <td>Daily Volatility</td>
-      <td>Defines realistic stop buffer and volatility-adjusted entry parameters.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="wikitable">
-  <caption>Table 7.2: Actionable Institutional Trade Architecture</caption>
-  <thead>
-    <tr>
-      <th>Order Parameter</th>
-      <th>Price Anchor</th>
-      <th>Distance / Sizing</th>
-      <th>Rationale &amp; Invalidation Logic</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Recommended Action</strong></td>
-      <td><strong>ACCUMULATE ON DIP</strong></td>
-      <td>Core Alpha Allocation</td>
-      <td>Exploit low-volume retracement toward the rising 50-DMA support pocket.</td>
-    </tr>
-    <tr>
-      <td><strong>Optimal Entry Zone</strong></td>
-      <td><strong>₹1,360.00 – ₹1,395.00</strong></td>
-      <td>Full Target Position</td>
-      <td>Anchored directly around the 50-DMA shelf (₹1,368.22) and current CMP.</td>
-    </tr>
-    <tr>
-      <td><strong>Hard Invalidation Stop</strong></td>
-      <td><strong>₹1,270.00</strong></td>
-      <td>-8.71% (-₹121.20 risk)</td>
-      <td>Placed strictly below the prior structural swing low and safely above the rising 200-DMA (₹1,242.21).</td>
-    </tr>
-    <tr>
-      <td><strong>12–18M Base Target</strong></td>
-      <td><strong>₹1,750.00</strong></td>
-      <td>+25.79% (+₹358.80 gain)</td>
-      <td>Priced at 20.0x FY27E EPS of ₹87.50 (assuming 18% PAT growth on ₹1,215 Cr PAT).</td>
-    </tr>
-    <tr>
-      <td><strong>Blue-Sky Bull Target</strong></td>
-      <td><strong>₹1,950.00</strong></td>
-      <td>+40.17% (+₹558.80 gain)</td>
-      <td>Priced at 22.0x FY27E EPS of ₹88.60 on accelerated Saudi/HVDC contract execution.</td>
-    </tr>
-    <tr>
-      <td><strong>Reward-to-Risk Asymmetry</strong></td>
-      <td><strong>3.00 : 1 (Base)</strong></td>
-      <td><strong>4.61 : 1 (Bull)</strong></td>
-      <td>Math: ₹358.80 potential gain / ₹121.20 defined risk = <strong>2.96x &asymp; 3.00:1</strong>. Meets gating floor.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 8: FATAL FLAWS & RED-TEAM -->
-<h2 id="fatal-flaws">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<p>
-  To prevent institutional confirmation bias, the red-team research group conducted an adversarial failure mode analysis:
-</p>
-
-<div class="fatal-box">
-  <strong>Fatal Flaw 1: Geopolitical Friction &amp; Supply Chain Disruptions in the Middle East:</strong><br>
-  With international projects—specifically in Saudi Arabia and the broader GCC—accounting for an expanding portion of the high-margin transmission order backlog, any escalation in regional geopolitical tensions or port blockades in the Red Sea could delay equipment mobilization, increase shipping demurrage charges, and defer milestone certification, negatively impacting quarterly revenue recognition.
-</div>
-
-<div class="fatal-box">
-  <strong>Fatal Flaw 2: Working Capital Elongation in Domestic Water (Jal Jeevan Mission):</strong><br>
-  While the central government's Jal Jeevan Mission has provided substantial order inflows, state-level implementation agencies (specifically in Uttar Pradesh and Madhya Pradesh) have periodically exhibited elongated payment certification cycles. A prolonged delay in state water subsidy disbursements could balloon unbilled contract assets and force higher short-term working capital borrowings.
-</div>
-
-<div class="fatal-box">
-  <strong>Fatal Flaw 3: Raw Material Volatility on Fixed-Price Components:</strong><br>
-  Although 80–85% of contracts incorporate price variation clauses, approximately 15–20% of international orders remain fixed-price. A sudden surge in global steel, aluminum, or zinc galvanizing chemical prices, compounded by unfavorable currency moves in emerging market contracts, could dilute blended operating profit margins below the 8.5% danger mark.
-</div>
-
-<div class="forensic-box">
-  <strong>Hard Invalidation Triggers (Immediate Exit / Thesis Termination):</strong>
-  <ul>
-    <li><strong>Fundamental Invalidation:</strong> Consolidated operating margin (OPM) compressing below 8.0% for two consecutive reporting quarters, or 3-year cumulative CFO/PAT collapsing below 0.70x due to working capital blowouts.</li>
-    <li><strong>Technical Invalidation:</strong> A decisive weekly closing breakdown below the hard invalidation stop floor of <strong>₹1,270.00</strong> on volume exceeding 1.5x the 20-day moving average.</li>
-  </ul>
-</div>
-
-<!-- SECTION 9: PORTFOLIO ALLOCATION & CAPITAL BLUEPRINT -->
-<h2 id="capital-allocation">9. Portfolio Allocation &amp; Capital Reallocation Blueprint</h2>
-<p>
-  Under the institutional investment policy framework, KPIL qualifies as a prime <strong>Core Alpha Challenger</strong> candidate within the Capital Goods &amp; Infrastructure sector allocation.
-</p>
-<ul>
-  <li><strong>Target Position Sizing:</strong> Recommended portfolio weight of <strong>4.0% to 5.5%</strong> of total assets under management (AUM).</li>
-  <li><strong>Execution Methodology:</strong> A two-tranche staggered accumulation strategy:
-    <ol>
-      <li><strong>Tranche 1 (50% Allocation):</strong> Initiate immediately at Current Market Price (₹1,391.20) within the optimal accumulation corridor.</li>
-      <li><strong>Tranche 2 (50% Allocation):</strong> Deploy on any intra-day liquidity test of the 50-DMA dynamic support zone between ₹1,365.00 and ₹1,375.00.</li>
-    </ol>
-  </li>
-  <li><strong>Capital Source / Reallocation Strategy:</strong> Capital can be funded via profit harvesting from extended tactical momentum positions or reallocating capital away from lagging capital goods peers burdened with high debt (e.g., swapping out of KEC International due to its inferior D/E of 0.85x and sub-15% ROCE).</li>
-</ul>
-
-<!-- SECTION 10: QUARTERLY MONITORING INDICATORS -->
-<h2 id="thesis-trackers">10. Key Quarterly Monitoring Indicators (Thesis Trackers)</h2>
-<p>
-  The research desk maintains fiduciary surveillance over three primary quarterly operational metrics:
-</p>
-
-<table class="wikitable">
-  <caption>Table 10.1: Key Quarterly Monitoring Indicators &amp; Early Warning System</caption>
-  <thead>
-    <tr>
-      <th>Monitoring Indicator</th>
-      <th>Analytical Significance &amp; Thesis Role</th>
-      <th>Bullish Compounding Zone</th>
-      <th>Bearish Alert / Warning Level</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Order Inflows &amp; Book-to-Bill Ratio</strong></td>
-      <td>Leading indicator of multi-year top-line growth visibility and international T&amp;D market share.</td>
-      <td>Quarterly order inflows &gt; ₹8,000 Cr; consolidated backlog expanding &gt; ₹60,000 Cr (&gt;2.1x bill).</td>
-      <td>Quarterly inflows drop &lt; ₹4,500 Cr for 2 consecutive quarters; backlog-to-bill falls &lt; 1.8x.</td>
-    </tr>
-    <tr>
-      <td><strong>2. Operating Profit Margin (OPM %)</strong></td>
-      <td>Confirms execution of margin-accretive international T&amp;D contracts and pass-through efficiency.</td>
-      <td>Consolidated OPM &ge; 9.2%; international T&amp;D margins sustaining &gt; 10.5%.</td>
-      <td>Consolidated OPM compresses &lt; 8.2%; unexpected cost overruns on legacy EPC packages.</td>
-    </tr>
-    <tr>
-      <td><strong>3. Operating Cash Flow &amp; Net Working Capital Days</strong></td>
-      <td>Ensures reported accounting profits translate directly into liquid, debt-retiring cash flow.</td>
-      <td>Net Working Capital &le; 105 days; TTM CFO/PAT &ge; 0.85x; net debt continuing downward trajectory.</td>
-      <td>NWC expands &gt; 125 days; TTM CFO/PAT &lt; 0.60x; sharp rise in short-term borrowing &gt; ₹2,500 Cr.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES & CITATIONS -->
-<h2 id="references">11. References, Regulatory Filings &amp; Statutory Disclosures</h2>
-<p>
-  This institutional dossier was synthesized from primary statutory disclosures, audited financial statements, credit rating publications, and official exchange notifications:
-</p>
-
+<section class="chapter" id="framework">
+<h2>How the framework works for this company</h2>
+<p>The framework is built to stop a good company from being bought at a poor price, and to stop a cheap price from hiding a weak company. It does this by running every candidate through the same ordered steps, and by refusing to score a company that has already failed a floor. For a reader new to the method, the closest everyday comparison is a building inspection. The structural engineer checks the foundation and the frame before anyone looks at the kitchen. If the frame fails, the decision is made, and the finishes are not discussed.</p>
+<p>For Kalpataru, the inspection ran in the order the rules require. Layer 1 came first, and it has three parts. The financial floors look at return on capital, debt and cash conversion, using audited annual figures. The technical floor looks at the share price itself, and it runs the momentum gate in code. The upside-to-downside floor checks that a target exists and that the ratio between the distance to the target and the distance to the stop clears the bucket's minimum. Each part can fail on its own. Layer 1 passes only when every part passes.</p>
+<p>This company failed the technical part. The financial part passed, and so did the stage test and the death-cross test. The momentum gate is the one that stopped the review. It is a stricter test than the stage test, because it adds the question of how far the price is from support and whether volume confirms the move. The financial floors pass, so the business is sound on paper, but the framework is not a verdict on the business alone. It is a verdict on the business at a particular price, on a particular day, against a particular support level.</p>
+<p>The rules are also explicit about what happens after a failure. The later layers are not evaluated. The reason is practical as well as procedural. A high score on Layer 2 would be a comfort that the rules say not to rely on, because the company cannot be bought under the current gate. Scoring it anyway would invite a reader to skip the technical gate in favour of the business story. This dossier therefore reports the Layer 2 and Layer 3 position only as a description of what would apply once Layer 1 passes.</p>
+<p>What this means for an investor: the verdict is not a judgement that the company will fall. It is a rule that says the price is too far from support to buy now under the framework, and that the company must be re-tested if the price comes back. The next chapters show each floor, its number and its as-of date, so that a reader can check the arithmetic and see which number would have to move.</p>
+</section>
+<section class="chapter" id="business">
+<h2>What the company does and how it earns</h2>
+<p>Kalpataru Projects International is an EPC contractor. EPC stands for engineering, procurement and construction. In practice a client, often a state utility, a railway, a developer or a government body, hires the contractor to design a project, buy the equipment and materials, and build it to a fixed scope and deadline. The contractor earns revenue as the work is completed. Its profit depends on how well it estimates costs, how fast it executes, and how quickly the client pays. Screener's overview says the company has executed more than 250 projects across five continents. The June 2026 press release says it has executed projects in more than 70 countries. <sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The company's business is split into segments, and the press release for the June 2026 quarter names them as power transmission and distribution, buildings and factories, water supply and irrigation, railways, oil and gas pipelines, urban mobility such as flyovers and metro rail, highways and airports. <sup><a href="#cite_note-4">[4]</a></sup> The transmission and distribution business drove the most recent large order disclosure. On 13 October 2026 the company disclosed new orders of ₹2,225 crore, of which ₹2,031 crore was in transmission and distribution, including a ₹194 crore order from its Swedish subsidiary. <sup><a href="#cite_note-1">[1]</a></sup> The segment split of the order book itself is shown on a paywalled Screener chart and is not used here, so the segment mix is described qualitatively only.</p>
+<p>Sales have grown quickly over three years. Consolidated sales were ₹27,143 crore in the year to March 2026, against ₹16,361 crore in the year to March 2023. Screener's compounded figure for three years is 18 percent, and the arithmetic from the two annual values gives 18.4 percent. <sup><a href="#cite_note-1">[1]</a></sup> That growth is the reason the order book matters. The order book at 30 June 2026 was ₹66,607 crore, which is about 2.45 times the sales of the year to March 2026. In plain terms, the company already has signed work that would take roughly two and a half years at its current pace of revenue, before any new order is won. <sup><a href="#cite_note-4">[4]</a></sup></p>
+<p>Margins are the weak link in the picture. The operating margin, which is the share of each sales rupee left after the costs of running the projects, was 9 percent in the year to March 2026. It was 13 percent in FY18 and FY19. <sup><a href="#cite_note-1">[1]</a></sup> That means the company has grown its revenue without widening the margin on each rupee of revenue. For a contractor, that is the central test. Volume is easier to win than margin. The June 2026 quarter did show a lift to 8.8 percent in the <dfn>EBITDA</dfn> margin (earnings before interest, taxes, depreciation and amortization, measured as a share of sales), and management guided to a PBT margin improvement of more than 75 basis points in FY27, but both are company statements, and the second is a <dfn>guidance</dfn> figure that has not yet been confirmed by a full year of results. <sup><a href="#cite_note-4">[4]</a></sup></p>
+<p>The company's capital position is more comfortable than its margins. Borrowings were ₹3,543 crore at 31 March 2026, against equity capital of ₹34 crore and reserves of ₹7,742 crore. <sup><a href="#cite_note-1">[1]</a></sup> The company reported consolidated <dfn>net debt</dfn> of ₹917 crore at 30 June 2026, down 67 percent from a year earlier. <sup><a href="#cite_note-4">[4]</a></sup> Credit ratings have also improved. India Ratings &amp; Research upgraded the company to IND AA+/Stable, as reported on 11 August 2026. <sup><a href="#cite_note-3">[3]</a></sup> The Screener overview page, which does not state a date for its ratings, still describes the rating as AA/Stable from CRISIL and India Ratings. <sup><a href="#cite_note-1">[1]</a></sup> The two statements conflict on the grade, and this dossier uses the more recent upgrade with the conflict disclosed.</p>
+<h3>What this means for an owner</h3>
+<p>For an owner, the business question is whether the company can turn a large and growing order book into profit that stays. The answer depends on margins, which have not yet recovered to their earlier peak, and on cash, which has been strong. Cash from operations in the three years to March 2026 was ₹3,291 crore against a profit of ₹2,114 crore, which means the reported profit has been backed by real cash rather than by accounting entries. <sup><a href="#cite_note-1">[1]</a></sup> That is a good sign for the quality of the profit, though the FY26 profit itself has a one-off look that the red-team chapter explains.</p>
+<p>The bridge to the rest of the report is simple. The business has the sales, the order book and the cash to justify a place on a watchlist. Whether it justifies a purchase depends on the price, and that is the subject of Layer 1, where the financial floors pass and the technical floor fails.</p>
+</section>
+<section class="chapter" id="layer1">
+<h2>Layer 1 gates</h2>
+<p>Layer 1 is the pass-or-fail stage. Every row in the table below has to pass for a company to continue to Layer 2. The floors come from the framework's configuration file, so they are not judgement calls. The company value column shows the number used for this session and its period. The result column shows whether the number clears the floor. The first three rows are financial. The next three are technical and valuation.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Layer</th><th>Gate</th><th>Floor</th><th>Company value and period</th><th>Result</th></tr>
+<tr><td>1</td><td>Return on capital employed (<dfn>ROCE</dfn>)</td><td>At least 15 percent; Core prefers above 18 percent</td><td>18 percent, year to 31 March 2026 <sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+<tr><td>1</td><td><dfn>Debt-to-equity</dfn>, which is borrowings divided by equity</td><td>Below 0.70 (not a lender)</td><td>0.46, computed as borrowings of ₹3,543 crore over equity plus reserves of ₹7,776 crore, at 31 March 2026 <sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+<tr><td>1</td><td>Three-year cash conversion (CFO to PAT)</td><td>At least 0.70</td><td>1.56, computed as ₹3,291 crore over ₹2,114 crore, FY24 to FY26 <sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+<tr><td>1</td><td>Technical posture: stage</td><td>Core: Stage 1 base breakout or Stage 2. Tactical: Stage 2 above rising 50-day and 200-day averages</td><td>Stage 2 on 13 October 2026. Close ₹1,417.50 above 50-day ₹1,384.40 and 200-day ₹1,256.75, both averages rising (ledger)</td><td>PASS</td></tr>
+<tr><td>1</td><td>Technical posture: no <dfn>Stage 4</dfn> or death cross, where Stage 4 is the decline phase</td><td>None allowed</td><td>Not in Stage 4. The 50-day average is above the 200-day average (ledger)</td><td>PASS</td></tr>
+<tr><td>1</td><td>Momentum gate (code)</td><td>Passes Test A or Test B</td><td>NO_MOMENTUM: Test A fails on extension (3.51 ATR against 1.2 maximum). Test B fails on pivot (3.51 ATR against 1.0) and on volume (0.79 against 1.0) (ledger)</td><td>FAIL</td></tr>
+<tr><td>1</td><td>Upside-to-downside ratio, anchored target</td><td>Core at least 3.0; Tactical at least 3.5; target must be verifiable</td><td>No verifiable target. Forward earnings and a three-year median multiple were not found (see the asymmetry chapter)</td><td>FAIL_ASYMMETRY (unverified)</td></tr>
+</table></div>
+<p>The table shows one clear pattern. The three financial floors pass with room to spare. The stage tests pass as well, which means the trend itself is intact. The one failure that stops the review is the momentum gate, and it fails for a reason that is about the entry, not the trend. The price is too far above its base. The rule is that a buyer should not pay for a move that has already happened. The second failure is the target. Without a checkable target, the ratio cannot be tested at all, and the framework counts that as a failure rather than as a gap to be filled with an estimate.</p>
+<p>The financial floors deserve a closer reading, because they are the reason the company is still on the list. Return on capital of 18 percent is about the level the Core bucket prefers, and it is well above the 15 percent floor. It has moved over time. It was 11 percent in FY15 and 21 percent in FY19, and it has been between 13 and 18 percent since FY22. <sup><a href="#cite_note-1">[1]</a></sup> The debt figure uses the balance sheet at 31 March 2026, where borrowings were ₹3,543 crore, down from ₹4,314 crore a year earlier. The cash test uses the three most recent audited years, which means the 1.56 ratio is a combination of strong cash in FY26 and steady cash in FY24 and FY25.</p>
+<h3>Financial floors</h3>
+<p>The financial floors ask whether the business earns a good return on the money it uses, whether it borrows heavily, and whether its profit turns into cash. Return on capital employed is operating profit set against the capital tied up in the business. An 18 percent figure means the business earns about 18 paise a year on each rupee it uses. Screener's return on equity for the last reported year was 14 percent, and its three-year figure was 12 percent. <sup><a href="#cite_note-1">[1]</a></sup> These measure the owners' view of the same question. They are reported here but are not a Layer 1 floor.</p>
+<p>The debt-to-equity figure is 0.46. That is borrowings of ₹3,543 crore divided by equity and reserves of ₹7,776 crore. The figure is not identical to the company's own statement of 0.1 times, which it gives as net debt over equity at 30 June 2026, because the company nets off its cash and uses a different date. <sup><a href="#cite_note-4">[4]</a></sup> Both figures are well inside the 0.70 limit, so the result does not depend on which one is used. The cash conversion test divides three years of operating cash by three years of profit, which smooths out a single unusual year. Here the operating cash flow was ₹843 crore in FY24, ₹914 crore in FY25 and ₹1,534 crore in FY26, against profits of ₹516 crore, ₹567 crore and ₹1,031 crore. <sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Passing all three financial floors means the business is not weak. It does not mean the profit is clean. The FY26 profit contains a large fourth quarter, with other income of ₹103 crore and a tax rate of 16 percent, which is why the next chapter treats the profit trend with caution. <sup><a href="#cite_note-1">[1]</a></sup> The financial floors are passed, and the reader should keep that in view when reading the earnings trend.</p>
+<h3>Technical floor</h3>
+<p>The technical floor asks whether the price has the shape of an uptrend, and whether it is free of a breakdown. Stage analysis follows the method of Stan Weinstein, which sorts a stock into four phases. Stage 1 is a base, where the price moves sideways after a fall. Stage 2 is the markup, where the price rises above a rising 50-day average and a rising 200-day average. Stage 3 is the top, and Stage 4 is the decline. The company is in Stage 2 on the ledger. Its close of ₹1,417.50 is above the 50-day average of ₹1,384.40, the 50-day average is 2.49 percent higher than it was 21 sessions ago, and the 200-day average of ₹1,256.75 is higher than its level 63 sessions ago of ₹1,215.25 (ledger). On the stage test alone, the stock passes both the Core and the Tactical versions.</p>
+<p>The technical floor does not stop at the stage. The momentum gate adds the questions of extension and entry, which the stage test does not ask. The company passes the stage and the death-cross tests, and it fails the momentum gate, so the technical floor fails as FAIL_TECHNICAL_NO_MOMENTUM. The gate status names the reason so that the failure can be read in the record without re-running the code.</p>
+<h3>Upside-to-downside floor</h3>
+<p>The upside-to-downside floor asks whether the reward from a purchase is large compared with the loss if the stop is hit. It is calculated as the distance from the price to a target, divided by the distance from the price to the stop. The Core bucket needs at least 3.0, and the Tactical bucket needs at least 3.5. The result depends on two inputs, a target and a stop. The stop is calculated from the ledger, but a target must be anchored to a checkable source. This company has no checkable target, so the floor is not passed. The full calculation, and the price each bucket would need, are in the asymmetry chapter.</p>
+<p>Put together, the Layer 1 result is REJECTED. The gate status is FAIL_TECHNICAL_NO_MOMENTUM;FAIL_ASYMMETRY. Layers 2 and 3 are not evaluated, and the chapter on those layers explains what would apply if the company later passes Layer 1.</p>
+</section>
+<section class="chapter" id="technical">
+<h2>Technical posture and the momentum gate</h2>
+<p>The technical posture describes where the price sits compared with its moving averages, its recent base, and the volume behind its moves. A moving average is the average close over a set number of sessions. A 50-day average shows the medium-term trend, and a 200-day average shows the long-term one. Here the price is above both, and both are rising. That is the shape the stage test wants. It is a description of the trend, and it does not say whether the price is too far from a sensible entry, which is the job of the momentum gate.</p>
+<p>The company's price has been firm. The stock rose 1.84 percent on 13 October 2026, 2.81 percent over the week, and 0.64 percent over the month. The 14-day <dfn>RSI</dfn> (relative strength index) is 53.11, which is in the middle of the range. An RSI above 70 suggests the price has risen quickly, and a reading below 30 suggests it has fallen quickly. A reading of 53 says the recent move is neither stretched nor weak. The volume multiple over the last 20 sessions is 0.79 (ledger), so recent trading has been lighter than the norm, which matters for the volume test below.</p>
+<p>The relative strength figures show the company has beaten the benchmark. Over 63 sessions the stock outperformed the benchmark index by 11.8 percentage points, and over 28 sessions by 6.83 percentage points. The benchmark for India in the scoring file is the Nifty 50 (^NSEI). Relative strength asks whether a stock is leading the market, which is a feature the framework wants in a momentum name. The ledger gives these as excess figures against the benchmark, computed in code (ledger).</p>
+<h3>The momentum gate result</h3>
+<p>The momentum gate is the test that stopped this review. It runs in code on the frozen session data, and it has two routes. Test A is for a stock already in a healthy uptrend. It requires four conditions. Test B is for a stock entering an uptrend from a base. It requires five conditions, and the last two are about volume. A stock needs every condition in one route to pass that route. Here neither route passes. The table below shows each condition, the measured value, and the threshold it was tested against.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Route and condition</th><th>Measured value (13 Oct 2026, ledger)</th><th>Threshold</th><th>Result</th></tr>
+<tr><td>A1 Structure: close above 50-day, 50-day above 200-day</td><td>Close ₹1,417.50; 50-day ₹1,384.40; 200-day ₹1,256.75</td><td>Close above 50-day, which is above 200-day</td><td>PASS</td></tr>
+<tr><td>A2 200-day average not falling</td><td>200-day ₹1,256.75 against ₹1,215.25 63 sessions ago</td><td>Not falling</td><td>PASS</td></tr>
+<tr><td>A3 Relative strength over 63 sessions</td><td>+11.8 percentage points against the benchmark</td><td>At least 0.0</td><td>PASS</td></tr>
+<tr><td>A4 Not extended from support</td><td>3.51 ATR above support</td><td>At most 1.2 ATR</td><td>FAIL</td></tr>
+<tr><td>B1 50-day average holding over 21 sessions</td><td>Up 2.49 percent</td><td>Decline no more than 0.5 percent</td><td>PASS</td></tr>
+<tr><td>B2 Relative strength rising over 28 sessions</td><td>+6.83 percentage points</td><td>Rising, above 0</td><td>PASS</td></tr>
+<tr><td>B3 At the base pivot</td><td>3.51 ATR above the pivot</td><td>At most 1.0 ATR</td><td>FAIL</td></tr>
+<tr><td>B4 Volume dry-up in the base</td><td>Ratio 0.19 over 63 sessions</td><td>At most 0.9</td><td>PASS</td></tr>
+<tr><td>B5 Volume expansion on the move</td><td>Ratio 0.79 over 20 sessions</td><td>At least 1.0</td><td>FAIL</td></tr>
+</table></div>
+<p>The table says the trend is healthy and the entry is not. Test A fails on the single condition that matters most for a buyer today, which is extension. The price is 3.51 normal daily moves above support, against a maximum of 1.2. Test B fails on the same distance and also on volume. The volume ratio of 0.79 over the last 20 sessions is below the 1.0 needed to show buyers stepping in on the move. Neither route can be passed on this session, so the code returns NO_MOMENTUM, and the rule allocates nothing.</p>
+<p>The conditions that pass are worth stating, because they show what is right about the stock. The trend is up, the 200-day average is rising, the company is beating the market, and volume has dried up in the base over 63 sessions, with a ratio of 0.19 against a maximum of 0.9. That last result is a sign of an orderly base. The issue is not that the stock is falling or that buyers are absent. It is that the stock has risen past its base before the framework's entry conditions are met.</p>
+<h3>What the momentum result means for a holder or a buyer</h3>
+<p>For a holder, the result has no sell signal, because the trend has not broken. The stock is above every moving average, and it is nowhere near the stop levels. A holder who bought earlier would have been judged under a different entry, and the framework does not ask a holder to sell on this result alone. For a new buyer, the result means waiting. The rule is that a buyer should not pay for a move that is already more than 1.2 ATR above support, however good the business is. Buying now would mean accepting a stop that is far below the price, and a reward that the framework cannot test. The bridge to the next chapter is the question of how large the stop and the target would be.</p>
+<p>The price that would change the answer is ₹1,312.63. That is 1.2 ATR above the 63-day base low of ₹1,258.20, and it is the point at which Test A's extension condition would pass. Below that point, the price would be in the limit-order band of the support ladder. At ₹1,303.56, which is 1.0 ATR above the base, the price would be in the standard band. At ₹1,280.88, which is 0.5 ATR above the base, it would be in the full-size band. These levels are the ones the framework would use to decide whether a buy is allowed and how large it may be.</p>
+</section>
+<section class="chapter" id="asymmetry">
+<h2>Asymmetry and target anchoring</h2>
+<p>Asymmetry compares what a buyer can gain with what a buyer can lose. The framework calculates it as the distance from the price to a target, divided by the distance from the price to a stop. The formula is written in the scoring file as (target base minus the close) divided by (the close minus the <dfn>stop loss</dfn>). A ratio of 3.0 means the potential gain is three times the potential loss. The Core bucket needs 3.0 and the Tactical bucket needs 3.5. The stop is set by a rule, but the target has to come from outside the rule, and the framework requires that it be anchored to a checkable basis.</p>
+<p>There are two accepted anchors. The first is forward earnings per share multiplied by a three-year median price-to-earnings ratio. The second is a technical measured move, which projects the height of a base onto the breakout point. Neither was verifiable for this company on 13 October 2026. A forward earnings figure needs an analyst consensus that can be opened, read and checked, and the consensus pages that were found returned only snippets with conflicting targets. The three-year median multiple also could not be verified, because the only history found was a five-year average from a third-party page that was not opened. The framework does not permit a broker's headline target to replace either anchor.</p>
+<p>The company has not failed on the arithmetic. It has failed on the evidence. The asymmetry floor is therefore recorded as FAIL_ASYMMETRY, with the word unverified, and this is one of the two items in the gate status. The rule is clear that an arbitrary target is forbidden, so no target has been invented for this dossier. The consequence is that even if the price moved into the buyable band, the company would still need a checkable target before it could be bought.</p>
+<h3>Why the broker targets are not used</h3>
+<p>Broker targets are the price levels that sell-side analysts publish for a stock, usually twelve months ahead. They are useful for a reader who wants to know what the market's professionals expect. They are not accepted here, for two reasons. First, the targets for this company disagree widely. The snippets listed targets from about ₹1,400 to ₹1,650 for the next twelve months, with other sites giving figures near ₹1,500 and ₹1,600, and none of these pages could be opened to check its method. <sup><a href="#cite_note-25">[25]</a></sup> Second, a target that is not built from earnings and a multiple, or from a measured move, cannot be tested by the reader. The framework needs a target that someone else can rebuild from the same inputs.</p>
+<h3>The stop-loss and the target each bucket would need</h3>
+<p>The stop is calculated from the ledger, and it is the one part of the ratio that can be verified today. For the Core bucket, the stop is placed below the lower of the swing low and the 50- and 200-day averages, minus 1.0 ATR. The lower of those levels is the 200-day average of ₹1,256.75, and subtracting 1.0 ATR of ₹45.36 gives a stop of ₹1,211.39. For the Tactical bucket, the stop is placed below the lower of the swing low and the 20- and 50-day averages, minus 0.5 ATR. The swing low is ₹1,345.10, and subtracting 0.5 ATR of ₹22.68 gives ₹1,322.42 (ledger).</p>
+<p>Using those stops, the target each bucket would need can be worked out. At the current close of ₹1,417.50, the Core stop is ₹206.11 below the price. A ratio of 3.0 therefore needs a target of about ₹2,035.83, which is 43.6 percent above the close. The Tactical stop is ₹95.08 below the price. A ratio of 3.5 needs a target of about ₹1,750.28, which is 23.5 percent above the close. The stock's 52-week high is ₹1,490.00 on a close basis, and a target at that level would give a ratio of only 0.35 on the Core stop and 0.76 on the Tactical stop. The reader can see the problem directly: the price is already near the top of its recent range, so the room to a high target is limited.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Bucket</th><th>Stop (ledger rule)</th><th>Risk from ₹1,417.50</th><th>Target needed for the floor</th><th>Upside from the close</th></tr>
+<tr><td>CORE_ALPHA (floor 3.0)</td><td>₹1,211.39</td><td>₹206.11</td><td>₹2,035.83</td><td>43.6 percent</td></tr>
+<tr><td>TACTICAL_MOMENTUM (floor 3.5)</td><td>₹1,322.42</td><td>₹95.08</td><td>₹1,750.28</td><td>23.5 percent</td></tr>
+</table></div>
+<p>The table shows that the price is the main barrier, not the stop. Both targets are well above the 52-week high, and they would need a verified source to justify them. The right way to read the table is to ask what a buyer would need to believe. A Core buyer would need to believe the stock is worth about ₹2,036 within the framework's horizon, which is roughly 44 percent above today's close. A Tactical buyer would need about ₹1,750. Neither belief is supported by a checkable anchor in this session.</p>
+<section class="estimate" id="target-estimate">
+<h4>The number</h4>
+<p>The number is the price target a buyer would need for the upside-to-downside ratio to reach the bucket's floor. At the 13 October 2026 close of ₹1,417.50, that is ₹2,035.83 for the Core bucket (floor 3.0) and ₹1,750.28 for the Tactical bucket (floor 3.5).</p>
+<h4>How it was calculated</h4>
+<p>The ratio is the distance from the close to the target, divided by the distance from the close to the stop. Rearranged, the target needed equals the close plus the floor multiplied by the risk, where the risk is the close minus the stop. For the Core bucket that is ₹1,417.50 plus 3.0 times ₹206.11, which gives ₹2,035.83.</p>
+<h4>The inputs</h4>
+<p>The inputs come from the ledger and the scoring file. The close is ₹1,417.50. The Core stop is ₹1,211.39, from the 200-day average of ₹1,256.75 less 1.0 ATR of ₹45.36. The Tactical stop is ₹1,322.42, from the swing low of ₹1,345.10 less 0.5 ATR of ₹22.68. No input comes from a broker or a web source, which is why the target itself is the missing part.</p>
+<h4>The range</h4>
+<p>The number moves with the entry price. If the entry were the 63-day base low of ₹1,258.20, the Core target needed would be ₹1,398.63, close to today's price. At the current close it is ₹2,035.83. The range is wide, so the answer depends on where the price is when the target is set.</p>
+<h4>If the number is off</h4>
+<p>If the target were lower than the number, the ratio would fall below the floor and the bucket would fail. If the Core stop moved by one ATR, the target needed would move by three times ₹45.36, which is ₹136.08. A target that cannot be checked counts as a failure, so the number is not used until a verifiable anchor exists.</p>
+</section>
+<p>Near support the ratio is far more favourable. If the price fell back to the base low of ₹1,258.20, the Core stop would sit ₹46.81 below the price.</p>
+<p>A ratio of 3.0 would then need a target of about ₹1,398.63, which is roughly where the stock trades today. The same company, at a lower price, would pass the asymmetry floor more easily if a target were verifiable.</p>
+<p>That is the main reason the framework waits for support. The price is doing the work that a target cannot.</p>
+</section>
+<section class="chapter" id="layers23">
+<h2>Layers 2 and 3</h2>
+<p>Layer 2 is a scorecard of three to five operating measures that describe how this kind of business is performing. Layer 3 is the timing gate, which maps the distance from support onto an action. Both are described here, but neither is scored, because the company failed Layer 1. The rules say that a company which fails a floor is not evaluated further, and this dossier follows that rule so that the verdict does not rest on the operating story alone.</p>
+<p>The reason for the rule is that a scorecard can be read as a reason to buy, even when a floor has failed. A company with a strong order book and strong cash conversion would score well on operating measures, and the score would then seem to argue for a purchase that the technical gate has already refused. Keeping Layer 2 out of the verdict prevents that. For the record, the company's order cover at 30 June 2026 would be about 2.45 times FY26 sales, and its three-year cash conversion is 1.56. Those figures are reported in the Layer 1 chapter, and they are not scored here.</p>
+<h3>What Layer 3 would say</h3>
+<p>Layer 3 would apply only after Layer 1 passes. Its job is to decide the timing of an entry. The framework maps the distance from support, in ATR, onto a ladder of four bands. Inside 0.5 ATR the action is an immediate buy at full size. Between 0.5 and 1.0 ATR the action is to accumulate on a dip at standard size. Between 1.0 and 1.2 ATR the action is a <dfn>limit order</dfn> only, at reduced size. Beyond 1.2 ATR the company is in the no-buy band, and the rule is to wait for support.</p>
+<p>On 13 October 2026 the price is 3.51 ATR above support, which is beyond the 1.2 ATR limit. If Layer 1 had passed, the posture would therefore be the no-buy band, and the verdict would be WAIT_FOR_SUPPORT. The posture is EXTENDED, and the rule is not to chase. The support level is the 63-day base low of ₹1,258.20. The price would return to the buyable bands at ₹1,312.63, which is the limit-order limit, at ₹1,303.56, which is the standard band, and at ₹1,280.88, which is the full-size band. The posture is therefore WAIT_FOR_SUPPORT in the present, and the company is not a candidate for a buy in this run.</p>
+</section>
+<section class="chapter" id="peers">
+<h2>Peer benchmarking</h2>
+<p>A peer comparison shows whether a company's numbers are good in absolute terms or only good for its sector. The framework asks for two to four peers. Here the two peers are companies that also build power transmission and EPC projects in India. The comparison uses Screener's header ratios, which are the figures printed at the top of each company's page on 13 October 2026. Those header ratios do not state the period they describe, so they are read as current figures and labelled that way. Where a peer's table figures were not in the cached text, they are not used.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Company</th><th>NSE code</th><th>Price-to-earnings (13 Oct 2026)</th><th>ROCE (header, undated)</th><th>ROE (header, undated)</th><th>Market cap (₹ crore, 13 Oct 2026)</th><th>Source</th></tr>
+<tr><td><b>KALPATPOWR</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AKALPATPOWR" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/KALPATPOWR/" style="color:var(--link);">Screener</a></span> (this company)</td><td>KPIL</td><td>21.8</td><td>18.3%</td><td>13.7%</td><td>24,210</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>KEC International</td><td>KEC</td><td>15.9</td><td>16.5%</td><td>11.4%</td><td>9,567</td><td><sup><a href="#cite_note-6">[6]</a></sup></td></tr>
+<tr><td>Techno Electric &amp; Engineering</td><td>TECHNOE</td><td>25.5</td><td>14.9%</td><td>12.0%</td><td>10,974</td><td><sup><a href="#cite_note-7">[7]</a></sup></td></tr>
+</table></div>
+<p>The table is read in three steps. First, the company's return on capital and return on equity, at 18.3 and 13.7 percent in the header, are the highest of the three companies, which is consistent with the Layer 1 result. Second, the price-to-earnings ratio of 21.8 sits between the two peers. KEC trades at 15.9 times earnings and Techno Electric at 25.5 times, so the company is not priced at either extreme of its group. Third, the company is the largest of the three by market value, at ₹24,210 crore, which is a rough guide to how easily its shares trade. These are useful context, but they do not change the verdict, because the framework does not reward a company for beating its peers if the price is outside the buyable band.</p>
+<p>The peers also show that the sector is not uniform. Techno Electric is priced at a higher multiple and has a lower header ROCE than the company. KEC has a lower multiple and a lower header ROE. For a reader building a watchlist from this comparison, the two peers are the natural next candidates, because both overlap with the company in power transmission and EPC work. Each would need its own Layer 1 run, with its own financial floors, stage test, momentum gate and target anchor. Neither result is implied by this table, and neither is a recommendation.</p>
+<p>The header figures carry one limit the reader should keep in view. Screener does not state the period for its ROCE and ROE headers, so the comparison is between current headers, not between matched years. A table comparison by year would need the full financial statements of each peer, and that was not cached for this run. Where a comparison of this kind matters for a decision, the matched-year figures should be obtained before the peers are used.</p>
+</section>
+<section class="chapter" id="redteam">
+<h2>Fatal-flaw red team</h2>
+<p>A red team asks the strongest case against the conclusion. Here the conclusion is REJECTED, so the red team asks what would make a buyer wrong to accept the framework's answer, and what would make the company look better than it is. The three flaws below are the ones the evidence supports most directly. Each one names the evidence, the number, and the level at which it would matter.</p>
+<h3>Flaw one: the price has already moved past its base</h3>
+<p>The strongest argument for buying now is that the trend is clean. The stock is above both averages, the 200-day average is rising, the company is beating the index, and the order book is at a record. A buyer who waits for a pullback risks missing a leg of the move. That is the bull case, and it deserves a direct answer. The answer is that the framework was built for this trade-off. A stock 3.51 ATR above its base has already delivered most of the gain that a base breakout would have offered. The rule is to pay for the entry and not for the story. A purchase at ₹1,417.50 would be a purchase after the breakout, with a stop 6.7 percent below on the Tactical rule, and 14.5 percent below on the Core rule. Those are the costs a buyer would carry from the first day.</p>
+<p>The level that would weaken this flaw is the price itself. If the price closed back at or below ₹1,312.63, the extension would fall inside 1.2 ATR, and the flaw would no longer apply in its present form. A breakout above ₹1,490.00 would not weaken this flaw, because it would put the price further from its base and the gate would still fail on extension. Until the price closes at or below ₹1,312.63, the flaw stands (ledger levels).</p>
+<h3>Flaw two: the profit trend is flattered by a one-off quarter</h3>
+<p>The second flaw sits in the earnings. The three-year profit growth printed by Screener is 36 percent. Arithmetic from the two annual profit figures in the same table gives 33 percent, from ₹435 crore in FY23 to ₹1,031 crore in FY26. <sup><a href="#cite_note-1">[1]</a></sup> That gap is small, but the bigger issue is the FY26 base. The March 2026 quarter alone reported a profit of ₹431 crore, with other income of ₹103 crore and a tax rate of 16 percent, against the June 2026 quarter's profit of ₹312 crore at a 26 percent tax rate. <sup><a href="#cite_note-1">[1]</a></sup> The March quarter is an outlier. A growth figure that starts from a low base and ends with an outlier quarter overstates the run rate. The operating margin is the more reliable test, and it was 9 percent in FY26, the same as FY23, and below the 13 percent of FY18 and FY19. <sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The level that would weaken this flaw is a clean year. If the FY27 operating margin moved above 10 percent, and the profit grew without an unusual quarter in other income, the margin argument would weaken. The company's own guidance of a PBT margin improvement of more than 75 basis points would need to be met in the full year, not in a single quarter. <sup><a href="#cite_note-4">[4]</a></sup></p>
+<h3>Flaw three: the ownership and the penalties</h3>
+<p>The third flaw is about the shareholder base and the small regulatory items. Promoters held 33.58 percent of the company at 30 June 2026. Trendlyne reports that their pledge was unchanged at 24.55 percent of holdings in the June 2026 quarter. <sup><a href="#cite_note-2">[2]</a></sup> The pledge is a loan secured on shares, and if the share price fell far enough the lender could sell the pledged shares, which would add supply to the market. Trendlyne words the pledge as a percentage of holdings and does not state whether that means promoter holdings or total shares. If the 24.55 percent is a share of promoter holdings, the pledged stake is about 8.2 percent of the company (33.58 percent multiplied by 24.55 percent). That is arithmetic from two published figures, not a published figure. The pledge is high enough to matter in a sharp fall, and it is unchanged, so it is not yet rising.</p>
+<p>The regulatory items are small. On 9 October 2026 the company disclosed a GST demand of ₹1.05 crore for an alleged excess input tax credit in FY22, and said it would appeal. Separately, on 13 October 2026 the company disclosed that an appeal on a GST demand was partly allowed, and the penalty was cut to ₹0.14 crore from ₹0.21 crore. <sup><a href="#cite_note-1">[1]</a></sup> The filings do not say whether these are the same matter. Neither matter is large against profit of ₹1,031 crore. They are listed because a reader who relies on the exchange filings should see them, and because they show that the company is still responding to tax matters, which is a small but real cost of its size. The level that would matter here is a pledge rising above the current 24.55 percent, or a penalty that grows materially on appeal.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>Invalidation levels and what we would do</h2>
+<p>An invalidation level is the price at which the reasoning in this dossier stops being true. For a rejected company, the levels describe when the verdict should be re-run, and for a company that later passes, they describe when a position would be cut. The levels below come from the ledger and the rules, not from any forecast of the price. Each one names the rule it feeds, so that a reader can check it against the next ledger without re-reading the report.</p>
+<p>The first level is the support itself. A close below ₹1,258.20, the 63-day base low, would mean the price had lost the base that the entry rule is built on. The Core stop would then be the reference, at ₹1,211.39, and the rule would say the setup has broken. The second level is the 200-day average at ₹1,256.75. A close below it would mean the long-term trend is at risk, and the Stage 2 test would be in doubt. Both levels are below the price by about 11 percent, and both are well outside the ATR bands, so they are not likely to be reached by ordinary movement in a single session.</p>
+<p>The third level is the swing low at ₹1,345.10 and the Tactical stop at ₹1,322.42. A holder who had bought under the Tactical rule would be out on a close below ₹1,322.42. For a rejected company there is no position, so the level is a marker of how the structure would look to a buyer who entered on a pullback. The fourth level is the upside. A close above the 52-week high of ₹1,490.00, with volume at least as high as the 20-day average, would be a new breakout. It would not change the verdict, because the price would be further from its base and Test A and Test B would fail on extension. It would make the eventual target harder to justify, because a higher entry shrinks the ratio.</p>
+<p class="trigger">A close at or below ₹1,312.63 would move the price into the limit-order band, and the momentum gate would be re-run on that close. A verifiable target that gives a ratio of at least 3.0 on the Core stop is the second trigger for re-testing this verdict.</p>
+<p>The action this dossier recommends is simple. No purchase is made. The company is kept on the watchlist with the reason recorded. The next re-test would be triggered by a close at or below ₹1,312.63, which would move the price into the limit-order band, or by the arrival of a verifiable target and a three-year median multiple. On either trigger the momentum gate would be re-run on the new close, the asymmetry would be recalculated against the Core and Tactical stops, and the verdict would be set again. If neither trigger occurs, the verdict stays REJECTED until the next run.</p>
+<p>The rule also requires that every figure in this chapter be checked against the next ledger, since the ledger is the only source for prices and technicals. If the price moved, the ATR distances, the stops and the required targets would all change, and the table in the asymmetry chapter would need to be rebuilt on that day's close.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Review status. The reviewer gate used two rounds. Round 1 returned REVISE, and every finding was corrected in the section that owned it. Round 2 returned APPROVE with notes, and one editorial note was then fixed. The red team returned verdict_holds in round 1, so no second red-team round was needed. Reviewer model: ao-claude-lc/claude-sonnet-5-5, as configured; no substitution. Status: APPROVE on reviewer round 2, with the stale as-of exceptions disclosed above.</p>
+<p><strong>Verdict and rule.</strong> REJECTED, because the Layer 1 technical floor fails on the momentum gate, which returns NO_MOMENTUM. The gate status is FAIL_TECHNICAL_NO_MOMENTUM, and the asymmetry floor is also recorded as FAIL_ASYMMETRY because no checkable target was found. Layers 2 and 3 were not evaluated, as the rules require after a Layer 1 failure. The financial floors pass.</p>
+<p><strong>Symbol note.</strong> The watchlist key and the ledger key are KALPATPOWR, and every price and technical figure comes from the ledger under that key. The company trades on the NSE under the ticker KPIL. The Screener page for the KALPATPOWR slug returned HTTP 404, so the Screener data was read from the KPIL page. The chart and Screener links that the assembler adds next to the bold ticker follow the KALPATPOWR key, and they may not resolve to the company's pages.</p>
+<p><strong>Stale as-of dates.</strong> The as-of dates below are more than 60 days before the report date of 13 October 2026. Each one is the true period of the figure, and none has been moved to avoid the check. They are disclosed as gate exceptions.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>As-of date</th><th>Days older than 13 Oct 2026</th><th>Research record keys</th><th>Count</th></tr>
+<tr><td>2026-03-31 (year to March 2026, Screener tables and the FY26 annual report listing)</td><td>196</td><td>roce_fy26, roe_fy26, borrowings_mar2026, equity_and_reserves_mar2026, cfo_fy24_fy26, pat_fy24_fy26, sales_fy26, sales_cagr_3y, pat_cagr_3y, opm_fy26, q4fy26_profit, annual_report_fy26_filing</td><td>12</td></tr>
+<tr><td>2026-06-30 (June 2026 quarter: shareholding, Q1 FY27 results and net debt)</td><td>105</td><td>promoter_holding_jun2026, promoter_pledge_jun2026, q1fy27_revenue, q1fy27_pat, q1fy27_ebitda, order_book_jun2026, order_inflow_fy27_ytd_jun2026, net_debt_jun2026</td><td>8</td></tr>
+<tr><td>2026-08-11 (company guidance and the India Ratings upgrade)</td><td>63</td><td>fy27_guidance, credit_rating_india_ratings</td><td>2</td></tr>
+</table></div>
+<p>Those are the 22 stale records. The newest figures, the price, the market capitalisation, the price-to-earnings ratio, the headline ratios and the exchange order and penalty disclosures, are all dated 13 October 2026 and are not exceptions. The stale periods matter because the Q1 FY27 figures, dated to June, are the latest quarterly numbers that could be checked. The September 2026 quarter had not been published in the sources reached by this run.</p>
+<p><strong>Not found after three or more queries.</strong> Two items could not be verified, and each was searched for with three distinct queries. The first is a forward earnings per share figure for FY27. The consensus pages returned only third-party snippets with conflicting targets, and none could be opened and checked. The second is a three-year median price-to-earnings ratio. The only history found was a five-year average from a third-party page that was not opened, and it is not the three-year median the framework names. Both items are recorded in the research file with their queries. Because neither is available, the asymmetry floor is recorded as FAIL_ASYMMETRY, with the word unverified.</p>
+<p><strong>Blocked or unfetchable sources.</strong> The company's own quarterly results page on kalpataruprojects.com returned a placeholder with no figures, and it is cached as such. The Q1 FY27 figures therefore come from a third-party mirror of the company release on kalpatarultd.com, which is not the company's own domain. The company's annual report PDF was not opened; the FY26 annual report is cited only through an aggregator listing that gives the filing date. The BSE and NSE disclosures were read only through Screener's list of announcements, not as the filings themselves. The KEC page returned an HTTP 429 rate-limit error in a shared cache entry, and this run replaced that error record with its own fetched text. The TECHNOE page is cached from an earlier run of the same URL with full text, and only its header figures are used.</p>
+<p><strong>Conflicting statements.</strong> Screener's overview describes the company's credit rating as AA/Stable from CRISIL and India Ratings, and it has no date for that statement. India Ratings' upgrade to IND AA+/Stable was reported on 11 August 2026. This dossier uses the upgrade, with the conflict disclosed. The Screener ROCE and ROE headers have no stated period, and they are used only in the peer table, labelled as undated.</p>
+<p><strong>Listings used for locating sources.</strong> Sources 8 to 28 in the references were identified in search results and were not opened. They were used to locate the company's pages, the consensus and valuation sites, and the annual report listings. No figure in this dossier is taken from them. Their presence in the reference list is to show where the search looked. They are labelled as search listings in the references.</p>
+</section>
+<section class="chapter" id="notes">
+<h2>Notes, glossary and sources</h2>
+<p>This chapter defines the terms used once more, for a reader who reads the chapters out of order, and it lists every source in the order it is cited. Each entry says whether the page was read in this run or only identified through a search listing.</p>
+<h3>Glossary pointers</h3>
+<p><dfn>ATR</dfn> (average true range) is the average size of a daily price move over 14 sessions. Here it is ₹45.36. <dfn>Base low</dfn> is the lowest close over the last 63 sessions, which is ₹1,258.20. <dfn>Stage 2</dfn> is the markup phase in which the price is above rising averages. <dfn>ROCE</dfn> is return on capital employed, and <dfn>ROE</dfn> is return on equity. <dfn>CFO</dfn> is cash from operations, and <dfn>PAT</dfn> is profit after tax. <dfn>OPM</dfn> is the operating margin. <dfn>EPC</dfn> is engineering, procurement and construction. <dfn>FAIL_ASYMMETRY</dfn> means the upside-to-downside floor failed, here because no checkable target exists.</p>
+<h3 id="references">Sources, in numbered order</h3>
 <ol class="reflist">
-  <li id="cite_note-1">^ National Stock Exchange of India (NSE) Corporate Announcement, "Kalpataru Projects International Limited: Corporate Profile, Shareholding Structure &amp; Segment Disclosures," NSE Scrip: KPIL, June 2026.</li>
-  <li id="cite_note-2">^ National Company Law Tribunal (NCLT) Ahmedabad Bench, "Sanction Order for the Composite Scheme of Amalgamation of JMC Projects (India) Limited with Kalpataru Power Transmission Limited," CP(CAA) No. 58/AHM/2022, Order dated January 11, 2023.</li>
-  <li id="cite_note-3">^ Kalpataru Projects International Limited Investor Presentation, "Q4 FY26 &amp; Full Year FY 2025–26 Consolidated Financial Results and Order Book Analysis," May 2026, pp. 6–18.</li>
-  <li id="cite_note-4">^ Central Electricity Authority (CEA), Ministry of Power, Government of India, "Transmission System for Integration of over 500 GW RE by 2030," Comprehensive National Master Plan, March 2025.</li>
-  <li id="cite_note-5">^ KPIL Q4 FY26 Earnings Conference Call Transcript, "Management Discussion on Margins, Order Inflow Guidance, and International Execution" (Speakers: Manish Mohnot, MD &amp; CEO; Ram Patodia, CFO), May 18, 2026, pp. 4–12.</li>
-  <li id="cite_note-6">^ BSE/NSE Exchange Disclosure, "Audited Standalone and Consolidated Financial Results of Kalpataru Projects International Limited for the Financial Year Ended March 31, 2026," Note 34 (Segment Reporting) &amp; Note 42 (Cash Flows).</li>
-  <li id="cite_note-7">^ Screener.in Financial Database, "Kalpataru Projects International Limited: Consolidated Historical Financials, Balance Sheet &amp; Cash Flow Ratios," <a href="https://www.screener.in/company/KPIL/consolidated/" target="_blank">screener.in/company/KPIL/consolidated/</a> (Audited FY20–FY26).</li>
-  <li id="cite_note-8">^ Registrar of Companies (RoC), Gujarat, "Certificate of Incorporation and History of HT Power Transmission / Kalpataru Power Transmission Limited (CIN: L40100GJ1981PLC004281)," Ministry of Corporate Affairs, India.</li>
-  <li id="cite_note-9">^ Kalpataru Power Transmission Limited, "30-Year Commemorative History of Tower Manufacturing and Testing Infrastructure," Gandhinagar Works Commemorative Volume, 2018, pp. 14–22.</li>
-  <li id="cite_note-10">^ Linjemontage i Gr&auml;storp AB Corporate Disclosure, "Acquisition of Controlling Stake by Kalpataru Power Transmission Limited and Expansion in Nordic TSO Transmission Projects," Swedish Companies Registration Office (Bolagsverket), 2019–2020.</li>
-  <li id="cite_note-11">^ Fasttel Engenharia Ltda Corporate Filing, "Strategic Acquisition by Kalpataru Group and Expansion in 500kV Brazilian Substation Grid Tenders," S&atilde;o Paulo Commercial Board, 2021.</li>
-  <li id="cite_note-12">^ BSE India Corporate Announcement, "Scheme of Amalgamation of JMC Projects (India) Limited into Kalpataru Power Transmission Limited: Effective Date and Name Change to Kalpataru Projects International Limited," May 22, 2023.</li>
-  <li id="cite_note-13">^ KPIL Exchange Intimation, "Divestment and Monetization of Vindhyachal Expressway Private Limited and Asset Recycling Strategy Update," BSE Scrip Code: 522287, Ref: KPIL/SEC/2024-25/1102.</li>
-  <li id="cite_note-14">^ Power Grid Corporation of India Limited (POWERGRID), "Contract Awards for 765kV D/C Transmission Corridors and Substations to Kalpataru Projects International Limited," Contracts Directory 2024–2026.</li>
-  <li id="cite_note-15">^ Ministry of Power, Government of India, "Report of the Task Force on Inter-Regional HVDC Corridors for Green Energy Corridors," CEA Publication No. CEA-TR-2025-08.</li>
-  <li id="cite_note-16">^ Saudi Electricity Company (SEC), "Major EPC Contract Awards for 380kV Interconnection Transmission Lines and Gas-Insulated Substations in Western and Central Provinces: Kalpataru Projects," Riyadh, KSA, 2025–2026.</li>
-  <li id="cite_note-17">^ Kalpataru Projects International Limited Integrated Annual Report 2025–26, "Management Discussion and Analysis: Buildings and Factories Division Strategic Realignment," July 2026, pp. 52–57.</li>
-  <li id="cite_note-18">^ Ministry of Jal Shakti, Department of Drinking Water and Sanitation, "Jal Jeevan Mission Har Ghar Jal Operational Review and Rural Water Supply Pipeline Implementation Status," New Delhi, 2025.</li>
-  <li id="cite_note-19">^ Dedicated Freight Corridor Corporation of India Limited (DFCCIL), "Status Report on Electrification and Signaling Works on Western DFC Packages: Kalpataru JV," New Delhi, October 2025.</li>
-  <li id="cite_note-20">^ GAIL (India) Limited &amp; Indian Oil Corporation Limited (IOCL), "Vendor Performance Evaluation and Cross-Country Hydrocarbon Pipeline EPC Approvals: Kalpataru Projects," New Delhi, 2025.</li>
-  <li id="cite_note-21">^ CRISIL Ratings Rationale, "Kalpataru Projects International Limited: Rating Reaffirmed at CRISIL AA/Positive and CRISIL A1+; Strong Business Risk Profile and Robust Backlog," Mumbai, August 14, 2026.</li>
-  <li id="cite_note-22">^ Central Power Research Institute (CPRI), "Technical Certification of Kalpataru Gandhinagar Tower Testing Station for 1200kV Transmission Structures," Bangalore, Technical Report Series.</li>
-  <li id="cite_note-23">^ London Metal Exchange (LME) &amp; Central Electricity Authority (CEA), "Standard Price Variation Formula Guidelines for High-Voltage Transmission Line Contracts," CEA-PVC-Guidelines-2024.</li>
-  <li id="cite_note-24">^ International Energy Agency (IEA), "Electricity Grids and Secure Energy Transitions: Accelerating Grid Investment to Connect Renewables," World Energy Outlook Special Report, Paris, 2024–2026.</li>
-  <li id="cite_note-25">^ Central Electricity Authority (CEA), "National Electricity Plan (Vol. II - Transmission) 2022–2032," Ministry of Power, Government of India, New Delhi, pp. 112–126.</li>
-  <li id="cite_note-26">^ Audited Consolidated Statement of Profit and Loss, Kalpataru Projects International Limited, Integrated Annual Report FY 2025–26, pp. 142–148.</li>
-  <li id="cite_note-27">^ Audited Consolidated Statement of Cash Flows, Kalpataru Projects International Limited, Integrated Annual Report FY 2025–26, pp. 150–154.</li>
-  <li id="cite_note-28">^ BSE India Shareholding Pattern Disclosures, "Kalpataru Projects International Limited (Scrip Code: 522287) - Shareholding Pattern for the Quarter Ended June 30, 2026," Promoter Pledge: 0.00%.</li>
-  <li id="cite_note-29">^ Independent Auditor's Report to the Members of Kalpataru Projects International Limited, M/s B S R &amp; Co. LLP, Chartered Accountants, Mumbai, May 15, 2026, pp. 134–140.</li>
-  <li id="cite_note-30">^ Capital IQ &amp; Screener.in Peer Comparison Engine, "Capital Goods &amp; Infrastructure EPC Comparative Valuation Multiples: KPIL, KEC, TECHNOE, LT," September 2026.</li>
-  <li id="cite_note-31">^ TradingView Interactive Technical Chart &amp; Moving Average Engine: <a href="https://www.tradingview.com/chart/?symbol=NSE%3AKPIL" target="_blank">tradingview.com/chart/?symbol=NSE%3AKPIL</a> (20-DMA, 50-DMA, 200-DMA, ATR(14) Analysis for NSE: KPIL).</li>
-  <li id="cite_note-32">^ Securities and Exchange Board of India (SEBI), "Listing Obligations and Disclosure Requirements (LODR) Compliance and Material Event Intimations for Kalpataru Projects International Limited," NSE Filing Ref: KPIL/SEBI/2026/08.</li>
-  <li id="cite_note-33">^ Ministry of Heavy Industries, Government of India, "Capital Goods Scheme Phase II &amp; Price Variation Mechanisms for Heavy Engineering Fabrication," Notification No. MHI/CG-II/2024.</li>
-  <li id="cite_note-34">^ ICRA Limited Credit Rating Release, "Kalpataru Projects International Limited: Long-Term Rating Reaffirmed at [ICRA] AA (Stable); Short-Term Rating at [ICRA] A1+," Gurgaon, July 2026.</li>
-  <li id="cite_note-35">^ NITI Aayog, "National Infrastructure Pipeline (NIP) Progress Report: Energy Transmission and Grid Interconnections Portfolio," New Delhi, 2025.</li>
+<li id="cite_note-1"><a href="https://www.screener.in/company/KPIL/consolidated/">Screener: Kalpataru Projects International Ltd consolidated company page (header ratios, profit and loss, balance sheet, cash flow, ratios, shareholding, quarterly results, exchange announcements; read in this run)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-2"><a href="https://trendlyne.com/equity/share-holding/712/KPIL/latest/kalpataru-projects-international-ltd/">Trendlyne: Kalpataru Projects latest shareholding pattern, promoter holding and pledge, June 2026 quarter (read in this run)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-3"><a href="https://www.investywise.com/kalpataru-projects-international-limited-q1-fy27-financial-results-strong-order-book/">InvestyWise: Kalpataru Projects Q1 FY27 results, credit rating upgrade and order book, dated 11 August 2026 (read in this run)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-4"><a href="https://kalpatarultd.com/updates/kalpataru-projects-international-kpil-reports-record-q1-fy27-results-consolidated-pat-surges-46-to-312-crore-order-book-hits-all-time-high-of-66-607-crore/">Kalpataru Projects Q1 FY27 results release, mirrored on kalpatarultd.com: revenue, profit, order book, net debt and FY27 guidance (read in this run; third-party mirror)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-5"><a href="https://www.reportsradar.com/reports/e4a5ef5b-d9ec-4e87-af6f-9b96a0c6ee58">ReportsRadar: Kalpataru Projects International FY2026 annual report listing, filed 22 June 2026 (metadata read; PDF not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-6"><a href="https://www.screener.in/company/KEC/consolidated/">Screener: KEC International Ltd header ratios, 13 October 2026 close (peer; read in this run)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-7"><a href="https://www.screener.in/company/TECHNOE/consolidated/">Screener: Techno Electric &amp; Engineering Company Ltd header ratios, 13 October 2026 close (peer; cached full text from an earlier run)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-8"><a href="https://www.psuconnect.in/financial/kpil-q1-fy27-revenue-hits-6408-cr-net-profit-surges-46-to-312-cr">PSU Connect: KPIL Q1 FY27 results article (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-9"><a href="https://www.kotakneo.com/news/stocks/kpil-secures-rs-2025-crore-orders-fy27/">Kotak Neo: KPIL order news for FY27 (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-10"><a href="https://univest.in/blogs/kalpataru-projects-order-win-2025-crore">Univest: Kalpataru Projects order win article (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-11"><a href="https://www.wirecable.in/kpil-announces/">Wirecable: KPIL order announcement (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-12"><a href="https://electricalmirror.net/kalpataru-projects-orders-power-td-bf-oil-gas/">Electrical Mirror: Kalpataru Projects multi-sector orders (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-13"><a href="https://mailcontent.icicidirect.com/mailcontent/idirect_kpil_q4fy26.pdf">ICICI Direct: Kalpataru Projects Q4 FY26 research note (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-14"><a href="https://kalpataruprojects.com/about-us">Kalpataru Projects: company about page (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-15"><a href="https://www.kalpataruprojects.com/">Kalpataru Projects: company home page (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-16"><a href="https://kalpataruprojects.com/investors/financials/annual-reports/annual-reports">Kalpataru Projects: company annual reports page (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-17"><a href="https://kalpataruprojects.com/investors/financials/quarterly-result/analyst-presentation">Kalpataru Projects: company analyst presentation page (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-18"><a href="https://kalpataruprojects.com/investors/corporate-governance/shareholding-pattern">Kalpataru Projects: company shareholding pattern page (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-19"><a href="https://concall.in/company/122287/updates/documents">Concall: Kalpataru Projects documents and earnings call transcripts (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-20"><a href="https://xaro.ai/company/kpil/annual-reports/2026">Xaro: Kalpataru Projects annual report 2026 (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-21"><a href="https://www.stockssena.com/research/filings/KPIL">StocksSena: KPIL filings archive (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-22"><a href="https://www.bicresearch.in/financials/kpil">BIC Research: KPIL financials (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-23"><a href="https://www.marketscreener.com/quote/stock/KALPATARU-PROJECTS-INTERN-9059529/valuation/">MarketScreener: KPIL valuation page (search listing; not opened; looked at for the median multiple)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-24"><a href="https://www.smart-investing.in/pe-ratio.php?Company=KALPATARU+PROJECTS+INTERNATIONAL+LTD">Smart Investing: KPIL price-to-earnings history (search listing; not opened; looked at for the median multiple)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-25"><a href="https://trendlyne.com/equity/consensus-estimates/712/KPIL/kalpataru-projects-international-ltd/">Trendlyne: KPIL consensus estimates (search listing; not opened; looked at for a forward earnings figure)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-26"><a href="https://www.livemint.com/market/market-stats/stocks-kalpataru-projects-international-share-price-nse-bse-s0003435">Mint: KPIL share price on 13 October 2026 (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-27"><a href="https://www.morningstar.com/stocks/xnse/kpil/valuation">Morningstar: KPIL valuation page (search listing; not opened)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-28"><a href="https://www.valueresearchonline.com/stocks/42872/kalpataru-projects-international-ltd/key-ratios/">Value Research: KPIL key ratios (search listing; not opened)</a>. Retrieved 2026-10-13</li>
 </ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-</div>
-</body>
-</html>
+</script></body></html>
