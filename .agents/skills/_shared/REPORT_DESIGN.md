@@ -16,7 +16,7 @@ Write the complete body, not a competing head, stylesheet or script. Retain all 
   --research "<RUN_DIR>/research_US_<session-date>.json"
 ```
 
-Dossiers use --kind dossier --workflow "Company research" and docs/blogs/SYMBOL_dossier.html. Use the correct market. Reassemble after final editorial changes, then run the existing factual, citation, recomputation, readability, structural and independent-review gates without weakening them. Newly completed publication checks require the research-desk-v1 marker, shared interactions and timezone-aware header.
+Dossiers use --kind dossier --workflow "Company research" and docs/blogs/<MARKET>/SYMBOL_dossier.html. Use the correct market. Reassemble after final editorial changes, then run the existing factual, citation, recomputation, readability, structural and independent-review gates without weakening them. Newly completed publication checks require the research-desk-v1 marker, shared interactions and timezone-aware header.
 
 Generation time is the actual assembly time in America/Los_Angeles: PDT during daylight saving, PST during standard time, with an ISO offset. Never substitute session dates or hard-code a time. --as-of separately identifies the verified research cutoff. Metadata provides report market, kind, workflow and dates independently of filename parsing.
 

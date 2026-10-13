@@ -15,7 +15,7 @@ Checks (see .agents/skills/_shared/BOOK_STANDARD.md section 5):
   6. banned filler phrases (REPORT_VOICE section 5) are absent; the primer has
      3-5 sentences; Notes and sources exist and are numbered
 
-Usage: python3 scripts/readability_check.py docs/blogs/ADBE_dossier.html [--max-grade 13]
+Usage: python3 scripts/readability_check.py docs/blogs/US/ADBE_dossier.html [--max-grade 13]
 Exit 0 = pass, 1 = failures.
 """
 import argparse

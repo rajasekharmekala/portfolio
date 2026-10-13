@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD.com, Inc. (NASDAQ: JD) — Institutional Equity Research Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p: #1f2937;
+  --s: #4b5563;
+  --m: #6b7280;
+  --b: #d1d5db;
+  --blue: #1d4ed8;
+  --green: #15803d;
+  --amber: #b45309;
+  --red: #b91c1c;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: Newsreader, Georgia, serif;
+  --mono: "JetBrains Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: var(--sans);
+  color: var(--p);
+  background: #f1f5f9;
+  line-height: 1.72;
+  font-size: 15px;
+  margin: 0;
+  padding: 24px 12px;
+}
+.main-container {
+  max-width: 1240px;
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 40px 48px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  color: #0f172a;
+  font-weight: 600;
+}
+h1.firstHeading {
+  font-size: 2.45em;
+  border-bottom: 1px solid var(--b);
+  padding-bottom: 10px;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+.siteSub {
+  font-size: 0.88em;
+  color: var(--m);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+h2 {
+  font-size: 1.65em;
+  border-bottom: 1px solid var(--b);
+  padding-bottom: 6px;
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+h3 {
+  font-size: 1.25em;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+p {
+  margin: 14px 0;
+  text-align: justify;
+}
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.decision-banner {
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 20px 0 32px 0;
+  border: 1px solid var(--b);
+}
+.decision-banner.reject {
+  background: #fef2f2;
+  border-left: 6px solid var(--red);
+  border-color: #fecaca;
+}
+.decision-title {
+  font-size: 1.35em;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--red);
+}
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+.decision-card {
+  background: #ffffff;
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 12px 16px;
+}
+.decision-card-label {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  color: var(--m);
+  font-weight: 600;
+}
+.decision-card-val {
+  font-size: 1.2em;
+  font-weight: 700;
+  font-family: var(--mono);
+  margin-top: 2px;
+}
+.decision-card-sub {
+  font-size: 0.8em;
+  color: var(--s);
+  margin-top: 2px;
+}
+table.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 24px 28px;
+  width: 340px;
+  background: #f8fafc;
+  border: 1px solid var(--b);
+  border-collapse: collapse;
+  font-size: 0.88em;
+  line-height: 1.5;
+}
+table.infobox caption {
+  font-family: var(--serif);
+  font-size: 1.25em;
+  font-weight: 700;
+  padding: 10px;
+  background: #f1f5f9;
+  border: 1px solid var(--b);
+  border-bottom: none;
+  color: #0f172a;
+}
+table.infobox th {
+  text-align: left;
+  padding: 6px 10px;
+  border-top: 1px solid var(--b);
+  color: #334155;
+  font-weight: 600;
+  width: 44%;
+}
+table.infobox td {
+  padding: 6px 10px;
+  border-top: 1px solid var(--b);
+  color: #0f172a;
+}
+table.infobox .header {
+  background: #e2e8f0;
+  font-weight: 700;
+  text-align: center;
+  color: #0f172a;
+  border-top: 1px solid var(--b);
+  border-bottom: 1px solid var(--b);
+  padding: 5px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+.toc {
+  background: #f8fafc;
+  border: 1px solid var(--b);
+  border-radius: 4px;
+  padding: 16px 24px;
+  display: inline-block;
+  margin: 16px 0 28px 0;
+  min-width: 300px;
+}
+.toc h2 {
+  font-size: 1.05em;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  border: none;
+  padding: 0;
+  text-align: center;
+}
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9em;
+}
+.toc li {
+  margin: 4px 0;
+}
+.tocnumber {
+  color: var(--m);
+  margin-right: 6px;
+  font-family: var(--mono);
+}
+table.wikitable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.88em;
+  background: #ffffff;
+  border: 1px solid var(--b);
+}
+table.wikitable th {
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border: 1px solid var(--b);
+}
+table.wikitable td {
+  padding: 7px 12px;
+  border: 1px solid var(--b);
+  color: #334155;
+}
+table.wikitable tr:nth-child(even) td {
+  background: #f8fafc;
+}
+table.wikitable td.num, table.wikitable th.num {
+  text-align: right;
+  font-family: var(--mono);
+}
+.callout-box {
+  padding: 14px 18px;
+  margin: 18px 0;
+  border-radius: 4px;
+  font-size: 0.95em;
+  border-left: 5px solid;
+}
+.callout-info { background: #eff6ff; border-color: var(--blue); }
+.callout-success { background: #f0fdf4; border-color: var(--green); }
+.callout-warning { background: #fffbeb; border-color: var(--amber); }
+.callout-danger { background: #fef2f2; border-color: var(--red); }
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.pill-pass { background: #dcfce7; color: #166534; }
+.pill-watch { background: #fef3c7; color: #92400e; }
+.pill-fail { background: #fee2e2; color: #991b1b; }
+ol.reflist {
+  font-size: 0.84em;
+  line-height: 1.6;
+  column-count: 2;
+  column-gap: 32px;
+  padding-left: 20px;
+}
+ol.reflist li {
+  margin-bottom: 8px;
+}
+sup.reference {
+  font-size: 0.8em;
+  font-weight: 500;
+}
+.table-wrapper {
+  overflow-x: auto;
+  margin: 14px 0;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+@media (max-width: 768px) {
+  body { padding: 12px 6px; }
+  .main-container { padding: 20px 16px; }
+  table.infobox { float: none; width: 100%; margin: 16px 0; }
+  ol.reflist { column-count: 1; }
+}
+</style>
+</head>
+<body>
+<div class="main-container">
+<div id="dossierNavSlot"></div>
+<script src="../dossier_nav.js" defer></script>
+
+<h1 class="firstHeading">JD.com, Inc. (NASDAQ: JD)</h1>
+<div class="siteSub">Institutional Equity Research Dossier & Underwriting Audit — SEC EDGAR Form 20-F / 6-K Primary Filings</div>
+
+<!-- EXECUTIVE DECISION BANNER -->
+<div class="decision-banner reject">
+  <div class="decision-title">
+    <span>🔴 UNDERWRITING DISPOSITION: REJECTED & ARCHIVED</span>
+    <span class="pill pill-fail" style="font-size:0.7em;">GATE FAILURE: FINANCIAL & TECHNICAL</span>
+  </div>
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="decision-card-label">Current Market Price</div>
+      <div class="decision-card-val">$26.61</div>
+      <div class="decision-card-sub">Market Cap: $32.0B USD</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-card-label">Capital Efficiency (ROIC)</div>
+      <div class="decision-card-val" style="color:var(--red);">4.88%</div>
+      <div class="decision-card-sub">Threshold: ≥ 12.0% (FAILED)</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-card-label">Free Cash Flow Margin</div>
+      <div class="decision-card-val" style="color:var(--red);">2.17% – 3.24%</div>
+      <div class="decision-card-sub">Threshold: ≥ 12.0% (FAILED)</div>
+    </div>
+    <div class="decision-card">
+      <div class="decision-card-label">Technical Regime</div>
+      <div class="decision-card-val" style="color:var(--red);">Stage 4 Downtrend</div>
+      <div class="decision-card-sub">Below 20, 50, 200-DMAs</div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOAT INFOBOX -->
+<table class="infobox">
+  <caption>JD.com, Inc. (京东)</caption>
+  <tbody>
+    <tr><td colspan="2" style="text-align:center; padding:12px; font-weight:bold; font-size:1.3em; color:#b91c1c;">JD.COM / 京东集团</td></tr>
+    <tr><th colspan="2" class="header">Entity Overview</th></tr>
+    <tr><th>Ticker</th><td>NASDAQ: JD / HKEX: 9618</td></tr>
+    <tr><th>Current Price</th><td>$26.61 (USD ADS)</td></tr>
+    <tr><th>Market Capitalization</th><td>$32.04 Billion USD</td></tr>
+    <tr><th>Enterprise Value</th><td>$16.82 Billion USD</td></tr>
+    <tr><th>Headquarters</th><td>Beijing, People's Republic of China</td></tr>
+    <tr><th>CEO</th><td>Sandy Ran Xu (许冉)</td></tr>
+    <tr><th>Founder / Chairman</th><td>Richard Qiangdong Liu (刘强东)</td></tr>
+    <tr><th>Employees</th><td>517,124 (Dec 2024)</td></tr>
+    <tr><th colspan="2" class="header">Valuation & Quality Forensics</th></tr>
+    <tr><th>P/E (GAAP TTM)</th><td>8.4x</td></tr>
+    <tr><th>EV / Sales (TTM)</th><td>0.10x</td></tr>
+    <tr><th>EV / EBITDA (TTM)</th><td>3.1x</td></tr>
+    <tr><th>Price / Book</th><td>0.66x</td></tr>
+    <tr><th>ROIC (TTM)</th><td style="color:var(--red); font-weight:bold;">4.88% (Failed)</td></tr>
+    <tr><th>FCF Margin</th><td style="color:var(--red); font-weight:bold;">2.17% (Failed)</td></tr>
+    <tr><th>Net Debt / EBITDA</th><td>-4.3x (Net Cash: $21.7B)</td></tr>
+    <tr><th>SBC / Revenue</th><td>0.41%</td></tr>
+    <tr><th colspan="2" class="header">Technical Indicators</th></tr>
+    <tr><th>20-Day SMA</th><td>$27.26 (Below)</td></tr>
+    <tr><th>50-Day SMA</th><td>$29.34 (Below)</td></tr>
+    <tr><th>200-Day SMA</th><td>$28.95 (Below)</td></tr>
+    <tr><th>14-Day RSI</th><td>35.10 (Bearish)</td></tr>
+    <tr><th>ATR (14-Day)</th><td>$0.85</td></tr>
+  </tbody>
+</table>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>Contents</h2>
+  <ul>
+    <li><a href="#sec-1"><span class="tocnumber">1</span> Corporate Overview & Architectural Foundation</a></li>
+    <li><a href="#sec-2"><span class="tocnumber">2</span> Comprehensive Business Model & Revenue Engine</a></li>
+    <li><a href="#sec-3"><span class="tocnumber">3</span> Industry Dynamics, Macro Environment & Competitive Landscape</a></li>
+    <li><a href="#sec-4"><span class="tocnumber">4</span> 5-Year Audited GAAP Financial Forensics</a></li>
+    <li><a href="#sec-5"><span class="tocnumber">5</span> Capital Allocation Track Record & Balance Sheet Quality</a></li>
+    <li><a href="#sec-6"><span class="tocnumber">6</span> Sector-Specific Operational KPIs & Execution Forensics</a></li>
+    <li><a href="#sec-7"><span class="tocnumber">7</span> Technical Architecture, Moving Averages & Volume Support</a></li>
+    <li><a href="#sec-8"><span class="tocnumber">8</span> 3-Layer Underwriting Framework Scorecard</a></li>
+    <li><a href="#sec-9"><span class="tocnumber">9</span> Peer Benchmarking & Relative Valuation Analysis</a></li>
+    <li><a href="#sec-10"><span class="tocnumber">10</span> Institutional Catalysts & Growth Vectors</a></li>
+    <li><a href="#sec-11"><span class="tocnumber">11</span> Fatal Flaws, Asymmetric Downside Scenarios & Invalidation Triggers</a></li>
+    <li><a href="#sec-12"><span class="tocnumber">12</span> Capital Allocation Verdict, Position Sizing & Rejection Audit</a></li>
+    <li><a href="#references"><span class="tocnumber">13</span> Primary SEC EDGAR Filings & Regulatory References</a></li>
+  </ul>
+</div>
+
+<div class="clearfix"></div>
+
+<h2 id="sec-1">1. Corporate Overview & Architectural Foundation</h2>
+<p>JD.com, Inc. (NASDAQ: JD; HKEX: 9618) is a leading supply chain-based technology and direct retail enterprise headquartered in Beijing, China.<sup class="reference"><a href="#ref-1">[1]</a></sup> Originally established by Richard Qiangdong Liu in 1998 as a retail distributor of magneto-optical products in Beijing's Zhongguancun technology hub, the company transitioned entirely online in 2004 following the SARS epidemic.<sup class="reference"><a href="#ref-2">[2]</a></sup> Over the subsequent two decades, JD differentiated itself from marketplace aggregators like Alibaba by establishing an in-house nationwide logistics, warehousing, cold-chain, and last-mile delivery network.<sup class="reference"><a href="#ref-3">[3]</a></sup></p>
+
+<p>The enterprise operates primarily through two principal segments: <strong>JD Retail</strong> (comprising first-party 1P online retail, 3P marketplace merchant services, and omni-channel supermarket initiatives) and <strong>JD Logistics</strong> (an independently listed subsidiary providing integrated supply chain logistics solutions to external commercial clients and internal retail divisions).<sup class="reference"><a href="#ref-4">[4]</a></sup> The group also consolidates operations in JD Health International Inc. (digital healthcare, teleconsultation, and online pharmaceutical distribution) and Dada Nexus Limited (on-demand local intra-city delivery).<sup class="reference"><a href="#ref-5">[5]</a></sup></p>
+
+<p>Corporate governance is structured via a Cayman Islands holding entity operating through Variable Interest Entity (VIE) agreements to navigate Chinese foreign ownership restrictions in domestic telecommunications and retail distribution licenses.<sup class="reference"><a href="#ref-6">[6]</a></sup> Day-to-day managerial leadership is headed by CEO Sandy Ran Xu (appointed in May 2023), while founder Richard Liu maintains significant voting power via Class B super-voting ordinary shares.<sup class="reference"><a href="#ref-7">[7]</a></sup></p>
+
+<h2 id="sec-2">2. Comprehensive Business Model & Revenue Engine</h2>
+<p>JD.com's revenue engine functions across three synchronized operational pillars: (1) <strong>Direct Product Sales (1P)</strong>, where JD acts as principal buyer, taking inventory ownership of consumer electronics, home appliances, computers, and general merchandise, delivering them via its proprietary fulfillment network with rapid delivery turnaround;<sup class="reference"><a href="#ref-8">[8]</a></sup> (2) <strong>Marketplace & Advertising Services (3P)</strong>, earning commission take-rates (typically 2%–5%) and digital search marketing fees from third-party merchants operating on the JD Open Platform;<sup class="reference"><a href="#ref-9">[9]</a></sup> and (3) <strong>Logistics & External Supply Chain Services</strong>, monetizing integrated fulfillment, cold chain, and freight solutions for external corporate customers.<sup class="reference"><a href="#ref-10">[10]</a></sup></p>
+
+<p>Historically, JD's core strength lies in consumer electronics and home appliances (accounting for ~50% of net product sales), where its reputation for genuine product authenticity, manufacturer warranties, and integrated installation services created high consumer trust.<sup class="reference"><a href="#ref-11">[11]</a></sup> In recent years, JD has attempted to expand into supermarket consumables, daily necessities, cosmetics, and apparel to increase purchasing frequency and customer lifetime value.<sup class="reference"><a href="#ref-12">[12]</a></sup></p>
+
+<p>Unit economics in JD's core 1P retail business are characterized by very high gross merchandise volume (GMV) but low operating margins (2.5% to 4.0% non-GAAP EBIT margin in JD Retail). This structural margin cap requires ultra-lean working capital management and rapid inventory turnover (typically 30–32 days) to generate positive operating cash flow.<sup class="reference"><a href="#ref-13">[13]</a></sup></p>
+
+<h2 id="sec-3">3. Industry Dynamics, Macro Environment & Competitive Landscape</h2>
+<p>The Chinese domestic retail and e-commerce landscape is contending with multi-faceted macroeconomic headwinds, including cautious consumer sentiment, property sector contraction, and widespread retail price deflation.<sup class="reference"><a href="#ref-14">[14]</a></sup> Consumer discretionary spending has shifted toward value-seeking behavior, igniting aggressive price competition across all major e-commerce platforms.<sup class="reference"><a href="#ref-15">[15]</a></sup></p>
+
+<p>The competitive environment has grown increasingly fierce due to PDD Holdings (Pinduoduo/Temu), whose factory-direct C2M model eroded JD's pricing perception in tier-3 to tier-5 cities. In response, JD launched its "RMB 10 Billion Subsidy Program" in early 2023, which defended user traffic but pressured gross profit margins in electronics and FMCG categories.<sup class="reference"><a href="#ref-16">[16]</a></sup> Concurrently, ByteDance's Douyin and Kuaishou have captured substantial market share in livestreaming commerce, disintermediating traditional search-driven e-commerce platforms.<sup class="reference"><a href="#ref-17">[17]</a></sup></p>
+
+<p>From an international capital perspective, US-China geopolitical tensions, tariff threats, and ongoing audit inspection compliance requirements under the Holding Foreign Companies Accountable Act (HFCAA) contribute to an elevated equity risk premium and structural valuation discount on China ADRs.<sup class="reference"><a href="#ref-18">[18]</a></sup></p>
+
+<h2 id="sec-4">4. 5-Year Audited GAAP Financial Forensics</h2>
+<p>The following financial statements are derived directly from JD.com, Inc.'s audited Form 20-F annual reports filed with the US Securities and Exchange Commission (SEC) and unaudited Form 6-K releases.<sup class="reference"><a href="#ref-19">[19]</a></sup></p>
+
+<h3>Audited Consolidated Statements of Operations (FY20 – FY24)</h3>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr>
+      <th>Metric (RMB Billions / GAAP)</th>
+      <th class="num">FY2020</th>
+      <th class="num">FY2021</th>
+      <th class="num">FY2022</th>
+      <th class="num">FY2023</th>
+      <th class="num">FY2024</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Net Revenues</strong></td><td class="num">745.80</td><td class="num">951.59</td><td class="num">1,046.24</td><td class="num">1,084.66</td><td class="num">1,158.80</td></tr>
+    <tr><td>— <em>Electronics & Home Appliances</em></td><td class="num">400.93</td><td class="num">490.62</td><td class="num">515.25</td><td class="num">538.34</td><td class="num">565.20</td></tr>
+    <tr><td>— <em>General Merchandise</em></td><td class="num">250.95</td><td class="num">323.70</td><td class="num">350.27</td><td class="num">348.61</td><td class="num">372.40</td></tr>
+    <tr><td>— <em>Logistics & Services</em></td><td class="num">93.92</td><td class="num">137.27</td><td class="num">180.72</td><td class="num">197.71</td><td class="num">221.20</td></tr>
+    <tr><td>Cost of Revenues</td><td class="num">(636.69)</td><td class="num">(822.45)</td><td class="num">(898.86)</td><td class="num">(924.96)</td><td class="num">(978.50)</td></tr>
+    <tr><td><strong>Gross Profit</strong></td><td class="num">109.11</td><td class="num">129.14</td><td class="num">147.38</td><td class="num">159.70</td><td class="num">180.30</td></tr>
+    <tr><td><em>Gross Margin %</em></td><td class="num">14.63%</td><td class="num">13.57%</td><td class="num">14.09%</td><td class="num">14.72%</td><td class="num">15.56%</td></tr>
+    <tr><td>Fulfillment Expenses</td><td class="num">(48.70)</td><td class="num">(59.08)</td><td class="num">(63.01)</td><td class="num">(64.55)</td><td class="num">(68.20)</td></tr>
+    <tr><td>Marketing Expenses</td><td class="num">(27.16)</td><td class="num">(38.74)</td><td class="num">(39.23)</td><td class="num">(40.11)</td><td class="num">(43.80)</td></tr>
+    <tr><td>R&D Expenses</td><td class="num">(16.15)</td><td class="num">(16.33)</td><td class="num">(16.89)</td><td class="num">(16.39)</td><td class="num">(17.10)</td></tr>
+    <tr><td>General & Administrative</td><td class="num">(6.41)</td><td class="num">(11.56)</td><td class="num">(10.22)</td><td class="num">(9.74)</td><td class="num">(10.40)</td></tr>
+    <tr><td><strong>GAAP Operating Income (EBIT)</strong></td><td class="num">12.34</td><td class="num">4.14</td><td class="num">19.67</td><td class="num">26.03</td><td class="num">35.60</td></tr>
+    <tr><td><em>Operating Margin %</em></td><td class="num">1.65%</td><td class="num">0.44%</td><td class="num">1.88%</td><td class="num">2.40%</td><td class="num">3.07%</td></tr>
+    <tr><td><strong>GAAP Net Income (Attributable)</strong></td><td class="num">49.40</td><td class="num">(3.56)</td><td class="num">10.38</td><td class="num">24.17</td><td class="num">41.40</td></tr>
+    <tr><td><em>GAAP Diluted EPS (RMB / ADS)</em></td><td class="num">31.68</td><td class="num">(2.29)</td><td class="num">6.56</td><td class="num">15.23</td><td class="num">26.40</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Audited Consolidated Balance Sheets (FY20 – FY24)</h3>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr>
+      <th>Balance Sheet Metric (RMB Billions)</th>
+      <th class="num">FY2020</th>
+      <th class="num">FY2021</th>
+      <th class="num">FY2022</th>
+      <th class="num">FY2023</th>
+      <th class="num">FY2024</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Cash & Cash Equivalents</td><td class="num">86.09</td><td class="num">72.74</td><td class="num">78.86</td><td class="num">71.05</td><td class="num">82.40</td></tr>
+    <tr><td>Restricted Cash & Short-Term Inv.</td><td class="num">65.01</td><td class="num">118.55</td><td class="num">147.37</td><td class="num">126.65</td><td class="num">130.20</td></tr>
+    <tr><td>Inventories</td><td class="num">58.93</td><td class="num">75.60</td><td class="num">77.95</td><td class="num">73.81</td><td class="num">76.50</td></tr>
+    <tr><td>Total Current Assets</td><td class="num">246.36</td><td class="num">300.99</td><td class="num">338.48</td><td class="num">305.29</td><td class="num">328.60</td></tr>
+    <tr><td>Property, Plant & Equipment (Net)</td><td class="num">39.09</td><td class="num">53.03</td><td class="num">54.06</td><td class="num">60.27</td><td class="num">64.80</td></tr>
+    <tr><td>Operating Lease ROU Assets</td><td class="num">15.02</td><td class="num">19.98</td><td class="num">22.25</td><td class="num">23.15</td><td class="num">24.50</td></tr>
+    <tr><td><strong>Total Assets</strong></td><td class="num">422.29</td><td class="num">496.53</td><td class="num">595.32</td><td class="num">628.98</td><td class="num">672.40</td></tr>
+    <tr><td>Accounts Payable</td><td class="num">106.82</td><td class="num">140.48</td><td class="num">160.61</td><td class="num">165.74</td><td class="num">174.20</td></tr>
+    <tr><td>Short-Term Debt & Borrowings</td><td class="num">0.00</td><td class="num">4.37</td><td class="num">12.15</td><td class="num">10.50</td><td class="num">11.20</td></tr>
+    <tr><td>Long-Term Debt & Unsecured Notes</td><td class="num">32.65</td><td class="num">30.64</td><td class="num">34.42</td><td class="num">32.80</td><td class="num">45.60</td></tr>
+    <tr><td><strong>Total Liabilities</strong></td><td class="num">234.74</td><td class="num">287.62</td><td class="num">381.42</td><td class="num">387.89</td><td class="num">415.80</td></tr>
+    <tr><td><strong>Total Shareholders' Equity</strong></td><td class="num">187.55</td><td class="num">208.91</td><td class="num">213.90</td><td class="num">241.09</td><td class="num">256.60</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Audited Consolidated Cash Flows & SBC Forensics (FY20 – FY24)</h3>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr>
+      <th>Cash Flow Metric (RMB Billions)</th>
+      <th class="num">FY2020</th>
+      <th class="num">FY2021</th>
+      <th class="num">FY2022</th>
+      <th class="num">FY2023</th>
+      <th class="num">FY2024</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Operating Cash Flow (CFO)</strong></td><td class="num">42.54</td><td class="num">42.30</td><td class="num">57.82</td><td class="num">59.52</td><td class="num">62.80</td></tr>
+    <tr><td>Capital Expenditures (CapEx)</td><td class="num">(17.58)</td><td class="num">(33.45)</td><td class="num">(35.66)</td><td class="num">(22.84)</td><td class="num">(25.20)</td></tr>
+    <tr><td><strong>Free Cash Flow (FCF)</strong></td><td class="num">24.96</td><td class="num">8.85</td><td class="num">22.16</td><td class="num">36.68</td><td class="num">37.60</td></tr>
+    <tr><td><em>FCF Margin %</em></td><td class="num">3.35%</td><td class="num">0.93%</td><td class="num">2.12%</td><td class="num">3.38%</td><td class="num">3.24%</td></tr>
+    <tr><td>Share-Based Compensation (SBC)</td><td class="num">4.15</td><td class="num">9.13</td><td class="num">7.54</td><td class="num">5.14</td><td class="num">4.80</td></tr>
+    <tr><td><em>SBC as % of Revenue</em></td><td class="num">0.56%</td><td class="num">0.96%</td><td class="num">0.72%</td><td class="num">0.47%</td><td class="num">0.41%</td></tr>
+    <tr><td>Cash Dividends Paid</td><td class="num">0.00</td><td class="num">0.00</td><td class="num">(13.24)</td><td class="num">(7.08)</td><td class="num">(8.50)</td></tr>
+    <tr><td>Share Repurchase Outflows</td><td class="num">(5.53)</td><td class="num">(5.39)</td><td class="num">(4.47)</td><td class="num">(2.45)</td><td class="num">(18.20)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="sec-5">5. Capital Allocation Track Record & Balance Sheet Quality</h2>
+<p>JD.com maintains significant net cash reserves, holding RMB 212.6 billion ($29.6B USD) in cash, cash equivalents, and short-term investments against RMB 56.8 billion in total debt, yielding a net cash surplus of RMB 155.8 billion (~$21.7B USD).<sup class="reference"><a href="#ref-20">[20]</a></sup> Its Net Debt / EBITDA ratio stands at -4.3x, eliminating immediate solvency and debt service risks.<sup class="reference"><a href="#ref-21">[21]</a></sup></p>
+
+<p>However, JD exhibits persistent capital allocation inefficiencies. Return on Invested Capital (ROIC) stands at <strong>4.88%</strong> (TTM), which fails the institutional 12.0% underwriting hurdle.<sup class="reference"><a href="#ref-22">[22]</a></sup> The immense capital requirements of building and maintaining over 1,600 automated fulfillment centers, combined with low retail operating margins, dilutes corporate returns relative to estimated cost of capital (WACC of ~8.5%–9.5%).<sup class="reference"><a href="#ref-23">[23]</a></sup></p>
+
+<p>While the company instituted regular cash dividends (~3.2% yield) and authorized a $5.0B share repurchase program in 2024, these capital return measures have not reversed underlying return-on-capital dilution.<sup class="reference"><a href="#ref-24">[24]</a></sup></p>
+
+<h2 id="sec-6">6. Sector-Specific Operational KPIs & Execution Forensics</h2>
+<p>Institutional analysis of Chinese e-commerce platforms focuses on three core operational KPIs: (1) <strong>Annual Active Customer Growth</strong>, (2) <strong>Inventory Turnover Efficiency</strong>, and (3) <strong>External Logistics Revenue Share</strong>.<sup class="reference"><a href="#ref-25">[25]</a></sup></p>
+
+<p>JD expanded its annual active customer base past 600 million users via promotions and lower-tier market penetration; however, ARPU expansion has remained constrained by deflationary retail trends.<sup class="reference"><a href="#ref-26">[26]</a></sup> Inventory turnover days remained strong at 31.2 days in FY24, demonstrating efficient inventory management, but thin retail margins continue to constrain free cash flow conversion.<sup class="reference"><a href="#ref-27">[27]</a></sup></p>
+
+<div class="callout-box callout-warning">
+  <strong>Operational Forensic Finding:</strong> JD Logistics generates over 70% of its revenues from external third-party enterprise clients. However, operating profit margins within JD Logistics remain constrained between 1.8% and 2.5% due to high labor expenses for its 350,000+ frontline logistics and courier workforce.
+</div>
+
+<h2 id="sec-7">7. Technical Architecture, Moving Averages & Volume Support</h2>
+<p>JD's technical profile indicates a Stage 4 structural downtrend with the stock trading below key moving averages:<sup class="reference"><a href="#ref-28">[28]</a></sup></p>
+<ul>
+  <li><strong>Current Market Price:</strong> $26.61 (USD ADS).</li>
+  <li><strong>20-Day Simple Moving Average:</strong> $27.26 (Stock is -2.38% below).</li>
+  <li><strong>50-Day Simple Moving Average:</strong> $29.34 (Stock is -9.30% below, downward sloping).</li>
+  <li><strong>200-Day Simple Moving Average:</strong> $28.95 (Stock is -8.08% below, overhead resistance).</li>
+  <li><strong>14-Day Relative Strength Index (RSI):</strong> 35.10 (Bearish momentum).</li>
+  <li><strong>14-Day Average True Range (ATR):</strong> $0.85 per share.</li>
+  <li><strong>52-Week Range:</strong> $20.82 to $41.90.</li>
+</ul>
+
+<p>Following a stimulus-fueled rally to $41.90 in October 2024, the stock experienced persistent institutional distribution, falling back below its 200-day moving average.<sup class="reference"><a href="#ref-29">[29]</a></sup> Primary support is situated near $24.00, with cyclical low support at $20.82.<sup class="reference"><a href="#ref-30">[30]</a></sup></p>
+
+<h2 id="sec-8">8. 3-Layer Underwriting Framework Scorecard</h2>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr>
+      <th>Underwriting Layer</th>
+      <th>Institutional Metric / Requirement</th>
+      <th>Reported Value</th>
+      <th>Status Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4"><strong>Layer 1: Hard Gating Floors</strong></td>
+      <td>ROIC ≥ 12.0%</td>
+      <td class="num"><strong>4.88%</strong></td>
+      <td><span class="pill pill-fail">FAIL (Sub-Hurdle)</span></td>
+    </tr>
+    <tr>
+      <td>Free Cash Flow Margin ≥ 12.0%</td>
+      <td class="num"><strong>2.17% – 3.24%</strong></td>
+      <td><span class="pill pill-fail">FAIL (Low Margin)</span></td>
+    </tr>
+    <tr>
+      <td>Net Debt / EBITDA ≤ 3.0x</td>
+      <td class="num"><strong>-4.3x (Net Cash)</strong></td>
+      <td><span class="pill pill-pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td>SBC / Revenue ≤ 5.0%</td>
+      <td class="num"><strong>0.41%</strong></td>
+      <td><span class="pill pill-pass">PASS</span></td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong>Layer 2: Technical Stage Floor</strong></td>
+      <td>Price above 20, 50, 200-DMAs (Stage 2 Upward Regime)</td>
+      <td>Below all 3 DMAs</td>
+      <td><span class="pill pill-fail">FAIL (Stage 4 Trend)</span></td>
+    </tr>
+    <tr>
+      <td>Risk/Reward Asymmetry Ratio ≥ 3.5:1</td>
+      <td class="num">5.88:1 ($41.90 / $24.00)</td>
+      <td><span class="pill pill-pass">PASS (Theoretical)</span></td>
+    </tr>
+    <tr>
+      <td rowspan="2"><strong>Layer 3: Support-Aware Posture</strong></td>
+      <td>Proximity to Validated Technical Support (≤ 1.5x ATR)</td>
+      <td>3.07x ATR from $24.00</td>
+      <td><span class="pill pill-fail">FAIL (No Valid Base)</span></td>
+    </tr>
+    <tr>
+      <td>Entry Posture</td>
+      <td>N/A</td>
+      <td><span class="pill pill-fail">REJECT & ARCHIVE</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="sec-9">9. Peer Benchmarking & Relative Valuation Analysis</h2>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr>
+      <th>Enterprise / Peer</th>
+      <th>Ticker</th>
+      <th class="num">EV / Sales</th>
+      <th class="num">EV / EBITDA</th>
+      <th class="num">P/E (GAAP)</th>
+      <th class="num">ROIC %</th>
+      <th class="num">FCF Margin %</th>
+      <th>Business Model Moat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>JD.com, Inc.</strong></td>
+      <td><strong>JD</strong></td>
+      <td class="num"><strong>0.10x</strong></td>
+      <td class="num"><strong>3.1x</strong></td>
+      <td class="num"><strong>8.4x</strong></td>
+      <td class="num"><strong>4.88%</strong></td>
+      <td class="num"><strong>2.17%</strong></td>
+      <td>1P Direct Retail & Logistics Asset-Heavy</td>
+    </tr>
+    <tr>
+      <td>Alibaba Group Holding</td>
+      <td>BABA</td>
+      <td class="num">1.45x</td>
+      <td class="num">7.8x</td>
+      <td class="num">14.2x</td>
+      <td class="num">8.95%</td>
+      <td class="num">18.40%</td>
+      <td>3P Marketplace & Cloud Platform</td>
+    </tr>
+    <tr>
+      <td>PDD Holdings Inc.</td>
+      <td>PDD</td>
+      <td class="num">2.80x</td>
+      <td class="num">11.2x</td>
+      <td class="num">13.6x</td>
+      <td class="num">32.40%</td>
+      <td class="num">28.10%</td>
+      <td>C2M Direct Factory-to-Consumer / Temu</td>
+    </tr>
+    <tr>
+      <td>Amazon.com, Inc.</td>
+      <td>AMZN</td>
+      <td class="num">3.10x</td>
+      <td class="num">16.4x</td>
+      <td class="num">38.5x</td>
+      <td class="num">14.80%</td>
+      <td class="num">7.50%</td>
+      <td>AWS Cloud, Ads, & Prime Ecosystem</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="sec-10">10. Institutional Catalysts & Growth Vectors</h2>
+<ol>
+  <li><strong>National Appliance Trade-In Subsidies:</strong> Government programs subsidizing energy-efficient consumer electronics and appliances support sales volumes through JD's specialized distribution channels.<sup class="reference"><a href="#ref-31">[31]</a></sup></li>
+  <li><strong>JD Logistics Third-Party Monetization:</strong> Expanding higher-margin supply chain contracts with enterprise clients could improve consolidated operating profit margins.<sup class="reference"><a href="#ref-32">[32]</a></sup></li>
+  <li><strong>Accretive Share Buybacks:</strong> Deploying portions of its $21.7B net cash position to retire shares below book value can provide EPS support.<sup class="reference"><a href="#ref-33">[33]</a></sup></li>
+</ol>
+
+<h2 id="sec-11">11. Fatal Flaws, Asymmetric Downside Scenarios & Invalidation Triggers</h2>
+<div class="callout-box callout-danger">
+  <h3>Fatal Flaw Scenario 1: Structural Margin Compression from E-Commerce Deflation</h3>
+  <p>JD's heavy reliance on first-party retail leaves it vulnerable to discounting pressures from PDD and Douyin. Sustained subsidy programs to protect market share risk capping operating margins below 2.5%, locking ROIC under 5.0% and limiting long-term economic value creation.<sup class="reference"><a href="#ref-34">[34]</a></sup></p>
+</div>
+
+<div class="callout-box callout-danger">
+  <h3>Fatal Flaw Scenario 2: Geopolitical and Capital Flow Disruption</h3>
+  <p>Heightened US-China trade friction and potential foreign investment restrictions present persistent overhangs on Chinese ADR valuation multiples.<sup class="reference"><a href="#ref-35">[35]</a></sup></p>
+</div>
+
+<div class="callout-box callout-danger">
+  <h3>Fatal Flaw Scenario 3: VIE Governance Limitations</h3>
+  <p>Contractual VIE structures convey economic interests but not legal title to domestic operating assets, subjecting foreign shareholders to regulatory and structural governance discounts.<sup class="reference"><a href="#ref-36">[36]</a></sup></p>
+</div>
+
+<h2 id="sec-12">12. Capital Allocation Verdict, Position Sizing & Rejection Audit</h2>
+<div class="callout-box callout-danger">
+  <strong>FINAL VERDICT: 0.0% ALLOCATION (🔴 REJECTED & ARCHIVED)</strong><br><br>
+  <strong>Audit Rationale:</strong> JD.com fails Layer 1 Financial Quality gates (ROIC of 4.88% and FCF Margin of 2.17% vs. the 12.0% threshold) and Layer 2 Technical Stage floors (trading below the 20, 50, and 200-day moving averages in a Stage 4 downtrend).<br><br>
+  <strong>Action Taken:</strong> The security is rejected from the active candidate universe and routed to the <code>Archive_Rejected</code> tab of <code>watchlist/US_Portfolio_Watchlist.xlsx</code> with a 90-day re-evaluation lockout.
+</div>
+
+<h2 id="references">13. Primary SEC EDGAR Filings & Regulatory References</h2>
+<ol class="reflist">
+  <li id="ref-1">JD.com, Inc. (2024-04-18). <em>SEC Form 20-F: Annual Report for the Fiscal Year Ended December 31, 2023</em>. US Securities and Exchange Commission EDGAR System.</li>
+  <li id="ref-2">JD.com, Inc. (2023-04-20). <em>SEC Form 20-F: Annual Report for the Fiscal Year Ended December 31, 2022</em>. US Securities and Exchange Commission.</li>
+  <li id="ref-3">JD Logistics, Inc. (2024-03-27). <em>Annual Results Announcement for the Year Ended December 31, 2023</em>. Hong Kong Exchanges and Clearing Limited (HKEX: 2618).</li>
+  <li id="ref-4">JD.com, Inc. (2024-11-14). <em>SEC Form 6-K: Unaudited Financial Results for the Third Quarter Ended September 30, 2024</em>. US SEC EDGAR.</li>
+  <li id="ref-5">Dada Nexus Limited (2024-03-05). <em>SEC Form 6-K: Independent Review Completion and Unaudited Q4 Financial Results</em>. US SEC.</li>
+  <li id="ref-6">JD.com, Inc. (2024-04-18). <em>Form 20-F, Item 4.C: Organizational Structure & Variable Interest Entity (VIE) Agreements</em>. SEC EDGAR.</li>
+  <li id="ref-7">JD.com, Inc. (2023-05-11). <em>SEC Form 6-K: Appointment of Sandy Ran Xu as Chief Executive Officer</em>. US SEC.</li>
+  <li id="ref-8">JD.com, Inc. (2024-04-18). <em>Form 20-F, Item 4.B: Business Overview & 1P Direct Sales Supply Chain Model</em>. SEC EDGAR.</li>
+  <li id="ref-9">JD.com, Inc. (2024-08-15). <em>SEC Form 6-K: Unaudited Financial Results for the Second Quarter Ended June 30, 2024</em>. US SEC EDGAR.</li>
+  <li id="ref-10">JD Logistics, Inc. (2024-08-15). <em>Interim Report for the Six Months Ended June 30, 2024</em>. HKEX.</li>
+  <li id="ref-11">JD.com, Inc. (2024-04-18). <em>Form 20-F, Item 5: Operating and Financial Review — Electronics and Home Appliances Category Share</em>. SEC EDGAR.</li>
+  <li id="ref-12">JD.com, Inc. (2024-11-14). <em>Form 6-K: Segment Financial Review — General Merchandise and Supermarket Expansion</em>. SEC EDGAR.</li>
+  <li id="ref-13">JD.com, Inc. (2024-04-18). <em>Form 20-F: Selected Financial Data — Inventory Turnover Days Analysis</em>. SEC EDGAR.</li>
+  <li id="ref-14">National Bureau of Statistics of China (2024-10-18). <em>Macroeconomic Statistics: Retail Sales of Consumer Goods (Q1-Q3 2024)</em>. Beijing.</li>
+  <li id="ref-15">People's Bank of China (2024-09-24). <em>Monetary Policy Announcement on Reserve Requirement Ratio and Mortgage Rate Reductions</em>.</li>
+  <li id="ref-16">PDD Holdings Inc. (2024-04-25). <em>SEC Form 20-F: Annual Report for the Fiscal Year Ended December 31, 2023</em>. US SEC EDGAR.</li>
+  <li id="ref-17">Alibaba Group Holding Limited (2024-05-23). <em>SEC Form 20-F: Annual Report for the Fiscal Year Ended March 31, 2024</em>. US SEC EDGAR.</li>
+  <li id="ref-18">US Public Company Accounting Oversight Board (PCAOB) (2023-12-01). <em>HFCAA Determination Report on Mainland China and Hong Kong Audit Inspection Access</em>. Washington D.C.</li>
+  <li id="ref-19">JD.com, Inc. (2020-2024). <em>Consolidated Financial Statements and Independent Auditor Reports (PricewaterhouseCoopers Zhong Tian LLP)</em>. US SEC EDGAR.</li>
+  <li id="ref-20">JD.com, Inc. (2024-11-14). <em>Form 6-K: Cash, Cash Equivalents, and Wealth Management Products Statement as of September 30, 2024</em>. SEC EDGAR.</li>
+  <li id="ref-21">Standard & Poor's Global Ratings (2024-06-12). <em>JD.com, Inc. 'BBB+' Long-Term Issuer Credit Rating Affirmed; Outlook Stable</em>. S&P RatingsDirect.</li>
+  <li id="ref-22">Moody's Investors Service (2024-06-20). <em>Credit Opinion: JD.com, Inc. — Baa1 Senior Unsecured Rating</em>. Moody's Research.</li>
+  <li id="ref-23">Institutional Equity Underwriting Framework (2025). <em>Cost of Capital & ROIC Gating Parameters for Emerging Market Securities</em>.</li>
+  <li id="ref-24">JD.com, Inc. (2024-08-21). <em>SEC Form 6-K: Adoption of US$5.0 Billion Share Repurchase Program</em>. US SEC EDGAR.</li>
+  <li id="ref-25">JD.com, Inc. (2024-04-18). <em>Form 20-F, Item 4: Key Operational Metrics and User Engagement Dynamics</em>. SEC EDGAR.</li>
+  <li id="ref-26">JD.com, Inc. (2024-11-14). <em>Form 6-K Press Release: Management Discussion on User Growth and Purchase Frequency</em>. SEC EDGAR.</li>
+  <li id="ref-27">JD.com, Inc. (2024-04-18). <em>Form 20-F: Supply Chain Efficiency and Automated Fulfillment Statistics</em>. SEC EDGAR.</li>
+  <li id="ref-28">Bloomberg Professional Services (2025-02-14). <em>JD.com Technical Analysis, Moving Average Envelopes and Volume Profile (NASDAQ: JD)</em>.</li>
+  <li id="ref-29">Morgan Stanley Equity Research (2024-10-15). <em>China E-Commerce: Post-Stimulus Reality Check and Valuation Multiples</em>.</li>
+  <li id="ref-30">Finviz Financial Visualizations (2025-02-14). <em>Technical Summary and Chart Structure: JD.com, Inc.</em>.</li>
+  <li id="ref-31">State Council of the People's Republic of China (2024-07-25). <em>Measures on Supporting Large-Scale Equipment Upgrades and Consumer Goods Trade-In</em>. Beijing.</li>
+  <li id="ref-32">Goldman Sachs Global Investment Research (2024-11-18). <em>JD.com, Inc.: 3Q24 Earnings Beat on Cost Discipline, Logistics Efficiency</em>.</li>
+  <li id="ref-33">JD.com, Inc. (2024-09-30). <em>SEC Form 6-K: Completion of Senior Unsecured Convertible Notes Offering</em>. US SEC EDGAR.</li>
+  <li id="ref-34">Bernstein Research (2024-08-28). <em>China Internet: The Deflationary Reality of E-Commerce Price Wars</em>.</li>
+  <li id="ref-35">US-China Economic and Security Review Commission (2024-11-19). <em>2024 Annual Report to Congress: Chapter 2 — US-China Economic and Trade Relations</em>.</li>
+  <li id="ref-36">US Securities and Exchange Commission (2021-12-20). <em>Sample Letter to China-Based Companies Regarding Disclosure Obligations on VIE Risks</em>. SEC Division of Corporation Finance.</li>
+</ol>
+
+</div>
+</body>
+</html>

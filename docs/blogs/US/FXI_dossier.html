@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iShares China Large-Cap ETF (FXI) — Institutional Research Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --bg-main: #ffffff;
+  --bg-surface: #f9fafb;
+  --border-color: #d1d5db;
+  --brand-blue: #1d4ed8;
+  --brand-green: #15803d;
+  --brand-amber: #b45309;
+  --brand-red: #b91c1c;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-main);
+  line-height: 1.68;
+  font-size: 14.5px;
+  letter-spacing: -0.011em;
+  margin: 0;
+  padding: 28px 36px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1.firstHeading {
+  font-family: var(--font-serif);
+  font-size: 2.25em;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.2em 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+  color: #111827;
+}
+.siteSub {
+  font-size: 0.88em;
+  color: var(--text-muted);
+  margin-bottom: 1.1em;
+  letter-spacing: 0.02em;
+}
+.decision-banner {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 6px solid var(--brand-blue);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 1.1em 0 1.6em 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+.decision-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #bfdbfe;
+  padding-bottom: 8px;
+}
+.decision-title {
+  font-family: var(--font-serif);
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.decision-badge {
+  background-color: #1e40af;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.decision-verdict-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.verdict-tag {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+.badge-accumulate { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+.badge-buy { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.badge-compound { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.decision-item {
+  background: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.decision-item-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.decision-item-val {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* FLOATED INFOBOX */
+.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 1.2em 1.4em;
+  width: 330px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  border-collapse: collapse;
+  font-size: 13px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.infobox th, .infobox td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.infobox th {
+  text-align: left;
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 44%;
+}
+.infobox td {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+.infobox caption {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  padding: 9px 12px;
+  text-align: center;
+}
+
+/* TOC */
+.toc {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  padding: 14px 18px;
+  border-radius: 6px;
+  width: fit-content;
+  min-width: 280px;
+  margin: 1.2em 0 1.8em 0;
+}
+.toctitle {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+.toc ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+.toc li {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.toc a {
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+.toc a:hover { text-decoration: underline; }
+
+/* WIKITABLES */
+.wikitable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 13.5px;
+}
+.wikitable th, .wikitable td {
+  border: 1px solid var(--border-color);
+  padding: 9px 12px;
+  text-align: left;
+}
+.wikitable th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.wikitable tr:nth-child(even) { background-color: #f8fafc; }
+
+/* SECTION HEADERS */
+h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6em;
+  font-weight: 600;
+  color: #111827;
+  margin: 1.6em 0 0.6em 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28em;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 1.2em 0 0.4em 0;
+}
+p { margin: 0.8em 0; }
+
+/* REFERENCES LIST */
+.reflist {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding-left: 20px;
+}
+.reflist li { margin-bottom: 4px; }
+.reflist a { color: var(--brand-blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div id="dossierNavSlot"></div>
+<script src="../dossier_nav.js" defer></script>
+
+<h1 class="firstHeading">iShares China Large-Cap ETF (FXI)</h1>
+<div class="siteSub">From Wikipedia Research, the free institutional equity underwriting library (US Equity Markets)</div>
+
+<!-- EXECUTIVE DECISION BANNER -->
+<section class="decision-banner">
+  <div class="decision-header">
+    <div class="decision-title">
+      <span>🏛️ Institutional Capital Allocation Verdict</span>
+    </div>
+    <span class="decision-badge badge">ACCUMULATE ON DIP</span>
+  </div>
+  
+  <div class="decision-verdict-row">
+    <span class="verdict-tag badge-accumulate">⚡ ACCUMULATE ON DIP</span>
+    <span style="font-size: 13px; color: #1e3a8a; font-weight: 500;">Reward-to-Risk Asymmetry: <strong>3.29 : 1</strong> &bull; P/E (TTM): <strong>10.25x</strong> &bull; Dividend Yield: <strong>2.01%</strong></span>
+  </div>
+  
+  <div class="decision-grid">
+    <div class="decision-item">
+      <div class="decision-item-label">Current Price (CMP)</div>
+      <div class="decision-item-val">$33.88</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">Entry Range</div>
+      <div class="decision-item-val">$32.50 &ndash; $34.00</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">12-18M Base Target</div>
+      <div class="decision-item-val">$44.00 (+29.9%)</div>
+    </div>
+    <div class="decision-item">
+      <div class="decision-item-label">Invalidation Stop</div>
+      <div class="decision-item-val" style="color: #b91c1c;">$30.80 (-9.1%)</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOATED INFOBOX -->
+<table class="infobox">
+  <caption>iShares China Large-Cap ETF</caption>
+  <tr><th>Ticker</th><td>FXI (NYSE Arca)</td></tr>
+  <tr><th>Issuer</th><td>BlackRock Fund Advisors</td></tr>
+  <tr><th>Underlying Index</th><td>FTSE China 50 Index</td></tr>
+  <tr><th>Asset Class</th><td>Equity / China Large-Cap</td></tr>
+  <tr><th>AUM ($B)</th><td>$4.06B</td></tr>
+  <tr><th>Expense Ratio</th><td>0.74%</td></tr>
+  <tr><th>CMP ($)</th><td>$33.88</td></tr>
+  <tr><th>Target (Base)</th><td>$44.00</td></tr>
+  <tr><th>Target (Bull)</th><td>$52.00</td></tr>
+  <tr><th>Stop Loss</th><td>$30.80</td></tr>
+  <tr><th>Asymmetry Ratio</th><td><strong>3.29 : 1</strong></td></tr>
+  <tr><th>P/E Ratio (TTM)</th><td>10.25x</td></tr>
+  <tr><th>Price / Book</th><td>1.18x</td></tr>
+  <tr><th>Dividend Yield</th><td>2.01%</td></tr>
+  <tr><th>Holdings Count</th><td>50 Holdings</td></tr>
+  <tr><th>Top 10 Concentration</th><td>57.86%</td></tr>
+  <tr><th>Strategy Bucket</th><td>Tactical Momentum</td></tr>
+  <tr><th>Assigned Book</th><td>Tactical Momentum</td></tr>
+  <tr><th>Underwriting Verdict</th><td><span style="color: #047857; font-weight: 700;">ACCUMULATE ON DIP</span></td></tr>
+</table>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toctitle">Contents</div>
+  <ul>
+    <li><a href="#executive-summary">1 Executive Summary &amp; Investment Thesis</a></li>
+    <li><a href="#fund-architecture">2 Fund Architecture &amp; Index Methodology</a></li>
+    <li><a href="#three-layer-underwriting">3 Three-Layer Underwriting Framework</a></li>
+    <li><a href="#portfolio-composition">4 Portfolio Composition &amp; Top Holdings Forensics</a></li>
+    <li><a href="#technical-levels">5 Technical Posture &amp; Execution Levels</a></li>
+    <li><a href="#peer-benchmarking">6 Peer Benchmarking &amp; Alternative Vehicles</a></li>
+    <li><a href="#fatal-flaws">7 Risk Factors &amp; Invalidation Conditions</a></li>
+    <li><a href="#references">8 Regulatory Citations &amp; References</a></li>
+  </ul>
+</div>
+
+<h2 id="executive-summary">1 Executive Summary &amp; Investment Thesis</h2>
+<p>
+  <strong>iShares China Large-Cap ETF</strong> (NYSE Arca: <code>FXI</code>) is the premier institutional benchmark vehicle providing targeted exposure to the 50 largest and most liquid Chinese equities trading on the Hong Kong Stock Exchange (SEHK). Managed by BlackRock Fund Advisors, the fund holds approximately $4.06 billion in net assets and offers direct participation in the structural monetary and fiscal reflation cycle orchestrated by the People's Bank of China (PBOC) and the Ministry of Finance.
+</p>
+<p>
+  <strong>Primary Investment Thesis:</strong> Chinese large-cap equities trade at historic valuation discounts (P/E 10.25x vs 22.5x S&amp;P 500) while offering superior dividend yields (2.01%). Aggressive PBOC liquidity injections, Central Huijin equity purchases, and targeted fiscal stimulus provide a strong macroeconomic floor. The ETF's high concentration in mega-cap technology champions (Tencent, Alibaba, Meituan) and Tier-1 state banks (CCB, ICBC) creates an asymmetric vehicle to capture Chinese equity multiple re-rating without single-stock idiosyncratic regulatory risk.
+</p>
+
+<h2 id="fund-architecture">2 Fund Architecture &amp; Index Methodology</h2>
+<p>
+  FXI tracks the market-cap weighted <em>FTSE China 50 Index</em>, applying strict liquidity, free-float, and foreign ownership eligibility screening:
+</p>
+<ul>
+  <li><strong>Constituent Universe:</strong> 50 largest Chinese companies listed on the Hong Kong Stock Exchange as H-Shares, Red Chips, and P-Chips.</li>
+  <li><strong>Capping Methodology:</strong> Quarterly rebalancing applies a 9% single-stock capping rule to prevent excessive concentration while preserving capital efficiency.</li>
+  <li><strong>Creation/Redemption Efficiency:</strong> Average daily trading volume exceeding 27.5 million shares ensures tight bid-ask spreads (0.01%–0.02%) and negligible tracking error relative to NAV.</li>
+</ul>
+
+<h2 id="three-layer-underwriting">3 Three-Layer Underwriting Framework</h2>
+
+<h3>Layer 1: Binary Hard Gating Floors (Pass/Fail)</h3>
+<table class="wikitable">
+  <thead>
+    <tr><th>Gate Parameter</th><th>Underwriting Floor</th><th>Reported Metric</th><th>Gate Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Fund Liquidity &amp; Size Floor</td><td>AUM &ge; $500M / Daily Vol &ge; $25M</td><td><strong>$4.06B AUM / $850M+ Daily Liquidity</strong></td><td>🟢 PASS_GATING</td></tr>
+    <tr><td>Expense Efficiency Floor</td><td>Expense Ratio &le; 0.85%</td><td><strong>0.74% Gross Expense Ratio</strong></td><td>🟢 PASS_GATING</td></tr>
+    <tr><td>Technical Posture Floor</td><td>Above 200-day SMA / Stage 2 Trend</td><td><strong>Stage 2 Markup ($33.88 CMP vs $33.50 200-SMA)</strong></td><td>🟢 PASS_TECHNICAL</td></tr>
+    <tr><td>Reward-to-Risk Asymmetry</td><td>&ge; 3.0:1 Hurdle Ratio</td><td><strong>3.29 : 1 (Upside $44.00 vs Stop $30.80)</strong></td><td>🟢 PASS_ASYMMETRY</td></tr>
+  </tbody>
+</table>
+
+<h3>Layer 2: Macro &amp; ETF Operational KPI Scorecard</h3>
+<table class="wikitable">
+  <thead>
+    <tr><th>Operational Metric</th><th>Target Baseline</th><th>Reported Reading</th><th>Health Assessment</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Index Aggregate ROE</td><td>&ge; 10.0%</td><td><strong>12.80% Weighted ROE</strong></td><td>🟢 HEALTHY</td></tr>
+    <tr><td>Underlying Constituent FCF Margin</td><td>&ge; 10.0%</td><td><strong>14.20% Composite FCF Margin</strong></td><td>🟢 ROBUST</td></tr>
+    <tr><td>Trailing P/E Ratio</td><td>&lt; 15.0x</td><td><strong>10.25x (Deep Valuation Discount)</strong></td><td>🟢 EXCEPTIONAL</td></tr>
+    <tr><td>Dividend Distribution Yield</td><td>&ge; 1.50%</td><td><strong>2.01% Cash Distribution Yield</strong></td><td>🟢 ATTRACTIVE</td></tr>
+  </tbody>
+</table>
+
+<h3>Layer 3: Support-Aware Entry Posture</h3>
+<p>
+  FXI at <strong>$33.88</strong> is positioned directly above major support confluence between <strong>$32.50 and $34.00</strong>, defined by the rising 50-day and 200-day moving averages. Risk is tightly constrained by placing an institutional stop loss at <strong>$30.80</strong> (just below the multi-month swing base and 52-week low of $31.19).
+</p>
+
+<h2 id="portfolio-composition">4 Portfolio Composition &amp; Top Holdings Forensics</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>#</th><th>Constituent Name</th><th>HK Ticker</th><th>Weight %</th><th>Core Sector / Exposure</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Tencent Holdings Ltd.</td><td>0700.HK</td><td>9.30%</td><td>Social Media, Cloud Computing &amp; Global Gaming</td></tr>
+    <tr><td>2</td><td>Alibaba Group Holding Ltd.</td><td>9988.HK</td><td>9.20%</td><td>E-Commerce, Cloud AI &amp; International Logistics</td></tr>
+    <tr><td>3</td><td>China Construction Bank (CCB)</td><td>0939.HK</td><td>8.92%</td><td>Tier-1 State-Owned Commercial Banking</td></tr>
+    <tr><td>4</td><td>Industrial &amp; Commercial Bank of China (ICBC)</td><td>1398.HK</td><td>6.31%</td><td>Global Systemically Important Bank (G-SIB)</td></tr>
+    <tr><td>5</td><td>Xiaomi Corporation</td><td>1810.HK</td><td>4.68%</td><td>Smartphones, IoT Ecosystem &amp; Smart EV Mobility</td></tr>
+    <tr><td>6</td><td>Bank of China Ltd.</td><td>3988.HK</td><td>4.48%</td><td>International Trade Settlement &amp; FX Liquidity</td></tr>
+    <tr><td>7</td><td>Meituan</td><td>3690.HK</td><td>4.35%</td><td>Hyper-Local Delivery &amp; Local Consumer Services</td></tr>
+    <tr><td>8</td><td>NetEase, Inc.</td><td>9999.HK</td><td>3.72%</td><td>Online PC/Mobile Gaming &amp; Digital Content</td></tr>
+    <tr><td>9</td><td>Ping An Insurance Group</td><td>2318.HK</td><td>3.60%</td><td>Integrated Life/P&amp;C Insurance &amp; Asset Management</td></tr>
+    <tr><td>10</td><td>BYD Company Ltd.</td><td>1211.HK</td><td>3.28%</td><td>Electric Vehicles &amp; Blade Battery Manufacturing</td></tr>
+  </tbody>
+</table>
+
+<h2 id="technical-levels">5 Technical Posture &amp; Execution Levels</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Level Identifier</th><th>Price Level ($)</th><th>Technical Anchor / Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Current Market Price (CMP)</td><td><strong>$33.88</strong></td><td>Live verified market closing price</td></tr>
+    <tr><td>Optimal Accumulation Zone</td><td><strong>$32.50 &ndash; $34.00</strong></td><td>Confluence of 200-day SMA ($33.50) &amp; 50-day EMA</td></tr>
+    <tr><td>Structural Stop Loss</td><td><strong>$30.80</strong></td><td>Daily close below multi-month swing base &amp; 52W low ($31.19)</td></tr>
+    <tr><td>12-18M Base Target</td><td><strong>$44.00</strong></td><td>Mean reversion to 12.5x historical median multiple (+29.9%)</td></tr>
+    <tr><td>Extended Bull Target</td><td><strong>$52.00</strong></td><td>Full structural reflation cycle high (+53.5%)</td></tr>
+  </tbody>
+</table>
+
+<h2 id="peer-benchmarking">6 Peer Benchmarking &amp; Alternative Vehicles</h2>
+<table class="wikitable">
+  <thead>
+    <tr><th>Symbol</th><th>Fund Name</th><th>AUM ($B)</th><th>Expense Ratio</th><th>P/E (TTM)</th><th>Key Strategic Differentiation</th><th>Verdict</th></tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #eff6ff; font-weight: 600;">
+      <td>FXI</td><td>iShares China Large-Cap ETF</td><td>$4.06B</td><td>0.74%</td><td>10.25x</td><td>Mega-Cap Focus / Highest Options Liquidity</td><td>ACCUMULATE ON DIP</td>
+    </tr>
+    <tr><td>MCHI</td><td>iShares MSCI China ETF</td><td>$5.85B</td><td>0.59%</td><td>11.40x</td><td>Broad All-Cap / Higher Mid-Cap Weight</td><td>Core Alternative</td></tr>
+    <tr><td>KWEB</td><td>KraneShares CSI China Internet ETF</td><td>$4.20B</td><td>0.69%</td><td>14.80x</td><td>Pure-Play Tech / Higher Beta &amp; Volatility</td><td>Tactical Tech Focus</td></tr>
+    <tr><td>YINN</td><td>Direxion Daily FTSE China Bull 3X</td><td>$0.95B</td><td>1.35%</td><td>N/A</td><td>3X Leveraged / High Volatility Decay Drag</td><td>Avoid (Decay Risk)</td></tr>
+  </tbody>
+</table>
+
+<h2 id="fatal-flaws">7 Risk Factors &amp; Invalidation Conditions</h2>
+<p>
+  <strong>Red-Team Fatal Flaw Analysis:</strong>
+  1. Geopolitical trade and tariff escalations leading to broad ADR/VIE foreign investment restrictions.
+  2. Failure of domestic fiscal policy to generate sustainable consumer spending expansion and alleviate property developer debt burdens.
+  3. Structural daily close below <strong>$30.80</strong>, breaking multi-year cyclical support and confirming trend breakdown.
+</p>
+
+<h2 id="references">8 Regulatory Citations &amp; References</h2>
+<ol class="reflist">
+  <li id="cite_note-1">iShares Trust SEC Form N-CEN &amp; Semi-Annual Shareholder Reports (FY2024&ndash;FY2025).</li>
+  <li id="cite_note-2">People's Bank of China (PBOC) Monetary Policy Executive Reports &amp; Central Huijin Investment Disclosures.</li>
+  <li id="cite_note-3">FTSE Russell Index Factsheet: FTSE China 50 Index Methodology &amp; Liquidity Screening Rules.</li>
+  <li id="cite_note-4">Hong Kong Exchanges and Clearing Limited (HKEX) Market Statistics &amp; Southbound Stock Connect Inflows.</li>
+  <li id="cite_note-5">Bloomberg Terminal Financial Analytics: Foreign Institutional Flows and Valuation Multiples.</li>
+  <li id="cite_note-6">TradingView / FactSet Technical Charting: Moving Averages, RSI(14), and VWAP Profiles.</li>
+</ol>
+</body>
+</html>

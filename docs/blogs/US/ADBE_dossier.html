@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adobe Inc. (ADBE): the company, the numbers, the price, and the decision</title>
+<style>
+:root {
+  /* Neutral base, taken from the Wikipedia desktop palette */
+  --ink:          #202122;  /* body text: 16.1:1 on white */
+  --ink-strong:   #111827;  /* headings: 18.7:1 on white */
+  --muted:        #54595d;  /* captions, sources, secondary text: 7.1:1 on white */
+  --rule:         #a2a9b1;  /* table borders, dividers */
+  --rule-soft:    #d1d5db;  /* card borders, dashed bridges */
+  --surface:      #ffffff;  /* page background */
+  --surface-alt:  #f8f9fa;  /* table header rows, howto blocks */
+  --link:         #0645ad;  /* links: 8.5:1 on white */
+  --link-visited: #0b0080;
+
+  /* Verdict and status colours. Each has a text colour and a tint, both AA on each other. */
+  --keep-ink:        #14532d;  /* 8.3:1 on --keep-tint */
+  --keep-tint:       #dcfce7;
+  --accumulate-ink:  #1e3a8a;  /* 8.5:1 on --accumulate-tint */
+  --accumulate-tint: #dbeafe;
+  --trim-ink:        #78350f;  /* 8.2:1 on --trim-tint */
+  --trim-tint:       #fef3c7;
+  --exit-ink:        #7f1d1d;  /* 8.2:1 on --exit-tint */
+  --exit-tint:       #fee2e2;
+  --watch-ink:       #374151;  /* 9.4:1 on --watch-tint */
+  --watch-tint:      #f3f4f6;
+
+  /* Callout blocks */
+  --primer-accent:   #0645ad;  --primer-tint:   #eaf3ff;
+  --howto-accent:    #54595d;  --howto-tint:    #f8f9fa;
+  --case-accent:     #1e3a8a;  --case-tint:     #ffffff;
+  --trigger-accent:  #92400e;  --trigger-tint:  #fef3c7;
+  --example-accent:  #166534;  --example-tint:  #f0fdf4;
+  --takeaway-accent: #1e3a8a;  --takeaway-tint: #eff6ff;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+</style>
+</head>
+<body>
+<div class="report">
+<h1>Adobe Inc. (ADBE): the company, the numbers, the price, and the decision</h1>
+<p class="report-meta">Report date: 2026-10-08 &middot; Market: US (Nasdaq) &middot; Ticker: ADBE &middot; Currency: USD. Adobe's fiscal 2025 ended November 28, 2025. The September 2026 quarter is the first quarter of fiscal 2026. All dollar figures are in US dollars.</p>
+<dl class="key-figures">
+  <dt>Price (2026-10-08 close)</dt><dd>$241.05</dd>
+  <dt>Market capitalization</dt><dd>$93.82 billion</dd>
+  <dt>Trailing twelve-month revenue</dt><dd>$25.97 billion</dd>
+  <dt>Trailing twelve-month net profit</dt><dd>$7.28 billion</dd>
+  <dt>Trailing cash from operations</dt><dd>$10.81 billion</dd>
+  <dt>Trailing cash after reinvestment</dt><dd>$10.59 billion</dd>
+  <dt>Share price to trailing earnings</dt><dd>13.45</dd>
+  <dt>52-week range</dt><dd>$190.12 to $363.70</dd>
+  <dt>Decision</dt><dd><span class="verdict verdict-watch">WAIT FOR SUPPORT</span></dd>
+</dl>
+
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Adobe sells creative and marketing software to about one billion people each month, mostly on subscription. In the last twelve months it turned $25.97 billion of revenue into $10.59 billion of <dfn>free cash flow (FCF)</dfn> &mdash; cash left after all business spending &mdash; and kept the difference. The stock is not in a momentum setup: it trades about 34 percent below its 52-week high and below both major moving averages, so the system waits. This report covers the business, the numbers, the price, and the exact conditions that would change the decision.</p>
+</section>
+
+<section class="chapter" id="ch-1">
+<h2>What the company does</h2>
+<p>Adobe makes software for people who create or publish visual content. Its best-known tools are Photoshop, Illustrator, Premiere Pro, Acrobat, and Lightroom. In fiscal 2025, the year ended November 28, 2025, the company earned $23.77 billion. Of that, $22.90 billion came from subscription fees, 96 percent of the total.</p>
+<p>About one billion people used Adobe products in an average month last year. The company sells to two customer groups: business professionals, such as designers, marketers, and editors, and creative professionals, such as photographers and film makers. In the September 2026 quarter, the business-facing group (Business Publishing and Communication) brought in $1.91 billion, up 16 percent a year ago. The creative-facing group (Creative and Marketing Pro) brought in $4.65 billion, up 13 percent.</p>
+<p>In January 2026 Adobe reorganized into three reporting units. Digital Media, the creative tools, sold $17.39 billion in fiscal 2025. Digital Experience, the marketing platforms, sold $5.41 billion. Publishing and Advertising, the print-era unit, sold $106 million.</p>
+<p>Most customers pay a subscription, usually per seat, billed monthly or annually. The tools sit inside team workflows, so switching away is slow and costly. That lock-in is the heart of the business.</p>
+<p>Words used in this report: <em>segment</em> &mdash; a piece of the business reported separately; <em>seat</em> &mdash; one user license; <em>subscription</em> &mdash; a recurring payment for the right to use software; <em>run-rate</em> &mdash; a quarterly number multiplied to show a full year; <em>fiscal year</em> &mdash; Adobe's reporting year, which ends in late November.</p>
+</section>
+
+<section class="chapter" id="ch-2">
+<h2>Why the business is strong or weak</h2>
+<p>Adobe's strength starts with pricing power. The <dfn>gross margin</dfn> is the share of revenue left after the direct cost of the product; at about 89 percent it is among the highest in software. Customers pay full price year after year, and the company keeps adding features, including AI ones, without losing them.</p>
+<p>Scale is the second strength. <dfn>annual recurring revenue (ARR)</dfn> is the annualized value of all active subscriptions. It reached $27.50 billion in the September 2026 quarter, up 10.2 percent a year ago. ARR for products where AI is the main selling point grew 150 percent in the same year. That is small in absolute dollars today, but it is the growth engine the bull case leans on.</p>
+<p>The third strength is a backlog. <dfn>remaining performance obligations (RPO)</dfn> is the value of contracts already paid for but not yet delivered. It stood at $22.16 billion at the end of the September 2026 quarter, up 13 percent a year ago. 67 percent of it (current RPO) turns into revenue within twelve months. In plain words: a large share of next year's revenue is already in the bank.</p>
+<p>Cash is the fourth. Adobe collected $7.65 billion of operating cash in the first nine months of fiscal 2026. It holds about $5.6 billion more in cash and short-term investments than it owes on its notes, a net-cash balance sheet (worked out in chapter 3).</p>
+<p>The weaknesses are real, and the filings say so plainly. First, competition in creative tools. Adobe paid $1 billion to walk away from its plan to buy Figma, because the deal hit regulatory walls. Figma is now a public company in its own right. Court records show a securities class action accusing Adobe of downplaying the Figma threat; the court let that case go, but the underlying point stands: creative software is no longer Adobe's alone.</p>
+<p>Second, the cost of equity. Adobe pays its employees partly in its own stock. In fiscal 2025 that stock-based compensation totaled $1.83 billion, about 7.7 percent of revenue. That dilutes owners over time (chapter 6) and is the reason Adobe fails one of the four sub-tests in the core screen.</p>
+<p>Third, execution risk. The company closed a $1.87 billion deal for the marketing company Semrush on April 28, 2026, and signed a roughly $340 million deal for the AI company Topaz Labs in June 2026, which is still pending. It also wrote down $70 million on its Publishing and Advertising unit, a sign that the old print business is fading. Finally, leadership is in transition: Shantanu Narayen is stepping down as CEO, with Anil named as the successor in the September 2026 release, and the CFO role is filled on an interim basis by Steve Day.</p>
+</section>
+
+<section class="chapter" id="ch-3">
+<h2>The numbers, in plain words</h2>
+<p>Adobe's income statement over five years, fiscal 2021 to fiscal 2025, in millions of dollars, from public data retrieved 2026-10-08:</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Year</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr>
+<tr><td>Revenue</td><td>15,785</td><td>17,606</td><td>19,409</td><td>21,505</td><td>23,769</td></tr>
+<tr><td>Revenue growth</td><td>&mdash;</td><td>11.5%</td><td>10.2%</td><td>10.8%</td><td>10.5%</td></tr>
+<tr><td>Net profit</td><td>4,822</td><td>4,756</td><td>5,428</td><td>5,560</td><td>7,130</td></tr>
+<tr><td>Diluted earnings per share</td><td>10.02</td><td>10.10</td><td>11.82</td><td>12.36</td><td>16.70</td></tr>
+<tr><td>Cash from operations</td><td>7,230</td><td>7,838</td><td>7,302</td><td>8,056</td><td>10,031</td></tr>
+<tr><td>Capital spending</td><td>(348)</td><td>(442)</td><td>(360)</td><td>(183)</td><td>(179)</td></tr>
+<tr><td>Free cash flow</td><td>6,882</td><td>7,396</td><td>6,942</td><td>7,873</td><td>9,852</td></tr>
+<tr><td>Free cash flow margin</td><td>43.60%</td><td>42.01%</td><td>35.77%</td><td>36.61%</td><td>41.45%</td></tr>
+</table></div>
+<p>Revenue grew in every one of the five years, at roughly 10 percent a year. Profit followed the revenue, and the gap between the two is the operating leverage of software: each extra dollar of sales costs little to serve. The cash flow margin dipped in the middle years, in part because of one-off items, including the $1 billion Figma termination fee in fiscal 2024; it recovered to 41.45 percent in fiscal 2025.</p>
+<p>The balance sheet over the same five years, plus the latest position at the end of August 2026, in millions of dollars:</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Item</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>Aug 2026</th></tr>
+<tr><td>Total assets</td><td>27,241</td><td>27,165</td><td>29,779</td><td>30,230</td><td>29,496</td><td>29,981</td></tr>
+<tr><td>Cash and equivalents</td><td>3,844</td><td>4,236</td><td>7,141</td><td>7,613</td><td>5,431</td><td>4,359</td></tr>
+<tr><td>Short-term investments</td><td>1,954</td><td>1,860</td><td>701</td><td>273</td><td>1,164</td><td>1,280</td></tr>
+<tr><td>Goodwill</td><td>12,668</td><td>12,787</td><td>12,805</td><td>12,788</td><td>12,857</td><td>14,037</td></tr>
+<tr><td>Total liabilities</td><td>12,444</td><td>13,114</td><td>13,261</td><td>16,125</td><td>17,873</td><td>18,217</td></tr>
+<tr><td>Total debt (broad measure)</td><td>4,673</td><td>4,633</td><td>4,080</td><td>6,056</td><td>6,656</td><td>6,787</td></tr>
+<tr><td>Net cash position (broad measure)</td><td>1,125</td><td>1,463</td><td>3,762</td><td>1,830</td><td>(59)</td><td>(1,145)</td></tr>
+</table></div>
+<p>Two things in that table deserve attention. First, goodwill &mdash; the premium paid over value for acquisitions &mdash; reached $14.0 billion, nearly half the balance sheet, so a heavy buyer's mistakes show up on the books. Second, the debt and net-cash rows use the broad measure that stockanalysis.com shows, which includes lease obligations. On Adobe's own books, the only interest-bearing debt at the end of August 2026 was $1.60 billion of notes, and the company had none of that at the end of fiscal 2025.</p>
+<p>The September 2026 quarter (first quarter of fiscal 2026) earned $6.76 billion of revenue, up 13 percent a year ago; the first nine months earned $19.78 billion. Net profit was $1.83 billion in the quarter and $5.43 billion in the nine months. Diluted <dfn>earnings per share (EPS)</dfn> is profit divided by the number of shares; it was $13.47 for the nine months. The company's <dfn>guidance</dfn> is the outlook it publishes for the period ahead: revenue of $6.80 to $6.85 billion in the fourth quarter, and $26.576 to $26.626 billion for fiscal 2026, with GAAP EPS of $18.12 to $18.17.</p>
+<p>Margins tell the same story. The gross margin for the trailing twelve months is 89.25 percent. The <dfn>operating margin</dfn> is profit after the costs of running the business, divided by revenue; it is 36.32 percent.</p>
+<p>Trailing free cash flow (FCF) is $10.59 billion, a 40.79 percent margin. The <dfn>capital expenditure</dfn> is spending on long-lived assets; it was only $179 million in fiscal 2025, less than 1 percent of revenue. A <dfn>buyback</dfn> is when the company buys its own shares off the market, shrinking the share count. Adobe repurchased 9.5 million shares in the September quarter, and 30.8 million shares for $11.28 billion in fiscal 2025. The share count fell 6.22 percent over the past year.</p>
+<p>One cost needs its own line. <dfn>stock-based compensation (SBC)</dfn> is pay to employees in the company's own shares, issued over the life of each award. It was $1.58 billion in the nine months of fiscal 2026 and $1.83 billion in fiscal 2025, about 7.7 percent of that year's revenue. This system asks for SBC below 5 percent of revenue for a core holding. Adobe misses that bar today, and that single fact keeps it out of the core bucket (chapter 7).</p>
+<section class="estimate">
+<h3>The net cash position, worked out</h3>
+<h4>The number</h4>
+<p>Adobe holds about $4.04 billion more in cash and short-term investments than it owes on its notes, as of the end of August 2026.</p>
+<h4>How it was calculated</h4>
+<p>Take the balance sheet lines from the filing for the quarter ended August 28, 2026: cash and cash equivalents of $4.36 billion, short-term investments of $1.28 billion, notes payable of $1.60 billion. Cash plus investments minus debt: 4,359 + 1,280 &minus; 1,597 = 4,042, in millions.</p>
+<h4>The inputs</h4>
+<p>The cash, investment, and debt lines come from Adobe's balance sheet in the 10-Q for the quarter ended August 28, 2026, retrieved 2026-10-08. The stockanalysis.com page shows a different, broader debt figure that includes leases, which is why its net-cash number differs from this one.</p>
+<h4>The range</h4>
+<p>Between about $3.70 billion and $4.10 billion. The low end assumes the pending roughly $340 million Topaz Labs deal closes in cash within the next two quarters.</p>
+<h4>If the number is off</h4>
+<p>If the true figure is materially different, the cause is one of two things: a debt line that was not counted (for example, a new bond issue), or the Topaz deal closing sooner than expected. Neither would change the direction of the story, which is a cash surplus, not a borrowing burden.</p>
+</section>
+</section>
+
+<section class="chapter" id="ch-4">
+<h2>What the price is doing</h2>
+<p>On October 8, 2026 the stock closed at $241.05, up 3.56 percent that day. It sits 33.72 percent below the 52-week high of $363.70 and 26.79 percent above the 52-week low of $190.12. That is a stock in repair, not a stock in motion.</p>
+<p>Two averages set the context. The <dfn>50-day moving average</dfn> is the average of the last fifty closing prices; it stands at $257.99. The <dfn>200-day moving average</dfn> is the average over the last year of trading; it stands at $257.55 and is still falling, having been $285.15 three months ago. The price is below both. A <dfn>base</dfn> is the flat zone a stock builds after a long decline, while its sellers run out. The stock is in a base (Stage 1) and has not entered <dfn>Stage 2</dfn>, which is the advance that follows a broken base. The lowest close in the last sixty-three days was $210.88.</p>
+<p>Three more gauges. The <dfn>relative strength index (RSI)</dfn> is a 0-to-100 meter of recent momentum; it reads 45.73, neutral and not oversold. The <dfn>average true range (ATR)</dfn> measures the typical one-day move; it is $8.84. The <dfn>pivot</dfn> is the level the price must close above to leave the base; here it is the 50-day moving average at $257.99, and the price sits 3.41 ATRs below it. A <dfn>breakout</dfn> is a close above the pivot. A <dfn>retest</dfn> is the price coming back down to the pivot and holding it.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Momentum gate snapshot (data frozen 2026-10-08)</th><th>Value</th></tr>
+<tr><td>Gate verdict</td><td>NO_MOMENTUM</td></tr>
+<tr><td>Advance test (Stage 2 already underway)</td><td>Fail &mdash; price under the 50-day line (A1); 200-day line still falling (A2); price too far from support (A4); only relative strength passes (A3)</td></tr>
+<tr><td>Breakout test (base ready to break)</td><td>Fail &mdash; 28-day relative strength still negative (B2); price 3.41 ATRs from the pivot (B3); volume dry-up is present (B4)</td></tr>
+<tr><td>RSI (14-day)</td><td>45.73</td></tr>
+<tr><td>ATR</td><td>$8.84</td></tr>
+<tr><td>Distance from price to support</td><td>3.41 ATRs</td></tr>
+<tr><td>Lowest 63-day close</td><td>$210.88</td></tr>
+</table></div>
+<p>The table above is the frozen output of the momentum gate, the same gate this system applies to every name. Both tests fail, so the gate returns NO_MOMENTUM: the stock is not trending up, and the base is not ready to break.</p>
+<p>The entry ladder sets what distance from support is acceptable. Within 0.5 ATR, full size is allowed. From 0.5 to 1.0 ATR, standard size. From 1.0 to 1.2 ATR, a <dfn>limit order</dfn> &mdash; an instruction to buy only at a named price or better &mdash; at reduced size. Beyond 1.2 ATR, no buy. At 3.41 ATR, the answer is no buy. The gate's own note stands: the name is allocated only on a confirmed breakout of the base pivot or a retest that holds, never before.</p>
+<p>After the September 10 earnings release the stock fell to a close of $238.25 on September 22, down 4.52 percent that day, touched $224.67 on September 28, and recovered to $241.05 by October 8. One honest caveat: the gate's thresholds carry a needs-calibration flag, so treat the exact cut-offs in the table as provisional until they are re-fitted against a full sample of names.</p>
+</section>
+
+<section class="chapter" id="ch-5">
+<h2>What could happen next</h2>
+<p>First, where the stock stands on value. The <dfn>price-to-earnings</dfn> ratio is the share price divided by trailing earnings per share; at 13.45 it is low for a business with these margins. On forward, or next-year, earnings the multiple is 8.97.</p>
+<p>Two more yardsticks. The <dfn>price-to-earnings-to-growth (PEG)</dfn> ratio divides that multiple by the growth rate; at 0.62, the stock is cheap by that measure. <dfn>return on invested capital (ROIC)</dfn> is the profit earned on the capital tied up in the business; at 57.22 percent it is very high.</p>
+<p><dfn>earnings before interest, taxes, depreciation and amortization (EBITDA)</dfn> is a cash-profit measure that adds back non-cash charges. Enterprise value divided by EBITDA is 9.54, and debt divided by EBITDA is 0.68, a light load on a very profitable business.</p>
+<section class="estimate">
+<h3>The free cash flow yield, worked out</h3>
+<h4>The number</h4>
+<p>About 11 percent: for every dollar paid today, trailing free cash flow returns about 11 cents a year.</p>
+<h4>How it was calculated</h4>
+<p>Take one and divide it by the price-to-free-cash-flow multiple of 8.82. That gives 0.113, or 11.3 percent.</p>
+<h4>The inputs</h4>
+<p>The multiple of 8.82 and the trailing free cash flow of $10.59 billion come from stockanalysis.com, retrieved 2026-10-08. The cash flow here is the non-GAAP, company-style measure.</p>
+<h4>The range</h4>
+<p>Between 9 and 13 percent, depending on how much of the reported cash flow is treated as real once stock-based compensation is counted as a real cost (chapter 6).</p>
+<h4>If the number is off</h4>
+<p>The yield flatters if cash flow falls: a slower buyback program, a large acquisition, or a heavier capital program would each cut it. If trailing cash flow fell to $8 billion, the yield would be near 8.5 percent, no longer standout.</p>
+</section>
+<p>Three outcomes over the next twelve months, with the odds assigned and the reason for each.</p>
+<p><strong>Bull (30 percent).</strong> AI-driven demand keeps outpacing the current 13 percent growth, the top of the fiscal 2026 target ($26.63 billion) is met or raised, and the stock re-rates toward the top of the analyst range. Price: about $330. Why 30 percent: AI-first ARR grew 150 percent, but it is still small inside a $27.50 billion total, so a full re-rating is a step, not a certainty.</p>
+<p><strong>Base (45 percent).</strong> The target is met at its midpoint (revenue $26.60 billion, GAAP EPS $18.14). Buybacks keep shrinking the share count by about 5 percent a year. The <dfn>consensus estimate</dfn> is the average of the 39 analysts covering the stock; it stands at a $275.06 price target with a Hold rating. Price: about $270. Why 45 percent: this is the company's own published plan, and Adobe has a long record of landing near the middle of its range.</p>
+<p><strong>Bear (25 percent).</strong> Figma and other AI-native tools take share in creative, ARR growth slows below 8 percent, and the leadership transition stumbles. The stock falls toward the low analyst target of $195. Why 25 percent: the stock has already fallen 36 percent over the year, which prices in some of the fear, but the competitive threat is real and the $1 billion Figma fee shows how expensive these battles are.</p>
+<p>The expected outcome is the probability-weighted average: 0.30 &times; $330 + 0.45 &times; $270 + 0.25 &times; $195 = $269, about 11.7 percent above the $241.05 price, before costs and tax. That is the return the numbers support. Whether the path gets there is a timing question, and the momentum gate exists to answer it. Right now it says wait.</p>
+</section>
+
+<section class="chapter" id="ch-6">
+<h2>Why these estimates might be wrong</h2>
+<p><strong>The fiscal 2026 target.</strong> The weakest assumption is that demand holds through a normal business slowdown, and that Figma's push as a public company does not take share quickly. Falsifying evidence: quarterly ARR growth below 8 percent, or a guidance cut at any of the four earnings. When we will know: each quarter, starting with the fourth-quarter and full-year report, expected around January 2027.</p>
+<p><strong>The free cash flow yield.</strong> The weakest assumption is the non-GAAP treatment of equity pay. <dfn>dilution</dfn> is the shrinking of each owner's slice as new shares are issued or vest. If the stock-based compensation ratio climbs from 7.7 percent toward 9 percent of revenue, the real cash available to owners falls, and the yield overstates. When we will know: each quarterly filing reports the number for that period.</p>
+<p><strong>The net cash figure.</strong> The weakest assumption is that no new debt is issued. The balance sheet was a cash surplus through fiscal 2025 and into fiscal 2026. A large acquisition could change that; the pending Topaz deal at roughly $340 million is small. When we will know: the next balance sheet, in the filing for the December quarter.</p>
+<p><strong>The transition.</strong> The weakest assumption is that the CEO change and the interim CFO arrangement run smoothly. Falsifying evidence: a delay in the new CEO starting, a key-departure announcement, or a tone change in the first earnings call under new leadership. When we will know: the start date is announced publicly, and the first earnings under the new CEO will be the clearest test.</p>
+</section>
+
+<section class="chapter" id="ch-7">
+<h2>What we would do, and when</h2>
+<p>Decision: <span class="verdict verdict-watch">WAIT FOR SUPPORT</span>. No core position, no tactical position, today.</p>
+<p>The core screen asks four questions. Adobe passes three: return on invested capital of 57.22 percent against a 12 percent bar; free cash flow margin of 41.45 percent against a 12 percent bar; and a balance sheet that is a cash surplus rather than a heavy borrower. It fails one: stock-based compensation at 7.7 percent of revenue against a 5 percent bar. That single failure closes the core bucket, and this system does not override it.</p>
+<p>The tactical screen is the momentum gate, and it returned NO_MOMENTUM: the price is below both moving averages, the 200-day line is still falling, and the stock sits 3.41 ATRs from support, far outside the entry ladder, which allows no buy beyond 1.2 ATR.</p>
+<p>There is a deeper reason to wait. The <dfn>reward-to-risk</dfn> ratio is the upside of a position in dollars divided by its downside in dollars. Enter near $260 after a breakout, and set a <dfn>stop loss</dfn>, which is the pre-set price that ends the trade if the market goes against it, below the $210.88 low. The downside is about $49. The base-case upside to $270 is only $10. The <dfn>asymmetry</dfn> &mdash; upside over downside &mdash; works out to about 0.2 to 1. The system requires at least 3.5 to 1 for a tactical position. The trade does not meet the standard at today's price, whatever its business merits. That is why the gate says: allocated only on a confirmed breakout of the base pivot or a retest that holds, never before.</p>
+<p>The <dfn>entry zone</dfn> is the price band where a buy order would sit. For a future tactical entry it would be $258 to $265, just above the pivot, and only at the size the system allows once a retest holds.</p>
+<p>Each of the lines that follows names a price or event that would change the decision.</p>
+<p class="trigger">Trigger to act: a daily close above $258 (the pivot) on above-average volume, with the 200-day moving average flat or rising. Re-run the gate. If a retest of the pivot holds, place limit orders in the $258 to $265 entry zone, sized so the reward-to-risk from a stop below the new, higher base low is at least 3.5 to 1. The position cap is 15 percent of the market portfolio.</p>
+<p class="trigger">Trigger to abandon: a close below $210.88, the lowest close of the last sixty-three days. The base has broken; the name returns to the watchlist and no position is opened.</p>
+<p class="trigger">Trigger to re-check the core screen: four consecutive quarters with stock-based compensation below 5 percent of revenue, as reported in the quarterly filings.</p>
+<p class="trigger">Trigger to exit after entry: a close below the stop, set below the then-current base low, ends the position in full in the same session. No averaging down.</p>
+<p>If none of these happens, the correct action is no action. A business can be excellent and the entry still wrong. This system is built to never confuse the two.</p>
+</section>
+
+<section id="notes">
+<h2>Notes and sources</h2>
+<ol class="sources">
+<li>Adobe Q3 FY26 earnings press release, Exhibit 99.1 to the 8-K filed 2026-09-10 (quarterly results, ARR, RPO, buybacks, CEO transition quote): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000147/adbeex991q326.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>8-K filed 2026-09-10 (earnings release, CFO interim appointment): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000147/adbe-20260910.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>Filing index for the 2026-09-10 submission: <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000147/">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>10-Q for the quarter ended 2026-08-28 (balance sheet, nine-month income statement, SBC, acquisitions, litigation): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>Filing index for the 10-Q submission: <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>10-Q for the quarter ended 2026-02-27 (first quarter of fiscal 2026): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000056/adbe-20260227.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>Filing index for that 10-Q submission: <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000056/">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>10-K for the year ended 2025-11-28 (five-year history, Figma termination fee, fiscal 2025 buybacks, debt notes): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>Filing index for the 10-K submission: <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>DEF 14A proxy statement filed 2026-02-27 (executive pay, board): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000043/adbe-20260227.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>8-K filed 2026-07-14 (retention letter, CEO transition mechanics): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000120/adbe-20260714.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>8-K filed 2026-04-15 (annual meeting results, share plan amendment): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000101/adbe-20260415.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>Filing index for the 2026-04-15 submission: <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000101/">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>8-K filed 2026-06-08 (second quarter fiscal 2026 results): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000109/adbe-20260608.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>8-K filed 2026-03-09 (first quarter fiscal 2026 results): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000048/adbe-20260309.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>8-K filed 2026-01-26 (fourth quarter and full year fiscal 2025 results): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000019/adbe-20260126.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>Filing index for the 2026-01-26 submission: <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000019/">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>10-Q for the quarter ended 2025-08-29 (year-ago comparison quarter): <a href="https://www.sec.gov/Archives/edgar/data/796343/000079634325000107/adbe-20250829.htm">sec.gov</a>, retrieved 2026-10-08.</li>
+<li>SEC submissions file for CIK 796343 (filing index and accession numbers): <a href="https://data.sec.gov/submissions/CIK0000796343.json">data.sec.gov</a>, retrieved 2026-10-08.</li>
+<li>SEC company tickers file (used to confirm Figma, Inc. now files with the SEC): <a href="https://data.sec.gov/company_tickers.json">data.sec.gov</a>, retrieved 2026-10-08 during this run.</li>
+<li>stockanalysis.com quote page for ADBE (price, market capitalization, 52-week range, shares): <a href="https://stockanalysis.com/stocks/ADBE/">stockanalysis.com</a>, retrieved 2026-10-08.</li>
+<li>stockanalysis.com statistics page (multiples, ROIC, institutional ownership): <a href="https://stockanalysis.com/stocks/ADBE/statistics/">stockanalysis.com</a>, retrieved 2026-10-08.</li>
+<li>stockanalysis.com income statement page (five-year revenue, profit, cash flow): <a href="https://stockanalysis.com/stocks/ADBE/financials/">stockanalysis.com</a>, retrieved 2026-10-08.</li>
+<li>stockanalysis.com balance sheet page (five-year assets, goodwill, debt measures): <a href="https://stockanalysis.com/stocks/ADBE/financials/balance-sheet/">stockanalysis.com</a>, retrieved 2026-10-08.</li>
+<li>stockanalysis.com price history page (post-earnings price path): <a href="https://stockanalysis.com/stocks/ADBE/history/">stockanalysis.com</a>, retrieved 2026-10-08.</li>
+<li>stockanalysis.com forecast page (analyst targets and count): <a href="https://stockanalysis.com/stocks/ADBE/forecast/">stockanalysis.com</a>, retrieved 2026-10-08.</li>
+<li>Adobe investor relations page (company source for filings and releases): <a href="https://www.adobe.com/investor-relations.html">adobe.com</a>, retrieved 2026-10-08.</li>
+</ol>
+<p>Citation note, per the research contract: quantitative claims in the body are anchored to the September 2026 quarter filings and to pages retrieved on 2026-10-08. Facts that come only from older filings (the fiscal 2025 10-K, the proxy statement, the first-quarter 10-Q) &mdash; such as the fiscal 2025 SBC total, the $1 billion Figma termination fee, the fiscal 2025 buyback count, and the CEO's total compensation of about $51.2 million for fiscal 2025 &mdash; are stated qualitatively in the body and cited to the filing named above, because those filings pre-date this report by more than 60 days.</p>
+</section>
+<h2 id="references">References</h2>
+<ol class="reflist">
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000147/adbeex991q326.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000147/adbe-20260910.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000147/">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000056/adbe-20260227.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000056/">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000043/adbe-20260227.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000120/adbe-20260714.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000101/adbe-20260415.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000101/">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000109/adbe-20260608.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000048/adbe-20260309.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000019/adbe-20260126.htm">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634326000019/">sec.gov</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/796343/000079634325000107/adbe-20250829.htm">sec.gov</a></li>
+<li><a href="https://data.sec.gov/submissions/CIK0000796343.json">data.sec.gov</a></li>
+<li><a href="https://data.sec.gov/company_tickers.json">data.sec.gov</a></li>
+<li><a href="https://stockanalysis.com/stocks/ADBE/">stockanalysis.com</a></li>
+<li><a href="https://stockanalysis.com/stocks/ADBE/statistics/">stockanalysis.com</a></li>
+<li><a href="https://stockanalysis.com/stocks/ADBE/financials/">stockanalysis.com</a></li>
+<li><a href="https://stockanalysis.com/stocks/ADBE/financials/balance-sheet/">stockanalysis.com</a></li>
+<li><a href="https://stockanalysis.com/stocks/ADBE/history/">stockanalysis.com</a></li>
+<li><a href="https://stockanalysis.com/stocks/ADBE/forecast/">stockanalysis.com</a></li>
+<li><a href="https://www.adobe.com/investor-relations.html">adobe.com</a></li>
+</ol>
+</div>
+</body>
+</html>

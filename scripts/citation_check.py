@@ -16,7 +16,7 @@ Four checks:
      --max-age-days of the report date.
 
 Usage:
-  .venv/bin/python scripts/citation_check.py docs/blogs/ADBE_dossier.html
+  .venv/bin/python scripts/citation_check.py docs/blogs/US/ADBE_dossier.html
       [--research scripts/.cache/research_US_*.json ...]
       [--cache-dir scripts/.cache/fetched]
       [--min-sources 25] [--max-age-days 60] [--allow-stale-asof]

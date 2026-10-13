@@ -43,8 +43,15 @@ function render() {
     const key = byId("sort").value === "symbol" ? "symbol" : "title";
     dossiers = dossiers.toSorted ? dossiers.toSorted((first, second) => first[key].localeCompare(second[key])) : [...dossiers].sort((first, second) => first[key].localeCompare(second[key]));
   }
-  byId("library-count").textContent = `${dossiers.length} dossiers`;
-  byId("dossier-list").innerHTML = dossiers.map(entry => `<tr><td><span class="symbol">${escapeText(entry.symbol)}</span>${link(entry)}</td><td>${escapeText(entry.market)}</td><td>${escapeText(entry.sector)}</td><td><span class="verdict">${escapeText(entry.verdict)}</span></td><td>${stamp(entry)}</td></tr>`).join("") || '<tr><td colspan="5" class="empty">No dossiers match these filters.</td></tr>';
+  const dossierRow = entry => `<tr><td><span class="symbol">${escapeText(entry.symbol)}</span>${link(entry)}</td><td>${escapeText(entry.market)}</td><td>${escapeText(entry.sector)}</td><td><span class="verdict">${escapeText(entry.verdict)}</span></td><td>${stamp(entry)}</td></tr>`;
+  const emptyRows = '<tr><td colspan="5" class="empty">No dossiers match these filters.</td></tr>';
+  const renderLibrary = (bodyId, countId, sectionId, market, list) => {
+    byId(countId).textContent = `${list.length} dossiers`;
+    byId(bodyId).innerHTML = list.map(dossierRow).join("") || emptyRows;
+    byId(sectionId).hidden = state.market !== "All" && state.market !== market;
+  };
+  renderLibrary("dossier-list-in", "library-count-in", "library-in", "IN", dossiers.filter(entry => entry.market === "IN"));
+  renderLibrary("dossier-list-us", "library-count-us", "library-us", "US", dossiers.filter(entry => entry.market === "US"));
 }
 async function load() {
   const button = byId("refresh");

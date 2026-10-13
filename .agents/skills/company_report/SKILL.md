@@ -55,7 +55,7 @@ Currency: US dollars. Exchange figures in $ millions or $ billions. Primary sour
 <!-- /MARKET -->
 
 Your deliverable is a standalone, self-contained HTML document saved directly in:
-`docs/blogs/<SYMBOL>_dossier.html` (e.g. `docs/blogs/AFCOM_dossier.html`, `docs/blogs/ADBE_dossier.html`).
+`docs/blogs/<MARKET>/<SYMBOL>_dossier.html` (e.g. `docs/blogs/IN/AFCOM_dossier.html`, `docs/blogs/US/ADBE_dossier.html`).
 
 ---
 
@@ -274,18 +274,18 @@ style, class per `../_shared/REPORT_PALETTE.md` section 3.
 
 The report is not finished until, in this order:
 
-1. `python3 scripts/readability_check.py docs/blogs/<SYMBOL>_dossier.html`
+1. `python3 scripts/readability_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html`
    — BOOK_STANDARD section 5 in code: reading level, glossary first-use
    definitions, no bare tables, estimate working parts, Chapter 7 triggers,
    banned phrases, primer length, numbered notes.
-2. `python3 scripts/citation_check.py docs/blogs/<SYMBOL>_dossier.html --research scripts/.cache/research_<MARKET>_<date>.json`
+2. `python3 scripts/citation_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html --research scripts/.cache/research_<MARKET>_<date>.json`
    — source floor (25 for dossiers), every found record's URL in the fetch
    cache, every value present in the cached text, as-of freshness (60 days).
    When the latest periodic filing is older than 60 days and no newer one
    exists, add `--allow-stale-asof`; the stale records then print as
    `EXCEPTION AS-OF` lines and must be listed in the dossier's
    `gate-exceptions` section (`../../workflows/_COMMON.md`).
-3. `python3 scripts/validate_report.py docs/blogs/<SYMBOL>_dossier.html` — the
+3. `python3 scripts/validate_report.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html` — the
    shared structural and voice validator.
 4. The reviewer cycle (`../_shared/REVIEWER_OPERATIONS.md`): the review packet
    (`scripts/review_packet.py build --kind dossier --symbol <SYMBOL>`), one reviewer,
@@ -300,7 +300,7 @@ Fix findings, rerun, and only then publish.
 report_base.css and book_components.css, wraps the body, and wraps every
 wikitable in .table-wrap. Assemble before validation:
   python3 scripts/assemble_report.py --body <RUN_DIR>/work/body.html \
-    --out docs/blogs/<SYMBOL>_dossier.html -->
+    --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html -->
 
 The body is, in order:
 
@@ -375,7 +375,7 @@ use `<p class="trigger">`; no emoji; colours only via the palette classes.
 
 ## 7. Output location & pipeline
 
-1. **Output path:** `docs/blogs/<SYMBOL>_dossier.html`. If the file exists,
+1. **Output path:** `docs/blogs/<MARKET>/<SYMBOL>_dossier.html`. If the file exists,
    update it in place. Never numbered copies. No `.docx`.
 2. **Assemble:** `python3 scripts/assemble_report.py --body … --out …`
    (the writer never writes the `<head>`).

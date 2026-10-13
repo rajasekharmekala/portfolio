@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-13">
+<meta name="generated-at" content="2026-10-13T07:32:09.173879-07:00">
+<title>Report</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-10-13T07:32:09.173879-07:00">13 Oct 2026, 07:32 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-13</p></header><div class="table-wrap"><table class="wikitable infobox">
+<tr><th>Company</th><td>Fine Organic Industries Limited; NSE symbol <b>FINEORG</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AFINEORG" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/FINEORG/" style="color:var(--link);">Screener</a></span>, BSE code 541557 <sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-18">[18]</a></sup></td></tr>
+<tr><th>What it is</th><td>A maker of oleochemical-based specialty additives for food, plastics, cosmetics, coatings and feed <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><th>Sector and size</th><td>Chemicals, small cap; market capitalisation of ₹16,618 crore at the 13 Oct 2026 close <sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-18">[18]</a></sup></td></tr>
+<tr><th>Close (ledger, 13 Oct 2026)</th><td>₹5,422.50</td></tr>
+<tr><th>52-week range (ledger)</th><td>₹3,856.00 to ₹5,666.00</td></tr>
+<tr><th>Weinstein stage (ledger)</th><td>2 (Markup)</td></tr>
+<tr><th>Momentum gate (code)</th><td>NO_MOMENTUM: fails Test A and Test B</td></tr>
+<tr><th>Gate result</th><td>Fails the upside-to-downside floor, with the anchored target below the close; the momentum gate also fails</td></tr>
+<tr><th>Strategy bucket tested</th><td>CORE_ALPHA, with the tactical test also checked</td></tr>
+<tr><th>Action verdict</th><td><span class="verdict verdict-exit">REJECTED</span></td></tr>
+<tr><th>As of</th><td>2026-10-13</td></tr>
+</table></div>
+<p>This box gives the company, the ledger close and trend for 13 October 2026, and the verdict that follows from them. The chapters below explain each line, and the key figures underneath repeat the numbers that decide the outcome.</p>
+<dl class="key-figures">
+<div><dt>Action verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span></dd></div>
+<div><dt>Gate result</dt><dd>Upside-to-downside fails: ratio of minus 1.00</dd></div>
+<div><dt>Momentum gate</dt><dd>NO_MOMENTUM, so no allocation</dd></div>
+<div><dt>Close, 13 Oct 2026</dt><dd>₹5,422.50 (ledger)</dd></div>
+<div><dt>Anchored target</dt><dd>₹4,564.33, below the close</dd></div>
+<div><dt>Core stop price</dt><dd>₹4,563.04</dd></div>
+<div><dt>KPI scoring</dt><dd>NOT_EVALUATED (rejected at Layer 1)</dd></div>
+<div><dt>Publication status</dt><dd>PUBLISHED_WITH_GATE_EXCEPTIONS and BEST_EFFORT_AFTER_REVIEW_LIMIT (stale-date exceptions and the review limit in the run notes)</dd></div>
+</dl>
+<section class="primer" id="primer"><h2>Start here</h2>
+<p>This dossier asks one question: should Fine Organic Industries, the Mumbai maker of plant-based specialty additives, be bought as a core holding today? It does not forecast the share price; the target levels below are rule-based numbers that test the framework. The framework runs three layers in order, and a company that fails a hard floor is rejected before the later layers are read. Fine Organic fails the upside-to-downside floor, so the verdict is REJECTED; the rejection rests on <dfn>FAIL_ASYMMETRY</dfn>, which means the anchored target sits below the floor. The momentum result, NO_MOMENTUM, is a separate rule: no buy is made while it fails, however good the business, and its thresholds are marked needs_calibration.</p>
+</section>
+<div class="lede">
+<p><strong>Status: PUBLISHED_WITH_GATE_EXCEPTIONS and BEST_EFFORT_AFTER_REVIEW_LIMIT.</strong></p>
+<p>The business is sound on the numbers. The company has been making these additives since 1970 and says its products reach customers in more than 110 countries <sup><a href="#cite_note-2">[2]</a></sup>. Its return on capital is about 21.5 percent, its borrowings are a small fraction of shareholders' funds, and over the last three years it has turned profit into operating cash at about one rupee of cash for each rupee of profit <sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-11">[11]</a></sup>. The quarter to June 2026 was strong, with consolidated revenue up about 18 percent and profit up about 18 percent on the year before <sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-8">[8]</a></sup>. Those are the facts that make this a company worth studying.</p>
+<p>The price is where the rules bite. The stock closed at ₹5,422.50 on 13 October 2026, about 4.9 percent above its 50-day average and 14.7 percent above its 200-day average, and the averages are rising. The trend passes the technical test for a core holding. The problem is the price relative to what the company can earn. The framework anchors the target on the consensus profit forecast for the year to March 2027 multiplied by the stock's own three-year median P/E ratio. That anchor comes to ₹4,564.33, which is below today's price. A target below the price means the rules see no upside at all against a stop that sits about 16 percent below the close.</p>
+<p>The momentum test is also failed. The stock is more than four typical daily price swings above the recent 63-session low, and the trading volume is well below its 20-day norm. The code result is NO_MOMENTUM, which means no allocation is made under either strategy bucket, however good the business. The rejection rests on FAIL_ASYMMETRY, the anchored target below the floor, and that failure alone is enough for REJECTED. NO_MOMENTUM is a separate allocation rule: it blocks any buy while it fails, however good the business, and its thresholds are marked needs_calibration in the configuration.</p>
+<p>Layers 2 and 3 are not scored for this company, because the framework stops once a hard floor fails. The verdict would not change from scoring them. The chapters below set out each number, the rule it is tested against, and the levels that would have to change before the verdict could change. A reader who wants the short answer should read the key figures, the Layer 1 table and the invalidation chapter.</p>
+<p>The report carries the statuses PUBLISHED_WITH_GATE_EXCEPTIONS and BEST_EFFORT_AFTER_REVIEW_LIMIT. Several figures are dated more than 60 days before the report date, because the latest annual figures are for the year to March 2026 and the latest quarter is the one to June 2026. Those dates are disclosed in the run notes and do not change the verdict. A second data issue, a mismatch in the ledger's one-day change, is also recorded there.</p>
+</div>
+<section class="chapter" id="terms"><h2>Terms used in this report</h2>
+<p>This chapter explains each technical and financial word once, with an everyday comparison, so the later chapters can use the words without stopping to define them. The words appear in the order the framework needs them.</p>
+<p><dfn>ROCE</dfn> stands for return on capital employed. It asks how much operating profit a business makes for each rupee tied up in factories, machines and working stock, much as a shopkeeper asks what a stall earns for the money locked in its shelves. A figure of 21.5 percent means the business earns about 21 paise a year on every rupee it uses.</p>
+<p><dfn>EPS</dfn> stands for earnings per share, the company's profit for the year divided by the number of shares. It puts a total profit on a per-share footing, in the way a price per kilogram lets you compare two sacks of different sizes. The target in this report is built from a per-share forecast.</p>
+<p><dfn>RSI</dfn> stands for relative strength index, a gauge from 0 to 100 of how quickly a price has recently risen or fallen. Readings above 70 are called overbought and below 30 oversold, and the reading of 60.4 for this stock is in the middle of the range.</p>
+<p><dfn>ATR</dfn> stands for average true range, the typical daily price swing over the last 14 sessions. It works as a ruler: a distance measured in ATR units shows how far a price sits from a reference level in terms of ordinary daily movement. The ATR for this stock is ₹164.33.</p>
+<p>A <dfn>base</dfn> is a sideways stretch, often a few weeks to a few months, in which a stock trades inside a narrow range before its next move. It is like a car idling at a junction while the driver waits for a clear road. The framework measures the lowest price of the last 63 sessions as the base low, which is ₹4,692.00 for this stock.</p>
+<p>A <dfn>breakout</dfn> is the moment the price closes above the top of a base, ideally on heavier trading than usual. It tells you the waiting period has ended, though some breakouts fail within days. A Core candidate passes the technical test with a fresh breakout from its base, or with a rising trend.</p>
+<p>A <dfn>pivot</dfn> is the price level a stock has to clear to confirm a breakout, usually the top of its base. The ledger does not record a top-of-base price for this stock, so the momentum gate measures the distance from the base low instead, in ATR units.</p>
+<p><dfn>Stage 2</dfn> is the rising phase of a stock's cycle, when the price holds above averages that are themselves rising. <dfn>Stage 4</dfn> is the falling phase, when the price breaks below averages that are heading down. A stock between them, in the topping or flat phase, is in Stage 3, which the ledger does not treat as a buy state.</p>
+<p>An <dfn>entry zone</dfn> is the price range in which the rules allow a buy, normally close to a support level. When a stock is outside its entry zone, the rule is to wait rather than chase it. This report sets no entry zone, because the company is rejected at Layer 1.</p>
+<p>A <dfn>stop loss</dfn> is the price at which a holding is sold to cap the loss. It is set below the level at which the trend would count as failed, so the sale happens before the loss grows. Here the stop is used only to measure the downside in the upside-to-downside ratio, because no position is held.</p>
+<p><dfn>asymmetry</dfn> is the ratio of the expected upside to the possible downside: how many rupees of gain the rules expect for each rupee that could be lost. A ratio of 3.0 means three rupees of expected gain for each rupee at risk. The framework calls this the upside-to-downside ratio in its floors.</p>
+<p>The <dfn>price-to-earnings</dfn> ratio, shortened to P/E, is the share price divided by earnings per share. A P/E of 38 means investors pay 38 rupees for each rupee of a year's profit per share. It is the multiple that the target anchor uses.</p>
+<p>The <dfn>debt-to-equity</dfn> ratio is the company's borrowings divided by the capital its shareholders own. A value of 0.04 means borrowings are about four percent of owners' capital, and the framework's floor is 0.70.</p>
+<p>The <dfn>cash flow from operations</dfn> is the cash that running the business brings in, before any money spent on new plant. Comparing it with reported profit shows whether profit is backed by money actually collected. The framework's three-year test divides the sum of this cash by the sum of profit over the same years.</p>
+<p><dfn>free cash flow</dfn> is the cash from operations left after capital spending on plant and equipment. It is the money the business can use for dividends, debt repayment or new investment, and it is smaller than operating cash by the amount spent on machines and buildings in the year.</p>
+<p>The <dfn>operating margin</dfn> is the share of sales left after the running costs of making and selling the product, before interest and tax. It shows how much of each sales rupee the core business keeps. The company's operating margin for the year to March 2026 was 20 percent.</p>
+<p>A <dfn>consensus estimate</dfn> is the average of forecasts made by several professional analysts for the same figure. It is a market view rather than a company promise, and each analyst's forecast can be wrong. The framework uses the consensus only where a company does not give its own number.</p>
+<p>A <dfn>20-day moving average</dfn> is the average closing price over the last 20 sessions. A <dfn>50-day moving average</dfn> covers the last 50 sessions, and a <dfn>200-day moving average</dfn> covers the last 200. Traders use these lines as reference points: a price above a rising line is in an uptrend, and a price below a falling line is in a downtrend.</p>
+<p><dfn>working capital</dfn> is the money tied up in stock and unpaid customer bills, less the bills the company itself has not yet paid. When it grows faster than sales, cash is absorbed, which is why it matters for the cash test.</p>
+</section>
+<section class="chapter" id="framework"><h2>How the framework works for this company</h2>
+<p>The framework is a set of hurdles that a company must clear in a fixed order. Layer 1 holds the hard floors: returns on capital, the level of borrowing, the quality of profit as cash, the shape of the price chart, the momentum test and the upside-to-downside ratio. A failure at any of these ends the review with a REJECTED verdict, and the later layers are not read. Layer 2 would score three to five business-specific operating measures, and Layer 3 would check where the price sits relative to support and whether a buy is allowed at that price.</p>
+<p>Each candidate is tested under one of two strategy buckets. CORE_ALPHA is for businesses expected to compound over three to five years. It needs a return on capital of at least 15 percent, with a preference above 18 percent, a fresh breakout or a Stage 2 trend, and a target that gives at least 3.0 times the stop-distance in upside. TACTICAL_MOMENTUM is for moves of three to twelve months, and it needs a Stage 2 trend above rising 50-day and 200-day averages, with an upside floor of 3.5. This company is tested under CORE_ALPHA, because its record looks like a compounder, and the tactical test is run as a check.</p>
+<p>The framework never lets a good business excuse a weak chart, and it never lets a strong chart excuse a weak business. The company passes the financial floors and the trend test, so the decisive failures are the momentum test and the upside-to-downside ratio. The later chapters show each number in turn.</p>
+</section>
+<section class="chapter" id="business"><h2>What the company does and how it earns</h2>
+<p>Fine Organic makes additives from oleochemicals, which are chemicals derived from plant oils and fats. Its product list covers polymer additives such as lubricants, anti-fogging and anti-static agents, food ingredients such as emulsifiers and anti-fungal agents, personal care ingredients, feed ingredients and coatings additives <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-16">[16]</a></sup>. The company was founded in 1970 and says its products are accepted by customers in more than 110 countries <sup><a href="#cite_note-2">[2]</a></sup>. Its customers are manufacturers that buy these ingredients, so its sales follow their demand for specialty additives.</p>
+<p>The company's sales have moved in a wide range. Revenue was ₹3,023 crore in the year to March 2023 and ₹2,366 crore in the year to March 2026, a fall of about 7.8 percent a year <sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-10">[10]</a></sup>. Profit has fallen by more, from ₹618 crore to ₹417 crore over the same three years, which is about 12.3 percent a year <sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-8">[8]</a></sup>. The quarter to June 2026 was a turn in the other direction, with consolidated revenue of ₹694.17 crore and profit of ₹138.14 crore <sup><a href="#cite_note-19">[19]</a></sup>.</p>
+<p>The company's own investor pages list the quarterly results, the annual reports back to 2017-18, and presentations back to 2018-19 <sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-7">[7]</a></sup>. The annual report and presentation files are PDFs that the research tools could not read as text, so the figures in this dossier come from data pages that reproduce the filings. That is a limit on how confidently each figure can be checked, and the run notes set it out.</p>
+<h3>What this means for an owner</h3>
+<p>For an owner, the business is a steady manufacturer whose profit has fallen from its peak and is now recovering. The June quarter shows growth, and the September 2026 announcement shows the company putting ₹55 crore into its wholly owned subsidiary for a new manufacturing unit <sup><a href="#cite_note-8">[8]</a></sup>. Shareholding is concentrated: the promoters hold 75.00 percent, and the public holds about 9 percent <sup><a href="#cite_note-8">[8]</a></sup>. The question the framework asks next is whether the price already reflects this recovery. The chart and the valuation answer that question.</p>
+</section>
+<section class="chapter" id="layer1"><h2>Layer 1 gates</h2>
+<p>Layer 1 is the pass-or-fail stage, and every row in the table below has to pass for the candidate to continue. The floors are set in the framework's configuration, so they are not judgement calls made for this company. The company value column shows the number used, and the result column shows whether it clears the floor. The table reads from top to bottom: the first three rows are financial, and the rest cover the chart, the momentum test and the upside-to-downside ratio.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Layer</th><th>Gate</th><th>Floor</th><th>Company value</th><th>Result</th></tr>
+<tr><td>1</td><td>Return on capital (ROCE)</td><td>At least 15 percent; CORE_ALPHA prefers above 18 percent</td><td>21.5 percent, current <sup><a href="#cite_note-8">[8]</a></sup></td><td>PASS, above the Core preference</td></tr>
+<tr><td>1</td><td>Debt-to-equity</td><td>Below 0.70</td><td>0.04 for the year to March 2026 <sup><a href="#cite_note-12">[12]</a></sup></td><td>PASS</td></tr>
+<tr><td>1</td><td>Three-year cash conversion</td><td>At least 0.70</td><td>1.02: operating cash of ₹1,268.1 crore over profit of ₹1,239.5 crore, years to March 2024 to 2026 <sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-10">[10]</a></sup></td><td>PASS</td></tr>
+<tr><td>1</td><td>Technical, Core test</td><td>Stage 2 trend, or a fresh breakout</td><td>Stage 2; close above the rising 50-day and 200-day averages</td><td>PASS</td></tr>
+<tr><td>1</td><td>Technical, Tactical test</td><td>Stage 2 above rising 50-day and 200-day averages</td><td>Close 4.9 percent above the 50-day average, which is rising</td><td>PASS (check only)</td></tr>
+<tr><td>1</td><td>Momentum gate (code)</td><td>Passes Test A or Test B</td><td>NO_MOMENTUM: both tests fail</td><td>FAIL</td></tr>
+<tr><td>1</td><td>Upside-to-downside ratio, Core</td><td>At least 3.0, with an anchored target</td><td>-1.00 on an anchored target of ₹4,564.33</td><td>FAIL</td></tr>
+</table></div>
+<p>The table shows a company that is sound on paper and well placed on trend, which is why the failure is worth explaining. The three financial floors pass with room to spare. The technical floor passes too, because the trend is up. The two failures that decide the verdict are the momentum gate, which measures how far the price has run from its base, and the upside-to-downside ratio, which measures whether the expected gain beats the possible loss. The ratio failure is the one the framework names first, because it fails on the anchored target and not on a chart reading.</p>
+<h3>Financial floors</h3>
+<p>The financial floors ask whether the business earns enough on its capital, borrows modestly and turns profit into cash. Return on capital is 21.5 percent in the current screen, which clears the 15 percent floor and the 18 percent Core preference. Reported borrowings are small, at ₹68 crore against shareholders' capital of about ₹2,664 crore on the Screener page, so the debt-to-equity ratio is in the range of 0.03 to 0.04 <sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-12">[12]</a></sup>. The company also holds net cash of about ₹1,358 crore after its borrowings <sup><a href="#cite_note-13">[13]</a></sup>. The cash test is the most useful of the three. Operating cash was ₹634.5 crore, ₹204.0 crore and ₹429.6 crore in the years to March 2024, 2025 and 2026, against profit of about ₹412 crore, ₹410 crore and ₹417 crore <sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-8">[8]</a></sup>. The single weak year, 2025, is one reason the cash test deserves a closer look, and the red team chapter returns to it.</p>
+<h3>Technical floor</h3>
+<p>The technical floor asks whether the price chart shows that the market already agrees with the business. Here it does. The ledger puts the stock in Stage 2, with the close of ₹5,422.50 above the 50-day average of ₹5,168.11, and the 50-day average above the 200-day average of ₹4,727.37. The 50-day average has risen from ₹5,059.17 twenty-one sessions earlier and the 200-day average from ₹4,532.51 sixty-three sessions earlier. Both averages are rising, so the trend passes the Core and Tactical tests. The floor passes, and the rejection comes from the next two gates.</p>
+<h3>Upside-to-downside floor</h3>
+<p>The upside-to-downside floor asks whether the expected gain is large compared with the possible loss, and it requires the target to be anchored to something a reader can check. The anchored target is ₹4,564.33, which is below the close. That gives a negative ratio of about minus 1.00 against a floor of 3.0 for Core. The detailed working is in the asymmetry chapter, which also explains why a broker's average target is not used. The floor fails, so the company is REJECTED.</p>
+</section>
+<section class="chapter" id="technical"><h2>Technical posture and the momentum gate</h2>
+<p>The chart says whether the market is currently rewarding the business. The ledger snapshot for 13 October 2026 shows a close of ₹5,422.50, a 20-day average of ₹5,228.57, a 50-day average of ₹5,168.11 and a 200-day average of ₹4,727.37. The 20-day average sits above the 50-day, which is the order a rising trend shows. The 14-day RSI reading is 60.4, in the upper middle of the range. The 52-week range is ₹3,856.00 to ₹5,666.00, so the stock is about 4.3 percent below its high. The 20-session swing low is ₹4,968.00.</p>
+<p>The averages together say the trend is up, and the chart is not overextended in the sense of a high RSI. The distance from the base is the issue. The stock is 4.45 ATR above its 63-session base low of ₹4,692.00. That is far above the limits in the momentum gate, and it is the reason the gate reads NO_MOMENTUM even though the trend is clean.</p>
+<h3>The momentum gate result</h3>
+<p>The momentum gate is a code-based test that runs on the frozen ledger snapshot and asks whether the stock is in momentum now (Test A) or is entering it (Test B). A candidate has to pass one of the two, and failing both means no allocation, however good the business. The thresholds in the configuration are marked as needing calibration against live data, so they are defaults rather than fitted values. The table lists each condition with the value measured for this company.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Test</th><th>Condition</th><th>Measured</th><th>Rule</th><th>Result</th></tr>
+<tr><td>A1</td><td>Structure: close above the 50-day average, which is above the 200-day average</td><td>Close 5,422.50; 50-day 5,168.11; 200-day 4,727.37</td><td>Price above both averages in order</td><td>PASS</td></tr>
+<tr><td>A2</td><td>The 200-day average is not falling over 63 sessions</td><td>4,727.37 now, against 4,532.51 then</td><td>Not falling</td><td>PASS</td></tr>
+<tr><td>A3</td><td>Relative strength over 63 sessions, against the benchmark index</td><td>Excess return of 14.08 percent</td><td>At least 0.0 percent</td><td>PASS</td></tr>
+<tr><td>A4</td><td>Not extended from support</td><td>4.45 ATR above the base low</td><td>At most 1.2 ATR</td><td>FAIL</td></tr>
+<tr><td>B1</td><td>50-day average holding over 21 sessions</td><td>Change of plus 2.15 percent</td><td>No worse than minus 0.5 percent</td><td>PASS</td></tr>
+<tr><td>B2</td><td>Relative strength turning up over 28 sessions</td><td>Excess return of 8.29 percent</td><td>Rising, above 0</td><td>PASS</td></tr>
+<tr><td>B3</td><td>Near the pivot, which the gate measures from the base low</td><td>4.45 ATR above the base low</td><td>At most 1.0 ATR</td><td>FAIL</td></tr>
+<tr><td>B4</td><td>Volume drying up in the base: quietest session as a share of the 63-session average</td><td>0.20</td><td>At most 0.9</td><td>PASS</td></tr>
+<tr><td>B5</td><td>Volume expanding: latest 20-session volume against its norm</td><td>0.44 times</td><td>At least 1.0</td><td>FAIL</td></tr>
+</table></div>
+<p>The table shows that the chart is healthy in direction and stretched in position. Test A fails on one condition, the distance from support, and passes the three that describe the trend. Test B fails on the pivot distance and on volume expansion, and passes the other three. The pivot distance and the support distance are measured from the same base low, so they fail together rather than as two separate pieces of evidence. The volume test shows trading at less than half its 20-day norm, which means the market is not yet bidding the stock up on heavy volume.</p>
+<h3>What the momentum result means for a buyer</h3>
+<p>The result is NO_MOMENTUM, which means no allocation to FINEORG under either bucket. The reason is not weak business quality, because the financial floors pass. The reason is that the price has moved well away from its base without the volume to show a confirmed breakout. The code's conditional entry rule allows an allocation only after a confirmed breakout of the pivot, or a return to that level that holds. For Test A to pass on distance alone, the price would need to fall back to about ₹4,889, which is 1.2 ATR above the base low. For Test B to pass on the pivot, the price would need to be near ₹4,856. Neither level is where the stock trades now. The invalidation chapter sets out what would reopen the case.</p>
+</section>
+<section class="chapter" id="asymmetry"><h2>Asymmetry and target anchoring</h2>
+<p>The upside-to-downside ratio compares how far the price could rise with how far it could fall before the stop is hit. The framework requires an anchored target: a forward earnings forecast multiplied by a three-year median price-to-earnings ratio, or a chart-based base target. A target without an anchor is treated as unverified, and an unverified target fails the floor. The rule is strict because a target chosen to look attractive can make almost any stock appear to have room to run.</p>
+<p>For this company the anchor uses the consensus profit forecast for the year to March 2027, which is ₹152.50 per share on the data provider's adjusted basis <sup><a href="#cite_note-15">[15]</a></sup>. The three-year median is taken from the year-end price-to-earnings ratios for the years to March 2024, 2025 and 2026, which are 30.03, 29.93 and 29.09 <sup><a href="#cite_note-12">[12]</a></sup>. The median of those three is 29.93. Multiplying the forecast by the multiple gives an anchored base target of ₹4,564.33. The forecast for the year to March 2028, ₹155.78 per share, gives a bull reference of ₹4,662.50 on the same multiple. The bull figure is shown for context and is not used in the ratio <sup><a href="#cite_note-15">[15]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Item</th><th>Value</th><th>How it is set</th></tr>
+<tr><td>Close</td><td>₹5,422.50</td><td>Ledger, FINEORG row, 13 Oct 2026</td></tr>
+<tr><td>Core stop</td><td>₹4,563.04</td><td>Stop rule for CORE_ALPHA, see the stop estimate below</td></tr>
+<tr><td>Tactical stop</td><td>₹4,885.84</td><td>Stop rule for TACTICAL_MOMENTUM</td></tr>
+<tr><td>Consensus earnings per share, year to March 2027</td><td>₹152.50</td><td>Consensus forecast on the data provider's basis <sup><a href="#cite_note-15">[15]</a></sup></td></tr>
+<tr><td>Three-year median price-to-earnings</td><td>29.93</td><td>Median of the year-end ratios for 2024, 2025 and 2026 <sup><a href="#cite_note-12">[12]</a></sup></td></tr>
+<tr><td>Anchored base target</td><td>₹4,564.33</td><td>₹152.50 multiplied by 29.93</td></tr>
+<tr><td>Bull reference</td><td>₹4,662.50</td><td>Forecast of ₹155.78 multiplied by 29.93; not used in the ratio</td></tr>
+<tr><td>Core upside-to-downside</td><td>-1.00</td><td>(4,564.33 minus 5,422.50) divided by (5,422.50 minus 4,563.04); floor 3.0; FAIL</td></tr>
+<tr><td>Tactical upside-to-downside</td><td>-1.60</td><td>Same numerator divided by (5,422.50 minus 4,885.84); floor 3.5; FAIL</td></tr>
+</table></div>
+<p>The table gives the working in plain steps. The anchored target sits ₹858.17 below the close, so the upside is negative. Dividing that by the Core risk of ₹859.46 gives about minus 1.00, and dividing it by the smaller Tactical risk of ₹536.66 gives about minus 1.60. Both ratios are below their floors, and no change in the stop can rescue them, because the target itself is below the price. The bull reference is also below the price, giving about minus 0.88 on the Core stop.</p>
+<p>The arithmetic also shows how far the anchor would have to move. For the Core ratio to reach 3.0, the target would need to be at least ₹8,000.88. On the same median multiple, that requires earnings of about ₹267 per share, which is roughly 75 percent above the consensus forecast. Put the other way, the Core target would need a multiple of about 52 times the consensus earnings, while today's price implies about 35.6 times (₹5,422.50 divided by ₹152.50), and the anchor uses 29.93 times. For the Tactical ratio to reach 3.5, the target would need to be at least ₹7,300.81, or about 48 times the consensus earnings. Neither is supported by the forecast on hand.</p>
+<p>The sensitivity of the anchor to its two inputs is set out here. The Core ratio is about minus 1.00 on ₹152.50 at the median 29.93 times, and about minus 0.72 on ₹160.50, an illustrative forecast about 18 percent above the reported ₹136.03 for the year to March 2026. ₹160.50 is an assumption for this test, not a consensus figure. At 38 times, the rough trailing multiple quoted in the peer section, the ratio is about 0.43 on ₹152.50 and about 0.79 on ₹160.50. At 47.3 times, the year-end multiple for the year to March 2022, it is about 2.08 on ₹152.50 and about 2.52 on ₹160.50. The Core stop is held at ₹4,563.04 in every case. No case reaches the 3.0 floor, which would need an anchored target of at least ₹8,000.88.</p>
+<h3>Why the broker average is not used</h3>
+<p>The consensus rating is Buy, with an average analyst price target of ₹5,392 across 11 analysts, a low of ₹4,009 and a high of ₹6,629 <sup><a href="#cite_note-15">[15]</a></sup>. A reader might ask why that average is not the target. The average is close to the current price, so it would give a ratio of about minus 0.04, which fails the floor as well. The framework does not accept broker targets as anchors in any case, because a target is a judgement rather than an arithmetic result of a forecast and a multiple. The point matters because the broker figure is the one most likely to look persuasive, and the rule exists to stop that from deciding the matter.</p>
+<h3>Why the earnings anchor is consensus rather than a company target</h3>
+<p>The company does not publish an earnings-per-share target that could serve as an anchor. The consensus forecast therefore stands in for it, and that is a weaker anchor than a company's own figure would be. The forecast also uses an adjusted basis: the consensus's prior-year figure is ₹134.28, while the reported profit per share for the year to March 2026 was ₹136.03 <sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-10">[10]</a></sup>. The difference is small, but it means the anchor is a forecast on its own basis. The consensus itself is dated 21 May 2026, before the June quarter, which was a strong quarter <sup><a href="#cite_note-19">[19]</a></sup>. An upgrade to the forecast would matter more than any other change to the inputs.</p>
+<section class="estimate" id="stop-estimate"><h3>The stop-loss estimate</h3>
+<p>The stop loss is the price at which a position would be sold, and it sets the risk in the upside-to-downside ratio. No position is held, so the stop is used only to measure the downside. The estimate below shows how the stop is set, what it depends on and how sensitive it is.</p>
+<h4>The number: stop-loss levels</h4>
+<p>The Core stop is ₹4,563.04, which is 15.9 percent below the close of ₹5,422.50. The Tactical stop is ₹4,885.84, which is 9.9 percent below the close. Both sit below the price, so a buyer who ignored the rule would be carrying the risk down to these levels.</p>
+<h4>How it was calculated: the stop rule</h4>
+<p>For CORE_ALPHA the rule takes the lowest of the 20-session swing low of ₹4,968.00, the 50-day average of ₹5,168.11 and the 200-day average of ₹4,727.37, which is ₹4,727.37, and subtracts one ATR of ₹164.33. The result is ₹4,563.04. For TACTICAL_MOMENTUM the rule takes the lowest of the swing low, the 20-day average of ₹5,228.57 and the 50-day average, which is ₹4,968.00, and subtracts half an ATR, which is ₹82.17. The result is ₹4,885.84.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Step</th><th>Core (CORE_ALPHA)</th><th>Tactical (TACTICAL_MOMENTUM)</th></tr>
+<tr><td>Reference levels</td><td>Swing low 4,968.00; 50-day average 5,168.11; 200-day average 4,727.37</td><td>Swing low 4,968.00; 20-day average 5,228.57; 50-day average 5,168.11</td></tr>
+<tr><td>Lowest reference level</td><td>4,727.37 (200-day average)</td><td>4,968.00 (swing low)</td></tr>
+<tr><td>ATR step taken off</td><td>One ATR, 164.33</td><td>Half an ATR, 82.17</td></tr>
+<tr><td>Stop</td><td>4,563.04</td><td>4,885.84</td></tr>
+</table></div>
+<p>The table sets the two rules side by side. The Core rule starts from the lower of the two long averages and takes a full ATR, so it sits further below the price. The Tactical rule starts from the swing low and takes half an ATR, so it sits closer to the price. The gap between the two stops is ₹322.80, and it is the gap that makes the Tactical ratio look more negative than the Core ratio.</p>
+<h4>The inputs: where each figure comes from</h4>
+<p>Every input comes from the FINEORG row in the frozen ledger, which records the 13 October 2026 close. The swing low, the averages and the ATR are ledger values, and no outside figure enters the stop. The close matches the figure on the exchange-based share price pages, which show ₹5,422.50 on 13 October <sup><a href="#cite_note-18">[18]</a></sup>.</p>
+<h4>The range: what the spread means</h4>
+<p>The two stops sit ₹322.80 apart. The Core stop is the lower of the two, because it uses the 200-day average and a full ATR, and it gives the stock more room before the stop is hit. The Tactical stop is higher, because it uses the swing low and half an ATR. For the upside-to-downside ratio the Core risk is ₹859.46 a share and the Tactical risk is ₹536.66 a share.</p>
+<h4>If the number is off: sensitivity</h4>
+<p>The Core stop moves rupee for rupee with the 200-day average and with the ATR, because both enter the rule directly while the 200-day average is the lowest reference level. A ₹10 rise in the 200-day average would lift the Core stop to ₹4,573.04 and cut the Core risk to ₹849.46, which moves the ratio from about minus 1.00 to about minus 1.01. A ₹10 rise in the ATR would lower the Core stop to ₹4,553.04, raise the Core risk to ₹869.46, and move the ratio to about minus 0.99. If the 200-day average rose above the swing low of ₹4,968.00, the swing low would become the anchor instead. None of these changes makes the target reach the price, so the verdict is not sensitive to the stop.</p>
+</section>
+</section>
+<section class="chapter" id="layers23"><h2>Layers 2 and 3</h2>
+<p>Layers 2 and 3 were not evaluated, because Layer 1 failed and the framework stops there. Layer 2 would score three to five operating measures for this kind of business, such as capacity use, margin stability and customer concentration, and Layer 3 would decide the entry posture. The Layer 2 scorecard is therefore marked NOT_EVALUATED, not PASS or FAIL, and no traffic-light table is shown. Scoring the measures now would give a false sense of completeness for a company the framework has already rejected.</p>
+<p>For reference only, the price position can be read from the ledger. The close is 4.45 ATR above the 63-session base low, and 1.55 ATR above the 50-day average. The support bands in the framework run from full size under half an ATR, through standard size under one ATR, to no buy beyond 1.2 ATR. On the base-low measure the price sits in the no-buy band, so the entry posture would be WAIT_FOR_SUPPORT even if Layer 1 had passed. That reading explains what the price would need to do before a buy could be considered, and it is not a Layer 3 verdict.</p>
+</section>
+<section class="chapter" id="peers"><h2>Peer benchmarking</h2>
+<p>A peer comparison shows whether the company's numbers are unusual for its industry or ordinary. The two peers below make specialty chemicals and surfactant-type products for Indian and export customers, and each has a public screen with current market size, multiples and return ratios <sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-24">[24]</a></sup>. The table lists market capitalisation, the trailing price-to-earnings ratio, the forward ratio from the data provider, return on capital and return on equity.</p>
+<div class="table-wrap"><table class="wikitable">
+<tr><th>Company</th><th>Market capitalisation (₹ crore)</th><th>Trailing P/E</th><th>Forward P/E</th><th>ROCE (percent)</th><th>ROE (percent)</th></tr>
+<tr><td>FINEORG</td><td>16,618 <sup><a href="#cite_note-8">[8]</a></sup></td><td>37.9 <sup><a href="#cite_note-8">[8]</a></sup></td><td>35.88 <sup><a href="#cite_note-14">[14]</a></sup></td><td>21.5 <sup><a href="#cite_note-8">[8]</a></sup></td><td>16.5 <sup><a href="#cite_note-8">[8]</a></sup></td></tr>
+<tr><td>Galaxy Surfactants</td><td>9,150 <sup><a href="#cite_note-23">[23]</a></sup></td><td>25.2 <sup><a href="#cite_note-23">[23]</a></sup></td><td>22.30 <sup><a href="#cite_note-21">[21]</a></sup></td><td>13.5 <sup><a href="#cite_note-23">[23]</a></sup></td><td>10.9 <sup><a href="#cite_note-23">[23]</a></sup></td></tr>
+<tr><td>Vinati Organics</td><td>11,785 <sup><a href="#cite_note-24">[24]</a></sup></td><td>26.3 <sup><a href="#cite_note-24">[24]</a></sup></td><td>23.60 <sup><a href="#cite_note-22">[22]</a></sup></td><td>19.8 <sup><a href="#cite_note-24">[24]</a></sup></td><td>14.9 <sup><a href="#cite_note-24">[24]</a></sup></td></tr>
+</table></div>
+<p>The company's return on capital is the highest of the three, which supports its place among the better businesses in this group. Vinati's return is close, at 19.8 percent, and Galaxy's is well below at 13.5 percent. On the multiple, however, the company trades at about 38 times trailing profit, against about 25 to 26 times for both peers. That premium is what the framework's anchor refuses to pay for, since the anchor uses the company's own history of about 30 times.</p>
+<p>The peer set has limits. Vinati and Galaxy make different product ranges, so their margins and growth are not a like-for-like test. The useful reading is narrower. The market pays a premium for this company's return on capital over both peers. The consensus forecast does not explain that premium. That is why the valuation gate fails, and why the peers do not change the verdict.</p>
+</section>
+<section class="chapter" id="redteam"><h2>Fatal-flaw red team</h2>
+<p>The red team asks what would make the verdict wrong, and the answer should be sharp rather than general. Three fatal flaws are tested below. Each is a reason the rejection could be a mistake, even though the framework's rules are clear on the numbers.</p>
+<h3>Flaw one: the anchor multiple is too low for this business</h3>
+<p>The first flaw is that the three-year median of about 30 times may understate what the market should pay for a company with a 21.5 percent return on capital and a low-borrowing balance sheet. The year-end multiple was 21.4 times in the year to March 2023 and 47.3 times in the year to March 2022, so the historical range is wide <sup><a href="#cite_note-12">[12]</a></sup>. If the market has permanently re-rated the company, the anchor would understate the target, and the ratio would be wrong for a reason that the rule cannot see. The defence is that the framework requires the anchor to be a median, not the best year. Under that rule the verdict stands, but the flaw is real and should be watched.</p>
+<h3>Flaw two: earnings are recovering, and the consensus is stale</h3>
+<p>The second flaw is that the consensus was last updated on 21 May 2026, before a June quarter in which revenue rose about 18 percent and profit rose about 18 percent on the year before <sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-19">[19]</a></sup>. If analysts raise their forecasts after the quarter, the anchor would rise. A profit forecast of about ₹267 a share would be needed to reach the Core floor at the median multiple, which is far above the recovery shown so far. The flaw could matter, but it would need a large revision, not a small one.</p>
+<h3>Flaw three: cash conversion is lumpy</h3>
+<p>The third flaw is that the three-year cash test passes only because two years are strong. Operating cash fell to ₹204.0 crore in the year to March 2025, which is about half of that year's profit, and the company's inventory days rose to 104 by March 2026, with a cash conversion cycle of 113 days <sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-8">[8]</a></sup>. Stock that sits for longer ties up cash, and a weak year could drag the three-year ratio below the 0.70 floor. The current figure of 1.02 clears the floor, but the cushion is not large in a bad year. The cash flow test is a fair pass, and the flaw is about the next year, not the past one.</p>
+<p>What would make the bear case wrong is a clean run of Stage 2 signals: the price holding above the 50-day average on heavy volume, relative strength staying positive, and a consensus upgrade after the June quarter. The price has been rising, and the trend signal is real. The verdict does not rest on the trend alone, because the momentum gate and the upside-to-downside ratio both fail.</p>
+</section>
+<section class="chapter" id="ch-7"><h2>Invalidation levels and what we would do</h2>
+<p>An invalidation level is a price or a date that ends a view. For a rejected stock, the relevant levels are the ones that would reopen the case and the ones that would confirm the rejection. The rules give three numbers that matter here, and each can be checked against the chart or the next filing without further judgement.</p>
+<p class="trigger">An anchored base target of at least ₹8,000.88 would be needed to pass the Core upside-to-downside floor of 3.0. On the current median multiple, that requires earnings of about ₹267 a share, so a forecast revision of that size would reopen the valuation test.</p>
+<p class="trigger">A close at or below ₹4,889, which is 1.2 ATR above the base low, would be needed for the distance check in Test A to pass. Even at that price the anchored target of ₹4,564.33 would still sit below the price, so the valuation floor would still fail on its own.</p>
+<p class="trigger">A close below ₹4,727.37, the 200-day average, would confirm that the long trend has broken and would bring the Core stop of ₹4,563.04 into view as the next line to watch.</p>
+<p>What we would do is nothing, for now. No allocation is made while the verdict is REJECTED. The rejection rests on FAIL_ASYMMETRY (anchored target below the floor). The momentum gate reading NO_MOMENTUM is a separate allocation rule that blocks any buy while it fails, however good the business, and its thresholds are marked needs_calibration. The next scheduled check is the June-to-September quarter results, which the company's trading window notice ties to the period after 1 October 2026 <sup><a href="#cite_note-8">[8]</a></sup>. The results are expected about 6 November 2026 on the data provider's estimate <sup><a href="#cite_note-14">[14]</a></sup>. At that point the consensus, the year-end figures and the chart would be re-run together. The watchlist row dated 27 September 2026 recorded an IMMEDIATE_BUY verdict with an asymmetry of 4.00 to 1. The target and stop prices that row used are not in the record this report was built from, so the 4.00 cannot be traced to a price and the reason for the difference is not known. The row does not show an anchored target, so its ratio cannot be checked against the anchored-target rule. This report uses the anchored target of ₹4,564.33 and the Core stop of ₹4,563.04, and on those figures the ratio is about minus 1.00. This report supersedes the 27 September row, which should not be used.</p>
+</section>
+<section class="chapter" id="gate-exceptions"><h2>Run notes and gate exceptions</h2>
+<p><strong>Verdict and rule.</strong> REJECTED. The upside-to-downside floor fails: the anchored target of ₹4,564.33 is below the close of ₹5,422.50, so the ratio is about minus 1.00 against a floor of 3.0. The Layer 1 rejection rests on FAIL_ASYMMETRY, and the gate status is FAIL_ASYMMETRY. The momentum gate also reads NO_MOMENTUM. That is a separate allocation rule, not a second reason for the rejection: no buy is made while it fails, however good the business, and its thresholds are marked needs_calibration. Layers 2 and 3 were not evaluated, and the KPI result is NOT_EVALUATED.</p>
+<p><strong>Stale-date exceptions.</strong> The freshness rule allows a research figure to be at most 60 days older than the report date. Several figures are older than that, and each is disclosed here rather than hidden. The annual figures for the year to March 2026 are dated to 31 March 2026, which is 196 days before the report date (the checker counts from the first day of the month, which gives 226 days). They are the operating cash, the profit, the revenue, the operating margin, the debt-to-equity ratio, the net cash, the inventory days and the year-end P/E history. The June 2026 quarter figures, dated to 30 June 2026, are the quarterly revenue, profit and margin, and the June 2026 shareholding is dated the same way. The consensus forecast and the analyst targets were last updated on 21 May 2026, which is 145 days before the report date. The third-party annual report summary is dated June 2026. None of these exceptions changes the verdict, because the anchor and the chart use the latest available values and the gates fail on current prices. The exceptions would be cured by the Q2 FY27 results and a refreshed consensus, expected in November 2026.</p>
+<p><strong>Ledger one-day change.</strong> The ledger records a previous close of ₹5,410.50 and a one-day change of plus 0.22 percent. The price history and the exchange-based pages show that the 12 October 2026 close was ₹5,501.50 and that the 13 October move was minus 1.44 percent, which matches the ₹5,422.50 close <sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-18">[18]</a></sup>. The ledger close is correct. The previous-close field appears to point at the 9 October bar. The one-day change is not used in any gate, so the verdict is unaffected, but the ledger row should be checked before the next run.</p>
+<p><strong>Primary filings not read.</strong> The company's annual reports, quarterly results PDFs and investor presentations are linked from its investor pages, but the research tools return them as binary files rather than text. The financial figures therefore come from two data providers that reproduce the filings, Screener and the S&amp;P Global data shown on StockAnalysis <sup><a href="#cite_note-9">[9]</a></sup>, and from the Q1 results reports <sup><a href="#cite_note-20">[20]</a></sup>. A third-party annual report summary repeats the debt figure of ₹68 crore, but it is not relied on alone <sup><a href="#cite_note-25">[25]</a></sup>. Where the two providers differ, the dossier shows both or uses the one with the explicit column labels. The return on capital for the year to March 2026 is 21 percent on one page and 15.7 percent on another, so the dossier uses the current 21.5 percent screen figure, and both figures clear the 15 percent floor. This limit lowers confidence in each figure, though it does not change the verdict. A reader checking a number should open the filing.</p>
+<p><strong>Figures not verified.</strong> The promoter pledge figure was not found on the pages read, so it is not reported. The rating letters were not retrieved. The only rating evidence used is the list of rating updates on the Screener page, which is not used in any gate. The management call transcript was not readable, so no management quote is used. The Business Standard share price page refused the cache request and is not cited.</p>
+<p><strong>Momentum thresholds.</strong> The momentum gate's thresholds are marked as needing calibration against live data in the configuration file. The result is applied as written, and the code output is recorded with this run.</p>
+<p><strong>Independent review.</strong> One independent review round was run on this dossier. Round 1 returned REVISE with four findings, on the target arithmetic, the watchlist row, the stop sensitivity and the run notes, and each finding has been applied in this version. Round 2 (delta review) returned REVISE on that line only, which is now corrected. The two-round limit is reached, so no further review was run. The status is BEST_EFFORT_AFTER_REVIEW_LIMIT.</p>
+</section>
+<section class="chapter" id="notes"><h2>Notes, glossary and sources</h2>
+<p>The bracketed numbers in the text point to the numbered list below. Each entry is a page the report reads from, and the research file holds the value and the quoted passage taken from it. The glossary is the Terms chapter near the start, where each word is defined at its first use. The company's own pages, the investor relations index and the quarterly results index come first, followed by the data pages that reproduce the filings, the share price pages and the peer pages.</p>
+<h3 id="references">Sources, in numbered order</h3>
+<ol class="reflist">
+<li id="cite_note-1"><a href="https://www.fineorganics.com">Fine Organics: company home page (product and green-additive positioning)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-2"><a href="https://www.fineorganics.com/about-us/">Fine Organics: About Us (founded 1970; customers in over 110 countries)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-3"><a href="https://www.fineorganics.com/sustainability/">Fine Organics: Sustainability page (green chemistry positioning)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-4"><a href="https://www.fineorganics.com/investor-relations">Fine Organics: Investor Relations index (filings, credit rating section, registered office)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-5"><a href="https://www.fineorganics.com/investor-annual-report/">Fine Organics: Annual Reports index (2025-26 back to 2017-18)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-6"><a href="https://www.fineorganics.com/investor-presentations/">Fine Organics: Investor Presentations index (August 2026 presentation; May 2026 call transcript listed)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-7"><a href="https://www.fineorganics.com/investor-financial-results-quarterly/">Fine Organics: Quarterly Financial Results index (Q1 2026-27 unaudited results for the quarter to 30 June 2026)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-8"><a href="https://www.screener.in/company/FINEORG/consolidated/">Screener: Fine Organic consolidated company page (profit, cash flow, ratios, shareholding, announcements). Used for ratio and shareholding figures only</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-9"><a href="https://stockanalysis.com/quote/nse/FINEORG/financials/">StockAnalysis: Fine Organic financials overview (S&amp;P Global Market Intelligence data)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-10"><a href="https://stockanalysis.com/quote/nse/FINEORG/financials/income-statement/">StockAnalysis: Fine Organic income statement, fiscal years 2022 to 2026 and TTM to June 2026</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-11"><a href="https://stockanalysis.com/quote/nse/FINEORG/financials/cash-flow-statement/">StockAnalysis: Fine Organic cash flow statement, fiscal years 2022 to 2026</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-12"><a href="https://stockanalysis.com/quote/nse/FINEORG/financials/ratios/">StockAnalysis: Fine Organic financial ratios and year-end valuation history</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-13"><a href="https://stockanalysis.com/quote/nse/FINEORG/financials/balance-sheet/">StockAnalysis: Fine Organic balance sheet, debt and net cash</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-14"><a href="https://stockanalysis.com/quote/nse/FINEORG/statistics/">StockAnalysis: Fine Organic statistics, valuation ratios, next earnings date and third-party moving averages</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-15"><a href="https://stockanalysis.com/quote/nse/FINEORG/forecast/">StockAnalysis: Fine Organic stock forecast, consensus earnings and price targets (S&amp;P Global, 11 analysts, updated 21 May 2026)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-16"><a href="https://stockanalysis.com/quote/nse/FINEORG/company/">StockAnalysis: Fine Organic company profile (founded 1970, employees, business description)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-17"><a href="https://stockanalysis.com/quote/nse/FINEORG/history/">StockAnalysis: Fine Organic daily price history, October 2026</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-18"><a href="https://www.businesstoday.in/stocks/fine-organic-industries-ltd-fineorg-share-price-364649">Business Today: FINEORG share price page (NSE close on 13 October 2026; Chemicals, small cap label)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-19"><a href="https://www.investywise.com/fine-organic-industries-limited-unaudited-financial-results/">InvestyWise: Q1 FY27 unaudited results report, 7 August 2026 (consolidated and standalone)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-20"><a href="https://www.investywise.com/fine-organics-standalone-consolidated-financial-results-announced/">InvestyWise: Q1 FY27 results article (standalone and consolidated detail, earnings per share)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-21"><a href="https://stockanalysis.com/quote/nse/GALAXYSURF/statistics/">StockAnalysis: Galaxy Surfactants statistics (peer forward and trailing ratios)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-22"><a href="https://stockanalysis.com/quote/nse/VINATIORGA/statistics/">StockAnalysis: Vinati Organics statistics (peer forward and trailing ratios)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-23"><a href="https://www.screener.in/company/GALAXYSURF/consolidated/">Screener: Galaxy Surfactants consolidated page (peer market size, P/E, ROCE, ROE)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-24"><a href="https://www.screener.in/company/VINATIORGA/consolidated/">Screener: Vinati Organics consolidated page (peer market size, P/E, ROCE, ROE)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-25"><a href="https://annualreportai.live/annual-report/fine-organic-industries-limited-fy2026">AnnualReportAI: FY2026 annual report summary (third-party AI summary; cross-check only, no figure relied on alone)</a>. Retrieved 2026-10-13</li>
+<li id="cite_note-26"><a href="https://companiesmarketcap.com/fine-organics/annual-reports/">CompaniesMarketCap: list of annual reports from 2017-18 to 2025-26 (index only)</a>. Retrieved 2026-10-13</li>
+</ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>

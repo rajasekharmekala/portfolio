@@ -31,6 +31,10 @@ def published_url(href, source=None, docs=DOCS, base_url=BASE_URL, absolute=True
             suffix = path.split(folder + "/", 1)[1]
             candidates.append(docs / suffix if folder == "docs" else docs / folder / suffix)
     if Path(path).name.endswith("_dossier.html"):
+        # Prefer the canonical market subfolders over a legacy flat path
+        # (which today is a redirect stub kept for old emailed links).
+        candidates.append(docs / "blogs" / "IN" / Path(path).name)
+        candidates.append(docs / "blogs" / "US" / Path(path).name)
         candidates.append(docs / "blogs" / Path(path).name)
     for candidate in candidates:
         resolved = candidate.resolve()
@@ -94,6 +98,12 @@ def read_entry(path, dates, updates):
     relative = path.relative_to(DOCS).as_posix()
     completion = updates.get(relative, {})
     kind = metadata.get("report-kind") or ("dossier" if path.name.endswith("_dossier.html") else "report")
+    # Dossiers live in market subfolders (blogs/IN/, blogs/US/); the folder is
+    # the canonical market attribution and beats content sniffing.
+    folder_market = None
+    parts = relative.split("/")
+    if len(parts) >= 3 and parts[0] == "blogs" and parts[1] in ("IN", "US"):
+        folder_market = parts[1]
     exchange = " ".join(value for key, value in info.items() if any(word in key for word in ("exchange", "ticker", "listing")))
     evidence = path.stem + " " + title + " " + exchange + " " + soup.get_text(" ", strip=True)[:3500]
     symbol_market = None
@@ -101,7 +111,7 @@ def read_entry(path, dates, updates):
     if registry_path.exists():
         registry = json.loads(registry_path.read_text(encoding="utf-8"))
         symbol_market = next((name for name in ("IN", "US") if path.stem.replace("_dossier", "") in registry.get(name, {}).get("symbols", {})), None)
-    market = completion.get("market") or metadata.get("report-market") or symbol_market or ("US" if re.search(r"\b(US|NASDAQ|NYSE|OTCQX)\b", evidence.replace("_", " ")) else "IN" if re.search(r"\b(Indian|India|NSE|BSE)\b", evidence.replace("_", " ")) else "Other")
+    market = completion.get("market") or metadata.get("report-market") or folder_market or symbol_market or ("US" if re.search(r"\b(US|NASDAQ|NYSE|OTCQX)\b", evidence.replace("_", " ")) else "IN" if re.search(r"\b(Indian|India|NSE|BSE)\b", evidence.replace("_", " ")) else "Other")
     verdict = next((value for key, value in info.items() if any(word in key for word in ("verdict", "decision", "recommendation"))), "")
     badge = soup.select_one(".verdict-badge, .decision-badge")
     verdict = verdict or (badge.get_text(" ", strip=True) if badge else "Not specified")
@@ -164,7 +174,7 @@ def build_catalog(completed=(), workflow=None, market=None, summary=None, highli
             raise ValueError("Completion must reference an existing published HTML report")
         require_modern_report(path, require_generated=True)
         updates[relative] = {"completedAt": now, "workflow": workflow, "market": market, "summary": summary, "highlights": list(highlights)}
-    paths = sorted(set(DOCS.glob("blogs/*_dossier.html")) | set(DOCS.glob("reports/**/*.html")))
+    paths = sorted(set(DOCS.glob("blogs/**/*_dossier.html")) | set(DOCS.glob("reports/**/*.html")))
     paths = [path for path in paths if not BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser").select_one('meta[name="report-redirect"]')]
     updates = {key: value for key, value in updates.items() if (DOCS / key).is_file()}
     dates = git_dates()

@@ -50,6 +50,25 @@
     });
   }
 
+  /* Dossiers now live in market subfolders (blogs/IN/, blogs/US/) while this
+     script and dossiers.json stay at the blogs/ root. Resolve every shared
+     destination against this script's own URL so navigation works from any
+     page depth, on Pages, localhost, or file://. */
+  var NAVBASE = (function () {
+    try {
+      var src = document.currentScript && document.currentScript.src;
+      if (src) return new URL('.', src).href;
+    } catch (e) {}
+    return '';
+  })();
+  function navUrl(rel) {
+    try { return new URL(rel, NAVBASE || document.baseURI).href; }
+    catch (e) { return rel; }
+  }
+  function sameFile(entry, here) {
+    return entry === here || entry.slice(-here.length - 1) === '/' + here;
+  }
+
   function stratClass(s) {
     s = (s || '').toLowerCase();
     if (s.indexOf('core') >= 0) return 'nav-badge-core-alpha';
@@ -83,7 +102,7 @@
   function render(list) {
     var here = location.pathname.split('/').pop();
     var i = -1;
-    for (var k = 0; k < list.length; k++) if (list[k].file === here) { i = k; break; }
+    for (var k = 0; k < list.length; k++) if (sameFile(list[k].file, here)) { i = k; break; }
     var d = i >= 0 ? list[i] : null;
 
     var style = document.createElement('style');
@@ -103,7 +122,7 @@
     var left = document.createElement('div');
     left.className = 'dossier-nav-left';
     left.innerHTML =
-      '<a class="nav-home-link" href="index.html">\u2302 Research Library</a>' +
+      '<a class="nav-home-link" href="' + navUrl('index.html') + '">\u2302 Research Library</a>' +
       '<span class="nav-sep">|</span>' +
       '<span class="nav-market-flag">' + (d ? (d.market === 'US' ? '\uD83C\uDDFA\uD83C\uDDF8' : '\uD83C\uDDEE\uD83C\uDCF1') : '\uD83D\uDCDA') + '</span>' +
       (d ? '<span class="nav-badge ' + stratClass(d.strat_clean) + '">' + esc(d.strat_badge) + '</span>' : '') +
@@ -126,7 +145,7 @@
     if (d && list.length > 1) {
       prev = list[(i - 1 + list.length) % list.length];
       next = list[(i + 1) % list.length];
-      right.appendChild(pager(prev.file, '\u2190 ' + prev.symbol));
+      right.appendChild(pager(navUrl(prev.file), '\u2190 ' + prev.symbol));
     }
 
     var sel = document.createElement('select');
@@ -142,9 +161,9 @@
       og.label = g;
       groups[g].forEach(function (x) {
         var o = document.createElement('option');
-        o.value = x.file;
+        o.value = navUrl(x.file);
         o.textContent = (x.market === 'US' ? '\uD83C\uDDFA\uD83C\uDDF8 ' : '\uD83C\uDDEE\uD83C\uDCF1 ') + x.symbol + ' \u2014 ' + x.company_name;
-        if (x.file === here) o.selected = true;
+        if (sameFile(x.file, here)) o.selected = true;
         og.appendChild(o);
       });
       sel.appendChild(og);
@@ -154,11 +173,11 @@
     });
     right.appendChild(sel);
 
-    if (d && list.length > 1) right.appendChild(pager(next.file, next.symbol + ' \u2192'));
+    if (d && list.length > 1) right.appendChild(pager(navUrl(next.file), next.symbol + ' \u2192'));
 
     var idx = document.createElement('a');
     idx.className = 'nav-index-btn';
-    idx.href = 'index.html';
+    idx.href = navUrl('index.html');
     idx.textContent = '\uD83D\uDCDA Index (' + list.length + ' Dossiers)';
     right.appendChild(idx);
 
@@ -167,7 +186,7 @@
     nav.appendChild(inner);
   }
 
-  fetch('dossiers.json')
+  fetch(navUrl('dossiers.json'))
     .then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
@@ -177,6 +196,6 @@
       render(list);
     })
     .catch(function () {
-      slot.innerHTML = '<nav class="dossier-nav-header" style="background:#fffbeb;border-bottom:2px solid #b45309;padding:0.5rem 1.25rem;font-family:Inter,sans-serif;font-size:0.85rem;color:#92400e">⚠ Shared navigation unavailable — open via <a href="index.html">index.html</a> (file:// blocks the registry fetch)</nav>';
+      slot.innerHTML = '<nav class="dossier-nav-header" style="background:#fffbeb;border-bottom:2px solid #b45309;padding:0.5rem 1.25rem;font-family:Inter,sans-serif;font-size:0.85rem;color:#92400e">⚠ Shared navigation unavailable — open via <a href="' + navUrl('index.html') + '">index.html</a> (file:// blocks the registry fetch)</nav>';
     });
 })();

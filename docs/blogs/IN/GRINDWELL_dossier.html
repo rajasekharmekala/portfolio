@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-09">
+<meta name="generated-at" content="2026-10-12T02:40:40.722042-07:00">
+<title>Report</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T02:40:40.722042-07:00">12 Oct 2026, 02:40 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-09</p></header><section class="primer" id="primer">
+<h2>Before you read</h2>
+<dl class="key-figures"><dt>Publication status</dt><dd>BEST_EFFORT_AFTER_REVIEW_LIMIT, PUBLISHED_WITH_GATE_EXCEPTIONS</dd>
+<dt>Close, 9 Oct 2026</dt><dd>₹1,990.6</dd>
+<dt>Layer 1</dt><dd>FAIL_TECHNICAL</dd>
+<dt>Momentum</dt><dd>NO_MOMENTUM</dd>
+<dt>Verdict</dt><dd>REJECTED</dd>
+<dt>Return on capital, FY26</dt><dd>21% <a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></dd>
+</dl>
+<p>Grindwell Norton makes abrasives, ceramics and plastic parts in India, and its promoters hold 58 per cent of the shares.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a><a class="cite" href="https://trendlyne.com/equity/share-holding/496/GRINDWELL/30-06-2026/grindwell-norton-ltd/">[10]</a> The report rejects the stock today, because the business passes its money tests but the price fails the trend test.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> The business is strong on paper.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> The call would be wrong if the stock closes back above its 50-day average and that average turns up.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>What the company does</h2>
+<p>Grindwell Norton is an Indian factory supplier. It sells grinding wheels and abrasive belts that shape metal and other hard materials, and it makes ceramic and plastic parts for industry. The company describes itself as a maker of abrasives, ceramics and performance plastics, with a digital services unit that serves its parent group.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/company/">[13]</a> It employed 2,385 people.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/">[28]</a> Its parent is Compagnie de Saint-Gobain, the French materials group.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></p>
+<p>The customers are other factories. A summary of the June quarter lists automotive, steel, bearing and general engineering as the core end markets.<a class="cite" href="https://investeemate.com/2026/07/24/grindwell-norton-reports-june-2026-financial-results/">[6]</a> The company's own report says it expects to benefit from demand in those markets and from newer areas, including electronics, semiconductors, defence and aerospace.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a></p>
+<p>The company reports in three parts. Abrasives is the largest. Ceramics and plastics makes engineered silicon carbide, refractory products and performance polymers. The digital unit runs software and infrastructure work for the group.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a> In FY26, consolidated revenue from operations was 3,073.19 crore rupees, and product sales were 2,788.18 crore of that. A crore is ten million rupees.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a></p>
+<p>Growth differed by part. Abrasives sales rose 6 per cent. Ceramics and plastics sales rose 10 per cent and its operating profit rose 15 per cent. Silicon carbide, one product inside that part, had a hard year because cheap imports pushed prices down, and exports fell because of US tariffs.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a></p>
+<h3>Terms used in this report</h3>
+<p>Each term is defined where it first appears and is repeated here for reference. The list covers the measures and chart words the report uses.</p>
+<ul class="glossary">
+<li><dfn>return on capital employed (ROCE)</dfn> is a measure of how much operating profit a business earns on the money tied up in it. A higher figure means the business turns its capital into profit more efficiently.</li>
+<li><dfn>earnings per share (EPS)</dfn> is the company's profit for the year divided by its number of shares. It is the profit available to each share.</li>
+<li><dfn>earnings before interest, taxes, depreciation and amortization (EBITDA)</dfn> is a rough measure of operating profit before financing costs, tax and the wear on plant and intangibles. It is used to compare the core operations of companies.</li>
+<li><dfn>free cash flow (FCF)</dfn> is the cash a business has left after paying for its running costs and the equipment it buys. It is the cash that can go to owners or lenders.</li>
+<li><dfn>relative strength index (RSI)</dfn> is a score from 0 to 100 over 14 sessions that shows how fast a price has risen or fallen recently. Above 70 is often called overheated and below 30 oversold.</li>
+<li><dfn>average true range (ATR)</dfn> is the typical daily price swing over 14 sessions, in rupees. It is a yardstick for how far a price normally moves in a day.</li>
+<li><dfn>Stage 2</dfn> is the phase when a stock trades above a rising 50-day average and above a rising 200-day average, which is the uptrend most buyers want.</li>
+<li><dfn>Stage 4</dfn> is the phase when a stock breaks down below falling averages, which usually marks a downtrend.</li>
+<li><dfn>base</dfn> is a sideways pause in price after a fall. A base can be the start of a new uptrend if the price then breaks out.</li>
+<li><dfn>pivot</dfn> is the price a stock has to clear to confirm that a base is ending.</li>
+<li><dfn>breakout</dfn> is a close above a pivot, ideally on higher than normal trading volume.</li>
+<li><dfn>Stage 1</dfn> is the phase after a decline when a new base forms and selling slows, so the price moves sideways before it can rise.</li>
+<li><dfn>Stage 3</dfn> is the topping phase, when the price stalls near its high, slips back and its averages flatten. It often comes before a fall.</li>
+<li><dfn>Core</dfn> is one of the two buy categories in the rules: a longer-term holding bought for the quality of the business, which needs Stage 1 or Stage 2.</li>
+<li><dfn>Tactical</dfn> is the other buy category: a shorter-term trade bought on a chart setup, which needs Stage 2 with rising averages.</li>
+<li><dfn>operating margin</dfn> is operating profit as a share of sales. It shows how much of each rupee of sales is kept after running costs.</li>
+<li><dfn>debt-to-equity</dfn> is borrowings divided by shareholders' equity. It measures how much the company relies on lenders.</li>
+<li><dfn>asymmetry</dfn> is the ratio of the gain to the target to the loss to the stop. A ratio of 3 means the possible gain is three times the possible loss.</li>
+<li><dfn>measured move</dfn> is a target found by adding the height of a base to its pivot.</li>
+<li><dfn>entry zone</dfn> is the price range in which a buy would be allowed under the rules.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>Why the business is strong or weak</h2>
+<p>The company's main asset is its brand and the technology behind it. The company says its strength comes from its association with Compagnie de Saint-Gobain and its subsidiaries.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a> In our reading, which is not the company's own wording, a parent that supplies process know-how and customer relationships is hard for a smaller rival to copy quickly.</p>
+<p>The market grows, but slowly. Ken Research sizes India's abrasives market at 557 million US dollars in 2025 and expects 6.89 per cent a year growth to 2031.<a class="cite" href="https://www.kenresearch.com/industry-reports/india-abrasives-market">[14]</a> IMARC gives 2.3 billion US dollars for 2025 and 5.83 per cent a year to 2034.<a class="cite" href="https://www.imarcgroup.com/india-abrasives-market">[15]</a> Two other publishers put growth at 6.1 per cent and 7.9 per cent a year.<a class="cite" href="https://www.intelmarketresearch.com/global-india-abrasives-forecast-market-10336">[16]</a><a class="cite" href="https://www.datamintelligence.com/research-report/india-abrasives-market">[17]</a> That is a steady market, not a boom, and the company's growth will track it closely.</p>
+<p>Ken Research names Carborundum Universal, 3M India, Wendt India and Klingspor India as the other major players.<a class="cite" href="https://www.kenresearch.com/industry-reports/india-abrasives-market">[14]</a> A separate market listing also names Grindwell Norton among the key players in India's abrasives market.<a class="cite" href="https://www.marketresearch.com/DataM-Intelligence-4Market-Research-LLP-v4207/India-Abrasives-Market2026-44775559/">[30]</a> The company's own report says it improved its market standing against a key competitor in India, though overall volume growth was moderate.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a></p>
+<p>Two weak spots show up in the company's own words. Silicon carbide faced price pressure from cheap imports, and exports fell after US tariffs.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a> A strong brand does not protect a product from those price and trade risks, so they are the points to watch. An AI-generated summary of the most recent results call describes management's focus on premiumization and digital transformation, which we treat as secondary evidence.<a class="cite" href="https://annualreportai.live/stocks/india/grindwell-norton-limited/transcripts">[22]</a></p>
+<p>Governance and quality signals are mixed. The company's ESG rating for FY2025-26 was CRISIL ESG 60, and the company said it did not engage the rating agency for that score.<a class="cite" href="https://news.tulsian.ai/news/regulation-legal/grindwell-norton-receives-crisil-esg-60-rating.html">[20]</a> Its June quarter figures were reviewed under a limited review by Kalyaniwalla &amp; Mistry LLP, not audited.<a class="cite" href="https://www.multibagg.ai/market-pulse/articles/grindwell-norton-q1fy27-profit-rise-cmryqnmwc9gzl0zl4kbr3uz5b">[7]</a></p>
+<p>Credit ratings are the other check. The rating pages we could read show no current rating. Trendlyne's credit ratings page has no rating content, and ICRA's rationale page sits behind a login.<a class="cite" href="https://trendlyne.com/fundamentals/documents-credit-ratings/496/GRINDWELL/grindwell-norton-ltd/">[26]</a><a class="cite" href="https://www.icra.in/Rationale/ShowRationaleReport/?Id=32315">[27]</a> The only ICRA item Screener lists is a rating update dated 29 December 2016.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> We therefore have no current rating view from an outside agency. The balance-sheet evidence we do have is in chapter 3: borrowings of 61 crore and reserves of 2,479 crore at March 2026. Cash balances, goodwill and new share issues are not available in the sources we could read, so the quality view rests on the debt and cash-flow figures alone.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></p>
+<p>What follows for the reader: the business is good, with long cash generation and low debt. Its growth is modest and its prices are exposed to imports, so it is not clearly a compounder. Business quality is not the same as a buy signal, and chapter 4 explains why the price test decides the verdict.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>The numbers, in plain words</h2>
+<p>The table below shows five years of consolidated numbers, the group figures that include the subsidiaries. The year runs from April to March, so FY26 is the year to March 2026. Figures are in crore rupees unless stated.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Measure</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+<tbody>
+<tr><td>Sales (revenue from operations), crore</td><td>2,013</td><td>2,541</td><td>2,687</td><td>2,812</td><td>3,073</td></tr>
+<tr><td>Net profit, crore</td><td>295</td><td>362</td><td>384</td><td>371</td><td>417</td></tr>
+<tr><td>Earnings per share, rupees</td><td>26.70</td><td>32.69</td><td>34.65</td><td>33.30</td><td>37.54</td></tr>
+<tr><td>Operating margin</td><td>20%</td><td>20%</td><td>19%</td><td>18%</td><td>19%</td></tr>
+<tr><td>Return on capital employed</td><td>26%</td><td>28%</td><td>25%</td><td>21%</td><td>21%</td></tr>
+<tr><td>Cash from operations, crore</td><td>187</td><td>393</td><td>368</td><td>458</td><td>542</td></tr>
+<tr><td>Free cash flow, crore</td><td>67</td><td>72</td><td>199</td><td>366</td><td>424</td></tr>
+<tr><td>Borrowings, crore</td><td>15</td><td>51</td><td>83</td><td>84</td><td>61</td></tr>
+<tr><td>Dividend per share, rupees</td><td>12.00</td><td>14.50</td><td>17.00</td><td>17.00</td><td>19.00</td></tr>
+</tbody></table></div>
+<p>Read the table from left to right. Sales rose from 2,013 to 3,073 crore over four years, but profit moved more slowly and fell in FY25 before recovering. Cash from operations was above net profit in FY25 (458 against 371) and FY26 (542 against 417), and just below it in FY24 (368 against 384). The cash test in chapter 4 therefore uses the three-year totals: 1,368 crore of cash from operations against 1,172 crore of net profit. Borrowings are small. The dividend per share rose from 12.00 rupees in FY22 to 19.00 in FY26, with a flat year at 17.00 in FY25 and a rise again in FY26, so it was not higher every year.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a><a class="cite" href="https://www.bottomstreet.com/news/grindwell-norton-outcome-of-board-meeting-2026-07-24/">[9]</a> An investor-presentation summary gives the same FY26 figures: revenue of 3,073 crore and net profit of 417 crore.<a class="cite" href="https://www.multibagg.ai/market-pulse/articles/grindwell-fy26-95257">[8]</a></p>
+<p>The numbers behind the three money tests come from this table. Return on capital employed was 21 per cent in FY26, against a floor of 15 per cent.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> Debt-to-equity is about 0.02 in our arithmetic: 61 crore of borrowings against about 2,534 crore of equity and reserves.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> Cash from operations over FY24 to FY26 was 1,368 crore against net profit of 1,172 crore, a ratio of 1.17 in our arithmetic, against a floor of 0.70.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></p>
+<p>Screener publishes three-year growth of 7 per cent a year for sales and 3 per cent a year for profit, but it does not state its base period. Our arithmetic from the table, FY23 to FY26, gives about 6.5 per cent for sales and about 4.8 per cent for profit, so we show both.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> Profit has grown more slowly because depreciation, the yearly charge for wear on plant, rose from 60 crore in FY23 to 105 crore in FY26.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> That charge does not use cash in the year, but it does lower reported profit. Operating margin has moved in a narrow band of 18 to 20 per cent over five years, which means the company has not yet shown a clear step up in profitability.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></p>
+<p>The June quarter is the latest print. The company filed its results on 24 July 2026.<a class="cite" href="https://www.reportsradar.com/reports/016ddf9b-76c8-4d67-be9e-b266704925ec">[23]</a> The table below compares it with the same quarter a year earlier.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Measure, consolidated</th><th>June 2025 quarter</th><th>June 2026 quarter</th></tr></thead>
+<tbody>
+<tr><td>Sales, crore</td><td>703</td><td>803</td></tr>
+<tr><td>Net profit, crore</td><td>94</td><td>115</td></tr>
+<tr><td>Operating margin</td><td>18%</td><td>20%</td></tr>
+<tr><td>Earnings per share, rupees</td><td>8.53</td><td>10.43</td></tr>
+</tbody></table></div>
+<p>On a standalone basis, revenue rose 14.4 per cent and net profit rose 22.4 per cent in the June quarter.<a class="cite" href="https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Grindwell-Norton-Q1-FY27-Revenue-Up-144percent-Profit-Jumps-224percent/6a63241d0037f071726daf94">[5]</a> Investeemate's summary gives the same standalone quarter as revenue of 79,385.59 lakhs and net profit of 11,552.88 lakhs.<a class="cite" href="https://investeemate.com/2026/07/24/grindwell-norton-reports-june-2026-financial-results/">[6]</a> The margin is the figure to watch. The EBITDA margin widened to 19.55 per cent from 18.46 per cent, and an independent summary gives the same operating margin of 19.55 per cent.<a class="cite" href="https://www.multibagg.ai/market-pulse/articles/grindwell-norton-q1fy27-profit-rise-cmryqnmwc9gzl0zl4kbr3uz5b">[7]</a><a class="cite" href="https://www.stockwatch.live/in/results/grindwell-norton-ltd-506076/2027/1">[19]</a> A consolidated summary gives revenue of 80,329.30 lakhs for the quarter, which matches the 803 crore in the table.<a class="cite" href="https://quartr.com/events/grindwell-norton-limited-506076-q1-26-27_FMqL5lIG">[18]</a> A quarter is one data point, so the margin has to hold in the next two or three quarters before it counts as a trend.</p>
+<p>Ownership is stable. The promoter group held 58.04 per cent at June 2026, with no pledged shares, while foreign investors held 5.21 per cent and domestic funds and insurers held 19.59 per cent.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a><a class="cite" href="https://trendlyne.com/equity/share-holding/496/GRINDWELL/30-06-2026/grindwell-norton-ltd/">[10]</a> Solomo, one aggregator, shows 58.03 per cent for June 2026 and repeats that figure for September 2026.<a class="cite" href="https://solomo.ai/company/GRINDWELL/">[11]</a> We could not read an exchange filing that confirms the September figure. It is almost identical to the June 58.04 per cent, so it changes nothing, and we use the June figures above.</p>
+<p>On valuation, the stock trades on a trailing <dfn>price-to-earnings</dfn> ratio (P/E) of 50.4. The P/E means investors pay about 50 rupees for each rupee of trailing twelve-month earnings per share, which StockAnalysis puts at 39.44 rupees.<a class="cite" href="https://stockanalysis.com/quote/nse/GRINDWELL/">[29]</a> The market value is about 21,972 crore.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a> The two Screener pages differ: the consolidated page shows a P/E of 50.4 and the standalone page 50.6. Mahir Screener shows a market value of 22,039.9 crore against about 21,972 crore above. The likely cause is a difference in earnings basis or price timing, since a 0.2 turn gap is larger than rounding would produce.<a class="cite" href="https://www.mahirscreener.com/stocks/GRINDWELL">[24]</a><a class="cite" href="https://www.screener.in/company/GRINDWELL/">[25]</a> The stock's own 10-year average P/E is 45.09, so it trades above its long-run average.<a class="cite" href="https://www.wisesheets.io/pe-ratio/GRINDWELL.NS">[21]</a> On next year's earnings the forward P/E is 42.46.<a class="cite" href="https://stockanalysis.com/quote/nse/GRINDWELL/">[29]</a> Mint's key-metrics page gives return on average equity of 17.35 per cent for the latest year, on a different averaging basis from the 16 per cent Screener shows.<a class="cite" href="https://www.livemint.com/grindwell-norton/key-metrics/companyid-s0003998">[31]</a></p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>What the price is doing</h2>
+<p>The price test asks whether the trend is up and whether the price sits at a sensible place to buy. Our price ledger, frozen at the 9 October 2026 close, gives the result NO_MOMENTUM. The stock fails both momentum tests. Under the rules, no money is allocated to a stock that fails both, however good its business is.</p>
+<p>The close was 1,990.6 rupees, down 0.82 per cent on the day. The 50-day average is 2,011.7. A 50-day average is the average closing price over the last 50 sessions, and it is a simple measure of the medium-term trend. The 50-day average has fallen from 2,067.6 twenty-one sessions earlier, a drop of 2.7 per cent. The 200-day average is 1,799.3 and is still rising. (Price ledger, 9 October 2026.)</p>
+<p>The price is 1.1 per cent below its 50-day average. That means the stock sits just under its own medium-term trend line, which is the first failure in the test. Stage 2, as defined in chapter 1, needs the price above both averages, with the 50-day average rising. Here the price is below the 50-day average, so the stock is not in Stage 2. It is in Stage 3, the topping phase. The price is 19 per cent below its 52-week high of 2,455, the 50-day average has turned from rising to flat and falling, and the price has slipped back to just below it. The ledger's stage label is Stage 3, topping and pullback, which fails the Core test of Stage 1 or Stage 2 and the Tactical test of a rising trend.</p>
+<p>The relative strength index (RSI) is 51.8, which is neutral. The average true range (ATR) is 59 rupees, about 3 per cent of the price on a typical day. The stock is 3.0 ATR above its 20-day swing low of 1,813.6, which is the base low. The rules want a buy within 1.2 ATR of support, so the stock is too far above support to be bought now.</p>
+<p>The table below shows the nine momentum checks. A stock passes the momentum test if it passes all four checks in Test A, or all five checks in Test B.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Condition</th><th>Measured</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>A1 Structure</td><td>Price above 50-day average, which is above 200-day average</td><td>1,990.6 vs 2,011.7 vs 1,799.3</td><td>FAIL</td></tr>
+<tr><td>A2 Long average</td><td>200-day average not falling over 63 sessions</td><td>1,799.3, up from 1,668.3</td><td>PASS</td></tr>
+<tr><td>A3 Relative strength</td><td>Beats the Nifty over 63 sessions</td><td>+3.66 per cent</td><td>PASS</td></tr>
+<tr><td>A4 Not extended</td><td>Within 1.2 ATR of support</td><td>3.0 ATR</td><td>FAIL</td></tr>
+<tr><td>B1 Medium average</td><td>50-day average down no more than 0.5 per cent in 21 sessions</td><td>down 2.7 per cent</td><td>FAIL</td></tr>
+<tr><td>B2 Relative strength rising</td><td>Beats the Nifty and rising over 28 sessions</td><td>+3.59 per cent</td><td>PASS</td></tr>
+<tr><td>B3 At pivot</td><td>Within 1.0 ATR of the base pivot</td><td>3.0 ATR</td><td>FAIL</td></tr>
+<tr><td>B4 Quiet base</td><td>Volume dry-up ratio at or below 0.9</td><td>0.18</td><td>PASS</td></tr>
+<tr><td>B5 Volume expansion</td><td>Volume at least 1.0 times its 20-day average</td><td>0.44 times</td><td>FAIL</td></tr>
+</tbody></table></div>
+<p>Test A has two passes and two failures. The stock beats the benchmark, but the price is below its 50-day average and far above support. Test B also has two passes and three failures. The volume is quiet, which is not a bad sign in a base, but there is no volume expansion, and the 50-day average is falling. A stock needs the trend and the volume to agree, and here they do not.</p>
+<p>The Layer 1 gate is the first of three filters in the framework. It is a set of floors that must all be met before the stock can be scored on the business KPIs or timed for entry. The table below sets out each Layer 1 gate with its measured value, its threshold and its result.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Layer 1 gate</th><th>Measured</th><th>Threshold</th><th>Result</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Return on capital employed</td><td>21 per cent, FY26</td><td>15 per cent or more</td><td>PASS</td><td><a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></td></tr>
+<tr><td>Debt-to-equity</td><td>0.02 (our arithmetic)</td><td>Below 0.70, not an NBFC</td><td>PASS</td><td><a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></td></tr>
+<tr><td>Three-year cash from operations to net profit</td><td>1.17 (our arithmetic)</td><td>0.70 or more</td><td>PASS</td><td><a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></td></tr>
+<tr><td>Technical posture, Core: Stage 1 base breakout or Stage 2 markup</td><td>Stage 3, topping and pullback</td><td>Stage 1 or Stage 2</td><td>FAIL</td><td>Price ledger</td></tr>
+<tr><td>Technical posture, Tactical: Stage 2 above rising 50-day and 200-day averages</td><td>Price below a falling 50-day average</td><td>Price above a rising 50-day average</td><td>FAIL</td><td>Price ledger</td></tr>
+<tr><td>No Stage 4 breakdown, no death cross</td><td>Stage 3; 50-day average above 200-day average</td><td>No breakdown</td><td>PASS</td><td>Price ledger</td></tr>
+<tr><td>Asymmetry floor with an anchored target</td><td>Target not verifiable: no 3-year median P/E in a fetched source</td><td>3.0 Core, 3.5 Tactical</td><td>FAIL (unverified)</td><td><a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a></td></tr>
+</tbody></table></div>
+<p>Four gates pass, two technical gates fail, and the asymmetry gate is treated as failed because it cannot be verified. The first failing gate is the technical posture, so the Gate Status is FAIL_TECHNICAL. The asymmetry gate is treated as failed because no 3-year median P/E is published in the sources we could fetch, so the target cannot be anchored. The 10-year mean P/E is 45.09, which is not the 3-year median the rules call for.<a class="cite" href="https://www.wisesheets.io/pe-ratio/GRINDWELL.NS">[21]</a> Under the rules, the action verdict is <span class="verdict verdict-exit">REJECTED</span>, and Layers 2 and 3 are not evaluated for this stock.</p>
+<p>What would confirm the idea: a close above 2,011.7 with the 50-day average turning up over 21 sessions, volume at or above its 20-day average, and a breakout above a pivot. What would reject it: a close below 1,813.6, the swing low that acts as the base, or a close below the 200-day average at 1,799.3. The current close sits between those two levels, so the chart has not yet decided.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>What could happen next</h2>
+<p>The three cases below are scenarios for the next twelve months, not forecasts. Each has a story, a driver, a number, a probability and a reason for that probability. The base case uses the analysts' average earnings estimate and the stock's own long-run P/E.</p>
+<h3>Bull case: the stock reaches the analysts' average target</h3>
+<p>The story is that sales keep growing near the June quarter pace and operating margin holds near 20 per cent. The driver is operating leverage, meaning profit grows faster than sales when fixed costs are spread over more output. The number is the average analyst target of 2,169.33 rupees, about 9 per cent above the close.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a> We give it a 25 per cent probability. Three analysts cover the stock, and their average target sits about 9 per cent above the close. Reaching it needs both sales growth and margins to hold at the top of their recent range, so we do not give it more weight.</p>
+<h3>Base case: earnings grow as expected and the stock holds its long-run multiple</h3>
+<p>The story is that earnings per share rise to about 45 rupees in FY27, as the analysts expect, and the market pays roughly its 10-year average P/E. The driver is earnings growth. The number is about 2,047 rupees, roughly 3 per cent above the close. We give it a 50 per cent probability, because the earnings path matches the recent run-rate and the multiple is the best published anchor we could find.</p>
+<h3>Bear case: silicon carbide pressure spreads and the trend breaks</h3>
+<p>The story is that price pressure and export weakness reach the abrasives business, and the stock closes below its recent swing low. The driver is volume and price. The number is the 20-day swing low of 1,813.6 rupees, about 9 per cent below the close (price ledger). We give it a 25 per cent probability. The 50-day average is already falling, and the trend has flattened, so a further fall is a real risk, but the price has not yet closed below the swing low.</p>
+<p>The expected outcome, weighting the three cases at 25, 50 and 25 per cent, is about 2,019 rupees. That is roughly 1.4 per cent above the close, which is a small gain for a stock that fails the rules. Measured as asymmetry, the expected gain against the bear-case loss is about 0.2, against a floor of 3.0 for core names. That is why the verdict is REJECTED rather than a buy. The verdict would change only if the price test passed and the valuation anchor became verifiable. The bull and bear legs are almost symmetric, at about +9.0 and -8.9 per cent, and the bear leg is a technical level rather than an earnings floor. An earnings-based bear case shows more downside. If FY27 earnings miss consensus by 10 per cent, to 40.86 rupees (45.4 times 0.90), and the multiple falls to 40 times, the value is 40.86 times 40, or 1,634 rupees. Against the 1,990.6 close that is 1,634 divided by 1,990.6, minus 1, or minus 17.9 per cent (our arithmetic). The 40 times multiple is an assumption, below the 43.8 times FY27 P/E estimated by MarketScreener.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a> The table in chapter 6 shows the other combinations. The verdict rests on the technical gate, not on valuation: no accepted valuation method is available to support a positive verdict, so the verdict is REJECTED.</p>
+<h3>How the base-case number was built</h3>
+<section class="estimate">
+<h4>The number</h4>
+<p>The base-case value is about 2,047 rupees per share, roughly 3 per cent above the 9 October close.</p>
+<h4>How it was calculated</h4>
+<p>We multiply the FY27 earnings-per-share consensus of 45.4 rupees by the stock's 10-year average P/E of 45.09. The source for 45.09 does not say whether it is a trailing or a forward multiple. Applied to forward FY27 earnings it gives 2,047 rupees. Applied to trailing FY26 earnings of 37.54 rupees it gives about 1,693, which is 15 per cent below the close. We show the forward basis because it matches the consensus earnings, and we do not treat either result as an accepted valuation. The verdict rests on the technical gate, which fails, and not on this base case.</p>
+<h4>The inputs</h4>
+<p>The FY27 consensus earnings per share of 45.4 rupees and the FY26 actual of 37.54 rupees come from MarketScreener.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a> The 10-year mean P/E of 45.09 comes from Wisesheets.<a class="cite" href="https://www.wisesheets.io/pe-ratio/GRINDWELL.NS">[21]</a> The close of 1,990.6 rupees is from the price ledger.</p>
+<h4>The range</h4>
+<p>The bull case gives about 2,169 rupees, from the analysts' average target, and the bear case gives about 1,814 rupees, from the 20-day swing low. The base sits between them, and the range is wide relative to the gap of about 3 per cent between the base and the close.</p>
+<h4>If the number is off</h4>
+<p>Each change of 5 in the multiple moves the value by about 227 rupees, which is 5 times 45.4. If the earnings estimate is cut to the FY26 level of 37.54 rupees, the base value falls to about 1,693, below the close. The verdict does not change either way, because the technical gate has already failed.</p>
+</section>
+</section>
+<section class="chapter" id="ch-6">
+<h2>Why these estimates might be wrong</h2>
+<p>Every estimate in this report rests on one or two assumptions. The first is the earnings path, which decides the base value. The second is the multiple the market will pay. Neither is certain, and each has an evidence trail that will show whether it was right.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>The FY27 earnings per share is about 45.4 rupees, the analysts' consensus, up from 37.54 rupees in FY26.</p>
+<h4>How it was calculated</h4>
+<p>It is the average of the analysts' estimates collected by MarketScreener, which covers three analysts, and it is not our own forecast.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a> We have not rebuilt it from the segments.</p>
+<h4>The inputs</h4>
+<p>The FY26 actual of 37.54 rupees, the FY27 and FY28 consensus of 45.4 and 51.4 rupees, and the FY27 P/E of 43.8 times are all from MarketScreener.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a> The June quarter profit growth of 22.4 per cent is from a news summary of the standalone accounts.<a class="cite" href="https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Grindwell-Norton-Q1-FY27-Revenue-Up-144percent-Profit-Jumps-224percent/6a63241d0037f071726daf94">[5]</a></p>
+<h4>The range</h4>
+<p>On the consensus path, FY28 earnings per share is 51.4 rupees. If the June quarter margin of about 20 per cent is not sustained and the company slips back to the FY25 margin of 18 per cent, FY27 earnings could fall well below the consensus, which would lower the base value.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></p>
+<h4>If the number is off</h4>
+<p>Each 1 per cent miss in earnings per share is about 0.45 rupees, which lowers the base value by about 20 rupees at the 45.09 multiple. If earnings stayed at FY26 levels, the base value would fall below the close. That would weaken the valuation case further, but the verdict is already REJECTED on the technical gate.</p>
+</section>
+<p>The weakest assumption is the margin. The June quarter showed 19.55 per cent, a step up from 18.46 per cent a year earlier, but one quarter is not a trend.<a class="cite" href="https://www.multibagg.ai/market-pulse/articles/grindwell-norton-q1fy27-profit-rise-cmryqnmwc9gzl0zl4kbr3uz5b">[7]</a> The evidence that will show whether it holds is the September-quarter result. The company reported its September quarter on 30 October last year, so that is the date to watch.<a class="cite" href="https://www.marketscreener.com/news/grindwell-norton-limited-reports-earnings-results-for-the-first-quarter-ended-june-30-2026-ce7f51dfdd88f121">[4]</a> A calendar listing shows 30 October 2026 as the estimated date, but we could not read a company notice confirming it.<a class="cite" href="https://stockanalysis.com/quote/nse/GRINDWELL/">[29]</a> The FY27 path needs earnings up about 21 per cent on FY26, and that is the one assumption behind the base case. A 10 per cent miss would leave 40.86 rupees, still about 9 per cent above FY26, so the path survives a moderate miss but not a deep one. The June quarter growth figure comes from a news summary of the standalone accounts, because the filing could not be read, so we label it as secondary.</p>
+<p>The sensitivity to earnings is shown in the table below. Each row applies a multiple to an earnings-per-share figure, and the value is compared with the 1,990.6 close from the price ledger. The 10 and 15 per cent cuts are our test cases, not forecasts.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Earnings case</th><th>Earnings per share, rupees</th><th>Multiple</th><th>Value, rupees</th><th>Against the close</th></tr></thead>
+<tbody>
+<tr><td>Consensus</td><td>45.4</td><td>45.09 (10-year mean)</td><td>2,047</td><td>+2.8%</td></tr>
+<tr><td>Consensus</td><td>45.4</td><td>40 (assumed)</td><td>1,816</td><td>-8.8%</td></tr>
+<tr><td>Earnings 10% below consensus</td><td>40.86</td><td>45.09</td><td>1,842</td><td>-7.5%</td></tr>
+<tr><td>Earnings 10% below consensus</td><td>40.86</td><td>40</td><td>1,634</td><td>-17.9%</td></tr>
+<tr><td>Earnings 15% below consensus</td><td>38.59</td><td>45.09</td><td>1,740</td><td>-12.6%</td></tr>
+<tr><td>Earnings 15% below consensus</td><td>38.59</td><td>40</td><td>1,544</td><td>-22.5%</td></tr>
+</tbody></table></div>
+<p>Read the table across. At the 10-year mean multiple, a 10 per cent earnings miss costs about 205 rupees of value, and a 15 per cent miss about 307 rupees. At 40 times, the same misses take the value 18 and 23 per cent below the close. A 15 per cent cut to 38.59 rupees is still about 3 per cent above FY26 earnings of 37.54 rupees, so the earnings path survives a cut of that size, though the valuation does not. All figures are our arithmetic, from the consensus earnings and multiple cited in chapter 5 and the close from the price ledger.</p>
+<p>The margin sensitivity works through the same consensus. MarketScreener's FY27 net sales estimate is 35,081 million rupees, about 3,508 crore, and its net income estimate is 5,026 million, on about 110.7 million shares.<a class="cite" href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">[12]</a> Each percentage point of operating margin on that sales base is about 35 crore of profit before tax. After tax at the FY26 rate of 25 per cent, that is about 26 crore, or about 2.4 rupees a share (our arithmetic). At the 45.09 multiple, 2.4 rupees is about 107 rupees of value, about 5 per cent of the 2,047 base value. In plain words, a margin one point below the consensus path would cut the base value by about 5 per cent.<a class="cite" href="https://www.screener.in/company/GRINDWELL/consolidated/">[1]</a></p>
+<p>The second assumption is the multiple. The 10-year mean P/E of 45.09 is only a stand-in.<a class="cite" href="https://www.wisesheets.io/pe-ratio/GRINDWELL.NS">[21]</a> The rules call for a 3-year median P/E, and we could not find one in a fetched source. We would know the valuation anchor is usable once a verifiable 3-year median appears in a source we can cite, or when the company's own filings give the data needed to calculate it.</p>
+<p>The third assumption is the data itself. Several figures come from aggregators, because the company's own filings could not be fetched from our environment. The annual report and the investor presentation were blocked, so the director's report and news summaries stand in for them.<a class="cite" href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">[2]</a><a class="cite" href="https://www.indiainfoline.com/company/grindwell-norton-ltd/reports/directors-report">[3]</a> Where a primary filing later disagrees with an aggregator, the filing wins.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>What we would do, and when</h2>
+<p>The decision is <span class="verdict verdict-exit">REJECTED</span>. The rule is the technical floor in the Layer 1 gate: a Core name must be in Stage 1 or Stage 2, and a Tactical name must be in Stage 2 with rising averages. A reader who owns the stock for the business would be a Core holder, and a reader who bought for a chart move would be a Tactical holder. The stock is in Stage 3 (see chapter 4), so it fails both tests. We would not buy this stock today, and we would not allocate any capital to it.</p>
+<p>No entry zone is set. An <dfn>entry zone</dfn> is only defined once a stock passes the gates, and this one does not. Because the verdict is a rejection, there is no stop or target to place. If the gates were later passed, the reference stop would sit near 1,740 rupees under the Core rule and near 1,784 rupees under the Tactical rule, both derived from the price ledger and the 14-session average true range.</p>
+<p class="trigger">Reconsider when the close is above 2,011.7 rupees, the 50-day average, and that average has risen over the last 21 sessions, on volume at least equal to its 20-day average.</p>
+<p class="trigger">Reject the idea outright if the close falls below 1,813.6 rupees, the swing low that acts as the base. The 200-day average at 1,799.3 rupees is the second line.</p>
+<p class="trigger">Revisit the valuation gate only when a verifiable 3-year median P/E appears in a source we can cite. Then the forward earnings of 45.4 rupees times that median must give an asymmetry of at least 3.0 for Core, measured against the stop.</p>
+<p class="trigger">Check the September-quarter result, which one calendar lists for 30 October 2026.<a class="cite" href="https://stockanalysis.com/quote/nse/GRINDWELL/">[29]</a> An operating margin below 18 per cent would weaken the earnings case in chapter 6, and the verdict would stay REJECTED.<a class="cite" href="https://www.marketscreener.com/news/grindwell-norton-limited-reports-earnings-results-for-the-first-quarter-ended-june-30-2026-ce7f51dfdd88f121">[4]</a></p>
+<p class="trigger">Re-test on the September-quarter results, which one calendar lists for 30 October 2026 (not confirmed by the company). If the operating margin is at or above 19 per cent and earnings per share are at or above the 45.4 rupee consensus, the earnings case holds and only the price test remains. If earnings per share come in at 40.86 rupees, the value at 45.09 times is about 1,842 rupees, about 7.5 per cent below the close, which weakens the base case but does not change the REJECTED verdict. The technical reject level is a close below 1,813.6 rupees; a holder under the Core rule would use the stop near 1,740 rupees and under the Tactical rule near 1,784 rupees.</p>
+<p>What this means for an owner: the company is a sound, cash-generative business with low debt, and it is not a buy under our rules today. The reason is the price trend, not the company's accounts. The report does not treat the stock as a holding. For a reader who already owns it, the same chart rule applies: the stock is below its 50-day average, and a close below 1,813.6 rupees would remove the base that supports the case.</p>
+</section>
+<section class="chapter" id="gate-exceptions"><h2>Run notes and gate exceptions</h2>
+<p>What failed: the citation gate ended as "CITATION CHECK: PASS WITH EXCEPTIONS". It listed 48 figures whose as-of date is more than 60 days before the check's report date. The check uses the calendar date of this run, 12 October 2026, not the 9 October 2026 session. Every other citation test passed: each cited URL is in the fetch cache, each recorded value appears in the cached text of its source, and the source count meets the 25-source floor.</p><p>Why it cannot be cured now: the newest periodic results are the quarter to 30 June 2026 and the year to 31 March 2026. No newer filing existed when the research was done, so the dates on those figures are true and were not changed. The figures are shown as recorded, not as current.</p><p>How it lowers confidence, by group, measured at the 12 October 2026 run date: the June 2026 quarter figures (quarter ended 30 June) are about 3.4 months old; the FY26 annual figures (year ended 31 March 2026) are about 6.4 months old; the industry market-size figures describe calendar 2024 or 2025 and are about 9 to 21 months old; and the only rating item Screener lists, an ICRA update, is dated 29 December 2016, almost ten years before the run date. No current rating was found. The verdict therefore rests on figures between about 3 and 21 months old, plus one rating item that is much older. The cure date is unconfirmed: the September-quarter results, which one calendar lists for 30 October 2026, should bring the quarterly figures current, and the exception clears when that filing is read and the research is refreshed. If those results miss, the reject level of 1,813.6 rupees applies at once, and a 10 per cent earnings miss at 40 times gives about 1,634 rupees (our arithmetic). The final red-team points were addressed best-effort after the round-2 limit and are not reviewer-approved.</p></section>
+<section id="notes">
+<h2>Notes and sources</h2>
+<p>Every number in the text is taken from the source linked beside it, except the derived ratios and the price ledger figures, which are marked. The price ledger is produced by code on the 9 October 2026 session and is not a web source. Retrieval times are those stored in the fetch cache.</p>
+<ol class="sources">
+<li id="src-1"><a href="https://www.screener.in/company/GRINDWELL/consolidated/">https://www.screener.in/company/GRINDWELL/consolidated/</a><br/>Screener, Grindwell Norton consolidated page: five-year tables, quarterly results, cash flows, shareholding and market value.</li>
+<li id="src-2"><a href="https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms">https://economictimes.indiatimes.com/grindwell-norton-ltd/directorsreport/companyid-13709.cms</a><br/>Economic Times, director's report for the year ended 31 March 2026: financial highlights, dividend, segment commentary and outlook.</li>
+<li id="src-3"><a href="https://www.indiainfoline.com/company/grindwell-norton-ltd/reports/directors-report">https://www.indiainfoline.com/company/grindwell-norton-ltd/reports/directors-report</a><br/>IndiaInfoline, director's report page carrying the same annual report text.</li>
+<li id="src-4"><a href="https://www.marketscreener.com/news/grindwell-norton-limited-reports-earnings-results-for-the-first-quarter-ended-june-30-2026-ce7f51dfdd88f121">https://www.marketscreener.com/news/grindwell-norton-limited-reports-earnings-results-for-the-first-quarter-ended-june-30-2026-ce7f51dfdd88f121</a><br/>MarketScreener, June 2026 quarter results release (S&amp;P Capital IQ), and the company's list of earlier results releases.</li>
+<li id="src-5"><a href="https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Grindwell-Norton-Q1-FY27-Revenue-Up-144percent-Profit-Jumps-224percent/6a63241d0037f071726daf94">https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Grindwell-Norton-Q1-FY27-Revenue-Up-144percent-Profit-Jumps-224percent/6a63241d0037f071726daf94</a><br/>Whalesbook, standalone June 2026 quarter results summary, 24 July 2026.</li>
+<li id="src-6"><a href="https://investeemate.com/2026/07/24/grindwell-norton-reports-june-2026-financial-results/">https://investeemate.com/2026/07/24/grindwell-norton-reports-june-2026-financial-results/</a><br/>Investeemate, June 2026 financial results summary, 24 July 2026, including end markets.</li>
+<li id="src-7"><a href="https://www.multibagg.ai/market-pulse/articles/grindwell-norton-q1fy27-profit-rise-cmryqnmwc9gzl0zl4kbr3uz5b">https://www.multibagg.ai/market-pulse/articles/grindwell-norton-q1fy27-profit-rise-cmryqnmwc9gzl0zl4kbr3uz5b</a><br/>Multibagg AI, June 2026 quarter profit note: EBITDA margin, segment results and the auditor's limited review.</li>
+<li id="src-8"><a href="https://www.multibagg.ai/market-pulse/articles/grindwell-fy26-95257">https://www.multibagg.ai/market-pulse/articles/grindwell-fy26-95257</a><br/>Multibagg AI, FY26 note on the investor presentation figures.</li>
+<li id="src-9"><a href="https://www.bottomstreet.com/news/grindwell-norton-outcome-of-board-meeting-2026-07-24/">https://www.bottomstreet.com/news/grindwell-norton-outcome-of-board-meeting-2026-07-24/</a><br/>BottomStreet, outcome of the 24 July 2026 board meeting: final dividend and dividend history.</li>
+<li id="src-10"><a href="https://trendlyne.com/equity/share-holding/496/GRINDWELL/30-06-2026/grindwell-norton-ltd/">https://trendlyne.com/equity/share-holding/496/GRINDWELL/30-06-2026/grindwell-norton-ltd/</a><br/>Trendlyne, shareholding pattern for June 2026: promoter holding and pledge.</li>
+<li id="src-11"><a href="https://solomo.ai/company/GRINDWELL/">https://solomo.ai/company/GRINDWELL/</a><br/>Solomo, ownership summary page (also shows a September 2026 print, not used in the figures).</li>
+<li id="src-12"><a href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/">https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/finances/</a><br/>MarketScreener, finances and estimates: consensus earnings per share, estimated P/E, analyst count and average target.</li>
+<li id="src-13"><a href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/company/">https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/company/</a><br/>MarketScreener, company profile: business description and employee count.</li>
+<li id="src-14"><a href="https://www.kenresearch.com/industry-reports/india-abrasives-market">https://www.kenresearch.com/industry-reports/india-abrasives-market</a><br/>Ken Research, India abrasives market summary: market size, growth and major players.</li>
+<li id="src-15"><a href="https://www.imarcgroup.com/india-abrasives-market">https://www.imarcgroup.com/india-abrasives-market</a><br/>IMARC Group, India abrasives market overview.</li>
+<li id="src-16"><a href="https://www.intelmarketresearch.com/global-india-abrasives-forecast-market-10336">https://www.intelmarketresearch.com/global-india-abrasives-forecast-market-10336</a><br/>Intel Market Research, India abrasives forecast.</li>
+<li id="src-17"><a href="https://www.datamintelligence.com/research-report/india-abrasives-market">https://www.datamintelligence.com/research-report/india-abrasives-market</a><br/>DataM Intelligence, India abrasives market summary.</li>
+<li id="src-18"><a href="https://quartr.com/events/grindwell-norton-limited-506076-q1-26-27_FMqL5lIG">https://quartr.com/events/grindwell-norton-limited-506076-q1-26-27_FMqL5lIG</a><br/>Quartr, June 2026 quarter earnings summary (consolidated figures).</li>
+<li id="src-19"><a href="https://www.stockwatch.live/in/results/grindwell-norton-ltd-506076/2027/1">https://www.stockwatch.live/in/results/grindwell-norton-ltd-506076/2027/1</a><br/>StockWatch, June 2026 quarter results summary (operating margin).</li>
+<li id="src-20"><a href="https://news.tulsian.ai/news/regulation-legal/grindwell-norton-receives-crisil-esg-60-rating.html">https://news.tulsian.ai/news/regulation-legal/grindwell-norton-receives-crisil-esg-60-rating.html</a><br/>Tulsian AI news, CRISIL ESG 60 rating disclosure, 4 August 2026.</li>
+<li id="src-21"><a href="https://www.wisesheets.io/pe-ratio/GRINDWELL.NS">https://www.wisesheets.io/pe-ratio/GRINDWELL.NS</a><br/>Wisesheets, P/E history page: ten-year mean P/E.</li>
+<li id="src-22"><a href="https://annualreportai.live/stocks/india/grindwell-norton-limited/transcripts">https://annualreportai.live/stocks/india/grindwell-norton-limited/transcripts</a><br/>annualreportai, Q4 FY26 earnings summary (AI-generated; secondary).</li>
+<li id="src-23"><a href="https://www.reportsradar.com/reports/016ddf9b-76c8-4d67-be9e-b266704925ec">https://www.reportsradar.com/reports/016ddf9b-76c8-4d67-be9e-b266704925ec</a><br/>Reports Radar, June 2026 quarter results filing record, filed 24 July 2026.</li>
+<li id="src-24"><a href="https://www.mahirscreener.com/stocks/GRINDWELL">https://www.mahirscreener.com/stocks/GRINDWELL</a><br/>Mahir Screener, market value cross-check.</li>
+<li id="src-25"><a href="https://www.screener.in/company/GRINDWELL/">https://www.screener.in/company/GRINDWELL/</a><br/>Screener, standalone page: P/E and book value cross-check.</li>
+<li id="src-26"><a href="https://trendlyne.com/fundamentals/documents-credit-ratings/496/GRINDWELL/grindwell-norton-ltd/">https://trendlyne.com/fundamentals/documents-credit-ratings/496/GRINDWELL/grindwell-norton-ltd/</a><br/>Trendlyne, credit ratings page (no rating content in the cached copy).</li>
+<li id="src-27"><a href="https://www.icra.in/Rationale/ShowRationaleReport/?Id=32315">https://www.icra.in/Rationale/ShowRationaleReport/?Id=32315</a><br/>ICRA, rating rationale page (login required; no rating text read).</li>
+<li id="src-28"><a href="https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/">https://www.marketscreener.com/quote/stock/GRINDWELL-NORTON-LIMITED-9059549/</a><br/>MarketScreener, company quote page: company calendar and employee count.</li>
+<li id="src-29"><a href="https://stockanalysis.com/quote/nse/GRINDWELL/">https://stockanalysis.com/quote/nse/GRINDWELL/</a><br/>StockAnalysis, quote page: trailing and forward P/E, listed estimated earnings date and analyst target (secondary calendar).</li>
+<li id="src-30"><a href="https://www.marketresearch.com/DataM-Intelligence-4Market-Research-LLP-v4207/India-Abrasives-Market2026-44775559/">https://www.marketresearch.com/DataM-Intelligence-4Market-Research-LLP-v4207/India-Abrasives-Market2026-44775559/</a><br/>MarketResearch.com, DataM Intelligence India abrasives report listing: key players, published January 2025.</li>
+<li id="src-31"><a href="https://www.livemint.com/grindwell-norton/key-metrics/companyid-s0003998">https://www.livemint.com/grindwell-norton/key-metrics/companyid-s0003998</a><br/>Mint, key metrics page: return on average equity for the latest fiscal year (secondary, different averaging basis).</li>
+</ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>

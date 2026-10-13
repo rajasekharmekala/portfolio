@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-12">
+<meta name="generated-at" content="2026-10-12T06:47:20.639943-07:00">
+<title>Report</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-10-12T06:47:20.639943-07:00">12 Oct 2026, 06:47 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-12</p></header><div class="primer">
+<h3>Start here</h3>
+<p><b>Review status:</b> PUBLISHED_WITH_GATE_EXCEPTIONS. The single reviewer asked for changes in round 1, the changes were applied, and the reviewer approved the dossier in round 2. The red-team check held the verdict. The gate exceptions are listed in the run notes.</p>
+<p>This dossier answers one question about <b>Aarti Pharmalabs Limited (AARTIPHARM)</b>, listed on the National Stock Exchange of India: should a buyer put new money into the shares now, and if not, what has to change first? The answer comes from a fixed process rather than a view of the company's prospects.</p>
+<p>The process has three layers. Layer 1 is a set of hard gates. A gate is a yes-or-no test with a number attached. If any gate fails, the stock is rejected and the later layers are not run. That rule keeps two questions apart: whether a company is a good business, and whether its shares are a good purchase today.</p>
+<p>Layer 2 is a scorecard of three to five operating measures for the type of business. Layer 3 is the entry posture. It measures how far the price sits from its nearest support, in units of <dfn>ATR</dfn>, the average true range. ATR is the typical daily price swing, averaged over the last fourteen sessions. For this stock it is 46.85 rupees, about 5.3 percent of the price.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<p>Three more terms recur. A <dfn>50-day moving average</dfn> is the average closing price over the last 50 sessions, and the <dfn>200-day moving average</dfn> is the same measure over 200. A <dfn>base</dfn> is a sideways stretch in which a stock stops falling and builds a floor. A <dfn>breakout</dfn> is a move above the level that has capped the price. <dfn>Stage 2</dfn> is the markup phase: the close sits above a rising 50-day average, which sits above the 200-day average. <dfn>Stage 4</dfn> is the reverse, a markdown below falling averages.</p>
+<p>The verdict is REJECTED. Three Layer 1 tests fail. Return on capital employed (<dfn>ROCE</dfn>) is the operating profit a company earns on all the money tied up in it. It stands at 10.7 percent against a 15 percent floor.<sup><a href="#cite_note-1">[1]</a></sup> No verified target supports the reward the <dfn>asymmetry</dfn> rule requires. Asymmetry is the ratio of reward to loss: the distance to a target divided by the distance to a stop. The momentum gate, which the code computes from the ledger, returns NO_MOMENTUM.<sup><a href="#cite_note-32">[32]</a></sup> The cash and leverage tests pass. The report does not call the business weak. It calls the return on capital, the target and the price trend not yet buyable under the rules.</p>
+<p>The market figures all come from one ledger for the session of 12 October 2026, the latest completed session. Company figures come from the public sources cited inline, each with the date it describes. Where two sources disagree, the report says so. Where a figure cannot be verified, the report writes N/A and gives the reason.</p>
+</div>
+<section class="chapter" id="ch01">
+<h2>1 Executive decision</h2>
+<p>The decision is the output of this report. A verdict in this process is one of five words: IMMEDIATE_BUY, ACCUMULATE_ON_DIP, WAIT_FOR_SUPPORT, QUALIFIED_DEFERRED or REJECTED. The first three mean the stock passes every hard gate and the question left is timing. QUALIFIED_DEFERRED means the business is sound but its bucket has no room for another name. REJECTED means at least one Layer 1 gate failed, so Layers 2 and 3 are not run.</p>
+<p>The verdict for <b>AARTIPHARM</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAARTIPHARM" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/AARTIPHARM/" style="color:var(--link);">Screener</a></span> is <span class="verdict verdict-exit">REJECTED</span>. The recorded gate status is FAIL_ROCE, FAIL_ASYMMETRY, NO_MOMENTUM (code). Each of the three is enough on its own. The return on capital is the first. Screener's consolidated header shows a ROCE of 10.7 percent, and the consolidated ratio row shows 11 percent for March 2026.<sup><a href="#cite_note-1">[1]</a></sup> The rule floor is 15 percent. The asymmetry test is the second. The reward to a 3.0-to-1 core target would need a target of about 1,432 rupees, and no verified target reaches it.<sup><a href="#cite_note-24">[24]</a></sup> The momentum gate is the third. Both of its tests fail on the same facts: the close is 4.86 ATR above its 63-day base low, and the 20-session volume ratio is 0.48 against a minimum of 1.0.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<dl class="key-figures">
+<div><dt>Close, 12 Oct 2026</dt><dd>878.35</dd></div>
+<div><dt>Trend stage</dt><dd>Stage 2</dd></div>
+<div><dt>ROCE, FY26</dt><dd>10.7%</dd></div>
+<div><dt>Debt to equity</dt><dd>0.35</dd></div>
+<div><dt>Cash to profit, 3 years</dt><dd>1.22x</dd></div>
+<div><dt>Core reference ratio (not verified)</dt><dd>0.67 : 1</dd></div>
+<div><dt>Momentum gate</dt><dd>NO_MOMENTUM</dd></div>
+<div><dt>Layers 2 and 3</dt><dd>Not run</dd></div>
+</dl>
+<p>What follows for you is simple. The stock is not bought today. Under this process, a Layer 1 failure moves the name from the active watchlist to the archive sheet, where its failed metrics are kept as the audit trail. The re-entry conditions are listed in section 9. Re-entry means the whole of Layer 1 is run again on new data. Reaching one price level is not enough on its own.</p>
+</section>
+<section class="chapter" id="ch02">
+<h2>2 What the company does</h2>
+<p>Aarti Pharmalabs makes chemical ingredients that other companies turn into medicines and nutritional products. The main product family is xanthine derivatives, which are caffeine-type compounds used in beverages and pharmaceuticals. Screener describes the company as an "internationally recognized manufacturer of generic API &amp; Intermediates, Xanthine derivatives, and offers CDMO /CMO services," with six manufacturing plants and three R&amp;D centres.<sup><a href="#cite_note-1">[1]</a></sup> The company's own website describes the same activities: the development of Active Pharmaceutical Ingredients (API) and New Chemical Entities, API intermediates, and Xanthine Derivatives for clinical testing and commercial production.<sup><a href="#cite_note-34">[34]</a></sup> An API, or active pharmaceutical ingredient, is the chemical that does the work in a medicine. A CDMO is a contract manufacturer that makes drugs for another company under its own process and quality system. The plain version is that the company sells raw chemicals, sells the service of making them, and in one case sells the service of developing and making a drug for someone else.</p>
+<p>Demerged from Aarti Industries in October 2022, the company was previously its wholly owned subsidiary.<sup><a href="#cite_note-1">[1]</a></sup> That history matters for one of the risks in section 8. The demerger has produced a tax and stamp-duty dispute, and the company now carries its own balance sheet and borrowing.</p>
+<h3>The business in three parts</h3>
+<p>The three product lines behave differently, so the mix shapes the results. Xanthines are the largest. In the June 2026 quarter they were about 57 percent of turnover, with the highest quarterly sales the company has recorded, according to the earnings-call transcript.<sup><a href="#cite_note-13">[13]</a></sup> The same summary puts API and intermediates at about 160 crore rupees and CDMO and CMO at about 37 crore, or 7 percent, for the quarter.<sup><a href="#cite_note-12">[12]</a></sup> Xanthine prices move with raw material costs and with the supply from other producers, so this line gives the largest swings in profit.</p>
+<p>The company has been adding xanthine capacity. A source on the quarter reports production capacity rising to 9,500 metric tonnes from about 6,000, a 50 percent increase that was commissioned.<sup><a href="#cite_note-12">[12]</a></sup> The two printed capacity figures, 6,000 and 9,500 tonnes, imply a rise of about 58 percent, so the source's percentage is quoted as its own figure. The company has also sought environmental clearance to take API and intermediate capacity at Tarapur from 14,688 tonnes a year to 45,641.52 tonnes a year. That application is not an approval, and the report does not count the capacity as available.<sup><a href="#cite_note-23">[23]</a></sup> Management said in the June quarter that it had completed a couple of expansion projects.<sup><a href="#cite_note-35">[35]</a></sup> What this means is that the company is buying growth with capital, and the growth is only worth something if the plants run full at good prices.</p>
+<h3>Ownership and the register</h3>
+<p>Ownership tells you who is in control and whether the people running the company have their own money at stake. The promoter group held 42.86 percent of the shares in the June 2026 quarter, down from 46.46 percent in March 2024.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> A falling promoter stake is not a breach of any rule, but it means the group has been selling or diluting over two years.</p>
+<p>Pledging is the more important ownership question. When a promoter pledges shares as collateral, a fall in the price can force a sale the company did not choose. Trendlyne reports that the total pledge stands at 11.08 percent of promoter holdings as of the June 2026 quarter.<sup><a href="#cite_note-20">[20]</a></sup> A separate filing summary describes a March 2026 pledge of about 3.08 percent of the total share capital, as collateral for a financing of 75 crore rupees.<sup><a href="#cite_note-19">[19]</a></sup> The report does not judge the purpose of the loans. It records that 11.08 percent of the promoter stake is pledged, and that this sits alongside a falling price trend.</p>
+<h3>Demand context</h3>
+<p>Demand for these products depends on two things: the number of medicines and beverages that use them, and the number of producers able to supply them. The company itself says the competition for many of its xanthine products is concentrated in China, which means Chinese supply sets much of the price.<sup><a href="#cite_note-13">[13]</a></sup> Management said in the call that prices had "come to lower level from the peak," and that realisation per kilogram would fall while volumes rose.<sup><a href="#cite_note-13">[13]</a></sup> The report does not have a market-size figure for xanthines that it can cite to a primary source, so demand is treated as an open question rather than a number.</p>
+</section>
+<section class="chapter" id="ch03">
+<h2>3 Financial track record</h2>
+<p>The track record is the three-year record of what the company earned, what cash it produced, what it borrowed and what it returned on the capital it used. The rules ask for three things here: the return on capital, the debt the company carries, and whether reported profit turns into cash. Figures are in crore rupees, where one crore is ten million rupees. The table uses the consolidated figures from Screener, because they cover the whole group.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<div class="howto">
+<h4>How to read this table</h4>
+<p>Each row is one measure and each column is one fiscal year, running from April to March. FY26 is the year ended 31 March 2026. Read across a row to see the trend. The cash-to-profit ratio is the key figure: a value above 1.0 means the company collected more cash than the profit it reported, which is what a healthy manufacturer should show over several years. The interest row is the cost of borrowing, and it matters more as the debt grows.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Measure (consolidated, crore unless noted)</th><th>FY24</th><th>FY25</th><th>FY26</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Sales</td><td class="num">1,853</td><td class="num">2,115</td><td class="num">1,819</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Operating profit</td><td class="num">386</td><td class="num">466</td><td class="num">369</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td><dfn>Operating margin</dfn> means operating profit as a share of sales (calculated, %)</td><td class="num">21</td><td class="num">22</td><td class="num">20</td><td>Calculated from the two rows above</td></tr>
+<tr><td>Interest cost</td><td class="num">17</td><td class="num">27</td><td class="num">47</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Net profit (PAT)</td><td class="num">217</td><td class="num">272</td><td class="num">175</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Operating cash flow (CFO)</td><td class="num">216</td><td class="num">330</td><td class="num">262</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>CFO to PAT (times)</td><td class="num">1.00</td><td class="num">1.21</td><td class="num">1.50</td><td>Calculated from the two rows above</td></tr>
+<tr><td><dfn>Free cash flow</dfn> means operating cash flow less capital spending</td><td class="num">18</td><td class="num">-114</td><td class="num">-186</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Borrowings</td><td class="num">285</td><td class="num">413</td><td class="num">754</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Reserves</td><td class="num">1,712</td><td class="num">1,945</td><td class="num">2,079</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Return on capital employed (ROCE, %)</td><td class="num">17</td><td class="num">17</td><td class="num">11</td><td><a href="#cite_note-1">Screener</a></td></tr>
+</tbody>
+</table></div>
+<p class="takeaway">The table shows a company that was earning close to 17 percent on its capital until FY25 and then fell to 11 percent in FY26. Profit fell about 36 percent in the year, from 272 to 175 crore, while sales fell 14 percent. Borrowings rose about 2.6 times over two years, from 285 to 754 crore, and interest cost rose from 17 to 47 crore. Cash from operations stayed positive every year, which is the good news, but free cash flow has been negative for two years because the plants absorbed the cash. The three-year totals are the figures the rules use, so the next section tests them directly.</p>
+<h3>Three-year cash and profit</h3>
+<p>The cash test asks whether reported profit is real. Accounting profit can be lifted by sales that are not yet collected or by costs that have been deferred. The rule adds up three years of operating cash flow and divides by three years of profit. For FY24 to FY26 the company generated 808 crore of operating cash flow against 664 crore of profit, a ratio of 1.22 times.<sup><a href="#cite_note-1">[1]</a></sup> The standalone accounts give 1.23 times on the same basis, so the result does not depend on which set of accounts is used.<sup><a href="#cite_note-2">[2]</a></sup> The rule's floor is 0.70, so the test passes with room to spare.</p>
+<p>The ratio is high because the cash figure is high, not because profit is weak. FY26 profit fell while operating cash held up, and that is why the ratio rose to 1.50 in the latest year. What this means for the reader is that the cash test is not the problem. The problem is that the profit being turned into cash is shrinking.</p>
+<h3>Returns and the balance sheet</h3>
+<p>ROCE measures how much operating profit the company earns on all the money in the business, both shareholders' money and borrowed money. The rules set a floor of 15 percent and a preference for above 18 percent in the core bucket. The header figure on Screener's consolidated page is 10.7 percent, and the standalone page shows 11.4 percent.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> Both are below the floor, so the result does not depend on the choice between the two. The FY26 ratio row shows 11 percent, which agrees.<sup><a href="#cite_note-1">[1]</a></sup> Trendlyne's standalone ratio table shows 10.78 percent for March 2026, which is the same picture on the standalone basis.<sup><a href="#cite_note-27">[27]</a></sup></p>
+<p>Debt has risen, but it is still moderate against the company's own capital. Borrowings were 754 crore at March 2026, and reserves plus equity capital were 2,124 crore, which gives a <dfn>debt-to-equity</dfn> ratio of 0.35 times. Debt-to-equity is the amount borrowed divided by the owners' capital, so 0.35 means about 35 paise of debt for every rupee of equity.<sup><a href="#cite_note-1">[1]</a></sup> CRISIL reports gearing (borrowings to equity) of 0.38 times on the same date, which is the same picture from a different definition.<sup><a href="#cite_note-7">[7]</a></sup> StockAnalysis shows 0.36 at 31 March 2026.<sup><a href="#cite_note-38">[38]</a></sup> The limit in the rules is 0.70. Interest cover, meaning operating profit divided by interest cost, is 8.25 times, which CRISIL describes as comfortable.<sup><a href="#cite_note-7">[7]</a></sup> The balance sheet passes, but the direction matters. Borrowings rose 83 percent in a year, and the company has a 149 crore intermediate-block project to fund, financed by internal accruals and borrowings.<sup><a href="#cite_note-15">[15]</a></sup></p>
+<h3>The latest quarter</h3>
+<p>The latest completed quarter is June 2026. Consolidated sales were 536 crore, against 386 crore a year earlier, and profit after tax was 76 crore, against 50 crore.<sup><a href="#cite_note-1">[1]</a></sup> The press summaries put revenue growth at about 39 to 42 percent, and <dfn>EBITDA</dfn>, which means earnings before interest, taxes, depreciation and amortization, at 133 crore, up 40 percent, with a margin of 24.9 percent.<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> The standalone figures in the earnings-call summary show revenue from operations of 534.59 crore, up 42.4 percent.<sup><a href="#cite_note-36">[36]</a></sup> The board approved the results on 7 August 2026.<sup><a href="#cite_note-37">[37]</a></sup> The quarter is strong. Much of the strength is price rather than volume, and management attributed part of it to elevated pricing on xanthines and to low-cost inventory sold at higher prices.<sup><a href="#cite_note-12">[12]</a></sup> That is why the rules look at three-year totals rather than one quarter. A single good quarter does not change a return on capital that has been near 11 to 17 percent.</p>
+<p>What this means for you is that the trend has turned up in the latest quarter but the business has not yet earned back the return the rules ask for. The next test is the second-quarter result, which the company scheduled for 28 October 2026.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></p>
+</section>
+<section class="chapter" id="ch04">
+<h2>4 Layer 1 gates</h2>
+<p>Layer 1 is the set of hard gates. Each gate is a rule with a number. The table shows the measured figure, the rule and the result for each test. A test passes or fails, and there is no partial credit. The financial floors come first, then the technical posture, then the asymmetry and momentum tests. The return, debt and cash figures come from Screener and CRISIL.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-7">[7]</a></sup> The technical, asymmetry and momentum figures come from the market ledger, and the rule thresholds come from the rule file.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-33">[33]</a></sup> The target inputs come from the analyst pages.<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-26">[26]</a></sup></p>
+<div class="howto">
+<h4>How to read this table</h4>
+<p>Each row is one test. The first column names it, the second states the threshold it must clear, the third gives the measured value and its source, and the fourth gives the result. Read the result column first. Any row marked FAIL is a reason for rejection on its own. Two rows fail on the financial and asymmetry side, and the momentum gate, computed in code, also fails, so the stock is rejected three times over.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Test</th><th>Rule</th><th>Measured</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Return on capital (ROCE)</td><td>At least 15 percent; core prefers above 18 percent</td><td class="num">10.7 (consolidated header); 11.4 (standalone header)</td><td><span class="fail">FAIL</span></td></tr>
+<tr><td>Debt to equity</td><td>Below 0.70</td><td class="num">0.35 (borrowings 754 over net worth 2,124 crore)</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>Three-year cash to profit</td><td>At least 0.70</td><td class="num">1.22 (FY24 to FY26)</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>Technical posture, core</td><td>Stage 1 base breakout or Stage 2 markup</td><td class="num">Stage 2; close 878.35 above 50-day 848.15</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>Technical posture, tactical</td><td>Stage 2 with 50-day and 200-day averages both rising</td><td class="num">50-day up 10.8 percent in 21 sessions; 200-day up 1.2 percent in 63 sessions</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>No Stage 4 breakdown</td><td>No close below falling averages</td><td class="num">Above both averages; the ledger reports 6 distribution days in 25 sessions</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>Asymmetry and target anchor</td><td>Core at least 3.0 to 1; tactical at least 3.5 to 1; target verified</td><td class="num">0.67 to 1 (core) and 0.91 to 1 (tactical) at the 52-week high; no verified target</td><td><span class="fail">FAIL_ASYMMETRY</span></td></tr>
+<tr><td>Momentum gate (Test A or Test B)</td><td>Test A or Test B must pass in full</td><td class="num">Test A fails on distance (4.86 ATR against 1.2). Test B fails on <dfn>pivot</dfn> distance, which means the distance from the price level a breakout must clear (4.86 against 1.0) and volume expansion (0.48 against 1.0)</td><td><span class="fail">NO_MOMENTUM (code)</span></td></tr>
+</tbody>
+</table></div>
+<p class="takeaway">Three Layer 1 tests fail, and each is enough by itself to reject the stock. The return on capital is the most basic: the business does not earn the return the rules ask for. The asymmetry test fails because no target is verified, and the reward cannot be sized against the loss. The momentum gate fails because the price is far from its base and volume is thin. The financial cash and debt tests pass, so the rejection is not about solvency.</p>
+<h3>Financial floors</h3>
+<p>The financial floors ask whether the business is good enough to hold through a poor period. The return test is the central one. A company that earns 10.7 percent on its capital while paying 47 crore of interest is earning only a little more than its borrowing cost, and the margin for error is thin. The 15 percent floor is set above that level, and the company does not reach it on either set of accounts.</p>
+<p>The debt and cash tests pass. Borrowings are 0.35 times equity, under the limit of 0.70, and the three-year cash ratio of 1.22 means reported profit is backed by cash. The financial floors therefore split: the leverage and cash tests say the company is not in trouble, and the return test says the company is not earning enough on what it has invested.</p>
+<h3>Technical posture</h3>
+<p>The technical posture test asks what the share price is doing. Using the ledger for 12 October 2026, the test runs in three steps. First, the close of 878.35 is above the 50-day average of 848.15. Second, the 50-day average is above the 200-day average of 740.72. Third, the averages are rising: the 50-day has moved from 765.32 twenty-one sessions earlier, a rise of 10.8 percent, and the 200-day has moved from 732.03 sixty-three sessions earlier, a rise of 1.2 percent.<sup><a href="#cite_note-32">[32]</a></sup> Those are the ledger's Stage 2 conditions, so the ledger labels the stock Stage 2. The core test asks for Stage 2, so it passes. The tactical test asks for both averages to be rising, and they are, so it passes too.</p>
+<p>The price is not extended on the trend, but it is far from its base. The close is 12.4 percent below the 52-week high of 1,002.40, and the 20-day average of 895.89 sits above the close.<sup><a href="#cite_note-32">[32]</a></sup> The ledger's momentum test is what catches this, and it is covered below. The technical floor passes, and the momentum gate is the stricter test that fails.</p>
+<h3>Asymmetry and target anchoring</h3>
+<p>Asymmetry is the reward-to-loss ratio. The rule writes it as (target minus price) divided by (price minus stop). The stop is set by the stop-placement rule. For the core bucket, the stop sits below the lowest of the swing low and the 50-day and 200-day averages, minus one ATR. The ledger gives a 20-day swing low of 765.00, a 50-day average of 848.15 and a 200-day average of 740.72. The lowest is 740.72. Subtract one ATR of 46.85 and the core stop is 693.87, which is 184.48 rupees below the close.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-33">[33]</a></sup></p>
+<p>The target has to be anchored to a number that can be checked. The rules accept either forward earnings per share multiplied by the three-year median <dfn>price-to-earnings</dfn> ratio, which is the share price divided by earnings per share, or a base <dfn>measured move</dfn>, which is a target set by the height of the base. Neither can be verified. The ledger holds no base high from which a measured move can be computed. The only forward earnings figure found is a single analyst's FY27 estimate of 17.80 rupees per share.<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-25">[25]</a></sup> A single estimate is not a consensus. Sharpely shows one recommendation in total, and its median, high and low are all 17.80.<sup><a href="#cite_note-25">[25]</a></sup> The three-year median multiple is not published in any source fetched, and no multi-year P/E history could be verified from a cached page. The only multiple used is the current header figure.<sup><a href="#cite_note-1">[1]</a></sup> Under the rule, an unverified target gives FAIL_ASYMMETRY.</p>
+<p>The arithmetic still helps the reader see how big the gap is. A 3.0-to-1 core ratio needs a target of about 1,431.79 rupees. A 3.5-to-1 tactical ratio needs about 1,357.06 rupees. The 52-week high of 1,002.40 is the best price reference the ledger holds, and it falls short of both.<sup><a href="#cite_note-32">[32]</a></sup> Multiplying the single FY27 estimate by the current header multiple of 37.0 times gives about 659 rupees, which is also below the close.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-25">[25]</a></sup> The single analyst's average target of 740 is also below the close.<sup><a href="#cite_note-26">[26]</a></sup> The honest reading is that every anchor the sources support points below the current price, so no verified anchor gives a reward above the loss. The 52-week high is only an upper reference. It gives 0.67 to 1 on the core stop and 0.91 to 1 on the tactical stop, and those are reference ratios, not verified targets.</p>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Measure</th><th>Core bucket</th><th>Tactical bucket</th></tr></thead>
+<tbody>
+<tr><td>Close, 12 Oct 2026 (ledger, rupees)</td><td class="num">878.35</td><td class="num">878.35</td></tr>
+<tr><td>Stop (rupees)</td><td class="num">693.87</td><td class="num">741.58</td></tr>
+<tr><td>Loss to stop per share (rupees)</td><td class="num">184.48</td><td class="num">136.77</td></tr>
+<tr><td>Floor the rule requires (times)</td><td class="num">3.0</td><td class="num">3.5</td></tr>
+<tr><td>Target needed to meet the floor (rupees)</td><td class="num">1,431.79</td><td class="num">1,357.06</td></tr>
+<tr><td>52-week high as reference target (rupees)</td><td class="num">1,002.40</td><td class="num">1,002.40</td></tr>
+<tr><td>Reference ratio at the 52-week high, not a verified target (times)</td><td class="num">0.67</td><td class="num">0.91</td></tr>
+</tbody>
+</table></div>
+<p class="takeaway">Neither bucket reaches its floor at any price the report can verify. The core bucket would need the close to rise 63 percent to reach its target, and the tactical bucket would need 55 percent. The 52-week high is 14 percent above the close. That is the realistic ceiling of the ledger's own history, and it does not pay for the risk on either rule. The reward-to-loss arithmetic does not depend on any view about the company.</p>
+<h3>The momentum gate</h3>
+<p>The momentum gate is the most restrictive test in the scoring rules, and it decides allocation. It exists because strong numbers can still be a poor buy when the price has not confirmed them. Test A asks for a clean uptrend, and it needs all four of its conditions. Test B asks for a confirmed breakout or a return to momentum, and it needs all five. The ledger measures distance from the 63-day base low of 650.80 rupees, which it treats as the pivot. The price is 4.86 ATR above that level.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Condition</th><th>Measured</th><th>Limit</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>A1 structure: close above 50-day, 50-day above 200-day</td><td class="num">878.35 / 848.15 / 740.72</td><td>Structure holds</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>A2 200-day not falling over 63 sessions</td><td class="num">740.72 against 732.03</td><td>Not falling</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>A3 relative strength over 63 sessions</td><td class="num">+30.0 points against the Nifty 50</td><td>At least 0.0</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>A4 distance from base, in ATR</td><td class="num">4.86</td><td>At most 1.2</td><td><span class="fail">FAIL</span></td></tr>
+<tr><td>B1 50-day change over 21 sessions</td><td class="num">+10.82 percent</td><td>No decline greater than 0.5 percent</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>B2 relative strength over 28 sessions</td><td class="num">+11.03 points</td><td>Rising, above 0</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>B3 distance from pivot, in ATR</td><td class="num">4.86</td><td>At most 1.0</td><td><span class="fail">FAIL</span></td></tr>
+<tr><td>B4 volume dry-up over the base</td><td class="num">0.07</td><td>At most 0.9</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>B5 volume expansion, 20-session ratio</td><td class="num">0.48</td><td>At least 1.0</td><td><span class="fail">FAIL</span></td></tr>
+</tbody>
+</table></div>
+<p class="takeaway">Test A fails on one condition, the distance from the base. Test B fails on two, the distance from the pivot and the lack of volume expansion. Because each test must pass in full, the result is NO_MOMENTUM, and the gate forbids any allocation. The relative-strength conditions are the strongest part of the chart: the stock has beaten the Nifty 50 by 30 points over 63 sessions. The gate still says no, because the stock has run a long way from its base on thin volume.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<p>The volume ratios come from the ledger, and the report has no second volume series to check them against. The gate's own note says an allocation is made only on a confirmed breakout over the pivot, or on a <dfn>retest</dfn>, which is a return to a broken level that then holds. Neither has happened.<sup><a href="#cite_note-33">[33]</a></sup> The gate's thresholds are marked as needing calibration in the rule file, so the result is a code result under current settings, not a permanent judgment.<sup><a href="#cite_note-33">[33]</a></sup></p>
+</section>
+<section class="chapter" id="ch05">
+<h2>5 Layer 2 KPI scorecard</h2>
+<p>The Layer 2 scorecard is a set of three to five operating measures, each rated PASS, WATCH or FAIL. For a company of this kind the measures would be plant utilisation, the realised price of its main product, the speed of collecting receivables, and the pace of capital spending against debt. The scorecard runs only after every Layer 1 test passes. AARTIPHARM fails Layer 1, so the scorecard is not run and no traffic-light result is assigned.</p>
+<p><b>Status: not run.</b> The reason is the Layer 1 result: return on capital, asymmetry and momentum all fail.</p>
+<h3>Why the scorecard is not scored</h3>
+<p>The scorecard is a second filter. A company that fails the first filter does not get a second look. Scoring it anyway would invite the reader to read a positive result as readiness, which is the wrong lesson, because the stock has not passed the return, asymmetry or momentum tests. The report therefore records the facts and leaves the ratings blank.</p>
+<h3>Facts a scorecard would use</h3>
+<p>Three facts from the June 2026 call would be the inputs. Xanthine capacity has been raised to 9,500 tonnes from about 6,000, and management aims for utilisation above 80 percent.<sup><a href="#cite_note-12">[12]</a></sup> Management guides to company-level EBITDA margins of 22 to 25 percent, and the June quarter came in at 24.9 percent.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> The CDMO business is guided to grow 40 to 50 percent in the current financial year.<sup><a href="#cite_note-13">[13]</a></sup> These are management's targets and are not yet results, so a scorecard would need them tested against the second-quarter and annual figures.</p>
+<h3>Facts to watch in the next filing</h3>
+<p>The second-quarter FY27 results are scheduled for 28 October 2026.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> The next filing should show three things. The first is whether the return on capital moves back toward 15 percent as the new capacity fills. The second is whether the cash ratio stays above 1.0 as the capital spending continues. The third is whether the realised price per kilogram of xanthines holds after the peak. A Layer 2 scorecard is only worth running once the Layer 1 return test passes.</p>
+</section>
+<section class="chapter" id="ch06">
+<h2>6 Layer 3 entry posture</h2>
+<p>Layer 3 is the execution gate. It asks how far the price sits from its nearest verified support, measured in ATR, and maps that distance onto a ladder of entry bands. A support level is a price where buyers have stepped in before, and moving averages serve that role here. The ladder reads as follows: within 0.5 ATR of support is the full-size band, within 1.0 ATR is the standard band, and within 1.2 ATR is a reduced band that accepts only a <dfn>limit order</dfn>. A limit order is an instruction to buy only at a set price or better. Beyond that is the no-buy band, where the rule says to wait for a pullback, a retest or a new base.<sup><a href="#cite_note-33">[33]</a></sup></p>
+<p><b>Status: not run.</b> Layer 1 failed, so the entry band is not assigned. The figures below are shown only as a reference, so the reader can see where the price sits.</p>
+<h3>Reference reading only</h3>
+<p>The nearest verified support is the 50-day average of 848.15 rupees. The close sits 30.20 rupees above it, which is 0.64 ATR. On the ladder that is the standard band. The 20-day swing low of 765.00 is 2.42 ATR below the close, which is beyond the 1.2 ATR limit. The reference reading would therefore be a standard-band entry if the stock passed the gates. It does not pass them, and the momentum gate forbids an allocation whatever the band.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<h3>Stops</h3>
+<p>A stop is the price at which a position is closed to cap the loss. The core rule places the stop at 693.87 rupees, as set out in section 4. The tactical rule places its stop below the lowest of the swing low and the 20-day and 50-day averages, minus half an ATR, which gives 741.58 rupees. The core stop is further away and suits a longer horizon. The tactical stop is closer. A close below the 20-day swing low of 765.00 would already breach the structure that anchors the tactical stop.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-33">[33]</a></sup></p>
+<h3>Targets and the asymmetry arithmetic</h3>
+<p>The asymmetry table in section 4 sets out the arithmetic for both buckets. It uses the ledger close, the two stops and the best price reference the ledger provides, and it shows the target each rule would require. The point to take from it is that the required targets sit above the 52-week high, while every verified anchor sits below the close. That gap is why the reward is treated as unverified and the gate fails.</p>
+</section>
+<section class="chapter" id="ch07">
+<h2>7 Peer comparison</h2>
+<p>A peer comparison asks whether AARTIPHARM is cheap, expensive or ordinary against listed companies in similar lines. The peers here are three listed Indian pharmaceutical ingredient and contract-manufacturing companies whose Screener pages were fetched in this run. The parent, Aarti Industries, is shown for reference and is not a peer. The figures are Screener header ratios as they stood on 12 October 2026.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-6">[6]</a></sup></p>
+<div class="howto">
+<h4>How to read this table</h4>
+<p>Each row is one company. Return on capital shows how much each business earns on its capital, and return on equity shows the return to shareholders. The price-to-earnings ratio shows how many rupees the market pays for each rupee of earnings. A high return with a moderate multiple is the combination that screens as attractive. A low return with a high multiple is priced for growth that has not yet arrived. The companies make different products, so the comparison shows the financial profile rather than a precise valuation.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Company</th><th>ROCE (%)</th><th>ROE (%)</th><th>Price-to-earnings (times)</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td><b>AARTIPHARM</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAARTIPHARM" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/AARTIPHARM/" style="color:var(--link);">Screener</a></span> (consolidated)</td><td class="num">10.7</td><td class="num">8.59</td><td class="num">37.0</td><td><a href="#cite_note-1">Screener</a></td></tr>
+<tr><td>Divi's Laboratories</td><td class="num">22.0</td><td class="num">16.5</td><td class="num">83.7</td><td><a href="#cite_note-3">Screener</a></td></tr>
+<tr><td>Laurus Labs</td><td class="num">17.8</td><td class="num">18.3</td><td class="num">102</td><td><a href="#cite_note-4">Screener</a></td></tr>
+<tr><td>Neuland Laboratories</td><td class="num">26.5</td><td class="num">21.2</td><td class="num">52.9</td><td><a href="#cite_note-5">Screener</a></td></tr>
+<tr><td>Aarti Industries (parent, reference only)</td><td class="num">6.86</td><td class="num">7.13</td><td class="num">32.9</td><td><a href="#cite_note-6">Screener</a></td></tr>
+</tbody>
+</table></div>
+<p class="takeaway">AARTIPHARM earns less on its capital than all three peers, and its return on equity is the lowest of the group apart from the parent. Its multiple of 37 times is below all three peers, which carry 53 to 102 times, and above only the parent, Aarti Industries, at 32.9 times. A low multiple paired with a low return is a discount for weaker returns, not a bargain. The gap to the peers is in return on capital, which is the number the Layer 1 floor measures.</p>
+<h3>Reading the peers</h3>
+<p>The peer table tests whether the rejection is about the company or about the market. A stock priced well below peers while earning a similar return would suggest value, and that would strengthen the case for patience. AARTIPHARM is not in that position. Its return is about 7 points below Laurus, 11 points below Divi's and 16 points below Neuland. Its multiple is well below all three, which reflects the lower return, not a bargain.</p>
+<h3>Peer candidates</h3>
+<p>None of the three peers was underwritten in this run. Neuland Laboratories passes the return floor on the Screener header, with ROCE of 26.5 percent, and Divi's and Laurus also clear 15 percent. Each would need separate underwriting before any watchlist seeding, which this dossier does not do. No peer changes the verdict on AARTIPHARM, because the verdict rests on its own return on capital, its target and its price trend.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-5">[5]</a></sup></p>
+</section>
+<section class="chapter" id="ch08">
+<h2>8 Fatal flaws and red team</h2>
+<p>A red-team review asks what would make the decision wrong, and it puts the strongest honest case against the report's own conclusions. The four points below are the risks a careful reader should weigh. Each has a number attached, so it can be checked.</p>
+<h3>Fatal flaw one: the return on capital is below the floor and falling</h3>
+<p>Return on capital is the measure that most directly decides whether a company creates value from the money invested in it. A reading of 10.7 percent means that every rupee of capital earns about 11 paise of operating profit, before tax and interest. The ratio fell from 17 percent in FY25 to 11 percent in FY26, as profit dropped from 272 to 175 crore.<sup><a href="#cite_note-1">[1]</a></sup> The standalone accounts show a 32 percent fall in profit for the year.<sup><a href="#cite_note-9">[9]</a></sup> The new plants add capital ahead of the profit they will earn, so the ratio may stay low for some time. The report cannot say when it will recover, only what level would pass.</p>
+<h3>Fatal flaw two: the cycle is in the price of xanthines</h3>
+<p>More than half of the quarter's revenue came from one product family, and its price is set in part by supply from other producers. The June 2026 quarter benefited from pricing that management called exceptional, and it reported that prices had come off the peak.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> A business whose profit is set by one commodity-like price can post a strong quarter and a weak year, and the FY26 result shows that pattern already. The rules use three-year totals for this reason, and the three-year return is still below the floor.</p>
+<h3>Fatal flaw three: the capital programme is growing faster than the cash it earns</h3>
+<p>Borrowings rose from 413 to 754 crore in one year, and interest cost rose from 27 to 47 crore. Free cash flow has been negative for two years.<sup><a href="#cite_note-1">[1]</a></sup> The company has a 149 crore intermediate-block project to fund through internal accruals and borrowings, and it is also expanding its Tarapur capacity.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-23">[23]</a></sup> On the reported equity of 2,124 crore, the debt limit of 0.70 would be reached at about 1,487 crore of borrowings, roughly double the current level. The debt test still passes, but the room is shrinking as the programme proceeds.</p>
+<h3>Fatal flaw four: a pledge and a legal claim on the company's cash</h3>
+<p>Promoter pledges stand at 11.08 percent of promoter holdings as of June 2026, and a March 2026 pledge was reported as collateral for a 75 crore rupee financing.<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-19">[19]</a></sup> The company also received a stamp-duty and penalty order of 59.5 crore rupees dated 29 August 2026, linked to the 2022 demerger, and has filed a writ petition in the Gujarat High Court.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> That amount is about 34 percent of FY26 profit. The company has filed a writ petition against the order, and the outcome is not known.<sup><a href="#cite_note-1">[1]</a></sup> If the order were paid in cash, it would reduce the room for the capital programme. The report does not assume an outcome.</p>
+<h3>The red team's view of the rejection</h3>
+<p>The strongest honest case against the rejection is this. The latest quarter is the best in the company's recent record. Sales rose about 39 percent and profit about 52 percent year on year, and CRISIL has reaffirmed the company's rating at AA-/Stable on 9 October 2026, with a stable outlook.<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-7">[7]</a></sup> The company guides to 15 to 18 percent revenue growth over the next three to four years (StockFin note, dated 1 June 2026).<sup><a href="#cite_note-10">[10]</a></sup> On that view, the return will rise as the new plants fill, and the rules are applied too early. The reply is that the rules ask for the return the business earns today, not the return it expects. One quarter does not move a three-year record that is still below the floor, and the new capacity has not yet earned anything. A stock that passes the return test in a later filing can be re-run then. Until it does, the rule stands.</p>
+<h3>The hinge claim</h3>
+<p>The claim on which the verdict most depends is the ROCE reading. The consolidated header shows 10.7 percent, the standalone header 11.4 percent, and the FY26 ratio row 11 percent.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> All three are below the 15 percent floor. The falsifier is a reported consolidated ROCE of at least 15 percent in a later filing, which would clear the floor on the rule's own definition. A second, independent claim is that no verified target reaches the 3.0-to-1 core floor of 1,431.79 rupees. Clearing that alone would not clear the momentum gate.<sup><a href="#cite_note-32">[32]</a></sup></p>
+</section>
+<section class="chapter" id="ch09">
+<h2>9 Verdict, action and triggers</h2>
+<p>The verdict is <span class="verdict verdict-exit">REJECTED</span>. The return on capital fails the 15 percent floor. The asymmetry test fails as FAIL_ASYMMETRY, because no verified target reaches the floor. The momentum gate fails in code as NO_MOMENTUM. Under the rules, a Layer 1 failure rejects the stock, and Layers 2 and 3 are not evaluated. The strategy bucket is REJECTED, because neither the core nor the tactical bucket is allowed while Layer 1 fails.</p>
+<h3>What this means for you</h3>
+<p>For a reader deciding whether to add new money to AARTIPHARM, the answer today is no. The rules give three reasons, each with a number: a return of 10.7 percent against a floor of 15, a reference reward of 0.67 to 1 even at the 52-week high, against a floor of 3.0 and with no verified target, and a momentum gate that is 4.86 ATR from its base against a limit of 1.2. The report does not cover any decision about an existing holding, which the portfolio rules govern separately. The levels in the triggers below are reference levels that mark where the trend would break. They are not orders.</p>
+<h3>Archive and re-entry</h3>
+<p>Under this process, a Layer 1 failure moves AARTIPHARM from the active watchlist to the archive sheet, watchlist.archive. That sheet keeps the failed metrics as the audit trail, and the name leaves the active round-robin queue. Re-entry means the full Layer 1 is run again on new ledger data and new filings. Reaching a single price level does not restore a name to the active list on its own.</p>
+<h3>Why the verdict is REJECTED and not deferred</h3>
+<p>QUALIFIED_DEFERRED is used when a candidate passes the hard gates but ranks below its bucket's capacity. AARTIPHARM fails hard gates, so it cannot be qualified. The triggers below show the levels and outcomes that would bring it back for evaluation, which keeps the record honest without treating a failed gate as a near miss.</p>
+<h3>Triggers</h3>
+<p>The triggers are the levels and outcomes that would change the verdict. Each is written as an explicit price or reporting event, so the next review can test it without new judgment.</p>
+<div class="triggers">
+<h4>Re-entry, review and reference levels</h4>
+<ul>
+<li><b>Return trigger:</b> a reported consolidated ROCE of at least 15 percent, the rule's floor. The current reading is 10.7 percent. The second-quarter filing due 28 October 2026 is the first chance to show movement.</li>
+<li><b>Re-run trigger:</b> a close above 895.89, the 20-day average, on two consecutive sessions with volume at least 1.0 times its 20-day average. This only starts a re-run. The momentum gate would then need the price within 1.2 ATR of its base, or a confirmed breakout over the pivot, or a holding retest.</li>
+<li><b>Target trigger:</b> a verified base measured move, or a verified forward earnings figure multiplied by a verified three-year median multiple, that places the core target at or above 1,431.79 rupees, or the tactical target at or above 1,357.06 rupees, measured against the stop in use at that time.</li>
+<li><b>Trend review level:</b> a close below the 50-day average of 848.15 on two consecutive sessions. The Stage 2 posture would then fail.</li>
+<li><b>Structure reference level:</b> a close below the 200-day average of 740.72. The trend would be broken, and the verdict would remain REJECTED.</li>
+<li><b>Core stop reference:</b> a close below 693.87. A position held under the core rule would be at its stop level there.</li>
+<li><b>Tactical stop reference:</b> a close below 741.58, if the stock were assessed under the tactical rule.</li>
+<li><b>Pledge reference:</b> a rise in the promoter pledge above 11.08 percent of promoter holdings in a later shareholding filing.</li>
+<li><b>Legal reference:</b> the Gujarat High Court outcome on the 59.5 crore stamp-duty order. An adverse outcome would be a cash outflow of the same size against FY26 profit of 175 crore.</li>
+<li><b>Cash floor:</b> the three-year cash-to-profit ratio falling below 0.70.</li>
+<li><b>Debt reference:</b> borrowings rising to about 1,487 crore, the point where debt-to-equity reaches 0.70 on the March 2026 net worth of 2,124 crore.</li>
+</ul>
+</div>
+<p>Most of these are reference levels rather than current breaches. The debt and cash floors pass today. The return floor is the one that fails, and it is the test the next filing must clear before anything else is re-run. The next company report, after the second-quarter FY27 results, should restate these figures before any decision.</p>
+</section>
+<section class="chapter" id="ch10">
+<h2>10 Evidence ledger and gaps</h2>
+<p>The evidence ledger lists the sources used, what each supplied, and the date each figure describes. Every figure in the report traces to one of these sources or to the market ledger, and every gap is named. A reader who wants to check a number should go to the source beside it and to its as-of date.</p>
+<div class="howto">
+<h4>How to read this table</h4>
+<p>Each row is a source. The first column names it, the second gives what the report took from it, and the third gives the date the figure describes. Several sources are secondary summaries of company filings. The company's own filings on the BSE and NSE were attempted, but their PDF files returned binary content in this run, so none of their figures is taken from them directly. The report relies on the Screener filings tables, the reporting summaries and the company's own pages, and says so here rather than hiding it.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<thead><tr><th>Source</th><th>Used for</th><th>As of</th></tr></thead>
+<tbody>
+<tr><td><a href="#cite_note-1">Screener consolidated</a></td><td>Header ROCE, ROE, P/E, book value and market cap; sales, profit, cash flow, borrowings, reserves, interest and free cash flow FY22 to FY26; quarterly sales and profit; promoter holding; announcements.</td><td class="num">31 Mar 2026; 30 Jun 2026; 12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-2">Screener standalone</a></td><td>Standalone header ROCE and P/E; standalone cash-to-profit cross-check.</td><td class="num">31 Mar 2026; 12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-7">CRISIL rating rationale</a></td><td>AA-/Stable reaffirmed; gearing (borrowings to equity) 0.38 times; total outside liabilities to adjusted net worth 0.68 times; interest cover 8.25 times; bank facilities of 1,000 crore.</td><td class="num">9 Oct 2026; 31 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-8">Company rating upgrade notice</a></td><td>Rating history: upgrade to AA-/Stable in July 2025.</td><td class="num">17 Jul 2025</td></tr>
+<tr><td><a href="#cite_note-9">Tulsian AI results note</a></td><td>Standalone FY26 revenue and PAT, and the 32 percent fall in profit; dividend.</td><td class="num">31 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-10">StockFin results note</a></td><td>Standalone FY26 revenue, PAT and EBITDA; xanthine share of FY26 revenue; management <dfn>guidance</dfn>, which means the company's own forecast, of 15 to 18 percent revenue growth.</td><td class="num">1 Jun 2026 (FY26 figures as of 31 Mar 2026)</td></tr>
+<tr><td><a href="#cite_note-11">InvestyWise AGM notice</a></td><td>Reviewed and rejected: a unit error prints FY26 consolidated revenue ten times the Screener figure.</td><td class="num">31 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-12">InvestorStack call summary</a></td><td>June 2026 quarter revenue, EBITDA and margin; xanthine capacity; segment mix; <dfn>gross margin</dfn> means sales less production cost, as a share of sales.</td><td class="num">30 Jun 2026</td></tr>
+<tr><td><a href="#cite_note-13">AlphaStreet call transcript</a></td><td>Management commentary on xanthine share, pricing, guidance for CDMO growth and the EBITDA range.</td><td class="num">10 Aug 2026</td></tr>
+<tr><td><a href="#cite_note-14">StockAnalysis statistics</a></td><td>Next confirmed earnings date, 28 October 2026.</td><td class="num">12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-15">InvestyWise board outcome</a></td><td>Q1 FY27 standalone and consolidated profit; 149 crore capex plan and its financing; leadership changes.</td><td class="num">7 Aug 2026</td></tr>
+<tr><td><a href="#cite_note-16">Multibagg Q1 FY27 note</a></td><td>Revenue growth of 39 to 42 percent; higher profit base.</td><td class="num">30 Jun 2026</td></tr>
+<tr><td><a href="#cite_note-17">Multibagg capex note</a></td><td>The 149 crore intermediate-block addition over about one year.</td><td class="num">7 Aug 2026</td></tr>
+<tr><td><a href="#cite_note-18">Multibagg stamp-duty note</a></td><td>The 59.5 crore order: 25 crore duty and penalties; link to the 2022 demerger.</td><td class="num">29 Aug 2026</td></tr>
+<tr><td><a href="#cite_note-19">InvestyWise pledge note</a></td><td>Promoter pledge of about 3.08 percent of share capital for a 75 crore financing.</td><td class="num">25 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-20">Trendlyne shareholding</a></td><td>Total promoter pledge of 11.08 percent of promoter holdings; promoter holding change.</td><td class="num">30 Jun 2026</td></tr>
+<tr><td><a href="#cite_note-21">InvestyWise USFDA note</a></td><td>One Form 483 observation (the FDA's written notice of inspection findings) at Unit-IV Tarapur, described as procedural.</td><td class="num">27 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-22">Edusehat USFDA note</a></td><td>Corroborates the inspection conclusion date and the single observation.</td><td class="num">27 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-23">IndiaProjectsNews</a></td><td>Environmental clearance sought for expansion of API capacity at Tarapur.</td><td class="num">29 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-24">MarketScreener valuation</a></td><td>Single FY27 <dfn>EPS</dfn>, which means earnings per share, estimate of 17.80 rupees; FY26 EPS and fiscal-year multiples.</td><td class="num">Estimates as printed</td></tr>
+<tr><td><a href="#cite_note-25">Sharpely forecast</a></td><td>One analyst in total; FY27 EPS median, high and low all 17.80.</td><td class="num">12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-26">Trendlyne research reports</a></td><td>Average target of 740 from one analyst, 15.75 percent below the last price.</td><td class="num">12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-27">Trendlyne financials</a></td><td>Standalone ROCE of 10.78 percent and total debt to equity of 0.3 at March 2026, as cross-checks.</td><td class="num">31 Mar 2026</td></tr>
+<tr><td><a href="#cite_note-28">Company quarterly results page</a></td><td>Index of the June 2026 quarter filing; no figure taken from it.</td><td class="num">30 Jun 2026</td></tr>
+<tr><td><a href="#cite_note-29">Company annual reports page</a></td><td>Index of annual reports, FY22 to FY26; the FY26 annual report was not readable as text.</td><td class="num">Not stated</td></tr>
+<tr><td><a href="#cite_note-30">StockSena filings index</a></td><td>Count of filings and transcripts available; no figure taken from it.</td><td class="num">Sep 2026</td></tr>
+<tr><td><a href="#cite_note-31">Company Q1 FY27 page</a></td><td>Index of the Q1 FY27 presentation and earnings call; no figure taken from it.</td><td class="num">Aug 2026</td></tr>
+<tr><td><a href="#cite_note-3">Screener Divi's Laboratories</a>; <a href="#cite_note-4">Screener Laurus Labs</a>; <a href="#cite_note-5">Screener Neuland Laboratories</a>; <a href="#cite_note-6">Screener Aarti Industries</a></td><td>Peer header ratios; parent reference.</td><td class="num">12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-34">Company website</a></td><td>Business description: API, intermediates and xanthine derivatives.</td><td class="num">12 Oct 2026</td></tr>
+<tr><td><a href="#cite_note-35">QuarterMark transcript</a></td><td>Completion of expansion projects in Q1 FY27.</td><td class="num">10 Aug 2026</td></tr>
+<tr><td><a href="#cite_note-36">QuarterMark earnings summary</a></td><td>Standalone revenue from operations of 534.59 crore, up 42.4 percent.</td><td class="num">30 Jun 2026</td></tr>
+<tr><td><a href="#cite_note-37">InvestyWise board outcome, 7 Aug 2026</a></td><td>Board approval of the Q1 FY27 results.</td><td class="num">7 Aug 2026</td></tr>
+<tr><td><a href="#cite_note-38">StockAnalysis ratios</a></td><td>Debt to equity of 0.36 at 31 March 2026.</td><td class="num">31 Mar 2026</td></tr>
+<tr><td>Market ledger, session 12 Oct 2026</td><td>Close, moving averages, ATR, swing low, 52-week range, relative strength, volume ratios, and the momentum gate result.</td><td class="num">12 Oct 2026</td></tr>
+</tbody>
+</table></div>
+<p class="takeaway">Most of the evidence is secondary: aggregators, news summaries and call summaries. That is adequate for the gates in this report, because the figures agree across sources where they can be checked. The two clearest checks are the consolidated and standalone Screener pages, which agree on the cash ratio, and the CRISIL rationale, which agrees on debt. The unit error in one AGM summary is rejected and disclosed. The standard for a purchase decision would be higher, and the report does not claim otherwise.</p>
+<h3>Gaps and exceptions</h3>
+<p>Several items could not be verified to the standard the rules set. The first is the company's own primary filings. The results PDF on the NSE, the investor presentation, the earnings-call transcript PDF, the USFDA intimation and the Tarapur capacity notice returned binary content in this run. No figure was taken from them directly. The figures from the call are taken from the transcript text published by AlphaStreet and the call summary by InvestorStack.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></p>
+<p>The second is the three-year median price-to-earnings ratio. No fetched source publishes it, and no multi-year P/E history could be verified from a cached page. The only multiple used is the current header figure of 37.0 times.<sup><a href="#cite_note-1">[1]</a></sup> Without it, the forward-earnings route to a target cannot be completed, and the asymmetry gate fails as unverified. The third is forward earnings. The only FY27 figure is a single estimate of 17.80 rupees per share, and the one analyst target of 740 is below the close.<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-26">[26]</a></sup> A search for a multi-analyst consensus returned no further figures.</p>
+<p>The fourth is the ROCE definition. The consolidated header gives 10.7 percent, the standalone header 11.4 percent and the ratio row 11 percent. The report shows the figures and does not choose between them, because all three fail the floor.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> The fifth is the outcome of the Gujarat High Court writ on the stamp-duty order, which is not known. The sixth is the <dfn>EIR</dfn>, which means establishment inspection report, classification of the March 2026 USFDA inspection. That classification was not found in fetched text. The seventh is the promoter pledge figure, which is a single source and is shown with its date. Two other items were reviewed and not used. A third-party AGM summary printed FY26 consolidated revenue of 18,194 crore, which is a unit error.<sup><a href="#cite_note-11">[11]</a></sup> Two price-target pages from a further site appeared in search results only, were not fetched, and quote prices that do not match the ledger close, so they are excluded.</p>
+<p>The stale-date exceptions are as follows. The latest annual figures are as of 31 March 2026, which is 195 days before 12 October 2026. The latest quarter is as of 30 June 2026, which is 104 days before. The CRISIL rationale is as of 9 October 2026, and the call summaries are as of August 2026. Each is stated at its true as-of date, and none has been moved forward. The June 2026 growth guidance comes from a press summary dated 1 June 2026, and it is shown at that date. The next company report should refresh the annual figures after the second-quarter results.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p><b>Status:</b> PUBLISHED_WITH_GATE_EXCEPTIONS. The citation check passes with disclosed as-of exceptions. The items below are the gate exceptions and checker findings, in plain English, with the cure for each.</p>
+<ol>
+<li><b>Stale as-of dates.</b> The checker lines read "EXCEPTION AS-OF ... older than report date (max 60)". The latest annual figures are for the year to 31 March 2026 (195 days old at the report date) and the latest quarter is the quarter to 30 June 2026 (104 days old). No newer filing had been published at the session date, so these are the latest available figures. The effect on confidence is modest, because the verdict rests on the figures as published. The cure is the Q2 FY27 filing for the quarter to 30 September 2026; the dossier should be re-underwritten once it is out.</li>
+<li><b>No dossier-type validator.</b> The full validator supports only the market-intelligence and portfolio-audit report types, so it cannot run on a company dossier. The figures were traced in code, the citations were checked against the fetched pages, and the readability was checked separately. The cure is to add a dossier type to the validator.</li>
+<li><b>Readability checker expects the legacy layout.</b> The checker still looks for four anchors this layout does not use: an estimate block, chapter 7, a primer id and a notes id. Glossary first-use and chapter-length items were fixed in the text. The four anchor items are disclosed here and are not a content gap. The cure is to update the checker for the Research Desk layout.</li>
+<li><b>Some web pages were stored under shared keys.</b> The page cache keys ignore query strings, so Smart Investing pages that differ only by a company parameter were stored under one key for several companies. Figures from those pages were not used and are shown as N/A. The cure is to include the query string in the cache key.</li>
+<li><b>Cure date for the stale figures.</b> The company's Q2 FY27 results are scheduled for 28 October 2026, according to the research record. The dossier should be re-underwritten after that filing.</li>
+<li><b>Company filings returned as binary.</b> The results, investor presentation, transcript and USFDA intimation PDFs could not be read as text. Their figures come from secondary summaries and are labelled as such in the body, so confidence in the exact figures is lower.</li>
+<li><b>No verified target.</b> No three-year median P/E and no measured move could be verified, so the asymmetry gate fails as the rules require. The Gujarat High Court outcome on the stamp-duty order and the USFDA EIR classification were not found in the fetched text.</li>
+<li><b>Reviewer gate.</b> Round 1 returned REVISE and the findings were applied. Round 2 returned APPROVE from the single reviewer. The red-team check held the verdict in round 1.</li>
+</ol>
+</section>
+<ol class="reflist">
+<li id="cite_note-1"><a href="https://www.screener.in/company/AARTIPHARM/consolidated/">Screener, AARTIPHARM consolidated company page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-2"><a href="https://www.screener.in/company/AARTIPHARM/">Screener, AARTIPHARM standalone company page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-3"><a href="https://www.screener.in/company/DIVISLAB/consolidated/">Screener, Divi's Laboratories consolidated page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-4"><a href="https://www.screener.in/company/LAURUSLABS/consolidated/">Screener, Laurus Labs consolidated page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-5"><a href="https://www.screener.in/company/NEULANDLAB/consolidated/">Screener, Neuland Laboratories consolidated page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-6"><a href="https://www.screener.in/company/AARTIIND/consolidated/">Screener, Aarti Industries consolidated page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-7"><a href="https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/AartiPharmalabsLtd_October%2009_%202026_RR_405037.html">CRISIL Ratings, rating rationale for Aarti Pharmalabs Ltd</a>, 9 Oct 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-8"><a href="https://www.aartipharmalabs.com/apl-credit-rating-upgraded-to-crisil-aa-stable">Aarti Pharmalabs, credit rating upgrade notice</a>, 17 Jul 2025, fetched 12 Oct 2026.</li>
+<li id="cite_note-9"><a href="https://news.tulsian.ai/news/company-results/aarti-pharmalabs-fy26-net-profit-falls-32-to-176-crore.html">Tulsian AI, Aarti Pharmalabs FY26 net profit note</a>, 29 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-10"><a href="https://www.stockfin.ai/news/AARTIPHARM/2026-06-01/financial-results">StockFin, Aarti Pharmalabs FY2026 financial results note</a>, 1 Jun 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-11"><a href="https://www.investywise.com/aarti-pharmalabs-limited-notice-of-seventh-annual-general-meeting/">InvestyWise, Aarti Pharmalabs FY26 AGM notice note</a>, 29 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-12"><a href="https://www.investorstack.in/earnings-calls/aartipharm">InvestorStack, Aarti Pharmalabs Q1 FY27 earnings call summary</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-13"><a href="https://alphastreet.com/india/aarti-pharmalabs-ltd-aartipharm-q1-2027-earnings-call-transcript/">AlphaStreet, Aarti Pharmalabs Q1 FY27 earnings call transcript</a>, 10 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-14"><a href="https://stockanalysis.com/quote/nse/AARTIPHARM/statistics/">StockAnalysis, Aarti Pharmalabs statistics and earnings date</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-15"><a href="https://www.investywise.com/aarti-pharmalabs-board-approves-financial-results-and-key-leadership-changes/">InvestyWise, Aarti Pharmalabs Q1 FY27 board outcome note</a>, 7 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-16"><a href="https://www.multibagg.ai/market-pulse/articles/aarti-pharmalabs-q1fy27-earnings-cmsx7jtss4fbl0zo0r958hgit">Multibagg, Aarti Pharmalabs Q1 FY27 earnings note</a>, 17 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-17"><a href="https://www.multibagg.ai/market-pulse/articles/aarti-pharmalabs-q1fy27-capex-update-cmsjopc6l4a7i0zn6dzy1rblf">Multibagg, Aarti Pharmalabs Q1 FY27 capex note</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-18"><a href="https://www.multibagg.ai/market-pulse/articles/aarti-pharmalabs-stamp-duty-order-cmuo4tbrz000d34mkc11tn698">Multibagg, Aarti Pharmalabs stamp-duty order note</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-19"><a href="https://www.investywise.com/aarti-pharmalabs-pledge-of-promoter-shares/">InvestyWise, Aarti Pharmalabs promoter share pledge note</a>, 25 Mar 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-20"><a href="https://trendlyne.com/equity/share-holding/1329646/AARTIPHARM/latest/aarti-pharmalabs-ltd/">Trendlyne, Aarti Pharmalabs latest shareholding pattern</a>, 30 Jun 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-21"><a href="https://www.investywise.com/aarti-pharmalabs-us-fda-inspection-concluded-at-tarapur-unit-iv/">InvestyWise, Aarti Pharmalabs US-FDA inspection note</a>, 27 Mar 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-22"><a href="https://edusehat.com/en/aarti-pharmalabs-gets-1-observation-in-usfda-inspection-at-tarapur-unit">Edusehat, Aarti Pharmalabs USFDA observation note</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-23"><a href="https://indiaprojectsnews.com/tag/aarti-pharmalabs-limited/">India Projects News, Aarti Pharmalabs Tarapur API expansion note</a>, 29 Mar 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-24"><a href="https://www.marketscreener.com/quote/stock/AARTI-PHARMALABS-LIMITED-149848943/valuation/">MarketScreener, Aarti Pharmalabs valuation and estimates</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-25"><a href="https://sharpely.in/stocks/aartipharm/forecast">Sharpely, Aarti Pharmalabs analyst ratings and estimates</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-26"><a href="https://trendlyne.com/research-reports/stock/1329646/AARTIPHARM/aarti-pharmalabs-ltd/">Trendlyne, Aarti Pharmalabs research reports and price target</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-27"><a href="https://trendlyne.com/fundamentals/financials/1329646/AARTIPHARM/aarti-pharmalabs-ltd/">Trendlyne, Aarti Pharmalabs financials and ratios</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-28"><a href="https://www.aartipharmalabs.com/quarterly-results">Aarti Pharmalabs, quarterly results page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-29"><a href="https://www.aartipharmalabs.com/annual-reports">Aarti Pharmalabs, annual reports page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-30"><a href="https://www.stockssena.com/research/filings/AARTIPHARM">StockSena, Aarti Pharmalabs filings index</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-31"><a href="https://www.aartipharmalabs.com/q1-fy-27">Aarti Pharmalabs, Q1 FY27 page</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-32">Market ledger for the session of 12 October 2026, instrument AARTIPHARM (run file cache/facts_IN_2026-10-12.json). Internal computation from the price history; not a web page.</li>
+<li id="cite_note-33">Repository rule file .agents/config/scoring.json (updated 2026-10-08): asymmetry floors, stop placement, support-distance ladder and momentum gate. Internal rule file; not a web page.</li>
+<li id="cite_note-34"><a href="https://www.aartipharmalabs.com/">Aarti Pharmalabs, company website</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-35"><a href="https://quartermark.in/companies/AARTIPHARM/earnings-calls/Q1-FY27/transcript">QuarterMark, Aarti Pharmalabs Q1 FY27 earnings call transcript</a>, 10 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-36"><a href="https://quartermark.in/companies/AARTIPHARM/earnings-calls/Q1-FY27/earnings">QuarterMark, Aarti Pharmalabs Q1 FY27 earnings call summary</a>, fetched 12 Oct 2026.</li>
+<li id="cite_note-37"><a href="https://www.investywise.com/aarti-pharmalabs-board-meeting-outcomes-and-key-appointments/">InvestyWise, Aarti Pharmalabs board meeting outcomes</a>, 7 Aug 2026, fetched 12 Oct 2026.</li>
+<li id="cite_note-38"><a href="https://stockanalysis.com/quote/nse/AARTIPHARM/financials/ratios/">StockAnalysis, Aarti Pharmalabs financial ratios</a>, fetched 12 Oct 2026.</li>
+</ol>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>

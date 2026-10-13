@@ -31,7 +31,7 @@ class ReportDesignTests(unittest.TestCase):
     def test_named_reports_preserve_all_research_on_reassembly(self):
         root = Path(__file__).resolve().parents[1] / 'docs'
         paths = [root / 'reports/US_Market_Intelligence.html', root / 'reports/IN_Watchlist_to_Shortlist.html']
-        paths += [root / 'blogs' / (symbol + '_dossier.html') for symbol in ('STLNETWORK', 'STLTECH', 'TBOTEK', 'TDPOWERSYS')]
+        paths += [root / 'blogs' / 'IN' / (symbol + '_dossier.html') for symbol in ('STLNETWORK', 'STLTECH', 'TBOTEK', 'TDPOWERSYS')]
         for path in paths:
             with self.subTest(report=path.name):
                 original = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
@@ -121,6 +121,28 @@ class PortalTests(unittest.TestCase):
             catalog = portal.build_catalog()
         self.assertEqual(len(catalog['entries']), 2)
         self.assertNotIn('reports/dated_report.html', [entry['url'] for entry in catalog['entries']])
+
+    def test_market_subfolder_dossiers(self):
+        (self.docs / "blogs" / "IN").mkdir(parents=True)
+        (self.docs / "blogs" / "US").mkdir(parents=True)
+        # US-sounding content in the IN folder stays IN: the folder wins.
+        ind = self.docs / "blogs" / "IN" / "TESTIN_dossier.html"
+        ind.write_text('<h1>Test India (NASDAQ: TESTIN)</h1><table class="infobox"><tr><th>Exchange</th><td>NSE</td></tr></table>')
+        usd = self.docs / "blogs" / "US" / "TESTUS_dossier.html"
+        usd.write_text('<h1>Test US (NASDAQ: TESTUS)</h1>')
+        # Redirect stub at the legacy flat path stays out of the catalog.
+        stub = self.docs / "blogs" / "TESTIN_dossier.html"
+        stub.write_text('<meta name="report-redirect" content="IN/TESTIN_dossier.html"><meta http-equiv="refresh" content="0; url=IN/TESTIN_dossier.html">')
+        with patch.object(portal, "DOCS", self.docs), patch.object(portal, "CATALOG", self.docs / "portal-data.json"), patch.object(portal, "UPDATES", self.docs / "portal-updates.json"), patch.object(portal, "git_dates", return_value={}):
+            catalog = portal.build_catalog()
+        urls = {entry["url"]: entry for entry in catalog["entries"]}
+        self.assertIn("blogs/IN/TESTIN_dossier.html", urls)
+        self.assertIn("blogs/US/TESTUS_dossier.html", urls)
+        self.assertNotIn("blogs/TESTIN_dossier.html", urls)
+        self.assertEqual(urls["blogs/IN/TESTIN_dossier.html"]["market"], "IN")
+        self.assertEqual(urls["blogs/US/TESTUS_dossier.html"]["market"], "US")
+        self.assertEqual(published_url("TESTIN_dossier.html", self.report, self.docs),
+                         "https://git.corp.adobe.com/pages/mereddy/ai-automations/blogs/IN/TESTIN_dossier.html")
 
 
 class EmailDigestTests(unittest.TestCase):

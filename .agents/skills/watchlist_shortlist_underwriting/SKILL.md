@@ -36,13 +36,13 @@ Act as an **Institutional Equity Portfolio Director**, **Chief US Underwriting O
 <!-- MARKET IN -->
 Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting Engine**.
 
-Your objective is to process the broad watchlist in continuous, stateful batches of **exactly 4 securities per run**. To eliminate context compression, diluted focus, and truncated research, the orchestrator MUST launch an **independent, dedicated research subagent for each individual company** (1 agent per company). Each dedicated agent conducts an exhaustive 360-degree fundamental and technical deep-dive on its assigned candidate, persists a standalone in-depth **Wikipedia-style HTML research dossier / company blog** (60–80 KB, with 25–40+ formal citations) in **`docs/blogs/<SYMBOL>_dossier.html`**, and returns a structured underwriting payload. The orchestrator dynamically maintains an elite, capacity-constrained **`data/shortlist/IN.json`** (strictly capped at **Max 10 Core Alpha** and **Max 10 Tactical Momentum** autowritten slots) using institutional displacement economics and **company-specific KPI underwriting**. The active watchlist in **`data/watchlist/IN.json`** is strictly capped at **Max 150 companies** across a two-sheet architecture (`watchlist.active` and `watchlist.archive`).
+Your objective is to process the broad watchlist in continuous, stateful batches of **exactly 4 securities per run**. To eliminate context compression, diluted focus, and truncated research, the orchestrator MUST launch an **independent, dedicated research subagent for each individual company** (1 agent per company). Each dedicated agent conducts an exhaustive 360-degree fundamental and technical deep-dive on its assigned candidate, persists a standalone in-depth **Wikipedia-style HTML research dossier / company blog** (60–80 KB, with 25–40+ formal citations) in **`docs/blogs/IN/<SYMBOL>_dossier.html`**, and returns a structured underwriting payload. The orchestrator dynamically maintains an elite, capacity-constrained **`data/shortlist/IN.json`** (strictly capped at **Max 10 Core Alpha** and **Max 10 Tactical Momentum** autowritten slots) using institutional displacement economics and **company-specific KPI underwriting**. The active watchlist in **`data/watchlist/IN.json`** is strictly capped at **Max 150 companies** across a two-sheet architecture (`watchlist.active` and `watchlist.archive`).
 <!-- /MARKET -->
 <!-- MARKET US -->
 Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting Engine**:
 1. Incrementally process exactly **4 pending securities per run** from `watchlist.active` in **`data/watchlist/US.json`**.
 2. For each security, dispatch a dedicated, independent research subagent (1 subagent per company) to conduct an exhaustive 360-degree fundamental and technical underwriting analysis.
-3. Generate and persist a comprehensive, standalone Wikipedia-style HTML research dossier saved directly to **`docs/blogs/<SYMBOL>_dossier.html`** (matching the exact design system, typography, infobox, wikitables, and 25–40+ primary SEC EDGAR citations defined in `us_company_report`).
+3. Generate and persist a comprehensive, standalone Wikipedia-style HTML research dossier saved directly to **`docs/blogs/US/<SYMBOL>_dossier.html`** (matching the exact design system, typography, infobox, wikitables, and 25–40+ primary SEC EDGAR citations defined in `us_company_report`).
 4. Apply institutional **Displacement Economics** to update **`data/shortlist/US.json`** (strictly adhering to the 10 Core Alpha + 10 Tactical Momentum + 5 Leveraged Satellite autowritten capacity caps).
 5. Update **`data/watchlist/US.json`** in-place (updating watchlist.active status and routing rejected candidates to watchlist.archive with full audit trails).
 6. Automatically rebuild the master blog portal by executing `.venv/bin/python scripts/build_dossier_portal.py`.
@@ -70,11 +70,11 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
    - **Layer 1: Binary Hard Gating Floors (Pass/Fail)**
    - **Layer 2: 3–5 Company/Sector-Specific KPIs (Traffic-Light Scorecard)**
    - **Layer 3: Support-Aware Entry Posture (Execution Timing Gate)**
-5. **WIKIPEDIA-STYLE HTML COMPANY BLOG DOSSIERS (NO DOCX):** This schedule writes standalone institutional research dossiers as self-contained **Wikipedia-style HTML files** directly to **`docs/blogs/<SYMBOL>_dossier.html`** (incorporating floating infoboxes, wikitables, table of contents, in-text superscript citations, and 3-layer underwriting scorecards). Word `.docx` output is deprecated.
+5. **WIKIPEDIA-STYLE HTML COMPANY BLOG DOSSIERS (NO DOCX):** This schedule writes standalone institutional research dossiers as self-contained **Wikipedia-style HTML files** directly to **`docs/blogs/IN/<SYMBOL>_dossier.html`** (incorporating floating infoboxes, wikitables, table of contents, in-text superscript citations, and 3-layer underwriting scorecards). Word `.docx` output is deprecated.
 6. **MANDATORY INDEPENDENT SUBAGENT PER COMPANY (DEDICATED SINGLE-COMPANY EXECUTION):**
    - **Strict Prohibition Against Single-Agent Sequential Batches:** The orchestrator MUST NEVER analyze multiple companies sequentially within a single agent context. Running all 4 batch companies through a single agent dilutes attention, exhausts context tokens, and forces the model to compress rich narrative into shallow scorecard summaries and truncate citations.
    - **Dedicated Subagent Spawning Mandate:** For every 4-security batch selected from the queue, the orchestrator MUST spawn/launch an **independent, dedicated research subagent for each individual company** (1 agent per company).
-   - **Subagent Mission & Deliverable:** Each dedicated company subagent focuses exclusively on its assigned ticker. It conducts the full 360-degree fundamental, operational, supply chain, and technical deep dive using live web searches, calculates exact mathematical levels, and generates the complete, unabbreviated **Wikipedia-style HTML blog dossier (`docs/blogs/<SYMBOL>_dossier.html`)** (targeting ~60–80 KB) with **25 to 40+ granular primary citations**.
+   - **Subagent Mission & Deliverable:** Each dedicated company subagent focuses exclusively on its assigned ticker. It conducts the full 360-degree fundamental, operational, supply chain, and technical deep dive using live web searches, calculates exact mathematical levels, and generates the complete, unabbreviated **Wikipedia-style HTML blog dossier (`docs/blogs/IN/<SYMBOL>_dossier.html`)** (targeting ~60–80 KB) with **25 to 40+ granular primary citations**.
    - **Payload Return to Orchestrator:** Once its company dossier is finalized, the dedicated subagent returns its standardized 3-layer underwriting payload (metrics, gate statuses, KPI health, entry posture, action verdict, and peer candidates) to the orchestrator.
    - **Orchestrator Role:** The orchestrator orchestrates the subagents, reconciles displacement economics across the 10+10 capacity books in `data/shortlist/IN.json`, updates `data/watchlist/IN.json`, and handles Google Drive synchronization strictly in-place.
 7. **MANDATORY HIGH CITATION DENSITY (25 TO 40+ FORMAL REGULATORY & MARKET CITATIONS):**
@@ -90,15 +90,15 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
      8. Interactive Technical & Fundamental Platforms (Screener.in consolidated financials, TradingView charts).
    - In-text superscript tags (`<sup>[X]</sup>`) must be densely distributed across EVERY section—corporate history, operating segments, unit economics, supply chain inputs, forensic cash flows, peer multiples, and technical levels. Zero uncited figures or floating assertions.
 8. **MANDATORY INDEPENDENT REVIEW (ONE REVIEWER, CODE-BUILT PACKET):**
-   - Before writing or persisting the final research dossiers `docs/blogs/<SYMBOL>_dossier.html`, `data/watchlist/IN.json`, and `data/shortlist/IN.json`, run the shared reviewer gate (`../_shared/REVIEWER_OPERATIONS.md`, `../../workflows/_COMMON.md`): `scripts/review_packet.py` traces the dossier's numbers in code, then one reviewer agent judges the untraced items, the verdict against its evidence and the tone, and the red team challenges the verdict.
+   - Before writing or persisting the final research dossiers `docs/blogs/IN/<SYMBOL>_dossier.html`, `data/watchlist/IN.json`, and `data/shortlist/IN.json`, run the shared reviewer gate (`../_shared/REVIEWER_OPERATIONS.md`, `../../workflows/_COMMON.md`): `scripts/review_packet.py` traces the dossier's numbers in code, then one reviewer agent judges the untraced items, the verdict against its evidence and the tone, and the red team challenges the verdict.
    - The live verification (CMP, 52-week ranges, 20/50/200 DMAs, 14-day RSI, volume multiples, ROCE, ROE, Debt/Equity, CFO/PAT, P/E, Sales & PAT CAGR, OPM %) belongs to the research stage: gather it with the `duck-duck-go` MCP (Screener.in, TradingView, BSE/NSE disclosures) and record it in the research record with `source_url`, `as_of` and `retrieved_at`. The reviewer checks claims against that record and the ledger and does not search the web.
    - Any hallucination, discrepancy, or unverified estimation must be immediately corrected or marked with explicit verifiable `N/A`.
    - Across all iterative reviews for a batch or dossier, obey the shared strict two-round maximum (round 2 is a delta review of the changed sections); after round 2, apply remaining fixes best-effort, rerun the validator, and record unresolved items without another review.
 9. **MANDATORY ZERO-OMISSION RESEARCH DOSSIER COMPLETENESS:**
-   - In every generated/updated `docs/blogs/<SYMBOL>_dossier.html`, **NONE of the standard dossier template sections may be omitted or abbreviated**. The 3-layer gating, company-specific KPI scorecard, peer benchmarking wikitable, fatal flaws red-team, and clear verdict must be completely rendered with no placeholders.
+   - In every generated/updated `docs/blogs/IN/<SYMBOL>_dossier.html`, **NONE of the standard dossier template sections may be omitted or abbreviated**. The 3-layer gating, company-specific KPI scorecard, peer benchmarking wikitable, fatal flaws red-team, and clear verdict must be completely rendered with no placeholders.
 10. **MANDATORY DOSSIER-FIRST GATE — NO STOCK MAY BE MARKED `COMPLETED` WITHOUT A VERIFIED DOSSIER FILE:**
-   - **Hard Prerequisite:** A stock's `Status` in `data/watchlist/IN.json` MUST NEVER be set to `COMPLETED` unless the corresponding dossier file `docs/blogs/<SYMBOL>_dossier.html` has been physically written to disk and verified to exist.
-   - **Verification Protocol:** Before the orchestrator writes any `status = COMPLETED` record back to the watchlist JSON, it MUST execute a filesystem check confirming `os.path.exists('docs/blogs/<SYMBOL>_dossier.html')` returns `True` AND the file size is ≥ 30 KB (a non-trivial, complete dossier).
+   - **Hard Prerequisite:** A stock's `Status` in `data/watchlist/IN.json` MUST NEVER be set to `COMPLETED` unless the corresponding dossier file `docs/blogs/IN/<SYMBOL>_dossier.html` has been physically written to disk and verified to exist.
+   - **Verification Protocol:** Before the orchestrator writes any `status = COMPLETED` record back to the watchlist JSON, it MUST execute a filesystem check confirming `os.path.exists('docs/blogs/IN/<SYMBOL>_dossier.html')` returns `True` AND the file size is ≥ 30 KB (a non-trivial, complete dossier).
    - **If the dossier file is missing or undersized:** The orchestrator MUST:
      1. Leave `Status = PENDING` for that stock — do NOT mark it `COMPLETED`.
      2. Log a clear error in the run summary: `DOSSIER MISSING: <SYMBOL>_dossier.html not found or < 30 KB. Status remains PENDING.`
@@ -107,14 +107,14 @@ Execute the **Autonomous Incremental Watchlist-to-Shortlist Deep Underwriting En
    - **Symbol vs. Filename Mismatch Rule:** If a company's legal name resolves to a different symbol than the watchlist ticker (e.g., watchlist has `MEDANTA` but dossier saved as `GLOBALHEALTH_dossier.html`), the orchestrator MUST update the watchlist `Symbol` column to match the dossier filename, OR rename the dossier to match the watchlist ticker. Both must be in sync before `COMPLETED` status is written.
 11. **MANDATORY GOOGLE DRIVE SYNCHRONIZATION & STRICT IN-PLACE OVERWRITE (NEVER GENERATE DUPLICATES OR NEW FILES):**
    - **Always Fetch Fresh from Google Drive:** At the start of every run/task, ALL JSON record files (`data/watchlist/IN.json`, `data/accounts/IN/zerodha.transactions.jsonl`, `data/shortlist/IN.json`) MUST always be actively fetched/synced fresh from sheets/ and shortlist/. **NEVER rely on local cached or stale files**, as the user may update holdings, watchlists, notes, or candidate entries directly on Google Drive between runs.
-   - **MANDATORY IN-PLACE FILE OVERWRITE (ZERO DUPLICATION TOLERANCE):** Every update, state change, and newly generated dossier in `data/watchlist/IN.json`, `data/shortlist/IN.json`, and `docs/blogs/<SYMBOL>_dossier.html` MUST be updated **strictly IN-PLACE**.
+   - **MANDATORY IN-PLACE FILE OVERWRITE (ZERO DUPLICATION TOLERANCE):** Every update, state change, and newly generated dossier in `data/watchlist/IN.json`, `data/shortlist/IN.json`, and `docs/blogs/IN/<SYMBOL>_dossier.html` MUST be updated **strictly IN-PLACE**.
      - **Google Drive API / Tool Semantics:** When running under Gemini Spark or Google Drive tools, **DO NOT call file creation endpoints (`files.create`) or upload as a new file**. You MUST search for the existing file by name in the target folder to retrieve its existing `fileId`, and call file update (`files.update`) with media replacement to overwrite the existing file object directly. If the tool platform lacks an update endpoint and generates a new copy, you MUST immediately trash/delete the older copy and ensure no duplicate display names exist.
      - **Local Filesystem Semantics:** When writing to paths (`docs/...`, `watchlist/...`, `shortlist/...`), directly overwrite the exact target file path in-place (`mode='wb'` in python).
      - **STRICTLY FORBIDDEN - NO BACKUP OR CHECKPOINT FILES IN CODE:** When generating Python scripts or modifying files, agents MUST NEVER write code that copies, renames, or creates backups (e.g. `shutil.copy(..., "..._old.xlsx")` or saving `*_Batch*.xlsx` or `*_Cycle*.xlsx` are STRICTLY FORBIDDEN). All transformations must be done in memory and saved directly to the single canonical file.
      - **STRICTLY FORBIDDEN - NO CYCLE SUFFIXES IN RESEARCH DOSSIERS:** Research dossier filenames must ALWAYS strictly be `<SYMBOL>_dossier.html` (e.g. `AFCOM_dossier.html`). NEVER name dossiers with cycle tags like `<SYMBOL>_Cycle1_dossier.html`. Cycle numbers belong inside the document metadata table, never in the filename.
      - **STRICTLY FORBIDDEN - NO COLLISION SUFFIXES:** Creating duplicate files or appending version counters, copy numbers, timestamps, or suffixes (e.g. `Zerodha_Shortlist (1).xlsx`, `<SYMBOL> (1)_dossier.html`, `_new.xlsx`) is strictly prohibited.
      - **COMPREHENSIVE PRE-SAVE & POST-SAVE DUPLICATE PURGE PROTOCOL:**
-       - Before AND immediately after saving any research dossier in `docs/blogs/`, scan the directory and delete all duplicate variants matching `<SYMBOL> (*)*`, `<SYMBOL>_Cycle*.*`, `<SYMBOL>_old*.*`, `<SYMBOL>_bak*.*`, `<SYMBOL>_copy*.*`, or `<SYMBOL>*.gdoc` so that ONLY the single canonical `<SYMBOL>_dossier.html` exists.
+       - Before AND immediately after saving any research dossier in `docs/blogs/IN/` (this run's market folder), scan that folder and delete all duplicate variants matching `<SYMBOL> (*)*`, `<SYMBOL>_Cycle*.*`, `<SYMBOL>_old*.*`, `<SYMBOL>_bak*.*`, `<SYMBOL>_copy*.*`, or `<SYMBOL>*.gdoc` so that ONLY the single canonical `<SYMBOL>_dossier.html` exists. (Redirect stubs at the old flat `docs/blogs/<SYMBOL>_dossier.html` paths are intentional and must be kept.)
        - For registries in `watchlist/` and `shortlist/`, scan for and remove any `* (*).json`, `*_old*.json`, `*_Batch*.xlsx`, or `*_Cycle*.xlsx`. If any duplicate file with newly updated rows is detected, consolidate the new rows into the canonical file and delete the duplicate immediately.
    - **Fail Closed on Sync Failure:** If fresh files cannot be fetched from Google Drive or changes cannot be pushed back to Google Drive, halt execution and report the exact sync blocker.
 
@@ -141,7 +141,7 @@ All file operations reference these canonical project workspace paths (`docs/`, 
 - **Broad Watchlist (Input Queue):** `data/watchlist/IN.json` (workspace custody)
 - **Active Portfolio Holdings (Exclusion & Audit Check):** `data/accounts/IN/zerodha.transactions.jsonl` (workspace custody)
 - **Curated Shortlist (Output Registry):** `data/shortlist/IN.json` (workspace custody)
-- **Company Blogs & Research Dossiers (Output):** `docs/blogs/<SYMBOL>_dossier.html` (GitHub Pages docs/blogs/ repository; updated in-place across round-robin cycles)
+- **Company Blogs & Research Dossiers (Output):** `docs/blogs/IN/<SYMBOL>_dossier.html` (GitHub Pages docs/blogs/ repository; updated in-place across round-robin cycles)
 <!-- /MARKET -->
 <!-- MARKET US -->
    - Permanent repository scripts (never delete): `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/market_facts.py`, `scripts/validate_report.py`.
@@ -200,7 +200,7 @@ Header columns:
 Symbol,Company Name,Strategy Bucket,Action Verdict,Gate Status,KPI Health,Entry Posture,Source Type,Macro Sector,Fine Subsector,Cap Tier,Market Cap (Cr),CMP,Entry Zone Low,Entry Zone High,Stop Loss,Target Base,Target Bull,Asymmetry Ratio,ROCE %,ROE %,Debt to Equity,CFO to PAT,3Y Sales CAGR %,3Y PAT CAGR %,OPM %,P/E,Weinstein Stage,RSI 14,RS Rating,Distance from Support ATR,1D Return %,1W Return %,2W Return %,Dist from 20DMA %,Momentum State,Primary Catalyst,Primary KPI Summary,Moat Description,Invalidation Condition,Research Dossier Path,Last Researched Date,As of Date
 ```
 
-*Note on `Research Dossier Path`:* This column records `blogs/<SYMBOL>_dossier.html` (or `docs/blogs/<SYMBOL>_dossier.html`).
+*Note on `Research Dossier Path`:* This column records `blogs/IN/<SYMBOL>_dossier.html` (or `docs/blogs/IN/<SYMBOL>_dossier.html`).
 
 #### 2. `data/watchlist/IN.json` Architecture & Canonical Schema (22 Columns):
 
@@ -348,7 +348,7 @@ Every candidate must be processed through the following 3 layers sequentially:
 │ 1. Fetch & Ingest `data/watchlist/IN.json` fresh from sheets/ and shortlist/│
 │ 2. Fetch & Ingest `data/shortlist/IN.json` fresh from sheets/ and shortlist/│
 │ 3. Fetch & Ingest `data/accounts/IN/zerodha.transactions.jsonl` fresh from sheets/ and shortlist/    │
-│ 4. Ensure `docs/blogs/` directory exists.                             │
+│ 4. Ensure `docs/blogs/IN/` directory exists.                          │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │
                                        ▼
@@ -388,7 +388,7 @@ Every candidate must be processed through the following 3 layers sequentially:
 │    and Layer 3 (Support-Aware Entry Posture).                               │
 │ 3. Peer Discovery & Benchmarking: Benchmarks 2–4 peers; identifies top      │
 │    candidates for watchlist.active seeding (Source Type = DEEP_RESEARCH_PEER│
-│ 4. Wikipedia HTML Dossier Generation (`docs/blogs/<SYMBOL>_dossier`): │
+│ 4. Wikipedia HTML Dossier Generation (`docs/blogs/IN/<SYMBOL>_dossier`): │
 │    - Google Fonts (Newsreader serif + Inter body + JetBrains Mono math)     │
 │    - Prominent top Executive Capital Allocation Decision Banner             │
 │    - Floated infobox, wikitables, TOC, non-robotic verbose investigative    │
@@ -419,7 +419,7 @@ Every candidate must be processed through the following 3 layers sequentially:
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ 1. MANDATORY DOSSIER GATE (before ANY JSON writes):                       │
 │    For each of the 4 stocks in this batch:                                  │
-│    a. Confirm `docs/blogs/<SYMBOL>_dossier.html` exists on disk.      │
+│    a. Confirm `docs/blogs/IN/<SYMBOL>_dossier.html` exists on disk.      │
 │    b. Confirm file size ≥ 30 KB.                                            │
 │    c. If MISSING or undersized → Status stays PENDING. Log error. Skip      │
 │       JSON update for that stock. Re-queue at top of next batch.             │
@@ -440,7 +440,7 @@ Every candidate must be processed through the following 3 layers sequentially:
    - Launch an independent research subagent for each of the 4 companies to eliminate context dilution.
 3. **Deep Underwriting & Wikipedia HTML Dossier Generation:**
    - Subagent executes two-step live web search, financial forensics, and support-level calculation.
-   - Subagent generates the self-contained HTML research dossier in `docs/blogs/<SYMBOL>_dossier.html` using the complete Wikipedia HTML design system, fonts, floated infobox, decision banner, wikitables, and 25–40+ SEC EDGAR citations from `us_company_report`.
+   - Subagent generates the self-contained HTML research dossier in `docs/blogs/US/<SYMBOL>_dossier.html` using the complete Wikipedia HTML design system, fonts, floated infobox, decision banner, wikitables, and 25–40+ SEC EDGAR citations from `us_company_report`.
 4. **Displacement Economics & Registry Updates:**
    - Reconcile the 10 Core + 10 Tactical + 5 Leveraged slots in `data/shortlist/US.json`.
    - Update `data/watchlist/US.json` marking evaluated rows `COMPLETED` and setting `Research Dossier Path`.
@@ -483,10 +483,10 @@ AUTONOMOUS UNDERWRITING RUN COMPLETE (Batch of 4)
   - Manual Protected Entries: [Z] slots preserved
 
 • Company Blogs Created/Updated (Wikipedia HTML Dossiers in docs/blogs/):
-  - docs/blogs/[SYMBOL1]_dossier.html
-  - docs/blogs/[SYMBOL2]_dossier.html
-  - docs/blogs/[SYMBOL3]_dossier.html
-  - docs/blogs/[SYMBOL4]_dossier.html
+  - docs/blogs/<MARKET>/[SYMBOL1]_dossier.html
+  - docs/blogs/<MARKET>/[SYMBOL2]_dossier.html
+  - docs/blogs/<MARKET>/[SYMBOL3]_dossier.html
+  - docs/blogs/<MARKET>/[SYMBOL4]_dossier.html
 
 • Watchlist Status: [N]/150 rows in watchlist.active | [M] in watchlist.archive | [P] pending in Cycle [X]
 • Google Drive Status: All JSON record files and company blogs synced in-place.
