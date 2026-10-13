@@ -15,6 +15,114 @@ BASE_URL = "https://git.corp.adobe.com/pages/mereddy/ai-automations/"
 CATALOG = DOCS / "portal-data.json"
 UPDATES = DOCS / "portal-updates.json"
 
+# Canonical dossier verdicts for the library filter. Raw verdict strings vary
+# across dossier generations (emoji prefixes, underscores vs spaces, and long
+# parenthetical gate explanations), so every raw value is mapped into one of
+# these buckets. Display style matches docs/blogs/dossiers.json.
+VERDICT_ORDER = ["IMMEDIATE BUY", "ACCUMULATE ON DIP", "KEEP COMPOUNDING",
+                 "TRIM / HARVEST", "REPLACE UNDERPERFORMER", "WAIT FOR SUPPORT",
+                 "WATCHLIST / HOLD", "AVOID / REJECTED"]
+MISSING = "Not specified"
+
+
+def normalize_verdict(raw):
+    """Map a raw verdict string to one canonical bucket (or MISSING)."""
+    if not raw or not str(raw).strip():
+        return MISSING
+    text = re.sub(r"[^\x00-\x7F]+", " ", str(raw).upper())
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text or text == MISSING.upper():
+        return MISSING
+    if "IMMEDIATE" in text and "BUY" in text:
+        return "IMMEDIATE BUY"
+    if "REJECT" in text or "AVOID" in text or "NO MOMENTUM" in text or "NO_MOMENTUM" in text \
+            or "HARD GATE" in text or "DO NOT ADD" in text or "BREAKDOWN" in text or "STAGE 4" in text:
+        return "AVOID / REJECTED"
+    if "REPLACE" in text:
+        return "REPLACE UNDERPERFORMER"
+    if "TRIM" in text or "HARVEST" in text:
+        return "TRIM / HARVEST"
+    if "KEEP" in text or "COMPOUND" in text or "CORE ALPHA" in text or "CORE_ALPHA" in text:
+        return "KEEP COMPOUNDING"
+    if "WAIT" in text or "SUPPORT" in text or "DEFERRED" in text:
+        return "WAIT FOR SUPPORT"
+    if "ACCUMULATE" in text or "ALL GATES PASSED" in text or "ALL_GATES_PASSED" in text:
+        return "ACCUMULATE ON DIP"
+    if "WATCH" in text or "HOLD" in text or "QUALIFIED" in text:
+        return "WATCHLIST / HOLD"
+    if "BUY" in text:
+        return "IMMEDIATE BUY"
+    return MISSING
+
+
+_record_cache = {}
+
+
+def record_lookup(symbol):
+    """Backfill (action_verdict, macro_sector) for a symbol from shortlist/watchlist records."""
+    if not symbol or symbol in _record_cache:
+        return _record_cache.get(symbol, (None, None))
+    verdict, sector = None, None
+    root = DOCS.parent / "data"
+    for name in ("shortlist/IN.json", "shortlist/US.json"):
+        path = root / name
+        if not path.exists():
+            continue
+        try:
+            sheets = json.loads(path.read_text(encoding="utf-8")).get("sheets", {})
+        except ValueError:
+            continue
+        for sheet, rows in sheets.items():
+            if "swap" in sheet.lower():
+                continue
+            for row in rows:
+                if row.get("symbol") == symbol:
+                    verdict = verdict or row.get("action_verdict")
+                    sector = sector or row.get("macro_sector")
+        if verdict and sector:
+            break
+    if not verdict:
+        for name in ("watchlist/IN.json", "watchlist/US.json"):
+            path = root / name
+            if not path.exists():
+                continue
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except ValueError:
+                continue
+            for row in data.get("active", []) + data.get("archive", []):
+                if row.get("symbol") == symbol and row.get("action_verdict"):
+                    verdict = row.get("action_verdict")
+                    break
+            if verdict:
+                break
+    _record_cache[symbol] = (verdict, sector)
+    return verdict, sector
+
+
+def extract_verdict(soup, info, metadata):
+    """Verdict across dossier generations: meta > key-figures > badge span > table > dek."""
+    if metadata.get("report-verdict"):
+        return metadata["report-verdict"]
+    figures = soup.select_one("dl.key-figures")
+    if figures:
+        for block in figures.select("div"):
+            term = block.select_one("dt")
+            value = block.select_one("dd")
+            if term and value and "verdict" in term.get_text(" ", strip=True).lower():
+                return value.get_text(" ", strip=True)
+    badge = soup.select_one("span.verdict, .verdict-badge, .decision-badge")
+    if badge and badge.get_text(" ", strip=True):
+        return badge.get_text(" ", strip=True)
+    table_verdict = next((value for key, value in info.items()
+                          if any(word in key for word in ("verdict", "decision", "recommendation"))), "")
+    if table_verdict:
+        return table_verdict
+    dek = soup.select_one("p.dek")
+    if dek and dek.get_text(" ", strip=True):
+        return dek.get_text(" ", strip=True)
+    return ""
+
 
 def published_url(href, source=None, docs=DOCS, base_url=BASE_URL, absolute=True):
     parts = urlsplit(href)
@@ -93,7 +201,7 @@ def read_entry(path, dates, updates):
         cells = row.find_all(["th", "td"], recursive=False)
         if len(cells) == 2:
             label = cells[0].get_text(" ", strip=True).lower()
-            if any(word in label for word in ("exchange", "ticker", "listing", "verdict", "recommendation", "sector", "decision", "market", "strategy")):
+            if any(word in label for word in ("exchange", "ticker", "listing", "verdict", "recommendation", "sector", "industry", "decision", "market", "strategy")):
                 info.setdefault(label, cells[1].get_text(" ", strip=True))
     relative = path.relative_to(DOCS).as_posix()
     completion = updates.get(relative, {})
@@ -112,9 +220,18 @@ def read_entry(path, dates, updates):
         registry = json.loads(registry_path.read_text(encoding="utf-8"))
         symbol_market = next((name for name in ("IN", "US") if path.stem.replace("_dossier", "") in registry.get(name, {}).get("symbols", {})), None)
     market = completion.get("market") or metadata.get("report-market") or folder_market or symbol_market or ("US" if re.search(r"\b(US|NASDAQ|NYSE|OTCQX)\b", evidence.replace("_", " ")) else "IN" if re.search(r"\b(Indian|India|NSE|BSE)\b", evidence.replace("_", " ")) else "Other")
-    verdict = next((value for key, value in info.items() if any(word in key for word in ("verdict", "decision", "recommendation"))), "")
-    badge = soup.select_one(".verdict-badge, .decision-badge")
-    verdict = verdict or (badge.get_text(" ", strip=True) if badge else "Not specified")
+    verdict = normalize_verdict(extract_verdict(soup, info, metadata))
+    symbol = path.stem.replace("_dossier", "") if kind == "dossier" else ""
+    sector = (metadata.get("report-sector")
+              or info.get("macro sector", info.get("sector", ""))
+              or next((value for key, value in info.items() if "industry" in key), ""))
+    if kind == "dossier" and symbol:
+        record_verdict, record_sector = record_lookup(symbol)
+        if verdict == MISSING and record_verdict:
+            verdict = normalize_verdict(record_verdict)
+        if not sector and record_sector:
+            sector = record_sector
+    sector = sector or MISSING
     description = soup.find("meta", attrs={"name": "description"})
     paragraph = soup.select_one(".executive-summary p, section#executive-summary p")
     if paragraph is None:
@@ -134,8 +251,8 @@ def read_entry(path, dates, updates):
             workflow = name
             break
     return {"id": relative, "url": relative, "title": title[:220], "kind": kind,
-            "symbol": path.stem.replace("_dossier", "") if kind == "dossier" else "", "market": market,
-            "sector": info.get("macro sector", info.get("sector", "Not specified")), "verdict": verdict[:150], "summary": summary[:360],
+            "symbol": symbol, "market": market,
+            "sector": sector, "verdict": verdict, "summary": summary[:360],
             "generatedAt": generated_at,
             "layoutUpdatedAt": metadata.get("layout-updated-at") or None,
             "researchAsOf": metadata.get("research-as-of") or None,

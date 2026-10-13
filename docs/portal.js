@@ -6,6 +6,9 @@ if (!state.read || typeof state.read !== "object" || Array.isArray(state.read)) 
 const escapeText = value => String(value ?? "").replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
 const version = entry => entry.updatedAt || entry.reportDate || "undated";
 const unread = entry => state.read[entry.id] !== version(entry);
+const MISSING = "Not specified";
+const VERDICT_ORDER = ["IMMEDIATE BUY", "ACCUMULATE ON DIP", "KEEP COMPOUNDING", "TRIM / HARVEST", "REPLACE UNDERPERFORMER", "WAIT FOR SUPPORT", "WATCHLIST / HOLD", "AVOID / REJECTED"];
+const display = value => (!value || value === MISSING ? "—" : value);
 const dateText = value => value && Number.isFinite(Date.parse(value)) ? new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)) : "Date unavailable";
 const safeUrl = value => typeof value === "string" && /^(blogs|reports)\/[A-Za-z0-9_./%& -]+\.html$/.test(value) && !value.includes("..") ? value.split("/").map(part => encodeURIComponent(decodeURIComponent(part))).join("/") : null;
 function link(entry, label = entry.title) { return `<a data-entry="${escapeText(entry.id)}" href="${escapeText(safeUrl(entry.url))}">${escapeText(label)}</a>`; }
@@ -33,7 +36,7 @@ function render() {
   });
   const metrics = [[entries.length, "Published pages"], [entries.filter(unread).length, "Unread updates"], [entries.filter(entry => Date.parse(entry.updatedAt) >= Date.now() - 86400000).length, "Updated in 24 hours"], [latest.size, "Workflow reports"]];
   byId("metrics").innerHTML = metrics.map(([count, label]) => `<div><strong>${count}</strong><span>${label}</span></div>`).join("");
-  byId("recent-list").innerHTML = visible.map(entry => `<article class="activity-row ${unread(entry) ? "is-unread" : ""}"><div class="activity-date">${stamp(entry)}<span>${escapeText(entry.market)} / ${entry.kind === "dossier" ? "Dossier" : "Report"}</span></div><div class="activity-main"><div class="activity-title">${link(entry)}${unread(entry) ? '<span class="unread-dot" title="Unread update" aria-label="Unread update"></span>' : ""}</div><p class="workflow">${escapeText(entry.workflow)}${entry.completed ? " / Completed" : ""}</p>${entry.summary ? `<p class="summary">${escapeText(entry.summary)}</p>` : ""}${entry.highlights?.length ? `<ul class="highlights">${entry.highlights.map(highlight => `<li>${escapeText(highlight)}</li>`).join("")}</ul>` : ""}</div><span class="verdict">${escapeText(entry.verdict)}</span></article>`).join("") || '<p class="empty">No updates match these filters.</p>';
+  byId("recent-list").innerHTML = visible.map(entry => `<article class="activity-row ${unread(entry) ? "is-unread" : ""}"><div class="activity-date">${stamp(entry)}<span>${escapeText(entry.market)} / ${entry.kind === "dossier" ? "Dossier" : "Report"}</span></div><div class="activity-main"><div class="activity-title">${link(entry)}${unread(entry) ? '<span class="unread-dot" title="Unread update" aria-label="Unread update"></span>' : ""}</div><p class="workflow">${escapeText(entry.workflow)}${entry.completed ? " / Completed" : ""}</p>${entry.summary ? `<p class="summary">${escapeText(entry.summary)}</p>` : ""}${entry.highlights?.length ? `<ul class="highlights">${entry.highlights.map(highlight => `<li>${escapeText(highlight)}</li>`).join("")}</ul>` : ""}</div><span class="verdict">${escapeText(display(entry.verdict))}</span></article>`).join("") || '<p class="empty">No updates match these filters.</p>';
   byId("more").hidden = recent.length <= state.limit;
   byId("mark-read").disabled = !visible.some(unread);
   byId("report-count").textContent = `${latest.size} latest reports`;
@@ -43,7 +46,7 @@ function render() {
     const key = byId("sort").value === "symbol" ? "symbol" : "title";
     dossiers = dossiers.toSorted ? dossiers.toSorted((first, second) => first[key].localeCompare(second[key])) : [...dossiers].sort((first, second) => first[key].localeCompare(second[key]));
   }
-  const dossierRow = entry => `<tr><td><span class="symbol">${escapeText(entry.symbol)}</span>${link(entry)}</td><td>${escapeText(entry.market)}</td><td>${escapeText(entry.sector)}</td><td><span class="verdict">${escapeText(entry.verdict)}</span></td><td>${stamp(entry)}</td></tr>`;
+  const dossierRow = entry => `<tr><td><span class="symbol">${escapeText(entry.symbol)}</span>${link(entry)}</td><td>${escapeText(entry.market)}</td><td>${escapeText(display(entry.sector))}</td><td><span class="verdict">${escapeText(display(entry.verdict))}</span></td><td>${stamp(entry)}</td></tr>`;
   const emptyRows = '<tr><td colspan="5" class="empty">No dossiers match these filters.</td></tr>';
   const renderLibrary = (bodyId, countId, sectionId, market, list) => {
     byId(countId).textContent = `${list.length} dossiers`;
@@ -67,7 +70,9 @@ async function load() {
     for (const [id, key, label] of [["sector", "sector", "All sectors"], ["verdict", "verdict", "All verdicts"]]) {
       const control = byId(id);
       const previous = control.value;
-      control.innerHTML = `<option value="all">${label}</option>` + [...new Set(state.entries.filter(entry => entry.kind === "dossier").map(entry => entry[key]))].sort().map(value => `<option value="${escapeText(value)}">${escapeText(value)}</option>`).join("");
+      const values = [...new Set(state.entries.filter(entry => entry.kind === "dossier").map(entry => entry[key]))].filter(value => value && value !== MISSING);
+      values.sort((first, second) => id === "verdict" ? (VERDICT_ORDER.indexOf(first) === -1 ? VERDICT_ORDER.length : VERDICT_ORDER.indexOf(first)) - (VERDICT_ORDER.indexOf(second) === -1 ? VERDICT_ORDER.length : VERDICT_ORDER.indexOf(second)) || first.localeCompare(second) : first.localeCompare(second));
+      control.innerHTML = `<option value="all">${label}</option>` + values.map(value => `<option value="${escapeText(value)}">${escapeText(value)}</option>`).join("");
       if ([...control.options].some(option => option.value === previous)) control.value = previous;
     }
     byId("catalog-time").textContent = `Catalog refreshed ${dateText(catalog.generatedAt)}`;
