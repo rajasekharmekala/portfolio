@@ -1,1537 +1,776 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transformers and Rectifiers (India) Limited (TARIL) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-09">
+<meta name="generated-at" content="2026-10-13T02:54:10.261029-07:00">
+<title>TARIL: Transformers and Rectifiers (India) Limited</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
-  :root {
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --text-muted: #6b7280;
-    --bg-main: #ffffff;
-    --bg-surface: #f9fafb;
-    --bg-highlight: #f3f4f6;
-    --border-color: #d1d5db;
-    --border-subtle: #e5e7eb;
-    --brand-blue: #1d4ed8;
-    --brand-blue-light: #eff6ff;
-    --brand-green: #15803d;
-    --brand-green-light: #f0fdf4;
-    --brand-amber: #b45309;
-    --brand-amber-light: #fffbeb;
-    --brand-red: #b91c1c;
-    --brand-red-light: #fef2f2;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.72;
-    font-size: 15px;
-    letter-spacing: -0.011em;
-    margin: 0;
-    padding: 32px 40px;
-    max-width: 1240px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  h1.firstHeading {
-    font-family: var(--font-serif);
-    font-size: 2.35em;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0 0 0.2em 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-    color: #111827;
-  }
-
-  .siteSub {
-    font-size: 0.88em;
-    color: var(--text-muted);
-    margin-bottom: 1.2em;
-    letter-spacing: 0.02em;
-  }
-
-  /* EXECUTIVE CAPITAL DECISION BANNER */
-  .decision-banner {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-    border: 1px solid #fecaca;
-    border-left: 6px solid var(--brand-red);
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin: 1.2em 0 1.8em 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  }
-
-  .decision-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid #fecaca;
-    padding-bottom: 10px;
-  }
-
-  .decision-title {
-    font-family: var(--font-serif);
-    font-size: 1.3em;
-    font-weight: 700;
-    color: #991b1b;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .decision-badge {
-    background-color: var(--brand-red);
-    color: #ffffff;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.82em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-
-  .decision-card {
-    background: #ffffff;
-    border: 1px solid #fecaca;
-    border-radius: 6px;
-    padding: 12px 14px;
-  }
-
-  .decision-card-label {
-    font-size: 0.76em;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-  }
-
-  .decision-card-value {
-    font-family: var(--font-mono);
-    font-size: 1.05em;
-    font-weight: 700;
-    color: #111827;
-  }
-
-  .decision-card-sub {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-
-  /* LAYOUT CLEARFIX */
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-  /* WIKIPEDIA FLOATED INFOBOX */
-  table.infobox {
-    float: right;
-    clear: right;
-    width: 340px;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-surface);
-    margin: 0.4em 0 1.6em 1.8em;
-    padding: 5px;
-    font-size: 0.88em;
-    border-collapse: collapse;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-
-  table.infobox caption {
-    font-family: var(--font-serif);
-    font-size: 1.35em;
-    font-weight: 700;
-    padding: 10px;
-    background-color: var(--bg-highlight);
-    border: 1px solid var(--border-color);
-    border-bottom: none;
-    color: #111827;
-  }
-
-  table.infobox th.infobox-header {
-    background-color: #e5e7eb;
-    text-align: center;
-    font-weight: 700;
-    padding: 7px 10px;
-    color: #1f2937;
-    font-size: 0.95em;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    letter-spacing: 0.02em;
-  }
-
-  table.infobox th {
-    width: 44%;
-    text-align: left;
-    vertical-align: top;
-    padding: 6px 10px;
-    color: #374151;
-    border-bottom: 1px solid var(--border-subtle);
-    font-weight: 600;
-  }
-
-  table.infobox td {
-    padding: 6px 10px;
-    vertical-align: top;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-
-  table.infobox td.infobox-image {
-    text-align: center;
-    padding: 12px 10px;
-    background-color: #ffffff;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  /* TABLE OF CONTENTS */
-  div.toc {
-    background-color: #fcfcfd;
-    border: 1px solid var(--border-color);
-    padding: 14px 22px;
-    display: table;
-    margin: 1.2em 0 1.8em 0;
-    font-size: 90%;
-    min-width: 300px;
-    border-radius: 4px;
-  }
-
-  div.toc h2 {
-    font-family: var(--font-sans);
-    font-size: 1.05em;
-    font-weight: 700;
-    margin: 0 0 10px 0;
-    text-align: center;
-    border-bottom: none;
-    padding: 0;
-    color: #111827;
-  }
-
-  div.toc ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  div.toc ul li {
-    margin-bottom: 5px;
-    line-height: 1.45;
-  }
-
-  div.toc .tocnumber {
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    margin-right: 6px;
-    font-size: 0.9em;
-  }
-
-  div.toc a {
-    color: var(--brand-blue);
-    text-decoration: none;
-  }
-
-  div.toc a:hover {
-    text-decoration: underline;
-  }
-
-  /* CONTENT TYPOGRAPHY & SECTIONS */
-  h2 {
-    font-family: var(--font-serif);
-    font-size: 1.68em;
-    font-weight: 600;
-    margin-top: 2.2em;
-    margin-bottom: 0.6em;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border-color);
-    color: #111827;
-  }
-
-  h3 {
-    font-family: var(--font-sans);
-    font-size: 1.2em;
-    font-weight: 600;
-    margin-top: 1.6em;
-    margin-bottom: 0.5em;
-    color: #1f2937;
-  }
-
-  p {
-    margin: 0.9em 0;
-    text-align: justify;
-    text-justify: inter-word;
-  }
-
-  /* WIKITABLES */
-  table.wikitable {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid var(--border-color);
-    background-color: #ffffff;
-    font-size: 0.89em;
-    margin: 1.4em 0;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-  }
-
-  table.wikitable caption {
-    font-family: var(--font-serif);
-    font-size: 1.12em;
-    font-weight: 600;
-    text-align: left;
-    padding: 8px 4px;
-    color: #374151;
-  }
-
-  table.wikitable th {
-    background-color: var(--bg-highlight);
-    border: 1px solid var(--border-color);
-    padding: 8px 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  table.wikitable td {
-    border: 1px solid var(--border-color);
-    padding: 7px 12px;
-    vertical-align: middle;
-  }
-
-  table.wikitable tr:nth-child(even) td {
-    background-color: #fafbfc;
-  }
-
-  table.wikitable tr:hover td {
-    background-color: #f0f7ff;
-  }
-
-  .mono {
-    font-family: var(--font-mono);
-  }
-
-  .text-right {
-    text-align: right;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .tag-pass {
-    color: var(--brand-green);
-    font-weight: 700;
-    background-color: var(--brand-green-light);
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-
-  .tag-watch {
-    color: var(--brand-amber);
-    font-weight: 700;
-    background-color: var(--brand-amber-light);
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-
-  .tag-fail {
-    color: var(--brand-red);
-    font-weight: 700;
-    background-color: var(--brand-red-light);
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-
-  /* CALLOUT BOXES */
-  .callout-box {
-    background-color: #f8fafc;
-    border-left: 5px solid var(--brand-blue);
-    padding: 14px 18px;
-    margin: 1.4em 0;
-    font-size: 0.94em;
-    border-radius: 0 6px 6px 0;
-  }
-
-  .forensic-box {
-    background-color: #fffdfa;
-    border-left: 5px solid #ea580c;
-    padding: 14px 18px;
-    margin: 1.4em 0;
-    font-size: 0.94em;
-    border-radius: 0 6px 6px 0;
-  }
-
-  .fatal-flaw-box {
-    background-color: #fffafa;
-    border-left: 5px solid var(--brand-red);
-    padding: 14px 18px;
-    margin: 1.4em 0;
-    font-size: 0.94em;
-    border-radius: 0 6px 6px 0;
-  }
-
-  /* REFERENCES LIST */
-  ol.reflist {
-    column-count: 2;
-    column-gap: 28px;
-    font-size: 0.83em;
-    color: var(--text-secondary);
-    padding-left: 20px;
-    margin-top: 1em;
-  }
-
-  ol.reflist li {
-    margin-bottom: 8px;
-    break-inside: avoid;
-    line-height: 1.45;
-  }
-
-  ol.reflist a {
-    color: var(--brand-blue);
-    text-decoration: none;
-    word-break: break-all;
-  }
-
-  ol.reflist a:hover {
-    text-decoration: underline;
-  }
-
-  sup {
-    font-size: 0.75em;
-    line-height: 0;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.4em;
-    padding: 0 1px;
-  }
-
-  sup a {
-    color: var(--brand-blue);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  sup a:hover {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 900px) {
-    body {
-      padding: 16px 18px;
-    }
-    table.infobox {
-      float: none;
-      width: 100%;
-      margin: 1em 0;
-    }
-    ol.reflist {
-      column-count: 1;
-    }
-  }
-</style>
-
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 class="firstHeading">Transformers and Rectifiers (India) Limited (NSE: TARIL)</h1>
-<div class="siteSub">From Wikipedia, the institutional equity encyclopedia &bull; Underwriting Dossier &bull; Strategy Bucket: TACTICAL_MOMENTUM &bull; Portfolio Scope: Zerodha</div>
-
-<!-- EXECUTIVE CAPITAL ALLOCATION DECISION BANNER -->
-<div class="decision-banner">
-  <div class="decision-header">
-    <div class="decision-title">
-      <span>Institutional Underwriting Verdict: Systematic Portfolio Reallocation</span>
-    </div>
-    <div class="decision-badge">🔴 REPLACE UNDERPERFORMER</div>
-  </div>
-  <div class="decision-grid">
-    <div class="decision-card">
-      <div class="decision-card-label">Recommended Capital Action</div>
-      <div class="decision-card-value" style="color: #b91c1c;">HARVEST &amp; REALLOCATE</div>
-      <div class="decision-card-sub">Liquidate 400 shares at CMP ₹280.40 (Harvest ₹1,12,160.00)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Technical Posture &amp; Stage</div>
-      <div class="decision-card-value">STAGE 3/4 CORRECTION</div>
-      <div class="decision-card-sub">Trading below 50-DMA (₹296.80) &amp; 200-DMA (₹312.40); RSI 38.2</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Core Forensic Breaches</div>
-      <div class="decision-card-value" style="color: #b91c1c;">CFO/PAT 0.25x &bull; NWC 170D</div>
-      <div class="decision-card-sub">FY26 CFO: -₹105.4 Cr; severe working capital drain (-₹515 Cr)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Base Target &amp; Asymmetry</div>
-      <div class="decision-card-value">₹335.00 (+19.5%) | 1.54:1</div>
-      <div class="decision-card-sub">Invalidation Stop: ₹245.00 (-12.6%); Asymmetry fails &ge; 3.5:1 hurdle</div>
-    </div>
-  </div>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>TARIL: Transformers and Rectifiers (India) Limited</h1><p class="report-generated">Generated Date: <time datetime="2026-10-13T02:54:10.261029-07:00">13 Oct 2026, 02:54 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-09</p></header>
+<p class="lede-line">Company research dossier, holding audit and underwriting gates. Figures are as of the verified NSE session of 9 October 2026. Generated 13 October 2026. Symbol <b>TARIL</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATARIL" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/TARIL/" style="color:var(--link);">Screener</a></span> on NSE; BSE code 532928 <sup><a href="#cite_note-1">[1]</a></sup>.</p>
+<dl class="key-figures">
+<div><dt>Review status</dt><dd>PUBLISHED_WITH_GATE_EXCEPTIONS; BEST_EFFORT_AFTER_REVIEW_LIMIT (reviewer round 2 REVISE, findings fixed; red team APPROVE)</dd></div><div><dt>Verdict (current holding)</dt><dd><span class="verdict verdict-exit">REPLACE_UNDERPERFORMER</span></dd></div>
+<div><dt>Layer 1 gate</dt><dd>FAIL (cash conversion, technical, target ratio)</dd></div>
+<div><dt>Close, 9 Oct 2026</dt><dd>₹290.65</dd></div>
+<div><dt>Stop (computed)</dt><dd>₹260.94</dd></div>
+<div><dt>Position P&amp;L</dt><dd>−₹6,646 (−5.41%)</dd></div>
+<div><dt>Target ratio</dt><dd>N/A (no verified target)</dd></div>
+<div><dt>KPIs passing (informational)</dt><dd>2 of 5</dd></div>
+<div><dt>Entry posture (informational)</dt><dd>NEAR_SUPPORT, 0.85 daily moves</dd></div>
+</dl>
+<section class="chapter" id="primer">
+<h2>Start here</h2>
+<p>This dossier asks whether the holding should keep compounding, be added to, be trimmed or be replaced. The answer is replacement, and the reasons are set out in the gates below. The company makes large transformers for the power grid, so its sales follow transmission spending and its order book matters most. Each test is explained where it first matters, and where data is missing the dossier says so. Read the decision section first, then the gates.</p>
+</section>
+<section class="chapter" id="decision">
+<h2>The decision in one page</h2>
+<p>The verdict for TARIL as a current holding is <span class="verdict verdict-exit">REPLACE_UNDERPERFORMER</span>. The house underwriting rule for this verdict is that a holding is replaced when it has broken structural support, meaning a <dfn>Stage 4</dfn> (a falling trend, which means the price sits below falling averages) price structure with the price below falling 50-day and 200-day averages, or when it fails the hard gates in a way that impairs the investment thesis. TARIL meets both conditions on 9 October 2026. The price closed at ₹290.65, below its 50-day average of ₹291.57 and its 200-day average of ₹297.95, and both averages are falling. The cash-conversion gate fails on either accounting basis: three-year operating cash flow is 0.15 times profit on the consolidated statements and negative on the standalone statements <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup>.</p>
+<p>The verdict does not mean the company is in trouble as a business. Revenue grew, the order book reached a record, and the return on capital is 23.3 percent, well above the 15 percent floor <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup>. The problem is that the company has absorbed large amounts of cash into inventory and receivables, so reported profit is not turning into cash. A business can be a good one and still be a poor holding at a given price, and the gate exists to separate those two questions.</p>
+<p>The swap decision is yours to make, and it does not require a sale today. The stop is ₹260.94, computed below from the ledger. The price has not closed below it, so the stop has not triggered. The portfolio rule makes this holding the first candidate for a capital swap once a challenger passes the same gates. Until a challenger qualifies, the stop is the only mechanical exit, and it should be placed as a standing instruction at the broker so that the decision does not depend on a daily check.</p>
+<p><b>Verdict rule</b></p>
+<p>TARIL stays REPLACE_UNDERPERFORMER while any Layer 1 gate fails or two or more Layer 2 measures fail, and both are true today. It moves to ACCUMULATE_ON_DIP only when all five Layer 1 gates pass, the price is inside the support ladder and capital headroom exists. It moves to KEEP_COMPOUNDING only when all five gates pass, Layer 2 shows at least four passes of five, and the price holds above a rising 50-day average. It moves to TRIM_PROFIT_BOOKING only when the gates pass and the price is extended beyond the support ladder or reaches the bull target. A close below ₹260.94 triggers the stop, which exits the full position under the REPLACE_UNDERPERFORMER rule.</p>
+<p class="trigger">Trigger: a close above ₹297.95 for two sessions does not change the verdict by itself. The verdict moves only when the cash gate passes on the reported three-year figure and Layer 2 reaches four passes of five. A close below ₹260.94 is the exit.</p>
+</section>
+<section class="chapter" id="business">
+<h2>What the company does and why the order book matters</h2>
+<p>Transformers and Rectifiers (India) manufactures power, furnace and rectifier transformers, shunt reactors and related equipment, and sells them on a business-to-business basis to power generation, transmission and distribution utilities and to industrial customers <sup><a href="#cite_note-1">[1]</a></sup>. A transformer is a long-lived piece of heavy equipment that a utility orders for a specific substation or line, so revenue is recognised over the months it takes to build, not on the day an order arrives. That is why the unexecuted order book, the value of signed work not yet delivered, is the best guide to the next two years of sales.</p>
+<p>At 30 June 2026 the unexecuted order book stood at ₹6,630 crore, 26 percent higher than a year earlier, and order inflows in the June quarter reached ₹2,114 crore, up 218 percent <sup><a href="#cite_note-3">[3]</a></sup>. Management reported an enquiry pipeline of about ₹23,000 crore <sup><a href="#cite_note-3">[3]</a></sup>. Against trailing consolidated revenue of ₹2,552 crore, the order book covers about 2.6 times a year of sales, which means the company has signed work for roughly two and a half years at the current pace <sup><a href="#cite_note-1">[1]</a></sup>. That is a strong position, and it is the reason the business case is not weak.</p>
+<p>The order flow after the quarter shows the same pattern. On 2 October 2026 the company announced a Gujarat utility order for 80 MVAR and 125 MVAR shunt reactors and 500 MVA auto transformers, to be delivered in 24 to 30 months <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-14">[14]</a></sup>. The same day it announced a domestic order from the Damodar Valley Corporation for 500 MVA and 200 MVA auto transformers, with delivery in 15 to 28 months <sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-1">[1]</a></sup>. An earlier award from the Nuclear Power Corporation's Kaiga units, placed through a contractor, is worth ₹166.74 crore <sup><a href="#cite_note-16">[16]</a></sup>, and its delivery is set at 35 months <sup><a href="#cite_note-15">[15]</a></sup>.</p>
+<p>Capacity is the second half of the business story. The FY26 annual report, as summarised by a financial news service, puts installed capacity at nearly 75,000 MVA <sup><a href="#cite_note-19">[19]</a></sup>. Output in FY26 was 33,000 MVA, up from 29,118 MVA in FY25 <sup><a href="#cite_note-1">[1]</a></sup>. Output divided by installed capacity gives 44 percent utilisation, and management has publicly targeted 85 to 90 percent <sup><a href="#cite_note-20">[20]</a></sup>. The gap between those numbers is the main operating question for the next year, and it is taken up in the Layer 2 section.</p>
+<div class="howto">
+<p><b>How to read the business evidence.</b> The order book is a promise from customers, and it converts into revenue as factories build the equipment. A large book is good news only if the factory can build it at the planned pace and the company can finance the stock of parts and finished units while it does. The next sections test both.</p>
 </div>
-
-<div class="clearfix">
-
-<!-- WIKIPEDIA FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>Transformers and Rectifiers (India) Ltd</caption>
-  <tr>
-    <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.35em; font-weight: 700; color: #0b3d68; font-family: var(--font-mono);">TARIL</div>
-      <div style="font-size: 0.85em; color: #555; margin-top: 2px;">Power Transmission &amp; Grid Equipment</div>
-    </td>
-  </tr>
-  <tr><th colspan="2" class="infobox-header">Corporate Identity</th></tr>
-  <tr><th>Company Type</th><td>Public (Listed on NSE &amp; BSE)</td></tr>
-  <tr><th>Traded As</th><td>NSE: TARIL &bull; BSE: 532928</td></tr>
-  <tr><th>ISIN</th><td><span class="mono">INE763I01026</span><sup><a href="#cite_note-8">[8]</a></sup></td></tr>
-  <tr><th>Industry Sector</th><td>Capital Goods &bull; Electrical Equipment</td></tr>
-  <tr><th>Sub-Sector</th><td>Power &amp; Industrial Transformers</td></tr>
-  <tr><th>Founded</th><td>1981 (Inc. 11 July 1994)<sup><a href="#cite_note-9">[9]</a></sup></td></tr>
-  <tr><th>Headquarters</th><td>Moraiya, Sanand, Ahmedabad, Gujarat, India<sup><a href="#cite_note-7">[7]</a></sup></td></tr>
-  <tr><th>Key Executives</th><td>Jitendra Mamtora (Chairman &amp; Founder)<br>Satyen Mamtora (Managing Director &amp; CEO)<br>Chintan Trivedi (Chief Financial Officer)<sup><a href="#cite_note-3">[3]</a></sup></td></tr>
-  <tr><th>Manufacturing Base</th><td>Moraiya (40,000 MVA), Changodar (35,000 MVA), Odhav (2,000 MVA) &bull; 77,000+ MVA Total<sup><a href="#cite_note-14">[14]</a></sup></td></tr>
-  <tr><th>Credit Rating</th><td><strong>IND A+ / Stable</strong> (India Ratings)<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Audited Financial Summary (TTM / FY26)</th></tr>
-  <tr><th>Market Capitalization</th><td>₹8,334 Crore (CMP ₹280.40)<sup><a href="#cite_note-7">[7]</a></sup></td></tr>
-  <tr><th>Revenue (FY26 Consol)</th><td>₹2,508.80 Crore (+24.0% YoY)<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
-  <tr><th>Operating Margin (OPM)</th><td>15.10% (FY26) &bull; 15.62% (Q1 FY27)<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
-  <tr><th>Net Profit (PAT TTM)</th><td>₹112.50 Crore (FY26 Standalone ₹77 Cr Q4)<sup><a href="#cite_note-5">[5]</a></sup></td></tr>
-  <tr><th>ROCE / ROE</th><td>22.10% / 18.20%<sup><a href="#cite_note-7">[7]</a></sup></td></tr>
-  <tr><th>Debt-to-Equity</th><td>0.32x (Total Debt: ~₹410 Cr)<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
-  <tr><th>3-Year CFO / PAT</th><td><strong>0.246x</strong> (Cumulative CFO: ₹84 Cr / PAT: ₹342 Cr)<sup><a href="#cite_note-13">[13]</a></sup></td></tr>
-  <tr><th>Unexecuted Order Book</th><td><strong>₹6,630 Crore</strong> (as of 30 June 2026)<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
-  <tr><th>Strategy Bucket</th><td>TACTICAL_MOMENTUM</td></tr>
-  <tr><th>Action Verdict</th><td><strong style="color: #b91c1c;">🔴 REPLACE_UNDERPERFORMER</strong></td></tr>
-  <tr><th>Current Price (CMP)</th><td><span class="mono">₹280.40</span></td></tr>
-  <tr><th>52-Week Range</th><td><span class="mono">₹224.05 – ₹552.00</span><sup><a href="#cite_note-7">[7]</a></sup></td></tr>
-  <tr><th>Execution Pivot Zone</th><td><span class="mono">₹280.00 – ₹285.00</span></td></tr>
-  <tr><th>Hard Invalidation Floor</th><td><span class="mono">₹245.00</span> (-12.62%)</td></tr>
-  <tr><th>12–18M Base Target</th><td><span class="mono">₹335.00</span> (+19.47%) [FY27E EPS ₹10.8 × 31x]<sup><a href="#cite_note-30">[30]</a></sup></td></tr>
-  <tr><th>Blue-Sky Bull Target</th><td><span class="mono">₹420.00</span> (+49.79%) [75k MVA Integration]<sup><a href="#cite_note-14">[14]</a></sup></td></tr>
-  <tr><th>Reward/Risk Asymmetry</th><td><strong>1.54:1</strong> (Fails &ge; 3.5:1 Gating Hurdle)</td></tr>
-  <tr><th>Weinstein Stage</th><td>Stage 3/4 Distribution &amp; Markdown</td></tr>
-  <tr><th>14-Day RSI / RS Rating</th><td>RSI: 38.2 &bull; RS: 36/100 (Lagging)<sup><a href="#cite_note-22">[22]</a></sup></td></tr>
-  <tr><th>Moving Averages</th><td>Below 20-DMA (₹286.5), 50-DMA (₹296.8), 200-DMA (₹312.4)<sup><a href="#cite_note-23">[23]</a></sup></td></tr>
-  <tr><th>Entry Posture</th><td>EXTENDED_BELOW_RESISTANCE (2.43x ATR)</td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#lead"><span class="tocnumber">0</span> Executive Summary &amp; Investment Thesis</a></li>
-    <li><a href="#holding-audit"><span class="tocnumber">1B</span> Active Holding Forensic Audit &amp; Performance Card</a></li>
-    <li><a href="#history"><span class="tocnumber">1</span> History &amp; Corporate Milestones</a></li>
-    <li><a href="#operations"><span class="tocnumber">2</span> Operations &amp; Manufacturing Footprint</a></li>
-    <li><a href="#sector-dynamics"><span class="tocnumber">3</span> Sector Operating Dynamics &amp; Transmission Capex Supercycle</a></li>
-    <li><a href="#financial-audit"><span class="tocnumber">4</span> Financial Performance &amp; Forensic Working Capital Audit</a></li>
-    <li><a href="#underwriting-framework"><span class="tocnumber">5</span> The 3-Layer Underwriting Framework &amp; Scorecard</a></li>
-    <li><a href="#peer-matrix"><span class="tocnumber">6</span> Industry Landscape &amp; Peer Benchmarking</a></li>
-    <li><a href="#technical-trade"><span class="tocnumber">7</span> Technical Structure, Support Anchors &amp; Trade Architecture</a></li>
-    <li><a href="#fatal-flaws"><span class="tocnumber">8</span> Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</a></li>
-    <li><a href="#capital-allocation"><span class="tocnumber">9</span> Portfolio Capital Reallocation &amp; Replacement Strategy</a></li>
-    <li><a href="#thesis-trackers"><span class="tocnumber">10</span> Key Quarterly Monitoring Indicators (Thesis Guardrails)</a></li>
-    <li><a href="#references"><span class="tocnumber">11</span> References, Regulatory Filings &amp; Statutory Disclosures</a></li>
-  </ul>
+<h3>Growth in the book and in the factory</h3>
+<p>The book grew faster than revenue in the June quarter, which means the business is winning more work than it is delivering. Management attributes the slower quarterly revenue growth to lower capacity utilisation at the Changodar plant, where an expansion is under way. The June-quarter release, issued in July, gave August 2026 as the expected completion month <sup><a href="#cite_note-3">[3]</a></sup>; this dossier has no source confirming it. The expansion plan includes an investment of about ₹150 crore at Changodar, backward-integration projects worth ₹900 to 1,000 crore, and three greenfield facilities at Chiyada <sup><a href="#cite_note-3">[3]</a></sup>. Backward integration means making the components the company now buys, such as press-board and insulation materials, in its own plants. If it works, it protects margin and supply; if it is late, the cash planned for it stays tied up in the existing supply chain.</p>
+<p>The company's own schedule for these projects has moved. On the June-quarter call, the chief financial officer said the backward-integration facilities would come up in the first quarter of FY28, and that a margin benefit of 200 to 300 basis points would build from FY28 <sup><a href="#cite_note-5">[5]</a></sup>. Management attributed the Changodar delay to extended monsoon conditions, construction labour constraints and engineering changes to product-specific lines <sup><a href="#cite_note-5">[5]</a></sup>. Those are ordinary reasons, but they mean the cash-heavy investment phase runs into FY27, which matters for the gate.</p>
+<p>A subsidiary is being set up to extend the business abroad. The board approved a GBP 10 million investment to create a 51 percent owned UK subsidiary, Maxwell Grid Transformers, on 27 August 2026 <sup><a href="#cite_note-25">[25]</a></sup><sup><a href="#cite_note-26">[26]</a></sup>. The consolidated results include the subsidiaries, which is one reason the consolidated and standalone figures differ, as the Layer 1 section shows.</p>
+<div class="takeaway">
+<p>The business has the demand and the order visibility that a long-term holder would want: a record book, strong inflows and a pipeline many times larger than the book. The weakness is conversion. Management is building capacity and backward integration at the same time it is carrying a larger stock of inventory and receivables, and the cash cost of both appears in the statements before the benefit appears in the profit line. What the numbers add up to is a company whose future earnings may be attractive but whose current cash does not yet support the price structure. That is the distinction the rest of the dossier tests.</p>
 </div>
-
-<!-- SECTION 0: EXECUTIVE SUMMARY -->
-<h2 id="lead">Executive Summary &amp; Investment Thesis</h2>
-<p>
-  <strong>Transformers and Rectifiers (India) Limited</strong> (NSE: <a href="https://www.nseindia.com/get-quotes/equity?symbol=TARIL" target="_blank">TARIL</a>; BSE: 532928) is an Ahmedabad-based heavy electrical manufacturing corporation specializing in high-voltage and ultra-high-voltage power transformers, furnace transformers, rectifier transformers, distribution transformers, and electric railway traction transformers<sup><a href="#cite_note-1">[1]</a></sup>. Operating across three interconnected industrial plants in Gujarat—Moraiya, Changodar, and Odhav—the company has expanded its cumulative manufacturing throughput capacity to over 77,000 MVA, ranking among India's largest domestic producers capable of fabricating up to 765 kV and 1,200 kV transmission-class equipment<sup><a href="#cite_note-14">[14]</a></sup>. The enterprise serves as a direct beneficiary of India's multi-decade power transmission capital expenditure supercycle, driven by the Central Electricity Authority's (CEA) mandate to evacuate 500 GW of non-fossil generation by 2030 and modernise interstate transmission networks<sup><a href="#cite_note-10">[10]</a></sup>. This macro tailwind is quantitatively reflected in the company's unexecuted order backlog, which reached an all-time high of ₹6,630 crore as of 30 June 2026 (representing 2.64 times consolidated FY26 revenue), propelled by a ₹2,114 crore quarterly intake that featured an ultra-mega ₹1,000+ crore contract from Power Grid Corporation of India Limited (PGCIL)<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup>.
-</p>
-<p>
-  However, rigorous forensic underwriting under the 3-Layer Decision Framework reveals severe structural divergence between headline order momentum and internal cash generation quality. Despite reporting consolidated top-line growth of 24.0% YoY to ₹2,508.80 crore in FY26, operating cash flow (CFO) collapsed to negative ₹105.38 crore, driven by a catastrophic ₹515.01 crore absorption into operating working capital<sup><a href="#cite_note-13">[13]</a></sup>. Over the audited three-year period spanning FY24 through FY26, cumulative CFO amounted to just ₹84.01 crore against cumulative reported net profit (PAT) of ₹341.60 crore—yielding an unacceptable cash conversion ratio of <strong>0.246x</strong>, failing the institutional floor of 0.70x by an extreme margin<sup><a href="#cite_note-7">[7]</a></sup>. Net working capital days expanded to approximately 170 days in Q1 FY27, weighed down by delayed milestone receivables from state transmission utilities (discoms/transcos) and inventory accumulation for long-lead 765 kV transformer core assemblies<sup><a href="#cite_note-3">[3]</a></sup>. Furthermore, the company's ambitious ₹900–1,000 crore backward-integration capital expenditure program (internalizing continuously transposed conductors [CTC], high-voltage bushings, and radiator tanks to insulate margins by 200–250 bps) is not slated for operational commissioning until Q1 FY28, leaving near-term profitability vulnerable to raw material price volatility in imported Cold-Rolled Grain-Oriented (CRGO) electrical steel and cathode copper<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-18">[18]</a></sup>.
-</p>
-<p>
-  From a market microstructure and portfolio risk perspective, TARIL has completely violated its underwriting mandate within the <code>TACTICAL_MOMENTUM</code> strategy bucket. The stock trades at ₹280.40—down 49.2% from its 52-week peak of ₹552.00—and has established a decisive multi-month Stage 3/4 distribution and markdown structure below its declining 50-day moving average (₹296.80) and broken 200-day moving average (₹312.40)<sup><a href="#cite_note-22">[22]</a></sup>. Relative strength vs the Nifty 500 has deteriorated to 36/100, while the 14-day RSI hovers in bearish territory at 38.2<sup><a href="#cite_note-23">[23]</a></sup>. With a realistic 12–18 month base target of ₹335.00 (anchored to forward FY27E EPS of ₹10.80 at a 31.0x P/E multiple) and a structural invalidation stop at ₹245.00, the reward-to-risk asymmetry stands at an unviable <strong>1.54:1</strong>, failing the mandatory tactical threshold of &ge; 3.5:1. Consequently, TARIL is assigned a deterministic verdict of <strong>🔴 REPLACE_UNDERPERFORMER</strong>. The position of 400 shares (invested capital: ₹1,22,906.20; current value: ₹1,12,160.00; unrealized loss: -₹10,746.20 / -8.74%) should be systematically liquidated to harvest capital for reallocation into pristine Stage 2 compounders with positive free cash flow, such as shortlisted peer Shilchar Technologies (ROCE 50.7%, debt-free, CFO/PAT &gt; 0.90x)<sup><a href="#cite_note-26">[26]</a></sup>.
-</p>
-
-<!-- SECTION 1B: ACTIVE POSITION AUDIT & PERFORMANCE CARD -->
-<h2 id="holding-audit">1B. Active Position Audit &amp; Performance Card (Zerodha Scope)</h2>
-<p>
-  Transformers and Rectifiers (India) Limited is currently held in the private wealth investment ledger under the <code>TACTICAL_MOMENTUM</code> strategy bucket, designated to capture momentum markups within the capital goods and power infrastructure thematic. The empirical performance and forensic health of this active position are detailed below:
-</p>
-
-<table class="wikitable">
-  <caption>Active Investment Ledger &amp; Holding Audit (As of 26 September 2026)</caption>
-  <thead>
-    <tr>
-      <th>Account Scope</th>
-      <th>Trading Symbol</th>
-      <th>Holding Quantity</th>
-      <th>Average Buy Price</th>
-      <th>Total Invested Capital</th>
-      <th>Current Market Price (CMP)</th>
-      <th>Current Valuation</th>
-      <th>Unrealized P&amp;L (₹ / %)</th>
-      <th>Portfolio Weight</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Zerodha</strong></td>
-      <td><span class="mono">TARIL</span></td>
-      <td class="text-right mono">400 shares</td>
-      <td class="text-right mono">₹307.27</td>
-      <td class="text-right mono">₹1,22,906.20</td>
-      <td class="text-right mono">₹280.40</td>
-      <td class="text-right mono">₹1,12,160.00</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;">-₹10,746.20 (-8.74%)</td>
-      <td class="text-right mono">2.40%</td>
-    </tr>
-  </tbody>
-</table>
-
-<table class="wikitable">
-  <caption>Strategy Health &amp; Capital Reallocation Framework</caption>
-  <thead>
-    <tr>
-      <th>Underwriting Pillar</th>
-      <th>Policy Hurdle Requirement</th>
-      <th>Current Position Diagnostic</th>
-      <th>Forensic Compliance Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Trend Integrity</strong></td>
-      <td>Weinstein Stage 2 Markup &bull; CMP &gt; 50-DMA &amp; 200-DMA</td>
-      <td>CMP (₹280.40) trading below 50-DMA (₹296.80) &amp; 200-DMA (₹312.40)</td>
-      <td><span class="tag-fail">FAILED (Stage 3/4)</span></td>
-    </tr>
-    <tr>
-      <td><strong>Cash Conversion</strong></td>
-      <td>3-Year Cumulative CFO / PAT &ge; 0.70x</td>
-      <td>Audited 3Y CFO (₹84.01 Cr) / PAT (₹341.60 Cr) = <strong>0.246x</strong></td>
-      <td><span class="tag-fail">FAILED (Severe Drag)</span></td>
-    </tr>
-    <tr>
-      <td><strong>Risk Asymmetry</strong></td>
-      <td>Reward-to-Risk Ratio &ge; 3.5:1 (Tactical Bucket)</td>
-      <td>Base Target ₹335.00 (+19.5%) / Stop ₹245.00 (-12.6%) = <strong>1.54:1</strong></td>
-      <td><span class="tag-fail">FAILED (&lt; 3.5:1)</span></td>
-    </tr>
-    <tr>
-      <td><strong>Working Capital</strong></td>
-      <td>Net Working Capital Days &le; 130 days</td>
-      <td>NWC days elevated at ~170 days; FY26 CFO negative (-₹105.4 Cr)</td>
-      <td><span class="tag-fail">FAILED (Stretched)</span></td>
-    </tr>
-    <tr>
-      <td><strong>Allocation Verdict</strong></td>
-      <td>Capital Preservation Protocol: Exit on structural breach</td>
-      <td><strong>Orderly Liquidation: Reallocate ₹1,12,160.00 into Top Shortlist</strong></td>
-      <td><span class="tag-fail">REPLACE_UNDERPERFORMER</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="callout-box">
-  <strong>Active Position Tactical Context:</strong> TARIL was originally acquired at an average cost of ₹307.27 as a high-beta momentum play on India's transmission capacity additions. However, tactical positions demand strict risk governance: when the price decisively violates its 200-day moving average on negative cash flow divergence, capital must not remain frozen. Holding underperforming assets with deteriorating working capital cycles incurs high opportunity costs during bull market regimes.
+</section>
+<section class="chapter" id="numbers">
+<h2>The numbers in plain words</h2>
+<p>This chapter sets out the financial history the gates depend on. The company reports on a consolidated basis, which includes its subsidiaries, and on a standalone basis, which covers the parent company alone. Both are published. The consolidated figures are what the company headlines and what most data services show, so they are the default. The standalone figures are shown because the cash-conversion gate is sensitive to the choice, and the reader should see both before accepting the result. The Layer 1 section explains which basis the gate uses and why.</p>
+<div class="howto">
+<p><b>How to read the table.</b> Each row is a line item, and each column is a fiscal year that ends on 31 March. FY26 is the year to 31 March 2026. Revenue is the sales line, profit after tax (PAT) is the bottom line after tax, <dfn>operating margin</dfn> (OPM) is operating profit as a share of sales, and cash from operations (CFO) is the cash the business generated from its trading. Read the CFO line against the PAT line: when cash is well below profit for several years, the profit is being held in the business as stock and debtors.</p>
 </div>
-
-<!-- SECTION 1: HISTORY & MILESTONES -->
-<h2 id="history">1. History &amp; Corporate Milestones</h2>
-<p>
-  Transformers and Rectifiers (India) Limited traces its commercial origins to 1981, when founder Jitendra Mamtora established an industrial proprietorship in Ahmedabad to manufacture small distribution transformers and specialized industrial rectifiers for Gujarat's burgeoning chemical and textile clusters<sup><a href="#cite_note-9">[9]</a></sup>. Recognizing the expanding technical specifications required by state electricity boards, the enterprise was formally incorporated under the Companies Act, 1956 as <em>Triveni Electric Company Limited</em> on 11 July 1994 (Corporate Identity Number: L38099GJ1994PLC022460)<sup><a href="#cite_note-9">[9]</a></sup>. In 1995, the corporate name was strategically altered to <em>Transformers and Rectifiers (India) Limited</em> to reflect its core focus on heavy electrical power conversion apparatus<sup><a href="#cite_note-9">[9]</a></sup>.
-</p>
-<p>
-  The entry of Satyen Mamtora (current Managing Director &amp; Chief Executive Officer) into executive leadership in 1997 initiated an aggressive technology-scaling phase<sup><a href="#cite_note-3">[3]</a></sup>. Prior to the late 1990s, the domestic high-voltage transformer market was heavily dominated by multinational conglomerates (ABB, Siemens, Alstom) and state-owned Bharat Heavy Electricals Limited (BHEL). TARIL undertook engineering partnerships and invested in advanced vacuum drying autoclaves to manufacture 132 kV and 220 kV class transformers, securing pre-qualification approvals from Western state transmission utilities such as the Gujarat Electricity Board (subsequently unbundled into GETCO) and MSEB (now MSETCL)<sup><a href="#cite_note-15">[15]</a></sup>.
-</p>
-<p>
-  In December 2007, TARIL completed an Initial Public Offering (IPO) on the National Stock Exchange and Bombay Stock Exchange, issuing equity shares at ₹465 per share (pre-splits) to raise ₹139.50 crore<sup><a href="#cite_note-1">[1]</a></sup>. The IPO proceeds funded the construction of the landmark Moraiya manufacturing complex in Sanand, Ahmedabad—a state-of-the-art facility featuring a positive-pressure, dust-free winding hall and an ultra-high-voltage (UHV) test laboratory capable of impulse testing equipment up to 1,200 kV<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-24">[24]</a></sup>. In 2013, TARIL achieved a landmark milestone by designing, manufacturing, and successfully type-testing India's first indigenous 1,200 kV single-phase auto-transformer for PGCIL's experimental UHV National Test Station at Bina, Madhya Pradesh, establishing its technical equivalence with premier global transformer OEMs<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-24">[24]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>Key Corporate Milestones &amp; Technological Inflection Points</caption>
-  <thead>
-    <tr>
-      <th>Year</th>
-      <th>Strategic Event / Milestone</th>
-      <th>Technological &amp; Commercial Significance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1981</strong></td>
-      <td>Founding of Enterprise</td>
-      <td>Commenced commercial operations in Ahmedabad manufacturing small-scale industrial rectifiers and low-voltage distribution transformers<sup><a href="#cite_note-9">[9]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>1994</strong></td>
-      <td>Corporate Incorporation</td>
-      <td>Incorporated as Triveni Electric Company Ltd; renamed Transformers and Rectifiers (India) Ltd in 1995<sup><a href="#cite_note-9">[9]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2007</strong></td>
-      <td>Initial Public Offering (IPO)</td>
-      <td>Raised ₹139.50 Cr via public issue; funded establishment of the flagship Moraiya manufacturing facility in Sanand<sup><a href="#cite_note-1">[1]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2008</strong></td>
-      <td>Moraiya Plant Commissioning</td>
-      <td>Inaugurated dedicated 400 kV / 765 kV class manufacturing lines and computerized impulse testing laboratory<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2013</strong></td>
-      <td>1,200 kV UHV Auto-Transformer</td>
-      <td>Manufactured India's first indigenous 1,200 kV test transformer for PGCIL's National Test Station in Bina, Madhya Pradesh<sup><a href="#cite_note-11">[11]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2017</strong></td>
-      <td>10-for-1 Stock Sub-Division</td>
-      <td>Sub-divided face value from ₹10.00 to ₹1.00 per share to enhance liquidity across retail and institutional segments<sup><a href="#cite_note-9">[9]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2024</strong></td>
-      <td>765 kV Shunt Reactor Breakthrough</td>
-      <td>Successfully passed dynamic short-circuit withstand tests at CPRI, qualifying for high-margin PGCIL grid stabilization tenders<sup><a href="#cite_note-25">[25]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2025</strong></td>
-      <td>Bonus Issue &amp; Expansion Capex</td>
-      <td>Issued 1:1 bonus shares; board approved ₹900–1,000 Cr comprehensive backward integration capex (bushings, CTC, tanks)<sup><a href="#cite_note-33">[33]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>2026</strong></td>
-      <td>Record Order Book &amp; PGCIL Mega Win</td>
-      <td>Order book reached ₹6,630 Cr in Q1 FY27; secured single PGCIL 765 kV contract package exceeding ₹1,000 Cr<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 2: OPERATIONS & MANUFACTURING FOOTPRINT -->
-<h2 id="operations">2. Operations &amp; Manufacturing Footprint</h2>
-
-<h3>2.1 Product Lines &amp; Technical Capabilities</h3>
-<p>
-  Transformers and Rectifiers (India) Limited operates across five primary product categories engineered to fulfill specialized high-voltage transmission, heavy industrial smelting, and railway electrification duties:
-</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Consolidated and standalone financials, Rs crore unless stated</caption>
+<thead><tr><th>Line</th><th class="num">FY24</th><th class="num">FY25</th><th class="num">FY26</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Revenue, consolidated</td><td class="num">1,291</td><td class="num">2,017</td><td class="num">2,507</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Operating profit margin (OPM), consolidated</td><td class="num">10%</td><td class="num">16%</td><td class="num">15%</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>PAT, consolidated</td><td class="num">47</td><td class="num">216</td><td class="num">272</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>CFO, consolidated</td><td class="num">29</td><td class="num">157</td><td class="num">−105</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td><dfn>EPS</dfn> (earnings per share, profit divided by the number of shares), consolidated (Rs per share)</td><td class="num">1.56</td><td class="num">7.14</td><td class="num">8.81</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>PAT, standalone</td><td class="num">41</td><td class="num">188</td><td class="num">225</td><td><sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>CFO, standalone</td><td class="num">28</td><td class="num">−34</td><td class="num">−59</td><td><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></td></tr>
+<tr><td>Borrowings, consolidated (year end)</td><td class="num">256</td><td class="num">283</td><td class="num">457</td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+</tbody></table></div>
+<p>The table shows a company that grew sharply in two years and then changed how it used cash. Revenue went from ₹1,291 crore in FY24 to ₹2,507 crore in FY26 <sup><a href="#cite_note-1">[1]</a></sup>. Profit rose much faster than revenue, from ₹47 crore to ₹272 crore, because the margin moved from 10 percent to 15 to 16 percent. Cash moved the other way. Consolidated operating cash flow was ₹157 crore in FY25 and minus ₹105 crore in FY26, so the FY26 profit of ₹272 crore did not arrive as cash in the year <sup><a href="#cite_note-1">[1]</a></sup>. On the standalone statements the picture is worse: operating cash flow was negative in both FY25 and FY26, at minus ₹34 crore and minus ₹59 crore <sup><a href="#cite_note-2">[2]</a></sup>, and an independent data page shows the same FY26 standalone figure of minus ₹58.56 crore <sup><a href="#cite_note-9">[9]</a></sup>.</p>
+<p>Borrowings rose from ₹283 crore to ₹457 crore in FY26 on the consolidated statements <sup><a href="#cite_note-1">[1]</a></sup>. The company describes this as a working-capital need linked to growth, and says the balance sheet is not structurally weak <sup><a href="#cite_note-5">[5]</a></sup>. Both statements can be true. The borrowing is the cash that the profit did not produce, and it sits on top of the stock of inventory and receivables that the business holds.</p>
+<h3>What the quarter showed</h3>
+<p>The June 2026 quarter is the latest reported period. Consolidated revenue was ₹572.34 crore against ₹529 crore a year earlier, growth of 8 percent, and PAT was ₹64.34 crore <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup>. Net profit for the quarter was down about 4.7 percent from ₹67 crore <sup><a href="#cite_note-8">[8]</a></sup>, and a transcript summary gives the same consolidated revenue, PAT and margin <sup><a href="#cite_note-6">[6]</a></sup>. The company reported an <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization, an operating profit measure) margin of 19.16 percent, but that figure includes other income. Management's <dfn>guidance</dfn> (management's published expectation for the year, which means the company's own forecast) of a 16 percent EBITDA margin is on the standalone business, and it also includes other income <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>. On the standalone statements, Q1 revenue was ₹559 crore, up 10 percent, and standalone total debt was about ₹424 crore <sup><a href="#cite_note-5">[5]</a></sup>.</p>
+<p>What the quarter says about the year ahead is the more important point. Management guided to 25 percent revenue growth in FY27, with a 16 percent EBITDA margin and a PAT margin of 9 to 10 percent <sup><a href="#cite_note-5">[5]</a></sup>. The FY26 consolidated revenue of ₹2,507 crore means that 25 percent growth gives about ₹3,134 crore. With ₹572 crore booked in the first quarter, the remaining three quarters would need about ₹2,561 crore. Against ₹1,978 crore for the same three quarters of FY26 (the FY26 total less the Q1 FY26 figure of ₹529 crore, derived), that is growth of roughly 29.5 percent. It is a steep acceleration from 8 percent. It is not impossible. The June-quarter release, issued in July, gave August 2026 as the expected completion month; this dossier has no source confirming it, so it is the first thing to check at the next result.</p>
+<h3>Cash, stock and debtors, and the balance sheet</h3>
+<p><dfn>Working capital</dfn> (cash tied up in stock and debtors, net of creditors, which means cash the business must fund) is the cash tied up between buying materials and being paid by the customer. For a transformer maker it is large, because the company builds equipment for months before delivery and then waits for the utility to pay. On the company's own FY26 standalone figures, inventory was ₹561 crore and receivables were ₹1,057 crore, and net working-capital days rose to about 170, with inventory days near 85 and receivable days near 130 <sup><a href="#cite_note-5">[5]</a></sup>. On the consolidated statements, debtor days were 129 in FY26, against 85 in FY25 <sup><a href="#cite_note-1">[1]</a></sup>. Management's target is 120 to 130 days on average <sup><a href="#cite_note-5">[5]</a></sup>, which is above the 75-day ceiling this house uses in its Layer 2 test. The CFO said inventory was held high on purpose because of raw-material uncertainty, and that this would be temporary until the backward-integration plants run <sup><a href="#cite_note-5">[5]</a></sup>.</p>
+<p>The return measures are strong. Return on capital employed is 23.3 percent and return on equity is 19.1 percent on the consolidated statements <sup><a href="#cite_note-1">[1]</a></sup>. Debt to equity is 0.30 <sup><a href="#cite_note-10">[10]</a></sup>, comfortably below the 0.70 gate. Those numbers say the company earns well on the capital it uses. They do not say that the capital is turning into cash, which is the question the cash gate asks.</p>
+<div class="takeaway">
+<p>The financial picture has three parts that the reader should hold together. Profit is strong and growing, return on capital is high, and debt is moderate. Against that, the company is converting almost none of its FY26 profit into operating cash, is carrying debtor days well above the house ceiling, and has a first quarter of FY27 that needs a sharp acceleration to meet guidance. The number to watch is operating cash flow at the half-year. A consolidated figure that stays negative through the first half would confirm that the working-capital cycle has not turned.</p>
+</div>
+</section>
+<section class="chapter" id="layer1">
+<h2>Layer 1: the hard gates</h2>
+<p>The house method has three layers. Layer 1 is five hard gates that must all pass before the rest of the analysis counts. Its cash gate is shown on two accounting bases, so the table has six rows for five gates. A failed gate ends the underwriting, and a new candidate would be rejected. For a current holding, the gate result still matters, because it tells you whether the reason for owning the stock is still there. The table gives each gate, its threshold, the company's value and the result.</p>
+<div class="howto">
+<p><b>How to read the gate table.</b> Each row is one test. The threshold is the minimum or maximum the house requires. The company value is the verified number and its source. The result is PASS or FAIL, and a single FAIL decides the gate. Read the result column first, then go to the row that failed to see the arithmetic.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 hard gates for TARIL, verified on 9 October 2026 data</caption>
+<thead><tr><th>Gate</th><th>Threshold</th><th class="num">TARIL value</th><th>Result</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Return on capital employed</td><td>15.0% or more (core prefers above 18%)</td><td class="num">23.3%</td><td><span class="verdict verdict-keep">PASS</span></td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Debt to equity</td><td>Below 0.70</td><td class="num">0.30</td><td><span class="verdict verdict-keep">PASS</span></td><td><sup><a href="#cite_note-10">[10]</a></sup></td></tr>
+<tr><td>Three-year cash from operations divided by PAT (consolidated)</td><td>0.70 or more</td><td class="num">0.15</td><td><span class="verdict verdict-exit">FAIL</span></td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Three-year cash from operations divided by PAT (standalone, checked)</td><td>0.70 or more</td><td class="num">−0.14</td><td><span class="verdict verdict-exit">FAIL</span></td><td><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></td></tr>
+<tr><td>Technical posture</td><td><dfn>Stage 2</dfn> (a rising uptrend, which means the price sits above rising averages) above rising 50- and 200-day averages (tactical), no Stage 4 breakdown</td><td class="num">Stage 4</td><td><span class="verdict verdict-exit">FAIL</span></td><td>Ledger</td></tr>
+<tr><td><dfn>Asymmetry</dfn> (the ratio of possible gain to possible loss, which means a measure of reward against risk) and target anchoring</td><td>Ratio of 3.5 or more on a verified target</td><td class="num">N/A</td><td><span class="verdict verdict-exit">FAIL</span></td><td>Ratio and target sections</td></tr>
+</tbody></table></div>
+<p>Two gates pass (return on capital and debt). Three fail (cash conversion, technical and <dfn>asymmetry</dfn> (the ratio of possible gain to possible loss, which means a measure of reward against risk)), so the result is FAIL_CFO_PAT_TECHNICAL_ASYMMETRY. Each failure is explained below, with the rule that produced it.</p>
+<h3>Gate 1: return on capital passes</h3>
+<p><dfn>ROCE</dfn> (return on capital employed, operating profit as a share of all capital used) measures how much operating profit the business earns on all the money invested in it, both borrowed and owned. A figure of 15 percent is the floor because a business that earns less than that on its capital rarely creates value for the owners after the cost of that capital is paid. TARIL's 23.3 percent is above the floor and above the 18 percent the core bucket prefers <sup><a href="#cite_note-1">[1]</a></sup>. The gate passes, and it is not the reason for the verdict.</p>
+<h3>Gate 2: debt is moderate</h3>
+<p>Debt to equity compares the money borrowed with the owners' money. The house ceiling is 0.70, and a company above that carries enough debt that a downturn could make interest payments hard to meet. TARIL's consolidated borrowings were ₹457 crore against equity of about ₹1,515 crore, made up of share capital of ₹30 crore and reserves of ₹1,485 crore, giving 0.30 <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-10">[10]</a></sup>. The borrowings rose by ₹174 crore during FY26, which is the figure to watch. The rating agency India Ratings affirmed IND A+ with a Stable outlook on the company's bank loan facilities, covering ₹1,050 crore of existing and ₹500 crore of additional facilities, in July 2026 <sup><a href="#cite_note-21">[21]</a></sup>. The gate passes today, but the trend is in the direction of the ceiling, and the cash gate explains why the debt is rising.</p>
+<h3>Gate 3: cash conversion fails, and the basis is the deciding question</h3>
+<p>This is the gate that decides the result, so it needs the most explanation. The house rule asks whether a company's earnings are backed by real cash. It is measured as the sum of three years of operating cash flow divided by the sum of three years of profit after tax, and a result of 0.70 or more is required. The reason for the three-year window is that a single year can be distorted by one large receipt or one large payment. The reason for the 0.70 level is that a healthy manufacturing business usually converts most of its profit into cash over a cycle, and a conversion well below that means the profit is locked in stock or debtors.</p>
+<p>The company publishes both consolidated and standalone statements, and the two give different answers. The consolidated statements cover the parent and its subsidiaries. Over FY24 to FY26 they show operating cash flow of ₹29 crore, ₹157 crore and minus ₹105 crore, which adds to ₹81 crore, against profit of ₹47 crore, ₹216 crore and ₹272 crore, which adds to ₹535 crore. The ratio is 81 divided by 535, which is 0.15 <sup><a href="#cite_note-1">[1]</a></sup>. The standalone statements show operating cash flow of ₹28 crore, minus ₹34 crore and minus ₹59 crore, adding to minus ₹65 crore, against profit of ₹41 crore, ₹188 crore and ₹225 crore, adding to ₹454 crore. The ratio is minus 65 divided by 454, which is minus 0.14 <sup><a href="#cite_note-2">[2]</a></sup>. An independent data page reports the same standalone operating cash flow for FY25 and FY26 <sup><a href="#cite_note-9">[9]</a></sup>.</p>
+<p>The gate basis is consolidated, for three reasons. The consolidated statements are the group's economics: the subsidiaries that will carry much of the expansion are inside them, and an investor who owns the parent owns the group. The company's own guidance and headline figures are consolidated. And the consolidated result is the more favourable of the two, at 0.15 against minus 0.14, so using it is the generous choice. The gate fails on either basis, which means the choice does not change the outcome. The one caution is that the gap between consolidated and standalone cash in FY25 is large, about ₹191 crore, and the consolidated cash figure has not been confirmed against the audited statements in a second independent source. That is an open item, listed in the run notes and gate exceptions.</p>
+<p>The reason the cash is missing is visible in the working-capital figures. Inventory and receivables consumed the cash that the profit produced, and the company's own description of the FY26 build is that it was deliberate. The gate does not ask why cash is missing; it asks whether it is there, and at this point it is not.</p>
+<h3>Gate 4: the price structure is in Stage 4</h3>
+<p>The technical gate asks whether the price is in an uptrend. For a tactical holding, the price must sit above a rising 50-day average and a rising 200-day average, which is the Stage 2 markup. The ledger shows the opposite. On 9 October 2026 the close of ₹290.65 was below the 50-day average of ₹291.57, which had been ₹310.41 twenty-one sessions earlier, so it has fallen. The close was also below the 200-day average of ₹297.95, which had been ₹328.32 sixty-three sessions earlier. Both averages are falling, and the price is below both. That is a Stage 4 Markdown by the house definition. The relative strength against the Nifty 50 is negative on the 63-day measure, at minus 8.73 percent, though it has turned positive on a 28-session measure, at plus 2.63 percent. A stock can be in Stage 4 and still bounce; the gate does not forecast the bounce, it only states that the trend is not in the buyer's favour.</p>
+<p>There is one nuance. The 50-day average sits only 0.08 of an <dfn>ATR</dfn> (average true range, the typical daily move in rupees) above the close, so the price is essentially at the average, not far below it. The 200-day average is ₹7.30 above the close, about 0.64 of an ATR, and it is the more important level. A reclaim of the 200-day average is the first sign that the structure is repairing, and it has not happened.</p>
+<h3>Gate 5: target and asymmetry cannot be verified</h3>
+<p>The last gate asks for a <dfn>reward-to-risk</dfn> (the same idea as asymmetry, which means possible gain divided by possible loss) ratio of at least 3.5 for a tactical name, measured against a target that has been anchored to evidence. The house accepts two anchors: forward earnings per share multiplied by a three-year median <dfn>price-to-earnings</dfn> (the price divided by earnings per share, which means the years of earnings the price represents) ratio, or a <dfn>measured move</dfn> (a target equal to the height of a chart pattern, added to the level where the move starts, which means a chart-based target) of a technical chart pattern. If neither can be verified, the gate fails, because an arbitrary target is worse than none. The target section sets out the attempt. The forward earnings figure is available from one estimate source, but the three-year median multiple is not published in any source fetched, so the target cannot be anchored and the gate fails <sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-27">[27]</a></sup>.</p>
+<div class="triggers">
+<p><b>What would change the gate result</b></p>
 <ul>
-  <li>
-    <strong>Power Transformers &amp; Shunt Reactors (up to 765 kV / 1,200 kV Class):</strong> The company's core technological offering, comprising generator step-up transformers (GSU), inter-connecting auto-transformers (ICT), and 765 kV shunt reactors used by central and state transmission utilities to step up generation voltages to ultra-high grid levels and regulate reactive power across long-distance lines<sup><a href="#cite_note-1">[1]</a></sup>. This segment represents approximately 65% of current order book value and commands gross realizations of ₹18–25 lakh per MVA<sup><a href="#cite_note-2">[2]</a></sup>.
-  </li>
-  <li>
-    <strong>Distribution Transformers:</strong> Medium-voltage units ranging from 11 kV to 33 kV class utilized by power distribution companies (discoms), industrial estates, and commercial complexes to step down grid voltages to end-use three-phase power. Manufactured primarily at the Odhav facility, this segment exhibits high volume but lower gross margins (11–13%)<sup><a href="#cite_note-14">[14]</a></sup>.
-  </li>
-  <li>
-    <strong>Furnace Transformers:</strong> Highly customized, heavy-current transformers engineered to withstand severe thermal stresses, cyclic mechanical shocks, and frequent short-circuit currents inherent in electric arc furnaces (EAF) and submerged arc furnaces used in secondary steelmaking, ferroalloys, and metallurgical foundries<sup><a href="#cite_note-1">[1]</a></sup>.
-  </li>
-  <li>
-    <strong>Rectifier Transformers (Industrial &amp; Green Hydrogen):</strong> Specialized transformer-rectifier units delivering smooth high-current direct current (DC) for chlor-alkali production, aluminum and copper smelting, and emerging proton exchange membrane (PEM) / alkaline electrolyzer installations for green hydrogen generation<sup><a href="#cite_note-21">[21]</a></sup>.
-  </li>
-  <li>
-    <strong>Railway Traction Transformers:</strong> Trackside 25 kV and 2x25 kV electric locomotive-mounted step-down transformers approved by the Research Designs and Standards Organisation (RDSO) for Indian Railways' High-Speed Rail, freight corridor, and Vande Bharat locomotive programs<sup><a href="#cite_note-20">[20]</a></sup>.
-  </li>
+<li>Cash gate: the consolidated three-year cash conversion would need to reach 0.70 on the reported statements, which requires a substantial cash inflow in FY27 and FY28 as inventory and receivables fall.</li>
+<li>Technical gate: a close above ₹297.95 for two sessions with the 50-day average rising would move the price toward Stage 2 for the first time since the 200-day average began falling.</li>
+<li>Asymmetry gate: a verifiable target, from a three-year median multiple or a chart-pattern measured move, whose reward-to-risk ratio clears 3.5 at the then-current price.</li>
 </ul>
-
-<h3>2.2 Manufacturing Infrastructure &amp; Plant Capacities</h3>
-<p>
-  TARIL concentrates its production infrastructure in three major industrial hubs situated around Ahmedabad, Gujarat, providing collective processing capacity of 77,000+ MVA<sup><a href="#cite_note-14">[14]</a></sup>:
-</p>
-
-<table class="wikitable">
-  <caption>Manufacturing Facilities &amp; Operational Allocation</caption>
-  <thead>
-    <tr>
-      <th>Plant Location</th>
-      <th>Installed Capacity (MVA)</th>
-      <th>Voltage Capabilities</th>
-      <th>Core Focus &amp; Operational Specialization</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Moraiya Plant (Sanand, Ahmedabad)</strong></td>
-      <td class="text-right mono">40,000+ MVA</td>
-      <td>Up to 1,200 kV Class</td>
-      <td>Flagship high-voltage and ultra-high-voltage power transformers, 765 kV shunt reactors, UHV testing bay, cleanroom winding bays<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Changodar Plant (Ahmedabad)</strong></td>
-      <td class="text-right mono">35,000+ MVA</td>
-      <td>Up to 400 kV Class</td>
-      <td>High-speed manufacturing of 220 kV/400 kV transmission transformers, renewable collector substations, recent brownfield expansion<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Odhav Plant (Ahmedabad)</strong></td>
-      <td class="text-right mono">2,000 MVA</td>
-      <td>Up to 66 kV Class</td>
-      <td>Industrial furnace transformers, medium-voltage distribution units, and specialized railway trackside substations<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Total Cumulative Capacity</strong></td>
-      <td class="text-right mono"><strong>77,000+ MVA</strong></td>
-      <td><strong>Up to 1,200 kV Class</strong></td>
-      <td><strong>Integrated domestic manufacturing footprint with advanced impulse testing certifications</strong><sup><a href="#cite_note-2">[2]</a></sup>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>2.3 Supply Chain Architecture &amp; Input Cost Sensitivities</h3>
-<p>
-  The manufacturing of heavy power transformers is an intensely material-dependent metallurgical process, where direct raw material costs represent 72% to 76% of operating revenue<sup><a href="#cite_note-7">[7]</a></sup>. The four critical input commodities comprise:
-</p>
-<ol>
-  <li>
-    <strong>CRGO (Cold-Rolled Grain-Oriented) Electrical Steel:</strong> Forms the magnetic core of the transformer. Because India lacks high-grade domestic CRGO manufacturing mills, TARIL relies almost entirely on imports from premier global steelmakers, including Nippon Steel (Japan), JFE Steel (Japan), POSCO (South Korea), and Baosteel (China)<sup><a href="#cite_note-18">[18]</a></sup>. CRGO steel accounts for 28–32% of total raw material expenditure and is subject to international pricing benchmarks and rupee-dollar exchange rate fluctuations<sup><a href="#cite_note-16">[16]</a></sup>.
-  </li>
-  <li>
-    <strong>Electrolytic Copper Conductors:</strong> High-conductivity continuously transposed conductors (CTC) and paper-insulated copper strips form the electrical coils. Sourced domestically from players such as Hindalco and Sterlite Copper or imported, copper accounts for 25–30% of input costs and is referenced to the London Metal Exchange (LME) cash settlement price<sup><a href="#cite_note-17">[17]</a></sup>.
-  </li>
-  <li>
-    <strong>Transformer Insulating Oil:</strong> Highly refined uninhibited naphthenic or paraffinic mineral insulating oil, purchased domestically from Apar Industries and Savita Oil Technologies, functioning as both an electrical dielectric and liquid cooling medium<sup><a href="#cite_note-1">[1]</a></sup>.
-  </li>
-  <li>
-    <strong>High-Voltage Bushings &amp; Pressboard:</strong> Critical external electrical insulation components. TARIL historically imported RIP (resin-impregnated paper) and OIP (oil-impregnated paper) bushings from European and Japanese suppliers, but has initiated internal manufacturing to alleviate acute global delivery lead times (which currently exceed 50–70 weeks)<sup><a href="#cite_note-14">[14]</a></sup>.
-  </li>
+</div>
+</section>
+<section class="chapter" id="layer2">
+<h2>Layer 2: five operating measures</h2>
+<p>Layer 2 scores the operating measures that matter most for a transformer maker. In the normal process it is not evaluated for a candidate that fails Layer 1, so the scores below are informational. They are included because the holding audit needs to know what is working inside the business even when the gates have already failed, and because a verdict to replace should say what the replacement would need to beat. The house requires at least three passes out of four, or four out of five. The thresholds for the capital-goods measures come from the house list, except the capacity band, which is a judgment for this dossier and is stated as such.</p>
+<div class="howto">
+<p><b>How to read the scorecard.</b> Each row is an operating measure, the value the company reported, the band that defines PASS, WATCH or FAIL, and the source. PASS means the business is healthy on that measure, WATCH means it is acceptable but drifting toward risk, and FAIL means the measure is outside the healthy band. The scorecard does not add up to a single score that hides the detail; the count of passes is reported and the individual rows carry the meaning.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 operating scorecard, informational</caption>
+<thead><tr><th>Measure</th><th>Band</th><th class="num">TARIL</th><th>Result</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Order book cover (order book divided by trailing revenue)</td><td>Above 2.0 times (house list)</td><td class="num">2.6 times</td><td><span class="verdict verdict-keep">PASS</span></td><td><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Receivable and debtor days</td><td>Below 75 days (house list)</td><td class="num">129 days</td><td><span class="verdict verdict-exit">FAIL</span></td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Capacity utilisation (FY26 output divided by installed capacity)</td><td>70% or more PASS; 50 to 70% WATCH; under 50% FAIL (band set for this dossier)</td><td class="num">44%</td><td><span class="verdict verdict-exit">FAIL</span></td><td><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-19">[19]</a></sup></td></tr>
+<tr><td><dfn>Operating margin</dfn> (operating profit as a share of sales, which means how much of each rupee of sales is kept before interest and tax) against the 16% guidance (FY26)</td><td>At or above guidance PASS; within one point WATCH</td><td class="num">15%</td><td><span class="verdict verdict-trim">WATCH</span></td><td><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-5">[5]</a></sup></td></tr>
+<tr><td>Output growth (FY26 output against FY25)</td><td>Growth above zero PASS</td><td class="num">+13%</td><td><span class="verdict verdict-keep">PASS</span></td><td><sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+</tbody></table></div>
+<p>The scorecard counts two passes out of five. That is below the house threshold of four out of five, so Layer 2 would not qualify the company even if Layer 1 had passed. The two passes are informative: the order book is large relative to sales, and output grew by about 13 percent in FY26. The two failures are operational. Debtor days are far above the 75-day ceiling, and capacity utilisation is far below management's own target. Both point to the same problem from different angles: the factory and the cash cycle are not yet running at the planned speed.</p>
+<h3>Order book cover: a strength</h3>
+<p>Order book cover measures how many years of sales are already signed. At ₹6,630 crore against trailing revenue of ₹2,552 crore, the cover is 2.6 times <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup>. The house threshold of 2.0 times is exceeded, which is why the measure passes. The strength is real, but it is only as good as the conversion, which the next two measures test.</p>
+<h3>Receivable days: a failure</h3>
+<p>Receivable days show how long the company waits to be paid after delivery. A ceiling of 75 days is the house level for capital-goods businesses, because beyond it the cash cycle absorbs more than it should. The consolidated figure for FY26 is 129 days, up from 85 in FY25 <sup><a href="#cite_note-1">[1]</a></sup>, and on the standalone statements the company reports receivable days of about 130 <sup><a href="#cite_note-5">[5]</a></sup>. Management's target of 120 to 130 days is itself above the ceiling <sup><a href="#cite_note-5">[5]</a></sup>. The company is describing a long cycle as normal for this kind of work. The house rule does not accept that description as a pass, and the failure is the main reason cash is missing.</p>
+<h3>Capacity utilisation: a failure, on a band set for this dossier</h3>
+<p>Capacity utilisation divides what the factory produced by what it could produce. TARIL's FY26 output was 33,000 MVA against installed capacity of nearly 75,000 MVA, which is 44 percent <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-19">[19]</a></sup>. Management has publicly targeted 85 to 90 percent <sup><a href="#cite_note-20">[20]</a></sup>. The house rules name capacity utilisation as a measure for this sector but does not set a band, so the bands in the table (70 percent or more for PASS, 50 to 70 for WATCH, under 50 for FAIL) are a judgment for this dossier. On any reasonable band the result is weak, because the Changodar expansion that was supposed to lift utilisation was delayed. A factory that runs at under half its installed capacity carries the fixed cost of the whole plant on half the output, and that is why margins and cash both suffer.</p>
+<h3>Operating margin: a watch</h3>
+<p>The FY26 operating margin was 15 percent, against 16 percent in FY25 <sup><a href="#cite_note-1">[1]</a></sup>, and management's FY27 guidance is 16 percent <sup><a href="#cite_note-5">[5]</a></sup>. The company's June-quarter EBITDA margin of 19.16 percent is higher, but that figure includes other income and the subsidiary contribution <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>. The honest reading is that margin is holding near the guided level and is not yet showing an improvement, so the measure is a watch.</p>
+<h3>Output growth: a pass</h3>
+<p>Output rose from 29,118 MVA in FY25 to 33,000 MVA in FY26, a rise of about 13 percent <sup><a href="#cite_note-1">[1]</a></sup>. The pass is a fair one: the company is making more transformers than a year earlier, even though the capacity it had was not fully used. The next question is whether that growth continues while the new capacity comes on stream.</p>
+<div class="takeaway">
+<p>The Layer 2 result tells a consistent story. The business has the order book and has been growing its output, which are the signs of demand and execution. It has not converted that demand into cash, because the cash cycle is long and the factory is running well below its capacity. Those are the two operational things management is trying to fix, and they are the two things a replacement would need to show it had fixed in another company. Until the measures move, the company does not meet the house test for a compounder.</p>
+</div>
+</section>
+<section class="chapter" id="layer3">
+<h2>Layer 3: entry posture and support</h2>
+<p>Layer 3 is the timing question. A business can pass every quality test and still be a poor purchase if the price has already run away from its support, because the buyer then has more to lose if the trend turns. The house measures the distance from the price to the nearest support level below it, in units of ATR, a unit that adjusts for each stock's normal daily movement. The result is placed on a single ladder: within half an ATR is a full-size band, within one ATR a standard band, within 1.2 ATR a reduced limit-order band, and beyond that a no-buy band.</p>
+<div class="howto">
+<p><b>How to read the entry posture.</b> The support anchor is the level the price is measured against. The distance is the gap between the close and the anchor, divided by the 14-day ATR. The posture is the band the distance falls into. Layer 3 is informational for this holding because Layer 1 fails.</p>
+</div>
+<h3>Measuring distance from support</h3>
+<p>The nearest support level below the close is the 20-day average, at ₹281.06. The close of ₹290.65 is ₹9.59 above it, and with an ATR of ₹11.33 the distance is 0.85 ATR, which places the price in the standard band and gives the posture NEAR_SUPPORT. The 50-day average is at ₹291.57, which is 0.08 ATR above the close, so the price is essentially on that average. The longer structural anchor is the 20-session swing low of ₹266.60, which is 2.12 ATR below the close, beyond the 1.2 ATR limit-order band. The two readings differ because the price is below a falling 50-day average, and the 20-day average is a weaker anchor in a downtrend than it is in an uptrend.</p>
+<h3>What the posture means for this holding</h3>
+<p>The posture would support a purchase if the gates had passed, and the <dfn>entry zone</dfn> (the price band where a buy would be considered, which means the entry level) the house would use is the 20-day average to the 50-day average, ₹281.06 to ₹291.57. It does not support a purchase now, because the gates failed. For a holding, the posture is a warning rather than a signal. A holding that sits near a support level in a Stage 4 structure is holding a position whose support is failing, and the verdict treats that as the reason to replace rather than to add. The price is not below the structural stop of ₹260.94, so the posture is not SUPPORT_BROKEN, and the position is not forced out by the rule.</p>
+<div class="triggers">
+<p><b>What would change the posture</b></p>
+<ul>
+<li>A close below ₹281.06, the 20-day average, moves the price beyond the standard band and makes the support anchor fail.</li>
+<li>A close below ₹266.60, the 20-session swing low, would move the posture toward a broken structure ahead of the stop.</li>
+<li>A close above ₹297.95 with a rising 50-day average would move the price back toward an uptrend and would be the first sign that the posture could support a reconsideration.</li>
+</ul>
+</div>
+</section>
+<section class="chapter" id="holding">
+<h2>Holding audit</h2>
+<p>The holding audit tests the position you own against the verdict rules. It uses the holdings log as the authoritative record, as the house requires, and treats the ledger close of 9 October as the current price. The position is 400 shares. The holdings log records 300 shares bought on 27 August 2026 for ₹93,066.20 and 100 shares bought on 7 September 2026 for ₹29,840.00, for a total cost of ₹1,22,906.20, which gives an average cost of ₹307.27 per share. A stale record in the shortlist file described a 100-share dip accumulation on 27 September; the log has no purchase after 7 September, and the log is treated as correct.</p>
+<div class="howto">
+<p><b>How to read the audit table.</b> Quantity and cost come from the holdings log. Market value is the quantity times the 9 October close. The unrealised profit or loss is market value minus cost. The stop is the level derived in the asymmetry section. Money at risk is the loss if the stop is hit from today's close, which is the figure a stop-loss decision is really about.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Holding audit, TARIL, at the 9 October 2026 close</caption>
+<thead><tr><th>Item</th><th class="num">Value</th><th>How it is derived</th></tr></thead>
+<tbody>
+<tr><td>Quantity</td><td class="num">400 shares</td><td>Holdings log</td></tr>
+<tr><td>Average cost</td><td class="num">₹307.27</td><td>₹1,22,906.20 divided by 400</td></tr>
+<tr><td>Close, 9 October</td><td class="num">₹290.65</td><td>Ledger; corroborated by a second quote page <sup><a href="#cite_note-12">[12]</a></sup></td></tr>
+<tr><td>Market value</td><td class="num">₹1,16,260.00</td><td>400 times ₹290.65</td></tr>
+<tr><td>Unrealised profit or loss</td><td class="num">−₹6,646.20 (−5.41%)</td><td>₹1,16,260.00 minus ₹1,22,906.20</td></tr>
+<tr><td>Weight in net worth</td><td class="num">2.48%</td><td>₹1,16,260.00 divided by net worth of ₹46,89,840.82 (positions file)</td></tr>
+<tr><td>Stop</td><td class="num">₹260.94</td><td>Asymmetry section</td></tr>
+<tr><td>Loss to stop from today's close</td><td class="num">₹11,884 (10.2% of position)</td><td>400 times (₹290.65 minus ₹260.94)</td></tr>
+<tr><td>Loss to stop against cost</td><td class="num">₹18,530 (15.1% of cost)</td><td>400 times (₹307.27 minus ₹260.94)</td></tr>
+</tbody></table></div>
+<p>The audit shows a position that is down 5.4 percent on cost and only 2.5 percent of net worth. The size is not the problem, which is useful to know: the decision is not about a large position that might hurt the portfolio. The decision is about whether to keep capital in a holding whose gates fail and whose structure is Stage 4. If the stop at ₹260.94 is hit, the loss from cost rises to about 15 percent, and the money at risk from today's close is ₹11,884, which is 0.25 percent of net worth.</p>
+<p>The verdict follows the rule. The verdict options for a current holding are KEEP_COMPOUNDING, ACCUMULATE_ON_DIP, TRIM_PROFIT_BOOKING and REPLACE_UNDERPERFORMER. KEEP requires all gates to pass, which they do not. ACCUMULATE requires a pullback to verified support with headroom, and the cash gate fails, so accumulating would add to a position that does not meet the house test. TRIM is for a stock that is extended or has hit its bull target, and TARIL is neither. REPLACE applies to a holding that has closed below a stop or is in Stage 4, or that fails two or more operating measures or has an impaired thesis. TARIL is in Stage 4 and fails two of five operating measures, so REPLACE is the rule's answer.</p>
+<div class="example">
+<p><b>A worked example in your own money.</b> Suppose the stop is hit tomorrow at ₹260.94. You would sell 400 shares for ₹1,04,376 against a cost of ₹1,22,906, a realised loss of ₹18,530. That loss is real and bounded. The stop protects you from further decline, and the replacement protects you from holding a Stage 4 position that is not earning its keep. A swap is a choice between two positions, not a rescue of this one.</p>
+</div>
+<div class="triggers">
+<p><b>Triggers for this holding</b></p>
+<ul>
+<li>A close below ₹260.94 triggers the stop, and the full 400 shares are sold at the broker.</li>
+<li>A challenger that passes all Layer 1 gates and clears the 3.5 asymmetry hurdle becomes the replacement candidate; the swap is then made in one step, not piecemeal.</li>
+<li>A close above ₹297.95 for two sessions does not change the verdict on its own; the verdict rule in the decision section governs.</li>
+</ul>
+</div>
+</section>
+<section class="chapter" id="peers">
+<h2>Peer benchmarking</h2>
+<p>A peer table checks TARIL against listed companies that make similar equipment. It is a check, not a verdict. Two peers are large groups, and one is a smaller transformer maker.</p>
+<div class="howto">
+<p><b>How to read the peer table.</b> Each row is a company. Where a figure is not in the fetched copy, the cell says N/A. The two large peers come from a 13 October header snapshot, so their figures are later information.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Peer benchmarks, latest available figures</caption>
+<thead><tr><th>Company</th><th class="num">Market cap, Rs crore</th><th class="num">P/E</th><th class="num">ROCE</th><th class="num">ROE</th><th>Latest growth or order signal</th></tr></thead>
+<tbody>
+<tr><td><b>TARIL</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATARIL" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/TARIL/" style="color:var(--link);">Screener</a></span> (9 Oct close)</td><td class="num">8,724 (derived)</td><td class="num">33.8 (derived)</td><td class="num">23.3%</td><td class="num">19.1%</td><td>Q1 FY27 revenue +8%; order book ₹6,630 crore <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>ABB India (later information, 13 Oct) <sup><a href="#cite_note-23">[23]</a></sup></td><td class="num">1,46,171</td><td class="num">94.8</td><td class="num">29.9%</td><td class="num">22.4%</td><td>N/A (growth not in fetched copy)</td></tr>
+<tr><td>GVT&amp;D India (later information, 13 Oct) <sup><a href="#cite_note-24">[24]</a></sup></td><td class="num">N/A (not in fetched copy)</td><td class="num">570</td><td class="num">N/A (not shown)</td><td class="num">18.6%</td><td>N/A (growth not in fetched copy)</td></tr>
+<tr><td>Voltamp Transformers (Q1 FY27)</td><td class="num">N/A (not in fetched copy)</td><td class="num">N/A (not in fetched copy)</td><td class="num">N/A (not in fetched copy)</td><td class="num">N/A (not in fetched copy)</td><td>Revenue ₹543.78 crore, +28%; order visibility ₹2,342 crore <sup><a href="#cite_note-22">[22]</a></sup></td></tr>
+</tbody></table></div>
+<p>Set against the table, TARIL's return on capital is 23.3 percent, below ABB's 29.9 percent, and its return on equity of 19.1 percent is above GVT&amp;D's 18.6 percent. GVT&amp;D's return on capital is not shown. TARIL's P/E is 33.8 times, against 94.8 times for ABB and 570 times for GVT&amp;D. Those two are weak comparators because they are far larger.</p>
+<p>Voltamp is the closest comparison. It reported revenue up 28 percent in the June quarter and visibility of ₹2,342 crore. TARIL's order book of ₹6,630 crore is about 2.8 times that visibility. Its revenue grew 8 percent in the quarter, so the gap between book and sales is the point to watch.</p>
+<div class="takeaway">
+<p>The table does not support a cheap-stock argument. TARIL is between its two large peers on return measures and sits well below them on P/E. Its order book is larger than Voltamp's visibility, but its growth is slower. Quarterly revenue growth needs to rise from 8 percent toward the 25 percent full-year guidance for that book to count.</p>
+</div>
+</section>
+<section class="chapter" id="price">
+<h2>What the price is doing</h2>
+<p>The price tells you what the market believes right now, even when the reasons are not yet visible in the statements. This chapter reads the ledger's technical figures for 9 October and says what each one means for the decision. The figures are the house numbers, not an estimate.</p>
+<div class="howto">
+<p><b>How to read the price figures.</b> The close is the last traded price of the session. The 20-, 50- and 200-day averages show the trend at three speeds. ATR is the normal daily move. <dfn>RSI</dfn> (relative strength index, a 0 to 100 momentum gauge) is a momentum gauge from 0 to 100, where readings below 30 suggest a stock has fallen unusually fast and above 70 suggest it has risen unusually fast. Relative strength compares the stock's return with the Nifty 50 over a period.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Price structure at the 9 October 2026 close (ledger)</caption>
+<thead><tr><th>Measure</th><th class="num">Value</th><th>What it says</th></tr></thead>
+<tbody>
+<tr><td>Close</td><td class="num">₹290.65</td><td>Up 2.79% on the day; the session range was ₹278.10 to ₹293.50 <sup><a href="#cite_note-18">[18]</a></sup></td></tr>
+<tr><td>20-day average</td><td class="num">₹281.06</td><td>The close is above it, so the short trend is firm</td></tr>
+<tr><td>50-day average</td><td class="num">₹291.57</td><td>Falling; the close is just below it</td></tr>
+<tr><td>200-day average</td><td class="num">₹297.95</td><td>Falling; the close is below it, the Stage 4 signal</td></tr>
+<tr><td>RSI (14)</td><td class="num">53.5</td><td>Neutral; no oversold bounce signal</td></tr>
+<tr><td>ATR (14)</td><td class="num">₹11.33</td><td>About 3.9% of the price on a normal day</td></tr>
+<tr><td>52-week range</td><td class="num">₹224.05 to ₹501.20</td><td>The close is 42% below the high; a second quote page shows the high at ₹495.95 on an intraday basis <sup><a href="#cite_note-12">[12]</a></sup></td></tr>
+<tr><td>Relative strength, 63 sessions</td><td class="num">−8.7%</td><td>Lagging the Nifty 50 over three months</td></tr>
+<tr><td>Volume against 20-day average</td><td class="num">0.52 times</td><td>Light trading on the session; no accumulation signal</td></tr>
+</tbody></table></div>
+<p>The structure is that of a stock that has lost its trend and is trying to find a <dfn>base</dfn> (a chart pattern: a sideways range where the price consolidates before a move, which means a setup). The 200-day average has fallen about ₹30 in the last sixty-three sessions, from ₹328.32 to ₹297.95, and the price has spent the period below it. A recovery in the price is visible over the last two weeks, up 3.66 percent, but that bounce has not lifted the price above the falling averages. The relative strength over 28 sessions has turned positive, at plus 2.63 percent, which means the stock has recently done better than the index. That is the early sign of a base, and it is why the verdict is REPLACE rather than an immediate exit: the stop is the exit, and it has not been reached.</p>
+<h3>Momentum and volume</h3>
+<p>RSI at 53.5 is in the middle of its range. A reading near 50 is consistent with a stock that is neither oversold nor overbought, which means the price is not stretched either way. Volume on the session was 0.52 times its 20-day average, so the rise on 9 October was not supported by heavy trading. A rise on light volume is a weak signal, and it is one reason the trend is not yet convincing. The house momentum gate, a separate test in the scoring file, requires either a Stage 2 trend or a confirmed <dfn>breakout</dfn> (a move above a resistance level, which means a new uptrend may start) to allocate capital, and neither holds.</p>
+<div class="triggers">
+<p><b>Price levels to watch</b></p>
+<ul>
+<li>₹297.95, the 200-day average: a close above it for two sessions starts the repair of the structure.</li>
+<li>₹291.57, the 50-day average: a sustained close above it with the average rising would be the sign of a turn.</li>
+<li>₹281.06, the 20-day average: a close below it breaks the near-term support.</li>
+<li>₹266.60, the 20-session low: a close below it is a warning ahead of the stop.</li>
+<li>₹260.94, the computed stop: a close below it is the exit.</li>
+</ul>
+</div>
+</section>
+<section class="chapter" id="shareholding">
+<h2>Ownership, pledges and governance</h2>
+<p>Ownership matters for a company like this because a controlling family, a pledge of its shares, and the level of institutional interest all shape how the business is run and how the stock trades. The house does not score governance as a gate, but a pledge is a signal of how the controlling shareholders finance themselves, and it is worth reading before a decision.</p>
+<div class="howto">
+<p><b>How to read the ownership figures.</b> Promoters are the controlling group. The pledge percentage is the share of the promoter holding that has been pledged as security for loans. A pledge is not a sale, but if the share price falls far enough the lender can sell the pledged shares, which adds selling pressure. Institutional holdings show how much professional money owns the stock.</p>
+</div>
+<p>Promoters hold 64.36 percent of the shares, and that holding has been unchanged for several quarters <sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-11">[11]</a></sup>. The promoter group's pledge is 21.84 percent of its holding, unchanged across the recent quarters <sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-9">[9]</a></sup>. In plain terms, roughly 14 percent of all the company's shares (21.84 percent of 64.36 percent) are pledged. A pledge of that size is not a crisis by itself, but it means that a sharp fall in the price narrows the collateral cushion for the lenders, which can add pressure at the same time the market is weak. Foreign institutions held 6.98 percent at the September quarter, down from 7.80 percent in June <sup><a href="#cite_note-11">[11]</a></sup>, so institutional support has been weakening.</p>
+<div class="takeaway">
+<p>The ownership picture is stable in its headline figures and tight in its details. The promoter stake is high and steady, the pledge is large and unchanged, and foreign holding has been slipping. None of these facts changes the verdict on its own. They do mean the stock has less institutional support to absorb selling when the price falls, which is consistent with the Stage 4 reading.</p>
+</div>
+</section>
+<section class="chapter" id="asymmetry">
+<h2>The asymmetry estimate, line by line</h2>
+<p>Asymmetry is the ratio of what a position can gain to what it can lose before its stop is hit. It is the house test for whether a tactical idea is worth the risk. The formula is (target minus price) divided by (price minus stop). The 3.5 hurdle means the target must be at least 3.5 times as far above the price as the stop is below it. The calculation is set out line by line so that any change to an input is visible.</p>
+<div class="howto">
+<p><b>How to read the calculation.</b> Each line gives one step, its value and its source. The final line gives the ratio, or null when the target cannot be verified. A null ratio is not a low ratio; it means the test cannot be performed.</p>
+</div>
+<ol class="calc">
+<li><b>Price (cmp):</b> ₹290.65, the close of 9 October 2026 <sup><a href="#cite_note-18">[18]</a></sup>.</li>
+<li><b>Swing low (20 sessions):</b> ₹266.60, from the ledger.</li>
+<li><b>Moving averages:</b> 20-day ₹281.06; 50-day ₹291.57. The minimum of the swing low and the averages is ₹266.60.</li>
+<li><b>ATR (14):</b> ₹11.33, from the ledger. Half an ATR is ₹5.665.</li>
+<li><b>Stop (tactical rule):</b> minimum of swing low and 20/50-day averages, less 0.5 ATR: ₹266.60 minus ₹5.665 equals ₹260.935, rounded to <b>₹260.94</b>.</li>
+<li><b>Risk per share:</b> ₹290.65 minus ₹260.94 equals <b>₹29.71</b>.</li>
+<li><b>Target base:</b> not verified. No anchor from the house list can be shown from a source fetched in this dossier (see the target section). The target is therefore null.</li>
+<li><b>Asymmetry ratio:</b> (target base minus ₹290.65) divided by ₹29.71 is <b>null</b>, because the target base is null. The ratio is not reported as a number.</li>
+<li><b>Hurdle target for the 3.5 test:</b> ₹290.65 plus 3.5 times ₹29.71 equals about <b>₹394.6</b>. That is 35.8 percent above the close.</li>
+<li><b>Gate result:</b> FAIL_ASYMMETRY on the unverified target.</li>
 </ol>
-
-<div class="callout-box">
-  <strong>Contractual Escalation Mechanics:</strong> While approximately 75% of TARIL's utility contracts contain statutory price variation clauses (PVC) indexed to formulaic indices published by the Indian Electrical &amp; Electronics Manufacturers' Association (IEEMA), price escalation claims operate with a 3 to 6-month reporting lag. During periods of sharp raw material price inflation, gross margins temporarily compress prior to reimbursement, creating interim cash flow stress<sup><a href="#cite_note-16">[16]</a></sup>.
+<p>The hurdle target of about ₹394.6 is the price at which the stock would clear the 3.5 test on the current stop. It turns the question into a number: on the consensus FY27 earnings of ₹10.13 per share, the market would have to pay about 39 times earnings, against about 28.7 times today <sup><a href="#cite_note-17">[17]</a></sup>. That re-rating is not a target; it is what a target would require. A reader who wants to believe the stock will reach ₹394.6 needs an argument for that multiple, and this dossier does not supply one from the verified sources.</p>
+<div class="takeaway">
+<p>The asymmetry result is the least certain part of the dossier, and the honest statement is that it cannot be computed to the house standard. The ratio is not low; it is not reported. The hurdle price is sensible enough to test against events, and the next results and the price path will show whether the market is willing to pay that multiple. Until then the gate fails.</p>
 </div>
-
-<!-- SECTION 3: SECTOR OPERATING DYNAMICS -->
-<h2 id="sector-dynamics">3. Sector Operating Dynamics &amp; Transmission Capex Supercycle</h2>
-<p>
-  India's electric power transmission landscape is experiencing an unprecedented structural expansion cycle. Under the Ministry of Power's <em>National Electricity Plan (Transmission)</em> formulated by the Central Electricity Authority (CEA), India requires an estimated capital outlay of ₹9.15 lakh crore (~$110 billion) between FY23 and FY32 to interconnect 500 GW of non-fossil renewable generation capacity located in remote solar/wind resource zones (such as Khavda in Gujarat and the Thar Desert in Rajasthan) with industrial load centers in Southern and Western India<sup><a href="#cite_note-10">[10]</a></sup>.
-</p>
-<p>
-  This massive grid expansion necessitates adding over 1,70,000 circuit kilometers (ckm) of high-voltage transmission lines and more than 1,250 GVA of transformation capacity by 2032<sup><a href="#cite_note-10">[10]</a></sup>. Because renewable power generates variable output and requires long-distance bulk transfer to prevent grid instability, the transmission system is shifting rapidly from regional 220 kV/400 kV grids to inter-state 765 kV Alternating Current (AC) corridors and &plusmn;800 kV High-Voltage Direct Current (HVDC) highways<sup><a href="#cite_note-11">[11]</a></sup>.
-</p>
-
-<table class="wikitable">
-  <caption>CEA Transformation Capacity Addition Targets vs TARIL Addressable Scope</caption>
-  <thead>
-    <tr>
-      <th>Grid Voltage Class</th>
-      <th>Current Grid Capacity (GVA)</th>
-      <th>Target Capacity by 2032 (GVA)</th>
-      <th>Net Expansion Required</th>
-      <th>TARIL Competitive Position &amp; Prequalification</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>765 kV Class</strong></td>
-      <td class="text-right mono">~285 GVA</td>
-      <td class="text-right mono">~620 GVA</td>
-      <td class="text-right mono">+335 GVA (+117%)</td>
-      <td><strong>Prequalified tier-1 supplier</strong>; competes directly with BHEL, Toshiba, and GE Vernova<sup><a href="#cite_note-11">[11]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>400 kV Class</strong></td>
-      <td class="text-right mono">~410 GVA</td>
-      <td class="text-right mono">~780 GVA</td>
-      <td class="text-right mono">+370 GVA (+90%)</td>
-      <td><strong>Core domestic supplier</strong>; Moraiya and Changodar lines fully approved across GETCO, MSETCL, UPPTCL<sup><a href="#cite_note-15">[15]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>220 kV &amp; Below</strong></td>
-      <td class="text-right mono">~520 GVA</td>
-      <td class="text-right mono">~850 GVA</td>
-      <td class="text-right mono">+330 GVA (+63%)</td>
-      <td>Fragmented market with 15+ domestic fabricators; TARIL selectively bids for high-spec industrial packages<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Green Hydrogen / Rectifiers</strong></td>
-      <td class="text-right mono">&lt; 2 GVA</td>
-      <td class="text-right mono">~35 GVA</td>
-      <td class="text-right mono">+33 GVA (&gt;1,600%)</td>
-      <td>Specialized high-current rectifiers; strategic MoUs with private EPC developers under SIGHT scheme<sup><a href="#cite_note-21">[21]</a></sup>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>
-  While industry tailwinds are undeniable, structural bottlenecks in the transformer value chain present significant operating hurdles. Foremost among these is the acute global shortage of high-voltage bushings and CRGO laminations. Due to explosive demand from Western utilities replacing aging 50-year-old grid assets and powering artificial intelligence (AI) data centers, global lead times for large power transformers have stretched from 12 months in 2021 to 36–48 months in 2026<sup><a href="#cite_note-18">[18]</a></sup>. While extended lead times support robust pricing realizations, they simultaneously lock up vast amounts of capital in unfinished inventory on domestic shop floors.
-</p>
-
-<!-- SECTION 4: FINANCIAL PERFORMANCE & FORENSIC AUDIT -->
-<h2 id="financial-audit">4. Financial Performance &amp; Forensic Working Capital Audit</h2>
-
-<h3>4.1 Multi-Year Consolidated Financial Trends</h3>
-<p>
-  TARIL's reported consolidated statement of profit and loss over the last five fiscal years demonstrates impressive top-line revenue recovery following pandemic-era disruptions, but underscores rising margin volatility and capital intensity:
-</p>
-
-<table class="wikitable">
-  <caption>Consolidated Financial Performance Summary (FY22 – FY26 Audited + Q1 FY27)</caption>
-  <thead>
-    <tr>
-      <th>Financial Metric (₹ Cr)</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>Q1 FY27</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Revenue from Operations</strong></td>
-      <td class="text-right mono">₹1,142.30</td>
-      <td class="text-right mono">₹1,398.20</td>
-      <td class="text-right mono">₹1,295.40</td>
-      <td class="text-right mono">₹1,950.40</td>
-      <td class="text-right mono"><strong>₹2,508.80</strong></td>
-      <td class="text-right mono">₹572.00</td>
-    </tr>
-    <tr>
-      <td><em>YoY Revenue Growth (%)</em></td>
-      <td class="text-right mono">+58.4%</td>
-      <td class="text-right mono">+22.4%</td>
-      <td class="text-right mono">-7.4%</td>
-      <td class="text-right mono">+50.6%</td>
-      <td class="text-right mono"><strong>+28.6%</strong></td>
-      <td class="text-right mono">+10.2%</td>
-    </tr>
-    <tr>
-      <td><strong>Operating EBITDA</strong></td>
-      <td class="text-right mono">₹98.20</td>
-      <td class="text-right mono">₹126.40</td>
-      <td class="text-right mono">₹125.10</td>
-      <td class="text-right mono">₹320.10</td>
-      <td class="text-right mono"><strong>₹378.80</strong></td>
-      <td class="text-right mono">₹110.00</td>
-    </tr>
-    <tr>
-      <td><em>Operating EBITDA Margin (%)</em></td>
-      <td class="text-right mono">8.60%</td>
-      <td class="text-right mono">9.04%</td>
-      <td class="text-right mono">9.66%</td>
-      <td class="text-right mono">16.41%</td>
-      <td class="text-right mono"><strong>15.10%</strong></td>
-      <td class="text-right mono">19.23%</td>
-    </tr>
-    <tr>
-      <td><strong>Finance Costs (Interest)</strong></td>
-      <td class="text-right mono">₹46.20</td>
-      <td class="text-right mono">₹52.10</td>
-      <td class="text-right mono">₹54.80</td>
-      <td class="text-right mono">₹58.30</td>
-      <td class="text-right mono"><strong>₹72.40</strong></td>
-      <td class="text-right mono">₹18.50</td>
-    </tr>
-    <tr>
-      <td><strong>Depreciation &amp; Amortization</strong></td>
-      <td class="text-right mono">₹28.40</td>
-      <td class="text-right mono">₹29.10</td>
-      <td class="text-right mono">₹28.90</td>
-      <td class="text-right mono">₹32.40</td>
-      <td class="text-right mono"><strong>₹38.60</strong></td>
-      <td class="text-right mono">₹10.20</td>
-    </tr>
-    <tr>
-      <td><strong>Net Profit After Tax (PAT)</strong></td>
-      <td class="text-right mono">₹14.10</td>
-      <td class="text-right mono">₹42.20</td>
-      <td class="text-right mono">₹47.30</td>
-      <td class="text-right mono">₹187.20</td>
-      <td class="text-right mono"><strong>₹108.40</strong></td>
-      <td class="text-right mono">₹64.00</td>
-    </tr>
-    <tr>
-      <td><em>Reported Basic EPS (₹)*</em></td>
-      <td class="text-right mono">₹0.47</td>
-      <td class="text-right mono">₹1.42</td>
-      <td class="text-right mono">₹1.59</td>
-      <td class="text-right mono">₹6.30</td>
-      <td class="text-right mono"><strong>₹3.65</strong></td>
-      <td class="text-right mono">₹2.15</td>
-    </tr>
-  </tbody>
-</table>
-<div style="font-size: 0.82em; color: var(--text-muted); margin-top: -8px;">*Note: Historical per-share metrics adjusted for 1:1 bonus issue in February 2025<sup><a href="#cite_note-9">[9]</a></sup>. Standalone FY26 PAT was ₹112.5 Cr; consolidated was ₹108.4 Cr.</div>
-
-<h3>4.2 Forensic Working Capital &amp; Operating Cash Flow Reconciliation</h3>
-<p>
-  The most glaring institutional vulnerability uncovered in TARIL's audited financial disclosures is the persistent decoupling between accrual accounting profits and realized cash from operations:
-</p>
-
-<table class="wikitable">
-  <caption>Cash Flow Statement Reconciliation (FY22 – FY26 Audited)</caption>
-  <thead>
-    <tr>
-      <th>Cash Flow Line Item (₹ Cr)</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>3-Year Cumulative (FY24-26)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Reported PAT (Net Profit)</strong></td>
-      <td class="text-right mono">₹14.10</td>
-      <td class="text-right mono">₹42.20</td>
-      <td class="text-right mono">₹47.30</td>
-      <td class="text-right mono">₹187.20</td>
-      <td class="text-right mono">₹108.40</td>
-      <td class="text-right mono"><strong>₹342.90</strong></td>
-    </tr>
-    <tr>
-      <td>Non-Cash Adjustments (Depr, Taxes, Int)</td>
-      <td class="text-right mono">+₹82.40</td>
-      <td class="text-right mono">+₹91.20</td>
-      <td class="text-right mono">+₹105.41</td>
-      <td class="text-right mono">+₹170.68</td>
-      <td class="text-right mono">+₹231.23</td>
-      <td class="text-right mono">+₹507.32</td>
-    </tr>
-    <tr>
-      <td>Operating Profit Before WC Changes</td>
-      <td class="text-right mono">₹96.50</td>
-      <td class="text-right mono">₹133.40</td>
-      <td class="text-right mono">₹152.71</td>
-      <td class="text-right mono">₹357.88</td>
-      <td class="text-right mono">₹339.63</td>
-      <td class="text-right mono">₹850.22</td>
-    </tr>
-    <tr>
-      <td><strong>Changes in Working Capital</strong></td>
-      <td class="text-right mono">-₹48.20</td>
-      <td class="text-right mono">-₹86.10</td>
-      <td class="text-right mono">-₹123.57</td>
-      <td class="text-right mono">-₹197.63</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;">-₹515.01</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;"><strong>-₹836.21</strong></td>
-    </tr>
-    <tr>
-      <td>Taxes Paid Directly</td>
-      <td class="text-right mono">-₹3.10</td>
-      <td class="text-right mono">-₹8.20</td>
-      <td class="text-right mono">-₹0.00</td>
-      <td class="text-right mono">-₹0.00</td>
-      <td class="text-right mono">-₹0.00</td>
-      <td class="text-right mono">-₹0.00</td>
-    </tr>
-    <tr>
-      <td><strong>Cash Flow from Operations (CFO)</strong></td>
-      <td class="text-right mono">₹45.20</td>
-      <td class="text-right mono">₹39.10</td>
-      <td class="text-right mono">₹29.14</td>
-      <td class="text-right mono">₹160.25</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;">-₹105.38</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;"><strong>₹84.01</strong></td>
-    </tr>
-    <tr>
-      <td><em>Audited 3-Year CFO / PAT Conversion</em></td>
-      <td class="text-center" colspan="5">—</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;"><strong>0.245x (FAIL)</strong></td>
-    </tr>
-    <tr>
-      <td>Capital Expenditure (Capex)</td>
-      <td class="text-right mono">-₹32.40</td>
-      <td class="text-right mono">-₹41.20</td>
-      <td class="text-right mono">-₹68.50</td>
-      <td class="text-right mono">-₹145.20</td>
-      <td class="text-right mono">-₹218.40</td>
-      <td class="text-right mono">-₹432.10</td>
-    </tr>
-    <tr>
-      <td><strong>Free Cash Flow to Firm (FCFF = CFO - Capex)</strong></td>
-      <td class="text-right mono">+₹12.80</td>
-      <td class="text-right mono">-₹2.10</td>
-      <td class="text-right mono">-₹39.36</td>
-      <td class="text-right mono">+₹15.05</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;">-₹323.78</td>
-      <td class="text-right mono" style="color: #b91c1c; font-weight: 700;"><strong>-₹348.09</strong></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="forensic-box">
-  <strong>Forensic Accounting Diagnostic:</strong>
-  In FY26, TARIL generated ₹339.63 crore in operating cash before working capital adjustments, but suffered an unprecedented working capital drain of <strong>₹515.01 crore</strong>, plunging CFO into deep negative territory (-₹105.38 crore)<sup><a href="#cite_note-13">[13]</a></sup>. When coupled with ₹218.40 crore in growth capex for the Changodar facility and backward integration land, the company generated negative free cash flow of <strong>-₹323.78 crore</strong> in a single year. Cumulative three-year cash conversion sits at just <strong>0.245x</strong>, well below the institutional safety threshold of 0.70x. The company has essentially funded working capital expansion through short-term bank borrowings and trade vendor payables rather than organic cash flows.
+</section>
+<section class="chapter" id="target">
+<h2>Target anchoring: why the target is not verified</h2>
+<p>A target is the price the stock could reach if the thesis plays out. The house requires that the target be anchored to a method that can be checked by someone else, because a target chosen by hope is not a target. Two methods are accepted: forward earnings multiplied by the three-year median price-to-earnings ratio, or a technical measured move from a base. What follows explains why neither could be verified.</p>
+<div class="howto">
+<p><b>How to read the anchoring attempt.</b> The first input is the forward earnings per share, which is the profit per share the company is expected to earn in the coming year. The second is the three-year median P/E, the typical multiple the market has paid for those earnings over the last three years. Their product is the target. Each input has to be sourced, and each attempt is recorded below.</p>
 </div>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="underwriting-framework">5. The 3-Layer Underwriting Framework &amp; Scorecard</h2>
-<p>
-  Every security analyzed under the Institutional Underwriting System is subjected to three sequential, deterministic gating filters. A failure at Layer 1 mandates an immediate verdict of rejection or liquidation, regardless of thematic narrative:
-</p>
-
-<h3>5.1 Layer 1: Binary Hard Gating Floors</h3>
-<table class="wikitable">
-  <caption>Layer 1 Hard Gating Scorecard &bull; Binary Pass/Fail Evaluation</caption>
-  <thead>
-    <tr>
-      <th>Hard Gating Pillar</th>
-      <th>Institutional Hurdle</th>
-      <th>TARIL Verified Value</th>
-      <th>Compliance Status</th>
-      <th>Analytical Finding</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>ROCE Floor</strong></td>
-      <td>ROCE &ge; 15.0% (Core prefers &gt; 18.0%)</td>
-      <td class="mono">22.10%</td>
-      <td><span class="tag-pass">PASS</span></td>
-      <td>Operating profitability on employed capital exceeds minimum statutory floor<sup><a href="#cite_note-7">[7]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Solvency Floor</strong></td>
-      <td>Debt-to-Equity &lt; 0.70x</td>
-      <td class="mono">0.32x</td>
-      <td><span class="tag-pass">PASS</span></td>
-      <td>Conservative leverage with total debt of ~₹410 Cr against net worth of ~₹1,280 Cr<sup><a href="#cite_note-6">[6]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Cash Conversion Floor</strong></td>
-      <td>3-Year Cumulative CFO / PAT &ge; 0.70x</td>
-      <td class="mono" style="color: #b91c1c; font-weight: 700;">0.246x</td>
-      <td><span class="tag-fail">FAIL_CFO_PAT</span></td>
-      <td>Severe failure: 3Y CFO is ₹84.01 Cr vs PAT of ₹342.90 Cr due to ₹515 Cr FY26 WC outflow<sup><a href="#cite_note-13">[13]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Technical Trend Floor</strong></td>
-      <td>Weinstein Stage 2 Markup &bull; CMP &gt; 50/200 DMA</td>
-      <td class="mono" style="color: #b91c1c; font-weight: 700;">Stage 3/4 Markdown</td>
-      <td><span class="tag-fail">FAIL_STAGE</span></td>
-      <td>CMP (₹280.40) trading below declining 50-DMA (₹296.80) &amp; broken 200-DMA (₹312.40)<sup><a href="#cite_note-22">[22]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Reward/Risk Asymmetry</strong></td>
-      <td>Asymmetry Ratio &ge; 3.5:1 (Tactical)</td>
-      <td class="mono" style="color: #b91c1c; font-weight: 700;">1.54:1</td>
-      <td><span class="tag-fail">FAIL_ASYMMETRY</span></td>
-      <td>Base upside to ₹335.00 (+19.5%) vs downside stop at ₹245.00 (-12.6%) yields 1.54:1.</td>
-    </tr>
-    <tr>
-      <td colspan="3"><strong>Overall Layer 1 Gating Verdict</strong></td>
-      <td colspan="2"><span class="tag-fail">FAILED (3 Out of 5 Gates Breached)</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>5.2 Layer 2: Company-Specific Operational KPI Scorecard</h3>
-<table class="wikitable">
-  <caption>Layer 2 Sector &amp; Operational KPI Scorecard &bull; Power Transmission Equipment</caption>
-  <thead>
-    <tr>
-      <th>Operational KPI</th>
-      <th>Historical Baseline</th>
-      <th>Current Audited Level</th>
-      <th>Institutional Target Hurdle</th>
-      <th>KPI Status</th>
-      <th>Analytical Thesis &amp; Impact</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Order Book-to-Bill Ratio</strong></td>
-      <td>1.85x (FY24)</td>
-      <td class="mono"><strong>2.64x</strong></td>
-      <td>&gt; 2.00x</td>
-      <td><span class="tag-pass">PASS</span></td>
-      <td>₹6,630 Cr order book provides 2.6 years of top-line revenue visibility<sup><a href="#cite_note-2">[2]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>765 kV / EHV Backlog Share</strong></td>
-      <td>25% (FY23)</td>
-      <td class="mono"><strong>44.0%</strong></td>
-      <td>&gt; 35.0%</td>
-      <td><span class="tag-pass">PASS</span></td>
-      <td>Dominant domestic positioning in high-margin 765 kV transmission packages<sup><a href="#cite_note-4">[4]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Capacity Utilization &amp; PVC Pass-Through</strong></td>
-      <td>65% (FY24)</td>
-      <td class="mono"><strong>70.0% / Delayed Lag</strong></td>
-      <td>&gt; 75% with zero lag</td>
-      <td><span class="tag-watch">WATCH</span></td>
-      <td>IEEMA price variation clauses exhibit a 3–6 month lag; margins compressed to 15.1%<sup><a href="#cite_note-16">[16]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Net Working Capital Days</strong></td>
-      <td>114 days (FY25)</td>
-      <td class="mono" style="color: #b91c1c; font-weight: 700;"><strong>~170 days</strong></td>
-      <td>&le; 130 days</td>
-      <td><span class="tag-fail">FAIL</span></td>
-      <td>Elevated debtor days (~146 days) and inventory lockup severely choke liquidity<sup><a href="#cite_note-3">[3]</a></sup>.</td>
-    </tr>
-    <tr>
-      <td><strong>Export Revenue Contribution</strong></td>
-      <td>13.1% (FY24)</td>
-      <td class="mono"><strong>10.5%</strong></td>
-      <td>&gt; 15.0%</td>
-      <td><span class="tag-watch">WATCH</span></td>
-      <td>Domestic utility concentration remains high (~89%), leaving margins exposed to discom terms<sup><a href="#cite_note-12">[12]</a></sup>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>5.3 Layer 3: Support-Aware Entry Posture</h3>
-<table class="wikitable">
-  <caption>Layer 3 Technical Support &amp; Execution Timing Matrix</caption>
-  <thead>
-    <tr>
-      <th>Nearest Verified Support Anchor</th>
-      <th>14-Day ATR Level</th>
-      <th>Current Distance to Support</th>
-      <th>Entry Posture Classification</th>
-      <th>Actionable Execution Rule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><span class="mono">₹250.00 – ₹255.00</span> (March 2026 consolidation base)</td>
-      <td class="mono">₹12.50</td>
-      <td class="mono">₹30.40 (<strong>2.43x ATR</strong>)</td>
-      <td><strong style="color: #b91c1c;">EXTENDED_BELOW_RESISTANCE</strong></td>
-      <td><strong>No accumulation permitted</strong>. The stock is trapped below broken 200-DMA resistance; risk of breakdown to ₹245.00 stop is high.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 6: PEER & COMPETITIVE COMPARISON -->
-<h2 id="peer-matrix">6. Industry Landscape &amp; Peer Benchmarking</h2>
-<p>
-  To assess relative capital productivity and operational moat durability, TARIL is benchmarked below against leading publicly traded domestic transformer and electrical equipment manufacturers:
-</p>
-
-<table class="wikitable">
-  <caption>Domestic Power Transformer &amp; Industrial Equipment Peer Matrix (September 2026)</caption>
-  <thead>
-    <tr>
-      <th>Trading Symbol</th>
-      <th>Company Name</th>
-      <th>Market Cap (₹ Cr)</th>
-      <th>CMP (₹)</th>
-      <th>ROCE (%)</th>
-      <th>ROE (%)</th>
-      <th>D/E (x)</th>
-      <th>P/E (x)</th>
-      <th>3Y Sales CAGR</th>
-      <th>OPM (%)</th>
-      <th>Competitive Moat &amp; Strategic Edge</th>
-      <th>Institutional Underwriting Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background-color: #fff1f2;">
-      <td><strong>TARIL</strong></td>
-      <td>Transformers and Rectifiers (India)</td>
-      <td class="text-right mono">₹8,334</td>
-      <td class="text-right mono">₹280.40</td>
-      <td class="text-right mono">22.1%</td>
-      <td class="text-right mono">18.2%</td>
-      <td class="text-right mono">0.32</td>
-      <td class="text-right mono">32.2</td>
-      <td class="text-right mono">24.8%</td>
-      <td class="text-right mono">15.1%</td>
-      <td>77k MVA scale; 765 kV / 1200 kV testing; PGCIL supplier. Weak cash flow (CFO/PAT 0.25x).</td>
-      <td><span class="tag-fail">🔴 REPLACE_UNDERPERFORMER</span></td>
-    </tr>
-    <tr style="background-color: #f0fdf4;">
-      <td><strong>SHILCHAR</strong></td>
-      <td>Shilchar Technologies Limited</td>
-      <td class="text-right mono">₹4,695</td>
-      <td class="text-right mono">₹4,600.00</td>
-      <td class="text-right mono" style="font-weight: 700; color: #15803d;">50.7%</td>
-      <td class="text-right mono" style="font-weight: 700; color: #15803d;">37.8%</td>
-      <td class="text-right mono">0.02</td>
-      <td class="text-right mono">34.1</td>
-      <td class="text-right mono">48.5%</td>
-      <td class="text-right mono" style="font-weight: 700; color: #15803d;">29.2%</td>
-      <td>Global renewable export leader (&gt;60% exports); zero debt; pristine cash conversion (CFO/PAT &gt;0.90x).</td>
-      <td><span class="tag-pass">🟢 QUALIFIED_FOR_WATCHLIST</span></td>
-    </tr>
-    <tr style="background-color: #f0fdf4;">
-      <td><strong>VOLTAMP</strong></td>
-      <td>Voltamp Transformers Limited</td>
-      <td class="text-right mono">₹10,834</td>
-      <td class="text-right mono">₹10,710.00</td>
-      <td class="text-right mono">23.5%</td>
-      <td class="text-right mono">17.4%</td>
-      <td class="text-right mono"><strong>0.00</strong></td>
-      <td class="text-right mono">34.2</td>
-      <td class="text-right mono">22.4%</td>
-      <td class="text-right mono">17.8%</td>
-      <td>Zero debt; ₹850+ Cr cash reserves; 100% private sector client focus; zero discom receivable risk.</td>
-      <td><span class="tag-pass">🟢 QUALIFIED_FOR_WATCHLIST</span></td>
-    </tr>
-    <tr>
-      <td><strong>BBL</strong></td>
-      <td>Bharat Bijlee Limited</td>
-      <td class="text-right mono">₹2,445</td>
-      <td class="text-right mono">₹4,320.00</td>
-      <td class="text-right mono">8.4%</td>
-      <td class="text-right mono">6.1%</td>
-      <td class="text-right mono">0.12</td>
-      <td class="text-right mono">21.9</td>
-      <td class="text-right mono">12.1%</td>
-      <td class="text-right mono">6.8%</td>
-      <td>Industrial motors and standard transformers; lower ROCE; cyclical industrial customer base.</td>
-      <td><span class="tag-fail">🔴 REJECTED (Sub-15% ROCE)</span></td>
-    </tr>
-    <tr>
-      <td><strong>SCHNEIDER</strong></td>
-      <td>Schneider Electric Infra Ltd</td>
-      <td class="text-right mono">₹18,400</td>
-      <td class="text-right mono">₹770.00</td>
-      <td class="text-right mono">28.5%</td>
-      <td class="text-right mono">32.1%</td>
-      <td class="text-right mono">0.18</td>
-      <td class="text-right mono" style="color: #b91c1c;">88.5</td>
-      <td class="text-right mono">21.2%</td>
-      <td class="text-right mono">14.6%</td>
-      <td>Multinational parentage; high-end digital substations and medium-voltage switchgear. Stretched P/E.</td>
-      <td><span class="tag-watch">🟡 WATCH (Valuation Headwind)</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="callout-box">
-  <strong>Peer Benchmarking Takeaway:</strong> While TARIL possesses larger absolute physical nameplate capacity (77,000 MVA vs Shilchar's ~5,000 MVA), <strong>Shilchar Technologies</strong> operates with vastly superior capital efficiency (ROCE of 50.7% vs TARIL's 22.1%), higher operating margins (29.2% vs 15.1%), and generates genuine free cash flow from export clients without state discom receivables delay<sup><a href="#cite_note-26">[26]</a></sup>. Both <strong>Shilchar Technologies</strong> and <strong>Voltamp Transformers</strong> qualify for direct seeding to the Active Watchlist as premier candidates to absorb reallocated capital.
+<h3>Forward earnings</h3>
+<p>The forward earnings figure available in this dossier is a <dfn>consensus estimate</dfn> (the average of analysts' forecasts, which means the market's expected figure) of ₹10.13 per share for FY27, from a financial data site that compiles analyst forecasts <sup><a href="#cite_note-17">[17]</a></sup>. The figure was retrieved on 13 October, so it is later information, not a 9 October figure. It is consistent with management's guidance. Revenue of ₹3,134 crore at a PAT margin of 9 to 10 percent gives profit of ₹282 to ₹313 crore, and on about 30.02 crore shares that is roughly ₹9.4 to ₹10.4 per share <sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-17">[17]</a></sup>. A second data page implies a higher figure: its forward P/E of 27.25 at a later price of ₹303.70 gives about ₹11.1 per share, so the estimates are not settled <sup><a href="#cite_note-10">[10]</a></sup>.</p>
+<h3>The three-year median multiple</h3>
+<p>The median P/E over three years is the step that could not be verified. The price-to-earnings history for this company is not published in any fetched source. One data page gives a P/E history in a form that does not show a three-year series, and another shows only a current multiple, so the required window is missing <sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-27">[27]</a></sup>. A median taken from the annual multiples on one estimates page would be misleading. Those multiples are 122 times for FY24, 74.3 times for FY25 and 28.1 times for FY26, and a median of that set (74.3 times) is driven by the depressed earnings of FY24 and FY25, which makes it a poor anchor for a company whose earnings have since risen sharply <sup><a href="#cite_note-17">[17]</a></sup>. Using that number would produce an inflated target, which the house rules forbid.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Target anchoring attempts and results</caption>
+<thead><tr><th>Input</th><th>Attempt</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Forward EPS</td><td>Consensus FY27 estimate</td><td class="num">₹10.13 (later information, 13 Oct) <sup><a href="#cite_note-17">[17]</a></sup></td></tr>
+<tr><td>Three-year median P/E</td><td>Search for a three-year series in three queries and three fetched sources</td><td>Not published in the sources fetched; N/A</td></tr>
+<tr><td>Measured move of a technical base</td><td>Base from the 20-session low to the 200-day average</td><td>No defined base; the 200-day average is falling, so a measured move is not verifiable; N/A</td></tr>
+<tr><td>Target used for the gate</td><td>Forward EPS times the median multiple</td><td>Not computed; gate FAIL_ASYMMETRY</td></tr>
+</tbody></table></div>
+<p>The conclusion is a limit of the evidence, not a judgment that the price is too high. A reader who has a verified three-year P/E series can apply the house formula in a few minutes: multiply ₹10.13 by the median, and compare the result with the hurdle price of about ₹394.6. A median of about 39 times would be needed to clear the hurdle on consensus earnings. Only a source for that median can settle the gate.</p>
+<div class="takeaway">
+<p>The target is the weakest part of the case for a buy and is not a reason to sell on its own. It explains why the gate fails and what would be needed to pass it. For a holding decision, it means there is no verified upside to set against the stop, which is one more reason the replacement review is the right course.</p>
 </div>
-
-<!-- SECTION 7: TECHNICAL POSTURE & TRADE ARCHITECTURE -->
-<h2 id="technical-trade">7. Technical Structure, Support Anchor &amp; Trade Architecture</h2>
-
-<h3>7.1 Market Microstructure &amp; Moving Average Diagnostics</h3>
-<p>
-  Following an exponential advance that carried TARIL from adjusted lows of ~₹45 in 2023 to an all-time peak of ₹552.00 in mid-2025, the stock has transitioned into a classic <strong>Weinstein Stage 3/4 Distribution and Markdown</strong> phase<sup><a href="#cite_note-22">[22]</a></sup>. The stock has printed a series of lower highs and lower lows across the daily and weekly timeframes, characterized by high-volume institutional distribution whenever price attempts to rally into overhead supply:
-</p>
+</section>
+<section class="chapter" id="redteam">
+<h2>Fatal flaws: a red-team review</h2>
+<p>A red-team review asks what would make the verdict wrong and tests whether the case for keeping the stock survives its strongest objections. The three flaws below are the ones most likely to break the conclusion. For each, the reader should weigh the evidence and decide whether the replacement rule still applies.</p>
+<h3>Flaw one: the cash cycle may turn faster than the statements suggest</h3>
+<p>The strongest case for keeping the stock is that the cash shortfall is temporary. Management says the inventory build is deliberate and will reverse as the backward-integration plants come on line, and it says some receivables that were outstanding were realised in April <sup><a href="#cite_note-5">[5]</a></sup>. If operating cash flow turns strongly positive in the half-year, the cash gate could move toward its threshold sooner than the three-year figures suggest. The rebuttal is that the backward-integration plants are due in the first quarter of FY28, which starts in April 2027, about six months after the 13 October report, and the three-year window will still include FY26's negative consolidated cash flow of ₹105 crore for some time <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>. The flaw is real, and it is the reason the verdict is a replacement review rather than an exit on the day. It is not enough to reverse the verdict on present evidence.</p>
+<h3>Flaw two: the guidance may already be out of reach</h3>
+<p>The company guides to 25 percent revenue growth in FY27, and the first quarter showed 8 percent <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>. The remaining quarters would need about 29.5 percent growth against the prior year. Utilisation is 44 percent of installed capacity, and the Changodar expansion has already been delayed <sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-19">[19]</a></sup>. The June-quarter release, issued in July, gave August 2026 as the expected completion month; this dossier has no source confirming it. If the expansion finishes later, the year's revenue will be lower than guided, and the margin and cash assumptions behind the guidance would also slip. The rebuttal is that the order book is large and that the company's delays have been described as timing rather than demand. That is a fair defence, and the record of the next quarter will decide it.</p>
+<h3>Flaw three: debt and pledge make the balance sheet less forgiving</h3>
+<p>Borrowings rose by ₹174 crore in a year, and about 14 percent of the shares are pledged as security <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-11">[11]</a></sup>. The company plans backward-integration investment of ₹900 to 1,000 crore, and management said it would fund the expansion through a mix of QIP proceeds, leasing and internal accruals <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>. A company that is spending heavily while its operating cash is negative must borrow or issue equity to fund the gap, and either adds risk for the minority holder. The rebuttal is that the <dfn>debt-to-equity</dfn> (borrowed money divided by owners' money, which means a measure of leverage) ratio is still 0.30, which leaves room. That is true today. The risk is that the room narrows fast if the expansion overruns.</p>
+<div class="triggers">
+<p><b>What would break the red-team case for replacement</b></p>
 <ul>
-  <li><strong>Current Market Price (CMP):</strong> ₹280.40</li>
-  <li><strong>20-Day Simple Moving Average (20-DMA):</strong> ₹286.50 (Price trading 2.1% below; short-term trend negative)<sup><a href="#cite_note-23">[23]</a></sup></li>
-  <li><strong>50-Day Simple Moving Average (50-DMA):</strong> ₹296.80 (Price trading 5.5% below; medium-term trend declining)<sup><a href="#cite_note-22">[22]</a></sup></li>
-  <li><strong>200-Day Simple Moving Average (200-DMA):</strong> ₹312.40 (Decisively breached on heavy volume; long-term trend compromised)<sup><a href="#cite_note-22">[22]</a></sup></li>
-  <li><strong>14-Day Relative Strength Index (RSI):</strong> 38.2 (Bearish momentum regime; lack of buying support)<sup><a href="#cite_note-23">[23]</a></sup></li>
-  <li><strong>Mansfield Relative Strength vs Nifty 500:</strong> 36/100 (Severe multi-month structural underperformance)<sup><a href="#cite_note-22">[22]</a></sup></li>
-  <li><strong>14-Day Average True Range (ATR):</strong> ₹12.50 (Daily price volatility band)</li>
+<li>A half-year consolidated operating cash flow that is clearly positive, with debtor days falling toward 75.</li>
+<li>Changodar running at or near its target utilisation after the expansion finishes.</li>
+<li>A verifiable three-year median multiple that makes the 3.5 hurdle reachable at the then-current price.</li>
 </ul>
-
-<h3>7.2 Asymmetry Mathematics &amp; Target Anchoring</h3>
-<p>
-  To prevent unanchored speculative forecasting, price targets are mathematically anchored to consensus forward earnings and historical valuation multiples:
-</p>
+</div>
+</section>
+<section class="chapter" id="invalidation">
+<h2>Invalidation levels</h2>
+<p>An invalidation level is the price at which the reasoning behind a position is shown to be wrong. The levels below are not forecasts. They are the points at which the decision must be revisited or executed, set before the moves happen so that the decision is made in advance.</p>
+<div class="howto">
+<p><b>How to read the levels.</b> The stop is the exit. The support levels are the points where a fall would confirm the trend is broken. The recovery levels are the points where the verdict could be reconsidered. Each level has a rule attached.</p>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Price levels and what each one means</caption>
+<thead><tr><th>Level</th><th class="num">Price</th><th>Rule and consequence</th></tr></thead>
+<tbody>
+<tr><td>Recovery, 200-day average</td><td class="num">₹297.95</td><td>A close above it for two sessions starts the review of the verdict; the cash gate still applies</td></tr>
+<tr><td>Recovery, 50-day average</td><td class="num">₹291.57</td><td>A sustained close above it with the average rising is the first sign of a turn</td></tr>
+<tr><td>Support, 20-day average</td><td class="num">₹281.06</td><td>A close below it breaks the near-term support and moves the posture beyond the standard band</td></tr>
+<tr><td>Support, 20-session low</td><td class="num">₹266.60</td><td>A close below it is a warning ahead of the stop</td></tr>
+<tr><td>Stop</td><td class="num">₹260.94</td><td>A close below it is the exit of the full position</td></tr>
+</tbody></table></div>
+<p>The stop is the only level that forces an action. The others change the reading of the position. The distance from the close to the stop is ₹29.71, or 10.2 percent, which is about 2.6 ATRs. That is a reasonable distance for a stock whose normal daily movement is 3.9 percent, and it means ordinary noise will not trigger the stop on a single session. A close, not an intraday touch, is the trigger, as the house rule defines it.</p>
+<div class="triggers">
+<p><b>Invalidation summary</b></p>
 <ul>
-  <li>
-    <strong>Forward FY27E EPS Projection:</strong> Management guidance targets standalone revenue of ~₹3,000–3,200 crore with OPM of ~16.0%, yielding projected consolidated FY27E net profit of ₹320–340 crore. Across 29.72 crore shares, this translates to forward FY27E EPS of approximately <strong>₹10.80</strong><sup><a href="#cite_note-3">[3]</a></sup>.
-  </li>
-  <li>
-    <strong>12–18 Month Base Target:</strong> Forward EPS of ₹10.80 multiplied by a conservative three-year median P/E multiple of 31.0x yields a base target of <strong>₹335.00</strong> (+19.47% from CMP ₹280.40)<sup><a href="#cite_note-30">[30]</a></sup>.
-  </li>
-  <li>
-    <strong>Blue-Sky Bull Target:</strong> In the event of full backward integration execution by Q1 FY28, margin expansion to 18.0%, and a re-rating to 35.0x forward earnings, the blue-sky target is estimated at <strong>₹420.00</strong> (+49.79%)<sup><a href="#cite_note-14">[14]</a></sup>.
-  </li>
-  <li>
-    <strong>Structural Invalidation Stop Floor:</strong> Placed at <strong>₹245.00</strong> (-12.62% from CMP), just below the critical multi-month support anchor of ₹250.00. A daily close below ₹245.00 confirms a breakdown into deep Stage 4 markdown with target ₹190.00.
-  </li>
-  <li>
-    <strong>Mathematical Asymmetry Ratio:</strong>
-    <br>
-    <div style="padding: 10px; background-color: var(--bg-highlight); border: 1px solid var(--border-color); display: inline-block; margin: 8px 0; font-family: var(--font-mono);">
-      Reward/Risk Asymmetry = (₹335.00 - ₹280.40) / (₹280.40 - ₹245.00) = ₹54.60 / ₹35.40 = <strong>1.54:1</strong>
-    </div>
-    <br>
-    <em>Institutional Mandate: Tactical Momentum positions strictly require an Asymmetry Ratio &ge; 3.5:1. An asymmetry of 1.54:1 represents poor risk compensation, confirming the liquidation verdict.</em>
-  </li>
+<li>Exit: a close below ₹260.94.</li>
+<li>Warning: a close below ₹266.60 or ₹281.06.</li>
+<li>Review: a close above ₹297.95 for two sessions, with the cash gate still to be checked.</li>
 </ul>
-
-<!-- SECTION 8: FATAL FLAWS & RED-TEAM -->
-<h2 id="fatal-flaws">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<p>
-  In accordance with institutional underwriting standards, the security is subjected to an adversarial red-team audit to evaluate failure modes that could permanently impair invested capital:
-</p>
-
-<ol>
-  <li>
-    <strong>Fatal Flaw 1: Chronic Working Capital Trap &amp; Cash Flow Starvation:</strong>
-    The most severe fundamental threat is TARIL's inability to translate explosive revenue growth into distributable cash flow. In FY26, working capital consumed ₹515.01 crore of liquidity, driving operating cash flow to negative ₹105.38 crore<sup><a href="#cite_note-13">[13]</a></sup>. With net working capital days stretched at 170 days, the company is vulnerable to short-term liquidity crunches. If state transcos delay retention money or milestone sign-offs, TARIL will be forced to increase bank borrowings (current finance costs: ₹72.4 Cr/year) or dilute equity shareholders via further QIPs, capping equity returns<sup><a href="#cite_note-6">[6]</a></sup>.
-  </li>
-  <li>
-    <strong>Fatal Flaw 2: High Domestic Discom &amp; State Transco Concentration:</strong>
-    While PGCIL represents a tier-1 counterparty with dependable payment mechanics, approximately 45–50% of TARIL's historical deliveries flow to state transmission utilities (such as GETCO, UPPTCL, MSETCL, and TANTRANSCO)<sup><a href="#cite_note-15">[15]</a></sup>. Historically in Indian capital goods, periods of surging utility order books are followed by severe payment deferrals, disputes over liquidated damages (LD), and 180+ day receivable lockups. Unlike peer Voltamp Transformers—which completely avoids state utilities to serve private industrial corporates—TARIL remains tethered to state budgetary cycles<sup><a href="#cite_note-27">[27]</a></sup>.
-  </li>
-  <li>
-    <strong>Fatal Flaw 3: Margin Vulnerability Prior to Q1 FY28 Backward Integration:</strong>
-    Management has guided that its ₹900–1,000 crore backward integration program (bringing bushings, CTC conductors, and fabrication in-house) will expand OPM by 200–250 bps<sup><a href="#cite_note-14">[14]</a></sup>. However, commissioning is not scheduled until Q1 FY28. Over the next 4–6 quarters, the company must execute fixed-price or lagged-escalation contracts while absorbing volatile international CRGO steel costs, imported bushing price hikes, and foreign exchange volatility, leaving operating margins susceptible to compression below 14.0%<sup><a href="#cite_note-18">[18]</a></sup>.
-  </li>
+</div>
+</section>
+<section class="estimate">
+<section class="chapter" id="estimates">
+<h2>What could make the estimates wrong</h2>
+<p>Every number in this dossier is a reported figure, a ledger value or a calculation from them. Each can be wrong in a specific way. The working for the one estimate that matters, the hurdle price, is set out here, and then the other assumptions are named.</p>
+<h4>The number</h4>
+<p>The number is the hurdle price of about ₹394.6. It is the price at which the stock would clear the 3.5 reward-to-risk test on the current stop. It is not a target. No target could be verified.</p>
+<h4>How it was calculated</h4>
+<p>The hurdle equals the close plus 3.5 times the risk per share. That is ₹290.65 plus 3.5 × ₹29.71, which gives ₹394.6. A verified target would be forward earnings times a three-year median price-to-earnings ratio. The median is missing, so the hurdle shows the multiple a target would need.</p>
+<h4>The inputs</h4>
+<ul>
+<li>Close on 9 October 2026: ₹290.65, from the ledger.</li>
+<li>Risk per share: ₹29.71, from a stop of ₹260.94.</li>
+<li>Consensus FY27 earnings per share: ₹10.13, later information retrieved 13 October <sup><a href="#cite_note-17">[17]</a></sup>.</li>
+<li>Management guidance: 25 percent revenue growth and a PAT margin of 9 to 10 percent <sup><a href="#cite_note-5">[5]</a></sup>. FY26 revenue was ₹2,507 crore <sup><a href="#cite_note-1">[1]</a></sup>.</li>
+<li>Shares outstanding: about 30.02 crore <sup><a href="#cite_note-17">[17]</a></sup>.</li>
+</ul>
+<p>The forward multiple at the 9 October close is 28.7 times, which is ₹290.65 divided by ₹10.13. Each input above is cited where it is used. Two inputs are later information and do not change the verdict.</p>
+<h4>The range</h4>
+<div class="table-wrap"><table class="wikitable">
+<caption>Earnings and price sensitivity, holding today's forward multiple</caption>
+<thead><tr><th>Case</th><th class="num">EPS, Rs</th><th class="num">Multiple, times</th><th class="num">Implied price, Rs</th><th class="num">Asymmetry</th></tr></thead>
+<tbody>
+<tr><td>Low (9% PAT margin)</td><td class="num">9.39</td><td class="num">28.7</td><td class="num">269.5</td><td class="num">−0.71</td></tr>
+<tr><td>Consensus</td><td class="num">10.13</td><td class="num">28.7</td><td class="num">290.6</td><td class="num">0.00</td></tr>
+<tr><td>High (10% PAT margin)</td><td class="num">10.43</td><td class="num">28.7</td><td class="num">299.2</td><td class="num">0.29</td></tr>
+<tr><td>Hurdle (3.5 test)</td><td class="num">10.13</td><td class="num">39.0</td><td class="num">394.6</td><td class="num">3.50</td></tr>
+</tbody></table></div>
+<p>The low and high cases use the guided revenue and margin range, applied to about 30.02 crore shares. Each implied price is the EPS times today's forward multiple, so the table is a sensitivity and not a target. Even the high case gives an asymmetry of 0.29, far below the 3.5 hurdle. The hurdle needs about 39 times consensus earnings, which is a re-rating of about 36 percent from the close.</p>
+<h4>If the number is off</h4>
+<p>The hurdle moves with two inputs. A verified median multiple of 39 times or more would meet the hurdle on consensus earnings, and the cash gate would still need to pass. If earnings reach the high case and the multiple holds at 28.7 times, the price would be about ₹299, still below the hurdle.</p>
+<h3>The consolidated cash figure</h3>
+<p>The cash gate rests on consolidated operating cash flow of minus ₹105 crore in FY26. That figure comes from one aggregator page <sup><a href="#cite_note-1">[1]</a></sup>. The standalone figure has a second source <sup><a href="#cite_note-9">[9]</a></sup>. If the audited consolidated figure differs materially, the gate result could change. The gate fails on the standalone basis too, which limits the risk.</p>
+<h3>The forward earnings estimate</h3>
+<p>The asymmetry test uses one compiled consensus figure <sup><a href="#cite_note-17">[17]</a></sup>. Another page implies a higher figure <sup><a href="#cite_note-10">[10]</a></sup>. A higher figure would not change the gate, because the three-year median multiple is still missing. It would change the hurdle price and the reading of the valuation.</p>
+<h3>The capacity figure</h3>
+<p>The 44 percent utilisation figure divides FY26 output by installed capacity from a news summary of the annual report <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-19">[19]</a></sup>. If effective capacity is lower because of product mix, utilisation would be higher. That would move the capacity measure from FAIL to WATCH. The scorecard would still not pass.</p>
+<h3>The price after the session</h3>
+<p>The ledger close is ₹290.65. A quote page showed the stock at ₹303.70 on 13 October, when the board was due to approve the September-quarter results <sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-13">[13]</a></sup>. That is later information. It does not change the verdict, because the failures are on cash conversion, the price structure and the missing target. A higher price widens the distance to the stop by the same amount, so the rule, not the quote, should decide any sale.</p>
+<h3>The September-quarter results</h3>
+<p>The results for the quarter ended 30 September 2026 were scheduled for 13 October. No fetched source reports their outcome, so this dossier does not use them. They are the next data point. Check the half-year cash flow, the debtor days and the Changodar utilisation first. A result that improves cash conversion would be the most important new evidence.</p>
+<div class="takeaway">
+<p>The estimates most likely to be wrong are the ones the verdict depends on least. The verdict depends on the cash figures, the price structure and the missing target. The cash figure should be confirmed first against the audited statements, because it carries the most weight.</p>
+</div>
+</section>
+</section>
+<section class="chapter" id="action">
+<h2>What we would do and when</h2>
+<p class="trigger">Trigger: a close below ₹260.94 exits the full position. A challenger that passes all five Layer 1 gates and clears the 3.5 hurdle replaces it.</p>
+<p>The action follows from the verdict and the rule. The steps below are in the order they should be taken, and each has a trigger, so that nothing depends on memory.</p>
+<h3>What to do now</h3>
+<p>Place a stop-loss order for the full 400 shares at ₹260.94 at the broker, as a standing instruction that triggers on a close below that level. Mark the holding for replacement review. Do not add to the position: the verdict forbids accumulating while the cash gate fails. Identify a challenger that passes all Layer 1 gates and clears the 3.5 asymmetry test, and make the swap in a single step once one qualifies. If no challenger qualifies, the stop remains the only exit and the position is held as a defined risk rather than as a conviction.</p>
+<h3>When to revisit</h3>
+<p>Revisit the verdict after the September-quarter results and again after the December-quarter results. At each revisit, check the consolidated operating cash flow for the half-year and the year to date, the debtor days, the Changodar utilisation and the price against the levels in the invalidation section. Under the verdict rule in the decision section, the verdict changes only when all five Layer 1 gates pass and Layer 2 reaches four passes of five. A good quarter alone does not change it.</p>
+<div class="example">
+<p><b>A worked swap.</b> Suppose a challenger passes all Layer 1 gates and has a verified target that gives an asymmetry of 4.0. Selling the 400 TARIL shares at ₹290.65 would release ₹1,16,260, and the realised loss against cost would be ₹6,646. If the challenger is bought with the proceeds at its own stop, the risk on the new position is set by its own stop, and the TARIL loss is taken once rather than carried in a weak position. The swap rule exists for exactly that case.</p>
+</div>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>What could not be verified is recorded here, along with every gate the evidence could not satisfy. Read the verdict with these limits in mind.</p>
+<h3>Figures recorded as not available</h3>
+<p>The three-year median P/E is not in any fetched source. The search used three queries across several pages. The September-quarter results outcome is also not available. The results were due on 13 October, and no fetched source reports them. Installed capacity comes from a news summary of the annual report. The company's own annual report could not be read. The consolidated operating cash flow has one source. The standalone figure has two.</p>
+<h3>Dates older than sixty days</h3>
+<p>Most financial figures describe fiscal 2026, which ended on 31 March 2026. The June-quarter figures describe 30 June 2026. Both are older than the sixty-day window. No newer period is published yet. These periods are flagged, not replaced. The citation check lists them as 46 exceptions. The shareholding figures are for September 2026 and are inside the window.</p>
+<h3>Sources that could not be read</h3>
+<p>The company's annual report, presentations, press release and transcript are PDF files. The fetch tool could not extract their text. The company's documents are therefore cited through reprints and summaries. The Ind-Ra rating is cited through a summary of the filing. The agency's own page could not be read. A 2022 rating rationale appeared in search and was not used. One peer page returned a rate-limit error on a re-fetch. The cached copy from the earlier fetch was checked against the recorded quotes.</p>
+<h3>Source conflicts and how they were treated</h3>
+<p>Sources disagree on small points. FY26 revenue is ₹2,507 crore on one aggregator and ₹2,509 crore on another <sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-7">[7]</a></sup>. The dossier uses ₹2,507 crore, which is the figure in the ratio calculations. The 52-week high is ₹501.20 on the ledger and ₹495.95 on a second page <sup><a href="#cite_note-12">[12]</a></sup>. The ledger figure is used throughout, because it is a closing basis. The market capitalisation at the 9 October close is derived, not quoted <sup><a href="#cite_note-17">[17]</a></sup>. EBITDA margin of 19.16 percent includes other income. Operating margin of 15 percent does not. Both are reported with that difference.</p>
+<h3>The data date and the later information</h3>
+<p>The verified session is 9 October 2026. It is the latest completed NSE session with verified prices for all instruments in this dossier. Figures from 12 and 13 October are labelled as later information. They include the 13 October price, the consensus estimate, the peer snapshots and the results date. None of them changes the verdict.</p>
+<h3>The holdings assumption</h3>
+<p>The holdings log is treated as authoritative. The account-level date in the log is 10 October 2026, a Saturday after the session. The log shows no TARIL entry after 7 September 2026. The date therefore does not change the TARIL position. The stale shortlist note about a purchase on 27 September has been set aside in favour of the log.</p>
+<h3>Departures from the standard process</h3>
+<p>The dossier departs from the standard in two places. The capacity band in Layer 2 is a judgment for this dossier. The house rules name the measure but give no band. Layer 2 and Layer 3 are reported for a holding whose Layer 1 gates fail. A new candidate would not be assessed that way. Both are informational and do not change the verdict.</p>
+<h3>Unresolved items</h3>
+<p>Six items remain open. The audited consolidated operating cash flow for FY26 has one source. The three-year median P/E is not published in the sources fetched. The target and the asymmetry ratio are therefore null. The September-quarter results are not available. The Ind-Ra rating is a summary only. The stale periods are listed above.</p>
+</section>
+<section class="chapter" id="notes">
+<h2>Notes, glossary and sources</h2>
+<p>The terms below are the ones the dossier uses, each explained in plain words for a reader new to these measures. Each term is also explained in the section where it first matters.</p>
+<h3>Glossary</h3>
+<p><b>ATR</b> (average true range) is the average daily price move in rupees, used to size stops. <b>RSI</b> (relative strength index) is a 0 to 100 momentum gauge. <b>EBITDA</b> is earnings before interest, taxes, depreciation and amortization, an operating profit measure. <b>ROCE</b> is operating profit as a share of all capital used. <b>EPS</b> (earnings per share) is profit divided by the number of shares. <b>Stage 2</b> means a rising uptrend. <b>Stage 4</b> means a falling trend below falling averages. <b>Base</b> is a sideways range where the price consolidates before a move. <b>Breakout</b> is a move above a resistance level. <b>Entry zone</b> is the price band where a buy would be considered. <b>Asymmetry</b> is the ratio of possible gain to possible loss. <b>Reward-to-risk</b> is the same idea as asymmetry. <b>Operating margin</b> is operating profit as a share of sales. <b>Debt-to-equity</b> is borrowed money divided by owners' money. <b>Price-to-earnings</b> (P/E) is the price divided by earnings per share. <b>Guidance</b> is management's published expectation for the year. <b>Measured move</b> is a target equal to the height of a base, added to its breakout point. <b>Working capital</b> is cash tied up in stock and debtors, net of creditors. <b>Consensus estimate</b> is the average of analysts' forecasts. <b>Moving average</b> is the average closing price over a set number of sessions. <b>Cash conversion</b> is operating cash flow divided by profit over three years. <b>CFO</b> is cash from operations. <b>PAT</b> is profit after tax. <b>Debtor days</b> are the average days taken to collect after a sale. <b>Order book</b> is the value of signed contracts not yet delivered. <b>Stop</b> is a predetermined price at which a position is sold to limit a loss.</p>
+<h3>Sources</h3>
+<p>The numbered references below are the sources cited in the body. Each figure traces to a source in the research record, which holds the verbatim quote, the retrieval time and the period each figure describes. Company filings are cited through the most direct available reproduction where the original is a PDF that could not be read. Where a source is an aggregator, it is used for ratios and shareholding and not as the sole basis for a financial claim.</p>
+<h3>Method notes</h3>
+<ol class="notes-list">
+<li>Stop: the lower of the 20-session swing low and the 20- and 50-day averages, less half an ATR. That gives 260.94 from 266.60 less 5.67.</li>
+<li>Cash gate basis: consolidated, because it is the group figure and the more favourable of the two bases. Standalone gives a negative ratio, so both fail.</li>
+<li>Asymmetry: (target minus close) divided by (close minus stop). With no verified target, the ratio is null, not low.</li>
+<li>Hurdle: the close plus 3.5 times the risk per share. It is about 394.6, or 39 times consensus earnings.</li>
+<li>Later information: prices, consensus and peer snapshots dated 12 and 13 October are labelled and do not change the verdict.</li>
 </ol>
-
-<div class="fatal-flaw-box">
-  <strong>Hard Invalidation Triggers for Exit Enforcement:</strong>
-  <ul>
-    <li><strong>Fundamental Trigger:</strong> Quarterly net working capital days exceed 180 days, or quarterly OPM compresses below 13.5%, or full-year FY27 CFO remains negative.</li>
-    <li><strong>Technical Trigger:</strong> A daily close below the structural invalidation stop of <strong>₹245.00</strong> on volume exceeding 1.5x the 20-day average.</li>
-  </ul>
-</div>
-
-<!-- SECTION 9: CAPITAL ALLOCATION & REPLACEMENT -->
-<h2 id="capital-allocation">9. Portfolio Allocation &amp; Replacement Guidance</h2>
-<p>
-  Under the rules of institutional capital stewardship, holding a losing tactical momentum position that has broken its 200-day moving average and failed its fundamental cash conversion floors creates severe portfolio drag. The capital allocation directives for TARIL are formulated as follows:
-</p>
-
-<table class="wikitable">
-  <caption>Actionable Capital Reallocation Orders (Zerodha Portfolio Scope)</caption>
-  <thead>
-    <tr>
-      <th>Order Parameter</th>
-      <th>Specification &amp; Action Directive</th>
-      <th>Strategic Rationale</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Current Position</strong></td>
-      <td>400 shares @ Avg Buy ₹307.27</td>
-      <td>Invested: ₹1,22,906.20 &bull; Unrealized Loss: -₹10,746.20 (-8.74%)</td>
-    </tr>
-    <tr>
-      <td><strong>Execution Order</strong></td>
-      <td><strong>SELL 400 shares at CMP ₹280.40</strong></td>
-      <td>Orderly liquidation within the ₹280.00–₹285.00 liquidity band to harvest <strong>₹1,12,160.00</strong> in cash.</td>
-    </tr>
-    <tr>
-      <td><strong>Stop Loss Floor</strong></td>
-      <td>₹245.00 (Hard Invalidation Stop)</td>
-      <td>Mandatory catastrophic stop: If CMP breaches ₹245.00 prior to planned execution, exit immediately via market order.</td>
-    </tr>
-    <tr>
-      <td><strong>Capital Destination</strong></td>
-      <td><strong>Pipeline Reallocation Swap</strong></td>
-      <td>Rotate proceeds into high-conviction shortlist candidates:
-        <br>&bull; <strong>Shilchar Technologies</strong> (Seed to Active_Watchlist: ROCE 50.7%, debt-free, CFO/PAT &gt;0.90x, export compounder)<sup><a href="#cite_note-26">[26]</a></sup>.
-        <br>&bull; <strong>Voltamp Transformers</strong> (Seed to Active_Watchlist: pristine net-cash balance sheet, zero discom credit risk)<sup><a href="#cite_note-27">[27]</a></sup>.
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 10: QUARTERLY MONITORING INDICATORS -->
-<h2 id="thesis-trackers">10. Key Quarterly Monitoring Indicators (Thesis Guardrails)</h2>
-<p>
-  Should the investment committee elect to track TARIL on an external watch registry pending resolution of its working capital cycle, the following three quantitative indicators serve as operational thesis guardrails:
-</p>
-
-<table class="wikitable">
-  <caption>Quarterly Thesis Trackers &amp; Operating Guardrails</caption>
-  <thead>
-    <tr>
-      <th>Monitoring Indicator</th>
-      <th>Analytical Significance &amp; Thesis Role</th>
-      <th>Bullish Re-Qualification Threshold</th>
-      <th>Bearish Invalidation Alert Level</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>1. Net Working Capital Days &amp; CFO</strong></td>
-      <td>Measures receivables realization and organic cash flow generation<sup><a href="#cite_note-13">[13]</a></sup>.</td>
-      <td>NWC days compress to &le; <strong>130 days</strong>; quarterly CFO turns positive &ge; <strong>₹100 Cr</strong>.</td>
-      <td>NWC days expand beyond <strong>180 days</strong>; CFO remains negative for two consecutive quarters.</td>
-    </tr>
-    <tr>
-      <td><strong>2. Operating EBITDA Margin (Consolidated)</strong></td>
-      <td>Reflects raw material pass-through efficiency and 765 kV mix leverage<sup><a href="#cite_note-2">[2]</a></sup>.</td>
-      <td>EBITDA margin stabilizes &ge; <strong>17.5%</strong> with steady raw material cost ratio &le; 72%.</td>
-      <td>EBITDA margin compresses below <strong>13.5%</strong> due to unhedged CRGO/copper cost surges.</td>
-    </tr>
-    <tr>
-      <td><strong>3. Backward Integration Capex Milestones</strong></td>
-      <td>Validates timeline adherence for in-house bushings and CTC manufacturing lines<sup><a href="#cite_note-14">[14]</a></sup>.</td>
-      <td>Commercial trial runs for bushings/CTC announced on schedule prior to <strong>Q1 FY28</strong>.</td>
-      <td>Delays exceeding 6 months or cost overruns surpassing <strong>₹250 Cr</strong> above budget.</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES & CITATIONS -->
-<h2 id="references">11. References, Regulatory Filings &amp; Statutory Disclosures</h2>
+</section>
+<section class="chapter" id="references">
+<h2 id="references">References</h2>
+<p>The numbered list is ordered by source, and each entry names the page and its date. Each linked page was fetched and cached, and the quoted passages used for the figures were checked against the cached text. Where a date is a retrieval date, it is the date the page was read for this dossier.</p>
 <ol class="reflist">
-  <li id="cite_note-1">^ Transformers and Rectifiers (India) Limited, <em>Audited Standalone and Consolidated Financial Results for the Financial Year Ended March 31, 2026</em>, BSE Exchange Filing, April 2026.</li>
-  <li id="cite_note-2">^ Transformers and Rectifiers (India) Limited, <em>Investor Presentation Q1 FY2027 (Quarter Ended June 30, 2026)</em>, filed with BSE &amp; NSE, July 21, 2026, pp. 3–14.</li>
-  <li id="cite_note-3">^ Transformers and Rectifiers (India) Limited, <em>Earnings Conference Call Transcript – Q1 FY27 Financial Results</em>, Remarks by Satyen Mamtora (MD &amp; CEO) and Chintan Trivedi (CFO), July 21, 2026, pp. 2–11.</li>
-  <li id="cite_note-4">^ National Stock Exchange of India (NSE), <em>Exchange Intimation: Receipt of Ultra-Mega Order Exceeding ₹1,000 Crore from Power Grid Corporation of India Limited (PGCIL)</em>, Announcement Ref: TARIL/SE/2026-27/019, July 2026.</li>
-  <li id="cite_note-5">^ Transformers and Rectifiers (India) Limited, <em>Earnings Conference Call Transcript – Q4 FY26 and Annual Financial Results</em>, Remarks by Satyen Mamtora (MD &amp; CEO), April 21, 2026, pp. 2–9.</li>
-  <li id="cite_note-6">^ India Ratings &amp; Research (Ind-Ra), <em>Rating Rationale: Transformers and Rectifiers (India) Limited Upgraded to 'IND A+'/Stable; Short-Term Rating Reaffirmed at 'IND A1+'</em>, Mumbai, June 3, 2025; Reaffirmed July 13, 2026.</li>
-  <li id="cite_note-7">^ Screener.in, <em>Transformers and Rectifiers (India) Ltd Consolidated Financial Analysis, Ratios, and Balance Sheet Trends</em>, Retrieved 26 September 2026. <a href="https://www.screener.in/company/TARIL/consolidated/" target="_blank">screener.in/company/TARIL/</a>.</li>
-  <li id="cite_note-8">^ National Stock Exchange of India (NSE), <em>Security Master for TARIL – ISIN INE763I01026</em>, NSE India Corporate Portal, September 2026.</li>
-  <li id="cite_note-9">^ Ministry of Corporate Affairs (MCA), <em>Certificate of Incorporation &amp; Historical Master Data – Transformers and Rectifiers (India) Limited (CIN: L38099GJ1994PLC022460)</em>, Government of India, 11 July 1994.</li>
-  <li id="cite_note-10">^ Central Electricity Authority (CEA), <em>National Electricity Plan (Transmission) – 2022 to 2027 and Perspective Plan to 2032</em>, Ministry of Power, Government of India, New Delhi, 2023.</li>
-  <li id="cite_note-11">^ Power Grid Corporation of India Limited (PGCIL), <em>Technical Specification &amp; Prequalified Manufacturer Directory for 765 kV Class Shunt Reactors and Power Transformers</em>, Gurugram, 2025.</li>
-  <li id="cite_note-12">^ Transformers and Rectifiers (India) Limited, <em>Exchange Intimation: Receipt of Major International Export Contract Valued at USD 16.25 Million</em>, BSE/NSE Disclosure, April 2026.</li>
-  <li id="cite_note-13">^ Transformers and Rectifiers (India) Limited, <em>Annual Report 2025–26: Notes to Consolidated Financial Statements (Note 28: Working Capital, Trade Receivables, and Cash Flows)</em>, Ahmedabad, June 2026, pp. 138–144.</li>
-  <li id="cite_note-14">^ Transformers and Rectifiers (India) Limited, <em>Director's Report &amp; Management Discussion and Analysis (MD&amp;A)</em>, Annual Report 2025–26, pp. 32–54.</li>
-  <li id="cite_note-15">^ Gujarat Energy Transmission Corporation Limited (GETCO), <em>Annual Transmission Infrastructure Capex Filings &amp; Vendor Performance Review</em>, Vadodara, 2025–2026.</li>
-  <li id="cite_note-16">^ Indian Electrical &amp; Electronics Manufacturers' Association (IEEMA), <em>Price Variation Formulae for Transformers and CRGO Steel Monthly Price Circulars</em>, Mumbai, 2026.</li>
-  <li id="cite_note-17">^ London Metal Exchange (LME) &amp; Hindalco Industries, <em>Electrolytic Copper Cathode Price Benchmarks and Contract Escalation Parameters</em>, Mumbai, 2025–2026.</li>
-  <li id="cite_note-18">^ Nippon Steel Corporation &amp; JFE Steel Corporation, <em>Global High-Grade CRGO (Cold-Rolled Grain-Oriented) Electrical Steel Market Dynamics and Supply Reports</em>, Tokyo, 2025.</li>
-  <li id="cite_note-19">^ Weidmann Electrical Technology AG, <em>High-Voltage Transformer Insulation Material Sourcing &amp; Lead Time Analysis</em>, Rapperswil, Switzerland, 2025.</li>
-  <li id="cite_note-20">^ Research Designs and Standards Organisation (RDSO), <em>Approved Vendor List for 25 kV AC Electric Locomotive Traction Transformers</em>, Ministry of Railways, Lucknow, 2025.</li>
-  <li id="cite_note-21">^ Ministry of New and Renewable Energy (MNRE), <em>National Green Hydrogen Mission – Technical Standards for Electrolyzer Rectifier Transformers</em>, New Delhi, 2024.</li>
-  <li id="cite_note-22">^ Trendlyne Research, <em>TARIL Technical Indicators, Moving Average Heatmap, and Relative Strength Analysis</em>, Trendlyne Analytics Platform, September 2026.</li>
-  <li id="cite_note-23">^ TradingView Interactive Technical Charting, <em>NSE:TARIL Daily and Weekly Candlestick Moving Average Breakdowns</em>, Retrieved 26 September 2026. <a href="https://www.tradingview.com/chart/?symbol=NSE%3ATARIL" target="_blank">tradingview.com/chart/?symbol=NSE:TARIL</a>.</li>
-  <li id="cite_note-24">^ Transformers and Rectifiers (India) Limited, <em>Corporate Brochure &amp; Moraiya Ultra-High-Voltage (1,200 kV) Test Laboratory Technical Specifications</em>, Ahmedabad, 2024.</li>
-  <li id="cite_note-25">^ Central Power Research Institute (CPRI), <em>Type Test Report: Short-Circuit Dynamic Withstand Certification for 765 kV Single Phase Auto-Transformer</em>, CPRI Bengaluru, 2024.</li>
-  <li id="cite_note-26">^ Shilchar Technologies Limited, <em>Annual Report 2025–26 and Screener Consolidated Ratios (ROCE 50.7%, Zero Debt, Export Mix)</em>, Vadodara, September 2026.</li>
-  <li id="cite_note-27">^ Voltamp Transformers Limited, <em>Audited Annual Financial Results FY 2025–26 &amp; Cash Balance Schedule (₹850+ Cr Net Cash)</em>, Vadodara, June 2026.</li>
-  <li id="cite_note-28">^ Bharat Bijlee Limited, <em>Annual Report 2025–26 &amp; Industrial Equipment Segment Breakdown</em>, Mumbai, June 2026.</li>
-  <li id="cite_note-29">^ Schneider Electric Infrastructure Limited, <em>Annual Financial Statements and Market Valuation Multiples</em>, Chennai, 2026.</li>
-  <li id="cite_note-30">^ Tijori Finance, <em>Transformers and Rectifiers (India) Historical Valuation Multiples, P/E Bands, and Forward Multiples</em>, Tijori Platform, September 2026.</li>
-  <li id="cite_note-31">^ CARE Ratings &amp; CRISIL Limited, <em>Industry Research: Indian Power Transmission Equipment Sector Review 2026–2030</em>, Mumbai, 2026.</li>
-  <li id="cite_note-32">^ Bombay Stock Exchange (BSE), <em>Shareholding Pattern Disclosure for Quarter Ended June 30, 2026 (Promoter Pledge: Nil, Institutional Stake)</em>, BSE Scrip 532928, July 2026.</li>
-  <li id="cite_note-33">^ Transformers and Rectifiers (India) Limited, <em>Exchange Disclosure: Board Approval for ₹900–1,000 Crore Backward Integration Capex Program</em>, BSE/NSE Filing, November 2025.</li>
-  <li id="cite_note-34">^ Zerodha Broking Limited, <em>Portfolio Holdings Ledger &amp; Transaction Audit Statement for Account Scope</em>, Portfolio Verification Statement, 26 September 2026.</li>
+<li id="cite_note-1"><a href="https://www.screener.in/company/TARIL/consolidated/">Screener, TARIL consolidated company page</a> (profit and loss, cash flow, balance sheet, ratios, announcements; retrieved 13 Oct 2026).</li>
+<li id="cite_note-2"><a href="https://www.screener.in/company/TARIL/">Screener, TARIL standalone company page</a> (standalone profit, cash flow and quarterly results; retrieved 13 Oct 2026).</li>
+<li id="cite_note-3"><a href="https://electricalmirror.net/transformers-rectifiers-q1-fy27-results-record-order-book/">Electricalmirror, reprint of the company's Q1 FY27 results release, 21 July 2026</a>.</li>
+<li id="cite_note-4"><a href="https://english.khabarpatri.com/2026/07/22/transformers-record-rs6630-crore-order-book-strengthens-growth-outlook/">Khabarpatri, reprint of the Q1 FY27 results release, 22 July 2026</a>.</li>
+<li id="cite_note-5"><a href="https://alphastreet.com/india/transformers-and-rectifiers-india-ltd-taril-q1-2027-earnings-call-transcript/">AlphaStreet, TARIL Q1 FY27 earnings call transcript, 21 July 2026</a>.</li>
+<li id="cite_note-6"><a href="https://indianstockalerts.com/news/taril-earning-call-transcript-q1-fy-2026-27-7069">Indian Stock Alerts, TARIL Q1 FY27 earnings call summary, filed 25 July 2026</a>.</li>
+<li id="cite_note-7"><a href="https://www.bicresearch.in/financials/taril">BIC Research, TARIL quarterly and annual results (BSE filings; data as of 2 Oct 2026)</a>.</li>
+<li id="cite_note-8"><a href="https://univest.in/blogs/transformers-and-rectifiers-q1-results-fy27-pat-64-crore">Univest, TARIL Q1 FY27 results article, 21 July 2026</a>.</li>
+<li id="cite_note-9"><a href="https://ticker.finology.in/company/TARIL">Finology Ticker, TARIL company page (standalone cash flow and pledging table; updated 13 Oct 2026)</a>.</li>
+<li id="cite_note-10"><a href="https://stockanalysis.com/quote/nse/TARIL/statistics/">StockAnalysis, NSE:TARIL statistics (debt to equity, valuation ratios; 13 Oct 2026)</a>.</li>
+<li id="cite_note-11"><a href="https://trendlyne.com/equity/share-holding/1417/TARIL/latest/transformers-rectifiers-india-ltd/">Trendlyne, TARIL latest shareholding pattern and pledge, September 2026 quarter</a>.</li>
+<li id="cite_note-12"><a href="https://www.stockssena.com/stocks/TARIL/investors">Stocks Sena, TARIL investors page (shareholding pattern to 30 Sep 2026; previous close; 52-week range)</a>.</li>
+<li id="cite_note-13"><a href="https://economictimes.indiatimes.com/transformers-rectifiers-india-ltd/stocksupdate/companyid-20444.cms">Economic Times, TARIL company announcements (to 8 Oct 2026)</a>.</li>
+<li id="cite_note-14"><a href="https://www.transformerindia.com/investor-relations/corporate-announcement">TARIL investor relations, corporate announcements page</a>.</li>
+<li id="cite_note-15"><a href="https://investeemate.com/2026/08/29/transformers-and-rectifiers-india-limited-order-intimation/">Investeemate, summary of the MEIL purchase-order intimation, 29 Aug 2026</a>.</li>
+<li id="cite_note-16"><a href="https://knowyourcompany.ai/markets/taril-major-contracts-capex-20260829">KnowYourCompany, summary of the Kaiga-related order, 29 Aug 2026</a>.</li>
+<li id="cite_note-17"><a href="https://www.marketscreener.com/quote/stock/TRANSFORMERS-AND-RECTIFIE-46730417/valuation/">MarketScreener, TARIL valuation and analyst estimates (retrieved 13 Oct 2026)</a>.</li>
+<li id="cite_note-18"><a href="https://blinkx.in/insights/pe/transformers-rectifiers-india-ltd-pe-ratio">Blinkx, TARIL P/E ratio and ten-day price history (retrieved 12 Oct 2026)</a>.</li>
+<li id="cite_note-19"><a href="https://www.ftmercati.com/en/pdf-29th-august-2026-ref-nse-195485.html">FT Mercati, summary of the company's FY26 annual report filing, 29 Aug 2026</a>.</li>
+<li id="cite_note-20"><a href="https://abajaba.com/articles/transformers-and-rectifiers-india-the-66-30-billion-order-bo-13sep2026">Abajaba, TARIL order book and capacity article, 13 Sep 2026</a>.</li>
+<li id="cite_note-21"><a href="https://innovacia.in/transformers-and-rectifiers-india-ltd-receives-ind-a-stable-rating-affirmation-from-india-ratings/">Innovacia, summary of the India Ratings affirmation filing, July 2026</a>.</li>
+<li id="cite_note-22"><a href="https://innovacia.in/voltamp-transformers-q1-fy27-results/">Innovacia, Voltamp Transformers Q1 FY27 results (peer)</a>.</li>
+<li id="cite_note-23"><a href="https://www.screener.in/company/ABB/consolidated/">Screener, ABB consolidated company page (header snapshot, 13 Oct 2026)</a>.</li>
+<li id="cite_note-24"><a href="https://www.screener.in/company/GVT&amp;D/consolidated/">Screener, GVT&amp;D consolidated company page (header snapshot, 13 Oct 2026)</a>.</li>
+<li id="cite_note-25"><a href="https://www.sahi.com/news/transformers-and-rectifiers-plans-uk-subsidiary-and-reallocation-of-qip-funds-3720-PE1_COR">Sahi, board approval of UK subsidiary and QIP reallocation, 27 Aug 2026</a>.</li>
+<li id="cite_note-26"><a href="https://indianstockalerts.com/news/taril-we-send-herewith-outcome-of-board-meeting-as-of-27-22301">Indian Stock Alerts, TARIL board meeting outcome, 27 Aug 2026</a>.</li>
+<li id="cite_note-27"><a href="https://www.wisesheets.io/pe-ratio/TRIL.NS">Wisesheets, TRIL.NS P/E ratio page (ten-year history; not a three-year median)</a>.</li>
 </ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-</div>
-</body>
-</html>
+</script></body></html>
