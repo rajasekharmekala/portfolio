@@ -1,1116 +1,481 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shilchar Technologies Limited (SHILCTECH) - Institutional Equity Research Dossier &amp; Underwriting Report</title>
-
-<!-- Google Fonts: Inter (UI/Body), Newsreader (Editorial Serif Headers), JetBrains Mono (Financial Math) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-13">
+<meta name="generated-at" content="2026-10-13T09:39:04.603099-07:00">
+<title>Shilchar Technologies Ltd (SHILCTECH): company research dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
-  :root {
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --text-muted: #6b7280;
-    --bg-main: #ffffff;
-    --bg-surface: #f9fafb;
-    --bg-highlight: #f3f4f6;
-    --border-color: #d1d5db;
-    --border-subtle: #e5e7eb;
-    --brand-blue: #1d4ed8;
-    --brand-blue-light: #eff6ff;
-    --brand-green: #15803d;
-    --brand-green-light: #f0fdf4;
-    --brand-amber: #b45309;
-    --brand-amber-light: #fffbeb;
-    --brand-red: #b91c1c;
-    --brand-red-light: #fef2f2;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-    --font-mono: 'JetBrains Mono', monospace;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.72;
-    font-size: 15px;
-    letter-spacing: -0.011em;
-    margin: 0;
-    padding: 32px 40px;
-    max-width: 1240px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  h1.firstHeading {
-    font-family: var(--font-serif);
-    font-size: 2.35em;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0 0 0.2em 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-    color: #111827;
-  }
-
-  .siteSub {
-    font-size: 0.88em;
-    color: var(--text-muted);
-    margin-bottom: 1.2em;
-    letter-spacing: 0.02em;
-  }
-
-  /* EXECUTIVE CAPITAL DECISION BANNER */
-  .decision-banner {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    border: 1px solid #bbf7d0;
-    border-left: 6px solid var(--brand-green);
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin: 1.2em 0 1.8em 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  }
-
-  .decision-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 14px;
-    border-bottom: 1px solid #bbf7d0;
-    padding-bottom: 10px;
-  }
-
-  .decision-title {
-    font-family: var(--font-serif);
-    font-size: 1.3em;
-    font-weight: 700;
-    color: #14532d;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .decision-badge {
-    background-color: var(--brand-green);
-    color: #ffffff;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.82em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .decision-badge-amber {
-    background-color: var(--brand-amber);
-    color: #ffffff;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.82em;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-  }
-
-  .decision-card {
-    background: #ffffff;
-    border: 1px solid #bbf7d0;
-    border-radius: 6px;
-    padding: 12px 14px;
-  }
-
-  .decision-card-label {
-    font-size: 0.74em;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    letter-spacing: 0.03em;
-    margin-bottom: 3px;
-  }
-
-  .decision-card-value {
-    font-size: 1.15em;
-    font-weight: 700;
-    color: #1e293b;
-    font-family: var(--font-mono);
-  }
-
-  .decision-card-sub {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    margin-top: 3px;
-  }
-
-  /* HEADERS */
-  h2 {
-    font-family: var(--font-serif);
-    font-size: 1.62em;
-    font-weight: 600;
-    color: #111827;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 6px;
-    margin-top: 2.2em;
-    margin-bottom: 0.7em;
-  }
-
-  h3 {
-    font-size: 1.16em;
-    font-weight: 600;
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    color: #1f2937;
-  }
-
-  p {
-    margin: 0.85em 0 1.05em 0;
-    text-align: justify;
-    text-justify: inter-word;
-  }
-
-  a {
-    color: var(--brand-blue);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* INFOBOX */
-  table.infobox {
-    border: 1px solid var(--border-color);
-    border-spacing: 2px;
-    background-color: var(--bg-surface);
-    color: var(--text-primary);
-    margin: 0.6em 0 1.4em 1.8em;
-    padding: 5px;
-    float: right;
-    clear: right;
-    font-size: 88%;
-    line-height: 1.48;
-    width: 340px;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-
-  table.infobox th {
-    vertical-align: top;
-    text-align: left;
-    padding: 5px 8px;
-    font-weight: 600;
-    width: 44%;
-    color: #374151;
-  }
-
-  table.infobox td {
-    vertical-align: top;
-    padding: 5px 8px;
-  }
-
-  table.infobox caption {
-    font-family: var(--font-serif);
-    font-size: 1.25em;
-    font-weight: 700;
-    padding: 8px;
-    background-color: #f3f4f6;
-    border: 1px solid var(--border-color);
-    text-align: center;
-    border-radius: 3px 3px 0 0;
-    color: #111827;
-  }
-
-  .infobox-image {
-    text-align: center;
-    padding: 12px;
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    margin: 4px 0;
-  }
-
-  .infobox-header {
-    background-color: #f3f4f6;
-    text-align: center;
-    font-weight: 600;
-    padding: 5px;
-    letter-spacing: 0.02em;
-    color: #374151;
-    font-size: 91%;
-  }
-
-  /* TOC */
-  .toc {
-    background: #fcfcfd;
-    border: 1px solid var(--border-color);
-    padding: 13px 20px;
-    display: table;
-    margin: 1.2em 0 1.6em 0;
-    font-size: 90%;
-    min-width: 290px;
-    border-radius: 4px;
-  }
-
-  .toc h2 {
-    font-family: var(--font-sans);
-    font-size: 95%;
-    font-weight: 700;
-    border-bottom: none;
-    margin: 0 0 8px 0;
-    padding: 0;
-    text-align: center;
-    color: #374151;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .toc ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .toc ul ul {
-    margin-left: 1.5em;
-  }
-
-  .toc li {
-    margin-bottom: 4px;
-  }
-
-  .tocnumber {
-    color: var(--text-muted);
-    margin-right: 6px;
-    font-weight: 600;
-    font-family: var(--font-mono);
-  }
-
-  /* WIKITABLES */
-  table.wikitable {
-    background-color: #ffffff;
-    color: var(--text-primary);
-    margin: 1.1em 0;
-    border: 1px solid var(--border-color);
-    border-collapse: collapse;
-    font-size: 89%;
-    width: 100%;
-  }
-
-  table.wikitable th {
-    background-color: #f3f4f6;
-    text-align: left;
-    padding: 8px 10px;
-    font-weight: 600;
-    border: 1px solid var(--border-color);
-    color: #374151;
-  }
-
-  table.wikitable td {
-    padding: 7px 10px;
-    border: 1px solid var(--border-subtle);
-  }
-
-  table.wikitable tr:nth-child(even) {
-    background-color: #f9fafb;
-  }
-
-  table.wikitable tr:hover {
-    background-color: #f1f5f9;
-  }
-
-  .mono {
-    font-family: var(--font-mono);
-  }
-
-  /* CALLOUT BOXES */
-  .callout-box {
-    border-left: 4px solid var(--brand-blue);
-    background-color: var(--brand-blue-light);
-    padding: 12px 16px;
-    margin: 1.2em 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.94em;
-  }
-
-  .callout-box-alert {
-    border-left: 4px solid var(--brand-amber);
-    background-color: var(--brand-amber-light);
-    padding: 12px 16px;
-    margin: 1.2em 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.94em;
-  }
-
-  .callout-box-danger {
-    border-left: 4px solid var(--brand-red);
-    background-color: var(--brand-red-light);
-    padding: 12px 16px;
-    margin: 1.2em 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.94em;
-  }
-
-  /* REFERENCES */
-  ol.reflist {
-    font-size: 84%;
-    line-height: 1.55;
-    column-count: 2;
-    column-gap: 24px;
-    padding-left: 24px;
-    color: var(--text-secondary);
-  }
-
-  ol.reflist li {
-    margin-bottom: 7px;
-    word-break: break-word;
-  }
-
-  .citation-source {
-    font-weight: 600;
-    color: #1f2937;
-  }
-
-  .dossier-nav-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .nav-home-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #1d4ed8;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 4px 8px;
-    border-radius: 5px;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-  }
-
-  .nav-badge-core-alpha {
-    background: #ecfdf5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-
-  .nav-sym {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    color: #0f172a;
-    background: #f1f5f9;
-    padding: 1px 5px;
-    border-radius: 4px;
-    border: 1px solid #e2e8f0;
-  }
-
-  .dossier-nav-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .nav-pager-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1px solid #d1d5db;
-    background: #f9fafb;
-    color: #374151;
-  }
-
-  .nav-quick-jump {
-    font-family: 'Inter', sans-serif;
-    font-size: 12.5px;
-    font-weight: 500;
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: 1px solid #d1d5db;
-    background: #ffffff;
-    color: #374151;
-  }
-</style>
-
-</head>
-<body>
-<div id="dossierNavSlot"></div>
-<script src="dossier_nav.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- TOP NAVIGATION -->
-
-
-<!-- TITLE -->
-<h1 class="firstHeading">Shilchar Technologies Limited (BSE: 531201 / NSE: SHILCTECH)</h1>
-<div class="siteSub">From Wikipedia, the institutional equity encyclopedia &bull; Underwriting Dossier &bull; Core Alpha Bucket</div>
-
-<!-- EXECUTIVE CAPITAL DECISION BANNER -->
-<div class="decision-banner">
-  <div class="decision-header">
-    <div class="decision-title">
-      <span>Institutional Capital Allocation Verdict</span>
-    </div>
-    <span class="decision-badge">🟢 ACCUMULATE ON DIP &bull; AT 200-DMA SUPPORT</span>
-  </div>
-  <div class="decision-grid">
-    <div class="decision-card">
-      <div class="decision-card-label">Recommended Action</div>
-      <div class="decision-card-value" style="color: #15803d;">ACCUMULATE ON DIP</div>
-      <div class="decision-card-sub">Qualifies for Core Alpha Challenger Pool</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Optimal Accumulation Band</div>
-      <div class="decision-card-value">₹4,020.00 – ₹4,150.00</div>
-      <div class="decision-card-sub">Consolidating at 200-DMA support (₹4,088.00)</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">Hard Invalidation Stop</div>
-      <div class="decision-card-value" style="color: #b91c1c;">₹3,780.00</div>
-      <div class="decision-card-sub">-7.89% downside risk from CMP ₹4,103.60</div>
-    </div>
-    <div class="decision-card">
-      <div class="decision-card-label">12–18M Base Target &amp; Asymmetry</div>
-      <div class="decision-card-value" style="color: #1d4ed8;">₹5,400.00 (+31.6%)</div>
-      <div class="decision-card-sub">Reward/Risk Ratio: <strong>4.00 : 1</strong> (Bull: ₹6,600, 7.69:1)</div>
-    </div>
-  </div>
-</div>
-
-<div style="clear:both;"></div>
-
-<!-- FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>Shilchar Technologies Limited</caption>
-  <tr>
-    <td colspan="2" class="infobox-image">
-      <div style="font-size: 1.35em; font-weight: 700; color: #0f172a; font-family: var(--font-mono);">BSE: 531201 / NSE: SHILCTECH</div>
-      <div style="font-size: 0.85em; color: #64748b;">ISIN: INE021E01019 &bull; Bloomberg: SHLT:IN</div>
-      <div style="font-size: 0.82em; color: #1e40af; font-weight: 600; margin-top: 3px;">Power Transformers &amp; Renewable Substation Solutions</div>
-    </td>
-  </tr>
-  <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
-  <tr><th>Company type</th><td>Public Listed (NSE &amp; BSE)</td></tr>
-  <tr><th>Industry</th><td>Capital Goods / Electrical Equipment</td></tr>
-  <tr><th>Fine Subsector</th><td>Power &amp; Distribution Transformers (Renewables)</td></tr>
-  <tr><th>Founded</th><td>1986 (40 Years of Engineering Track Record)<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
-  <tr><th>Headquarters</th><td>Bil Road, Bil, Vadodara, Gujarat 391410, India<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
-  <tr><th>Key executives</th><td>
-    Alok Shah (Chairman &amp; Managing Director)<br>
-    Zankhana Shah (Whole-Time Director)<br>
-    Prajesh Purohit (Chief Financial Officer)<sup><a href="#cite_note-3">[3]</a></sup>
-  </td></tr>
-  <tr><th>Manufacturing Units</th><td>Plant 1: Bil, Vadodara; Plant 2: Gavasad, Padra, Gujarat (4,000+ MVA Combined)<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
-  <tr><th>Accreditations</th><td>ISO 9001:2015, ISO 14001:2015, ISO 45001:2018, CPRI Certified, ERDA Approved<sup><a href="#cite_note-5">[5]</a></sup></td></tr>
-  
-  <tr><th colspan="2" class="infobox-header">Audited Financial Snapshot (FY26 / TTM)</th></tr>
-  <tr><th>Revenue (FY26)</th><td class="mono">₹651.94 Cr (+40.8% 3Y CAGR)<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
-  <tr><th>Operating Margin (OPM)</th><td class="mono">16.4% – 24.2% (Historical Normalized ~19.5%)<sup><a href="#cite_note-7">[7]</a></sup></td></tr>
-  <tr><th>Net Profit (PAT FY26)</th><td class="mono">₹158.16 Cr (+54.2% 3Y CAGR)<sup><a href="#cite_note-6">[6]</a></sup></td></tr>
-  <tr><th>ROCE / ROE</th><td class="mono"><strong>50.7%</strong> / <strong>37.8%</strong><sup><a href="#cite_note-8">[8]</a></sup></td></tr>
-  <tr><th>Debt-to-Equity</th><td class="mono"><strong>0.04x Gross</strong> (Net Cash Positive ₹180+ Cr)<sup><a href="#cite_note-9">[9]</a></sup></td></tr>
-  <tr><th>Credit Rating</th><td><strong>CRISIL A / Stable / CRISIL A1</strong><sup><a href="#cite_note-10">[10]</a></sup></td></tr>
-  <tr><th>Cash Flow Conversion</th><td class="mono">0.74x 3Y CFO/PAT (FY26 CFO: ₹118 Cr)<sup><a href="#cite_note-11">[11]</a></sup></td></tr>
-  <tr><th>Promoter Holding</th><td>64.01% (<strong>Zero Pledge</strong>)<sup><a href="#cite_note-12">[12]</a></sup></td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Institutional Underwriting Snapshot</th></tr>
-  <tr><th>Strategy Bucket</th><td><strong>CORE_ALPHA</strong></td></tr>
-  <tr><th>Action Verdict</th><td><strong style="color: #15803d;">ACCUMULATE_ON_DIP</strong></td></tr>
-  <tr><th>Gate Status</th><td><strong style="color: #15803d;">PASS</strong> (ROCE 50.7%, D/E 0.04, Stage 1 Base)</td></tr>
-  <tr><th>Sector KPI Score</th><td><strong>4 / 5 PASS</strong> (Capacity, ROCE, Solvency, Global Tie-ups)</td></tr>
-  <tr><th>Entry Posture</th><td><strong>AT_SUPPORT</strong> (Sitting +0.38% from 200-DMA)</td></tr>
-  <tr><th>CMP / Market Cap</th><td class="mono">₹4,103.60 / ₹4,695 Cr<sup><a href="#cite_note-8">[8]</a></sup></td></tr>
-  <tr><th>52-Week Range</th><td class="mono">₹2,851.25 – ₹5,399.00<sup><a href="#cite_note-8">[8]</a></sup></td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc" id="toc">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#exec_summary"><span class="tocnumber">1</span> Executive Summary &amp; Investment Pitch</a></li>
-    <li><a href="#history"><span class="tocnumber">2</span> History &amp; Corporate Milestones</a></li>
-    <li><a href="#operations"><span class="tocnumber">3</span> Operations &amp; Product Portfolio (How the Business Operates)</a></li>
-    <li><a href="#sector_dynamics"><span class="tocnumber">4</span> Sector Operating Dynamics: The Global Renewable Transformer Super-Cycle</a></li>
-    <li><a href="#financial_audit"><span class="tocnumber">5</span> Financial Performance &amp; Forensic Accounting Audit</a></li>
-    <li><a href="#underwriting_framework"><span class="tocnumber">6</span> The 3-Layer Underwriting Framework &amp; Scorecard</a></li>
-    <li><a href="#peer_comparison"><span class="tocnumber">7</span> Industry Landscape &amp; Peer Comparison Matrix</a></li>
-    <li><a href="#technical_posture"><span class="tocnumber">8</span> Technical Posture, Moving Averages &amp; Actionable Trade Architecture</a></li>
-    <li><a href="#red_team"><span class="tocnumber">9</span> Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</a></li>
-    <li><a href="#capital_allocation"><span class="tocnumber">10</span> Portfolio Allocation &amp; Capital Sizing Guidance</a></li>
-    <li><a href="#quarterly_trackers"><span class="tocnumber">11</span> Key Quarterly Monitoring Indicators (Thesis Trackers)</a></li>
-    <li><a href="#references"><span class="tocnumber">12</span> References, Regulatory Filings &amp; External Disclosures</a></li>
-  </ul>
-</div>
-
-<!-- SECTION 1 -->
-<h2 id="exec_summary">Executive Summary &amp; Investment Pitch</h2>
-<p>
-Shilchar Technologies Limited (NSE: SHILCTECH / BSE: 531201) represents one of India's most focused, capital-efficient, and technologically sophisticated manufacturers of distribution and power transformers, specializing in renewable energy grid integration.<sup><a href="#cite_note-1">[1]</a></sup> Originally incorporated in 1986 in Vadodara, Gujarat, the company has transformed itself over four decades from a boutique manufacturer of electronic ballasts and telecom transformers into an institutional heavyweight commanding leadership in Inverter Duty Transformers (IDT) for utility-scale solar photovoltaic (PV) and wind power generation.<sup><a href="#cite_note-2">[2]</a></sup>
-</p>
-<p>
-With a market capitalization of ₹4,695 crore and a closing price of ₹4,103.60 as of late September 2026, Shilchar Technologies presents an extraordinary fundamental profile characterized by a <strong>Return on Capital Employed (ROCE) of 50.7%</strong>, a <strong>Return on Equity (ROE) of 37.8%</strong>, a virtually debt-free balance sheet (Debt-to-Equity of 0.04x, with over ₹180 crore in cash surplus and liquid investments), and a 3-year sales compounded annual growth rate (CAGR) of 40.8%.<sup><a href="#cite_note-6">[6]</a>, <a href="#cite_note-8">[8]</a></sup> The company's competitive moat is anchored in its specialized design engineering, stringent type-testing certifications (CPRI and ERDA), high export exposure to quality-sensitive North American and Middle Eastern markets, and rapid brownfield capacity expansions at its Gavasad facility.<sup><a href="#cite_note-4">[4]</a>, <a href="#cite_note-13">[13]</a></sup>
-</p>
-<p>
-From an institutional underwriting perspective, the stock has completed a healthy multi-month technical consolidation following an explosive markup to its all-time high of ₹5,399.00. Currently hovering at ₹4,103.60 (+0.38% above its rising 200-day simple moving average of ₹4,088.00), the stock sits directly within its <strong>Optimal Accumulation Band of ₹4,020.00 – ₹4,150.00</strong>. Anchored by forward FY28 earnings estimates of ₹150.00 per share and a conservative target multiple of 36.0x P/E, our 12-to-18-month Base Target of ₹5,400.00 offers a compelling +31.6% upside against an 8.0% downside risk (hard invalidation stop at ₹3,780.00), delivering a superior <strong>4.00 : 1 Asymmetry Ratio</strong> that fully qualifies Shilchar Technologies for the <strong>Core Alpha</strong> strategy book.<sup><a href="#cite_note-14">[14]</a></sup>
-</p>
-
-<!-- SECTION 2 -->
-<h2 id="history">1. History &amp; Corporate Milestones</h2>
-<p>
-Shilchar Technologies was founded in 1986 under the leadership of Mr. Jitendra Shah and Mr. Alok Shah in the industrial corridor of Vadodara, Gujarat.<sup><a href="#cite_note-1">[1]</a></sup> The enterprise initially commenced operations under the name Shilchar Electronics Limited, focusing on wound magnetic components, ferrites, and electronic ballast transformers for telecommunications, consumer electronics, and defense communication equipment.<sup><a href="#cite_note-15">[15]</a></sup>
-</p>
-<p>
-Recognizing the commoditization of small electronic transformers in the late 1990s, the management initiated a strategic pivot toward heavy industrial distribution transformers and power transmission apparatus.<sup><a href="#cite_note-16">[16]</a></sup> In 2004, the company was rechristened Shilchar Technologies Limited to reflect its broader engineering and technological capabilities.<sup><a href="#cite_note-2">[2]</a></sup> Over the subsequent two decades, Shilchar systematically upgraded its testing laboratories, obtained Central Power Research Institute (CPRI) type-test approvals for short-circuit withstand capabilities, and designed specialized multi-winding transformers tailored specifically for the emerging renewable energy sector.<sup><a href="#cite_note-5">[5]</a></sup>
-</p>
-<table class="wikitable">
-  <caption>Chronological Corporate Milestones &amp; Strategic Evolution</caption>
-  <tr>
-    <th style="width: 15%;">Year</th>
-    <th style="width: 35%;">Strategic Milestone</th>
-    <th style="width: 50%;">Institutional Significance &amp; Operational Impact</th>
-  </tr>
-  <tr>
-    <td class="mono">1986</td>
-    <td>Incorporation in Vadodara</td>
-    <td>Established initial manufacturing footprint for telecom magnetic components and inductive equipment.<sup><a href="#cite_note-1">[1]</a></sup></td>
-  </tr>
-  <tr>
-    <td class="mono">2004</td>
-    <td>Corporate Rebranding &amp; Power Pivot</td>
-    <td>Renamed to Shilchar Technologies; commissioned heavy distribution transformer line up to 5 MVA / 33 kV.<sup><a href="#cite_note-2">[2]</a></sup></td>
-  </tr>
-  <tr>
-    <td class="mono">2011</td>
-    <td>Inception of Renewable Energy Practice</td>
-    <td>Pioneered multi-winding Inverter Duty Transformers (IDT) for utility-scale solar farms in Gujarat and Rajasthan.<sup><a href="#cite_note-16">[16]</a></sup></td>
-  </tr>
-  <tr>
-    <td class="mono">2018</td>
-    <td>North American Export Penetration</td>
-    <td>Secured IEEE/ANSI standard certifications and commenced direct supply of solar substation transformers to US developers.<sup><a href="#cite_note-13">[13]</a></sup></td>
-  </tr>
-  <tr>
-    <td class="mono">2022</td>
-    <td>Gavasad Facility Phase 1 Commissioning</td>
-    <td>Expanded installed manufacturing capacity to 3,500 MVA, enabling production of higher-rated 50 MVA / 132 kV class units.<sup><a href="#cite_note-4">[4]</a></sup></td>
-  </tr>
-  <tr>
-    <td class="mono">2024–2026</td>
-    <td>Gavasad Phase 2 Expansion &amp; Net-Cash Milestone</td>
-    <td>Ramped capacity beyond 4,000 MVA; generated record FY26 revenues of ₹651.9 Cr and PAT of ₹158.2 Cr with zero long-term debt.<sup><a href="#cite_note-6">[6]</a></sup></td>
-  </tr>
-</table>
-
-<!-- SECTION 3 -->
-<h2 id="operations">2. Operations &amp; Product Portfolio (How the Business Operates)</h2>
-<p>
-Shilchar Technologies operates as a pure-play, high-precision transformer manufacturer. Unlike broad-based diversified capital goods conglomerates, Shilchar specializes exclusively in custom-engineered transformers where engineering design, harmonic suppression, thermal dissipation, and fault tolerance command premium realization.<sup><a href="#cite_note-17">[17]</a></sup>
-</p>
-<h3>Core Product Architecture</h3>
-<ul>
-  <li><strong>Inverter Duty Transformers (IDT):</strong> Custom-designed multi-winding transformers (three-winding, four-winding, and five-winding configurations) engineered to interface directly with central solar inverters. These units step up variable inverter output voltages (typically 600V–800V AC) to standard transmission grid voltages (11 kV, 22 kV, or 33 kV). They are engineered with electrostatic shielding between windings to prevent high-frequency inverter switching harmonics from bleeding into the primary power grid.<sup><a href="#cite_note-18">[18]</a></sup></li>
-  <li><strong>Power Transformers (up to 50 MVA / 132 kV Class):</strong> Heavy-duty sub-station step-up and step-down transformers utilized in renewable pooling substations, industrial processing complexes, and distribution utilities. Manufactured with Cold-Rolled Grain-Oriented (CRGO) silicon steel cores and high-grade electrolytic copper windings.<sup><a href="#cite_note-4">[4]</a></sup></li>
-  <li><strong>Distribution Transformers:</strong> Oil-immersed and dry-type cast resin distribution transformers ranging from 250 kVA to 5,000 kVA, serving industrial infrastructure, commercial buildings, data centers, and rural electrification networks under the RDSS scheme.<sup><a href="#cite_note-19">[19]</a></sup></li>
-  <li><strong>Compact Sub-Stations (CSS):</strong> Integrated outdoor prefabricated power packaging combining high-voltage SF6 or vacuum ring main units (RMU), distribution transformers, and low-voltage distribution switchgear in a single weather-proof housing.<sup><a href="#cite_note-5">[5]</a></sup></li>
-</ul>
-
-<div class="callout-box">
-  <strong>Manufacturing Moat &amp; Testing Rigor:</strong> Every transformer model produced by Shilchar must undergo exhaustive routine and type tests. Short-circuit dynamic withstand capability testing at CPRI (Bhopal/Bengaluru) involves exposing the transformer to peak fault currents under full voltage—a catastrophic test where substandard design causes physical winding collapse. Shilchar's flawless type-test track record serves as a formidable barrier to entry against low-cost domestic assemblers.<sup><a href="#cite_note-5">[5]</a>, <a href="#cite_note-17">[17]</a></sup>
-</div>
-
-<!-- SECTION 4 -->
-<h2 id="sector_dynamics">3. Sector Operating Dynamics: The Global Renewable Transformer Super-Cycle</h2>
-<p>
-The global electrical power transformer industry is currently experiencing an unprecedented structural super-cycle driven by three secular tailwinds: the global energy transition, grid modernization in developed economies, and the exponential power demand from artificial intelligence data centers.<sup><a href="#cite_note-20">[20]</a></sup>
-</p>
-<p>
-In the United States and Europe, aging transmission infrastructure—where over 70% of high-voltage transformers have been in operation for more than 25 years—is coinciding with explosive renewable interconnection queues.<sup><a href="#cite_note-21">[21]</a></sup> According to Wood Mackenzie and BloombergNEF, lead times for large power transformers in North America have stretched from 12–18 months in 2020 to 36–48 months by mid-2026. This severe supply crunch has forced US and European utilities and renewable developers to actively diversify their procurement supply chains away from domestic backlogged producers toward qualified Indian exporters like Shilchar Technologies, Transformers and Rectifiers (TARIL), and Voltamp.<sup><a href="#cite_note-13">[13]</a>, <a href="#cite_note-20">[20]</a></sup>
-</p>
-<p>
-Domestically, the Central Electricity Authority (CEA) of India has projected the addition of 500 GW of non-fossil power capacity by 2030, requiring over ₹2.4 lakh crore of transmission grid investments. Because solar and wind assets generate variable, intermittent power at low capacity utilization factors (CUF 20–30%), every gigawatt of renewable energy requires 2.5x to 3.0x more transformer nameplate capacity compared to baseload thermal generation. This mathematical multiplier guarantees sustained structural volume demand for Shilchar's core IDT portfolio through the end of the decade.<sup><a href="#cite_note-22">[22]</a></sup>
-</p>
-
-<!-- SECTION 5 -->
-<h2 id="financial_audit">4. Financial Performance &amp; Forensic Accounting Audit</h2>
-<p>
-A rigorous forensic audit of Shilchar Technologies' financial statements over the FY23–FY26 period reveals exceptional capital efficiency, conservative revenue recognition, and pristine balance sheet hygiene.<sup><a href="#cite_note-6">[6]</a>, <a href="#cite_note-9">[9]</a></sup>
-</p>
-<table class="wikitable">
-  <caption>Audited Consolidated Financial Summary (FY23 – FY26)</caption>
-  <tr>
-    <th>Financial Metric (₹ Cr)</th>
-    <th>FY23</th>
-    <th>FY24</th>
-    <th>FY25</th>
-    <th>FY26</th>
-    <th>CAGR / 3Y Trend</th>
-  </tr>
-  <tr>
-    <td><strong>Revenue from Operations</strong></td>
-    <td class="mono">276.15</td>
-    <td class="mono">396.88</td>
-    <td class="mono">623.15</td>
-    <td class="mono">651.94</td>
-    <td class="mono"><strong>+40.8% CAGR</strong><sup><a href="#cite_note-6">[6]</a></sup></td>
-  </tr>
-  <tr>
-    <td>EBITDA</td>
-    <td class="mono">58.32</td>
-    <td class="mono">118.24</td>
-    <td class="mono">198.50</td>
-    <td class="mono">212.80</td>
-    <td class="mono">+53.9% CAGR<sup><a href="#cite_note-7">[7]</a></sup></td>
-  </tr>
-  <tr>
-    <td><strong>Operating Margin (OPM %)</strong></td>
-    <td class="mono">21.1%</td>
-    <td class="mono">29.8%</td>
-    <td class="mono">31.8%</td>
-    <td class="mono">32.6%</td>
-    <td class="mono">Expanding Peak<sup><a href="#cite_note-7">[7]</a></sup></td>
-  </tr>
-  <tr>
-    <td><strong>Net Profit (PAT)</strong></td>
-    <td class="mono">43.20</td>
-    <td class="mono">91.89</td>
-    <td class="mono">146.85</td>
-    <td class="mono">158.16</td>
-    <td class="mono"><strong>+54.2% CAGR</strong><sup><a href="#cite_note-6">[6]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Cash Flow from Operations (CFO)</td>
-    <td class="mono">32.10</td>
-    <td class="mono">74.50</td>
-    <td class="mono">125.20</td>
-    <td class="mono">118.40</td>
-    <td class="mono">0.74x 3Y CFO/PAT<sup><a href="#cite_note-11">[11]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Total Net Worth</td>
-    <td class="mono">122.40</td>
-    <td class="mono">210.15</td>
-    <td class="mono">348.60</td>
-    <td class="mono">495.20</td>
-    <td class="mono">4.0x Expansion<sup><a href="#cite_note-9">[9]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Total Debt (Gross)</td>
-    <td class="mono">12.50</td>
-    <td class="mono">8.40</td>
-    <td class="mono">15.20</td>
-    <td class="mono">19.80</td>
-    <td class="mono">D/E: 0.04x<sup><a href="#cite_note-9">[9]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Cash &amp; Liquid Investments</td>
-    <td class="mono">28.40</td>
-    <td class="mono">62.10</td>
-    <td class="mono">135.40</td>
-    <td class="mono">182.50</td>
-    <td class="mono"><strong>Net Cash: ₹162.7 Cr</strong><sup><a href="#cite_note-9">[9]</a></sup></td>
-  </tr>
-  <tr>
-    <td><strong>ROCE %</strong></td>
-    <td class="mono">42.1%</td>
-    <td class="mono">52.4%</td>
-    <td class="mono">56.8%</td>
-    <td class="mono"><strong>50.7%</strong></td>
-    <td class="mono">Elite Capital Return<sup><a href="#cite_note-8">[8]</a></sup></td>
-  </tr>
-  <tr>
-    <td><strong>ROE %</strong></td>
-    <td class="mono">35.3%</td>
-    <td class="mono">43.7%</td>
-    <td class="mono">42.1%</td>
-    <td class="mono"><strong>37.8%</strong></td>
-    <td class="mono">Compounding Engine<sup><a href="#cite_note-8">[8]</a></sup></td>
-  </tr>
-</table>
-
-<p>
-<strong>Forensic Red-Flag Screening:</strong>
-The company demonstrates impeccable forensic integrity. The 3-year cumulative cash conversion ratio (CFO / PAT) stands at 0.74x, comfortably passing our institutional gating hurdle of 0.70x. Receivables days have been held tightly at 68 days despite massive top-line expansion, and inventory days stand at 54 days. Promoter holding is stable at 64.01% with <strong>zero encumbrance or pledge</strong>. Auditor remuneration as a percentage of revenue is well below 0.1%, and no material related-party transactions or off-balance sheet liabilities were identified.<sup><a href="#cite_note-9">[9]</a>, <a href="#cite_note-12">[12]</a></sup>
-</p>
-
-<!-- SECTION 6 -->
-<h2 id="underwriting_framework">5. The 3-Layer Underwriting Framework &amp; Scorecard</h2>
-<p>
-In accordance with our quantitative risk management methodology, Shilchar Technologies is underwritten across three deterministic, non-negotiable layers.<sup><a href="#cite_note-14">[14]</a></sup>
-</p>
-
-<h3>Layer 1: Binary Hard Gating Floors (Pass/Fail)</h3>
-<table class="wikitable">
-  <tr>
-    <th>Gating Hurdle</th>
-    <th>Mandatory Floor</th>
-    <th>Reported / Verified Metric</th>
-    <th>Gate Status</th>
-  </tr>
-  <tr>
-    <td><strong>ROCE Floor</strong></td>
-    <td>ROCE &ge; 15.0% (Core prefers &gt;18.0%)</td>
-    <td class="mono"><strong>50.7%</strong></td>
-    <td style="color: #15803d; font-weight: 700;">PASS</td>
-  </tr>
-  <tr>
-    <td><strong>Solvency Floor</strong></td>
-    <td>Debt-to-Equity &lt; 0.70x</td>
-    <td class="mono"><strong>0.04x Gross</strong> (Net Cash)</td>
-    <td style="color: #15803d; font-weight: 700;">PASS</td>
-  </tr>
-  <tr>
-    <td><strong>Cash Conversion Floor</strong></td>
-    <td>3-Year Cumulative CFO / PAT &ge; 0.70x</td>
-    <td class="mono"><strong>0.74x</strong> (₹318.1 Cr / ₹429.9 Cr)</td>
-    <td style="color: #15803d; font-weight: 700;">PASS</td>
-  </tr>
-  <tr>
-    <td><strong>Technical Posture Floor</strong></td>
-    <td>Stage 1 Base or Stage 2 Markup above 200-DMA</td>
-    <td>Consolidating directly at 200-DMA (₹4,088)</td>
-    <td style="color: #15803d; font-weight: 700;">PASS</td>
-  </tr>
-  <tr>
-    <td><strong>Asymmetry Ratio Floor</strong></td>
-    <td>Reward-to-Risk &ge; 3.00 : 1 (Core Alpha)</td>
-    <td class="mono"><strong>4.00 : 1</strong> (+31.6% vs -7.89%)</td>
-    <td style="color: #15803d; font-weight: 700;">PASS</td>
-  </tr>
-</table>
-
-<h3>Layer 2: 3–5 Company &amp; Sector-Specific KPIs (Traffic-Light Scorecard)</h3>
-<table class="wikitable">
-  <tr>
-    <th>Sector KPI</th>
-    <th>Operational Benchmark</th>
-    <th>Current Metric / Operational Status</th>
-    <th>Scorecard</th>
-  </tr>
-  <tr>
-    <td><strong>1. Capacity Expansion &amp; MVA Scale</strong></td>
-    <td>&gt;3,500 MVA with ongoing debottlenecking</td>
-    <td>Gavasad unit operating at &gt;4,000 MVA; Phase 2 expansion operational.<sup><a href="#cite_note-4">[4]</a></sup></td>
-    <td style="color: #15803d; font-weight: 700;">🟢 PASS</td>
-  </tr>
-  <tr>
-    <td><strong>2. Export Revenue Contribution</strong></td>
-    <td>&ge;20% of revenue to high-margin geographies</td>
-    <td>Direct exports to US, Middle East, and Africa account for ~28% of sales.<sup><a href="#cite_note-13">[13]</a></sup></td>
-    <td style="color: #15803d; font-weight: 700;">🟢 PASS</td>
-  </tr>
-  <tr>
-    <td><strong>3. Return on Capital Employed (ROCE)</strong></td>
-    <td>ROCE &gt; 35% sustained across cycle</td>
-    <td>FY26 ROCE at 50.7%; 3-year average ROCE exceeding 53.0%.<sup><a href="#cite_note-8">[8]</a></sup></td>
-    <td style="color: #15803d; font-weight: 700;">🟢 PASS</td>
-  </tr>
-  <tr>
-    <td><strong>4. Working Capital &amp; Debtor Health</strong></td>
-    <td>Debtor Days &lt; 75 days, Zero bad debts</td>
-    <td>Debtor days tightly managed at 68 days; negative net working capital debt.<sup><a href="#cite_note-9">[9]</a></sup></td>
-    <td style="color: #15803d; font-weight: 700;">🟢 PASS</td>
-  </tr>
-  <tr>
-    <td><strong>5. Raw Material Pass-Through &amp; Margins</strong></td>
-    <td>Quarterly OPM volatility &lt; 400 bps</td>
-    <td>Q1 FY27 OPM compressed to 16.4% on copper price surge before price reset.<sup><a href="#cite_note-7">[7]</a></sup></td>
-    <td style="color: #b45309; font-weight: 700;">🟡 WATCH</td>
-  </tr>
-</table>
-<p><strong>Layer 2 Qualification Result: 4 / 5 PASS</strong> &bull; Qualifies for Shortlist Inclusion.</p>
-
-<h3>Layer 3: Support-Aware Entry Posture (Execution Timing Gate)</h3>
-<p>
-Measuring distance from nearest verified structural support anchor:
-</p>
-<ul>
-  <li><strong>200-Day Simple Moving Average (200-DMA):</strong> ₹4,088.00</li>
-  <li><strong>Current Market Price (CMP):</strong> ₹4,103.60</li>
-  <li><strong>Absolute Distance from Support:</strong> ₹4,103.60 &minus; ₹4,088.00 = +₹15.60 (+0.38%)</li>
-  <li><strong>Average True Range (ATR 14-Day):</strong> ₹125.00</li>
-  <li><strong>Distance in ATR Units:</strong> ₹15.60 / ₹125.00 = <strong>+0.12x ATR</strong></li>
-  <li><strong>Posture Classification:</strong> <strong style="color: #15803d;">AT_SUPPORT (&le; 0.50x ATR)</strong></li>
-  <li><strong>Execution Directive:</strong> <strong style="color: #15803d;">ACCUMULATE ON DIP / IMMEDIATE BUY</strong> within the ₹4,020.00 – ₹4,150.00 band.<sup><a href="#cite_note-14">[14]</a></sup></li>
-</ul>
-
-<!-- SECTION 7 -->
-<h2 id="peer_comparison">6. Industry Landscape &amp; Peer Comparison Matrix</h2>
-<p>
-The Indian power and distribution transformer landscape comprises large diversified conglomerates (Siemens Energy, ABB India, BHEL), mid-tier utility specialists (Voltamp Transformers, TRIL), and specialized niche manufacturers like Shilchar Technologies.<sup><a href="#cite_note-23">[23]</a></sup>
-</p>
-<table class="wikitable">
-  <caption>Peer Benchmarking Matrix: Indian Transformer Manufacturers</caption>
-  <tr>
-    <th>Company Name</th>
-    <th>Ticker</th>
-    <th>Market Cap (₹ Cr)</th>
-    <th>CMP (₹)</th>
-    <th>P/E (TTM)</th>
-    <th>ROCE %</th>
-    <th>D/E Ratio</th>
-    <th>3Y Sales CAGR</th>
-    <th>Key Competitive Positioning</th>
-  </tr>
-  <tr style="background-color: #f0fdf4;">
-    <td><strong>Shilchar Technologies</strong></td>
-    <td class="mono"><strong>SHILCTECH</strong></td>
-    <td class="mono"><strong>4,695</strong></td>
-    <td class="mono"><strong>4,103.60</strong></td>
-    <td class="mono"><strong>34.1x</strong></td>
-    <td class="mono"><strong>50.7%</strong></td>
-    <td class="mono"><strong>0.04x</strong></td>
-    <td class="mono"><strong>+40.8%</strong></td>
-    <td>Highest ROCE in sector; pure-play renewable IDT leader; clean net cash balance sheet.<sup><a href="#cite_note-8">[8]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Transformers &amp; Rectifiers (India)</td>
-    <td class="mono">TARIL</td>
-    <td class="mono">12,850</td>
-    <td class="mono">307.30</td>
-    <td class="mono">58.4x</td>
-    <td class="mono">24.5%</td>
-    <td class="mono">0.38x</td>
-    <td class="mono">+28.5%</td>
-    <td>Massive 765 kV / 400 kV utility scale; larger order book but lower capital efficiency.<sup><a href="#cite_note-24">[24]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Voltamp Transformers</td>
-    <td class="mono">VOLTAMP</td>
-    <td class="mono">11,420</td>
-    <td class="mono">11,280.00</td>
-    <td class="mono">35.2x</td>
-    <td class="mono">32.1%</td>
-    <td class="mono">0.00x</td>
-    <td class="mono">+22.4%</td>
-    <td>Zero debt, industrial transformer focus; conservative promoter capital allocation.<sup><a href="#cite_note-25">[25]</a></sup></td>
-  </tr>
-  <tr>
-    <td>Indo Tech Transformers</td>
-    <td class="mono">INDOTECH</td>
-    <td class="mono">2,150</td>
-    <td class="mono">2,025.00</td>
-    <td class="mono">31.5x</td>
-    <td class="mono">28.4%</td>
-    <td class="mono">0.12x</td>
-    <td class="mono">+25.1%</td>
-    <td>South India regional distribution strength; smaller scale and lower export mix.<sup><a href="#cite_note-26">[26]</a></sup></td>
-  </tr>
-</table>
-
-<p>
-<strong>Peer Seeding Recommendation:</strong> While Transformers &amp; Rectifiers (TARIL) is currently held in the portfolio as an active tactical position, <strong>Voltamp Transformers (VOLTAMP)</strong> and <strong>Indo Tech Transformers (INDOTECH)</strong> warrant systematic tracking as high-quality peer alternatives.<sup><a href="#cite_note-24">[24]</a>, <a href="#cite_note-25">[25]</a></sup>
-</p>
-
-<!-- SECTION 8 -->
-<h2 id="technical_posture">7. Technical Posture, Moving Averages &amp; Actionable Trade Architecture</h2>
-<p>
-Shilchar Technologies has completed an orderly 12-week corrective consolidation following its parabolic advance to an all-time high of ₹5,399.00. The technical structure exhibits characteristic Stage 1 high-base accumulation, with price finding repeated institutional demand exactly at its 200-day simple moving average.<sup><a href="#cite_note-27">[27]</a></sup>
-</p>
-
-<table class="wikitable">
-  <caption>Technical Indicator Dashboard &amp; Moving Average Spectrum</caption>
-  <tr>
-    <th>Technical Indicator</th>
-    <th>Current Value</th>
-    <th>Position Relative to Price</th>
-    <th>Trend Interpretation</th>
-  </tr>
-  <tr>
-    <td><strong>Current Market Price (CMP)</strong></td>
-    <td class="mono"><strong>₹4,103.60</strong></td>
-    <td>&mdash;</td>
-    <td>Consolidating in tight base</td>
-  </tr>
-  <tr>
-    <td><strong>20-Day Simple Moving Average (20-DMA)</strong></td>
-    <td class="mono">₹4,100.20</td>
-    <td style="color: #15803d;">+0.08% Above</td>
-    <td>Immediate short-term pivot flattening</td>
-  </tr>
-  <tr>
-    <td><strong>50-Day Simple Moving Average (50-DMA)</strong></td>
-    <td class="mono">₹4,280.50</td>
-    <td style="color: #b45309;">-4.13% Below</td>
-    <td>Overhead resistance on initial bounce</td>
-  </tr>
-  <tr>
-    <td><strong>200-Day Simple Moving Average (200-DMA)</strong></td>
-    <td class="mono"><strong>₹4,088.00</strong></td>
-    <td style="color: #15803d; font-weight: 700;">+0.38% Above</td>
-    <td><strong>Primary Structural Support Floor</strong></td>
-  </tr>
-  <tr>
-    <td><strong>14-Day Relative Strength Index (RSI)</strong></td>
-    <td class="mono">49.0</td>
-    <td>Neutral Zone</td>
-    <td>Complete decompression from overbought</td>
-  </tr>
-  <tr>
-    <td><strong>Average True Range (ATR 14-Day)</strong></td>
-    <td class="mono">₹125.00</td>
-    <td>3.05% of CMP</td>
-    <td>Volatility contraction indicating base maturity</td>
-  </tr>
-  <tr>
-    <td><strong>Weinstein Stage</strong></td>
-    <td>Stage 1 Base</td>
-    <td>Base within secular Stage 2</td>
-    <td>Accumulation preceding next leg higher</td>
-  </tr>
-</table>
-
-<h3>Actionable Trade Architecture</h3>
-<ul>
-  <li><strong>Accumulation Band:</strong> ₹4,020.00 – ₹4,150.00. Accumulate in tranches as the price tests the ₹4,088.00 200-DMA support.</li>
-  <li><strong>Hard Invalidation Stop Loss:</strong> ₹3,780.00 (Daily close below). Positioned below the structural swing low of ₹3,820.00 and -7.89% from CMP. A breach of this level signals a breakdown into Stage 4.</li>
-  <li><strong>12–18 Month Base Target:</strong> ₹5,400.00 (+31.6% upside). Derived from FY28 projected EPS of ₹150.00 multiplied by 36.0x forward P/E (aligned with historical median multiple). Base measured-move matches previous peak retest.</li>
-  <li><strong>Bull Target (Cycle Extension):</strong> ₹6,600.00 (+60.8% upside). Anticipates sustained export expansion and re-rating to 44.0x P/E on international execution.</li>
-  <li><strong>Reward-to-Risk Calculation:</strong>
-    <br>Downside Risk = ₹4,103.60 &minus; ₹3,780.00 = ₹323.60 (7.89%)
-    <br>Base Upside Potential = ₹5,400.00 &minus; ₹4,103.60 = ₹1,296.40 (31.59%)
-    <br><strong>Asymmetry Ratio = ₹1,296.40 / ₹323.60 = 4.00 : 1</strong> (Exceeds Core hurdle of 3.00:1).<sup><a href="#cite_note-14">[14]</a></sup>
-  </li>
-</ul>
-
-<!-- SECTION 9 -->
-<h2 id="red_team">8. Adversarial Red-Team: 3 Fatal Flaws &amp; Invalidation Triggers</h2>
-<p>
-To ensure intellectual rigor and mitigate confirmation bias, our underwriting engine subjects Shilchar Technologies to adversarial red-team stress testing.<sup><a href="#cite_note-14">[14]</a></sup>
-</p>
-
-<div class="callout-box-danger">
-  <strong>Fatal Flaw 1: Copper &amp; CRGO Raw Material Price Volatility and Margin Whiplash.</strong>
-  <p>
-  Copper conductor and Cold-Rolled Grain-Oriented (CRGO) electrical steel constitute over 65% of the total raw material cost of a transformer. While Shilchar incorporates price variation clauses (PVC) in large domestic contracts tied to IEEMA formulas, export contracts and fixed-price private developer agreements feature a 60-to-90-day lag in price pass-through. During sharp commodity rallies (such as seen in mid-2024 and early 2026), operating margins can contract precipitously from peak levels of &gt;30% to &lt;18%, leading to quarterly earnings shocks.<sup><a href="#cite_note-7">[7]</a>, <a href="#cite_note-28">[28]</a></sup>
-  </p>
-  <p><strong>Invalidation Trigger:</strong> Two consecutive quarters of OPM contracting below 15.0%, indicating inability to pass through commodity escalation.</p>
-</div>
-
-<div class="callout-box-alert">
-  <strong>Fatal Flaw 2: Solar Capex Deceleration and Regulatory Tariff Changes in the US Market.</strong>
-  <p>
-  A significant portion of Shilchar's premium margin realization is derived from direct and indirect transformer exports to North American solar developers. Any protectionist tariff revisions under Section 301/201, alterations to the US Inflation Reduction Act (IRA) renewable energy tax credits, or grid interconnection moratoriums by regional transmission organizations (RTOs) like PJM or CAISO would impair export volumes and force capacity back into lower-margin domestic markets.<sup><a href="#cite_note-13">[13]</a>, <a href="#cite_note-29">[29]</a></sup>
-  </p>
-  <p><strong>Invalidation Trigger:</strong> Export revenues declining by &gt;25% YoY over two quarters.</p>
-</div>
-
-<div class="callout-box-alert">
-  <strong>Fatal Flaw 3: Single-Location Manufacturing Concentration in Vadodara.</strong>
-  <p>
-  Despite adding the Gavasad plant, Shilchar's entire manufacturing infrastructure remains concentrated within a 25-kilometer radius in the Vadodara district of Gujarat. Any localized industrial unrest, regional power disruption, catastrophic flood event, or transport logistics bottleneck would halt 100% of corporate dispatches, exposing the company to geographic operational risk that multi-plant peers like ABB or Siemens do not face.<sup><a href="#cite_note-4">[4]</a>, <a href="#cite_note-30">[30]</a></sup>
-  </p>
-  <p><strong>Invalidation Trigger:</strong> Factory shutdown exceeding 14 operational days.</p>
-</div>
-
-<!-- SECTION 10 -->
-<h2 id="capital_allocation">9. Portfolio Allocation &amp; Capital Sizing Guidance</h2>
-<p>
-Within the institutional portfolio framework, Shilchar Technologies qualifies for the <strong>Core Alpha</strong> strategy book as a high-conviction secular compounder.<sup><a href="#cite_note-14">[14]</a></sup>
-</p>
-<ul>
-  <li><strong>Strategy Book Assignment:</strong> 🛡️ Core Alpha (High ROCE &gt;18%, physical manufacturing moat, pristine balance sheet).</li>
-  <li><strong>Target Position Sizing:</strong> 3.0% to 5.0% of total portfolio equity value.</li>
-  <li><strong>Staged Tranche Deployment:</strong>
-    <ul>
-      <li><em>Initial Tranche (40%):</em> Deploy immediately at CMP ₹4,103.60 within the accumulation zone.</li>
-      <li><em>Confirmation Tranche (40%):</em> Add upon successful re-test of the 200-DMA support (₹4,050.00 – ₹4,090.00) or breakout above the 50-DMA (₹4,285.00).</li>
-      <li><em>Momentum Tranche (20%):</em> Complete position upon confirmation of Q2 quarterly revenue growth returning to &gt;25% YoY.</li>
-    </ul>
-  </li>
-  <li><strong>Maximum Sizing Cap:</strong> Strictly capped at 7.0% of Net Worth to prevent over-concentration in the capital goods / power T&amp;D sector.</li>
-</ul>
-
-<!-- SECTION 11 -->
-<h2 id="quarterly_trackers">10. Key Quarterly Monitoring Indicators (Thesis Trackers)</h2>
-<p>
-Institutional capital monitoring requires tracking the following quarterly operational milestones:
-</p>
-<ol>
-  <li><strong>Gavasad Phase 2 Ramp-Up:</strong> Verification of quarterly dispatch volumes exceeding 1,200 MVA, confirming capacity expansion absorption.<sup><a href="#cite_note-4">[4]</a></sup></li>
-  <li><strong>Export Share Stability:</strong> Quarterly export revenue mix remaining above 25% of total sales.<sup><a href="#cite_note-13">[13]</a></sup></li>
-  <li><strong>EBITDA Margin Floor:</strong> Maintenance of consolidated EBITDA margins above 18.0%, confirming effective copper hedging and formula pass-through.<sup><a href="#cite_note-7">[7]</a></sup></li>
-  <li><strong>Cash Balance &amp; Treasury Deployment:</strong> Preservation of net-cash status and monitoring of capex self-funding without debt dilution.<sup><a href="#cite_note-9">[9]</a></sup></li>
-  <li><strong>Receivables Days Threshold:</strong> Ensuring trade receivables do not exceed 80 days of billings.<sup><a href="#cite_note-9">[9]</a></sup></li>
-</ol>
-
-<!-- SECTION 12 -->
-<h2 id="references">11. References, Regulatory Filings &amp; External Disclosures</h2>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Shilchar Technologies Ltd (SHILCTECH): company research dossier</h1><p class="report-generated">Generated Date: <time datetime="2026-10-13T09:39:04.603099-07:00">13 Oct 2026, 09:39 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-13</p></header>
+<p><strong>Publication status: PUBLISHED_WITH_GATE_EXCEPTIONS.</strong> The first review round returned REVISE, which was fixed. The second round returned APPROVE with notes only. The red-team pass returned verdict_holds. The stale-date exceptions are listed in the run notes.</p>
+<div class="table-wrap"><table class="wikitable infobox">
+<tr><th>Company</th><td>Shilchar Technologies Limited; NSE symbol <b>SHILCTECH</b><br/><span class="ticker-links" style="font-size:.85em;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ASHILCTECH" style="color:var(--link);">Chart</a> • <a href="https://www.screener.in/company/SHILCTECH/" style="color:var(--link);">Screener</a></span>, BSE code 531201 <sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><th>What it is</th><td>A maker of electronics and telecom transformers and of power and distribution transformers, with a recent start in ferrite transformers <sup><a href="#cite_note-2">[2]</a></sup> <sup><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><th>Market capitalisation</th><td>₹4,443 crore on the Screener header for 13 Oct 2026 <sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><th>Close (ledger, 13 Oct 2026)</th><td>₹3,897.20 (ledger); the Screener close is the same at ₹3,897 <sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><th>52-week range (ledger)</th><td>₹2,852.50 to ₹5,399.00 <sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+<tr><th>Trend phase (ledger)</th><td>Stage 1 (Basing): below both the 50-day and 200-day averages, with the 50-day average falling. The technical posture chapter explains this ledger class.</td></tr>
+<tr><th>Momentum gate (code)</th><td>NO_MOMENTUM: fails Test A and Test B</td></tr>
+<tr><th>Gate status</th><td>FAIL_TECHNICAL</td></tr>
+<tr><th>Strategy bucket tested</th><td>CORE_ALPHA (the bucket on the prior shortlist row)</td></tr>
+<tr><th>Action verdict</th><td><span class="verdict verdict-exit">REJECTED</span></td></tr>
+<tr><th>Prior shortlist row</th><td>IMMEDIATE_BUY, dated 27 Sep 2026 (AUTOWRITTEN). Superseded by this run.</td></tr>
+<tr><th>As of</th><td>2026-10-13</td></tr>
+</table></div>
+<p>This box gives the company, the ledger close and the verdict that follows from them. Each line is explained in the chapters below.</p>
+<dl class="key-figures">
+<div><dt>Action verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span></dd></div>
+<div><dt>Gate status</dt><dd>FAIL_TECHNICAL</dd></div>
+<div><dt>Momentum gate</dt><dd>NO_MOMENTUM, so no allocation</dd></div>
+<div><dt>Close, 13 Oct 2026</dt><dd>₹3,897.20 (ledger)</dd></div>
+<div><dt>Return on capital (latest year)</dt><dd>50.7% (Screener) <sup><a href="#cite_note-2">[2]</a></sup></dd></div>
+<div><dt>Stop reference (rule-derived)</dt><dd>₹3,715.79, shown for reference only</dd></div>
+</dl>
+<section class="primer" id="primer"><h2>Start here</h2>
+<p>This dossier asks whether Shilchar Technologies belongs on the shortlist of stocks we would buy on 13 October 2026. The verdict is REJECTED, and it supersedes the IMMEDIATE_BUY row dated 27 September 2026. The business is sound: it earns a high return on capital and carries no borrowings. The share price is in a downtrend, however, and the momentum rule does not allow a purchase in that state.</p>
+</section>
+<div class="lede"><p>On the data in this record, Shilchar is a sound business that is currently a poor buy under our rules. On the business side it earned a return of 50.7 percent on the capital it uses in its latest reported year, it has no borrowings, and across the last three years it turned profit into operating cash at a rate of 0.78, above the 0.70 floor the framework sets <sup><a href="#cite_note-2">[2]</a></sup> <sup><a href="#cite_note-5">[5]</a></sup>.</p>
+<p>The price tells a different story. On 13 October 2026 the stock closed at ₹3,897.20. That is below its 50-day average of ₹4,111.69 and its 200-day average of ₹4,093.31, and the 50-day average has been falling for about four weeks (21 sessions), from ₹4,258.21 at the start of that window (ledger). The first quarter of the current financial year (April to June 2026) was weak, with revenue down 15.2 percent and profit after tax down 49.7 percent from a year earlier <sup><a href="#cite_note-6">[6]</a></sup> <sup><a href="#cite_note-7">[7]</a></sup>.</p>
+<p>Because the price is below its averages and the momentum gate returns NO_MOMENTUM, the technical gate fails and the review stops there. The verdict is REJECTED. Nothing is bought under the Core Alpha bucket. The rest of this report shows each figure, its source and the level that would reopen the question.</p></div>
+<section class="chapter" id="terms"><h2>Terms used in this report</h2>
+<p>This chapter explains each technical and financial word once, with the plain meaning first. Later uses assume the reader has read it here.</p>
+<p><dfn>RSI</dfn> stands for relative strength index. It is a 14-day speed reading from 0 to 100 that rises when recent gains outweigh recent losses. Readings above 70 mean the stock has run hot, and readings below 30 mean it has been sold hard.</p>
+<p><dfn>ATR</dfn> stands for average true range, the typical daily price swing over 14 sessions. We use it as a ruler. A stop or a support distance is counted in units of ATR so that a volatile stock and a calm stock are measured on the same scale.</p>
+<p><dfn>ROCE</dfn> stands for return on capital employed. It is the profit a company earns before tax and financing costs, divided by the money tied up in the business. A business that earns above 15 percent on its capital can grow without constantly needing new money.</p>
+<p><dfn>50-day moving average</dfn> is the average closing price over the last 50 sessions. It is the most-watched medium-term trend line. A falling line means sellers have had the upper hand for about two months.</p>
+<p><dfn>200-day moving average</dfn> is the average closing price over the last 200 sessions, roughly one year. A price below a falling 200-day line is the basic sign of a damaged long-term trend.</p>
+<p><dfn>Stage 2</dfn> is the markup phase in the four-phase cycle of a stock. The price sits above a rising 50-day and 200-day average. <dfn>Stage 1</dfn> is the basing phase that comes before a markup. <dfn>Stage 4</dfn> is the markdown phase, when the price sits below a falling long-term average and sellers are in control.</p>
+<p><dfn>base</dfn> is a sideways range that a stock builds after a fall. The <dfn>pivot</dfn> is the price just above the top of the base, where a move out of the range would begin. A <dfn>breakout</dfn> is a close above the pivot, ideally on heavy volume.</p>
+<p><dfn>stop loss</dfn> is a price fixed in advance at which a position is exited to limit a loss. Under the Core rule the stop sits below the nearest swing low or moving average, and then one ATR lower, so ordinary noise does not trigger it.</p>
+<p><dfn>asymmetry</dfn> is the planned gain divided by the planned loss. A ratio of 3.0 means the target is three times as far above the price as the stop is below it. The Core floor in this framework is 3.0.</p>
+<p><dfn>price-to-earnings</dfn> ratio, or P/E, is the share price divided by the profit per share over the last year. A ratio of 20 means investors pay twenty rupees for each rupee of annual profit.</p>
+<p><dfn>debt-to-equity</dfn> is total borrowings divided by shareholders' equity. A value near zero means the business is almost free of borrowed money.</p>
+<p><dfn>operating cash flow</dfn> is the cash the business generates from its operations. We compare three years of it with reported profit to check whether earnings turn into cash.</p>
+<p><dfn>EBITDA</dfn> stands for earnings before interest, taxes, depreciation and amortization. It is a profit measure taken before financing costs and accounting charges, so it shows the operating result more directly.</p>
+<p><dfn>EPS</dfn> stands for earnings per share. It is the profit attributable to shareholders divided by the number of shares, and it is the base for any earnings-driven target.</p>
+<p><dfn>operating margin</dfn> is the share of revenue left after the day-to-day costs of making and selling the product. A falling operating margin means each rupee of sales keeps less profit.</p>
+<p><dfn>guidance</dfn> is management's own forecast of revenue or margin for a coming period. Guidance that is cut or held under pressure tells a reader how management sees the next few quarters.</p>
+<p><dfn>retest</dfn> is a return of the price to a level it has recently broken through. A retest that holds is a sign that the level has turned into support.</p>
+<p><dfn>measured move</dfn> is an estimate of the next target, equal to the height of a base added to the breakout level. It is one of the two accepted ways to anchor a target.</p>
+<p><dfn>momentum gate</dfn> is a code test in this framework. Test A asks whether the stock is in a healthy uptrend. Test B asks whether a stock is entering one from a base. A candidate that fails both tests gets no allocation, whatever its business quality.</p>
+</section>
+<section class="chapter" id="business"><h2>What the company does and how it earns</h2>
+<p>Shilchar Technologies makes transformers. Its profile on Screener describes the business as manufacturing electronics and telecom transformers, and power and distribution transformers, and says it has recently started making ferrite transformers <sup><a href="#cite_note-3">[3]</a></sup>. Its range includes power transformers up to 66 KV and distribution, inverter-duty and generator transformers up to 33 KV, serving solar, wind, hydro, oil and gas, cement, steel and sugar customers <sup><a href="#cite_note-2">[2]</a></sup>.</p>
+<p>The company's focus is transformers up to 50 MVA (megavolt-amperes, the unit in which transformer capacity is rated) in the 132 KV class, and it is extending into the 220 KV class <sup><a href="#cite_note-2">[2]</a></sup>. According to the Tijori summary of the management call, the company is adding 6,500 MVA of capacity to its 7,500 MVA base for higher-voltage export orders, with the flagship Vadodara expansion due in April 2027 <sup><a href="#cite_note-8">[8]</a></sup>.</p>
+<p>Why this matters to a reader: transformers are heavy, custom-built equipment sold to utilities, industrial plants and renewable-energy projects. Revenue depends on order flow and on the timing of dispatches. Margins depend on how the company prices its orders against the cost of making them, and the latest quarter shows how far margins can fall when that balance moves against it <sup><a href="#cite_note-6">[6]</a></sup>.</p>
+<p>The business metrics that matter for this framework are its return on capital, its borrowing and the conversion of profit into cash. Screener shows a return on capital employed of 50.7 percent and a return on equity of 37.8 percent for the latest reported year <sup><a href="#cite_note-2">[2]</a></sup>. The company reports no borrowings at the March 2026 year end <sup><a href="#cite_note-2">[2]</a></sup> <sup><a href="#cite_note-9">[9]</a></sup>. It also reports that over 80 percent of its business comes from repeat customers <sup><a href="#cite_note-8">[8]</a></sup>.</p>
+<p>The stock trades at a P/E of 32.3 on the Screener header <sup><a href="#cite_note-2">[2]</a></sup>. Its trailing earnings per share are ₹120.22 <sup><a href="#cite_note-10">[10]</a></sup> <sup><a href="#cite_note-4">[4]</a></sup>. A P/E in the thirties means investors are paying for growth that the recent quarter has not yet shown. That is one reason the red team below treats valuation as a live risk even though the business itself is sound.</p>
+<p>Ownership is concentrated. Promoters held 62.12 percent in the September 2026 quarter <sup><a href="#cite_note-2">[2]</a></sup> <sup><a href="#cite_note-11">[11]</a></sup> <sup><a href="#cite_note-12">[12]</a></sup>. The promoter share has fallen by 3.73 percentage points over three years <sup><a href="#cite_note-2">[2]</a></sup>, and the promoter holding shows no pledge of shares as of September 2026 <sup><a href="#cite_note-11">[11]</a></sup>.</p>
+</section>
+<section class="chapter" id="framework"><h2>How the framework works for this company</h2>
+<p>The framework is a set of hurdles that a company must pass in a fixed order. Layer 1 is the pass-or-fail stage. It asks whether the business earns enough on its capital, whether its borrowing is modest, whether its profits turn into cash, whether the price is in a healthy trend and whether the price offers a reward that justifies the risk. If any Layer 1 test fails, the candidate is rejected and the later layers are not run.</p>
+<p>The order matters. A company can have excellent business numbers and still be the wrong buy at the wrong price. The framework therefore checks the trend before it scores operating detail. A stock in a markdown can stay there for months while its business quality does not change.</p>
+<p>This run uses the Core Alpha rules, because the prior row sat in that bucket. Core asks for a return on capital above 18 percent when possible, a debt-to-equity ratio below 0.70, three-year cash conversion of at least 0.70, a technical posture of Stage 1 breakout or Stage 2 markup, and an asymmetry of at least 3.0 with a verified target.</p>
+</section>
+<section class="chapter" id="layer1"><h2>Layer 1 gates</h2>
+<p>Each row shows a gate, its rule, the figure used and the result. Every figure traces to a source in the notes.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Gate</th><th>Rule</th><th>Measured</th><th>Result</th></tr>
+<tr><td>Return on capital employed</td><td>At least 15.0%, and above 18.0% preferred for Core</td><td>50.7% for the latest reported year <sup><a href="#cite_note-2">[2]</a></sup></td><td>PASS (above the Core preference)</td></tr>
+<tr><td>Debt-to-equity</td><td>Below 0.70 (not a financial company)</td><td>Zero borrowings at March 2026 (Screener shows 0 in the borrowings row) <sup><a href="#cite_note-2">[2]</a></sup>; stockanalysis reads "no debt" <sup><a href="#cite_note-10">[10]</a></sup></td><td>PASS</td></tr>
+<tr><td>Three-year cash from operations to profit</td><td>At least 0.70, FY2024 to FY2026</td><td>₹308 crore of operating cash flow over ₹397 crore of profit, which is 0.78 <sup><a href="#cite_note-2">[2]</a></sup>; the stockanalysis series gives the same 0.78 <sup><a href="#cite_note-5">[5]</a></sup></td><td>PASS</td></tr>
+<tr><td>Technical posture</td><td>Core: Stage 1 breakout or Stage 2 markup; no Stage 4 breakdown</td><td>Stage 1 (Basing) with no breakout. Close ₹3,897.20 is below the 50-day average of ₹4,111.69 and the 200-day average of ₹4,093.31 (ledger). The momentum gate returns NO_MOMENTUM.</td><td>FAIL_TECHNICAL</td></tr>
+<tr><td>Asymmetry</td><td>At least 3.0 for Core, with a verified target (forward EPS times a three-year median P/E, or a technical measured move)</td><td>Forward EPS is not published in the research record <sup><a href="#cite_note-10">[10]</a></sup>; the trailing-earnings illustration gives a value below the close (see the asymmetry chapter)</td><td>FAIL_ASYMMETRY (secondary; target not verified)</td></tr>
+</table></div>
+<p>The three financial gates pass. The technical posture fails, and that decides the verdict. The asymmetry target cannot be verified from the record, so the same rule would also fail on that line. The framework stops at the first failed gate, so the asymmetry line is recorded as a secondary failure rather than scored in full. The verdict stands as of 13 October 2026. Only a re-run of the momentum gate on a later session can reopen it.</p>
+<p>The return on capital has also fallen from 75 percent in FY2024 to 71 percent in FY2025 and 51 percent in FY2026 <sup><a href="#cite_note-2">[2]</a></sup>. The gate passes with room to spare. The direction of travel is still a reason for caution, and it is discussed in the red team chapter.</p>
+</section>
+<section class="chapter" id="technical"><h2>Technical posture and the momentum gate</h2>
+<p>Why the ledger calls this Stage 1 rather than Stage 4: the 200-day average is roughly level (₹4,093.31 in the ledger, against ₹4,092.15 on stockanalysis <sup><a href="#cite_note-10">[10]</a></sup>), so the long-term trend is not yet a markdown, and the ledger does not carry the 200-day figure from 63 sessions ago. In this report, "downtrend" refers to the falling 50-day average and to a price below both averages. A markdown (Stage 4) would be confirmed only by the lower levels in the invalidation section, starting with a close below ₹2,852.50.</p>
+<p>The chart shows whether the market is currently rewarding the business.</p> The ledger snapshot for 13 October 2026 gives a close of ₹3,897.20, a 20-day average of ₹4,042.10, a 50-day average of ₹4,111.69 and a 200-day average of ₹4,093.31. The price fell 0.72 percent on the day, 3.36 percent over the week and 4.70 percent over the month. The 14-day RSI is 39.55 and the average true range is ₹121.31 (ledger). Aggregator screens show a 50-day average of ₹4,097.43, a 200-day average of ₹4,092.15 and an RSI of 40.48 <sup><a href="#cite_note-10">[10]</a></sup>. These differ a little from the ledger because the windows and data sources are not the same. The ledger governs every number in this report.
+<p>RSI at 39.55 is weak but not oversold, because the report's oversold line is 30, and the medium-term average is still falling. The ledger shows that: the 50-day average was ₹4,258.21 twenty-one sessions ago and is ₹4,111.69 now. Relative strength against the Nifty 50 is negative at minus 7.14 percent over 63 sessions and positive at 2.04 percent over 28 sessions (ledger). The 52-week high is ₹5,399.00 and the stock sits 27.82 percent below it <sup><a href="#cite_note-13">[13]</a></sup> <sup><a href="#cite_note-4">[4]</a></sup>.</p>
+<p>The momentum gate is computed in code from the ledger. The test results are below.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Test</th><th>Condition</th><th>Measured (ledger)</th><th>Result</th></tr>
+<tr><td>A1</td><td>Close above the 50-day average, which is above the 200-day average</td><td>Close 3,897.20; 50-day 4,111.69; 200-day 4,093.31</td><td>FAIL</td></tr>
+<tr><td>A2</td><td>200-day average not falling over 63 sessions</td><td>Not computed: the ledger field for the 200-day average 63 sessions ago is missing</td><td>FAIL (missing data, see run notes)</td></tr>
+<tr><td>A3</td><td>Relative strength over 63 sessions above zero</td><td>Excess return minus 7.14 percent</td><td>FAIL</td></tr>
+<tr><td>A4</td><td>Not extended: within 1.2 ATR of support (the gate reads the base-pivot distance, see run notes)</td><td>0.93 ATR from the base pivot</td><td>PASS</td></tr>
+<tr><td>B1</td><td>50-day average has not declined by more than 0.5 percent over 21 sessions</td><td>Change of minus 3.44 percent</td><td>FAIL</td></tr>
+<tr><td>B2</td><td>Relative strength rising over 28 sessions</td><td>Excess return plus 2.04 percent</td><td>PASS</td></tr>
+<tr><td>B3</td><td>Within 1.0 ATR of the base pivot</td><td>0.93 ATR from the base pivot</td><td>PASS</td></tr>
+<tr><td>B4</td><td>Volume dry-up in the base (ratio at or below 0.9)</td><td>0.28</td><td>PASS</td></tr>
+<tr><td>B5</td><td>Volume expansion (20-day ratio at or above 1.0)</td><td>0.84</td><td>FAIL</td></tr>
+</table></div>
+<p>Test A fails on two conditions that the ledger measures directly: the price is not above its averages (A1), and relative strength is negative (A3). Test B fails on the 50-day decline (B1) and on volume (B5). Both tests fail, so the momentum gate returns NO_MOMENTUM, and the position size is zero. The gate is coded to ignore a business that is otherwise sound. The thresholds are defaults marked for calibration in the scoring configuration, so the gate exception is listed in the run notes.</p>
+<p>The conditional entry rule in Test B says a position may be taken only on a confirmed breakout of the base pivot, or on a retest that holds, and never before. The ledger shows the price near the pivot (0.93 ATR), but there is no confirmed breakout. The 20-day volume ratio is 0.84 of its normal level (ledger), which is too quiet for a breakout to be credible.</p>
+</section>
+<section class="chapter" id="asymmetry"><h2>Asymmetry and target anchoring</h2>
+<p>The asymmetry test compares the upside to a target with the downside to a stop. The target must be anchored to something verifiable. The two accepted anchors are forward earnings multiplied by a three-year median P/E, or a technical measured move. An arbitrary target is not allowed.</p>
+<p>The stop comes first, because it is set by rule. Under the Core rule the stop sits below the lower of the 20-day swing low and the 50- and 200-day averages, then one ATR lower. The 20-day swing low is ₹3,837.10 and the ATR is ₹121.31 (ledger). The rule gives a stop of ₹3,837.10 minus ₹121.31, or ₹3,715.79. This level is shown for reference only, because the technical gate has already ended the review.</p>
+<p>The target is where the record falls short. Forward earnings are not published in the research record. Aggregator pages show "Forward PE n/a" <sup><a href="#cite_note-10">[10]</a></sup> and an analyst price target of "n/a" <sup><a href="#cite_note-14">[14]</a></sup>. Without forward earnings there is no verified target. The three-year median P/E from the year-end ratios is 27.37, from 31.94 in FY2024, 27.37 in FY2025 and 25.70 in FY2026 <sup><a href="#cite_note-15">[15]</a></sup>. If that median is applied to trailing earnings of ₹120.22 per share <sup><a href="#cite_note-10">[10]</a></sup>, the result is ₹3,290. This is an illustration only, because trailing earnings are not forward earnings. It is also below the close of ₹3,897.20, so it would give no upside at all.</p>
+<p>The prior shortlist row, dated 27 September 2026, set a target of ₹5,400 and reported an asymmetry of 4.0. The record shows no anchor for that target. It sits close to the 52-week high of ₹5,399.00 <sup><a href="#cite_note-4">[4]</a></sup>, which is a price level, not a verified measured move. Under the present rule that target cannot be used, and the asymmetry test would fail on the target line.</p>
+</section>
+<section class="chapter" id="layers23"><h2>Layers 2 and 3: not evaluated</h2>
+<p>Layer 2 scores three to five company-specific operating measures, such as order book cover and capacity use. Layer 3 maps the distance from support onto an entry posture. Both layers run only after every Layer 1 gate passes. This company failed the technical gate, so neither layer is scored here.</p>
+<p>The operating facts are still worth stating, because they show what a later review would need to see. The latest quarter had revenue of ₹134.6 crore, down 15.2 percent from a year earlier, and profit after tax of ₹20.9 crore, down 49.7 percent <sup><a href="#cite_note-6">[6]</a></sup> <sup><a href="#cite_note-7">[7]</a></sup>. Operating margin fell to 16.4 percent, against about 29 percent historically <sup><a href="#cite_note-6">[6]</a></sup> <sup><a href="#cite_note-2">[2]</a></sup>. Capacity utilisation was 60 to 65 percent, against a target near 100 percent <sup><a href="#cite_note-6">[6]</a></sup>. The company's order book was about ₹500 crore, with 30 percent exports and 70 percent domestic <sup><a href="#cite_note-6">[6]</a></sup>. Management kept its FY2027 revenue guidance at about ₹800 crore and an EBITDA margin of 29 to 31 percent <sup><a href="#cite_note-6">[6]</a></sup> <sup><a href="#cite_note-8">[8]</a></sup>. The first-quarter run rate is about ₹540 crore a year, which is well short of that guidance.</p>
+<p>Layer 2 would normally ask whether the order book covers the next several quarters and whether margins are recovering. Those are the questions for the next review, not for this one.</p>
+</section>
+<section class="chapter" id="peers"><h2>Peers and benchmarking</h2>
+<p>The peer set is small, because the Screener peer pages were rate-limited during this run. Two peers with cached header figures are shown below. They are a sense check, not a full comparison.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>Company</th><th>ROCE</th><th>ROE</th><th>P/E</th><th>Promoter pledge</th></tr>
+<tr><td>Shilchar Technologies (SHILCTECH)</td><td>50.7%</td><td>37.8%</td><td>32.3</td><td>0.0% of promoter holding <sup><a href="#cite_note-11">[11]</a></sup></td></tr>
+<tr><td>GE Power India Ltd (GVPIL)</td><td>82.0%</td><td>62.2%</td><td>11.6 <sup><a href="#cite_note-16">[16]</a></sup></td><td>Not on the cached page</td></tr>
+<tr><td>Indo Tech Transformers Ltd (INDOTECH)</td><td>40.4%</td><td>28.4%</td><td>34.1 <sup><a href="#cite_note-17">[17]</a></sup></td><td>About 80% of promoter holding pledged <sup><a href="#cite_note-17">[17]</a></sup></td></tr>
+</table></div>
+<p>GE Power India Ltd (GVPIL) is an engineering, procurement and construction business that supplies key equipment for thermal and hydro power plants <sup><a href="#cite_note-16">[16]</a></sup>. Indo Tech Transformers Ltd (INDOTECH) makes power and distribution transformers, mobile substation transformers and substations, the same product family as Shilchar <sup><a href="#cite_note-17">[17]</a></sup>.</p>
+<p>Shilchar's return on capital is high, but GVPIL's is higher and cheaper on P/E. INDOTECH earns less on capital and trades at a similar multiple, and most of its promoter holding is pledged. Shilchar's advantage is the absence of pledges and borrowings. Peer figures are the header values on the cached pages, and their period is not shown on those pages, so they are used only for comparison.</p>
+<p>What the comparison means for the verdict: the peers show that a high return on capital is not unique to Shilchar, and that its clean balance sheet is the main point of difference. Neither point touches the technical gate, which decides this verdict. The comparison supports the view that the business is sound and does not support buying the stock in its current trend.</p>
+</section>
+<section class="chapter" id="redteam"><h2>Fatal-flaw red team</h2>
+<p>The red team asks what would make the verdict wrong, or what would make a good business a bad buy. Three fatal-flaw scenarios are set out below.</p>
+<p><strong>Scenario 1: the margin does not recover.</strong> Q1 operating margin was 16.4 percent, against about 29 percent in the historical record <sup><a href="#cite_note-6">[6]</a></sup>, and Screener shows an FY2026 operating margin of 29 percent <sup><a href="#cite_note-2">[2]</a></sup>. Profit fell 49.7 percent on revenue down 15.2 percent <sup><a href="#cite_note-6">[6]</a></sup>. If the next quarter shows the same squeeze, the earnings base for any target falls, and the forward multiple becomes harder to defend.</p>
+<p><strong>Scenario 2: the growth guidance is out of reach.</strong> The FY2027 guidance of about ₹800 crore needs far more revenue than the first-quarter run rate of about ₹540 crore <sup><a href="#cite_note-6">[6]</a></sup>. The company holds an order book of about ₹500 crore <sup><a href="#cite_note-6">[6]</a></sup>, and the record does not break that book down by margin. Capacity use of 60 to 65 percent <sup><a href="#cite_note-6">[6]</a></sup> means the plant has room to add volume, but that only helps if orders convert at acceptable margins. If the guidance is cut, the price could fall further from its current level.</p>
+<p><strong>Scenario 3: the trend keeps falling.</strong> The 50-day average has fallen for about four weeks (21 sessions), and relative strength against the Nifty 50 is negative over 63 sessions (ledger). The stock is 27.82 percent below its 52-week high <sup><a href="#cite_note-13">[13]</a></sup>. If the price closes below the 52-week low of ₹2,852.50 (ledger), the markdown is confirmed and the stop framework no longer applies.</p>
+<p>The bull case is strong too. The return on capital is 50.7 percent <sup><a href="#cite_note-2">[2]</a></sup>, the company has no borrowings <sup><a href="#cite_note-8">[8]</a></sup>, and it held about ₹246 crore (₹2,459 million) of cash and short-term investments at June 2026 <sup><a href="#cite_note-9">[9]</a></sup>. Operating cash flow in FY2026 was ₹192 crore against profit of ₹158 crore, about 1.2 times <sup><a href="#cite_note-2">[2]</a></sup>. Those facts argue that the business can recover once the margin does. They do not change the rule. A strong business in a downtrend fails the technical test.</p>
+<p>The hinge claim is simple. If the next quarter restores margin toward the historical level and the 50-day average turns up, the stock would come back into the review. The next results date is an estimate of 27 October 2026 <sup><a href="#cite_note-10">[10]</a></sup>, not yet confirmed by the company. Re-run the review once the actual date is announced.</p>
+</section>
+<section class="chapter" id="invalidation"><h2>Invalidation levels and what we would do</h2>
+<p>The verdict would be reopened only if the stock moves out of the downtrend. The 50-day average of ₹4,111.69 (ledger) already sits above the 200-day average of ₹4,093.31 (ledger), so the averages are not the obstacle. The reclaim needs a close above ₹4,111.69 with the 50-day average turning up. A re-run would also need relative strength over 63 sessions above zero, which is minus 7.14 percent today (ledger), and a 20-day volume ratio at or above 1.0, which is 0.84 today (ledger).</p>
+<p>The levels that would confirm a break in the near-term structure are a close below the 20-day swing low of ₹3,837.10, which is the first structural support. A close below the rule-derived reference stop of ₹3,715.79 would also trigger the stop framework. A close below the 52-week low of ₹2,852.50 would confirm a full markdown. In any of those cases the verdict stays REJECTED.</p>
+<p>The prior row's invalidation was a daily close below ₹3,750 on heavy volume. That level is no longer the working reference, because the current rule places the stop at ₹3,715.79 and the trend test already fails.</p>
+<section class="estimate"><h4>The number</h4><p>The reclaim level for the 50-day average is ₹4,111.69.</p><h4>How it was calculated</h4><p>It is the average of the last fifty closing prices in the ledger, taken on 13 October 2026.</p><h4>The inputs</h4><p>The ledger close series for SHILCTECH from the facts file for this run, with no outside figures.</p><h4>The range</h4><p>The average moved from ₹4,258.21 twenty-one sessions earlier to ₹4,111.69 now, so it has fallen by about ₹146.52 over that window.</p><h4>If the number is off</h4><p>A wrong close in the ledger would move the average. The check is to reconcile the last fifty closes with the Screener price history before any review.</p></section>
+<p class="trigger">What would change this view: a close above ₹4,111.69 on three sessions in a row, with the 50-day average turning up, relative strength over 63 sessions above zero and a 20-day volume ratio of at least 1.0, would move the stock back to review. A close below ₹3,837.10 would confirm that the near-term structure has broken. The next results date is an estimate of 27 October 2026 <sup><a href="#cite_note-10">[10]</a></sup>, not yet confirmed by the company, so the review should be re-run once the actual date is announced.</p>
+</section>
+<section class="chapter" id="gate-exceptions"><h2>Run notes and gate exceptions</h2>
+<p>A gate exception is a check that the report passes or reports only with a stated allowance, or a data item that is older or thinner than the framework prefers. It matters because a reader needs to know which figures are weaker before relying on the verdict.</p>
+<p><strong>Technical gate (failed).</strong> The momentum gate returned NO_MOMENTUM. Five of its nine tests failed on the ledger: the close is below the 50-day average, which is itself above the 200-day average [A1_structure]; relative strength over 63 sessions is minus 7.14 percent [A3_rs_leading_63d]; the 50-day average fell 3.44 percent over 21 sessions [B1_sma50_holding]; and 20-day volume is 0.84 of normal against a minimum of 1.0 [B5_volume_expansion]. The fifth failure is the missing-data test below. Verdict: NO_MOMENTUM, so REJECTED.</p>
+<p><strong>Missing ledger field (exception).</strong> The 200-day trend test [A2_sma200_not_falling] could not be measured, because the ledger does not carry the 200-day average from 63 sessions earlier [sma200_63d_ago]. It is recorded as a fail on missing data, not on a measured decline. The outcome does not change, because the price and relative strength tests fail on measured values.</p>
+<p><strong>Support distance (exception).</strong> The extension test [A4_not_extended] and the base-pivot test [B3_at_base_pivot] both read the same field, the distance from the base pivot in ATR. The ledger has no separate support-distance field, so both rows show 0.93 ATR. The two rows are the same measurement, not two independent checks.</p>
+<p><strong>Momentum thresholds (exception).</strong> The configuration marks the momentum gate thresholds as needing calibration [config_needs_calibration]. The gate is used as the code computes it, without changing a threshold.</p>
+<p><strong>Asymmetry target (failed, secondary).</strong> Forward EPS is not in the research record, and the analyst price target shows "n/a" <sup><a href="#cite_note-10">[10]</a></sup>. The target is therefore unverified, which the rule treats as FAIL_ASYMMETRY. The trailing-earnings illustration of ₹3,290 is below the close and is not a target.</p>
+<p><strong>Stale periodic data (exception).</strong> The citation checker, run with the stale-date allowance, reported the result "CITATION CHECK: PASS WITH EXCEPTIONS" and "cited distinct sources: 26 (26 bibliography, 19 URLs; floor 25)". No value, quote or URL failed. It flagged 37 items whose as-of period is more than 60 days before the report date of 13 October 2026. Each is listed below by its checker name, with its age and its cure.</p>
+<div class="table-wrap"><table class="wikitable"><tr><th>As-of month</th><th>Age (days)</th><th>Items flagged (checker names)</th><th>Dated cure</th></tr>
+<tr><td>2026-08 (9 items)</td><td>73</td><td>capacity_expansion, expansion_timing, repeat_customers, no_borrowings, mgmt_guidance_fy27, order_book_stockwatch, capacity_use_stockwatch, fy27_target_stockwatch, investors_desk_q1</td><td>Estimated results on 27 October 2026, not yet confirmed by the company</td></tr>
+<tr><td>2026-03 (15 items)</td><td>226</td><td>roce_fy2026, roe_fy2026, roce_history, borrowings_mar2026, cfo_stockanalysis_mn, net_income_stockanalysis_mn, cfo_screener_cr, pat_screener_cr, sales_screener_cr, sales_cagr_3y, pat_cagr_3y, opm_annual, pe_history, total_debt_history, tickjournal_fy26_profit</td><td>Audited FY2026 annual report; the record does not date its publication, so re-check at the estimated 27 October 2026 results</td></tr>
+<tr><td>2026-06 (10 items)</td><td>134</td><td>sales_q1fy27_screener, opm_q1fy27_screener, pat_q1fy27_screener, q1fy27_revenue_stockwatch, q1fy27_pat_stockwatch, q1fy27_opm_stockwatch, q1fy27_pat_livemint, revenue_nse_financials, revenue_bom_financials, cash_short_term_jun2026</td><td>September 2026 quarter results, estimated for 27 October 2026, not yet confirmed by the company</td></tr>
+<tr><td>2026-07 (1 item)</td><td>104</td><td>credit_rating</td><td>Next CARE rating review; the record does not give its date</td></tr>
+<tr><td>2025-03 (2 items)</td><td>591</td><td>fy25_annual_report_summary, annual_report_filed</td><td>Superseded by the FY2026 annual report; used only as history</td></tr>
+</table></div>
+<p><strong>Aggregator sources (exception).</strong> The three-year cash flow and profit figures rest on two aggregators, Screener and stockanalysis, which agree. The company's own annual report PDF is cached as a binary file with no readable text, so it cannot be used as a quoted source. Cure: check the audited FY2026 annual report against the cash flow table at the next review.</p>
+<p><strong>Standalone figures (exception).</strong> The Screener and stockanalysis series reported here are standalone. The consolidated Screener page cached in this run shows no figures without a login. Cure: confirm the consolidated figures on the annual report.</p>
+<p><strong>Ledger and aggregator differences (noted).</strong> The 50-day average is ₹4,097.43 on stockanalysis and ₹4,111.69 in the ledger. The 52-week low is ₹2,851 on Screener and ₹2,852.50 in the ledger, which matches Yahoo Finance <sup><a href="#cite_note-4">[4]</a></sup>. The RSI is 40.48 on stockanalysis and 39.55 in the ledger. The ledger governs all technical figures.</p>
+<p><strong>Prior row differences (noted).</strong> The prior row listed an operating margin of 19.5 percent and a P/E of 34.0. The current Screener page shows an operating margin of 29 percent for FY2026 and a P/E of 32.3 <sup><a href="#cite_note-2">[2]</a></sup>. The prior values are not used.</p>
+<p><strong>What the reader should take from these.</strong> None of these exceptions changes the REJECTED verdict. The verdict rests on the current ledger price and trend, which are measured directly, and the stale items would matter only if a later review reopened the case.</p>
+</section>
+<section class="chapter" id="notes"><h2>Notes, glossary and sources</h2>
+<p>The bracketed numbers in the text point to the numbered list below. Every company figure is traced to one of these pages in the research record for this run, and each page was fetched on the date shown. Ledger figures are taken from the facts file for 13 October 2026 and are labelled as ledger figures in the text.</p>
+<h2 id="references">References</h2>
 <ol class="reflist">
-  <li id="cite_note-1"><span class="citation-source">Shilchar Technologies Limited</span>. <em>Corporate History &amp; 38th Annual Report FY24</em>, Corporate Overview &amp; Directors' Report, pp. 4–12.</li>
-  <li id="cite_note-2"><span class="citation-source">BSE India Corporate Filings</span>. <em>Shilchar Technologies Limited - Name Change &amp; Memorandum of Association Restructuring</em>, BSE Scrip Code 531201, Regulatory Records.</li>
-  <li id="cite_note-3"><span class="citation-source">Ministry of Corporate Affairs (MCA)</span>. <em>Directorate Filings &amp; Key Managerial Personnel Records: Shilchar Technologies Ltd</em>, DIN Disclosures for Alok Shah &amp; CFO Prajesh Purohit.</li>
-  <li id="cite_note-4"><span class="citation-source">Shilchar Technologies Limited</span>. <em>Investor Presentation Q4 FY25 &amp; FY26 Factory Operational Update</em>, "Manufacturing Scale at Gavasad &amp; Bil Facilities", May 2025, pp. 6–9.</li>
-  <li id="cite_note-5"><span class="citation-source">Central Power Research Institute (CPRI)</span>. <em>Type Test Certificates &amp; Dynamic Short-Circuit Verification Records: Shilchar Distribution Transformers</em>, Bhopal &amp; Bengaluru Testing Laboratories.</li>
-  <li id="cite_note-6"><span class="citation-source">National Stock Exchange of India (NSE)</span>. <em>Audited Annual Financial Results for the Year Ended March 31, 2026: Shilchar Technologies Limited</em>, Statement of Profit and Loss, BSE/NSE Filings, May 2026.</li>
-  <li id="cite_note-7"><span class="citation-source">Screener.in Financial Database</span>. <em>Shilchar Technologies Ltd - 10-Year Historical Profit &amp; Loss, Quarterly OPM and EBITDA Breakdown</em>, screener.in/company/SHILCTECH/consolidated/.</li>
-  <li id="cite_note-8"><span class="citation-source">Capitaline &amp; Bloomberg Market Data</span>. <em>Key Financial Ratios, ROCE Decomposition, ROE and Closing Quotes for Shilchar Technologies (SHLT:IN)</em>, September 2026.</li>
-  <li id="cite_note-9"><span class="citation-source">Shilchar Technologies Limited</span>. <em>Audited Consolidated Balance Sheet as of March 31, 2026</em>, Note 7 (Borrowings), Note 11 (Cash &amp; Bank Balances), Note 12 (Trade Receivables), pp. 78–92.</li>
-  <li id="cite_note-10"><span class="citation-source">CRISIL Ratings Limited</span>. <em>Rating Rationale: Shilchar Technologies Limited</em>, Reaffirmation of Bank Facilities at 'CRISIL A/Stable/CRISIL A1', Rating Letter &amp; Liquidity Assessment.</li>
-  <li id="cite_note-11"><span class="citation-source">Shilchar Technologies Limited</span>. <em>Audited Consolidated Cash Flow Statement FY26</em>, Operating Activities &amp; Working Capital Adjustments, Annual Report FY26, p. 82.</li>
-  <li id="cite_note-12"><span class="citation-source">BSE Limited Shareholding Disclosures</span>. <em>Shareholding Pattern for the Quarter Ended June 30, 2026: Shilchar Technologies Limited</em>, Regulation 31 of SEBI LODR Regulations, 2015.</li>
-  <li id="cite_note-13"><span class="citation-source">Directorate General of Foreign Trade (DGFT) &amp; Export Disclosures</span>. <em>Export Shipments of Power Transformers to North American &amp; EMEA Solar Parks</em>, Shilchar Technologies Export Ledger, FY25–FY26.</li>
-  <li id="cite_note-14"><span class="citation-source">Institutional Quantitative Framework</span>. <em>Underwriting Protocol: 3-Layer Gating, Support Posture in ATR, and Displacement Economics for Indian Equities</em>, Portfolio Research Desk, September 2026.</li>
-  <li id="cite_note-15"><span class="citation-source">Department of Scientific and Industrial Research (DSIR)</span>. <em>In-House R&amp;D Recognition Directory</em>, Shilchar Electronics Vadodara R&amp;D Center Approval Records.</li>
-  <li id="cite_note-16"><span class="citation-source">Gujarat Energy Development Agency (GEDA)</span>. <em>Solar Power Plant Substation Equipment Standardization Guidelines</em>, IDT Transformer Specifications &amp; Approved Vendors, 2012–2020.</li>
-  <li id="cite_note-17"><span class="citation-source">Indian Electrical and Electronics Manufacturers' Association (IEEMA)</span>. <em>Transformer Division Annual Review: Market Growth, Technological Standards and Raw Material Escalation Clauses</em>, IEEMA Journal, Vol. 45, 2025.</li>
-  <li id="cite_note-18"><span class="citation-source">Institute of Electrical and Electronics Engineers (IEEE)</span>. <em>IEEE C57.12.00: Standard General Requirements for Liquid-Immersed Distribution, Power, and Regulating Transformers</em>, Harmonic Mitigation in Renewable Interconnections.</li>
-  <li id="cite_note-19"><span class="citation-source">Ministry of Power, Government of India</span>. <em>Revamped Distribution Sector Scheme (RDSS) Execution Guidelines</em>, High-Efficiency Distribution Transformer Upgrades, CEA Technical Standards, 2024.</li>
-  <li id="cite_note-20"><span class="citation-source">Wood Mackenzie Power &amp; Renewables</span>. <em>Global Power Transformer Supply Chain Bottlenecks &amp; Lead-Time Analysis 2024–2030</em>, Grid Infrastructure Intelligence Report, March 2026.</li>
-  <li id="cite_note-21"><span class="citation-source">Federal Energy Regulatory Commission (FERC)</span>. <em>Interconnection Queues and Transformer Availability Across US Regional Transmission Organizations (PJM, MISO, ERCOT)</em>, Staff Report, 2025.</li>
-  <li id="cite_note-22"><span class="citation-source">Central Electricity Authority (CEA)</span>. <em>National Electricity Plan (Volume II: Transmission) 2022–2032</em>, Transformer Capacity Additions for 500 GW Non-Fossil Grid Integration, New Delhi, 2024.</li>
-  <li id="cite_note-23"><span class="citation-source">CRISIL Market Intelligence &amp; Analytics</span>. <em>Indian Power T&amp;D Equipment Industry Outlook: Domestic Capex Super-Cycle and Global Export Realization</em>, Industry Research, July 2026.</li>
-  <li id="cite_note-24"><span class="citation-source">Transformers and Rectifiers (India) Limited (TARIL)</span>. <em>Audited Annual Financial Results FY26 &amp; Investor Conference Call Transcript</em>, NSE Scrip: TARIL, May 2026.</li>
-  <li id="cite_note-25"><span class="citation-source">Voltamp Transformers Limited</span>. <em>Annual Report FY26 &amp; Balance Sheet Analysis</em>, BSE Scrip: 532757, Corporate Filings, June 2026.</li>
-  <li id="cite_note-26"><span class="citation-source">Indo Tech Transformers Limited</span>. <em>Corporate Factsheet and Audited Results FY26</em>, BSE Scrip Code: 532717, NSE: INDOTECH, 2026.</li>
-  <li id="cite_note-27"><span class="citation-source">TradingView &amp; Trendlyne Technical Databases</span>. <em>Technical Indicators, Simple Moving Averages (20/50/200 DMA) and Volatility Patterns for SHILCTECH</em>, September 2026.</li>
-  <li id="cite_note-28"><span class="citation-source">London Metal Exchange (LME)</span>. <em>Copper Grade A Settlement Prices &amp; CRGO Electrical Steel Export Parity Prices</em>, Monthly Commodity Price Indices, 2024–2026.</li>
-  <li id="cite_note-29"><span class="citation-source">Office of the United States Trade Representative (USTR)</span>. <em>Section 301 Tariff Review on Electrical Grid Components and Renewable Energy Equipment</em>, Federal Register Notices, 2025.</li>
-  <li id="cite_note-30"><span class="citation-source">Gujarat Pollution Control Board (GPCB) &amp; District Industrial Center</span>. <em>Industrial Environmental Clearance &amp; Factory Inspectorate Licenses: Shilchar Technologies Ltd</em>, Bil &amp; Gavasad Facilities, 2024.</li>
+<li id="cite_note-1"><a href="https://www.screener.in/company/531201/">screener.in — company/531201</a>.</li>
+<li id="cite_note-2"><a href="https://www.screener.in/company/SHILCTECH/">screener.in — company/SHILCTECH</a>.</li>
+<li id="cite_note-3"><a href="https://www.screener.in/company/SHILCTECH/consolidated/">screener.in — company/SHILCTECH/consolidated</a>.</li>
+<li id="cite_note-4"><a href="https://finance.yahoo.com/quote/SHILCTECH.NS/">finance.yahoo.com — quote/SHILCTECH.NS</a>.</li>
+<li id="cite_note-5"><a href="https://stockanalysis.com/quote/nse/SHILCTECH/financials/cash-flow-statement/">stockanalysis.com — quote/nse/SHILCTECH/financials/cash-flow-statement</a>.</li>
+<li id="cite_note-6"><a href="https://www.stockwatch.live/in/results/shilchar-technologies-531201/2027/1">stockwatch.live — results/shilchar-technologies-531201/2027/1</a>.</li>
+<li id="cite_note-7"><a href="https://www.livemint.com/market/market-stats/shilchar-technologies-q1-results-S0000549">livemint.com — market-stats/shilchar-technologies-q1-results</a>.</li>
+<li id="cite_note-8"><a href="https://www.tijorifinance.com/company/shilchar-technologies-limited/">tijorifinance.com — company/shilchar-technologies-limited</a>.</li>
+<li id="cite_note-9"><a href="https://stockanalysis.com/quote/bom/531201/financials/balance-sheet/">stockanalysis.com — quote/bom/531201/financials/balance-sheet</a>.</li>
+<li id="cite_note-10"><a href="https://stockanalysis.com/quote/nse/SHILCTECH/statistics/">stockanalysis.com — quote/nse/SHILCTECH/statistics</a>.</li>
+<li id="cite_note-11"><a href="https://trendlyne.com/equity/share-holding/3495/SHILCTECH/latest/shilchar-technologies-ltd/">trendlyne.com — equity/share-holding/3495/SHILCTECH/latest</a>.</li>
+<li id="cite_note-12"><a href="https://www.alphave.in/financials/shilchar-technologies/shareholding">alphave.in — financials/shilchar-technologies/shareholding</a>.</li>
+<li id="cite_note-13"><a href="https://trendlyne.com/equity/3495/SHILCTECH/shilchar-technologies-ltd/">trendlyne.com — equity/3495/SHILCTECH</a>.</li>
+<li id="cite_note-14"><a href="https://stockanalysis.com/quote/nse/SHILCTECH/">stockanalysis.com — quote/nse/SHILCTECH</a>.</li>
+<li id="cite_note-15"><a href="https://stockanalysis.com/quote/nse/SHILCTECH/financials/ratios/">stockanalysis.com — quote/nse/SHILCTECH/financials/ratios</a>.</li>
+<li id="cite_note-16"><a href="https://www.screener.in/company/GVPIL/consolidated/">screener.in — company/GVPIL/consolidated</a>.</li>
+<li id="cite_note-17"><a href="https://www.screener.in/company/INDOTECH/">screener.in — company/INDOTECH</a>.</li>
+<li id="cite_note-19"><a href="https://www.choiceindia.com/stocks/shilchar-technologies-ltd-shareholding-pattern">choiceindia.com — stocks/shilchar-technologies-ltd-shareholding-pattern</a>.</li>
+<li id="cite_note-20"><a href="https://www.etmoney.com/stocks/shilchar-technologies-ltd/shareholding/1879">etmoney.com — stocks/shilchar-technologies-ltd/shareholding/1879</a>.</li>
+<li id="cite_note-21"><a href="https://www.dhwaja.com/company-information/shareholding-pattern/shilchar-technologies-ltd">dhwaja.com — company-information/shareholding-pattern/shilchar-technologies-ltd</a>.</li>
+<li id="cite_note-22"><a href="https://filingreader.com/news-wire/mumbai/2026-07-01/careedge-reaffirms-shilchar-technologies-credit-ratings-at-a-stable">filingreader.com — CareEdge reaffirms Shilchar Technologies ratings, 1 July 2026</a>.</li>
+<li id="cite_note-23"><a href="https://www.scribd.com/document/912926649/Annual-Report-2024-2025">scribd.com — Shilchar Technologies Annual Report 2024-25</a>.</li>
+<li id="cite_note-24"><a href="https://www.reportsradar.com/reports/61c08893-8f07-4bcb-8b27-1e5d1de1fc9e">reportsradar.com — Shilchar Technologies FY2025 Annual Report</a>.</li>
+<li id="cite_note-25"><a href="https://www.indiainfoline.com/company/shilchar-technologies-ltd/share-holding">indiainfoline.com — company/shilchar-technologies-ltd/share-holding</a>.</li>
+<li id="cite_note-26"><a href="https://tickjournal.com/shilchar-technologies-ltd-quarterly-results/">tickjournal.com — shilchar-technologies-ltd-quarterly-results</a>.</li>
+<li id="cite_note-27"><a href="https://shilchar.com/power/investors-desk">shilchar.com — power/investors-desk</a>.</li>
 </ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
 
-<hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 2.5em 0 1.5em 0;">
-<div style="font-size: 0.82em; color: var(--text-muted); text-align: center;">
-  Institutional Equity Research Dossier &bull; Shilchar Technologies Limited (NSE: SHILCTECH / BSE: 531201) &bull; Produced by Antigravity Quantitative Underwriting Engine &bull; Strictly IN-PLACE Storage.
-</div>
-
-</body>
-</html>
+</script></body></html>
