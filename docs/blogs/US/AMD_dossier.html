@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="research-desk-v1" name="report-design"/>
+<meta content="US" name="report-market"/>
+<meta content="dossier" name="report-kind"/>
+<meta content="Company research" name="report-workflow"/>
+<meta content="2026-10-16" name="research-as-of"/>
+<meta content="2026-10-17T11:41:00.734152-07:00" name="generated-at"/>
+<title>Advanced Micro Devices (NASDAQ: AMD) - the book report, as of 2026-10-16</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress aria-label="Reading progress" class="desk-progress" hidden="" max="100" value="0"></progress>
+<header class="desk-masthead"><a class="desk-wordmark" aria-disabled="true">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select hidden="" id="desk-section"><option value="">Contents</option></select><button aria-label="Print report" hidden="" id="desk-print" title="Print report"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"></path><rect height="8" rx="1" width="12" x="6" y="14"></rect></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Advanced Micro Devices (NASDAQ: AMD) - the book report, as of 2026-10-16</h1><p class="report-generated">Generated Date: <time datetime="2026-10-17T11:41:00.734152-07:00">17 Oct 2026, 11:41 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-16</p></header>
+<dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span> (NO_ARCHETYPE_QUALIFIES)</dd></div>
+<div><dt>Session Price (2026-10-16)</dt><dd>$528.75</dd></div>
+<div><dt>Strategy Bucket</dt><dd>TACTICAL_MOMENTUM</dd></div>
+<div><dt>Implied 10Y Growth (Reverse DCF)</dt><dd>+28.4%/yr</dd></div>
+<div><dt>Estimate Revisions (90d)</dt><dd>RISING_ESTIMATES</dd></div>
+<div><dt>Trend &amp; Momentum Gate</dt><dd>Stage 3 (Topping / Pullback) | NO_MOMENTUM</dd></div>
+<div><dt>Support Distance / Stop</dt><dd>0.07 ATR | Stop $410.40</dd></div>
+<div><dt>Base Target / Asymmetry</dt><dd>$610.86 | 0.69:1 (Risk-Unit Size: 0.0%)</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Advanced Micro Devices (NASDAQ: AMD) designs chips for data centers, PCs and game consoles; Data Center is 58% of sales, and June-quarter revenue was $11,536 million, up 50%.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> Our verdict is REJECTED for new money at $528.75: the chart is below its 50-day average, return on invested capital is 9.8% against a 12% floor, and only 2 of 5 operating measures pass, so we buy nothing.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> A close above $537.14 would fix the chart test, and $424.03 to $454.95 would be a better entry. A new decision also needs a 12% return on capital and 4 of 5 operating measures, so the first check is the November 3 results. The conclusion would be wrong if the new Helios AI racks ship on time and the price never gives us a better entry.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does</h2>
+<p>AMD designs chips and sells them to companies that build computers. It owns no factories for its main products: wafers for its server, PC and adaptive chips are made by Taiwan Semiconductor Manufacturing Company (TSMC), and a second contract maker, GLOBALFOUNDRIES, supplies some older nodes.<sup><a href="#cite_note-2">[2]</a></sup> The company had about 31,000 employees at the end of 2025.<sup><a href="#cite_note-2">[2]</a></sup> A chip designer of this kind earns money from the quality of its designs and from the price its customers pay per chip, so the report keeps asking one question: how many chips will customers buy, and at what price?</p>
+<p>Fiscal 2025 revenue was $34,639 million, split across three reporting segments.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> Data Center, which sells EPYC server processors, Instinct AI accelerators, networking cards and programmable chips to cloud and AI companies, brought in $16,635 million, or 48.0%.<sup><a href="#cite_note-3">[3]</a></sup> Client and Gaming, which sells Ryzen PC processors, Radeon graphics cards and chips for game consoles, brought in $14,550 million, or 42.0%.<sup><a href="#cite_note-3">[3]</a></sup> Embedded, which sells programmable and embedded processors to industrial, communications and aerospace customers, brought in $3,454 million, or 10.0%.<sup><a href="#cite_note-3">[3]</a></sup> By the June 2026 quarter the mix had moved sharply: Data Center was $6,718 million of $11,536 million, or 58.2%.<sup><a href="#cite_note-15">[15]</a></sup></p>
+<p>Who pays? Cloud providers such as Amazon Web Services, Microsoft, Google and Oracle buy EPYC processors for their data centers, and AI laboratories such as OpenAI, Meta and Anthropic buy Instinct accelerators to train and run AI models.<sup><a href="#cite_note-32">[32]</a></sup> PC makers such as Dell, HP and Lenovo buy Ryzen chips, and console makers buy custom chips. No single customer reached 10% of revenue in fiscal 2025 or 2024, although one Client and Gaming customer was 18% of revenue in 2023.<sup><a href="#cite_note-6">[6]</a></sup> By billing location, $11,363 million came from the United States, $7,751 million from China including Hong Kong (22.4% of revenue), $5,186 million from Taiwan and $4,284 million from Singapore.<sup><a href="#cite_note-6">[6]</a></sup></p>
+<p>The product that matters most for the next two years is a full AI rack called Helios. It combines 72 Instinct GPUs (graphics processing units, chips that do the heavy AI arithmetic), EPYC processors, Pensando networking and ROCm software, the free programming tools that let developers run AI models on AMD chips.<sup><a href="#cite_note-40">[40]</a></sup><sup><a href="#cite_note-32">[32]</a></sup> Selling a whole rack means AMD sells more content per customer and competes directly with Nvidia's rack systems. To avoid running a factory, AMD sold the manufacturing arm of ZT Systems, a rack builder it had bought, to Sanmina for $2.4 billion in cash and shares and kept the design team.<sup><a href="#cite_note-7">[7]</a></sup></p>
+<p>Three large AI customers have signed multi-year commitments. OpenAI agreed in October 2025 to deploy 6 gigawatts of AMD GPUs, with the first gigawatt starting in the second half of 2026.<sup><a href="#cite_note-26">[26]</a></sup> Meta agreed in February 2026 to deploy up to 6 gigawatts, with the first shipments in the second half of 2026.<sup><a href="#cite_note-28">[28]</a></sup> Anthropic announced in 2026 up to 2 gigawatts, starting in the first half of 2027.<sup><a href="#cite_note-32">[32]</a></sup> A gigawatt is a unit of electrical power, used here as a measure of data-center size. The chief financial officer put the revenue at double-digit billions of dollars per gigawatt.<sup><a href="#cite_note-32">[32]</a></sup> OpenAI and Meta each also received a warrant, a right to buy up to 160 million AMD shares for $0.01 each, which vests only as purchases and stock-price targets are met.<sup><a href="#cite_note-17">[17]</a></sup></p>
+<p>Management sizes the prize in its own numbers. It expects the market for data-center AI accelerators to grow more than 45% a year to about $1.4 trillion by 2030, and the server processor market to grow more than 50% a year to about $220 billion by 2030.<sup><a href="#cite_note-32">[32]</a></sup> These are company estimates, not audited facts, and the whole investment case depends on how much of that market AMD wins and at what profit.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>How AMD's fiscal 2025 revenue of $34,639 million splits, by segment and by billing location</caption>
+<thead><tr><th>Way of cutting revenue</th><th>Fiscal 2025 amount</th><th>Share</th><th>What it covers</th><th>Why it matters to an owner</th></tr></thead>
+<tbody>
+<tr><td>Data Center</td><td>$16,635 million<sup><a href="#cite_note-3">[3]</a></sup></td><td>48.0%</td><td>EPYC server CPUs, Instinct AI GPUs, Pensando networking, FPGAs for data centers.</td><td>The AI engine. June 2026 quarter: $6,718 million, up 107%.<sup><a href="#cite_note-15">[15]</a></sup></td></tr>
+<tr><td>Client and Gaming</td><td>$14,550 million<sup><a href="#cite_note-3">[3]</a></sup></td><td>42.0%</td><td>Ryzen PC chips ($10,640 million), Radeon and console chips ($3,910 million).</td><td>Cyclical. Management plans for a softer PC market in the second half of 2026.<sup><a href="#cite_note-32">[32]</a></sup></td></tr>
+<tr><td>Embedded</td><td>$3,454 million<sup><a href="#cite_note-3">[3]</a></sup></td><td>10.0%</td><td>Embedded processors and programmable chips for industrial, networking and defense customers.</td><td>Recovering: the June 2026 quarter was up 19% to $977 million.<sup><a href="#cite_note-18">[18]</a></sup></td></tr>
+<tr><td>United States</td><td>$11,363 million<sup><a href="#cite_note-6">[6]</a></sup></td><td>32.8%</td><td>Revenue billed to US customers.</td><td>The largest single region.</td></tr>
+<tr><td>China including Hong Kong</td><td>$7,751 million<sup><a href="#cite_note-6">[6]</a></sup></td><td>22.4%</td><td>Revenue billed in China.</td><td>Exposed to US export controls; AMD took an $800 million charge on MI308 chips in 2025.<sup><a href="#cite_note-7">[7]</a></sup></td></tr>
+<tr><td>Taiwan and Singapore</td><td>$9,470 million<sup><a href="#cite_note-6">[6]</a></sup></td><td>27.3%</td><td>Billing hubs for manufacturers and cloud builders.</td><td>Reflects where servers are assembled, not where chips are used.</td></tr>
+</tbody>
+</table></div>
+<p>The three segment rows add to $34,639 million, and the three geography rows plus $6,055 million of other regions add to the same total. Read the first three rows to see who pays and the last three to see where the bills go. <sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-6">[6]</a></sup> For an owner, the point is mix. Data Center is the segment with the fastest growth and the AI story, but Client and Gaming is still 42% of sales, so a weak PC or console year can hide strength in the data center for a while. The table does not show how much of Data Center is AI GPUs. AMD reports Instinct revenue growth in words and publishes no dollar figure for AI accelerators, which is why Chapter 2B scores that measure as a watch item. The next chapter asks how strong the competitive position behind these sales really is.</p>
+<h3>Plain-English glossary for this report</h3>
+<ul>
+<li>EPYC: AMD's family of server processors, sold mostly to cloud providers and large companies.</li>
+<li>Instinct: AMD's line of AI accelerator chips (GPUs), the rival of Nvidia's data-center GPUs.</li>
+<li>Helios: AMD's rack-scale AI system that links 72 Instinct GPUs, EPYC processors, networking and software into one product.</li>
+<li>MI450 and MI455X: the next-generation Instinct GPUs that power Helios, built on a 2-nanometer process.</li>
+<li>ROCm: AMD's open-source programming software for AI, the counterpart to Nvidia's CUDA.</li>
+<li>Fabless: a chip company that designs chips and pays contract makers such as TSMC to produce them.</li>
+<li>Gigawatt: a billion watts of power; AI customers use it as a shorthand for the size of a data-center build.</li>
+<li>Warrant: a right to buy shares at a fixed low price; AMD gave two to its biggest AI customers as an incentive.</li>
+<li>Non-GAAP: results that remove items such as acquisition amortization and stock pay; companies publish both versions, and this report labels which is used.</li>
+<li>Hyperscaler: one of the very largest cloud companies, such as Microsoft or Amazon.</li>
+<li>HBM (high-bandwidth memory): the fast stacked memory that sits next to an AI chip; its supply and price affect AI-chip cost.</li>
+<li>ASIC: a custom chip built for one customer's workload, an alternative to a general-purpose GPU.</li>
+<li>Relative strength index (<dfn>RSI</dfn>) is a 0-to-100 meter of how fast a price has moved; below 30 is called oversold and above 70 overbought.</li>
+<li>Average true range (<dfn>ATR</dfn>) is the typical daily price swing in dollars; a stop placed closer than one ATR sits inside normal daily noise.</li>
+<li>Earnings per share (<dfn>EPS</dfn>) is the company's profit divided by the number of shares.</li>
+<li><dfn>Free cash flow</dfn> (<dfn>FCF</dfn>) is the cash left after running the business and paying for equipment.</li>
+<li><dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization) is a rough measure of operating profit before financing and accounting charges.</li>
+<li><dfn>ROIC</dfn> (return on invested capital) is the profit a business earns on each dollar invested in it.</li>
+<li><dfn>Gross margin</dfn> is the share of each sales dollar left after the direct cost of making the product; <dfn>operating margin</dfn> is the share left after all running costs; <dfn>net margin</dfn> is the share left after every cost.</li>
+<li><dfn>Net debt</dfn> is borrowings minus cash and short-term investments; a negative figure means net cash.</li>
+<li><dfn>Price-to-earnings</dfn> (P/E) is the share price divided by earnings per share; a forward P/E uses expected earnings.</li>
+<li><dfn>Guidance</dfn> is a company's own forecast for the coming period.</li>
+<li><dfn>Dilution</dfn> is the rise in share count that shrinks each existing share's slice of the company.</li>
+<li>A <dfn>base</dfn> is a flat stretch of trading that comes before a move, and its <dfn>pivot</dfn> is the top of that stretch; a <dfn>breakout</dfn> is a move above the pivot on heavy volume.</li>
+<li><dfn>Stage 2</dfn> is the confirmed uptrend on the Weinstein stage scale and <dfn>Stage 4</dfn> is the confirmed downtrend; Stage 3 is a topping or pullback phase.</li>
+<li>The <dfn>50-day moving average</dfn> is the average closing price over the last 50 trading days; it shows the medium-term trend.</li>
+<li><dfn>Entry zone</dfn> is the band of prices where buying is planned.</li>
+<li><dfn>Reward-to-risk</dfn>, also called <dfn>asymmetry</dfn>, is the gain to a target divided by the loss to the stop: (target - price) / (price - stop).</li>
+<li>A <dfn>measured move</dfn> is a target found by projecting the height of a base above its pivot.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Why the business is strong or weak</h2>
+<p>A strong position is not the same as a safe one. AMD's strength is breadth: it sells server CPUs, data-center GPUs, PC processors and programmable chips under one roof. The 10-K names Intel and Nvidia as its main rivals in the data center, and notes that some customers build their own chips.<sup><a href="#cite_note-1">[1]</a></sup> AMD says it gained x86 server revenue share in the June 2026 quarter, that it has had five consecutive record server CPU quarters and that its fifth-generation EPYC chips power nearly one-third of more than 1,600 public cloud instance types.<sup><a href="#cite_note-32">[32]</a></sup> These are company statements, so we treat them as evidence of momentum, not as audited share data.</p>
+<p>In AI accelerators, AMD is the challenger. Nvidia reported revenue of $96,221 million for its July 2026 quarter, which is more than eight times AMD's $11,536 million for the whole company, and Nvidia's GAAP operating margin was 66.2% against AMD's 17.3%.<sup><a href="#cite_note-43">[43]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> AMD's argument is cost and openness. It says Helios delivers up to 15% more throughput at the same rack power and up to 30% more tokens per dollar than the competition on a range of inference workloads, a claim made by the company and not yet checked by us.<sup><a href="#cite_note-32">[32]</a></sup> Meta's chief executive described the 6-gigawatt deal as a way to diversify its compute, which is the real demand signal: large buyers want a second source.<sup><a href="#cite_note-28">[28]</a></sup></p>
+<p>The competitive edge also depends on technology cadence. AMD plans a new rack-scale platform every year: Helios with MI450-series GPUs now, then a platform with MI500 GPUs and the Verano CPU in 2027.<sup><a href="#cite_note-32">[32]</a></sup> It showed a 192-core Verano chip at the Open Compute Project summit on October 12.<sup><a href="#cite_note-40">[40]</a></sup> A yearly cadence helps if every launch lands on time, and each late launch hands a quarter to Nvidia.</p>
+<h3>Where the business is weak</h3>
+<p>First, profit per sales dollar is far lower than the leaders'. AMD's GAAP gross margin, the share of each sales dollar left after the direct cost of making the product, was 53.2% over the twelve months to June 2026, against 75.0% for Nvidia and 69.1% for Broadcom in their latest quarters.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-43">[43]</a></sup><sup><a href="#cite_note-44">[44]</a></sup> Management says Helios gross margin will be slightly below the company average, so the AI ramp may dilute the margin before it lifts profit.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<p>Second, AMD relies on one foundry. The 10-K says AMD relies on TSMC for all wafers at 7 nanometers or smaller, which covers its newest chips.<sup><a href="#cite_note-2">[2]</a></sup> Helios also uses about 50% more high-bandwidth memory than a rival design, according to an analyst on the August call, and AMD said it has good visibility into memory supply for 2027 while customers watch memory cost.<sup><a href="#cite_note-32">[32]</a></sup> A memory shortage would hit AMD's costs and its customers' budgets at once.</p>
+<p>Third, the biggest customers are paid in shares. The OpenAI and Meta warrants cover up to 320 million shares, which is 19.6% of the 1,632.475 million shares outstanding, and the vesting schedule and stock-price targets are redacted in the exhibit filed with the SEC.<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-27">[27]</a></sup> At today's price of $528.75, one 160-million-share warrant would be worth about $84.6 billion if it vested and was exercised in full, which is large next to the 'tens of billions of dollars' of revenue AMD said in October 2025 it expects from the OpenAI deal.<sup><a href="#cite_note-26">[26]</a></sup> We do not know how much will vest, so this is a size check, not a forecast.</p>
+<p>Fourth, AMD is putting its own balance sheet behind the AI buildout. Unconditional purchase commitments rose from $12,166 million at December 27, 2025 to $30,276 million at June 27, 2026.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> AMD also guarantees up to $4.1 billion of data-center lease payments, has leases not yet started worth $4.5 billion, signed another $9.5 billion of data-center leases after quarter-end, and committed up to $5.0 billion of investments.<sup><a href="#cite_note-16">[16]</a></sup> On October 13, a data-center developer, Fermi America, announced a credit support agreement with AMD for the 222-megawatt first phase of its Texas project.<sup><a href="#cite_note-39">[39]</a></sup> Each of these commitments makes sense if customers buy the racks, and each becomes a cost if they do not.</p>
+<p>What this means for an owner: the business is strong on product breadth, server-CPU momentum and customer wins, and weaker on margin, single-foundry reliance, share-based customer incentives and a fast-growing pile of fixed commitments. Chapter 2B scores these points one at a time.</p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>
+<p>Layer 2 of our framework asks which few measures actually run this business, and whether management has done what it said it would. For a chip designer in the middle of an AI ramp, five measures decide the outcome: how fast the Data Center segment grows, whether gross margin holds as the mix shifts, whether the AI accelerator ramp can be seen in reported numbers, whether supply commitments stay in proportion to profit, and how much the share count can grow. We chose each because it can break the investment case on its own.</p>
+<p>We set the scoring rule for each measure before reading the result, and each rule is in the table. PASS means the measure is healthy, WATCH means it is acceptable but carries a named risk, and FAIL means it breaks the case. The framework needs four PASS scores out of five.</p>
+<h3>Layer 2 scorecard: company-specific operating KPIs</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 scorecard for Advanced Micro Devices, five company-specific measures</caption>
+<thead><tr><th>Measure</th><th>Why we chose it</th><th>Latest reading</th><th>How we score it</th><th>Score</th></tr></thead>
+<tbody>
+<tr><td>Data Center revenue growth and share of sales</td><td>Data Center is where the AI and server-CPU growth shows up.</td><td>June 2026 quarter: $6,718 million, up 107% from $3,240 million; 58.2% of revenue against 42% a year earlier. First half of 2026: $12,493 million against $6,914 million, up 80.7%. Twelve months: $22,214 million, 53.8% of revenue.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-32">[32]</a></sup></td><td>PASS if growth is at least 30% a year and the share of sales is rising; FAIL if growth is under 10%.</td><td>PASS</td></tr>
+<tr><td>Non-GAAP gross margin</td><td>Shows pricing power and the cost of the product mix, including the cost of the new racks.</td><td>56% in the June 2026 quarter, 55% in March, 56% guided for September; 43% in June 2025 after an $800 million export-control charge. The December 2025 figure of 57% included about $360 million of reserve release; without it, about 55%.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-22">[22]</a></sup> Management says Helios margin will be slightly below the company average.<sup><a href="#cite_note-32">[32]</a></sup></td><td>PASS if at least 55% and flat or rising; WATCH if 50% to 55% or falling; FAIL if under 50%.</td><td>PASS</td></tr>
+<tr><td>Visible AI accelerator ramp</td><td>AI GPUs are the largest source of expected growth, and the market is paying for it.</td><td>Signed commitments of 6 gigawatts (OpenAI), 6 gigawatts (Meta) and up to 2 gigawatts (Anthropic); Helios production shipments began in September 2026.<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-40">[40]</a></sup> AMD says Instinct sales 'more than doubled' but reports no dollar figure for AI accelerator revenue or backlog.<sup><a href="#cite_note-32">[32]</a></sup></td><td>PASS if the company reports AI accelerator revenue or backlog in dollars; WATCH if only gigawatt commitments are disclosed; FAIL if first shipments slip past the guided quarter.</td><td>WATCH</td></tr>
+<tr><td>Supply commitments and inventory</td><td>Commitments are costs AMD owes whether or not customers buy.</td><td>Unconditional commitments $30,276 million (up from $12,166 million six months earlier), of which $17,386 million falls in the rest of 2026; inventory $8,468 million, about 144 days of quarterly cost of sales.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> Twelve-month gross profit is $21,976 million, so commitments are 1.38 times gross profit.<sup><a href="#cite_note-13">[13]</a></sup></td><td>PASS if commitments are at most 1.0 times twelve-month gross profit; WATCH from 1.0 to 2.0 times; FAIL above 2.0 times.</td><td>WATCH</td></tr>
+<tr><td>Share count and dilution</td><td>The two big warrants and a new stock deal can add shares faster than buybacks remove them.</td><td>Stock pay is 4.6% of revenue. Shares outstanding 1,632 million against 1,622 million a year earlier. Potential warrant shares 320 million (19.6%); the World Labs deal is about $8.2 billion in stock, roughly 15.5 million shares at today's price; buybacks were $221 million in the first half of 2026 with $9.2 billion of authority left.<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-30">[30]</a></sup></td><td>PASS if potential warrant shares are under 10% of shares and buybacks offset stock pay; WATCH from 10% to 25%; FAIL above 25%.</td><td>WATCH</td></tr>
+</tbody>
+</table></div>
+<p>Two of five measures pass, three sit on watch and none fail, so the Layer 2 minimum of four passes is not met. The two passes describe results already reported: Data Center growth of 107% and a 56% gross margin. The three watch items describe risks that grow with the ramp. AI revenue is not reported in dollars, so we cannot check the ramp against a number. Purchase commitments are 1.38 times twelve-month gross profit, so a shortfall in demand would leave AMD paying for parts it cannot sell. The two warrants could add 19.6% to the share count, and their vesting terms are redacted. For an owner, a score of 2 out of 5 does not say the business is weak. It says the evidence of strength sits mostly in past results, while the evidence for the next stage is still promises. The next part tests how well those promises have been kept.</p>
+<h3>Management walk-the-talk: past promises vs delivered reality</h3>
+<p>Management has a clear pattern of guiding low and delivering higher. In each of the last six quarters, revenue came in above the midpoint of the range given three months earlier, by 3.0% to 7.0%.<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> Guidance is management's own forecast, so repeated beats mean the forecast is cautious. The company also kept its gross margin guidance in five of six quarters and beat it in the sixth.<sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></p>
+<p>Two details temper the record. The December 2025 beat of $670 million over the $9.6 billion guide included about $390 million of MI308 chip sales to China that the guide excluded, and the 57% non-GAAP gross margin included about $360 million of reserve release.<sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> Capital allocation is the weaker half: AMD repurchased $1,316 million of shares in 2025 but only $221 million in the first half of 2026, while it issued two large warrants, agreed an $8.2 billion all-stock acquisition and raised $4.75 billion of debt.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-29">[29]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>What AMD promised and what it delivered, 2025 to 2026</caption>
+<thead><tr><th>Promise (date and source)</th><th>What was delivered</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>First quarter 2025: revenue about $7.1 billion, non-GAAP gross margin about 54% (February 2025).<sup><a href="#cite_note-24">[24]</a></sup></td><td>Revenue $7,438 million (+4.8% above the guide), gross margin 54%.<sup><a href="#cite_note-23">[23]</a></sup></td><td>Beaten</td></tr>
+<tr><td>Second quarter 2025: revenue about $7.4 billion, non-GAAP gross margin 43% including an $800 million charge (May 2025).<sup><a href="#cite_note-23">[23]</a></sup></td><td>Revenue $7,685 million (+3.9%), gross margin 43%.<sup><a href="#cite_note-22">[22]</a></sup></td><td>Beaten</td></tr>
+<tr><td>Third quarter 2025: revenue about $8.7 billion, gross margin about 54% (August 2025).<sup><a href="#cite_note-22">[22]</a></sup></td><td>Revenue $9,246 million (+6.3%), gross margin 54%.<sup><a href="#cite_note-21">[21]</a></sup></td><td>Beaten</td></tr>
+<tr><td>Fourth quarter 2025: revenue about $9.6 billion, gross margin about 54.5%, no China MI308 sales (November 2025).<sup><a href="#cite_note-21">[21]</a></sup></td><td>Revenue $10,270 million (+7.0%), gross margin 57%, helped by about $390 million of China sales and a $360 million reserve release.<sup><a href="#cite_note-20">[20]</a></sup></td><td>Beaten, with one-time help</td></tr>
+<tr><td>First quarter 2026: revenue about $9.8 billion including about $100 million of China sales, gross margin about 55% (February 2026).<sup><a href="#cite_note-20">[20]</a></sup></td><td>Revenue $10,253 million (+4.6%), gross margin 55%.<sup><a href="#cite_note-19">[19]</a></sup></td><td>Beaten</td></tr>
+<tr><td>Second quarter 2026: revenue about $11.2 billion, gross margin about 56% (May 2026).<sup><a href="#cite_note-19">[19]</a></sup></td><td>Revenue $11,536 million (+3.0%), gross margin 56%, non-GAAP EPS $1.66.<sup><a href="#cite_note-18">[18]</a></sup></td><td>Beaten</td></tr>
+<tr><td>Long-term targets, November 2025: data-center revenue growth above 60% a year, AI accelerator growth above 80% a year, revenue growth above 35% a year, EPS above $20 within three to five years.<sup><a href="#cite_note-25">[25]</a></sup></td><td>First-half 2026 Data Center revenue grew 80.7%; in August management said it is tracking above the model and expects to exceed $20 of EPS.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-32">[32]</a></sup></td><td>On track, not yet proven</td></tr>
+<tr><td>MI450 and Helios shipments starting in the third quarter or second half of 2026 (October 2025 to November 2025).<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-25">[25]</a></sup></td><td>Lisa Su said on October 12 that production shipments began in September; no revenue is reported yet.<sup><a href="#cite_note-40">[40]</a></sup></td><td>On time, unmeasured</td></tr>
+<tr><td>'Tens of billions' of AI revenue in 2027 (February 2026).<sup><a href="#cite_note-33">[33]</a></sup></td><td>Repeated in August with Data Center revenue expected to more than double in 2027; no dollar figure for AI revenue is published.<sup><a href="#cite_note-32">[32]</a></sup></td><td>Open</td></tr>
+<tr><td>Sell the ZT Systems manufacturing arm and keep the design team (2025).<sup><a href="#cite_note-7">[7]</a></sup></td><td>Sold to Sanmina for $2.4 billion in cash and shares, with up to $450 million more contingent.<sup><a href="#cite_note-7">[7]</a></sup></td><td>Kept</td></tr>
+<tr><td>Share repurchases under a $14 billion program.<sup><a href="#cite_note-17">[17]</a></sup></td><td>$1,316 million in 2025, $221 million in the first half of 2026; $9.2 billion still available.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></td><td>Slowed</td></tr>
+</tbody>
+</table></div>
+<p>Of eleven promises, seven were kept or beaten, two are on track but not yet measured, one is open, and one (buybacks) has slowed. The pattern is a cautious guide followed by a beat, which builds credibility. It also raises the bar: a quarter that is only in line with a raised forecast can disappoint a market that now expects a beat of 3% to 7%. One entry carries a caveat, because the December 2025 beat leaned on China sales and a reserve release that will not repeat. The open entries concern the biggest claims, namely AI revenue of 'tens of billions' in 2027 and the Helios ramp. Those are the claims the price depends on, and the test left is delivery on November 3 and in the quarters after it. The next chapter puts five years of numbers behind these promises.</p>
+<p>What this means for an owner: management earns a high grade for forecasting and a mixed one for capital allocation. The next test is November 3, 2026, when AMD reports the September quarter against a guide of about $13 billion, a 56% gross margin and non-GAAP operating expenses of about $3.65 billion.<sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-32">[32]</a></sup> Chapter 3 now puts five years of numbers behind these promises.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. The numbers, in plain words</h2>
+<p>Revenue grew from $16,434 million in fiscal 2021 to $34,639 million in fiscal 2025, a compound rate of 20.5% a year, and the twelve months to June 27, 2026 reached $41,305 million.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> The path was uneven: revenue fell 3.9% in 2023, and operating income, the profit left after all running costs, was only $401 million that year.<sup><a href="#cite_note-4">[4]</a></sup> The 2022 purchase of Xilinx, paid for in stock, explains much of this. The balance sheet now carries $25,470 million of goodwill and $15,635 million of acquired intangibles, mostly from that deal, and the amortization of those intangibles ($2,254 million in 2025) lowers GAAP profit every year.<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-5">[5]</a></sup></p>
+<p>Two things have changed since 2024. Data Center now supplies most of the growth, and profit has grown faster than sales: GAAP operating margin, the share of revenue left after running costs, rose from 1.8% in 2023 to 15.7% over the twelve months to June 2026.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> The tables below show income, cash, debt, quarterly momentum and segment mix. We mark our own arithmetic, and every input is cited to a filing.</p>
+<h3>Five years of revenue and profit</h3>
+<p>Read each row left to right. The first five columns are fiscal years; the last column is the twelve months to June 27, 2026, built from the 2025 10-K plus the first half of 2026 minus the first half of 2025 (our arithmetic).<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> Fiscal 2025 net income includes $66 million from discontinued operations.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>AMD income statement, fiscal 2021 to the twelve months ended June 2026 ($ millions unless noted)</caption>
+<thead><tr><th>Measure</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>12 months to Jun 2026</th></tr></thead>
+<tbody>
+<tr><td>Revenue<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>16,434</td><td>23,601</td><td>22,680</td><td>25,785</td><td>34,639</td><td>41,305</td></tr>
+<tr><td>Revenue growth</td><td>68.3%</td><td>43.6%</td><td>-3.9%</td><td>13.7%</td><td>34.3%</td><td>first half of 2026 up 44.1%</td></tr>
+<tr><td>Gross profit<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>7,929</td><td>10,603</td><td>10,460</td><td>12,725</td><td>17,152</td><td>21,976</td></tr>
+<tr><td>Gross margin</td><td>48.2%</td><td>44.9%</td><td>46.1%</td><td>49.4%</td><td>49.5%</td><td>53.2%</td></tr>
+<tr><td>Operating income<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>3,648</td><td>1,264</td><td>401</td><td>1,900</td><td>3,694</td><td>6,488</td></tr>
+<tr><td>Operating margin</td><td>22.2%</td><td>5.4%</td><td>1.8%</td><td>7.4%</td><td>10.7%</td><td>15.7%</td></tr>
+<tr><td>Net income<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>3,162</td><td>1,320</td><td>854</td><td>1,641</td><td>4,335</td><td>6,434</td></tr>
+<tr><td>Net margin</td><td>19.2%</td><td>5.6%</td><td>3.8%</td><td>6.4%</td><td>12.5%</td><td>15.6%</td></tr>
+<tr><td>Diluted earnings per share ($)<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>2.57</td><td>0.84</td><td>0.53</td><td>1.00</td><td>2.65</td><td>3.90</td></tr>
+</tbody>
+</table></div>
+<p>Revenue and profit have risen together since 2023, and the operating margin gained about 14 points in under three years, which means profit grew much faster than sales. Gross margin rose from 46.1% to 53.2% over the same period, which the 10-Q attributes to a favorable product mix with higher Data Center revenue.<sup><a href="#cite_note-13">[13]</a></sup> The table does not show the non-GAAP view that management and analysts use. In the June 2026 quarter, non-GAAP operating income was $3,094 million against GAAP operating income of $1,990 million, because GAAP charges include acquisition amortization and stock pay.<sup><a href="#cite_note-18">[18]</a></sup> For an owner, the lesson is that GAAP profit is still small next to the stock's value, so the market is pricing profits that have not yet arrived. The cash table tests whether the profit turns into cash.</p>
+<h3>Five years of cash, debt and share count</h3>
+<p>Free cash flow is cash from operations minus spending on equipment. The 2025 and twelve-month figures use continuing operations, which excludes the ZT Systems manufacturing arm that was sold. Cash includes short-term investments, and net cash is cash minus debt. The last column uses the twelve months to June 2026 for flows and June 27, 2026 for balances.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>AMD cash, debt and shares, fiscal 2021 to June 2026 ($ millions unless noted)</caption>
+<thead><tr><th>Measure</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>12 months or date: Jun 2026</th></tr></thead>
+<tbody>
+<tr><td>Cash from operations<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></td><td>3,521</td><td>3,565</td><td>1,667</td><td>3,041</td><td>6,493</td><td>9,413</td></tr>
+<tr><td>Spending on equipment</td><td>301</td><td>450</td><td>546</td><td>636</td><td>974</td><td>1,677</td></tr>
+<tr><td>Free cash flow</td><td>3,220</td><td>3,115</td><td>1,121</td><td>2,405</td><td>5,519</td><td>7,736</td></tr>
+<tr><td>Free cash flow margin</td><td>19.6%</td><td>13.2%</td><td>4.9%</td><td>9.3%</td><td>15.9%</td><td>18.7%</td></tr>
+<tr><td>Stock-based compensation<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></td><td>379</td><td>1,081</td><td>1,384</td><td>1,407</td><td>1,638</td><td>1,895</td></tr>
+<tr><td>Stock-based compensation as % of revenue</td><td>2.3%</td><td>4.6%</td><td>6.1%</td><td>5.5%</td><td>4.7%</td><td>4.6%</td></tr>
+<tr><td>Cash and short-term investments<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>3,608</td><td>5,855</td><td>5,773</td><td>5,132</td><td>10,552</td><td>13,111</td></tr>
+<tr><td>Debt</td><td>313</td><td>2,467</td><td>2,468</td><td>1,721</td><td>3,222</td><td>3,226</td></tr>
+<tr><td>Net cash (cash minus debt)</td><td>3,295</td><td>3,388</td><td>3,305</td><td>3,411</td><td>7,330</td><td>9,885</td></tr>
+<tr><td>Share repurchases<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></td><td>1,762</td><td>3,702</td><td>985</td><td>862</td><td>1,316</td><td>310</td></tr>
+<tr><td>Inventories<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>1,955</td><td>3,771</td><td>4,351</td><td>5,734</td><td>7,920</td><td>8,468</td></tr>
+<tr><td>Shares outstanding, millions<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></td><td>1,207</td><td>1,612</td><td>1,616</td><td>1,622</td><td>1,630</td><td>1,632</td></tr>
+</tbody>
+</table></div>
+<p>Free cash flow has risen from $1.1 billion in 2023 to $7.7 billion over the latest twelve months, and net cash is $9.9 billion with only $3.2 billion of debt. Stock pay is 4.6% of revenue, down from 6.1% in 2023, though the share count has still crept up from 1,616 million to 1,632 million because buybacks slowed to $310 million over twelve months. The table understates two things. In August 2026 AMD sold another $4.75 billion of notes, which lifts debt to about $8.0 billion on a pro forma basis. It also leaves out the $30.3 billion of purchase commitments that sit outside the balance sheet.<sup><a href="#cite_note-29">[29]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> For an owner, the balance sheet is strong today, and the commitments are the part to watch, because they turn into cash outflows over the next two years. The quarterly table shows how fast revenue is moving.</p>
+<h3>Six quarters of momentum, and the guide for the next one</h3>
+<p>The quarterly table shows how the acceleration built, one quarter at a time, from early 2025 to the September 2026 guide. Data Center figures are as printed in each release, rounded to $0.1 billion. Gross margin and earnings per share are non-GAAP, which means they remove acquisition amortization and stock pay. The last row is a guide and a consensus figure, not a result.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>AMD quarterly revenue, Data Center revenue, gross margin and earnings per share, Q1 2025 to Q3 2026 guide</caption>
+<thead><tr><th>Quarter</th><th>Revenue ($M)</th><th>Data Center ($B)</th><th>Non-GAAP gross margin</th><th>Non-GAAP EPS ($)</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>Q1 2025<sup><a href="#cite_note-23">[23]</a></sup></td><td>7,438</td><td>3.7</td><td>54%</td><td>0.96</td><td>Revenue up 36%.</td></tr>
+<tr><td>Q2 2025<sup><a href="#cite_note-22">[22]</a></sup></td><td>7,685</td><td>3.2</td><td>43%</td><td>0.48</td><td>Includes an $800 million export-control charge.</td></tr>
+<tr><td>Q3 2025<sup><a href="#cite_note-21">[21]</a></sup></td><td>9,246</td><td>4.3</td><td>54%</td><td>1.20</td><td>No China MI308 sales.</td></tr>
+<tr><td>Q4 2025<sup><a href="#cite_note-20">[20]</a></sup></td><td>10,270</td><td>5.4</td><td>57%</td><td>1.53</td><td>Includes about $390 million of China sales and a $360 million reserve release.</td></tr>
+<tr><td>Q1 2026<sup><a href="#cite_note-19">[19]</a></sup></td><td>10,253</td><td>5.8</td><td>55%</td><td>1.37</td><td>Revenue up 38%.</td></tr>
+<tr><td>Q2 2026<sup><a href="#cite_note-18">[18]</a></sup></td><td>11,536</td><td>6.7</td><td>56%</td><td>1.66</td><td>Revenue up 50%; Data Center up 107%.</td></tr>
+<tr><td>Q3 2026 guide and consensus<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-34">[34]</a></sup></td><td>about 13,000 (plus or minus 300)</td><td>not guided</td><td>about 56% (guide)</td><td>1.93 (consensus)</td><td>Reports November 3, 2026.</td></tr>
+</tbody>
+</table></div>
+<p>Revenue rose every quarter except a flat first quarter of 2026, and the September guide implies growth of 41% against the year-earlier quarter. Data Center revenue went from $3.2 billion in the June 2025 quarter, when export controls cut MI308 sales, to $6.7 billion a year later. Gross margin has stayed between 54% and 57% apart from that charge, so the growth has not come at the cost of price. The table shows reported momentum only.<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> Data Center revenue in the guide is described as strong double-digit growth, so the split between server CPUs and AI GPUs in the next quarter is not published, and the fourth quarter of 2025 includes one-time items. For an owner, six quarters of guidance beats make the near-term path credible. The next table shows how the segment mix is changing under the growth.</p>
+<h3>Segment mix over time</h3>
+<p>Segment revenue shows where the growth comes from and how dependent the company is on any one market. Data Center is the AI and server business, Client and Gaming is PCs and consoles, and Embedded is industrial and communications chips. The last column is our arithmetic from the 10-K and the June 2026 10-Q.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-15">[15]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>AMD revenue by segment, fiscal 2023 to the twelve months ended June 2026 ($ millions)</caption>
+<thead><tr><th>Segment</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>12 months to Jun 2026</th></tr></thead>
+<tbody>
+<tr><td>Data Center<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-15">[15]</a></sup></td><td>6,496</td><td>12,579</td><td>16,635</td><td>22,214</td></tr>
+<tr><td>Client and Gaming</td><td>10,863</td><td>9,649</td><td>14,550</td><td>15,434</td></tr>
+<tr><td>Embedded</td><td>5,321</td><td>3,557</td><td>3,454</td><td>3,657</td></tr>
+<tr><td>Total</td><td>22,680</td><td>25,785</td><td>34,639</td><td>41,305</td></tr>
+<tr><td>Data Center share of revenue</td><td>28.6%</td><td>48.8%</td><td>48.0%</td><td>53.8%</td></tr>
+</tbody>
+</table></div>
+<p>Data Center has gone from 28.6% to 53.8% of revenue in three years, which changes what kind of company AMD is: its results now follow cloud and AI spending more than PC sales. Client and Gaming recovered to $15,434 million over twelve months, but management plans for a softer PC market in the second half of 2026 and a double-digit fall in gaming.<sup><a href="#cite_note-32">[32]</a></sup> Embedded sales fell from $5,321 million in 2023 to $3,454 million in 2025 before turning up, an example of how cyclical the non-AI segments can be. For an owner, a larger Data Center share raises both the growth rate and the sensitivity to a small number of large buyers. These numbers describe levels. Layer 1 now asks whether those levels, and the direction they are moving, pass our gates.</p>
+<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>
+<p>Layer 1 compares where the company stands now with the direction it is moving. A weak level that is improving can still pass the turnaround archetype; a strong level that is deteriorating deserves caution. AMD misses one static compounder test, return on invested capital, and passes the other financial tests. We therefore test three archetypes: COMPOUNDER (high return on capital, strong cash and a clean balance sheet), TACTICAL_BREAKOUT (a leader in a confirmed uptrend, with accelerating results), and TURNAROUND_VALUE_INFLECTION (a missed static test, but improving trend and a cheap price for the growth expected). The technical test uses the Tactical bucket because the watchlist assigns AMD there.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 gates for Advanced Micro Devices: floor, level now, trajectory and result</caption>
+<thead><tr><th>Test</th><th>Floor or rule</th><th>Level now</th><th>Trajectory (rate of change)</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Hard red lines (solvency, Stage 4, governance)</td><td>No distressed balance sheet, no Stage 4 breakdown, no fraud or going-concern warning.</td><td>Net cash $9,885 million; interest coverage 44.1 times; Stage 3, not Stage 4; unqualified audit opinion on the 2025 statements.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></td><td>Net cash up from $3,295 million in 2021; $4.75 billion of new notes in August 2026 add debt but cash rose with them.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-29">[29]</a></sup></td><td>PASS</td></tr>
+<tr><td>ROIC (return on invested capital)</td><td>At least 12%; Core prefers above 16%.</td><td>9.8%: after-tax operating profit of $5,544 million over average invested capital of $56,504 million (our arithmetic).<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-17">[17]</a></sup> StockAnalysis shows 9.77%.<sup><a href="#cite_note-37">[37]</a></sup></td><td>Rising about 3 points a year: 0.77% (2023), 3.14% (2024), 6.73% (2025), 9.8% now.<sup><a href="#cite_note-36">[36]</a></sup> Excluding acquisition amortization it is 13.2%; at the June 2026 quarterly run rate it is about 12%.</td><td>FAIL on the static level</td></tr>
+<tr><td>Free cash flow margin</td><td>At least 12%.</td><td>18.7% over twelve months ($7,736 million).<sup><a href="#cite_note-14">[14]</a></sup></td><td>4.9% (2023), 9.3% (2024), 15.9% (2025), 18.7% now.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></td><td>PASS</td></tr>
+<tr><td>Net debt to EBITDA (earnings before interest, taxes, depreciation and amortization)</td><td>Below 3.0 times.</td><td>-1.04 times: net cash of $9,885 million against EBITDA of $9,515 million.<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>Net cash has risen from $3.3 billion to $9.9 billion since 2023.<sup><a href="#cite_note-11">[11]</a></sup></td><td>PASS</td></tr>
+<tr><td>Stock-based pay as % of revenue</td><td>Below 5%.</td><td>4.6% ($1,895 million over twelve months).<sup><a href="#cite_note-14">[14]</a></sup></td><td>6.1% in 2023, 5.5% in 2024, 4.7% in 2025; the warrants are not counted in this figure.<sup><a href="#cite_note-5">[5]</a></sup></td><td>PASS, with thin room</td></tr>
+<tr><td>Technical floor (Tactical)</td><td>Stage 2 uptrend above a rising 50-day and 200-day average.</td><td>Stage 3 (topping or pullback): the close of $528.75 is below the 50-day average ($537.14) and the 20-day average ($610.40); the 200-day average is $394.25 (session ledger).</td><td>50-day average rising ($495.59 to $537.14 in 21 days) but the price fell 13.05% in a week.</td><td>FAIL</td></tr>
+<tr><td>No Stage 4 or death cross</td><td>Not below a falling 200-day average.</td><td>The close is 34.1% above the 200-day average (session ledger).</td><td>200-day average rose from $298.40 to $394.25 in 63 days.</td><td>PASS</td></tr>
+<tr><td>Target anchoring</td><td>Forward EPS times 3-year median P/E, a DCF or a measured move.</td><td>2027 consensus EPS of $15.76 times the 3-year median year-end forward P/E of 38.76 gives $610.86.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-36">[36]</a></sup></td><td>2027 consensus EPS rose 17.0% in 90 days.<sup><a href="#cite_note-34">[34]</a></sup></td><td>PASS (anchored)</td></tr>
+<tr><td>Reward-to-risk (asymmetry)</td><td>At least 3.5 for Tactical: (target - price) / (price - stop).</td><td>At the rule-based tactical stop of $513.20 the ratio is 5.28, but that stop is only 2.9% (0.57 ATR) below the close. At the structural stop of $410.40 it is 0.69. We use the structural stop (Chapter 7).</td><td>The ratio clears 3.5 only at or below $454.95 on the structural stop.</td><td>FAIL at today's price</td></tr>
+<tr><td>Archetype fit</td><td>COMPOUNDER, TACTICAL_BREAKOUT or TURNAROUND_VALUE_INFLECTION.</td><td>COMPOUNDER fails on ROIC; TACTICAL_BREAKOUT fails on Stage 3; TURNAROUND passes on red lines, trajectory and Reverse DCF (28.4% implied growth in free cash flow over ten years; consensus expects EPS to grow 76.2% a year over three years, but the two measures are not like-for-like and the EPS rate starts from a low base)<sup><a href="#cite_note-37">[37]</a></sup> but fails on asymmetry.</td><td>Trajectory signals present: operating margin up, free cash flow margin up, 2027 consensus EPS up 17.0% in 90 days.</td><td>No archetype qualifies</td></tr>
+</tbody>
+</table></div>
+<p>Four of the five financial tests pass, and the one that fails (return on capital) is improving fast, so the business is close to passing every financial floor. Two other gates fail at today's price: the chart is a Stage 3 pullback, and the reward-to-risk ratio on a structural stop is 0.69 against a floor of 3.5. Layer 1 therefore fails on three gates, and the failures come from price and chart more than from the company. For an owner, this is the usual shape of a good business bought after a run: the quality is visible, and the entry price carries the risk. The ROIC failure is the only one the company can fix by itself, and the June quarter run rate says it may do so within one or two quarters. The verdict comes in Chapter 7, after the KPI and entry-posture layers, and the next table first compares AMD with its peers.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Free cash flow from continuing operations over the twelve months to June 27, 2026 was $7,736 million, which is 18.7% of revenue.</p>
+<h4>How it was calculated</h4>
+<p>We took cash from operations for 2025 ($6,493 million), added the first half of 2026 ($5,321 million) and subtracted the first half of 2025 ($2,401 million) to get $9,413 million. We did the same for spending on equipment ($974 + $1,197 - $494 = $1,677 million) and subtracted it.</p>
+<h4>The inputs</h4>
+<p>Cash from operations and purchases of property and equipment come from the 10-K cash flow statement and the June 2026 10-Q.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> StockAnalysis reports $8.40 billion, which includes discontinued operations (the ZT manufacturing arm).<sup><a href="#cite_note-37">[37]</a></sup> The session ledger carried $8.841 billion, which does not match either filing figure.</p>
+<h4>The range</h4>
+<p>The high case is $8,387 million (20.3% of revenue) if discontinued operations are counted. The low case is $5,841 million (14.1%) after subtracting $1,895 million of stock pay, which is a real cost to shareholders.<sup><a href="#cite_note-14">[14]</a></sup></p>
+<h4>If the number is off</h4>
+<p>If the lower figure is the true recurring one, the growth rate the share price needs for ten years rises from 28.4% to 32.3% a year (Chapter 5). The margin stays above the 12% floor in both cases, so the Layer 1 cash test passes either way.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Return on invested capital over the twelve months to June 27, 2026 was about 9.8%, below the 12% floor.</p>
+<h4>How it was calculated</h4>
+<p>We multiplied twelve-month operating income of $6,488 million by one minus the tax rate of 14.6% to get after-tax operating profit of $5,544 million. We divided by average invested capital of $56,504 million, the mean of June 2026 ($57,339 million) and December 2025 ($55,669 million), where invested capital is equity plus debt minus cash and investments.</p>
+<h4>The inputs</h4>
+<p>Operating income and tax come from the 10-K and 10-Q income statements; equity, debt and cash come from the two balance sheets.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> StockAnalysis, using S&amp;P Global data, shows 9.77%, which agrees.<sup><a href="#cite_note-36">[36]</a></sup></p>
+<h4>The range</h4>
+<p>The high case is 13.2% if acquisition amortization of $2,214 million is added back after tax, because that charge reflects the 2022 Xilinx price and not current operations. The low case is 9.7% using ending capital only.</p>
+<h4>If the number is off</h4>
+<p>The floor needs about $7,934 million of operating income, 22% above the twelve-month figure. The June 2026 quarter alone ($1,990 million) is a run rate of $7,960 million, so the gate is likely to flip within one or two quarters if margins hold. A failure at 9.8% is a timing problem more than a quality problem.</p>
+</section>
+<h3>Peer comparison matrix</h3>
+<p>The peers below are the chip companies that sell into the same AI and server buyers. Each row uses the company's own latest quarter, so the dates differ. Margins are GAAP. Forward price-to-earnings figures are from StockAnalysis (S&amp;P Global data) on the close dates shown, so they are not all from October 16.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>AMD against four peers, latest reported quarter</caption>
+<thead><tr><th>Company</th><th>Latest quarter</th><th>Revenue and growth</th><th>Gross margin / operating margin (GAAP)</th><th>Signal worth noting</th><th>Forward price-to-earnings</th></tr></thead>
+<tbody>
+<tr><td>AMD</td><td>June 27, 2026<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-18">[18]</a></sup></td><td>$11,536 million, +50%</td><td>53.8% / 17.3%</td><td>Data Center $6,718 million, +107%.</td><td>53.51 on October 13 at a price of $605.53, or about 46.7 at today's $528.75; 33.6 on 2027 EPS (our arithmetic).<sup><a href="#cite_note-36">[36]</a></sup></td></tr>
+<tr><td>Nvidia</td><td>July 26, 2026<sup><a href="#cite_note-43">[43]</a></sup></td><td>$96,221 million, +106%</td><td>75.0% / 66.2%</td><td>Revenue more than doubled in a year.</td><td>18.89 (October 13)<sup><a href="#cite_note-47">[47]</a></sup></td></tr>
+<tr><td>Broadcom</td><td>August 2, 2026<sup><a href="#cite_note-44">[44]</a></sup></td><td>$29,591 million, +86%</td><td>69.1% / 53.9%</td><td>Semiconductor solutions revenue $20,839 million, +127%.</td><td>20.47 (October 13)<sup><a href="#cite_note-48">[48]</a></sup></td></tr>
+<tr><td>Marvell</td><td>August 1, 2026<sup><a href="#cite_note-46">[46]</a></sup></td><td>$2,739.3 million, +36.5%</td><td>53.1% / 16.8%</td><td>No segment split is used here.</td><td>40.32 (October 16)<sup><a href="#cite_note-49">[49]</a></sup></td></tr>
+<tr><td>Intel</td><td>June 27, 2026<sup><a href="#cite_note-45">[45]</a></sup></td><td>$16,128 million, +25.4%</td><td>40.4% / 11.1%</td><td>GAAP net loss attributable to Intel of $11,033 million.</td><td>52.43 (October 16)<sup><a href="#cite_note-50">[50]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>AMD's growth ranks third of five, behind Nvidia and Broadcom, and its margins are far below theirs. Its forward multiple on StockAnalysis's basis (53.51 on October 13) is about 2.6 to 2.8 times theirs (20.47 and 18.89), close to Intel's 52.43 and above Marvell's 40.32. That means investors are paying for AMD's growth to continue and for margins to rise toward the leaders'. Because the dates and accounting differ, use the rows to rank the companies, not to measure exact gaps. For an owner, the comparison cuts both ways. If AMD's margins climb as the data-center mix grows, the multiple can look reasonable in hindsight. If they do not, AMD is a lower-margin chip designer priced like a leader. Chapter 4 now turns from the business to what the price is doing.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. What the price is doing</h2>
+<p>On October 16, 2026, AMD closed at $528.75. That was down 5.95% on the day, 13.05% over one week and 16.59% over two weeks.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-38">[38]</a></sup> The stock trades 19.71% below its 52-week high of $658.52. It is about 2.8 times its 52-week low of $188.22. The market backdrop was weak. The Nasdaq fell 2.14% and the S&amp;P 500 fell 1.09%. The volatility index (VIX) rose to 19.99, and the 10-year Treasury yield was 5.10%.<sup><a href="#cite_note-34">[34]</a></sup> MarketBeat links the chip selloff to a jury verdict in a case involving Qualcomm and Arm, to doubts about whether very high AI-infrastructure spending can continue, and to rising Treasury yields. It also notes that insiders sold 213,838 shares worth $105.5 million in three months, and the two sales it names, by Jean Hu and by Forrest Norrod, were made under pre-arranged trading plans.<sup><a href="#cite_note-38">[38]</a></sup> These events explain days. They do not explain the business. The measurements below come from the session ledger.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verified price and technical structure for AMD as of 2026-10-16</caption>
+<thead><tr><th>Technical measure</th><th>Ledger reading</th><th>Plain-English meaning</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-16)</td><td>$528.75<sup><a href="#cite_note-34">[34]</a></sup></td><td>1D: -5.95%, 1W: -13.05%, 1M: -3.0%</td></tr>
+<tr><td>20-day / 50-day / 200-day average</td><td>$610.40 / $537.14 / $394.25</td><td>50-day trend: RISING (21d ago: $495.59; 200d 63d ago: $298.40)</td></tr>
+<tr><td>Weinstein trend stage</td><td>Stage 3 (Topping / Pullback)</td><td>Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; Stage 4 is markdown</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day)</td><td>37.77 / $27.27</td><td>Momentum gauge (30 oversold, 70 overbought) and typical daily price swing</td></tr>
+<tr><td>52-week high / low</td><td>$658.52 / $188.22</td><td>Close is -19.71% from 52-week high</td></tr>
+<tr><td>20-day swing low / 63-day base low</td><td>$526.83 / $424.03</td><td>Active support anchor: $526.83 (0.07 ATR away)</td></tr>
+<tr><td>Volume vs 20-day average</td><td>1.03x</td><td>63-day volume dry-up ratio: 0.53</td></tr>
+<tr><td>Relative strength vs S&amp;P 500 (63d / 28d)</td><td>2.15% / 4.9%</td><td>Excess return vs benchmark over 3 months and 6 weeks</td></tr>
+</tbody>
+</table></div>
+<p>The price is below the 20-day and 50-day averages. It is above the 200-day average, which rose from $298.40 to $394.25 in 63 days. That shape is a pullback inside a larger uptrend, after a stock that tripled from its low. It is not yet a collapse. The relative strength index (RSI) of 37.8 is above the 35 floor in our tests. It is also above the 30 line that traders call oversold. The ledger's support anchor of $526.83 is the 20-day swing low, and it was set in today's session. So the 0.07 ATR distance says only that the stock closed near the day's low. It is not yet a floor that buyers have tested. For a buyer, the practical meaning is that the trend is intact on the longer view and broken on the shorter one.</p>
+<h3>Momentum and turnaround inflection gate</h3>
+<p>The ledger runs three tests on the frozen price data. Test A asks whether the stock is in a confirmed uptrend now. Test B asks whether a flat stock is starting to break upward. Test C asks whether a beaten-down stock is forming a floor and turning. AMD fails all three, and the result is called NO_MOMENTUM. Each test fails on one condition. Test A misses narrowly, by $8.39 or 1.6%. Tests B and C miss by wide margins. The ledger also notes that its thresholds are still being calibrated.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Momentum &amp; recovery gate evaluation for AMD (Verdict: NO_MOMENTUM / NONE)</caption>
+<thead><tr><th>Gate test</th><th>Rule in plain words</th><th>Measured values from ledger</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Test A1 (Markup structure)</td><td>Price above the 50-day average, which is above the 200-day average, with the 50-day average rising over 21 trading days</td><td>Close $528.75; 50-day average $537.14; 200-day average $394.25; 50-day average 21 days ago $495.59.</td><td>FAIL</td></tr>
+<tr><td>Test A2 (Long trend slope)</td><td>200-day average flat or rising over 63 trading days</td><td>200-day average $394.25 now against $298.40 63 trading days ago.</td><td>PASS</td></tr>
+<tr><td>Test A3 (Quarterly leadership)</td><td>63-day return beats S&amp;P 500</td><td>The 63-day return is 2.15 percentage points ahead of the S&amp;P 500; the test needs at least 0.</td><td>PASS</td></tr>
+<tr><td>Test A4 (Support proximity)</td><td>Price within 1.2 ATR (average true range, the typical daily swing, $27.27 here) of the nearest verified support</td><td>The price is 0.07 ATR above the nearest support; the limit is 1.2 ATR.</td><td>PASS</td></tr>
+<tr><td>Test B1 (Base 50-day average holding)</td><td>50-day average has not fallen more than 0.5% over 21 days</td><td>The 50-day average is up 8.38% over 21 days; a fall of up to 0.5% is allowed.</td><td>PASS</td></tr>
+<tr><td>Test B2 (Monthly relative-strength turn)</td><td>28-day return beats S&amp;P 500 (&gt; 0%)</td><td>The 28-day return is 4.9 percentage points ahead of the S&amp;P 500; the test needs more than zero.</td><td>PASS</td></tr>
+<tr><td>Test B3 (Tight base pivot)</td><td>Price within 1.0 ATR of 63-day base low</td><td>The price is 3.84 ATR above the 63-day base low; the limit is 1 ATR.</td><td>FAIL</td></tr>
+<tr><td>Test B4 (Seller exhaustion)</td><td>63-day volume dry-up ratio (recent volume against its norm) of 0.90 or lower</td><td>The volume dry-up ratio is 0.53; the test needs 0.9 or lower.</td><td>PASS</td></tr>
+<tr><td>Test B5 (Buyer expansion)</td><td>Session volume at least 1.0 times the 20-day average volume</td><td>Session volume is 1.03 times the 20-day average; the test needs at least 1.</td><td>PASS</td></tr>
+<tr><td>Test C1 (Higher-low floor)</td><td>Price above the 63-day low, with the 20-day swing low holding as a floor</td><td>Close $528.75; 20-day swing low $526.83; 63-day base low $424.03.</td><td>PASS</td></tr>
+<tr><td>Test C2 (Short-term inflection)</td><td>Price at or above the 20-day average, with a positive 28-day return against the S&amp;P 500 or a two-week gain</td><td>Close $528.75 against a 20-day average of $610.40; the 28-day return is 4.9 points ahead of the S&amp;P 500; the two-week change is -16.59%.</td><td>FAIL</td></tr>
+<tr><td>Test C3 (Buyable support distance)</td><td>Price within 1.8 ATR of the active support level</td><td>The price is 0.07 ATR above the nearest support; the limit is 1.8 ATR.</td><td>PASS</td></tr>
+<tr><td>Test C4 (No freefall)</td><td>14-day RSI of at least 35, which shows selling pressure is stabilizing</td><td>The 14-day RSI is 37.77; the test needs at least 35.</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Test A fails on one condition, and the miss is narrow. The close of $528.75 is $8.39 (1.6%) below the 50-day average of $537.14. Test B fails on one condition, and the miss is wide. The price is 3.84 ATR above the 63-day base low of $424.03, so it is not near a tight base. Test C fails on one condition, and the miss is wide. The price is 13.4% below the 20-day average of $610.40 after a 16.59% two-week fall. The 50-day line is so close that one close above it would turn Test A to a pass, but Tests B and C would still fail. So we do not rely on the gate alone. We also look at the stock's structure and at the stop, in Chapter 7. For an owner, a narrow miss still means no allocation at market. Only Test A can change quickly. Return on invested capital, the operating measures and reward-to-risk need new results or a different price, so the levels in the next chapters matter more than the label.</p>
+<p>A stock that fails all three tests is not bought at market. The ledger's own note says it needs limit-order patience at support or a confirmed turnaround. Confirmation would be a close above the 50-day average, then a reclaim of the 20-day average of $610.40 with relative strength staying positive. Rejection would be a close below the swing low of $526.83. That would put the 63-day low of $424.03 and the 200-day average of $394.25 in play. Chapter 5 asks whether today's price already reflects the business. Chapter 7 uses these levels for an entry zone, the band of prices where buying would be planned, and for a stop.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. What could happen next</h2>
+<p>A share price is a bet on future cash. The reverse discounted cash flow method works backward: it takes today's price and asks what growth in free cash flow, held for ten years, the price needs in order to earn 10% a year. Our house settings are a 10% discount rate, a terminal value of 18 times year-ten free cash flow and a ten-year horizon. The session ledger's first answer for AMD, 26.57% a year, rested on free cash flow of $8.841 billion, a figure that does not match the filings. We replaced it with $7.736 billion of free cash flow from continuing operations, computed from the 10-K and the June 2026 10-Q, and the answer rises to 28.4%. The replacement is disclosed in the run notes.<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></p>
+<p>The table gives the corrected block and shows how analysts' numbers are moving. Read it top to bottom: what the price assumes, what the Street assumes, and whether estimates are rising or falling. The first rows come from the session ledger with our corrections, and the added rows show our own cross-checks. A rising estimate trend while the price falls means the market is cutting the multiple, not the earnings.</p>
+<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for AMD</caption>
+<thead><tr><th>Expectations dimension</th><th>Measured reading</th><th>How to interpret it</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF implied 10-year growth</td><td>+28.40% per year<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></td><td>At the current price (528.75), the market is pricing in +28.4% annual growth in TTM free cash flow from continuing operations ($7.736B) for the next 10 years (using a 10% discount rate and 18x terminal multiple). The ledger's original block used $8.841B, which does not match the filings (the 10-K and 10-Q give $7.736B from continuing operations, or $8.387B including discontinued operations), and gave +26.6%.</td></tr>
+<tr><td>Reverse DCF cash-flow basis &amp; FCF yield</td><td>TTM Free Cash Flow from continuing operations (10-K FY2025 plus H1 2026 less H1 2025) (7.736 $B); FCF yield: 0.90%</td><td>Solved at 10.0% discount rate and 18.0x terminal multiple</td></tr>
+<tr><td>Consensus FY1 EPS (current vs 90d ago)</td><td>$7.59 vs $7.43 (+2.07%)</td><td>Revision trend status: RISING_ESTIMATES</td></tr>
+<tr><td>Consensus FY2 EPS (current vs 90d ago)</td><td>$15.76 vs $13.46 (+17.01%)</td><td>Implied FY2 vs FY1 EPS growth: +107.7%</td></tr>
+<tr><td>Street analyst target range (low / mean / high)</td><td>$365.00 / $636.21 / $1,250.00 (55 analysts)</td><td>Used as expectations context only; our underwriting target is anchored in the scenario model below</td></tr>
+<tr><td>Ledger's original reverse DCF (replaced)</td><td>26.57% a year on $8.841 billion of free cash flow.</td><td>The filings give $7.736 billion from continuing operations. A smaller base needs more growth to justify the same value, so the corrected figure is higher.</td></tr>
+<tr><td>Growth the average Street target needs</td><td>About 31.0% a year at the $636.21 mean target (our arithmetic).<sup><a href="#cite_note-35">[35]</a></sup></td><td>The Street's own target needs more growth than today's price already asks for (28.4%).</td></tr>
+<tr><td>Other cash-flow bases</td><td>$8.387 billion including discontinued operations needs 27.3% a year; $5.841 billion after subtracting stock pay needs 32.3% a year.<sup><a href="#cite_note-14">[14]</a></sup></td><td>The answer ranges from 27% to 32% depending on how free cash flow is counted.</td></tr>
+<tr><td>Analysts behind each number</td><td>55 analysts give price targets; 50 give 2027 EPS; 39 Strong Buy, 5 Buy, 11 Hold, 0 Sell.<sup><a href="#cite_note-35">[35]</a></sup><sup><a href="#cite_note-34">[34]</a></sup></td><td>The ledger counted 50 analysts for the targets; we corrected the copy to 55 and kept 50 as the earnings-estimate count.</td></tr>
+<tr><td>Revenue estimates</td><td>$50.95 billion for 2026 (+47.1%) and $89.05 billion for 2027 (+74.8%).<sup><a href="#cite_note-34">[34]</a></sup></td><td>Growth is expected to accelerate in 2027, not slow.</td></tr>
+<tr><td>Price against earnings</td><td>69.7 times 2026 EPS of $7.59; 33.6 times 2027 EPS of $15.76 (our arithmetic).<sup><a href="#cite_note-34">[34]</a></sup></td><td>Most of the multiple compression the Street expects depends on 2027 earnings arriving.</td></tr>
+</tbody>
+</table></div>
+<p>Today's price needs about 28.4% a year of free cash flow growth for ten years. Consensus 2027 earnings per share rose 17.0% in 90 days and 1.2% in 30 days while the price fell, so estimates did not follow the price down. Whether analysts are slow to cut or right to hold is something only the next results can settle. The ledger's original figure of 26.57% understated the demand on the business, because it used a cash-flow base that the filings do not support. The Street's own mean target needs about 31% a year, which means the target price asks for more growth than the current price does. For an owner, the number to hold on to is 28.4% a year, which sits inside the 20% to 35% sensitivity range in the detail below, where each five points of growth moves the value by $126 to $248 a share. The next part sets out our own view against the Street's.</p>
+<h3>Our variant perception</h3>
+<p>The Street's view is that AMD is a fast grower with a strong set of anchor customers: 44 of 55 analysts rate it Buy or Strong Buy, and the mean target of $636.21 is 20.3% above the close.<sup><a href="#cite_note-35">[35]</a></sup> We agree on the product quality and on the near-term growth. AMD has beaten its own revenue guide in each of the last six quarters, and the September consensus of $1.93 a share ties to the company's own guidance: ($13,000 million x 56% gross margin - $3,650 million of operating expenses + $55 million of other income) x (1 - 13% tax) / 1,660 million shares = $1.93.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-34">[34]</a></sup></p>
+<p>We differ in three ways. First, the price of growth. At $528.75 the stock needs free cash flow to rise from $7.7 billion to about $94.2 billion in year ten, 12.2 times today's level, before the market earns 10% a year.<sup><a href="#cite_note-14">[14]</a></sup> Second, the cost of growth. The consensus 2027 EPS of $15.76 sits inside a Street range of $9.60 to $20.25, and we cannot tell how much of the warrants (320 million shares), the $8.2 billion stock acquisition and the $30.3 billion of commitments the average analyst has already priced in.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> Third, timing. The chart is a Stage 3 pullback, and we do not buy a stock that fails the trend floor when the reward-to-risk rule also fails.</p>
+<p>What we do not claim: we do not claim demand is weak, because six straight beats and signed gigawatt deals say otherwise. We do not know how much of the 2027 consensus is already contracted, since AMD publishes no AI revenue or backlog in dollars. We also do not claim the selloff is over. The Nasdaq fell 2.14% on October 16, the VIX rose 21% in one day and the 10-year yield is 5.10%, so multiples may still shrink.<sup><a href="#cite_note-34">[34]</a></sup></p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Today's price needs AMD's free cash flow to grow 28.4% a year for ten years, from $7.736 billion to about $94.2 billion.</p>
+<h4>How it was calculated</h4>
+<p>We valued the operating business at $853.29 billion: market value of $863.17 billion less $13.111 billion of cash and investments plus $3.226 billion of debt. We then solved for the growth rate at which ten years of cash flow, discounted at 10%, plus 18 times the year-ten cash flow, discounted back, equals that value. At 28.4% the ten yearly flows are worth $199.5 billion today and the terminal value is worth $653.9 billion, a total of $853.4 billion.</p>
+<h4>The inputs</h4>
+<p>Free cash flow of $7.736 billion from the 10-K and 10-Q.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> Shares outstanding of 1,632,475,042 on July 29, 2026 times the $528.75 close gives $863.17 billion.<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-34">[34]</a></sup> Cash, investments and debt come from the June 2026 balance sheet.<sup><a href="#cite_note-13">[13]</a></sup> The discount rate, terminal multiple and horizon come from scoring.json.</p>
+<h4>The range</h4>
+<p>At our bear price of $266.30 the same method needs 18.9% a year; at $610.86 it needs 30.4%; at the $636.21 mean target it needs 31.0%; at the bull price of $898.09 it needs 36.0%. With free cash flow after stock pay ($5.841 billion) today's price needs 32.3%.</p>
+<h4>If the number is off</h4>
+<p>If true growth is 20% a year, the stock is worth about $289 at these settings; at 25% it is worth about $415; at 30% about $592; at 35% about $840. Each five points of growth moves the fair value by roughly $126 to $248 a share.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Our 2027 earnings estimate is $15.76 a share on a non-GAAP basis, 107.7% above the $7.59 expected for 2026.</p>
+<h4>How it was calculated</h4>
+<p>We adopt the consensus because the company has beaten its own guidance in each of the last six quarters, and we cross-check it two ways. For 2026, reported first-quarter EPS of $1.37 plus second-quarter $1.66 plus a September figure of $1.93 built from guidance plus the December consensus of $2.65 gives $7.61, which matches $7.59. For 2027, revenue of $89.05 billion times the 35% non-GAAP operating margin target from the Financial Analyst Day times (1 - 13% tax), divided by 1.70 billion shares (our assumption: 1.66 billion plus some dilution), gives $15.95.</p>
+<h4>The inputs</h4>
+<p>Quarterly results and the guide come from the company's releases and call; consensus comes from Yahoo Finance.<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-34">[34]</a></sup> The 35% margin target comes from the November 2025 targets.<sup><a href="#cite_note-25">[25]</a></sup> The 90-day trend is $7.43 to $7.59 for 2026 and $13.46 to $15.76 for 2027.<sup><a href="#cite_note-34">[34]</a></sup></p>
+<h4>The range</h4>
+<p>Analysts' 2027 estimates run from $9.60 (low) to $20.25 (high).<sup><a href="#cite_note-34">[34]</a></sup> The low case assumes the Helios ramp slips and gross margin sags; the high case assumes AMD reaches its $20 target a year or more early, which management says it expects to exceed.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<h4>If the number is off</h4>
+<p>If 2027 earnings come in 10% below consensus, at $14.18, our central price falls from $610.86 to $549.78 at the same multiple. Each $1 of 2027 earnings is worth about $38.76 of price at the median multiple.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Our 12-month central price is $610.86, and the probability-weighted value is $579.30, 9.6% above $528.75.</p>
+<h4>How it was calculated</h4>
+<p>Each case multiplies 2027 earnings per share by a year-end forward price-to-earnings multiple from AMD's own three-year range. Bear: $9.60 x 27.74 = $266.30. Central: $15.76 x 38.76 = $610.86, the three-year median. Bull: $20.25 x 44.35 = $898.09. Weights of 30%, 45% and 25% give 0.30 x 266.30 + 0.45 x 610.86 + 0.25 x 898.09 = $579.30.</p>
+<h4>The inputs</h4>
+<p>Earnings range from Yahoo Finance and the multiple history from StockAnalysis (S&amp;P Global data); the multiples are the year-end forward P/E for fiscal 2023, 2024 and 2025.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-36">[36]</a></sup> The weights are our judgment, explained in the scenario table.</p>
+<h4>The range</h4>
+<p>The bear price is 49.6% below today's close, the central price is 15.5% above and the bull price is 69.9% above. The range is wide because the 2027 earnings estimates themselves span a factor of two.</p>
+<h4>If the number is off</h4>
+<p>Each turn of the multiple is worth about $15.76 of price. A three-turn lower multiple (35.76) would cut the central price to $563.58. With only three years of multiples, the median is a weak anchor, and Chapter 6 tests it against the low multiple of 27.74 and against the Street-low earnings estimate.</p>
+</section>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>12-month scenarios for Advanced Micro Devices (price per share)</caption>
+<thead><tr><th>Scenario</th><th>Story</th><th>Driver</th><th>Number</th><th>Probability</th><th>Why that probability</th></tr></thead>
+<tbody>
+<tr><td>Bull</td><td>Helios ships on time, OpenAI, Meta and Anthropic scale, and EPS reaches the $20 target early. The multiple returns to its three-year high.</td><td>2027 EPS $20.25 (Street high) times 44.35 (3-year high).</td><td>$898.09 (+69.9%).</td><td>25%</td><td>Six straight beats and signed multi-gigawatt deals support it, but it needs both earnings and the multiple at the top while the chart is in Stage 3.</td></tr>
+<tr><td>Central</td><td>Guidance is delivered, 2027 EPS reaches consensus and the multiple settles at its three-year median.</td><td>2027 EPS $15.76 times 38.76 (3-year median).</td><td>$610.86 (+15.5%).</td><td>45%</td><td>The most likely single path given AMD's record of meeting or beating its own guidance.</td></tr>
+<tr><td>Bear</td><td>The Helios ramp slips a quarter or two, fixed commitments stay, customers slow orders, and the multiple falls.</td><td>2027 EPS $9.60 (Street low) times 27.74 (3-year low).</td><td>$266.30 (-49.6%).</td><td>30%</td><td>Higher than a rare-event weight because the stock tripled from its low, beta is 2.45, $30.3 billion of commitments are fixed and the 10-year yield is 5.10%.<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-37">[37]</a></sup><sup><a href="#cite_note-34">[34]</a></sup></td></tr>
+<tr><td>Probability-weighted</td><td>Weighted average of the three cases.</td><td>0.25 x 898.09 + 0.45 x 610.86 + 0.30 x 266.30.</td><td>$579.30 (+9.6%).</td><td>100%</td><td>Positive expected gain, but with a wide spread and below what the reward-to-risk rule requires on a structural stop.</td></tr>
+</tbody>
+</table></div>
+<p>The weighted value of $579.30 is 9.6% above the close, which is modest for a stock that can move 6% in a day. The reward-to-risk rule is stricter: it compares the central gain of $82.11 with the $118.35 gap to the structural stop, a ratio of 0.69, and requires 3.5. That is why the verdict is REJECTED for new money at this price. The scenario spread is also wide: the bull price is 69.9% above the close and the bear price is 49.6% below it. For an owner, a wide spread with a modest weighted gain describes a stock whose outcome depends on a few events, chiefly the Helios ramp and the multiple. Chapter 6 takes each estimate and asks which assumption is weakest and when we will know.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Why these estimates might be wrong</h2>
+<p>Each estimate in Chapter 5 rests on one weak assumption. We name it, say what evidence would prove it wrong, and say when that evidence arrives. The next dated events are Meta's results on October 21, Microsoft's on October 28 and AMD's own on November 3, 2026.<sup><a href="#cite_note-41">[41]</a></sup><sup><a href="#cite_note-42">[42]</a></sup><sup><a href="#cite_note-31">[31]</a></sup> Meta and Microsoft are both AMD customers, so their capital spending plans arrive before AMD's own numbers.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-32">[32]</a></sup></p>
+<h3>The reverse DCF assumes cash flow can grow twelve-fold</h3>
+<p>The weakest assumption behind 28.4% is that free cash flow can rise from $7.736 billion to about $94.2 billion in year ten. The cost of getting there is already visible: unconditional commitments rose from $12.166 billion to $30.276 billion in six months, and $17.386 billion of that falls due in the second half of 2026.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> In the June quarter AMD generated $1.6 billion of free cash flow, and inventory rose to $8.468 billion.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></p>
+<p>The evidence that would show this wrong is two quarters in which cash from operations falls below net income, or inventory grows faster than revenue. The first test is the September quarter report on November 3 and the 10-Q that follows.<sup><a href="#cite_note-31">[31]</a></sup> If either shows up, the growth needed from the base rises and the case weakens at once.</p>
+<h3>The earnings estimate assumes the AI ramp starts on time and customers keep paying</h3>
+<p>The $15.76 figure for 2027 assumes the fourth-quarter Helios ramp happens and that Data Center revenue more than doubles in 2027, as management says.<sup><a href="#cite_note-32">[32]</a></sup> Consensus fourth-quarter revenue is $16.11 billion, which is 24% above the September guide of $13 billion.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> The risks named on the August call and at the October keynote are supply and complexity: Helios is a 72-GPU rack, yields are expected to improve over several quarters, and memory is a cost and supply constraint.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-40">[40]</a></sup></p>
+<p>A cut to 2027 spending plans by Meta or Microsoft would hit the low case of $9.60. They report on October 21 and October 28.<sup><a href="#cite_note-41">[41]</a></sup><sup><a href="#cite_note-42">[42]</a></sup> AMD also signed a credit support agreement for a data-center developer's lease on October 13, which links AMD's results to the financing of its customers' buildouts.<sup><a href="#cite_note-39">[39]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></p>
+<h3>The price target assumes the multiple stays near its median</h3>
+<p>Our central price multiplies earnings by 38.76, the median of three year-end readings of 44.35, 27.74 and 38.76.<sup><a href="#cite_note-36">[36]</a></sup> Three data points are thin. The 10-year Treasury yield was 5.10% on October 16, and the volatility index jumped 21% that day.<sup><a href="#cite_note-34">[34]</a></sup></p>
+<p>The stress that matters most is the multiple. Hold earnings at $15.76 and drop the multiple to the three-year low of 27.74: the price is $437.18, which is 17.3% below today's close, so the central case then offers a loss. Hold the multiple at 38.76 and cut earnings to the Street low of $9.60: the price is $372.10, 29.6% below the close. The first stress leaves the stock 3.1% above the $424.03 base low, and the second takes it through that low. The first stress also changes the probability-weighted result. If only the central branch is de-rated to 27.74, the weighted value becomes 0.25 x $898.09 + 0.45 x $437.18 + 0.30 x $266.30 = $501.14, which is 5.22% below the close instead of 9.6% above it. A positive scenario-weighted gain is therefore fragile and is not an edge.</p>
+<h3>The share count may grow faster than the estimate assumes</h3>
+<p>We assumed about 1.66 billion shares, the company's own count for the September quarter.<sup><a href="#cite_note-32">[32]</a></sup> The OpenAI and Meta warrants could add up to 320 million shares, and the World Labs deal adds about 15.5 million at today's price.<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-30">[30]</a></sup> We do not know whether the $15.76 consensus includes the warrants. If all 320 million shares vested and were exercised, the count would be 1.98 billion and 2027 earnings would be $13.21 a share, which gives $512.13 at the median multiple, 3.1% below the close. Vesting needs GPU purchases and stock-price targets, so full dilution is unlikely, but the schedule is redacted in the filed exhibit and cannot be checked.<sup><a href="#cite_note-27">[27]</a></sup> The practical consequence is that the earnings estimate carries a dilution risk that grows with success.</p>
+<h3>Red-team bear case</h3>
+<p>A red-team case is the strongest honest argument against our own conclusion. It is here to show what could go wrong together, not to predict it. It differs from the $266.30 bear case in Chapter 5, which changes only earnings and the multiple, because it also counts the obligations that AMD has already signed and cannot cancel.</p>
+<p>In the story, Helios yields or memory supply push the volume ramp from the fourth quarter into mid-2027. Meanwhile $30.3 billion of purchase commitments, $14.0 billion of new leases and $4.1 billion of guarantees stay fixed.<sup><a href="#cite_note-16">[16]</a></sup> One anchor customer slows orders as financing tightens with the 10-year yield at 5.10%. Earnings for 2027 slide toward the Street low of $9.60 and the multiple falls to the three-year low of 27.74, which gives $266.30, 49.6% below the close.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-36">[36]</a></sup> Reported results would still look strong until the fourth-quarter guide, so the stock can fall before the numbers do.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>What would show each estimate wrong, and when we will know</caption>
+<thead><tr><th>Estimate</th><th>Weakest assumption</th><th>Evidence that would prove it wrong</th><th>When we will know</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF growth of 28.4%.</td><td>Free cash flow can grow from $7.7 billion to $94.2 billion.</td><td>Cash from operations below net income for two quarters; inventory growing faster than revenue.</td><td>Results on November 3, 2026, then the 10-Q.<sup><a href="#cite_note-31">[31]</a></sup></td></tr>
+<tr><td>2027 EPS of $15.76.</td><td>Helios ships on time and customers keep buying.</td><td>A fourth-quarter outlook well below $16.11 billion; a cut to Meta or Microsoft capital spending.</td><td>Meta October 21, Microsoft October 28, AMD November 3.<sup><a href="#cite_note-41">[41]</a></sup><sup><a href="#cite_note-42">[42]</a></sup><sup><a href="#cite_note-31">[31]</a></sup></td></tr>
+<tr><td>Central price of $610.86.</td><td>The multiple stays at 38.76.</td><td>A multiple at 27.74 (price $437.18); rising yields; a close below $410.40.</td><td>Daily; the structural stop is checked each session.</td></tr>
+<tr><td>Share count near 1.66 billion.</td><td>Warrants vest slowly and the World Labs deal is small.</td><td>Disclosed vesting of any warrant tranche; the World Labs closing share count.</td><td>Each quarterly filing and the closing 8-K.<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-30">[30]</a></sup></td></tr>
+<tr><td>Hinge claim: Helios racks ship at volume.</td><td>Customers accept racks on the guided schedule.</td><td>September-quarter revenue below $12.7 billion; gross margin below 54%.</td><td>November 3, 2026.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-31">[31]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>The first test arrives within five days, and Meta's capital spending is the first dated clue. Every test is an item the company or its customers report on a known date, which is why we can name the day we will know. The estimates are linked: if the ramp slips, earnings fall, the multiple falls and cash flow weakens together, so a miss on one row makes a miss on the others more likely. For an owner, the table is a calendar of checks. Meta reports on October 21, Microsoft on October 28 and AMD on November 3. A clean pass of all three would not by itself make AMD buyable, because the chart and the reward-to-risk rule must also clear, but a failure of any one of them would remove the case for waiting. Chapter 7 turns these checks into the decision, the entry zone, the stop and the triggers.</p>
+<p>The hinge claim, the single assumption that decides the case, is that Helios racks ship and are paid for at volume from the fourth quarter of 2026, so that Data Center revenue more than doubles in 2027.<sup><a href="#cite_note-32">[32]</a></sup> The proof is a fourth-quarter outlook near the consensus of $16.11 billion on November 3, with gross margin held near 56%.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> If it holds, the $30.3 billion of commitments turn into revenue. If it does not, inventory, commitments and margin all move against the owner together.<sup><a href="#cite_note-16">[16]</a></sup> Chapter 7 now converts the analysis into actions.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when</h2>
+<p>REJECTED is the verdict for new money at $528.75. AMD is not in the portfolio, so nothing is sold, and no buy order is placed at any price today. Three Layer 1 rules produce the verdict. The technical floor for the Tactical bucket needs a confirmed uptrend above a rising 50-day average, and the price is $8.39 below that average in a Stage 3 pullback. The static return on invested capital is 9.8% against a 12% floor. The reward-to-risk ratio on a structural stop is 0.69 against a floor of 3.5. Layer 2 also falls short, with 2 of 5 measures at PASS against a minimum of 4.<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></p>
+<p>The stop explains why. The Tactical rule puts the stop below the lower of the swing low and the 20- and 50-day averages, minus half an ATR. That is the swing low of $526.83 less half of the $27.27 ATR, or $513.20. That gives a ratio of 5.28, which looks like a pass. But $513.20 is only $15.55 (2.9%) below the close, and the ledger's swing low is today's own low. A stock that fell 5.95% today can touch that level on any routine move, so the 5.28 is a result of arithmetic and not an edge. The structural level is the 63-day base low of $424.03, and a stop half an ATR below it, $410.40, marks where the higher-low structure fails. On that stop the ratio is 0.69.</p>
+<p>We therefore show a reference entry zone of $424.03 to $454.95. The lower edge is the 63-day base low. The upper edge is the highest price at which the central target of $610.86 still gives a ratio of 3.5 against the $410.40 stop: ($610.86 + 3.5 x $410.40) / 4.5 = $454.95. The zone is 14% to 20% below today's close and would require a base to form. It is a reference zone, not an order. The 200-day average of $394.25 sits just below the stop and is the next level of support.</p>
+<p>What would change the verdict is a set of conditions that must all be true, not a single price. The chart must turn into a confirmed uptrend, which starts with a close above the rising 50-day average. Return on invested capital must reach 12%, which the June quarter run rate suggests is likely after the next report. Layer 2 needs at least 4 of 5 passes, so AMD must report AI accelerator revenue or backlog in dollars and bring commitments to no more than 1.0 times twelve-month gross profit. The reward-to-risk ratio must reach 3.5 on that day's refreshed target and stop.</p>
+<p>Targets and sizing follow the same logic. The central target is $610.86 (+15.5%), the bull target is $898.09 (+69.9%) and the bear price is $266.30 (-49.6%).<sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-36">[36]</a></sup> The risk-unit weight is 0.0% (TIER_0) today. If AMD re-qualified at Tier 3 with a $454.95 entry and the $410.40 stop, the formula would give 50 bps divided by a 9.79% stop distance, or 5.1%, capped at the Tier 3 maximum of 3.5%. The let-winners-run rule, which lets an appreciated position run toward 22% of the portfolio, does not apply because AMD is not held.</p>
+<p>Layer 3 is the part of the framework that decides how much to buy, where to buy and where to stop. The table after this paragraph shows the result for AMD. A basis point (bps) is one hundredth of a percent, so a risk budget of 75 bps means the portfolio would lose 0.75% of its value if the stop were hit. The size of a new position is the risk budget divided by the distance to the stop, so a wider stop gives a smaller position. The industry calls this portfolio heat. TIER_0 is our label for a name with no allowed weight, which is why a rejected stock shows 0.0%. A moving average is the average closing price over a set number of days, and an exponential moving average (EMA) gives more weight to recent days. The table uses the 21-day EMA and the 50-day average as the lines that a winning position's stop would follow.</p>
+<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 3 execution levels and risk-unit position sizing for AMD</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Underwriting archetype &amp; bucket</td><td>NO_ARCHETYPE_QUALIFIES (TACTICAL_MOMENTUM)</td><td>Evaluates both static quality and rate-of-change inflection</td></tr>
+<tr><td>Action verdict</td><td><span class="verdict verdict-exit">REJECTED</span></td><td>REJECTED for new money: Layer 1 fails (Stage 3 chart, ROIC 9.8% against 12%, reward-to-risk 0.69 against 3.5) and Layer 2 has 2 of 5 PASS. AMD is not a holding, so there is no sell decision.</td></tr>
+<tr><td>Recommended entry zone</td><td>$424.03 to $454.95</td><td>Current price $528.75 is 0.07 ATR from verified support</td></tr>
+<tr><td>Structural invalidation stop</td><td>$410.40 (-9.79% from entry)</td><td>Tactical rule: below the lowest of the swing low and the 20- and 50-day averages, minus half an ATR; here the rule is applied to the 63-day base low (Chapter 7)</td></tr>
+<tr><td>Base / Bull / Bear targets</td><td>$610.86 / $898.09 / $266.30</td><td>Reward-to-risk asymmetry at CMP: 0.69:1</td></tr>
+<tr><td>Risk-unit initial sizing (how much of the portfolio is at risk)</td><td>0.0% of net worth (TIER_0, 0 basis points risk budget)</td><td>Formula: min(Tier cap 0–0%, 0 basis points / 9.79% stop distance)</td></tr>
+<tr><td>Let-winners-run rule</td><td>A winning position may grow to 22%</td><td>Never trim solely for the 14-day RSI above 70 or crossing 15%; move the stop up with the rising 21-day exponential average or 50-day average until trend or fundamentals break</td></tr>
+</tbody>
+</table></div>
+<p>The sizing row shows 0.0% because a rejected name is TIER_0 and receives no risk-unit weight. The stop appears in the table as 9.79% below the $454.95 top of the reference zone, and it is 22.4% below today's close of $528.75. The entry zone row is a reference zone, not an order, and the targets are shown for reference. The reward-to-risk figure of 0.69 is measured at today's close on the structural stop. For an owner, the table says three things. No money goes in at this price. A purchase would need a lower price, a repaired chart or both. And any future purchase would be sized by the stop distance, so the wide stop of this volatile stock means a smaller position, not a larger one. The triggers below name the prices and events that would change the verdict.</p>
+<p class="trigger">Re-underwrite trigger: after the November 3, 2026 results (after the market close), we run all three layers again. New money is considered only if the chart turns into a confirmed uptrend with a close above the rising 50-day average (now $537.14), return on invested capital is at least 12%, at least 4 of 5 Layer 2 measures pass, and reward-to-risk is at least 3.5 on a refreshed target and stop.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<p class="trigger">Pullback trigger: a close inside $424.03 to $454.95 with a 14-day relative strength index (RSI) reading of at least 35 and falling volume sends AMD to a fresh underwriting for ACCUMULATE_ON_DIP. A close in the zone with heavy selling and a reading under 35 on that index does not.</p>
+<p class="trigger">Avoid trigger: a weekly close below $410.40, the 63-day base low minus half an ATR, ends the pipeline case for this cycle and moves AMD to the archive review.</p>
+<p class="trigger">Event trigger: September-quarter revenue below $12.7 billion (the low end of the guide), a fourth-quarter outlook well below the $16.11 billion consensus, or gross margin below 54% puts the hinge claim in doubt and returns the verdict to a full review. A cut to capital spending by Meta on October 21 or Microsoft on October 28 delays any re-underwrite until AMD reports.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-34">[34]</a></sup><sup><a href="#cite_note-41">[41]</a></sup><sup><a href="#cite_note-42">[42]</a></sup></p>
+<p class="trigger">Chase trigger: a gap above the 20-day average of $610.40 does not change the verdict by itself. The gate list above must be re-run, and we do not buy a stock that has moved away from its stop.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Status: PUBLISHED_WITH_GATE_EXCEPTIONS. This dossier replaces one block of the shared session ledger, uses research records that are older than 60 days, relies on some secondary sources and lists items that no source publishes.</p><p>Review record: Round 1: the reviewer returned REVISE with seven findings and the red team returned APPROVE; the fixes were applied. Round 2: the reviewer returned APPROVE and confirmed that all round 1 findings were fixed. One wording note, the title of an insider seller, was corrected afterwards and was not re-read. Status: APPROVED by the reviewer and the red team, published with gate exceptions.</p><p>Validation scope: scripts/validate_report.py only accepts market-intelligence and portfolio-audit reports, so it cannot run on a dossier. The dossier's structural checks are the readability check, the citation check and the layout check, and all three were run on this version.</p><p>Replaced ledger block: the reverse DCF block for AMD in the shared ledger used free cash flow of $8.841 billion and an enterprise value of $854.34 billion, and gave 26.57% a year. The free cash flow figure does not match the filings. We recomputed it from the 10-K for fiscal 2025 and the 10-Q for June 27, 2026: operating cash flow from continuing operations of $9,413 million less capital spending of $1,677 million gives $7,736 million.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> Enterprise value is $853.29 billion (market value of $863.17 billion at the $528.75 close, less $13.111 billion of cash and investments, plus $3.226 billion of debt).<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-17">[17]</a></sup> With the corrected base the implied growth is 28.4% a year. The analyst count in the ledger (50) is the earnings-estimate count; the price targets come from 55 analysts, so the corrected copy of the ledger used for this dossier shows 55 for the targets and keeps 50 as the earnings-estimate count. The shared ledger was not edited.</p><p>Stale as-of records: 47 of the 68 found research records carry an as-of date more than 60 days before October 17, 2026 (ages from 61 to 1,386 days), because they are period dates of filings and releases. These include the 10-Ks for fiscal 2022, 2023 and 2025, the 10-Q for June 27, 2026, earnings releases and call transcripts from 2025 and 2026, and peer filings for quarters ended June to August 2026. The latest periodic filing is the 10-Q for the quarter ended June 27, 2026, filed on August 5, 2026. No newer periodic filing exists: AMD reports the September quarter on November 3, 2026. The 21 fresh records are the consensus, price, market-backdrop and valuation pages, the October 2026 announcements and the derived-levels record.</p><p>Secondary sources: Yahoo Finance and StockAnalysis (S&amp;P Global data) supply consensus estimates, price targets, forward P/E history and some trailing ratios. The Q2 and Q4 call transcripts come from Yahoo Finance and The Motley Fool, not from AMD. The Q2 transcript reads 'copper average' for what is evidently 'corporate average'. MarketBeat supplies the October 16 market explanation and insider sale totals instead of the SEC Form 4 filings, and Converge Digest supplies the October 12 keynote statements that Helios production shipments began in September and that the Verano chip has 192 cores. StockAnalysis valuation pages for Nvidia and Broadcom are dated October 13. Those for Marvell and Intel are dated October 16. AMD's StockAnalysis multiple is from October 13 at a price of $605.53.</p><p>Not published: AMD reports no dollar figure for AI accelerator revenue or backlog, so Layer 2 scores that measure as WATCH. The vesting schedule and exercise conditions of the OpenAI warrant are redacted in the filed exhibit, and the Meta warrant's schedule was not read. Helios gross margin is described only as slightly below the company average. We found no source that gives consensus 2027 EPS with and without the warrants.</p><p>Judgment calls: the strategy bucket is TACTICAL_MOMENTUM, from the watchlist, and the technical floor uses it. Return on invested capital is our computation from the filings (after-tax operating profit over average equity plus debt minus cash and investments); StockAnalysis shows 9.77%. Free cash flow uses continuing operations, so it excludes the ZT manufacturing arm. We use the structural stop of $410.40 and not the rule-based $513.20, because the latter sits 0.57 ATR below the close, and we show both. The conditional zone of $424.03 to $454.95 is a reference zone, not an order. The verdict is REJECTED for new money, a Layer 1 result, and AMD is not held: the positions file shows no open AMD shares, although a closed AMD position appears in the Robinhood activity from April 2026.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">Advanced Micro Devices, Annual Report on Form 10-K for fiscal 2025 (filed 2026-02-04), Item 1 Business: segments, products and Competition. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-2">Advanced Micro Devices, Form 10-K fiscal 2025, Item 1 Business: third-party wafer foundries and Human Capital (about 31,000 employees); Item 1A Risk Factors: reliance on TSMC for wafers at 7 nanometers or smaller. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-3">Advanced Micro Devices, Form 10-K fiscal 2025, Note 4 Segment Reporting, pp. 70-71: net revenue and operating income by segment, fiscal 2023-2025. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-4">Advanced Micro Devices, Form 10-K fiscal 2025, Consolidated Statements of Operations, p. 58 (fiscal 2023-2025). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-5">Advanced Micro Devices, Form 10-K fiscal 2025, Consolidated Balance Sheets (p. 60) and Statements of Cash Flows (p. 62). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-6">Advanced Micro Devices, Form 10-K fiscal 2025, Note 4: sales by billing location and customer concentration (no customer at 10% in fiscal 2025 and 2024). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-7">Advanced Micro Devices, Form 10-K fiscal 2025, Item 7 Overview: ZT Systems manufacturing sale to Sanmina, OpenAI agreement and warrant, MI308 export-control charge and reversal. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-8">Advanced Micro Devices, Form 10-K fiscal 2025, Item 7 Liquidity and Note 12: unconditional commitments of $12.2 billion at December 27, 2025. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-9">Advanced Micro Devices, Form 10-K fiscal 2025, Report of Independent Registered Public Accounting Firm: opinion on the consolidated financial statements. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm</a></li>
+<li id="cite_note-10">Advanced Micro Devices, Form 10-K fiscal 2023 (filed 2024-01-31), Consolidated Statements of Operations, p. 54 (fiscal 2021-2023). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248824000012/amd-20231230.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248824000012/amd-20231230.htm</a></li>
+<li id="cite_note-11">Advanced Micro Devices, Form 10-K fiscal 2023, Consolidated Balance Sheets (p. 56) and Statements of Cash Flows (p. 58), fiscal 2021-2023. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248824000012/amd-20231230.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248824000012/amd-20231230.htm</a></li>
+<li id="cite_note-12">Advanced Micro Devices, Form 10-K fiscal 2022 (filed 2023-02-27), Consolidated Balance Sheets, p. 52: December 25, 2021 comparison column. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248823000047/amd-20221231.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248823000047/amd-20221231.htm</a></li>
+<li id="cite_note-13">Advanced Micro Devices, Quarterly Report on Form 10-Q for the quarter ended June 27, 2026 (filed 2026-08-05), Condensed Consolidated Statements of Operations and Balance Sheets, pp. 3-5. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm</a></li>
+<li id="cite_note-14">Advanced Micro Devices, Form 10-Q June 27, 2026, Condensed Consolidated Statements of Cash Flows, pp. 6-7. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm</a></li>
+<li id="cite_note-15">Advanced Micro Devices, Form 10-Q June 27, 2026, Note on Segment Reporting: segment revenue and operating income, three and six months. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm</a></li>
+<li id="cite_note-16">Advanced Micro Devices, Form 10-Q June 27, 2026, Commitments note and Liquidity discussion: unconditional commitments $30,276 million, leases not yet commenced, lease guarantees, subsequent investment commitments. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm</a></li>
+<li id="cite_note-17">Advanced Micro Devices, Form 10-Q June 27, 2026, cover page (shares outstanding on July 29, 2026) and Stockholders' Equity note (repurchase program, OpenAI and Meta warrants). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm</a></li>
+<li id="cite_note-18">Advanced Micro Devices, Form 8-K Exhibit 99.1, second-quarter 2026 results and third-quarter outlook (2026-08-04). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/q22026991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000121/q22026991.htm</a></li>
+<li id="cite_note-19">Advanced Micro Devices, Form 8-K Exhibit 99.1, first-quarter 2026 results and second-quarter outlook (2026-05-05). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/q12026991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/q12026991.htm</a></li>
+<li id="cite_note-20">Advanced Micro Devices, Form 8-K Exhibit 99.1, fourth-quarter and full-year 2025 results and first-quarter 2026 outlook (2026-02-03). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/q42025991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/q42025991.htm</a></li>
+<li id="cite_note-21">Advanced Micro Devices, Form 8-K Exhibit 99.1, third-quarter 2025 results and fourth-quarter outlook (2025-11-04). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248825000163/q32025991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248825000163/q32025991.htm</a></li>
+<li id="cite_note-22">Advanced Micro Devices, Form 8-K Exhibit 99.1, second-quarter 2025 results and third-quarter outlook (2025-08-05). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248825000106/q22025991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248825000106/q22025991.htm</a></li>
+<li id="cite_note-23">Advanced Micro Devices, Form 8-K Exhibit 99.1, first-quarter 2025 results and second-quarter outlook (2025-05-06). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248825000045/q12025991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248825000045/q12025991.htm</a></li>
+<li id="cite_note-24">Advanced Micro Devices, Form 8-K Exhibit 99.1, fourth-quarter and full-year 2024 results and first-quarter 2025 outlook (2025-02-04). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248825000009/q42024991.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248825000009/q42024991.htm</a></li>
+<li id="cite_note-25">AMD press release, Financial Analyst Day long-term targets (2025-11-11), as syndicated by Yahoo Finance (GlobeNewswire). <a href="https://finance.yahoo.com/news/amd-unveils-strategy-lead-1-213000438.html">https://finance.yahoo.com/news/amd-unveils-strategy-lead-1-213000438.html</a></li>
+<li id="cite_note-26">Advanced Micro Devices, Form 8-K Exhibit 99.1, AMD and OpenAI strategic partnership to deploy 6 gigawatts (2025-10-06). <a href="https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189dex991.htm">https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189dex991.htm</a></li>
+<li id="cite_note-27">Advanced Micro Devices, Form 8-K Exhibit 4.1, Warrant to purchase common stock issued to OpenAI OpCo, LLC (2025-10-05); Exhibits E and F (vesting and exercise conditions) are redacted. <a href="https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189dex41.htm">https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189dex41.htm</a></li>
+<li id="cite_note-28">Advanced Micro Devices, Form 8-K Exhibit 99.1, AMD and Meta expanded partnership to deploy 6 gigawatts and warrant for up to 160 million shares (2026-02-24). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/pressreleasedatedfebruary2.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/pressreleasedatedfebruary2.htm</a></li>
+<li id="cite_note-29">Advanced Micro Devices, Form 8-K (2026-08-17), Item 1.01: $4.75 billion of senior notes due 2029, 2031, 2033 and 2036. <a href="https://www.sec.gov/Archives/edgar/data/2488/000119312526354029/d142696d8k.htm">https://www.sec.gov/Archives/edgar/data/2488/000119312526354029/d142696d8k.htm</a></li>
+<li id="cite_note-30">Advanced Micro Devices, Form 8-K (2026-09-28), Item 3.02: agreement to acquire World Labs for about $8.2 billion in AMD common stock. <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm">https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm</a></li>
+<li id="cite_note-31">AMD Investor Relations, press release 2026-10-06: third-quarter 2026 results on Tuesday, November 3, 2026, after the market close. <a href="https://ir.amd.com/news-events/press-releases/detail/1300/amd-to-report-fiscal-third-quarter-2026-financial-results">https://ir.amd.com/news-events/press-releases/detail/1300/amd-to-report-fiscal-third-quarter-2026-financial-results</a></li>
+<li id="cite_note-32">Yahoo Finance (Motley Fool transcript), AMD Q2 2026 earnings call (held 2026-08-04): Lisa Su and Jean Hu prepared remarks and analyst questions. <a href="https://finance.yahoo.com/markets/stocks/articles/amd-amd-q2-2026-earnings-232859641.html">https://finance.yahoo.com/markets/stocks/articles/amd-amd-q2-2026-earnings-232859641.html</a></li>
+<li id="cite_note-33">The Motley Fool, AMD Q4 2025 earnings call transcript (held 2026-02-03): data center growth target and 2027 AI revenue comment. <a href="https://www.fool.com/earnings/call-transcripts/2026/02/03/amd-amd-q4-2025-earnings-call-transcript/">https://www.fool.com/earnings/call-transcripts/2026/02/03/amd-amd-q4-2025-earnings-call-transcript/</a></li>
+<li id="cite_note-34">Yahoo Finance, AMD analysis page (session of 2026-10-16): consensus EPS and revenue, 7/30/60/90-day revisions, close of $528.75 and market backdrop. <a href="https://finance.yahoo.com/quote/AMD/analysis/">https://finance.yahoo.com/quote/AMD/analysis/</a></li>
+<li id="cite_note-35">StockAnalysis.com, AMD stock forecast (S&amp;P Global Market Intelligence, updated 2026-10-06): 55 analysts, price targets, ratings. <a href="https://stockanalysis.com/stocks/amd/forecast/">https://stockanalysis.com/stocks/amd/forecast/</a></li>
+<li id="cite_note-36">StockAnalysis.com, AMD financial ratios (S&amp;P Global Market Intelligence, checked 2026-10-13): year-end forward P/E history, ROIC history, net debt to EBITDA. <a href="https://stockanalysis.com/stocks/amd/financials/ratios/">https://stockanalysis.com/stocks/amd/financials/ratios/</a></li>
+<li id="cite_note-37">StockAnalysis.com, AMD statistics and valuation (S&amp;P Global Market Intelligence, checked 2026-10-13): trailing twelve-month revenue, cash flow, beta, interest coverage. <a href="https://stockanalysis.com/stocks/amd/statistics/">https://stockanalysis.com/stocks/amd/statistics/</a></li>
+<li id="cite_note-38">MarketBeat, Advanced Micro Devices stock falls 6% (2026-10-16): session move, news summary, analyst targets and insider sales (secondary source). <a href="https://www.marketbeat.com/instant-alerts/price-advanced-micro-devices-nasdaq-amd-stock-falls-6-heres-why-2026-10-16/">https://www.marketbeat.com/instant-alerts/price-advanced-micro-devices-nasdaq-amd-stock-falls-6-heres-why-2026-10-16/</a></li>
+<li id="cite_note-39">Fermi America press release (2026-10-13): credit support agreement with AMD for the 222 MW first phase of Project Matador. <a href="https://www.newswire.com/news/fermi-signs-credit-support-agreement-with-amd-and-announces-partnership">https://www.newswire.com/news/fermi-signs-credit-support-agreement-with-amd-and-announces-partnership</a></li>
+<li id="cite_note-40">Converge Digest, Lisa Su says Helios is shipping (OCP Global Summit keynote, 2026-10-12): production shipments began in September (secondary source). <a href="https://convergedigest.com/amd-lisa-su-ocp-helios-shipping-verano-192-core/">https://convergedigest.com/amd-lisa-su-ocp-helios-shipping-verano-192-core/</a></li>
+<li id="cite_note-41">Meta Platforms, announcement of third-quarter 2026 results date, October 21, 2026 (PR Newswire via Yahoo Finance, 2026-10-12). <a href="https://finance.yahoo.com/markets/stocks/articles/meta-announce-third-quarter-2026-203500910.html">https://finance.yahoo.com/markets/stocks/articles/meta-announce-third-quarter-2026-203500910.html</a></li>
+<li id="cite_note-42">Microsoft, announcement of fiscal 2027 first-quarter earnings date, October 28, 2026 (2026-10-07). <a href="https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/">https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/</a></li>
+<li id="cite_note-43">NVIDIA, Form 10-Q for the quarter ended July 26, 2026: condensed consolidated statements of income, p. 3. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm">https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm</a></li>
+<li id="cite_note-44">Broadcom, Form 8-K Exhibit 99.1, third-quarter fiscal 2026 results, quarter ended August 2, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm">https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm</a></li>
+<li id="cite_note-45">Intel, Form 10-Q for the quarter ended June 27, 2026 (filed 2026-07-24): consolidated condensed statements of operations, p. 2. <a href="https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/intc-20260627.htm">https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/intc-20260627.htm</a></li>
+<li id="cite_note-46">Marvell Technology, Form 10-Q for the quarter ended August 1, 2026 (filed 2026-08-28): condensed consolidated statements of operations, p. 3. <a href="https://www.sec.gov/Archives/edgar/data/1835632/000183563226000025/mrvl-20260801.htm">https://www.sec.gov/Archives/edgar/data/1835632/000183563226000025/mrvl-20260801.htm</a></li>
+<li id="cite_note-47">StockAnalysis.com, NVDA statistics and valuation (S&amp;P Global Market Intelligence, close of 2026-10-13): forward P/E. <a href="https://stockanalysis.com/stocks/nvda/statistics/">https://stockanalysis.com/stocks/nvda/statistics/</a></li>
+<li id="cite_note-48">StockAnalysis.com, AVGO statistics and valuation (S&amp;P Global Market Intelligence, close of 2026-10-13): forward P/E. <a href="https://stockanalysis.com/stocks/avgo/statistics/">https://stockanalysis.com/stocks/avgo/statistics/</a></li>
+<li id="cite_note-49">StockAnalysis.com, MRVL statistics and valuation (S&amp;P Global Market Intelligence, close of 2026-10-16): forward P/E. <a href="https://stockanalysis.com/stocks/mrvl/statistics/">https://stockanalysis.com/stocks/mrvl/statistics/</a></li>
+<li id="cite_note-50">StockAnalysis.com, INTC statistics and valuation (S&amp;P Global Market Intelligence, close of 2026-10-16): forward P/E. <a href="https://stockanalysis.com/stocks/intc/statistics/">https://stockanalysis.com/stocks/intc/statistics/</a></li>
+</ol>
+</section></main><aside aria-label="Report contents" class="desk-contents" hidden=""><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk="">
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
