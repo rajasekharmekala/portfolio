@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-16">
+<meta name="generated-at" content="2026-10-17T08:43:04.048326-07:00">
+<title>Arista Networks (NYSE: ANET) - the book report, as of 2026-10-16</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" aria-disabled="true">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Arista Networks (NYSE: ANET) - the book report, as of 2026-10-16</h1><p class="report-generated">Generated Date: <time datetime="2026-10-17T08:43:04.048326-07:00">17 Oct 2026, 08:43 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-16</p></header>
+<dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span> (COMPOUNDER)</dd></div>
+<div><dt>Session Price (2026-10-16)</dt><dd>$176.98</dd></div>
+<div><dt>Strategy Bucket</dt><dd>CORE_ALPHA</dd></div>
+<div><dt>Implied 10Y Growth (Reverse DCF)</dt><dd>+14.9%/yr</dd></div>
+<div><dt>Estimate Revisions (90d)</dt><dd>RISING_ESTIMATES</dd></div>
+<div><dt>Trend &amp; Momentum Gate</dt><dd>Stage 3 (Topping / Pullback) | NO_MOMENTUM</dd></div>
+<div><dt>Support Distance / Stop</dt><dd>0.03 ATR | Stop $154.27</dd></div>
+<div><dt>Base Target / Asymmetry</dt><dd>$213.29 | 1.60:1 (Risk-Unit Size: 0.0%)</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p><span>Arista Networks (NYSE: ANET) sells the Ethernet switches and software that link servers inside data centers, including large AI clusters.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> The business is excellent: $10.54 billion of sales, a 43.1% <dfn>operating margin</dfn>, $5.16 billion of <dfn>free cash flow</dfn> (<dfn>FCF</dfn>) and $13.34 billion of cash with no debt.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-30">[30]</a></sup> The price is the problem: the stock fell 18.3% in a week to $176.98, and the <dfn>reward-to-risk</dfn> ratio is 1.60 to 1 against a floor of 3.0.<sup><a href="#cite_note-27">[27]</a></sup> So our verdict is REJECTED for new money, which is about adding, not selling: no exit rule is met, so we hold the 9.73 shares and place no order. We sell if the stock closes below $154.27, and we look again for new money after the November 3 results<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-20">[20]</a></sup>.</span></p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does</h2>
+<p><span>Arista Networks designs and sells the equipment and software that move data between computers inside a data center. Picture a data center as a very large warehouse of servers, and Arista's switches as the road system between them: every web request, every file and every AI training job crosses those roads. The switches speak Ethernet, the same standard that links office computers, and they all run one operating system, called EOS, that Arista writes itself on top of standard Linux.<sup><a href="#cite_note-2">[2]</a></sup> The shares trade on the New York Stock Exchange under the symbol ANET, although the holdings file shows a Nasdaq code; the 10-K cover page names the New York Stock Exchange.<sup><a href="#cite_note-1">[1]</a></sup></span></p>
+<p><span>The company's $9.006 billion of 2025 revenue came from three groups of buyers. Cloud and AI Titans, the largest cloud and AI companies, supplied about 48%. Enterprise and financial-services customers supplied 32%. AI and specialty providers, a group that includes Apple, Oracle and the newer AI-focused cloud companies called neoclouds, supplied 20%.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-22">[22]</a></sup> By product, the core data-center and AI switches were 65% of revenue, campus and routing products 18%, and software and subscription services 17%.<sup><a href="#cite_note-3">[3]</a></sup> Product sales were 84.1% of revenue ($7,576.9 million) and service contracts were 15.9% ($1,428.8 million).<sup><a href="#cite_note-4">[4]</a></sup> About 79% of sales were in the Americas.<sup><a href="#cite_note-3">[3]</a></sup></span></p>
+<p><span>Two customers each bought more than 10% of the company's revenue. They accounted for 26% and 16% of 2025 revenue, a combined 42%, up from 35% in 2024 and 39% in 2023.<sup><a href="#cite_note-3">[3]</a></sup> The 10-K does not name them. On earnings calls the chief executive has named Microsoft and Meta as her two longest partners, and she expects one or perhaps two more customers to pass 10% in 2026.<sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-22">[22]</a></sup> This is the central fact about the business: a handful of the world's largest companies buy most of the AI-related equipment, so Arista's growth follows their spending plans.</span></p>
+<p><span>Arista does not build its own boxes. Contract manufacturers Jabil, Sanmina and Foxconn assemble the switches, and the main switching chips come from one supplier, Broadcom.<sup><a href="#cite_note-2">[2]</a></sup> The company sells through its own sales force and through channel partners, and it earns service revenue from support contracts that often run for several years.<sup><a href="#cite_note-6">[6]</a></sup> Large AI orders frequently carry a customer acceptance clause: the customer tests the equipment for six to eighteen months before it counts as delivered.<sup><a href="#cite_note-22">[22]</a></sup> Until then the cash can arrive but the revenue waits in a liability called deferred revenue, which stood at $6.87 billion on June 30, 2026, up from $4.06 billion a year earlier.<sup><a href="#cite_note-13">[13]</a></sup></span></p>
+<p><span>The AI part of the business has three jobs, which management calls scale-up, scale-out and scale-across. Scale-up links chips inside one rack and is still dominated by Nvidia's proprietary NVLink. Scale-out links racks to each other, where Ethernet is replacing the older InfiniBand standard. Scale-across links data centers that sit far apart because no single site has enough power.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> Management says it passed its 2025 goal of $1.5 billion of AI center revenue and has set a 2026 goal of at least $3.5 billion, the figure in the finance chief's formal outlook; the chief executive once said $3.6 billion on the same August call, and we use $3.5 billion.<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> In June 2025 it also bought the VeloCloud branch-office networking business from Broadcom for $300.0 million in cash, to sell alongside its campus products.<sup><a href="#cite_note-8">[8]</a></sup></span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>How Arista's 2025 revenue of $9,005.7 million splits, three ways</caption>
+<thead><tr><th>Way of cutting revenue</th><th>Share or amount in 2025</th><th>What it covers</th><th>Why it matters to an owner</th></tr></thead>
+<tbody>
+<tr><td><span>Cloud and AI Titans.</span></td><td><span>about 48%.<sup><a href="#cite_note-3">[3]</a></sup></span></td><td><span>The largest cloud and AI companies.</span></td><td><span>Includes the two customers above 10%; their capital spending drives results.</span></td></tr>
+<tr><td><span>Enterprise and financials.</span></td><td><span>about 32%.<sup><a href="#cite_note-3">[3]</a></sup></span></td><td><span>Banks, government, media, healthcare, industry.</span></td><td><span>The steadier, more diversified part; also where campus products sell.</span></td></tr>
+<tr><td><span>AI and specialty providers.</span></td><td><span>about 20%.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-22">[22]</a></sup></span></td><td><span>Apple, Oracle, neoclouds and other AI-focused providers.</span></td><td><span>The group management expects to produce new 10% customers.</span></td></tr>
+<tr><td><span>Core (AI, cloud, data center).</span></td><td><span>about 65%.<sup><a href="#cite_note-3">[3]</a></sup></span></td><td><span>Switches for data centers and AI clusters.</span></td><td><span>Where most profit and most risk sit.</span></td></tr>
+<tr><td><span>Campus and routing.</span></td><td><span>about 18%.<sup><a href="#cite_note-3">[3]</a></sup></span></td><td><span>Office networks, Wi-Fi, WAN and routing, including VeloCloud.</span></td><td><span>Newer growth area against Cisco and HPE.</span></td></tr>
+<tr><td><span>Software and services.</span></td><td><span>about 17%.<sup><a href="#cite_note-3">[3]</a></sup></span></td><td><span>Support contracts, CloudVision management software, subscriptions.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-22">[22]</a></sup></span></td><td><span>Recurring revenue that smooths the lumpy hardware.</span></td></tr>
+<tr><td><span>Product versus service.</span></td><td><span>84.1% / 15.9%.<sup><a href="#cite_note-4">[4]</a></sup></span></td><td><span>$7,576.9 million of product and $1,428.8 million of service.</span></td><td><span>Product revenue is the part that can swing with customer orders.</span></td></tr>
+<tr><td><span>Geography</span></td><td><span>Americas 79.1%, Europe/Middle East/Africa 11.9%, Asia-Pacific 9.0%.<sup><a href="#cite_note-3">[3]</a></sup></span></td><td><span>Where the customer is billed.</span></td><td><span>Heavy US exposure, so US cloud spending matters most.</span></td></tr>
+</tbody>
+</table></div>
+<p><span>The three customer groups and the three product lines are two views of the same $9.0 billion. Read down the first column to see who pays, and down the second to see what they buy. Missing from the table is the AI share of each group's spending: Arista reports AI revenue only as a yearly goal, never as a measured line.</span></p>
+<h3>Plain-English glossary for this report</h3>
+<ul>
+<li><span>Ethernet: the common standard for sending data over cables between computers; Arista sells Ethernet switches.</span></li>
+<li><span>Switch: a box that receives data from many cables and forwards each piece to the right cable.</span></li>
+<li><span>EOS: Arista's own operating system, the software that runs every Arista switch.</span></li>
+<li><span>Hyperscaler or cloud titan: one of the very largest cloud companies, such as Microsoft or Meta.</span></li>
+<li><span>Neocloud: a newer cloud company built mainly to rent out AI computing power.</span></li>
+<li><span>Scale-up, scale-out, scale-across: three ways to link AI chips, inside a rack, between racks, and between buildings.</span></li>
+<li><span>InfiniBand: an older networking standard, sold mostly alongside Nvidia chips, that Ethernet is competing to replace in AI clusters.</span></li>
+<li><span>White box: a low-cost generic switch that the customer loads with its own or open-source software.</span></li>
+<li><span>Deferred revenue: money billed or collected before the sale counts as revenue, usually because the customer has not yet accepted the product.</span></li>
+<li><span>Purchase commitments: binding orders placed with suppliers for parts the company has not yet received.</span></li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Why the business is strong or weak</h2>
+<p><span>A strong position in a market is not the same as a safe one. Arista's position is strong because customers say they choose it for reliability and software, and because, according to management citing outside market researchers, it now holds the largest share of fast Ethernet switching.<sup><a href="#cite_note-21">[21]</a></sup> The company reports a net promoter score of 89, which it says means 94% of customers are strongly positive,<sup><a href="#cite_note-15">[15]</a></sup> and it counts more than 10,000 cumulative customers.<sup><a href="#cite_note-22">[22]</a></sup> The research firm Gartner named it a Leader for enterprise wired and wireless networks in 2026.<sup><a href="#cite_note-14">[14]</a></sup> These are company-reported claims. We treat them as evidence of how customers see Arista, not as audited measurements.</span></p>
+<p><span>The technical argument is simple. Every Arista product runs the same software image, so a feature written once works on every box, and a switch can be upgraded without taking it offline. Management calls this Smart System Upgrade, and its engineering chief told investors in August that it lets customers patch security holes “without sacrificing even a single minute” of expensive chip time.<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> For a customer that has spent billions on AI chips, an idle chip costs far more than a switch, which is why reliability earns Arista a higher price than a generic box.</span></p>
+<h3>Who competes with Arista, and how</h3>
+<p><span>The 10-K names Cisco as the historical leader in data-center and campus networking, with Dell, Extreme, Hewlett Packard Enterprise (HPE), Huawei, Juniper, Nvidia and white-box vendors as other rivals.<sup><a href="#cite_note-2">[2]</a></sup> Cisco is not shrinking. In the quarter ended July 25, 2026, Cisco's networking product revenue rose 28% to $9.79 billion, and it reported $9.3 billion of AI infrastructure orders from hyperscalers in fiscal 2026, against about $4 billion of revenue delivered, with $7.5 billion of revenue expected in fiscal 2027.<sup><a href="#cite_note-33">[33]</a></sup> The market is growing fast enough for several winners. It also means the incumbent is winning large AI orders from the same buyers Arista needs.</span></p>
+<p><span>HPE completed its purchase of Juniper, and the 10-K lists that as a competitive change.<sup><a href="#cite_note-2">[2]</a></sup> HPE's networking segment sold $2.9 billion in its latest quarter, up 74.9%, with data-center networking up 112.2% to $382 million; the release does not separate purchased growth from organic growth, so those rates may overstate the underlying pace.<sup><a href="#cite_note-36">[36]</a></sup> Broadcom, which bought VMware, is both Arista's main chip supplier and, because its chips can also power white-box switches, an indirect competitor.<sup><a href="#cite_note-2">[2]</a></sup> Nvidia sells networking as part of its AI systems. Its Compute &amp; Networking segment had $88.3 billion of revenue in the July 2026 quarter, but it does not report networking on its own, so we cannot size the overlap.<sup><a href="#cite_note-34">[34]</a></sup></span></p>
+<p><span>In AI the rivals are technologies as well as companies. The 10-K says Ethernet faces competition from InfiniBand and NVLink in AI back-end clusters, both usually sold with Nvidia chips.<sup><a href="#cite_note-2">[2]</a></sup> The chief executive told analysts in August, “we live in an NVIDIA world”: where Nvidia supplies the whole stack, Arista has little part in scale-up, and she compared the coming shift to the move from InfiniBand to Ethernet, which took two to three years.<sup><a href="#cite_note-20">[20]</a></sup> No source we can cite publishes the split of AI back-end ports between Ethernet and InfiniBand, so we put no number on it. White-box switches, generic hardware with open-source software, are a cheaper option. Management calls them “a tactical solution” for simple designs and says most neoclouds lack large networking teams, but the 10-K warns that white box could push prices down.<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></span></p>
+<h3>Where the business is weak</h3>
+<p><span>Three weak points matter. First, two customers produced 42% of 2025 revenue, so one customer's budget cut would show up quickly in Arista's results.<sup><a href="#cite_note-3">[3]</a></sup> Second, the company depends on Broadcom for its main chips, on three contract manufacturers for assembly, and on a memory market that the 10-K says is tight and is pressuring <dfn>gross margin</dfn>, the share of each sales dollar left after the direct cost of making the product.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> The chief executive told investors the industry has “a 2-year problem” on supply that she does not expect to clear until 2028.<sup><a href="#cite_note-20">[20]</a></sup> Third, revenue is lumpy: large AI deployments can sit in acceptance windows of six to eighteen months, and the finance chief said the deferred balance can move “independent of underlying business drivers.”<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></p>
+<p><span>Gross margin has slipped. On the standard accounting (GAAP) basis it was 64.1% in 2025 and 62.9% in the June 2026 quarter, against 65.2% a year earlier.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> The 10-K ties part of the pressure to sales to the largest customers, who receive volume discounts, and to supplier costs for memory and chips.<sup><a href="#cite_note-3">[3]</a></sup> A business that keeps 63 cents of each dollar is still highly profitable, but the direction matters because today's valuation assumes the margin holds.</span></p>
+<p><span>What this means for an owner: the business is strong on product quality and financial health and weak on dependence. The company depends on few buyers, one chip supplier and a supply chain that is tight until at least 2028. Chapter 2B scores that mix one measure at a time.</span></p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>
+<p><span>Layer 2 of our framework asks which few measures actually run this business, and whether management has done what it said it would. For a networking company that sells to a handful of giant buyers, five measures matter: AI revenue against the company's own goal, gross margin, the backlog that deferred revenue and purchase commitments describe, customer concentration, and the enterprise and campus mix that diversifies the customer list. We chose them because each one can break the investment case on its own.</span></p>
+<h3>Layer 2 scorecard: company-specific operating KPIs</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 scorecard for Arista Networks, five company-specific measures</caption>
+<thead><tr><th>Measure</th><th>Why we chose it</th><th>Latest reading</th><th>How we score it</th><th>Score</th></tr></thead>
+<tbody>
+<tr><td><span>AI fabrics revenue against the company's own goal.</span></td><td><span>AI networking is the growth story behind the share price.</span></td><td><span>2025 goal of $1.5 billion for AI centers (including $750 million of back-end clusters) was exceeded; the 2026 goal went from $2.75 billion to $3.25 billion in February, $3.5 billion in May, and at least $3.5 billion in the finance chief's August outlook (the chief executive quoted $3.6 billion once on the same call, so we score on $3.5 billion); management declined to commit to a higher number; actual AI revenue for the half year is not published.<sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></td><td><span>PASS if last year's goal was beaten and this year's goal was raised; FAIL if cut.</span></td><td><span>PASS</span></td></tr>
+<tr><td><span>Non-GAAP gross margin against the 62% to 64% range for 2026.</span></td><td><span>Shows pricing power and cost pressure from memory and chips.</span></td><td><span>62.4% in the March quarter and 63.4% in the June quarter, including 20 to 30 basis points of tariff refund, against 65.6% a year earlier and 64.6% for 2025.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></span></td><td><span>PASS if in range and flat or rising; WATCH if in range but falling; FAIL if below range.</span></td><td><span>WATCH</span></td></tr>
+<tr><td><span>Deferred revenue and purchase commitments.</span></td><td><span>Shows how much revenue is contracted and how much supply is promised.</span></td><td><span>Deferred revenue $6.87 billion, up 69% from $4.06 billion; total contracted future revenue $8.4 billion; purchase commitments $9.7 billion, up from $3.6 billion a year earlier.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></td><td><span>PASS if contracted revenue covers commitments; WATCH if commitments exceed it; FAIL if more than 1.5 times.</span></td><td><span>WATCH</span></td></tr>
+<tr><td><span>Customer concentration (top two customers).</span></td><td><span>One budget decision can move a large share of sales.</span></td><td><span>26% and 16% of 2025 revenue, a combined 42%, versus 35% in 2024 and 39% in 2023; management expects one or two more 10% customers.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-22">[22]</a></sup></span></td><td><span>Our rule: PASS under 30%, WATCH 30% to 45%, FAIL above 45%.</span></td><td><span>WATCH</span></td></tr>
+<tr><td><span>Enterprise and campus diversification.</span></td><td><span>Non-hyperscaler sales steady the business if AI orders pause.</span></td><td><span>Enterprise was about 32% of 2025 revenue (about 35% in 2024); the $1.25 billion campus goal for 2026 is unchanged after beating the 2025 goal of $800 million.<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></td><td><span>Our rule: PASS if enterprise is at least 30% of revenue and the campus goal is intact.</span></td><td><span>PASS</span></td></tr>
+</tbody>
+</table></div>
+<p><span>Two of the five measures pass, three sit on watch and none fail, so the Layer 2 minimum of four passes out of five is not met. The three watch items share one cause: Arista is growing faster than its supply chain and customer list can comfortably absorb. Actual 2026 AI revenue is a blind spot, because management gives goals and reports results only after the year ends.</span></p>
+<h3>Management walk-the-talk: past promises vs delivered reality</h3>
+<p><span>Management has a clear pattern of guiding low and delivering higher. In each of the last four reported quarters revenue came in above the top of the range the company had given three months earlier: $2.308 billion against about $2.25 billion, $2.488 billion against $2.3 to $2.4 billion, $2.709 billion against about $2.6 billion, and $3.036 billion against about $2.8 billion.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> The June quarter also brought $1.02 of <dfn>EPS</dfn> (earnings per share, profit divided by the number of shares) against a forecast of about $0.88.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> <dfn>Guidance</dfn> is management's own forecast, so beating it repeatedly shows the forecast is deliberately cautious. The yearly goals followed the same path. Fiscal 2025 growth was first guided at 15% to 17% and delivered at 28.6%.<sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> The 2026 revenue goal began at $10.5 billion at the September 2025 analyst day and has been raised to $12.6 billion in three steps.<sup><a href="#cite_note-25">[25]</a></sup><sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></p>
+<p><span>Capital allocation is where the record is more mixed. The company spent $1.6 billion buying back shares in 2025 at an average of about $101, and $620 million of that in the fourth quarter at about $128.<sup><a href="#cite_note-22">[22]</a></sup> In the first half of 2026 the cash flow statement shows no repurchases, and $817.9 million of the authorization was still available at December 31, 2025 and again on the August 4, 2026 call.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> In the same period purchase commitments to suppliers rose from $6.8 billion to $9.7 billion.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> That is a choice to put cash behind supply rather than behind the share price, and it fits a company short of parts, but it also means $9.4 billion of those orders are expected to arrive within twelve months.<sup><a href="#cite_note-13">[13]</a></sup></span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>What Arista promised, and what it delivered</caption>
+<thead><tr><th>Promise (date and source)</th><th>What was delivered</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td><span>2025 revenue growth of 15% to 17% (November 2024), then 17% or $8.2 billion (February 2025) and 25% or $8.75 billion (August 2025).<sup><a href="#cite_note-23">[23]</a></sup><sup><a href="#cite_note-24">[24]</a></sup></span></td><td><span>Revenue of $9.006 billion, up 28.6%.<sup><a href="#cite_note-16">[16]</a></sup></span></td><td><span>Beaten</span></td></tr>
+<tr><td><span>Q1 2025: revenue $1.93 to $1.97 billion, gross margin about 63%, operating margin about 44% (February 2025).<sup><a href="#cite_note-19">[19]</a></sup></span></td><td><span>About $2.0 billion (derived from Q2 2025 being 10.0% higher), 64.1%, 47.8%.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-15">[15]</a></sup></span></td><td><span>Beaten on all three.</span></td></tr>
+<tr><td><span>Q3 2025: revenue about $2.25 billion, gross margin about 64%, operating margin about 47% (August 2025).<sup><a href="#cite_note-18">[18]</a></sup></span></td><td><span>$2.308 billion, 65.2%, 48.6%.<sup><a href="#cite_note-17">[17]</a></sup></span></td><td><span>Beaten on all three.</span></td></tr>
+<tr><td><span>Q4 2025: revenue $2.3 to $2.4 billion, gross margin 62% to 63%, operating margin 47% to 48% (November 2025).<sup><a href="#cite_note-17">[17]</a></sup></span></td><td><span>$2.488 billion, 63.4%, 47.5%.<sup><a href="#cite_note-16">[16]</a></sup></span></td><td><span>Beaten on revenue and gross margin, in range on operating margin.</span></td></tr>
+<tr><td><span>Q1 2026: revenue about $2.6 billion, gross margin 62% to 63%, operating margin about 46% (February 2026).<sup><a href="#cite_note-16">[16]</a></sup></span></td><td><span>$2.709 billion, 62.4%, 47.8%.<sup><a href="#cite_note-15">[15]</a></sup></span></td><td><span>Revenue and operating margin beaten, gross margin at the low end.</span></td></tr>
+<tr><td><span>Q2 2026: revenue about $2.8 billion, operating margin 46% to 47%, EPS about $0.88 (May 2026).<sup><a href="#cite_note-15">[15]</a></sup></span></td><td><span>$3.036 billion, 49.9%, EPS $1.02.<sup><a href="#cite_note-14">[14]</a></sup></span></td><td><span>Beaten on all three.</span></td></tr>
+<tr><td><span>2025 AI center goal of $1.5 billion (including $750 million back-end) and campus goal of $750 million (February 2025).<sup><a href="#cite_note-23">[23]</a></sup></span></td><td><span>Management says both were exceeded and cites an $800 million campus goal; the amounts achieved are not published.<sup><a href="#cite_note-22">[22]</a></sup></span></td><td><span>Kept, not independently measured.</span></td></tr>
+<tr><td><span>2026 revenue goal of $10.5 billion (September 2025).<sup><a href="#cite_note-25">[25]</a></sup></span></td><td><span>Raised to $11.25 billion, $11.5 billion, then $12.6 billion; $5.745 billion earned in the first half.<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-21">[21]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>Raised three times; the second half must deliver $6.86 billion.</span></td></tr>
+<tr><td><span>2026 gross margin range of 62% to 64% (February 2026).<sup><a href="#cite_note-22">[22]</a></sup></span></td><td><span>62.9% non-GAAP for the first half; range kept in August.<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></td><td><span>On track, trend falling.</span></td></tr>
+<tr><td><span>Share repurchases: $1.5 billion program approved May 2025.<sup><a href="#cite_note-9">[9]</a></sup></span></td><td><span>$1.6 billion bought in 2025, no repurchases in the first half of 2026, $817.9 million still available on the August 4, 2026 call.<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></td><td><span>Paused</span></td></tr>
+</tbody>
+</table></div>
+<p><span>Ten promises, eight kept or beaten, one on track with a weakening trend and one paused. The pattern is a careful guide followed by a beat, which is good for credibility and risky for the stock: a result that is only in line with a raised goal can disappoint. Whether the beats are of good quality is a separate question, taken up in Chapter 6.</span></p>
+<p><span>What this means for an owner: management earns a high grade for forecasting and a mixed one for balance between growth spending and share buybacks. The next test is November 3, 2026, when the company reports the quarter ended September 30 against a guide of about $3.3 billion of revenue, a 48% to 49% operating margin and $1.06 to $1.08 of earnings per share.<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> Chapter 3 now puts five years of numbers behind these promises.</span></p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. The numbers, in plain words</h2>
+<p><span>Revenue grew from $2.948 billion in 2021 to $9.006 billion in 2025, a compound rate of 32% a year, and the twelve months to June 30, 2026 reached $10.54 billion.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> Operating margin, the share of revenue left after all running costs, rose from 31.4% to 42.8% over the same four years and reached 43.1% in the latest twelve months.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> <dfn>Net margin</dfn> is profit after every cost as a share of sales, and it rose from 28.5% to 39.0%. Few companies of this size grow that fast and keep that much of each sales dollar.</span></p>
+<p><span>Two tables follow. The first covers income. The second covers cash, cash held, deferred revenue and share count, because for Arista the cash line and the income line tell different stories. Deferred revenue, cash received before the sale counts as revenue, grew from $0.9 billion in 2021 to $6.9 billion in June 2026, and it feeds the cash flow figures. We label every derived number as ours, and every input is cited to a filing.</span></p>
+<p><span>Three groups of terms need plain definitions before the tests. The Weinstein stage scale names the phase of a stock: <dfn>Stage 2</dfn> is a confirmed uptrend, Stage 3 is a topping or pullback phase, and <dfn>Stage 4</dfn> is a confirmed downtrend. A <dfn>base</dfn> is a flat stretch of trading that comes before a move. The <dfn>pivot</dfn> is the top of that stretch, and a <dfn>breakout</dfn> is a move above it on heavy volume. Reward-to-risk, also called <dfn>asymmetry</dfn>, is the gain to a target divided by the loss to the stop. A <dfn>measured move</dfn> projects the height of a base above the pivot as a target.</span></p>
+<h3>Five years of revenue and profit</h3>
+<p><span>Read each row left to right. The first five columns are fiscal years ending December 31; the last column is the twelve months to June 30, 2026, which we built from the 2025 10-K plus the first half of 2026 minus the first half of 2025.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> Earnings per share for 2021 and 2022 were reported before the four-for-one split of December 2024, so we divided them by four.</span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Arista income statement, fiscal 2021 to the twelve months ended June 30, 2026 ($ millions unless noted)</caption>
+<thead><tr><th>Measure</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>12 months to Jun 2026</th></tr></thead>
+<tbody>
+<tr><td><span>Revenue.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>2,948.0</span></td><td><span>4,381.3</span></td><td><span>5,860.2</span></td><td><span>7,003.1</span></td><td><span>9,005.7</span></td><td><span>10,540.8 (first half up 36.5%).</span></td></tr>
+<tr><td><span>Revenue growth.</span></td><td><span>27.2%</span></td><td><span>48.6%</span></td><td><span>33.8%</span></td><td><span>19.5%</span></td><td><span>28.6%</span></td><td><span>n/a</span></td></tr>
+<tr><td><span>Gross profit.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>1,880.8</span></td><td><span>2,675.7</span></td><td><span>3,630.3</span></td><td><span>4,491.3</span></td><td><span>5,768.7</span></td><td><span>6,641.1</span></td></tr>
+<tr><td><span>Gross margin.</span></td><td><span>63.8%</span></td><td><span>61.1%</span></td><td><span>62.0%</span></td><td><span>64.1%</span></td><td><span>64.1%</span></td><td><span>63.0%</span></td></tr>
+<tr><td><span>Operating income.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>924.7</span></td><td><span>1,527.1</span></td><td><span>2,257.3</span></td><td><span>2,944.6</span></td><td><span>3,856.1</span></td><td><span>4,546.9</span></td></tr>
+<tr><td><span>Operating margin.</span></td><td><span>31.4%</span></td><td><span>34.9%</span></td><td><span>38.5%</span></td><td><span>42.0%</span></td><td><span>42.8%</span></td><td><span>43.1%</span></td></tr>
+<tr><td><span>Net income.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>840.9</span></td><td><span>1,352.4</span></td><td><span>2,087.3</span></td><td><span>2,852.1</span></td><td><span>3,511.4</span></td><td><span>4,044.6</span></td></tr>
+<tr><td><span>Net margin.</span></td><td><span>28.5%</span></td><td><span>30.9%</span></td><td><span>35.6%</span></td><td><span>40.7%</span></td><td><span>39.0%</span></td><td><span>38.4%</span></td></tr>
+<tr><td><span>Diluted earnings per share ($, split-adjusted).<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>0.66</span></td><td><span>1.07</span></td><td><span>1.65</span></td><td><span>2.23</span></td><td><span>2.75</span></td><td><span>3.16</span></td></tr>
+</tbody>
+</table></div>
+<p><span>Revenue and profit rose every year, and the operating margin gained about 11 points in four years, which means profit grew faster than sales. Gross margin did not rise; it moved in a band of 61% to 64%, so the gain came from spending on research and sales growing slower than revenue. Profit alone can flatter a business, so the next table checks it against cash.</span></p>
+<h3>Five years of cash, debt and deferred revenue</h3>
+<p><span>Free cash flow is cash from operations minus spending on equipment and software. Cash and securities equal net cash here because none of the balance sheets lists borrowings; only lease obligations appear.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-11">[11]</a></sup> The last column uses the twelve months to June 2026, except for balance items, which are June 30, 2026.</span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Arista cash, debt, deferred revenue and share count, fiscal 2021 to June 2026 ($ millions unless noted)</caption>
+<thead><tr><th>Measure</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>12 months or date: Jun 2026</th></tr></thead>
+<tbody>
+<tr><td><span>Cash from operations.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>1,015.9</span></td><td><span>492.8</span></td><td><span>2,034.0</span></td><td><span>3,708.2</span></td><td><span>4,371.9</span></td><td><span>5,306.6</span></td></tr>
+<tr><td><span>Spending on equipment and software.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>64.7</span></td><td><span>44.6</span></td><td><span>34.4</span></td><td><span>32.0</span></td><td><span>119.5</span></td><td><span>151.3</span></td></tr>
+<tr><td><span>Free cash flow.</span></td><td><span>951.1</span></td><td><span>448.2</span></td><td><span>1,999.6</span></td><td><span>3,676.2</span></td><td><span>4,252.4</span></td><td><span>5,155.3</span></td></tr>
+<tr><td><span>Free cash flow margin.</span></td><td><span>32.3%</span></td><td><span>10.2%</span></td><td><span>34.1%</span></td><td><span>52.5%</span></td><td><span>47.2%</span></td><td><span>48.9%</span></td></tr>
+<tr><td><span>Stock-based compensation.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>186.9</span></td><td><span>230.9</span></td><td><span>296.8</span></td><td><span>355.4</span></td><td><span>439.2</span></td><td><span>502.3</span></td></tr>
+<tr><td><span>Stock-based compensation as % of revenue.</span></td><td><span>6.3%</span></td><td><span>5.3%</span></td><td><span>5.1%</span></td><td><span>5.1%</span></td><td><span>4.9%</span></td><td><span>4.8%</span></td></tr>
+<tr><td><span>Cash and marketable securities (also net cash).<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>3,408.3</span></td><td><span>3,023.7</span></td><td><span>5,008.0</span></td><td><span>8,303.5</span></td><td><span>10,743.0</span></td><td><span>13,343.3</span></td></tr>
+<tr><td><span>Borrowings.</span></td><td><span>none</span></td><td><span>none</span></td><td><span>none</span></td><td><span>none</span></td><td><span>none</span></td><td><span>none</span></td></tr>
+<tr><td><span>Total deferred revenue.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></span></td><td><span>929.3</span></td><td><span>1,041.2</span></td><td><span>1,506.2</span></td><td><span>2,791.4</span></td><td><span>5,372.4</span></td><td><span>6,865.9</span></td></tr>
+<tr><td><span>Share repurchases.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>411.6</span></td><td><span>670.3</span></td><td><span>112.3</span></td><td><span>423.6</span></td><td><span>1,603.1</span></td><td><span>0 (first half 2026).</span></td></tr>
+<tr><td><span>Shares outstanding, millions (split-adjusted).<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-13">[13]</a></sup></span></td><td><span>1,230.7</span></td><td><span>1,227.6</span></td><td><span>1,249.0</span></td><td><span>1,261.3</span></td><td><span>1,256.5</span></td><td><span>1,261.2</span></td></tr>
+</tbody>
+</table></div>
+<p><span>Cash generation went from $0.4 billion in the weak year 2022, when the company built inventory and free cash flow was 10.2% of revenue, to $5.2 billion in the latest twelve months. Net cash has grown every year since 2022, to $13.3 billion. Deferred revenue grew 7.4 times between 2021 and June 2026, and in 2025 it supplied $2.45 billion of the $4.37 billion of operating cash flow. How much of that cash is permanent is unclear, because deferred revenue turns into sales when customers accept their products. Chapter 6 tests that point.</span></p>
+<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>
+<p><span>Layer 1 compares where the company stands now with the direction it is moving. A weak level that is improving can still pass the turnaround archetype; a strong level that is deteriorating deserves caution. Arista has strong levels, so the archetype is COMPOUNDER, which requires return on capital of at least 12%, free cash flow of at least 12% of revenue, <dfn>net debt</dfn> (borrowings minus cash) under 3 times <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization, a rough measure of operating profit) and stock-based pay under 5% of revenue. The technical and reward-to-risk tests use the Core Alpha bucket, which we explain in Chapter 7.</span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 gates for Arista Networks: floor, level now, trajectory and result</caption>
+<thead><tr><th>Test</th><th>Floor or rule</th><th>Level now</th><th>Trajectory (rate of change)</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><span>Hard red lines (solvency, Stage 4, governance).</span></td><td><span>No distressed balance sheet, no Stage 4 breakdown, no fraud or going-concern warning.</span></td><td><span>No borrowings; net cash $13.34 billion; Stage 3 not Stage 4; unqualified audit opinion.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>Net cash up from $3.4 billion in 2021 to $13.3 billion.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>PASS</span></td></tr>
+<tr><td><span><dfn>ROIC</dfn> (return on invested capital).</span></td><td><span>At least 12%, Core prefers above 16%.</span></td><td><span>27.1% (operating profit after tax of $3,685 million over average equity of $13,584 million).<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-29">[29]</a></sup></span></td><td><span>28.5% in 2025 to 27.1% now, a small fall as cash piles up in equity.</span></td><td><span>PASS</span></td></tr>
+<tr><td><span>Free cash flow margin.</span></td><td><span>At least 12%.</span></td><td><span>48.9% over twelve months.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-30">[30]</a></sup></span></td><td><span>10.2% in 2022, then 34.1%, 52.5%, 47.2%, 48.9%; more than half of 2025 operating cash flow came from the deferred revenue build.</span></td><td><span>PASS, with a quality caveat.</span></td></tr>
+<tr><td><span>Net debt to EBITDA.</span></td><td><span>Below 3.0 times.</span></td><td><span>-2.88 times, meaning net cash exceeds a full year of EBITDA.<sup><a href="#cite_note-29">[29]</a></sup></span></td><td><span>Net cash has risen every year since 2022.</span></td><td><span>PASS</span></td></tr>
+<tr><td><span>Stock-based pay as % of revenue.</span></td><td><span>Below 5%.</span></td><td><span>4.8% over twelve months, 4.9% in 2025.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td><span>6.3% in 2021 to 4.8%; share count flat at about 1,261 million since December 2024 because buybacks offset new grants.</span></td><td><span>PASS, with thin room.</span></td></tr>
+<tr><td><span>Technical floor.</span></td><td><span>Core: Stage 1 base breakout or Stage 2 uptrend.</span></td><td><span>Stage 3; the close of $176.98 is below the 20-day ($204.44) and 50-day ($198.42) averages (session ledger).</span></td><td><span>50-day average still rising ($187.24 to $198.42 in 21 days) but the price fell 18.3% in a week.</span></td><td><span>FAIL</span></td></tr>
+<tr><td><span>No Stage 4 or death cross.</span></td><td><span>Not below a falling 200-day average.</span></td><td><span>Close is 8.8% above the rising 200-day average of $162.64 (session ledger).</span></td><td><span>200-day average rose from $144.85 to $162.64 in 63 days.</span></td><td><span>PASS</span></td></tr>
+<tr><td><span>Target anchoring.</span></td><td><span>Forward EPS times 3-year median P/E, a DCF or a measured move.</span></td><td><span>FY2027 consensus EPS $5.22 times the 3-year median year-end forward P/E of 40.86 gives $213.29.<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-28">[28]</a></sup></span></td><td><span>Consensus EPS up 17.2% in 90 days.<sup><a href="#cite_note-27">[27]</a></sup></span></td><td><span>PASS (anchored).</span></td></tr>
+<tr><td><span>Reward-to-risk (asymmetry).</span></td><td><span>At least 3.0 for Core Alpha: (target - price) / (price - stop).</span></td><td><span>(213.29 - 176.98) / (176.98 - 154.27) = 1.60.</span></td><td><span>Clears 3.0 only at or below $169.02.</span></td><td><span>FAIL at today's price.</span></td></tr>
+</tbody>
+</table></div>
+<p><span>Five tests are financial and all pass: the company is a COMPOUNDER on every static level, and the direction of travel is mostly stable or better. Two tests fail at today's price: the chart is a Stage 3 pullback, and the reward-to-risk ratio of 1.60 is half the 3.0 floor. Layer 1 therefore fails on two hard gates, and both failures are about price and chart, not about the business. The verdict comes in Chapter 7, after the KPI and entry-posture layers.</span></p>
+<section class="estimate">
+<h4>The number</h4>
+<p><span>Free cash flow over the twelve months to June 30, 2026 was $5,155.3 million, which is 48.9% of revenue.</span></p>
+<h4>How it was calculated</h4>
+<p><span>We took cash from operations for 2025 ($4,371.9 million), added the first half of 2026 ($2,776.5 million) and subtracted the first half of 2025 ($1,841.8 million), then subtracted the same calculation for equipment and software purchases ($119.5 + $84.2 - $52.4 = $151.3 million).</span></p>
+<h4>The inputs</h4>
+<p><span>Cash from operations and purchases of property, equipment and intangible assets come from the cash flow statements in the 10-K and the June 2026 10-Q.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> StockAnalysis, using S&amp;P Global data, reports the same $5.16 billion.<sup><a href="#cite_note-30">[30]</a></sup></span></p>
+<h4>The range</h4>
+<p><span>If we strip out the net build in deferred revenue (an increase of $2,804.1 million over twelve months, less $1,153.9 million of matching deferred costs in other assets), free cash flow would be $3,505.1 million, a 33.3% margin.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-5">[5]</a></sup> That is the low case. The high case is the reported figure.</span></p>
+<h4>If the number is off</h4>
+<p><span>If the lower figure is the true recurring one, the growth rate the share price needs for the next ten years rises from 14.9% to 20.1% a year (Chapter 5), and the margin is still above the 12% floor, so the Layer 1 financial test passes either way.</span></p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p><span>Return on invested capital over the last twelve months was about 27.1%.</span></p>
+<h4>How it was calculated</h4>
+<p><span>We multiplied twelve-month operating income of $4,546.9 million by one minus the tax rate of 18.9% to get after-tax operating profit of $3,685 million, then divided by average equity of $13,584 million, the mean of December 2025 ($12,370.5 million) and June 2026 ($14,797.7 million).</span></p>
+<h4>The inputs</h4>
+<p><span>Operating income and tax come from the 10-K and 10-Q income statements; equity comes from the two balance sheets.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> StockAnalysis reports return on capital employed of 26.9%, which agrees.<sup><a href="#cite_note-29">[29]</a></sup></span></p>
+<h4>The range</h4>
+<p><span>Counting only the capital the operations use, and leaving out $13.3 billion of cash, would raise the figure far above 100%; StockAnalysis shows 284.77% on that basis.<sup><a href="#cite_note-29">[29]</a></sup> Using ending equity of $14,797.7 million gives 24.9%, the low case.</span></p>
+<h4>If the number is off</h4>
+<p><span>The floor is 12%, so the ratio would have to fall by more than half to fail. A fall of that size would require profit to halve, which Chapter 6 treats as the bear case.</span></p>
+</section>
+<h3>Peer comparison matrix</h3>
+<p><span>The peers below are the companies that sell networking into the same buyers. Each row uses the company's own latest quarter, so the dates differ. Price multiples use the session ledger close and the company's own earnings guidance where it publishes one; where it does not, the cell says so.</span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Arista against four direct peers, latest reported quarter</caption>
+<thead><tr><th>Company</th><th>Latest quarter</th><th>Revenue and growth</th><th>Gross margin / operating margin</th><th>Networking or AI signal</th><th>Price against guided or consensus EPS</th></tr></thead>
+<tbody>
+<tr><td><span>Arista (ANET).</span></td><td><span>June 2026.</span></td><td><span>$3,035.7 million, +37.7%.<sup><a href="#cite_note-14">[14]</a></sup></span></td><td><span>62.9% / 45.4% (GAAP).<sup><a href="#cite_note-14">[14]</a></sup></span></td><td><span>AI fabrics goal of at least $3.5 billion for 2026.<sup><a href="#cite_note-20">[20]</a></sup></span></td><td><span>$176.98 / $4.12 consensus for 2026 = 43.0 times.<sup><a href="#cite_note-27">[27]</a></sup></span></td></tr>
+<tr><td><span>Cisco (CSCO).</span></td><td><span>Quarter ended Jul 25, 2026.</span></td><td><span>$17.3 billion, +18%.<sup><a href="#cite_note-33">[33]</a></sup></span></td><td><span>64.1% / 24.7% (GAAP).<sup><a href="#cite_note-33">[33]</a></sup></span></td><td><span>Networking product revenue $9.79 billion, +28%; hyperscaler AI orders $9.3 billion in fiscal 2026.<sup><a href="#cite_note-33">[33]</a></sup></span></td><td><span>$107.39 / $5.08 midpoint of fiscal 2027 guide = 21.1 times.<sup><a href="#cite_note-33">[33]</a></sup></span></td></tr>
+<tr><td><span>Nvidia (NVDA).</span></td><td><span>Quarter ended Jul 26, 2026.</span></td><td><span>$96,221 million, +106%.<sup><a href="#cite_note-34">[34]</a></sup></span></td><td><span>75.0% / 66.2% (GAAP).<sup><a href="#cite_note-34">[34]</a></sup></span></td><td><span>Compute &amp; Networking segment $88,299 million; networking alone not reported.<sup><a href="#cite_note-34">[34]</a></sup></span></td><td><span>Not published (no company EPS guide in the filing).</span></td></tr>
+<tr><td><span>Broadcom (AVGO).</span></td><td><span>Quarter ended Aug 2, 2026.</span></td><td><span>$29,591 million, +86%.<sup><a href="#cite_note-35">[35]</a></sup></span></td><td><span>69.1% / 53.9% (GAAP, our arithmetic).<sup><a href="#cite_note-35">[35]</a></sup></span></td><td><span>AI semiconductor revenue $16.7 billion, +221%.<sup><a href="#cite_note-35">[35]</a></sup></span></td><td><span>Not published (no company EPS guide in the release).</span></td></tr>
+<tr><td><span>HPE (HPE).</span></td><td><span>Quarter ended Jul 31, 2026.</span></td><td><span>$12.2 billion, +34%.<sup><a href="#cite_note-36">[36]</a></sup></span></td><td><span>40.1% / 11.4% (GAAP).<sup><a href="#cite_note-36">[36]</a></sup></span></td><td><span>Networking segment $2.9 billion, +74.9%, 22.0% segment margin; includes Juniper.<sup><a href="#cite_note-36">[36]</a></sup></span></td><td><span>$55.13 / $3.80 midpoint of fiscal 2026 guide = 14.5 times.<sup><a href="#cite_note-36">[36]</a></sup></span></td></tr>
+</tbody>
+</table></div>
+<p><span>Arista has the best mix of growth and profit among the networking pure plays: faster revenue growth than Cisco and a far higher operating margin than Cisco or HPE. Nvidia and Broadcom earn more per sales dollar but sit in chips, not switches. The price tells the other half: at 43 times earnings Arista costs about twice Cisco's multiple, so investors are paying for the growth gap to last. Because the dates and accounting differ, use these rows to rank the companies, not to measure precise gaps.</span></p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. What the price is doing</h2>
+<p><span>On October 16, 2026, Arista closed at $176.98.<sup><a href="#cite_note-27">[27]</a></sup> That was down 4.63% on the day. It was down 18.34% over one week and 14.65% over two weeks. The close sits 18.6% below the 52-week high of $217.41. Two events explain much of the drop. A stronger-than-expected U.S. inflation report hit high-valuation technology stocks on October 15.<sup><a href="#cite_note-32">[32]</a></sup> The chief executive also sold more than 255,000 shares near $217 on October 7 to 9, under pre-arranged plans.<sup><a href="#cite_note-31">[31]</a></sup> Both can weigh on a stock for days. Neither changes what the company earned. The measurements in the table come from the session ledger. The <dfn>50-day moving average</dfn> is the average closing price over the last 50 trading days. The <dfn>RSI</dfn> (relative strength index) is a meter from 0 to 100 of how fast the price has moved. The <dfn>ATR</dfn> (average true range) is the typical daily price swing, here $8.37.</span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verified price and technical structure for ANET as of 2026-10-16</caption>
+<thead><tr><th>Technical measure</th><th>Ledger reading</th><th>Plain-English meaning</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-16)</td><td>$176.98<span><sup><a href="#cite_note-27">[27]</a></sup></span></td><td>1D: -4.63%, 1W: -18.34%, 1M: -11.3%</td></tr>
+<tr><td>20-day / 50-day / 200-day average</td><td>$204.44 / $198.42 / $162.64</td><td>50-day trend: RISING (21d ago: $187.24; 200d 63d ago: $144.85)</td></tr>
+<tr><td>Weinstein trend stage</td><td>Stage 3 (Topping / Pullback)</td><td>Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; Stage 4 is markdown</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day)</td><td>31.6 / $8.37</td><td>Momentum gauge (30 oversold, 70 overbought) and typical daily price swing</td></tr>
+<tr><td>52-week high / low</td><td>$217.41 / $114.52</td><td>Close is -18.6% from 52-week high</td></tr>
+<tr><td>20-day swing low / 63-day base low</td><td>$176.77 / $156.84</td><td>Active support anchor: $176.77 (0.03 ATR away)</td></tr>
+<tr><td>Volume vs 20-day average</td><td>1.29x</td><td>63-day volume dry-up ratio: 0.47</td></tr>
+<tr><td>Relative strength vs S&amp;P 500 (63d / 28d)</td><td>1.65% / -8.87%</td><td>Excess return vs benchmark over 3 months and 6 weeks</td></tr>
+</tbody>
+</table></div>
+<p><span>The price is below the 20-day and 50-day averages. It is above the 200-day average, which rose from $144.85 to $162.64 in 63 days. That shape is a pullback inside a longer uptrend. It is not yet a collapse. RSI of 31.6 sits just above the 30 line that traders call oversold. Oversold means the stock fell unusually fast. The close is only 0.03 ATR, about 21 cents, above the 20-day swing low of $176.77. Support is being tested today.</span></p>
+<h3>Momentum and turnaround inflection gate</h3>
+<p><span>The ledger runs three tests on the frozen price data. Test A asks whether the stock is in a confirmed uptrend now. Test B asks whether a flat stock is starting to break upward. Test C asks whether a beaten-down stock is forming a floor and turning. Arista fails all three. The ledger calls the result NO_MOMENTUM.</span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Momentum &amp; recovery gate evaluation for ANET (Verdict: NO_MOMENTUM / NONE)</caption>
+<thead><tr><th>Gate test</th><th>Rule in plain words</th><th>Measured values from ledger</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Test A1 (Markup structure)</td><td>Price &gt; SMA50 &gt; SMA200 and SMA50 rising over 21d</td><td>{"close": 176.98, "sma50": 198.42, "sma200": 162.64, "sma50_21d_ago": 187.24}</td><td>FAIL</td></tr>
+<tr><td>Test A2 (Long trend slope)</td><td>SMA200 flat or rising over 63 trading days</td><td>{"sma200": 162.64, "sma200_63d_ago": 144.85}</td><td>PASS</td></tr>
+<tr><td>Test A3 (Quarterly leadership)</td><td>63-day return beats S&amp;P 500</td><td>{"rs_63d_excess_pct": 1.65, "required_min_pct": 0.0}</td><td>PASS</td></tr>
+<tr><td>Test A4 (Support proximity)</td><td>Price within 1.2 ATR of nearest verified support</td><td>{"support_distance_atr": 0.03, "max_atr": 1.2}</td><td>PASS</td></tr>
+<tr><td>Test B1 (Base 50-DMA holding)</td><td>50-day average decline &lt;= 0.5% over 21 days</td><td>{"sma50_21d_chg_pct": 5.97, "max_decline_pct": 0.5}</td><td>PASS</td></tr>
+<tr><td>Test B2 (Monthly RS turn)</td><td>28-day return beats S&amp;P 500 (&gt; 0%)</td><td>{"rs_28d_excess_pct": -8.87, "required": "rising (&gt; 0)"}</td><td>FAIL</td></tr>
+<tr><td>Test B3 (Tight base pivot)</td><td>Price within 1.0 ATR of 63-day base low</td><td>{"base_pivot_atr": 2.41, "max_atr": 1.0}</td><td>FAIL</td></tr>
+<tr><td>Test B4 (Seller exhaustion)</td><td>63-day volume dry-up ratio &lt;= 0.90</td><td>{"vol_dryup_ratio_63d": 0.47, "max_ratio": 0.9}</td><td>PASS</td></tr>
+<tr><td>Test B5 (Buyer expansion)</td><td>Session volume &gt;= 1.0x 20-day average</td><td>{"vol_mult_20d": 1.29, "min_ratio": 1.0}</td><td>PASS</td></tr>
+<tr><td>Test C1 (Higher-low floor)</td><td>Price &gt; 63d low and 20d swing low holding floor</td><td>{"close": 176.98, "swing_low_20d": 176.77, "base_low_63d": 156.84}</td><td>PASS</td></tr>
+<tr><td>Test C2 (Short-term inflection)</td><td>Price &gt;= 20-DMA with positive 28d RS or 2W gain</td><td>{"close": 176.98, "sma20": 204.44, "rs_28d_pct": -8.87, "chg_2w_pct": -14.65}</td><td>FAIL</td></tr>
+<tr><td>Test C3 (Buyable support distance)</td><td>Price within 1.8 ATR of active support</td><td>{"support_distance_atr": 0.03, "max_atr": 1.8}</td><td>PASS</td></tr>
+<tr><td>Test C4 (No freefall)</td><td>14-day RSI &gt;= 35 (selling pressure stabilizing)</td><td>{"rsi14": 31.6, "min_rsi14": 35.0}</td><td>FAIL</td></tr>
+</tbody>
+</table></div>
+<p><span>Test A fails on one condition. The close is below the 50-day average. Test B fails on two. Arista lagged the S&amp;P 500 by 8.87 points over 28 days, and it sits 2.41 ATR from its base pivot. Test C also fails on two. The close is below the 20-day average, and RSI of 31.6 is under the 35 floor. The ledger says its gate thresholds are still being calibrated. We read the result as a strong caution, not a precise score.</span></p>
+<p><span>A stock that fails all three tests is not bought at market. The ledger's own note says it needs limit-order patience at support or a confirmed turnaround. Confirmation would be a close above the 50-day average of $198.42, then the 20-day average of $204.44, with relative strength turning positive. Rejection would be a close below the swing low of $176.77. After that, the next tests are the 200-day average at $162.64 and the 63-day low of $156.84. Chapter 5 asks whether the price already reflects the business. Chapter 7 uses these levels for an <dfn>entry zone</dfn>, the band of prices where buying would be planned, shown for information only, and for a stop.</span></p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. What could happen next</h2>
+<p><span>A share price is a bet on future cash. The reverse discounted cash flow method works backwards: it takes today's price and asks what growth in free cash flow, held for ten years, the price needs in order to earn 10% a year. Our house settings are a 10% discount rate, a terminal value of 18 times year-ten free cash flow and a ten-year horizon. The ledger's first answer for Arista, 18.66% a year, rested on free cash flow of $3.892 billion, a figure that does not match the filings. We replaced it with $5.155 billion computed from the 10-K and the June 2026 10-Q, and the answer falls to 14.9%. The replacement is disclosed in the run notes.</span></p>
+<p><span>The table gives the corrected block and how analysts' numbers are moving. Read it top to bottom: what the price assumes, what the Street assumes, and whether estimates are rising or falling.</span></p>
+<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for ANET</caption>
+<thead><tr><th>Expectations dimension</th><th>Measured reading</th><th>How to interpret it</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF implied 10-year growth</td><td>+14.92% per year<span><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></td><td>At the session close (176.98) the market values the operating business at $209.87B (market cap $223.21B on 1,261.22M shares, less $13.34B of cash and securities and no debt). Solving 10 years of cash-flow growth at a 10% discount rate and an 18x terminal multiple on TTM FCF of $5.155B gives +14.9% a year.</td></tr>
+<tr><td>Reverse DCF cash-flow basis &amp; FCF yield</td><td>TTM Free Cash Flow (operating cash flow less purchases of property, equipment and intangible assets; 10-K FY2025 plus six months to June 30, 2026 less six months to June 30, 2025) (5.155 $B); FCF yield: 2.31%</td><td>Solved at 10.0% discount rate and 18.0x terminal multiple</td></tr>
+<tr><td>Consensus FY1 EPS (current vs 90d ago)</td><td>$4.12 vs $3.63 (+13.44%)</td><td>Revision trend status: RISING_ESTIMATES</td></tr>
+<tr><td>Consensus FY2 EPS (current vs 90d ago)</td><td>$5.22 vs $4.46 (+17.20%)</td><td>Implied FY2 vs FY1 EPS growth: +26.9%</td></tr>
+<tr><td>Street analyst target range (low / mean / high)</td><td>$190.00 / $245.14 / $290.00 (32 analysts)</td><td>Used as expectations context only; our underwriting target is anchored in the scenario model below</td></tr>
+<tr><td><span>Ledger's original reverse DCF (replaced).</span></td><td><span>18.66% a year on $3.892 billion of free cash flow.</span></td><td><span>The filings give $5.155 billion; the same enterprise value of $209.87 billion needs less growth on a bigger base.</span></td></tr>
+<tr><td><span>Growth the average Street target needs.</span></td><td><span>About 19.5% a year at the $245.14 mean target (our arithmetic).<sup><a href="#cite_note-28">[28]</a></sup></span></td><td><span>Targets require more growth than today's price, which already needs 14.9%.</span></td></tr>
+<tr><td><span>Low case for free cash flow, net of deferred revenue build.</span></td><td><span>$3.505 billion of free cash flow needs 20.1% a year at today's price.</span></td><td><span>If much of the cash is timing, the price asks for much more growth.</span></td></tr>
+<tr><td><span>Analysts behind each number.</span></td><td><span>32 analysts give price targets; 29 give earnings estimates.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-27">[27]</a></sup></span></td><td><span>The ledger counted 29 for the targets; we corrected the copy to 32 and kept 29 as the earnings-estimate count.</span></td></tr>
+<tr><td><span>Revenue estimates.</span></td><td><span>$12.68 billion for 2026 (+40.8%) and $16.36 billion for 2027 (+29.0%).<sup><a href="#cite_note-27">[27]</a></sup></span></td><td><span>Growth is expected to slow, but from a high level.</span></td></tr>
+<tr><td><span>Price against earnings.</span></td><td><span>43.0 times 2026 EPS of $4.12; 33.9 times 2027 EPS of $5.22.<sup><a href="#cite_note-27">[27]</a></sup></span></td><td><span>At the October 9 high of $217.41 the 2026 multiple was 52.8 times.</span></td></tr>
+</tbody>
+</table></div>
+<p><span>Today's price needs about 14.9% a year of free cash flow growth for ten years. Consensus earnings per share for 2026 and 2027 rose 13.4% and 17.2% in 90 days, but moved little in the last 30, while the price fell: the sell-off compressed the multiple and left estimates untouched. Whether analysts are slow to cut or right to hold is something only the next results can settle.</span></p>
+<h3>Our variant perception</h3>
+<p><span>The Street's view is that Arista is a fast grower with a safe lead: 31 of 32 analysts rate it Buy or Strong Buy and the mean target is $245.14, 38.5% above the close.<sup><a href="#cite_note-28">[28]</a></sup> We agree on the quality of the business and on the near-term growth. Revenue goals have been raised three times this year and four straight quarters came in above the top of the range.<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></span></p>
+<p><span>We differ in two ways. First, the quality of free cash flow. Reported margin is 48.9%, but 2025 operating cash flow included $2.45 billion from deferred revenue, partly offset by $937 million of deferred costs, and the same pattern continued in 2026.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> If much of the cash is timing, the price needs 20% a year, not 14.9%. Second, the multiple. Arista's year-end forward P/E ranged from 33.6 to 46.9 over three years with a median of 40.86, and the stock trades at 43.0 times 2026 earnings and 33.9 times 2027 earnings.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-27">[27]</a></sup> At the 3.0 reward-to-risk rule, that is not cheap enough to add at market.</span></p>
+<p><span>What we do not claim: we do not know how much AI revenue Arista has booked this year, because management gives goals only.<sup><a href="#cite_note-20">[20]</a></sup> We also do not claim the sell-off is over. The S&amp;P 500 is in the ledger's Correction regime, only 34.3% of stocks sit above their 50-day average, and the 10-year Treasury yield is 5.10%, so multiples may still shrink. Those are market facts from the session ledger.</span></p>
+<section class="estimate">
+<h4>The number</h4>
+<p><span>Today's price needs Arista's free cash flow to grow 14.9% a year for ten years, from $5.155 billion to about $20.7 billion.</span></p>
+<h4>How it was calculated</h4>
+<p><span>We set the value of the operating business at $209.87 billion (market value $223.21 billion minus $13.34 billion of cash and securities). We then solved for the growth rate at which ten years of cash flow, discounted at 10%, plus 18 times the year-ten cash flow, discounted back, equals that value. At 14.92%, year-ten cash flow is $20.71 billion; the ten yearly flows are worth $66.1 billion today and the terminal value $143.7 billion, a total of $209.8 billion.</span></p>
+<h4>The inputs</h4>
+<p><span>Free cash flow of $5.155 billion from the 10-K and 10-Q.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> Shares outstanding of 1,261,224,648 on July 30, 2026 times the $176.98 close gives $223.21 billion.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-27">[27]</a></sup> Cash and securities of $13.34 billion with no borrowings.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-30">[30]</a></sup> Discount rate, terminal multiple and horizon come from scoring.json.</span></p>
+<h4>The range</h4>
+<p><span>At $156.39, our bear price, the same method needs 13.2% a year; at $213.29 it needs 17.5%; at the $245.14 mean target it needs 19.5%. With free cash flow net of deferred revenue build ($3.505 billion) the current price needs 20.1%.</span></p>
+<h4>If the number is off</h4>
+<p><span>If true growth is 10% a year, the stock is worth about $125 at these settings; at 20% it is worth about $254. Each point of growth moves the fair value by roughly $12 to $18 a share.</span></p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p><span>Our earnings estimate for 2027 is $5.22 a share on a non-GAAP basis, 26.9% above the $4.12 expected for 2026.</span></p>
+<h4>How it was calculated</h4>
+<p><span>We adopt the consensus rather than our own number because the company has beaten its own guidance in each of the last four quarters. As a check on 2026, reported March quarter EPS of $0.87 plus June quarter $1.02 plus the September guide midpoint of $1.07 plus the December consensus of $1.15 equals $4.11, matching the $4.12 consensus.</span></p>
+<h4>The inputs</h4>
+<p><span>Quarterly results and guidance come from the company's releases; consensus comes from Yahoo Finance.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-27">[27]</a></sup> The 90-day trend is $3.63 to $4.12 for 2026 and $4.46 to $5.22 for 2027.</span></p>
+<h4>The range</h4>
+<p><span>Analysts' 2027 estimates run from $4.66 (low) to $5.73 (high).<sup><a href="#cite_note-27">[27]</a></sup> The low case assumes growth slows sharply after the customers' 2026 build-out; the high case assumes supply eases and new 10% customers arrive.</span></p>
+<h4>If the number is off</h4>
+<p><span>If 2027 earnings come in 10% below consensus, at $4.70, our central price falls from $213.29 to $191.96 at the same multiple, and the reward-to-risk ratio at $176.98 falls to 0.66.</span></p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p><span>Our 12-month central price is $213.29, and the probability-weighted value is $210.04, 18.7% above $176.98.</span></p>
+<h4>How it was calculated</h4>
+<p><span>Each case multiplies 2027 earnings per share by a year-end forward P/E from Arista's own three-year range. Bear: $4.66 x 33.56 = $156.39. Central: $5.22 x 40.86 = $213.29, the three-year median. Bull: $5.73 x 46.87 = $268.57. Weights of 30%, 45% and 25% give 0.30 x 156.39 + 0.45 x 213.29 + 0.25 x 268.57 = $210.04.</span></p>
+<h4>The inputs</h4>
+<p><span>Earnings range from Yahoo Finance and P/E history from StockAnalysis (S&amp;P Global data).<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-28">[28]</a></sup> The weights are our judgment, explained in the scenario table.</span></p>
+<h4>The range</h4>
+<p><span>The bear price is 11.6% below today's close and just above our $154.27 stop; the bull price is 51.8% above. The central price is 20.5% above.</span></p>
+<h4>If the number is off</h4>
+<p><span>Each $1 of 2027 earnings is worth about $40.86 of price at the central multiple, and each turn of P/E is worth about $5.22. A two-turn lower multiple (38.86) would cut the central price to $202.85 and the ratio at today's price to 1.14.</span></p>
+</section>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>12-month scenarios for Arista (price per share)</caption>
+<thead><tr><th>Scenario</th><th>Story</th><th>Driver</th><th>Number</th><th>Probability</th><th>Why that probability</th></tr></thead>
+<tbody>
+<tr><td><span>Bull</span></td><td><span>Supply eases, the $12.6 billion goal is beaten, one or two new 10% customers appear, and the multiple recovers.</span></td><td><span>2027 EPS $5.73 (Street high) times 46.87 (3-year high P/E).</span></td><td><span>$268.57 (+51.8%).</span></td><td><span>25%</span></td><td><span>Four straight beats above guidance, and consensus EPS is rising, but the stock is in Stage 3 and needs the multiple back too.</span></td></tr>
+<tr><td><span>Central</span></td><td><span>Guidance is delivered, 2027 EPS reaches consensus, the multiple settles at its 3-year median.</span></td><td><span>2027 EPS $5.22 times 40.86 (3-year median P/E).</span></td><td><span>$213.29 (+20.5%).</span></td><td><span>45%</span></td><td><span>Most likely single path given the company's record of meeting or beating its own goals.</span></td></tr>
+<tr><td><span>Bear</span></td><td><span>Cloud spending digests, large orders slip into later quarters, memory costs squeeze margin, and the multiple falls.</span></td><td><span>2027 EPS $4.66 (Street low) times 33.56 (3-year low P/E).</span></td><td><span>$156.39 (-11.6%).</span></td><td><span>30%</span></td><td><span>Higher than bull because the market is in a correction, the 10-year yield is 5.10%, the one-year beta in the holdings file is 2.15 (the five-year beta is 1.60<sup><a href="#cite_note-30">[30]</a></sup>) and two customers are 42% of sales.</span></td></tr>
+<tr><td><span>Probability-weighted</span></td><td><span>Weighted average of the three cases.</span></td><td><span>0.25 x 268.57 + 0.45 x 213.29 + 0.30 x 156.39.</span></td><td><span>$210.04 (+18.7%).</span></td><td><span>100%</span></td><td><span>Positive expected gain, but below the 3.0 reward-to-risk bar when measured against the $154.27 stop.</span></td></tr>
+</tbody>
+</table></div>
+<p><span>The weighted value of $210.04 is 18.7% above the close, which is attractive on its own. The reward-to-risk rule is stricter: it compares the central gain of $36.31 with the $22.71 gap to the stop, a ratio of 1.60, and requires 3.0. That is why the verdict is REJECTED for new money until the price or the central target changes.</span></p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Why these estimates might be wrong</h2>
+<p><span>Each estimate in Chapter 5 rests on one weak assumption. We name it, say what evidence would prove it wrong, and say when that evidence arrives. The next dated events are Meta's results on October 21, Microsoft's on October 28 and Arista's own on November 3, 2026.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-39">[39]</a></sup><sup><a href="#cite_note-26">[26]</a></sup></span></p>
+<h3>The reverse DCF assumes free cash flow is permanent</h3>
+<p><span>The weakest assumption behind 14.9% is that $5.155 billion is a clean starting point. Deferred revenue rose $2.45 billion in 2025 and $1.49 billion in the first half of 2026, and a customer's acceptance of a product turns that liability into revenue without new cash.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup> When the large orders are accepted, the cash flow benefit stops. If the net deferral build is removed, free cash flow is $3.505 billion and the same price needs 20.1% a year.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></span></p>
+<p><span>The evidence that would show this wrong is a quarter where deferred revenue falls while revenue is flat, or where cash from operations drops below net income. The next 10-Q after November 3 will show both. Management itself says the deferred balance can move significantly “independent of underlying business drivers.”<sup><a href="#cite_note-20">[20]</a></sup></span></p>
+<h3>The earnings estimate assumes the biggest buyers keep spending</h3>
+<p><span>The $5.22 figure for 2027 assumes Microsoft and Meta keep growing their orders. Meta's 2026 capital spending outlook is $130 billion to $145 billion,<sup><a href="#cite_note-37">[37]</a></sup> and Arista says it remains “very committed” to those two partners.<sup><a href="#cite_note-20">[20]</a></sup> A cut to 2027 spending plans by either company would hit the low case of $4.66. Meta reports on October 21 and Microsoft on October 28, 2026, so the first evidence arrives before Arista's own results.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-39">[39]</a></sup></span></p>
+<p><span>Supply is the other half. The 10-K and the chief executive both say memory and chip supply is tight, that costs are rising, and that price increases reach customers only toward the end of 2026 or in 2027.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> Gross margin has already fallen from 64.1% to about 63%. A fall to 60% would take about 3 points off the operating margin on the same revenue.</span></p>
+<h3>The price target assumes the multiple stays near its median</h3>
+<p><span>Our central price multiplies earnings by 40.86, the median of three year-end readings. Three data points are thin, and the stock now trades at 43.0 times 2026 earnings.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-27">[27]</a></sup> The 10-year Treasury yield was 5.10% on October 15, the latest date in the ledger, 33 basis points above the 2-year yield, and the S&amp;P 500 sits in a correction by the ledger's definition. If rates keep rising, high-multiple technology stocks can fall further without any change in earnings.</span></p>
+<p><span>The stress that matters most is the multiple. Hold earnings at $5.22 and keep the multiple at the three-year low of 33.56: the central price is $5.22 x 33.56 = $175.18, which is 1.0% below today's close ($175.18 / $176.98 - 1 = -1.0%), so the central case then offers no upside from today's price. At $169.02 the reward-to-risk ratio is 0.42 to 1, and the highest price that would still clear 3.0 is $159.50, below the whole conditional zone. With that lower central case the probability-weighted value is $192.89, a gain of 8.99% instead of 18.7%. A separate 10% earnings miss at the median multiple gives $191.96 and 1.56 to 1 at $169.02. So the zone's reward-to-risk comes from an assumed re-rating in a correction, not from consensus earnings alone.<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-28">[28]</a></sup></span></p>
+<p><span>Red-team bear case: customers in the two largest accounts defer part of 2027 orders, deferred revenue reverses, gross margin drops to 60%, and the stock trades back to 33.56 times a $4.66 estimate, or $156.39, then overshoots the $154.27 stop. The bear case costs 11.6% from here and about 24% from our average cost of $205.55 a share. The hinge claim, the single assumption that decides the case, is that $9.7 billion of purchase commitments turns into delivered, accepted revenue; if it does, Arista beats its $12.6 billion goal, and if it does not, inventory and deferred revenue reverse together.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></span></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>What would show each estimate wrong, and when we will know</caption>
+<thead><tr><th>Estimate</th><th>Weakest assumption</th><th>Evidence that would prove it wrong</th><th>When we will know</th></tr></thead>
+<tbody>
+<tr><td><span>Reverse DCF growth of 14.9%.</span></td><td><span>Free cash flow of $5.155 billion is permanent.</span></td><td><span>Deferred revenue falls while sales are flat; cash from operations below net income.</span></td><td><span>Q3 results November 3, 2026, 10-Q days later.<sup><a href="#cite_note-26">[26]</a></sup></span></td></tr>
+<tr><td><span>2027 earnings of $5.22.</span></td><td><span>Microsoft and Meta keep raising orders.</span></td><td><span>A cut to capital spending plans; revenue below the $3.3 billion guide.</span></td><td><span>Meta October 21, Microsoft October 28, Arista November 3, 2026.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-39">[39]</a></sup><sup><a href="#cite_note-26">[26]</a></sup></span></td></tr>
+<tr><td><span>Central price of $213.29.</span></td><td><span>The multiple rises from about 33.9 times 2027 earnings to the 3-year median of 40.86.</span></td><td><span>The multiple stays at the 3-year low of 33.56, which gives $175.18 and 0.42 to 1 at $169.02; yields keep rising; price closes below $154.27.</span></td><td><span>Daily; the stop is checked every session.</span></td></tr>
+<tr><td><span>Hinge claim: $9.7 billion of commitments become revenue.</span></td><td><span>Customers accept products on schedule.</span></td><td><span>Purchase commitments keep rising while deferred revenue stops rising.</span></td><td><span>Each quarterly report; first on November 3, 2026.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-26">[26]</a></sup></span></td></tr>
+</tbody>
+</table></div>
+<p><span>The first test arrives within five days, and Meta's capital spending is the first dated clue. If Meta or Microsoft lowers its spending plans, the evidence arrives before Arista's own results. None of the tests is exotic; each is an item the company reports every quarter, which is why we can name the day we will know.</span></p>
+<p><span>The hinge claim is stated once so that it can be tested: the $9.7 billion of purchase commitments that Arista has promised to suppliers will turn into products that customers accept. The commitments are legally binding, and the 10-Q says they can be rescheduled only with the supplier's agreement, so a shortfall in demand would leave Arista holding the cost.<sup><a href="#cite_note-13">[13]</a></sup> Chapter 7 now converts the analysis into actions.</span></p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when</h2>
+<p><span><span class="verdict verdict-exit">REJECTED</span> is the verdict for new money, and it is a decision about adding, not a sell signal. The holding labels have no hold-without-adding option, so we apply the gate rule, under which a Layer 1 failure means no new capital, to this held name and state the result as REJECTED for new money; any summary should read it as hold, do not add. Arista fails two at $176.98: the technical floor (Stage 3 instead of a Stage 1 breakout or Stage 2 uptrend) and the reward-to-risk floor (1.60 against 3.0). Layer 2 also falls short, with 2 of 5 measures at PASS against a minimum of 4 of 5. The business itself passes every financial floor, and no exit rule is met: the stock has not closed below the $154.27 stop, the chart is Stage 3 and not Stage 4, no measure is scored FAIL, and nothing in the filings shows the thesis is broken. So you keep the 9.7299 shares you hold, we place no order at any price today, and the shares stay under the stop. A close below $154.27 changes the verdict to REPLACE_UNDERPERFORMER and the shares are sold.</span></p>
+<p><span>We classify the position as CORE_ALPHA, not the TACTICAL_MOMENTUM label in the holdings file. Three facts decide it: the business is a multi-year compounder with a 27.1% return on capital, 48.9% free cash flow margin and net cash; the tactical bucket requires a Stage 2 momentum chart and Arista has none; and the tactical stop rule (below the lower of the swing low and 20/50-day averages, minus half an ATR) would sit at $172.58, only $4.40 below the price, where one normal day (the ATR is $8.37) would end the position. The Core stop rule uses the lowest of the swing low ($176.77), 50-day ($198.42) and 200-day ($162.64) averages, minus one ATR, giving $162.64 - $8.37 = <dfn>stop loss</dfn> of $154.27, 12.8% below today's close. That is a price below which our thesis is wrong. The Core reward-to-risk floor is 3.0. The conviction tier is TIER_0 and the risk-unit weight is 0%, because a rejected name receives no new allocation. The existing 2.08% is not a target weight, so it is neither added to nor sold on that account.</span></p>
+<p><span>The earlier work found a conditional zone of $162.64 to $169.02, from the 200-day average up to the price where reward-to-risk reaches 3.0 on the central target; it is shown for information only, as a reference zone and not an order. Chapter 6 shows that this arithmetic holds only if the multiple re-rates from its three-year low to the median: at a P/E of 33.56 the central price is $175.18, 1.0% below today's close, and the ratio at $169.02 falls to 0.42 to 1.</span></p>
+<p><span>The earlier two-step add plan is withdrawn. It stays inactive, and any revival must come from a new underwriting that shows stabilisation before the first dollar goes in. That means a Stage 1 base breakout or a Stage 2 reclaim of the 50-day average ($198.42), RSI back above 35, relative strength turning positive, and refreshed earnings after the November 3, 2026 results that keep the $12.6 billion goal. It also means a target, ATR, support and stop reset from the levels of that day, and reward-to-risk of at least 3.0 at the new price. A lower <dfn>limit order</dfn> price alone does not repair a failed chart. Any future add would be by limit order, never at market, and would be sized by the tier the new underwriting assigns.</span></p>
+<p><span>Targets follow the same logic and apply to the shares already held. The central target is $213.29, 20.5% above today, anchored on 2027 earnings of $5.22 times the three-year median multiple of 40.86. The bull target of $268.57 would trigger TRIM_PROFIT_BOOKING of 30% to 50%. The bear price of $156.39 sits just above the stop. The let-winners-run rule, which lets an appreciated position run to 22% of the portfolio while the stop trails the rising 21-day average, does not apply: the position is at a loss and weighs 2.08%.</span></p>
+<h3>Active holding audit</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Active holding audit for Arista Networks in the Schwab account (from the positions file of 2026-10-16)</caption>
+<thead><tr><th>Item</th><th>Position fact</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td><span>Shares and account.</span></td><td><span>9.7299 shares in Schwab.</span></td><td><span>A small position, so the stop risk is small.</span></td></tr>
+<tr><td><span>Cost basis and average cost.</span></td><td><span>$1,999.98, or $205.55 a share.</span></td><td><span>Average cost sits near today's 20-day average of $204.44 and below the October high of $217.41.</span></td></tr>
+<tr><td><span>Market value and weight.</span></td><td><span>$1,722.00, or 2.08% of net worth of $82,699.61.</span></td><td><span>Far below the 15% single-name cap; the weight for new money is 0% (TIER_0), so the position is held, not added to.</span></td></tr>
+<tr><td><span>Unrealized result.</span></td><td><span>-$277.98, or -13.9%.</span></td><td><span>The loss is smaller than the 18.6% drop from the high because the entry was below the peak.</span></td></tr>
+<tr><td><span>Realized profit and loss.</span></td><td><span>$82.37</span></td><td><span>A small realized gain from earlier sales of this stock; it does not change the verdict.</span></td></tr>
+<tr><td><span>Beta</span></td><td><span>One-year effective beta 2.15 from the holdings file; five-year beta 1.60.<sup><a href="#cite_note-30">[30]</a></sup></span></td><td><span>Over the last year the stock moved about twice as much as the market, so expect large swings.</span></td></tr>
+<tr><td><span>Loss if the stop is hit.</span></td><td><span>$220.97 from today's price, 0.27% of net worth; $498.95 against cost, or -24.9%.</span></td><td><span>The portfolio can absorb the stop; the shares would be sold on a close below $154.27.</span></td></tr>
+<tr><td><span>New money allowed now.</span></td><td><span>$0 (TIER_0, 0% risk-unit weight).</span></td><td><span>No order at any price until a new underwriting passes all three layers.</span></td></tr>
+<tr><td><span>Why this is not a sell.</span></td><td><span>No exit rule is met: stop not breached, Stage 3 not Stage 4, no measure scored FAIL, no thesis impairment.</span></td><td><span>REJECTED blocks adding; REPLACE_UNDERPERFORMER, triggered by a close below $154.27, is the sell rule.</span></td></tr>
+</tbody>
+</table></div>
+<p><span>The position is small, underwater and well inside every size limit. Nothing here calls for selling, since the stop is 12.8% below the price and the business passes its financial tests. Nothing calls for adding either, because the reward-to-risk ratio is 1.60 and the Layer 2 minimum is missed. The Layer 3 table that follows is built by the standard renderer, and its row labelled recommended entry zone is a reference zone, not an order: the verdict is REJECTED and we place no order at any price. The triggers after it name the prices and events that would change that stance.</span></p>
+<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 3 execution levels and risk-unit position sizing for ANET</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Underwriting archetype &amp; bucket</td><td>COMPOUNDER (CORE_ALPHA)</td><td>Evaluates both static quality and rate-of-change inflection</td></tr>
+<tr><td>Action verdict</td><td><span class="verdict verdict-exit">REJECTED</span></td><td>REJECTED for new money: Layer 1 fails (Stage 3 chart, reward-to-risk 1.60 vs 3.0) and Layer 2 has 2 of 5 PASS. Not a sell signal: no exit rule is met, so the existing shares are held above the stop</td></tr>
+<tr><td>Recommended entry zone</td><td>$162.64 to $169.02</td><td>Current price $176.98 is 0.03 ATR from verified support</td></tr>
+<tr><td>Structural invalidation stop</td><td>$154.27 (-8.73% from entry)</td><td>below min(swing low, 50/200-day MA) minus 1.0 x ATR(14)</td></tr>
+<tr><td>Base / Bull / Bear targets</td><td>$213.29 / $268.57 / $156.39</td><td>Reward-to-risk asymmetry at CMP: 1.60:1</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat)</td><td>0.0% of net worth (TIER_0, 0 bps risk budget)</td><td>Formula: min(Tier cap 0–0%, 0 bps / 8.73% stop distance)</td></tr>
+<tr><td>Let-winners-run rule</td><td>Appreciated weight ceiling up to 22%</td><td>Never trim solely for RSI &gt; 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break</td></tr>
+</tbody>
+</table></div>
+<p><span>The sizing row shows 0% because a rejected name is TIER_0 and receives no risk-unit weight. The stop appears in the table as 8.73% below the $169.02 top of the reference zone, and it is 12.8% below today's close of $176.98, a gap of $22.71 a share. The entry zone row is a reference zone, not an order, and the targets are shown for reference only. The reward-to-risk figure of 1.60 is measured at today's close.</span></p>
+<p class="trigger"><span>Re-underwrite trigger: after the November 3, 2026 results, we re-run all three layers. New money is considered only if the chart reaches a Stage 1 base breakout or reclaims the 50-day average of $198.42 as Stage 2, relative strength turns positive, and reward-to-risk is at least 3.0 on refreshed estimates, a refreshed target and a refreshed stop. Until then the verdict stays REJECTED.</span></p>
+<p class="trigger"><span>Exit trigger: a daily close below $154.27 changes the verdict to REPLACE_UNDERPERFORMER and the 9.7299 shares are sold; the loss from today's price would be about $221.</span></p>
+<p class="trigger"><span>Event trigger: Arista's results on November 3, 2026. Revenue below the $3.3 billion guide, a cut to the $12.6 billion goal, or purchase commitments rising again while deferred revenue falls would move the verdict to REPLACE_UNDERPERFORMER review for thesis impairment. A beat with a higher goal does not lift the verdict by itself; it only starts the re-underwrite above.<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></span></p>
+<p class="trigger"><span>Customer trigger: if Meta (October 21) or Microsoft (October 28) lowers its 2027 capital spending outlook, the re-underwrite is put off until Arista's own results are in.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-39">[39]</a></sup></span></p>
+<p class="trigger"><span>Profit trigger: a close at or above $268.57 changes the verdict on the held shares to TRIM_PROFIT_BOOKING, with 30% to 50% of the position sold.</span></p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Status: PUBLISHED_WITH_GATE_EXCEPTIONS and BEST_EFFORT_AFTER_REVIEW_LIMIT. This dossier replaces one block of the session ledger. It uses records that are older than 60 days. It relies on some secondary sources. It also lists items that no source publishes.</p><p>Review record. Round 1: the reviewer asked for changes and the red team (bear case) judged that the first verdict, ACCUMULATE_ON_DIP, was too loose; we changed the verdict to REJECTED for new money (hold the existing shares, do not add) and rewrote the sections that carried the old add plan. Round 2: the reviewer confirmed that all round 1 findings were fixed and that the new verdict reads consistently, but asked for four more changes (a sign error saying that $175.18 is 1.0% above today's close when it is 1.0% below it, one sentence on why a gate rule is applied to a held name, the label on the reference entry zone, and a repeated stress paragraph). The red team repeated the sign error. The rules allow only two review rounds, so we made those four edits afterwards and re-ran the readability and citation checks, but no reviewer has re-read them. This dossier therefore did not receive a reviewer APPROVE.</p><p>Replaced ledger block: the Reverse DCF block for ANET in the shared ledger used trailing free cash flow of $3.892 billion and gave 18.66% a year. That figure does not match the filings. We recomputed it from the 10-K for fiscal 2025 and the 10-Q for June 30, 2026. Operating cash flow of $5,306.6 million less equipment and software purchases of $151.3 million gives $5,155.3 million. The ledger's valuation base of $209.87 billion is enterprise value, not a price, and it is correct: market value of $223.21 billion at the $176.98 close, less $13.34 billion of cash and securities. With the corrected base the implied growth is 14.92% a year. The correction lives in the per-company copy facts_US_2026-10-16_ANET.json with a corrected_by note. The shared ledger is untouched.</p><p>Consensus check: the ledger's estimates for FY1 and FY2 match the Yahoo Finance analysis page exactly, including the 7-, 30- and 90-day history (4.12, 4.11, 4.11, 3.63 and 5.22, 5.20, 5.16, 4.46). The price targets of $190, $245.14 and $290 match StockAnalysis. Only the analyst count was corrected. The ledger's analyst count of 29 is the earnings-estimate count. The price targets come from 32 analysts, so the per-company ledger copy now shows 32 for the targets and keeps 29 as the earnings-estimate count.</p><p>Stale as-of records: 109 of the 124 found research records carry an as-of date more than 60 days before October 17, 2026, with ages from 74 to 1,386 days. They are mostly period dates of annual and quarterly filings, older releases and call transcripts, and peer filings for quarters ended July 25 to August 2, 2026. The 10-Ks for fiscal 2022 and 2023 are used only for the five-year history. The latest periodic filing is the June 30, 2026 10-Q. The cure date is November 3, 2026, when Arista reports the September quarter, with the 10-Q expected within days. Peer figures refresh when each peer reports in November and December. The 15 fresh records are the consensus pages, price targets, ratio pages, the earnings-date notices and the October market news.</p><p>Secondary sources: StockAnalysis and Yahoo Finance supply consensus estimates, price targets and trailing ratios. The Motley Fool, Yahoo Finance and Investor's Business Daily supply call transcripts or summaries, not company-published transcripts. MarketBeat supplies the October 2026 insider sale amounts instead of the SEC Form 4 filings. BestStocks supplies the reason for the October 15 sell-off. The Arista press release of October 6, 2026 was read with a web fetch tool and stored in the fetch cache from a local file, because the direct download returned a compressed body.</p><p>Not published: Arista reports no AI revenue for any quarter or half year, only yearly goals. The Q2 2026 10-Q repeats the 2025 customer percentages and gives none for 2026. No cited source gives the split between Ethernet and InfiniBand in AI clusters. Nvidia does not report networking revenue on its own. Nvidia and Broadcom give no full-year EPS guide, so peer price multiples are shown only for Cisco and HPE.</p><p>Judgment calls: the holdings file labels ANET as TACTICAL_MOMENTUM and the watchlist labels it CORE_ALPHA. We use CORE_ALPHA. The chart does not meet the tactical Stage 2 test, and a tactical stop would sit only $4.40 below the price. The verdict is REJECTED for new money: Layer 1 fails the technical floor and the reward-to-risk floor at $176.98, and Layer 2 has 2 of 5 measures at PASS against a minimum of 4 of 5. This is a decision about adding money, not a sell signal. No exit rule is met, so the existing 9.7299 shares are held under the $154.27 stop, and a close below it becomes REPLACE_UNDERPERFORMER. We considered ACCUMULATE_ON_DIP and did not choose it. The conditional zone of $162.64 to $169.02 reaches 3.0 only if the multiple re-rates from the three-year low of 33.56 to the median of 40.86; at 33.56 the central price is $175.18, 1.0% below the close, so the central case offers no upside from today's price, and the ratio at $169.02 is 0.42 to 1. The earlier two-step add plan is withdrawn. The conviction tier is TIER_0 with a 0% risk-unit weight. The ledger marks its momentum gate thresholds as still being calibrated. Position facts come only from the positions file of 2026-10-16. The Layer 3 table is built by the standard renderer and shows the stop as 8.73% from the $169.02 zone top; the stop is also 12.8% from the close, as stated in Chapter 7.</p><p>Beta and goals: the 2.15 beta is the one-year effective beta in the holdings file, and StockAnalysis shows a five-year beta of 1.60. On the August 4, 2026 call the finance chief gave an AI fabrics goal of at least $3.5 billion and the chief executive once said $3.6 billion; we use $3.5 billion.</p><p>Listing: the holdings file lists exchange XNAS. The 10-K cover page lists the New York Stock Exchange, which is the primary listing used here.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">Arista Networks, Annual Report on Form 10-K for fiscal 2025 (filed 2026-02-17), cover page and Item 5: listing on the New York Stock Exchange. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-2">Arista Networks, Form 10-K fiscal 2025, Item 1 Business: Competition, Manufacturing and Competitive Strengths (Cisco, HPE/Juniper, Broadcom/VMware, Nvidia, white box, InfiniBand, contract manufacturers, EOS). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-3">Arista Networks, Form 10-K fiscal 2025, Item 7 MD&amp;A Overview and Results of Operations, pp. 52-55: customer-group and product-category mix, top-two customer percentages, revenue by geography, gross margin drivers. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-4">Arista Networks, Form 10-K fiscal 2025, Consolidated Statements of Income, p. 69 (fiscal 2023-2025). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-5">Arista Networks, Form 10-K fiscal 2025, Consolidated Balance Sheets (p. 68) and Statements of Cash Flows (p. 72). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-6">Arista Networks, Form 10-K fiscal 2025, Note 3 Revenue: deferred revenue roll-forward and remaining performance obligations. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-7">Arista Networks, Form 10-K fiscal 2025, Note 5 Commitments and Contingencies: purchase commitments of $6.8 billion at December 31, 2025. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-8">Arista Networks, Form 10-K fiscal 2025, Note 4 Acquisition: VeloCloud purchased from Broadcom for $300.0 million cash on June 30, 2025. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-9">Arista Networks, Form 10-K fiscal 2025, Item 7 Liquidity and Capital Resources and Item 8 auditor's report: cash and securities, stock repurchase programs, unqualified opinion. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm</a></li>
+<li id="cite_note-10">Arista Networks, Form 10-K fiscal 2022 (filed 2023-02-14), financial statements for fiscal 2020-2022 and balance sheets at December 31, 2022 and 2021 (amounts in thousands, before the 4-for-1 split). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653223000016/anet-20221231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653223000016/anet-20221231.htm</a></li>
+<li id="cite_note-11">Arista Networks, Form 10-K fiscal 2023 (filed 2024-02-13), balance sheet at December 31, 2023. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653224000043/anet-20231231.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653224000043/anet-20231231.htm</a></li>
+<li id="cite_note-12">Arista Networks, Quarterly Report on Form 10-Q for the period ended June 30, 2026 (filed 2026-08-05), condensed financial statements and cash flows. <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000175/anet-20260630.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000175/anet-20260630.htm</a></li>
+<li id="cite_note-13">Arista Networks, Form 10-Q June 30, 2026, cover page (shares outstanding), Note on revenue (deferred revenue, remaining performance obligations) and Note 5 (purchase commitments). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000175/anet-20260630.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000175/anet-20260630.htm</a></li>
+<li id="cite_note-14">Arista Networks, Form 8-K Exhibit 99.1, second-quarter 2026 results and third-quarter outlook (2026-08-04). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000174/ex991q226-earningsrelease.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000174/ex991q226-earningsrelease.htm</a></li>
+<li id="cite_note-15">Arista Networks, Form 8-K Exhibit 99.1, first-quarter 2026 results and second-quarter outlook (2026-05-05). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000074/ex991q126-earningsrelease.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000074/ex991q126-earningsrelease.htm</a></li>
+<li id="cite_note-16">Arista Networks, Form 8-K Exhibit 99.1, fourth-quarter and full-year 2025 results and first-quarter 2026 outlook (2026-02-12). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653226000010/ex991q425-earningsrelease.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653226000010/ex991q425-earningsrelease.htm</a></li>
+<li id="cite_note-17">Arista Networks, Form 8-K Exhibit 99.1, third-quarter 2025 results and fourth-quarter outlook (2025-11-04). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653225000284/ex991q325-earningsrelease.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653225000284/ex991q325-earningsrelease.htm</a></li>
+<li id="cite_note-18">Arista Networks, Form 8-K Exhibit 99.1, second-quarter 2025 results and third-quarter outlook (2025-08-05). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653225000214/ex991q225-earningsrelease.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653225000214/ex991q225-earningsrelease.htm</a></li>
+<li id="cite_note-19">Arista Networks, Form 8-K Exhibit 99.1, fourth-quarter and full-year 2024 results and first-quarter 2025 outlook (2025-02-18). <a href="https://www.sec.gov/Archives/edgar/data/1596532/000159653225000018/ex991q424-earningsrelease.htm">https://www.sec.gov/Archives/edgar/data/1596532/000159653225000018/ex991q424-earningsrelease.htm</a></li>
+<li id="cite_note-20">The Motley Fool, Arista Networks Q2 2026 earnings call transcript (call held 2026-08-04): $12.6 billion goal, AI and campus goals, purchase commitments, supply comments, Microsoft and Meta. <a href="https://www.fool.com/earnings/call-transcripts/2026/08/11/arista-anet-q2-2026-earnings-call-transcript/">https://www.fool.com/earnings/call-transcripts/2026/08/11/arista-anet-q2-2026-earnings-call-transcript/</a></li>
+<li id="cite_note-21">Yahoo Finance, Arista Networks Q1 2026 earnings call transcript (call held 2026-05-05): $11.5 billion goal, AI goal raised to $3.5 billion, market-share claim. <a href="https://finance.yahoo.com/markets/stocks/articles/arista-anet-q1-2026-earnings-222710236.html">https://finance.yahoo.com/markets/stocks/articles/arista-anet-q1-2026-earnings-222710236.html</a></li>
+<li id="cite_note-22">The Motley Fool, Arista Networks Q4 2025 earnings call transcript (call held 2026-02-12): 2025 goals exceeded, 2026 goals, buybacks, customers. <a href="https://www.fool.com/earnings/call-transcripts/2026/02/12/arista-anet-q4-2025-earnings-call-transcript/">https://www.fool.com/earnings/call-transcripts/2026/02/12/arista-anet-q4-2025-earnings-call-transcript/</a></li>
+<li id="cite_note-23">The Motley Fool, Arista Networks Q4 2024 earnings call transcript (call held 2025-02-18): fiscal 2025 growth outlook, AI and campus goals, Microsoft and Meta shares of 2024 revenue. <a href="https://www.fool.com/earnings/call-transcripts/2025/02/18/arista-networks-anet-q4-2024-earnings-call-transcr/">https://www.fool.com/earnings/call-transcripts/2025/02/18/arista-networks-anet-q4-2024-earnings-call-transcr/</a></li>
+<li id="cite_note-24">Yahoo Finance, Arista Networks Q2 2025 earnings call transcript summary (call held 2025-08-05): fiscal 2025 growth outlook raised to 25%. <a href="https://finance.yahoo.com/quote/ANET/earnings/ANET-Q2-2025-earnings_call-343047.html">https://finance.yahoo.com/quote/ANET/earnings/ANET-Q2-2025-earnings_call-343047.html</a></li>
+<li id="cite_note-25">Investor's Business Daily, Arista Stock Reverses Down Amid Analyst Day Touting AI (September 2025): 20% growth to $10.5 billion for fiscal 2026. <a href="https://www.investors.com/news/technology/arista-stock-ai-growth-outlook-analyst-day/">https://www.investors.com/news/technology/arista-stock-ai-growth-outlook-analyst-day/</a></li>
+<li id="cite_note-26">Arista Networks, press release of 2026-10-06, Q3 2026 results to be released on November 3, 2026 (read with a web fetch tool and stored from a local file because the direct download was compressed). <a href="https://www.arista.com/en/company/news/press-release/24817-pr-20261006">https://www.arista.com/en/company/news/press-release/24817-pr-20261006</a></li>
+<li id="cite_note-27">Yahoo Finance, ANET analyst estimates page (session of 2026-10-16): consensus EPS and revenue, 7/30/90-day trend, close of $176.98. <a href="https://finance.yahoo.com/quote/ANET/analysis/">https://finance.yahoo.com/quote/ANET/analysis/</a></li>
+<li id="cite_note-28">StockAnalysis.com, ANET stock forecast (data from S&amp;P Global Market Intelligence, 2026-10-16): price targets from 32 analysts and year-end forward P/E history. <a href="https://stockanalysis.com/stocks/anet/forecast/">https://stockanalysis.com/stocks/anet/forecast/</a></li>
+<li id="cite_note-29">StockAnalysis.com, ANET financial ratios (S&amp;P Global Market Intelligence, 2026-10-16): trailing P/E history, return on capital employed, net debt to EBITDA. <a href="https://stockanalysis.com/stocks/anet/financials/ratios/">https://stockanalysis.com/stocks/anet/financials/ratios/</a></li>
+<li id="cite_note-30">StockAnalysis.com, ANET statistics and valuation (S&amp;P Global Market Intelligence, 2026-10-16): trailing free cash flow, net cash, beta. <a href="https://stockanalysis.com/stocks/anet/statistics/">https://stockanalysis.com/stocks/anet/statistics/</a></li>
+<li id="cite_note-31">MarketBeat, Arista Networks stock falls 4.6% on insider selling (2026-10-14): chief executive's Rule 10b5-1 sales on October 7-9, 2026 (secondary source). <a href="https://www.marketbeat.com/instant-alerts/price-arista-networks-nyse-anet-stock-falls-46-on-insider-selling-2026-10-14/">https://www.marketbeat.com/instant-alerts/price-arista-networks-nyse-anet-stock-falls-46-on-insider-selling-2026-10-14/</a></li>
+<li id="cite_note-32">BestStocks, Why ANET stock fell 5.0% on October 15, 2026 (secondary source): inflation-report sell-off. <a href="https://beststocks.com/stocks/anet/what-changed/2026-10-15">https://beststocks.com/stocks/anet/what-changed/2026-10-15</a></li>
+<li id="cite_note-33">Cisco Systems, Form 8-K Exhibit 99.1, fourth-quarter and fiscal 2026 results (2026-08-12), quarter ended July 25, 2026. <a href="https://www.sec.gov/Archives/edgar/data/858877/000085887726000106/exhibit991pressrelease-q4f.htm">https://www.sec.gov/Archives/edgar/data/858877/000085887726000106/exhibit991pressrelease-q4f.htm</a></li>
+<li id="cite_note-34">NVIDIA, Form 10-Q for the quarter ended July 26, 2026 (filed 2026-08-26): revenue, margins, Compute &amp; Networking segment. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm">https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm</a></li>
+<li id="cite_note-35">Broadcom, Form 8-K Exhibit 99.1, third-quarter fiscal 2026 results (2026-09-02), quarter ended August 2, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm">https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm</a></li>
+<li id="cite_note-36">Hewlett Packard Enterprise, Form 8-K Exhibit 99.1, third-quarter fiscal 2026 results (2026-09-02), quarter ended July 31, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1645590/000164559026000078/ex-991x922026x8k.htm">https://www.sec.gov/Archives/edgar/data/1645590/000164559026000078/ex-991x922026x8k.htm</a></li>
+<li id="cite_note-37">Meta Platforms, second-quarter 2026 results press release (PR Newswire): 2026 capital spending outlook of $130-145 billion. <a href="https://www.prnewswire.com/news-releases/meta-reports-second-quarter-2026-results-302838214.html">https://www.prnewswire.com/news-releases/meta-reports-second-quarter-2026-results-302838214.html</a></li>
+<li id="cite_note-38">Meta Platforms, announcement of third-quarter 2026 results date, October 21, 2026 (Yahoo Finance, 2026-10-12). <a href="https://finance.yahoo.com/markets/stocks/articles/meta-announce-third-quarter-2026-203500910.html">https://finance.yahoo.com/markets/stocks/articles/meta-announce-third-quarter-2026-203500910.html</a></li>
+<li id="cite_note-39">Microsoft, announcement of fiscal 2027 first-quarter earnings date, October 28, 2026 (2026-10-07). <a href="https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/">https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/</a></li>
+</ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
