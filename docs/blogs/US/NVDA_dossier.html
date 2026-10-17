@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-16">
+<meta name="generated-at" content="2026-10-17T05:28:05.069109-07:00">
+<title>NVIDIA Corporation (NASDAQ: NVDA) — the book report, as of 2026-10-16</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" aria-disabled="true">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>NVIDIA Corporation (NASDAQ: NVDA) — the book report, as of 2026-10-16</h1><p class="report-generated">Generated Date: <time datetime="2026-10-17T05:28:05.069109-07:00">17 Oct 2026, 05:28 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-16</p></header>
+<dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span> (COMPOUNDER)</dd></div>
+<div><dt>Session Price (2026-10-16)</dt><dd>$214.13</dd></div>
+<div><dt>Strategy Bucket</dt><dd>CORE_ALPHA</dd></div>
+<div><dt>Implied 10Y Growth (Reverse DCF)</dt><dd>+14.8%/yr (our calculation, Ch. 5)</dd></div>
+<div><dt>Estimate Revisions (90d)</dt><dd>NO_CONSENSUS</dd></div>
+<div><dt>Trend &amp; Momentum Gate</dt><dd>Stage 3 (Topping / Pullback) | NO_MOMENTUM</dd></div>
+<div><dt>Support Distance / Stop</dt><dd>0.21 ATR | Stop $197.00</dd></div>
+<div><dt>Base Target / Asymmetry</dt><dd>$296.73 | 4.82:1 (Risk-Unit Size: 6.5%)</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>NVIDIA designs the chips, networks and software that most AI data centers run on, and it sold $96.2 billion of goods in the quarter ended July 26, 2026.<sup><a href="#cite_note-1">[1]</a></sup> It passes every financial test in this report: it earns about 65 cents of operating profit on each dollar of sales, it made $127.0 billion of cash after investment in a year, and it holds more cash than debt.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-6">[6]</a></sup> Our verdict is REJECTED for now because the chart is weak, not the business: the stock is in Stage 3, a topping phase, and fails all three momentum tests.<sup><a href="#cite_note-30">[30]</a></sup> The verdict could change after a close above $223.08, but only if a fresh review clears our stage and momentum tests. The case fails if AI customers stop paying, since NVIDIA has guaranteed or committed $530.5 billion tied to them<sup><a href="#cite_note-2">[2]</a></sup> (status: PUBLISHED_WITH_GATE_EXCEPTIONS).</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does</h2>
+<p>NVIDIA is a company in Santa Clara, California that designs computer chips and sells them, together with networking equipment, complete server racks and software, mainly to the companies that build artificial-intelligence data centers.<sup><a href="#cite_note-8">[8]</a></sup> It does not own chip factories. It pays Taiwan Semiconductor Manufacturing Company, known as TSMC, and Samsung to make its chips, it buys memory from SK Hynix, Micron and Samsung, and it uses contract manufacturers such as Hon Hai to assemble systems.<sup><a href="#cite_note-8">[8]</a></sup> Its fiscal year ends in late January, so fiscal 2027 runs from late January 2026 to late January 2027. The latest quarter, the second of fiscal 2027, ended on July 26, 2026.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Who pays NVIDIA, and for what, is now a short list. In the second quarter the Data Center platform brought in $89.0 billion, which is 92.5 percent of revenue.<sup><a href="#cite_note-2">[2]</a></sup> Inside it, Hyperscale customers (the public clouds and the largest consumer internet companies) paid $48.7 billion. Customers in a group called AI Clouds, Industrial and Enterprise (AI-focused cloud firms, factories, companies and governments) paid $40.3 billion.<sup><a href="#cite_note-2">[2]</a></sup> The Edge Computing platform covers PCs, game consoles, workstations, robots and cars, and it added $7.2 billion.<sup><a href="#cite_note-2">[2]</a></sup> The buyers are companies, not consumers, and there are few of them. One direct customer made up 16 percent of second-quarter revenue, and three direct customers made up 16, 15 and 13 percent of first-half revenue.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>NVIDIA makes money by selling hardware at a price far above its cost. The <dfn>gross margin</dfn>, which is the share of revenue left after the direct cost of making the product, was 75.0 percent in the quarter.<sup><a href="#cite_note-1">[1]</a></sup> The hardware runs on CUDA, NVIDIA's own software platform, and on a large library of tools built on top of it.<sup><a href="#cite_note-8">[8]</a></sup> Software is what keeps customers returning, because programs written for CUDA run on NVIDIA chips and moving them to a rival chip costs engineers time. Payments that arrive before NVIDIA delivers support or software are also growing. That balance, called deferred revenue, was $6.4 billion at the end of July 2026 against $2.0 billion a year earlier.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>What changed in 2026 is that customers want a place to put the chips as well as the chips themselves. Land, electric power and building space are now the scarce items, and many AI companies cannot borrow enough to secure them. NVIDIA has started to help. It has guarantees of $3.5 billion for AI cloud partners, and in August 2026 it guaranteed up to $105 billion of lease payments for a data center campus in Ohio whose tenant is an affiliate of OpenAI.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> It also agreed to buy Hugging Face, a platform for sharing open-source AI models, for about $11.9 billion.<sup><a href="#cite_note-5">[5]</a></sup> These steps widen NVIDIA's reach and raise the amount of money it stands behind. Chapters 2B and 6 return to that point.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Revenue by market platform, in $ millions (prior periods recast by the company for a customer reclassification)</caption>
+<thead><tr><th>Platform</th><th>Q2 FY27 (Jul 26, 2026)</th><th>Q1 FY27 (Apr 26, 2026)</th><th>Q2 FY26 (Jul 27, 2025)</th><th>Year-on-year change</th></tr></thead>
+<tbody>
+<tr><td>Data Center<sup><a href="#cite_note-2">[2]</a></sup></td><td>89,023</td><td>75,246</td><td>41,096</td><td>+116.6%</td></tr>
+<tr><td>of which Hyperscale</td><td>48,710</td><td>43,050</td><td>24,168</td><td>+101.5%</td></tr>
+<tr><td>of which AI Clouds, Industrial and Enterprise</td><td>40,313</td><td>32,196</td><td>16,928</td><td>+138.1%</td></tr>
+<tr><td>Edge Computing</td><td>7,198</td><td>6,369</td><td>5,647</td><td>+27.5%</td></tr>
+<tr><td>Total revenue</td><td>96,221</td><td>81,615</td><td>46,743</td><td>+105.9%</td></tr>
+</tbody>
+</table></div>
+<p>Read one row at a time. Data Center is 92.5 percent of revenue, so the company is now mostly one business, and the fastest part of it is the AI-cloud, industrial and enterprise group at 138 percent growth. The table does not show who the customers behind each group are, and it does not show how much of the growth is paid for with NVIDIA's own guarantees. Those questions come back in Chapters 2B and 6.</p>
+<h3>How this report counts twelve months</h3>
+<p>Many figures here are for the trailing twelve months, written as TTM. TTM means the most recent four quarters added together. We build it as fiscal 2026 plus the first half of fiscal 2027, minus the first half of fiscal 2026. That is the only way to reach July 2026 from the filings, because NVIDIA files full-year numbers in the 10-K and half-year numbers in the 10-Q.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Every TTM figure in this report is our own arithmetic on those filed numbers, and the working is shown next to it.</p>
+<h3>Plain-English glossary for this report</h3>
+<ul>
+<li><strong>Data Center</strong>: the platform that sells chips, networks and racks to the companies that run AI and cloud computing.</li>
+<li><strong>Hyperscaler</strong>: one of the very large cloud-computing companies that buy chips by the hundreds of thousands.</li>
+<li><strong>GPU</strong>: graphics processing unit, a chip that does many calculations at the same time, which is what AI training and AI answers need.</li>
+<li><strong>CUDA</strong>: NVIDIA's software platform that lets programmers use its GPUs; the main reason customers stay.</li>
+<li><strong>Blackwell and Vera Rubin</strong>: two generations of NVIDIA data center systems. Blackwell is still the majority of shipments; Vera Rubin began production shipments in the third quarter of fiscal 2027.<sup><a href="#cite_note-3">[3]</a></sup></li>
+<li><strong>TTM</strong>: trailing twelve months, the latest four quarters added together.</li>
+<li><strong>Reverse DCF</strong>: a method that starts from today's price and works out the growth rate the price already assumes.</li>
+<li><strong>Momentum gate</strong>: our three chart tests (Test A, Test B, Test C) that a stock must pass before we allocate money to it.</li>
+<li><strong>Stage 3</strong>: the Weinstein stage for a market that has stopped rising and is topping or pulling back. <dfn>Stage 2</dfn> means the confirmed uptrend, and <dfn>Stage 4</dfn> means the confirmed downtrend.</li>
+<li><strong>Price terms</strong>: a <dfn>20-day moving average</dfn> is the average closing price over the last 20 trading days. A <dfn>base</dfn> means a sideways price range that a stock builds before a move. The <dfn>pivot</dfn> means the top of that base. A <dfn>breakout</dfn> means a move above the pivot on strong volume.</li>
+<li><strong>Chart indicators</strong>: the <dfn>RSI</dfn> (relative strength index) is a 0-to-100 meter of how fast the price has been moving, where below 30 means oversold and above 70 means overbought. The <dfn>ATR</dfn> (average true range) is the typical daily price swing in dollars.</li>
+<li><strong>Trade terms</strong>: the <dfn>entry zone</dfn> means the band of prices where buying is planned. <dfn>Asymmetry</dfn>, also called <dfn>reward-to-risk</dfn>, is the gain to the target divided by the loss to the stop. A <dfn>measured move</dfn> means a target found by adding the height of a base to its top.</li>
+<li><strong>Profit terms</strong>: <dfn>operating margin</dfn> is the share of revenue left after all running costs. <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization) is profit before those charges. <dfn>EPS</dfn> (earnings per share) is profit divided across all shares. <dfn>Price-to-earnings</dfn> means the share price divided by earnings per share.</li>
+<li><strong>Cash terms</strong>: <dfn>free cash flow</dfn>, written <dfn>FCF</dfn> (free cash flow), is the cash left after running the business and buying equipment. <dfn>Net debt</dfn> means debt minus cash, so it is negative when a company holds more cash than debt.</li>
+<li><strong>Management terms</strong>: <dfn>guidance</dfn> is the company's own published forecast for the coming period. <dfn>CoWoS</dfn> (chip-on-wafer-on-substrate) is the advanced packaging that joins logic chips to memory.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Why the business is strong or weak</h2>
+<p>The case that NVIDIA is a strong business rests on three things that show up in filed numbers: it sells a whole system, it earns a very high margin, and it has secured supply. The case that it is a fragile business rests on three others: its customers are few, its suppliers are few, and it is putting more of its own money behind its customers. This chapter takes each in turn.</p>
+<h3>Strength one: a system, not a part</h3>
+<p>NVIDIA says its data center products use what it calls extreme co-design, which means the chips, networking, systems, software and algorithms are designed together.<sup><a href="#cite_note-8">[8]</a></sup> Networking is the clearest proof. Networking revenue rose from $12.99 billion in fiscal 2025 to $31.38 billion in fiscal 2026, an increase of 141.5 percent, because racks full of chips need fast links between them.<sup><a href="#cite_note-8">[8]</a></sup> A customer that buys the chips, the links and the software from one supplier has fewer reasons to try a second supplier.</p>
+<p>The software side is the lock. The 10-K describes CUDA as the foundational platform that runs on all NVIDIA GPUs, with hundreds of libraries and tools on top.<sup><a href="#cite_note-8">[8]</a></sup> A rival can build a fast chip. It is harder to build the years of tools that programmers already know.</p>
+<h3>Strength two: price, and what it says about demand</h3>
+<p>NVIDIA kept a 75.0 percent gross margin while revenue doubled.<sup><a href="#cite_note-1">[1]</a></sup> The peers in Chapter 3 earned less in their latest quarter: Broadcom 69.1 percent, AMD 53.8 percent, Marvell 53.1 percent and Intel 40.4 percent.<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-21">[21]</a></sup> A buyer that keeps paying a 75 percent margin is telling you that it has few close substitutes today. The spending also looks sustainable on NVIDIA's side. Research and development cost $7.05 billion in the second quarter, more than twice AMD's $2.53 billion and more than Broadcom's $2.90 billion in their latest quarters.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></p>
+<p>NVIDIA has also tried to lock up the parts it needs. It says it has partnered with suppliers to secure the critical components needed to meet demand for the next several years, and its supply and capacity commitments rose from $119 billion to $279 billion in one quarter, mostly for memory.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> The same fact has a second reading, which is that NVIDIA now owes suppliers a very large sum whether or not demand holds. We score that under Layer 2 in Chapter 2B.</p>
+<h3>Weakness one: few customers, few suppliers</h3>
+<p>In fiscal 2026 one direct customer made up 22 percent of revenue and another 14 percent.<sup><a href="#cite_note-8">[8]</a></sup> In the first half of fiscal 2027 three direct customers made up 16, 15 and 13 percent.<sup><a href="#cite_note-3">[3]</a></sup> Losing or delaying one of them would be felt in a single quarter. On the supply side, NVIDIA relies on TSMC and Samsung for wafers, on SK Hynix, Micron and Samsung for memory, and on a packaging method called CoWoS (chip-on-wafer-on-substrate), which joins the logic chip to memory.<sup><a href="#cite_note-8">[8]</a></sup> The latest 10-Q says NVIDIA is currently experiencing certain supply constraints.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>Competition is real but, so far, has not shown up in the margin. The 10-K names AMD, Huawei and Intel as chip rivals, and it names large cloud companies including Alphabet, Amazon and Microsoft as firms with internal teams designing their own AI hardware.<sup><a href="#cite_note-8">[8]</a></sup> Regulators in the European Union, the United States, the United Kingdom, China and South Korea have asked NVIDIA for information about its sales and its investments in AI model makers, and the 10-Q says more requests are expected.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<h3>Weakness two: China is shut out, and the cycle has turned down before</h3>
+<p>Shipments of Data Center Hopper products to China were less than 1 percent of Data Center revenue in the second quarter, and the outlook for the third quarter assumes no Data Center compute revenue from China.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> That makes China an option rather than a need. Customers headquartered in China still accounted for $7.9 billion of revenue in the quarter, so the exposure has not vanished.<sup><a href="#cite_note-3">[3]</a></sup></p>
+<p>The last downturn is a reminder of how fast the numbers can move. In fiscal 2023, revenue was flat at $26.97 billion against $26.91 billion the year before, the gross margin fell to 56.9 percent from 64.9 percent, and the operating margin fell to 15.7 percent from 37.3 percent.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup> Net income fell 55 percent in that year.<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-15">[15]</a></sup> That was a smaller company and a different demand source, but it shows what an inventory-and-demand mismatch does to a chip maker's profit.</p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>
+<p>Layer 2 of our method asks which operating measures run this particular business, and whether each is healthy. For an AI chip company we picked five: gross margin (pricing power), Data Center revenue share and growth (demand), customer concentration (dependence), supply commitments and customer financing (obligations), and cash conversion (whether profit turns into cash). Each gets PASS, WATCH or FAIL. A FAIL needs two red flags inside one measure. The thresholds are our own analyst rules, written in the table, because scoring.json does not set operating thresholds.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<p>The scorecard comes out at three PASS and two WATCH with no FAIL. The two WATCH items are the ones that matter for the rest of this report, because they describe how much NVIDIA is standing behind its own customers.</p>
+<h3>Layer 2 scorecard: company-specific operating KPIs</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 operating KPI scorecard for NVDA (latest quarter ended July 26, 2026 unless stated)</caption>
+<thead><tr><th>KPI and why it was picked</th><th>Reading</th><th>Trend</th><th>Our rule</th><th>Score</th></tr></thead>
+<tbody>
+<tr><td>Gross margin. Shows pricing power over rivals.<sup><a href="#cite_note-1">[1]</a></sup></td><td>75.0% GAAP in Q2 FY27</td><td>74.9% in Q1 FY27 and 72.4% in Q2 FY26. Q3 guide is 74.0% plus or minus 0.5 points.</td><td>PASS above 50%; WATCH 40% to 50%.</td><td>PASS</td></tr>
+<tr><td>Data Center revenue share and growth. Shows whether the core product is still pulling demand.<sup><a href="#cite_note-2">[2]</a></sup></td><td>$89.0B, 92.5% of revenue, up 117% on a year ago</td><td>Up 18% on the previous quarter. Hyperscale up 102%, AI Clouds and Enterprise up 138% on a year ago.</td><td>PASS if growth above 30% a year and share rising.</td><td>PASS</td></tr>
+<tr><td>Customer concentration. Shows how much one decision can move revenue.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-8">[8]</a></sup></td><td>One direct customer was 16% of Q2 revenue; three were 16%, 15% and 13% of H1 revenue</td><td>Three customers were 21%, 17% and 16% of Q1 FY27 revenue.<sup><a href="#cite_note-11">[11]</a></sup> Two were 22% and 14% of fiscal 2026 revenue.</td><td>PASS if no customer above 20% and fewer than three above 10%.</td><td>WATCH</td></tr>
+<tr><td>Supply commitments and customer financing. Shows how much NVIDIA owes and backs.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>Supply and capacity commitments $279B; total commitments, guarantees and backstops $530.5B; receivables took 60 days to collect</td><td>Supply commitments were $50.3B, $95.2B, $119B, then $279B over four quarters.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> Collection days were 53, 51, 45, then 60.</td><td>PASS if commitments are below TTM free cash flow times two and collection days are stable.</td><td>WATCH</td></tr>
+<tr><td>Cash conversion. Shows whether profit becomes spendable cash.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-6">[6]</a></sup></td><td>TTM free cash flow $127.0B, a 41.9% margin</td><td>H1 FY27 free cash flow was $69.9B against $39.6B a year earlier. Q2 alone was $21.3B, a 22.2% margin.</td><td>PASS above 18% TTM margin (Core preference).</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Each row names the measure, the reading, how it has moved, and the rule that produced the score. The two WATCH scores are about obligations and dependence, not about product quality. One caution sits behind the cash row: the second-quarter FCF margin of 22.2 percent is about half of the twelve-month margin, because receivables grew by $22.3 billion, and that is weak against profit. We kept the PASS because the twelve-month figure is far above the floor, and we carry the quarter as a risk in Chapter 6.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<h3>Management walk-the-talk: past promises vs delivered reality</h3>
+<p>Management guidance is the forecast a company publishes for the next quarter. The test of management is whether it delivers what it says. NVIDIA's record on its own quarterly forecasts is clean and, in each of the last three quarters, conservative. In November 2025 it guided fourth-quarter revenue to $65.0 billion plus or minus 2 percent, and it delivered $68.1 billion.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-6">[6]</a></sup> In February 2026 it guided the first quarter to $78.0 billion, and it delivered $81.6 billion.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-9">[9]</a></sup> In May it guided the second quarter to $91.0 billion, and it delivered $96.2 billion.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>On capital return, the record is also kept. In fiscal 2026 NVIDIA returned $41.1 billion to shareholders.<sup><a href="#cite_note-7">[7]</a></sup> In the first quarter of fiscal 2027 it returned about $20.0 billion, and in the second about $26.0 billion, so two quarters exceeded the whole prior year.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> In May the board raised the quarterly dividend from $0.01 to $0.25 a share and added $80.0 billion to the repurchase authorization.<sup><a href="#cite_note-9">[9]</a></sup></p>
+<p>The open item is the shift from selling chips to backing customers. In February the CFO said NVIDIA had strategically secured inventory and capacity to meet demand beyond the next several quarters, with supply-related commitments of $95.2 billion.<sup><a href="#cite_note-7">[7]</a></sup> That figure is now $279 billion.<sup><a href="#cite_note-2">[2]</a></sup> In August the company also said it expects to reassign certain data center leases to third parties. That has not yet happened, so we mark it open.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Management promises against delivered results for NVDA (guidance dates and sources in the notes)</caption>
+<thead><tr><th>Promise and date</th><th>What was delivered</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Q4 FY26 revenue of $65.0B plus or minus 2% (Nov 19, 2025)<sup><a href="#cite_note-12">[12]</a></sup></td><td>$68.1B reported Feb 25, 2026, 4.8% above the midpoint<sup><a href="#cite_note-6">[6]</a></sup></td><td>Kept, beat</td></tr>
+<tr><td>Q1 FY27 revenue of $78.0B plus or minus 2% (Feb 25, 2026)<sup><a href="#cite_note-6">[6]</a></sup></td><td>$81.6B reported May 20, 2026, 4.6% above the midpoint<sup><a href="#cite_note-9">[9]</a></sup></td><td>Kept, beat</td></tr>
+<tr><td>Q2 FY27 revenue of $91.0B plus or minus 2% (May 20, 2026)<sup><a href="#cite_note-9">[9]</a></sup></td><td>$96.2B reported Aug 26, 2026, 5.7% above the midpoint<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></td><td>Kept, beat</td></tr>
+<tr><td>Q2 FY27 gross margin 74.9% GAAP and operating expenses of about $8.5B (May 20, 2026)<sup><a href="#cite_note-9">[9]</a></sup></td><td>75.0% and $8.408B reported Aug 26, 2026<sup><a href="#cite_note-1">[1]</a></sup></td><td>Kept</td></tr>
+<tr><td>No Data Center compute revenue from China assumed in outlooks (Feb, May and Aug 2026)<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>Hopper shipments to China were under 1% of Data Center revenue in Q2<sup><a href="#cite_note-2">[2]</a></sup></td><td>Kept</td></tr>
+<tr><td>Capital return plan at Feb 25, 2026: $58.5B of repurchase authorization left and a $0.01 quarterly dividend<sup><a href="#cite_note-6">[6]</a></sup></td><td>$80.0B added, dividend raised to $0.25, about $46.0B returned across Q1 and Q2<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>Exceeded</td></tr>
+<tr><td>Secure supply for demand beyond the next several quarters, with $95.2B of commitments (Feb 25, 2026)<sup><a href="#cite_note-7">[7]</a></sup></td><td>Commitments rose to $279B by Jul 26, 2026<sup><a href="#cite_note-2">[2]</a></sup></td><td>Kept, but a much larger obligation</td></tr>
+<tr><td>Expects to reassign data center leases to third parties (Aug 26, 2026)<sup><a href="#cite_note-2">[2]</a></sup></td><td>Not yet reported as done</td><td>Open</td></tr>
+</tbody>
+</table></div>
+<p>Management has told the market less than it has delivered on every forecast we could check, and it has returned more cash than it promised. That is a good sign for the honesty of its guidance. The results of the new customer-financing commitments will arrive over many years, so no table can prove they work out. We therefore treat management as reliable on the near term and unproven on the financing it has just started.</p>
+<p>One change in how results are reported helps the reader. Beginning in the first quarter of fiscal 2027, NVIDIA stopped excluding stock-based compensation from its adjusted profit measures.<sup><a href="#cite_note-1">[1]</a></sup> That makes the adjusted numbers harder to flatter, and we credit management for it. Chapter 3 now turns the filed numbers into the Layer 1 tests.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. The numbers, in plain words</h2>
+<p>This chapter turns the filings into numbers and tests them against Layer 1 of our rules. Layer 1 asks two questions. Is the business solvent and profitable enough? And are its numbers improving, or only high? We use GAAP numbers, the standard accounting figures. We do not use the adjusted ones, because their definition changed in fiscal 2027.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Fiscal years end in late January and are named for the year they end in. Fiscal 2026 ended on January 25, 2026. Fiscal 2022 per-share figures are shown as filed, before the 10-for-1 stock split of June 2024.<sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-15">[15]</a></sup> The last column is the trailing twelve months to July 26, 2026, built from the filings as Chapter 1 explains. The latest filings are the 10-Q for the quarter ended July 26, 2026, filed on 2026-08-26, and the 10-K for fiscal 2026, filed on 2026-02-25.<sup><a href="#cite_note-18">[18]</a></sup></p>
+<p>One warning applies to net income. In the first half of fiscal 2027, NVIDIA booked $23.7 billion of gains on equity investments.<sup><a href="#cite_note-1">[1]</a></sup> Those gains are not operating profit, and they will not repeat on a schedule. So we judge profitability on operating income. We use net income only for the price-to-earnings ratio.</p>
+<h3>Five fiscal years and the latest twelve months</h3>
+<p>Each column is one year. Read across a row to see the direction, and down a column to see how the year held together.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>NVIDIA income, cash flow and balance sheet, fiscal 2022 to the twelve months ended July 26, 2026 ($ millions unless stated)</caption>
+<thead><tr><th>Measure</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>TTM to Jul 2026</th></tr></thead>
+<tbody>
+<tr><td>Revenue ($M)<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>26,914</td><td>26,974</td><td>60,922</td><td>130,497</td><td>215,938</td><td>302,970</td></tr>
+<tr><td>Revenue growth on prior year</td><td>+61.4%</td><td>+0.2%</td><td>+125.9%</td><td>+114.2%</td><td>+65.5%</td><td>+40.3% on FY26</td></tr>
+<tr><td>Gross margin</td><td>64.9%</td><td>56.9%</td><td>72.7%</td><td>75.0%</td><td>71.1%</td><td>74.7%</td></tr>
+<tr><td>Operating income ($M)</td><td>10,041</td><td>4,224</td><td>32,972</td><td>81,453</td><td>130,387</td><td>197,579</td></tr>
+<tr><td>Operating margin</td><td>37.3%</td><td>15.7%</td><td>54.1%</td><td>62.4%</td><td>60.4%</td><td>65.2%</td></tr>
+<tr><td>Net income ($M)</td><td>9,752</td><td>4,368</td><td>29,760</td><td>72,880</td><td>120,067</td><td>192,880</td></tr>
+<tr><td>Diluted EPS ($)</td><td>3.85 as filed, before the 2024 split</td><td>0.17</td><td>1.19</td><td>2.94</td><td>4.90</td><td>7.91</td></tr>
+<tr><td>Cash from operations ($M)</td><td>9,108</td><td>5,641</td><td>28,090</td><td>64,089</td><td>102,718</td><td>134,360</td></tr>
+<tr><td>Capital spending ($M)</td><td>976</td><td>1,833</td><td>1,069</td><td>3,236</td><td>6,042</td><td>7,354</td></tr>
+<tr><td>Free cash flow ($M)</td><td>8,132</td><td>3,808</td><td>27,021</td><td>60,853</td><td>96,676</td><td>127,006</td></tr>
+<tr><td>Free cash flow margin</td><td>30.2%</td><td>14.1%</td><td>44.4%</td><td>46.6%</td><td>44.8%</td><td>41.9%</td></tr>
+<tr><td>Cash and debt securities ($M)</td><td>21,208</td><td>13,296</td><td>25,984</td><td>43,210</td><td>49,670</td><td>56,586</td></tr>
+<tr><td>Total debt ($M)</td><td>10,946</td><td>10,953</td><td>9,709</td><td>8,463</td><td>8,468</td><td>33,366</td></tr>
+<tr><td>Shareholders' equity ($M)</td><td>26,612</td><td>22,101</td><td>42,978</td><td>79,327</td><td>157,293</td><td>228,984</td></tr>
+</tbody>
+</table></div>
+<p>Revenue grew from $26.9 billion to $303.0 billion in four and a half years, and operating income grew from $10.0 billion to $197.6 billion. The one bad year is fiscal 2023, when the operating margin fell to 15.7 percent. Two things lie outside the table: the quality of the demand behind the growth, and the $530.5 billion of commitments that sit outside the balance sheet. Free cash flow margin eased from 46.6 percent in fiscal 2025 to 41.9 percent over the last twelve months, which is the first sign that cash is growing more slowly than revenue.</p>
+<h3>The latest quarter against the one before and a year earlier</h3>
+<p>The five-year table hides the speed of recent change. This table compares the second quarter of fiscal 2027 with the first quarter and with the same quarter a year ago.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>NVIDIA quarterly results and the next-quarter outlook ($ millions unless stated)</caption>
+<thead><tr><th>Measure</th><th>Q2 FY27 (Jul 26, 2026)</th><th>Q1 FY27 (Apr 26, 2026)</th><th>Q2 FY26 (Jul 27, 2025)</th><th>Q3 FY27 company outlook</th></tr></thead>
+<tbody>
+<tr><td>Revenue<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>96,221</td><td>81,615</td><td>46,743</td><td>$108.0B plus or minus 2%<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Data Center revenue</td><td>89,023</td><td>75,246</td><td>41,096</td><td>Not given</td></tr>
+<tr><td>Gross margin (GAAP)</td><td>75.0%</td><td>74.9%</td><td>72.4%</td><td>74.0% plus or minus 0.5 points</td></tr>
+<tr><td>Operating expenses (GAAP)</td><td>8,408</td><td>7,621</td><td>5,413</td><td>About 9,200</td></tr>
+<tr><td>Operating income</td><td>63,734</td><td>53,536</td><td>28,440</td><td>Not given</td></tr>
+<tr><td>Operating margin</td><td>66.2%</td><td>65.6%</td><td>60.8%</td><td>Not given</td></tr>
+<tr><td>Net income</td><td>59,688</td><td>58,321</td><td>26,422</td><td>Not given</td></tr>
+<tr><td>Diluted EPS (GAAP, $)</td><td>2.46</td><td>2.39</td><td>1.08</td><td>Not given</td></tr>
+<tr><td>Free cash flow</td><td>21,341</td><td>48,554</td><td>13,450</td><td>Not given</td></tr>
+</tbody>
+</table></div>
+<p>Revenue grew 18 percent on the previous quarter and 106 percent on a year ago, and the operating margin widened to 66.2 percent from 60.8 percent. Revenue has risen every quarter by 18 to 20 percent: $57.0 billion in the third quarter of fiscal 2026, then $68.1 billion, $81.6 billion and $96.2 billion.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> The company's own outlook for the next quarter is 12 percent higher revenue and a gross margin 100 basis points lower, a basis point being one-hundredth of a percentage point. First-quarter net income of $58.3 billion came out above operating income of $53.5 billion because of equity gains of $15.9 billion in that quarter.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<h3>Cash, debt, investments and promises</h3>
+<p>A balance sheet lists what the company owns and owes today. NVIDIA also carries large promises that the balance sheet does not list, so the table below shows both.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>NVIDIA balance sheet items and commitments, January 25, 2026 and July 26, 2026 ($ millions unless stated)</caption>
+<thead><tr><th>Item</th><th>Jan 25, 2026</th><th>Jul 26, 2026</th><th>Change</th></tr></thead>
+<tbody>
+<tr><td>Cash and marketable debt securities<sup><a href="#cite_note-1">[1]</a></sup></td><td>49,670</td><td>56,586</td><td>+13.9%</td></tr>
+<tr><td>Marketable equity securities</td><td>12,886</td><td>42,783</td><td>+232.0%</td></tr>
+<tr><td>Non-marketable equity securities</td><td>22,251</td><td>51,157</td><td>+129.9%</td></tr>
+<tr><td>Accounts receivable</td><td>38,466</td><td>63,059</td><td>+63.9%</td></tr>
+<tr><td>Inventories</td><td>21,403</td><td>31,575</td><td>+47.5%</td></tr>
+<tr><td>Total debt<sup><a href="#cite_note-3">[3]</a></sup></td><td>8,468</td><td>33,366</td><td>+294.0%</td></tr>
+<tr><td>Shareholders' equity</td><td>157,293</td><td>228,984</td><td>+45.6%</td></tr>
+</tbody>
+</table></div>
+<p>Net cash is $23.2 billion, which is the $56.6 billion of cash and debt securities less $33.4 billion of debt. Debt rose by $24.9 billion because NVIDIA sold $25.0 billion of senior notes in June 2026.<sup><a href="#cite_note-3">[3]</a></sup> The sharpest moves are in receivables, up 64 percent in six months, and in equity investments, which together rose from $35.1 billion to $93.9 billion. Promises that are not yet on the balance sheet are listed in the next table.</p>
+<h3>Promises the balance sheet does not list</h3>
+<p>NVIDIA has agreed to buy, lease, invest and guarantee on a scale that no balance sheet line shows. The company publishes these in a commitments note, and the table below adds them up.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>NVIDIA commitments and guarantees as of July 26, 2026 ($ billions)</caption>
+<thead><tr><th>Group</th><th>Item</th><th>Amount ($B)</th><th>What it is</th></tr></thead>
+<tbody>
+<tr><td>Commitments<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>Supply and capacity</td><td>279</td><td>Memory and manufacturing capacity to build chips. It was $119B a quarter earlier.</td></tr>
+<tr><td>Commitments</td><td>Cloud service agreements</td><td>29</td><td>Cloud computing that NVIDIA's own engineers use for research.</td></tr>
+<tr><td>Commitments</td><td>Data center leases not yet started</td><td>25</td><td>Leases for engineering and testing sites, running up to twenty years.</td></tr>
+<tr><td>Commitments</td><td>Equity investments</td><td>25</td><td>Money NVIDIA has agreed to invest in AI model makers and other private companies.</td></tr>
+<tr><td>Commitments</td><td>Capital expenditures</td><td>8</td><td>Equipment and infrastructure for engineering and manufacturing.</td></tr>
+<tr><td>Subtotal</td><td>Commitments</td><td>366</td><td>The five lines above.</td></tr>
+<tr><td>Additional commitments<sup><a href="#cite_note-2">[2]</a></sup></td><td>AI cloud agreements</td><td>36</td><td>NVIDIA sells infrastructure to AI clouds and shares revenue; it may have to buy unsold capacity.</td></tr>
+<tr><td>Additional commitments</td><td>Data center leases for third parties</td><td>20</td><td>Leases NVIDIA signed and expects to hand to others.</td></tr>
+<tr><td>Subtotal</td><td>Additional commitments</td><td>56</td><td>The two lines above.</td></tr>
+<tr><td>Guarantees<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td><td>Land, power and shell guarantees for AI clouds</td><td>3.5</td><td>Credit support if certain AI cloud partners default on data center leases.</td></tr>
+<tr><td>Guarantees</td><td>SB Energy Corp. guarantees (Ohio campus, signed August 2026)</td><td>105.0</td><td>Capped. The tenant is an OpenAI affiliate, which agreed to reimburse NVIDIA.</td></tr>
+<tr><td>Subtotal</td><td>Guarantees</td><td>108.5</td><td>The two lines above.</td></tr>
+<tr><td>Total</td><td>Commitments, additional commitments and guarantees</td><td>530.5</td><td>The sum of the three subtotals, our own addition.</td></tr>
+</tbody>
+</table></div>
+<p>The total of $530.5 billion is 4.2 times trailing free cash flow and 9.4 times cash and debt securities. Much of it is payable over several years, and the supply part could be adjusted before firm orders are placed in some contracts, so it is not all due at once. The table does not show how many of these promises depend on a single customer. The Q4 FY26 commentary gave supply-related commitments of $95.2 billion at January 2026, so the supply line has nearly tripled in two quarters.<sup><a href="#cite_note-7">[7]</a></sup></p>
+<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>
+<p>Layer 1 of our method has three parts: a financial floor, a technical floor and an asymmetry floor. A company that fails the hard red lines is rejected. A company that clears the financial floor is classed as a compounder, a turnaround or a tactical breakout. The thresholds come from the repository rules file.<sup><a href="#cite_note-31">[31]</a></sup> The table shows the static level, which is where each measure stands today, and the trajectory, which is the direction it is moving.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 levels against trajectory, with the rule for each test (TTM to July 26, 2026)</caption>
+<thead><tr><th>Layer 1 test</th><th>Rule</th><th>Static level and working</th><th>Trajectory</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Return on invested capital<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>At least 12%, Core prefers above 16%</td><td>80.2%: after-tax operating profit $165.0B divided by invested capital $205.8B</td><td>Operating margin up from 60.8% to 66.2% on a year ago</td><td>PASS</td></tr>
+<tr><td>Free cash flow margin<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-6">[6]</a></sup></td><td>At least 12%, Core prefers above 18%</td><td>41.9%: $127.0B divided by $303.0B revenue</td><td>Down from 46.6% in FY25 and 44.8% in FY26</td><td>PASS</td></tr>
+<tr><td>Net debt to EBITDA</td><td>Below 3.0 times</td><td>-0.12 times: net debt of minus $23.2B (net cash) divided by EBITDA of $201.3B</td><td>Debt rose to $33.4B in June 2026; cash and securities also rose</td><td>PASS</td></tr>
+<tr><td>Stock-based compensation to revenue<sup><a href="#cite_note-1">[1]</a></sup></td><td>Below 5.0%</td><td>2.39%: $7.2B divided by $303.0B</td><td>Share count fell from 24,304M to 24,147M in six months<sup><a href="#cite_note-3">[3]</a></sup></td><td>PASS</td></tr>
+<tr><td>Hard red line: distress</td><td>Net debt to EBITDA at or above 4.0 times with interest cover below 2.0 times</td><td>Not triggered. Fiscal 2026 operating income of $130.4B covers interest expense of $0.26B about 503 times<sup><a href="#cite_note-6">[6]</a></sup></td><td>Not applicable</td><td>PASS</td></tr>
+<tr><td>Hard red line: structure<sup><a href="#cite_note-30">[30]</a></sup></td><td>Stage 4 breakdown</td><td>Not triggered. The ledger stage is Stage 3, not Stage 4</td><td>Price is above a rising 200-day average</td><td>PASS</td></tr>
+<tr><td>Hard red line: governance<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></td><td>Accounting fraud or going-concern warning</td><td>None found in the 10-K or 10-Q. The IRS is examining fiscal 2023 and 2024 tax returns. The CEO owns 3.58% of shares</td><td>Not applicable</td><td>PASS</td></tr>
+<tr><td>Technical posture floor (Core book)<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-31">[31]</a></sup></td><td>Stage 1 base breakout or Stage 2 markup</td><td>Ledger stage is Stage 3 (topping or pullback)</td><td>Close is below the 50-day and 20-day averages</td><td>FAIL</td></tr>
+<tr><td>Asymmetry floor (Core book)<sup><a href="#cite_note-31">[31]</a></sup></td><td>At least 3.0 to 1, with an anchored target</td><td>4.82 to 1 at the close of $214.13, using the measured-move target of $296.73 and the stop of $197.00</td><td>At a $223.08 entry the ratio would be 2.82 to 1</td><td>PASS (conditional)</td></tr>
+</tbody>
+</table></div>
+<p>The financial floor passes with room to spare, so the archetype is Compounder, the one in our rules for high-return, cash-rich, low-debt businesses. Neither Turnaround nor Tactical Breakout fits, because the business is not depressed and the chart is not in Stage 2. The technical posture floor fails because the ledger shows Stage 3, and our rules say any failed gate means the disposition is REJECTED. The gate status is therefore FAIL_TECHNICAL, which is a chart verdict and not a verdict on the business. The asymmetry pass is conditional because the target needs a breakout above $243.37 that has not happened.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>We estimate NVIDIA's return on invested capital at about 80 percent. Return on invested capital means the profit earned on each dollar the business has put to work.</p>
+<h4>How it was calculated</h4>
+<p>We took trailing operating income of $197.6 billion, applied the 16.5 percent tax rate NVIDIA reported for the first half of fiscal 2027, and divided by invested capital. We defined invested capital as equity plus debt minus cash and debt securities.</p>
+<h4>The inputs</h4>
+<p>Operating income: $130,387 + $117,270 − $50,078 = $197,579 million.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Tax rate 16.5 percent.<sup><a href="#cite_note-3">[3]</a></sup> Equity $228,984 million, debt $33,366 million, cash and marketable debt securities $56,586 million.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> After-tax profit is $164,978 million and invested capital is $205,764 million.</p>
+<h4>The range</h4>
+<p>Bear case: if the operating margin fell to 45 percent on the same revenue, after-tax profit would be about $113.8 billion and the ratio about 55 percent. Bull case: if the $93.9 billion of marketable and non-marketable equity investments were excluded from capital as non-operating, the ratio would be about 148 percent.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<h4>If the number is off</h4>
+<p>The pass does not depend on the exact figure, because the rule is 12 percent and even the bear case is several times that. What would change is the claim that NVIDIA's profits are unusually safe: a fall toward the fiscal 2023 operating margin would cut the figure sharply.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>We estimate trailing free cash flow at $127.0 billion, a 41.9 percent margin. Free cash flow means the cash left after running the business and buying equipment.</p>
+<h4>How it was calculated</h4>
+<p>We added cash from operations for fiscal 2026 and the first half of fiscal 2027 and subtracted the first half of fiscal 2026, then did the same for capital spending, and subtracted the second from the first.</p>
+<h4>The inputs</h4>
+<p>Cash from operations: $102,718 + $74,421 − $42,779 = $134,360 million.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Capital spending (purchases of property, equipment and intangibles): $6,042 + $4,434 − $3,122 = $7,354 million.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Revenue $302,970 million.</p>
+<h4>The range</h4>
+<p>Bear case: the company's own definition also subtracts principal payments on equipment, which would lower the figure by about $0.1 billion, so the choice of definition changes little. A larger bear risk is the pace: the second quarter alone produced $21.3 billion, and four times that is $85.4 billion.<sup><a href="#cite_note-1">[1]</a></sup> Bull case: the first half produced $69.9 billion, which at a doubled pace would be $139.8 billion.</p>
+<h4>If the number is off</h4>
+<p>If the true repeatable figure is the second-quarter pace of $85.4 billion, the growth rate the share price already assumes rises from 14.8 percent to 20.1 percent a year (Chapter 5), and the stock looks less cheap.</p>
+</section>
+<h3>Peer comparison matrix</h3>
+<p>A business is only strong or weak next to something else. The table puts NVIDIA beside the four listed chip companies that the 10-K names as competitors or partners in AI hardware and networking. All figures are GAAP, for each company's own latest quarter, so the calendar differs slightly.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>NVDA against four chip peers: latest-quarter results (filings) and session chart state (ledger, close of 2026-10-16)</caption>
+<thead><tr><th>Company</th><th>Latest quarter</th><th>Revenue</th><th>Growth on a year ago</th><th>Gross margin</th><th>Operating margin</th><th>Weinstein stage</th><th>RSI (14)</th><th>63-day return minus S&amp;P 500 return</th><th>Momentum gate</th></tr></thead>
+<tbody>
+<tr><td>NVIDIA (NVDA)<sup><a href="#cite_note-1">[1]</a></sup></td><td>Q2 FY27 (Jul 26, 2026)</td><td>$96.2B</td><td>+105.9%</td><td>75.0%</td><td>66.2%</td><td>Stage 3</td><td>37.53</td><td>+2.49%</td><td>NO_MOMENTUM</td></tr>
+<tr><td>Broadcom (AVGO)<sup><a href="#cite_note-20">[20]</a></sup></td><td>Q3 FY26 (Aug 2, 2026)</td><td>$29.6B</td><td>+85.5%</td><td>69.1%</td><td>53.9%</td><td>Stage 4</td><td>34.79</td><td>-15.92%</td><td>NO_MOMENTUM</td></tr>
+<tr><td>AMD (AMD)<sup><a href="#cite_note-19">[19]</a></sup></td><td>Q2 2026 (Jun 27, 2026)</td><td>$11.5B</td><td>+50.1%</td><td>53.8%</td><td>17.3%</td><td>Stage 3</td><td>37.77</td><td>+2.15%</td><td>NO_MOMENTUM</td></tr>
+<tr><td>Marvell (MRVL)<sup><a href="#cite_note-22">[22]</a></sup></td><td>Q2 FY27 (Aug 1, 2026)</td><td>$2.7B</td><td>+36.5%</td><td>53.1%</td><td>16.8%</td><td>Stage 3</td><td>37.53</td><td>+14.02%</td><td>NO_MOMENTUM</td></tr>
+<tr><td>Intel (INTC)<sup><a href="#cite_note-21">[21]</a></sup></td><td>Q2 2026 (Jun 27, 2026)</td><td>$16.1B</td><td>+25.4%</td><td>40.4%</td><td>11.1%</td><td>Stage 3</td><td>31.41</td><td>-10.28%</td><td>NO_MOMENTUM</td></tr>
+</tbody>
+</table></div>
+<p>NVIDIA leads the group on growth (+106 percent against +85 percent for Broadcom), on gross margin (75.0 percent) and on operating margin (66.2 percent). The chart column shows something different. All five names are in a weak phase and all five fail the momentum gate, so the chart weakness is sector-wide, not specific to NVIDIA. Valuation is not compared, because we did not retrieve the peers' share counts. Broadcom is in Stage 4, which is worse than NVIDIA's Stage 3.<sup><a href="#cite_note-30">[30]</a></sup></p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. What the price is doing</h2>
+<p>This chapter reports what the chart says. It uses only the frozen session ledger for the close of 2026-10-16.<sup><a href="#cite_note-30">[30]</a></sup> NVIDIA closed at $214.13. That is down 1.43% on the day and down 8.47% over two weeks. The price is below its 20-day average of $228.18 and below its 50-day average of $223.08. It is above its 200-day average of $202.97. The Weinstein stage is Stage 3. That means the stock rose, stopped rising, and is now sliding back toward its long-term average. The wider market is also weak. The S&amp;P 500 is below its 50-day average and above its 200-day average, which the ledger calls a correction. Only 34.3 percent of stocks are above their own 50-day average. There have been 7 distribution days, which are sessions of heavy selling.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verified price and technical structure for NVDA as of 2026-10-16</caption>
+<thead><tr><th>Technical measure</th><th>Ledger reading</th><th>Plain-English meaning</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-16)</td><td>$214.13<sup><a href="#cite_note-30">[30]</a></sup></td><td>1D: -1.43%, 1W: -6.61%, 1M: -2.38%</td></tr>
+<tr><td>20-day / 50-day / 200-day average</td><td>$228.18 / $223.08 / $202.97</td><td>50-day trend: RISING (21d ago: $213.88; 200d 63d ago: $192.48)</td></tr>
+<tr><td>Weinstein trend stage</td><td>Stage 3 (Topping / Pullback)</td><td>Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; Stage 4 is markdown</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day)</td><td>37.53 / $5.97</td><td>Momentum gauge (30 oversold, 70 overbought) and typical daily price swing</td></tr>
+<tr><td>52-week high / low</td><td>$243.37 / $164.27</td><td>Close is -12.01% from 52-week high</td></tr>
+<tr><td>20-day swing low / 63-day base low</td><td>$212.85 / $190.01</td><td>Active support anchor: $212.85 (0.21 ATR away)</td></tr>
+<tr><td>Volume vs 20-day average</td><td>1.12x</td><td>63-day volume dry-up ratio: 0.59</td></tr>
+<tr><td>Relative strength vs S&amp;P 500 (63d / 28d)</td><td>2.49% / -4.79%</td><td>Excess return vs benchmark over 3 months and 6 weeks</td></tr>
+</tbody>
+</table></div>
+<p>The RSI is 37.53. A reading below 30 would be called oversold. At 37.53 the stock is weak but not at an extreme. The ATR is $5.97. The swing low of $212.85 is the nearest support. It is only 0.21 ATR below the close, so the stock sits on its support. The table does not say that support will hold. It says only that a stop can be placed close to the price. That is why the reward-to-risk ratio looks good on paper.</p>
+<h3>Momentum and turnaround inflection gate</h3>
+<p>The momentum gate is a set of three tests. They are defined in the rules file and run by code on the frozen ledger.<sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-30">[30]</a></sup> Test A asks whether the stock is in a confirmed uptrend now. Test B asks whether it is entering an uptrend from a flat base. Test C asks whether a beaten-down stock is turning up from a floor. A stock must pass at least one test to be allocated. NVIDIA passes none. The ledger verdict is NO_MOMENTUM, with no sub-verdict.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Momentum &amp; recovery gate evaluation for NVDA (Verdict: NO_MOMENTUM / NONE)</caption>
+<thead><tr><th>Gate test</th><th>Rule in plain words</th><th>Measured values from ledger</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Test A1 (Markup structure)</td><td>Price &gt; SMA50 &gt; SMA200 and SMA50 rising over 21d</td><td>{"close": 214.13, "sma50": 223.08, "sma200": 202.97, "sma50_21d_ago": 213.88}</td><td>FAIL</td></tr>
+<tr><td>Test A2 (Long trend slope)</td><td>SMA200 flat or rising over 63 trading days</td><td>{"sma200": 202.97, "sma200_63d_ago": 192.48}</td><td>PASS</td></tr>
+<tr><td>Test A3 (Quarterly leadership)</td><td>63-day return beats S&amp;P 500</td><td>{"rs_63d_excess_pct": 2.49, "required_min_pct": 0.0}</td><td>PASS</td></tr>
+<tr><td>Test A4 (Support proximity)</td><td>Price within 1.2 ATR of nearest verified support</td><td>{"support_distance_atr": 0.21, "max_atr": 1.2}</td><td>PASS</td></tr>
+<tr><td>Test B1 (Base 50-DMA holding)</td><td>50-day average decline &lt;= 0.5% over 21 days</td><td>{"sma50_21d_chg_pct": 4.3, "max_decline_pct": 0.5}</td><td>PASS</td></tr>
+<tr><td>Test B2 (Monthly RS turn)</td><td>28-day return beats S&amp;P 500 (&gt; 0%)</td><td>{"rs_28d_excess_pct": -4.79, "required": "rising (&gt; 0)"}</td><td>FAIL</td></tr>
+<tr><td>Test B3 (Tight base pivot)</td><td>Price within 1.0 ATR of 63-day base low</td><td>{"base_pivot_atr": 4.04, "max_atr": 1.0}</td><td>FAIL</td></tr>
+<tr><td>Test B4 (Seller exhaustion)</td><td>63-day volume dry-up ratio &lt;= 0.90</td><td>{"vol_dryup_ratio_63d": 0.59, "max_ratio": 0.9}</td><td>PASS</td></tr>
+<tr><td>Test B5 (Buyer expansion)</td><td>Session volume &gt;= 1.0x 20-day average</td><td>{"vol_mult_20d": 1.12, "min_ratio": 1.0}</td><td>PASS</td></tr>
+<tr><td>Test C1 (Higher-low floor)</td><td>Price &gt; 63d low and 20d swing low holding floor</td><td>{"close": 214.13, "swing_low_20d": 212.85, "base_low_63d": 190.01}</td><td>PASS</td></tr>
+<tr><td>Test C2 (Short-term inflection)</td><td>Price &gt;= 20-DMA with positive 28d RS or 2W gain</td><td>{"close": 214.13, "sma20": 228.18, "rs_28d_pct": -4.79, "chg_2w_pct": -8.47}</td><td>FAIL</td></tr>
+<tr><td>Test C3 (Buyable support distance)</td><td>Price within 1.8 ATR of active support</td><td>{"support_distance_atr": 0.21, "max_atr": 1.8}</td><td>PASS</td></tr>
+<tr><td>Test C4 (No freefall)</td><td>14-day RSI &gt;= 35 (selling pressure stabilizing)</td><td>{"rsi14": 37.53, "min_rsi14": 35.0}</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Test A fails on one line. The close of $214.13 is below the 50-day average of $223.08. The other three lines of Test A pass, so this test is close. Test B fails on two lines. The 28-day return against the S&amp;P 500 is -4.79 percent, and it needs to be positive. The price is 4.04 ATR from the top of its base, and the rule allows 1.0. Test C fails on one line. The price is below its 20-day average, and both the 28-day relative strength and the two-week gain are negative. Every test fails on short-term trend, and none fails on long-term structure.</p>
+<p>The rules say a stock that fails the momentum tests is not allocated at market, however good the business. It needs a confirmed breakout or a limit-order setup at support. NVIDIA is at support but has not turned. Two things would confirm the idea. A daily close above $223.08 would pass Test A, if the 50-day average is still rising and the 63-day relative strength is still positive. That alone would not clear the Stage 3 label, as Chapter 7 explains. A close above $228.18 with positive relative strength would pass Test C. One thing would reject it. A close below $197.00, our structural stop, would put the price under the 200-day average and open the way to Stage 4. Chapter 5 now asks a different question: what is today's price assuming about the business?</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. What could happen next</h2>
+<p>Chapter 4 told us what the chart says today. This chapter asks what the price is already assuming, how analysts' numbers are moving, and where we differ from both. A reverse DCF works backwards. A normal discounted cash flow model starts with a growth forecast and produces a fair price. A reverse model starts with today's price and asks what growth is needed to justify it. We use the rules in the repository: a 10 percent discount rate, which is the return an investor demands each year, an 18 times multiple on free cash flow at the end of year 10, and a 10-year window.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<p>The ledger's own reverse-DCF and consensus fields are empty for this run because the data feed returned an error. So the first five rows of the table below, which the renderer fills from the ledger, show N/A or no consensus. The rows after them are our own figures, built from the SEC filings and from analyst pages we fetched. The gate notes at the end of the report give the details.</p>
+<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for NVDA</caption>
+<thead><tr><th>Expectations dimension</th><th>Measured reading</th><th>How to interpret it</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF implied 10-year growth</td><td>N/A (see working below)<sup><a href="#cite_note-30">[30]</a></sup></td><td>Reverse DCF implied growth is N/A (negative or unverified trailing cash flow and earnings).</td></tr>
+<tr><td>Reverse DCF cash-flow basis &amp; FCF yield</td><td>N/A (None $B); FCF yield: N/A</td><td>Solved at 10.0% discount rate and 18.0x terminal multiple</td></tr>
+<tr><td>Consensus FY1 EPS (current vs 90d ago)</td><td>No consensus coverage (N/A)</td><td>Revision trend status: NO_CONSENSUS</td></tr>
+<tr><td>Consensus FY2 EPS (current vs 90d ago)</td><td>No consensus coverage (N/A)</td><td>Implied FY2 vs FY1 EPS growth: N/A</td></tr>
+<tr><td>Street analyst target range (low / mean / high)</td><td>No street price targets published (N/A)</td><td>Used as expectations context only; our underwriting target is anchored in the scenario model below</td></tr>
+<tr><td>Reverse DCF implied 10-year growth (our calculation, from SEC filings)<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>+14.84% per year in free cash flow</td><td>The price already assumes trailing free cash flow of $127.0B grows by about 14.8% a year for 10 years, then is sold at 18 times. Solved with the repository's solver at a 10% discount rate.</td></tr>
+<tr><td>Reverse DCF inputs (our calculation)</td><td>Enterprise value $5,137.3B = market cap $5,160.5B (24.1B shares x $214.13) + debt $33.4B − cash and debt securities $56.6B</td><td>The share count is from the 10-Q cover page.<sup><a href="#cite_note-3">[3]</a></sup> Equity investments of $93.9B are not subtracted, which makes the test stricter.</td></tr>
+<tr><td>Free cash flow yield (our calculation)</td><td>2.47% ($127.0B divided by $5,137.3B)</td><td>The cash the business produces each year as a share of what the whole company costs to buy.</td></tr>
+<tr><td>Consensus FY2027 EPS now against 90 days ago (secondary source)<sup><a href="#cite_note-23">[23]</a></sup></td><td>$9.31 against $8.95 (+4.02%), 51 analysts</td><td>Estimates for the year ending January 2027 have crept up. The figure is the normalized (non-GAAP) EPS shown on the page.</td></tr>
+<tr><td>Consensus FY2028 EPS now against 90 days ago (secondary source)<sup><a href="#cite_note-23">[23]</a></sup></td><td>$15.91 against $12.76 (+24.69%), 52 analysts</td><td>The estimate for the following year jumped by about a quarter in three months. The range is $12.85 to $18.75.</td></tr>
+<tr><td>Consensus revenue FY2027 and FY2028 (secondary source)<sup><a href="#cite_note-23">[23]</a></sup></td><td>$411.65B and $692.21B</td><td>These imply growth of 91% and then 68%. The current quarter, which ends in October 2026, is expected at $108.98B against the company's own outlook of $108.0B.</td></tr>
+<tr><td>Revision trend (our reading of the above)</td><td>RISING</td><td>Both years moved up over 30, 60 and 90 days. No source other than the Yahoo page could be fetched for this, so confidence is moderate.</td></tr>
+<tr><td>Street price targets (S&amp;P Global data via StockAnalysis, secondary)<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-25">[25]</a></sup></td><td>Average $328.72, median $315, low $180, high $515, 62 analysts. 59 rate it buy or strong buy, 2 hold, 1 sell</td><td>Context only. MarketBeat's average of $321.89 across 55 analysts and Walnut Invest's $328.72 across 59 analysts are close to this figure.<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-27">[27]</a></sup> Our own targets come from the scenario work below, not from the Street.</td></tr>
+<tr><td>Valuation on consensus (our arithmetic)</td><td>27.1x trailing GAAP EPS of $7.91; 23.0x FY2027E; 13.5x FY2028E; EV is 17.7x the FY2028 free cash flow implied by consensus revenue at the current margin</td><td>At 41.9% margin, $692.21B revenue would give free cash flow of about $290B. The 18x exit multiple in our reverse DCF is almost the same as today's multiple of that cash flow.</td></tr>
+</tbody>
+</table></div>
+<p>The first five rows are filled from the frozen ledger and show N/A because the ledger could not fetch fundamentals; they do not mean that no analysts follow NVIDIA, since 51 to 57 of them do. The rows below them carry our own working. The main reading is that a price of $214.13 asks for about 14.8 percent annual growth in cash flow for ten years, while analysts expect revenue to grow 91 percent this year and 68 percent next. How long the high growth can last is the real disagreement in this report.</p>
+<h3>Our variant perception</h3>
+<p>Our variant perception is where our view differs from what the price and the Street imply. There are three points.</p>
+<p>First, the price is not asking for much on the numbers. A 14.8 percent growth rate in free cash flow is far below the 77 percent growth in first-half free cash flow and the 91 percent growth in consensus revenue.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-23">[23]</a></sup> The market is paying 13.5 times next year's estimated profit for the market's most profitable large chip company. That is the multiple of a business expected to run out of growth soon. So on the numbers the stock looks cheap against its growth, but only if trailing cash flow is repeatable and the multiple does not shrink further. Two checks show how much depends on that. With no re-rating, FY2028 EPS of $15.91 at today's 13.46 times is $214.13, which is a 0 percent return. At the lowest analyst estimate of $12.85 and the same multiple, the price would be $172.95 (12.85 × 13.4588), a fall of 19.2 percent. The upside therefore needs both the earnings and a re-rating.</p>
+<p>Second, the estimates and the price have recently moved in different directions. The FY2028 EPS estimate rose 25 percent in 90 days.<sup><a href="#cite_note-23">[23]</a></sup> Over a shorter window the stock fell 8.47% in two weeks, and it sits 12.01% below its 52-week high.<sup><a href="#cite_note-30">[30]</a></sup> The windows differ, so this is not a clean comparison. The longer trend measures are still up: the 50-day average is rising, the 200-day average is $202.97 against $192.48 63 days ago, and the 63-day return is 2.49 points ahead of the S&amp;P 500. One possible reading is that some buyers doubt the estimates. If so, we think the doubt is about the quality of demand, not the amount. NVIDIA now guarantees up to $108.5 billion of customer lease payments, has agreed in some contracts to purchase AI cloud capacity that the cloud firms cannot sell, and its receivables took 60 days to collect against 45 a quarter earlier.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> If part of the demand is financed by NVIDIA itself, then consensus FY2028 EPS of $15.91 is less safe than its count of 52 analysts suggests.</p>
+<p>Third, we do not agree with the Street that this is already a buy. Of 62 analysts, 59 rate it buy or strong buy.<sup><a href="#cite_note-25">[25]</a></sup> A view that crowded leaves little room for good news. We would change our mind if the price closed above the 50-day average with estimates still rising, which would mean the market had accepted the estimates. We would hold to our view if the price kept falling while estimates rose, because we would read that as the market waiting for proof.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>We estimate that today's price assumes NVIDIA's free cash flow grows about 14.8 percent a year for ten years. In dollars, that is trailing free cash flow of $127.0 billion rising to about $507 billion in year ten.</p>
+<h4>How it was calculated</h4>
+<p>We took enterprise value, which is the cost of buying the whole company, and asked the repository's solver for the growth rate at which ten years of discounted cash flow plus an 18 times exit value equals that cost. The discount rate is 10 percent.</p>
+<h4>The inputs</h4>
+<p>Share count 24.1 billion from the 10-Q cover page, as of August 21, 2026.<sup><a href="#cite_note-3">[3]</a></sup> Close $214.13 from the ledger.<sup><a href="#cite_note-30">[30]</a></sup> Market cap 24.1 × $214.13 = $5,160.5 billion. Debt $33,366 million.<sup><a href="#cite_note-3">[3]</a></sup> Cash and marketable debt securities $56,586 million.<sup><a href="#cite_note-1">[1]</a></sup> Enterprise value = $5,160.5B + $33.4B − $56.6B = $5,137.3B. Base cash flow $127.0B (Chapter 3).<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Parameters from the rules file.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<h4>The range</h4>
+<p>If true repeatable free cash flow is 20 percent lower ($101.6B), the implied growth is 17.8 percent; if 20 percent higher, 12.4 percent. With a 14 times exit multiple it is 17.1 percent, and with 22 times, 13.0 percent. At a 9 percent discount rate it is 13.8 percent, and at 11 percent, 15.9 percent. Using only second-quarter free cash flow, annualized to $85.4 billion, it rises to 20.1 percent.</p>
+<h4>If the number is off</h4>
+<p>Every case sits between about 12 and 20 percent a year. If the true number is the higher end, the price is not cheap on cash flow. If it is the lower end, the price is asking for little and the chart is the main obstacle.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Our base-case target price for the next 12 months is $296.73, which is +38.6 percent from the close. A base target is the price we expect if the central scenario plays out.</p>
+<h4>How it was calculated</h4>
+<p>We used a measured move, which projects the height of a price base above its top. The base runs from the 63-day low of $190.01 to the 52-week high of $243.37, a height of $53.36. Adding that height to the high gives $296.73. We then checked it against earnings: $296.73 is 18.65 times the FY2028 consensus EPS of $15.91.</p>
+<h4>The inputs</h4>
+<p>63-day base low $190.01, 52-week high $243.37, close $214.13, 50-day average $223.08, 200-day average $202.97, average true range $5.97.<sup><a href="#cite_note-30">[30]</a></sup> FY2028 consensus EPS $15.91, high $18.75, low $12.85.<sup><a href="#cite_note-23">[23]</a></sup> Stop-loss $197.00 follows the Core rule: below the lowest of the swing low ($212.85), the 50-day average and the 200-day average, minus one average true range: $202.97 − $5.97 = $197.00.<sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-30">[30]</a></sup></p>
+<h4>The range</h4>
+<p>Bull target $349.70: the same 18.65 times multiple applied to the highest FY2028 EPS estimate of $18.75. Bear target $164.27: the 52-week low, which equals 17.6 times FY2027 EPS of $9.31. For comparison, the Street's average target is $328.72 and its lowest is $180.<sup><a href="#cite_note-24">[24]</a></sup></p>
+<h4>If the number is off</h4>
+<p>The target only applies if the price first breaks above $243.37, which is 13.7 percent above the close. If the breakout never comes, the target does not apply. Reward-to-risk at the close is 4.82 to 1, and it falls to 2.82 to 1 if we paid $223.08.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>The probability-weighted 12-month price is $260.96, which is +21.9 percent from the close. This is the average outcome, weighted by how likely we think each scenario is, and it is not a forecast.</p>
+<h4>How it was calculated</h4>
+<p>We multiplied each scenario price by its probability and added them: 20% × $349.70 + 45% × $296.73 + 35% × $164.27.</p>
+<h4>The inputs</h4>
+<p>Prices from the two estimates above. Probabilities are our judgement, set out with reasons in the scenario table. They sum to 100 percent.</p>
+<h4>The range</h4>
+<p>If we moved 10 points of probability from base to bear, the weighted price would be $247.72. If we moved them from bear to base, it would be $274.21.</p>
+<h4>If the number is off</h4>
+<p>The weighted price is far above the close, and that is not enough to buy. The stock has no confirmed uptrend, the scenarios assume a breakout that has not happened, and the bear case is a fall of about 23 percent. The weighted price tells us the business may be worth more than the price, and the chart tells us the market has not agreed.</p>
+</section>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>12-month bull, base and bear scenarios for NVDA from the close of $214.13</caption>
+<thead><tr><th>Scenario</th><th>Story in plain words</th><th>Driver</th><th>12-month price</th><th>Probability</th><th>Why this probability</th><th>Change from close</th></tr></thead>
+<tbody>
+<tr><td>Bull</td><td>Rubin ramps on schedule, third-quarter revenue beats the $108.0B outlook by the recent 4 to 6 percent, and customers pay faster. The market pays the base multiple on the highest estimates.</td><td>FY2028 EPS near the Street high of $18.75</td><td>$349.70</td><td>20%</td><td>It needs both an earnings beat and a chart breakout. Three recent beats support it. The regime is a correction and breadth is weak, which holds it down.</td><td>+63.3%</td></tr>
+<tr><td>Base</td><td>The stock breaks above its $243.37 high after strong third- and fourth-quarter results, then travels one base height. Customers keep paying.</td><td>Consensus FY2028 EPS of $15.91 at about 18.7 times</td><td>$296.73</td><td>45%</td><td>Estimates are rising, the business beat its outlook three quarters in a row, and the stock is already on its support. The breakout is not yet confirmed, so this is not higher.</td><td>+38.6%</td></tr>
+<tr><td>Bear</td><td>A customer-financing problem or a supply and inventory mismatch hits the third or fourth quarter. The price retests the 52-week low and the market stops paying for future growth.</td><td>Price falls to the 52-week low, about 17.6 times FY2027 EPS</td><td>$164.27</td><td>35%</td><td>The stock is in Stage 3, fails all three momentum tests, the market is in correction, and $108.5B of guarantees and $279B of supply commitments could turn against it. Estimates are rising, which keeps this below one in two.</td><td>-23.3%</td></tr>
+<tr><td>Probability-weighted</td><td>The three scenarios averaged by probability.</td><td>Not applicable</td><td>$260.96</td><td>100%</td><td>Probabilities sum to 100 percent.</td><td>+21.9%</td></tr>
+</tbody>
+</table></div>
+<p>The scenarios are lopsided in price: the bull and base cases add 39 to 63 percent, and the bear case subtracts 23 percent. The probabilities are weighted toward the base case because estimates are rising. A fourth outcome sits outside the table: a drift sideways between $190 and $243. That outcome is the most likely way to lose time rather than money, and we have not given it a separate probability.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Why these estimates might be wrong</h2>
+<p>Every estimate in Chapter 5 rests on an assumption that could be wrong. This chapter names the weakest assumption behind each estimate, describes the strongest case against our own view, names the one claim the whole conclusion depends on, and says when we will learn more. The aim is to say what evidence would prove the work wrong before that evidence arrives.</p>
+<h3>Risk one: customers are being financed, in part, by NVIDIA</h3>
+<p>The weakest assumption behind the base target is that demand is organic. The 10-Q says that if AI clouds do not sell committed capacity to third parties, NVIDIA has agreed to purchase that capacity, and that customers may fail to meet financial commitments or become insolvent.<sup><a href="#cite_note-3">[3]</a></sup> NVIDIA also guarantees up to $105 billion of lease payments at the Ohio campus where an OpenAI affiliate is the tenant, and OpenAI has agreed to reimburse NVIDIA for any payments made.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> A reimbursement promise is only as good as the party making it. If end demand for AI computing falls short of the cost of the capacity, NVIDIA could lose both the sale and the guarantee.</p>
+<p>The evidence that would show the risk is real is rising collection days, which went from 45 to 60 in one quarter, new or larger guarantees, or a customer asking for longer payment terms.<sup><a href="#cite_note-2">[2]</a></sup> We will see it in the third-quarter report and 10-Q.</p>
+<h3>Risk two: $279 billion of supply promises meet demand that may slow</h3>
+<p>The weakest assumption behind the free cash flow estimate is that supply commitments can be sold through. The 10-Q says NVIDIA may be unable to reduce them if demand differs from expectations, and that some supplier agreements may be cancelable, rescheduled or adjustable only before firm orders are placed.<sup><a href="#cite_note-3">[3]</a></sup> Inventory already rose to $31.6 billion from $25.8 billion in one quarter.<sup><a href="#cite_note-2">[2]</a></sup> A mismatch between supply and demand is what cut the gross margin to 56.9 percent in fiscal 2023.<sup><a href="#cite_note-14">[14]</a></sup></p>
+<p>The company's own outlook for the third quarter is a gross margin of 74.0 percent, 100 basis points lower than the second quarter, and memory prices are already described as elevated.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> If the next outlook shows another step down, our base case weakens.</p>
+<h3>Risk three: few customers, and a market that has stopped paying for growth</h3>
+<p>The weakest assumption behind the scenario probabilities is that the market will pay about 18.7 times FY2028 profit once the stock breaks out. Today it pays 13.5 times, and three direct customers were 44 percent of first-half revenue.<sup><a href="#cite_note-3">[3]</a></sup> One of them cutting orders would move the whole company's revenue in a single quarter. Custom chips from cloud companies are a second threat, since the 10-K names Alphabet, Amazon and Microsoft as firms designing their own AI hardware.<sup><a href="#cite_note-8">[8]</a></sup></p>
+<p>Export rules are a third. The outlook already assumes no Data Center compute revenue from China, so a ban would not change the forecast, but regulators in five jurisdictions have asked for information and the 10-Q says more requests are likely.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></p>
+<h3>The red-team bear case, in one paragraph</h3>
+<p>A sceptic would write it this way. NVIDIA's revenue doubled because a few customers raced to build AI capacity, and NVIDIA lent them its balance sheet to do it. Cash from operations fell from $50.3 billion in the first quarter to $24.1 billion in the second as receivables grew by $22.3 billion.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Commitments and guarantees of $530.5 billion are 9.4 times its cash and debt securities. Profit includes $23.7 billion of equity gains that will not repeat.<sup><a href="#cite_note-1">[1]</a></sup> The stock has already stopped rising, and the market is in correction. If any one large customer stumbles, the guarantees turn from a sales tool into a liability, and the stock falls toward the 52-week low of $164.27. The sceptic reads today's 13.5 times multiple on FY2028 estimates as the market refusing to believe those estimates. Chapter 5 reads the same multiple as room to re-rate if the estimates are met.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Weakest assumption, disproof evidence and timing for each estimate in this report</caption>
+<thead><tr><th>Estimate</th><th>Weakest assumption</th><th>Evidence that would show it wrong</th><th>When we will know</th></tr></thead>
+<tbody>
+<tr><td>Layer 1 return on invested capital</td><td>Operating margin stays near 65%</td><td>Gross margin below 70% or operating margin below 55% in any reported quarter</td><td>Q3 FY27 results, estimated November 18, 2026 (not yet confirmed by NVIDIA)</td></tr>
+<tr><td>Trailing free cash flow of $127.0B</td><td>Q2's weak cash conversion is timing, not a trend</td><td>A third quarter where free cash flow stays near $21B or collection days rise above 60</td><td>Q3 FY27 10-Q, after the results release</td></tr>
+<tr><td>Reverse DCF implied growth of 14.8%</td><td>Trailing free cash flow is a fair base</td><td>Second-quarter pace of $85.4B becomes the new base, which lifts the implied rate to 20.1%</td><td>Q3 FY27 results</td></tr>
+<tr><td>Base target of $296.73</td><td>A breakout above $243.37 happens</td><td>A close below $197.00 or two closes below the 200-day average of $202.97</td><td>Daily, from the next session</td></tr>
+<tr><td>Scenario probabilities (20 / 45 / 35)</td><td>Estimates keep rising and customers keep paying</td><td>Estimate cuts, new guarantees, or revenue below $105.8B (the bottom of the outlook range)</td><td>Q3 FY27 results and the next three months of revisions</td></tr>
+<tr><td>Layer 2 scorecard (3 PASS, 2 WATCH)</td><td>Concentration and financing are manageable</td><td>A customer above 20% of revenue, or commitments above $279B with falling demand signals</td><td>Q3 FY27 10-Q</td></tr>
+</tbody>
+</table></div>
+<p>The table lists one weak point for each number in the report, what would disprove it and when we will see that. Most of the disproof signals arrive with the next earnings release. We rank customer financing first, because it is the one that could turn good revenue into a loss.</p>
+<p>The hinge claim is this: AI customers can pay for the capacity NVIDIA is shipping and financing, out of the revenue that capacity earns for them. If that is true, the 14.8 percent growth that the price assumes is too low and the scenarios in Chapter 5 are fair. If it is false, the guarantees and supply commitments become the main story. We will know more at the third-quarter report, which the market expects on November 18, 2026, though NVIDIA has not confirmed the date.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-29">[29]</a></sup> A good report would show revenue at or above the $105.8 billion bottom of the outlook range, collection days back near 45 to 50, and no new guarantees. A bad one would show the reverse. The Hugging Face purchase, expected to close in the first half of 2027, and the first phases of the Ohio campus, expected in fiscal 2029, are later checks.<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when</h2>
+<p>The decision is <span class="verdict verdict-exit">REJECTED</span> for now, and the rule is the Layer 1 technical floor. The Core book requires Stage 1 or Stage 2, the ledger shows Stage 3, and the momentum gate returned NO_MOMENTUM, with all three tests failing.<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-31">[31]</a></sup> This is a chart decision. The financial floor, the Layer 2 scorecard (three PASS, two WATCH) and the asymmetry floor all pass. Allocation today is zero. The label can change quickly, because Test A fails on one line only.</p>
+<p>We hold no NVDA shares and no NVDA options, according to the portfolio snapshot and the options file.<sup><a href="#cite_note-32">[32]</a></sup> The shortlist is empty, so all slots are free: 10 Core Alpha, 10 Tactical Momentum and 5 Leveraged Satellite. The portfolio already carries about 20.3 percent of net worth in AI-infrastructure names: VRT (data center power and cooling) 5.74, ORCL (AI cloud infrastructure) 5.43, ASX (chip packaging) 3.92, ANET (AI networking) 2.08, SKHY (high-bandwidth memory) 1.73 and SOXL (a leveraged semiconductor fund) 1.38 percent.<sup><a href="#cite_note-32">[32]</a></sup> A new NVDA position would add to a theme the portfolio already leans on.</p>
+<p>Layer 3 of the method is the support-aware posture. The distance from the nearest support is 0.21 ATR, which falls in the FULL_SIZE band of the ladder (below 0.6 ATR).<sup><a href="#cite_note-31">[31]</a></sup><sup><a href="#cite_note-30">[30]</a></sup> That band would allow a full risk-adjusted size if the chart gate passed. It does not override the gate. The close below both short-term averages means the price has not yet shown that buyers are in control.</p>
+<p>If the gate opens, the plan is this. The entry zone is $212.85 to $221.90. The low end is the 20-day swing low that now acts as support. The high end is the highest price that still gives a reward-to-risk of 3.0 to 1 with our target and stop, which is 3.01 to 1 at $221.90. The stop-loss is $197.00, which is the 200-day average of $202.97 less one ATR of $5.97, as the Core rule requires.<sup><a href="#cite_note-31">[31]</a></sup> The targets are $296.73 base, $349.70 bull and $164.27 bear, with the working in Chapter 5.</p>
+<p>Position size comes from risk, not from conviction alone. We would assign Tier 2, whose range is 4 to 6.5 percent, with a risk budget of 75 basis points of net worth, and a basis point is one-hundredth of a percent. At the top of the entry zone the stop is 11.22 percent away, so the formula gives 75 divided by 11.22, which is 6.68 percent, capped at the tier maximum of 6.5 percent. On the snapshot net worth of $82,699.61 that is about $5,375.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-31">[31]</a></sup> The table below shows 6.5 percent because it applies the formula; it is the size we would use only after the gate passes. Today the position is 0 percent.</p>
+<p>The let-winners-run rule would apply after entry. We would not trim a Stage 2 winner just because the RSI went above 70 or because its weight crossed 15 percent, as long as the business and the estimates held. The weight may grow to 22 percent while the stop trails the rising 21-day average or the 50-day average.<sup><a href="#cite_note-31">[31]</a></sup> A position that rises to 22 percent of the portfolio would be a large single-company risk in a company with a few customers, so we would review it at each earnings date.</p>
+<p>To restate before the table: today's allocation is 0 percent. The 6.5 percent in the table is what the formula would give on today's numbers, and it applies only if the name re-qualifies, meaning a Stage 2 classification, a passing momentum test and an asymmetry of at least 3.0 to 1 at the actual fill, with support, stop and size recalculated.</p>
+<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 3 execution levels and risk-unit position sizing for NVDA</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Underwriting archetype &amp; bucket</td><td>COMPOUNDER (CORE_ALPHA)</td><td>Evaluates both static quality and rate-of-change inflection</td></tr>
+<tr><td>Action verdict</td><td><span class="verdict verdict-exit">REJECTED</span></td><td>Layer 1 technical floor fails (Stage 3 against the Core rule of Stage 1 or 2) and the momentum gate returns NO_MOMENTUM; today's allocation is 0%</td></tr>
+<tr><td>Recommended entry zone</td><td>$212.85 to $221.90</td><td>Current price $214.13 is 0.21 ATR from verified support</td></tr>
+<tr><td>Structural invalidation stop</td><td>$197.00 (-11.22% from entry)</td><td>below min(swing low, 50/200-day MA) minus 1.0 x ATR(14)</td></tr>
+<tr><td>Base / Bull / Bear targets</td><td>$296.73 / $349.70 / $164.27</td><td>Reward-to-risk asymmetry at CMP: 4.82:1</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat)</td><td>6.5% of net worth (TIER_2, 75 bps risk budget)</td><td>Formula: min(Tier cap 4–6.5%, 75 bps / 11.22% stop distance)</td></tr>
+<tr><td>Let-winners-run rule</td><td>Appreciated weight ceiling up to 22%</td><td>Never trim solely for RSI &gt; 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break</td></tr>
+</tbody>
+</table></div>
+<p>Today's allocation is 0 percent, and the 6.5 percent shown applies only if the name re-qualifies on a fresh evaluation. This table separates the rule from today's action. The verdict row shows REJECTED, which means the allocation today is zero. The sizing rows show what the rules would give if the chart gate passed: an entry zone of $212.85 to $221.90, a stop of $197.00, and a size of up to 6.5 percent of net worth. It records the plan on today's numbers so the decision can be made quickly if the gate opens, and it is not advice to buy at today's price.</p>
+<p class="trigger">Re-open trigger: a daily close above $223.08, the 50-day average, with that average still rising and the 63-day return against the S&amp;P 500 still positive, would pass Test A and nothing more. That close alone does not make the name eligible. The Core floor needs the next ledger run to classify the stock as Stage 2, which means the price is above a rising 50-day average and a rising 200-day average. We would then require a fresh full Layer 1 evaluation of stage, momentum gate and asymmetry at the actual fill, with support, stop and size recalculated from that day's data. We make no standing promise to move to ACCUMULATE_ON_DIP.</p>
+<p class="trigger">Entry-price trigger: with today's target and stop, a buy at the $243.37 breakout would give only 1.15 to 1, which is ($296.73 − $243.37) ÷ ($243.37 − $197.00). A buy at $223.08 would give 2.82 to 1. Only a price at or below $221.90 clears the 3.0 floor, and that price is below the 50-day average, so a fill there would usually fail Test A again. The target and stop would also need recalculating. To clear 3.0 to 1 at $223.08 the stop would have to be at least $198.53, which needs the 200-day average to rise by about $1.53 at an unchanged ATR. Until a fresh evaluation passes, the verdict stays REJECTED.</p>
+<p class="trigger">Turnaround trigger: a daily close above $228.18, the 20-day average, together with a positive 28-day return against the S&amp;P 500 and a positive two-week return, would pass Test C, which permits a starter position near support with a stop below the swing low.</p>
+<p class="trigger">Structure-break trigger: a daily close below $197.00, or two closes below the 200-day average of $202.97, would end the Stage 3 pullback and put the stock on watch for Stage 4. The verdict would stay REJECTED and the entry plan would be rebuilt from lower support.</p>
+<p class="trigger">Earnings trigger: at the third-quarter report, expected around November 18, 2026 but not confirmed, revenue below $105.8 billion, a gross margin below 73.5 percent, or collection days above 60 would lower the base-case probability from 45 percent. New customer guarantees beyond the current $108.5 billion would add to the financing risk in Chapter 6.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-28">[28]</a></sup></p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p><strong>Ledger enrichment missing.</strong> The Yahoo fundamentals endpoint returned HTTP 401 while the session ledger was built, so the ledger's reverse_dcf, consensus_revisions and fundamentals_snapshot blocks are empty for NVDA. We cannot repair the frozen ledger. The effect is that the renderer fills the first five rows of the Chapter 5 expectations table, and the Implied growth and Revision lines in the top figures strip, with N/A or NO_CONSENSUS. We computed the reverse DCF ourselves from SEC filings and show it in the extra rows, and we read consensus revisions from a fetched Yahoo analysis page. Confidence is moderate because consensus is a secondary source. Re-running the ledger enrichment when the Yahoo endpoint recovers would cure it.</p><p><strong>Stale as-of dates on periodic filings.</strong> The latest 10-Q covers the quarter ended July 26, 2026, which is 83 days before the 2026-10-17 run date and so outside the 60-day window. No newer periodic filing exists, so the citation check is run with --allow-stale-asof. 54 of the 68 research records have a period that ends before 2026-08-18 and print as EXCEPTION AS-OF lines. This includes all fiscal 2022 to fiscal 2026 annual data, the earlier quarterly releases and the peer quarters. The next 10-Q, expected after the November 2026 results, cures it.</p><p><strong>Secondary sources for consensus and price targets.</strong> Analyst counts differ by provider (62 at S&amp;P Global and CleaRank, 59 at Walnut Invest, 55 at MarketBeat), and the pages are aggregators. They are used for expectations context only. The Seeking Alpha and Zacks estimate pages returned HTTP 403 and were not used.</p><p><strong>Earnings date is an estimate.</strong> NVIDIA had not announced its third-quarter fiscal 2027 date when this report was written. The November 18, 2026 date comes from two aggregators and follows the company's usual timing. We say so wherever the date appears.</p><p><strong>Three-year median price-to-earnings not verified.</strong> We could not verify a three-year median P/E from fetched sources, so the target is anchored on a measured move and checked against consensus earnings instead. The share count used for market value is the rounded 24.1 billion from the 10-Q cover page. The trailing P/E of 27.1 uses GAAP EPS, which includes equity gains. Peer figures use each company's own fiscal calendar.</p><p>Publication status: PUBLISHED_WITH_GATE_EXCEPTIONS. The independent reviewer and the red team both approved after round 2. The exceptions are the ones listed above. After that approval, only this status disclosure was added to the report.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">NVIDIA Corporation, Form 8-K Exhibit 99.1, press release for the second quarter of fiscal 2027 (quarter ended July 26, 2026), filed 2026-08-26: summary table, outlook, statements of income, balance sheets, cash flows and reconciliation tables. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm">sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm</a></li>
+<li id="cite_note-2">NVIDIA Corporation, Form 8-K Exhibit 99.2, CFO Commentary on second quarter fiscal 2027 results, filed 2026-08-26: revenue by market platform, commitments tables, guarantees, balance sheet and cash flow commentary. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27cfocommentary.htm">q2fy27cfocommentary.htm</a></li>
+<li id="cite_note-3">NVIDIA Corporation, Form 10-Q for the quarter ended July 26, 2026, filed 2026-08-26: cover page (shares outstanding), Note 10 (commitments and contingencies), Management's Discussion (liquidity, capital return, debt), Part II Item 1A (risk factors), customer concentration note. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm">nvda-20260726.htm</a></li>
+<li id="cite_note-4">NVIDIA Corporation, Form 8-K dated 2026-08-17, Item 1.01: residual value guaranties with SB Energy for the PORTS Technology Campus, capped at $105 billion. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000069/nvda-20260817.htm">nvda-20260817.htm</a></li>
+<li id="cite_note-5">NVIDIA Corporation, Form 8-K dated 2026-09-02, Item 8.01: definitive agreement to acquire Hugging Face, Inc. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000078/nvda-20260902.htm">nvda-20260902.htm</a></li>
+<li id="cite_note-6">NVIDIA Corporation, Form 8-K Exhibit 99.1, press release for the fourth quarter and fiscal 2026 (year ended January 25, 2026), filed 2026-02-25: fiscal 2026 statements of income and cash flows, outlook for the first quarter of fiscal 2027. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000019/q4fy26pr.htm">q4fy26pr.htm</a></li>
+<li id="cite_note-7">NVIDIA Corporation, Form 8-K Exhibit 99.2, CFO Commentary on fourth quarter and fiscal 2026, filed 2026-02-25: supply commitments, days sales outstanding, capital return. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000019/q4fy26cfocommentary.htm">q4fy26cfocommentary.htm</a></li>
+<li id="cite_note-8">NVIDIA Corporation, Form 10-K for the fiscal year ended January 25, 2026, filed 2026-02-25: Item 1 (business, competition, manufacturing), Item 1A (risk factors), Note 16 (segment, end-market and geographic revenue), customer concentration. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm">nvda-20260125.htm</a></li>
+<li id="cite_note-9">NVIDIA Corporation, Form 8-K Exhibit 99.1, press release for the first quarter of fiscal 2027 (quarter ended April 26, 2026), filed 2026-05-20: results, outlook for the second quarter, dividend increase and repurchase authorization. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000051/q1fy27pr.htm">q1fy27pr.htm</a></li>
+<li id="cite_note-10">NVIDIA Corporation, Form 8-K Exhibit 99.2, CFO Commentary on first quarter fiscal 2027 results, filed 2026-05-20: supply commitments and days sales outstanding. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000051/q1fy27cfocommentary.htm">q1fy27cfocommentary.htm</a></li>
+<li id="cite_note-11">NVIDIA Corporation, Form 10-Q for the quarter ended April 26, 2026, filed 2026-05-20: customer concentration note. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm">nvda-20260426.htm</a></li>
+<li id="cite_note-12">NVIDIA Corporation, Form 8-K Exhibit 99.2, CFO Commentary on third quarter fiscal 2026 results (quarter ended October 26, 2025), filed 2025-11-19: supply commitments and outlook for the fourth quarter of fiscal 2026. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581025000228/q3fy26cfocommentary.htm">q3fy26cfocommentary.htm</a></li>
+<li id="cite_note-13">NVIDIA Corporation, Form 8-K Exhibit 99.1, press release for the third quarter of fiscal 2026, filed 2025-11-19: quarterly summary table. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581025000228/q3fy26pr.htm">q3fy26pr.htm</a></li>
+<li id="cite_note-14">NVIDIA Corporation, Form 10-K for the fiscal year ended January 26, 2025, filed 2025-02-26: consolidated statements of income, balance sheets and cash flows for fiscal 2023 to 2025 (split-adjusted per-share data). <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm">nvda-20250126.htm</a></li>
+<li id="cite_note-15">NVIDIA Corporation, Form 10-K for the fiscal year ended January 29, 2023, filed 2023-02-24: consolidated statements of income, balance sheets and cash flows for fiscal 2021 to 2023 (per-share data before the 2024 stock split). <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581023000017/nvda-20230129.htm">nvda-20230129.htm</a></li>
+<li id="cite_note-16">NVIDIA Corporation, Schedule 14A definitive proxy statement filed 2026-05-12: Security Ownership of Certain Beneficial Owners and Management, table dated March 23, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000036/nvda-20260512.htm">nvda-20260512.htm</a></li>
+<li id="cite_note-17">NVIDIA Corporation, Form 8-K dated 2026-08-26, Item 2.02 cover document listing the press release and CFO commentary exhibits. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/nvda-20260826.htm">nvda-20260826.htm</a></li>
+<li id="cite_note-18">U.S. Securities and Exchange Commission, EDGAR submissions index for NVIDIA Corporation (CIK 0001045810), listing filing and report dates used to identify the latest 10-K and 10-Q. <a href="https://data.sec.gov/submissions/CIK0001045810.json">data.sec.gov/submissions/CIK0001045810.json</a></li>
+<li id="cite_note-19">Advanced Micro Devices, Inc., Form 10-Q for the quarter ended June 27, 2026, filed 2026-08-05: condensed consolidated statements of operations (peer comparison). <a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm">amd-20260627.htm</a></li>
+<li id="cite_note-20">Broadcom Inc., Form 10-Q for the fiscal quarter ended August 2, 2026, filed 2026-09-10: condensed consolidated statements of operations (peer comparison). <a href="https://www.sec.gov/Archives/edgar/data/1730168/000173016826000080/avgo-20260802.htm">avgo-20260802.htm</a></li>
+<li id="cite_note-21">Intel Corporation, Form 10-Q for the quarter ended June 27, 2026, filed 2026-07-24: consolidated condensed statements of operations (peer comparison). <a href="https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/intc-20260627.htm">intc-20260627.htm</a></li>
+<li id="cite_note-22">Marvell Technology, Inc., Form 10-Q for the quarter ended August 1, 2026, filed 2026-08-28: condensed consolidated statements of operations (peer comparison). <a href="https://www.sec.gov/Archives/edgar/data/1835632/000183563226000025/mrvl-20260801.htm">mrvl-20260801.htm</a></li>
+<li id="cite_note-23">Yahoo Finance, NVIDIA Corporation (NVDA) Analysis page, fetched 2026-10-17 after the 2026-10-16 close: analyst counts, average estimates, EPS trend (current, 30, 60 and 90 days ago), close of $214.13 (secondary source). <a href="https://finance.yahoo.com/quote/NVDA/analysis/">finance.yahoo.com/quote/NVDA/analysis</a></li>
+<li id="cite_note-24">StockAnalysis.com, NVIDIA (NVDA) Stock Forecast and Analyst Price Targets, last updated 2026-10-09, data from S&amp;P Global Market Intelligence (secondary source). <a href="https://stockanalysis.com/stocks/nvda/forecast/">stockanalysis.com/stocks/nvda/forecast</a></li>
+<li id="cite_note-25">CleaRank, NVIDIA (NVDA) stock forecast, as of 2026-10-17, analyst rating counts and target range from TwelveData (secondary source). <a href="https://clearank.com/stock/nvda-nvidia-corp/">clearank.com/stock/nvda-nvidia-corp</a></li>
+<li id="cite_note-26">MarketBeat, NVIDIA (NVDA) Stock Forecast and Price Target, consensus target and analyst count (secondary source). <a href="https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/">marketbeat.com/stocks/NASDAQ/NVDA/forecast</a></li>
+<li id="cite_note-27">Walnut Invest, NVIDIA (NVDA) stock forecast and price target, October 2026 (secondary source). <a href="https://walnutinvest.com/stocks/nvda/forecast">walnutinvest.com/stocks/nvda/forecast</a></li>
+<li id="cite_note-28">Finance Calendar, NVDA Earnings November 2026: expected date of November 18, 2026, not yet confirmed by the company (secondary source). <a href="https://www.financecalendar.com/event/nvda-earnings-november-2026/">financecalendar.com/event/nvda-earnings-november-2026</a></li>
+<li id="cite_note-29">MarketBeat, NVIDIA (NVDA) Earnings Date and Reports 2026: estimated next earnings date and second-quarter EPS versus consensus (secondary source). <a href="https://www.marketbeat.com/stocks/NASDAQ/NVDA/earnings/">marketbeat.com/stocks/NASDAQ/NVDA/earnings</a></li>
+<li id="cite_note-30">Session market-data ledger facts_US_2026-10-16.json (Yahoo Finance daily bars via yfinance; SMA arithmetic; RSI and ATR by Wilder 14), instruments.NVDA, regime and momentum_gate blocks, final bar 2026-10-16. Frozen for this run; the reverse_dcf and consensus_revisions blocks are empty for this run.</li>
+<li id="cite_note-31">Repository rules file .agents/config/scoring.json (schema version 2, updated 2026-10-16): hard red lines, archetypes, asymmetry floors, support-distance ladder, stop placement, reverse-DCF parameters, risk-unit sizing and momentum gate.</li>
+<li id="cite_note-32">Portfolio snapshot positions_US_2026-10-16.json (net worth $82,699.61) and data/options/US.json, checked for NVDA shares or options; none found.</li>
+</ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>

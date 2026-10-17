@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-16">
+<meta name="generated-at" content="2026-10-17T05:28:17.634243-07:00">
+<title>Meta Platforms, Inc. (NASDAQ: META): the company research book, as of 2026-10-16</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" aria-disabled="true">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Meta Platforms, Inc. (NASDAQ: META): the company research book, as of 2026-10-16</h1><p class="report-generated">Generated Date: <time datetime="2026-10-17T05:28:17.634243-07:00">17 Oct 2026, 05:28 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-16</p></header>
+<dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span> (NONE_QUALIFIES)</dd></div>
+<div><dt>Session Price (2026-10-16)</dt><dd>$709.33</dd></div>
+<div><dt>Strategy Bucket</dt><dd>CORE_ALPHA</dd></div>
+<div><dt>Implied 10Y Growth (Reverse DCF)</dt><dd>17.0%/yr on trailing FCF (our computation, see Ch. 5)</dd></div>
+<div><dt>Estimate Revisions (90d)</dt><dd>NO_CONSENSUS</dd></div>
+<div><dt>Trend &amp; Momentum Gate</dt><dd>Stage 2 (Markup) | NO_MOMENTUM</dd></div>
+<div><dt>Support Distance / Stop</dt><dd>1.18 ATR | Stop $606.69</dd></div>
+<div><dt>Base Target / Asymmetry</dt><dd>$803.90 | 0.92:1 (Risk-Unit Size: 2.0%)</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Meta Platforms owns Facebook, Instagram, WhatsApp and Messenger, and sells ads to 3.60 billion daily users<sup><a href="#cite_note-1">[1]</a></sup>. Revenue grew 28% in the June 2026 quarter, but AI data center spending cut the cash left for owners to $784 million<sup><a href="#cite_note-1">[1]</a></sup>. We reject the stock for now: share-based pay is 11.0% of revenue against a 5% limit, the chart fails the momentum test, and our $803.90 target gains less than our $606.69 stop loses<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-31">[31]</a></sup>. Today's allocation is 0%; the 2.0% in the top strip is only a size if Meta re-qualifies, and its N/A cells are empty data (see Chapter 5). The verdict would change if pay in shares fell inside the rules or cash recovered, and the next test is the October 21 report, five days after our data date<sup><a href="#cite_note-15">[15]</a></sup> (status: BEST_EFFORT_AFTER_REVIEW_LIMIT, PUBLISHED_WITH_GATE_EXCEPTIONS).</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does</h2>
+<p>Meta runs four large social and messaging apps: Facebook, Instagram, Messenger and WhatsApp. The company groups them as the Family of Apps. A second unit, Reality Labs, sells virtual reality headsets and smart glasses. In the second quarter of 2026 the Family of Apps brought in $60.37 billion of the $60.80 billion total revenue, and advertising alone was $59.36 billion, or 97.6% of everything Meta earned.<sup><a href="#cite_note-1">[1]</a></sup> Our arithmetic gives the 97.6% as 59,363 divided by 60,801.</p>
+<p>Who pays? Businesses of every size, from a local shop to a global brand, pay Meta to put their ads in front of people. Meta's AI systems decide which ad to show to which person. Revenue is therefore the number of ads shown times the average price of each ad. In the second quarter, ad impressions (the count of ads delivered) grew 14% over a year earlier and the average price per ad grew 12%.<sup><a href="#cite_note-1">[1]</a></sup> Those two growth rates combine to roughly the 27% rise in advertising revenue that the company reported.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The audience is the raw material. Meta counts daily active people (DAP), meaning individuals who used at least one of its apps on a given day. DAP was 3.60 billion on average for June 2026, up 3% from a year earlier.<sup><a href="#cite_note-1">[1]</a></sup> Average revenue per person (ARPP) is Family of Apps revenue divided by the average of DAP at the start and end of the quarter. It was $16.86 in the second quarter, up 24% year over year.<sup><a href="#cite_note-2">[2]</a></sup> Growth now comes mostly from earning more per person, not from adding people.</p>
+<p>Reality Labs is the long-term bet on new devices. It brought in $431 million of revenue in the second quarter and lost $4.62 billion at the operating line.<sup><a href="#cite_note-1">[1]</a></sup> The loss for all of 2025 was $19.19 billion, and management says the 2026 loss will stay similar.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<p>The newest part of the story is spending. Meta is building data centers to train its own AI models, to run the ad-ranking systems, and to offer new AI products. <dfn>Capital expenditure</dfn>, meaning cash spent on buildings, servers and equipment, including finance leases, was $72.22 billion in 2025 and is guided to $130 billion to $145 billion in 2026.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> On the July 2026 call, the CEO said, "We're getting a lot of offers for compute at a significant premium over what we paid for it," which hints at a possible new line of business.<sup><a href="#cite_note-24">[24]</a></sup> Founder Mark Zuckerberg holds a majority of the voting power, so outside owners cannot overrule his spending choices.<sup><a href="#cite_note-9">[9]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Meta's two reporting segments, second quarter 2026 versus second quarter 2025 (US$ millions)</caption>
+<thead><tr><th>Segment</th><th>Revenue, Q2 2026</th><th>Revenue, Q2 2025</th><th>Operating income (loss), Q2 2026</th><th>Operating income (loss), Q2 2025</th></tr></thead>
+<tbody>
+<tr><td>Family of Apps (Facebook, Instagram, Messenger, WhatsApp)</td><td>60,370<sup><a href="#cite_note-1">[1]</a></sup></td><td>47,146</td><td>23,394</td><td>24,971</td></tr>
+<tr><td>Reality Labs (headsets, smart glasses)</td><td>431</td><td>370</td><td>(4,619)</td><td>(4,530)</td></tr>
+<tr><td>Total company</td><td>60,801</td><td>47,516</td><td>18,775</td><td>20,441</td></tr>
+</tbody>
+</table></div>
+<p>Revenue in the Family of Apps grew 28% but its operating income fell 6%, and Reality Labs lost about the same amount as a year earlier. The company-wide operating income of $18.78 billion was 8% lower than a year ago even though revenue rose 28%, which is the central tension of this report.</p>
+<h3>Plain-English glossary for this report</h3>
+<ul>
+<li><strong>Family of Apps</strong> — Meta's advertising business: Facebook, Instagram, Messenger, WhatsApp and related services.</li>
+<li><strong>Daily active people (DAP)</strong> — the estimated number of distinct individuals who use at least one Meta app on a given day.</li>
+<li><strong>Average revenue per person (ARPP)</strong> — Family of Apps revenue divided by average DAP in the quarter; it shows how well Meta earns from each user.</li>
+<li><strong>Ad impressions and price per ad</strong> — the number of ads shown, and the average revenue earned from each one; together they give advertising revenue.</li>
+<li><strong>Capital expenditure</strong> — cash spent on long-lived assets such as data centers and servers; Meta includes principal paid on finance leases.</li>
+<li><strong><dfn>Free cash flow</dfn> (<dfn>FCF</dfn>)</strong> — cash from operations minus capital expenditure; it is what is left for owners, debt holders and new ideas.</li>
+<li><strong>Share-based compensation (<dfn>SBC</dfn> (stock-based compensation))</strong> — pay to employees in company shares; it is a real cost because it adds shares and shrinks each owner's slice.</li>
+<li><strong>Return on invested capital (<dfn>ROIC</dfn>)</strong> — after-tax operating profit divided by the money owners and lenders have put in.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Why the business is strong or weak</h2>
+<p>A strong business earns more than it costs to run, keeps customers, and is hard to copy. Meta passes the first two tests easily and the third mostly. The question this chapter answers is whether the strengths are growing faster than the weaknesses. The evidence says the strengths are intact, but the weaknesses are growing quickly.</p>
+<h3>Where Meta is strong</h3>
+<p>Meta's first strength is scale that feeds itself. Advertisers go where the people are, and people stay where their friends are. With 3.60 billion daily users, the audience advertisers can reach is very large.<sup><a href="#cite_note-1">[1]</a></sup> That scale produces data, and the data trains the AI that ranks ads. Better ranking raises the price advertisers will pay, which is what the 12% rise in price per ad in the second quarter suggests.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The second strength is profit per sale. The Family of Apps made $102.47 billion of operating income in 2025 on $198.76 billion of revenue, a 51.6% margin.<sup><a href="#cite_note-4">[4]</a></sup> Our arithmetic from the same release gives a company-wide <dfn>gross margin</dfn>, the share of revenue left after the direct cost of serving users, of 81.7% over the last twelve months. A business with margins like these can pay for a lot of mistakes.</p>
+<p>The third strength is growth that is still accelerating. Revenue grew 22% in 2025 and 28% in the June 2026 quarter, with every region growing: in the second quarter, 32% in the United States and Canada, 24% in Europe, 19% in Asia-Pacific and 36% in the rest of the world.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></p>
+<h3>Where Meta is weak</h3>
+<p>The first weakness is cost. Total costs rose 55% in the second quarter against revenue growth of 28%. Research and development rose from $12.94 billion to $21.66 billion.<sup><a href="#cite_note-1">[1]</a></sup> The <dfn>operating margin</dfn>, the share of revenue left after all running costs, fell from 43% to 31%. Two one-off items explain part of the drop: $2.40 billion of legal charges and $1.18 billion of severance.<sup><a href="#cite_note-1">[1]</a></sup> Adding both back gives operating income of $22.36 billion, a 36.8% margin, which is still well below last year's 43%.</p>
+<p>The second weakness is legal and regulatory risk, and it grew in the past six months. A New Mexico jury ordered $375 million in penalties in March 2026 over child safety claims.<sup><a href="#cite_note-21">[21]</a></sup> In August a judge added a $567 million abatement fund and five years of required product changes.<sup><a href="#cite_note-23">[23]</a></sup> On September 25, 2026 a second New Mexico jury found that Meta willfully violated the state's consumer protection law 43,899,720 times; at the legal maximum of $5,000 per violation the exposure is about $219.5 billion. That is a theoretical ceiling, not an expected payment, and a judge will now set the actual amount.<sup><a href="#cite_note-22">[22]</a></sup> Meta itself warns that youth-related trials this year may result in a material loss.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>The third weakness is dependence. Substantially all revenue comes from ads on Facebook and Instagram.<sup><a href="#cite_note-2">[2]</a></sup> The founder controls a majority of the votes, so a change of course depends on one person.<sup><a href="#cite_note-9">[9]</a></sup> The fourth is financing. Long-term debt was zero at the end of 2021 and is $83.66 billion now, after bond sales of about $30 billion in November 2025 and $25 billion in May 2026, our sums of the tranches listed in the two filings.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-13">[13]</a></sup> Interest expense in the second quarter was $783 million, 225% above a year earlier.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<p>The fifth weakness sits partly off the balance sheet. Meta's maximum exposure to loss on its Louisiana data center venture, in which it holds a 20% membership interest, is $46.03 billion, it signed another $68 billion of data center leases that start in 2027 and 2028, and non-cancelable contractual commitments total $349.31 billion.<sup><a href="#cite_note-2">[2]</a></sup> These are promises to pay whatever happens to ad revenue.</p>
+<h3>How Meta compares with its rivals</h3>
+<p>Alphabet grew revenue 24% in the same quarter, and its Google Cloud revenue rose 82%.<sup><a href="#cite_note-26">[26]</a></sup> Microsoft grew 18%, with Azure and other cloud services up 43%.<sup><a href="#cite_note-27">[27]</a></sup> Amazon grew 20%, with AWS up 37%.<sup><a href="#cite_note-28">[28]</a></sup> Each of the three therefore earns fast-growing cloud revenue next to its other income. CNBC's report on Meta's results says that, unlike them, Meta doesn't have a thriving cloud-computing business.<sup><a href="#cite_note-24">[24]</a></sup> Meta is growing faster than any of them, but its capital spending has no cloud revenue line beside it yet. Pinterest, a smaller ad platform, grew 18% and generated cash, but it is far smaller.<sup><a href="#cite_note-29">[29]</a></sup></p>
+<p>What this means for an owner: Meta has the fastest growth in this group, an 81.7% gross margin and a 51.6% Family of Apps operating margin. Its company-wide operating margin of 30.9% in the quarter is below Alphabet's 34.0% and Microsoft's 45.1%. Per CNBC, it is also the only one of the three large spenders without a thriving cloud business. The next chapter turns that observation into five measured indicators.</p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>
+<p>Layer 2 of our process asks which three to five numbers run this business. It also asks whether each is healthy. For an advertising platform the useful set has five parts. They are the size of the audience, the number and price of ads, the revenue per person, the ability to pay for capital spending from cash flow, and cost discipline. Each is scored PASS, WATCH or FAIL against a rule stated in the table. Four of five must pass for Layer 2 to be healthy.</p>
+<p>We chose these five because Meta's revenue equals people times ads times price, and its profit equals revenue minus the cost of building the machine that serves the ads. Today the cost of the machine is the swing factor.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<h3>Layer 2 scorecard: company-specific operating KPIs</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 scorecard for Meta: five operating indicators, latest quarter</caption>
+<thead><tr><th>Indicator</th><th>Rule we apply</th><th>Latest reading</th><th>Trend</th><th>Score</th></tr></thead>
+<tbody>
+<tr><td>1. Ad volume and price (impressions, price per ad)</td><td>PASS if both grow at least 5% year over year</td><td>Impressions +14%, price per ad +12% in Q2 2026<sup><a href="#cite_note-1">[1]</a></sup></td><td>Impressions +18% Q4 2025, +19% Q1 2026, +14% Q2 2026; price +6%, +12%, +12%<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>PASS</td></tr>
+<tr><td>2. Revenue per person (ARPP)</td><td>PASS if growth is at least 10% year over year</td><td>$16.86 in Q2 2026, +24%<sup><a href="#cite_note-2">[2]</a></sup></td><td>The nine quarters charted in the 10-Q rise from $11.89 to $16.86</td><td>PASS</td></tr>
+<tr><td>3. Audience (daily active people)</td><td>PASS if growth is at least 5%; WATCH if 2% to 5%</td><td>3.60 billion, +3%<sup><a href="#cite_note-1">[1]</a></sup></td><td>Growth slowed from +8% (Sep 2025) to +7% (Dec 2025), +4% (Mar 2026) and +3% (Jun 2026)<sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>WATCH</td></tr>
+<tr><td>4. Free cash flow after capital spending</td><td>PASS if free cash flow margin is at least 12% in the latest quarter; FAIL if below 5%</td><td>$784 million, 1.3% of revenue, in Q2 2026; $12.39 billion in Q1<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></td><td>Q2 2025: $8.55 billion. The 2026 capex guide implies negative cash flow in the second half (Chapter 3)</td><td>FAIL</td></tr>
+<tr><td>5. Cost discipline and Reality Labs losses</td><td>PASS if operating margin is within 5 points of last year and the Reality Labs loss is flat or falling; WATCH if only one holds; FAIL if neither</td><td>Operating margin 31% vs 43%; Reality Labs loss $8.65 billion in H1 2026 vs $8.74 billion<sup><a href="#cite_note-1">[1]</a></sup></td><td>Headcount 74,067 (Dec 2024), 78,865 (Dec 2025), 75,472 (Jun 2026), a figure that still includes about 8,000 employees affected by the May 2026 reduction, most of whom leave by the end of Q3, so the saving is not yet in the number; total 2026 expense guide $165-169 billion vs $117.69 billion in 2025<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>WATCH</td></tr>
+</tbody>
+</table></div>
+<p>Two indicators pass, two are on watch and one fails, so Layer 2 scores 2 of 5, below the 4-of-5 bar. The demand side is healthy: ads, price and revenue per person are all strong. The weakness is on the cash and cost side, which is where the AI buildout shows up.</p>
+<h3>Management walk-the-talk: past promises vs delivered reality</h3>
+<p>Walk-the-talk means comparing what management said it would do with what it did. <dfn>Guidance</dfn> is the company's own published forecast. We checked each outlook given in the January 2025 and January 2026 earnings releases against later releases. The pattern is clear. The direction is reliable. The size keeps growing.</p>
+<p>Take 2025 capital spending. In January 2025 the company guided to $60 billion to $65 billion.<sup><a href="#cite_note-8">[8]</a></sup> It raised the range to $64-72 billion in April, $66-72 billion in July and $70-72 billion in October, and the final figure was $72.22 billion, 11% above the original top end.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-5">[5]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> Total expenses for 2025 started at $114-119 billion and landed at $117.69 billion, inside the range.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> Management controlled the costs it could control. It under-forecast capital spending.</p>
+<p>The same thing is happening in 2026. The capex range started at $115-135 billion in January, rose to $125-145 billion in April because of higher component prices, and was narrowed to $130-145 billion in July.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> The midpoint moved from $125 billion to $137.5 billion, up 10% in six months. In October 2025 the company had also said that 2026 capital spending dollar growth would be notably larger than 2025, and that promise has been kept in full.<sup><a href="#cite_note-5">[5]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Meta guidance versus delivery, 2025 and 2026</caption>
+<thead><tr><th>What management said</th><th>When and where</th><th>What happened</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>2025 capital spending of $60-65 billion</td><td>January 2025 earnings release<sup><a href="#cite_note-8">[8]</a></sup></td><td>Actual $72.22 billion after three raises<sup><a href="#cite_note-4">[4]</a></sup></td><td>MISSED (over by 11% vs top end)</td></tr>
+<tr><td>2025 total expenses of $114-119 billion</td><td>January 2025 earnings release<sup><a href="#cite_note-8">[8]</a></sup></td><td>Actual $117.69 billion<sup><a href="#cite_note-4">[4]</a></sup></td><td>DELIVERED</td></tr>
+<tr><td>2026 capital spending of $115-135 billion</td><td>January 2026 earnings release<sup><a href="#cite_note-4">[4]</a></sup></td><td>Raised to $125-145 billion, then $130-145 billion<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>RAISED TWICE</td></tr>
+<tr><td>2026 total expenses of $162-169 billion</td><td>January 2026 earnings release<sup><a href="#cite_note-4">[4]</a></sup></td><td>Now $165-169 billion; low end lifted to absorb $2.40 billion legal charges<sup><a href="#cite_note-1">[1]</a></sup></td><td>ON TRACK, TIGHTER</td></tr>
+<tr><td>2026 operating income above 2025 ($83.28 billion)</td><td>January 2026 earnings release<sup><a href="#cite_note-4">[4]</a></sup></td><td>First half $41.65 billion vs $38.00 billion a year earlier; the second half must add more than $41.63 billion<sup><a href="#cite_note-1">[1]</a></sup></td><td>OPEN, ON TRACK</td></tr>
+<tr><td>2026 Reality Labs loss similar to 2025 ($19.19 billion)</td><td>January 2026 earnings release<sup><a href="#cite_note-4">[4]</a></sup></td><td>First half loss $8.65 billion vs $8.74 billion<sup><a href="#cite_note-1">[1]</a></sup></td><td>ON TRACK</td></tr>
+<tr><td>Share repurchases (no pledge made; $26.26 billion bought in 2025)</td><td>2025 results<sup><a href="#cite_note-4">[4]</a></sup></td><td>None in the first half of 2026; $25.03 billion authorization remains<sup><a href="#cite_note-2">[2]</a></sup></td><td>PAUSED (cash went to capex)</td></tr>
+</tbody>
+</table></div>
+<p>Management delivered on every promise about direction and cost control, and underdelivered on the one number investors care about most this year: how much capital spending it takes. The midpoint of the capital spending range has risen at every one of the five updates since each January guide, which is why we treat the current guide as a floor, not a midpoint.</p>
+<p>What this means for an owner: you can believe what management says about where it will spend. It has done so for two years. Do not rely on the size of the first number it gives. That number has been too low twice. The next chapter shows what the larger numbers do to the financial statements.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. The numbers, in plain words</h2>
+<p>This chapter shows five years of results and one extra column for the twelve months to June 2026. Meta's fiscal year is the calendar year. Figures are in US$ millions unless marked. Revenue, profit and cash flow come from the company's own filings, and every twelve-month figure is our arithmetic: the 2025 total, plus the first six months of 2026, minus the first six months of 2025.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></p>
+<p>Two things stand out in the table. First, revenue has nearly doubled since 2021 while operating income has less than doubled. Second, capital spending has gone from about $19 billion to about $92 billion a year, and free cash flow has fallen from a high of $52.10 billion in 2024 to $37.87 billion over the last twelve months.<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Debt went from nothing to $83.66 billion. <dfn>Net debt</dfn> is debt minus cash, so a negative figure means the company holds more cash than debt. Cash has grown, but only because the company borrowed.</p>
+<h3>Five years of income, cash flow and balance sheet</h3>
+<p>Read each row left to right to see the trend. The last column is the most recent twelve months.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Meta Platforms: five fiscal years and trailing twelve months to June 30, 2026 (US$ millions except per-share figures)</caption>
+<thead><tr><th>Measure</th><th>FY2021</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>12 months to Jun 2026</th></tr></thead>
+<tbody>
+<tr><td>Revenue</td><td>117,929<sup><a href="#cite_note-11">[11]</a></sup></td><td>116,609</td><td>134,902</td><td>164,501<sup><a href="#cite_note-4">[4]</a></sup></td><td>200,966</td><td>228,247<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Operating income</td><td>46,753</td><td>28,944</td><td>46,751</td><td>69,380</td><td>83,276</td><td>86,926</td></tr>
+<tr><td>Operating margin</td><td>39.6%</td><td>24.8%</td><td>34.7%</td><td>42.2%</td><td>41.4%</td><td>38.1%</td></tr>
+<tr><td>Net income</td><td>39,370</td><td>23,200</td><td>39,098</td><td>62,360</td><td>60,458</td><td>68,098</td></tr>
+<tr><td>Diluted earnings per share (US$)</td><td>13.77</td><td>8.59</td><td>14.87</td><td>23.86</td><td>23.49</td><td>26.55</td></tr>
+<tr><td>Cash from operations</td><td>57,683</td><td>50,475</td><td>71,113</td><td>91,328</td><td>115,800</td><td>130,301</td></tr>
+<tr><td>Capital spending incl. finance leases (cash from operations minus FCF)</td><td>19,244</td><td>32,036</td><td>28,103</td><td>39,225</td><td>72,215</td><td>92,429</td></tr>
+<tr><td>Free cash flow (company definition)</td><td>38,439</td><td>18,439</td><td>43,010</td><td>52,103</td><td>43,585</td><td>37,872</td></tr>
+<tr><td>Free cash flow margin</td><td>32.6%</td><td>15.8%</td><td>31.9%</td><td>31.7%</td><td>21.7%</td><td>16.6%</td></tr>
+<tr><td>Stock-based compensation</td><td>9,164<sup><a href="#cite_note-11">[11]</a></sup></td><td>11,992</td><td>14,027</td><td>16,690<sup><a href="#cite_note-4">[4]</a></sup></td><td>20,427</td><td>25,136</td></tr>
+<tr><td>Stock-based compensation as % of revenue</td><td>7.8%</td><td>10.3%</td><td>10.4%</td><td>10.1%</td><td>10.2%</td><td>11.0%</td></tr>
+<tr><td>Cash and marketable securities</td><td>47,998<sup><a href="#cite_note-12">[12]</a></sup></td><td>40,738</td><td>65,403</td><td>77,815</td><td>81,592</td><td>90,258<sup><a href="#cite_note-1">[1]</a></sup></td></tr>
+<tr><td>Long-term debt</td><td>0</td><td>9,923</td><td>18,385</td><td>28,826</td><td>58,744</td><td>83,664</td></tr>
+<tr><td>Net debt (debt minus cash; negative = net cash)</td><td>(47,998)</td><td>(30,815)</td><td>(47,018)</td><td>(48,989)</td><td>(22,848)</td><td>(6,594)</td></tr>
+<tr><td>Shareholders' equity</td><td>124,879</td><td>125,713</td><td>153,168</td><td>182,637</td><td>217,243</td><td>261,221</td></tr>
+</tbody>
+</table></div>
+<p>The table shows a business whose profit keeps growing but whose cash after spending has shrunk for two years, and whose cushion of net cash has narrowed from $49.0 billion at the end of 2024 to $6.6 billion. It does not show the second half of 2026, when guided capital spending is higher than cash from operations, or the $349.31 billion of future commitments.</p>
+<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>
+<p>Layer 1 asks whether the company clears the hard floors in our rules file. It also asks which of three types it is. A COMPOUNDER has high quality, steady growth and a fair price. A TURNAROUND misses a standard today, but is cheap and improving. The third type is a stock in a confirmed uptrend with accelerating results. A <dfn>breakout</dfn> is a move of the price above a ceiling it failed to clear before, and the rules call this third type TACTICAL_BREAKOUT. <dfn>Stage 2</dfn> means the confirmed uptrend phase on the Weinstein stage scale, and <dfn>Stage 4</dfn> means the confirmed downtrend phase. A <dfn>base</dfn> is a flat trading range where a stock rests before its next move.<sup><a href="#cite_note-31">[31]</a></sup> Return on invested capital (ROIC) is after-tax operating profit divided by invested money. Free cash flow (FCF) is cash from operations minus capital spending. Stock-based compensation (SBC) is employee pay in shares. <dfn>EBITDA</dfn>, which stands for earnings before interest, taxes, depreciation and amortization, is profit before those costs. Earnings per share (<dfn>EPS</dfn>) is profit divided by the number of shares. <dfn>Asymmetry</dfn>, also called <dfn>reward-to-risk</dfn>, is the gain to the target divided by the loss to the <dfn>stop loss</dfn>, which is the price at which the idea is wrong. A name fails if any hard floor fails.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 hard floors and archetype tests for Meta (twelve months to June 2026 unless stated)</caption>
+<thead><tr><th>Test</th><th>Rule from scoring.json</th><th>Meta result, with working</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Red line: distressed balance sheet</td><td>Net debt / EBITDA of 4.0x or more together with interest coverage below 2.0x</td><td>Net debt is debt $83,664 minus cash $90,258 = -$6,594, so net cash. EBITDA (earnings before interest, taxes, depreciation and amortization) is $86,926 + $22,729 = $109,655, giving -0.06x. First-half operating income $41,647 over interest expense $1,345 = 31.0x<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>PASS</td></tr>
+<tr><td>Red line: Stage 4 breakdown</td><td>Close below falling 50-day below falling 200-day average with no base</td><td>Ledger shows Stage 2 (Markup); 50-day average rising<sup><a href="#cite_note-30">[30]</a></sup></td><td>PASS</td></tr>
+<tr><td>Red line: governance, fraud or going-concern warning</td><td>Any such finding</td><td>None in the 10-Q. Court findings concern consumer-protection claims, not accounting fraud, but they create a large loss risk<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-22">[22]</a></sup></td><td>PASS WITH WATCH</td></tr>
+<tr><td>ROIC at least 12% (Core prefers above 16%)</td><td>Compounder floor</td><td>After-tax operating profit $86,926 x (1 - 22.2% tax rate) = $67,633; invested money equity $261,221 + debt $83,664 = $344,885; ROIC 19.6%. A secondary source shows 25.40%<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-18">[18]</a></sup></td><td>PASS</td></tr>
+<tr><td>FCF margin at least 12%</td><td>Compounder floor</td><td>$37,872 over revenue $228,247 = 16.6% over twelve months; first half 2026 was 11.2% and the second quarter alone 1.3%<sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS on trailing; trend FAILS</td></tr>
+<tr><td>Net debt / EBITDA below 3.0x</td><td>Compounder floor</td><td>-0.06x with debt only; 0.20x if operating lease liabilities of $28,654 are added<sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+<tr><td>SBC below 5.0% of revenue (or below 10.0% if FCF minus SBC margin is at least 20% and the share count is shrinking)</td><td>Compounder floor</td><td>SBC $25,136 over revenue $228,247 = 11.0%. FCF minus SBC is $12,736, a 5.6% margin, not 20%. Diluted shares were 2,566 million vs 2,570 million, flat. Fails the 5% test and the 10% exception<sup><a href="#cite_note-1">[1]</a></sup></td><td>FAIL</td></tr>
+<tr><td>Technical floor (Core: Stage 1 base breakout or Stage 2)</td><td>Posture floor</td><td>Stage 2 (Markup) per ledger; momentum gate NO_MOMENTUM (Chapter 4)<sup><a href="#cite_note-30">[30]</a></sup></td><td>PASS on stage</td></tr>
+<tr><td>Asymmetry at least 3.0:1 (Core)</td><td>(target - price) / (price - stop)</td><td>($803.90 - $709.33) / ($709.33 - $606.69) = 0.92:1. The target is forward EPS $33.92 x 3-year median P/E 23.70<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-30">[30]</a></sup></td><td>FAIL</td></tr>
+<tr><td>Archetype: COMPOUNDER</td><td>Passes all compounder floors</td><td>Fails the SBC floor (11.0% vs 5.0%, and vs 10.0% in the exception)</td><td>NOT MET</td></tr>
+<tr><td>Archetype: TURNAROUND_VALUE_INFLECTION</td><td>Red lines pass, at least 2 improving signals, cheap valuation, asymmetry at least 3.5:1</td><td>Improving signals: margin expansion no (31% vs 43%); cash conversion no (FCF margin 21.7% to 16.6%); consensus EPS revisions no (2026 estimate -7.2% in 90 days); debt reduction no ($58,744 to $83,664). That is 0 of 4. P/E 26.7x is 12.7% above the 3-year median 23.70, not 25% below. Asymmetry 0.92<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-18">[18]</a></sup></td><td>NOT MET</td></tr>
+<tr><td>Archetype: TACTICAL_BREAKOUT</td><td>Stage 2 momentum leader, accelerating earnings, asymmetry at least 3.5:1</td><td>Revenue accelerates (28%) but profit does not; momentum gate NO_MOMENTUM; asymmetry 0.92<sup><a href="#cite_note-30">[30]</a></sup></td><td>NOT MET</td></tr>
+</tbody>
+</table></div>
+<p>Meta clears the solvency and return floors with ease and fails two: stock-based pay is 11.0% of revenue against a 5% limit, and the reward-to-risk ratio is 0.92 against a 3.0 floor. No archetype qualifies, so the Layer 1 result is FAIL_FINANCIAL, with FAIL_ASYMMETRY as a second, independent failure. Layers 2 and 3 are still scored, as the process requires.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Meta's return on invested capital over the last twelve months is 19.6%, and 15.2% if the capital base grows by $100 billion with no gain in profit.</p>
+<h4>How it was calculated</h4>
+<p>We took twelve-month operating income, subtracted tax at the twelve-month effective rate, and divided by shareholders' equity plus long-term debt at June 30, 2026. We did not subtract cash, which makes the result conservative.</p>
+<h4>The inputs</h4>
+<p>Twelve-month operating income $86,926 million (2025 $83,276 plus first half 2026 $41,647 minus first half 2025 $37,997).<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Twelve-month tax $19,426 on pretax income $87,524, a 22.2% rate.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Equity $261,221 million and long-term debt $83,664 million.<sup><a href="#cite_note-1">[1]</a></sup> After-tax profit $67,633 divided by $344,885 gives 19.6%.</p>
+<h4>The range</h4>
+<p>Bull: if cash and the lease liabilities of $28,654 are netted (capital of $283,281), the figure is 23.9%, close to the 25.40% shown by a secondary source.<sup><a href="#cite_note-18">[18]</a></sup> Bear: if capital rises by $100 billion because of 2026 spending and profit does not move, the figure is 67,633 / 444,885 = 15.2%.</p>
+<h4>If the number is off</h4>
+<p>If ROIC falls under 12% the compounder floor fails on a second count. At 15.2% the floor still holds, so ROIC is not the reason for the rejection; it is the trend that matters.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Free cash flow for the second half of 2026 is likely to be negative, between about -$7 billion and -$34 billion, which makes full-year 2026 free cash flow about +$6 billion to -$21 billion.</p>
+<h4>How it was calculated</h4>
+<p>We subtracted first-half capital spending from the company's full-year guide to get second-half spending, then subtracted that from an assumed second-half cash from operations.</p>
+<h4>The inputs</h4>
+<p>Full-year 2026 capital spending guide $130-145 billion.<sup><a href="#cite_note-1">[1]</a></sup> First-half capital spending including finance leases was $19.84 billion plus $31.08 billion, or $50.92 billion.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Second-half spending is therefore $79.08 billion to $94.08 billion. First-half cash from operations was $64.09 billion, and first-half free cash flow was $13.17 billion.<sup><a href="#cite_note-1">[1]</a></sup> If second-half cash from operations equals the first half, second-half free cash flow is between -$15.0 billion and -$30.0 billion. A consensus source shows full-year 2026 free cash flow of -$6.35 billion.<sup><a href="#cite_note-17">[17]</a></sup></p>
+<h4>The range</h4>
+<p>Bull: cash from operations of $72 billion in the second half and spending at the low end of the guide give -$7.1 billion. Bear: cash from operations of $60 billion and spending at the top end give -$34.1 billion. These ranges assume the company hits its own guide, and the guide has been raised before.</p>
+<h4>If the number is off</h4>
+<p>If second-half free cash flow comes in positive, the single biggest objection to the stock disappears, and we would reopen the review. If it is below -$30 billion, more debt is needed and the bear case in Chapter 5 gets more likely.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Stock-based compensation is 11.0% of revenue over the last twelve months and will stay near 10% to 11% through 2026.</p>
+<h4>How it was calculated</h4>
+<p>We added 2025 stock-based compensation to the first half of 2026 and subtracted the first half of 2025, then divided by twelve-month revenue.</p>
+<h4>The inputs</h4>
+<p>Twelve-month SBC $25,136 million (2025 $20,427 plus $13,690 minus $8,981) over revenue $228,247 million.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> The second quarter alone was $7,658 million on $60,801 million, or 12.6%.<sup><a href="#cite_note-1">[1]</a></sup> Unrecognized restricted stock unit cost is $79.79 billion over about three years, or about $26.6 billion a year.<sup><a href="#cite_note-2">[2]</a></sup></p>
+<h4>The range</h4>
+<p>Bull: first-half 2026 pace of $27.4 billion on consensus 2026 revenue of $254.19 billion is 10.8%.<sup><a href="#cite_note-16">[16]</a></sup> Bear: the second-quarter rate of 12.6% continues. For the 5% floor to be met, revenue would have to be roughly $500 billion at today's pay levels.</p>
+<h4>If the number is off</h4>
+<p>Even a large revenue beat does not bring SBC under 5%. Only a sharp cut in share-based pay would, so the rule should be read as a lasting feature of the company, not a quarterly accident.</p>
+</section>
+<h3>Peer comparison matrix</h3>
+<p>Peers were chosen because they also sell ads or are spending at the same scale on AI infrastructure. Every figure is from the most recent quarter in each company's own earnings release. Capital spending is purchases of property and equipment, and free cash flow margin here is cash from operations minus that spending, divided by revenue, so all five rows use the same rule.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Meta and four peers, latest reported quarter (June 2026 quarter)</caption>
+<thead><tr><th>Company</th><th>Revenue growth</th><th>Operating margin</th><th>Capital spending / revenue</th><th>Free cash flow margin</th><th>SBC / revenue</th></tr></thead>
+<tbody>
+<tr><td>Meta (Q2 2026)<sup><a href="#cite_note-1">[1]</a></sup></td><td>28%</td><td>30.9%</td><td>49.5%</td><td>2.9%</td><td>12.6%</td></tr>
+<tr><td>Alphabet (Q2 2026)<sup><a href="#cite_note-26">[26]</a></sup></td><td>24%</td><td>34.0%</td><td>37.5%</td><td>-4.9%</td><td>6.6%</td></tr>
+<tr><td>Microsoft (fiscal Q4 2026)<sup><a href="#cite_note-27">[27]</a></sup></td><td>18%</td><td>45.1%</td><td>39.8%</td><td>21.8%</td><td>3.5%</td></tr>
+<tr><td>Amazon (Q2 2026)<sup><a href="#cite_note-28">[28]</a></sup></td><td>20%</td><td>13.7%</td><td>27.0%</td><td>-4.4%</td><td>3.0%</td></tr>
+<tr><td>Pinterest (Q2 2026)<sup><a href="#cite_note-29">[29]</a></sup></td><td>18%</td><td>-4.7%</td><td>1.9%</td><td>22.9%</td><td>27.5%</td></tr>
+</tbody>
+</table></div>
+<p>Meta grows fastest and spends the largest share of revenue on capital equipment, 49.5%, so almost nothing is left as cash. Alphabet and Amazon also have negative free cash flow in the quarter, but both report fast-growing cloud segments (Google Cloud +82%, AWS +37%). Only Pinterest pays more of its revenue in shares, and Microsoft shows that heavy spending can coexist with a 21.8% cash margin when the spending earns cloud revenue.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. What the price is doing</h2>
+<p>A moving average is the average closing price over a set number of trading days. The <dfn>20-day moving average</dfn>, the <dfn>50-day moving average</dfn> and the <dfn>200-day moving average</dfn> are slow lines, and a rising stock tends to stay above them. The relative strength index (<dfn>RSI</dfn>) is a 0 to 100 meter of how fast the price has been moving. The average true range (<dfn>ATR</dfn>) is the typical daily price swing. A base is a flat trading range where a stock rests before its next move. The <dfn>pivot</dfn> is the top of that base. A breakout must clear it on heavy volume. A <dfn>retest</dfn> is a pullback that checks the broken level from above.</p><p>Meta closed at $709.33 on October 16, 2026, down 3.72% on the day. That is below the 20-day average of $735.77 and above the 50-day average of $655.24 and the 200-day average of $631.98.<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> The 50-day average has risen from $606.69 21 trading days ago, a healthy slope. The 200-day average has slipped from $640.06 to $631.98 over 63 trading days. Meta's RSI is 50.23, which is neutral, and its ATR is $25.29. The stock sits 9.04% below its 52-week high of $779.82. The wider market is in a correction: only 34.3% of stocks are above their 50-day averages, and the index has 7 distribution days.</p><p>What this means: the trend is intact but not clean. The one detail that stops it reading as a clean uptrend is the slightly falling 200-day average.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verified price and technical structure for META as of 2026-10-16</caption>
+<thead><tr><th>Technical measure</th><th>Ledger reading</th><th>Plain-English meaning</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-16)</td><td>$709.33<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></td><td>1D: -3.72%, 1W: -1.3%, 1M: 3.96%</td></tr>
+<tr><td>20-day / 50-day / 200-day average</td><td>$735.77 / $655.24 / $631.98</td><td>50-day trend: RISING (21d ago: $606.69; 200d 63d ago: $640.06)</td></tr>
+<tr><td>Weinstein trend stage</td><td>Stage 2 (Markup)</td><td>Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; Stage 4 is markdown</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day)</td><td>50.23 / $25.29</td><td>Momentum gauge (30 oversold, 70 overbought) and typical daily price swing</td></tr>
+<tr><td>52-week high / low</td><td>$779.82 / $520.26</td><td>Close is -9.04% from 52-week high</td></tr>
+<tr><td>20-day swing low / 63-day base low</td><td>$679.60 / $524.49</td><td>Active support anchor: $679.60 (1.18 ATR away)</td></tr>
+<tr><td>Volume vs 20-day average</td><td>0.93x</td><td>63-day volume dry-up ratio: 0.46</td></tr>
+<tr><td>Relative strength vs S&amp;P 500 (63d / 28d)</td><td>6.98% / 15.98%</td><td>Excess return vs benchmark over 3 months and 6 weeks</td></tr>
+</tbody>
+</table></div>
+<p>The picture is mixed. The stock is above its rising 50-day average. It is 1.18 daily swings above its nearest support, the 20-day low of $679.60. Friday's drop took it back below the 20-day average. Volume was 0.93 times normal, not heavy. The market backdrop is a correction. Even so, Meta beat the S&amp;P 500 by 6.98% over 63 days and by 15.98% over 28 days. Buyers favored Meta over the market in recent weeks.</p>
+<h3>Momentum and turnaround inflection gate</h3>
+<p>Our momentum gate has three tests, and passing any one of them lets a stock be allocated at market. Each test asks a different question about the trend.</p><p>Test A asks whether the stock is already in an established uptrend. The price must sit above a rising 50-day average, which itself sits above the 200-day average, and the 200-day line must not be falling. The stock must also have beaten the S&amp;P 500 over 63 days, so that it is a leader and not a passenger. Finally it must be within 1.2 swings of support, which keeps buyers from chasing an extended price.</p><p>Test B asks whether a stock is only now leaving a quiet base. Here the 50-day average must be holding, relative strength must be improving and selling must have dried up. The price must be within 1.0 swing of the 63-day base low, which shows it is still hugging the base. Volume must be at least average, which shows buyers arriving.</p><p>Test C looks for a recovery floor in a beaten-down stock. It wants higher lows, a price at or above the 20-day average, support within 1.8 swings and an RSI of at least 35, so that selling has stopped.</p><p>Meta's verdict is NO_MOMENTUM, with sub-verdict NONE. Test A fails on a single condition: the 200-day average is slightly falling. Test B fails because the price is 7.31 swings above the 63-day base low of $524.49, far from a tight base, and because volume was 0.93 times average against the 1.0 needed. Test C fails because the price closed below its 20-day average of $735.77. The pivot, the $779.82 high, is a separate level that matters for the confirmation trigger below.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Momentum &amp; recovery gate evaluation for META (Verdict: NO_MOMENTUM / NONE)</caption>
+<thead><tr><th>Gate test</th><th>Rule in plain words</th><th>Measured values from ledger</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Test A1 (Markup structure)</td><td>Price &gt; SMA50 &gt; SMA200 and SMA50 rising over 21d</td><td>{"close": 709.33, "sma50": 655.24, "sma200": 631.98, "sma50_21d_ago": 606.69}</td><td>PASS</td></tr>
+<tr><td>Test A2 (Long trend slope)</td><td>SMA200 flat or rising over 63 trading days</td><td>{"sma200": 631.98, "sma200_63d_ago": 640.06}</td><td>FAIL</td></tr>
+<tr><td>Test A3 (Quarterly leadership)</td><td>63-day return beats S&amp;P 500</td><td>{"rs_63d_excess_pct": 6.98, "required_min_pct": 0.0}</td><td>PASS</td></tr>
+<tr><td>Test A4 (Support proximity)</td><td>Price within 1.2 ATR of nearest verified support</td><td>{"support_distance_atr": 1.18, "max_atr": 1.2}</td><td>PASS</td></tr>
+<tr><td>Test B1 (Base 50-DMA holding)</td><td>50-day average decline &lt;= 0.5% over 21 days</td><td>{"sma50_21d_chg_pct": 8.0, "max_decline_pct": 0.5}</td><td>PASS</td></tr>
+<tr><td>Test B2 (Monthly RS turn)</td><td>28-day return beats S&amp;P 500 (&gt; 0%)</td><td>{"rs_28d_excess_pct": 15.98, "required": "rising (&gt; 0)"}</td><td>PASS</td></tr>
+<tr><td>Test B3 (Tight base pivot)</td><td>Price within 1.0 ATR of 63-day base low</td><td>{"base_pivot_atr": 7.31, "max_atr": 1.0}</td><td>FAIL</td></tr>
+<tr><td>Test B4 (Seller exhaustion)</td><td>63-day volume dry-up ratio &lt;= 0.90</td><td>{"vol_dryup_ratio_63d": 0.46, "max_ratio": 0.9}</td><td>PASS</td></tr>
+<tr><td>Test B5 (Buyer expansion)</td><td>Session volume &gt;= 1.0x 20-day average</td><td>{"vol_mult_20d": 0.93, "min_ratio": 1.0}</td><td>FAIL</td></tr>
+<tr><td>Test C1 (Higher-low floor)</td><td>Price &gt; 63d low and 20d swing low holding floor</td><td>{"close": 709.33, "swing_low_20d": 679.6, "base_low_63d": 524.49}</td><td>PASS</td></tr>
+<tr><td>Test C2 (Short-term inflection)</td><td>Price &gt;= 20-DMA with positive 28d RS or 2W gain</td><td>{"close": 709.33, "sma20": 735.77, "rs_28d_pct": 15.98, "chg_2w_pct": -2.58}</td><td>FAIL</td></tr>
+<tr><td>Test C3 (Buyable support distance)</td><td>Price within 1.8 ATR of active support</td><td>{"support_distance_atr": 1.18, "max_atr": 1.8}</td><td>PASS</td></tr>
+<tr><td>Test C4 (No freefall)</td><td>14-day RSI &gt;= 35 (selling pressure stabilizing)</td><td>{"rsi14": 50.23, "min_rsi14": 35.0}</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Nine of the thirteen conditions pass. The gate needs a whole test to pass, and none does. The nearest miss is Test A, where only the 200-day slope fails. A close above $735.77, the 20-day average, would fix the one failure in Test C. A 200-day average that stops falling over the 63-day window would fix Test A.</p>
+<p>A stock that fails all three tests is not allocated at market, however good the business. Meta is in that group. Here is what would confirm the chart. First, a close above the 20-day average of $735.77. Then a close above the $779.82 high on volume of at least 1.0 times the 20-day average. The 200-day average would also need to stop falling. Here is what would reject it. A close below the $679.60 swing low would be a warning. A close below the 200-day average of $631.98 would be worse. The setup is also close to an event. Meta reports on October 21, 2026. The report can reset the capital spending outlook. Any entry before it carries event risk.<sup><a href="#cite_note-15">[15]</a></sup> The rules file flags the gate settings as still needing calibration. We therefore weigh this result together with Chapters 3 and 5.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. What could happen next</h2>
+<p>This chapter asks what today's price assumes, how analysts are changing their forecasts, where we differ from the price, and what the three possible outcomes are worth. A reverse discounted cash flow (Reverse DCF) works backward: given what the whole company is worth today, it solves for how fast cash flow must grow each year for ten years to justify the price, using a 10% yearly discount rate and a terminal value of 18 times cash flow at the end of year ten.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<p>The ledger's own expectations rows are empty for this run, because the Yahoo fundamentals request failed. Because of that, the key-figures strip at the top of this report reads NO_CONSENSUS, and the first five rows of the table below read N/A, NO_CONSENSUS or no street targets. Those cells are blank-ledger artifacts, not findings. The computed rows after them are the working figures: Reverse DCF growth of 16.98% a year, estimate revisions that are negative, and street targets averaging $805.50 and $808.88. Those rows come from filings and fetched pages.</p>
+<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for META</caption>
+<thead><tr><th>Expectations dimension</th><th>Measured reading</th><th>How to interpret it</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF implied 10-year growth</td><td>N/A (see working below)<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>Reverse DCF implied growth is N/A (negative or unverified trailing cash flow and earnings).</td></tr>
+<tr><td>Reverse DCF cash-flow basis &amp; FCF yield</td><td>N/A (None $B); FCF yield: N/A</td><td>Solved at 10.0% discount rate and 18.0x terminal multiple</td></tr>
+<tr><td>Consensus FY1 EPS (current vs 90d ago)</td><td>No consensus coverage (N/A)</td><td>Revision trend status: NO_CONSENSUS</td></tr>
+<tr><td>Consensus FY2 EPS (current vs 90d ago)</td><td>No consensus coverage (N/A)</td><td>Implied FY2 vs FY1 EPS growth: N/A</td></tr>
+<tr><td>Street analyst target range (low / mean / high)</td><td>No street price targets published (N/A)</td><td>Used as expectations context only; our underwriting target is anchored in the scenario model below</td></tr>
+<tr><td>Reverse DCF inputs (our computation)<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>Enterprise value $1,800.43 billion = market value $1,807.02 billion + debt $83.66 billion - cash and securities $90.26 billion</td><td>Market value is 2,205,128,509 Class A plus 342,377,716 Class B shares (2,547,506,225 total at July 24, 2026) times the $709.33 close</td></tr>
+<tr><td>Reverse DCF base cash flow</td><td>$37.87 billion free cash flow over the last twelve months (company definition)</td><td>Cash from operations $130.30 billion minus capital spending incl. finance leases $92.43 billion</td></tr>
+<tr><td>Reverse DCF implied 10-year growth (our computation)</td><td>+16.98% per year</td><td>At 10% discount rate and 18x terminal multiple. Using $43.59 billion (2025) gives 15.12%; $41.0 billion (cash from operations minus equipment purchases only) gives 15.93%; first-half 2026 pace of $26.34 billion gives 21.84%</td></tr>
+<tr><td>Free cash flow yield (our computation)</td><td>2.1% = $37.87 billion / $1,807.02 billion</td><td>A buyer of the whole company earns about 2.1% a year in free cash flow today</td></tr>
+<tr><td>Consensus 2026 EPS, now vs 90 days ago<sup><a href="#cite_note-16">[16]</a></sup></td><td>$30.61 vs $33.00 (-7.2%); 30 days ago $31.34; 7 days ago $31.04</td><td>Estimates have fallen at every checkpoint (55 analysts). Yahoo labels this series normalized, and it includes the one-time Q1 2026 tax benefit</td></tr>
+<tr><td>Consensus 2027 EPS, now vs 90 days ago<sup><a href="#cite_note-16">[16]</a></sup></td><td>$33.92 vs $34.94 (-2.9%); range $28.57 to $41.50 (54 analysts)</td><td>Implied 2027 growth over 2026 is 10.8%; two other aggregators show $34.65 and $36.10<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-19">[19]</a></sup></td></tr>
+<tr><td>Consensus September-quarter EPS, now vs 90 days ago<sup><a href="#cite_note-16">[16]</a></sup></td><td>$5.70 vs $7.06 (-19.3%); range $2.61 to $7.64</td><td>The wide range shows analysts disagree on how the legal charges and spending hit one quarter</td></tr>
+<tr><td>Consensus 2026 free cash flow<sup><a href="#cite_note-17">[17]</a></sup></td><td>-$6.35 billion (secondary source)</td><td>Close to our case where second-half cash from operations equals the first half (full-year -$1.8 to -$16.8 billion); our wider full-year range in Chapter 3 is +$6 to -$21 billion</td></tr>
+<tr><td>Street price targets<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></td><td>Average $805.50 (63 analysts) and $808.88 (57 analysts); range $580 to $1,050</td><td>Used as context only. Our own target is built in the estimates below</td></tr>
+<tr><td>Consensus revisions trend (summary)</td><td>NEGATIVE: all three horizons cut in 90 days</td><td>Source is one aggregator page fetched October 17, 2026; we could not confirm it on a second page with revision history</td></tr>
+</tbody>
+</table></div>
+<p>The price assumes that Meta's free cash flow will grow at about 17% a year for ten years, from a base that is already shrinking, while analysts cut their 2026 profit forecast by 7.2% in three months. Ledger-based rows read N/A for the reason given above; the computed rows are the ones to rely on.</p>
+<h3>Our variant perception</h3>
+<p>Variant perception means where our view differs from what the price implies, and why. The market is paying 26.7 times twelve-month earnings per share of $26.55. That figure contains two one-time tax items. The third quarter of 2025 carried a $15.93 billion tax charge worth $6.20 a share, which we add back.<sup><a href="#cite_note-5">[5]</a></sup> The first quarter of 2026 carried an $8.03 billion tax benefit worth $3.13 a share, which we remove.<sup><a href="#cite_note-3">[3]</a></sup> Adjusted earnings per share are $26.55 + $6.20 - $3.13 = $29.62, and $709.33 / $29.62 = 23.9 times. That is close to the 3-year median of 23.70.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> On earnings the stock looks fairly priced. On cash it does not, because free cash flow yield is 2.1% and falling.</p>
+<p>We differ from the price in three places. First, the price has risen about 4% in a month and is 15.98% ahead of the market over 28 days, while 2026 profit estimates were cut at every checkpoint.<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> Prices and estimates are moving in opposite directions, so the multiple, not earnings, is doing the work. Second, the Reverse DCF only works because it starts from trailing cash flow of $37.87 billion; the company's own guide implies 2026 free cash flow near zero or negative, and at that starting point the solver cannot return an answer.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-17">[17]</a></sup> Third, share-based pay of $25.14 billion is 66% of that free cash flow, so the cash that is really left for owners is $12.74 billion, 0.7% of the market value.</p>
+<p>Where we agree with the market: advertising demand is strong, with ad impressions up 14%, price per ad up 12% and revenue per person up 24%, and revenue consensus of $254.19 billion for 2026 and $306.92 billion for 2027 looks achievable.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> Our disagreement is about the conversion of revenue into owner cash during 2026 and 2027, and about the legal tail. One analyst reportedly raised a 2027 capital spending estimate to $225 billion from $203 billion, which we note but do not use, because it comes from an AI-assisted news summary of the analyst's note.<sup><a href="#cite_note-25">[25]</a></sup></p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Today's price of $709.33 assumes Meta's free cash flow grows 17.0% a year for ten years.</p>
+<h4>How it was calculated</h4>
+<p>We found the yearly growth rate that makes ten years of discounted cash flow, plus a terminal value at 18 times the year-ten cash flow, equal today's enterprise value, using the repository solver with a 10% discount rate.</p>
+<h4>The inputs</h4>
+<p>Enterprise value $1,800.43 billion: shares 2,547,506,225 at July 24, 2026 times $709.33 equals $1,807.02 billion; plus long-term debt $83.66 billion; minus cash and securities $90.26 billion.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> Base cash flow $37.87 billion (2025 free cash flow $43.585 billion plus first half 2026 $13.170 billion minus first half 2025 $18.883 billion).<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Discount rate 10%, terminal multiple 18 and 10 years from the rules file.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<h4>The range</h4>
+<p>Starting from $43.59 billion the answer is 15.1% a year; from the first-half 2026 pace of $26.34 billion it is 21.8%. A base of $64.30 billion would need only 10% growth, a level Meta has not reached in any of the five years shown (the peak was $52.10 billion in 2024).</p>
+<h4>If the number is off</h4>
+<p>If the true starting cash flow is near zero because capital spending stays high, no growth rate of ten years justifies the price on cash flow alone, and the stock must be valued on earnings. If the true starting cash flow were $60 billion, implied growth would be about 10.9%, and the valuation would look fair.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Our base 12-month price target is $803.90, a 13.3% gain from $709.33.</p>
+<h4>How it was calculated</h4>
+<p>We multiplied consensus 2027 earnings per share by the median of the last three year-end <dfn>price-to-earnings</dfn> ratios, which is the rule's anchor (forward EPS times 3-year median P/E).</p>
+<h4>The inputs</h4>
+<p>2027 consensus EPS $33.92 (Yahoo, 54 analysts).<sup><a href="#cite_note-16">[16]</a></sup> Year-end price-to-earnings ratios: 27.52 for 2025, 23.70 for 2024, 23.28 for 2023; the median is 23.70.<sup><a href="#cite_note-18">[18]</a></sup> $33.92 x 23.70 = $803.90.</p>
+<h4>The range</h4>
+<p>Bull $933.48 is the same EPS times 27.52, the highest of the three. Bear $524.49 is the 63-day base low from the ledger, which equals 18.4 times the lowest 2027 estimate of $28.57.<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> A different anchor, the base <dfn>measured move</dfn>, gives $1,035.15 (the $779.82 high plus the $255.33 height of the 63-day range), but it applies only after a breakout above $779.82, so we do not use it.</p>
+<h4>If the number is off</h4>
+<p>If 2027 EPS falls to the low estimate of $28.57 at the 23.70 multiple, the value is $677.11, below today's price. If it reaches the $41.50 high estimate, the value is $983.55. The cut in estimates seen over 90 days argues the low side is more likely than the high.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>The probability-weighted 12-month value is $746.00, a 5.2% gain from $709.33.</p>
+<h4>How it was calculated</h4>
+<p>We multiplied each scenario price by its probability and added them: 0.20 x $933.48 + 0.50 x $803.90 + 0.30 x $524.49.</p>
+<h4>The inputs</h4>
+<p>Scenario prices come from the estimate above. Probabilities (20%, 50%, 30%) are our judgment, explained in the table below. They add to 100%.</p>
+<h4>The range</h4>
+<p>If the bear probability rises to 40% and bull falls to 10%, the value is $705.09, a loss of 0.6%. If bull rises to 30% and bear falls to 20%, the value is $786.89, a gain of 10.9%.</p>
+<h4>If the number is off</h4>
+<p>An expected gain of 5.2% is below the roughly 10% a year the rules assume as a discount rate, so even our central case does not pay enough for the risk of a 26% fall to the bear price. The expected-value result therefore supports the rejection.</p>
+</section>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Twelve-month scenarios for Meta from the $709.33 close</caption>
+<thead><tr><th>Scenario</th><th>Story in plain words</th><th>Driver and price</th><th>Probability and reason</th></tr></thead>
+<tbody>
+<tr><td>Bull</td><td>Advertising keeps growing above 25%, Meta signs outside customers for spare compute, and capital spending growth slows in 2027.</td><td>2027 EPS of $33.92 at the 27.52 multiple of end-2025 gives $933.48, up 31.6%</td><td>20%. Needs three things to go right together, and estimates are falling now.</td></tr>
+<tr><td>Base</td><td>Revenue meets consensus, cash after spending stays near zero in 2026, and the market keeps paying its 3-year median multiple.</td><td>2027 EPS of $33.92 at 23.70 gives $803.90, up 13.3%</td><td>50%. It matches where analysts' targets cluster ($805.50 and $808.88), and the quarter-by-quarter guide is mostly on plan.</td></tr>
+<tr><td>Bear</td><td>The September-quarter report raises capital spending again, the New Mexico penalty is large, and the market keeps cutting its multiple.</td><td>Return to the 63-day base low of $524.49, down 26.1%, which equals 18.4 times the lowest 2027 estimate</td><td>30%, our judgment. The capex midpoint has risen at all five updates, the legal exposure has a ceiling of $219.5 billion (not an expected payment), and the index is in a correction.</td></tr>
+<tr><td>Expected value</td><td>Probability-weighted result</td><td>$746.00, up 5.2%</td><td>Below the 10% discount rate in our rules; downside to bear (-$184.84) is about twice the upside to base (+$94.57).</td></tr>
+</tbody>
+</table></div>
+<p>The weighted outcome of $746.00 is only 5.2% above the close, and the 30% bear case costs $184.84 a share against a base-case gain of $94.57. The scenarios therefore do not offer the asymmetry our rules require.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Why these estimates might be wrong</h2>
+<p>Every number in the last chapter rests on assumptions, and the weakest assumption in each is the one to watch. This chapter names each, says what would prove it wrong, then gives the strongest honest case against our own conclusion, which here is a case for owning the stock, not avoiding it.</p>
+<h3>Weakest assumption in the Reverse DCF</h3>
+<p>The calculation starts from twelve-month free cash flow of $37.87 billion. That figure still contains the lower-spending quarters of 2025. Meta's own guide implies spending runs near $40 billion to $47 billion a quarter in the second half, while cash from operations ran at $31.86 billion in the June quarter.<sup><a href="#cite_note-1">[1]</a></sup> If the starting cash flow is lower, the implied growth is higher, and at or below zero the solver returns no answer. Evidence that this assumption is wrong: free cash flow below $5 billion in the September quarter. We will know on October 21, 2026.<sup><a href="#cite_note-15">[15]</a></sup></p>
+<h3>Weakest assumption in the price target</h3>
+<p>The $803.90 target uses 2027 consensus EPS of $33.92 and a 23.70 multiple taken from only three year-end snapshots in a secondary source.<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-18">[18]</a></sup> Two things can break it. EPS estimates are falling, and the Yahoo series is labelled normalized and mixes GAAP quarters that include tax items. Also, the possible loss from the New Mexico case is not in any consensus figure that we could verify. At $500 per violation, 43,899,720 violations would be $21.95 billion, about 25% of twelve-month pre-tax income of $87.52 billion; at the $5,000 maximum it would be $219.5 billion, 12.1% of today's market value.<sup><a href="#cite_note-22">[22]</a></sup> The judge has not yet set the amount, and Meta will appeal.</p>
+<h3>The red-team case: why this rejection could be wrong</h3>
+<p>The strongest case for owning Meta is this. Revenue is growing 28% with 31% operating margins even after $3.58 billion of one-off charges. Ad price and volume are both rising, and ARPP is up 24%.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup> The AI spending may be the best investment the company has made. The CEO said Meta is getting "a lot of offers for compute at a significant premium over what we paid for it."<sup><a href="#cite_note-24">[24]</a></sup> Capacity bought at a price others will pay a premium for is not wasted. Cash from operations is $130.30 billion a year, and net cash is still positive. Heavy capital spending can also sit beside strong cash: Microsoft spent 39.8% of revenue on equipment and still kept a 21.8% free cash flow margin.<sup><a href="#cite_note-27">[27]</a></sup> On pay in shares, the bull view concedes that Meta is an outlier. Its SBC is 12.6% of revenue in the quarter, against 6.6% at Alphabet, 3.5% at Microsoft and 3.0% at Amazon.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-28">[28]</a></sup> The argument is that the 5% rule is too blunt for a company with a 38% operating margin. On this view, rejecting a 28% grower at 23.9 times adjusted earnings (working in Chapter 5) costs the portfolio a leader.</p>
+<p>Our answer is that the rule is deliberate and the cash evidence is current. Meta's pay in shares is about twice the highest of the three other large spenders (Alphabet, 6.6%). Only the much smaller Pinterest, at 27.5%, pays more. The price also offers no margin of safety against three risks that sit together: more capital spending, a large legal penalty, and a market in correction. The $219.5 billion figure is a ceiling set by the number of violations, not a forecast, and our 30% bear probability is a judgment. The case would change on evidence, not on argument.</p>
+<h3>When we will know</h3>
+<p>Meta reports third-quarter results on Wednesday, October 21, 2026, after the market closes, with a call at 1:30 p.m. Pacific.<sup><a href="#cite_note-15">[15]</a></sup> The company guided revenue of $61 billion to $64 billion and full-year expenses of $165 billion to $169 billion.<sup><a href="#cite_note-1">[1]</a></sup> The fourth-quarter report that carries 2027 capital spending guidance has no announced date; the 2025 fourth-quarter report came out on January 28, 2026.<sup><a href="#cite_note-4">[4]</a></sup> Further New Mexico rulings are expected within weeks of the September 25 verdict.<sup><a href="#cite_note-22">[22]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>What would prove each conclusion wrong, and when we find out</caption>
+<thead><tr><th>Conclusion</th><th>Weakest assumption</th><th>Evidence that it is wrong</th><th>When we will know</th></tr></thead>
+<tbody>
+<tr><td>Free cash flow is trending toward zero in 2026</td><td>Second-half cash from operations equals first-half</td><td>Second-half cash from operations above $72 billion or capital spending at $130 billion or less</td><td>October 21, 2026 and January 2027<sup><a href="#cite_note-15">[15]</a></sup></td></tr>
+<tr><td>Base target $803.90</td><td>2027 EPS $33.92 at 23.70 times</td><td>EPS estimates stop falling; quarterly results beat the $5.70 consensus</td><td>October 21, 2026<sup><a href="#cite_note-16">[16]</a></sup></td></tr>
+<tr><td>Bear target $524.49</td><td>Market punishes capex and legal news together</td><td>A small New Mexico penalty and a capex guide that is not raised</td><td>Weeks after September 25, 2026<sup><a href="#cite_note-22">[22]</a></sup></td></tr>
+<tr><td>SBC gate failure</td><td>Rule reflects lasting cost</td><td>SBC below 10% of revenue with FCF minus SBC at 20% of revenue and shrinking shares</td><td>Not before fiscal 2027</td></tr>
+</tbody>
+</table></div>
+<p>Each row has a dated or observable test, and the earliest one is five days after the data date, and four days after this report was generated. The rejection is built to be reversible. Positive free cash flow for the September quarter and no new capex raise in the October 21 report would reopen the review. Positive second-half cash flow is the later confirmation. Neither is a purchase signal, and every failed floor must be rerun and pass first.</p>
+<p>The hinge claim, the one statement on which the verdict turns, is this: Meta's 2027 capital spending will grow by less, in dollars, than its cash from operations. If that is true, free cash flow turns up from the 2026 low, the shares-for-pay burden shrinks as a share of cash, and the Reverse DCF starts from a better base. If it is false, free cash flow stays near zero while debt and commitments grow, and the price needs earnings alone to carry it.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when</h2>
+<p>The decision is REJECTED. That means no purchase and no allocation. The rule that triggers it is the Layer 1 floor on stock-based compensation: 11.0% of revenue against a 5.0% limit, and against 10.0% in the exception clause, which needs a 20% margin of free cash flow minus SBC and a shrinking share count. Meta has 5.6% and a flat count.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-31">[31]</a></sup> Two further failures stand alone: the reward-to-risk ratio of 0.92:1 is below the 3.0:1 floor for the Core book, and the momentum gate fails all three tests. The trigger that reopens the review is the October 21, 2026 report, if it shows positive free cash flow for the September quarter and no new raise in capital spending.<sup><a href="#cite_note-15">[15]</a></sup> A reopened review is not a purchase. Every failed floor, which means SBC, asymmetry, the momentum gate and Layer 2, must be rerun and pass first.</p>
+<p>No position exists to manage. Neither the positions snapshot nor the options file lists Meta, so there is nothing to sell or hedge.<sup><a href="#cite_note-30">[30]</a></sup> The shortlist is empty and capacity is free in all three books (10 Core Alpha, 10 Tactical Momentum, 5 Leveraged Satellite), so no incumbent is displaced; Meta is simply not admitted. The watchlist bucket is CORE_ALPHA and the archetype result is NONE_QUALIFIES.</p>
+<p>Layer 3 asks where the price sits against support. The ledger puts the nearest support at $679.60 and the close $29.73 above it, which is 1.18 ATRs from support. The ladder in our rules calls anything under 1.2 swings the STANDARD band. That band would normally map to ACCUMULATE_ON_DIP.<sup><a href="#cite_note-30">[30]</a></sup><sup><a href="#cite_note-31">[31]</a></sup> The band edge is only $0.62 away, at $709.95; above it lies the LIMIT_ORDER_REDUCE band up to $720.06, and beyond that NO_BUY. Because Layer 1 fails, the ladder does not change the verdict. It tells us where an entry would be if the Layer 1 gap were cured. The <dfn>entry zone</dfn>, the band of prices where buying is planned, would be $679.60 to $709.33.</p>
+<p>The structural stop for the Core book is below the lowest of the swing low ($679.60), the 50-day average ($655.24) and the 200-day average ($631.98), minus one ATR ($25.29). That is $631.98 - $25.29 = $606.69, which is 14.5% below the close. The base target is $803.90 and the bull target $933.48. At the close the ratio is 0.92:1; at the low end of the entry zone it is 1.70:1. The measured-move target of $1,035.15 would give 3.17:1 but is not available until a close above $779.82. Today's allocation is 0% because the verdict is REJECTED. The sizing table below shows the size that would apply only if Meta re-qualifies on every floor: the tier-4 band, a 35 basis point risk budget divided by the 14.47% stop distance, capped at 2.0%.</p>
+<p>The let-winners-run rule applies only after an entry. It lets a winner grow to 22% of the portfolio while the stop trails the 21-day average or 50-day average. It would apply if the verdict changed. There is no mechanical trim just because RSI is above 70.</p>
+<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 3 execution levels and risk-unit position sizing for META</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Underwriting archetype &amp; bucket</td><td>NONE_QUALIFIES (CORE_ALPHA)</td><td>Evaluates both static quality and rate-of-change inflection</td></tr>
+<tr><td>Action verdict</td><td><span class="verdict verdict-exit">REJECTED</span></td><td>REJECTED, so today's allocation is 0% (the 2.0% sizing row is the hypothetical size if re-qualified): Layer 1 fails on SBC at 11.0% of revenue (limit 5%) and on asymmetry of 0.92:1 (floor 3.0:1); momentum gate NO_MOMENTUM; Layer 2 scores 2 of 5. The sizing row shows the size only if the name re-qualifies</td></tr>
+<tr><td>Recommended entry zone</td><td>$679.60 to $709.33</td><td>Current price $709.33 is 1.18 ATR from verified support</td></tr>
+<tr><td>Structural invalidation stop</td><td>$606.69 (-14.47% from entry)</td><td>below min(swing low, 50/200-day MA) minus 1.0 x ATR(14)</td></tr>
+<tr><td>Base / Bull / Bear targets</td><td>$803.90 / $933.48 / $524.49</td><td>Reward-to-risk asymmetry at CMP: 0.92:1</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat)</td><td>2.0% of net worth (TIER_4, 35 bps risk budget)</td><td>Formula: min(Tier cap 1–2%, 35 bps / 14.47% stop distance)</td></tr>
+<tr><td>Let-winners-run rule</td><td>Appreciated weight ceiling up to 22%</td><td>Never trim solely for RSI &gt; 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break</td></tr>
+</tbody>
+</table></div>
+<p>Today's allocation is 0%, because the verdict is REJECTED. The sizing row shows the size that would apply only if Meta re-qualifies on every floor: the tier-4 band, where a 35 basis point risk budget divided by a 14.47% stop distance gives 2.42%, capped at 2.0%. The entry zone, stop and targets are the plan for that case, not an order. Wide stops shrink the starting size automatically.</p>
+<p class="trigger">Trigger to reopen the review: the report on October 21, 2026 shows positive free cash flow for the September quarter and keeps the 2026 capital spending guide at $130-145 billion or lower. Positive second-half free cash flow is the later confirmation, known in early 2027. Neither is a purchase signal, and every failed floor must be rerun and pass before any buy.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></p>
+<p class="trigger">Trigger on SBC: stock-based pay at or below 10% of revenue, with free cash flow minus SBC at 20% of revenue and a falling diluted share count; in the five years shown only fiscal 2021 had both an SBC share under 10% (7.8%) and a free cash flow minus SBC margin of at least 20% (24.8%).<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-31">[31]</a></sup></p>
+<p class="trigger">Trigger on price: a close above $735.77 (20-day average), then above $779.82 on volume of at least 1.0 times average, would pass the chart tests; it would not cure the cash and SBC failures.</p>
+<p class="trigger">Trigger to avoid: a close below $679.60 (the swing low) warns of a weaker structure; a close below $631.98 (the 200-day average) puts the stock near the $606.69 stop level and out of consideration.</p>
+<p class="trigger">Trigger on legal risk: a penalty ruling in the New Mexico case above $21.95 billion (about $500 per violation) would lower our bear-case value and extend the rejection.<sup><a href="#cite_note-22">[22]</a></sup></p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p><strong>Missing ledger enrichment.</strong> The Yahoo fundamentals endpoint returned HTTP 401 while the ledger was built, so the ledger's Reverse DCF and consensus-revision blocks are empty, and the first rows of the Chapter 5 expectations table and the key-figures strip read N/A. The ledger was frozen and cannot be rebuilt in this run. We computed the Reverse DCF from SEC filings and read consensus revisions from fetched pages instead. The effect is moderate: revisions come from one page with history (Yahoo, fetched October 17, 2026), cross-checked for level only against StockAnalysis and Business Quant, which disagree on 2027 EPS ($34.65, $36.10 vs $33.92). The cure is rebuilding the ledger when the endpoint works.</p><p><strong>Stale as-of dates.</strong> The latest periodic filing is the Form 10-Q for June 30, 2026, which is more than 60 days before the report date, and no newer one exists until Meta reports on October 21, 2026. The citation gate was therefore run with the stale as-of allowance, and every research record dated June 30, 2026 or earlier prints as an EXCEPTION AS-OF line. Older records (2021 to 2025 fiscal years) are history and were taken from the filing that reported them. The cure is a refresh after the October 21 release.</p><p><strong>Secondary and news sources.</strong> Consensus estimates, price targets, year-end P/E history (StockAnalysis), the Gotrade summary of an analyst capital-spending estimate, and the New Mexico verdict reports (New Mexico Political Report, Tech Oversight Project) come from secondary pages. None is the sole source for a company financial figure. The September 25, 2026 verdict postdates the latest filing, and the court documents were not fetched. The three year-end P/E points used for the 3-year median are an approximation of a daily-history median.</p><p><strong>Renderer artifacts.</strong> The renderer reads the empty ledger for the key-figures strip and the first Chapter 5 rows, so they show NO_CONSENSUS, N/A and None $B. These are blank-ledger artifacts, not findings, and Chapter 5 says so before its table. The working figures are the computed rows: Reverse DCF 16.98%, negative revisions, street targets of $805.50 and $808.88. The sizing row uses the tier-4 band so the stop distance prints; the allocation today is 0% because the verdict is REJECTED.</p><p><strong>Pages that could not be fetched.</strong> Zacks and Seeking Alpha returned HTTP 403, Macrotrends returned HTTP 403 and a MarketBeat news article timed out. These were not used, and no value was taken from a search snippet or memory. The momentum gate settings are marked in the rules file as needing calibration, so Chapter 4 is weighted together with Chapters 3 and 5.</p><p>Publication status: BEST_EFFORT_AFTER_REVIEW_LIMIT and PUBLISHED_WITH_GATE_EXCEPTIONS. The two-round independent review did not end in APPROVE: the round 2 reviewer returned REVISE with three findings (head-strip sizing note, a peer-comparison sentence, and the wording of the October 21 reopen trigger). All three were corrected after that review and were not re-reviewed, because the limit is two rounds. The red team's round 1 assessment was that the REJECTED verdict holds. This report must not be read as reviewer-approved.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports Second Quarter 2026 Results", July 29, 2026: highlights, CFO outlook commentary, income statement, balance sheet, cash flow statement, segment results and free cash flow reconciliation. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026050596/meta-06302026xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-2">Meta Platforms, Inc., Form 10-Q for the quarter ended June 30, 2026 (filed July 30, 2026): cover page share counts, Note 9 commitments and contingencies, Note 10 stockholders' equity, Item 2 key metrics (DAP, ARPP, ad impressions, price per ad), interest and other income. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/meta-20260630.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-3">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports First Quarter 2026 Results", April 29, 2026: highlights, outlook, tax benefit note. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-4">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports Fourth Quarter and Full Year 2025 Results", January 28, 2026: full-year income statement, cash flow, free cash flow reconciliation, 2026 outlook. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026003832/meta-12312025xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-5">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports Third Quarter 2025 Results", October 29, 2025: highlights, 2025 capital expenditure outlook, one-time tax charge, 2026 planning commentary. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828025047114/meta-09302025xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-6">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports Second Quarter 2025 Results", July 30, 2025: CFO outlook commentary (2025 capital expenditure and expense ranges). <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828025036719/meta-06302025xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-7">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports First Quarter 2025 Results", April 30, 2025: CFO outlook commentary. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000132680125000050/meta-03312025xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-8">Meta Platforms, Inc., Form 8-K, Exhibit 99.1, "Meta Reports Fourth Quarter and Full Year 2024 Results", January 29, 2025: first 2025 capital expenditure and expense outlook. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000132680125000014/meta-12312024xexhibit991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-9">Meta Platforms, Inc., Form 10-K for fiscal year 2025 (filed January 29, 2026): risk factors on founder voting control. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-10">Meta Platforms, Inc., Form 10-K for fiscal year 2024 (filed January 30, 2025): headcount of 74,067 at December 31, 2024. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000132680125000017/meta-20241231.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-11">Meta Platforms, Inc., Form 10-K for fiscal year 2023 (filed February 2, 2024): income statement, balance sheet and cash flow for 2021 to 2023, free cash flow reconciliation. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000132680124000012/meta-20231231.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-12">Meta Platforms, Inc., Form 10-K for fiscal year 2022 (filed February 2, 2023): balance sheet at December 31, 2021. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000132680123000013/meta-20221231.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-13">Meta Platforms, Inc., Form 8-K (Item 8.01), senior notes offering completed May 4, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000119312526204128/d134616d8k.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-14">Meta Platforms, Inc., Form 8-K (Item 8.01), senior notes offering completed November 3, 2025. <a href="https://www.sec.gov/Archives/edgar/data/1326801/000119312525262593/d75422d8k.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-15">Meta Investor Relations, press release "Meta to Announce Third Quarter 2026 Results", October 12, 2026: results due after market close on October 21, 2026. <a href="https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-to-Announce-Third-Quarter-2026-Results/default.aspx">investor.atmeta.com</a>.</li>
+<li id="cite_note-16">Yahoo Finance, "Meta Platforms, Inc. (META) Analyst Ratings, Estimates and Forecasts" (analysis page, fetched October 17, 2026): earnings and revenue estimates, estimate trend 7, 30, 60 and 90 days ago, session close of $709.33. Secondary source. <a href="https://finance.yahoo.com/quote/META/analysis/">finance.yahoo.com</a>.</li>
+<li id="cite_note-17">StockAnalysis.com, "Meta Platforms (META) Stock Forecast and Analyst Price Targets" (fetched October 13, 2026): average price target, analyst count, consensus free cash flow for 2026. Secondary source. <a href="https://stockanalysis.com/stocks/meta/forecast/">stockanalysis.com</a>.</li>
+<li id="cite_note-18">StockAnalysis.com, "Meta Platforms (META) Financial Ratios" (fetched October 13, 2026): year-end price-to-earnings history and a return-on-capital cross-check. Secondary source. <a href="https://stockanalysis.com/stocks/meta/financials/ratios/">stockanalysis.com</a>.</li>
+<li id="cite_note-19">Business Quant, "Meta Platforms, Inc. (META) Analyst Estimates" (fetched October 17, 2026): a third set of consensus figures used only as a cross-check. Secondary source. <a href="https://businessquant.com/stocks/meta/estimates/">businessquant.com</a>.</li>
+<li id="cite_note-20">MarketBeat, "Meta Platforms (META) Stock Forecast and Price Target 2026" (fetched October 17, 2026): consensus price target and second confirmation of the October 16, 2026 close. Secondary source. <a href="https://www.marketbeat.com/stocks/NASDAQ/META/forecast/">marketbeat.com</a>.</li>
+<li id="cite_note-21">New Mexico Department of Justice, press release "New Mexico Department of Justice Wins Landmark Verdict Against Meta", March 24, 2026. <a href="https://nmdoj.gov/press-release/new-mexico-department-of-justice-wins-landmark-verdict-against-meta/">nmdoj.gov</a>.</li>
+<li id="cite_note-22">New Mexico Political Report, "Potential $219 billion penalty: Jury finds Meta misled New Mexicans 43.9 million times", September 25, 2026. News source; the court filing itself was not fetched. <a href="https://nmpoliticalreport.com/2026/09/25/its-complicated-jury-finds-meta-misled-new-mexicans-43-9-million-times/">nmpoliticalreport.com</a>.</li>
+<li id="cite_note-23">Tech Oversight Project, "Fact Sheet: New Mexico Meta Ruling", August 7, 2026, summarising the August 6, 2026 judgment in State of New Mexico v. Meta Platforms. Advocacy-group summary; the judgment itself was not fetched. <a href="https://techoversight.org/2026/08/07/fact-sheet-new-mexico-meta-ruling/">techoversight.org</a>.</li>
+<li id="cite_note-24">CNBC, "Meta's stock plunges on light revenue guidance, dwindling free cash flow", July 29, 2026. News source. <a href="https://www.cnbc.com/2026/07/29/meta-q2-earnings-report-2026.html">cnbc.com</a>.</li>
+<li id="cite_note-25">Gotrade, "Meta Stock News (Oct 15, 2026): META Falls 3.3% to $737.54", October 15, 2026 (page states parts are AI-generated). Used only to report one analyst's capital spending estimate, not in any calculation. <a href="https://www.heygotrade.com/en/news/meta-meta-stock-news-october-15-2026/">heygotrade.com</a>.</li>
+<li id="cite_note-26">Alphabet Inc., Form 8-K, Exhibit 99.1, "Alphabet Announces Second Quarter 2026 Results", July 22, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-27">Microsoft Corp., Form 8-K, Exhibit 99.1, fourth-quarter fiscal 2026 results, July 29, 2026. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-28">Amazon.com, Inc., Form 8-K, Exhibit 99.1, second quarter 2026 results, July 30, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-29">Pinterest, Inc., Form 8-K, Exhibit 99.1, second quarter 2026 results, August 4, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1506293/000150629326000102/q2-26xpressrelease.htm">SEC EDGAR</a>.</li>
+<li id="cite_note-30">Portfolio session ledger <code>facts_US_2026-10-16.json</code> (frozen, instruments.META): close, 20/50/200-day averages, RSI, ATR, support anchor and distance, Weinstein stage, relative strength and momentum gate Tests A, B and C; and the positions snapshot <code>positions_US_2026-10-16.json</code>, in which META does not appear. Local repository files, no web address.</li>
+<li id="cite_note-31">Portfolio rules file <code>.agents/config/scoring.json</code> (schema version 2, updated 2026-10-16): hard red lines, archetypes, asymmetry floors, support distance ladder, stop placement, risk-unit sizing and Reverse DCF parameters. Local repository file, no web address.</li>
+</ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
