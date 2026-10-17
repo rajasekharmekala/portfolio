@@ -96,10 +96,11 @@ def _compute_risk_unit_sizing(cmp_val: float, entry_val: float, stop_val: float,
     budget_bps = float(ru_cfg.get("tier_risk_budget_bps", {}).get(tier, 75 if tier != "TIER_0" else 0))
     ref_entry = entry_val if (entry_val and entry_val > 0) else cmp_val
     if not ref_entry or not stop_val or ref_entry <= stop_val or budget_bps <= 0:
+        zero_stop_dist = round((ref_entry - stop_val) / ref_entry * 100.0, 2) if (ref_entry and stop_val and ref_entry > stop_val) else "n/a"
         return {
             "tier": tier,
             "risk_budget_bps": budget_bps,
-            "stop_distance_pct": None,
+            "stop_distance_pct": zero_stop_dist,
             "risk_adjusted_weight_pct": 0.0,
             "tier_range_pct": f"{tier_tbl.get('min_pct', 0)}–{tier_tbl.get('max_pct', 0)}%",
             "runaway_winner_cap_pct": pos_cfg.get("runaway_winner_cap_pct", 22),

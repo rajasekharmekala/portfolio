@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-16">
+<meta name="generated-at" content="2026-10-17T07:18:00.201360-07:00">
+<title>Microsoft (MSFT) — the book report, as of 2026-10-16</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" aria-disabled="true">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Microsoft (MSFT) — the book report, as of 2026-10-16</h1><p class="report-generated">Generated Date: <time datetime="2026-10-17T07:18:00.201360-07:00">17 Oct 2026, 07:18 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-16</p></header>
+<dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span> (COMPOUNDER)</dd></div>
+<div><dt>Session Price (2026-10-16)</dt><dd>$529.05</dd></div>
+<div><dt>Strategy Bucket</dt><dd>CORE_ALPHA</dd></div>
+<div><dt>Implied 10Y Growth (Reverse DCF)</dt><dd>+26.0%/yr</dd></div>
+<div><dt>Estimate Revisions (90d)</dt><dd>RISING_ESTIMATES</dd></div>
+<div><dt>Trend &amp; Momentum Gate</dt><dd>Stage 2 (Markup) | ENTERING_MOMENTUM</dd></div>
+<div><dt>Support Distance / Stop</dt><dd>0.74 ATR | Stop $423.24</dd></div>
+<div><dt>Base Target / Asymmetry</dt><dd>$640.00 | 1.05:1 (Risk-Unit Size: 0.0%)</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Microsoft sells the software and the cloud computing that most large organisations run on. In the year to June 2026 it earned $331.8 billion of revenue and $133.7 billion of profit.<sup><a href="#cite_note-1">[1]</a></sup> The shares closed at $529.05 on 2026-10-16, which is 4.5% under the 52-week high and 21.6% over the 200-day average price.<sup><a href="#cite_note-38">[38]</a></sup> Our verdict is REJECTED, and it is a verdict on price and risk, not on quality, because the business clears every financial floor but the gain to our $640 target is only 1.05 times the loss to our $423.24 exit price, and the portfolio rule asks for 3.0 times.<sup><a href="#cite_note-39">[39]</a></sup> We would be wrong if the October 28 results lift profit forecasts far above the Street, and a fall toward $477 would prompt a fresh look only once the chart has rebuilt its footing.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does</h2>
+<p>Microsoft sells the tools that most large organisations use to run their work, and it makes its money in three main ways. First, it rents computing power by the hour through Azure, its cloud platform. Second, it sells monthly or yearly subscriptions to Word, Excel, Teams, Outlook and security software, now with an artificial intelligence assistant called Copilot added on top. Third, it sells things people use at home or on a games console: Windows, Xbox games and Bing search advertising. In the year to June 30, 2026, revenue was $331.8 billion, up 18%, and operating income was $155.2 billion.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></p>
+<p>The company reports three segments, and the next table shows their size. Productivity and Business Processes (Microsoft 365, LinkedIn, Dynamics business software) brought in $140.0 billion at a 59.9% <dfn>operating margin</dfn> (the share of each revenue dollar left after the costs of running the business). Intelligent Cloud (Azure, server software and support services) brought in $137.8 billion, up 30%, at a 41.3% margin. More Personal Computing (Windows, Xbox, search ads) brought in $54.1 billion, down 1%.<sup><a href="#cite_note-7">[7]</a></sup> The first two segments are the engine. The third is mature and shrinking at the edges.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Microsoft fiscal 2026 revenue and operating income by reporting segment (year to June 30, 2026, $ billions)</caption>
+<thead><tr><th>Segment</th><th>What it sells</th><th>FY26 revenue</th><th>Change</th><th>FY26 operating income</th><th>Operating margin</th><th>Share of revenue</th></tr></thead>
+<tbody>
+<tr><td>Productivity and Business Processes</td><td>Microsoft 365 (commercial and consumer), LinkedIn, Dynamics 365<sup><a href="#cite_note-7">[7]</a></sup></td><td>$140.0</td><td>+16%</td><td>$83.9</td><td>59.9%</td><td>42.2%</td></tr>
+<tr><td>Intelligent Cloud</td><td>Azure and other cloud services, server software, enterprise support<sup><a href="#cite_note-7">[7]</a></sup></td><td>$137.8</td><td>+30%</td><td>$57.0</td><td>41.3%</td><td>41.5%</td></tr>
+<tr><td>More Personal Computing</td><td>Windows and devices, Xbox, search advertising<sup><a href="#cite_note-7">[7]</a></sup></td><td>$54.1</td><td>-1%</td><td>$14.4</td><td>26.6%</td><td>16.3%</td></tr>
+<tr><td>Whole company</td><td>All three segments as reported for fiscal 2026<sup><a href="#cite_note-1">[1]</a></sup></td><td>$331.8</td><td>+18%</td><td>$155.2</td><td>46.8%</td><td>100%</td></tr>
+</tbody>
+</table></div>
+<p>Two segments supply about 84% of revenue and about 91% of operating income, so the investment case rests on cloud and subscription software, not on Windows or Xbox. Percentages are our arithmetic on the cited segment figures.</p>
+<h3>How the money comes in: seats, usage and long contracts</h3>
+<p>Most revenue arrives in one of two forms. A subscription charges a fixed fee per user per month, so a company with 10,000 staff pays for 10,000 seats. A consumption contract charges for what is used, much like an electricity bill, and Azure works this way. Microsoft is now mixing the two: management says Copilot and Dynamics are moving from seats to seats plus usage.<sup><a href="#cite_note-21">[21]</a></sup> Microsoft Cloud revenue, which adds Azure, Microsoft 365 commercial cloud, the commercial part of LinkedIn and Dynamics 365, was $214.4 billion in fiscal 2026, up 27%.<sup><a href="#cite_note-8">[8]</a></sup></p>
+<p>The contracts are long. Commercial remaining performance obligations, meaning signed customer commitments that have not yet turned into revenue, stood at $678 billion at June 30, 2026, with a weighted average length of 2.3 years. About 30% of that should turn into revenue within 12 months.<sup><a href="#cite_note-5">[5]</a></sup> Azure alone passed $100 billion of annual revenue for the first time.<sup><a href="#cite_note-15">[15]</a></sup> After the September 2026 restatement, Azure's fiscal 2026 revenue is $101.9 billion against $72.6 billion a year earlier.<sup><a href="#cite_note-23">[23]</a></sup></p>
+<h3>Who pays, and how much depends on OpenAI</h3>
+<p>Customers are mostly businesses, governments and developers. Management says nearly 90% of Microsoft Cloud revenue in fiscal 2026 came from customers outside the frontier model companies, which means the large AI labs.<sup><a href="#cite_note-18">[18]</a></sup> The largest of those labs is OpenAI, in which Microsoft holds an equity stake of about 25% on an as-converted basis, which is the 10-K figure after OpenAI's later funding rounds. The stake was about 27% at the October 2025 recapitalisation. OpenAI was also a customer: Microsoft booked $24.1 billion of revenue from its commercial arrangements with OpenAI in fiscal 2026, which is 7.3% of total revenue, and was owed $6.0 billion by OpenAI at year end.<sup><a href="#cite_note-6">[6]</a></sup> The share of the backlog that belongs to OpenAI is larger than its share of revenue, and Chapter 6 returns to that.</p>
+<h3>What changes in fiscal 2027: two segments instead of three</h3>
+<p>From fiscal 2027 Microsoft will report two segments, Agents and Infra and Devices and Consumer. Restated for fiscal 2026, Agents and Infra had revenue of $268.1 billion and Devices and Consumer had $63.7 billion.<sup><a href="#cite_note-23">[23]</a></sup> Azure becomes a cleaner measure of pure cloud infrastructure because GitHub cloud and Security Copilot move into Microsoft 365 cloud, and the first fiscal 2027 quarter will be reported in the new layout.<sup><a href="#cite_note-22">[22]</a></sup> The change matters because the old growth figures will not line up exactly with the new ones, so we quote the restated Azure figure where it is available.</p>
+<h3>The cost side: chips, buildings and power</h3>
+<p>Serving AI customers needs graphics chips, ordinary server chips, datacenter buildings and electricity, and Microsoft pays for them in three ways. It pays cash for equipment, which the cash flow statement calls additions to property and equipment. It signs finance leases for large datacenter sites, which are in substance loans, and the lease asset is recorded in full when the lease starts. It also signs operating leases, which are rent. In fiscal 2026 cash additions to property and equipment were $115.9 billion, and a further $24.6 billion of assets came in through finance leases.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> Roughly two thirds of fourth-quarter capital spending went on short-lived chips.<sup><a href="#cite_note-17">[17]</a></sup> How these costs are counted decides which <dfn>free cash flow</dfn> figure you see. Free cash flow is the cash left after paying for the equipment the business needs. Chapter 3 shows three versions.</p>
+<h3>Plain-English glossary for this report</h3>
+<ul>
+<li><strong>Azure</strong> is Microsoft's cloud platform, where customers rent computing, storage and AI services by usage.</li>
+<li><strong>Copilot</strong> is the family of AI assistants Microsoft sells inside Microsoft 365, GitHub, Dynamics and security products.</li>
+<li><strong>Commercial <dfn>RPO</dfn></strong> (remaining performance obligations) is the dollar value of signed business contracts not yet recognised as revenue.</li>
+<li><strong>Finance lease</strong> is a long lease that works like a loan. The full asset and a matching debt-like liability appear on the balance sheet at the start.</li>
+<li><strong>Free cash flow</strong> is cash from operations minus cash spent on equipment. This report shows three versions because the treatment of leases changes the answer.</li>
+<li><strong>Return on invested capital</strong> measures profit after tax as a share of the money tied up in the business; Chapter 3 shows the working.</li>
+<li><strong>Reverse DCF</strong> (reverse discounted cash flow) solves for the yearly growth in cash flow that today's price already assumes.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Why the business is strong or weak</h2>
+<p>Microsoft's strength is that its customers are already inside its products. A company that runs email, documents, meetings, identity and security on Microsoft 365 does not swap that suite lightly, and Microsoft keeps adding value to the same seat. Commercial Microsoft 365 cloud revenue grew 17% in fiscal 2026 while paid seats grew only 6%, so most of the growth came from higher revenue per seat as customers moved to the higher-priced E5 suite and added Copilot.<sup><a href="#cite_note-7">[7]</a></sup> More than 30 million seats now pay for Microsoft 365 Copilot, and management says net seat additions more than doubled from the third quarter to the fourth.<sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-21">[21]</a></sup></p>
+<p>The second strength is scale in the cloud. Microsoft added 88 datacenters in fiscal 2026, expects to roughly double its overall capacity in two years, and says demand still exceeds supply.<sup><a href="#cite_note-21">[21]</a></sup> Azure grew 41% in fiscal 2026 and 43% in the fourth quarter, and management guided the first fiscal 2027 quarter to about 45% in constant currency, meaning growth with exchange-rate moves removed.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> The company also builds its own chip, Maia 200, which it says delivers 30% better performance per dollar than the latest hardware in its fleet, and it offers over 11,000 models from many vendors.<sup><a href="#cite_note-21">[21]</a></sup> Both facts point the same way: Microsoft is trying to be the neutral place where AI runs, whichever model wins.</p>
+<p>The third strength is financial. Operating margin was 46.8%, up from 45.6%, while the company absorbed the cost of the build-out.<sup><a href="#cite_note-1">[1]</a></sup> Debt is small beside cash and profit, which gives room to keep spending in a downturn. The auditor gave an unqualified opinion and management reported effective internal control over financial reporting at June 30, 2026.<sup><a href="#cite_note-14">[14]</a></sup></p>
+<h3>Where the moat is thinner</h3>
+<p>The moat is weaker in two places. The first is the link to OpenAI. In April 2026 the two companies amended their deal: Microsoft's licence to OpenAI technology became non-exclusive, OpenAI may now serve its products on any cloud, and Microsoft stopped paying OpenAI a revenue share. In return, revenue-share payments from OpenAI to Microsoft continue through 2030 but are subject to a total cap.<sup><a href="#cite_note-30">[30]</a></sup> Microsoft remains a major shareholder, valued at roughly $135 billion for about 27% at the October 2025 recapitalisation (about 25% in the 10-K after OpenAI's later funding rounds), and OpenAI contracted to buy an incremental $250 billion of Azure services.<sup><a href="#cite_note-29">[29]</a></sup> A partner that can now shop elsewhere is a partner whose spending is a promise, not a lock.</p>
+<p>The second is the consumer side. Windows OEM and Devices revenue is guided to fall in the low twenties percent in the September 2026 quarter because of weak PC demand and high component prices, and Xbox content and services is guided to fall in the mid-single digits even though management says it expects the business to return to growth in fiscal 2027.<sup><a href="#cite_note-20">[20]</a></sup> These units are small beside the cloud, but they show that not every Microsoft product has a moat.</p>
+<p>The third is capital intensity. A moat is only as good as the return on the money spent to hold it, and Microsoft's spending has jumped. Cash additions to property and equipment rose from $64.6 billion to $115.9 billion in one year, and the company has $743.8 billion of contractual commitments, of which $443.5 billion are leases and $194.1 billion purchase commitments.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-11">[11]</a></sup> Competitors are spending at the same pace, which means the capital does not buy an advantage by itself. It buys the right to stay in the race. Chapter 3 compares Microsoft with four peers on this point.</p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>
+<p>Layer 2 of the underwriting asks which five operating measures actually run this business, scores each as PASS, WATCH or FAIL against a stated threshold, and requires four of five to pass. For Microsoft we chose measures that follow the AI build-out from demand to returns: how fast Azure grows, how much of the backlog is independent of OpenAI, whether the capital being spent earns more than it costs, whether Copilot is turning into revenue, and whether stock pay is under control. We state each threshold before its score, using tests that the filings and the company's <dfn>guidance</dfn> let us measure. Guidance is the company's own published forecast for the coming period.</p>
+<p>Four measures pass and one is a watch item. That scores 4 out of 5, which meets the qualifying bar. The watch item is capital intensity, and it matters more than the others because it is the link between Layer 2 and the cash flow problem in Chapter 3.</p>
+<h3>Layer 2 scorecard: company-specific operating KPIs</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 scorecard: five operating KPIs for Microsoft as of the fiscal 2026 filings and the September 2026 outlook</caption>
+<thead><tr><th>KPI</th><th>Why it governs this business</th><th>Threshold for PASS</th><th>Measured</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>1. Azure revenue growth</td><td>Azure is where the AI build-out turns into revenue. The capex only pays if it keeps growing.</td><td>At least 30% a year</td><td>FY26 +41%, Q4 +43%, September-quarter guide +44% to 45% in constant currency<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-22">[22]</a></sup></td><td>PASS</td></tr>
+<tr><td>2. Backlog quality: RPO growth outside OpenAI</td><td>The $678 billion backlog is the proof of demand. Its quality depends on how much is not one customer.</td><td>Growth outside OpenAI of at least 20%</td><td>Commercial RPO $678 billion (+84%); +25% outside OpenAI. All sequential growth outside frontier labs<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-5">[5]</a></sup></td><td>PASS</td></tr>
+<tr><td>3. Capital intensity and return on new capital</td><td>Spending doubled. Returns on the new dollars decide whether the build-out creates value.</td><td>Return on new capital at least 12% and finance-lease-inclusive free cash flow margin at least 12%. WATCH if either test passes but is within 3 points of its limit or is falling year on year</td><td>Return on new capital 14.4%. Total capex incl. leases 42.4% of revenue (FY25 30.2%). Free cash flow margin after leases 12.8% (FY25 18.1%)<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>WATCH</td></tr>
+<tr><td>4. Microsoft 365 commercial cloud growth and Copilot seats</td><td>The first-party AI products must monetise, otherwise Azure growth is only reselling compute.</td><td>Growth of at least 15% and net Copilot seat additions rising</td><td>FY26 +17%; Q4 +14% reported, +16% adjusted. Over 30 million paid Copilot seats, net adds more than doubled<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-21">[21]</a></sup></td><td>PASS</td></tr>
+<tr><td>5. Stock pay and share count</td><td>Large stock grants quietly shift value from owners to staff.</td><td>Stock pay under 5% of revenue and diluted share count not rising</td><td>3.7% of revenue. Diluted shares 7,453 million against 7,469 million two years ago<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Four of five KPIs pass, so Layer 2 qualifies. The single watch item, capital intensity, meets both of its limits today, but the margin test is only 0.8 points above its limit and is falling. That triggers the stated WATCH rule, so it is scored WATCH and not PASS.</p>
+<h3>Management walk-the-talk: past promises vs delivered reality</h3>
+<p>Management earns trust by doing what it said. We read the last two years of calls and filings and compared each dated promise with the result. The record on revenue, margin and Azure is strong: growth, operating margin and Azure growth all landed at or above guidance in the quarters we checked, and the fourth-quarter revenue of $90.0 billion beat the $86.7 billion to $87.8 billion range.<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-16">[16]</a></sup> Two items need care. Discrete items in the fourth quarter, including a $3.2 billion gain on an Anthropic investment, added a net $0.27 to earnings per share, and management itself said that after adjusting for those items it still exceeded expectations.<sup><a href="#cite_note-17">[17]</a></sup></p>
+<p>The weak spot is capital spending. In July 2025 the CFO said <dfn>capital expenditure</dfn> growth would moderate against fiscal 2025. Capital expenditure is cash spent on datacenters, chips and other long-lived equipment. Three months later she said the fiscal 2026 growth rate would be higher than fiscal 2025.<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-25">[25]</a></sup> The numbers confirm the second statement: cash additions to property and equipment rose 80% against 45% a year earlier, and total capex including finance leases rose 65% against 52%.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> Management explained the change as demand running ahead of supply. That may be a good reason, but it was a promise broken, and the investor takeaway is that capex guidance has been revised up once and is now guided higher again for fiscal 2027.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Management guidance and delivery audit for Microsoft, July 2025 to October 2026</caption>
+<thead><tr><th>Promise or target</th><th>Date made</th><th>What happened</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Double-digit revenue and operating income growth in fiscal 2026</td><td>2025-07-30</td><td>Revenue +18%, operating income +21%<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></td><td>DELIVERED</td></tr>
+<tr><td>Operating margin “relatively unchanged”; in April 2026, “up about one point”</td><td>2025-07-30 and 2026-04-29</td><td>46.8% against 45.6%, up 1.2 points<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>DELIVERED, then beaten</td></tr>
+<tr><td>Capital expenditure growth “will moderate” against fiscal 2025</td><td>2025-07-30</td><td>Revised on 2025-10-29 to growth higher than fiscal 2025. Cash capex +80%, with leases +65%<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-25">[25]</a></sup><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td><td>MISSED</td></tr>
+<tr><td>Azure growth about 37% in constant currency in the September 2025 quarter</td><td>2025-07-30</td><td>39% in constant currency (40% reported)<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-23">[23]</a></sup></td><td>BEAT</td></tr>
+<tr><td>Azure growth 39% to 40% in the June 2026 quarter</td><td>2026-04-29</td><td>43%<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></td><td>BEAT</td></tr>
+<tr><td>June 2026 quarter revenue of $86.7 billion to $87.8 billion</td><td>2026-04-29</td><td>$90.0 billion<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></td><td>BEAT</td></tr>
+<tr><td>June 2026 quarter capex of over $40 billion</td><td>2026-04-29</td><td>$41 billion including finance leases<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></td><td>MET</td></tr>
+<tr><td>Calendar 2026 capex of about $190 billion</td><td>2026-04-29</td><td>About $175 billion on 2026-07-29. Management says the drop comes from datacenter leases moving from finance to operating, and that spending expectations are otherwise unchanged<sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-19">[19]</a></sup></td><td>RE-BASED</td></tr>
+<tr><td>Azure capacity constrained through the first half of fiscal 2026</td><td>2025-07-30</td><td>In July 2026 management still said demand exceeds available supply<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></td><td>SLIPPED</td></tr>
+<tr><td>Return cash to owners under the $60 billion repurchase programme</td><td>2024-09-16</td><td>Over $43 billion returned in fiscal 2026; $40.6 billion of the programme left. Diluted shares 7,469 million to 7,453 million in two years<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>MET, small effect</td></tr>
+<tr><td>Xbox to return to growth in fiscal 2027</td><td>2026-07-29</td><td>The first-quarter outlook already has Xbox content and services falling in the mid-single digits<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup></td><td>OPEN, early warning</td></tr>
+</tbody>
+</table></div>
+<p>Management delivered on revenue, margin and Azure, and missed on the one promise that costs real money, capital spending. Credibility on the operating promises is high. Credibility on cash-spending promises is now earned only by the next two quarters of capex that matches guidance.</p>
+<p>What this means for you as an owner: the operating KPIs say the business is healthy, and management meets its demand-side promises. The thing to monitor is whether capex guidance stops rising. If the September-quarter capex lands near the guided $50 billion and Azure growth holds near 45%, the watch item moves toward PASS. If capex runs above the guide with no extra Azure growth, it moves toward FAIL. The next chapter shows the numbers behind that call.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. The numbers, in plain words</h2>
+<p>Revenue grew from $198.3 billion in fiscal 2022 to $331.8 billion in fiscal 2026, a compound rate of 13.7% a year over four years, and operating margin rose from 42.1% to 46.8%.<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> Profit followed: diluted earnings per share rose from $9.65 to $17.95, although fiscal 2026 includes a $0.67 gain from the OpenAI recapitalisation, so the adjusted figure is $17.28.<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-10">[10]</a></sup> The first table gives five years of the income statement and the cash flow statement together, because the story of this stock is the gap between them.</p>
+<h3>Five years of revenue, profit and cash</h3>
+<p>Read the table from the top down. Revenue and operating income climb every year. Cash from operations dipped in fiscal 2023, then rose in each of the last three years, and it grew faster than profit in fiscal 2024 and fiscal 2026. The change is in the lines near the bottom. Cash spent on equipment has quadrupled since fiscal 2022. Free cash flow, which is what is left after that spending, rose in fiscal 2024 and has fallen in each of the last two years.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Microsoft five-year income and cash summary, fiscal years ended June 30 ($ billions unless noted)</caption>
+<thead><tr><th>Measure</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+<tbody>
+<tr><td>Revenue<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>198.3</td><td>211.9</td><td>245.1</td><td>281.7</td><td>331.8</td></tr>
+<tr><td>Revenue growth</td><td>n/a</td><td>6.9%</td><td>15.7%</td><td>14.9%</td><td>17.8%</td></tr>
+<tr><td>Operating income<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>83.4</td><td>88.5</td><td>109.4</td><td>128.5</td><td>155.2</td></tr>
+<tr><td>Operating margin</td><td>42.1%</td><td>41.8%</td><td>44.6%</td><td>45.6%</td><td>46.8%</td></tr>
+<tr><td>Net income (GAAP)<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>72.7</td><td>72.4</td><td>88.1</td><td>101.8</td><td>133.7</td></tr>
+<tr><td>Diluted earnings per share ($)<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>9.65</td><td>9.68</td><td>11.80</td><td>13.64</td><td>17.95</td></tr>
+<tr><td>Cash from operations<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>89.0</td><td>87.6</td><td>118.5</td><td>136.2</td><td>182.9</td></tr>
+<tr><td>Cash additions to property and equipment<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>23.9</td><td>28.1</td><td>44.5</td><td>64.6</td><td>115.9</td></tr>
+<tr><td>Free cash flow (cash from operations minus cash capex)</td><td>65.1</td><td>59.5</td><td>74.1</td><td>71.6</td><td>67.0</td></tr>
+<tr><td>Free cash flow margin</td><td>32.9%</td><td>28.1%</td><td>30.2%</td><td>25.4%</td><td>20.2%</td></tr>
+<tr><td>Finance-lease assets obtained<sup><a href="#cite_note-4">[4]</a></sup></td><td>not retrieved</td><td>not retrieved</td><td>11.6</td><td>20.5</td><td>24.6</td></tr>
+<tr><td>Free cash flow after finance-lease additions</td><td>n/a</td><td>n/a</td><td>62.4</td><td>51.1</td><td>42.4</td></tr>
+<tr><td>Margin after finance-lease additions</td><td>n/a</td><td>n/a</td><td>25.5%</td><td>18.1%</td><td>12.8%</td></tr>
+<tr><td>Stock-based pay<sup><a href="#cite_note-33">[33]</a></sup><sup><a href="#cite_note-2">[2]</a></sup></td><td>7.5</td><td>9.6</td><td>10.7</td><td>12.0</td><td>12.4</td></tr>
+<tr><td>Stock-based pay as % of revenue</td><td>3.8%</td><td>4.5%</td><td>4.4%</td><td>4.3%</td><td>3.7%</td></tr>
+</tbody>
+</table></div>
+<p>Profit is rising and cash is rising, but the cash left after building datacenters is falling: free cash flow margin went from 32.9% to 20.2% in four years, and to 12.8% once finance-lease additions are counted. The table does not show what the new assets will earn. That is the question the next table and Chapter 5 take up. Margins and free cash flow are our arithmetic on the cited statements.</p>
+<h3>Balance sheet and the lease commitments behind the build-out</h3>
+<p>Debt is small, and the growing item is leases. The balance sheet shows what Microsoft owns and owes today. The commitments line shows what it has already promised to pay or build.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Selected balance sheet and commitment items at June 30, 2026 and 2025 ($ billions)</caption>
+<thead><tr><th>Item</th><th>June 30, 2026</th><th>June 30, 2025</th></tr></thead>
+<tbody>
+<tr><td>Cash and short-term investments<sup><a href="#cite_note-3">[3]</a></sup></td><td>76.8</td><td>94.6</td></tr>
+<tr><td>Debt (current portion plus long-term)<sup><a href="#cite_note-3">[3]</a></sup></td><td>40.3</td><td>43.2</td></tr>
+<tr><td>Finance-lease liabilities<sup><a href="#cite_note-4">[4]</a></sup></td><td>66.6</td><td>46.2</td></tr>
+<tr><td>Operating-lease liabilities<sup><a href="#cite_note-4">[4]</a></sup></td><td>21.9</td><td>22.9</td></tr>
+<tr><td>Stockholders' equity<sup><a href="#cite_note-3">[3]</a></sup></td><td>442.4</td><td>343.5</td></tr>
+<tr><td>Property and equipment, net<sup><a href="#cite_note-3">[3]</a></sup></td><td>313.1</td><td>205.0</td></tr>
+<tr><td>Other current assets<sup><a href="#cite_note-3">[3]</a></sup></td><td>48.6</td><td>25.7</td></tr>
+<tr><td>Equity and other investments (includes OpenAI)<sup><a href="#cite_note-3">[3]</a></sup></td><td>36.3</td><td>15.4</td></tr>
+<tr><td>Leases signed but not yet started<sup><a href="#cite_note-4">[4]</a></sup></td><td>329.1</td><td>not retrieved</td></tr>
+<tr><td>Purchase commitments / construction commitments<sup><a href="#cite_note-11">[11]</a></sup></td><td>194.1 / 34.6</td><td>not retrieved</td></tr>
+</tbody>
+</table></div>
+<p>Cash fell by $17.7 billion while property and equipment grew by $108.1 billion, so the build-out is being financed by cash flow, new finance leases and a thinner cash cushion. The $329.1 billion of leases not yet started is the largest single number on the page and will commence between fiscal 2027 and fiscal 2033.</p>
+<h3>How large is the capital spending, counted three ways</h3>
+<p>Microsoft's own phrase capital expenditures includes finance leases, while the cash flow statement does not. Here the same spending is shown on each basis, with the quarterly figures management gave on its calls.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Microsoft capital spending by definition ($ billions) and as a share of revenue</caption>
+<thead><tr><th>Basis</th><th>FY24</th><th>FY25</th><th>FY26</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Cash additions to property and equipment</td><td>44.5</td><td>64.6</td><td>115.9</td><td>Cash flow statement<sup><a href="#cite_note-2">[2]</a></sup></td></tr>
+<tr><td>Finance-lease assets obtained</td><td>11.6</td><td>20.5</td><td>24.6</td><td>Lease note<sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+<tr><td>Total capex including finance leases (our sum)</td><td>56.1</td><td>85.1</td><td>140.6</td><td>Our arithmetic<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td></tr>
+<tr><td>Total capex as % of revenue</td><td>22.9%</td><td>30.2%</td><td>42.4%</td><td>Our arithmetic</td></tr>
+<tr><td>Growth in total capex</td><td>n/a</td><td>+51.6%</td><td>+65.2%</td><td>Our arithmetic</td></tr>
+<tr><td>Management capex by quarter, FY26 (Q1 / Q2 / Q3 / Q4)</td><td>n/a</td><td>n/a</td><td>34.9 / 37.5 / 31.9 / 41.0 (sum 145.3)</td><td>Earnings calls<sup><a href="#cite_note-25">[25]</a></sup><sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>On any basis capital spending has more than doubled in two years. Management's quarterly figures add to $145.3 billion, about $4.7 billion more than our $140.6 billion. Management says the gap between total capex and cash paid is mainly finance leases plus the timing of goods received but not yet paid.</p>
+<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>
+<p>Layer 1 asks two things. Are the static levels good enough today? And is the direction of travel right? The first tests are the hard red lines, the facts that end the discussion. One is a distressed balance sheet, measured by <dfn>net debt</dfn> (debt minus cash) over earnings before interest, taxes, depreciation and amortization (<dfn>EBITDA</dfn>). Another is a <dfn>Stage 4</dfn> breakdown, the Weinstein stage of a confirmed downtrend, with no <dfn>base</dfn>, which is a sideways resting zone where a stock builds strength. The third is accounting fraud. Microsoft passes all three. Next come the floors for a compounder, a company that earns high returns and keeps reinvesting. It passes those too. The technical floor asks for <dfn>Stage 2</dfn>, the confirmed uptrend phase, or a <dfn>breakout</dfn>, a move above the top of a base on heavy volume. Microsoft is in Stage 2. The last floor is <dfn>asymmetry</dfn>, also called <dfn>reward-to-risk</dfn>: the possible gain divided by the possible loss. The target behind it must be anchored in forward earnings per share (<dfn>EPS</dfn>) times a sourced median multiple, a cash flow model, or a <dfn>measured move</dfn>, which is the height of a base projected upward. Ours is anchored. It fails the test anyway. The 12-month central target of $640 is only 1.05 times the distance from the $529.05 close down to the $423.24 exit price. The rule asks for 3.0 times.<sup><a href="#cite_note-39">[39]</a></sup><sup><a href="#cite_note-38">[38]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 gates for Microsoft: hard red lines, compounder floors, technical floor and asymmetry</caption>
+<thead><tr><th>Gate</th><th>Rule</th><th>Measured</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Red line 1: debt</td><td>Net debt/EBITDA at least 4.0x with interest cover under 2.0x</td><td>Net debt $30.0 billion (debt plus finance leases less cash) over EBITDA $193.8 billion = 0.16x. Interest cover 50.9x<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-10">[10]</a></sup></td><td>PASS</td></tr>
+<tr><td>Red line 2: trend</td><td>Stage 4 breakdown with no base</td><td>Stage 2 (Markup), close 4.7% above the 50-day average<sup><a href="#cite_note-38">[38]</a></sup></td><td>PASS</td></tr>
+<tr><td>Red line 3: governance</td><td>Fraud, going-concern warning or severe accounting finding</td><td>Unqualified audit opinion. Internal control effective. No going-concern language in the 10-K text we searched<sup><a href="#cite_note-14">[14]</a></sup></td><td>PASS</td></tr>
+<tr><td>Floor: return on invested capital</td><td>At least 12%</td><td>Average-capital basis 30.9%. Year-end 26.5%. New capital 14.4% (working in the estimate below)</td><td>PASS</td></tr>
+<tr><td>Floor: free cash flow margin</td><td>At least 12%</td><td>20.2% on management's definition; 12.8% after finance-lease additions. Falling from 30.2% in FY24<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></td><td>PASS (thin on the cautious basis)</td></tr>
+<tr><td>Floor: net debt/EBITDA</td><td>Under 3.0x</td><td>0.16x (0.27x including operating leases)</td><td>PASS</td></tr>
+<tr><td>Floor: stock pay</td><td>Under 5% of revenue</td><td>3.7%. Shares shrinking slightly<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></td><td>PASS</td></tr>
+<tr><td>Technical floor (Core)</td><td>Stage 1 base breakout or Stage 2. No Stage 4</td><td>Stage 2 in the ledger, although the 200-day average is still edging down (-0.8% in 63 days): the long trend has flattened but not turned up<sup><a href="#cite_note-38">[38]</a></sup></td><td>PASS (200-day slope not yet positive)</td></tr>
+<tr><td>Target anchoring</td><td>Forward EPS times the sourced 3-year median P/E, a DCF, or a measured move</td><td>FY27 consensus EPS $19.78 times the 3-year median forward P/E of 32.3x = $640<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-32">[32]</a></sup></td><td>PASS (anchored)</td></tr>
+<tr><td>Reward to risk (Core)</td><td>At least 3.0 = (target - close) / (close - stop)</td><td>($640.00 - $529.05) / ($529.05 - $423.24) = 1.05. With a nearer stop of $479.21 it is 2.23</td><td>FAIL</td></tr>
+<tr><td>Archetype tests</td><td>Compounder floors met. Turnaround and tactical tests are only needed if a floor is missed</td><td>No static floor is missed, so the turnaround test is not needed. The tactical test is not met because the 200-day is not rising and its floor of 3.5 is higher</td><td>Compounder floors met, asymmetry fails</td></tr>
+</tbody>
+</table></div>
+<p>Microsoft clears every financial and structural gate and fails one: reward to risk. The gate status is FAIL_ASYMMETRY, which routes the verdict to REJECTED. The result does not hinge on how we read the stop rule, because both readings give a ratio under 3.0.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Microsoft earned about 30.9% on the capital invested in the business in fiscal 2026 (26.5% on year-end capital), and about 14.4% on the capital it added during the year.</p>
+<h4>How it was calculated</h4>
+<p>Return on invested capital (<dfn>ROIC</dfn>) is profit after tax divided by invested capital. We took operating income of $155.237 billion times one minus the tax rate of 19.4% ($32.185 billion of tax on $165.934 billion of pre-tax income) to get $125.1 billion of after-tax operating profit. Invested capital is debt plus finance-lease liabilities plus equity minus all cash and short-term investments: $40.294 + $66.594 + $442.387 - $76.843 = $472.4 billion at June 30, 2026, and $338.2 billion a year earlier. The average is $405.3 billion, so 125.1 / 405.3 = 30.9%. The new-capital figure is the rise in after-tax profit ($19.3 billion) over the rise in invested capital ($134.2 billion).<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+<h4>The inputs</h4>
+<p>Operating income $155,237 million and tax provision $32,185 million on pre-tax income of $165,934 million<sup><a href="#cite_note-1">[1]</a></sup>. Debt $9,227 million current and $31,067 million long-term, equity $442,387 million, cash and short-term investments $76,843 million<sup><a href="#cite_note-3">[3]</a></sup>. Finance-lease liabilities $66,594 million and $46,172 million a year earlier<sup><a href="#cite_note-4">[4]</a></sup>. For comparison the data vendor shows 26.18% on its own method.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<h4>The range</h4>
+<p>If the $36.3 billion of equity and other investments (mainly OpenAI) is treated as outside the operating business, average ROIC rises to about 33%. If operating-lease liabilities of $21.9 billion are added to capital, it falls to about 29%. In the cautious case, where fiscal 2027 adds $140 billion of capital and after-tax profit grows $17 billion, return on new capital would be about 12%, which is the floor.</p>
+<h4>If the number is off</h4>
+<p>The 12% floor is cleared with more than 18 points to spare on average capital, so the floor does not decide the verdict. The number to watch is return on new capital: if it drops under 12% for two straight years, the build-out is destroying value at the margin and the KPI 3 watch item turns to FAIL.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Free cash flow margin was 20.2% on management's definition and 12.8% after counting finance-lease additions as capital spending.</p>
+<h4>How it was calculated</h4>
+<p>Free cash flow (<dfn>FCF</dfn>) is cash from operations minus cash additions to property and equipment: $182.935 - $115.948 = $66.987 billion, which is 20.2% of $331.839 billion of revenue. The finance-lease version also subtracts the $24.608 billion of assets obtained under finance leases: $66.987 - $24.608 = $42.379 billion, or 12.8% of revenue. Management's own fourth-quarter figure uses the first method: $55.4 billion less $35.8 billion is $19.6 billion.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></p>
+<h4>The inputs</h4>
+<p>Cash from operations $182,935 million. Additions to property and equipment $115,948 million. Finance-lease assets obtained $24,608 million<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup>. Revenue $331,839 million<sup><a href="#cite_note-1">[1]</a></sup>. The data vendor shows the same $66.99 billion and 20.19%.<sup><a href="#cite_note-31">[31]</a></sup> The session ledger instead shows $16.546 billion. We could not reproduce it from the filings and replaced it as set out in Chapter 5.</p>
+<h4>The range</h4>
+<p>Fiscal 2027 is likely lower on both bases. Our estimate in Chapter 5 is about $27 billion on management's definition, which would be about 7% of an estimated $390 billion of revenue (our assumption of about 17% growth), and below the 12% floor. The bull case is about $64 billion. The bear case is about $5 billion.</p>
+<h4>If the number is off</h4>
+<p>The floor is met today on both bases, but not with much room on the cautious one, and the trend is down by about five to seven points a year. If trailing free cash flow margin after finance leases falls under 12% in the September 2026 or December 2026 quarterly filings, Layer 1 would fail on financial grounds and not only on asymmetry.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Net debt is $30.0 billion against EBITDA of $193.8 billion, a ratio of 0.16 times, and operating income covers interest expense 50.9 times.</p>
+<h4>How it was calculated</h4>
+<p>EBITDA is operating income $155.237 billion plus depreciation, amortization and other $38.534 billion = $193.771 billion. Net debt is debt $40.294 billion plus finance-lease liabilities $66.594 billion minus cash and short-term investments $76.843 billion = $30.045 billion. Interest cover is $155.237 / $3.051 billion of interest expense.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-10">[10]</a></sup></p>
+<h4>The inputs</h4>
+<p>All items from the fiscal 2026 balance sheet, cash flow statement and other income note.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-10">[10]</a></sup> The data vendor reports interest coverage of 50.39 on its own definition.<sup><a href="#cite_note-31">[31]</a></sup></p>
+<h4>The range</h4>
+<p>Adding operating-lease liabilities of $21.9 billion lifts the ratio to 0.27 times. Even if all $329.1 billion of leases not yet started were treated as debt on day one, net debt would be about $359 billion, or about 1.9 times EBITDA, still under the 3.0 floor.</p>
+<h4>If the number is off</h4>
+<p>The balance sheet is not the problem. A change would matter only if cash flow fell sharply while lease payments began. The red-line test of 4.0 times with cover under 2.0 is far away.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Stock-based compensation (<dfn>SBC</dfn>) is the cost of paying staff in shares. It was 3.7% of revenue in fiscal 2026, and the diluted share count fell slightly.</p>
+<h4>How it was calculated</h4>
+<p>$12.405 billion of SBC divided by $331.839 billion of revenue is 3.74%. Diluted shares were 7,453 million in fiscal 2026 against 7,469 million in fiscal 2024. Free cash flow after SBC is $66.987 - $12.405 = $54.6 billion, or 16.4% of revenue. On the finance-lease basis it is $42.379 - $12.405 = $30.0 billion, or 9.0%.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></p>
+<h4>The inputs</h4>
+<p>SBC $12,405 million, $11,974 million and $10,734 million for the last three years<sup><a href="#cite_note-2">[2]</a></sup>. Diluted weighted shares 7,453, 7,465 and 7,469 million<sup><a href="#cite_note-1">[1]</a></sup>. Shares issued 29 million and repurchased 36 million in fiscal 2026.<sup><a href="#cite_note-12">[12]</a></sup></p>
+<h4>The range</h4>
+<p>The 5% test is passed by 1.3 points. The share count is shrinking only because buybacks (36 million shares) slightly exceed issuance (29 million), so the <dfn>buyback</dfn> programme mostly offsets stock pay. A buyback is a company repurchasing its own shares.</p>
+<h4>If the number is off</h4>
+<p>If stock pay rose to 5% of revenue the floor would fail, but on the current revenue that would need about $4.2 billion more of stock pay a year than now. The risk is low.</p>
+</section>
+<h3>Peer comparison matrix</h3>
+<p>Four peers are the right comparison because they are the companies spending on AI infrastructure at the same time: Alphabet, Amazon, Oracle and Meta. The first two are cloud rivals, Oracle is a smaller cloud challenger, and Meta spends on AI without selling cloud. Free cash flow here is the data vendor's cash from operations minus capital expenditures, and capex is the vendor's trailing twelve months.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Microsoft against four AI-infrastructure peers (trailing twelve months, $ billions unless noted)</caption>
+<thead><tr><th>Company</th><th>Revenue</th><th>Operating margin</th><th>Capex / revenue</th><th>Free cash flow (vendor)</th><th>ROIC (vendor)</th><th>Forward P/E</th><th>Stage (ledger)</th></tr></thead>
+<tbody>
+<tr><td>Microsoft<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-31">[31]</a></sup></td><td>331.8</td><td>46.8%</td><td>34.9%</td><td>67.0</td><td>26.2%</td><td>26.8</td><td>Stage 2</td></tr>
+<tr><td>Alphabet<sup><a href="#cite_note-34">[34]</a></sup></td><td>445.9</td><td>33.1%</td><td>29.7%</td><td>53.3</td><td>24.9%</td><td>26.2 (Oct 13)</td><td>Stage 1</td></tr>
+<tr><td>Amazon<sup><a href="#cite_note-35">[35]</a></sup></td><td>775.7</td><td>12.1%</td><td>22.3%</td><td>-11.6</td><td>11.9%</td><td>27.7 (Oct 13)</td><td>Stage 3</td></tr>
+<tr><td>Oracle<sup><a href="#cite_note-36">[36]</a></sup></td><td>71.8</td><td>34.3%</td><td>105.4%</td><td>-28.7</td><td>11.3%</td><td>15.1</td><td>Stage 1</td></tr>
+<tr><td>Meta Platforms<sup><a href="#cite_note-37">[37]</a></sup></td><td>228.3</td><td>38.1%</td><td>39.1%</td><td>41.0</td><td>25.4%</td><td>23.1 (Oct 13)</td><td>Stage 2</td></tr>
+</tbody>
+</table></div>
+<p>Microsoft has the best operating margin and the most free cash flow of the five, but also the second-highest forward <dfn>price-to-earnings</dfn> ratio, so the market already pays for that quality. The price-to-earnings ratio is the share price divided by a year of profit per share. The same hyperscaler build-out is visible at every peer: capex is 22% to 105% of revenue. Forward P/E figures for Alphabet, Amazon and Meta come from pages cached on 2026-10-13; Stage comes from the 2026-10-16 ledger. Capex over revenue is our arithmetic.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. What the price is doing</h2>
+<p>The price test asks whether the chart agrees with the story. Three tools help. The 20-day, 50-day and 200-day moving averages are the average closing price over the last 20, 50 and 200 trading days. A stock in a healthy uptrend sits above all three. The relative strength index (<dfn>RSI</dfn>) is a meter from 0 to 100 of how fast the price has been rising. Above 70 is called overbought. Below 30 is called oversold. The average true range (<dfn>ATR</dfn>) is the typical daily price swing, here $12.01. We measure distances in ATRs so that a calm stock and a wild stock can be compared. Microsoft closed at $529.05 on 2026-10-16, after a 1.9% fall that day. It is above all three averages. The 50-day average ($505.53) has risen 9.3% in 21 days. The Weinstein stage is Stage 2, the confirmed uptrend phase. The 200-day average ($435.25) is still edging down, 0.8% lower than 63 days ago. So the long-term trend has flattened but has not turned up. That is why Test A2 below fails. The ledger still labels the stage as Stage 2 because price is above a rising 50-day average that is above the 200-day average.<sup><a href="#cite_note-38">[38]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verified price and technical structure for MSFT as of 2026-10-16</caption>
+<thead><tr><th>Technical measure</th><th>Ledger reading</th><th>Plain-English meaning</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-16)</td><td>$529.05<sup><a href="#cite_note-38">[38]</a></sup></td><td>1D: -1.93%, 1W: -1.13%, 1M: 6.29%</td></tr>
+<tr><td>20-day / 50-day / 200-day average</td><td>$520.22 / $505.53 / $435.25</td><td>50-day trend: RISING (21d ago: $462.49; 200d 63d ago: $438.77)</td></tr>
+<tr><td>Weinstein trend stage</td><td>Stage 2 (Markup)</td><td>Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; Stage 4 is markdown</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day)</td><td>57.33 / $12.01</td><td>Momentum gauge (30 oversold, 70 overbought) and typical daily price swing</td></tr>
+<tr><td>52-week high / low</td><td>$553.72 / $349.20</td><td>Close is -4.46% from 52-week high</td></tr>
+<tr><td>20-day swing low / 63-day base low</td><td>$491.22 / $377.39</td><td>Active support anchor: $520.22 (0.74 ATR away)</td></tr>
+<tr><td>Volume vs 20-day average</td><td>1.08x</td><td>63-day volume dry-up ratio: 0.48</td></tr>
+<tr><td>Relative strength vs S&amp;P 500 (63d / 28d)</td><td>28.66% / 7.46%</td><td>Excess return vs benchmark over 3 months and 6 weeks</td></tr>
+</tbody>
+</table></div>
+<p>The chart reads as a recovery in progress. Price is 51.5% above the 52-week low of $349.20 and 4.5% under the high of $553.72. RSI is 57.3, neither stretched nor weak. The nearest support is the 20-day average at $520.22, only 0.74 ATR away. For context, the stock closed at $372.32 on June 30, 2026 and $368.68 on March 31, 2026. Most of this rally happened in the last three and a half months.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<h3>Momentum and turnaround inflection gate</h3>
+<p>The momentum gate runs three tests on the frozen price snapshot. Test A asks whether the stock is already in a strong uptrend. It needs price over a rising 50-day average and a flat or rising 200-day average. It also needs a three-month return that beats the S&amp;P 500, and a price within 1.2 ATR of support. Test B asks whether the stock is building a launch point. A base is a sideways resting zone. Volume should dry up inside it. Then comes a breakout, a move above the <dfn>pivot</dfn>, the top of that base, on heavy volume. Sometimes a <dfn>retest</dfn> follows. That is a pullback that tests the level from above. Test C asks whether a recovering stock has a floor and is turning up. The overall result is ENTERING_MOMENTUM with a turnaround inflection. The configuration is flagged in the ledger as needing calibration.<sup><a href="#cite_note-38">[38]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Momentum &amp; recovery gate evaluation for MSFT (Verdict: ENTERING_MOMENTUM / TURNAROUND_INFLECTION)</caption>
+<thead><tr><th>Gate test</th><th>Rule in plain words</th><th>Measured values from ledger</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Test A1 (Markup structure)</td><td>Price &gt; SMA50 &gt; SMA200 and SMA50 rising over 21d</td><td>{"close": 529.05, "sma50": 505.53, "sma200": 435.25, "sma50_21d_ago": 462.49}</td><td>PASS</td></tr>
+<tr><td>Test A2 (Long trend slope)</td><td>SMA200 flat or rising over 63 trading days</td><td>{"sma200": 435.25, "sma200_63d_ago": 438.77}</td><td>FAIL</td></tr>
+<tr><td>Test A3 (Quarterly leadership)</td><td>63-day return beats S&amp;P 500</td><td>{"rs_63d_excess_pct": 28.66, "required_min_pct": 0.0}</td><td>PASS</td></tr>
+<tr><td>Test A4 (Support proximity)</td><td>Price within 1.2 ATR of nearest verified support</td><td>{"support_distance_atr": 0.74, "max_atr": 1.2}</td><td>PASS</td></tr>
+<tr><td>Test B1 (Base 50-DMA holding)</td><td>50-day average decline &lt;= 0.5% over 21 days</td><td>{"sma50_21d_chg_pct": 9.31, "max_decline_pct": 0.5}</td><td>PASS</td></tr>
+<tr><td>Test B2 (Monthly RS turn)</td><td>28-day return beats S&amp;P 500 (&gt; 0%)</td><td>{"rs_28d_excess_pct": 7.46, "required": "rising (&gt; 0)"}</td><td>PASS</td></tr>
+<tr><td>Test B3 (Tight base pivot)</td><td>Price within 1.0 ATR of 63-day base low</td><td>{"base_pivot_atr": 12.63, "max_atr": 1.0}</td><td>FAIL</td></tr>
+<tr><td>Test B4 (Seller exhaustion)</td><td>63-day volume dry-up ratio &lt;= 0.90</td><td>{"vol_dryup_ratio_63d": 0.48, "max_ratio": 0.9}</td><td>PASS</td></tr>
+<tr><td>Test B5 (Buyer expansion)</td><td>Session volume &gt;= 1.0x 20-day average</td><td>{"vol_mult_20d": 1.08, "min_ratio": 1.0}</td><td>PASS</td></tr>
+<tr><td>Test C1 (Higher-low floor)</td><td>Price &gt; 63d low and 20d swing low holding floor</td><td>{"close": 529.05, "swing_low_20d": 491.22, "base_low_63d": 377.39}</td><td>PASS</td></tr>
+<tr><td>Test C2 (Short-term inflection)</td><td>Price &gt;= 20-DMA with positive 28d RS or 2W gain</td><td>{"close": 529.05, "sma20": 520.22, "rs_28d_pct": 7.46, "chg_2w_pct": 2.23}</td><td>PASS</td></tr>
+<tr><td>Test C3 (Buyable support distance)</td><td>Price within 1.8 ATR of active support</td><td>{"support_distance_atr": 0.74, "max_atr": 1.8}</td><td>PASS</td></tr>
+<tr><td>Test C4 (No freefall)</td><td>14-day RSI &gt;= 35 (selling pressure stabilizing)</td><td>{"rsi14": 57.33, "min_rsi14": 35.0}</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Test A fails on one condition: the 200-day average is 0.8% lower than 63 days ago. Test B fails because price is 12.63 ATR above the 63-day base low, so there is no tight base near the price to buy against. Test C passes on all four conditions. The honest reading is that the stock has recovered strongly and has a floor. It is not at a fresh entry point.</p>
+<p>What this means for you: the chart does not block a purchase. The distance to support is 0.74 ATR, which is the standard band of the ladder. On technicals alone this would be an accumulate-on-dip name. The market regime is a correction, however. Only 34.3% of the 1,497 stocks in our pool are above their 50-day average. The S&amp;P 500 has 7 distribution days, which are heavy-volume down days, in the last 25 sessions.<sup><a href="#cite_note-38">[38]</a></sup> Microsoft itself has 3 of them. What would confirm the chart is a pullback that holds the 20-day and 50-day averages, around $505 to $520, followed by a new high on rising volume above $553.72. A pullback to that band improves the chart but gives only about 1.24 to 1.65 times reward to risk against the $640 target. So it does not change the verdict. What would reject it is a close under the 50-day average for several sessions. A close under the 200-day average at $435.25 would break the structure.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. What could happen next</h2>
+<p>This chapter asks what growth today's price already assumes, how analysts are changing their forecasts, where we differ, and what the next 12 months could look like in three cases. The first answer needed a correction. The session ledger said the market is pricing in 39.5% growth a year for ten years. That figure used a trailing free cash flow of $16.546 billion, which we could not reproduce from the filings: the 10-K cash flow statement gives $66.987 billion on management's definition, and $42.379 billion after finance-lease additions.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-38">[38]</a></sup> We replaced the ledger figure in the table below and disclose the swap in the run notes. That table sets the corrected Reverse DCF beside the direction of analyst estimates.</p>
+<p>The Reverse DCF solves one equation. Take a starting cash flow, grow it at a constant rate for ten years, add the value of a terminal year worth 18 times that year's cash flow, discount everything at 10% a year, and ask what growth rate makes the total equal today's market value. With a market value of $3,937.7 billion (the $529.05 price times 7,443 million diluted shares) the answer is 26.0% a year on the finance-lease basis, 19.8% a year on management's basis, and 39.5% on the ledger's figure (the ledger shows 39.55%), which our solver reproduces.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-39">[39]</a></sup><sup><a href="#cite_note-16">[16]</a></sup></p>
+<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for MSFT</caption>
+<thead><tr><th>Expectations dimension</th><th>Measured reading</th><th>How to interpret it</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF implied 10-year growth</td><td>+26.03% per year<sup><a href="#cite_note-38">[38]</a></sup></td><td>At the current price (529.05), the market is pricing in +26.0% annual growth in free cash flow after finance-lease additions for the next 10 years (10% discount rate, 18x terminal multiple, market value = price x 7,443M diluted shares). On management's own definition of free cash flow (cash from operations less cash additions to property and equipment, $66.987B) the figure is +19.8%.</td></tr>
+<tr><td>Reverse DCF cash-flow basis &amp; FCF yield</td><td>FY2026 FCF after cash capex and finance-lease additions (42.379 $B); FCF yield: 1.08%</td><td>Solved at 10.0% discount rate and 18.0x terminal multiple</td></tr>
+<tr><td>Consensus FY1 EPS (current vs 90d ago)</td><td>$19.78 vs $19.39 (+1.98%)</td><td>Revision trend status: RISING_ESTIMATES</td></tr>
+<tr><td>Consensus FY2 EPS (current vs 90d ago)</td><td>$23.72 vs $22.61 (+4.93%)</td><td>Implied FY2 vs FY1 EPS growth: +19.9%</td></tr>
+<tr><td>Street analyst target range (low / mean / high)</td><td>$440.00 / $599.24 / $870.00 (53 analysts)</td><td>Used as expectations context only; our underwriting target is anchored in the scenario model below</td></tr>
+<tr><td>Same Reverse DCF on management's free cash flow</td><td>+19.81% per year on $66.987 billion (FCF yield 1.70%)<sup><a href="#cite_note-2">[2]</a></sup></td><td>Cash from operations minus cash additions to property and equipment, with no finance-lease charge</td></tr>
+<tr><td>Original ledger figure (replaced)</td><td>+39.55% per year on $16.546 billion (FCF yield 0.42%)</td><td>Vendor-based figure we could not trace to the filings. The solver reproduces 39.5% from that input, so the arithmetic was right and the input was not</td></tr>
+<tr><td>Sensitivity of the corrected figure</td><td>+22.6% to +30.2% per year across 12x to 25x terminal multiples</td><td>At 25x the figure is 22.59%. At 12x it is 30.17%. The discount rate range of 9% to 11% moves it by about plus or minus 1.2 points</td></tr>
+</tbody>
+</table></div>
+<p>Correcting the input moves the implied growth from 39.5% to 26.0% a year on the finance-lease basis, or 19.8% on management's basis, but it does not make the stock look cheap. A 1.1% to 1.7% free cash flow yield needs 20% to 26% yearly growth for ten years. Microsoft's revenue is growing 18%. The <dfn>consensus estimate</dfn> (the average analyst forecast) for next year's profit per share is rising and the analyst target range of $440 to $870 brackets the price.</p>
+<h3>Our variant perception</h3>
+<p>Three working estimates follow: the Reverse DCF, the central price and fiscal 2027 free cash flow. A scenario table then combines them into bull, central and bear cases with probabilities.</p>
+<p>Where consensus stands. Analysts' fiscal 2027 profit estimate is $19.78 a share, up 1.98% in 90 days and 0.09% in 30 days, and the fiscal 2028 estimate is $23.72, up 4.93% in 90 days and 0.54% in 30 days. That is a rising trend, and the ledger labels it RISING_ESTIMATES. The average analyst target is $599.24, 13.3% above the price, with a low of $440 and a high of $870, which we use as context only.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-31">[31]</a></sup> Our own central target of $640 is about 6.8% above the average analyst target, so we are not more cautious on earnings than the Street.</p>
+<p>Where we differ from the price. The market is rewarding earnings per share, which grows about 14.5% from adjusted fiscal 2026 to fiscal 2027 and 19.9% the year after, but cash is moving the other way. Management guided the September quarter's capital spending to over $50 billion, the calendar 2026 total to about $175 billion even after the lease reclassification, and said only that it expects to remain free cash flow positive in fiscal 2027.<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-22">[22]</a></sup> Our estimate is that fiscal 2027 free cash flow on management's definition falls to about $27 billion from $67.0 billion, a 60% drop. A stock that has risen 42% since June 30 is being priced on the profit line while the cash line weakens, and on a 1.1% to 1.7% cash yield that gap leaves little room for a disappointment.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<p>What would prove us right or wrong. We are right on the cash point if the September 2026 quarter, reported on Wednesday, October 28, 2026, shows capex above $50 billion with free cash flow under $10 billion while Azure growth stays near 45%.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> We are wrong, and too cautious, if cash from operations is above $60 billion for the quarter and free cash flow is above $15 billion, which would mean the build-out is converting to cash faster than our estimate. We are also wrong on valuation if consensus fiscal 2027 profit per share moves to about $26.17 or more, which would lift the central target to the $846 or so needed for a 3.0 reward to risk.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>The price assumes about 26.0% yearly growth in finance-lease-inclusive free cash flow for ten years (19.8% on management's definition).</p>
+<h4>How it was calculated</h4>
+<p>We solved for the growth rate g in: sum from year 1 to 10 of (base cash flow x (1+g)^t / 1.10^t) plus 18 x (base cash flow x (1+g)^10) / 1.10^10 = market value. Market value is $529.05 x 7,443 million diluted shares = $3,937.7 billion. Base cash flow is $42.379 billion in the corrected case: cash from operations $182.935 billion, less cash capital additions $115.948 billion, less finance-lease assets obtained $24.608 billion.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-39">[39]</a></sup></p>
+<h4>The inputs</h4>
+<p>Discount rate 10% and terminal multiple 18x are the portfolio settings for US names.<sup><a href="#cite_note-39">[39]</a></sup> Price from the ledger.<sup><a href="#cite_note-38">[38]</a></sup> Diluted shares of 7,443 million are the June 2026 quarter figure.<sup><a href="#cite_note-16">[16]</a></sup> Cash flow items from the 10-K.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+<h4>The range</h4>
+<p>On management's cash flow of $66.987 billion the answer is 19.8%. On a hypothetical fiscal 2027 free cash flow of $27 billion it would be 32.3%. On $100 billion it would be 14.5%. A terminal multiple of 25x lowers the corrected answer to 22.6%; 12x raises it to 30.2%.</p>
+<h4>If the number is off</h4>
+<p>If the right starting cash flow is the higher one, the market is asking for about 20% a year, which is plausible for a company growing revenue 18% with expanding margins. If it is the lower one, the market is asking for 26% to 32%, which would need revenue growth well above the 16% to 17% guided for the next quarter. The spread of 14 points between the cases is why the cash flow basis matters.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Our central 12-month price is $640, which is 21% above the close.</p>
+<h4>How it was calculated</h4>
+<p>We multiplied consensus fiscal 2027 profit per share of $19.78 by the 3-year median forward price-to-earnings ratio of 32.3x. The median is the middle of twelve quarter-end values from March 2024 to June 2026 (20.14, 21.07, 27.18, 28.68, 29.07, 31.97, 32.72, 33.28, 33.55, 34.50, 34.51, 35.35), so the median is (31.97 + 32.72) / 2 = 32.35. $19.78 x 32.345 = $639.8. A cross-check agrees: fiscal 2028 profit per share of $23.72 at today's 26.75x is $634.5.<sup><a href="#cite_note-38">[38]</a></sup><sup><a href="#cite_note-32">[32]</a></sup></p>
+<h4>The inputs</h4>
+<p>Fiscal 2027 and 2028 profit per share from the session ledger.<sup><a href="#cite_note-38">[38]</a></sup> The forward P/E history is from a secondary data vendor, so the median is a supporting anchor and not a filing-based fact.<sup><a href="#cite_note-32">[32]</a></sup></p>
+<h4>The range</h4>
+<p>Bull: $23.72 x 32.3x = $767. Bear: profit per share of $18.00, about 9% under consensus, at 21x, the multiple around the March 2026 low, is $378.</p>
+<h4>If the number is off</h4>
+<p>If the multiple stays at today's 26.75x on fiscal 2027 profit, the price is $529, so the whole 21% gain in the central case comes from the multiple recovering. That is the weakest part of the target, and it is why the asymmetry fails.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>We estimate fiscal 2027 free cash flow on management's definition at about $27 billion, with a range of $5 billion to $64 billion.</p>
+<h4>How it was calculated</h4>
+<p>Cash from operations is $182.9 billion in fiscal 2026 and we assume it grows 18% to about $216 billion. It grew 34% in fiscal 2026 and 30% in the fourth quarter, but management says operating-lease payments are rising. Total capex including finance leases for calendar 2026 is guided to about $175 billion. The June-quarter and March-quarter figures were $41.0 billion and $31.9 billion, so the second half of 2026 is about $102 billion, with the September quarter above $50 billion. We assume the first half of 2027 matches that pace, giving about $204 billion of fiscal 2027 capex including leases. Cash additions are lower by the roughly $15 billion of finance leases we assume, so about $189 billion. $216 - $189 = $27 billion.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-27">[27]</a></sup></p>
+<h4>The inputs</h4>
+<p>Management's capex figures and its statement that fiscal 2027 capex will grow and that it expects to stay free cash flow positive.<sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-22">[22]</a></sup> The 18% growth of cash from operations and the $15 billion finance-lease figure are our assumptions, not company guidance.</p>
+<h4>The range</h4>
+<p>Bull: cash from operations grows 25% to $229 billion and capex falls to a cash total of $165 billion, giving $64 billion. Bear: cash from operations grows 12% to $205 billion and cash capex is $200 billion, giving $5 billion.</p>
+<h4>If the number is off</h4>
+<p>If free cash flow lands near the bull case, Microsoft's cash margin recovers. The Reverse DCF on that cash flow would show about 20%, so the stock would look better value than we say. If it lands near the bear case, the stock's free cash flow yield would be near zero and the multiple would depend entirely on earnings.</p>
+</section>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>12-month scenarios for Microsoft from the $529.05 close on 2026-10-16, with probabilities and reasons</caption>
+<thead><tr><th>Scenario</th><th>The story in plain words</th><th>Main driver</th><th>12-month price</th><th>Probability and reason</th></tr></thead>
+<tbody>
+<tr><td>Bull</td><td>AI demand keeps outrunning supply, Copilot usage billing lifts revenue per seat, and the market pays its three-year normal multiple on next year's profit.</td><td>Fiscal 2028 profit per share of $23.72 at 32.3x</td><td>$767 (+45%)</td><td>25%. It needs both the earnings and the multiple. The stock has already gained 42% since June 30, and analysts' average target of $599 sits well under it.</td></tr>
+<tr><td>Central</td><td>Consensus fiscal 2027 profit of $19.78 is met, Azure holds near 45% growth for two quarters, and the multiple recovers to the three-year median.</td><td>Fiscal 2027 profit per share $19.78 at 32.3x</td><td>$640 (+21%)</td><td>45%. Estimates are rising, management has met its demand-side promises, and it guided the September quarter to revenue growth of 16% to 17%.</td></tr>
+<tr><td>Bear</td><td>Capex outruns revenue, Azure growth slips as OpenAI spreads its workloads, profit misses by about 9%, and the multiple falls back to the 2026 trough.</td><td>Profit per share $18.00 at 21x</td><td>$378 (-29%)</td><td>30%. The shares were at $368.68 on March 31, 2026 and $372.32 on June 30, 2026, and the market regime is a correction.</td></tr>
+<tr><td>Expected value</td><td>Probability-weighted outcome: 0.25 x $767 + 0.45 x $640 + 0.30 x $378</td><td>Weighted average of the three cases</td><td>$593.15 (+12.1%)</td><td>Probabilities sum to 100%. The expected gain of $64 is only 0.6 times the $106 distance to the exit price of $423.24.</td></tr>
+</tbody>
+</table></div>
+<p>The expected value is positive at +12.1%, but the downside to the bear case, 29%, is larger than half of the upside to the bull case, and the exit price sits above the bear case. A positive expected value is not the same as a favourable reward-to-risk ratio, and Chapter 7 applies the stricter rule.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Why these estimates might be wrong</h2>
+<p>Every estimate rests on one weakest assumption. This chapter names it for each estimate, says what evidence would show it wrong and when that evidence arrives, then sets out the strongest case against our own conclusion. The weak points are the starting cash flow, the multiple and OpenAI.</p>
+<p>Reverse DCF: the weakest assumption is the starting cash flow. The answer moves from 19.8% to 26.0% depending on whether finance leases count. It moves to 32.3% if fiscal 2027 free cash flow is $27 billion. A reader who trusts a different cash flow reaches a different conclusion. The evidence that settles it is the lease footnote and cash flow statement in the Form 10-Q for the September 2026 quarter, due after the October 28 results.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+<p>Central target: the weakest assumption is that the multiple recovers to 32.3x while the free cash flow yield is only 1.1% to 1.7%. If the multiple holds at 26.75x the price is $529 and there is no upside. We will know part of the answer on October 28 and the rest when the fiscal 2027 results arrive in July 2027.</p>
+<p>Free cash flow estimate: the weakest assumption is 18% growth of cash from operations, because management warns that operating-lease payments are rising. The evidence is the cash flow statement in the September 2026 10-Q.<sup><a href="#cite_note-17">[17]</a></sup></p>
+<h3>Fatal-flaw scenario 1: OpenAI backlog proves less solid than it looks</h3>
+<p>At December 31, 2025 about 45% of the commercial backlog belonged to OpenAI, and the rest was about $350 billion.<sup><a href="#cite_note-26">[26]</a></sup> In June 2026 total commercial RPO was $678 billion and the part outside OpenAI had grown 25% in a year. From the July 2025 figure of $368 billion that implies OpenAI is at least about $218 billion, or 32% of the backlog, and more if any of the year-ago backlog was OpenAI's. This is our arithmetic, because the current share is not published.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-24">[24]</a></sup> In April 2026 OpenAI gained the right to run on other clouds and Microsoft's licence became non-exclusive.<sup><a href="#cite_note-30">[30]</a></sup> OpenAI is also an equity-method investment: Microsoft's earnings contain OpenAI gains of $0.67 a share in fiscal 2026 and losses of $0.49 a share in fiscal 2025.<sup><a href="#cite_note-10">[10]</a></sup> If OpenAI cannot fund its commitments, the revenue at risk is $24.1 billion of annual revenue, 7.3% of the total, and the backlog would shrink by more than the revenue share suggests.<sup><a href="#cite_note-6">[6]</a></sup></p>
+<h3>Fatal-flaw scenario 2: the capex gets ahead of demand</h3>
+<p>Microsoft's capital spending is 42% of revenue counting finance leases, about two thirds of it on chips that depreciate over about six years, and it has $329.1 billion of leases not yet started plus $194.1 billion of purchase commitments.<sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-17">[17]</a></sup> Management says demand exceeds supply, and the Azure growth of 43% supports that. But if demand growth slows to the high teens while depreciation keeps rising, <dfn>gross margin</dfn> falls first. Gross margin is revenue minus the direct cost of delivering the product, as a share of revenue. Microsoft Cloud gross margin was already down to 65% in the June 2026 quarter, and 66% for the year, and management guides the September quarter to be relatively stable.<sup><a href="#cite_note-18">[18]</a></sup><sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> The CFO argues the chip part of the spend can be slowed, and she is right about timing, but the leases and buildings cannot be cancelled cheaply. That is the scenario behind our $378 bear case.</p>
+<h3>Fatal-flaw scenario 3: quality of earnings and the price paid</h3>
+<p>Fiscal 2026 profit per share of $17.95 contains a $0.67 OpenAI gain, and the fourth quarter included a $3.2 billion Anthropic gain and other discrete items worth $0.27 a share.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-17">[17]</a></sup> Adjusted profit per share was $17.28, up 22%. Earnings growth of 22% is excellent, but the market price already assumes it continues: the shares sold at 20.1 times fiscal 2027 profit on June 30, 2026 and at 26.7 times on October 16.<sup><a href="#cite_note-32">[32]</a></sup><sup><a href="#cite_note-38">[38]</a></sup> The market regime on October 16 is a correction, with only 34.3% of stocks over their 50-day average.<sup><a href="#cite_note-38">[38]</a></sup> If the stock gives back half of its 42% gain, it returns to about $450, which is under our $477 level for a 3.0 reward to risk but above the $423 exit price. There is also an unresolved tax matter: the IRS is seeking $28.9 billion plus penalties and interest for 2004 to 2013, which Microsoft disputes.<sup><a href="#cite_note-13">[13]</a></sup> The next table lists each risk with the evidence that would show it and the date we first learn it.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Key risks, the evidence that would show them, and when we will know</caption>
+<thead><tr><th>Risk</th><th>What would show it is real</th><th>First data point</th><th>Effect on our view</th></tr></thead>
+<tbody>
+<tr><td>OpenAI concentration and multi-cloud</td><td>Commercial RPO outside OpenAI growth under 20%, or Azure growth under 40%</td><td>October 28, 2026 results<sup><a href="#cite_note-28">[28]</a></sup></td><td>Lowers KPI 2 to WATCH and raises the bear probability</td></tr>
+<tr><td>Capex ahead of demand</td><td>Capex above the guided $50 billion with Azure growth under 44%. Cloud gross margin under 64%</td><td>October 28, 2026 results<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-28">[28]</a></sup></td><td>KPI 3 turns FAIL, Layer 2 drops to 3 of 5</td></tr>
+<tr><td>Cash flow thinner than expected</td><td>Trailing free cash flow margin after finance leases under 12%</td><td>10-Q for the September 2026 quarter</td><td>Layer 1 fails on financial grounds too</td></tr>
+<tr><td>Multiple does not recover</td><td>Forward P/E stays at or under 27x after a beat</td><td>Weeks after October 28, 2026</td><td>Central target falls toward $529</td></tr>
+<tr><td>Tax matter</td><td>IRS or court outcome adding tens of billions in tax</td><td>Not dated. Disputed in appeals<sup><a href="#cite_note-13">[13]</a></sup></td><td>One-off cost. Affects cash, not operations</td></tr>
+</tbody>
+</table></div>
+<p>Four of the five risks produce a data point on or soon after October 28, 2026, which is why that date is the central catalyst for the decision. The tax matter has no date.</p>
+<p>The single hinge claim: the AI build-out turns into cash. Specifically, that Azure keeps growing at 40% or more while capital spending growth falls below revenue growth during fiscal 2028, so that free cash flow margin after finance leases stops falling near the 12.8% of fiscal 2026 and then rises. If that holds, the cost of the build-out is a timing effect and the 26% implied growth in Chapter 5 is achievable. If it fails, the stock is paying a premium multiple for a business whose cash is being swallowed by the equipment it needs. The first evidence arrives on Wednesday, October 28, 2026, and decisive evidence in the fiscal 2027 results around July 2027.<sup><a href="#cite_note-28">[28]</a></sup><sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when</h2>
+<p>The decision is REJECTED. We do not buy Microsoft now. The rule is the reward-to-risk floor for Core Alpha names, which is 3.0 times. The measured figure is 1.05. The central target of $640 is $110.95 above the $529.05 close. The exit price of $423.24 is $105.81 below it. The exit price follows the scoring rule. That rule puts the stop under the lowest of the 20-day swing low ($491.22), the 50-day average ($505.53) and the 200-day average ($435.25), minus one ATR of $12.01.<sup><a href="#cite_note-39">[39]</a></sup><sup><a href="#cite_note-38">[38]</a></sup> A narrower reading uses the swing low alone. The exit price is then $479.21 and the ratio is 2.23, which still fails. The bull target of $767 would give 2.25 on the rule's stop and 4.77 on the swing-low stop. But a bull case is not a central case.</p>
+<p>Support distance is not the problem. The close is 0.74 ATR above the nearest support at $520.22, which is the standard band of the ladder. RSI of 57.3 is well under the limit of 72. On timing alone this would be ACCUMULATE_ON_DIP. The rule outranks timing. A name that fails a Layer 1 gate is REJECTED however the chart looks. Layer 2 qualified with 4 of 5 KPIs, so the quality side is intact.</p>
+<p>What the price would have to be. For a central target of $640 and the rule's exit price, a 3.0 ratio needs a price of about $477.43. That is 9.8% under the close. At that level the stock would sit under its 50-day average ($505.53) and out of Stage 2. The Core technical floor would then fail. A pullback that only holds the $505 to $520 band keeps the chart healthy but gives about 1.24 to 1.65 times reward to risk, so it does not change the verdict. So the price route needs a rebuilt chart as well as a lower price. It needs either a new Stage 1 base that breaks out above its pivot, or a Stage 2 reclaim: price back above a rising 50-day average with the 200-day average turning up. The stop and the target are then recalculated from the new data, and the ratio must still reach 3.0.</p>
+<p>The other route is a higher target. At the current price, a 3.0 ratio needs a central target of $846.48. At 32.345 times earnings that needs fiscal 2027 profit of about $26.17 a share, which is 32% above consensus. This figure is an illustration on today's frozen inputs, not a trigger to buy.</p>
+<p>If every gate cleared, the plan would be as follows. The conditional <dfn>entry zone</dfn>, the band of prices where buying is planned, is $450 to $477. It would be placed as a <dfn>limit order</dfn>, which fills only at that price or better and does not chase. The stop would be $423.24, recalculated at that time. We would assign TIER_2, which rates the business high but gives the capital-intensity watch item a haircut. At an entry of $477 the stop is 11.3% away, so 75 basis points of risk would size the position at 6.65% of the portfolio. The tier cap of 6.5% would then apply. The stop would trail the rising 21-day average or the 50-day average.</p>
+<p>The next table is Layer 3, which turns a decision into a price plan: where to buy, where to get out, and how much to hold. Risk-unit sizing sets the position by the loss we would accept. A basis point is 0.01% of the portfolio. A tier is a conviction grade, from TIER_1 (highest) to TIER_4, and TIER_0 marks a name we will not buy. TIER_2 is the grade used here for the conditional plan. Each tier has a risk budget in basis points and a cap on position size. Portfolio heat is the share of the portfolio we would lose if the stop were hit. The weight is the risk budget divided by the stop distance. Let-winners-run means we do not sell a rising holding only because it has grown large or the RSI is high. We trail the stop up under the 21-day exponential average, a fast-reacting average of recent closes, or the 50-day average. Because the verdict is REJECTED, these levels are a conditional checklist, not an order. The weight line shows 0% because the tier is TIER_0, and the stop distance in the table is measured from the $477 top of the entry zone.</p>
+<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 3 execution levels and risk-unit position sizing for MSFT</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Underwriting archetype &amp; bucket</td><td>COMPOUNDER (CORE_ALPHA)</td><td>Evaluates both static quality and rate-of-change inflection</td></tr>
+<tr><td>Action verdict</td><td><span class="verdict verdict-exit">REJECTED</span></td><td>REJECTED because reward to risk is 1.05 against a Core floor of 3.0. All other Layer 1 gates and Layer 2 pass</td></tr>
+<tr><td>Recommended entry zone</td><td>$450.00 to $477.00</td><td>Current price $529.05 is 0.74 ATR from verified support</td></tr>
+<tr><td>Structural invalidation stop</td><td>$423.24 (-11.27% from entry)</td><td>below min(swing low, 50/200-day MA) minus 1.0 x ATR(14)</td></tr>
+<tr><td>Base / Bull / Bear targets</td><td>$640.00 / $767.00 / $378.00</td><td>Reward-to-risk asymmetry at CMP: 1.05:1</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat)</td><td>0.0% of net worth (TIER_0, 0 bps risk budget)</td><td>Formula: min(Tier cap 0–0%, 0 bps / 11.27% stop distance)</td></tr>
+<tr><td>Let-winners-run rule</td><td>Appreciated weight ceiling up to 22%</td><td>Never trim solely for RSI &gt; 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break</td></tr>
+</tbody>
+</table></div>
+<p>The risk-unit weight shows zero because the verdict is REJECTED and the tier is TIER_0. The entry zone and stop are the conditional levels we would use if the gates cleared. If Microsoft were ever held, the let-winners-run rule would apply. There would be no automatic trim for RSI above 70 or for passing 15% of the portfolio while the Stage 2 trend, earnings estimates and fundamentals stay intact. The ceiling is 22%, and the stop trails the rising 21-day or 50-day average.</p>
+<p class="trigger">Trigger 1, dated event: Wednesday, October 28, 2026, after the close, when Microsoft reports the September quarter.<sup><a href="#cite_note-28">[28]</a></sup> We re-underwrite that evening with the new cash flow, capex, lease and Azure data. This is a trigger to re-underwrite, not to buy. The verdict moves to ACCUMULATE_ON_DIP only if all of these hold together: a verified, refreshed earnings basis supports a central target that gives at least 3.0 reward to risk against a recalculated stop. Every financial gate and the Layer 2 KPIs still pass. And the chart meets the Core technical floor. On today's frozen inputs the earnings route would need fiscal 2027 profit per share of about $26.17 (against $19.78 now), because $26.17 x 32.345 = $846.48.</p>
+<p class="trigger">Trigger 2, price: a fall toward $477, where the 3.0 ratio is reached at the $640 target, is also a trigger to re-underwrite, not to buy. A buy then needs a new Stage 1 base breakout or a Stage 2 reclaim, a recalculated stop and target with a ratio of at least 3.0, and every other gate passing. A close at or under $435.25, the 200-day average, ends the Stage 2 structure. The name then rests for one quarter, with no re-underwriting before the December quarter results. A close above $553.72 on rising volume would confirm the uptrend. It would also make reward to risk worse, so it would not change the verdict by itself.</p>
+<p class="trigger">Trigger 3, quality: if the 10-Q for the September 2026 quarter shows trailing free cash flow after finance-lease additions under 12% of trailing revenue, Layer 1 fails on financial grounds as well. The same happens if quarterly capex is above $50 billion without Azure growth of at least 44%. KPI 3 would then become a FAIL.<sup><a href="#cite_note-20">[20]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Ledger correction. The session ledger's Reverse DCF for Microsoft (39.55% a year on trailing free cash flow of $16.546 billion) was replaced in the file facts_US_2026-10-16_MSFT.json by our recomputation of 26.03% a year on $42.379 billion, which is cash from operations less cash additions to property and equipment less finance-lease assets obtained, and market value of $3,937.7 billion (price times 7,443 million diluted shares). The replacement carries the key corrected_by. We solved the original input with our solver and got 39.5%, so the arithmetic was right and the input was wrong. We could not trace $16.546 billion to the 10-K: cash from operations of $182.935 billion less cash additions of $115.948 billion is $66.987 billion. Only the reverse_dcf block was changed. Price, technical fields, consensus revisions and the fundamentals_snapshot (which still shows the vendor free cash flow of $16.546 billion) were left as in the ledger.</p><p>Stale as-of records. The Form 10-K and its full-year figures are dated June 30, 2026, which is 108 days before the 2026-10-16 session date. They are the latest annual figures available, and Chapters 3 and 5 use them as such. The July 29, 2026 earnings release and call are 79 days old and are the latest company statements. The earlier calls used for the guidance audit are 170 days (April 29, 2026), 261 days (January 28, 2026), 352 days (October 29, 2025) and 443 days (July 30, 2025) old because they record historical promises. The OpenAI agreements are 353 days (October 28, 2025) and 172 days (April 27, 2026) old. The SEC history for fiscal 2022 and 2023 ends on June 30, 2022 and 2023, which is 1,569 and 1,204 days before the session date. The citation gate lists all of these as stale as-of exceptions. The cure date is the Form 10-Q for the September 2026 quarter, which follows the October 28, 2026 results. We will refresh these figures then.</p><p>Secondary sources. StockAnalysis.com pages (ROIC, free cash flow, price target, price-to-earnings history, peers) are used as supporting records only. Every financial claim has a primary SEC or company source. The 3-year median forward P/E of 32.3x comes only from one aggregator's quarter-end history. We could not obtain a filing-based multiple. For Alphabet, Amazon and Meta the cached copies of the statistics pages are dated 2026-10-13, so their P/E ratios are three sessions older than the 2026-10-16 Microsoft data. Their trailing-twelve-month fundamentals do not change between the two dates.</p><p>Not published. Microsoft does not publish the OpenAI share of its June 2026 commercial RPO, or Microsoft 365 Copilot revenue. Both are recorded as not found after three or more searches. The 32% minimum OpenAI share of the backlog is our arithmetic from the disclosed 25% growth outside OpenAI and the $368 billion July 2025 balance. The 45% OpenAI share at December 31, 2025 is Microsoft's own figure.</p><p>Stop rule and sizing display. The stop of $423.24 applies the scoring rule literally (lowest of swing low, 50-day and 200-day average, less one ATR). The narrower swing-low reading is shown as a sensitivity and also fails. The Layer 3 table shows a 0% risk-unit weight because the tier is TIER_0, as the run instructions require for rejected names. The entry zone of $450 to $477 and the TIER_2, 6.5% figure in Chapter 7 are conditional on the gates clearing. The stop distance in that table is measured from the $477 top of the entry zone (11.27%). From the $529.05 close it is 20.0%. The momentum gate configuration is flagged as needing calibration in the ledger.</p><p>Abbreviation in the gate table. In the Test C2 row, RS stands for relative strength against the S&amp;P 500. It does not refer to any other company.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">Microsoft Corp., Form 10-K for the fiscal year ended June 30, 2026 (filed 2026-07-29), Item 8, Income Statements, p. 50. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-2">Microsoft Corp., Form 10-K FY2026, Item 8, Cash Flows Statements, p. 53 (net cash from operations, additions to property and equipment, stock-based compensation, depreciation and amortization). <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-3">Microsoft Corp., Form 10-K FY2026, Item 8, Balance Sheets, p. 52. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-4">Microsoft Corp., Form 10-K FY2026, Item 8, Note 13 Leases, p. 78 (finance-lease assets obtained, finance-lease liabilities, $329.1 billion of leases not yet commenced). <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-5">Microsoft Corp., Form 10-K FY2026, Item 8, Note 12 Unearned Revenue, p. 77 (remaining performance obligations of $684 billion total, $678 billion commercial). <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-6">Microsoft Corp., Form 10-K FY2026, Item 8, Note 1 Accounting Policies (variable interest entities and OpenAI), p. 60. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-7">Microsoft Corp., Form 10-K FY2026, Item 7, Segment Results of Operations, p. 38. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-8">Microsoft Corp., Form 10-K FY2026, Item 7, Overview and fiscal year 2026 highlights, p. 34. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-9">Microsoft Corp., Form 10-K FY2026, Item 7, Fiscal Year 2026 Compared with Fiscal Year 2025 (gross margin and Microsoft Cloud gross margin), p. 37. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-10">Microsoft Corp., Form 10-K FY2026, Item 7, Other Income (Expense), Net, and Non-GAAP Financial Measures, pp. 41-42. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-11">Microsoft Corp., Form 10-K FY2026, Item 7, Liquidity and Capital Resources, contractual obligations table, p. 44. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-12">Microsoft Corp., Form 10-K FY2026, Item 8, Note 15 Stockholders’ Equity (shares outstanding and share repurchases), p. 79. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-13">Microsoft Corp., Form 10-K FY2026, Item 7, Income Taxes and Uncertain Tax Positions (IRS notices of proposed adjustment), p. 42. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-14">Microsoft Corp., Form 10-K FY2026, Item 8, Report of Independent Registered Public Accounting Firm (Deloitte opinion) and Item 9A (management conclusion on internal control). <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm</a></li>
+<li id="cite_note-15">Microsoft Corp., Form 8-K Exhibit 99.1, press release of 2026-07-29 (Azure above $100 billion; more than 30 million paid Microsoft 365 Copilot seats). <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm</a></li>
+<li id="cite_note-16">Microsoft Corp., Form 8-K Exhibit 99.1 of 2026-07-29, fourth-quarter results and business highlights (revenue $90.0 billion, Microsoft Cloud $59.3 billion, Azure +43%). <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm</a></li>
+<li id="cite_note-17">Microsoft FY26 Q4 earnings call transcript, 2026-07-29, CFO prepared remarks on capital expenditures and free cash flow. <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4</a></li>
+<li id="cite_note-18">Microsoft FY26 Q4 earnings call transcript, 2026-07-29, CFO remarks on commercial RPO excluding OpenAI and cloud revenue outside frontier model companies. <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4</a></li>
+<li id="cite_note-19">Microsoft FY26 Q4 earnings call transcript, 2026-07-29, CFO remarks on the calendar 2026 capex estimate, the useful-life change and the FY27 outlook. <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4</a></li>
+<li id="cite_note-20">Microsoft FY26 Q4 earnings call transcript, 2026-07-29, first-quarter FY27 outlook (revenue range, Azure growth, capex above $50 billion, Xbox). <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4</a></li>
+<li id="cite_note-21">Microsoft FY26 Q4 earnings call transcript, 2026-07-29, CEO remarks (datacenters added, Maia 200, model catalog, Copilot seats, GitHub). <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4</a></li>
+<li id="cite_note-22">Microsoft Corp., Form 8-K Exhibit 99.1 of 2026-09-02, FY27 Segments and Investor Metrics, FY27 Q1 adjusted outlook. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm</a></li>
+<li id="cite_note-23">Microsoft Corp., Form 8-K Exhibit 99.1 of 2026-09-02, restated segment history and Azure quarterly growth by quarter. <a href="https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm">https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm</a></li>
+<li id="cite_note-24">Microsoft FY25 Q4 earnings call transcript, 2025-07-30, fiscal 2026 outlook and $368 billion contracted backlog. <a href="https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4">https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4</a></li>
+<li id="cite_note-25">Microsoft FY26 Q1 earnings call transcript, 2025-10-29, capital expenditure outlook revised. <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q1">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q1</a></li>
+<li id="cite_note-26">Microsoft FY26 Q2 earnings call transcript, 2026-01-28 (OpenAI share of commercial RPO; capex; server depreciation life). <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2</a></li>
+<li id="cite_note-27">Microsoft FY26 Q3 earnings call transcript, 2026-04-29 (calendar 2026 capex guide, fourth-quarter guide, AI revenue run rate). <a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3">https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3</a></li>
+<li id="cite_note-28">Microsoft Source, “Microsoft announces quarterly earnings release date,” 2026-10-07. <a href="https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/">https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/</a></li>
+<li id="cite_note-29">The Official Microsoft Blog, “The next chapter of the Microsoft-OpenAI partnership,” 2025-10-28. <a href="https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/">https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/</a></li>
+<li id="cite_note-30">The Official Microsoft Blog, “The next phase of the Microsoft-OpenAI partnership,” 2026-04-27. <a href="https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/">https://blogs.microsoft.com/blog/2026/04/27/the-next-phase-of-the-microsoft-openai-partnership/</a></li>
+<li id="cite_note-31">StockAnalysis.com, Microsoft (MSFT) statistics page (S&amp;P Global Market Intelligence data), read 2026-10-16: vendor ROIC, free cash flow, analyst price target. Secondary source, supporting only. <a href="https://stockanalysis.com/stocks/msft/statistics/">https://stockanalysis.com/stocks/msft/statistics/</a></li>
+<li id="cite_note-32">StockAnalysis.com, Microsoft (MSFT) quarterly financial ratios, read 2026-10-16: quarter-end price-to-earnings history. Secondary source, supporting only. <a href="https://stockanalysis.com/stocks/msft/financials/ratios/?p=quarterly">https://stockanalysis.com/stocks/msft/financials/ratios/?p=quarterly</a></li>
+<li id="cite_note-33">U.S. SEC, EDGAR XBRL companyfacts API, CIK 0000789019 (Microsoft), annual 10-K values for fiscal 2022 and fiscal 2023. <a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json</a></li>
+<li id="cite_note-34">StockAnalysis.com, Alphabet (GOOGL) statistics page, cached copy of 2026-10-13 (fundamentals are trailing twelve months). Secondary source. <a href="https://stockanalysis.com/stocks/googl/statistics/">https://stockanalysis.com/stocks/googl/statistics/</a></li>
+<li id="cite_note-35">StockAnalysis.com, Amazon (AMZN) statistics page, cached copy of 2026-10-13. Secondary source. <a href="https://stockanalysis.com/stocks/amzn/statistics/">https://stockanalysis.com/stocks/amzn/statistics/</a></li>
+<li id="cite_note-36">StockAnalysis.com, Oracle (ORCL) statistics page, read 2026-10-16. Secondary source. <a href="https://stockanalysis.com/stocks/orcl/statistics/">https://stockanalysis.com/stocks/orcl/statistics/</a></li>
+<li id="cite_note-37">StockAnalysis.com, Meta Platforms (META) statistics page, cached copy of 2026-10-13. Secondary source. <a href="https://stockanalysis.com/stocks/meta/statistics/">https://stockanalysis.com/stocks/meta/statistics/</a></li>
+<li id="cite_note-38">Session ledger facts_US_2026-10-16 (frozen price snapshot, Stage, momentum gate, consensus revisions), with the MSFT Reverse DCF block replaced as disclosed in the run notes; file facts_US_2026-10-16_MSFT.json in the run directory.</li>
+<li id="cite_note-39">Portfolio scoring rules, .agents/config/scoring.json (hard red lines, archetype floors, asymmetry floors, stop placement, support-distance ladder, risk-unit sizing, Reverse DCF settings).</li>
+</ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
