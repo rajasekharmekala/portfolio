@@ -262,15 +262,16 @@ Every candidate must be processed through the following 3 layers sequentially:
 │      strictly forbidden. If unverified, Gate Status = FAIL_ASYMMETRY.       │
 <!-- /MARKET -->
 │                                                                             │
-│ DISPOSITION: If ANY gate fails → Gate Status = FAIL_[REASON]             │
-<!-- MARKET IN -->
-│    → Action Verdict = REJECTED → Do NOT evaluate Layer 2 or Layer 3.     │
-<!-- /MARKET -->
-<!-- MARKET US -->
-│    → Action Verdict = REJECTED → Archive candidate to watchlist.archive.  │
-<!-- /MARKET -->
+│ DISPOSITION: Evaluate ALL 3 layers for every candidate.                     │
+│ • Qualifies under `COMPOUNDER`, `TURNAROUND_VALUE_INFLECTION` (if trajectory│
+│   is improving, `hard_red_lines` pass, and valuation asymmetry ≥ 3.5:1), or │
+│   `TACTICAL_BREAKOUT` per `.agents/config/scoring.json`.                    │
+│ • If `hard_red_lines` fail or trajectory + valuation both fail →            │
+│   Action Verdict = REJECTED (still complete Layer 2, Layer 3, and all       │
+│   8 book chapters in full so the reader understands the business and what   │
+│   would change the verdict).                                                │
 └──────────────────────────────────────┬──────────────────────────────────────┘
-                                       │ (If ALL Gates Pass)
+                                       │ (Always evaluate Layers 2 and 3)
                                        ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 <!-- MARKET IN -->

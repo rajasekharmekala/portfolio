@@ -72,26 +72,31 @@ def term_regex(term):
 
 
 def first_use_in_dfn(soup, term):
-    """First text-node occurrence of term: return (node, in_dfn, paragraph)."""
+    """First prose text-node occurrence of term: return (node, in_dfn, paragraph)."""
     rx = term_regex(term)
+    skip_tags = {"script", "style", "head", "title", "header", "footer", "nav",
+                 "aside", "select", "button", "h1", "h2", "h3", "h4", "h5", "h6",
+                 "dt", "th", "caption"}
     for node in soup.find_all(string=True):
-        if node.parent.name in ("script", "style"):
+        ancestors = [p.name for p in node.parents if p and p.name]
+        if any(t in skip_tags for t in ancestors):
+            continue
+        if any("key-figures" in (p.get("class") or []) for p in node.parents if hasattr(p, "get")):
             continue
         if rx.search(str(node)):
             in_dfn = node.parent.name == "dfn" or \
                 any(p.name == "dfn" for p in node.parent.parents)
-            para = node.parent.find_parent(["p", "li", "td"])
+            para = node.parent.find_parent(["p", "li", "td", "dd"])
             return node, in_dfn, para
     return None, False, None
 
 
 def check_glossary(soup, glossary, errors):
-    text = soup.get_text(" ", strip=True)
     for entry in glossary.get("must_define", []):
         term = entry["term"]
-        if not term_regex(term).search(text):
+        node, in_dfn, para = first_use_in_dfn(soup, term)
+        if node is None:
             continue
-        _, in_dfn, para = first_use_in_dfn(soup, term)
         where = str(para.get_text(" ", strip=True)) if para else ""
         if not in_dfn:
             errors.append(f"GLOSSARY {term}: first use is not inside <dfn>")
@@ -99,9 +104,9 @@ def check_glossary(soup, glossary, errors):
             errors.append(f"GLOSSARY {term}: paragraph at first use lacks the "
                           f"expansion {entry['expansion']!r}")
     for term in glossary.get("plain", []):
-        if not term_regex(term).search(text):
+        node, in_dfn, para = first_use_in_dfn(soup, term)
+        if node is None:
             continue
-        _, in_dfn, para = first_use_in_dfn(soup, term)
         where = (" " + str(para.get_text(" ", strip=True)).lower() + " ") if para else " "
         if not in_dfn:
             errors.append(f"GLOSSARY {term}: first use is not inside <dfn>")

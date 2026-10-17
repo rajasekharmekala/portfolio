@@ -31,7 +31,7 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE_DIR = os.path.join(ROOT, "scripts", ".cache", "fetched")
-MAX_BYTES = 2_000_000
+MAX_BYTES = 20_000_000
 # SEC EDGAR requires a "name email" User-Agent; a generic browser UA gets 403.
 UA = "portfolio-research admin@example.com"
 

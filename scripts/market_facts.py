@@ -19,7 +19,10 @@ from; the full ledger is too large to give every section) and manifest.json (inp
 freshness for every holding, shortlist and watchlist name). A holding that is not current on the session date
 aborts the build unless --allow-stale-holdings is given. Input sources live in .agents/config/portfolios.json.
 """
+from __future__ import annotations
+
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import datetime as dt
 import hashlib
 import io
@@ -190,11 +193,22 @@ def metrics(df: pd.DataFrame) -> dict:
     stage = classify_stage(close, s50v, s200v, s50p)
     atrv = at(a)
     # momentum gate (scoring.json): SMA history over the test windows, 63-day base pivot, volume dryup
+    s20v = at(s20)
     s50_21, s200_63 = at(s50, 21), at(s200, 63)
     low63 = df["Low"].iloc[-63:]
     base_low_63d = num(low63.min()) if low63.notna().any() else None
     vol63 = vol.iloc[-63:]
     vol_dryup = num(vol63.min() / vol63.mean()) if len(vol63) >= 20 and vol63.notna().any() and vol63.mean() > 0 else None
+    support_anchor, support_dist_atr = None, None
+    if close is not None and atrv:
+        anchors = [x for x in (s50v, base_low_63d) if x is not None]
+        if anchors:
+            if s50v is not None and base_low_63d is not None and (s50v - base_low_63d) > 2.5 * atrv:
+                near = [x for x in (s50v, swing_low_20d, s20v) if x is not None and x <= close]
+                support_anchor = max(near) if near else s50v
+            else:
+                support_anchor = min(anchors)
+            support_dist_atr = num((close - support_anchor) / atrv)
     # distribution days: down >= 0.2% on higher volume than the prior session, last 25 sessions
     dist = None
     if vol.iloc[-25:].sum() > 0:
@@ -204,7 +218,7 @@ def metrics(df: pd.DataFrame) -> dict:
         "asof_bar": df.index[-1].strftime("%Y-%m-%d"),
         "close": close, "prev_close": at(c, 1),
         "chg_1d_pct": pct(1), "chg_1w_pct": pct(5), "chg_2w_pct": pct(10), "chg_1m_pct": pct(21),
-        "sma20": at(s20), "sma50": s50v, "sma200": s200v,
+        "sma20": s20v, "sma50": s50v, "sma200": s200v,
         "sma50_10d_ago": s50p,
         "sma50_trend": None if s50p is None or s50v is None else ("RISING" if s50v > s50p else "FALLING/FLAT"),
         "rsi14": at(r), "atr14": atrv,
@@ -214,6 +228,8 @@ def metrics(df: pd.DataFrame) -> dict:
         "hi52": num(hi52), "lo52": num(lo52),
         "pct_from_52w_high": num((close / hi52 - 1) * 100),
         "delta_50dma_atr": num((close - s50v) / atrv) if s50v and atrv else None,
+        "support_anchor": support_anchor,
+        "support_distance_atr": support_dist_atr,
         "sma50_21d_ago": s50_21, "sma200_63d_ago": s200_63,
         "base_low_63d": base_low_63d,
         "base_pivot_atr": num((close - base_low_63d) / atrv) if (base_low_63d is not None and atrv) else None,
@@ -302,6 +318,145 @@ def load_sources(market: str):
     return roles, sources
 
 
+CLOSES_CACHE = {}
+BENCH_CLOSE_CACHE = None
+MARKET_CACHE = None
+
+
+def compute_portfolio_risk_and_overlap(per_sym: dict, equities: float, cash_total: float, options_value: float, net_worth: float | None):
+    """Compute Effective Market Exposure (beta/leverage-adjusted) and Hidden Overlap (pairwise return correlations >= 0.65)
+    from the 2-year daily price series already downloaded in memory."""
+    if not net_worth or net_worth <= 0 or not per_sym:
+        return None
+    cur_sym = "₹" if MARKET_CACHE == "IN" else "$"
+    bench_name = "Nifty 50" if MARKET_CACHE == "IN" else "S&P 500"
+    bench_ret = BENCH_CLOSE_CACHE.pct_change().dropna().iloc[-252:] if BENCH_CLOSE_CACHE is not None and len(BENCH_CLOSE_CACHE) > 30 else None
+
+    weighted_beta_sum = 0.0
+    held_returns = {}
+    per_holding_exposure = []
+    for sym, d in sorted(per_sym.items(), key=lambda kv: -(kv[1].get("market_value") or 0)):
+        mv = d.get("market_value") or 0.0
+        wt_pct = round(mv / net_worth * 100.0, 2)
+        meta = d.get("metadata") or {}
+        lev = float(meta.get("leverage_multiplier") or 1.0)
+        if sym in ("SOXL", "TQQQ", "UPRO", "SPXL", "TECL", "FNGU", "LABU") and lev == 1.0:
+            lev = 3.0
+        elif sym in ("USD", "SSO", "QLD", "NVDL", "CONL", "MSTU") and lev == 1.0:
+            lev = 2.0
+        s_close = CLOSES_CACHE.get(sym)
+        beta_raw = 1.0
+        if s_close is not None and len(s_close) > 30:
+            s_ret = s_close.pct_change().dropna().iloc[-252:]
+            held_returns[sym] = s_ret
+            if bench_ret is not None:
+                joined = pd.DataFrame({"s": s_ret, "b": bench_ret}).dropna()
+                if len(joined) >= 30 and joined["b"].var() > 0:
+                    beta_raw = round(float(joined["s"].cov(joined["b"]) / joined["b"].var()), 2)
+        eff_beta = round(beta_raw if lev == 1.0 else max(beta_raw, lev), 2)
+        d["beta_1y"] = beta_raw
+        d["effective_beta"] = eff_beta
+        d["weight_pct"] = wt_pct
+        weighted_beta_sum += (mv / net_worth) * eff_beta
+        per_holding_exposure.append({
+            "symbol": sym, "weight_pct": wt_pct, "beta_1y": beta_raw,
+            "leverage_multiplier": lev, "effective_beta": eff_beta,
+            "effective_exposure_pct": round(wt_pct * eff_beta, 2)
+        })
+
+    # Options carry higher effective delta/leverage (~2.5x notional proxy when live delta is not in log)
+    options_eff_beta = 2.5 if options_value > 0 else 0.0
+    weighted_beta_sum += (options_value / net_worth) * options_eff_beta
+    eff_pct = round(weighted_beta_sum * 100.0, 1)
+    eff_val = round(net_worth * weighted_beta_sum, 2)
+    one_pct_drop_loss = round(eff_val * 0.01, 2)
+
+    # Pairwise correlation matrix across held stocks
+    high_corr_pairs = []
+    adj = {s: set() for s in held_returns}
+    if len(held_returns) >= 2:
+        ret_df = pd.DataFrame(held_returns).dropna(how="all")
+        corr = ret_df.corr(min_periods=30)
+        syms = sorted(held_returns.keys())
+        for i in range(len(syms)):
+            for j in range(i + 1, len(syms)):
+                s1, s2 = syms[i], syms[j]
+                val = corr.loc[s1, s2] if (s1 in corr.index and s2 in corr.columns) else math.nan
+                if not math.isnan(val) and val >= 0.60:
+                    r_val = round(float(val), 2)
+                    w1 = per_sym[s1].get("weight_pct", 0.0)
+                    w2 = per_sym[s2].get("weight_pct", 0.0)
+                    high_corr_pairs.append({
+                        "pair": f"{s1}-{s2}", "symbol_a": s1, "symbol_b": s2,
+                        "correlation_1y": r_val,
+                        "same_direction_pct_approx": round(50.0 + 50.0 * r_val, 0),
+                        "combined_weight_pct": round(w1 + w2, 2)
+                    })
+                    if r_val >= 0.65:
+                        adj[s1].add(s2)
+                        adj[s2].add(s1)
+        high_corr_pairs.sort(key=lambda x: -x["correlation_1y"])
+
+    # Connected components for lockstep clusters (correlation >= 0.65)
+    visited, clusters = set(), []
+    for s in sorted(adj, key=lambda k: -(per_sym[k].get("market_value") or 0)):
+        if s in visited or not adj[s]:
+            continue
+        comp, queue = [], [s]
+        while queue:
+            cur = queue.pop(0)
+            if cur in visited:
+                continue
+            visited.add(cur)
+            comp.append(cur)
+            for nb in sorted(adj[cur]):
+                if nb not in visited:
+                    queue.append(nb)
+        if len(comp) >= 2:
+            comb_wt = round(sum(per_sym[x].get("weight_pct", 0.0) for x in comp), 2)
+            clusters.append({"symbols": comp, "count": len(comp), "combined_weight_pct": comb_wt})
+    clusters.sort(key=lambda c: -c["combined_weight_pct"])
+
+    plain_exposure = (
+        f"Your total net worth is {cur_sym}{net_worth:,.2f}, but because of stock volatility (beta), "
+        f"leveraged positions, and options, your portfolio behaves like {cur_sym}{eff_val:,.2f} "
+        f"({eff_pct:.1f}% effective exposure to {bench_name}). In plain words: a 1% drop in the "
+        f"{bench_name} is expected to move your portfolio by about {weighted_beta_sum:.2f}% "
+        f"(roughly {cur_sym}{one_pct_drop_loss:,.2f})."
+    )
+    if clusters:
+        top_c = clusters[0]
+        plain_overlap = (
+            f"Although you hold {len(per_sym)} separate equity tickers, {top_c['count']} of them "
+            f"({', '.join(top_c['symbols'])}) move closely together (1-year return correlation >= 0.65) "
+            f"and make up {top_c['combined_weight_pct']:.1f}% of your net worth — acting like one combined bet."
+        )
+    elif high_corr_pairs:
+        top_p = high_corr_pairs[0]
+        plain_overlap = (
+            f"Your highest-overlap pair is {top_p['pair']} (1-year return correlation {top_p['correlation_1y']:.2f}, "
+            f"combined weight {top_p['combined_weight_pct']:.1f}% of net worth); no multi-stock cluster exceeds the 0.65 lockstep threshold."
+        )
+    else:
+        plain_overlap = (
+            f"Across your {len(per_sym)} equity holdings, no pair has a 1-year daily return correlation of 0.60 or higher, "
+            f"indicating low hidden overlap between positions."
+        )
+
+    return {
+        "portfolio_beta_weighted": round(weighted_beta_sum, 2),
+        "effective_market_exposure_pct": eff_pct,
+        "effective_market_exposure_value": eff_val,
+        "expected_move_per_1pct_index": round(weighted_beta_sum, 2),
+        "expected_dollar_per_1pct_index": one_pct_drop_loss,
+        "per_holding_exposure": per_holding_exposure,
+        "high_correlation_pairs": high_corr_pairs[:15],
+        "lockstep_clusters": clusters,
+        "plain_english_exposure": plain_exposure,
+        "plain_english_overlap": plain_overlap,
+    }
+
+
 def consolidate_positions(inst=None):
     """One view per symbol across accounts, valued at the ledger close (inst) when available.
     Cost basis comes from the transaction log; a missing cost stays None, never guessed."""
@@ -333,6 +488,8 @@ def consolidate_positions(inst=None):
         d["metadata"] = META.get(d["symbol"])
     equities = round(sum(d["market_value"] or 0 for d in per_sym.values()), 2)
     options_value = round(sum(o["market_value"] for o in OPTIONS_BOOK), 2)
+    net_worth = round(equities + cash_total + options_value, 2) if inst else None
+    risk_overlap = compute_portfolio_risk_and_overlap(per_sym, equities, cash_total, options_value, net_worth) if inst else None
     return {
         "accounts": [{"id": a["id"], "label": a["label"], "last_transaction": a["snapshot_date"], "positions": len(a["positions"]),
                       "cash": a["cash"], "market_value": round(sum((inst or {}).get(p["symbol"], {}).get("close", 0) * p["quantity"]
@@ -341,7 +498,8 @@ def consolidate_positions(inst=None):
         "consolidated": sorted(per_sym.values(), key=lambda d: -(d["market_value"] or 0)),
         "equities_value": equities, "cash_total": round(cash_total, 2),
         "options_value": options_value, "options_rows": OPTIONS_BOOK,
-        "net_worth": round(equities + cash_total + options_value, 2) if inst else None,
+        "net_worth": net_worth,
+        "portfolio_risk_and_overlap": risk_overlap,
         "reconciliation": {
             "unclassified": sorted(s for s in per_sym if not META.get(s)),
             "in_metadata_but_no_position": sorted(s for s in META if s not in per_sym),
@@ -440,6 +598,170 @@ def ymap_rev(ymap, rep):
     return next(k for k, v in ymap.items() if v == rep)
 
 
+def solve_reverse_dcf(target_val: float, base_cf: float, r_pct: float, term_mult: float, years: int = 10) -> float | None:
+    """Solve for the 10-year annual growth rate g (%) such that PV(10y cash flows + terminal value) == target_val."""
+    if not target_val or target_val <= 0 or not base_cf or base_cf <= 0:
+        return None
+    r = r_pct / 100.0
+    lo, hi = -0.35, 0.75
+    for _ in range(45):
+        mid = (lo + hi) / 2.0
+        pv = 0.0
+        cf = base_cf
+        for t in range(1, years + 1):
+            cf *= (1.0 + mid)
+            pv += cf / ((1.0 + r) ** t)
+        pv += (cf * term_mult) / ((1.0 + r) ** years)
+        if pv < target_val:
+            lo = mid
+        else:
+            hi = mid
+    return round(((lo + hi) / 2.0) * 100.0, 2)
+
+
+def enrich_symbol_expectations(market: str, sym: str, yt: str, close: float | None, scoring: dict) -> dict:
+    """Fetch free yfinance consensus revisions, analyst targets, and compute Reverse DCF implied growth."""
+    rdcf_cfg = scoring.get("reverse_dcf", {})
+    r_pct = float(rdcf_cfg.get("discount_rate_pct", {}).get(market, 10.0 if market == "US" else 12.0))
+    term_mult = float(rdcf_cfg.get("terminal_multiple_fcf", {}).get(market, 18.0 if market == "US" else 20.0))
+    years = int(rdcf_cfg.get("projection_years", 10))
+    scale = 1e7 if market == "IN" else 1e9
+    unit_lbl = "₹ Cr" if market == "IN" else "$B"
+
+    info = {}
+    eps_trend_dict = {}
+    try:
+        tk = yf.Ticker(yt)
+        info = tk.info or {}
+        if info.get("quoteType") != "ETF":
+            try:
+                et = tk.eps_trend
+                if et is not None and not et.empty:
+                    eps_trend_dict = et.to_dict()
+            except Exception:  # noqa: BLE001
+                pass
+    except Exception:  # noqa: BLE001
+        pass
+
+    mc_raw = info.get("marketCap")
+    ev_raw = info.get("enterpriseValue") or mc_raw
+    fcf_raw = info.get("freeCashflow")
+    ocf_raw = info.get("operatingCashflow")
+    rev_raw = info.get("totalRevenue")
+    opm_raw = info.get("operatingMargins")
+    pm_raw = info.get("profitMargins")
+    tpe = num(info.get("trailingPE"))
+    fpe = num(info.get("forwardPE"))
+
+    # Determine base cash flow for Reverse DCF with transparent fallback hierarchy
+    base_cf_raw = None
+    basis = None
+    if isinstance(fcf_raw, (int, float)) and fcf_raw > 0 and (not rev_raw or fcf_raw >= 0.02 * rev_raw):
+        base_cf_raw = float(fcf_raw)
+        basis = "TTM Free Cash Flow"
+    elif isinstance(ocf_raw, (int, float)) and ocf_raw > 0:
+        base_cf_raw = float(ocf_raw) * 0.75
+        basis = "Normalized Owner's Cash Flow (75% of TTM Operating Cash Flow; FCF depressed by capex)"
+    elif mc_raw and tpe and tpe > 0:
+        base_cf_raw = float(mc_raw) / float(tpe)
+        basis = "TTM Net Profit (derived from Market Cap / Trailing P/E)"
+    elif rev_raw and opm_raw and opm_raw > 0:
+        tax = 0.25 if market == "IN" else 0.21
+        base_cf_raw = float(rev_raw) * float(opm_raw) * (1.0 - tax)
+        basis = "Normalized NOPAT (TTM Revenue x Operating Margin after tax)"
+
+    val_raw = ev_raw if (basis and "Free Cash Flow" in basis and ev_raw and ev_raw > 0) else mc_raw
+    implied_g = solve_reverse_dcf(val_raw, base_cf_raw, r_pct, term_mult, years) if (val_raw and base_cf_raw) else None
+    fcf_yield_pct = num(fcf_raw / mc_raw * 100.0) if (isinstance(fcf_raw, (int, float)) and mc_raw and mc_raw > 0) else None
+
+    if implied_g is not None:
+        plain_rdcf = (
+            f"At the current price ({close}), the market is pricing in {implied_g:+.1f}% annual growth in "
+            f"{basis} for the next {years} years (using a {r_pct:.0f}% discount rate and {term_mult:.0f}x terminal multiple)."
+        )
+    else:
+        plain_rdcf = "Reverse DCF implied growth is N/A (negative or unverified trailing cash flow and earnings)."
+
+    # Consensus EPS revisions (0y = FY1, +1y = FY2)
+    cur_map = eps_trend_dict.get("current", {}) if isinstance(eps_trend_dict, dict) else {}
+    d30_map = eps_trend_dict.get("30daysAgo", {}) if isinstance(eps_trend_dict, dict) else {}
+    d90_map = eps_trend_dict.get("90daysAgo", {}) if isinstance(eps_trend_dict, dict) else {}
+
+    def _valid_eps(v):
+        return float(v) if isinstance(v, (int, float)) and not math.isnan(v) and abs(v) > 1e-6 else None
+
+    fy1_cur = _valid_eps(cur_map.get("0y"))
+    fy1_30d = _valid_eps(d30_map.get("0y"))
+    fy1_90d = _valid_eps(d90_map.get("0y"))
+    fy2_cur = _valid_eps(cur_map.get("+1y"))
+    fy2_30d = _valid_eps(d30_map.get("+1y"))
+    fy2_90d = _valid_eps(d90_map.get("+1y"))
+
+    fy1_rev_30d = num((fy1_cur / fy1_30d - 1.0) * 100.0) if (fy1_cur and fy1_30d and fy1_30d > 0) else None
+    fy1_rev_90d = num((fy1_cur / fy1_90d - 1.0) * 100.0) if (fy1_cur and fy1_90d and fy1_90d > 0) else None
+    fy2_rev_30d = num((fy2_cur / fy2_30d - 1.0) * 100.0) if (fy2_cur and fy2_30d and fy2_30d > 0) else None
+    fy2_rev_90d = num((fy2_cur / fy2_90d - 1.0) * 100.0) if (fy2_cur and fy2_90d and fy2_90d > 0) else None
+    fy2_vs_fy1_growth = num((fy2_cur / fy1_cur - 1.0) * 100.0) if (fy2_cur and fy1_cur and fy1_cur > 0) else None
+
+    rev_signals = [x for x in (fy1_rev_90d, fy2_rev_90d, fy1_rev_30d, fy2_rev_30d) if x is not None]
+    if not rev_signals:
+        rev_label = "NO_CONSENSUS"
+    elif max(rev_signals) >= 1.5 and min(rev_signals) >= -0.5:
+        rev_label = "RISING_ESTIMATES"
+    elif min(rev_signals) <= -1.5:
+        rev_label = "FALLING_ESTIMATES"
+    else:
+        rev_label = "STABLE_ESTIMATES"
+
+    return {
+        "reverse_dcf": {
+            "implied_10y_cagr_pct": implied_g,
+            "basis": basis,
+            "base_cashflow_unit": unit_lbl,
+            "base_cashflow_val": num(base_cf_raw / scale, 3) if base_cf_raw else None,
+            "valuation_used_val": num(val_raw / scale, 2) if val_raw else None,
+            "discount_rate_pct": r_pct,
+            "terminal_multiple": term_mult,
+            "fcf_yield_pct": fcf_yield_pct,
+            "plain_english": plain_rdcf,
+        },
+        "consensus_revisions": {
+            "revision_trend": rev_label,
+            "fy1_eps_current": num(fy1_cur, 2),
+            "fy1_eps_30d_ago": num(fy1_30d, 2),
+            "fy1_eps_90d_ago": num(fy1_90d, 2),
+            "fy1_eps_rev_30d_pct": fy1_rev_30d,
+            "fy1_eps_rev_90d_pct": fy1_rev_90d,
+            "fy2_eps_current": num(fy2_cur, 2),
+            "fy2_eps_30d_ago": num(fy2_30d, 2),
+            "fy2_eps_90d_ago": num(fy2_90d, 2),
+            "fy2_eps_rev_30d_pct": fy2_rev_30d,
+            "fy2_eps_rev_90d_pct": fy2_rev_90d,
+            "implied_fy2_eps_growth_pct": fy2_vs_fy1_growth,
+            "analyst_target_low": num(info.get("targetLowPrice"), 2),
+            "analyst_target_mean": num(info.get("targetMeanPrice"), 2),
+            "analyst_target_high": num(info.get("targetHighPrice"), 2),
+            "num_analysts": info.get("numberOfAnalystOpinions"),
+        },
+        "fundamentals_snapshot": {
+            "unit": unit_lbl,
+            "market_cap": num(mc_raw / scale, 2) if mc_raw else None,
+            "enterprise_value": num(ev_raw / scale, 2) if ev_raw else None,
+            "revenue_ttm": num(rev_raw / scale, 2) if rev_raw else None,
+            "free_cashflow_ttm": num(fcf_raw / scale, 3) if isinstance(fcf_raw, (int, float)) else None,
+            "operating_cashflow_ttm": num(ocf_raw / scale, 3) if isinstance(ocf_raw, (int, float)) else None,
+            "operating_margin_pct": num(opm_raw * 100.0, 2) if isinstance(opm_raw, (int, float)) else None,
+            "profit_margin_pct": num(pm_raw * 100.0, 2) if isinstance(pm_raw, (int, float)) else None,
+            "roe_pct": num(info.get("returnOnEquity") * 100.0, 2) if isinstance(info.get("returnOnEquity"), (int, float)) else None,
+            "debt_to_equity_pct": num(info.get("debtToEquity"), 2),
+            "trailing_pe": tpe,
+            "forward_pe": fpe,
+            "revenue_growth_yoy_pct": num(info.get("revenueGrowth") * 100.0, 2) if isinstance(info.get("revenueGrowth"), (int, float)) else None,
+            "earnings_growth_yoy_pct": num(info.get("earningsGrowth") * 100.0, 2) if isinstance(info.get("earningsGrowth"), (int, float)) else None,
+        },
+    }
+
+
 def build(args):
     market = args.market
     cfg = BENCH[market]
@@ -488,12 +810,16 @@ def build(args):
             closes[rep] = df["Close"]
 
     # momentum gate: 63d / 28d relative strength (excess return) vs the scoring.json benchmark
+    global CLOSES_CACHE, BENCH_CLOSE_CACHE, MARKET_CACHE
+    MARKET_CACHE = market
+    CLOSES_CACHE = closes
     scoring = json.load(open(os.path.join(ROOT, ".agents", "config", "scoring.json")))
     mg_bench = scoring["momentum_gate"]["benchmark"][market]
     if mg_bench in frames:
         bc = frames[mg_bench]["Close"]
         if args.date:
             bc = bc[bc.index <= pd.Timestamp(args.date)]
+        BENCH_CLOSE_CACHE = bc
         for rep, c in closes.items():
             j = pd.DataFrame({"s": c, "b": bc}).dropna()
             if len(j) >= 64:
@@ -502,6 +828,31 @@ def build(args):
             if len(j) >= 29:
                 inst[rep]["rs_28d_pct"] = num((j["s"].iloc[-1] / j["s"].iloc[-29] - 1) * 100
                                                - (j["b"].iloc[-1] / j["b"].iloc[-29] - 1) * 100)
+    elif cfg["primary"] in frames:
+        bc = frames[cfg["primary"]]["Close"]
+        if args.date:
+            bc = bc[bc.index <= pd.Timestamp(args.date)]
+        BENCH_CLOSE_CACHE = bc
+
+    # Attach momentum_gate (Test A, Test B, Test C) to every stock instrument
+    import momentum_gate as mg_mod
+    for sym_k, m_val in inst.items():
+        if m_val.get("kind") == "stock" and not m_val.get("error") and m_val.get("close") is not None:
+            m_val["momentum_gate"] = mg_mod.gate(m_val, scoring["momentum_gate"])
+
+    # Enrich holding, shortlist, and extra symbols with Reverse DCF + Consensus EPS Revisions
+    enrich_syms = [
+        s for s, rs in roles.items()
+        if ("holding" in rs or "shortlist" in rs or "extra" in rs)
+        and s in inst and inst[s].get("kind") == "stock" and not inst[s].get("error")
+    ]
+    if enrich_syms:
+        def _enrich_one(s):
+            m_val = inst[s]
+            return s, enrich_symbol_expectations(market, s, m_val.get("yahoo", s), m_val.get("close"), scoring)
+        with ThreadPoolExecutor(max_workers=8) as pool_ex:
+            for s, extra_data in pool_ex.map(_enrich_one, enrich_syms):
+                inst[s].update(extra_data)
 
     primary_name = ymap[cfg["primary"]]
     # The session date is a requirement, not a label: the benchmark must have a bar on that date.
@@ -633,7 +984,7 @@ def factpack(facts):
     names = {}
     for sym, f in fresh.items():
         m = inst.get(sym, {})
-        if "holding" in f["roles"] or "shortlist" in f["roles"]:
+        if "holding" in f["roles"] or "shortlist" in f["roles"] or "extra" in f["roles"]:
             names[sym] = {**f, **m}
         else:
             names[sym] = {**f, "close": m.get("close"), "stage": m.get("stage"), "asof_bar": m.get("asof_bar")}

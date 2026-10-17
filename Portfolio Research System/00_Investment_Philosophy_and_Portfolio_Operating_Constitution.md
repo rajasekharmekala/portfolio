@@ -90,9 +90,11 @@ Identifiable catalysts or business developments capable of producing meaningful 
 
 The 3-5 year horizon carries a 6-12 month thesis checkpoint: if a Core name leaves momentum for a sustained period, the review flags it and the thesis must be re-confirmed before it is held
 
-## Concentration
+## Concentration & Risk-Unit Sizing
 
-The Core portfolio holds 5-10 companies; the total portfolio holds 6-12 names. Maximum position size is a hard cap of 15% of total portfolio for any single name, in any market and any bucket. Position sizes follow the tier table in `.agents/config/scoring.json` (Tier 1 7-10%, Tier 2 4-6.5%, Tier 3 2-3.5%, Tier 4 1-2%).
+The Core portfolio holds 5-10 companies; the total portfolio holds 6-12 names. Initial position sizing is governed by **Risk-Unit Sizing (Portfolio Heat)** per `.agents/config/scoring.json`: new positions risk 35–100 bps of portfolio net worth between entry price and invalidation stop (`weight_pct = min(tier_max_pct, risk_budget_bps / stop_distance_pct)`), with an initial cost-basis cap of 10% and a standard single-name cap of 15%. Total portfolio heat across all open stops is capped at 12% of net worth.
+
+**Letting Winners Run:** Never mechanically trim a Stage 2 winner with intact fundamentals and stable/rising earnings revisions solely because RSI exceeds 70 or its weight grows past 15%. Appreciated winners may run up to the `runaway_winner_cap_pct` (22% of net worth) in `.agents/config/scoring.json` while trailing the stop to the rising 21-day EMA or 50-day SMA.
 
 ## Core Decision Standard
 
@@ -206,48 +208,21 @@ Multiple strikes or contracts on the same underlying should generally be treated
 | --- |
 
 
-# 9. Decision Hierarchy
+# 9. Decision Hierarchy & Archetype Underwriting
 
-My investment decisions place substantial weight on market behavior. Working priority:
+Almost any non-fraudulent, solvent business is ownable if the price is cheap enough (high valuation asymmetry / low Reverse-DCF implied growth) and the fundamental and technical trajectory is inflecting in the right direction. Every company on the watchlist or in the portfolio is evaluated across all three underwriting layers (`Layer 1: Levels vs. Trajectory & Red Lines`, `Layer 2: Company-Specific KPIs & Management Walk-the-Talk`, `Layer 3: Support-Aware Entry & Risk-Unit Sizing`) — Layers 2 and 3 are never skipped.
 
-1.  Price momentum / technical structure (a GATE, not just a priority)
+Candidates qualify under one of three archetypes defined in `.agents/config/scoring.json` (`underwriting_philosophy`):
 
-2.  Valuation and risk/reward
+1. **Compounder (`CORE_ALPHA`):** High static return on capital (`ROIC >= 12%` US, `ROCE >= 15%` IN), strong cash conversion, and reasonable valuation (`asymmetry >= 3.0:1`).
+2. **Turnaround / Value Inflection (`TURNAROUND_VALUE_INFLECTION`):** A company that misses a static compounder floor (e.g., depressed trailing margin/ROIC or elevated SBC) still qualifies when: (a) all solvency/governance `hard_red_lines` pass, (b) at least two rate-of-change trajectory indicators are improving (QoQ/YoY margins, cash conversion/working capital days, consensus EPS revisions, or debt reduction), (c) Reverse-DCF implied 10-year growth at today's price is below realistic forward growth, and (d) reward-to-risk asymmetry clears `3.5:1`.
+3. **Tactical Breakout (`TACTICAL_MOMENTUM`):** Confirmed Stage 2 trend leader with earnings/revenue acceleration and `asymmetry >= 3.5:1`.
 
-3.  Business fundamentals
+Technical momentum and inflection are measured from the frozen price snapshot (`scripts/momentum_gate.py`) across three tests in `.agents/config/scoring.json`:
 
-4.  Catalysts and upcoming events
-
-5.  Relative opportunity / alternative use of capital
-
-Momentum is a gate before allocation. Every candidate for any bucket must pass
-one of two momentum tests, computed in code from the frozen price snapshot
-(`scripts/momentum_gate.py`), with thresholds defined in
-`.agents/config/scoring.json`:
-
-- **Test A — in momentum now:** confirmed Stage 2 uptrend (price above a
-  rising 50-day and 200-day average, 50-day above the 200-day), relative
-  strength at or above the configured benchmark-rank threshold, and price
-  inside the support-distance ladder.
-- **Test B — entering momentum:** Stage 1 base turning up — the 50-day
-  average has stopped falling, relative strength is rising over the last 4-8
-  weeks, price is within about 1 ATR of the base pivot, volume is drying up
-  in the base and expanding on the approach. A Test B pass earns a
-  *conditional* entry only: allocation happens on a confirmed breakout or a
-  retest of the pivot, never before.
-
-A stock that fails both tests is not allocated, however good its business. The
-company report is still written and records what would have to happen for the
-stock to pass. Fundamentals still have to pass their own floors — momentum does
-not excuse weak business quality, and a technical decline with intact
-fundamentals and improving valuation can create an opportunity. Conversely, strong
-fundamentals do not require indefinite holding when momentum deteriorates,
-valuation becomes excessive, growth expectations weaken, or a superior
-opportunity exists.
-
-Horizon is a separate tag, not a different rule: each name is tagged `SHORT`
-(expected 3-12 months) or `LONG` (3-5 years). A `LONG` name must still pass
-Test A or B on every review.
+- **Test A — in momentum now (`STAGE2_LEADER`):** Confirmed Stage 2 uptrend (`price > SMA50 > SMA200`, rising 50-day, non-falling 200-day), positive 63-day relative strength vs. benchmark, and price within `1.2 ATR` of nearest verified support.
+- **Test B — entering momentum (`BASE_PIVOT`):** Tight 63-day base with flattening 50-day average, rising 28-day relative strength, volume dry-up in the base, and volume expansion on the turn.
+- **Test C — turnaround inflection (`TURNAROUND_INFLECTION`):** Price holding a higher-low floor above its 63-day low (`swing_low_20d >= base_low_63d`), reclaiming its 20-day moving average with positive 28-day relative strength or 2-week gain, within `1.8 ATR` of support, and RSI stabilizing (`>= 35`).
 
 # 10. Capital Efficiency
 

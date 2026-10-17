@@ -71,12 +71,15 @@ exact HTML.
 | 0 | `primer` | Before you read | what is the company, the conclusion, and what would make it wrong (3–5 sentences) |
 | 1 | `ch-1` | What the company does | who pays, for what, how it makes money; ends with the report's glossary |
 | 2 | `ch-2` | Why the business is strong or weak | competitive position with reasons and cited evidence |
-| 3 | `ch-3` | The numbers, in plain words | five years of revenue, profit, cash, debt; every table followed by what it means and what it does not show |
-| 4 | `ch-4` | What the price is doing | the momentum test result in plain words, and what would confirm or reject the idea |
-| 5 | `ch-5` | What could happen next | bull / base / bear: story, driver, number, probability and its reason, then the expected outcome |
-| 6 | `ch-6` | Why these estimates might be wrong | each estimate's weakest assumption, the evidence that would show it wrong, and when we know |
-| 7 | `ch-7` | What we would do, and when | the decision, the trigger that changes it, entry zone, stop, targets, each with the reason |
+| 2B | `ch-2b` | Company specifics, operating KPIs, and management walk-the-talk | the 3–5 company-specific KPIs (Layer 2, always evaluated) and whether management walked the talk on past guidance/capital allocation |
+| 3 | `ch-3` | The numbers, in plain words | five years of revenue, profit, cash, debt; Layer 1 static levels vs trajectory (rate of change) and archetype fit; peer matrix |
+| 4 | `ch-4` | What the price is doing | the momentum/turnaround test result in plain words (Test A, Test B, Test C), and what would confirm or reject the idea |
+| 5 | `ch-5` | What could happen next | what today's price assumes (Reverse DCF implied 10Y growth), how consensus estimates are moving, our variant perception, and bull / base / bear scenarios |
+| 6 | `ch-6` | Why these estimates might be wrong | each estimate's weakest assumption, the red-team bear case, the hinge claim, and when we know |
+| 7 | `ch-7` | What we would do, and when | the decision, risk-unit initial sizing (portfolio heat), let-winners-run rule, entry zone, stop, targets, and the trigger that changes it |
 | 8 | `notes` | Notes and sources | numbered, with page/section for each filing |
+
+Use `scripts/dossier_builder_template.py` (`--spec <spec.json> --facts <facts.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html`) to render the dossier body deterministically from your structured JSON spec and the session ledger, which automatically populates the Chapter 4 technical/momentum-gate tables, Chapter 5 Reverse-DCF/revisions table, Chapter 7 risk-unit sizing table, and runs `scripts/assemble_report.py` with automatic first-use `<dfn>` glossary definitions.
 
 Leveraged/ETF names are not analysed as companies: the book covers the index,
 the trend, and the decay risk, and says so in the primer.
@@ -98,14 +101,21 @@ guided to (cited), and assuming the margin stays where it was last year
 (cited). If margins fall by two points, profit would be about $Y, and the case
 for buying would weaken."
 
-## 3. The 3-Layer Underwriting Framework (the engine behind chapters 2, 5 and 7)
+## 3. The 3-Layer Underwriting Framework (the engine behind chapters 2B, 3, 5 and 7)
 
-The book is the presentation; the underwriting is the engine. Every report
-evaluates all three layers and states the outcome; Chapter 2 carries the
-Layer 2 reasoning, Chapter 5 the Layer 1 gate results, Chapter 7 the Layer 3
-posture. Thresholds that live in `.agents/config/scoring.json` (asymmetry
-floors, tier sizing, support ladder, momentum gate) are cited from the config,
-not restated.
+The book is the presentation; the underwriting is the engine. **Every report evaluates all three layers completely (`Layer 1`, `Layer 2`, and `Layer 3`) — never skip Layer 2 or Layer 3 even if a Layer 1 gate fails.** Almost any non-fraudulent, solvent business is ownable if the price is cheap enough (low Reverse-DCF implied growth / high asymmetry) and the fundamental and technical trajectory is turning up. Thresholds and archetypes live in `.agents/config/scoring.json` (`underwriting_philosophy`, `asymmetry_floor`, `position_sizing`, `support_distance_ladder`, `momentum_gate`).
+
+- **Layer 1 (Chapter 3): Static Levels vs. Trajectory (Rate of Change) & Archetype Fit.**
+  - Evaluate whether the company passes the solvency/governance `hard_red_lines` in `scoring.json`.
+  - Classify and evaluate under one of the three archetypes in `scoring.json`:
+    1. `COMPOUNDER`: Passes standard high-ROIC/ROCE, cash conversion, and balance-sheet floors.
+    2. `TURNAROUND_VALUE_INFLECTION`: Misses a static compounder sub-gate (e.g., depressed trailing margin or SBC > 5%), **but** passes all `hard_red_lines`, shows at least 2 improving trajectory signals (QoQ/YoY margin expansion, improving cash conversion/working capital, rising consensus EPS revisions, or debt reduction), trades below realistic growth on Reverse DCF, and clears the `3.5:1` turnaround asymmetry floor.
+    3. `TACTICAL_BREAKOUT`: Stage 2 momentum leader with earnings/revenue acceleration and `>= 3.5:1` asymmetry.
+- **Layer 2 (Chapter 2B): 3–5 Company-Specific Operating KPIs & Management Walk-the-Talk.**
+  - Score 3–5 business-specific KPIs (`PASS | WATCH | FAIL`) and audit management's 1–2 year guidance/capital-allocation track record ("Did they walk the talk?").
+- **Layer 3 (Chapter 7): Support-Aware Entry Posture, Risk-Unit Sizing & Let-Winners-Run.**
+  - Map distance from nearest verified support (`support_distance_atr`) onto `support_distance_ladder` in `scoring.json`.
+  - Compute initial position size using **Risk-Unit Sizing (Portfolio Heat)** (`weight_pct = min(tier_max_pct, risk_budget_bps / stop_distance_pct)`), and apply the **Let-Winners-Run** rule (no mechanical trim at RSI > 70; appreciated winners may run up to `22%` while trailing stop to rising 21-EMA / 50-SMA).
 
 <!-- MARKET IN -->
 ```text

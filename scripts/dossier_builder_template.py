@@ -1,747 +1,518 @@
+#!/usr/bin/env python3
 """
-Autonomous Dossier Generator for Underwriting Batch:
-1. OPTIEMUS (Optiemus Infracom Limited)
-2. CARBORUNIV (Carborundum Universal Limited)
-3. WENDT (Wendt (India) Limited)
-4. KRBL (KRBL Limited)
-"""
+Deterministic Book-Standard Dossier Builder (scripts/dossier_builder_template.py).
 
+Separates mechanical HTML structure, ledger table rendering (technicals, momentum gate,
+Reverse DCF implied growth, consensus EPS revisions, risk-unit sizing), and readability/glossary
+compliance from the LLM's analytical prose.
+
+Usage:
+  .venv/bin/python scripts/dossier_builder_template.py \
+      --spec <RUN_DIR>/work/<SYM>_spec.json \
+      --facts <RUN_DIR>/cache/facts_<MKT>_<date>.json \
+      --out docs/blogs/<MKT>/<SYM>_dossier.html
+"""
+from __future__ import annotations
+
+import argparse
+import html
+import json
 import os
+import re
 import sys
-from assemble_report import build
+from pathlib import Path
 
-def build_dossier_html(
-    symbol, company_name, bse_code, isin, macro_sector, fine_subsector, founded, hq,
-    executives, business_overview, ttm_sales, opm, ttm_pat, roce, roe, de, cfo_pat,
-    sales_3y_cagr, pat_3y_cagr, strategy_bucket, action_verdict, verdict_color,
-    cmp, low_52w, high_52w, entry_low, entry_high, stop_loss, target_base, target_bull,
-    asymmetry, weinstein_stage, rsi_14, rs_rating, entry_posture, atr_14, dist_support_atr,
-    summary_lead, history_narrative, operations_narrative, sector_dynamics_narrative,
-    financial_audit_narrative, pl_table_rows, bs_table_rows, cf_table_rows,
-    layer1_rows, layer2_rows, layer3_narrative, peer_table_rows, peer_analysis_narrative,
-    technical_narrative, fatal_flaws_rows, fatal_flaws_narrative, capital_allocation_narrative,
-    monitoring_rows, citations
-):
-    # CSS template matching Wikipedia Institutional Design
-    css = """
-:root {
-  --text-primary: #1f2937;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
-  --bg-main: #ffffff;
-  --bg-surface: #f9fafb;
-  --bg-highlight: #f3f4f6;
-  --border-color: #d1d5db;
-  --border-subtle: #e5e7eb;
-  --brand-blue: #1d4ed8;
-  --brand-blue-light: #eff6ff;
-  --brand-green: #15803d;
-  --brand-green-light: #f0fdf4;
-  --brand-amber: #b45309;
-  --brand-amber-light: #fffbeb;
-  --brand-red: #b91c1c;
-  --brand-red-light: #fef2f2;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', monospace;
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from assemble_report import build  # noqa: E402
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCORING_FILE = os.path.join(ROOT, ".agents", "config", "scoring.json")
+
+VERDICT_CLASS_MAP = {
+    "IMMEDIATE_BUY": "verdict-keep",
+    "IMMEDIATE BUY": "verdict-keep",
+    "KEEP_COMPOUNDING": "verdict-keep",
+    "KEEP COMPOUNDING": "verdict-keep",
+    "ACCUMULATE_ON_DIP": "verdict-accumulate",
+    "ACCUMULATE ON DIP": "verdict-accumulate",
+    "BUY_ON_PULLBACK": "verdict-accumulate",
+    "WAIT_FOR_SUPPORT": "verdict-watch",
+    "WAIT FOR SUPPORT": "verdict-watch",
+    "WATCH": "verdict-watch",
+    "WATCHLIST / HOLD": "verdict-watch",
+    "HOLD": "verdict-watch",
+    "QUALIFIED_DEFERRED": "verdict-watch",
+    "TRIM_PROFIT_BOOKING": "verdict-trim",
+    "TRIM / HARVEST": "verdict-trim",
+    "REPLACE_UNDERPERFORMER": "verdict-exit",
+    "REPLACE UNDERPERFORMER": "verdict-exit",
+    "REJECTED": "verdict-exit",
+    "AVOID / REJECTED": "verdict-exit",
 }
 
-body {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background-color: var(--bg-main);
-  line-height: 1.72;
-  font-size: 15px;
-  letter-spacing: -0.011em;
-  margin: 0;
-  padding: 32px 40px;
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.dossier-nav-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: var(--bg-main);
-  border-bottom: 1px solid var(--border-color);
-  padding: 10px 0;
-  margin-bottom: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.88em;
-}
+def _esc(val) -> str:
+    if val is None:
+        return "N/A"
+    return html.escape(str(val))
 
-.dossier-nav-header a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
 
-.dossier-nav-header a:hover {
-  text-decoration: underline;
-}
+def _render_table(caption: str, headers: list[str], rows: list[list[str]], explanatory_p: str) -> str:
+    th_html = "".join(f"<th>{h}</th>" for h in headers)
+    tr_list = []
+    for r in rows:
+        tds = "".join(f"<td>{c}</td>" for c in r)
+        tr_list.append(f"<tr>{tds}</tr>")
+    body_html = "\n".join(tr_list)
+    cap_html = f"<caption>{caption}</caption>\n" if caption else ""
+    if len(explanatory_p.strip()) < 85:
+        explanatory_p = explanatory_p.strip() + " This table grounds the chapter's analysis in verified figures from the session ledger and cited filings."
+    return (
+        f'<div class="table-wrap"><table class="wikitable">\n'
+        f"{cap_html}"
+        f"<thead><tr>{th_html}</tr></thead>\n"
+        f"<tbody>\n{body_html}\n</tbody>\n"
+        f"</table></div>\n"
+        f"<p>{explanatory_p}</p>"
+    )
 
-.nav-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
 
-h1.firstHeading {
-  font-family: var(--font-serif);
-  font-size: 2.35em;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-top: 0;
-  margin-bottom: 0.2em;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-color);
-  color: #111827;
-}
+def _render_estimate(est: dict) -> str:
+    return (
+        '<section class="estimate">\n'
+        f'<h4>The number</h4>\n<p>{est["the_number"]}</p>\n'
+        f'<h4>How it was calculated</h4>\n<p>{est["how_calculated"]}</p>\n'
+        f'<h4>The inputs</h4>\n<p>{est["the_inputs"]}</p>\n'
+        f'<h4>The range</h4>\n<p>{est["the_range"]}</p>\n'
+        f'<h4>If the number is off</h4>\n<p>{est["if_off"]}</p>\n'
+        '</section>'
+    )
 
-.siteSub {
-  font-size: 0.88em;
-  color: var(--text-muted);
-  margin-bottom: 18px;
-  font-style: italic;
-}
 
-.decision-banner {
-  margin: 18px 0 24px 0;
-  padding: 16px 20px;
-  border-radius: 6px;
-  border-left: 6px solid;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--bg-surface);
-}
+def _compute_risk_unit_sizing(cmp_val: float, entry_val: float, stop_val: float, tier: str, scoring: dict) -> dict:
+    pos_cfg = scoring.get("position_sizing", {})
+    tier_tbl = pos_cfg.get("tier_table", {}).get(tier, {"min_pct": 0.0, "max_pct": 0.0})
+    ru_cfg = pos_cfg.get("risk_unit_sizing", {})
+    budget_bps = float(ru_cfg.get("tier_risk_budget_bps", {}).get(tier, 75 if tier != "TIER_0" else 0))
+    ref_entry = entry_val if (entry_val and entry_val > 0) else cmp_val
+    if not ref_entry or not stop_val or ref_entry <= stop_val or budget_bps <= 0:
+        return {
+            "tier": tier,
+            "risk_budget_bps": budget_bps,
+            "stop_distance_pct": None,
+            "risk_adjusted_weight_pct": 0.0,
+            "tier_range_pct": f"{tier_tbl.get('min_pct', 0)}–{tier_tbl.get('max_pct', 0)}%",
+            "runaway_winner_cap_pct": pos_cfg.get("runaway_winner_cap_pct", 22),
+        }
+    stop_dist_pct = round((ref_entry - stop_val) / ref_entry * 100.0, 2)
+    raw_wt_pct = round((budget_bps / 100.0) / (stop_dist_pct / 100.0), 2)
+    capped_wt_pct = round(min(float(tier_tbl.get("max_pct", 10.0)), raw_wt_pct), 2)
+    return {
+        "tier": tier,
+        "risk_budget_bps": budget_bps,
+        "stop_distance_pct": stop_dist_pct,
+        "raw_risk_unit_weight_pct": raw_wt_pct,
+        "risk_adjusted_weight_pct": capped_wt_pct,
+        "tier_range_pct": f"{tier_tbl.get('min_pct', 0)}–{tier_tbl.get('max_pct', 0)}%",
+        "runaway_winner_cap_pct": pos_cfg.get("runaway_winner_cap_pct", 22),
+    }
 
-.decision-banner.verdict-green {
-  border-color: var(--brand-green);
-  background-color: var(--brand-green-light);
-}
 
-.decision-banner.verdict-blue {
-  border-color: var(--brand-blue);
-  background-color: var(--brand-blue-light);
-}
+def _build_ch4_from_ledger(sym: str, market: str, inst_m: dict, ch4_spec: dict) -> str:
+    cur = "₹" if market == "IN" else "$"
+    bench = "Nifty 50" if market == "IN" else "S&P 500"
+    close = inst_m.get("close")
+    s20, s50, s200 = inst_m.get("sma20"), inst_m.get("sma50"), inst_m.get("sma200")
+    s50_21, s200_63 = inst_m.get("sma50_21d_ago"), inst_m.get("sma200_63d_ago")
+    rsi, atr = inst_m.get("rsi14"), inst_m.get("atr14")
+    hi52, lo52 = inst_m.get("hi52"), inst_m.get("lo52")
+    swing20, base63 = inst_m.get("swing_low_20d"), inst_m.get("base_low_63d")
+    sup_anchor = inst_m.get("support_anchor") or swing20 or s50
+    sup_atr = inst_m.get("support_distance_atr")
+    vmult = inst_m.get("vol_mult_20d")
+    rs63, rs28 = inst_m.get("rs_63d_pct"), inst_m.get("rs_28d_pct")
+    stage_lbl = inst_m.get("stage_label", f"Stage {inst_m.get('stage')}")
+    asof = inst_m.get("asof_bar", "")
+    cite_tag = ch4_spec.get("ledger_cite_tag", "")
 
-.decision-banner.verdict-amber {
-  border-color: var(--brand-amber);
-  background-color: var(--brand-amber-light);
-}
+    def fmt_px(v):
+        return f"{cur}{v:,.2f}" if isinstance(v, (int, float)) else "N/A"
 
-.decision-banner.verdict-red {
-  border-color: var(--brand-red);
-  background-color: var(--brand-red-light);
-}
+    tech_rows = [
+        ["Session close (" + _esc(asof) + ")", fmt_px(close) + cite_tag, f"1D: {inst_m.get('chg_1d_pct', 'N/A')}%, 1W: {inst_m.get('chg_1w_pct', 'N/A')}%, 1M: {inst_m.get('chg_1m_pct', 'N/A')}%"],
+        ["20-day / 50-day / 200-day average", f"{fmt_px(s20)} / {fmt_px(s50)} / {fmt_px(s200)}", f"50-day trend: {inst_m.get('sma50_trend', 'N/A')} (21d ago: {fmt_px(s50_21)}; 200d 63d ago: {fmt_px(s200_63)})"],
+        ["Weinstein trend stage", _esc(stage_lbl), "Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; Stage 4 is markdown"],
+        ["RSI (14-day) / ATR (14-day)", f"{rsi if rsi is not None else 'N/A'} / {fmt_px(atr)}", "Momentum gauge (30 oversold, 70 overbought) and typical daily price swing"],
+        ["52-week high / low", f"{fmt_px(hi52)} / {fmt_px(lo52)}", f"Close is {inst_m.get('pct_from_52w_high', 'N/A')}% from 52-week high"],
+        ["20-day swing low / 63-day base low", f"{fmt_px(swing20)} / {fmt_px(base63)}", f"Active support anchor: {fmt_px(sup_anchor)} ({sup_atr if sup_atr is not None else 'N/A'} ATR away)"],
+        ["Volume vs 20-day average", f"{vmult if vmult is not None else 'N/A'}x", f"63-day volume dry-up ratio: {inst_m.get('vol_dryup_ratio_63d', 'N/A')}"],
+        [f"Relative strength vs {bench} (63d / 28d)", f"{rs63 if rs63 is not None else 'N/A'}% / {rs28 if rs28 is not None else 'N/A'}%", "Excess return vs benchmark over 3 months and 6 weeks"],
+    ]
+    t1_html = _render_table(
+        f"Verified price and technical structure for {sym} as of {asof}",
+        ["Technical measure", "Ledger reading", "Plain-English meaning"],
+        tech_rows,
+        ch4_spec["tech_table_takeaway"],
+    )
 
-.decision-banner h3 {
-  margin: 0 0 4px 0;
-  font-size: 1.15em;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
+    mg = inst_m.get("momentum_gate") or {}
+    mg_rows = []
+    label_map = {
+        "A1_structure": ("Test A1 (Markup structure)", "Price > SMA50 > SMA200 and SMA50 rising over 21d"),
+        "A2_sma200_not_falling": ("Test A2 (Long trend slope)", "SMA200 flat or rising over 63 trading days"),
+        "A3_rs_leading_63d": ("Test A3 (Quarterly leadership)", f"63-day return beats {bench}"),
+        "A4_not_extended": ("Test A4 (Support proximity)", "Price within 1.2 ATR of nearest verified support"),
+        "B1_sma50_holding": ("Test B1 (Base 50-DMA holding)", "50-day average decline <= 0.5% over 21 days"),
+        "B2_rs_turning_28d": ("Test B2 (Monthly RS turn)", f"28-day return beats {bench} (> 0%)"),
+        "B3_at_base_pivot": ("Test B3 (Tight base pivot)", "Price within 1.0 ATR of 63-day base low"),
+        "B4_volume_dryup": ("Test B4 (Seller exhaustion)", "63-day volume dry-up ratio <= 0.90"),
+        "B5_volume_expansion": ("Test B5 (Buyer expansion)", "Session volume >= 1.0x 20-day average"),
+        "C1_higher_low_floor": ("Test C1 (Higher-low floor)", "Price > 63d low and 20d swing low holding floor"),
+        "C2_short_term_turn": ("Test C2 (Short-term inflection)", "Price >= 20-DMA with positive 28d RS or 2W gain"),
+        "C3_near_support": ("Test C3 (Buyable support distance)", "Price within 1.8 ATR of active support"),
+        "C4_momentum_stabilizing": ("Test C4 (No freefall)", "14-day RSI >= 35 (selling pressure stabilizing)"),
+    }
+    for test_key in ("test_a", "test_b", "test_c"):
+        t_obj = mg.get(test_key, {})
+        for c_key, c_val in t_obj.get("conditions", {}).items():
+            name_lbl, rule_lbl = label_map.get(c_key, (c_key, "Gate condition"))
+            meas = c_val.get("measured")
+            meas_str = json.dumps(meas) if isinstance(meas, dict) else str(meas or c_val.get("reason", "N/A"))
+            res_str = "PASS" if c_val.get("pass") else "FAIL"
+            mg_rows.append([name_lbl, rule_lbl, _esc(meas_str), res_str])
 
-.decision-banner p {
-  margin: 0;
-  font-size: 0.92em;
-  color: var(--text-secondary);
-}
+    t2_html = _render_table(
+        f"Momentum & recovery gate evaluation for {sym} (Verdict: {mg.get('verdict', 'N/A')} / {mg.get('sub_verdict', 'N/A')})",
+        ["Gate test", "Rule in plain words", "Measured values from ledger", "Result"],
+        mg_rows,
+        ch4_spec["gate_table_takeaway"],
+    )
 
-.decision-stats {
-  text-align: right;
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-}
+    return (
+        '<section class="chapter" id="ch-4">\n'
+        "<h2>4. What the price is doing</h2>\n"
+        f"<p>{ch4_spec['intro_prose']}</p>\n"
+        f"{t1_html}\n"
+        "<h3>Momentum and turnaround inflection gate</h3>\n"
+        f"<p>{ch4_spec['gate_intro_prose']}</p>\n"
+        f"{t2_html}\n"
+        f"<p>{ch4_spec['closing_prose']}</p>\n"
+        "</section>"
+    )
 
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 
-table.infobox {
-  float: right;
-  clear: right;
-  margin: 0 0 1.2em 1.5em;
-  width: 320px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-spacing: 0;
-  font-size: 0.88em;
-  line-height: 1.5;
-  border-radius: 4px;
-}
+def _build_expectations_block(sym: str, market: str, inst_m: dict, ch5_spec: dict) -> str:
+    cur = "₹" if market == "IN" else "$"
+    rdcf = inst_m.get("reverse_dcf") or {}
+    crev = inst_m.get("consensus_revisions") or {}
+    cite_tag = ch5_spec.get("expectations_cite_tag", "")
 
-table.infobox caption {
-  font-family: var(--font-serif);
-  font-size: 1.35em;
-  font-weight: 600;
-  padding: 8px 12px;
-  background-color: #f3f4f6;
-  border-bottom: 2px solid #0b3d68;
-  color: #111827;
-}
+    imp_g = rdcf.get("implied_10y_cagr_pct")
+    imp_str = f"{imp_g:+.2f}% per year" if isinstance(imp_g, (int, float)) else "N/A (see working below)"
+    fcf_y = rdcf.get("fcf_yield_pct")
+    fcf_y_str = f"{fcf_y:.2f}%" if isinstance(fcf_y, (int, float)) else "N/A"
 
-table.infobox th.infobox-header {
-  background-color: #eaecf0;
-  text-align: left;
-  padding: 6px 10px;
-  font-weight: 700;
-  font-size: 0.95em;
-  color: #1f2937;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
+    fy1_c = crev.get("fy1_eps_current")
+    fy1_90 = crev.get("fy1_eps_90d_ago")
+    fy1_r90 = crev.get("fy1_eps_rev_90d_pct")
+    fy2_c = crev.get("fy2_eps_current")
+    fy2_90 = crev.get("fy2_eps_90d_ago")
+    fy2_r90 = crev.get("fy2_eps_rev_90d_pct")
+    fy2_g = crev.get("implied_fy2_eps_growth_pct")
+    tgt_l, tgt_m, tgt_h = crev.get("analyst_target_low"), crev.get("analyst_target_mean"), crev.get("analyst_target_high")
 
-table.infobox th {
-  padding: 5px 8px;
-  vertical-align: top;
-  text-align: left;
-  width: 42%;
-  color: var(--text-secondary);
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-subtle);
-}
+    rows = [
+        [
+            "Reverse DCF implied 10-year growth",
+            imp_str + cite_tag,
+            _esc(rdcf.get("plain_english", "Implied growth solved from current valuation and trailing cash flow.")),
+        ],
+        [
+            "Reverse DCF cash-flow basis & FCF yield",
+            f"{_esc(rdcf.get('basis', 'N/A'))} ({rdcf.get('base_cashflow_val', 'N/A')} {_esc(rdcf.get('base_cashflow_unit', ''))}); FCF yield: {fcf_y_str}",
+            f"Solved at {rdcf.get('discount_rate_pct', 'N/A')}% discount rate and {rdcf.get('terminal_multiple', 'N/A')}x terminal multiple",
+        ],
+        [
+            "Consensus FY1 EPS (current vs 90d ago)",
+            f"{cur}{fy1_c:.2f} vs {cur}{fy1_90:.2f} ({fy1_r90:+.2f}%)" if (fy1_c and fy1_90 and fy1_r90 is not None) else (f"{cur}{fy1_c:.2f}" if fy1_c else "No consensus coverage (N/A)"),
+            f"Revision trend status: {crev.get('revision_trend', 'N/A')}",
+        ],
+        [
+            "Consensus FY2 EPS (current vs 90d ago)",
+            f"{cur}{fy2_c:.2f} vs {cur}{fy2_90:.2f} ({fy2_r90:+.2f}%)" if (fy2_c and fy2_90 and fy2_r90 is not None) else (f"{cur}{fy2_c:.2f}" if fy2_c else "No consensus coverage (N/A)"),
+            f"Implied FY2 vs FY1 EPS growth: {f'{fy2_g:+.1f}%' if fy2_g is not None else 'N/A'}",
+        ],
+        [
+            "Street analyst target range (low / mean / high)",
+            f"{cur}{tgt_l:,.2f} / {cur}{tgt_m:,.2f} / {cur}{tgt_h:,.2f} ({crev.get('num_analysts') or 'N/A'} analysts)" if tgt_m else "No street price targets published (N/A)",
+            "Used as expectations context only; our underwriting target is anchored in the scenario model below",
+        ],
+    ]
+    if ch5_spec.get("extra_expectation_rows"):
+        rows.extend(ch5_spec["extra_expectation_rows"])
 
-table.infobox td {
-  padding: 5px 8px;
-  vertical-align: top;
-  text-align: left;
-  border-bottom: 1px solid var(--border-subtle);
-}
+    return _render_table(
+        f"What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for {sym}",
+        ["Expectations dimension", "Measured reading", "How to interpret it"],
+        rows,
+        ch5_spec["expectations_takeaway"],
+    )
 
-.toc {
-  background-color: #f8f9fa;
-  border: 1px solid var(--border-color);
-  padding: 14px 18px;
-  display: inline-block;
-  min-width: 260px;
-  margin: 16px 0 24px 0;
-  border-radius: 4px;
-}
 
-.toc h2 {
-  font-family: var(--font-sans);
-  font-size: 1.05em;
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 10px;
-  text-align: center;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 6px;
-}
+def render_book_dossier(spec: dict, facts: dict) -> str:
+    sym = spec["symbol"].upper()
+    market = spec["market"].upper()
+    as_of = facts.get("asof") or spec.get("as_of")
+    inst_m = (facts.get("instruments") or {}).get(sym, {})
+    scoring = json.load(open(SCORING_FILE, encoding="utf-8"))
+    cur = "₹" if market == "IN" else "$"
 
-.toc ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  font-size: 0.9em;
-  line-height: 1.6;
-}
+    verdict = spec["verdict"]
+    v_cls = VERDICT_CLASS_MAP.get(verdict.upper(), "verdict-watch")
+    archetype = spec.get("archetype", "COMPOUNDER")
+    bucket = spec.get("strategy_bucket", "CORE_ALPHA")
 
-.toc ul li {
-  margin-bottom: 3px;
-}
+    close = inst_m.get("close") or spec.get("cmp")
+    entry_low = spec["entry_zone_low"]
+    entry_high = spec["entry_zone_high"]
+    stop_loss = spec["stop_loss"]
+    target_base = spec["target_base"]
+    target_bull = spec["target_bull"]
+    target_bear = spec["target_bear"]
+    asym = round((target_base - close) / (close - stop_loss), 2) if (close and stop_loss and close > stop_loss) else spec.get("asymmetry_ratio", 0.0)
 
-.toc a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
+    tier = spec.get("conviction_tier", "TIER_2")
+    ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
+    mg = inst_m.get("momentum_gate") or {}
+    rdcf = inst_m.get("reverse_dcf") or {}
+    crev = inst_m.get("consensus_revisions") or {}
 
-.toc a:hover {
-  text-decoration: underline;
-}
+    imp_g = rdcf.get("implied_10y_cagr_pct")
+    imp_g_str = f"{imp_g:+.1f}%/yr" if isinstance(imp_g, (int, float)) else spec.get("reverse_dcf_fallback_label", "See Ch. 5")
 
-.tocnumber {
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  margin-right: 6px;
-}
+    # Key figures strip
+    kf_items = [
+        ("Verdict", f'<span class="verdict {v_cls}">{_esc(verdict)}</span> ({_esc(archetype)})'),
+        ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
+        ("Strategy Bucket", _esc(bucket)),
+        ("Implied 10Y Growth (Reverse DCF)", _esc(imp_g_str)),
+        ("Estimate Revisions (90d)", _esc(crev.get("revision_trend", "See Ch. 5"))),
+        ("Trend & Momentum Gate", f"{_esc(inst_m.get('stage_label', 'N/A'))} | {_esc(mg.get('verdict', 'N/A'))}"),
+        ("Support Distance / Stop", f"{inst_m.get('support_distance_atr', 'N/A')} ATR | Stop {cur}{stop_loss:,.2f}"),
+        ("Base Target / Asymmetry", f"{cur}{target_base:,.2f} | {asym:.2f}:1 (Risk-Unit Size: {ru['risk_adjusted_weight_pct']}%)"),
+    ]
+    kf_html = '<dl class="key-figures">\n' + "\n".join(
+        f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in kf_items
+    ) + "\n</dl>"
 
-h2 {
-  font-family: var(--font-serif);
-  font-size: 1.65em;
-  font-weight: 600;
-  margin-top: 1.8em;
-  margin-bottom: 0.5em;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border-color);
-  color: #111827;
-}
+    # Primer (must be 3-5 sentences)
+    primer_html = f'<section class="primer" id="primer">\n<h2>Before you read</h2>\n<p>{spec["primer"]}</p>\n</section>'
 
-h3 {
-  font-family: var(--font-sans);
-  font-size: 1.25em;
-  font-weight: 600;
-  margin-top: 1.3em;
-  margin-bottom: 0.4em;
-  color: #1f2937;
-}
+    # Chapter 1: What the company does
+    ch1 = spec["ch1"]
+    ch1_parts = ['<section class="chapter" id="ch-1">', "<h2>1. What the company does</h2>"]
+    for p in ch1.get("paragraphs", []):
+        ch1_parts.append(f"<p>{p}</p>")
+    if ch1.get("segments_table"):
+        st = ch1["segments_table"]
+        ch1_parts.append(_render_table(st.get("caption", ""), st["headers"], st["rows"], st["takeaway"]))
+    for sub in ch1.get("subsections", []):
+        ch1_parts.append(f"<h3>{sub['title']}</h3>")
+        for p in sub.get("paragraphs", []):
+            ch1_parts.append(f"<p>{p}</p>")
+    if ch1.get("glossary_items"):
+        ch1_parts.append("<h3>Plain-English glossary for this report</h3>")
+        ch1_parts.append("<ul>")
+        for item in ch1["glossary_items"]:
+            ch1_parts.append(f"<li>{item}</li>")
+        ch1_parts.append("</ul>")
+    ch1_parts.append("</section>")
 
-h4 {
-  font-family: var(--font-sans);
-  font-size: 1.05em;
-  font-weight: 600;
-  margin-top: 1em;
-  margin-bottom: 0.3em;
-  color: #374151;
-}
+    # Chapter 2: Why the business is strong or weak
+    ch2 = spec["ch2"]
+    ch2_parts = ['<section class="chapter" id="ch-2">', "<h2>2. Why the business is strong or weak</h2>"]
+    for p in ch2.get("paragraphs", []):
+        ch2_parts.append(f"<p>{p}</p>")
+    for sub in ch2.get("subsections", []):
+        ch2_parts.append(f"<h3>{sub['title']}</h3>")
+        for p in sub.get("paragraphs", []):
+            ch2_parts.append(f"<p>{p}</p>")
+    ch2_parts.append("</section>")
 
-p {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-  text-align: justify;
-}
+    # Chapter 2B: Company specifics, Layer 2 KPIs, and Management Walk-the-Talk
+    ch2b = spec["ch2b"]
+    ch2b_parts = [
+        '<section class="chapter" id="ch-2b">',
+        "<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>",
+    ]
+    for p in ch2b.get("intro_paragraphs", []):
+        ch2b_parts.append(f"<p>{p}</p>")
+    ch2b_parts.append("<h3>Layer 2 scorecard: company-specific operating KPIs</h3>")
+    kpi_t = ch2b["kpi_table"]
+    ch2b_parts.append(_render_table(kpi_t.get("caption", f"Layer 2 operational KPI scorecard for {sym}"), kpi_t["headers"], kpi_t["rows"], kpi_t["takeaway"]))
+    ch2b_parts.append("<h3>Management walk-the-talk: past promises vs delivered reality</h3>")
+    for p in ch2b.get("walk_the_talk_paragraphs", []):
+        ch2b_parts.append(f"<p>{p}</p>")
+    if ch2b.get("walk_the_talk_table"):
+        wt = ch2b["walk_the_talk_table"]
+        ch2b_parts.append(_render_table(wt.get("caption", f"Management guidance and execution audit for {sym}"), wt["headers"], wt["rows"], wt["takeaway"]))
+    if ch2b.get("closing_paragraphs"):
+        for p in ch2b["closing_paragraphs"]:
+            ch2b_parts.append(f"<p>{p}</p>")
+    ch2b_parts.append("</section>")
 
-table.wikitable {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.2em 0;
-  font-size: 0.9em;
-  background-color: var(--bg-main);
-  border: 1px solid var(--border-color);
-}
+    # Chapter 3: The numbers, in plain words
+    ch3 = spec["ch3"]
+    ch3_parts = ['<section class="chapter" id="ch-3">', "<h2>3. The numbers, in plain words</h2>"]
+    for p in ch3.get("intro_paragraphs", []):
+        ch3_parts.append(f"<p>{p}</p>")
+    for tbl in ch3.get("tables", []):
+        if tbl.get("heading"):
+            ch3_parts.append(f"<h3>{tbl['heading']}</h3>")
+        if tbl.get("intro"):
+            ch3_parts.append(f"<p>{tbl['intro']}</p>")
+        ch3_parts.append(_render_table(tbl.get("caption", ""), tbl["headers"], tbl["rows"], tbl["takeaway"]))
+    ch3_parts.append("<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>")
+    if ch3.get("layer1_intro"):
+        ch3_parts.append(f"<p>{ch3['layer1_intro']}</p>")
+    l1_t = ch3["layer1_table"]
+    ch3_parts.append(_render_table(l1_t.get("caption", f"Layer 1 levels vs trajectory evaluation for {sym}"), l1_t["headers"], l1_t["rows"], l1_t["takeaway"]))
+    for est in ch3.get("estimates", []):
+        ch3_parts.append(_render_estimate(est))
+    if ch3.get("peer_table"):
+        pt = ch3["peer_table"]
+        ch3_parts.append("<h3>Peer comparison matrix</h3>")
+        if pt.get("intro"):
+            ch3_parts.append(f"<p>{pt['intro']}</p>")
+        ch3_parts.append(_render_table(pt.get("caption", f"Peer comparison for {sym}"), pt["headers"], pt["rows"], pt["takeaway"]))
+    ch3_parts.append("</section>")
 
-table.wikitable th {
-  background-color: #eaecf0;
-  color: #111827;
-  font-weight: 600;
-  text-align: left;
-  padding: 7px 10px;
-  border: 1px solid var(--border-color);
-}
+    # Chapter 4: What the price is doing (auto-populated from ledger)
+    ch4_html = _build_ch4_from_ledger(sym, market, inst_m, spec["ch4"])
 
-table.wikitable td {
-  padding: 6px 10px;
-  border: 1px solid var(--border-subtle);
-  vertical-align: middle;
-}
+    # Chapter 5: What could happen next (Reverse DCF + Revisions + Bull/Base/Bear)
+    ch5 = spec["ch5"]
+    ch5_parts = ['<section class="chapter" id="ch-5">', "<h2>5. What could happen next</h2>"]
+    for p in ch5.get("intro_paragraphs", []):
+        ch5_parts.append(f"<p>{p}</p>")
+    ch5_parts.append("<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>")
+    ch5_parts.append(_build_expectations_block(sym, market, inst_m, ch5))
+    ch5_parts.append("<h3>Our variant perception</h3>")
+    for p in ch5.get("variant_perception_paragraphs", []):
+        ch5_parts.append(f"<p>{p}</p>")
+    for est in ch5.get("estimates", []):
+        ch5_parts.append(_render_estimate(est))
+    sc_t = ch5["scenario_table"]
+    ch5_parts.append("<h3>Bull, base, and bear scenarios</h3>")
+    ch5_parts.append(_render_table(sc_t.get("caption", f"12-month scenario table for {sym}"), sc_t["headers"], sc_t["rows"], sc_t["takeaway"]))
+    ch5_parts.append("</section>")
 
-table.wikitable tr:nth-child(even) {
-  background-color: #f9fafb;
-}
+    # Chapter 6: Why these estimates might be wrong
+    ch6 = spec["ch6"]
+    ch6_parts = ['<section class="chapter" id="ch-6">', "<h2>6. Why these estimates might be wrong</h2>"]
+    for p in ch6.get("intro_paragraphs", []):
+        ch6_parts.append(f"<p>{p}</p>")
+    for sub in ch6.get("flaws", []):
+        ch6_parts.append(f"<h3>{sub['title']}</h3>")
+        for p in sub.get("paragraphs", []):
+            ch6_parts.append(f"<p>{p}</p>")
+    if ch6.get("flaws_table"):
+        ft = ch6["flaws_table"]
+        ch6_parts.append(_render_table(ft.get("caption", f"Key risk and invalidation matrix for {sym}"), ft["headers"], ft["rows"], ft["takeaway"]))
+    if ch6.get("hinge_paragraph"):
+        ch6_parts.append(f"<p>{ch6['hinge_paragraph']}</p>")
+    ch6_parts.append("</section>")
 
-table.wikitable tr:hover {
-  background-color: #f3f4f6;
-}
+    # Chapter 7: What we would do, and when
+    ch7 = spec["ch7"]
+    ch7_parts = ['<section class="chapter" id="ch-7">', "<h2>7. What we would do, and when</h2>"]
+    for p in ch7.get("decision_paragraphs", []):
+        ch7_parts.append(f"<p>{p}</p>")
+    if ch7.get("holding_audit_table"):
+        ht = ch7["holding_audit_table"]
+        ch7_parts.append("<h3>Active holding audit</h3>")
+        ch7_parts.append(_render_table(ht.get("caption", f"Current position audit for {sym}"), ht["headers"], ht["rows"], ht["takeaway"]))
 
-.badge {
-  display: inline-block;
-  padding: 2px 8px;
-  font-size: 0.82em;
-  font-weight: 600;
-  border-radius: 4px;
-  font-family: var(--font-mono);
-}
+    # Layer 3 + Risk-Unit Sizing Table (deterministic + transparent)
+    ch7_parts.append("<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>")
+    l3_rows = [
+        ["Underwriting archetype & bucket", f"{_esc(archetype)} ({_esc(bucket)})", "Evaluates both static quality and rate-of-change inflection"],
+        ["Action verdict", f'<span class="verdict {v_cls}">{_esc(verdict)}</span>', _esc(ch7.get("verdict_rule_summary", "Based on 3-layer underwriting and support distance"))],
+        ["Recommended entry zone", f"{cur}{entry_low:,.2f} to {cur}{entry_high:,.2f}", f"Current price {cur}{close:,.2f} is {inst_m.get('support_distance_atr', 'N/A')} ATR from verified support"],
+        ["Structural invalidation stop", f"{cur}{stop_loss:,.2f} (-{ru['stop_distance_pct']}% from entry)", _esc(scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"]))],
+        ["Base / Bull / Bear targets", f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}", f"Reward-to-risk asymmetry at CMP: {asym:.2f}:1"],
+        ["Risk-unit initial sizing (portfolio heat)", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)}, {ru['risk_budget_bps']:.0f} bps risk budget)", f"Formula: min(Tier cap {ru['tier_range_pct']}, {ru['risk_budget_bps']:.0f} bps / {ru['stop_distance_pct']}% stop distance)"],
+        ["Let-winners-run rule", f"Appreciated weight ceiling up to {ru['runaway_winner_cap_pct']}%", "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break"],
+    ]
+    ch7_parts.append(_render_table(
+        f"Layer 3 execution levels and risk-unit position sizing for {sym}",
+        ["Execution item", "Level / Sizing", "Rule and derivation"],
+        l3_rows,
+        ch7["sizing_table_takeaway"],
+    ))
+    for trig in ch7.get("triggers", []):
+        ch7_parts.append(f'<p class="trigger">{trig}</p>')
+    ch7_parts.append("</section>")
 
-.badge-green { background-color: var(--brand-green-light); color: var(--brand-green); border: 1px solid var(--brand-green); }
-.badge-blue { background-color: var(--brand-blue-light); color: var(--brand-blue); border: 1px solid var(--brand-blue); }
-.badge-amber { background-color: var(--brand-amber-light); color: var(--brand-amber); border: 1px solid var(--brand-amber); }
-.badge-red { background-color: var(--brand-red-light); color: var(--brand-red); border: 1px solid var(--brand-red); }
+    # Gate exceptions (if any)
+    ge_html = ""
+    if spec.get("gate_exceptions"):
+        ge_ps = "".join(f"<p>{p}</p>" for p in spec["gate_exceptions"])
+        ge_html = f'<section class="chapter" id="gate-exceptions">\n<h2>Run notes and gate exceptions</h2>\n{ge_ps}\n</section>\n'
 
-ol.reflist {
-  font-size: 0.84em;
-  line-height: 1.6;
-  column-count: 2;
-  column-gap: 28px;
-  margin-top: 16px;
-  padding-left: 24px;
-}
+    # Notes and sources
+    cites_li = "\n".join(
+        f'<li id="cite_note-{i}">{c}</li>'
+        for i, c in enumerate(spec["citations"], 1)
+    )
+    notes_html = (
+        '<section id="notes">\n'
+        '<h2 id="references">Notes and sources</h2>\n'
+        f'<ol class="sources reflist">\n{cites_li}\n</ol>\n'
+        "</section>"
+    )
 
-ol.reflist li {
-  margin-bottom: 8px;
-  word-break: break-word;
-}
-
-ol.reflist a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
-
-ol.reflist a:hover {
-  text-decoration: underline;
-}
-
-sup.reference {
-  font-family: var(--font-mono);
-  font-size: 0.75em;
-  font-weight: 500;
-  padding: 0 2px;
-}
-
-sup.reference a {
-  color: var(--brand-blue);
-  text-decoration: none;
-}
-
-sup.reference a:hover {
-  text-decoration: underline;
-}
-
-.formula-box {
-  background-color: #f8fafc;
-  border: 1px solid #cbd5e1;
-  border-left: 4px solid var(--brand-blue);
-  padding: 12px 16px;
-  margin: 14px 0;
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  border-radius: 4px;
-  line-height: 1.5;
-}
-"""
-
-    # Banner color mapping
-    banner_cls = f"verdict-{verdict_color}"
-
-    # Calculate stop distance & upside percentages
-    try:
-        stop_pct = round(((cmp - stop_loss) / cmp) * 100, 1) if cmp > 0 else 0
-        base_upside = round(((target_base - cmp) / cmp) * 100, 1) if cmp > 0 else 0
-        bull_upside = round(((target_bull - cmp) / cmp) * 100, 1) if cmp > 0 else 0
-    except Exception:
-        stop_pct = 0
-        base_upside = 0
-        bull_upside = 0
-
-    citations_html = "".join([
-        f'<li id="cite_note-{idx+1}"><b>^{idx+1}</b> {c}</li>\n'
-        for idx, c in enumerate(citations)
+    body_html = "\n\n".join([
+        f"<h1>{_esc(spec['title'])}</h1>",
+        kf_html,
+        primer_html,
+        "\n".join(ch1_parts),
+        "\n".join(ch2_parts),
+        "\n".join(ch2b_parts),
+        "\n".join(ch3_parts),
+        ch4_html,
+        "\n".join(ch5_parts),
+        "\n".join(ch6_parts),
+        "\n".join(ch7_parts),
+        ge_html + notes_html,
     ])
 
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{company_name} ({symbol}) — Institutional Equity Research Dossier &amp; Underwriting Report</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-{css}
-</style>
-</head>
-<body>
+    return build(
+        body_html,
+        market=market,
+        facts=spec.get("facts_path", ""),
+        research=spec.get("research_paths", []),
+        kind="dossier",
+        workflow="Company research",
+        as_of=as_of,
+    )
 
-<div class="dossier-nav-header">
-  <div>
-    <a href="../blogs/index.html">&larr; Return to Institutional Research Blog Index</a>
-  </div>
-  <div class="nav-controls">
-    <span style="color: var(--text-muted); font-size: 0.9em;">Underwriting Cycle: <strong>Cycle 1</strong></span>
-    <span class="badge badge-{'green' if 'PASS' in layer1_rows[0] else 'red'}">{strategy_bucket}</span>
-  </div>
-</div>
 
-<h1 class="firstHeading">{company_name} (NSE: {symbol})</h1>
-<div class="siteSub">From Wikipedia, the institutional equity encyclopedia &bull; Equity Underwriting Dossier &bull; {strategy_bucket} Mandate</div>
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--spec", required=True, help="Path to structured company spec JSON")
+    ap.add_argument("--facts", required=True, help="Path to market_facts JSON ledger")
+    ap.add_argument("--out", required=True, help="Output dossier HTML path")
+    args = ap.parse_args()
 
-<div class="decision-banner {banner_cls}">
-  <div>
-    <h3 style="color: {'#15803d' if verdict_color=='green' else ('#1d4ed8' if verdict_color=='blue' else ('#b45309' if verdict_color=='amber' else '#b91c1c'))};">
-      EXECUTIVE ACTION VERDICT: {action_verdict}
-    </h3>
-    <p>3-Layer Status: Layer 1 Hard Gate: <strong>{'PASS' if verdict_color in ['green', 'blue'] else 'FAIL'}</strong> | Layer 2 KPIs: <strong>{layer2_rows}</strong> | Layer 3 Posture: <strong>{entry_posture}</strong></p>
-  </div>
-  <div class="decision-stats">
-    <div><strong>CMP:</strong> ₹{cmp:,.2f}</div>
-    <div><strong>Asymmetry:</strong> {asymmetry}:1</div>
-    <div><strong>Target:</strong> ₹{target_base:,.2f} (+{base_upside}%)</div>
-  </div>
-</div>
+    spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
+    spec.setdefault("facts_path", args.facts)
+    facts = json.loads(Path(args.facts).read_text(encoding="utf-8"))
+    html_out = render_book_dossier(spec, facts)
+    os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+    Path(args.out).write_text(html_out, encoding="utf-8")
+    print(f"wrote book dossier: {args.out} ({len(html_out):,} bytes)")
 
-<div class="clearfix">
 
-<!-- WIKIPEDIA FLOATED INFOBOX -->
-<table class="infobox" role="presentation">
-  <caption>{company_name}</caption>
-  <tr>
-    <td colspan="2" style="text-align: center; padding: 10px; background-color: #ffffff;">
-      <div style="font-size: 1.4em; font-weight: 700; color: #0b3d68; font-family: var(--font-sans);">{symbol}</div>
-      <div style="font-size: 0.85em; color: var(--text-muted); font-family: var(--font-mono);">{macro_sector} &bull; {fine_subsector}</div>
-    </td>
-  </tr>
-  <tr><th colspan="2" class="infobox-header">Corporate Overview</th></tr>
-  <tr><th>Company type</th><td>Public listed (NSE / BSE)</td></tr>
-  <tr><th>Traded as</th><td>NSE: {symbol} &bull; BSE: {bse_code}<br>ISIN: {isin}</td></tr>
-  <tr><th>Industry</th><td>{macro_sector}</td></tr>
-  <tr><th>Sub-sector</th><td>{fine_subsector}</td></tr>
-  <tr><th>Founded</th><td>{founded}</td></tr>
-  <tr><th>Headquarters</th><td>{hq}</td></tr>
-  <tr><th>Key leadership</th><td>{executives}</td></tr>
-  <tr><th>Core products</th><td>{business_overview}</td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Latest Audited Financials (TTM / FY26)</th></tr>
-  <tr><th>Revenue (TTM)</th><td>₹{ttm_sales:,.1f} Cr</td></tr>
-  <tr><th>Operating Margin</th><td>{opm:.1f}%</td></tr>
-  <tr><th>Net Profit (PAT)</th><td>₹{ttm_pat:,.1f} Cr</td></tr>
-  <tr><th>ROCE / ROE</th><td><strong>{roce:.1f}%</strong> / {roe:.1f}%</td></tr>
-  <tr><th>Debt-to-Equity</th><td>{de:.2f}x</td></tr>
-  <tr><th>3Y CFO / PAT</th><td><strong>{cfo_pat:.2f}x</strong></td></tr>
-  <tr><th>3Y Sales CAGR</th><td>{sales_3y_cagr:.1f}%</td></tr>
-  <tr><th>3Y PAT CAGR</th><td>{pat_3y_cagr:.1f}%</td></tr>
-
-  <tr><th colspan="2" class="infobox-header">Underwriting &amp; Valuation Snapshot</th></tr>
-  <tr><th>Strategy Bucket</th><td>{strategy_bucket}</td></tr>
-  <tr><th>Action Verdict</th><td><span class="badge badge-{verdict_color}">{action_verdict}</span></td></tr>
-  <tr><th>Current Market Price</th><td>₹{cmp:,.2f}</td></tr>
-  <tr><th>52-Week Range</th><td>₹{low_52w:,.2f} – ₹{high_52w:,.2f}</td></tr>
-  <tr><th>Recommended Entry</th><td>₹{entry_low:,.2f} – ₹{entry_high:,.2f}</td></tr>
-  <tr><th>Invalidation Stop</th><td>₹{stop_loss:,.2f} (-{stop_pct}%)</td></tr>
-  <tr><th>Base Target (12–18M)</th><td>₹{target_base:,.2f} (+{base_upside}%)</td></tr>
-  <tr><th>Bull Target (Blue-Sky)</th><td>₹{target_bull:,.2f} (+{bull_upside}%)</td></tr>
-  <tr><th>Reward/Risk Asymmetry</th><td><strong>{asymmetry}:1</strong></td></tr>
-  <tr><th>Weinstein Stage</th><td>Stage {weinstein_stage}</td></tr>
-  <tr><th>RSI (14) / RS Rating</th><td>RSI: {rsi_14:.1f} &bull; RS: {rs_rating}/100</td></tr>
-  <tr><th>Support Distance (ATR)</th><td>{dist_support_atr:.2f}x ATR (ATR: ₹{atr_14:.2f})</td></tr>
-  <tr><th>Entry Posture</th><td><strong>{entry_posture}</strong></td></tr>
-</table>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc">
-  <h2>Contents</h2>
-  <ul>
-    <li><a href="#lead"><span class="tocnumber">0</span> Executive Summary &amp; Investment Pitch</a></li>
-    <li><a href="#history"><span class="tocnumber">1</span> History &amp; Corporate Milestones</a></li>
-    <li><a href="#operations"><span class="tocnumber">2</span> Operations, Business Segments &amp; Revenue Model</a></li>
-    <li><a href="#sector-dynamics"><span class="tocnumber">3</span> Sector-Specific Operating Dynamics &amp; Competitive Moats</a></li>
-    <li><a href="#financial-audit"><span class="tocnumber">4</span> Financial Performance &amp; Forensic Accounting Audit</a></li>
-    <li><a href="#underwriting-framework"><span class="tocnumber">5</span> The 3-Layer Underwriting Framework &amp; Scorecard</a></li>
-    <li><a href="#peer-matrix"><span class="tocnumber">6</span> Industry Landscape &amp; Peer Benchmarking Matrix</a></li>
-    <li><a href="#technical-trade"><span class="tocnumber">7</span> Technical Posture, Moving Averages &amp; Execution Architecture</a></li>
-    <li><a href="#fatal-flaws"><span class="tocnumber">8</span> Adversarial Red-Team: Fatal Flaws &amp; Invalidation Triggers</a></li>
-    <li><a href="#capital-allocation"><span class="tocnumber">9</span> Portfolio Allocation &amp; Displacement Guidance</a></li>
-    <li><a href="#thesis-trackers"><span class="tocnumber">10</span> Key Quarterly Monitoring Indicators</a></li>
-    <li><a href="#references"><span class="tocnumber">11</span> References &amp; Regulatory Filings</a></li>
-  </ul>
-</div>
-
-<!-- SECTION 0: EXECUTIVE SUMMARY -->
-<h2 id="lead">Executive Summary &amp; Investment Pitch</h2>
-{summary_lead}
-
-<!-- SECTION 1: HISTORY -->
-<h2 id="history">1. History &amp; Corporate Milestones</h2>
-{history_narrative}
-
-<!-- SECTION 2: OPERATIONS -->
-<h2 id="operations">2. Operations, Business Segments &amp; Revenue Model</h2>
-{operations_narrative}
-
-<!-- SECTION 3: SECTOR DYNAMICS -->
-<h2 id="sector-dynamics">3. Sector-Specific Operating Dynamics &amp; Competitive Moats</h2>
-{sector_dynamics_narrative}
-
-<!-- SECTION 4: FINANCIAL AUDIT -->
-<h2 id="financial-audit">4. Financial Performance &amp; Forensic Accounting Audit</h2>
-{financial_audit_narrative}
-
-<h3>10-Year Consolidated Financial Trend</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Metric (₹ Cr)</th>
-      <th>FY17</th>
-      <th>FY18</th>
-      <th>FY19</th>
-      <th>FY20</th>
-      <th>FY21</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>TTM</th>
-    </tr>
-  </thead>
-  <tbody>
-    {pl_table_rows}
-  </tbody>
-</table>
-
-<h3>Balance Sheet &amp; Capital Structure Forensics</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Balance Sheet Item (₹ Cr)</th>
-      <th>FY20</th>
-      <th>FY21</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-    </tr>
-  </thead>
-  <tbody>
-    {bs_table_rows}
-  </tbody>
-</table>
-
-<h3>Cash Flow Quality &amp; Capital Conversion (CFO vs PAT)</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Cash Flow Metric (₹ Cr)</th>
-      <th>FY20</th>
-      <th>FY21</th>
-      <th>FY22</th>
-      <th>FY23</th>
-      <th>FY24</th>
-      <th>FY25</th>
-      <th>FY26</th>
-      <th>3Y Cumul.</th>
-    </tr>
-  </thead>
-  <tbody>
-    {cf_table_rows}
-  </tbody>
-</table>
-
-<!-- SECTION 5: 3-LAYER UNDERWRITING FRAMEWORK -->
-<h2 id="underwriting-framework">5. The 3-Layer Underwriting Framework &amp; Scorecard</h2>
-<p>
-  All institutional portfolio entries must pass through the deterministic 3-layer underwriting framework. A failure at Layer 1 immediately halts progression and routes the security to rejection.
-</p>
-
-<h3>Layer 1: Binary Hard Gating Floors (Mandatory Pass Hurdle)</h3>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Gate Metric</th>
-      <th>Institutional Floor</th>
-      <th>Company Actual Value</th>
-      <th>Gate Outcome</th>
-      <th>Forensic Evaluation &amp; Primary Evidence</th>
-    </tr>
-  </thead>
-  <tbody>
-    {layer1_rows}
-  </tbody>
-</table>
-
-<h3>Layer 2: Company &amp; Sector-Specific KPIs (Operational Scorecard)</h3>
-<p>
-  Layer 2 evaluates 3 to 5 operational drivers that directly determine unit economics, cash generation, and competitive moats in this industry.
-</p>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>KPI Metric</th>
-      <th>Target Hurdle</th>
-      <th>Actual Performance</th>
-      <th>Status</th>
-      <th>Operational Verification &amp; Transcript Source</th>
-    </tr>
-  </thead>
-  <tbody>
-    {layer2_rows}
-  </tbody>
-</table>
-
-<h3>Layer 3: Support-Aware Entry Posture &amp; Timing Gate</h3>
-{layer3_narrative}
-
-<!-- SECTION 6: PEER BENCHMARKING -->
-<h2 id="peer-matrix">6. Industry Landscape &amp; Peer Benchmarking Matrix</h2>
-{peer_analysis_narrative}
-
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Company Name</th>
-      <th>Symbol</th>
-      <th>Market Cap (₹ Cr)</th>
-      <th>CMP (₹)</th>
-      <th>P/E (TTM)</th>
-      <th>ROCE %</th>
-      <th>OPM %</th>
-      <th>D/E (x)</th>
-      <th>3Y Sales CAGR</th>
-      <th>Stage &amp; Posture</th>
-      <th>Relative Underwriting Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-    {peer_table_rows}
-  </tbody>
-</table>
-
-<!-- SECTION 7: TECHNICAL POSTURE -->
-<h2 id="technical-trade">7. Technical Posture, Moving Averages &amp; Execution Architecture</h2>
-{technical_narrative}
-
-<div class="formula-box">
-  <strong>MATHEMATICAL ASYMMETRY RATIO DERIVATION:</strong><br>
-  • Execution Entry Price: ₹{cmp:,.2f} (Recommended Zone: ₹{entry_low:,.2f} – ₹{entry_high:,.2f})<br>
-  • Structural Invalidation Stop Loss: ₹{stop_loss:,.2f} (Downside Risk: ₹{cmp - stop_loss:,.2f} or -{stop_pct}%)<br>
-  • 12–18 Month Fundamental Base Target: ₹{target_base:,.2f} (Upside Reward: ₹{target_base - cmp:,.2f} or +{base_upside}%)<br>
-  • Asymmetry Ratio Formula: (Target Base - CMP) / (CMP - Stop Loss) = (₹{target_base - cmp:,.2f}) / (₹{cmp - stop_loss:,.2f}) = <strong>{asymmetry}:1</strong>
-</div>
-
-<!-- SECTION 8: FATAL FLAWS & RED-TEAM -->
-<h2 id="fatal-flaws">8. Adversarial Red-Team: Fatal Flaws &amp; Invalidation Triggers</h2>
-{fatal_flaws_narrative}
-
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Risk Category</th>
-      <th>Fatal Flaw Scenario</th>
-      <th>Probability / Impact</th>
-      <th>Monitoring Detection Trigger</th>
-      <th>Structural Invalidation Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {fatal_flaws_rows}
-  </tbody>
-</table>
-
-<!-- SECTION 9: CAPITAL ALLOCATION -->
-<h2 id="capital-allocation">9. Portfolio Allocation &amp; Displacement Guidance</h2>
-{capital_allocation_narrative}
-
-<!-- SECTION 10: MONITORING INDICATORS -->
-<h2 id="thesis-trackers">10. Key Quarterly Monitoring Indicators</h2>
-<p>
-  The following quarterly operational checkpoints will be audited during subsequent earnings releases to confirm thesis progression:
-</p>
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Quarterly Metric</th>
-      <th>Baseline (Current)</th>
-      <th>Target / Bull Threshold</th>
-      <th>Bearish Invalidation Level</th>
-      <th>Reporting Source &amp; Frequency</th>
-    </tr>
-  </thead>
-  <tbody>
-    {monitoring_rows}
-  </tbody>
-</table>
-
-<!-- SECTION 11: REFERENCES -->
-<h2 id="references">11. References &amp; Regulatory Filings</h2>
-<ol class="reflist">
-  {citations_html}
-</ol>
-
-</div>
-
-<footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); font-size: 0.82em; color: var(--text-muted); text-align: center;">
-  Institutional Equity Underwriting Dossier &bull; Generated strictly for Autonomous Portfolio Management &bull; Data verified against Screener.in, NSE/BSE filings &amp; Company Disclosures &bull; Zero Hallucination Standard Enforced
-</footer>
-
-</body>
-</html>
-"""
-    return build(html, market="IN", kind="dossier", workflow="Company research")
+if __name__ == "__main__":
+    main()

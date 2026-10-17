@@ -44,12 +44,20 @@ def _missing(m, *keys):
 
 
 def _support_distance_atr(m):
-    """ATR multiple above the nearest verified support anchor (SMA50 or 63d base low)."""
+    """ATR multiple above the nearest verified support anchor.
+    In a tight base (SMA50 within 2.5 ATR of the 63d base low), uses the base floor min(SMA50, base_low_63d).
+    After a multi-month advance where the 63d low is far below SMA50 (>2.5 ATR), uses the nearest support at or below close (SMA50 or 20d swing low)."""
     close, atr = m.get("close"), m.get("atr14")
-    anchors = [a for a in (m.get("sma50"), m.get("base_low_63d")) if a is not None]
+    s50, base63 = m.get("sma50"), m.get("base_low_63d")
+    anchors = [a for a in (s50, base63) if a is not None]
     if close is None or not atr or not anchors:
         return None
-    return round((close - min(anchors)) / atr, 2)
+    if s50 is not None and base63 is not None and (s50 - base63) > 2.5 * atr:
+        near = [a for a in (s50, m.get("swing_low_20d"), m.get("sma20")) if a is not None and a <= close]
+        anchor = max(near) if near else s50
+    else:
+        anchor = min(anchors)
+    return round((close - anchor) / atr, 2)
 
 
 def test_a(m, cfg):
@@ -140,15 +148,66 @@ def test_b(m, cfg):
             "conditional_entry": t.get("conditional_entry")}
 
 
-def gate(m, cfg):
-    a, b = test_a(m, cfg), test_b(m, cfg)
-    if a["pass"]:
-        verdict, note = "IN_MOMENTUM", None
-    elif b["pass"]:
-        verdict, note = "ENTERING_MOMENTUM", b["conditional_entry"]
+def test_c(m, cfg):
+    """Test C — turnaround / value inflection recovery: higher low above 63d floor, short-term trend/RS turning up, near support."""
+    t = cfg.get("test_c_turnaround_inflection", {
+        "higher_low_tolerance_pct": 1.0,
+        "support_atr_max": 1.8,
+        "min_rsi14": 35.0,
+        "conditional_entry": "turnaround / value inflection setup: floor holding above 63d low with short-term trend or relative strength turning up"
+    })
+    conds = {}
+    close, base63, swing20, atr = m.get("close"), m.get("base_low_63d"), m.get("swing_low_20d"), m.get("atr14")
+    s20, s50, rs28, rsi = m.get("sma20"), m.get("sma50"), m.get("rs_28d_pct"), m.get("rsi14")
+
+    if close is None or base63 is None or swing20 is None:
+        conds["C1_higher_low_floor"] = _cond(False, None, "missing_fields:close,base_low_63d,swing_low_20d")
     else:
-        verdict, note = "NO_MOMENTUM", "fails both tests — not allocated, however good its business"
-    return {"verdict": verdict, "test_a": a, "test_b": b, "note": note,
+        tol = 1.0 - (t.get("higher_low_tolerance_pct", 1.0) / 100.0)
+        ok = close > base63 * 1.01 and swing20 >= base63 * tol
+        conds["C1_higher_low_floor"] = _cond(ok, {"close": close, "swing_low_20d": swing20, "base_low_63d": base63})
+
+    if s20 is None and rs28 is None:
+        conds["C2_short_term_turn"] = _cond(False, None, "missing_fields:sma20,rs_28d_pct")
+    else:
+        above_s20 = (close is not None and s20 is not None and close >= s20)
+        rs_up = (rs28 is not None and rs28 > 0)
+        chg_2w_up = (m.get("chg_2w_pct") is not None and m.get("chg_2w_pct") > 0 and above_s20)
+        ok = bool(above_s20 and (rs_up or chg_2w_up))
+        conds["C2_short_term_turn"] = _cond(ok, {"close": close, "sma20": s20, "rs_28d_pct": rs28, "chg_2w_pct": m.get("chg_2w_pct")})
+
+    if close is None or not atr:
+        conds["C3_near_support"] = _cond(False, None, "missing_fields:close,atr14")
+    else:
+        anchors = [a for a in (s20, s50, swing20, base63) if a is not None and a <= close * 1.01]
+        if not anchors:
+            conds["C3_near_support"] = _cond(False, None, "no_support_below_close")
+        else:
+            dist = round((close - max(anchors)) / atr, 2)
+            conds["C3_near_support"] = _cond(dist <= t.get("support_atr_max", 1.8),
+                                             {"support_distance_atr": dist, "max_atr": t.get("support_atr_max", 1.8)})
+
+    if rsi is None:
+        conds["C4_momentum_stabilizing"] = _cond(False, None, "missing_fields:rsi14")
+    else:
+        ok = rsi >= t.get("min_rsi14", 35.0)
+        conds["C4_momentum_stabilizing"] = _cond(ok, {"rsi14": rsi, "min_rsi14": t.get("min_rsi14", 35.0)})
+
+    return {"pass": all(c["pass"] for c in conds.values()), "conditions": conds,
+            "conditional_entry": t.get("conditional_entry")}
+
+
+def gate(m, cfg):
+    a, b, c = test_a(m, cfg), test_b(m, cfg), test_c(m, cfg)
+    if a["pass"]:
+        verdict, sub, note = "IN_MOMENTUM", "STAGE2_LEADER", None
+    elif b["pass"]:
+        verdict, sub, note = "ENTERING_MOMENTUM", "BASE_PIVOT", b["conditional_entry"]
+    elif c["pass"]:
+        verdict, sub, note = "ENTERING_MOMENTUM", "TURNAROUND_INFLECTION", c["conditional_entry"]
+    else:
+        verdict, sub, note = "NO_MOMENTUM", "NONE", "fails momentum tests — not allocated at market; requires limit-order patience at support or turnaround confirmation"
+    return {"verdict": verdict, "sub_verdict": sub, "test_a": a, "test_b": b, "test_c": c, "note": note,
             "config_needs_calibration": bool(cfg.get("needs_calibration", False))}
 
 

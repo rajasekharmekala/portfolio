@@ -1,0 +1,21 @@
+{
+  "market": "US",
+  "migrated_from": "shortlist/US_Shortlist.xlsx",
+  "sheets": {
+    "Master_Shortlist": [],
+    "Holdings_Audit": [],
+    "Core_Alpha_Challengers": [],
+    "Tactical_Momentum": [],
+    "Leveraged_Satellite": [],
+    "Swap_Decision_Matrix": []
+  },
+  "normalization": {
+    "schema_version": 2,
+    "normalized_at": "2026-10-13",
+    "schemas": [
+      "scripts/schemas/shortlist_record.schema.json",
+      "scripts/schemas/swap_decision.schema.json"
+    ],
+    "notes": "Field names unified across markets (cmp, entry_zone_*, stop_loss, target_*, market_cap, strategy_bucket). Enums normalized: action_verdict, weinstein_stage, kpi_health, gate_status, strategy_bucket, cap_tier. Emoji removed. Non-numeric asymmetry converted to number or null. Dossier paths repointed to docs/blogs/. stale_as_of=true for as-of dates older than 30 days before the latest as-of date in this file, or unknown."
+  }
+}

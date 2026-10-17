@@ -1,7 +1,7 @@
 {
   "$comment": "SINGLE SOURCE OF TRUTH for all portfolio threshold numbers. The constitution (Portfolio Research System/00_Investment_Philosophy_and_Portfolio_Operating_Constitution.md) states these rules in prose; this file is the machine-readable twin. Skills must reference this file and must not restate numbers that differ from it. Change a number here and in the matching constitution paragraph — nowhere else.",
-  "schema_version": 1,
-  "updated": "2026-10-08",
+  "schema_version": 2,
+  "updated": "2026-10-16",
   "buckets": {
     "CORE_ALPHA": { "US": [35, 40], "IN": [30, 40] },
     "TACTICAL_MOMENTUM": { "US": [50, 65], "IN": [50, 65] },
@@ -18,6 +18,21 @@
   },
   "position_sizing": {
     "hard_cap_pct": 15,
+    "initial_cost_cap_pct": 10,
+    "runaway_winner_cap_pct": 22,
+    "let_winners_run_rule": "Never mechanically trim a Stage 2 winner with intact fundamentals and rising/stable estimates solely because RSI > 70 or weight crossed 15%; allow appreciated weight up to runaway_winner_cap_pct (22%) while trailing the stop to the rising 21-day EMA or 50-day SMA.",
+    "risk_unit_sizing": {
+      "formula": "weight_pct = min(tier_max_pct, risk_budget_bps / ((entry_price - stop_loss) / entry_price * 10000) * 100)",
+      "tier_risk_budget_bps": {
+        "TIER_1": 100,
+        "TIER_2": 75,
+        "TIER_3": 50,
+        "TIER_4": 35,
+        "TIER_0": 0
+      },
+      "max_portfolio_heat_pct": 12.0,
+      "note": "Size new entries by NAV risk-to-stop (bps of portfolio lost if stop is hit) capped by the tier notional range. Wider stops automatically receive smaller initial notional weights."
+    },
     "core_names": [5, 10],
     "total_names": [6, 12],
     "tier_table": {
@@ -28,23 +43,63 @@
       "TIER_0": { "min_pct": 0, "max_pct": 0 }
     }
   },
+  "underwriting_philosophy": {
+    "principle": "Almost any non-fraudulent, solvent business is ownable if the price is cheap enough (high valuation asymmetry / low Reverse-DCF implied growth) and the fundamental + technical trajectory is inflecting upward. Evaluate ALL 3 layers for every company; never skip Layer 2 or Layer 3.",
+    "hard_red_lines": {
+      "description": "True binary disqualifiers (solvency, governance, or structural breakdown). Failing a red line routes to AVOID / REJECTED, though Layers 2 and 3 are still documented.",
+      "US": [
+        "Net Debt / EBITDA >= 4.0x with interest coverage < 2.0x (distressed balance sheet)",
+        "Stage 4 breakdown (Close < falling SMA50 < falling SMA200) with no base formation",
+        "Severe governance / accounting fraud / going-concern warning"
+      ],
+      "IN": [
+        "Debt-to-Equity >= 1.20x (non-financial) or interest coverage < 2.0x",
+        "Promoter pledge >= 20% of promoter holding or rising pledge into a falling stock",
+        "3-Year Cumulative CFO / PAT < 0.40 without verified order-book/working-capital turnaround in latest 2 quarters",
+        "Stage 4 breakdown (Close < falling SMA50 < falling SMA200) with no base formation"
+      ]
+    },
+    "archetypes": {
+      "COMPOUNDER": {
+        "description": "High static quality + steady growth + reasonable valuation.",
+        "US_standards": "ROIC >= 12% (prefers >16%), FCF margin >= 12%, Net Debt/EBITDA < 3.0x, SBC < 5% (or < 10% if FCF-less-SBC margin >= 20% and share count is shrinking).",
+        "IN_standards": "ROCE >= 15% (prefers >18%), D/E < 0.70, 3Y CFO/PAT >= 0.70.",
+        "min_asymmetry": 3.0
+      },
+      "TURNAROUND_VALUE_INFLECTION": {
+        "description": "Trailing static metric misses standard compounder floor, BUT price is cheap and rate-of-change (trajectory) is turning up.",
+        "qualification_rule": "Qualifies when: (1) all hard_red_lines pass, (2) at least 2 trajectory signals are positive (QoQ/YoY margin expansion, improving cash conversion/working capital days, rising consensus EPS revisions, or debt reduction), (3) Reverse-DCF implied growth is below realistic 3Y forward growth or valuation is at a >25% discount to 3Y median multiple, and (4) reward-to-risk asymmetry clears the higher turnaround floor.",
+        "min_asymmetry": 3.5
+      },
+      "TACTICAL_BREAKOUT": {
+        "description": "Stage 2 momentum leader with earnings/revenue acceleration or major dated catalyst.",
+        "min_asymmetry": 3.5
+      }
+    }
+  },
   "asymmetry_floor": {
     "CORE_ALPHA": 3.0,
     "TACTICAL_MOMENTUM": 3.5,
+    "TURNAROUND_VALUE_INFLECTION": 3.5,
     "formula": "(target_base - cmp) / (cmp - stop_loss)"
   },
+  "reverse_dcf": {
+    "discount_rate_pct": { "US": 10.0, "IN": 12.0 },
+    "terminal_multiple_fcf": { "US": 18.0, "IN": 20.0 },
+    "projection_years": 10
+  },
   "support_distance_ladder": [
-    { "band": "FULL_SIZE", "atr_below": 0.5, "action": "full tier size" },
-    { "band": "STANDARD", "atr_below": 1.0, "action": "standard size" },
-    { "band": "LIMIT_ORDER_REDUCE", "atr_below": 1.2, "action": "limit order only, reduced size" },
-    { "band": "NO_BUY", "atr_below": null, "action": "no buy — wait for pullback, retest, or new base" }
+    { "band": "FULL_SIZE", "atr_below": 0.6, "action": "full risk-adjusted tier size" },
+    { "band": "STANDARD", "atr_below": 1.2, "action": "standard risk-adjusted size" },
+    { "band": "LIMIT_ORDER_REDUCE", "atr_below": 1.6, "action": "starter / limit order only, reduced size" },
+    { "band": "NO_BUY", "atr_below": null, "action": "no chase at market — place limit order in entry zone or wait for pullback/consolidation" }
   ],
   "stop_placement": {
     "CORE_ALPHA": "below min(swing low, 50/200-day MA) minus 1.0 x ATR(14)",
     "TACTICAL_MOMENTUM": "below min(swing low, 20/50-day MA) minus 0.5 x ATR(14)"
   },
   "momentum_gate": {
-    "note": "Every candidate for any bucket must pass Test A or Test B, computed in code (scripts/momentum_gate.py) from the frozen price snapshot. Failing both = no allocation, however good the business. Thresholds below are defaults and are marked needs_calibration until reviewed against live data.",
+    "note": "Computes Test A (in Stage 2 momentum now), Test B (entering momentum from a flat base), and Test C (turnaround / recovery inflection above a 63d floor) from the frozen price snapshot (scripts/momentum_gate.py). Nearest verified support is the highest structural support (SMA20, SMA50, 20d swing low, or 63d base low) at or below price.",
     "needs_calibration": true,
     "benchmark": { "US": "SPY", "IN": "^NSEI" },
     "atr_period": 14,
@@ -66,6 +121,12 @@
       "volume_dryup_ratio_max": 0.9,
       "volume_expand_ratio_min": 1.0,
       "conditional_entry": "allocated only on a confirmed breakout of the base pivot or a retest that holds; never before"
+    },
+    "test_c_turnaround_inflection": {
+      "higher_low_tolerance_pct": 1.0,
+      "support_atr_max": 1.8,
+      "min_rsi14": 35.0,
+      "conditional_entry": "turnaround / value inflection setup: floor holding above 63d low with short-term trend or relative strength turning up; starter or limit entry near support with strict stop below swing low"
     },
     "horizon_tags": { "SHORT": "3-12 months", "LONG": "3-5 years" }
   },

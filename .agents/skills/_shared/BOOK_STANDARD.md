@@ -22,11 +22,12 @@ for that company's business.
 | 0 | `primer` | Before you read | what is this company, what does this report conclude, and what would make the conclusion wrong? |
 | 1 | `ch-1` | What the company does | who pays it, for what, and how does it make money? |
 | 2 | `ch-2` | Why the business is strong or weak | what is the competitive position, and what is the evidence? |
-| 3 | `ch-3` | The numbers, in plain words | what do revenue, profit, cash and debt do over five years? |
-| 4 | `ch-4` | What the price is doing | does the stock pass the momentum test, and what would confirm or reject the idea? |
-| 5 | `ch-5` | What could happen next | what are the bull, base and bear cases, and what is the expected outcome? |
-| 6 | `ch-6` | Why these estimates might be wrong | which assumption is weakest, and when will we know? |
-| 7 | `ch-7` | What we would do, and when | what is the decision, and what changes it? |
+| 2B | `ch-2b` | Company specifics, operating KPIs, and management walk-the-talk | which 3–5 company-specific KPIs run this business (Layer 2), and did management deliver on what it promised 1–2 years ago? |
+| 3 | `ch-3` | The numbers, in plain words | what do revenue, profit, cash and debt do over five years, and how do static levels compare with trajectory (Layer 1)? |
+| 4 | `ch-4` | What the price is doing | does the stock pass the momentum/turnaround test, and what would confirm or reject the idea? |
+| 5 | `ch-5` | What could happen next | what growth rate is today's price already assuming (Reverse DCF), how are analyst estimates moving, what is our variant view, and what are the bull, base and bear cases? |
+| 6 | `ch-6` | Why these estimates might be wrong | which assumption is weakest, what is the red-team bear case, and when will we know? |
+| 7 | `ch-7` | What we would do, and when | what is the decision, the risk-unit position size, the let-winners-run rule, and the trigger that changes it? |
 | 8 | `notes` | Notes and sources | where does every number come from? |
 
 Rules per chapter:

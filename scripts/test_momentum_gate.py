@@ -196,6 +196,31 @@ class TestVerdict(unittest.TestCase):
     def test_needs_calibration_flag_propagates(self):
         self.assertTrue(mg.gate(base_a_pass(), CFG)["config_needs_calibration"])
 
+    def test_support_distance_uses_nearest_support_after_multi_month_advance(self):
+        m = base_a_pass()
+        m.update({"close": 229.13, "sma50": 225.03, "sma200": 199.71,
+                  "sma50_21d_ago": 196.92, "sma200_63d_ago": 198.0,
+                  "base_low_63d": 155.15, "swing_low_20d": 220.29, "atr14": 8.14})
+        a = mg.test_a(m, CFG)
+        self.assertEqual(a["conditions"]["A4_not_extended"]["measured"]["support_distance_atr"], 0.5)
+        self.assertTrue(a["conditions"]["A4_not_extended"]["pass"])
+
+    def test_turnaround_inflection_test_c(self):
+        m = {
+            "kind": "stock",
+            "close": 241.0, "sma20": 236.0, "sma50": 245.0, "sma200": 280.0,
+            "sma50_21d_ago": 252.0, "sma200_63d_ago": 295.0,
+            "atr14": 6.0, "base_low_63d": 210.0, "swing_low_20d": 228.0,
+            "rs_63d_pct": -8.0, "rs_28d_pct": 2.4, "chg_2w_pct": 3.5, "rsi14": 48.0,
+            "vol_dryup_ratio_63d": 0.95, "vol_mult_20d": 0.9,
+        }
+        g = mg.gate(m, CFG)
+        self.assertFalse(g["test_a"]["pass"])
+        self.assertFalse(g["test_b"]["pass"])
+        self.assertTrue(g["test_c"]["pass"])
+        self.assertEqual(g["verdict"], "ENTERING_MOMENTUM")
+        self.assertEqual(g["sub_verdict"], "TURNAROUND_INFLECTION")
+
 
 class TestKnownPriceSeries(unittest.TestCase):
     def test_steady_uptrend_is_extended(self):

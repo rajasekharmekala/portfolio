@@ -197,8 +197,11 @@ Capital allocation per security is determined by **Conviction Tiering**, **Suppo
 
 <!-- MARKET IN -->
 #### Deterministic Mathematical Formulas:
-1. **Capital Allocated ($₹$):**
+1. **Capital Allocated ($₹$ / $\$$) via Risk-Unit Sizing (Portfolio Heat):**
+   $$\text{Stop Distance}_i \% = \frac{\text{Target Entry Price}_i - \text{Stop Loss}_i}{\text{Target Entry Price}_i} \times 100$$
+   $$\text{Target Weight}_i \% = \min\!\left(\text{Tier Max Weight \%},\; \frac{\text{Tier Risk Budget bps} / 100}{\text{Stop Distance}_i \% / 100}\right)$$
    $$\text{Capital Allocated}_i = \text{Total Net Worth} \times \left( \frac{\text{Target Weight}_i \%}{100} \right)$$
+   (Risk budgets and caps live in `.agents/config/scoring.json` under `position_sizing.risk_unit_sizing`.)
 2. **Target Share Count:**
    $$\text{Target Shares}_i = \left\lfloor \frac{\text{Capital Allocated}_i}{\text{Target Entry Price}_i} \right\rfloor$$
 3. **Effective Capital Outlay ($₹$):**

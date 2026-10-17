@@ -14,6 +14,7 @@ The head is never written by the report writer. This script:
 """
 import argparse
 import html
+import json
 import os
 import re
 import sys
@@ -21,13 +22,121 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 from zoneinfo import ZoneInfo
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from report_links import body_sources, linkify, research_sources, symbol_universe  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHARED = os.path.join(ROOT, ".agents", "skills", "_shared")
+GLOSSARY_FILE = os.path.join(ROOT, ".agents", "config", "glossary.json")
+DEFINE_MARKERS = (" is ", " are ", " means ", " stands for ", " \u2014 ", " - ")
+PLAIN_GLOSS = {
+    "20-day moving average": "the 20-day average closing price",
+    "50-day moving average": "the 50-day average closing price",
+    "200-day moving average": "the 200-day average closing price",
+    "Stage 2": "the rising uptrend phase",
+    "Stage 4": "the falling downtrend phase",
+    "base": "a flat consolidation floor",
+    "pivot": "the breakout trigger level",
+    "breakout": "a move above resistance",
+    "retest": "a pullback that tests prior support",
+    "stop loss": "the exit price if the trade is wrong",
+    "limit order": "an order capped at a chosen price",
+    "entry zone": "the target buy price range",
+    "asymmetry": "upside reward relative to downside risk",
+    "reward-to-risk": "expected gain divided by stop-loss risk",
+    "gross margin": "the share of revenue left after direct costs",
+    "operating margin": "the share of revenue left after operating costs",
+    "net margin": "the share of revenue left as net profit",
+    "debt-to-equity": "total borrowings divided by shareholder equity",
+    "net debt": "total debt minus cash and liquid securities",
+    "price-to-earnings": "share price divided by earnings per share",
+    "free cash flow": "operating cash left after capital spending",
+    "cash flow from operations": "cash actually collected by core operations",
+    "guidance": "management's official forecast",
+    "measured move": "a target projected from the height of the base",
+    "book-to-bill": "new orders received divided by revenue billed",
+    "take rate": "the fee share kept by a platform",
+    "dilution": "the increase in share count that shrinks each share's slice",
+    "capital expenditure": "cash spent on long-term plant and equipment",
+    "buyback": "company repurchases of its own shares",
+    "working capital": "cash tied up in inventory and customer bills minus supplier credit",
+    "consensus estimate": "the average forecast of Wall Street or institutional analysts",
+}
+
+
+def _term_rx(term: str) -> re.Pattern:
+    return re.compile(r"(?<![A-Za-z0-9])" + re.escape(term) + r"(?![A-Za-z0-9])", re.IGNORECASE)
+
+
+def auto_glossary(document: BeautifulSoup) -> None:
+    """Ensure first prose occurrence of every glossary term is wrapped in <dfn> with its expansion/definition."""
+    if not os.path.exists(GLOSSARY_FILE):
+        return
+    with open(GLOSSARY_FILE, encoding="utf-8") as f:
+        glossary = json.load(f)
+    skip_tags = {"script", "style", "head", "title", "header", "footer", "nav",
+                 "aside", "select", "button", "h1", "h2", "h3", "h4", "h5", "h6",
+                 "dt", "th", "caption"}
+
+    def find_first(rx: re.Pattern):
+        for node in document.find_all(string=True):
+            ancestors = [p.name for p in node.parents if p and p.name]
+            if any(t in skip_tags for t in ancestors):
+                continue
+            if any("key-figures" in (p.get("class") or []) for p in node.parents if hasattr(p, "get")):
+                continue
+            m = rx.search(str(node))
+            if m:
+                in_dfn = node.parent.name == "dfn" or any(p.name == "dfn" for p in node.parent.parents)
+                para = node.parent.find_parent(["p", "li", "td", "dd"])
+                return node, m, in_dfn, para
+        return None, None, False, None
+
+    for entry in glossary.get("must_define", []):
+        term, exp = entry["term"], entry["expansion"]
+        rx = _term_rx(term)
+        node, m, in_dfn, para = find_first(rx)
+        if node is None or para is None:
+            continue
+        where = str(para.get_text(" ", strip=True))
+        need_exp = exp.lower() not in where.lower()
+        if in_dfn and not need_exp:
+            continue
+        if in_dfn and need_exp:
+            dfn_tag = node.parent if node.parent.name == "dfn" else node.parent.find_parent("dfn")
+            if dfn_tag is not None:
+                dfn_tag.insert_after(NavigableString(f" ({exp})"))
+            continue
+        text = str(node)
+        before, matched, after = text[:m.start()], text[m.start():m.end()], text[m.end():]
+        dfn_tag = document.new_tag("dfn")
+        dfn_tag.string = matched
+        tail = f" ({exp})" + after if need_exp else after
+        node.replace_with(NavigableString(before), dfn_tag, NavigableString(tail))
+
+    for term in glossary.get("plain", []):
+        rx = _term_rx(term)
+        node, m, in_dfn, para = find_first(rx)
+        if node is None or para is None:
+            continue
+        where = " " + str(para.get_text(" ", strip=True)).lower() + " "
+        has_marker = any(mk in where for mk in DEFINE_MARKERS)
+        if in_dfn and has_marker:
+            continue
+        gloss = PLAIN_GLOSS.get(term, "a key operating metric")
+        if in_dfn and not has_marker:
+            dfn_tag = node.parent if node.parent.name == "dfn" else node.parent.find_parent("dfn")
+            if dfn_tag is not None:
+                dfn_tag.insert_after(NavigableString(f" — {gloss} —"))
+            continue
+        text = str(node)
+        before, matched, after = text[:m.start()], text[m.start():m.end()], text[m.end():]
+        dfn_tag = document.new_tag("dfn")
+        dfn_tag.string = matched
+        tail = (f" — {gloss} —" + after) if not has_marker else after
+        node.replace_with(NavigableString(before), dfn_tag, NavigableString(tail))
 
 
 def palette_root() -> str:
@@ -106,6 +215,8 @@ def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional
             if block:
                 body += "\n" + block
     document = BeautifulSoup(body, "html.parser")
+    if not layout_only:
+        auto_glossary(document)
     heading = document.find("h1")
     title = heading.get_text(" ", strip=True) if heading else "Report"
     if heading is None:
