@@ -14,7 +14,7 @@ Use the **latest completed market session with a verified final benchmark close*
 
 ## 2. Run directory and preflight
 
-Follow `_COMMON.md`: create the run directory, check inputs, read `.env`.
+Follow `_COMMON.md`: start the run session first (`run_session.py start --workflow market_intelligence --market <MKT>`; refused if another market intelligence run for this market is live), work in its worktree, then create the run directory, check inputs, read `.env`.
 
 ## 3. Facts ledger
 

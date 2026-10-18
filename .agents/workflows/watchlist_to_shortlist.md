@@ -14,7 +14,7 @@ As in `market_intelligence.md` §1–2. Date technical facts and dossier as-of s
 
 ## 2. Batch
 
-Take the next batch of eligible names in watchlist order, up to the skill's batch size. If fewer names are eligible, process those and disclose the short batch in the summary report; never widen eligibility to fill it. Record the batch in `manifest.json`. Do not process a name twice in the same run. Select only from the records synced from `origin/main` (`_COMMON.md` Preflight step 4), so names another run has already completed are skipped. Record the synced commit hash in the batch entry of the manifest.
+Start the run session (`run_session.py start --workflow watchlist_to_shortlist --market <MKT>`), then claim the batch from inside the worktree: `.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size <skill batch size>`. It returns the next eligible names in watchlist order, read from freshly fetched `origin/main`, skipping names completed on origin and names claimed by any other live run, so two runs never work on the same company. Work on exactly the returned `symbols`; if `short_batch` is true, process those and disclose the short batch in the summary report; never widen eligibility to fill it. Record the batch, the claim output and `base_commit` in `manifest.json`. Do not process a name twice in the same run. Rerunning the command for the same run id returns the same names.
 
 ## 3. Ledger and research
 

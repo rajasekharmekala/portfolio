@@ -7,3 +7,5 @@ Use --market IN/US, --kind report/dossier, --workflow and --as-of. The actual ge
 Newly completed workflows must pass the modern-layout check in scripts/portal_publish.py in addition to all existing research-quality checks. Never bypass the check. Catalog rebuilds may still include historical reports unchanged. Use --layout-only solely for explicitly requested presentation updates to existing research; never call those new research or invent their original generation timestamp.
 
 Use .venv/bin/python for Python commands. Do not change unrelated user work, publish fresh research without its quality gates, or commit/push without user authorization.
+
+Workflow runs may overlap. Follow RUN_PROTOCOL §8: start every run with scripts/run_session.py (own git worktree plus claims), claim companies with scripts/run_claims.py, and reach main only through scripts/publish_run.py. Never edit, pull or merge in the shared checkout during a run, and never touch another run's files or worktree. A refused singleton run or a publish conflict is reported, never bypassed.

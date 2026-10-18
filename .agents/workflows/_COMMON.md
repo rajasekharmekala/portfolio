@@ -13,16 +13,24 @@ Every workflow takes a market (`IN` or `US`) and reads its parameters from `../c
 - `../config/reviewer.json`: the reviewer model, the red-team scope and the strict maximum of two rounds. Do not raise the cap or name a model in a workflow.
 - `../../scripts/review_packet.py`: builds the review packet (the mechanical review, in code) and checks reviewer output.
 
+## Run session (isolated worktree, claims) — do this before anything else
+
+Runs may overlap, so no run works in the shared checkout. RUN_PROTOCOL §8 is binding. Start the session from the main checkout:
+
+`.venv/bin/python scripts/run_session.py start --workflow <workflow> --market <MKT>`
+
+Workflow names: `market_intelligence`, `portfolio_audit`, `options_audit`, `displacement` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `watchlist_to_shortlist`, `reject_to_watchlist`, `company_report` (per-company; take names with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
+
 ## Run directory
 
-Create it first, as RUN_PROTOCOL §1 says. Every file this run creates lives there. The only things that leave the run are the final report, the updated JSON record files, the email, and the published copy in `docs/`.
+Create it as RUN_PROTOCOL §1 says. Every file this run creates lives there. The only things that leave the run are the final report, the updated JSON record files, the email, and the published copy in `docs/`.
 
 ## Preflight (every run)
 
 1. Resolve the **latest completed market session** under `../skills/_shared/RUN_PROTOCOL.md` §0. Do not default to the calendar date of the run. Check exchange holidays and close time, then confirm the benchmark's final daily bar; if today's session is incomplete or its final bar is not available, date the report to the most recent earlier completed session with a verified close. Record `run_date` and `session_date` separately when they differ.
 2. Check inputs: `.venv/bin/python scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"`. A missing or mis-shaped source stops the run. The manifest records the SHA-256 of every input.
 3. Read `.env` for the email settings: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `GMAIL_RECIPIENT`. The recipient comes from `.env`, not from this document.
-4. Sync before selecting anything. Run `git fetch origin`, then `git merge --ff-only origin/main` on `main`. Stop and report if the working tree holds unrelated changes or `main` cannot fast-forward. Read every JSON record file (watchlist, shortlist, holdings) only after this sync, and record the synced commit hash in the manifest. Eligibility and batch selection come from the synced files, so a name that origin already holds as `COMPLETED` is not eligible for a new batch.
+4. Sync is part of the run session: `run_session.py start` fetches origin and cuts the worktree from `origin/main`, so the worktree is already synced and unrelated changes in the main checkout never reach it. Never `merge`, `pull` or `checkout` in the main checkout. Read every JSON record file (watchlist, shortlist, holdings) from the worktree, and record `base_commit` in the manifest. Batch eligibility comes from freshly fetched `origin/main` through `run_claims.py batch`, so a name that origin already holds as `COMPLETED`, or that another live run has claimed, is not offered.
 
 ## The ledger
 
@@ -72,9 +80,9 @@ Every run that completes its research publishes its reports. A gate that the exi
 Only after the validator and reviewer process are complete, with every unmet gate recorded under **Gate exceptions** (`RESULT: PASS` plus reviewer APPROVE is preferred; `BEST_EFFORT_AFTER_REVIEW_LIMIT` and `PUBLISHED_WITH_GATE_EXCEPTIONS` are both acceptable final states):
 
 1. Save the final report under the published `docs/` output path and remove superseded reports for the same market/type. Continue publishing every report, even when email is skipped.
-2. Record completion and refresh the catalog with `.venv/bin/python scripts/build_dossier_portal.py --completed "<published HTML path>" --workflow "<stable workflow name>" --market "<IN or US>" --summary "<one-sentence decision overview>" --highlight "<key change or risk>" --repair-links`. Include updated dossiers as separate `--completed` arguments. Never mark failed runs completed.
-3. Verify published destinations and stage only this run's reports, deletions, public catalog JSON files and relevant workflow changes. Never stage unrelated work or private research records.
-4. Commit and push publication to the configured origin branch, without force-pushing or asking for per-run approval. If rejected, fetch/integrate safely and retry once. Record the commit and push result in the manifest. Do not email links when publication fails.
+2. Edit the reports, dossiers and record files inside the run's worktree only. Do not run `build_dossier_portal.py` and do not commit or push by hand: `publish_run.py` stamps completion and regenerates the catalog on top of the newest origin copy (the catalog files are never merged).
+3. Publish from the worktree: `.venv/bin/python scripts/publish_run.py --run-id "<run_id>" --market "<IN or US>" --message "<descriptive commit message>" --workflow "<stable workflow name>" --completed "<published HTML path>" [more paths] --summary "<one-sentence decision overview>" --highlight "<key change or risk>" --manifest "<RUN_DIR>/manifest.json"`. Include updated dossiers as separate `--completed` paths; never list a failed run's output. It commits only `docs/`, `data/`, `.agents/` and `scripts/` changes, replays them onto the newest `origin/main` (records merge symbol by symbol; the "Overriding earlier publications" rules decide a page both runs changed), validates the data, pushes as a fast-forward and releases the run's claims after the push. Exit 5 means refused (a conflict or a newer page on origin): nothing was pushed, so report it. Never force-push.
+4. Verify the published destinations on origin. Do not email links when publication fails. After successful delivery run `.venv/bin/python scripts/run_session.py finish --run-id "<run_id>"` from the main checkout to remove the worktree.
 5. After successful publication, apply the email policy below. All emails are short digests: one decision summary, up to five highlights, qualifying events when present, and an absolute GitHub Pages link to the full report. Never email the complete HTML report.
 6. Send with `.venv/bin/python scripts/send_email.py --html-file "<published HTML path>" --subject "<configured subject>" --report-type "<type>" --summary "<decision overview>" --highlight "<key change>"`, adding event flags only when verified. Repeat `--highlight`, `--shortlisted`, and `--displacement` as needed. Record sent/skipped/failed status and qualifying evidence in the manifest. An email failure must retain the run for retry; an intentional skip is successful delivery.
 
@@ -95,10 +103,10 @@ A later run may replace a published dossier, report or record written by an earl
 
 1. **Allowed override.** A run may overwrite an earlier output for the same symbol or report when its own `research-as-of` (ledger session date) is the same as or later than the earlier output's, and its `generated-at` time is later. The run may then overwrite the file in place and update the records in place.
 2. **Refused override.** Never overwrite an output whose `research-as-of` is later than this run's, or whose `generated-at` is later than this run's, even when the session dates match. Stop, report both commits and both dates, and leave the existing output alone.
-3. **Concurrent runs.** Before committing, run `git fetch origin` again. If `origin/main` has advanced, read the new commits that touched the same files. For each affected symbol apply rules 1 and 2. For an allowed override, rebase this run's publication onto `origin/main` and rebuild the record edits from the freshly synced JSON files; never copy an old record file over a newer one. Record the superseded commit hash in the manifest and in the commit message. For a refused override, stop before any push and keep the run directory.
+3. **Concurrent runs.** `publish_run.py` does this in code: it fetches `origin/main` again, and for every file both runs changed it applies rules 1 and 2 (HTML) or merges the record by symbol (JSON; the same field changed differently by both runs is a conflict). An allowed override records the superseded commit in the commit message and manifest. A refused override or conflict stops before any push, keeps the run's branch, worktree, claims and run directory, and is reported with both commits and dates.
 4. **Eligibility after an override.** A name whose newer output is already on origin is not re-selected for a new batch. Its next underwriting waits for a later round-robin cycle, as the workflow's selection rule states.
 5. **Push.** Always fast-forward. Never force-push. If the push is rejected, repeat step 3 once and then report the blocker.
 
 ## Cleanup
 
-When delivery is complete, delete the run directory: `rm -rf "<RUN_DIR>"`. On any failure, keep it and report its path. Do not delete any file in the repository as cleanup. The only repository changes a run makes are the deliverables listed above.
+When delivery is complete, delete the run directory: `rm -rf "<RUN_DIR>"`, and finish the run session (`run_session.py finish`). On any failure, keep both and report the run directory, the worktree path and the run id; a failed run's claims stay held until its TTL expires or you release them with `run_session.py finish --run-id <id> --keep-worktree`. Do not delete any file in the repository as cleanup. The only repository changes a run makes are the deliverables listed above.

@@ -100,6 +100,8 @@ Follow `_COMMON.md` delivery policy. Send no routine or failed-gate displacement
 
 ## Run
 
+Start a run session first (`_COMMON.md`, "Run session"): `run_session.py start --workflow displacement --market <MKT>`; it is refused while another displacement run for this market is live. Run and publish from its worktree.
+
 ```bash
 .venv/bin/python scripts/displacement.py \
   --input data/displacement/ORCL_vs_ADBE_2026-10-08.json \

@@ -10,6 +10,8 @@ Read `_COMMON.md` first.
 
 ## 1. Session date and run directory
 
+Start the run session first (`_COMMON.md`, "Run session"): `run_session.py start --workflow options_audit --market <MKT>`. It is refused while another options audit for this market is live; stop and report the holder. Work only in the printed worktree.
+
 As in `market_intelligence.md` §1–2. The options report uses the latest completed, data-verified exchange session date, even when that date precedes the run date.
 
 ## 2. Positions

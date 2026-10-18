@@ -14,7 +14,7 @@ As in `market_intelligence.md` §1–2. Date the review and its market facts to 
 
 ## 2. Batch
 
-Take the next batch of archived names in archive order. Record the batch in `manifest.json`.
+Start the run session (`run_session.py start --workflow reject_to_watchlist --market <MKT>`), then claim the batch from inside the worktree: `.venv/bin/python scripts/run_claims.py batch --workflow reject_to_watchlist --market <MKT> --run-id <run_id> --pool archive --size <skill batch size>`. It returns the next archived names in archive order that no other live run holds. Work on exactly those names, and record the batch, the claim output and `base_commit` in `manifest.json`.
 
 ## 3. Ledger and research
 
