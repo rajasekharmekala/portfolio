@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="report">
+<meta name="report-workflow" content="Watchlist underwriting">
+<meta name="research-as-of" content="2026-10-23">
+<meta name="generated-at" content="2026-10-23T15:30:34.120075-07:00">
+<title>US watchlist to shortlist: batch of four (ADBE, UNH, NVDA, META), as of the 2026-10-23 close</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">US / Watchlist underwriting</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>US watchlist to shortlist: batch of four (ADBE, UNH, NVDA, META), as of the 2026-10-23 close</h1><p class="report-generated">Generated Date: <time datetime="2026-10-23T15:30:34.120075-07:00">23 Oct 2026, 03:30 PM PDT</time></p><p class="report-as-of">Research as of 2026-10-23</p></header>
+<p class="status-line"><strong>Status:</strong> PUBLISHED_WITH_GATE_EXCEPTIONS and BEST_EFFORT_AFTER_REVIEW_LIMIT (Adobe and Meta). The gate exceptions are listed in the last chapter.</p>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>This batch underwrote the next four names in the US watchlist queue: Adobe, UnitedHealth, NVIDIA and Meta. Three of them, Adobe, UnitedHealth and NVIDIA, passed the financial and business gates but are not buyable at today's price, so each joins the shortlist as WAIT_FOR_SUPPORT with a limit-order zone. Meta failed the cash-flow test and moved to the archive. Each verdict changes if the price or an earnings figure named in its dossier moves, and none of the three shortlisted names is an order to buy today.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. The decisions at a glance</h2>
+<p>Each row in the table is one company, with its verdict under the repository's three-layer rules, and the price levels that matter. Layer 1 tests the financial floors and the archetype, Layer 2 scores 3 to 5 operating measures that run that business, and Layer 3 turns the chart into an entry rule. The reward-to-risk figure is the gain to the base target divided by the loss to the stop.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verdicts for the four names underwritten on the 2026-10-23 close</caption>
+<thead><tr><th>Company</th><th>Verdict</th><th>Gate and archetype</th><th>Close</th><th>Entry zone</th><th>Stop</th><th>Base target</th><th>Reward-to-risk</th></tr></thead>
+<tbody>
+<tr><td><a href="../blogs/US/ADBE_dossier.html">Adobe (ADBE)</a></td><td><span class="verdict verdict-watch">WAIT_FOR_SUPPORT</span></td><td>PASSED_CONDITIONAL, COMPOUNDER; Layer 2 PASS_WITH_WATCH (3.5 of 5.0)</td><td>$263.82</td><td>$236.00 to $245.00</td><td>$215.57</td><td>$304.00</td><td>0.83:1 at the close; 2.00:1 at $245.00</td></tr>
+<tr><td><a href="../blogs/US/UNH_dossier.html">UnitedHealth (UNH)</a></td><td><span class="verdict verdict-watch">WAIT_FOR_SUPPORT</span></td><td>PASSED_CONDITIONAL, TURNAROUND_VALUE_INFLECTION; Layer 2 PASS_WITH_WATCH (3.5 of 5.0)</td><td>$418.09</td><td>$362.60 to $376.28</td><td>$351.20</td><td>$451.00</td><td>0.49:1 at the close; 2.98:1 at $376.28 (1.07:1 if the multiple falls to 17.35x)</td></tr>
+<tr><td><a href="../blogs/US/NVDA_dossier.html">NVIDIA (NVDA)</a></td><td><span class="verdict verdict-watch">WAIT_FOR_SUPPORT</span></td><td>PASSED_CONDITIONAL, COMPOUNDER; Layer 2 PASS_WITH_WATCH (3.5 of 5.0)</td><td>$210.96</td><td>$204.00 to $210.18</td><td>$183.95</td><td>$286.38</td><td>2.79:1 at the close; 2.90:1 at $210.18</td></tr>
+<tr><td><a href="../blogs/US/META_dossier.html">Meta (META)</a></td><td><span class="verdict verdict-exit">REJECTED</span></td><td>FAIL at Layer 1, no archetype qualifies; Layer 2 PASS_WITH_WATCH (3.0 of 5.0)</td><td>$642.62</td><td>Reference only: $620.23 to $636.00</td><td>$607.19</td><td>$725.00</td><td>2.33:1 at the close; not actionable</td></tr>
+</tbody></table></div>
+<p>Three names clear the cash and balance-sheet floors on their business, yet only NVIDIA clears the 2.0:1 reward-to-risk floor at the current price, and it is held back by a chart that is not in an uptrend. Adobe and UnitedHealth need a lower price. Meta's problem is different: it is a strong business whose spending now exceeds its cash generation, so no price in the reference zone changes the Layer 1 result.</p>
+<h3>What each decision rests on</h3>
+<p><strong>Adobe.</strong> Return on invested capital is 40.1 percent, free cash flow margin is 40.8 percent and stock pay is 7.97 percent of revenue, just under the 8 percent limit. Net new annual recurring revenue is down 36 to 37 percent from a year earlier, which is the one failed operating measure. The market price already assumes the business shrinks (a reverse discounted-cash-flow reading of -3.9 percent a year), so the case needs recurring revenue to stabilise. The reviewer did not approve the dossier after two rounds, so treat it as the least settled of the four. The watchlist idea also listed Adobe as a holding, but the Schwab and Robinhood records show no Adobe shares, only one $350 call option expiring 2027-06-17, whose break-even of $370.70 sits above the $360 bull target.</p>
+<p><strong>UnitedHealth.</strong> The medical care ratio improved to 88.4 percent from 89.9 percent and the Optum margin to 5.6 percent from 3.6 percent, which qualifies it as a turnaround. Free cash flow margin of 5.08 percent misses the 12 percent compounder floor, so it cannot be treated as a compounder. At $418.09 the stock is 4.87 average true ranges above support, so the dossier sets a conditional fill rule: the target must be at least the entry price plus 2.5 times the distance from the entry to the $351.20 stop. If the share price multiple falls back to its historical 17.35 times, reward-to-risk at the top of the zone drops to 1.07:1, and the dossier says to skip that part of the zone.</p>
+<p><strong>NVIDIA.</strong> Data Center revenue is $89.0 billion, up 117 percent, at a 75.0 percent gross margin, and free cash flow margin is 41.9 percent. The risks are $279 billion of supply commitments, up to $108.5 billion of guarantees tied to customers, and the next earnings report, expected 2026-11-18 but not confirmed by the company. The price sits 0.13 average true ranges above its 20-day swing low, yet the momentum gate reads NO_MOMENTUM, so the dossier uses a limit order and requires the gate to be re-run at the actual fill.</p>
+<p><strong>Meta.</strong> Revenue grew 26 percent in the third quarter, but capital spending was 54 percent of revenue and free cash flow was negative $2.12 billion. Trailing free cash flow margin of 10.4 percent and stock pay of 11.2 percent of revenue both fail the compounder floors, and none of the turnaround signals the rules require could be verified. The decision is REJECTED, moved to the watchlist archive with a review date of 2027-01-21 or earlier if free cash flow turns positive.</p>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. What changed in the records</h2>
+<p>The watchlist and shortlist files were updated in place. Adobe, UnitedHealth and NVIDIA keep their rows in the active watchlist with status COMPLETED and are added to the shortlist as autowritten Core Alpha challengers. Meta moves from the active list to the archive. No existing shortlist entry was displaced, because the shortlist was empty before this run.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Record changes in this batch</caption>
+<thead><tr><th>Record</th><th>Before</th><th>After</th></tr></thead>
+<tbody>
+<tr><td>Watchlist, active</td><td>70 names, all RESEARCH_REQUIRED</td><td>69 names; 3 COMPLETED (ADBE, UNH, NVDA), 66 still RESEARCH_REQUIRED</td></tr>
+<tr><td>Watchlist, archive</td><td>56 names</td><td>57 names (META added)</td></tr>
+<tr><td>Shortlist, Master_Shortlist</td><td>0 names</td><td>3 names: ADBE, UNH, NVDA, all CORE_ALPHA and WAIT_FOR_SUPPORT</td></tr>
+<tr><td>Core Alpha autowritten slots</td><td>0 of 10 used</td><td>3 of 10 used</td></tr>
+</tbody></table></div>
+<p>The shortlist holds the three names as candidates with limit-order zones, not as positions. No displacement against a current holding was evaluated in this run, because the displacement test is a separate advisory workflow with its own inputs, so this report makes no claim that any of the three replaces a holding.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. How the reviewers judged the dossiers</h2>
+<p>Each dossier went through the independent reviewer gate: code traced the numbers, one reviewer judged the claims, and a red team tried to break the verdict. The gate allows two rounds at most, and a third was not run.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Reviewer and red team results by round</caption>
+<thead><tr><th>Dossier</th><th>Reviewer round 1</th><th>Reviewer round 2</th><th>Red team</th><th>Final status</th></tr></thead>
+<tbody>
+<tr><td>ADBE</td><td>REVISE (9 findings)</td><td>REVISE (2 findings, fixed afterwards without review)</td><td>Round 1: verdict should be stricter (changed to WAIT_FOR_SUPPORT); round 2: verdict holds</td><td>BEST_EFFORT_AFTER_REVIEW_LIMIT</td></tr>
+<tr><td>UNH</td><td>REVISE (8 findings)</td><td>APPROVE</td><td>Round 1: verdict should be stricter; round 2: verdict holds</td><td>Approved by reviewer</td></tr>
+<tr><td>NVDA</td><td>REVISE (9 findings)</td><td>APPROVE</td><td>Round 1: verdict should be stricter; round 2: verdict holds</td><td>Approved by reviewer</td></tr>
+<tr><td>META</td><td>REVISE (5 findings)</td><td>REVISE (1 finding, fixed afterwards without review)</td><td>Round 1: verdict holds (red team not rerun)</td><td>BEST_EFFORT_AFTER_REVIEW_LIMIT</td></tr>
+</tbody></table></div>
+<p>Round 1 forced real changes: Adobe's verdict moved from ACCUMULATE_ON_DIP to WAIT_FOR_SUPPORT because reward-to-risk at the close was 0.83:1, UnitedHealth's scenario inputs were recomputed from the filed cost sensitivity, and Meta's bull case was corrected to deduct the same penalty interest as the other cases. The fixes made after Adobe's and Meta's round 2 were narrow, each removing or sourcing a single claim, and were verified by the readability and citation checks rather than by a third review.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Status: PUBLISHED_WITH_GATE_EXCEPTIONS for all four dossiers and this report. Adobe and Meta also carry BEST_EFFORT_AFTER_REVIEW_LIMIT, because the reviewer's second and last round did not approve them. Each dossier repeats its own exceptions in a section before its sources.</p>
+<p>Stale source dates. Adobe, UnitedHealth and NVIDIA cite prior-period filings, earnings calls and rule announcements that are older than 60 days, and no newer version exists for the historical periods they describe. The citation checker was run with its stale-date allowance and printed an exception line for each record: Adobe 20, UnitedHealth 17 and NVIDIA 48. Meta reported on 2026-10-21 and needed none. Each is a prior-period fact, so the exceptions lower confidence only in how current those specific figures are, and they clear as each company files its next report.</p>
+<p>Estimate data. The data vendor's consensus and valuation feed returned an authorization error on the run date, so the session ledger holds no reverse discounted-cash-flow or consensus figures for these four names. The underwriting computed the reverse discounted-cash-flow growth rates from cited SEC filings with the repository's own solver at the 10 percent discount rate and 18 times terminal multiple in the scoring file. Consensus earnings and 90-day revisions were taken from fetchable public pages where they exist and shown as not available where they do not (for example the 90-day change for Adobe, the 30-day and 90-day changes for Meta, and the 30-day changes for UnitedHealth). This lowers confidence in the consensus readings. It would be cured by a working vendor feed on a later run.</p>
+<p>Structural validator. The repository's structural validator for reports accepts only the market-report and portfolio-audit kinds, so it cannot return a pass for a company dossier. The readability check, the citation check, the review packet's code checks and the Research Desk layout check were run instead, and all passed.</p>
+<p>Earnings dates. The next report dates for Adobe (2026-12-09), NVIDIA (2026-11-18) and Meta (about 2027-01-27) are estimates from third-party calendars, not company confirmations. UnitedHealth had not announced its date. Each dossier names the date as unconfirmed.</p>
+<p>Peer names not on the watchlist. The dossiers surfaced INTU and ADSK (from Adobe), CI (from UnitedHealth), AVGO (from NVIDIA) and PINS (from Meta). None was added to the watchlist in this run, because adding them would widen the underwritten queue without their own research.</p>
+<p>Email. Adobe, UnitedHealth and NVIDIA are newly shortlisted, which qualifies for one short digest after publication. No displacement alert applies.</p>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
