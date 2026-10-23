@@ -171,10 +171,10 @@ To eliminate incumbent holding bias, the audit is synthesized across 3 decoupled
 
 ### DETERMINISTIC DECISION RULES & ACTION LABELS:
 
-1. **Stop Methodology:**
-   - Core Alpha: $\text{Stop} = \min(\text{Recent Swing Low}, \text{50/200-DMA}) - 1.0 \times \text{ATR}(14)$.
-   - Tactical Momentum: $\text{Stop} = \min(\text{Recent Swing Low}, \text{20/50-DMA}) - 0.5 \times \text{ATR}(14)$.
-2. **Targets & Asymmetry:** Target must be mathematically anchored to Forward EPS $\times$ 3Y Median P/E OR Technical Base Measured-Move. Asymmetry Ratio must be $\ge 3.5:1$ Tactical, $\ge 3.0:1$ Core.
+1. **Stop Methodology (per `.agents/config/scoring.json` `stop_placement`):**
+   - Core Alpha: Nearest structural invalidation support — $\text{Stop} = \min(\text{20d Swing Low}, \text{50-DMA}) - 1.0 \times \text{ATR}(14)$ for Stage 2 uptrends, or $\text{63d Base Low} - 1.0 \times \text{ATR}(14)$ for Stage 1 / turnaround bases (do not mechanically use a distant 200-DMA in a Stage 2 advance).
+   - Tactical Momentum: $\text{Stop} = \min(\text{20d Swing Low}, \text{20/50-DMA}) - 0.5 \times \text{ATR}(14)$.
+2. **Targets & Asymmetry (per `.agents/config/scoring.json` `asymmetry_floor`):** Target must be mathematically anchored to 12–24M Forward EPS $\times$ 3Y Median P/E, DCF, or Technical Base Measured-Move. Asymmetry Ratio must be $\ge 2.5:1$ Tactical / Turnaround, $\ge 2.0:1$ Core (at CMP or at the planned limit-order Entry Zone).
 3. **Concentration, Risk-Unit Sizing & Letting Winners Run (per `.agents/config/scoring.json`):**
    - Initial entries are sized by **Risk-Unit Sizing (Portfolio Heat)**: `weight_pct = min(tier_max_pct, risk_budget_bps / stop_distance_pct)` with an initial cost-basis cap of `10.0%` and a standard single-stock cap of `15.0%` (`position_sizing.hard_cap_pct`). Total portfolio heat across open stops is capped at `12.0%`.
    - **The Let-Winners-Run Rule (`runaway_winner_cap_pct: 22%`):** Never mechanically trim a Stage 2 winner with intact fundamentals and stable/rising earnings revisions solely because RSI > 70 or its appreciated weight crossed `15.0%`. Allow appreciated weight up to `22.0%` while trailing the stop to the rising 21-day EMA or 50-day SMA.

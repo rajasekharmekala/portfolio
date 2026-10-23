@@ -111,7 +111,8 @@ class TestTestA(unittest.TestCase):
 
     def test_a4_boundary_exactly_max(self):
         m = base_a_pass()
-        m["close"] = 101.0 + 1.2 * 3.0  # exactly 1.2 ATR above anchor
+        max_atr = CFG["test_a_in_momentum_now"]["support_distance_atr_max"]
+        m["close"] = 101.0 + max_atr * 3.0  # exactly max_atr above anchor
         a = mg.test_a(m, CFG)
         self.assertTrue(a["conditions"]["A4_not_extended"]["pass"])
 
@@ -139,7 +140,8 @@ class TestTestB(unittest.TestCase):
 
     def test_b1_boundary_exactly_max_decline(self):
         m = base_b_pass()
-        m["sma50_21d_ago"] = 101.0 / 0.995  # exactly -0.5%
+        max_dec = CFG["test_b_entering_momentum"]["sma50_max_decline_pct"] / 100.0
+        m["sma50_21d_ago"] = 101.0 / (1.0 - max_dec)
         b = mg.test_b(m, CFG)
         self.assertTrue(b["conditions"]["B1_sma50_holding"]["pass"])
 
@@ -163,7 +165,7 @@ class TestTestB(unittest.TestCase):
 
     def test_b5_no_volume_expansion(self):
         m = base_b_pass()
-        m["vol_mult_20d"] = 0.95
+        m["vol_mult_20d"] = 0.90
         b = mg.test_b(m, CFG)
         self.assertFalse(b["conditions"]["B5_volume_expansion"]["pass"])
 
@@ -194,7 +196,7 @@ class TestVerdict(unittest.TestCase):
         self.assertIn("not allocated", g["note"])
 
     def test_needs_calibration_flag_propagates(self):
-        self.assertTrue(mg.gate(base_a_pass(), CFG)["config_needs_calibration"])
+        self.assertEqual(mg.gate(base_a_pass(), CFG)["config_needs_calibration"], bool(CFG.get("needs_calibration", False)))
 
     def test_support_distance_uses_nearest_support_after_multi_month_advance(self):
         m = base_a_pass()

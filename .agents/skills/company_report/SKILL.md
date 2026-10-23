@@ -108,11 +108,12 @@ The book is the presentation; the underwriting is the engine. **Every report eva
 - **Layer 1 (Chapter 3): Static Levels vs. Trajectory (Rate of Change) & Archetype Fit.**
   - Evaluate whether the company passes the solvency/governance `hard_red_lines` in `scoring.json`.
   - Classify and evaluate under one of the three archetypes in `scoring.json`:
-    1. `COMPOUNDER`: Passes standard high-ROIC/ROCE, cash conversion, and balance-sheet floors.
-    2. `TURNAROUND_VALUE_INFLECTION`: Misses a static compounder sub-gate (e.g., depressed trailing margin or SBC > 5%), **but** passes all `hard_red_lines`, shows at least 2 improving trajectory signals (QoQ/YoY margin expansion, improving cash conversion/working capital, rising consensus EPS revisions, or debt reduction), trades below realistic growth on Reverse DCF, and clears the `3.5:1` turnaround asymmetry floor.
-    3. `TACTICAL_BREAKOUT`: Stage 2 momentum leader with earnings/revenue acceleration and `>= 3.5:1` asymmetry.
+    1. `COMPOUNDER`: Passes standard high-ROIC/ROCE (or adjusted ex-goodwill/intangibles amortization), cash conversion, and balance-sheet floors (`asymmetry >= 2.0:1`).
+    2. `TURNAROUND_VALUE_INFLECTION`: Misses a static compounder sub-gate (e.g., depressed trailing margin or elevated SBC), **but** passes all `hard_red_lines`, shows at least 2 improving trajectory signals (QoQ/YoY margin expansion, improving cash conversion/working capital, rising consensus EPS revisions, or debt reduction), trades below realistic growth on Reverse DCF (or `>20%` below 3Y median multiple), and clears the `2.5:1` turnaround asymmetry floor (at CMP or at the limit-order Entry Zone).
+    3. `TACTICAL_BREAKOUT`: Stage 2 momentum leader or Stage 1 base breakout with earnings/revenue acceleration and `>= 2.5:1` asymmetry.
+  - **Technical Routing (`scoring.json` `technical_routing_rule`):** Only a Stage 4 breakdown (`Close < falling SMA50 < falling SMA200` with `Test C` failing) is a Layer 1 technical disqualifier (`REJECTED`). If a candidate qualifies on fundamentals, KPIs, and asymmetry (at CMP or Entry Zone) but is in a Stage 3 pullback / Stage 1 base above a rising/flat 200-DMA or extended in Stage 2 (`> 1.6 ATR` above support), set `gate_status = PASSED_CONDITIONAL` and route to `WAIT_FOR_SUPPORT` (do not reject).
 - **Layer 2 (Chapter 2B): 3–5 Company-Specific Operating KPIs & Management Walk-the-Talk.**
-  - Score 3–5 business-specific KPIs (`PASS | WATCH | FAIL`) and audit management's 1–2 year guidance/capital-allocation track record ("Did they walk the talk?").
+  - Score 3–5 business-specific KPIs (`PASS = 1.0 | WATCH = 0.5 | FAIL = 0.0`) per `layer2_kpi_rule` in `scoring.json` (qualifies as `PASS` or `PASS_WITH_WATCH` when weighted score `>= 3.0/5.0` or `>= 2.5/4.0` and at most 1 KPI is `FAIL`) and audit management's 1–2 year guidance/capital-allocation track record ("Did they walk the talk?").
 - **Layer 3 (Chapter 7): Support-Aware Entry Posture, Risk-Unit Sizing & Let-Winners-Run.**
   - Map distance from nearest verified support (`support_distance_atr`) onto `support_distance_ladder` in `scoring.json`.
   - Compute initial position size using **Risk-Unit Sizing (Portfolio Heat)** (`weight_pct = min(tier_max_pct, risk_budget_bps / stop_distance_pct)`), and apply the **Let-Winners-Run** rule (no mechanical trim at RSI > 70; appreciated winners may run up to `22%` while trailing stop to rising 21-EMA / 50-SMA).
@@ -120,22 +121,25 @@ The book is the presentation; the underwriting is the engine. **Every report eva
 <!-- MARKET IN -->
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 1: BINARY HARD GATING FLOORS (Pass / Fail)                            │
+│ LAYER 1: ARCHETYPE QUALIFICATION & RED-LINE GATES (per scoring.json)        │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Financial Health Floor:                                                  │
-│    - ROCE ≥ 15.0% (Core prefers > 18.0%)                                    │
-│    - Debt-to-Equity < 0.70 (Excluding financial institutions/NBFCs)         │
-│    - 3-Year Cumulative CFO / PAT ≥ 0.70 (Audited cash flow conversion)      │
-│ 2. Technical Posture Floor:                                                 │
-│    - Tactical: Weinstein Stage 2 Markup above rising 50-DMA and 200-DMA     │
-│    - Core: Stage 1 Base Breakout or Stage 2 Markup                          │
-│    - No Stage 4 Breakdown / No Death Cross on heavy distribution volume     │
-│ 3. Asymmetry Floor (per scoring.json asymmetry_floor):                      │
-│    - Tactical ≥ 3.5:1, Core ≥ 3.0:1                                         │
-│    - Formula: (Target - Entry) / (Entry - Stop)                             │
-│    - Target Anchoring: Forward EPS × 3Y Median P/E OR Base Measured-Move.   │
-│      Unanchored targets = REJECT                                            │
-│ DISPOSITION: If ANY gate fails → FAIL_[REASON] → REJECTED (no shortlist buy)│
+│ 1. Financial Health & Archetype Standards:                                  │
+│    - ROCE (or ex-goodwill / ROE for financials) ≥ 15.0% (Core prefers >18%) │
+│    - Debt-to-Equity < 0.70 (Hard red line: ≥ 1.20x or interest cover < 2x)  │
+│    - 3Y Cumulative CFO / PAT ≥ 0.70 (or ≥ 0.50 for Capital Goods / Defense /│
+│      Infra / Manufacturing growing ≥ 20% CAGR with D/E < 0.50 & ROCE ≥ 18%; │
+│      SEBI requires CF statements only semi-annually in H1/Sep and FY/Mar)   │
+│ 2. Technical Posture & Routing (`technical_routing_rule`):                  │
+│    - Stage 4 Breakdown (Close < falling SMA50 < falling SMA200, Test C fail)│
+│      → Hard Red Line FAIL (`REJECTED`).                                     │
+│    - Stage 2 Markup / Stage 1 Breakout (Test A / B / C pass) → PASS.        │
+│    - Stage 3 pullback or Stage 1 base above rising/flat 200-DMA, or Stage 2 │
+│      extended (> 1.6 ATR) → `PASSED_CONDITIONAL` → `WAIT_FOR_SUPPORT`.      │
+│ 3. Asymmetry Floor & Stop Placement (`scoring.json`):                       │
+│    - Core ≥ 2.0:1, Tactical / Turnaround ≥ 2.5:1 (at CMP or Entry Zone)     │
+│    - Stop: Nearest structural support (`min(swing_low_20d, SMA50) - 1 ATR`  │
+│      for Stage 2 Core, `- 0.5 ATR` Tactical; do NOT use a distant 200-DMA)  │
+│    - Target Anchoring: 12–24M Forward EPS × 3Y Median P/E or Measured-Move  │
 └─────────────────────────────────────────────────────────────────────────────┘
                                        ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -143,7 +147,8 @@ The book is the presentation; the underwriting is the engine. **Every report eva
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Pick the 3–5 metrics from BOOK_STANDARD.md section 3 that govern this exact │
 │ business model, and say why each was picked. Score each KPI:                │
-│ PASS | WATCH | FAIL (minimum 3/4 or 4/5 required)                           │
+│ PASS (1.0) | WATCH (0.5) | FAIL (0.0) — qualifies when weighted score       │
+│ ≥ 3.0/5.0 (or ≥ 2.5/4.0) and at most 1 KPI is FAIL (`PASS_WITH_WATCH`).     │
 └─────────────────────────────────────────────────────────────────────────────┘
                                        ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -151,33 +156,36 @@ The book is the presentation; the underwriting is the engine. **Every report eva
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Distance from nearest verified support anchor in ATR(14), mapped to the     │
 │ single support_distance_ladder in scoring.json:                             │
-│ • FULL_SIZE band                    → IMMEDIATE BUY / ACCUMULATE            │
-│ • STANDARD band                     → ACCUMULATE ON DIP                     │
-│ • NO_BUY band, or RSI > 70          → WAIT FOR SUPPORT (do not chase)       │
-│ • SUPPORT_BROKEN                    → REJECTED / BROKEN STRUCTURE           │
+│ • FULL_SIZE band (≤ 0.6 ATR)        → IMMEDIATE BUY / ACCUMULATE            │
+│ • STANDARD / LIMIT_ORDER (≤ 1.6)    → ACCUMULATE ON DIP                     │
+│ • NO_BUY band (> 1.6), or Pullback  → WAIT FOR SUPPORT (limit order / watch)│
+│ • SUPPORT_BROKEN (Stage 4)          → REJECTED / BROKEN STRUCTURE           │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 <!-- /MARKET -->
 <!-- MARKET US -->
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 1: BINARY HARD GATING FLOORS (Pass / Fail)                            │
+│ LAYER 1: ARCHETYPE QUALIFICATION & RED-LINE GATES (per scoring.json)        │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Financial Health Floor:                                                  │
-│    - ROIC ≥ 12.0% (Core prefers > 16.0%)                                    │
-│    - Free Cash Flow (FCF) Margin ≥ 12.0%                                    │
-│    - Net Debt-to-EBITDA < 3.0x (Excluding financial institutions/banks)     │
-│    - Stock-Based Compensation (SBC) Dilution < 5.0% of Annual Revenue       │
-│ 2. Technical Posture Floor:                                                 │
-│    - Tactical: Weinstein Stage 2 Markup above rising 50-DMA and 200-DMA     │
-│    - Core: Stage 1 Base Breakout or Stage 2 Markup                          │
-│    - No Stage 4 Breakdown / No Death Cross on heavy distribution volume     │
-│ 3. Asymmetry Floor (per scoring.json asymmetry_floor):                      │
-│    - Tactical ≥ 3.5:1, Core ≥ 3.0:1                                         │
-│    - Formula: (Target - Entry) / (Entry - Stop)                             │
-│    - Mandatory Target Anchoring: Forward EPS × 3Y Median P/E, DCF, or Base  │
-│      Measured-Move. Unverified → FAIL_ASYMMETRY.                            │
-│ DISPOSITION: If ANY gate fails → FAIL_[REASON] → REJECTED (no shortlist buy)│
+│ 1. Financial Health & Archetype Standards:                                  │
+│    - ROIC (GAAP, or ex-M&A intangibles amortization, or ROTCE) ≥ 12.0%      │
+│    - Free Cash Flow (FCF) Margin ≥ 12.0% (N/A for banks/insurers)           │
+│    - Net Debt-to-EBITDA < 3.0x (Hard red line: ≥ 4.0x with cover < 2.0x)    │
+│    - SBC < 8.0% of Revenue (or < 15.0% if Owner FCF margin [FCF - SBC]      │
+│      ≥ 10.0% and diluted share count growth ≤ 3.0% YoY)                     │
+│ 2. Technical Posture & Routing (`technical_routing_rule`):                  │
+│    - Stage 4 Breakdown (Close < falling SMA50 < falling SMA200, Test C fail)│
+│      → Hard Red Line FAIL (`REJECTED`).                                     │
+│    - Stage 2 Markup / Stage 1 Breakout (Test A / B / C pass) → PASS.        │
+│    - Stage 3 pullback or Stage 1 base above rising/flat 200-DMA, or Stage 2 │
+│      extended (> 1.6 ATR) → `PASSED_CONDITIONAL` → `WAIT_FOR_SUPPORT`.      │
+│ 3. Asymmetry Floor & Stop Placement (`scoring.json`):                       │
+│    - Core ≥ 2.0:1, Tactical / Turnaround ≥ 2.5:1 (at CMP or Entry Zone)     │
+│    - Stop: Nearest structural support (`min(swing_low_20d, SMA50) - 1 ATR`  │
+│      for Stage 2 Core, `- 0.5 ATR` Tactical; do NOT use a distant 200-DMA)  │
+│    - Mandatory Target Anchoring: 12–24M Forward EPS × 3Y Median P/E, DCF,   │
+│      or Base Measured-Move. Unverified → FAIL_ASYMMETRY.                    │
 └─────────────────────────────────────────────────────────────────────────────┘
                                        ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -190,7 +198,8 @@ The book is the presentation; the underwriting is the engine. **Every report eva
 │ - Consumer Tech / Platforms: Take Rate, GMV Growth, Active Users            │
 │ - Healthcare / Biotech / MedTech: Pipeline Phase III, Regulatory Clearance  │
 │ - Industrials / Aerospace / Defense: Firm Backlog / TTM Sales, Book-to-Bill │
-│ Score each KPI: PASS | WATCH | FAIL (minimum 3/4 or 4/5 required)           │
+│ Score each KPI: PASS (1.0) | WATCH (0.5) | FAIL (0.0) — qualifies when      │
+│ weighted score ≥ 3.0/5.0 (or ≥ 2.5/4.0) and at most 1 KPI is FAIL.          │
 └─────────────────────────────────────────────────────────────────────────────┘
                                        ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐

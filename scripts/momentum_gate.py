@@ -199,12 +199,19 @@ def test_c(m, cfg):
 
 def gate(m, cfg):
     a, b, c = test_a(m, cfg), test_b(m, cfg), test_c(m, cfg)
+    ca = a["conditions"]
     if a["pass"]:
         verdict, sub, note = "IN_MOMENTUM", "STAGE2_LEADER", None
     elif b["pass"]:
         verdict, sub, note = "ENTERING_MOMENTUM", "BASE_PIVOT", b["conditional_entry"]
     elif c["pass"]:
         verdict, sub, note = "ENTERING_MOMENTUM", "TURNAROUND_INFLECTION", c["conditional_entry"]
+    elif ca.get("A1_structure", {}).get("pass") and ca.get("A2_sma200_not_falling", {}).get("pass"):
+        verdict, sub = "NO_MOMENTUM", "STAGE2_EXTENDED"
+        note = "Stage 2 uptrend intact (A1-A2 pass) but extended above support or lagging 63d RS — not allocated at market; route to WAIT_FOR_SUPPORT with limit order in the entry zone (do NOT reject at Layer 1)"
+    elif m.get("close") is not None and m.get("sma200") is not None and m["close"] >= m["sma200"] and ca.get("A2_sma200_not_falling", {}).get("pass"):
+        verdict, sub = "NO_MOMENTUM", "PULLBACK_ABOVE_SMA200"
+        note = "Consolidation / pullback above rising or flat 200-day average — not allocated at market; if fundamentals, KPIs, and entry-zone asymmetry pass, route to WAIT_FOR_SUPPORT (do NOT reject as Stage 4)"
     else:
         verdict, sub, note = "NO_MOMENTUM", "NONE", "fails momentum tests — not allocated at market; requires limit-order patience at support or turnaround confirmation"
     return {"verdict": verdict, "sub_verdict": sub, "test_a": a, "test_b": b, "test_c": c, "note": note,

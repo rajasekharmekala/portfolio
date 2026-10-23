@@ -168,7 +168,7 @@ To eliminate directional bias and context exhaustion, the newsletter is synthesi
 #### 2. Specialist 2: `us_bull_momentum_desk` (Long Stage 2 Breakout Screener)
 - **Focus:** Long momentum universe (Exactly 30 Verified Setups: 10 Mega/Large-Cap >$50B, 10 Mid-Cap $10B–$50B, 10 Small/Growth $1B–$10B).
 <!-- /MARKET -->
-- **Hurdles:** Weinstein Stage 2 markup, Price > 50-DMA > 200-DMA, volume expansion ≥ 1.5x 20-DMA volume, 14-day RSI 55–72, reward/risk asymmetry ≥ 3.5:1.
+- **Hurdles:** Weinstein Stage 2 markup, Price > 50-DMA > 200-DMA, volume expansion ≥ 1.5x 20-DMA volume, 14-day RSI 55–72, reward/risk asymmetry ≥ 2.5:1 (per `scoring.json` `asymmetry_floor.TACTICAL_MOMENTUM`).
 
 <!-- MARKET IN -->
 #### 3. Specialist 3: `bear_distribution_desk` (Short & Distribution Risk Screener)
@@ -194,7 +194,7 @@ To eliminate directional bias and context exhaustion, the newsletter is synthesi
 <!-- MARKET US -->
 #### 5. Master Editor & Watchlist Gatekeeper (`tactical_playbook_and_ingestion`)
 <!-- /MARKET -->
-- **Tactical Playbook (Section 6):** Selects the **Top 3 Standout Setups of the Day** (Asymmetry $\ge 3.5:1$) with exact entry bands, stops, targets, and regime-aligned portfolio allocation stance.
+- **Tactical Playbook (Section 6):** Selects the **Top 3 Standout Setups of the Day** (Asymmetry $\ge 2.5:1$ per `scoring.json`) with exact entry bands, stops, targets, and regime-aligned portfolio allocation stance.
 <!-- MARKET IN -->
 - **Watchlist Ingestion (Section 7):** Ingests the standout ideas into `data/watchlist/IN.json`.
 <!-- /MARKET -->
@@ -844,9 +844,9 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <div class="callout-box">
   <strong>Top 3 Tactical Setups of the Day:</strong>
   <ul>
-    <li><strong>Setup 1:</strong> Exact entry band, stop loss, base target, asymmetry ratio ($R:R \ge 3.5:1$).</li>
-    <li><strong>Setup 2:</strong> Exact entry band, stop loss, base target, asymmetry ratio ($R:R \ge 3.5:1$).</li>
-    <li><strong>Setup 3:</strong> Exact entry band, stop loss, base target, asymmetry ratio ($R:R \ge 3.5:1$).</li>
+    <li><strong>Setup 1:</strong> Exact entry band, stop loss, base target, asymmetry ratio ($R:R \ge 2.5:1$).</li>
+    <li><strong>Setup 2:</strong> Exact entry band, stop loss, base target, asymmetry ratio ($R:R \ge 2.5:1$).</li>
+    <li><strong>Setup 3:</strong> Exact entry band, stop loss, base target, asymmetry ratio ($R:R \ge 2.5:1$).</li>
   </ul>
 </div>
 <!-- MARKET IN -->

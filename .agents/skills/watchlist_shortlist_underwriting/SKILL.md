@@ -226,46 +226,52 @@ Every candidate must be processed through the following 3 layers sequentially:
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 1: BINARY HARD GATING FLOORS (Must Pass 100% of Gates)                │
+│ LAYER 1: ARCHETYPE QUALIFICATION & RED-LINE GATES (per scoring.json)        │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Financial Health Floor:                                                  │
+│ 1. Financial Health & Archetype Standards (`.agents/config/scoring.json`):  │
 <!-- MARKET IN -->
-│    - ROCE ≥ 15.0% (Core prefers >18.0%)                                     │
-│    - Debt-to-Equity < 0.70 (Excluding financial institutions/NBFCs)         │
-│    - 3-Year Cumulative CFO / PAT ≥ 0.70 (Earnings backed by real cash flows)│
+│    - ROCE (or ex-goodwill / ROE for financials) ≥ 15.0% (Core prefers >18%) │
+│    - Debt-to-Equity < 0.70 (Hard red line: ≥ 1.20x or interest cover < 2x)  │
+│    - 3Y Cumulative CFO / PAT ≥ 0.70 (or ≥ 0.50 for Capital Goods / Defense /│
+│      Infra / Manufacturing growing ≥ 20% CAGR with D/E < 0.50 & ROCE ≥ 18%; │
+│      Hard red line < 0.25 or < 0.40 without turnaround evidence; note SEBI  │
+│      requires CF statements only semi-annually in H1/Sep and FY/Mar).       │
 <!-- /MARKET -->
 <!-- MARKET US -->
-│    - ROIC ≥ 12.0% (Core prefers >16.0%)                                     │
-│    - Free Cash Flow Margin ≥ 12.0% (Core prefers >18.0%)                    │
-│    - Net Debt / EBITDA < 3.0x (Excluding financial institutions)            │
-│    - Stock-Based Compensation (SBC) Dilution < 5.0% of Annual Revenue       │
+│    - ROIC (GAAP, or ex-M&A intangibles amortization, or ROTCE) ≥ 12.0%      │
+│    - Free Cash Flow Margin ≥ 12.0% (N/A for banks/insurers)                 │
+│    - Net Debt / EBITDA < 3.0x (Hard red line: ≥ 4.0x with cover < 2.0x)     │
+│    - SBC < 8.0% of Revenue (or < 15.0% if Owner FCF margin [FCF - SBC]      │
+│      ≥ 10.0% and diluted share count growth ≤ 3.0% YoY; `< 15%` permitted   │
+│      for `TACTICAL_BREAKOUT` with positive FCF-less-SBC)                    │
 <!-- /MARKET -->
-│ 2. Technical Posture Floor:                                                 │
-│    - Tactical: Weinstein Stage 2 Markup above rising 50-DMA and 200-DMA     │
-│    - Core: Stage 1 Base Breakout or Stage 2 Markup                          │
-│    - No Stage 4 Breakdown / No Death Cross on heavy volume                  │
+│ 2. Technical Posture & Selection vs. Timing Routing (`scoring.json`):       │
+│    - Hard Red Line: Stage 4 breakdown (Close < falling SMA50 < falling      │
+│      SMA200 with Test C failing) → REJECTED.                                │
+│    - Stage 2 Markup or Stage 1 Base Breakout (Test A / B / C pass) → PASS.  │
+│    - Stage 3 pullback or Stage 1 consolidation above rising/flat 200-DMA,   │
+│      or Stage 2 extended (> 1.6 ATR above support) → `PASSED_CONDITIONAL`   │
+│      (route to `WAIT_FOR_SUPPORT` / limit-order entry zone; DO NOT reject). │
 <!-- MARKET IN -->
-│ 3. Asymmetry Floor & Mathematical Target Anchoring:                         │
+│ 3. Asymmetry Floor & Mathematical Target Anchoring (`scoring.json`):        │
 <!-- /MARKET -->
 <!-- MARKET US -->
-│ 3. Asymmetry Floor & Target Anchoring:                                      │
+│ 3. Asymmetry Floor & Target Anchoring (`scoring.json`):                     │
 <!-- /MARKET -->
-│    - Floors per `asymmetry_floor` in `.agents/config/scoring.json`           │
-│      (TACTICAL_MOMENTUM / CORE_ALPHA entries).                               │
-│    - Mandatory Target Anchoring: Must cite Forward EPS × 3Y Median P/E OR   │
-<!-- MARKET IN -->
-│      Technical Base Measured-Move. Arbitrary inflated targets strictly      │
-│      forbidden. If target unverified, Gate Status = FAIL_ASYMMETRY.          │
-<!-- /MARKET -->
-<!-- MARKET US -->
-│      Discounted Cash Flow (DCF) or Base Measured-Move. Arbitrary targets    │
-│      strictly forbidden. If unverified, Gate Status = FAIL_ASYMMETRY.       │
-<!-- /MARKET -->
+│    - Floors: `CORE_ALPHA >= 2.0:1`, `TACTICAL_MOMENTUM >= 2.5:1`,           │
+│      `TURNAROUND_VALUE_INFLECTION >= 2.5:1` (measured at CMP for immediate  │
+│      entries, or at `entry_zone_high` for limit-order / `WAIT_FOR_SUPPORT`).│
+│    - Stop Placement: Nearest structural invalidation support —              │
+│      `min(swing_low_20d, SMA50) - 1.0 ATR` for Stage 2 Core (`- 0.5 ATR`    │
+│      for Tactical), or `base_low_63d - 1.0 ATR` for Stage 1 / turnaround    │
+│      bases. Do NOT mechanically use a distant 200-DMA in a Stage 2 advance. │
+│    - Target Anchoring: Must cite 12–24M Forward EPS (FY27E/FY28E) × 3Y      │
+│      Median P/E, DCF, EV/EBITDA, P/B, or Technical Base Measured-Move.      │
 │                                                                             │
 │ DISPOSITION: Evaluate ALL 3 layers for every candidate.                     │
-│ • Qualifies under `COMPOUNDER`, `TURNAROUND_VALUE_INFLECTION` (if trajectory│
-│   is improving, `hard_red_lines` pass, and valuation asymmetry ≥ 3.5:1), or │
-│   `TACTICAL_BREAKOUT` per `.agents/config/scoring.json`.                    │
+│ • Qualifies under `COMPOUNDER` (≥ 2.0:1), `TURNAROUND_VALUE_INFLECTION` (if │
+│   trajectory is improving, `hard_red_lines` pass, and asymmetry ≥ 2.5:1), or│
+│   `TACTICAL_BREAKOUT` (≥ 2.5:1) per `.agents/config/scoring.json`.          │
 │ • If `hard_red_lines` fail or trajectory + valuation both fail →            │
 │   Action Verdict = REJECTED (still complete Layer 2, Layer 3, and all       │
 │   8 book chapters in full so the reader understands the business and what   │
@@ -291,8 +297,10 @@ Every candidate must be processed through the following 3 layers sequentially:
 │   Commercialization, Gross Margin Stability.                                │
 │ • Consumer / Retail: Same-Store-Sales Growth (SSSG), Store Unit Economics.  │
 │                                                                             │
-│ Score each KPI: PASS (Healthy) | WATCH (Moderate Risk) | FAIL      │
-│ DISPOSITION: Minimum 3/4 or 4/5 PASS required to qualify.                 │
+│ Score each KPI: PASS (1.0 pt) | WATCH (0.5 pt) | FAIL (0.0 pt)              │
+│ DISPOSITION (`scoring.json` `layer2_kpi_rule`): Qualifies (`PASS` or        │
+│ `PASS_WITH_WATCH`) when weighted score ≥ 3.0/5.0 (or ≥ 2.5/4.0) AND at most │
+│ 1 KPI is `FAIL` (e.g., 3 PASS + 2 WATCH + 0 FAIL = 4.0/5.0 QUALIFIES).      │
 <!-- /MARKET -->
 <!-- MARKET US -->
 │ Evaluate candidate against 3–5 company-specific operational metrics:        │
@@ -300,7 +308,10 @@ Every candidate must be processed through the following 3 layers sequentially:
 │ • Semiconductors: Gross Margin (>50%), Fab Capacity, Design Win Pipeline    │
 │ • AI/Compute: GPU Cluster Utilization, Power Availability, Backlog ($B)     │
 │ • E-Commerce: Take Rate, Active Buyers, Logistics Unit Economics            │
-│ Score: PASS (All Healthy) | WATCH (1 Amber) | FAIL (≥2 Red)        │
+│ Score each KPI: PASS (1.0 pt) | WATCH (0.5 pt) | FAIL (0.0 pt)              │
+│ DISPOSITION (`scoring.json` `layer2_kpi_rule`): Qualifies (`PASS` or        │
+│ `PASS_WITH_WATCH`) when weighted score ≥ 3.0/5.0 (or ≥ 2.5/4.0) AND at most │
+│ 1 KPI is `FAIL` (e.g., 3 PASS + 2 WATCH + 0 FAIL = 4.0/5.0 QUALIFIES).      │
 <!-- /MARKET -->
 └──────────────────────────────────────┬──────────────────────────────────────┘
 <!-- MARKET IN -->

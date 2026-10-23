@@ -84,7 +84,7 @@ Attractive or improving fundamentals
 
 Credible earnings growth
 
-A favorable valuation/risk-reward relationship (Core requires at least 3.0:1 target-vs-stop asymmetry at CMP, per `.agents/config/scoring.json`)
+A favorable valuation/risk-reward relationship (Core requires at least 2.0:1 target-vs-stop asymmetry at CMP or at the planned limit-order Entry Zone, per `.agents/config/scoring.json`)
 
 Identifiable catalysts or business developments capable of producing meaningful progress within roughly 6-12 months
 
@@ -214,15 +214,19 @@ Almost any non-fraudulent, solvent business is ownable if the price is cheap eno
 
 Candidates qualify under one of three archetypes defined in `.agents/config/scoring.json` (`underwriting_philosophy`):
 
-1. **Compounder (`CORE_ALPHA`):** High static return on capital (`ROIC >= 12%` US, `ROCE >= 15%` IN), strong cash conversion, and reasonable valuation (`asymmetry >= 3.0:1`).
-2. **Turnaround / Value Inflection (`TURNAROUND_VALUE_INFLECTION`):** A company that misses a static compounder floor (e.g., depressed trailing margin/ROIC or elevated SBC) still qualifies when: (a) all solvency/governance `hard_red_lines` pass, (b) at least two rate-of-change trajectory indicators are improving (QoQ/YoY margins, cash conversion/working capital days, consensus EPS revisions, or debt reduction), (c) Reverse-DCF implied 10-year growth at today's price is below realistic forward growth, and (d) reward-to-risk asymmetry clears `3.5:1`.
-3. **Tactical Breakout (`TACTICAL_MOMENTUM`):** Confirmed Stage 2 trend leader with earnings/revenue acceleration and `asymmetry >= 3.5:1`.
+1. **Compounder (`CORE_ALPHA`):** High static return on capital (`ROIC >= 12%` US, `ROCE >= 15%` IN; or adjusted ex-goodwill/intangibles amortization), strong cash conversion (`FCF margin >= 12%` US; `3Y CFO/PAT >= 0.70` IN, or `>= 0.50` for high-growth Capital Goods/Defense/Infra/Manufacturing with `D/E < 0.50` and `ROCE >= 18%`), disciplined dilution (`SBC < 8%` US, or `< 15%` when Owner FCF margin `>= 10%` and share dilution `<= 3%`), and reasonable valuation (`asymmetry >= 2.0:1`).
+2. **Turnaround / Value Inflection (`TURNAROUND_VALUE_INFLECTION`):** A company that misses a static compounder floor (e.g., depressed trailing margin/ROIC or elevated SBC) still qualifies when: (a) all solvency/governance `hard_red_lines` pass, (b) at least two rate-of-change trajectory indicators are improving (QoQ/YoY margins, cash conversion/working capital days, consensus EPS revisions, or debt reduction), (c) Reverse-DCF implied 10-year growth at today's price is below realistic forward growth (or valuation is at a `>20%` discount to 3Y median multiple), and (d) reward-to-risk asymmetry clears `2.5:1` (at CMP or at the planned limit-order Entry Zone).
+3. **Tactical Breakout (`TACTICAL_MOMENTUM`):** Confirmed Stage 2 trend leader or Stage 1 base breakout with earnings/revenue acceleration and `asymmetry >= 2.5:1`.
+
+**Layer 2 KPI Qualification (`PASS_WITH_WATCH`):** Company-specific KPIs (3–5 metrics) are scored `PASS` (`1.0`), `WATCH` (`0.5`), or `FAIL` (`0.0`). A candidate qualifies when its weighted score is `>= 3.0/5.0` (or `>= 2.5/4.0`) and at most 1 KPI is `FAIL` (e.g., `3 PASS + 2 WATCH + 0 FAIL = 4.0/5.0` qualifies as `PASS_WITH_WATCH`).
+
+**Technical Routing (Selection vs. Entry Timing):** Only a `Stage 4` breakdown (`Close < falling SMA50 < falling SMA200` with `Test C` failing) is a Layer 1 technical disqualifier (`REJECTED`). If a candidate passes `hard_red_lines`, qualifies under an archetype + Layer 2 KPIs, and clears the asymmetry floor at CMP or at its support Entry Zone, but is currently in a Stage 3 pullback / Stage 1 base above a rising/flat 200-DMA or extended in Stage 2 (`> 1.6 ATR` above support), it is routed to `WAIT_FOR_SUPPORT` (or limit-order `ACCUMULATE_ON_DIP`) rather than rejected.
 
 Technical momentum and inflection are measured from the frozen price snapshot (`scripts/momentum_gate.py`) across three tests in `.agents/config/scoring.json`:
 
-- **Test A — in momentum now (`STAGE2_LEADER`):** Confirmed Stage 2 uptrend (`price > SMA50 > SMA200`, rising 50-day, non-falling 200-day), positive 63-day relative strength vs. benchmark, and price within `1.2 ATR` of nearest verified support.
-- **Test B — entering momentum (`BASE_PIVOT`):** Tight 63-day base with flattening 50-day average, rising 28-day relative strength, volume dry-up in the base, and volume expansion on the turn.
-- **Test C — turnaround inflection (`TURNAROUND_INFLECTION`):** Price holding a higher-low floor above its 63-day low (`swing_low_20d >= base_low_63d`), reclaiming its 20-day moving average with positive 28-day relative strength or 2-week gain, within `1.8 ATR` of support, and RSI stabilizing (`>= 35`).
+- **Test A — in momentum now (`STAGE2_LEADER`):** Confirmed Stage 2 uptrend (`price > SMA50 > SMA200`, rising 50-day, non-falling 200-day), positive 63-day relative strength vs. benchmark, and price within `1.6 ATR` of nearest verified support.
+- **Test B — entering momentum (`BASE_PIVOT`):** Tight 63-day base with flattening 50-day average (`<= 0.8%` decline over 21d), rising 28-day relative strength, within `1.5 ATR` of base low, volume dry-up in the base (`<= 0.92x`), and volume expansion (`>= 0.95x`) on the turn.
+- **Test C — turnaround inflection (`TURNAROUND_INFLECTION`):** Price holding a higher-low floor above its 63-day low (`swing_low_20d >= base_low_63d` within `2.0%` tolerance), reclaiming its 20-day moving average with positive 28-day relative strength or 2-week gain, within `2.0 ATR` of support, and RSI stabilizing (`>= 32`).
 
 # 10. Capital Efficiency
 
@@ -261,18 +265,21 @@ anchor, distance from support, and data-as-of timestamp must be recorded.
 
 Operationally, entry sizing follows the single support-distance ladder in
 `.agents/config/scoring.json`, measured from the selected verified support
-anchor: within `0.5 × ATR(14)` → full tier size; `0.5–1.0 × ATR(14)` →
-standard size; `1.0–1.2 × ATR(14)` → limit order only, at reduced size;
-beyond `1.2 × ATR(14)` → no buy. Do not chase a sharp extension, convert a
-breakout into an automatic market buy, or catch a falling knife. If price is
-extended, wait for a controlled pullback, a valid breakout retest, or a new
-base; if support has failed, mark the setup `NO TRADE / WATCH`.
+anchor: within `0.6 × ATR(14)` (`FULL_SIZE`) → full risk-adjusted tier size;
+`0.6–1.2 × ATR(14)` (`STANDARD`) → standard risk-adjusted size;
+`1.2–1.6 × ATR(14)` (`LIMIT_ORDER_REDUCE`) → starter / limit order only, at
+reduced size; beyond `1.6 × ATR(14)` (`NO_BUY`) → no chase at market (place a
+limit order in the entry zone or wait for a pullback/consolidation). Do not
+chase a sharp extension, convert a breakout into an automatic market buy, or
+catch a falling knife. If price is extended, wait for a controlled pullback, a
+valid breakout retest, or a new base (`WAIT_FOR_SUPPORT`); if structural
+Stage 4 support has failed, mark the setup `REJECTED`.
 
-Asymmetry floor: a Core position must offer at least 3.0:1 and a Tactical
-position at least 3.5:1 target-vs-stop asymmetry at CMP (formula:
-`(target_base − cmp) / (cmp − stop_loss)`). Stops: Core below the lower of
-the swing low and the 50/200-day MA, minus 1.0 × ATR(14); Tactical below the
-lower of the swing low and the 20/50-day MA, minus 0.5 × ATR(14).
+Asymmetry floor: a Core position must offer at least 2.0:1 and a Tactical or
+Turnaround position at least 2.5:1 target-vs-stop asymmetry (at CMP for
+immediate entries, or at `entry_zone_high` for limit-order / `WAIT_FOR_SUPPORT`
+setups; formula: `(target_base − entry_ref) / (entry_ref − stop_loss)`).
+Stops: Core below the nearest structural invalidation support — `min(swing_low_20d, SMA50) − 1.0 × ATR(14)` in Stage 2 uptrends (or `base_low_63d − 1.0 × ATR(14)` in Stage 1 / turnaround bases; do not mechanically use a distant 200-day MA in a multi-month advance); Tactical below `min(swing_low_20d, SMA20 or SMA50) − 0.5 × ATR(14)`.
 
 The stop must sit below the support structure with the applicable volatility
 buffer, and the target must be independently supported by resistance,

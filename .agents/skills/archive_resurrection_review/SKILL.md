@@ -107,8 +107,8 @@ CHECK 1: ORIGINAL GATE REVERSAL (Did the specific failure reason improve?)
     PASS if: Death cross resolved (50-DMA crossed back above 200-DMA)
 
   FAIL_ASYMMETRY:
-    PASS if: New CMP creates Asymmetry Ratio >= 3.0:1
-      (Old_Target - New_CMP) / (New_CMP - Old_Stop) >= 3.0
+    PASS if: New CMP (or Entry Zone) creates Asymmetry Ratio >= 2.0:1 (Core) or >= 2.5:1 (Tactical / Turnaround)
+      (Old_Target - New_CMP) / (New_CMP - Old_Stop) >= 2.0
 <!-- MARKET IN -->
     PASS if: New support level identified at materially better entry
 <!-- /MARKET -->
@@ -118,11 +118,11 @@ CHECK 1: ORIGINAL GATE REVERSAL (Did the specific failure reason improve?)
 
 <!-- MARKET IN -->
   FAIL_CFO_PAT:
-    PASS if: Trailing 4Q CFO/PAT is now >= 0.65x (improving trend)
+    PASS if: Trailing 4Q or H1/FY CFO/PAT is now >= 0.50x (for high-growth capital goods/defense/infra) or >= 0.65x (improving trend)
 <!-- /MARKET -->
 <!-- MARKET US -->
   FAIL_SBC_DILUTION:
-    PASS if: SBC as % of Revenue has moderated below 5.5% (approaching 5% floor)
+    PASS if: SBC as % of Revenue has moderated below 8.0%, OR Owner FCF margin (FCF margin minus SBC %) is >= 10.0% with share dilution <= 3.0% YoY
 <!-- /MARKET -->
 
 <!-- MARKET IN -->
