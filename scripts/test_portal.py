@@ -77,7 +77,7 @@ class PortalTests(unittest.TestCase):
 
     def test_resolve_paths_and_fragments(self):
         for href in ("../blogs/TEST_dossier.html#thesis", "docs/blogs/TEST_dossier.html#thesis", "TEST_dossier.html#thesis", str(self.dossier) + "#thesis", self.dossier.as_uri() + "#thesis"):
-            self.assertEqual(published_url(href, self.report, self.docs), "https://git.corp.adobe.com/pages/mereddy/ai-automations/blogs/TEST_dossier.html#thesis")
+            self.assertEqual(published_url(href, self.report, self.docs), "https://rajasekharmekala.github.io/portfolio/blogs/TEST_dossier.html#thesis")
         self.assertEqual(published_url("../blogs/TEST_dossier.html?view=full#thesis", self.report, self.docs, absolute=False), "../blogs/TEST_dossier.html?view=full#thesis")
 
     def test_missing_and_escape_paths(self):
@@ -89,7 +89,7 @@ class PortalTests(unittest.TestCase):
     def test_email_and_idempotent_repair(self):
         original = "<p>Keep formatting</p><a class='x' href='TEST_dossier.html'>Test</a><a href='missing.html'>Missing</a>"
         result = rewrite_published_links(original, self.report, self.docs)
-        self.assertIn('href="https://git.corp.adobe.com/pages/mereddy/ai-automations/blogs/TEST_dossier.html"', result)
+        self.assertIn('href="https://rajasekharmekala.github.io/portfolio/blogs/TEST_dossier.html"', result)
         self.assertIn('aria-disabled="true"', result)
         self.assertTrue(result.startswith("<p>Keep formatting</p>"))
         self.assertEqual(rewrite_published_links(result, self.report, self.docs), result)
@@ -142,7 +142,7 @@ class PortalTests(unittest.TestCase):
         self.assertEqual(urls["blogs/IN/TESTIN_dossier.html"]["market"], "IN")
         self.assertEqual(urls["blogs/US/TESTUS_dossier.html"]["market"], "US")
         self.assertEqual(published_url("TESTIN_dossier.html", self.report, self.docs),
-                         "https://git.corp.adobe.com/pages/mereddy/ai-automations/blogs/IN/TESTIN_dossier.html")
+                         "https://rajasekharmekala.github.io/portfolio/blogs/IN/TESTIN_dossier.html")
 
 
 class EmailDigestTests(unittest.TestCase):
@@ -173,7 +173,7 @@ class EmailDigestTests(unittest.TestCase):
         self.assertIn("Review &lt;risk&gt;", body)
         self.assertIn("New shortlist qualification: TEST", plain)
         self.assertIn("Eligible holding displacement: TEST replaces HELD", plain)
-        self.assertIn("https://git.corp.adobe.com/pages/mereddy/ai-automations/reports/", body)
+        self.assertIn("https://rajasekharmekala.github.io/portfolio/reports/", body)
         with self.assertRaises(ValueError):
             build_digest("Audit", "Full report", None)
         with self.assertRaises(ValueError):

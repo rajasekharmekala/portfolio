@@ -11,7 +11,7 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 from bs4 import BeautifulSoup
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
-BASE_URL = "https://git.corp.adobe.com/pages/mereddy/ai-automations/"
+BASE_URL = "https://rajasekharmekala.github.io/portfolio/"
 CATALOG = DOCS / "portal-data.json"
 UPDATES = DOCS / "portal-updates.json"
 
