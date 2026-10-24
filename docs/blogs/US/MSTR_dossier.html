@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-23">
+<meta name="generated-at" content="2026-10-24T00:16:40.378879-07:00">
+<title>Strategy Inc (MSTR): software company, bitcoin treasury and leveraged bitcoin proxy</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4f6f4;
+  --paper-top: #edf3ef;
+  --ink: #202923;
+  --ink-strong: #202923;
+  --muted: #526158;
+  --rule: #dce3dd;
+  --rule-soft: #dce3dd;
+  --surface: #ffffff;
+  --surface-alt: #eef3ef;
+  --link: #176547;
+  --link-visited: #176547;
+  --keep-ink: #14532d;
+  --keep-tint: #dcfce7;
+  --accumulate-ink: #176547;
+  --accumulate-tint: #e5f1ea;
+  --trim-ink: #78350f;
+  --trim-tint: #fef3c7;
+  --exit-ink: #a34242;
+  --exit-tint: #fff0f0;
+  --watch-ink: #374151;
+  --watch-tint: #f3f4f6;
+  --primer-accent: #176547; --primer-tint: #e5f1ea;
+  --howto-accent: #526158; --howto-tint: #eef3ef;
+  --case-accent: #176547; --case-tint: #ffffff;
+  --trigger-accent: #92400e; --trigger-tint: #fef3c7;
+  --example-accent: #166534; --example-tint: #f0fdf4;
+  --takeaway-accent: #176547; --takeaway-tint: #e5f1ea;
+}
+/* report_base v2: shared layout for every report. Put the palette :root block from REPORT_PALETTE.md first, then this file, then book_components.css. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
+.report{max-width:960px;margin:0 auto;padding:24px 20px 64px}
+h1{font-size:2rem;line-height:1.2;font-weight:700;color:var(--ink-strong);margin:0 0 .2em;padding-bottom:.3em;border-bottom:1px solid var(--rule)}
+.sitesub{color:var(--muted);font-size:.95rem;margin:0 0 1.25em}
+h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:var(--ink-strong);margin:2.2em 0 .6em;padding-bottom:.2em;border-bottom:1px solid var(--rule-soft)}
+h3{font-size:1.15rem;line-height:1.35;font-weight:700;color:var(--ink-strong);margin:1.6em 0 .4em}
+h4{font-size:1rem;font-weight:700;color:var(--ink-strong);margin:1.2em 0 .3em}
+p,li{max-width:72ch}
+p{margin:.8em 0}
+ul,ol{padding-left:1.3em}
+a{color:var(--link)}
+a:visited{color:var(--link-visited)}
+/* Key figures: the summary a reader sees before anything else. Two columns on phones, four on wide screens. */
+dl.key-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1em 0 1.5em}
+dl.key-figures div{background:var(--surface-alt);border:1px solid var(--rule-soft);border-radius:8px;padding:10px 12px;margin:0}
+dl.key-figures dt{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+dl.key-figures dd{margin:2px 0 0;font-size:1.25rem;font-weight:700;color:var(--ink-strong);font-variant-numeric:tabular-nums}
+@media (min-width:720px){dl.key-figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Infobox: floats right on wide screens and stacks above the text on phones. */
+table.infobox{float:right;width:320px;max-width:100%;margin:0 0 1em 1.5em;border:1px solid var(--rule);border-collapse:collapse;font-size:.92rem;background:var(--surface)}
+table.infobox caption{font-weight:700;padding:8px 10px;background:var(--surface-alt);text-align:left}
+table.infobox th,table.infobox td{padding:6px 8px;border-top:1px solid var(--rule-soft);vertical-align:top;text-align:left}
+table.infobox th{width:42%;color:var(--muted);font-weight:600}
+/* Data tables: always inside .table-wrap, so a wide table scrolls within its box instead of breaking the page. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1em 0;border:1px solid var(--rule-soft);border-radius:6px}
+table.wikitable{width:max-content;min-width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.wikitable th,table.wikitable td{padding:8px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+table.wikitable th{background:var(--surface-alt);color:var(--ink-strong);font-weight:700;white-space:nowrap}
+table.wikitable tr:nth-child(even) td{background:var(--surface-alt)}
+table.wikitable td.num,table.wikitable th.num{text-align:right;white-space:nowrap}
+.toc{display:table;margin:1em 0 1.5em;padding:12px 16px;border:1px solid var(--rule-soft);background:var(--surface-alt);border-radius:6px;font-size:.95rem}
+.toc ol{margin:.4em 0 0 1.2em;padding:0}
+ol.reflist{font-size:.85rem;color:var(--muted)}
+.foot{clear:both;border-top:1px solid var(--rule);margin-top:2.5em;padding-top:1em;color:var(--muted);font-size:.9rem}
+.clear{clear:both}
+@media (max-width:719px){
+  body{font-size:16px}
+  .report{padding:16px 14px 48px}
+  h1{font-size:1.6rem}
+  h2{font-size:1.3rem}
+  h3{font-size:1.05rem}
+  table.infobox{float:none;width:100%;margin:0 0 1.2em}
+  table.wikitable{font-size:.85rem}
+  table.wikitable th,table.wikitable td{padding:6px 7px}
+}
+@media print{
+  .table-wrap{overflow:visible;border:0}
+  dl.key-figures,.toc,table.wikitable tr{break-inside:avoid}
+}
+
+/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
+.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
+.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
+.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
+.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
+.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
+.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
+.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
+.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
+.triggers ul{margin:.4em 0 0 1.2em;padding:0}
+.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
+.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
+.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
+.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
+.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
+.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
+.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
+.casenote .verdict{margin-left:8px}
+
+*, *::before, *::after { box-sizing: border-box; letter-spacing: 0; }
+html { scroll-padding-top: 28px; }
+body { margin: 0; padding: 0; max-width: none; background: linear-gradient(180deg, var(--paper-top), var(--paper) 320px); color: var(--ink); font: 16px/1.7 'IBM Plex Sans', sans-serif; }
+a, a:visited { color: var(--link); overflow-wrap: anywhere; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+[hidden] { display: none !important; }
+.desk-masthead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 16px max(24px, calc((100% - 1240px) / 2)); background: var(--surface); border-bottom: 1px solid var(--rule); }
+.desk-wordmark { color: var(--ink) !important; font: 500 13px 'IBM Plex Mono', monospace; text-decoration: none; }
+.desk-label { font: 12px 'IBM Plex Mono', monospace; color: var(--link); }
+.desk-tools { display: flex; gap: 10px; align-items: center; }
+.desk-tools select, .desk-tools button { min-height: 36px; font: 13px 'IBM Plex Sans', sans-serif; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.desk-tools select { width: 180px; padding: 7px 10px; }
+.desk-tools button { width: 36px; height: 36px; padding: 8px; cursor: pointer; }
+.desk-tools svg { width: 18px; height: 18px; }
+.desk-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 100; border: 0; appearance: none; background: transparent; }
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value, .desk-progress::-moz-progress-bar { background: var(--link); }
+.desk-layout { max-width: 1240px; margin: auto; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.report { min-width: 0; width: 100%; max-width: 960px; padding: 0 0 64px; margin: 0 auto; overflow-wrap: anywhere; }
+.report-header { padding: 38px 0 24px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+.report h1 { font: 500 40px/1.15 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 0; padding: 0; border: 0; }
+.report h2 { clear: both; font: 500 28px/1.25 'Newsreader', Georgia, serif; color: var(--ink-strong); margin: 40px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.report h3 { font: 600 19px/1.4 'IBM Plex Sans', sans-serif; }
+.report h4 { font-size: 16px; }
+.report-generated, .report-as-of { font: 11px/1.7 'IBM Plex Mono', monospace; color: var(--muted); margin: 12px 0 0; }
+.report-as-of { margin-top: 6px; }
+.report p, .report li { max-width: 74ch; }
+.report .meta, .report .small, .report .note, .report .sitesub, .report .siteSub { color: var(--muted); font-size: 13px; }
+.report code, .report .mono, .report .decision-stats { font-family: 'IBM Plex Mono', monospace; }
+.report dl.key-figures { gap: 0; row-gap: 20px; padding: 18px 0; border-block: 1px solid var(--rule); }
+.report dl.key-figures div { border: 0; border-left: 1px solid var(--rule); padding: 0 16px; border-radius: 0; background: transparent; min-width: 0; }
+.report dl.key-figures div:nth-child(4n+1) { border-left: 0; padding-left: 0; }
+.report dl.key-figures dd { font: 500 18px/1.5 'IBM Plex Mono', monospace; }
+.report .table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; margin: 18px 0; clear: both; }
+.report .table-wrap .table-wrap { border: 0; margin: 0; }
+.report table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.report table.wikitable { width: max-content; min-width: 100%; }
+.report th, .report td { padding: 10px 12px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.report th { background: var(--surface-alt); font-weight: 600; color: var(--ink); }
+.report td { background: var(--surface); }
+.report tr:nth-child(even) td { background: var(--surface-alt); }
+.report td.num, .report th.num { text-align: right; white-space: nowrap; }
+.report caption { text-align: left; padding: 12px; font-weight: 600; background: var(--surface-alt); }
+.report .infobox { float: right; width: 320px; max-width: 100%; margin: 0 0 20px 24px; border: 1px solid var(--rule); background: var(--surface); font-size: 13px; }
+.report aside.infobox { padding: 14px; }
+.report aside.infobox table.infobox { float: none; width: 100%; margin: 0; border: 0; }
+.report .infobox dt { font-weight: 600; margin-top: 8px; color: var(--muted); }
+.report .infobox dd { margin: 0; }
+.report .infobox-title { font: 500 21px 'Newsreader', Georgia, serif; }
+.report .toc { border-radius: 4px; background: var(--surface-alt); }
+.report .primer, .report .howto, .report .casenote, .report .triggers, .report .trigger, .report .example, .report .takeaway, .report .estimate { max-width: 74ch; font-size: 15px; padding: 16px 20px; border-radius: 0 4px 4px 0; }
+.report .trigger { margin: 20px 0; border-left: 4px solid var(--trigger-accent); background: var(--trigger-tint); }
+.report .estimate { margin: 20px 0; border-left: 4px solid var(--case-accent); background: var(--surface-alt); }
+.report .banner, .report .fatal { margin: 24px 0; padding: 16px 20px; border-left: 4px solid var(--exit-ink); color: var(--exit-ink); background: var(--exit-tint); }
+.report .pass { color: var(--keep-ink); font-weight: 600; }
+.report .fail { color: var(--exit-ink); font-weight: 600; }
+.report .na { color: var(--watch-ink); }
+.report .verdict { border-radius: 4px; white-space: normal; }
+.report .reflist { font-size: 13px; line-height: 1.8; }
+.desk-contents { align-self: start; position: sticky; top: 28px; padding: 36px 0 20px 28px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.desk-contents-label { font: 11px 'IBM Plex Mono', monospace; color: var(--muted); margin: 0 0 16px; }
+.desk-contents ol { list-style: none; padding: 0; margin: 0; }
+.desk-contents li { margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
+.desk-contents a { display: block; padding-left: 12px; border-left: 2px solid transparent; text-decoration: none; color: var(--muted); }
+.desk-contents a[aria-current] { border-color: var(--link); color: var(--link); }
+.desk-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; max-width: 1240px; margin: auto; padding: 22px 24px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
+.desk-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (min-width: 1080px) { .desk-layout:has(.desk-contents:not([hidden])) { grid-template-columns: minmax(0, 960px) minmax(0, 220px); gap: 12px; } }
+@media (max-width: 1079px) { .desk-contents { display: none; } }
+@media (max-width: 719px) {
+  body { font-size: 15px; }
+  .desk-masthead { padding: 14px 18px; }
+  .desk-layout { padding: 0 18px; }
+  .report-header { padding-top: 28px; }
+  .report h1 { font-size: 30px; }
+  .report h2 { font-size: 25px; }
+  .report .infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .report dl.key-figures div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .desk-tools select { width: 155px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media print {
+  body { background: var(--surface); font-size: 10pt; }
+  .desk-masthead, .desk-contents, .desk-tools, .desk-progress, .desk-footer { display: none !important; }
+  .desk-layout { display: block; padding: 0; max-width: none; }
+  .report { max-width: none; padding: 0; }
+  .report-header { padding-top: 0; }
+  .report h1 { font-size: 26pt; }
+  .report h2 { font-size: 18pt; break-after: avoid; }
+  .report .table-wrap { overflow: visible; border: 0; }
+  .report table, .report table.wikitable { width: 100%; min-width: 0; table-layout: fixed; font-size: 8pt; }
+  .report th, .report td, .report td.num { padding: 4px; white-space: normal; overflow-wrap: anywhere; }
+  .report tr { break-inside: avoid; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<header class="desk-masthead"><a class="desk-wordmark" aria-disabled="true">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Strategy Inc (MSTR): software company, bitcoin treasury and leveraged bitcoin proxy</h1><p class="report-generated">Generated Date: <time datetime="2026-10-24T00:16:40.378879-07:00">24 Oct 2026, 12:16 AM PDT</time></p><p class="report-as-of">Research as of 2026-10-23</p></header>
+<dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-trim">TRIM_PROFIT_BOOKING</span> (NONE_QUALIFIED (closest: TACTICAL_BREAKOUT))</dd></div>
+<div><dt>Session Price (2026-10-23)</dt><dd>$146.01</dd></div>
+<div><dt>Strategy Bucket</dt><dd>LEVERAGED_SATELLITE</dd></div>
+<div><dt>Implied 10Y Growth (Reverse DCF)</dt><dd>N/A (cash flow is negative)</dd></div>
+<div><dt>Estimate Revisions (90d)</dt><dd>MIXED (FY2026 down, FY2027 up)</dd></div>
+<div><dt>Trend &amp; Momentum Gate</dt><dd>Stage 2 (Markup) | NO_MOMENTUM</dd></div>
+<div><dt>Support Distance / Stop</dt><dd>0.64 ATR | Stop $123.81</dd></div>
+<div><dt>Base Target / Asymmetry</dt><dd>$162.50 | 0.74:1 (Risk-Unit Size: 2.0%)</dd></div>
+</dl>
+<p class="status-line"><strong>Status:</strong> PUBLISHED_WITH_GATE_EXCEPTIONS. See the run notes and gate exceptions before the sources.</p>
+<section class="primer" id="primer">
+<h2>Before you read</h2>
+<p>Strategy Inc (NASDAQ: MSTR), formerly MicroStrategy, sells analytics software and holds 848,517 bitcoin bought with debt, preferred stock and new shares<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-2">[2]</a></sup>. We treat it as a leveraged bitcoin vehicle, and the verdict on your 21.414 shares is TRIM_PROFIT_BOOKING: sell 11 at $146.00 or better by the October 29 close. The trim is because your 3.80% weight is above the 2.0% ceiling and <dfn>reward-to-risk</dfn> is only 0.74 to 1 against a floor of 2.5. Whole shares leave 1.85%, and any purchase needs a fresh momentum test and 2.5 to 1 reward-to-risk, today $131.94 or lower. The verdict is wrong if bitcoin runs up first or dividend cover proves thin, and three dated events matter: the October 28 vote, the October 29 results and the November 11 MSCI list<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup><sup><a href="#cite_note-5">[5]</a></sup>.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does</h2>
+<p>Strategy runs two businesses under one roof. The first is enterprise analytics software: dashboards, reporting and an artificial-intelligence layer that large companies license or rent by subscription. It had 1,539 employees on June 30, 2026 and booked $477.2 million of revenue in 2025.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-7">[7]</a></sup> The second is a bitcoin treasury. As of October 18, 2026 the company held 848,517 bitcoin that it bought for $64.02 billion, an average of $75,446 per coin.<sup><a href="#cite_note-1">[1]</a></sup> Since the second quarter of 2026 Strategy reports the two as separate segments, and all of the revenue comes from software.<sup><a href="#cite_note-6">[6]</a></sup></p>
+<p>The software does not pay for the bitcoin. In the second quarter of 2026 the software segment earned $3.7 million of net income, and the whole company produced only $9.9 million of operating cash flow in the first half.<sup><a href="#cite_note-6">[6]</a></sup> The bitcoin is funded by selling things to investors: common shares through an at-the-market program (called an ATM, a way of selling new shares gradually at the market price), convertible notes, and five series of perpetual preferred stock that pay fixed dividends. In 2025 the company raised $25.3 billion this way, and in the 2026 year to date it had raised $17.06 billion by July.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-8">[8]</a></sup></p>
+<p>A common shareholder owns what is left after those senior claims are paid. At the October 23 bitcoin price of $80,672.82 the pile is worth $68.45 billion, while the convertible notes and preferred stock add up to about $20.27 billion at face value.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-10">[10]</a></sup> So the stock behaves like a bitcoin position with built-in borrowing. When bitcoin rises, the residual rises faster; when it falls, the residual falls faster. The market also pays a premium or discount on top, which is the mNAV measure explained in the glossary below.</p>
+<p>The accounting adds a twist. Since 2025 Strategy records bitcoin at fair value, so every move in the bitcoin price flows through net income. In 2025 that meant a $5.40 billion unrealized loss, and in the second quarter of 2026 an $8.32 billion unrealized loss on a $122.4 million revenue quarter.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-8">[8]</a></sup> Reported profit and earnings per share (<dfn>EPS</dfn>, the profit divided across all shares) are therefore mostly a bitcoin price gauge. This report reads them that way and anchors value on bitcoin and the capital structure instead.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>What Strategy owns and what it owes, October 2026</caption>
+<thead><tr><th>Item</th><th>Amount</th><th>Terms</th><th>Source date</th></tr></thead>
+<tbody>
+<tr><td>Bitcoin held.</td><td>848,517 coins; $68.45 billion at $80,672.82.</td><td>Cost $64.02 billion, average $75,446 per coin; unencumbered at June 30<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-6">[6]</a></sup>.</td><td>Oct 18 / Oct 23, 2026.</td></tr>
+<tr><td>Software segment.</td><td>$122.4 million revenue in Q2 2026.</td><td>Subscription revenue $62.9 million versus $40.8 million a year earlier<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Jun 30, 2026.</td></tr>
+<tr><td>USD Reserve and USD Cash.</td><td>$4.83 billion and $447.3 million.</td><td>Reserve is for preferred dividends and interest; cash is for broader uses<sup><a href="#cite_note-1">[1]</a></sup>.</td><td>Oct 18, 2026.</td></tr>
+<tr><td>Convertible notes.</td><td>$6.71 billion principal.</td><td>Six series due 2028 to 2032, coupons 0% to 2.25%, first holder put September 15, 2027<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Jun 30, 2026.</td></tr>
+<tr><td>STRC preferred.</td><td>$8.60 billion notional.</td><td>Variable rate, 12.00% for November; bought back near par<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-1">[1]</a></sup>.</td><td>Oct 23, 2026.</td></tr>
+<tr><td>STRF, STRD, STRK preferred.</td><td>$1.28 billion, $1.40 billion, $1.40 billion.</td><td>10.00%, 10.00% and 8.00% yearly dividends<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-10">[10]</a></sup>.</td><td>Jun 30 / Oct 23, 2026.</td></tr>
+<tr><td>STRE preferred.</td><td>EUR 775 million ($884 million).</td><td>10.00% yearly dividend<sup><a href="#cite_note-6">[6]</a></sup>.</td><td>Jun 30, 2026.</td></tr>
+</tbody>
+</table></div>
+<p>The table shows a company whose bitcoin is worth about 3.4 times the senior claims against it, and whose software segment is small next to those claims. What it does not show is the timing of cash needs, which Chapter 3 turns into an annual obligation figure.</p>
+<h3>Plain-English glossary for this report</h3>
+<ul>
+<li><strong>mNAV</strong> is the multiple of the bitcoin pile that the market pays for the whole company, measured as enterprise value divided by bitcoin value. A reading of 1.12 means you pay $1.12 for each $1.00 of bitcoin the company holds.</li>
+<li><strong>BTC Yield</strong> is the percentage change in bitcoin held per diluted share over a period. It rises only when the company adds coins faster than it adds shares and share-like claims.</li>
+<li><strong>BTC Hurdle</strong> is the company's own estimate of its yearly cost of credit, 10.8% in the second quarter release. Bitcoin has to beat that rate for common shareholders to gain on a per-share basis.</li>
+<li><strong>USD Reserve</strong> is cash and short-term investments set aside only to pay preferred dividends and interest. The board's policy requires at least 12 months of cover.</li>
+<li><strong>Convertible note</strong> is a loan that can turn into shares at a set price. If the stock stays below that price, the lender can demand cash at the put date.</li>
+<li><strong>Perpetual preferred stock</strong> is a share class that pays a fixed dividend with no maturity date and ranks ahead of common stock. STRC, STRF, STRK, STRD and STRE are the five series.</li>
+<li><strong>Senior claims</strong> are the convertible notes plus the preferred stock at face value, the amounts that rank ahead of common shareholders.</li>
+<li><strong>Fair-value accounting</strong> means the bitcoin is marked to the market price each quarter, with the gain or loss counted in net income.</li>
+</ul>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Why the business is strong or weak</h2>
+<p>The competitive position rests on scale and access to capital, not on software. Strategy calls itself the largest institutional holder of bitcoin, and it kept raising money through the bitcoin decline of early 2026: $25.3 billion in 2025 and $17.06 billion by late July 2026.<sup><a href="#cite_note-2">[2]</a></sup><sup><a href="#cite_note-8">[8]</a></sup> In the week to October 18 its common-stock program still had $18.79 billion of capacity and its STRC program $17.51 billion.<sup><a href="#cite_note-1">[1]</a></sup> That access is the real asset, because it lets the company buy bitcoin with other people's money when the stock trades above the value of the coins.</p>
+<p>The same engine is also the weak point. The cheapest funding stopped working in the summer. STRC, the flagship preferred, traded below its $100 face value, so management raised its dividend from 11.00% in January to 11.50% by March and 12.00% in July, and began buying it back.<sup><a href="#cite_note-11">[11]</a></sup><sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-3">[3]</a></sup> In the week to October 18 it sold no preferred stock and spent $193.1 million repurchasing 1,938,780 STRC shares, an average of about $99.60 a share. The repurchase program was lifted from $2.0 billion to $3.0 billion, with $1.16 billion left.<sup><a href="#cite_note-1">[1]</a></sup> Money spent on repurchases is money not spent on bitcoin, so the growth of the pile now leans on common-stock sales.</p>
+<p>The software moat is modest. Revenue was $510.8 million in 2021 and $477.2 million in 2025, a decline of about 1.7% a year over four years, and <dfn>gross margin</dfn>, the share of revenue left after the direct cost of delivering the product, slid from 82.0% to 68.7% as sales shifted from licenses to cloud subscriptions.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-7">[7]</a></sup> Subscription revenue grew 54% in the second quarter of 2026 while product-support revenue kept shrinking, and gross margin was 66.6%.<sup><a href="#cite_note-8">[8]</a></sup> Signed software contracts not yet recognized as revenue, called remaining performance obligations (<dfn>RPO</dfn>), were $546.9 million on June 30, 2026, with $320.1 million due within 12 months.<sup><a href="#cite_note-6">[6]</a></sup> The business is real, profitable at the margin and stable, but at about $0.5 billion of yearly revenue it is too small to carry the obligations on its own.</p>
+<p>Peers show how crowded the model has become. Metaplanet trades at 0.79 times its bitcoin, Twenty One Capital at 1.10 and Strive at 1.41, while Strategy sits at 1.17 on the same headline measure those sites use, or 0.96 on a simple ratio of market value to bitcoin value. Chapter 3 explains the difference.<sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-14">[14]</a></sup><sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-10">[10]</a></sup> Anyone who wants bitcoin alone can buy it directly. Owning MSTR adds a premium, dividend claims ranking ahead of you, and a software business, so the premium needs a reason: the company's ability to raise capital and add coins per share faster than a plain holder could.</p>
+<h3>Where the edge holds and where it does not</h3>
+<p>The edge holds in scale, liquidity and a clear playbook. A reserve of $4.83 billion gives about three years of cover for the dividends and interest, and the company has never missed a preferred dividend, with 18 months of consecutive payments reported in July.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-8">[8]</a></sup> The edge does not hold in cost of capital. A 12.00% dividend on the largest preferred series sits above the company's own 10.8% hurdle, so each new dollar of STRC needs bitcoin to rise more than 10.8% a year just to break even per share.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-8">[8]</a></sup> What this means for an owner: the structure can work for years, but it works best when bitcoin rises and the stock trades at a premium, and it asks the owner to accept a wide band of outcomes. The next chapter lists the five measures that track whether it is still working.</p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Company specifics, operating KPIs, and management walk-the-talk</h2>
+<p>Layer 2 asks five questions that fit this company: how much premium the market pays for the bitcoin, whether bitcoin per share is growing, whether the cash set aside covers the dividends, how large the senior claims are against the bitcoin, and whether the software business is healthy. Each is scored PASS for 1.0 point, WATCH for 0.5 or FAIL for 0.0, with the boundaries written in the table. The rule is that a name qualifies at 3.0 out of 5.0 or better with at most one FAIL, and is rejected at two FAILs.</p>
+<p>The scores below use the enterprise-value version of mNAV that Chapter 3 builds step by step: $61.83 billion of market value, plus $6.71 billion of convertible notes and $13.56 billion of preferred stock, minus $5.28 billion of reserve and cash, divided by the $68.45 billion bitcoin value.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-9">[9]</a></sup> That gives 1.12 times. The mNAV.com headline reading is 1.17 times, using that site's own method. A simple ratio of market value to bitcoin value is 0.96 on the same page, which would score KPI 1 as FAIL.<sup><a href="#cite_note-10">[10]</a></sup> We use enterprise value because the convertible notes and preferred stock rank ahead of the common shares, and the simple ratio ignores them. On the harsher simple-ratio basis the scorecard would total 3.0 out of 5.0 with one FAIL, which still qualifies. The scorecard lists each KPI with its reading, the PASS rule, the WATCH and FAIL boundaries and the points, so read the Result column last.</p>
+<h3>Layer 2 scorecard: company-specific operating KPIs</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 2 scorecard for Strategy Inc, October 23, 2026</caption>
+<thead><tr><th>KPI</th><th>Reading</th><th>PASS if</th><th>WATCH / FAIL boundary</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>1. mNAV (enterprise value over bitcoin value).</td><td>1.12 times on our build; 1.17 times site headline (0.96 simple ratio); headline 52-week range 0.98 to 1.37<sup><a href="#cite_note-10">[10]</a></sup>.</td><td>1.30 times or higher.</td><td>WATCH from 1.00 to 1.29; FAIL below 1.00, where issuing shares to buy coins shrinks bitcoin per share.</td><td>WATCH (0.5).</td></tr>
+<tr><td>2. BTC Yield per share.</td><td>4.5% for 2026 to July 26; 22.8% for 2025 against an original 30% target<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-2">[2]</a></sup>.</td><td>10% a year or higher.</td><td>WATCH from 0% to 9.9%; FAIL below 0%.</td><td>WATCH (0.5).</td></tr>
+<tr><td>3. Cover for preferred dividends and interest.</td><td>USD Reserve $4.83 billion against about $1.54 billion a year, or 3.1 years<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-6">[6]</a></sup>.</td><td>2.0 years or more.</td><td>WATCH from 1.0 to 1.99 years; FAIL below 1.0 (the board's own minimum is 12 months).</td><td>PASS (1.0).</td></tr>
+<tr><td>4. Senior claims over bitcoin value.</td><td>29.6% gross, 21.9% after the reserve and cash; claims reach the bitcoin only below about $23,900 a coin<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-1">[1]</a></sup>.</td><td>Below 35%.</td><td>WATCH from 35% to 50%; FAIL above 50%.</td><td>PASS (1.0).</td></tr>
+<tr><td>5. Software revenue trend.</td><td>Revenue up 6.9% to $122.4 million in Q2 2026; subscriptions up 54%; gross margin 66.6% against 68.8%<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Growth of 10% or more with positive cash flow.</td><td>WATCH from 0% to 9.9% growth; FAIL if revenue shrinks.</td><td>WATCH (0.5).</td></tr>
+</tbody>
+</table></div>
+<p>Two PASS and three WATCH score 3.5 out of 5.0 with no FAIL, so Layer 2 qualifies as PASS_WITH_WATCH. The two passes both measure safety of the structure, while the three watches measure how well the machine is still creating value for common shareholders, which is the weaker side.</p>
+<h3>Management walk-the-talk: past promises vs delivered reality</h3>
+<p>Management gets its grade from what it promised one to two years ago. The record splits in two. On the capital-structure promises (cash reserve, convertible debt reduction, keeping the preferred near $100, paying every dividend) it delivered. On the earnings promises it missed by a wide margin, because those depended on the bitcoin price.<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-8">[8]</a></sup></p>
+<p>The largest miss was the 2025 <dfn>guidance</dfn>, which is the company's own published forecast. In October 2025 the company reaffirmed operating income of $34 billion, net income of $24 billion and diluted EPS of $80, based on a bitcoin price of $150,000 at year-end. The actual 2025 result was an operating loss of $5.44 billion, a net loss of $3.85 billion and a loss of $15.23 per share.<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-7">[7]</a></sup> The lesson for an owner is that company-guided profit is a bitcoin forecast in disguise and should not be used as an anchor.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Management promises against results</caption>
+<thead><tr><th>Promise (date)</th><th>What was promised</th><th>What happened</th><th>Grade</th></tr></thead>
+<tbody>
+<tr><td>Full-year 2025 earnings (Oct 30, 2025).</td><td>Operating income $34 billion, net income $24 billion, EPS $80, on a $150,000 bitcoin year-end<sup><a href="#cite_note-16">[16]</a></sup>.</td><td>Operating loss $5.44 billion, net loss $3.85 billion, EPS loss $15.23<sup><a href="#cite_note-7">[7]</a></sup>.</td><td>Missed.</td></tr>
+<tr><td>2025 BTC Yield and BTC $ Gain (Oct 30, 2025).</td><td>30% yield and $20 billion gain; range cut to 22.0%-26.0% and $8.4-12.8 billion on Dec 1<sup><a href="#cite_note-16">[16]</a></sup><sup><a href="#cite_note-2">[2]</a></sup>.</td><td>22.8% and $8.9 billion, inside the cut range, below the original target<sup><a href="#cite_note-2">[2]</a></sup>.</td><td>Partly met.</td></tr>
+<tr><td>USD Reserve (Feb 2026).</td><td>$2.25 billion giving 2.5 years of cover<sup><a href="#cite_note-2">[2]</a></sup>.</td><td>$3.75 billion (2.1 years) in July, $4.83 billion on Oct 18<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-1">[1]</a></sup>.</td><td>Delivered.</td></tr>
+<tr><td>Keep STRC near $100 (Jul 30, 2026).</td><td>Objective of $99 to $100, with repurchases when below $100<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Repurchased 1,938,780 shares for $193.1 million in one October week, about $99.60 each; dividend rate raised to 12.00%<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-3">[3]</a></sup>.</td><td>Delivered, at a higher cost.</td></tr>
+<tr><td>Cut convertible debt (May-Jul 2026).</td><td>Repurchase of $1.50 billion of 2029 notes at about an 8% discount<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Notes outstanding fell from $8.21 billion to $6.71 billion<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Delivered.</td></tr>
+<tr><td>Pay every preferred dividend.</td><td>18 months of consecutive payments, none missed, by July 2026<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>$400.7 million of preferred dividends in Q2 2026<sup><a href="#cite_note-8">[8]</a></sup>.</td><td>Delivered.</td></tr>
+</tbody>
+</table></div>
+<p>Four of six promises were delivered and one was partly met, while the headline earnings guidance was missed by more than $27 billion at the net income line. Management is dependable on the plumbing it controls and unreliable on any number that rides on the bitcoin price.</p>
+<p>Putting Layer 2 and the walk-the-talk record together, the structure is sound today and the people running it do what they say about cash. That supports owning a small position. It does not support a large one, because the three WATCH scores sit exactly where a falling bitcoin price or a slipping STRC price would hit first. Chapter 3 now puts numbers on the five-year history and the funding load.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. The numbers, in plain words</h2>
+<p><dfn>Free cash flow</dfn> (<dfn>FCF</dfn>, the cash left after running the business and buying equipment), return on invested capital (<dfn>ROIC</dfn>, the profit earned on the money put into the business) and the rest of the usual quality screen were built for companies that make things and sell them. For Strategy they apply poorly, because the biggest numbers on the income statement are bitcoin price marks, and the biggest cash flows are money raised from investors and spent on coins. This chapter shows the five-year history as reported, then adapts each static floor to the questions that matter for a bitcoin treasury.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-12">[12]</a></sup></p>
+<p>Three adaptations carry the analysis. The profit floor becomes coverage of dividend and interest obligations by the USD Reserve and by software cash flow. The debt floor becomes senior claims divided by bitcoin value, with the bitcoin price at which those claims would consume the pile. The <dfn>dilution</dfn> floor, where dilution is the rise in share count from issuing new shares, becomes bitcoin per share and the premium paid per share. Each is a number the reader can recompute from the cited inputs.</p>
+<h3>Five years of income statements, as reported</h3>
+<p>The table below uses the audited statements for 2021 to 2025. The last row removes the bitcoin lines to show what the software business earned on its own, which is our arithmetic and not a reported figure.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Strategy Inc income statement, fiscal years 2021 to 2025 (dollars in thousands except per share)</caption>
+<thead><tr><th>Line</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+<tbody>
+<tr><td>Revenue.</td><td>510,762</td><td>499,264</td><td>496,261</td><td>463,456</td><td>477,233</td></tr>
+<tr><td>Gross profit.</td><td>418,853</td><td>396,275</td><td>386,317</td><td>333,988</td><td>327,816</td></tr>
+<tr><td>Gross margin (derived).</td><td>82.0%</td><td>79.4%</td><td>77.8%</td><td>72.1%</td><td>68.7%</td></tr>
+<tr><td>Bitcoin line in operating costs (impairment or unrealized loss).</td><td>830,621</td><td>1,286,286</td><td>115,851</td><td>1,789,862</td><td>5,403,476</td></tr>
+<tr><td>Loss from operations.</td><td>(784,527)</td><td>(1,275,742)</td><td>(115,047)</td><td>(1,852,978)</td><td>(5,444,385)</td></tr>
+<tr><td>Net income (loss).</td><td>(535,480)</td><td>(1,469,797)</td><td>429,121</td><td>(1,166,661)</td><td>(3,848,152)</td></tr>
+<tr><td>Diluted EPS, dollars.</td><td>(53.44) as filed.</td><td>(129.83) as filed.</td><td>2.64 split-adjusted.</td><td>(6.06)</td><td>(15.23)</td></tr>
+<tr><td>Operating result without the bitcoin line (derived).</td><td>46,094</td><td>10,544</td><td>804</td><td>(63,116)</td><td>(40,909)</td></tr>
+</tbody>
+</table></div>
+<p>Revenue is flat to down over five years while the bitcoin line swings from a $0.8 billion charge to a $5.4 billion loss, which is why headline profit says almost nothing about the software. The 2021 and 2022 per-share figures are as filed before the 10-for-1 stock split of 2024, so they are 10 times larger than split-adjusted numbers would be.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-7">[7]</a></sup> The derived last row shows the software business moving from a small profit to a small loss.</p>
+<h3>Cash flow, equipment spending and share-based pay</h3>
+<p>Cash flow tells a cleaner story than profit here. Stock-based compensation (<dfn>SBC</dfn>, the cost of paying employees in shares) is shown against revenue because the SBC floor in the scoring rules is 8% of revenue.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Cash flow and stock-based pay, fiscal years 2021 to 2025 (dollars in thousands)</caption>
+<thead><tr><th>Line</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+<tbody>
+<tr><td>Net cash from operating activities.</td><td>93,833</td><td>3,211</td><td>12,712</td><td>(53,032)</td><td>(67,241)</td></tr>
+<tr><td>Purchases of property and equipment.</td><td>2,706</td><td>2,486</td><td>2,938</td><td>2,978</td><td>8,212</td></tr>
+<tr><td>Free cash flow (derived: operating cash flow minus equipment purchases).</td><td>91,127</td><td>725</td><td>9,774</td><td>(56,010)</td><td>(75,453)</td></tr>
+<tr><td>Free cash flow margin (derived).</td><td>17.8%</td><td>0.1%</td><td>2.0%</td><td>(12.1%)</td><td>(15.8%)</td></tr>
+<tr><td>Share-based compensation.</td><td>44,126</td><td>63,619</td><td>69,571</td><td>77,124</td><td>53,369</td></tr>
+<tr><td>Share-based compensation as % of revenue (derived).</td><td>8.6%</td><td>12.7%</td><td>14.0%</td><td>16.6%</td><td>11.2%</td></tr>
+<tr><td>Purchases of digital assets.</td><td>2,626,529</td><td>287,921</td><td>1,902,299</td><td>22,072,759</td><td>22,467,083</td></tr>
+</tbody>
+</table></div>
+<p>Operating cash flow turned negative in 2024 and stayed negative in 2025, so in those two years the software business used cash before any dividend was paid. In the first half of 2026 operating cash flow turned slightly positive at $9.9 million, which is still far too small to carry the obligations. Purchases of bitcoin jumped from $1.9 billion in 2023 to more than $22 billion in each of the next two years, funded by investors, not by operations.<sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-7">[7]</a></sup></p>
+<h3>Balance sheet and share count: year-end 2024, year-end 2025 and June 30, 2026</h3>
+<p>The balance sheet shows how fast the structure grew and how the share count moved with it. The table shows selected lines only, so the rows do not add up to equity, which also includes additional paid-in capital and the accumulated deficit.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-8">[8]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Selected balance sheet items (dollars in thousands; shares in thousands)</caption>
+<thead><tr><th>Line</th><th>Dec 31, 2024</th><th>Dec 31, 2025</th><th>Jun 30, 2026</th></tr></thead>
+<tbody>
+<tr><td>Cash and cash equivalents.</td><td>38,117</td><td>2,301,470</td><td>1,711,837</td></tr>
+<tr><td>Short-term investments.</td><td>none.</td><td>none.</td><td>736,145</td></tr>
+<tr><td>Digital assets at carrying value.</td><td>23,909,373</td><td>58,854,028</td><td>49,672,080</td></tr>
+<tr><td>Long-term debt, net.</td><td>7,191,158</td><td>8,158,842</td><td>6,670,114</td></tr>
+<tr><td>Perpetual preferred stock (mezzanine equity).</td><td>none.</td><td>6,919,514</td><td>14,440,895</td></tr>
+<tr><td>Class A shares outstanding.</td><td>226,138</td><td>292,422</td><td>351,963</td></tr>
+<tr><td>Total stockholders' equity.</td><td>18,229,984</td><td>44,123,458</td><td>30,886,088</td></tr>
+</tbody>
+</table></div>
+<p>Class A shares rose 29.3% in 2025 and another 20.4% in the first half of 2026, while preferred stock grew from nothing to $14.4 billion on the balance sheet. Dilution (the rise in share count from issuing new shares) is the cost of the growth, and the key question is whether each new share bought more bitcoin than it cost.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-8">[8]</a></sup></p>
+<h3>Funding load, bitcoin value and net value per share</h3>
+<p>This table turns the capital structure into the numbers used for the valuation. Every input is cited and the arithmetic is in the estimates that follow.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Capital structure at the October 23, 2026 bitcoin price (dollars in billions unless stated)</caption>
+<thead><tr><th>Measure</th><th>Value</th><th>How it is built</th></tr></thead>
+<tbody>
+<tr><td>Bitcoin value.</td><td>68.45</td><td>848,517 coins times $80,672.82.</td></tr>
+<tr><td>Market value of common stock.</td><td>61.83</td><td>Market value in the session data; implies about 423.5 million shares at $146.01.</td></tr>
+<tr><td>Senior claims at face value.</td><td>20.27</td><td>Convertible notes 6.71 plus preferred 13.56 (STRC 8.60, STRD 1.40, STRF 1.28, STRK 1.40, STRE 0.88).</td></tr>
+<tr><td>Reserve and cash.</td><td>5.28</td><td>USD Reserve 4.83 plus USD Cash 0.45.</td></tr>
+<tr><td>Enterprise value.</td><td>76.82</td><td>Market value plus senior claims minus reserve and cash.</td></tr>
+<tr><td>Enterprise value over bitcoin value.</td><td>1.12 times.</td><td>Our mNAV; the site headline is 1.17 and its simple ratio is 0.96.</td></tr>
+<tr><td>Net bitcoin value for common stock.</td><td>53.46</td><td>Bitcoin value plus reserve and cash minus senior claims.</td></tr>
+<tr><td>Net bitcoin value per share.</td><td>$126.2</td><td>Against a price of $146.01, a premium of 15.7%.</td></tr>
+<tr><td>Annual dividend and interest load.</td><td>1.54</td><td>See the first estimate below.</td></tr>
+<tr><td>Bitcoin price at which senior claims equal the whole pile.</td><td>$23,894</td><td>$20.27 billion divided by 848,517 coins.</td></tr>
+</tbody>
+</table></div>
+<p>The common stock is priced about 16% above its net bitcoin value, and enterprise value equals the bitcoin pile only at a coin price 12% above today's, so the market is paying for growth in bitcoin per share. The senior claims reach the whole pile only at about $23,900 a coin, which is 70% below today's price, so solvency is not the near-term issue; the issue is how much the common shares fall when bitcoin does.</p>
+<h3>Layer 1 underwriting: static levels, trajectory (rate of change), and archetype fit</h3>
+<p>Layer 1 compares static levels with the direction of travel. The static floors are return on invested capital of 12%, free cash flow margin of 12%, <dfn>net debt</dfn> (borrowings minus cash) to <dfn>EBITDA</dfn> (earnings before interest, taxes, depreciation and amortization) under 3.0 times, and stock-based pay under 8% of revenue. <dfn>Asymmetry</dfn> is the ratio of the possible gain to the possible loss from an entry price, and a <dfn>breakout</dfn> is a move of the price above a flat trading range. The table gives the reading, the trend, and how each floor is adapted for a bitcoin treasury. The honest summary is that MSTR fails every static floor and no archetype fits, so it is scored as a leveraged satellite and judged on structure, coverage and price.<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-12">[12]</a></sup><sup><a href="#cite_note-8">[8]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 1 levels against trajectory for Strategy Inc</caption>
+<thead><tr><th>Test</th><th>Floor</th><th>Reading</th><th>Trajectory</th><th>Adaptation and result</th></tr></thead>
+<tbody>
+<tr><td>Return on invested capital.</td><td>12% or higher.</td><td>Not meaningful: 2025 operating loss of $5.44 billion is almost all bitcoin marks; without them the software result was minus $40.9 million<sup><a href="#cite_note-7">[7]</a></sup>.</td><td>Worse since 2021: software result fell from plus $46.1 million to minus $40.9 million.</td><td>Replaced by senior claims over bitcoin value, 29.6% gross and 21.9% after cash: PASS on the adapted test.</td></tr>
+<tr><td>Free cash flow margin.</td><td>12% or higher.</td><td>Minus 15.8% in 2025; first-half 2026 operating cash flow was plus $9.85 million<sup><a href="#cite_note-7">[7]</a></sup><sup><a href="#cite_note-6">[6]</a></sup>.</td><td>Fell from 17.8% in 2021.</td><td>Replaced by coverage of obligations: USD Reserve $4.83 billion against about $1.54 billion a year is 3.1 years: PASS on the adapted test.</td></tr>
+<tr><td>Net debt over EBITDA.</td><td>Under 3.0 times; red line at 4.0 times with cover below 2.0 times.</td><td>Not meaningful: EBITDA without bitcoin marks was minus $15.4 million in 2025 ($25.5 million of depreciation added to a $40.9 million operating loss)<sup><a href="#cite_note-7">[7]</a></sup>.</td><td>Debt fell to $6.71 billion in 2026.</td><td>Red line not tripped by the stated test; the adapted red line is the bitcoin price at which senior claims consume the pile, about $23,900.</td></tr>
+<tr><td>Stock-based pay.</td><td>Under 8% of revenue, or under 15% if owner free cash flow is at least 10% and share growth is 3% or less.</td><td>11.2% of revenue; owner free cash flow margin minus 27.0%; Class A shares up 29.3% in 2025<sup><a href="#cite_note-7">[7]</a></sup>.</td><td>Share count up 20.4% more in H1 2026.</td><td>FAIL on both paths; the adaptation is bitcoin per share and the premium paid per share (Layer 2 KPIs 1 and 2).</td></tr>
+<tr><td>Downtrend check.</td><td>Close below a falling 50-day average that is below a falling 200-day average.</td><td>Close 146.01 is above a rising 50-day average (139.70); only the 200-day average is falling (135.26 against 162.29 63 days ago).</td><td>50-day average up 20.05% in 21 days.</td><td>No downtrend disqualification.</td></tr>
+<tr><td>Archetype fit.</td><td>COMPOUNDER 2.0 to 1; TURNAROUND 2.5 to 1; TACTICAL_BREAKOUT 2.5 to 1.</td><td>COMPOUNDER fails every floor. TURNAROUND fails on valuation (reverse DCF undefined, mNAV mid-range) and asymmetry 0.74. TACTICAL_BREAKOUT fails the momentum gate and asymmetry<sup><a href="#cite_note-10">[10]</a></sup>.</td><td>Mixed.</td><td>No archetype qualifies; bucket is LEVERAGED_SATELLITE with the 2.5 to 1 tactical floor applied for discipline.</td></tr>
+</tbody>
+</table></div>
+<p>Every static floor fails or is not meaningful, which is why the adapted tests carry the decision. The adapted tests pass on structure, but passing on structure is a reason to own a small position, not a reason to buy at any price, which is where the asymmetry test takes over in Chapter 7.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Enterprise value is about $76.82 billion, which is 1.12 times the $68.45 billion bitcoin pile.</p>
+<h4>How it was calculated</h4>
+<p>Market value of the common stock plus convertible notes plus preferred stock at face value, minus the USD Reserve and USD Cash, then divided by bitcoin value at the October 23 price.</p>
+<h4>The inputs</h4>
+<p>Market value $61.83 billion from the session data; convertible notes $6.71 billion and preferred notionals from the filings and the third-party claim list; reserve $4.83 billion and cash $447.3 million from the October 19 filing; 848,517 coins and a bitcoin price of $80,672.82.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></p>
+<h4>The range</h4>
+<p>The mNAV.com headline reading is 1.17 times and its simple ratio of market value to bitcoin value is 0.96. An enterprise value of $74.86 billion in the session data gives 1.09 times. The headline's 52-week range is 0.98 to 1.37 times.</p>
+<h4>If the number is off</h4>
+<p>If the true premium is 1.09 times, the stock is slightly cheaper than we say and Layer 2 KPI 1 is still WATCH. Only a reading below 1.00 would turn that KPI to FAIL.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>The company must pay about $1.54 billion a year in preferred dividends and note interest at today's balances.</p>
+<h4>How it was calculated</h4>
+<p>Each series' notional times its yearly dividend rate, plus note coupons: STRC $8.60 billion at 12.00% is $1,032 million; STRF $128 million; STRD $140 million; STRK $112 million; STRE $88 million; note coupons $34.6 million (two half-year payments of $17.3 million).</p>
+<h4>The inputs</h4>
+<p>Notionals and rates from the second-quarter 10-Q and the third-party claim list; STRC rate from the October 15 filing; coupon figure from the 10-Q.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-3">[3]</a></sup></p>
+<h4>The range</h4>
+<p>The 10-Q states $1.76 billion at the July 24 STRC balance of $10.46 billion, and the same method reproduces that figure to within $1 million, which tests the arithmetic.<sup><a href="#cite_note-6">[6]</a></sup> The current figure is lower because about $1.9 billion of STRC has been bought back since.</p>
+<h4>If the number is off</h4>
+<p>If STRC were back at $10.46 billion the load would be $1.76 billion and the cover would be 2.7 years instead of 3.1. Cover below 2.0 years would turn Layer 2 KPI 3 to WATCH.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>Net bitcoin value per common share is about $126, against a market price of $146.01.</p>
+<h4>How it was calculated</h4>
+<p>Bitcoin value $68.45 billion plus reserve and cash $5.28 billion minus senior claims $20.27 billion equals $53.46 billion, divided by about 423.5 million shares.</p>
+<h4>The inputs</h4>
+<p>Same inputs as above; the share count is the market value in the session data divided by the $146.01 close, because we could not reconcile a share count from the filings after June 30.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></p>
+<h4>The range</h4>
+<p>On the third-party fully diluted market value of $66.0 billion the share count is about 452 million and net value per share is about $118. The premium then runs from 16% to 23%.</p>
+<h4>If the number is off</h4>
+<p>A higher share count lowers net value per share and raises the premium we are paying. The October 29 filing will give the share count at September 30 and settle the question.</p>
+</section>
+<h3>Peer comparison matrix</h3>
+<p>Peers are the other public bitcoin treasury companies. The headline column is each site's own mNAV reading, and the range comes from the same page. A simple ratio of market value to bitcoin value, computed from the other columns, sits beside it. The two agree within rounding for Metaplanet and Twenty One Capital. They differ for Strategy (0.96 against 1.17) and Strive (1.24 against 1.41). For Strategy the page says its headline method nets the senior claims differently, and it shows 0.96 as the gross figure; we did not rebuild Strive's headline from the page. Our own enterprise-value reading for Strategy is 1.12.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-13">[13]</a></sup><sup><a href="#cite_note-15">[15]</a></sup><sup><a href="#cite_note-14">[14]</a></sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Bitcoin treasury peer matrix, October 23, 2026</caption>
+<thead><tr><th>Company</th><th>Bitcoin held</th><th>Bitcoin value</th><th>Fully diluted market value</th><th>Simple ratio (computed)</th><th>Site headline mNAV</th><th>Headline 52-week range</th></tr></thead>
+<tbody>
+<tr><td>Strategy (MSTR)<sup><a href="#cite_note-10">[10]</a></sup>.</td><td>848,250</td><td>$68.4 billion.</td><td>$66.0 billion.</td><td>0.96</td><td>1.17</td><td>0.98 to 1.37</td></tr>
+<tr><td>Metaplanet (3350.T)<sup><a href="#cite_note-13">[13]</a></sup>.</td><td>44,000</td><td>$3.55 billion.</td><td>$2.75 billion.</td><td>0.77</td><td>0.79</td><td>0.70 to 1.44</td></tr>
+<tr><td>Strive (ASST)<sup><a href="#cite_note-15">[15]</a></sup>.</td><td>36,818</td><td>$2.97 billion.</td><td>$3.67 billion.</td><td>1.24</td><td>1.41</td><td>0.80 to 2.00</td></tr>
+<tr><td>Twenty One Capital (XXI)<sup><a href="#cite_note-14">[14]</a></sup>.</td><td>43,514</td><td>$3.51 billion.</td><td>$3.86 billion.</td><td>1.10</td><td>1.10</td><td>0.68 to 1.71</td></tr>
+</tbody>
+</table></div>
+<p>Strategy holds about nineteen times more bitcoin than the next largest peer here. On the site headlines it sits in the upper half, behind Strive; on the simple ratio it is third, behind Strive and Twenty One Capital. Either way the premium moves a lot, from 0.98 to 1.37 for Strategy over 52 weeks, which says it is a market mood that can disappear.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. What the price is doing</h2>
+<p>The stock closed at $146.01 on October 23.<sup><a href="#cite_note-9">[9]</a></sup> That is 51.3% below its 52-week high of $299.80. It is 78.5% above its 52-week low of $81.81. The session data labels it <dfn>Stage 2</dfn>, the markup phase. In Stage 2 a stock trades above a rising 50-day average and above its 200-day average. The 50-day average is $139.70 and the 200-day average is $135.26.</p><p>The relative strength index (<dfn>RSI</dfn>) is a 0 to 100 gauge of how fast the price has moved. It reads 49.51, which is neutral. The average true range (<dfn>ATR</dfn>) is the typical daily swing. It is $9.79 here, or 6.7% of the price. An ordinary day moves this stock more than most stocks move in a week. Volume on October 23 was 0.95 times the 20-day average. That is normal, not a surge.</p><p>The 50-day trend label says RISING. That label compares today with 10 trading days ago, when the average was $129.82. The gate tests use a longer window of 21 days. Then the average was $116.37, so it has risen 20.05%. Both windows agree on direction. They differ only in how steep the climb looks.</p><p>The 200-day average tells the opposite story. It was $162.29 63 trading days ago and is $135.26 now. A falling long-term line means the rebound has not repaired the longer trend. The rebound is real. It is not yet a trend. A <dfn>base</dfn> is a flat trading range that a stock builds before a larger move.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Verified price and technical structure for MSTR as of 2026-10-23</caption>
+<thead><tr><th>Technical measure</th><th>Ledger reading</th><th>Plain-English meaning</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-23)</td><td>$146.01<sup><a href="#cite_note-9">[9]</a></sup></td><td>1D: 0.14%, 1W: 6.71%, 1M: -9.65%</td></tr>
+<tr><td>20-day / 50-day / 200-day average</td><td>$151.69 / $139.70 / $135.26</td><td>50-day trend: RISING (21d ago: $116.37; 200d 63d ago: $162.29)</td></tr>
+<tr><td>Weinstein trend stage</td><td>Stage 2 (Markup)</td><td>Stage 2 is rising markup; Stage 1 is basing floor; Stage 3 is pullback/top; <dfn>Stage 4</dfn> is markdown</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day)</td><td>49.51 / $9.79</td><td>Momentum gauge (30 oversold, 70 overbought) and typical daily price swing</td></tr>
+<tr><td>52-week high / low</td><td>$299.80 / $81.81</td><td>Close is -51.3% from 52-week high</td></tr>
+<tr><td>20-day swing low / 63-day base low</td><td>$133.60 / $89.21</td><td>Active support anchor: $139.70 (0.64 ATR away)</td></tr>
+<tr><td>Volume vs 20-day average</td><td>0.95x</td><td>63-day volume dry-up ratio: 0.45</td></tr>
+<tr><td>Relative strength vs S&amp;P 500 (63d / 28d)</td><td>45.18% / 12.32%</td><td>Excess return vs benchmark over 3 months and 6 weeks</td></tr>
+</tbody>
+</table></div>
+<p>The picture is a sharp rebound from a deep low that has not reclaimed its long-term trend. The price is above the rising 50-day average but below the 20-day average, and the 200-day average is still falling.</p>
+<h3>Momentum and turnaround inflection gate</h3>
+<p>The momentum gate runs three tests. Test A asks if the stock is in a Stage 2 uptrend now. Test B asks if it is leaving a flat base. Test C asks if a turnaround is under way above a 63-day floor. Passing any one of them earns a momentum pass. A <dfn>pivot</dfn> is the top of a base, the level a rise must clear to count as a move out of it.</p><p>Test A uses the 63-day return against the S&amp;P 500. The stock beat the index by 45.18 points over 63 days. Tests B2 and C2 use the 28-day return instead. They look for a recent change of direction. The stock beat the index by 12.32 points over 28 days. Relative strength is strong on both windows.</p><p>Each test fails on exactly one condition. That makes the failures easy to read. Test A fails on the 200-day slope. Test B fails on the distance from the base low. Test C fails on the short-term turn.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Momentum &amp; recovery gate evaluation for MSTR (Verdict: NO_MOMENTUM / NONE)</caption>
+<thead><tr><th>Gate test</th><th>Rule in plain words</th><th>Measured values from ledger</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Test A1 (Markup structure)</td><td>Close above the 50-day average, the 50-day above the 200-day, and the 50-day average higher than 21 trading days ago</td><td>close: $146.01; 50-day average: $139.70; 200-day average: $135.26; 50-day average 21 days earlier: $116.37</td><td>PASS</td></tr>
+<tr><td>Test A2 (Long trend slope)</td><td>200-day average flat or rising over 63 trading days</td><td>200-day average: $135.26; 200-day average 63 days earlier: $162.29</td><td>FAIL</td></tr>
+<tr><td>Test A3 (Quarterly leadership)</td><td>63-day return at least equal to the S&amp;P 500 return</td><td>63-day return minus S&amp;P 500 return (points): 45.18; required minimum (points): 0.0</td><td>PASS</td></tr>
+<tr><td>Test A4 (Support proximity)</td><td>Close no more than 1.6 ATR above the nearest verified support</td><td>distance above support (ATR): 0.64; limit (ATR): 1.6</td><td>PASS</td></tr>
+<tr><td>Test B1 (Base 50-day holding)</td><td>50-day average has fallen no more than 0.8% over 21 trading days</td><td>50-day average change over 21 days (%): 20.05; largest allowed decline (%): 0.8</td><td>PASS</td></tr>
+<tr><td>Test B2 (Monthly relative-strength turn)</td><td>28-day return beats the S&amp;P 500 return (above 0)</td><td>28-day return minus S&amp;P 500 return (points): 12.32; required: rising (&gt; 0)</td><td>PASS</td></tr>
+<tr><td>Test B3 (Tight base pivot)</td><td>Close no more than 1.5 ATR above the 63-day base low</td><td>distance above 63-day base low (ATR): 5.8; limit (ATR): 1.5</td><td>FAIL</td></tr>
+<tr><td>Test B4 (Seller exhaustion)</td><td>63-day volume dry-up ratio at or below 0.92</td><td>63-day volume dry-up ratio: 0.45; limit: 0.92</td><td>PASS</td></tr>
+<tr><td>Test B5 (Buyer expansion)</td><td>Session volume at least 0.95 times the 20-day average</td><td>session volume versus 20-day average (times): 0.95; required minimum (times): 0.95</td><td>PASS</td></tr>
+<tr><td>Test C1 (Higher-low floor)</td><td>Close more than 1% above the 63-day low, and the 20-day swing low within 2.0% of or above that low</td><td>close: $146.01; 20-day swing low: $133.60; 63-day base low: $89.21</td><td>PASS</td></tr>
+<tr><td>Test C2 (Short-term inflection)</td><td>Close at or above the 20-day average, with a positive 28-day relative-strength reading or a 2-week gain</td><td>close: $146.01; 20-day average: $151.69; 28-day return minus S&amp;P 500 return (points): 12.32; 2-week change (%): -5.4</td><td>FAIL</td></tr>
+<tr><td>Test C3 (Buyable support distance)</td><td>Close no more than 2.0 ATR above the highest support at or below price</td><td>distance above support (ATR): 0.64; limit (ATR): 2.0</td><td>PASS</td></tr>
+<tr><td>Test C4 (No free fall)</td><td>14-day RSI at or above 32.0</td><td>RSI: 49.51; required minimum RSI: 32.0</td><td>PASS</td></tr>
+</tbody>
+</table></div>
+<p>Test A fails only because the 200-day average is lower than it was 63 days ago. Test B fails only because the price is 5.8 ATR above its 63-day base low. Test C fails only because the close is below the 20-day average of $151.69. The verdict is NO_MOMENTUM, so the gate's own note says the name is not allocated at market.</p>
+<p>The result is a rule for action, not a forecast. A close above the 20-day average, $151.69 today, would pass condition C2. The other three C conditions already pass. So test C would pass. That would allow a starter position near support. It would not allow a chase.</p><p>The 200-day condition cannot be cured soon. The 200-day average would need to rise above $162.29, its level 63 days ago. That is a matter of months.</p><p>A close below $123.81 would break the structure and end the idea. Between those two levels the right posture is patience. That is why Chapter 7 uses a limit-order <dfn>entry zone</dfn> and not a market buy. A <dfn>limit order</dfn> fills only at your price or better, and the entry zone is the band of prices where buying is planned.</p><p>Support sits at $139.70, the 50-day average, which is 0.64 ATR below the price. The 20-day swing low is $133.60. The 63-day base low is $89.21, far below. A pullback to the swing low would be a normal move for a stock with a $9.79 daily swing.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. What could happen next</h2>
+<p>What could happen next depends on three things: the bitcoin price, the premium the market pays over the net value of the coins, and whether the funding machine keeps running. Analysts expect a swing from a loss to a profit next year, but that swing is a bitcoin mark-to-market effect, and each analyst picks a different bitcoin price.<sup><a href="#cite_note-9">[9]</a></sup> We therefore value the stock directly from the bitcoin pile and the senior claims instead of from earnings, and use consensus only as context. A reverse DCF is a cash-flow model run backward to find the growth rate that today's price implies. The table after the next heading shows that result, our substitute for it, and how analyst estimates have moved.</p>
+<h3>What today's price assumes (Reverse DCF) and how consensus estimates are moving</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What today's stock price assumes (Reverse DCF) and how analyst estimates are moving for MSTR</caption>
+<thead><tr><th>Expectations dimension</th><th>Measured reading</th><th>How to interpret it</th></tr></thead>
+<tbody>
+<tr><td>Reverse DCF implied 10-year growth</td><td>N/A (see working below)<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-17">[17]</a></sup></td><td>Reverse DCF implied growth is not defined because trailing cash flow and earnings are negative. The report uses a bitcoin-implied price instead.</td></tr>
+<tr><td>Reverse DCF cash-flow basis &amp; FCF yield</td><td>N/A: trailing cash flow and earnings are negative, and the data vendor's trailing free cash flow counts bitcoin purchases as spending (N/A no positive figure); FCF yield: N/A</td><td>Solved at 10.0% discount rate and 18.0x terminal multiple</td></tr>
+<tr><td>Consensus FY1 EPS (current vs 90d ago)</td><td>$-19.12 vs $16.87 (-213.36%)</td><td>Revision trend status: MIXED (FY2026 down, FY2027 up)</td></tr>
+<tr><td>Consensus FY2 EPS (current vs 90d ago)</td><td>$13.04 vs $8.77 (+48.68%)</td><td>Implied FY2 vs FY1 EPS growth: N/A</td></tr>
+<tr><td>Street analyst target range (low / mean / high)</td><td>$165.00 / $239.27 / $435.00 (16 analysts)</td><td>Used as expectations context only; our underwriting target is anchored in the scenario model below</td></tr>
+<tr><td>Bitcoin price implied by enterprise value.</td><td>About $90,500 a coin against $80,672.82 spot (12% higher).</td><td>Divides the $76.82 billion enterprise value by 848,517 coins; a substitute for reverse DCF<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-1">[1]</a></sup>.</td></tr>
+<tr><td>Premium to net bitcoin value per share.</td><td>15.7% ($146.01 against about $126.2).</td><td>The price paid above the coins after senior claims and the reserve.</td></tr>
+<tr><td>Why cash-flow methods fail here.</td><td>2025 free cash flow minus $75.5 million; vendor trailing figure minus $22.6 billion counts bitcoin purchases as spending<sup><a href="#cite_note-7">[7]</a></sup>.</td><td>A reverse DCF needs positive cash flow to solve for growth, so we show N/A and do not force a number.</td></tr>
+<tr><td>Wall Street target range.</td><td>S&amp;P Global: 16 analysts, mean $239.27; MarketBeat: 17 analysts, mean $246.13<sup><a href="#cite_note-17">[17]</a></sup><sup><a href="#cite_note-18">[18]</a></sup>.</td><td>Both sit far above our $162.50 base value, and each analyst assumes its own bitcoin price.</td></tr>
+</tbody>
+</table></div>
+<p>Reverse DCF is not defined for this company because cash flow is negative, so we use a bitcoin-based substitute: today's enterprise value equals the bitcoin pile at a coin price of about $90,500, which is 12% above spot. The discount rate and terminal multiple in the second row are the standard settings, and no solution exists at them because cash flow is negative. The consensus rows come from public pages that match the session data, and the analyst count is 16 per S&amp;P Global on StockAnalysis, not the 15 in the session data.<sup><a href="#cite_note-17">[17]</a></sup> The revision trend is mixed, not falling: this year's estimate fell from a $16.87 profit to a $19.12 loss on bitcoin marks while next year's estimate rose from $8.77 to $13.04.<sup><a href="#cite_note-9">[9]</a></sup></p>
+<h3>Our variant perception</h3>
+<p>The market view is that Strategy keeps growing bitcoin per share by selling stock at a premium, and the mean analyst target of $239.27 is 64% above the price.<sup><a href="#cite_note-17">[17]</a></sup> Our reading is more cautious. In the second quarter of 2026 STRC paid for $5.46 billion of the $6.42 billion of bitcoin bought, and that engine has paused: in the week to October 18 the company sold no preferred stock, spent $193.1 million buying STRC back, and raised only $22.0 million from common stock, enough to buy 267 coins.<sup><a href="#cite_note-1">[1]</a></sup> The yearly dividend and interest load of about $1.54 billion works out to $29.5 million a week, so a $22.0 million week does not even cover it.</p>
+<p>The reserve is large enough to bridge that gap for about three years, which is why we do not call this a distressed structure. But a premium of 15.7% over net bitcoin value is paying for growth that is not visible in the latest weekly filings. That is our variant view: the shares are priced for a restart of accretive issuance, and the restart needs either a higher bitcoin price or a higher premium. Without one of them the base value is close to the current price, which is why the plan is to hold less and buy lower.</p>
+<p>The October 29 report will almost certainly show a large profit, and it will not be news. Bitcoin rose from about $58,700 a coin implied by the June 30 carrying value to about $83,600 at the start of October, and the company held 847,666 coins on September 30.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-19">[19]</a></sup><sup><a href="#cite_note-20">[20]</a></sup> Marking those coins up adds roughly $21 billion before tax by our rough arithmetic, and analysts expect $17.98 a share on Yahoo Finance and $17.25 on MarketBeat, against revenue of about $128 million.<sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-21">[21]</a></sup> The last report came on July 30, 2026, and the company confirmed the next date on October 8: after the close on October 29, with a webinar at 5:00 pm Eastern.<sup><a href="#cite_note-22">[22]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> The numbers that matter are the USD Reserve, the share count, STRC pricing and BTC Yield, not the headline profit.</p>
+<section class="estimate">
+<h4>The number</h4>
+<p>Our 12-month base value is $162.50 a share, 11.3% above the $146.01 close.</p>
+<h4>How it was calculated</h4>
+<p>Base bitcoin price of $90,000 times 848,517 coins is $76.37 billion; add reserve and cash of $5.28 billion, subtract $1.54 billion of dividends and interest paid over the year and $20.27 billion of senior claims, which leaves $59.84 billion. Divide by 423.5 million shares for $141.3, then apply a 1.15 premium to get $162.50.</p>
+<h4>The inputs</h4>
+<p>848,517 coins, reserve and senior claims from the October 19 filing and the 10-Q; the $90,000 bitcoin price is our assumption and sits between today's $80,672.82 and the $107,621.59 of a year ago.<sup><a href="#cite_note-1">[1]</a></sup><sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-9">[9]</a></sup><sup><a href="#cite_note-23">[23]</a></sup></p>
+<h4>The range</h4>
+<p>In the bear case bitcoin is $55,000 with a 0.90 premium and the value is $64.00; in the bull case bitcoin is $125,000 with a 1.30 premium and the value is $275.00. On a share count of 452 million, with everything else held constant, the base value is $152.25: $59.84 billion divided by 452 million is $132.39, times 1.15. That is a sensitivity on the share count alone. It holds the senior claims fixed, and a filing-backed bridge is still needed.</p>
+<h4>If the number is off</h4>
+<p>Each $10,000 on the bitcoin price moves the base value by about $23 a share, and each 0.05 on the premium moves it by about $7. Holding the bitcoin price at $90,000 and the premium at 1.00 gives $141.30. The share-count sensitivity lowers the base value by $10.25 and cuts reward-to-risk at $134.85 from 2.50 to 1.58, which is why the top of the entry zone is $131.94.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>The probability-weighted value is $161.08 a share, a 10.3% gain from $146.01.</p>
+<h4>How it was calculated</h4>
+<p>Bear 30% times $64.00 is $19.20, base 45% times $162.50 is $73.13, bull 25% times $275.00 is $68.75; the sum is $161.08.</p>
+<h4>The inputs</h4>
+<p>Scenario values from the previous estimate. Probabilities are our judgement: bitcoin traded near $58,700 at June 30 and sales in July were made at $60,773, so a return to the mid-$50,000s inside a year is a live outcome, and the weights reflect that.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-6">[6]</a></sup></p>
+<h4>The range</h4>
+<p>Moving 10 points of probability from the base to the bear case lowers the weighted value to $151.2, a gain of 3.6%. Moving them from the base to the bull case raises it to $172.3.</p>
+<h4>If the number is off</h4>
+<p>A 10% expected gain with a 56% loss in the bear case and a 15% loss at the stop is not compensation for the volatility, which is why the verdict is to trim and wait for a lower entry.</p>
+</section>
+<section class="estimate">
+<h4>The number</h4>
+<p>The dividend and interest load equals about 2.2% of the bitcoin pile each year, so bitcoin has to rise about 2.2% a year just to pay the senior holders without selling coins.</p>
+<h4>How it was calculated</h4>
+<p>$1.54 billion of yearly obligations divided by the $68.45 billion bitcoin pile.</p>
+<h4>The inputs</h4>
+<p>Obligations from the first Chapter 3 estimate; the company's own hurdle of 10.8% from the second-quarter release is the all-in cost of credit.<sup><a href="#cite_note-8">[8]</a></sup><sup><a href="#cite_note-1">[1]</a></sup> The company gave no earnings or cash-flow outlook for 2026 in that release, and its only guidance heading covers the tax treatment of preferred dividends.<sup><a href="#cite_note-8">[8]</a></sup></p>
+<h4>The range</h4>
+<p>At the company's 10.8% hurdle, bitcoin must rise about 10.8% a year to leave common shareholders ahead on a per-share basis, which is $8,700 a coin from today's price.</p>
+<h4>If the number is off</h4>
+<p>If the hurdle is higher than 10.8% because STRC needs a rate above 12.00%, the break-even bitcoin gain rises with it and the base value falls. The scenario table next sets the three outcomes side by side. The probabilities are our judgement, and the weighted value is the probability-weighted average of the three outcomes.</p>
+</section>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>12-month scenarios for MSTR from the $146.01 close</caption>
+<thead><tr><th>Scenario</th><th>Probability</th><th>Bitcoin price in 12 months</th><th>Premium over net bitcoin value</th><th>Value per share</th><th>Return from $146.01</th><th>Story</th></tr></thead>
+<tbody>
+<tr><td>Bear.</td><td>30%</td><td>$55,000</td><td>0.90</td><td>$64.00</td><td>-56.2%</td><td>Bitcoin returns toward its 2026 low, the premium turns into a discount, and the reserve is drawn to pay dividends.</td></tr>
+<tr><td>Base.</td><td>45%</td><td>$90,000</td><td>1.15</td><td>$162.50</td><td>+11.3%</td><td>Bitcoin recovers about 12% and the company resumes modest accretive issuance.</td></tr>
+<tr><td>Bull.</td><td>25%</td><td>$125,000</td><td>1.30</td><td>$275.00</td><td>+88.3%</td><td>Bitcoin passes last year's level of $107,621 and the premium widens as preferred issuance restarts.</td></tr>
+<tr><td>Probability-weighted.</td><td>100%</td><td>n/a</td><td>n/a</td><td>$161.08</td><td>+10.3%</td><td>Close to the base case because the bear and bull cases partly offset.</td></tr>
+</tbody>
+</table></div>
+<p>The weighted value is 10.3% above the price, and the bear case is five times larger than the base gain. A stock with that spread and a beta of 3.2 earns its place only in a small size with a defined exit.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Why these estimates might be wrong</h2>
+<p>The bear case is simple: bitcoin falls, the premium over the coins disappears, and the funding machine that buys bitcoin stalls at the same moment. Each of our three estimates has a weakest assumption, and each has a date when evidence arrives. The base value of $162.50 rests on bitcoin reaching $90,000, the premium holding at 1.15 and a share count of about 423.5 million; on 452 million shares it would be $152.25. Evidence against it would be a bitcoin close below $75,000 or a premium below 1.05 after the October 29 report, and it is fully tested only in October 2027. The probability-weighted value of $161.08 rests on a 30% bear weight, and if the true weight is 40% the weighted value falls to $151.2. The cover estimate of 3.1 years rests on a third-party STRC balance of $8.60 billion, and the October 29 filing will confirm or correct it.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-1">[1]</a></sup></p>
+<h3>Fatal flaw 1: bitcoin and the premium fall together</h3>
+<p>The senior claims are fixed in dollars, so a drop in bitcoin hits the common stock harder than it hits the coins. At today's premium, a 20% fall in bitcoin to about $64,500 would cut net bitcoin value per share from $126.2 to $93.9 and the stock to about $108.6, a loss of 25.6%. If the premium also fell to 1.00, the price would be $93.9, a loss of 35.7%. In the bear scenario, bitcoin at $55,000 and a 0.90 premium gives $64.00. The stop at $123.81 would trigger well before those levels, but a gap through it is possible, since the stock moved 6.7% on an average day over the last 14 sessions.<sup><a href="#cite_note-10">[10]</a></sup><sup><a href="#cite_note-9">[9]</a></sup></p>
+<h3>Fatal flaw 2: the funding loop breaks and coins must be sold</h3>
+<p>The company sold 2,225 bitcoin in July 2026 at an average of $60,773 to fund dividends, which is below its average cost of about $75,500, and it had already sold $218.4 million of bitcoin earlier in the year.<sup><a href="#cite_note-6">[6]</a></sup><sup><a href="#cite_note-8">[8]</a></sup> That shows the mechanism exists. Two dates make it sharper. The $1.01 billion of 2028 convertible notes can be put back to the company on September 15, 2027, and their conversion price is $183.19, which is 25.5% above the current $146.01, so the holders would likely ask for cash.<sup><a href="#cite_note-6">[6]</a></sup> The USD Reserve of $4.83 billion can pay for that and a year of dividends, but each dollar used there is a dollar not buying bitcoin, and a second year of low prices would force a choice between selling coins and issuing shares at a discount.<sup><a href="#cite_note-1">[1]</a></sup></p>
+<h3>Fatal flaw 3: index, accounting or legal action removes the bid</h3>
+<p>MSCI adopted a new test for non-operating companies in mid-October and will publish its list of affected companies on November 11, with removals taking effect after the close on November 30.<sup><a href="#cite_note-5">[5]</a></sup> JPMorgan estimated $2.8 billion of forced selling if Strategy is excluded, and the company says index funds hold about 13 million shares, 3.1% of basic shares, which is less than one average trading day of volume.<sup><a href="#cite_note-24">[24]</a></sup><sup><a href="#cite_note-5">[5]</a></sup> The shares traded at $141.34, down 4.12%, on October 16, the day after the rules were adopted.<sup><a href="#cite_note-25">[25]</a></sup> Other index providers or an accounting change could follow, and the exit would be a sale into a thin gap. The bear case for this flaw is a 10% to 15% air pocket, not a collapse, but it lands in a stock that already moves 6.7% on an ordinary day.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Risk and invalidation matrix for MSTR</caption>
+<thead><tr><th>Risk</th><th>What would show it</th><th>Price effect we model</th><th>When we will know</th></tr></thead>
+<tbody>
+<tr><td>Bitcoin and premium fall together.</td><td>Bitcoin below $75,000 or mNAV below 1.05.</td><td>Minus 25.6% for bitcoin down 20%; minus 35.7% if the premium also goes to 1.00.</td><td>Every Monday filing; first test October 29.</td></tr>
+<tr><td>Funding loop breaks.</td><td>STRC below $95, reserve below $3.1 billion, new bitcoin sales to pay dividends.</td><td>Bear value $64.00.</td><td>October 29 report; November 2 daily dividends start if the vote passes.</td></tr>
+<tr><td>Index removal.</td><td>MSCI list on November 11 names Strategy.</td><td>Air pocket of 10% to 15%, partly recovered.</td><td>November 11; effective after the close on November 30.</td></tr>
+<tr><td>Convertible put.</td><td>Stock below $183.19 into September 2027.</td><td>Reserve drawdown of $1.01 billion.</td><td>September 15, 2027.</td></tr>
+</tbody>
+</table></div>
+<p>The four risks arrive on dated calendars, which means the position can be managed around them instead of guessed at. Three of the four are tested by November 30, which is why the plan reduces the weight before the first of them.</p>
+<p>The hinge claim is that the preferred stock can stay near $100 without a dividend rate above 12.00%, so that the company can pay its obligations from the reserve and a restart of issuance without selling bitcoin at a loss. The first checkpoints are the October 28 vote on daily dividends and the October 29 report, where the USD Reserve and the share count will be updated.<sup><a href="#cite_note-26">[26]</a></sup><sup><a href="#cite_note-27">[27]</a></sup><sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup> The Monday filings in November will show whether STRC keeps trading near par, and the claim is settled in practice only after the November 11 MSCI list and the November 30 index change.<sup><a href="#cite_note-5">[5]</a></sup></p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when</h2>
+<p>The decision for your 21.414 shares is TRIM_PROFIT_BOOKING, and the rule behind it is the size ceiling, not a view that the company is failing. Your weight is 3.80% of $82,368.77, above the 2.00% ceiling for a TIER_4 position. TIER_4 is the smallest size class: it caps the weight at 2.00% of net worth and the loss at the stop at 35 basis points (0.35%) of net worth. We put MSTR there because the static floors fail, the price gate fails and the stock swings 6.7% on an ordinary day. Reward-to-risk at the $146.01 close is 0.74 to 1 against a 2.5 to 1 floor. The taxonomy defines this label for extended or oversized winners, so we flag that it is the nearest fit and not an exact one: the stock is not extended, but the position is oversized and under-compensated. A close below $123.81 ends the idea, and any purchase after the trim needs every condition in the re-entry trigger below.</p>
+<p>Some terms first. CMP means current market price, here the $146.01 close of October 23.<sup><a href="#cite_note-9">[9]</a></sup> Reward-to-risk compares the gain to the base target of $162.50 with the loss to the stop: at CMP that is (162.50 minus 146.01) divided by (146.01 minus 123.81), or 0.74. We set the top of the entry zone at the price where the ratio reaches the 2.5 floor even on a harsher share-count test. The $162.50 target uses about 423.5 million shares. If the true count is 452 million, as the third-party fully diluted figure suggests, the same method gives $152.25: $59.84 billion divided by 452 million is $132.39, times the 1.15 premium. That is a sensitivity on the share count alone. It holds the senior claims fixed, so it is not a reconciled value, and the October 29 filing must supply the bridge. On $152.25, reward-to-risk at $134.85 would be (152.25 minus 134.85) divided by (134.85 minus 123.81), or 1.58, which fails the floor. The price at which the floor holds is (152.25 plus 2.5 times 123.81) divided by 3.5, or $131.94, so that is the top of the zone. On the $162.50 target the ratio at $131.94 is 3.76. The bottom of the zone, $128.00, keeps a gap of 0.43 ATR above the stop so a normal day does not trigger it on arrival. Reward-to-risk there is 8.2 to 1 on $162.50 and 5.8 to 1 on $152.25. The zone is narrow, about 0.4 ATR, by design.</p>
+<p>The stop is a structural invalidation level, meaning the price at which the reason for owning has failed. The scoring rules give a tactical stop of the lower of the 20-day swing low ($133.60) and the 50-day average ($139.70) minus 0.5 ATR, which is $128.71, and a core stop of the same base minus 1.0 ATR, which is $123.81. The satellite bucket has no stop rule of its own, so we use the core stop because 0.5 ATR is only 3.4% of the price and one ordinary day would hit it. Reward-to-risk on the tactical stop would be 0.95 at CMP and 9.5 at $131.94, so the zone clears the 2.5 floor on either stop, while CMP clears neither.</p>
+<p>A simple moving average (SMA) averages the last N closing prices equally, and an exponential moving average (EMA) gives recent days more weight; the plan watches the 50-day SMA at $139.70 and the 21-day EMA as the trailing guide if the stock rallies. The let-winners-run rule says a rising Stage 2 winner with improving estimates is not trimmed just because RSI passes 70 or the weight passes 15%, and it allows an appreciated weight up to 22%. It does not apply here for two reasons: the trim is driven by the position size ceiling and the asymmetry, not by a profit target, and the estimate trend is mixed, not improving.</p>
+<p>Risk-unit sizing answers how much to own. A risk budget is the share of net worth you accept losing if the stop is hit, measured in basis points (bps, hundredths of a percent). TIER_4 allows 35 bps. Divide 35 bps by the stop distance from the entry price, which is 6.16% from $131.94, and the raw weight is 5.68%, but the TIER_4 ceiling of 2.00% binds first. Portfolio heat is the total of these risks across all positions, which the rules cap at 12% of net worth. The positions file shows a portfolio beta of 2.68, so a 1% fall in the S&amp;P 500 is expected to move the whole portfolio about 2.68%, and a 3.2-beta stock adds to that.</p>
+<p>What the numbers say about loss: at 3.80% the move to the stop costs 58 bps of net worth, above the 35 bps budget. A 25% overnight gap to $109.51 would cost 95 bps. At 1.85% the stop costs 28 bps and the same gap costs 46 bps. A stress on the premium alone, from 1.157 to 1.00, takes the price from $146.01 to about $126.2 (minus 13.6%) with no change in bitcoin. These figures are why the target weight is 2.00% or lower.</p>
+<p>The plan is built around the October 29 report, which the company confirmed for after the close that day,<sup><a href="#cite_note-4">[4]</a></sup> so it must be done before the close. Today, Friday October 23, markets are closed and nothing is entered. On Monday October 26 place one order to sell 11 of your 21.414 shares at a limit of $146.00, good for the day. If it fills in full, you hold 10.414 shares, about $1,520.55 or 1.85% of net worth at $146.01, and the plan is complete. If it fills in part, say n shares, cancel the rest at the close and send a new limit order for 11 minus n shares on Tuesday October 27 at $146.00. If shares remain on Wednesday October 28, replace the order with a limit of $142.00. If any remain at 3:30 pm Eastern on Thursday October 29, sell them at market before the close, because the report arrives after the close and the weight cap must hold through it.</p>
+<p>If the stock closes below $123.81 on any day, sell every remaining share at the next open. If the stock gaps up before you fill, the $146.00 limit fills at the better price and nothing changes. After the trim, do not add before the October 29 filing and the November 11 MSCI list. A purchase after that needs three things at the time of the order. First, the base value must be recomputed with the filing's share count and senior claims. Second, a fresh full momentum gate run must pass at least one of tests A, B and C. Third, reward-to-risk on the recomputed target must be at least 2.5 to 1 at your limit price, which on the 452 million share sensitivity means $131.94 or lower. The passage of time, a lower price or room under the 2.00% ceiling does not authorize a buy. The room is about 0.15 points of net worth, roughly $127, which is less than one share at these prices. For lots, you bought 13.2758 shares on August 20 at $112.99 and 8.1382 shares today at about $147.46. Selling today's lot first and 2.8618 shares of the August lot realizes about $83 of gain at $146.00. This is arithmetic, not tax advice.</p>
+<p>Two items sit outside the share audit. The options file holds no MSTR options, so there is no option position to audit. The positions file does hold MSTX, a 2x daily long fund on MSTR, at 3.41% of net worth, which moves in lockstep with MSTR (correlation 1.00). Counting MSTX at twice its weight, your MSTR exposure is about 10.6% of net worth before the trim and about 8.7% after it, so a decision on MSTX is the bigger lever and belongs in its own review. The 1.85% direct holding does not settle the combined exposure, and the room under the ceiling is not an instruction to refill it.</p>
+<p>The audit table shows what you own today and what you would own after the plan fills, with cost, value, weight and stop for each row. It uses the positions file, which records the shares, cost basis, market value and weight for each account.</p>
+<h3>Active holding audit</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Active holding audit for MSTR (Charles Schwab account)</caption>
+<thead><tr><th>Row</th><th>Quantity</th><th>Cost basis</th><th>Market value</th><th>Gain or loss</th><th>Weight of net worth</th><th>Stop (close basis)</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Today.</td><td>21.414 shares.</td><td>$2,699.99 ($126.09 a share).</td><td>$3,126.66</td><td>+$426.67 (+15.8%)</td><td>3.80%</td><td>$123.81</td><td>TRIM_PROFIT_BOOKING: sell 11 shares.</td></tr>
+<tr><td>After the plan fills.</td><td>10.414 shares.</td><td>$1,176.64 (higher-cost lots sold first).</td><td>$1,520.55</td><td>+$343.91 (+29.2%)</td><td>1.85%</td><td>$123.81</td><td>Hold to the stop; any add needs every condition in the re-entry trigger and fits only under 2.00%.</td></tr>
+</tbody>
+</table></div>
+<p>The position is up 15.8% on cost and is the right size for a TIER_4 name only after 11 shares are sold. The second row depends on the lot choice, and with average cost the remaining basis would be about $1,313 instead of $1,177. The Layer 3 table next sets out the entry zone, stop, targets and size rule behind the plan, with the derivation of each.</p>
+<h3>Layer 3 support-aware entry posture, risk-unit sizing, and let-winners-run rules</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Layer 3 execution levels and risk-unit position sizing for MSTR</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Underwriting archetype &amp; bucket</td><td>NONE_QUALIFIED (closest: TACTICAL_BREAKOUT) (LEVERAGED_SATELLITE)</td><td>Evaluates both static quality and rate-of-change inflection</td></tr>
+<tr><td>Action verdict</td><td><span class="verdict verdict-trim">TRIM_PROFIT_BOOKING</span></td><td>Trim rule: weight above the 2.00% TIER_4 ceiling, reward-to-risk 0.74 at the close against a 2.5 floor, and three dated events before November 12</td></tr>
+<tr><td>Recommended entry zone</td><td>$128.00 to $131.94</td><td>Current price $146.01 is 0.64 ATR from verified support</td></tr>
+<tr><td>Structural invalidation stop</td><td>$123.81 (-6.16% from entry)</td><td>below nearest structural invalidation support — min(swing_low_20d, SMA50) minus 1.0 x ATR(14) for Stage 2 uptrends, or base_low_63d minus 1.0 x ATR(14) for Stage 1 / turnaround bases (do NOT mechanically use a distant 200-day MA in a Stage 2 advance; Risk-Unit Sizing already scales position weight to stop distance)</td></tr>
+<tr><td>Base / Bull / Bear targets</td><td>$162.50 / $275.00 / $64.00</td><td>Reward-to-risk asymmetry at CMP: 0.74:1</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat)</td><td>2.0% of net worth (TIER_4, 35 bps risk budget)</td><td>Formula: min(Tier cap 1–2%, 35 bps / 6.16% stop distance)</td></tr>
+<tr><td>Let-winners-run rule</td><td>Appreciated weight ceiling up to 22%</td><td>Never trim solely for RSI &gt; 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break</td></tr>
+</tbody>
+</table></div>
+<p>The 2.00% in the sizing row is the maximum total weight for a TIER_4 position, not a purchase size: the risk-unit formula gives 5.68% and the tier cap binds. After the sale you hold 1.85%, so any purchase is limited to the room under the cap, about 0.15 points of net worth or less than one share, and it also needs every condition in the re-entry trigger.</p>
+<p class="trigger">Price trigger: a close below $123.81 on any day ends the idea, and every remaining share is sold at the next open regardless of news.</p>
+<p class="trigger">Event trigger: if the October 28 vote fails, or the October 29 report shows the USD Reserve below $3.1 billion (2.0 years of cover), or STRC closes below $95, sell the remaining 10.414 shares within two sessions.<sup><a href="#cite_note-3">[3]</a></sup><sup><a href="#cite_note-4">[4]</a></sup></p>
+<p class="trigger">Re-entry trigger: no purchase before the October 29 filing and the November 11 MSCI list.<sup><a href="#cite_note-5">[5]</a></sup> After both, a limit buy inside $128.00 to $131.94 needs a fresh full momentum gate run that passes at least one test, a base value recomputed from the filing's share count and senior claims, and reward-to-risk of at least 2.5 to 1 on that value at the limit price. On the 452 million share sensitivity, which gives $152.25, $134.85 yields only 1.58 and $131.94 yields 2.50. Time passing, a lower price or room under the 2.00% ceiling does not authorize a buy.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Status: PUBLISHED_WITH_GATE_EXCEPTIONS. This page carries disclosed gate exceptions, listed below with the checker's own lines where they apply.</p><p>Review status: the independent reviewer returned REVISE in round 1 and APPROVE in round 2. The red team asked for a stricter verdict in round 1 (buys now need a fresh full gate rerun and the entry zone was tightened) and held the verdict in round 2. Three non-blocking notes (a dense entry-zone paragraph, a day count of 116 versus 115 in the run notes, and the wording of how one site nets senior claims) were left as written.</p><p>The repository's structural validator (validate_report.py) accepts only market-report and portfolio-audit kinds and has no dossier mode, so a PASS from it cannot be produced for a company dossier. In its place the readability check and the citation check were run on this page, the review packet's code checks traced the numbers, and the layout check for the Research Desk design passed. This lowers confidence only in the sense that one automated structural check could not be applied. It would be cured by adding a dossier mode to that validator.</p><p>Layer 1 static floors fail or are not meaningful: return on invested capital, free cash flow margin and net debt to EBITDA cannot be computed in a useful way, and stock-based pay is 11.2% of revenue with Class A shares up 29.3% in 2025. The checker's own line for the price gate reads "fails momentum tests - not allocated at market; requires limit-order patience at support or turnaround confirmation." These cannot be cured now because the business is a bitcoin treasury, and they lower confidence in any quality-based argument. The adapted tests (senior claims over bitcoin value, cover for dividends, bitcoin per share) are what cure the doubt, and the October 29 report is the next time they update.</p><p>No archetype qualifies: COMPOUNDER fails the static floors, TURNAROUND_VALUE_INFLECTION fails on valuation because reverse DCF is undefined and mNAV sits mid-range, and TACTICAL_BREAKOUT fails the momentum gate. The bucket is LEVERAGED_SATELLITE, which has no asymmetry floor in the scoring file, so we applied the 2.5 to 1 tactical floor as a discipline. The positions file lists MSTR under TACTICAL_MOMENTUM, and moving it to the satellite bucket changes which cap it counts against.</p><p>Reverse DCF is not defined because trailing cash flow is negative. The session data shows a trailing free cash flow yield of minus 36.5% because the data vendor counts bitcoin purchases as spending, so that field is shown as N/A. We replaced it with a bitcoin-implied price of about $90,500 and did not force a growth rate.</p><p>Three expectation fields from the session data were corrected after checking public pages: the analyst count is 16 per S&amp;P Global (the session data said 15), the revision trend is labelled mixed because this year's estimate fell while next year's rose, and the free cash flow yield is shown as N/A. Consensus EPS figures match the public Yahoo Finance page for the same date.</p><p>The share count of about 423.5 million is the session market value divided by the price, not a figure read from a filing after June 30, 2026. The third-party fully diluted count is about 452 million. On 452 million shares the base value would be $152.25 and reward-to-risk at $134.85 falls to 1.58, so the top of the entry zone is set at $131.94, the price at which 2.5 to 1 holds on the lower value. That sensitivity holds the senior claims fixed and is not a reconciled fair value. The October 29 report will give the September 30 count, and no purchase is allowed until the target is recomputed from it.</p><p>The verdict label TRIM_PROFIT_BOOKING is the nearest fit in the holding taxonomy, which defines it for extended or oversized winners. We use it because the position is above its tier ceiling and under-compensated at the close, not because the stock is extended. The sale of 11 shares is 51.4% of the holding, slightly above the 30% to 50% band, because the ceiling binds.</p><p>As-of freshness exceptions, group 1, the audited annual reports. Run on October 24, 2026, the checker prints lines such as "EXCEPTION AS-OF MSTR:fy2025_income_statement: 2025-12-31 is 297 days older than report date 2026-10-24 (max 60)". The same line and the same 297-day age apply to fy2025_cash_flow, fy2025_balance_sheet and stock_split_2024. Three more records describe fiscal 2021 and 2022 from the 2023 annual report. They are fy2021_2022_income_statement, fy2021_2022_sbc and fy2021_2022_cfo, and each is 1028 days older than the report date. These are the latest audited years. No newer annual statement exists, so they cannot be refreshed until early 2027. They lower confidence only in the five-year history, which is context and not the valuation input. Every age in these four groups grows by one day for each day after October 24, 2026.</p><p>As-of freshness exceptions, group 2, the quarter ended June 30, 2026 and earlier 2026 items. The checker prints "EXCEPTION AS-OF" lines at 116 days for these records. They are q2_2026_income_statement, q2_2026_balance_sheet, q2_2026_bitcoin_rollforward and q2_2026_bitcoin_funding_sources. They also cover q2_10q_bitcoin_unencumbered, q2_10q_convertible_terms and q2_10q_convertible_principal. They also cover q2_10q_preferred_stock_table, q2_10q_coupon_interest and q2_10q_software_segment. The last of the 115-day lines are q2_10q_rpo_employees, q2_10q_operating_cash_flow, going_concern_legal_test_10q and eps_surprise_history_yahoo. Two records are 146 days old: q2_2026_convertible_repurchase and strc_dividend_rates_2026. These are the latest quarterly filings, and the third-quarter report arrives on October 29, 2026. Where a newer figure exists, the report uses it. The USD Reserve, bitcoin holdings and STRC repurchases come from the October 19 filing. The June 30 balances lower confidence in exact debt and preferred amounts until the new filing replaces them.</p><p>As-of freshness exceptions, group 3, company disclosures dated July 24 to July 30, 2026. The checker prints "EXCEPTION AS-OF" lines at 90 days for q2_2026_digital_capital_highlights, q2_2026_btc_summary, q2_2026_usd_reserve_btc_monetization and capital_raised_2026_ytd. It prints them at 92 days for q2_10q_usd_reserve_policy, q2_10q_july_bitcoin_sales and q2_10q_strc_after_repurchase. It prints them at 86 days for q2_2026_ceo_cfo_comments, q2_2026_results_date, largest_institutional_holder and consecutive_dividends_2026. These support management statements, the board policy on the reserve and the July bitcoin sales. They cannot be updated before the next report. The report uses them for history and policy wording, not for current balances.</p><p>As-of freshness exceptions, group 4, 2025 releases used for the walk-the-talk record. The checker prints "EXCEPTION AS-OF" lines at 359 days for fy2025_guidance_q3_release, fy2025_btc_targets_q3_release and sp_credit_rating_q3_2025. It prints one at 389 days for software_revenue_q3_2025. It prints lines at 297 days for fy2025_btc_yield_actual, fy2025_btc_dollar_gain_actual, software_revenue_q4_2025 and capital_raised_2025. It prints one at 265 days for usd_reserve_established_feb_2026. A promise made in 2025 is old by nature, and the point of the record is to compare it with what happened. The S&amp;P rating of B minus dates from October 2025. We found no newer rating in the pages we read, so it is shown as a dated fact.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">Strategy Inc, Form 8-K dated October 19, 2026, Item 8.01: ATM update, BTC update, repurchase program and USD Reserve balances for October 12 to October 18, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000119312526424688/mstr-20261019.htm">sec.gov</a></li>
+<li id="cite_note-2">Strategy Inc, Exhibit 99.1 to Form 8-K, press release dated February 5, 2026, fourth-quarter 2025 results (digital asset table, USD Reserve). <a href="https://www.sec.gov/Archives/edgar/data/1050446/000105044626000012/mstr-20251030x8kxex991.htm">sec.gov</a></li>
+<li id="cite_note-3">Strategy Inc, Form 8-K dated October 15, 2026, Item 8.01: STRC dividend rate and the conditional November daily dividends. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000119312526423400/mstr-20261015.htm">sec.gov</a></li>
+<li id="cite_note-4">Strategy Inc, press release dated October 8, 2026, "Strategy Announces Earnings Release Date and Live Video Webinar for Third Quarter 2026 Financial Results" (Business Wire text, National Law Review). <a href="https://natlawreview.com/press-releases/strategy-announces-earnings-release-date-and-live-video-webinar-third">natlawreview.com</a></li>
+<li id="cite_note-5">Coin Alert News, "MSCI Index Rule Change Threatens Bitcoin Treasury Companies," October 16, 2026. <a href="https://coinalertnews.com/news/2026/10/16/msci-bitcoin-treasury-exclusion-risk">coinalertnews.com</a></li>
+<li id="cite_note-6">Strategy Inc, Quarterly Report on Form 10-Q for the quarter ended June 30, 2026, filed August 2026: Liquidity and Capital Resources, Notes 6, 10, 13 and 15, SEC EDGAR. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000105044626000044/mstr-20260630.htm">sec.gov</a></li>
+<li id="cite_note-7">Strategy Inc, Annual Report on Form 10-K for the year ended December 31, 2025, filed February 2026: consolidated balance sheets, statements of operations and cash flows (pages 89-93), SEC EDGAR. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm">sec.gov</a></li>
+<li id="cite_note-8">Strategy Inc, Exhibit 99.1 to Form 8-K, press release dated July 30, 2026, "Strategy Announces Second Quarter Financial Results" (highlights, statements, digital-asset table). <a href="https://www.sec.gov/Archives/edgar/data/1050446/000162828026051027/mstr-20260730x8kxex991.htm">sec.gov</a></li>
+<li id="cite_note-9">Yahoo Finance, "Strategy Inc (MSTR) Analyst Ratings, Estimates and Forecasts," earnings-estimate and revision tables, price header and BTC-USD quote at the October 23, 2026 close. <a href="https://finance.yahoo.com/quote/MSTR/analysis/">finance.yahoo.com</a></li>
+<li id="cite_note-10">mNAV.com, "Strategy (MSTR) mNAV," bitcoin value, senior claims and 52-week range, as at the October 23, 2026 close. <a href="https://www.mnav.com/mnav/strategy">mnav.com</a></li>
+<li id="cite_note-11">Strategy Inc, Exhibit 99.1 to Form 8-K, press release dated May 5, 2026, first-quarter 2026 results (STRC monthly dividend table). <a href="https://www.sec.gov/Archives/edgar/data/1050446/000105044626000024/mstr-20260505x8kxex991.htm">sec.gov</a></li>
+<li id="cite_note-12">MicroStrategy Incorporated, Annual Report on Form 10-K for the year ended December 31, 2023: consolidated statements of operations and cash flows (years 2021 and 2022), SEC EDGAR. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000095017024015847/mstr-20231231.htm">sec.gov</a></li>
+<li id="cite_note-13">mNAV.com, "Metaplanet (3350.T) mNAV," as at the October 23, 2026 close. <a href="https://www.mnav.com/mnav/metaplanet">mnav.com</a></li>
+<li id="cite_note-14">mNAV.com, "Twenty One Capital (XXI) mNAV," as at the October 23, 2026 close. <a href="https://www.mnav.com/mnav/xxi">mnav.com</a></li>
+<li id="cite_note-15">mNAV.com, "Strive (ASST) mNAV," as at the October 23, 2026 close. <a href="https://www.mnav.com/mnav/strive">mnav.com</a></li>
+<li id="cite_note-16">Strategy Inc, Exhibit 99.1 to Form 8-K, press release dated October 30, 2025, third-quarter 2025 results and full-year guidance. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000119312525258690/mstr-ex99_1.htm">sec.gov</a></li>
+<li id="cite_note-17">StockAnalysis.com, "Strategy (MSTR) Stock Forecast and Analyst Price Targets," S&amp;P Global consensus section, last updated October 20, 2026. <a href="https://stockanalysis.com/stocks/mstr/forecast/">stockanalysis.com</a></li>
+<li id="cite_note-18">MarketBeat, "Strategy (MSTR) Stock Forecast and Price Target 2026," consensus rating and target section, retrieved after the October 23, 2026 close. <a href="https://www.marketbeat.com/stocks/NASDAQ/MSTR/forecast/">marketbeat.com</a></li>
+<li id="cite_note-19">StatMuse Money, "Bitcoin Price History October 2026," daily open-high-low-close table. <a href="https://www.statmuse.com/money/ask/bitcoin-price-history-october-2026">statmuse.com</a></li>
+<li id="cite_note-20">Strategy Inc, Form 8-K dated October 5, 2026, Item 8.01: weekly ATM, BTC and repurchase updates through October 4, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000119312526413164/mstr-20261005.htm">sec.gov</a></li>
+<li id="cite_note-21">MarketBeat, "Strategy (MSTR) Q3 2026 Earnings Date, Time and Estimates," page retrieved after the October 23, 2026 close. <a href="https://www.marketbeat.com/earnings/reports/2026-10-29-microstrategy-incorporated-stock/">marketbeat.com</a></li>
+<li id="cite_note-22">Strategy Inc, Form 8-K Item 2.02 dated July 30, 2026, announcing second-quarter results. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000162828026051027/mstr-20260730.htm">sec.gov</a></li>
+<li id="cite_note-23">Fortune, "Current price of Bitcoin for Oct. 22, 2026," price table with one-year-ago comparison. <a href="https://fortune.com/article/price-of-bitcoin-10-22-2026/">fortune.com</a></li>
+<li id="cite_note-24">TFTC, "MSCI Index Rules Put Strategy, Bitcoin Treasury Firms at Risk," October 2026. <a href="https://www.tftc.io/msci-non-operating-framework-strategy-bitcoin-treasury-index-risk">tftc.io</a></li>
+<li id="cite_note-25">ABC Money, "Strategy Stock Falls on MSCI Index Exclusion Threat," October 16, 2026. <a href="https://www.abcmoney.co.uk/2026/10/strategy-stock-falls-on-msci-index-exclusion-threat/">abcmoney.co.uk</a></li>
+<li id="cite_note-26">Strategy Inc, Definitive Proxy Statement (Schedule 14A) filed October 5, 2026 for the special meeting of stockholders on October 28, 2026. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000119312526413159/d503578ddef14a.htm">sec.gov</a></li>
+<li id="cite_note-27">Strategy Inc, Form 8-K dated September 24, 2026, Item 8.01: special meeting for the proposed daily dividend amendments. <a href="https://www.sec.gov/Archives/edgar/data/1050446/000119312526401636/mstr-20260924.htm">sec.gov</a></li>
+</ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
