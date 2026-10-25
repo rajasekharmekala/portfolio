@@ -31,7 +31,7 @@ class ReportDesignTests(unittest.TestCase):
     def test_named_reports_preserve_all_research_on_reassembly(self):
         root = Path(__file__).resolve().parents[1] / 'docs'
         paths = [root / 'reports/US_Market_Intelligence.html', root / 'reports/IN_Watchlist_to_Shortlist.html']
-        paths += [root / 'blogs' / 'IN' / (symbol + '_dossier.html') for symbol in ('STLNETWORK', 'STLTECH', 'TBOTEK', 'TDPOWERSYS')]
+        paths += [root / 'blogs' / 'IN' / (symbol + '_dossier.html') for symbol in ('HAL', 'TDPOWERSYS', 'TRENT', 'POLYCAB')]
         for path in paths:
             with self.subTest(report=path.name):
                 original = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
@@ -100,7 +100,7 @@ class PortalTests(unittest.TestCase):
             self.assertEqual(len(initial["entries"]), 2)
             dossier = next(entry for entry in initial["entries"] if entry["kind"] == "dossier")
             self.assertEqual(dossier["market"], "US")
-            self.assertEqual(dossier["verdict"], "WATCH")
+            self.assertEqual(dossier["verdict"], "WATCHLIST / HOLD")
             self.assertEqual(dossier["timestampSource"], "git")
             with self.assertRaisesRegex(ValueError, "assemble"):
                 portal.build_catalog([self.report], "Portfolio audit", "US", "Two positions need review")
@@ -147,25 +147,30 @@ class PortalTests(unittest.TestCase):
 
 class EmailDigestTests(unittest.TestCase):
     def test_delivery_matrix(self):
-        for kind in ("watchlist", "archive", "displacement"):
+        self.assertFalse(should_email("watchlist"))
+        self.assertFalse(should_email("watchlist", shortlisted=["TEST"]))
+        self.assertFalse(should_email("watchlist", displacements=["TEST replaces HELD"]))
+        for kind in ("archive", "displacement"):
             self.assertFalse(should_email(kind))
             self.assertTrue(should_email(kind, shortlisted=["TEST"]))
             self.assertTrue(should_email(kind, displacements=["TEST replaces HELD"]))
         for kind in ("market-intelligence", "portfolio-audit"):
             self.assertTrue(should_email(kind))
         self.assertEqual(report_type("Indian Watchlist to Shortlist"), "watchlist")
+        self.assertEqual(report_type("US Watchlist to Shortlist"), "watchlist")
         self.assertEqual(report_type("Archive Resurrection Review"), "archive")
         self.assertEqual(report_type("Rejected to Watchlist"), "archive")
 
     def test_skips_before_credentials_and_smtp(self):
         with patch.object(send_email, "load_env") as load_env, patch.object(send_email.smtplib, "SMTP_SSL") as smtp:
             self.assertFalse(send_email.send_email_html("Watchlist to Shortlist", "FULL REPORT"))
+            self.assertFalse(send_email.send_email_html("Watchlist to Shortlist", "FULL REPORT", shortlisted=["TEST"]))
             self.assertFalse(send_email.send_email_html("Archive Resurrection", "FULL REPORT"))
             load_env.assert_not_called()
             smtp.assert_not_called()
 
     def test_digest_is_summary_only(self):
-        source = Path(__file__).resolve().parents[1] / "docs" / "reports" / "US_Market_Intelligence_2026-10-09.html"
+        source = Path(__file__).resolve().parents[1] / "docs" / "reports" / "US_Market_Intelligence.html"
         body, plain = build_digest("Portfolio audit", "FULL REPORT CONTENT", source,
                                    summary="Concentration needs review", highlights=["Review <risk>"],
                                    shortlisted=["TEST"], displacements=["TEST replaces HELD"])

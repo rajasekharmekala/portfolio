@@ -89,7 +89,8 @@ Only after the validator and reviewer process are complete, with every unmet gat
 ### Email Policy
 
 - `market-intelligence` and `portfolio-audit`: always send a summary email after successful publication.
-- `watchlist`, `archive`, and `displacement`: no routine emails. Send only when a company newly becomes eligible for the shortlist (`--shortlisted SYMBOL`) or a shortlisted candidate newly becomes eligible to replace an actual current holding (`--displacement "CANDIDATE replaces HOLDING: passed gate and reason"`).
+- `watchlist`: do not send emails. Watchlist-to-shortlist reports and dossiers are published to GitHub Pages only; email delivery is permanently disabled and intentionally skipped.
+- `archive` and `displacement`: no routine emails. Send only when a company newly becomes eligible for the shortlist (`--shortlisted SYMBOL`) or a shortlisted candidate newly becomes eligible to replace an actual current holding (`--displacement "CANDIDATE replaces HOLDING: passed gate and reason"`).
 - Compare validated results with the frozen starting state. Already-shortlisted companies, unchanged previously eligible replacements, archive-to-watchlist promotions, tentative ideas and failed gates do not qualify. Do not fabricate events to bypass the sender. Displacement must pass the deterministic displacement gates, including bucket, transaction costs, return hurdle and portfolio caps; this is an eligibility alert, not an executed trade.
 - Archive resurrection alone remains silent. If that workflow also completes full shortlist underwriting and newly qualifies a company, send the shortlist event; otherwise only publish the report.
 - Preserve existing email eligibility for other report types, but send only a digest and the published report link.

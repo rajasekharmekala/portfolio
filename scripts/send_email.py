@@ -42,7 +42,10 @@ def send_email_html(subject, html_content, recipient=None, text_fallback=None, *
     """Send a short published-report digest, subject to the report/event policy."""
     kind = kind or report_type(subject, source_path)
     if not should_email(kind, shortlisted, displacements):
-        print(f"EMAIL SKIPPED: {kind}; no new shortlist qualification or eligible holding displacement.")
+        if kind == "watchlist":
+            print(f"EMAIL SKIPPED: {kind}; email notifications are permanently disabled for Watchlist -> Shortlist reports.")
+        else:
+            print(f"EMAIL SKIPPED: {kind}; no new shortlist qualification or eligible holding displacement.")
         return False
     html_content, text_fallback = build_digest(subject, html_content, source_path, summary, highlights, shortlisted, displacements)
     if dry_run:

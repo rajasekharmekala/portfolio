@@ -19,15 +19,17 @@ def report_type(subject, source=None):
         return "displacement"
     if "archive" in text or "resurrection" in text or ("reject" in text and "watchlist" in text):
         return "archive"
-    if "watchlist" in text:
+    if "watchlist" in text or "shortlist" in text or "dossier" in text:
         return "watchlist"
     return "other"
 
 
 def should_email(kind, shortlisted=(), displacements=()):
+    if kind == "watchlist":
+        return False
     if kind in ("market-intelligence", "portfolio-audit"):
         return True
-    if kind in ("watchlist", "archive", "displacement"):
+    if kind in ("archive", "displacement"):
         return any(str(item).strip() for item in (*shortlisted, *displacements))
     return True
 
