@@ -29,7 +29,9 @@ def normalize_verdict(raw):
     """Map a raw verdict string to one canonical bucket (or MISSING)."""
     if not raw or not str(raw).strip():
         return MISSING
-    text = re.sub(r"[^\x00-\x7F]+", " ", str(raw).upper())
+    # Strip parenthetical annotations: e.g. (COMPOUNDER), (CYCLICAL), (Stage 3, no momentum)
+    text = re.sub(r"\([^)]*\)", " ", str(raw))
+    text = re.sub(r"[^\x00-\x7F]+", " ", text.upper())
     text = re.sub(r"\s+", " ", text).strip()
     if not text or text == MISSING.upper():
         return MISSING
@@ -42,12 +44,12 @@ def normalize_verdict(raw):
         return "REPLACE UNDERPERFORMER"
     if "TRIM" in text or "HARVEST" in text:
         return "TRIM / HARVEST"
-    if "KEEP" in text or "COMPOUND" in text or "CORE ALPHA" in text or "CORE_ALPHA" in text:
-        return "KEEP COMPOUNDING"
     if "WAIT" in text or "SUPPORT" in text or "DEFERRED" in text:
         return "WAIT FOR SUPPORT"
     if "ACCUMULATE" in text or "ALL GATES PASSED" in text or "ALL_GATES_PASSED" in text:
         return "ACCUMULATE ON DIP"
+    if "KEEP" in text or "KEEP_COMPOUNDING" in text or text.startswith("COMPOUNDING"):
+        return "KEEP COMPOUNDING"
     if "WATCH" in text or "HOLD" in text or "QUALIFIED" in text:
         return "WATCHLIST / HOLD"
     if "BUY" in text:
@@ -110,6 +112,9 @@ def extract_verdict(soup, info, metadata):
             term = block.select_one("dt")
             value = block.select_one("dd")
             if term and value and "verdict" in term.get_text(" ", strip=True).lower():
+                badge = value.select_one("span.verdict, .verdict-badge, .decision-badge")
+                if badge and badge.get_text(" ", strip=True):
+                    return badge.get_text(" ", strip=True)
                 return value.get_text(" ", strip=True)
     badge = soup.select_one("span.verdict, .verdict-badge, .decision-badge")
     if badge and badge.get_text(" ", strip=True):
