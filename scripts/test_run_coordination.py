@@ -319,6 +319,38 @@ class EndToEndTests(unittest.TestCase):
         self.assertFalse(tree.exists())
         self.assertEqual(run_claims_list(self.main, self.env), "")
 
+    def test_finish_from_inside_worktree_succeeds(self):
+        tree = self.start("watchlist_to_shortlist", "f2")
+        self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US", "--run-id", "f2",
+                "--size", "2", cwd=tree)
+        self.py("run_session.py", "finish", "--run-id", "f2", cwd=tree)
+        self.assertFalse(tree.exists())
+        self.assertEqual(run_claims_list(self.main, self.env), "")
+
+    def test_publish_automatically_cleans_up_worktree_on_success(self):
+        tree = self.start("company_report", "pub1")
+        path = "data/watchlist/US.json"
+        data = self.read(tree, path)
+        data["active"][0]["status"] = "BUY"
+        self.write(tree, path, data)
+        res = self.publish(tree, "pub1")
+        self.assertEqual(res.returncode, 0)
+        self.assertFalse(tree.exists())
+        self.assertEqual(run_claims_list(self.main, self.env), "")
+
+    def test_publish_with_keep_worktree_preserves_worktree(self):
+        tree = self.start("company_report", "pub2")
+        path = "data/watchlist/US.json"
+        data = self.read(tree, path)
+        data["active"][0]["status"] = "HOLD"
+        self.write(tree, path, data)
+        res = self.py("publish_run.py", "--run-id", "pub2", "--market", "US", "--message", "run pub2",
+                      "--no-portal", "--no-validate", "--keep-worktree", cwd=tree)
+        self.assertEqual(res.returncode, 0)
+        self.assertTrue(tree.exists())
+        self.py("run_session.py", "finish", "--run-id", "pub2")
+        self.assertFalse(tree.exists())
+
 
 def run_claims_list(main, env):
     done = subprocess.run([sys.executable, str(main / "scripts/run_claims.py"), "list"], cwd=main, env=env,

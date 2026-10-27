@@ -11,6 +11,7 @@ Per-company workflows then take their names with `run_claims.py batch` from insi
 Every command of the run (scripts, validators, the ledger build) runs with the worktree as its
 working directory; the main checkout is never touched by a run.
 """
+import os
 import argparse
 import json
 import secrets
@@ -72,12 +73,17 @@ def finish(run_id, keep_worktree=False):
     removed = False
     path = worktree_path(run_id)
     if not keep_worktree and path.exists():
+        root = main_checkout()
         for name in LINKED:
             link = path / name
             if link.is_symlink():
                 link.unlink()
-        git("worktree", "remove", "--force", str(path))
-        git("branch", "-D", f"run/{run_id}", check=False)
+        try:
+            os.chdir(root)
+        except OSError:
+            pass
+        git("worktree", "remove", "--force", str(path), cwd=root)
+        git("branch", "-D", f"run/{run_id}", cwd=root, check=False)
         removed = True
     return {"run_id": run_id, "released_claims": released, "worktree_removed": removed}
 

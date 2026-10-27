@@ -11,7 +11,7 @@ Run it from inside the run's worktree (see run_session.py). It:
   3. regenerates the public catalog (docs/portal-*.json) on top of origin's copy, never merges it;
   4. validates the data, makes one linear commit, and pushes it as a fast-forward (never forced);
      a rejected push is retried from step 2 with the newer origin/main;
-  5. releases the run's claims, only after the push has succeeded.
+  5. releases the run's claims and cleans up the worktree and branch (unless --keep-worktree is passed), only after the push has succeeded.
 On any refusal nothing is pushed, claims stay held, and the run branch keeps every change.
 Exit codes: 0 published (or nothing to publish), 2 bad input, 4 validation failed, 5 refused/conflict,
 6 push failed.
@@ -28,6 +28,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import record_merge
 import run_claims
+import run_session
 
 ALLOWED_PREFIXES = ("docs/", "data/", ".agents/", "scripts/")
 ALLOWED_FILES = {"AGENTS.md", "README.md", ".gitignore"}
@@ -214,10 +215,13 @@ def publish(args):
         result["released_claims"] = run_claims.release(args.run_id)
     result["run_commit"] = run_commit
     if args.manifest:
-        manifest = Path(args.manifest)
+        manifest = Path(args.manifest).resolve()
         data = json.loads(manifest.read_text()) if manifest.exists() else {}
         data["publication"] = result
         manifest.write_text(json.dumps(data, indent=2) + "\n")
+    if result["status"] in ("PUBLISHED", "NOTHING_TO_PUBLISH") and not args.keep_worktree and not args.dry_run:
+        cleanup = run_session.finish(args.run_id, keep_worktree=False)
+        result["worktree_cleaned"] = cleanup.get("worktree_removed", False)
     return result
 
 
@@ -235,7 +239,8 @@ def main():
     parser.add_argument("--manifest", help="write the publication result into this manifest.json")
     parser.add_argument("--max-attempts", type=int, default=5)
     parser.add_argument("--keep-claims", action="store_true")
-    parser.add_argument("--dry-run", action="store_true", help="build and commit locally, do not push or release")
+    parser.add_argument("--keep-worktree", action="store_true", help="keep the worktree and branch after publishing (default: remove on successful publish)")
+    parser.add_argument("--dry-run", action="store_true", help="build and commit locally, do not push, release or clean worktree")
     parser.add_argument("--no-portal", action="store_true", help="skip the catalog rebuild (tests only)")
     parser.add_argument("--no-validate", action="store_true", help="skip data validation (tests only)")
     args = parser.parse_args()
