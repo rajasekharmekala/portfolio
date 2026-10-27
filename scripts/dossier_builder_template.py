@@ -158,27 +158,32 @@ def _build_ch4_from_ledger(sym: str, market: str, inst_m: dict, ch4_spec: dict) 
 
     mg = inst_m.get("momentum_gate") or {}
     mg_rows = []
+    mgc = (json.load(open(SCORING_FILE, encoding="utf-8")).get("momentum_gate") or {})
+    ta, tb, tc = mgc.get("test_a_in_momentum_now", {}), mgc.get("test_b_entering_momentum", {}), mgc.get("test_c_turnaround_inflection", {})
     label_map = {
-        "A1_structure": ("Test A1 (Markup structure)", "Price > SMA50 > SMA200 and SMA50 rising over 21d"),
-        "A2_sma200_not_falling": ("Test A2 (Long trend slope)", "SMA200 flat or rising over 63 trading days"),
-        "A3_rs_leading_63d": ("Test A3 (Quarterly leadership)", f"63-day return beats {bench}"),
-        "A4_not_extended": ("Test A4 (Support proximity)", "Price within 1.2 ATR of nearest verified support"),
-        "B1_sma50_holding": ("Test B1 (Base 50-DMA holding)", "50-day average decline <= 0.5% over 21 days"),
-        "B2_rs_turning_28d": ("Test B2 (Monthly RS turn)", f"28-day return beats {bench} (> 0%)"),
-        "B3_at_base_pivot": ("Test B3 (Tight base pivot)", "Price within 1.0 ATR of 63-day base low"),
-        "B4_volume_dryup": ("Test B4 (Seller exhaustion)", "63-day volume dry-up ratio <= 0.90"),
-        "B5_volume_expansion": ("Test B5 (Buyer expansion)", "Session volume >= 1.0x 20-day average"),
-        "C1_higher_low_floor": ("Test C1 (Higher-low floor)", "Price > 63d low and 20d swing low holding floor"),
-        "C2_short_term_turn": ("Test C2 (Short-term inflection)", "Price >= 20-DMA with positive 28d RS or 2W gain"),
-        "C3_near_support": ("Test C3 (Buyable support distance)", "Price within 1.8 ATR of active support"),
-        "C4_momentum_stabilizing": ("Test C4 (No freefall)", "14-day RSI >= 35 (selling pressure stabilizing)"),
+        "A1_structure": ("Test A1 (Markup structure)", f"Price > SMA50 > SMA200 and SMA50 rising over {ta.get('sma50_rising_window_days', 21)} days"),
+        "A2_sma200_not_falling": ("Test A2 (Long trend slope)", f"SMA200 flat or rising over {ta.get('sma200_not_falling_window_days', 63)} trading days"),
+        "A3_rs_leading_63d": ("Test A3 (Quarterly leadership)", f"{ta.get('rs_window_days', 63)}-day return beats {bench} by at least {ta.get('rs_min_excess_vs_benchmark_pct', 0.0)}%"),
+        "A4_not_extended": ("Test A4 (Support proximity)", f"Price within {ta.get('support_distance_atr_max', 1.6)} ATR of nearest verified support"),
+        "B1_sma50_holding": ("Test B1 (Base 50-DMA holding)", f"50-day average decline no more than {tb.get('sma50_max_decline_pct', 0.8)}% over {tb.get('sma50_window_days', 21)} days"),
+        "B2_rs_turning_28d": ("Test B2 (Monthly RS turn)", f"{tb.get('rs_rising_window_days', 28)}-day return beats {bench} (> 0%)"),
+        "B3_at_base_pivot": ("Test B3 (Tight base pivot)", f"Price within {tb.get('pivot_atr_max', 1.5)} ATR of the {tb.get('base_window_days', 63)}-day base low"),
+        "B4_volume_dryup": ("Test B4 (Seller exhaustion)", f"{tb.get('base_window_days', 63)}-day volume dry-up ratio at or below {tb.get('volume_dryup_ratio_max', 0.92)}"),
+        "B5_volume_expansion": ("Test B5 (Buyer expansion)", f"Session volume at least {tb.get('volume_expand_ratio_min', 0.95)}x the 20-day average"),
+        "C1_higher_low_floor": ("Test C1 (Higher-low floor)", f"Price more than 1% above the 63-day low, with the 20-day swing low no more than {tc.get('higher_low_tolerance_pct', 1.0)}% below it"),
+        "C2_short_term_turn": ("Test C2 (Short-term inflection)", "Price at or above the 20-day average, with positive 28-day relative strength or a positive 2-week gain"),
+        "C3_near_support": ("Test C3 (Buyable support distance)", f"Price within {tc.get('support_atr_max', 2.0)} ATR of active support"),
+        "C4_momentum_stabilizing": ("Test C4 (No freefall)", f"14-day RSI at or above {tc.get('min_rsi14', 32.0)} (selling pressure stabilizing)"),
     }
     for test_key in ("test_a", "test_b", "test_c"):
         t_obj = mg.get(test_key, {})
         for c_key, c_val in t_obj.get("conditions", {}).items():
             name_lbl, rule_lbl = label_map.get(c_key, (c_key, "Gate condition"))
             meas = c_val.get("measured")
-            meas_str = json.dumps(meas) if isinstance(meas, dict) else str(meas or c_val.get("reason", "N/A"))
+            if isinstance(meas, dict):
+                meas_str = "; ".join(f"{str(k).replace('_', ' ')} {v}" for k, v in meas.items())
+            else:
+                meas_str = str(meas or c_val.get("reason", "N/A"))
             res_str = "PASS" if c_val.get("pass") else "FAIL"
             mg_rows.append([name_lbl, rule_lbl, _esc(meas_str), res_str])
 
@@ -302,6 +307,8 @@ def render_book_dossier(spec: dict, facts: dict) -> str:
         ("Support Distance / Stop", f"{inst_m.get('support_distance_atr', 'N/A')} ATR | Stop {cur}{stop_loss:,.2f}"),
         ("Base Target / Asymmetry", f"{cur}{target_base:,.2f} | {asym:.2f}:1 (Risk-Unit Size: {ru['risk_adjusted_weight_pct']}%)"),
     ]
+    if spec.get("report_status"):
+        kf_items.append(("Report status", _esc(spec["report_status"])))
     kf_html = '<dl class="key-figures">\n' + "\n".join(
         f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in kf_items
     ) + "\n</dl>"
