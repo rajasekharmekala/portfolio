@@ -121,6 +121,44 @@ def commit_run(git, message):
     return True
 
 
+def bump_watchlist_cycles(path, base_bytes, ours_bytes):
+    """Ensure completed rows modified during a watchlist round-robin batch advance to target_research_cycle."""
+    if not (path.startswith("data/watchlist/") and path.endswith(".json") and base_bytes and ours_bytes):
+        return ours_bytes
+    try:
+        base_data = json.loads(base_bytes.decode("utf-8"))
+        ours_data = json.loads(ours_bytes.decode("utf-8"))
+    except Exception:
+        return ours_bytes
+    base_active = base_data.get("active")
+    ours_active = ours_data.get("active")
+    if not isinstance(base_active, list) or not isinstance(ours_active, list) or not base_active:
+        return ours_bytes
+    base_by_sym = {r.get("symbol"): r for r in base_active if isinstance(r, dict) and r.get("symbol")}
+    max_c = max((run_claims._row_cycle(r) for r in base_active if isinstance(r, dict)), default=1)
+    has_elig = any(
+        run_claims._is_pending_row(r) or run_claims._row_cycle(r) < max_c
+        for r in base_active if isinstance(r, dict)
+    )
+    target_c = max_c if has_elig else (max_c + 1)
+    changed = False
+    for r in ours_active:
+        if not isinstance(r, dict):
+            continue
+        sym = r.get("symbol")
+        b_row = base_by_sym.get(sym)
+        if b_row is not None and r != b_row and r.get("status") == "COMPLETED":
+            if r.get("deep_research_status") in ("PENDING", "RESEARCH_REQUIRED"):
+                r["deep_research_status"] = "COMPLETED"
+                changed = True
+            if run_claims._row_cycle(r) < target_c and ("research_cycle" in r or target_c > 1):
+                r["research_cycle"] = target_c
+                changed = True
+    if not changed:
+        return ours_bytes
+    return record_merge.dump(ours_data, ours_bytes.decode("utf-8")).encode("utf-8")
+
+
 def apply_run(git, run_commit, target, completed, args):
     """Build the publication on top of `target` from `run_commit`. Returns (changed_paths, superseded)."""
     base = git.out("merge-base", run_commit, target)
@@ -131,6 +169,7 @@ def apply_run(git, run_commit, target, completed, args):
         if path in CATALOG_FILES:
             continue
         b, o, t = (git.blob(ref, path) for ref in (base, run_commit, target))
+        o = bump_watchlist_cycles(path, b, o)
         if o == t:
             continue
         if b == t:

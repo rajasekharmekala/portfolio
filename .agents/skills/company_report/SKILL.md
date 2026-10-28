@@ -128,7 +128,9 @@ The book is the presentation; the underwriting is the engine. **Every report eva
 │    - Debt-to-Equity < 0.70 (Hard red line: ≥ 1.20x or interest cover < 2x)  │
 │    - 3Y Cumulative CFO / PAT ≥ 0.70 (or ≥ 0.50 for Capital Goods / Defense /│
 │      Infra / Manufacturing growing ≥ 20% CAGR with D/E < 0.50 & ROCE ≥ 18%; │
-│      SEBI requires CF statements only semi-annually in H1/Sep and FY/Mar)   │
+│      High-Growth Working-Capital Ramp-Up Exemption in scoring.json routes   │
+│      3Y CFO/PAT < 0.25 to Layer 2 WATCH when YoY rev ≥ 35% or PAT ≥ 50%     │
+│      with order book ≥ 1.5x sales or positive latest H1/FY CFO)             │
 │ 2. Technical Posture & Routing (`technical_routing_rule`):                  │
 │    - Stage 4 Breakdown (Close < falling SMA50 < falling SMA200, Test C fail)│
 │      → Hard Red Line FAIL (`REJECTED`).                                     │

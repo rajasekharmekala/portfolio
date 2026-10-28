@@ -242,6 +242,43 @@ class EndToEndTests(unittest.TestCase):
                                   "--run-id", "r3", "--size", "3", cwd=three).stdout)
         self.assertEqual(got3["symbols"], ["G", "H"])
         self.assertTrue(got3["short_batch"])
+        self.assertEqual(got3["target_research_cycle"], 1)
+        self.assertFalse(got3["round_robin_rollover"])
+
+        # Complete G and H so all A..H have completed cycle 1
+        self.complete(three, got3["symbols"])
+        self.publish(three, "r3")
+
+        # Now all 8 rows in watchlist.active are COMPLETED at cycle 1 -> round-robin rolls over to cycle 2!
+        four, five = self.start("watchlist_to_shortlist", "r4"), self.start("watchlist_to_shortlist", "r5")
+        got4 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+                                  "--run-id", "r4", "--size", "3", cwd=four).stdout)
+        got5 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+                                  "--run-id", "r5", "--size", "3", cwd=five).stdout)
+        self.assertEqual(got4["symbols"], ["A", "B", "C"])
+        self.assertEqual(got4["target_research_cycle"], 2)
+        self.assertTrue(got4["round_robin_rollover"])
+        self.assertEqual(got5["symbols"], ["D", "E", "F"])
+        self.assertEqual(got5["target_research_cycle"], 2)
+
+        # Even if complete() only updates cmp/status without manually setting research_cycle=2,
+        # publish_run.py automatically bumps research_cycle to 2 on the modified rows!
+        for tree, syms in ((four, got4["symbols"]), (five, got5["symbols"])):
+            data = self.read(tree, "data/watchlist/US.json")
+            for row in data["active"]:
+                if row["symbol"] in syms:
+                    row["cmp"] = 9.0
+            self.write(tree, "data/watchlist/US.json", data)
+        self.publish(four, "r4")
+        self.publish(five, "r5")
+
+        # Next run r6 sees A..F at cycle 2 and G, H still at cycle 1 -> offers G, H for cycle 2!
+        six = self.start("watchlist_to_shortlist", "r6")
+        got6 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+                                  "--run-id", "r6", "--size", "3", cwd=six).stdout)
+        self.assertEqual(got6["symbols"], ["G", "H"])
+        self.assertEqual(got6["target_research_cycle"], 2)
+        self.assertFalse(got6["round_robin_rollover"])
 
     def test_concurrent_batch_requests_never_overlap(self):
         trees = [self.start("watchlist_to_shortlist", f"p{i}") for i in range(4)]

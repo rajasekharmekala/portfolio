@@ -34,7 +34,7 @@ REPO = Path(__file__).resolve().parents[1]
 DEFAULT_TTL_HOURS = 6.0
 SINGLETON_WORKFLOWS = {"market_intelligence", "portfolio_audit", "options_audit", "displacement"}
 NAME_WORKFLOWS = {"watchlist_to_shortlist", "reject_to_watchlist", "company_report"}
-ELIGIBLE_WATCHLIST_STATUS = {"RESEARCH_REQUIRED", "PENDING_RESEARCH"}
+ELIGIBLE_WATCHLIST_STATUS = {"RESEARCH_REQUIRED", "PENDING_RESEARCH", "PENDING"}
 MARKETS = ("IN", "US")
 
 
@@ -187,10 +187,35 @@ def _watchlist_path(market):
     return next(s["path"] for s in sources if s["role"] == "watchlist")
 
 
-def candidate_symbols(market, pool, ref="origin/main"):
-    """Ordered candidate names for a batch, read from `ref` (default: the freshly fetched origin/main).
+def _row_cycle(row):
+    c = row.get("research_cycle")
+    if isinstance(c, int) and 1 <= c < 1000:
+        return c
+    return 1
 
-    ref "WORKTREE" reads the working file. If the ref cannot be resolved the working file is used.
+
+def _is_pending_row(row):
+    return (
+        row.get("status") in ELIGIBLE_WATCHLIST_STATUS
+        or row.get("deep_research_status") in ("PENDING", "RESEARCH_REQUIRED")
+    )
+
+
+def watchlist_queue_info(market, pool="watchlist", ref="origin/main"):
+    """Return (ordered_symbols, target_cycle, rollover) for `pool` ('watchlist' or 'archive').
+
+    For 'watchlist' (`watchlist.active`):
+      1. Any row explicitly marked pending (`status` in ELIGIBLE_WATCHLIST_STATUS or
+         `deep_research_status` in {'PENDING', 'RESEARCH_REQUIRED'}) is eligible first in sequential order.
+      2. When `max_cycle > 1` (a multi-cycle round-robin pass is already underway), completed rows with
+         `research_cycle < max_cycle` are eligible next in sequential order so every company completes
+         `max_cycle` before the next rollover.
+      3. Round-Robin Rollover: when ZERO rows in `watchlist.active` match (1) or (2) — meaning every
+         company in `watchlist.active` has completed `max_cycle` — the queue automatically rolls over
+         to `target_cycle = max_cycle + 1` from the top of `watchlist.active` (`rollover = True`).
+    For 'archive' (`watchlist.archive`):
+      Skips rows flagged `PERMANENT_REJECT` in notes/status, and orders by `(research_cycle, last_researched_date, index)`
+      so the oldest/lowest-cycle archive names are triaged first in round-robin order.
     """
     rel = _watchlist_path(market)
     text = None
@@ -204,10 +229,41 @@ def candidate_symbols(market, pool, ref="origin/main"):
         text = (REPO / rel).read_text(encoding="utf-8")
     data = json.loads(text)
     if pool == "archive":
-        rows = data.get("archive", [])
-    else:
-        rows = [r for r in data.get("active", []) if r.get("status") in ELIGIBLE_WATCHLIST_STATUS]
-    return [r["symbol"] for r in rows]
+        arch = data.get("archive", [])
+        eligible_arch = [
+            (idx, r) for idx, r in enumerate(arch)
+            if "PERMANENT_REJECT" not in str(r.get("notes") or "")
+            and r.get("status") != "PERMANENT_REJECT"
+        ]
+        min_c = min((_row_cycle(r) for _, r in eligible_arch), default=1)
+        max_c = max((_row_cycle(r) for _, r in eligible_arch), default=1)
+        rollover = bool(eligible_arch) and min_c == max_c and all(
+            r.get("status") not in ELIGIBLE_WATCHLIST_STATUS for _, r in eligible_arch
+        )
+        target_cycle = (max_c + 1) if rollover else max_c
+        eligible_arch.sort(key=lambda pair: (_row_cycle(pair[1]), str(pair[1].get("last_researched_date") or ""), pair[0]))
+        return [r["symbol"] for _, r in eligible_arch], target_cycle, rollover
+
+    active = data.get("active", [])
+    if not active:
+        return [], 1, False
+    max_cycle = max((_row_cycle(r) for r in active), default=1)
+    pending = [r for r in active if _is_pending_row(r)]
+    lagging = [r for r in active if not _is_pending_row(r) and _row_cycle(r) < max_cycle]
+    eligible = pending + lagging
+    if eligible:
+        return [r["symbol"] for r in eligible], max_cycle, False
+    # All active rows have completed max_cycle -> roll over to max_cycle + 1 in top-to-bottom order
+    return [r["symbol"] for r in active], max_cycle + 1, True
+
+
+def candidate_symbols(market, pool, ref="origin/main"):
+    """Ordered candidate names for a batch, read from `ref` (default: the freshly fetched origin/main).
+
+    ref "WORKTREE" reads the working file. If the ref cannot be resolved the working file is used.
+    """
+    symbols, _, _ = watchlist_queue_info(market, pool, ref)
+    return symbols
 
 
 def main():
@@ -248,10 +304,12 @@ def main():
                 fetched = _git("fetch", "origin", check=False)
                 if fetched.returncode != 0:
                     print("warning: git fetch origin failed; eligibility may be stale", file=sys.stderr)
-            candidates = candidate_symbols(args.market, args.pool, args.ref)
+            candidates, target_cycle, rollover = watchlist_queue_info(args.market, args.pool, args.ref)
             symbols, skipped = claim_batch(args.workflow, args.market, args.run_id, args.size, candidates, args.ttl_hours)
             print(json.dumps({"symbols": symbols, "skipped_held_by_other_runs": skipped,
-                              "short_batch": len(symbols) < args.size}))
+                              "short_batch": len(symbols) < args.size,
+                              "target_research_cycle": target_cycle,
+                              "round_robin_rollover": rollover}))
         elif args.command == "names":
             print(json.dumps({"claimed": claim_names(args.workflow, args.market, args.run_id, args.symbols, args.ttl_hours)}))
         elif args.command == "heartbeat":

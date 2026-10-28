@@ -89,7 +89,8 @@ Earlier runs failed in three ways: (1) tables full of `N/A` because no price his
   | Uptrend (broad) | Deploy toward the top of the equity band; add on pullbacks to support |
   | Uptrend (narrow breadth) | Normal deployment, leaders only, no chasing extended names, cash at policy target |
   | Correction | Cash at the top of the policy band; add only Stage 2 names within 0.5 ATR of support |
-  | Downtrend | Maximum cash; trim leveraged and Stage 4 holdings; no new momentum longs |
+  | Downtrend (capitulation bounce / follow-through watch) | Retain relative-strength leaders and undercut-and-reclaim shakeouts (stops anchored `0.5 x ATR` below the panic swing low); do not wholesale-liquidate into 40%+ cash; rotate capital freed from broken Stage 4 laggards into pilot/starter entries (up to 50% of standard tier size) or support limit orders in candidates passing Test A, Test B, or Test C; keep cash near the 10–15% policy ceiling |
+  | Downtrend | Maximum policy cash (10–15%); trim leveraged and broken Stage 4 holdings; no new momentum longs |
 - **One number, one value.** Prices, yields, VIX, breadth, stage and RSI for a symbol are copied from the ledger everywhere, with the as-of date. No re-quoting from memory and no differently rounded copies.
 - **The narrative spine.**
   Market report: regime (1) -> which sectors lead and lag (2) -> the Bull List is drawn mainly from leading sectors and the Bear List from lagging ones; any exception is named and explained (3, 4) -> smart-money flow corroborates or dissents (5) -> the Top 3 come only from section 3, are sized by the regime table, and each cites the sector and flow evidence (6) -> section 7 ingests exactly those names and no others.

@@ -234,8 +234,10 @@ Every candidate must be processed through the following 3 layers sequentially:
 │    - Debt-to-Equity < 0.70 (Hard red line: ≥ 1.20x or interest cover < 2x)  │
 │    - 3Y Cumulative CFO / PAT ≥ 0.70 (or ≥ 0.50 for Capital Goods / Defense /│
 │      Infra / Manufacturing growing ≥ 20% CAGR with D/E < 0.50 & ROCE ≥ 18%; │
-│      Hard red line < 0.25 or < 0.40 without turnaround evidence; note SEBI  │
-│      requires CF statements only semi-annually in H1/Sep and FY/Mar).       │
+│      Hard red line < 0.25 unless exempt under High-Growth Working-Capital   │
+│      Ramp-Up in scoring.json: YoY rev ≥ 35% or PAT ≥ 50% with order book    │
+│      ≥ 1.5x sales or positive latest H1/FY CFO → Layer 2 WATCH; promoter    │
+│      pledge hard line ≥ 25%, or 20–25% only with high debt/Stage 4).        │
 <!-- /MARKET -->
 <!-- MARKET US -->
 │    - ROIC (GAAP, or ex-M&A intangibles amortization, or ROTCE) ≥ 12.0%      │
@@ -367,17 +369,21 @@ Every candidate must be processed through the following 3 layers sequentially:
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ PHASE 2: STATEFUL ROUND-ROBIN QUEUE SELECTION (NEXT 4 STOCKS)               │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Load `watchlist.active` array from `data/watchlist/IN.json`.   │
-│ 2. Determine current `Research Cycle` = max(Research Cycle in the JSON records) or 1.   │
-│ 3. Find eligible candidate rows where:                                      │
-│    - `Deep Research Status` is 'PENDING' OR empty, OR                       │
-│    - `Research Cycle` < current_cycle                                       │
-│ 4. ROUND-ROBIN RESET CHECK:                                                 │
-│    - If ZERO rows are pending:                                               │
-│      • Set current_cycle = current_cycle + 1                                │
-│      • Reset all watchlist.active rows to `Deep Research Status` = 'PENDING' │
-│      • Select the first 4 rows from the top of the watchlist.active.         │
-│ 5. If pending rows exist: Select first 4 pending rows in sequential order.  │
+│ 1. Claim the batch via `scripts/run_claims.py batch --workflow              │
+│    watchlist_to_shortlist --market IN --run-id <RUN_ID> --size 4`.          │
+│ 2. `run_claims.py` deterministically resolves the round-robin queue from    │
+│    `data/watchlist/IN.json` (`watchlist.active`):                           │
+│    - Priority 1: Rows with `status` in `RESEARCH_REQUIRED`/`PENDING` or     │
+│      `deep_research_status = 'PENDING'`.                                    │
+│    - Priority 2: Completed rows where `research_cycle < max_cycle`.         │
+│    - Automatic Rollover: When ALL rows in `watchlist.active` have completed │
+│      `max_cycle`, `run_claims.py` sets `round_robin_rollover = true` and    │
+│      `target_research_cycle = max_cycle + 1`, selecting from the top of     │
+│      `watchlist.active` without bulk-mutating untouched rows.               │
+│ 3. In Phase 6, stamp the 4 completed rows with `status = 'COMPLETED'`,      │
+│    `deep_research_status = 'COMPLETED'`, and                                │
+│    `research_cycle = target_research_cycle` (never bulk-reset untouched     │
+│    rows, so concurrent worktree runs merge cleanly via `record_merge.py`).  │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │
                                        ▼
@@ -445,9 +451,10 @@ Every candidate must be processed through the following 3 layers sequentially:
 ```
 <!-- /MARKET -->
 <!-- MARKET US -->
-1. **Reconciliation & Queue Selection:**
+1. **Reconciliation & Stateful Round-Robin Queue Selection:**
    - Ingest `data/watchlist/US.json` and `data/shortlist/US.json`.
-   - Select the next 4 pending candidates from `watchlist.active` where `Deep Research Status` is `'PENDING'` or empty.
+   - Claim the next 4 candidates via `.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market US --run-id <RUN_ID> --size 4`. When all rows in `watchlist.active` have completed the current `research_cycle`, `run_claims.py` automatically rolls over to `target_research_cycle = max_cycle + 1` from the top of `watchlist.active`.
+   - When updating `data/watchlist/US.json` in Step 4, stamp ONLY the 4 evaluated rows with `status = "COMPLETED"`, `deep_research_status = "COMPLETED"`, and `research_cycle = target_research_cycle` (never bulk-reset untouched rows to `PENDING`).
 2. **Dedicated Subagent Dispatch (1 Agent per Company):**
    - Launch an independent research subagent for each of the 4 companies to eliminate context dilution.
 3. **Deep Underwriting & Wikipedia HTML Dossier Generation:**

@@ -887,6 +887,10 @@ def build(args):
     breadth200 = num(100 * sum(1 for m in pool if m.get("sma200") and m["close"] > m["sma200"]) / len(pool), 1) if pool else None
     sec = {n: inst[n] for n in cfg["sectors"] if n in inst}
     p = inst.get(primary_name, {})
+    vix_name = "India VIX" if market == "IN" else "VIX"
+    vix_inst = inst.get(vix_name, {})
+    vix_1d = vix_inst.get("chg_1d_pct") if isinstance(vix_inst, dict) else None
+    sub_regime = "STANDARD"
     if not p or p.get("error"):
         label = "N/A (benchmark series unavailable)"
     elif p["close"] > p["sma50"] > p["sma200"] and (breadth50 is None or breadth50 >= 55):
@@ -896,9 +900,22 @@ def build(args):
     elif p["close"] > p["sma200"]:
         label = "Correction (below 50-DMA, above 200-DMA)"
     else:
-        label = "Downtrend"
+        # Check for Capitulation Reversal / Follow-Through Watch when breadth is washed out (<= 25%) and green shoots appear
+        p_1d = p.get("chg_1d_pct")
+        p_sw20 = p.get("swing_low_20d")
+        green_shoot = (
+            (p_1d is not None and p_1d >= 0.0)
+            or (p_sw20 is not None and p_sw20 > 0 and p["close"] >= p_sw20 * 1.01)
+            or (vix_1d is not None and vix_1d < 0.0)
+        )
+        if breadth50 is not None and breadth50 <= 25.0 and green_shoot:
+            label = "Downtrend (capitulation bounce / follow-through watch)"
+            sub_regime = "CAPITULATION_REVERSAL_WATCH"
+        else:
+            label = "Downtrend"
     regime = {
-        "label": label, "benchmark": primary_name, "breadth_pct_above_50dma": breadth50,
+        "label": label, "sub_regime": sub_regime, "benchmark": primary_name,
+        "breadth_pct_above_50dma": breadth50,
         "breadth_pct_above_200dma": breadth200, "breadth_pool_size": len(pool),
         "distribution_days_25": p.get("dist_days_25"),
         "sectors_above_20dma": sum(1 for m in sec.values() if m.get("sma20") and m["close"] > m["sma20"]),

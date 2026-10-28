@@ -6,7 +6,7 @@ description: Underwrites the next batch of watchlist names for one market (IN or
 
 Read `_COMMON.md` first.
 
-**Input:** market `<MKT>`. The watchlist source and its shortlist are declared in `config/portfolios.json`. The batch size comes from the skill (`skills[watchlist_to_shortlist]`). Only names whose `Status` is `RESEARCH_REQUIRED` or `PENDING_RESEARCH` are eligible. Select them by header name.
+**Input:** market `<MKT>`. The watchlist source and its shortlist are declared in `config/portfolios.json`. The batch size comes from the skill (`skills[watchlist_to_shortlist]`). Eligibility is determined by `scripts/run_claims.py batch`: names with `status` in `RESEARCH_REQUIRED` / `PENDING_RESEARCH` / `PENDING` (or `deep_research_status = PENDING`) come first, followed by names whose `research_cycle` lags the current max cycle, and once all names in `watchlist.active` have completed the current cycle, `run_claims.py` automatically rolls over to `target_research_cycle = current_cycle + 1` from the top of `watchlist.active`. Select and update fields by header name.
 
 ## 1. Session date and run directory
 
@@ -14,7 +14,7 @@ As in `market_intelligence.md` §1–2. Date technical facts and dossier as-of s
 
 ## 2. Batch
 
-Start the run session (`run_session.py start --workflow watchlist_to_shortlist --market <MKT>`), then claim the batch from inside the worktree: `.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size <skill batch size>`. It returns the next eligible names in watchlist order, read from freshly fetched `origin/main`, skipping names completed on origin and names claimed by any other live run, so two runs never work on the same company. Work on exactly the returned `symbols`; if `short_batch` is true, process those and disclose the short batch in the summary report; never widen eligibility to fill it. Record the batch, the claim output and `base_commit` in `manifest.json`. Do not process a name twice in the same run. Rerunning the command for the same run id returns the same names.
+Start the run session (`run_session.py start --workflow watchlist_to_shortlist --market <MKT>`), then claim the batch from inside the worktree: `.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size <skill batch size>`. It returns the next eligible names in watchlist/round-robin order (`symbols`), `target_research_cycle`, and `round_robin_rollover`, read from freshly fetched `origin/main`, skipping names already completed in the current cycle on origin and names claimed by any other live run, so two runs never work on the same company. Work on exactly the returned `symbols`; if `short_batch` is true, process those and disclose the short batch in the summary report; never widen eligibility to fill it. When updating `data/watchlist/<MKT>.json` in §5, update **only** the rows processed in this batch (setting `status = "COMPLETED"`, `deep_research_status = "COMPLETED"`, and `research_cycle = target_research_cycle`); never bulk-reset untouched rows in `watchlist.active` to `PENDING`, as that would conflict with concurrent runs. Record the batch, the claim output and `base_commit` in `manifest.json`. Do not process a name twice in the same run. Rerunning the command for the same run id returns the same names.
 
 ## 3. Ledger and research
 

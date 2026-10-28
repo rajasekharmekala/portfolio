@@ -1,7 +1,7 @@
 {
   "$comment": "SINGLE SOURCE OF TRUTH for all portfolio threshold numbers. The constitution (Portfolio Research System/00_Investment_Philosophy_and_Portfolio_Operating_Constitution.md) states these rules in prose; this file is the machine-readable twin. Skills must reference this file and must not restate numbers that differ from it. Change a number here and in the matching constitution paragraph — nowhere else.",
   "schema_version": 2,
-  "updated": "2026-10-23",
+  "updated": "2026-10-27",
   "buckets": {
     "CORE_ALPHA": { "US": [35, 40], "IN": [30, 40] },
     "TACTICAL_MOMENTUM": { "US": [50, 65], "IN": [50, 65] },
@@ -54,8 +54,8 @@
       ],
       "IN": [
         "Debt-to-Equity >= 1.20x (non-financial; excluding standard trade LC acceptances where interest coverage >= 3.0x) or interest coverage < 2.0x",
-        "Promoter pledge >= 20% of promoter holding or rising pledge into a falling stock",
-        "3-Year Cumulative CFO / PAT < 0.25 (or < 0.40 for mature non-order-book businesses) without working-capital/order-book turnaround evidence. Note: SEBI LODR requires statutory Cash Flow Statements only semi-annually (H1/Sep and FY/Mar); never fail a Q1/Q3 evaluation solely because a quarterly CF statement is unpublished — evaluate using the latest H1/FY cash flow plus quarterly revenue/margin/order-book disclosures.",
+        "Promoter pledge >= 25% of promoter holding (or >= 20% only when combined with D/E >= 0.70x, falling earnings, or a Stage 4 breakdown; a static 20-25% pledge on a growing, low-debt business is a Layer 2 WATCH, not a Layer 1 hard red line), or a material pledge jump (> 5 percentage points QoQ) into a Stage 4 falling stock",
+        "3-Year Cumulative CFO / PAT < 0.25 (or < 0.40 for mature non-order-book businesses) UNLESS the company qualifies under the High-Growth Working-Capital Ramp-Up Exemption: Capital Goods, Defense, Power Transmission/Transformers, Infra, EPC, or Manufacturing businesses with YoY revenue growth >= 35% (or PAT growth >= 50% or 3Y sales CAGR >= 25%) and either unexecuted order book >= 1.5x TTM revenue or positive latest H1/FY operating cash flow are exempt from the trailing 3Y CFO/PAT red line (scored as a Layer 2 working-capital WATCH instead of a Layer 1 disqualifier, because rapid order-book execution consumes working capital upfront). Note: SEBI LODR requires statutory Cash Flow Statements only semi-annually (H1/Sep and FY/Mar); never fail a Q1/Q3 evaluation solely because a quarterly CF statement is unpublished.",
         "Stage 4 breakdown (Close < falling SMA50 < falling SMA200) with no base formation (Test C not passing)"
       ]
     },
@@ -84,7 +84,8 @@
     "TACTICAL_MOMENTUM": 2.5,
     "TURNAROUND_VALUE_INFLECTION": 2.5,
     "formula": "(target_base - entry_ref) / (entry_ref - stop_loss), where entry_ref is CMP for immediate entries or entry_zone_high for limit-order / WAIT_FOR_SUPPORT setups",
-    "target_anchoring": "Anchor target_base to 12-24M Forward EPS (FY27E/FY28E) x 3Y Median P/E (or justified DCF / EV-EBITDA / P-B for financials / Technical Base Measured-Move). For multi-year CORE_ALPHA compounders, 2-year forward EPS (FY28E) x 3Y median P/E (or current P/E if below 3Y median) is permitted so 3-5 year compounders are not penalized by 1-year multiple compression."
+    "target_anchoring": "Anchor target_base to 12-24M Forward EPS (FY27E/FY28E) x 3Y Median P/E (or justified DCF / EV-EBITDA / P-B for financials / Technical Base Measured-Move). For multi-year CORE_ALPHA compounders, 2-year forward EPS (FY28E) x 3Y median P/E (or current P/E if below 3Y median) is permitted so 3-5 year compounders are not penalized by 1-year multiple compression.",
+    "incumbent_holding_rule": "The asymmetry_floor (2.0x Core, 2.5x Tactical) governs NEW capital deployment (IMMEDIATE_BUY / ACCUMULATE_ON_DIP) and 3-condition swap comparisons. Never mechanically EXIT an existing holding that is trading above its active invalidation stop solely because a bounce narrowed its R:R to a static prior target_base; evaluate existing holdings against target_bull / forward revisions and trail the stop."
   },
   "reverse_dcf": {
     "discount_rate_pct": { "US": 10.0, "IN": 12.0 },
@@ -99,7 +100,16 @@
   ],
   "stop_placement": {
     "CORE_ALPHA": "below nearest structural invalidation support — min(swing_low_20d, SMA50) minus 1.0 x ATR(14) for Stage 2 uptrends, or base_low_63d minus 1.0 x ATR(14) for Stage 1 / turnaround bases (do NOT mechanically use a distant 200-day MA in a Stage 2 advance; Risk-Unit Sizing already scales position weight to stop distance)",
-    "TACTICAL_MOMENTUM": "below min(swing_low_20d, SMA20 or SMA50) minus 0.5 x ATR(14)"
+    "TACTICAL_MOMENTUM": "below min(swing_low_20d, SMA20 or SMA50) minus 0.5 x ATR(14)",
+    "undercut_and_reclaim_rule": "Evaluate stops strictly on the current session's close — never latch a prior session's unexecuted stop breach as a permanent exit order. If a holding closed below its written stop during a prior session (shakeout) and was not sold, and the current session's close has reclaimed the written stop (or closed within 0.25 x ATR(14) of it on a positive reversal day with 1D return > 0% and RSI >= 32), the prior breach is Forgiven as an Undercut-and-Reclaim shakeout. Retain the holding (HOLD / HARD STOP) and reset the active invalidation stop to 0.5 x ATR(14) below the shakeout low (swing_low_20d)."
+  },
+  "regime_posture": {
+    "capitulation_reversal_watch": {
+      "trigger": "Benchmark below SMA50 and SMA200 (Downtrend), BUT universe breadth_pct_above_50dma <= 25% (washed-out capitulation territory) AND green shoots appear (benchmark 1D return >= 0%, or bouncing >= 1.0% off 20-day swing low, or VIX cooling on the day).",
+      "label": "Downtrend (capitulation bounce / follow-through watch)",
+      "holdings_rule": "Do NOT wholesale-liquidate holdings into cash on a breadth-washout bounce. Retain all Stage 2 leaders, Stage 1/3 holdings above their active stops, and Undercut-and-Reclaim shakeouts (with stops anchored below the panic swing low). Only exit broken Stage 4 laggards that failed Test C or true solvency/governance red-line failures.",
+      "deployment_rule": "Instead of parking 30-45% in idle cash waiting for the index to clear its 50-DMA, rotate capital freed from Stage 4 laggards into pilot/starter positions (up to 50% of standard Risk-Unit tier weight) or support-zone limit orders in shortlist candidates passing Test A (Stage 2 leader), Test B (base pivot), or Test C (turnaround inflection), using the capitulation swing low minus 0.5 x ATR(14) as the hard stop. Target cash remains near the policy ceiling (10-15%), not 40%+."
+    }
   },
   "momentum_gate": {
     "note": "Computes Test A (in Stage 2 momentum now), Test B (entering momentum from a flat base), and Test C (turnaround / recovery inflection above a 63d floor) from the frozen price snapshot (scripts/momentum_gate.py). Nearest verified support is the highest structural support (SMA20, SMA50, 20d swing low, or 63d base low) at or below price.",
