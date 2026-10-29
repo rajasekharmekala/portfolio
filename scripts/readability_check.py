@@ -81,7 +81,7 @@ def first_use_in_dfn(soup, term):
         ancestors = [p.name for p in node.parents if p and p.name]
         if any(t in skip_tags for t in ancestors):
             continue
-        if any("key-figures" in (p.get("class") or []) for p in node.parents if hasattr(p, "get")):
+        if any("key-figures" in (p.get("class") or []) or any(c in (p.get("class") or []) for c in ("desk-prenav", "desk-logotab", "desk-masthead")) for p in node.parents if hasattr(p, "get")):
             continue
         if rx.search(str(node)):
             in_dfn = node.parent.name == "dfn" or \

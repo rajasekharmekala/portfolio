@@ -51,17 +51,63 @@ VERDICT_CLASS_MAP = {
 }
 
 
+def _lookup_snapshot(snapshots: dict, sym: str) -> dict:
+    """Find one symbol's block in a stock_snapshot.py file (key `snapshots` or `symbols`) or a bare symbol map."""
+    for key in ("snapshots", "symbols"):
+        block = snapshots.get(key)
+        if isinstance(block, dict) and sym in block:
+            return block[sym]
+        if isinstance(block, list):
+            for row in block:
+                if isinstance(row, dict) and row.get("symbol") == sym:
+                    return row
+    return snapshots.get(sym, {}) if isinstance(snapshots.get(sym), dict) else {}
+
+
+def _zone(zone) -> tuple:
+    if isinstance(zone, dict):
+        return zone.get("low"), zone.get("high")
+    if isinstance(zone, (list, tuple)) and len(zone) == 2:
+        return zone[0], zone[1]
+    return None, None
+
+
+def _valuation(val) -> tuple:
+    if isinstance(val, dict):
+        return val.get("posture", "N/A"), val.get("note", "Compares current P/E against earnings growth and ROE/ROCE.")
+    if isinstance(val, str) and val:
+        return val, "Compares current P/E against earnings growth and ROE/ROCE."
+    return "N/A", "Compares current P/E against earnings growth and ROE/ROCE."
+
+
+def _tv_rating_label(score) -> str:
+    if not isinstance(score, (int, float)):
+        return "N/A"
+    label = (
+        "Strong Buy" if score >= 0.5 else "Buy" if score >= 0.1 else "Neutral" if score > -0.1
+        else "Sell" if score > -0.5 else "Strong Sell"
+    )
+    return f"{label} ({score:+.2f})"
+
+
 def _esc(val) -> str:
     if val is None:
         return "N/A"
     return html.escape(str(val))
 
 
+def _clean_cell(c: str) -> str:
+    s = str(c).strip()
+    if s and not s.endswith((".", "!", "?", ":", ";", ">")):
+        return s + "."
+    return s
+
+
 def _render_table(caption: str, headers: list[str], rows: list[list[str]], explanatory_p: str) -> str:
-    th_html = "".join(f"<th>{h}</th>" for h in headers)
+    th_html = "".join(f"<th>{_clean_cell(h)}</th>" for h in headers)
     tr_list = []
     for r in rows:
-        tds = "".join(f"<td>{c}</td>" for c in r)
+        tds = "".join(f"<td>{_clean_cell(c)}</td>" for c in r)
         tr_list.append(f"<tr>{tds}</tr>")
     body_html = "\n".join(tr_list)
     cap_html = f"<caption>{caption}</caption>\n" if caption else ""
@@ -141,17 +187,17 @@ def _build_ch4_from_snapshot_or_ledger(
     s200 = tv.get("sma200") or inst_m.get("sma200")
     w30 = tv.get("sma30_weekly") or s200
     w10_ema = tv.get("ema10_weekly") or tv.get("ema50") or s50
-    rsi = tv.get("rsi14") if tv.get("rsi14") is not None else inst_m.get("rsi14")
-    atr = tv.get("atr14") if tv.get("atr14") is not None else inst_m.get("atr14")
+    rsi = next((v for v in (tv.get("rsi14_daily"), tv.get("rsi_14_daily"), tv.get("rsi14"), inst_m.get("rsi14")) if v is not None), None)
+    atr = next((v for v in (tv.get("atr14"), tv.get("atr_14"), inst_m.get("atr14")) if v is not None), None)
     hi52 = tv.get("high_52w") or inst_m.get("hi52")
     lo52 = tv.get("low_52w") or inst_m.get("lo52")
-    rvol = tv.get("rel_vol_10d") or inst_m.get("vol_mult_20d")
-    tv_label = tv.get("tv_rating_label", "N/A")
+    rvol = tv.get("rel_vol_10d") or tv.get("vol_ratio_vs_30d") or inst_m.get("vol_mult_20d")
+    tv_label = tv.get("tv_rating_label") or _tv_rating_label(tv.get("tv_rating_overall"))
     piv_s1, piv_m, piv_r1 = tv.get("pivot_s1"), tv.get("pivot_middle"), tv.get("pivot_r1")
     ext_10w = s2_ev.get("extension_from_10w_ema_pct")
     ext_50d = s2_ev.get("extension_from_50d_sma_pct")
     w_stage = s2_ev.get("weinstein_stage") or inst_m.get("stage_label", "N/A")
-    w_explain = s2_ev.get("stage_explanation", "Stage 2 is rising institutional markup; Stage 4 is breakdown.")
+    w_explain = s2_ev.get("stage_explanation") or s2_ev.get("summary_rationale") or "Stage 2 is rising institutional markup; Stage 4 is breakdown."
     cite_tag = ch4_spec.get("ledger_cite_tag", "")
 
     def fmt_px(v):
@@ -167,7 +213,7 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Stan Weinstein Stage & TheWrap status",
-            f"{_esc(w_stage)} (In TheWrap Stage 2 list: {w_s2.get('in_stage2_list', 'N/A')})",
+            f"{_esc(w_stage)} (In TheWrap Stage 2 list: {w_s2.get('in_thewrap_stage2', w_s2.get('in_stage2_list', 'N/A'))}; weeks in Stage 2: {w_s2.get('weeks_in_stage2', 'N/A')})",
             _esc(w_explain),
         ],
         [
@@ -194,9 +240,10 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Relative volume & institutional sponsorship",
-            f"{round(rvol, 2) if isinstance(rvol, (int, float)) else 'N/A'}x vs 10d avg",
-            f"Sector Stage 2 breadth ({_esc(w_s2.get('sector_name', tv.get('sector', 'N/A')))}): "
-            f"{w_s2.get('sector_pct_in_stage2') or w_s2.get('industry_pct_outperforming_sp500', 'N/A')}%",
+            f"{round(rvol, 2) if isinstance(rvol, (int, float)) else 'N/A'}x vs 30d avg",
+            f"TheWrap industry ({_esc(w_s2.get('thewrap_industry') or w_s2.get('sector_name') or tv.get('industry', 'N/A'))}); "
+            f"relative-strength rank {w_s2.get('rs_pct', 'N/A')}%; sector Stage 2 density "
+            f"{w_s2.get('sector_stage2_density_pct') or w_s2.get('sector_pct_in_stage2') or w_s2.get('industry_pct_outperforming_sp500') or 'N/A'}",
         ],
     ]
     t1_html = _render_table(
@@ -218,11 +265,11 @@ def _build_ch4_from_snapshot_or_ledger(
         [
             "No-FOMO entry timing posture",
             _esc(s2_ev.get("entry_timing_posture", ch4_spec.get("entry_posture", "N/A"))),
-            _esc(s2_ev.get("timing_rationale", "Determines whether to buy at CMP or wait for a pullback to support.")),
+            _esc(s2_ev.get("timing_rationale") or "Determines whether to buy at CMP or wait for a pullback to support."),
         ],
         [
             "Support buy zone (20D EMA / 10W EMA / 50D SMA)",
-            f"{fmt_px((s2_ev.get('support_buy_zone') or {}).get('low'))} – {fmt_px((s2_ev.get('support_buy_zone') or {}).get('high'))}",
+            f"{fmt_px(_zone(s2_ev.get('support_buy_zone'))[0])} – {fmt_px(_zone(s2_ev.get('support_buy_zone'))[1])}",
             "Primary institutional pullback accumulation zone on TradingView",
         ],
         [
@@ -232,8 +279,8 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Valuation sanity check (Screener.in / Finviz)",
-            _esc((s2_ev.get("valuation_assessment") or {}).get("posture", "N/A")),
-            _esc((s2_ev.get("valuation_assessment") or {}).get("note", "Compares current P/E against earnings growth and ROE/ROCE.")),
+            _esc(_valuation(s2_ev.get("valuation_assessment"))[0]),
+            _esc(_valuation(s2_ev.get("valuation_assessment"))[1]),
         ],
     ]
     t2_html = _render_table(
@@ -266,7 +313,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     market = spec["market"].upper()
     as_of = spec.get("as_of") or snapshots.get("as_of") or facts.get("asof") or "latest"
     inst_m = (facts.get("instruments") or {}).get(sym, {})
-    snap_sym = (snapshots.get("symbols") or {}).get(sym, {}) if "symbols" in snapshots else snapshots.get(sym, {})
+    snap_sym = _lookup_snapshot(snapshots, sym)
     scoring = json.load(open(SCORING_FILE, encoding="utf-8"))
     cur = "₹" if market == "IN" else "$"
 
@@ -293,7 +340,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     tier = spec.get("conviction_tier", "TIER_2")
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
     w_stage = s2_ev.get("weinstein_stage") or inst_m.get("stage_label") or spec.get("weinstein_stage", "Stage 2")
-    entry_posture = s2_ev.get("entry_timing_posture") or spec.get("entry_posture", verdict)
+    entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
 
     # Key figures strip
     kf_items = [
@@ -332,7 +379,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         ch1_parts.append(f"<p>{p}</p>")
     if ch1.get("segments_table"):
         st = ch1["segments_table"]
-        ch1_parts.append(_render_table(st.get("caption", ""), st["headers"], st["rows"], st["takeaway"]))
+        ch1_parts.append(_render_table(st.get("caption", ""), st["headers"], st["rows"], st.get("takeaway", "")))
     for sub in ch1.get("subsections", []):
         ch1_parts.append(f"<h3>{sub['title']}</h3>")
         for p in sub.get("paragraphs", []):
@@ -430,7 +477,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
                 l1_t.get("caption", f"Financial health and valuation summary for {sym}"),
                 l1_t["headers"],
                 l1_t["rows"],
-                l1_t["takeaway"],
+                l1_t.get("takeaway", ""),
             )
         )
     for est in ch3.get("estimates", []):
@@ -441,7 +488,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         if pt.get("intro"):
             ch3_parts.append(f"<p>{pt['intro']}</p>")
         ch3_parts.append(
-            _render_table(pt.get("caption", f"Peer comparison for {sym}"), pt["headers"], pt["rows"], pt["takeaway"])
+            _render_table(pt.get("caption", f"Peer comparison for {sym}"), pt["headers"], pt["rows"], pt.get("takeaway", ""))
         )
     ch3_parts.append("</section>")
 
@@ -464,7 +511,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
                 ht.get("caption", f"Multi-horizon investment outlook for {sym}"),
                 ht["headers"],
                 ht["rows"],
-                ht["takeaway"],
+                ht.get("takeaway", ""),
             )
         )
     if ch5.get("variant_perception_paragraphs"):
@@ -477,7 +524,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     ch5_parts.append("<h3>Bull, base, and bear scenarios</h3>")
     ch5_parts.append(
         _render_table(
-            sc_t.get("caption", f"12-month scenario table for {sym}"), sc_t["headers"], sc_t["rows"], sc_t["takeaway"]
+            sc_t.get("caption", f"12-month scenario table for {sym}"), sc_t["headers"], sc_t["rows"], sc_t.get("takeaway", "")
         )
     )
     ch5_parts.append("</section>")
@@ -498,7 +545,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
                 ft.get("caption", f"Key risk and invalidation matrix for {sym}"),
                 ft["headers"],
                 ft["rows"],
-                ft["takeaway"],
+                ft.get("takeaway", ""),
             )
         )
     if ch6.get("hinge_paragraph"):

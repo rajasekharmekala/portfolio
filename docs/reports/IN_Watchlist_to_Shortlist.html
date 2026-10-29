@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="report">
+<meta name="report-workflow" content="Watchlist to Shortlist">
+<meta name="research-as-of" content="2026-10-29">
+<meta name="generated-at" content="2026-10-29T16:39:35.189269-07:00">
+<title>Report</title>
+<style>
+:root {
+  /* Page & surface (Techmeme / Morning Brief unified theme) */
+  --paper:          #ffffff;
+  --paper-top:      #f4f6f8;
+  --ink:            #111111;
+  --ink-strong:     #174a61;
+  --muted:          #556677;
+  --rule:           #cccccc;
+  --rule-soft:      #d8e0e6;
+  --surface:        #ffffff;
+  --surface-alt:    #f4f6f8;
+  --link:           #002848;
+  --link-visited:   #902050;
+  --link-hover-bg:  #d0e8f4;
+  --navy:           #174a61;
+  --navy-hover:     #578aa1;
+  --sisnav-hover:   #25607b;
+
+  /* Verdict semantic tokens — four distinct hues, colour-blind safe when paired with text labels */
+  --keep-ink:       #145a32;   /* forest green — KEEP / HOLD / SHORTLIST */
+  --keep-bg:        #e8f4ec;
+  --keep-rule:      #8ec5a1;
+
+  --accumulate-ink: #0f4c81;   /* slate blue — ACCUMULATE / BUY / ADD / STAGE 2 BREAKOUT */
+  --accumulate-bg:  #e7f0f9;
+  --accumulate-rule:#8fb4da;
+
+  --trim-ink:       #7c4700;   /* warm amber — TRIM / WAIT FOR SUPPORT / ROLL */
+  --trim-bg:        #fbf2e1;
+  --trim-rule:      #dfba73;
+
+  --exit-ink:       #8b1e1e;   /* brick red — EXIT / REJECT / CLOSE / STAGE 4 */
+  --exit-bg:        #fbeaea;
+  --exit-rule:      #dca1a1;
+
+  --watch-ink:      #424b54;   /* neutral slate — WATCH / ARCHIVED / PENDING */
+  --watch-bg:       #eef0f2;
+  --watch-rule:     #b8c0c8;
+
+  /* Callout accents (matching personal-wiki .exec-theme-box and .deepdive-container) */
+  --primer-accent:  #d4a017;   /* gold — Executive Synthesis / Primer box */
+  --primer-tint:    #fdfbe8;
+  --rule-accent:    #0f4c81;   /* slate blue — Rule Explained box */
+  --rule-tint:      #eef4fa;
+  --case-accent:    #174a61;   /* Techmeme navy — Deep-Dive / Case Note box */
+  --case-tint:      #fcfdfe;
+  --warn-accent:    #8b1e1e;   /* brick — Risk / Conflict callout */
+  --warn-tint:      #fcf1f1;
+}
+* { box-sizing: border-box; }
+html { font-size: 15.5px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+.report {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 18px 56px;
+}
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--link-visited);
+}
+a:hover {
+  background-color: var(--link-hover-bg);
+  text-decoration: underline;
+}
+
+/* Headings — Techmeme / Research Desk style */
+h1, h2, h3, h4 {
+  color: var(--ink-strong);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.hatnote {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--navy);
+  clear: left;
+  color: var(--navy);
+}
+h3 {
+  font-size: 1.05rem;
+  margin: 1.35rem 0 0.45rem;
+  color: var(--ink-strong);
+}
+h4 {
+  font-size: 0.96rem;
+  margin: 1rem 0 0.35rem;
+  color: var(--ink);
+}
+p { margin: 0.55rem 0 0.9rem; }
+ul, ol { margin: 0.45rem 0 0.95rem; padding-left: 1.5rem; }
+li { margin: 0.28rem 0; }
+hr { border: 0; border-top: 1px solid var(--rule-soft); margin: 1.5rem 0; }
+
+/* Lead & TOC */
+.lead { font-size: 1.01rem; }
+.toc {
+  display: table;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  padding: 0.75rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+.toc-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: 0.18rem 0; }
+
+/* Infobox */
+.infobox {
+  float: right;
+  clear: right;
+  width: 310px;
+  margin: 0 0 1.25rem 1.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.infobox caption, .infobox .infobox-title {
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+}
+.infobox th, .infobox td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--rule-soft);
+  vertical-align: top;
+  text-align: left;
+}
+.infobox th {
+  width: 44%;
+  color: var(--muted);
+  font-weight: 600;
+}
+.infobox td {
+  font-variant-numeric: tabular-nums;
+}
+.infobox .infobox-subhead th {
+  background: #e9eff4;
+  color: var(--navy);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Data tables (wikitable) — responsive & sticky headers */
+.table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0.85rem 0 1.35rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+table.wikitable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  background: var(--surface);
+}
+table.wikitable caption {
+  font-weight: 700;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  color: var(--navy);
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule-soft);
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid var(--rule-soft);
+  padding: 0.44rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+table.wikitable thead th, table.wikitable tr:first-child th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule);
+}
+table.wikitable tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+table.wikitable tbody tr:hover {
+  background: #eef5fa;
+}
+.num, td.num, th.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Verdict pills */
+.verdict {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.verdict-keep       { color: var(--keep-ink);       background: var(--keep-bg);       border-color: var(--keep-rule); }
+.verdict-accumulate { color: var(--accumulate-ink); background: var(--accumulate-bg); border-color: var(--accumulate-rule); }
+.verdict-trim       { color: var(--trim-ink);       background: var(--trim-bg);       border-color: var(--trim-rule); }
+.verdict-exit       { color: var(--exit-ink);       background: var(--exit-bg);       border-color: var(--exit-rule); }
+.verdict-watch      { color: var(--watch-ink);      background: var(--watch-bg);      border-color: var(--watch-rule); }
+
+/* Footnotes & references */
+sup.reference { font-size: 0.75em; line-height: 0; }
+.reflist {
+  font-size: 0.84rem;
+  color: var(--muted);
+  column-width: 28rem;
+  column-gap: 2rem;
+  padding-left: 1.5rem;
+}
+.reflist li { margin: 0.25rem 0; break-inside: avoid; }
+
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-alt);
+  padding: 0.08rem 0.3rem;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .report { padding: 14px 12px 40px; }
+  .infobox { float: none; width: 100%; margin: 0 0 1.25rem 0; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; }
+}
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  .report { max-width: none; padding: 0; }
+  a { color: #000; text-decoration: underline; }
+  h2, h3 { page-break-after: avoid; }
+  table, .callout, .case-note { page-break-inside: avoid; }
+}
+
+/* === Book-report teaching components (Techmeme / Morning Brief unified theme) === */
+
+/* Key-figures strip: 3–5 headline numbers at the top of a report or section */
+.key-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 1.4rem;
+  clear: left;
+}
+.key-figures > div {
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  padding: 0.65rem 0.85rem;
+}
+.key-figures .kf-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+.key-figures .kf-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+.key-figures .kf-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Callout boxes: Primer (matches .exec-theme-box), Rule Explained, Risk/Warning */
+.callout {
+  border: 1px solid var(--rule-soft);
+  border-left: 5px solid var(--primer-accent);
+  background: var(--primer-tint);
+  padding: 0.75rem 1.05rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.93rem;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8a6300;
+  margin: 0 0 0.35rem;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout-rule {
+  border-left-color: var(--rule-accent);
+  background: var(--rule-tint);
+}
+.callout-rule .callout-title { color: var(--rule-accent); }
+.callout-warn {
+  border-left-color: var(--warn-accent);
+  background: var(--warn-tint);
+}
+.callout-warn .callout-title { color: var(--warn-accent); }
+
+/* Case note: one box per holding / option / candidate (matches .deepdive-container) */
+.case-note {
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--case-accent);
+  background: var(--case-tint);
+  padding: 0.95rem 1.15rem;
+  margin: 1.15rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.case-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.case-note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+.case-note-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.case-note dl.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: #f4f8fb;
+  border-left: 3px solid var(--navy);
+  font-size: 0.84rem;
+}
+.case-note dl.case-facts div { margin: 0; }
+.case-note dl.case-facts dt {
+  color: var(--muted);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.case-note dl.case-facts dd {
+  margin: 0.05rem 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* First-use glossary term */
+dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+/* Chapter lead / section summary */
+.section-summary {
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #f4f8fb;
+  border-left: 4px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Horizontal bar meter for allocations / weights */
+.weight-bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: var(--navy);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border-radius: 1px;
+}
+
+/* === Techmeme / Morning Brief Unified Research Desk Chrome === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+code, .mono, .num, td.num, th.num, .infobox td, .key-figures .kf-value, .case-note dl.case-facts dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.desk-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  border: 0;
+  background: transparent;
+}
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value { background: var(--navy-hover); }
+.desk-progress::-moz-progress-bar { background: var(--navy-hover); }
+
+/* Top prenavbar + logo header + navy navbar inside .desk-masthead */
+.desk-prenav {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 8px 18px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.desk-prenav-links a {
+  color: var(--link);
+  font-weight: 600;
+}
+.desk-logotab {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px 18px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.desk-brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.desk-brand-title:visited { color: var(--navy); }
+.desk-brand-title:hover { background: transparent; text-decoration: none; color: var(--navy-hover); }
+.desk-brand-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.desk-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  padding: 0 18px;
+  background: var(--navy);
+  color: #ffffff;
+  border-bottom: 1px solid #0f3547;
+}
+.desk-wordmark {
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  background: var(--navy-hover);
+  text-decoration: none;
+}
+.desk-wordmark:visited { color: #ffffff !important; }
+.desk-wordmark:hover { background: var(--navy-hover); text-decoration: none; }
+.desk-label {
+  color: #e6f0f5;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.desk-sisnav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+.desk-sisnav a {
+  color: #ffffff !important;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+.desk-sisnav a:hover {
+  background: var(--sisnav-hover);
+  text-decoration: none;
+}
+.desk-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desk-tools select, .desk-tools button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: #10384a;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.desk-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  padding: 0;
+}
+.desk-tools button svg { width: 14px; height: 14px; }
+.desk-tools select:hover, .desk-tools button:hover {
+  background: var(--navy-hover);
+}
+.desk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.desk-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 20px 18px 64px;
+}
+.report {
+  max-width: 960px;
+  margin: 0;
+  padding: 0;
+}
+.report-header {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: var(--primer-tint);
+  border: 1px solid #d8c878;
+  border-left: 5px solid var(--primer-accent);
+}
+.report-header h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.report-generated, .report-as-of {
+  margin: 6px 0 0;
+  color: #4a4530;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.report-as-of { font-weight: 500; color: var(--muted); }
+
+.toc { display: none; }
+.desk-contents { display: none; }
+
+.desk-footer {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 16px 18px 36px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 1120px) {
+  .desk-tools select { display: none; }
+  .desk-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 940px) 250px;
+    justify-content: space-between;
+    align-items: start;
+    gap: 28px;
+  }
+  .desk-contents:not([hidden]) {
+    display: block;
+    position: sticky;
+    top: 52px;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 10px 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--rule-soft);
+    border-top: 3px solid var(--navy);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+  .desk-contents-label {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .desk-contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .desk-contents li { margin: 0; }
+  .desk-contents a {
+    display: block;
+    padding: 4px 6px;
+    color: var(--link);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+  .desk-contents a:visited { color: var(--link); }
+  .desk-contents a:hover, .desk-contents a.is-active {
+    color: var(--navy);
+    background: var(--link-hover-bg);
+    border-left-color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .desk-prenav, .desk-logotab { padding-left: 12px; padding-right: 12px; }
+  .desk-masthead { padding: 0 10px; }
+  .desk-sisnav { display: none; }
+  .desk-layout { padding: 14px 12px 44px; }
+}
+
+@media print {
+  .desk-progress, .desk-prenav, .desk-logotab, .desk-masthead, .desk-contents, .desk-footer { display: none !important; }
+  .desk-layout, .report { display: block; max-width: none; padding: 0; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<div class="desk-prenav"><span>October 29, 2026 &bull; India (NSE/BSE)</span><span class="desk-prenav-links"><a href="https://rajasekharmekala.github.io/">Home</a> | <a href="../index.html">Portfolio Desk</a> | <a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> | <a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a></span></div>
+<div class="desk-logotab"><a class="desk-brand-title" href="../index.html">Portfolio Research Desk</a><span class="desk-brand-sub">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</span></div>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Watchlist to Shortlist</span><nav class="desk-sisnav" aria-label="Sister sites"><a href="https://rajasekharmekala.github.io/">Profile</a><a href="https://rajasekharmekala.github.io/personal-wiki/">Morning Brief</a><a href="https://rajasekharmekala.github.io/travel-research/">Travel</a></nav><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-10-29T16:39:35.189269-07:00">29 Oct 2026, 04:39 PM PDT</time></p><p class="report-as-of">Research as of 2026-10-29</p></header>
+<div class="exec-theme-box">
+<div class="exec-theme-title">Executive Summary — Stage 2 Momentum &amp; Watchlist Rationalization</div>
+<p class="exec-theme-p">
+    Under our re-architected portfolio philosophy, we eliminate rigid numerical formula assertions in favor of Stan Weinstein Stage 2 trend confirmation, TheWrap relative strength momentum, and No-FOMO pullback entry timing. During the October 29 session, we completed a rigorous pruning pass across <code>data/watchlist/IN.json</code>, removing 35 names trapped in confirmed Stage 4 markdowns or structural deterioration to restore a focused, high-conviction watchlist of 110 active names.
+  </p>
+<p class="exec-theme-p">
+    Our primary breakout candidate is <strong>Firstsource Solutions Limited (NSE: FSL)</strong>, an RP-Sanjiv Goenka Group BPM and AI-enabled operations leader entering Week 1 of TheWrap's Stage 2 trend scanner at ₹306.45. Rather than chasing a vertical rally (+19.71% in one month, extended +10.56% above its 10-week average), we assign an <strong>ACCUMULATE_ON_DIP</strong> posture with staged limit orders inside the ₹273.03 to ₹288.73 support band.
+  </p>
+</div>
+<section class="chapter" id="ch-1">
+<h2>1. Watchlist Pruning Audit — Pruning Stage 4 Traps</h2>
+<p>
+    A bloated watchlist dilutes attention and tempts capital into falling knives. In Stan Weinstein's market structure framework, Stage 4 represents the markdown phase where institutions distribute shares and price trades beneath falling 30-week and 200-day moving averages.
+  </p>
+<div class="table-wrap" tabindex="0">
+<table class="wikitable">
+<caption>Summary of Watchlist Rationalization &amp; Pruning Pass for India (NSE/BSE)</caption>
+<thead>
+<tr>
+<th>Category / Metric</th>
+<th>Count / Value</th>
+<th>Strategic Rationale &amp; Institutional Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Starting Watchlist Universe</td>
+<td>145 symbols</td>
+<td>Historical watchlist containing accumulated Stage 4 drift and low-momentum candidates.</td>
+</tr>
+<tr>
+<td>Pruned Broken / Stage 4 Names</td>
+<td>35 symbols</td>
+<td>Pruned names exhibiting declining relative strength, broken moving averages, or governance red flags.</td>
+</tr>
+<tr>
+<td>Active Focused Watchlist</td>
+<td>110 symbols</td>
+<td>Curated universe of Stage 1 consolidations, Stage 2 breakouts, and quality compounders.</td>
+</tr>
+<tr>
+<td>Primary Stage 2 Focus Seed</td>
+<td>FSL (Firstsource Solutions)</td>
+<td>Confirmed Week 1 Stage 2 breakout on TheWrap India scanner (+17.48% relative strength).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Candidate Evaluation &amp; Deep Monograph Underwriting</h2>
+<p>
+    We underwrite Firstsource Solutions Limited (NSE: FSL) through our deep business monograph framework. We analyze day-to-day operations across its four core verticals (Banking &amp; Financial Services, Healthcare Provider/Payer RCM, Communications/Media/Tech, and Ascensos Retail CX), audit CEO Ritesh Idnani's guidance delivery, and verify technical support zones on TradingView.
+  </p>
+<div class="table-wrap" tabindex="0">
+<table class="wikitable">
+<caption>Stage 2 Candidate Evaluation &amp; No-FOMO Action Matrix for India</caption>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Company Name</th>
+<th>Weinstein Stage</th>
+<th>CMP (₹)</th>
+<th>Entry Zone (₹)</th>
+<th>Stop Loss (₹)</th>
+<th>Action Verdict</th>
+<th>Deep Research Monograph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FSL</strong></td>
+<td>Firstsource Solutions Limited</td>
+<td>Stage 2 (Week 1)</td>
+<td>₹306.45</td>
+<td>₹273.03 – ₹288.73</td>
+<td>₹253.79</td>
+<td><span class="badge badge-accent">ACCUMULATE_ON_DIP</span></td>
+<td><a href="../blogs/IN/FSL_dossier.html">Read 8-Chapter Book Monograph (114 KB)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. No-FOMO Execution &amp; Staged Limit Order Plan</h2>
+<p>
+    FSL closed at ₹306.45, sitting +10.56% above its 10-week EMA (₹277.19) and +12.93% above its 50-day SMA (₹271.36). Our No-FOMO rule in <code>.agents/config/scoring.json</code> caps immediate market orders at +10.0% extension. 
+  </p>
+<p>
+    Therefore, we execute via two limit tranches:
+  </p>
+<ul>
+<li><strong>Tranche 1 (50% size, ~3.1% net worth):</strong> Resting limit order at ₹284.50 to ₹288.73, targeting the 20-day EMA (₹284.46) and Classic R1 pivot (₹282.98).</li>
+<li><strong>Tranche 2 (50% size, ~3.1% net worth):</strong> Resting limit order at ₹273.03 to ₹278.00, accumulating shares near the rising 10-week EMA (₹277.19) and 50-day SMA (₹271.36).</li>
+<li><strong>Structural Invalidation Stop:</strong> Hard stop on a daily close below ₹253.79, anchored beneath the rising 30-week SMA (₹259.54) and 200-day SMA (₹260.19) minus 0.5x ATR.</li>
+</ul>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk &bull; Curated by Rajasekhar Mekala</span><a href="#top">Back to top &uarr;</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
