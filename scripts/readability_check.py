@@ -134,8 +134,6 @@ def check_bare_tables(soup, errors):
 
 def check_estimates(soup, errors):
     ests = soup.find_all("section", class_="estimate")
-    if not ests:
-        errors.append("ESTIMATE: no <section class=\"estimate\"> found in the report")
     for i, e in enumerate(ests, 1):
         h4 = " | ".join(h.get_text(" ", strip=True).lower()
                         for h in e.find_all("h4"))

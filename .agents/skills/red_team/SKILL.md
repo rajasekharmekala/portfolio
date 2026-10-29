@@ -48,11 +48,8 @@ for you to go looking.
      versus what the market consensus in the record already expects.
    - **Balance sheet / quality** — SBC and dilution, debt, goodwill and
      impairment history, one-off items flattery the trend.
-   - **Execution** — transitions, pending deals, litigation, anything in the
-     research record that can fail.
-   - **Technical** (tactical names) — what the gate itself says; what a base
-     failure, a stop-out, or a failed retest does to the thesis; the distance
-     from support in ATRs and what that costs.
+   - **Execution & CEO Walk-the-Talk** — past guidance misses, delayed capex/product rollouts, management overpromising vs. delivered reality, or structural barriers preventing the company from reaching its potential.
+   - **Stage 2 Trend & No-FOMO Technicals** — whether the sector's Stage 2 breadth is deteriorating, whether the stock is overextended above its 10-week EMA / 50-day SMA (`>10-12%` or `RSI > 73`) and vulnerable to a mean-reversion flush (making an `IMMEDIATE_BUY` verdict premature vs. `WAIT_FOR_SUPPORT`), or whether volume on the breakout is weak.
 3. **Stress the math.** Take the report's own base case. State the specific
    assumption you are changing (one at a time), recompute the result with
    arithmetic shown, and state the bear-case return. A bear scenario without

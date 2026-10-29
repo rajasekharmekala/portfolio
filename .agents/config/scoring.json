@@ -1,7 +1,7 @@
 {
-  "$comment": "SINGLE SOURCE OF TRUTH for all portfolio threshold numbers. The constitution (Portfolio Research System/00_Investment_Philosophy_and_Portfolio_Operating_Constitution.md) states these rules in prose; this file is the machine-readable twin. Skills must reference this file and must not restate numbers that differ from it. Change a number here and in the matching constitution paragraph — nowhere else.",
-  "schema_version": 2,
-  "updated": "2026-10-27",
+  "$comment": "SINGLE SOURCE OF TRUTH for portfolio allocation buckets, position sizing, Stage 2 momentum & No-FOMO entry rules, and citation standards. Skills must reference this file and must not restate numbers that differ from it.",
+  "schema_version": 3,
+  "updated": "2026-10-29",
   "buckets": {
     "CORE_ALPHA": { "US": [35, 40], "IN": [30, 40] },
     "TACTICAL_MOMENTUM": { "US": [50, 65], "IN": [50, 65] },
@@ -43,116 +43,51 @@
       "TIER_0": { "min_pct": 0, "max_pct": 0 }
     }
   },
-  "underwriting_philosophy": {
-    "principle": "Almost any non-fraudulent, solvent business is ownable if the price is cheap enough (high valuation asymmetry / low Reverse-DCF implied growth) and the fundamental + technical trajectory is inflecting upward. Evaluate ALL 3 layers for every company; never skip Layer 2 or Layer 3.",
-    "hard_red_lines": {
-      "description": "True binary disqualifiers (solvency, governance, or structural Stage 4 breakdown). Failing a red line routes to AVOID / REJECTED, though Layers 2 and 3 are still documented.",
-      "US": [
-        "Net Debt / EBITDA >= 4.0x with interest coverage < 2.0x (distressed balance sheet)",
-        "Stage 4 breakdown (Close < falling SMA50 < falling SMA200) with no base formation (Test C not passing)",
-        "Severe governance / accounting fraud / going-concern warning"
-      ],
-      "IN": [
-        "Debt-to-Equity >= 1.20x (non-financial; excluding standard trade LC acceptances where interest coverage >= 3.0x) or interest coverage < 2.0x",
-        "Promoter pledge >= 25% of promoter holding (or >= 20% only when combined with D/E >= 0.70x, falling earnings, or a Stage 4 breakdown; a static 20-25% pledge on a growing, low-debt business is a Layer 2 WATCH, not a Layer 1 hard red line), or a material pledge jump (> 5 percentage points QoQ) into a Stage 4 falling stock",
-        "3-Year Cumulative CFO / PAT < 0.25 (or < 0.40 for mature non-order-book businesses) UNLESS the company qualifies under the High-Growth Working-Capital Ramp-Up Exemption: Capital Goods, Defense, Power Transmission/Transformers, Infra, EPC, or Manufacturing businesses with YoY revenue growth >= 35% (or PAT growth >= 50% or 3Y sales CAGR >= 25%) and either unexecuted order book >= 1.5x TTM revenue or positive latest H1/FY operating cash flow are exempt from the trailing 3Y CFO/PAT red line (scored as a Layer 2 working-capital WATCH instead of a Layer 1 disqualifier, because rapid order-book execution consumes working capital upfront). Note: SEBI LODR requires statutory Cash Flow Statements only semi-annually (H1/Sep and FY/Mar); never fail a Q1/Q3 evaluation solely because a quarterly CF statement is unpublished.",
-        "Stage 4 breakdown (Close < falling SMA50 < falling SMA200) with no base formation (Test C not passing)"
-      ]
-    },
-    "archetypes": {
-      "COMPOUNDER": {
-        "description": "High static quality + steady growth + reasonable valuation.",
-        "US_standards": "ROIC (GAAP, or adjusted ex-M&A intangibles amortization, or ROTCE/ROE for financials) >= 12% (prefers >16%), FCF margin >= 12% (N/A for banks/insurers), Net Debt/EBITDA < 3.0x, SBC < 8% of revenue (or SBC < 15% if Owner FCF margin [FCF margin minus SBC %] >= 10% and diluted share count growth <= 3.0% YoY).",
-        "IN_standards": "ROCE (or adjusted ROCE ex-goodwill / ROE for financials) >= 15% (prefers >18%), D/E < 0.70, 3Y CFO/PAT >= 0.70 (or >= 0.50 for Capital Goods / Defense / Infra / EPC / Manufacturing businesses growing revenue >= 20% CAGR with D/E < 0.50 and ROCE >= 18%).",
-        "min_asymmetry": 2.0
+  "stage2_momentum": {
+    "principle": "Focus on leading momentum sectors and catch high-conviction businesses in early Stan Weinstein Stage 2 advances or tight base/pullback setups — never chase extended FOMO spikes, and never rely on synthetic LLM formula math.",
+    "benchmark": { "US": "SPY", "IN": "^NSEI" },
+    "data_sources": {
+      "IN": {
+        "sector_stage2_dashboard": "https://thewrap.in/data-tools/stage2",
+        "technicals_scanner": "TradingView India Scanner (scripts/stock_snapshot.py)",
+        "fundamentals_valuation": "Screener.in + BSE/NSE Filings"
       },
-      "TURNAROUND_VALUE_INFLECTION": {
-        "description": "Trailing static metric misses standard compounder floor, BUT price is cheap and rate-of-change (trajectory) is turning up.",
-        "qualification_rule": "Qualifies when: (1) all hard_red_lines pass, (2) at least 2 trajectory signals are positive (QoQ/YoY margin expansion, improving cash conversion/working capital days, rising consensus EPS revisions, or debt reduction), (3) Reverse-DCF implied growth is below realistic 3Y forward growth or valuation is at a >20% discount to 3Y median multiple, and (4) reward-to-risk asymmetry clears 2.5:1 (at CMP or at the planned limit-order Entry Zone).",
-        "min_asymmetry": 2.5
-      },
-      "TACTICAL_BREAKOUT": {
-        "description": "Stage 2 momentum leader or Stage 1 base breakout with earnings/revenue acceleration or major dated catalyst. For high-growth tech/industrial breakouts, SBC < 15% (with positive FCF-less-SBC) is permitted.",
-        "min_asymmetry": 2.5
+      "US": {
+        "sector_stage2_dashboard": "https://thewrap.in/data-tools/ustocks",
+        "technicals_scanner": "TradingView America Scanner (scripts/stock_snapshot.py)",
+        "fundamentals_valuation": "Finviz + SEC Filings"
       }
     },
-    "layer2_kpi_rule": "Score 3-5 company-specific KPIs as PASS (1.0 pt), WATCH (0.5 pt), or FAIL (0.0 pt). Qualifies (PASS or PASS_WITH_WATCH) when weighted score >= 3.0/5.0 (or >= 2.5/4.0) AND at most 1 KPI is FAIL. For example, 3 PASS + 2 WATCH + 0 FAIL (= 4.0/5.0) or 3 PASS + 1 WATCH + 1 FAIL (= 3.5/5.0) QUALIFIES as PASS_WITH_WATCH; never reject a company with 0 or 1 KPI FAIL if weighted score >= 3.0/5.0. Reject (FAIL) only when >= 2 KPIs are FAIL or weighted score < 3.0/5.0.",
-    "technical_routing_rule": "Separate business/valuation qualification from entry timing. Only a Stage 4 breakdown (Close < falling SMA50 < falling SMA200 with Test C failing) is a Layer 1 technical disqualifier (REJECTED). If a candidate passes hard_red_lines, qualifies under an archetype + Layer 2 KPIs, and clears the asymmetry floor at CMP or at its verified support Entry Zone, but is currently (a) in a Stage 3 pullback or Stage 1 base above a rising/flat 200-DMA, or (b) in Stage 2 but extended (> 1.6 ATR above support), DO NOT reject/archive it — set gate_status = PASSED_CONDITIONAL (or PASSED) and route it to WAIT_FOR_SUPPORT (or ACCUMULATE_ON_DIP via limit order in the Entry Zone) so it stays on the Shortlist/Watchlist with concrete limit/breakout triggers."
-  },
-  "asymmetry_floor": {
-    "CORE_ALPHA": 2.0,
-    "TACTICAL_MOMENTUM": 2.5,
-    "TURNAROUND_VALUE_INFLECTION": 2.5,
-    "formula": "(target_base - entry_ref) / (entry_ref - stop_loss), where entry_ref is CMP for immediate entries or entry_zone_high for limit-order / WAIT_FOR_SUPPORT setups",
-    "target_anchoring": "Anchor target_base to 12-24M Forward EPS (FY27E/FY28E) x 3Y Median P/E (or justified DCF / EV-EBITDA / P-B for financials / Technical Base Measured-Move). For multi-year CORE_ALPHA compounders, 2-year forward EPS (FY28E) x 3Y median P/E (or current P/E if below 3Y median) is permitted so 3-5 year compounders are not penalized by 1-year multiple compression.",
-    "incumbent_holding_rule": "The asymmetry_floor (2.0x Core, 2.5x Tactical) governs NEW capital deployment (IMMEDIATE_BUY / ACCUMULATE_ON_DIP) and 3-condition swap comparisons. Never mechanically EXIT an existing holding that is trading above its active invalidation stop solely because a bounce narrowed its R:R to a static prior target_base; evaluate existing holdings against target_bull / forward revisions and trail the stop."
-  },
-  "reverse_dcf": {
-    "discount_rate_pct": { "US": 10.0, "IN": 12.0 },
-    "terminal_multiple_fcf": { "US": 18.0, "IN": 20.0 },
-    "projection_years": 10
-  },
-  "support_distance_ladder": [
-    { "band": "FULL_SIZE", "atr_below": 0.6, "action": "full risk-adjusted tier size" },
-    { "band": "STANDARD", "atr_below": 1.2, "action": "standard risk-adjusted size" },
-    { "band": "LIMIT_ORDER_REDUCE", "atr_below": 1.6, "action": "starter / limit order only, reduced size" },
-    { "band": "NO_BUY", "atr_below": null, "action": "no chase at market — place limit order in entry zone or wait for pullback/consolidation" }
-  ],
-  "stop_placement": {
-    "CORE_ALPHA": "below nearest structural invalidation support — min(swing_low_20d, SMA50) minus 1.0 x ATR(14) for Stage 2 uptrends, or base_low_63d minus 1.0 x ATR(14) for Stage 1 / turnaround bases (do NOT mechanically use a distant 200-day MA in a Stage 2 advance; Risk-Unit Sizing already scales position weight to stop distance)",
-    "TACTICAL_MOMENTUM": "below min(swing_low_20d, SMA20 or SMA50) minus 0.5 x ATR(14)",
-    "undercut_and_reclaim_rule": "Evaluate stops strictly on the current session's close — never latch a prior session's unexecuted stop breach as a permanent exit order. If a holding closed below its written stop during a prior session (shakeout) and was not sold, and the current session's close has reclaimed the written stop (or closed within 0.25 x ATR(14) of it on a positive reversal day with 1D return > 0% and RSI >= 32), the prior breach is Forgiven as an Undercut-and-Reclaim shakeout. Retain the holding (HOLD / HARD STOP) and reset the active invalidation stop to 0.5 x ATR(14) below the shakeout low (swing_low_20d)."
-  },
-  "regime_posture": {
-    "capitulation_reversal_watch": {
-      "trigger": "Benchmark below SMA50 and SMA200 (Downtrend), BUT universe breadth_pct_above_50dma <= 25% (washed-out capitulation territory) AND green shoots appear (benchmark 1D return >= 0%, or bouncing >= 1.0% off 20-day swing low, or VIX cooling on the day).",
-      "label": "Downtrend (capitulation bounce / follow-through watch)",
-      "holdings_rule": "Do NOT wholesale-liquidate holdings into cash on a breadth-washout bounce. Retain all Stage 2 leaders, Stage 1/3 holdings above their active stops, and Undercut-and-Reclaim shakeouts (with stops anchored below the panic swing low). Only exit broken Stage 4 laggards that failed Test C or true solvency/governance red-line failures.",
-      "deployment_rule": "Instead of parking 30-45% in idle cash waiting for the index to clear its 50-DMA, rotate capital freed from Stage 4 laggards into pilot/starter positions (up to 50% of standard Risk-Unit tier weight) or support-zone limit orders in shortlist candidates passing Test A (Stage 2 leader), Test B (base pivot), or Test C (turnaround inflection), using the capitulation swing low minus 0.5 x ATR(14) as the hard stop. Target cash remains near the policy ceiling (10-15%), not 40%+."
+    "weinstein_stages": {
+      "STAGE_2": "Price above rising 30-week SMA (SMA150 / SMA200) and rising 50-day SMA, with positive sector breadth.",
+      "STAGE_2_PULLBACK": "Primary Stage 2 uptrend intact (price > 30W SMA & 200D SMA), pulling back constructively toward the 10-week EMA / 20D-50D SMA support zone on contracting volume.",
+      "STAGE_1_BASE": "Constructive multi-week horizontal base or turnaround accumulation near a flattening 30W / 200D SMA with relative strength inflecting up.",
+      "STAGE_3_DISTRIBUTION": "Chopping laterally or breaking below a flattening 50D SMA after an extended advance while still above the 200D SMA.",
+      "STAGE_4_BREAKDOWN": "Price below a falling 30-week SMA and falling 50-day SMA. Automatic avoid/reject for new buys and prune candidate for the watchlist."
+    },
+    "no_fomo_entry_rules": {
+      "max_extension_above_10w_ema_pct": 10.0,
+      "max_extension_above_50d_sma_pct": 12.0,
+      "max_immediate_buy_rsi14": 73.0,
+      "IMMEDIATE_BUY": "Stock is in Early Stage 2 (1-8 weeks in Stage 2 or fresh base breakout / constructive pullback), within 10% of its 10W EMA / 50D SMA, RSI(14) <= 73, and valuation + business execution support immediate deployment at CMP.",
+      "WAIT_FOR_SUPPORT": "Business quality and Stage 2 trend are strong, but price is extended (>10% above 10W EMA, >12% above 50D SMA, or RSI > 73) OR valuation requires a margin-of-safety pullback. Place on Shortlist with a concrete limit-order support zone (20D EMA / 10W EMA / 50D SMA).",
+      "REJECTED": "Broken Stage 4 downtrend, structural business/governance failure, or severe valuation disconnect with deteriorating fundamentals. Prune from active watchlist to archive."
+    },
+    "watchlist_pruning": {
+      "rule": "Keep the active watchlist focused. Automatically move any active watchlist stock in a confirmed Stage 4 breakdown or marked REJECTED/AVOID into watchlist.archive via scripts/stock_snapshot.py --prune-watchlist."
     }
   },
-  "momentum_gate": {
-    "note": "Computes Test A (in Stage 2 momentum now), Test B (entering momentum from a flat base), and Test C (turnaround / recovery inflection above a 63d floor) from the frozen price snapshot (scripts/momentum_gate.py). Nearest verified support is the highest structural support (SMA20, SMA50, 20d swing low, or 63d base low) at or below price.",
-    "needs_calibration": false,
-    "benchmark": { "US": "SPY", "IN": "^NSEI" },
-    "atr_period": 14,
-    "test_a_in_momentum_now": {
-      "stage2": "price > SMA50 > SMA200",
-      "sma50_rising_window_days": 21,
-      "sma200_not_falling_window_days": 63,
-      "rs_window_days": 63,
-      "rs_min_excess_vs_benchmark_pct": 0.0,
-      "support_distance_atr_max": 1.6
-    },
-    "test_b_entering_momentum": {
-      "sma50_window_days": 21,
-      "sma50_max_decline_pct": 0.8,
-      "rs_rising_window_days": 28,
-      "rs_must_be_rising": true,
-      "base_window_days": 63,
-      "pivot_atr_max": 1.5,
-      "volume_dryup_ratio_max": 0.92,
-      "volume_expand_ratio_min": 0.95,
-      "conditional_entry": "allocated only on a confirmed breakout of the base pivot or a retest that holds; never before"
-    },
-    "test_c_turnaround_inflection": {
-      "higher_low_tolerance_pct": 2.0,
-      "support_atr_max": 2.0,
-      "min_rsi14": 32.0,
-      "conditional_entry": "turnaround / value inflection setup: floor holding above 63d low with short-term trend or relative strength turning up; starter or limit entry near support with strict stop below swing low"
-    },
-    "horizon_tags": { "SHORT": "3-12 months", "LONG": "3-5 years" }
+  "stop_placement": {
+    "CORE_ALPHA": "Below nearest structural support (50-day SMA, 10-week EMA, or recent consolidation swing low minus 1.0 x ATR14).",
+    "TACTICAL_MOMENTUM": "Below nearest tactical support (20-day EMA / 50-day SMA or breakout pivot low minus 0.5 x ATR14).",
+    "undercut_and_reclaim_rule": "Evaluate stops on the session close. If a holding briefly undercuts support intra-week and reclaims its 50-day SMA / 10-week EMA on positive volume, retain the holding and anchor the stop below the shakeout low."
   },
   "data_hygiene": {
     "stale_as_of_days": 30,
     "as_of_formats": ["YYYY-MM-DD", "unknown"]
   },
   "citations": {
-    "dossier_min_sources": 25,
-    "other_reports_min_sources": 12,
-    "research_item_max_age_days": 60,
-    "not_found_min_queries": 3
-  },
-  "core_horizon_months": [36, 60],
-  "core_thesis_checkpoint_months": [6, 12]
+    "every_company_claim_requires_citation": true,
+    "missing_data_policy": "cite_or_not_available"
+  }
 }

@@ -1,33 +1,55 @@
 ---
-description: Underwrites the next batch of watchlist names for one market (IN or US) through the shortlist underwriting skill, writes one dossier per name, updates the shortlist JSON record file, and delivers the batch summary.
+description: Underwrites the next batch of watchlist names for one market (IN or US) using Stage 2 sector momentum, TradingView + Screener/Finviz snapshots, and No-FOMO support entry rules; prunes broken Stage 4 leads from the watchlist; writes a deep business-monograph dossier per company; and updates the shortlist and watchlist JSON files.
 ---
 
-# Watchlist to Shortlist Workflow (generic: IN or US)
+# Watchlist to Shortlist Workflow (Market: `<MKT>`)
 
 Read `_COMMON.md` first.
 
-**Input:** market `<MKT>`. The watchlist source and its shortlist are declared in `config/portfolios.json`. The batch size comes from the skill (`skills[watchlist_to_shortlist]`). Eligibility is determined by `scripts/run_claims.py batch`: names with `status` in `RESEARCH_REQUIRED` / `PENDING_RESEARCH` / `PENDING` (or `deep_research_status = PENDING`) come first, followed by names whose `research_cycle` lags the current max cycle, and once all names in `watchlist.active` have completed the current cycle, `run_claims.py` automatically rolls over to `target_research_cycle = current_cycle + 1` from the top of `watchlist.active`. Select and update fields by header name.
+**Input:** market `<MKT>` (`IN` or `US`). Follow `.agents/skills/watchlist_shortlist_underwriting/SKILL.md`.
 
-## 1. Session date and run directory
+## 1. Session Date, Run Worktree & Batch Claim
 
-As in `market_intelligence.md` §1–2. Date technical facts and dossier as-of statements to the latest completed session with a verified benchmark close, not automatically to the run date.
+1. Start the isolated run session per `_COMMON.md`:
+   ```bash
+   .venv/bin/python scripts/run_session.py start --workflow watchlist_to_shortlist --market <MKT>
+   ```
+2. Refresh consumer-tool snapshots and prune broken Stage 4 / rejected names from `data/watchlist/<MKT>.json`:
+   ```bash
+   .venv/bin/python scripts/stock_snapshot.py \
+     --market <MKT> \
+     --from-watchlist --from-shortlist \
+     --stage2-file data/views/stage2_<MKT>_latest.json \
+     --prune-watchlist \
+     --out "<RUN_DIR>/cache/snapshots_<MKT>_<date>.json"
+   ```
+3. Claim the next batch of up to 4 eligible symbols:
+   ```bash
+   .venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size 4
+   ```
+   Ensure the claimed batch symbols are included in `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (re-run `stock_snapshot.py --symbols ...` if needed).
 
-## 2. Batch
+## 2. Dedicated Per-Company Deep Business-Monograph Dossiers
 
-Start the run session (`run_session.py start --workflow watchlist_to_shortlist --market <MKT>`), then claim the batch from inside the worktree: `.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size <skill batch size>`. It returns the next eligible names in watchlist/round-robin order (`symbols`), `target_research_cycle`, and `round_robin_rollover`, read from freshly fetched `origin/main`, skipping names already completed in the current cycle on origin and names claimed by any other live run, so two runs never work on the same company. Work on exactly the returned `symbols`; if `short_batch` is true, process those and disclose the short batch in the summary report; never widen eligibility to fill it. When updating `data/watchlist/<MKT>.json` in §5, update **only** the rows processed in this batch (setting `status = "COMPLETED"`, `deep_research_status = "COMPLETED"`, and `research_cycle = target_research_cycle`); never bulk-reset untouched rows in `watchlist.active` to `PENDING`, as that would conflict with concurrent runs. Record the batch, the claim output and `base_commit` in `manifest.json`. Do not process a name twice in the same run. Rerunning the command for the same run id returns the same names.
+Spawn **1 dedicated subagent per company** (`invoke_subagent`) for each symbol in the batch:
+- Each subagent reads its symbol's TradingView + Screener.in/Finviz + TheWrap Stage 2 snapshot from `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` and follows `.agents/skills/company_report/SKILL.md`.
+- Each subagent writes and assembles `docs/blogs/<MKT>/<SYMBOL>_dossier.html` (`scripts/assemble_report.py --market <MKT> --kind dossier --workflow "Company research" --as-of <date>`) covering:
+  1. What the company does & day-to-day operational processes across each business vertical.
+  2. External learning hub (curated links to websites, YouTube videos/interviews/factory tours, investor presentations, and concalls).
+  3. Core operational KPIs, moat, and business story.
+  4. Management "Walk the Talk" audit (past guidance vs. delivered reality) and whether the company is reaching its potential.
+  5. Financials & valuation sanity (Screener.in / Finviz).
+  6. Stage 2 & TradingView technical structure (`30W SMA`, `10W EMA`, `50D/200D SMA`, `RSI-14`, volume, pivots).
+  7. Multi-horizon view (Short-term momentum, Medium-term catalysts, Long-term compounding) and **No-FOMO Action Plan** (`IMMEDIATE_BUY` at CMP vs. `WAIT_FOR_SUPPORT` limit zone vs. `REJECTED`).
 
-## 3. Ledger and research
+## 3. Shortlist & Watchlist Updates
 
-Build the ledger, as in the market intelligence workflow, so every name has its price and stage history from the same session. Research each name through the duck-duck-go MCP, following the underwriting skill, and record it in the research file.
+1. Promote qualified candidates (`IMMEDIATE_BUY`, `ACCUMULATE_ON_DIP`, `WAIT_FOR_SUPPORT`) into `data/shortlist/<MKT>.json` with exact TradingView/Screener/Finviz metrics and support buy zones.
+2. Move `REJECTED` candidates from `watchlist.active` to `watchlist.archive` in `data/watchlist/<MKT>.json` so the active watchlist remains focused.
+3. Update completed status on surviving active rows and validate with `.venv/bin/python scripts/data_layer.py --market <MKT> --validate`.
 
-## 4. Underwrite and write dossiers
+## 4. Batch Report, Review Gate & Publication
 
-Apply the underwriting skill to each name. Each name gets one dossier written in sections (`skills/_shared/SECTION_DRAFTING.md`). The output path for each dossier is `output.watchlist_to_shortlist` in `markets.json`, with `{symbol}` filled in. Each dossier must pass the full validator and complete up to two reviewer rounds. If round 2 is still REVISE or BLOCK, make the remaining evidence-backed fixes best-effort, rerun the validator, and record unresolved findings; do not start a third review. Gates the existing evidence cannot satisfy (above all the 60-day `as_of` check when the latest quarterly filing is older than 60 days) are exceptions under `_COMMON.md`, "Gate exceptions and mandatory publication": run `citation_check.py` with `--allow-stale-asof`, put a `gate-exceptions` section in every dossier and in the batch summary report, and publish. A dossier is never withheld for an excepted gate.
-
-## 5. Workbook updates
-
-Update the watchlist and shortlist JSON record files with each name's verdict. Use header names, never column positions. A name that fails underwriting moves to the rejected list only as the skill describes.
-
-## 6. Delivery and cleanup
-
-Publish every validated batch and its dossier updates to GitHub Pages, refreshing the catalog and committing/pushing as `_COMMON.md` requires. Before committing, apply the "Overriding earlier publications" rules in `_COMMON.md`: a dossier or record from an earlier run is replaced only by a fresher or equal-session run that was generated later, and the superseded commit is recorded. Re-read origin's record files and rebuild the record edits on them before the push. Do not send any emails for Watchlist to Shortlist reports (email delivery is permanently disabled for all watchlist-to-shortlist workflows and dossiers; always publish to GitHub Pages, and record email as intentionally skipped in the manifest). Clean up as `_COMMON.md` specifies.
+1. Assemble `docs/reports/<MKT>_Watchlist_to_Shortlist.html` using `scripts/assemble_report.py --market <MKT> --kind report --workflow "Watchlist underwriting" --as-of <date>`.
+2. Run the reviewer and red-team gate (`scripts/review_packet.py`, `report_reviewer`, `red_team`) on each dossier and the batch summary report.
+3. Publish via `scripts/publish_run.py` (email delivery is disabled for `watchlist_to_shortlist`).

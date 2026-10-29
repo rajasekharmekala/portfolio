@@ -1,18 +1,149 @@
-/* report_base v2 callouts. Include after report_base.css. The validator keys on these class names. */
-.primer,.howto,.casenote,.triggers,.example,.takeaway{padding:14px 18px;margin:1.3em 0;border-radius:0 6px 6px 0;font-size:1rem;line-height:1.7;color:var(--ink);max-width:72ch}
-.primer{background:var(--primer-tint);border-left:5px solid var(--primer-accent)}
-.howto{background:var(--howto-tint);border-left:5px solid var(--howto-accent)}
-.casenote{background:var(--case-tint);border:1px solid var(--rule-soft);border-left:5px solid var(--case-accent)}
-.triggers{background:var(--trigger-tint);border-left:5px solid var(--trigger-accent)}
-.example{background:var(--example-tint);border-left:5px solid var(--example-accent)}
-.takeaway{background:var(--takeaway-tint);border-left:5px solid var(--takeaway-accent)}
-.primer h3,.howto h4,.casenote h4,.triggers h4,.example h4{margin:0 0 .4em 0}
-.triggers ul{margin:.4em 0 0 1.2em;padding:0}
-.chapter-bridge{font-style:italic;color:var(--muted);border-top:1px dashed var(--rule-soft);margin-top:1.5em;padding-top:.8em;max-width:72ch}
-.verdict{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:.9em;white-space:nowrap}
-.verdict-keep{color:var(--keep-ink);background:var(--keep-tint)}
-.verdict-accumulate{color:var(--accumulate-ink);background:var(--accumulate-tint)}
-.verdict-trim{color:var(--trim-ink);background:var(--trim-tint)}
-.verdict-exit{color:var(--exit-ink);background:var(--exit-tint)}
-.verdict-watch{color:var(--watch-ink);background:var(--watch-tint)}
-.casenote .verdict{margin-left:8px}
+/* === Book-report teaching components (Techmeme / Morning Brief unified theme) === */
+
+/* Key-figures strip: 3–5 headline numbers at the top of a report or section */
+.key-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 1.4rem;
+  clear: left;
+}
+.key-figures > div {
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  padding: 0.65rem 0.85rem;
+}
+.key-figures .kf-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+.key-figures .kf-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+.key-figures .kf-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Callout boxes: Primer (matches .exec-theme-box), Rule Explained, Risk/Warning */
+.callout {
+  border: 1px solid var(--rule-soft);
+  border-left: 5px solid var(--primer-accent);
+  background: var(--primer-tint);
+  padding: 0.75rem 1.05rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.93rem;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8a6300;
+  margin: 0 0 0.35rem;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout-rule {
+  border-left-color: var(--rule-accent);
+  background: var(--rule-tint);
+}
+.callout-rule .callout-title { color: var(--rule-accent); }
+.callout-warn {
+  border-left-color: var(--warn-accent);
+  background: var(--warn-tint);
+}
+.callout-warn .callout-title { color: var(--warn-accent); }
+
+/* Case note: one box per holding / option / candidate (matches .deepdive-container) */
+.case-note {
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--case-accent);
+  background: var(--case-tint);
+  padding: 0.95rem 1.15rem;
+  margin: 1.15rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.case-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.case-note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+.case-note-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.case-note dl.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: #f4f8fb;
+  border-left: 3px solid var(--navy);
+  font-size: 0.84rem;
+}
+.case-note dl.case-facts div { margin: 0; }
+.case-note dl.case-facts dt {
+  color: var(--muted);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.case-note dl.case-facts dd {
+  margin: 0.05rem 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* First-use glossary term */
+dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+/* Chapter lead / section summary */
+.section-summary {
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #f4f8fb;
+  border-left: 4px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Horizontal bar meter for allocations / weights */
+.weight-bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: var(--navy);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border-radius: 1px;
+}

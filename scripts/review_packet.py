@@ -228,16 +228,15 @@ def flat_numbers(obj, out=None):
     return out
 
 
-REC_KEYS = ("symbol", "Symbol", "ticker", "Ticker", "underlying", "SYMBOL")
+REC_KEYS = ("symbol", "Symbol", "ticker", "Ticker", "underlying", "SYMBOL", "TradingView Code")
 
 
 def collect_records(obj, out):
-    """symbol -> numeric fields, from any JSON record file (shortlist, watchlist, options)."""
+    """symbol -> numeric fields, from any JSON record or snapshot file (shortlist, watchlist, options, stock_snapshot, stage2)."""
     if isinstance(obj, dict):
         sym = next((str(obj[k]).upper() for k in REC_KEYS if isinstance(obj.get(k), str)), None)
         if sym:
-            out.setdefault(sym, []).extend(float(v) for v in obj.values()
-                                           if isinstance(v, (int, float)) and not isinstance(v, bool))
+            out.setdefault(sym, []).extend(flat_numbers(obj))
         for v in obj.values():
             collect_records(v, out)
     elif isinstance(obj, list):
@@ -607,28 +606,6 @@ def table_items(parsed, only_sids=None):
                                       "problem": "column '%s': rows add to %s but the %s row says %s" % (
                                           rows[0][ci] if ci < len(rows[0]) else ci, round(s, d + 1), rows[ri][0], rows[ri][ci])})
                 start = ri + 1
-        # asymmetry
-        def col(*names):
-            for i, h in enumerate(hdr):
-                if any(n in h for n in names):
-                    return i
-            return None
-        c_cmp, c_stop = col("cmp", "close", "price", "entry"), col("stop")
-        c_tgt, c_asym = col("target"), col("asymmetry", "reward")
-        if None not in (c_cmp, c_stop, c_tgt, c_asym):
-            for ri, r in enumerate(rows[1:], 1):
-                try:
-                    cmp_, _ = to_float(r[c_cmp]); stop, _ = to_float(r[c_stop])
-                    tgt, _ = to_float(r[c_tgt]); asym, _ = to_float(r[c_asym])
-                except IndexError:
-                    continue
-                if None in (cmp_, stop, tgt, asym) or cmp_ <= stop or tgt <= cmp_:
-                    continue
-                calc = (tgt - cmp_) / (cmp_ - stop)
-                if abs(calc - asym) > max(0.15, 0.05 * abs(calc)):
-                    items.append({"type": "asymmetry", "loc": "%s (table row %d)" % (b["sec"], ri), "sid": b["sid"],
-                                  "problem": "%s: (target %s - cmp %s) / (cmp - stop %s) = %.2f but the table says %s" % (
-                                      r[0], tgt, cmp_, stop, calc, r[c_asym])})
     return items
 
 
@@ -865,9 +842,14 @@ def build(args):
             record_paths.append(cand)
         elif pth.endswith(".json") and args.inputs_dir and os.path.isfile(os.path.join(args.inputs_dir, os.path.basename(pth))):
             record_paths.append(os.path.join(args.inputs_dir, os.path.basename(pth)))
-    for extra in ("data/options/%s.json" % facts_json.get("market", ""),):
+    for extra in (
+        "data/options/%s.json" % facts_json.get("market", ""),
+        "data/views/stage2_%s_latest.json" % facts_json.get("market", ""),
+    ):
         if os.path.isfile(os.path.join(ROOT, extra)) and os.path.join(ROOT, extra) not in record_paths:
             record_paths.append(os.path.join(ROOT, extra))
+    if getattr(args, "snapshots", None) and os.path.isfile(args.snapshots):
+        record_paths.append(args.snapshots)
     facts = Facts(facts_json, research_json, record_paths)
     default_symbol = args.symbol or ""
     if not default_symbol and kind == "dossier":
@@ -1142,6 +1124,7 @@ def main():
     b.add_argument("--kind", required=True, choices=KINDS)
     b.add_argument("--facts")
     b.add_argument("--research")
+    b.add_argument("--snapshots", help="optional path to snapshots_<MKT>_<date>.json from stock_snapshot.py")
     b.add_argument("--out-dir", required=True)
     b.add_argument("--round", type=int, default=1)
     b.add_argument("--sibling")

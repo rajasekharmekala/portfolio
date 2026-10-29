@@ -809,12 +809,14 @@ def build(args):
         if m["kind"] == "stock" and not m.get("error"):
             closes[rep] = df["Close"]
 
-    # momentum gate: 63d / 28d relative strength (excess return) vs the scoring.json benchmark
+    # Relative strength (excess return) vs benchmark over 63d / 28d
     global CLOSES_CACHE, BENCH_CLOSE_CACHE, MARKET_CACHE
     MARKET_CACHE = market
     CLOSES_CACHE = closes
     scoring = json.load(open(os.path.join(ROOT, ".agents", "config", "scoring.json")))
-    mg_bench = scoring["momentum_gate"]["benchmark"][market]
+    mg_bench = scoring.get("stage2_momentum", {}).get("benchmark", {}).get(market, cfg["primary"])
+    if mg_bench not in frames:
+        mg_bench = cfg["primary"]
     if mg_bench in frames:
         bc = frames[mg_bench]["Close"]
         if args.date:
@@ -828,31 +830,6 @@ def build(args):
             if len(j) >= 29:
                 inst[rep]["rs_28d_pct"] = num((j["s"].iloc[-1] / j["s"].iloc[-29] - 1) * 100
                                                - (j["b"].iloc[-1] / j["b"].iloc[-29] - 1) * 100)
-    elif cfg["primary"] in frames:
-        bc = frames[cfg["primary"]]["Close"]
-        if args.date:
-            bc = bc[bc.index <= pd.Timestamp(args.date)]
-        BENCH_CLOSE_CACHE = bc
-
-    # Attach momentum_gate (Test A, Test B, Test C) to every stock instrument
-    import momentum_gate as mg_mod
-    for sym_k, m_val in inst.items():
-        if m_val.get("kind") == "stock" and not m_val.get("error") and m_val.get("close") is not None:
-            m_val["momentum_gate"] = mg_mod.gate(m_val, scoring["momentum_gate"])
-
-    # Enrich holding, shortlist, and extra symbols with Reverse DCF + Consensus EPS Revisions
-    enrich_syms = [
-        s for s, rs in roles.items()
-        if ("holding" in rs or "shortlist" in rs or "extra" in rs)
-        and s in inst and inst[s].get("kind") == "stock" and not inst[s].get("error")
-    ]
-    if enrich_syms:
-        def _enrich_one(s):
-            m_val = inst[s]
-            return s, enrich_symbol_expectations(market, s, m_val.get("yahoo", s), m_val.get("close"), scoring)
-        with ThreadPoolExecutor(max_workers=8) as pool_ex:
-            for s, extra_data in pool_ex.map(_enrich_one, enrich_syms):
-                inst[s].update(extra_data)
 
     primary_name = ymap[cfg["primary"]]
     # The session date is a requirement, not a label: the benchmark must have a bar on that date.

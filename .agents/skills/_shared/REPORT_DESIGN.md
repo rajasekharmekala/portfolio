@@ -1,31 +1,48 @@
-# Research Desk Design (Binding)
+# Research Desk Report Design (Techmeme / Morning Brief Unified Theme)
 
-All new reports and dossiers match the homepage: IBM Plex Sans body, Newsreader headings, IBM Plex Mono figures and timestamps, pale neutral background and restrained green links. The assembler embeds REPORT_PALETTE.md, report_base.css, book_components.css, report_desk.css and report_desk.js. Older skill HTML heads, Wikipedia styling, encyclopedia subtitles and daily output naming do not apply to new presentation.
+Every newly generated report or dossier in `docs/reports/` and `docs/blogs/` must match the Techmeme-inspired Research Desk visual language used by `docs/index.html`, `/Users/mereddy/Desktop/github/personal-wiki`, and `/Users/mereddy/Desktop/github/rajasekharmekala.github.io`.
 
-Write the complete body, not a competing head, stylesheet or script. Retain all fixed research chapters, financial tables, calculations and inputs, bull/base/bear cases and probabilities, sector and options analysis, underwriting layers, uncertainties, monitoring triggers, source URLs, citation anchors and numbered end references. Book-style analysis means readable, comprehensive research, not a Wikipedia page design. No analysis may be hidden in tabs, collapsed panels, tooltips or script-loaded content. JavaScript only enhances navigation, table access, reading progress and printing. Research must remain readable without it.
+This file defines presentation and assembly rules only. Do **not** drop, shorten, rewrite or omit any analysis, table, citation, source link, reviewer check or methodology rule to fit the layout.
 
-## Assemble Before Validation and Publication
+## Single Assembly Path
+
+Write only the report body HTML (`<h1>` through references) to a scratch file, then assemble the published page with:
 
 ```bash
 .venv/bin/python scripts/assemble_report.py \
-  --body "<RUN_DIR>/work/body.html" \
-  --out docs/reports/US_Market_Intelligence.html \
-  --market US --kind report --workflow "Market intelligence" \
-  --as-of "<verified market-session date>" \
-  --facts "<RUN_DIR>/facts_US_<session-date>.json" \
-  --research "<RUN_DIR>/research_US_<session-date>.json"
+  --body <RUN_DIR>/work/body.html \
+  --out docs/reports/<Stable_Report_Name>.html \
+  --market <IN|US> \
+  --kind <report|dossier> \
+  --workflow "<Workflow Name>" \
+  --as-of "<Verified market-session cutoff>" \
+  --facts <RUN_DIR>/facts_<MKT>_<date>.json \
+  --research <RUN_DIR>/research_<MKT>_<date>.json
 ```
 
-Dossiers use --kind dossier --workflow "Company research" and docs/blogs/<MARKET>/SYMBOL_dossier.html. Use the correct market. Reassemble after final editorial changes, then run the existing factual, citation, recomputation, readability, structural and independent-review gates without weakening them. Newly completed publication checks require the research-desk-v1 marker, shared interactions and timezone-aware header.
+For company monographs / dossiers, use `--kind dossier` and `--out docs/blogs/<MKT>/<SYMBOL>_dossier.html`.
 
-Generation time is the actual assembly time in America/Los_Angeles: PDT during daylight saving, PST during standard time, with an ISO offset. Never substitute session dates or hard-code a time. --as-of separately identifies the verified research cutoff. Metadata provides report market, kind, workflow and dates independently of filename parsing.
+Never hand-write `<head>`, `<style>` or `<html>` in a report skill. Never copy an old report or dossier file as a shell.
 
-For future workflow reports, use one stable filename per market and type, such as IN_Market_Intelligence.html, US_Market_Intelligence.html, IN_Portfolio_Audit.html, US_Portfolio_Audit.html, IN_Options_Audit.html, US_Options_Audit.html, IN_Watchlist_to_Shortlist.html and US_Watchlist_to_Shortlist.html. Evidence files remain session-dated. Do not delete or rename old published reports solely for styling.
+## Header & Timestamp Contract
 
-## Explicit Existing-Research Updates
+`scripts/assemble_report.py` injects:
 
-Use --layout-only only when asked to restyle an existing report. It preserves original body text, links, IDs and tables, suppresses new ticker-link/research additions, and labels the header timestamp "Layout updated". Original generation time is unknown unless recorded; do not invent it. This is not new research, must not refresh workflow completion timestamps, and must not trigger an email.
+- `<meta name="report-design" content="research-desk-v1">`
+- `<meta name="generated-at" content="...">` in `America/Los_Angeles` time (`PDT`/`PST`)
+- The top pre-navigation bar (`.desk-prenav`) with cross-repo links (`Home`, `Portfolio Desk`, `The Morning Brief`, `Travel Research`), logo banner (`.desk-logotab`), and `#174a61` Techmeme navy `.desk-masthead` bar
+- `<header class="report-header">` (styled as the gold-accented executive synthesis banner) containing the `<h1>` and `Generated Date: <time datetime="...">DD Mon YYYY, HH:MM AM/PM PDT|PST</time>`
+- An optional `Research as of ...` line when `--as-of` is passed
 
-## Checks
+Do not put a fake generation timestamp in the body. Keep the market-session cutoff (`as of ...`) separate from the Pacific generation timestamp.
 
-Run scripts/test_portal.py, JavaScript syntax checks and desktop/mobile browser checks. Check no overflow, working section and citation navigation, all references retained, print output and no-JavaScript reading. The named-report preservation test compares actual content before and after layout-only rendering. Never bypass failed checks by reverting the renderer to an old shell.
+## Visual Rules
+
+- **Palette**: `.agents/skills/_shared/REPORT_PALETTE.md` (`#ffffff` page, `#111111` ink, `#174a61` Techmeme navy brand/headers, `#002848` links with `#d0e8f4` hover highlight, `#fdfbe8` gold-bordered primer/synthesis banner, `#fcfdfe` deep-dive case cards, and WCAG-checked verdict pills).
+- **Typography**: `Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif` across body and headings; `tabular-nums` on every figure, price, date, delta, ratio and table cell.
+- **Layout**: Centered Techmeme container with main reading column (`940px`) and sticky right-hand section contents rail (`250px`) on wide screens; responsive mobile section jumper on narrow screens.
+- **Components**: Keep using `.infobox`, `.key-figures`, `table.wikitable`, `.callout`, `.callout-rule`, `.callout-warn`, `.case-note`, `.section-summary`, `.verdict` and `ol.reflist` as documented in `.agents/skills/_shared/BOOK_REPORT_TEMPLATE.md`. Tables are automatically wrapped in `<div class="table-wrap" tabindex="0" role="region">` with sticky `<th>` headers.
+
+## Publish Enforcement
+
+`scripts/portal_publish.py` refuses to complete a workflow if any target HTML page lacks the `research-desk-v1` design marker, masthead, Pacific `<time datetime>` header, or generated-at metadata. Use `--layout-only` only when restyling an existing historical file at the user's explicit request; `--layout-only` pages are marked `Layout updated` and are not accepted as newly completed workflow outputs.

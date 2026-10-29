@@ -158,7 +158,7 @@ def strip_shell(body: str) -> str:
 
 def wrap_tables(body: str) -> str:
     def repl(m: re.Match) -> str:
-        return f'<div class="table-wrap">{m.group(0)}</div>'
+        return f'<div class="table-wrap" tabindex="0" role="region" aria-label="Data table">{m.group(0)}</div>'
     return re.sub(r'<table class="wikitable".*?</table>', repl, body, flags=re.S)
 
 
@@ -201,7 +201,7 @@ def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional
         wrapper.unwrap()
     for table in content.select("table:not(.infobox)"):
         if "table-wrap" not in table.parent.get("class", []):
-            wrapper = source.new_tag("div", attrs={"class": "table-wrap"})
+            wrapper = source.new_tag("div", attrs={"class": "table-wrap", "tabindex": "0", "role": "region"})
             table.wrap(wrapper)
     body = content.decode_contents()
     if not layout_only:
@@ -249,15 +249,32 @@ def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional
                 "report-kind": kind, "report-workflow": workflow, "research-as-of": as_of,
                 "layout-updated-at" if layout_only else "generated-at": generated.isoformat()}
     meta = "\n".join(f'<meta name="{name}" content="{html.escape(value, quote=True)}">' for name, value in metadata.items())
+    home_href = "../../index.html" if kind == "dossier" else "../index.html"
     return (
         '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         f'{meta}\n<title>{html.escape(title)}</title>\n'
-        '<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">\n'
         f'<style>\n{style}\n</style></head><body id="top">\n'
         '<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>\n'
-        '<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a>'
+        '<div class="desk-prenav">'
+        f'<span>{generated.strftime("%B %d, %Y")} &bull; {"India (NSE/BSE)" if market == "IN" else "United States (NYSE/NASDAQ)"}</span>'
+        '<span class="desk-prenav-links">'
+        '<a href="https://rajasekharmekala.github.io/">Home</a> | '
+        f'<a href="{home_href}">Portfolio Desk</a> | '
+        '<a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> | '
+        '<a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a>'
+        '</span></div>\n'
+        '<div class="desk-logotab">'
+        f'<a class="desk-brand-title" href="{home_href}">Portfolio Research Desk</a>'
+        f'<span class="desk-brand-sub">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</span>'
+        '</div>\n'
+        f'<header class="desk-masthead"><a class="desk-wordmark" href="{home_href}">RESEARCH / DESK</a>'
         f'<span class="desk-label">{"India" if market == "IN" else "US"} / {html.escape(workflow)}</span>'
+        '<nav class="desk-sisnav" aria-label="Sister sites">'
+        '<a href="https://rajasekharmekala.github.io/">Profile</a>'
+        '<a href="https://rajasekharmekala.github.io/personal-wiki/">Morning Brief</a>'
+        '<a href="https://rajasekharmekala.github.io/travel-research/">Travel</a>'
+        '</nav>'
         '<div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label>'
         '<select id="desk-section" hidden><option value="">Contents</option></select>'
         '<button id="desk-print" title="Print report" aria-label="Print report" hidden>'
@@ -267,7 +284,7 @@ def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional
         '</button></div></header>\n'
         f'<div class="desk-layout"><main class="report">{body}</main>'
         '<aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>\n'
-        '<footer class="desk-footer"><span>Portfolio Research Desk</span><a href="#top">Back to top</a></footer>\n'
+        '<footer class="desk-footer"><span>Portfolio Research Desk &bull; Curated by Rajasekhar Mekala</span><a href="#top">Back to top &uarr;</a></footer>\n'
         f'<script data-report-desk>\n{script}\n</script></body></html>\n'
     )
 

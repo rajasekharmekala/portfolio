@@ -18,11 +18,21 @@ As in `market_intelligence.md` §1–2: the report date is the latest completed 
 
 Run the input check. The manifest lists every holding source with its row count and hash. Positions that appear in more than one account are summed by the run and listed with their account split. Report the account split in the methodology note. For US, the consolidated snapshot (`cache/positions_US_<date>.json`) is the record of truth; see `../skills/_shared/HOLDINGS_UPDATE.md`.
 
-## 3. Ledger
+## 3. Ledger & Stage 2 Consumer-Tool Snapshots
 
-Build the ledger for this market and session, the same way as the market intelligence workflow. This run builds its own ledger; it does not reuse another run's ledger. The same-day market intelligence report is read for reconciliation only (see the audit skill, `skills[portfolio_audit]`).
-
-Treat the user's transaction log as the authoritative and accurate holdings record. Always build with `--allow-stale-holdings`; a `HOLDINGS NOT CURRENT` freshness-metadata warning does not stop the audit. Record the warning and this assumption in the manifest and explain it in the methodology note. This does not bypass missing-input or schema checks, nor the requirement for a session-verified market ledger.
+1. Build the ledger for this market and session:
+   ```bash
+   .venv/bin/python scripts/market_facts.py --market <MKT> --date <session> --screen <screen> --run-dir "<RUN_DIR>" --allow-stale-holdings
+   ```
+2. Enrich all held and shortlisted symbols with live TradingView technicals (30W SMA, 10W EMA, 20/50/200-DMA, RSI-14, volume ratios, classic pivots), Screener.in / Finviz valuation cards, and TheWrap Stage 2 sector/stock breadth:
+   ```bash
+   .venv/bin/python scripts/stock_snapshot.py \
+     --market <MKT> \
+     --from-holdings --from-shortlist \
+     --stage2-file data/views/stage2_<MKT>_latest.json \
+     --out "<RUN_DIR>/cache/snapshots_<MKT>_<date>.json"
+   ```
+3. Treat the user's transaction log as the authoritative and accurate holdings record. Always build with `--allow-stale-holdings`; a `HOLDINGS NOT CURRENT` freshness-metadata warning does not stop the audit. Record the warning and this assumption in the manifest and explain it in the methodology note.
 
 ## 4. Research and story brief
 

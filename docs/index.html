@@ -1,25 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio Research Desk</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="portal.css">
-<script src="portal.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Research Desk</title>
+  <meta name="description" content="Equity research portal for US and Indian markets: Stage 2 sector momentum, market intelligence, portfolio audits, and deep company monographs.">
+  <link rel="stylesheet" href="portal.css">
 </head>
 <body id="top">
-<header class="masthead"><a class="wordmark" href="index.html">RESEARCH / DESK</a><nav aria-label="Main navigation"><a href="#recent">Activity</a><a href="#reports">Workflows</a><a href="#library">Library</a></nav><span class="live-label">India + US</span></header>
-<main>
-<section class="heading-band"><div><p class="eyebrow">PORTFOLIO INTELLIGENCE</p><h1>The Research Desk</h1><p class="subtitle">Latest research, decisions, and portfolio reviews.</p></div><div class="sync"><span id="catalog-time">Loading catalog...</span><button id="refresh" title="Refresh research catalog" aria-label="Refresh research catalog">&#8635;</button></div></section>
-<div id="error" role="alert" hidden></div>
-<noscript><p>JavaScript is required to load the research catalog.</p></noscript>
-<section class="metrics" aria-label="Research overview" id="metrics"><div><strong>...</strong><span>Loading research</span></div></section>
-<div class="toolbar"><div class="segmented" role="group" aria-label="Market filter"><button data-market="All" aria-pressed="true">All markets</button><button data-market="IN" aria-pressed="false">India</button><button data-market="US" aria-pressed="false">US</button></div><label class="search"><span>Search</span><input id="search" type="search" placeholder="Company, symbol, sector, or workflow" autocomplete="off"></label></div>
-<section id="recent" class="section"><div class="section-heading"><div><p class="eyebrow">THE UPDATE FEED</p><h2>Recently Updated</h2></div><div class="section-tools"><label><input id="unread-only" type="checkbox"> Unread only</label><label><span class="sr-only">Activity period</span><select id="period"><option value="all">All time</option><option value="1">Last 24 hours</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></label><button id="mark-read">Mark visible as read</button></div></div><div id="recent-list" class="activity-list" aria-live="polite"></div><button id="more" class="more" hidden>Show more updates</button></section>
-<section id="reports" class="section"><div class="section-heading"><div><p class="eyebrow">LATEST BY WORKFLOW</p><h2>Intelligence &amp; Reviews</h2></div><span id="report-count" class="muted"></span></div><div id="report-list" class="report-grid"></div></section>
-<section id="library" class="section"><div class="section-heading"><div><p class="eyebrow">COMPANY RESEARCH</p><h2>Dossier Library</h2></div><label><span class="sr-only">Sort dossiers</span><select id="sort"><option value="updated">Recently updated</option><option value="symbol">Symbol A-Z</option><option value="company">Company A-Z</option></select></label></div><div class="library-filters"><label>Sector<select id="sector"><option value="all">All sectors</option></select></label><label>Verdict<select id="verdict"><option value="all">All verdicts</option></select></label></div><div id="library-in"><h3>India <span id="library-count-in" class="muted"></span></h3><div class="table-scroll"><table><thead><tr><th>Company</th><th>Market</th><th>Sector</th><th>Verdict</th><th>Updated</th></tr></thead><tbody id="dossier-list-in"></tbody></table></div></div><div id="library-us"><h3>United States <span id="library-count-us" class="muted"></span></h3><div class="table-scroll"><table><thead><tr><th>Company</th><th>Market</th><th>Sector</th><th>Verdict</th><th>Updated</th></tr></thead><tbody id="dossier-list-us"></tbody></table></div></div></section>
-</main>
-<footer><span>Portfolio Research Desk</span><span id="footer-status">Published research catalog</span><a href="#top">Back to top &#8593;</a></footer>
+  <div class="page-container">
+    <!-- Top Bar (Techmeme prenavbar) -->
+    <div class="prenavbar">
+      <div class="topline">
+        <div class="topdate" id="catalog-meta">Loading catalog&hellip;</div>
+        <div class="topllinks">
+          <a href="https://rajasekharmekala.github.io/">Home</a> |
+          <a href="index.html"><strong>Portfolio Desk</strong></a> |
+          <a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> |
+          <a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a>
+        </div>
+      </div>
+      <!-- Logo / Title Header -->
+      <div class="logotab">
+        <div class="logo-box">
+          <a href="index.html" class="brand-link">
+            <div class="brand-title">Portfolio Research Desk</div>
+            <div class="brand-subtitle">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</div>
+          </a>
+        </div>
+        <dl class="hero-stats" id="portal-stats" aria-label="Catalog summary"></dl>
+      </div>
+    </div>
+
+    <!-- Main Navy Navigation Bar (#174a61) -->
+    <div class="navbar">
+      <div class="navtabs">
+        <a href="#recent-heading" class="active">Latest Activity</a>
+        <a href="#workflows-heading">Workflow Reports</a>
+        <a href="#dossiers-heading">Company Monographs</a>
+      </div>
+      <div class="sisnav">
+        <span class="sis-label">Sister Sites:</span>
+        <a href="https://rajasekharmekala.github.io/">Profile &amp; CV</a>
+        <a href="https://rajasekharmekala.github.io/personal-wiki/">Daily Blogs</a>
+        <a href="https://rajasekharmekala.github.io/travel-research/">Travel</a>
+      </div>
+    </div>
+
+    <!-- Sub-navigation / Filter Controls -->
+    <div class="subnavbar" aria-label="Filter research">
+      <div class="control-row">
+        <div class="segmented" role="group" aria-label="Market filter" id="market-filters">
+          <button type="button" class="segment is-active" data-market="ALL">All markets</button>
+          <button type="button" class="segment" data-market="US">United States</button>
+          <button type="button" class="segment" data-market="IN">India</button>
+        </div>
+
+        <label class="search-field" for="search-input">
+          <span class="sr-only">Search symbol, company, workflow, verdict or thesis</span>
+          <input id="search-input" type="search" placeholder="Filter by ticker, company, workflow, Stage 2 or thesis..." autocomplete="off">
+          <kbd aria-hidden="true">/</kbd>
+        </label>
+
+        <label class="select-field">
+          <span>Verdict</span>
+          <select id="verdict-filter">
+            <option value="ALL">All verdicts</option>
+          </select>
+        </label>
+
+        <label class="select-field">
+          <span>Sort</span>
+          <select id="sort-select">
+            <option value="updated">Recently updated</option>
+            <option value="symbol">Ticker A&ndash;Z</option>
+            <option value="title">Title A&ndash;Z</option>
+          </select>
+        </label>
+
+        <button type="button" class="ghost-button" id="reset-filters" hidden>Reset</button>
+      </div>
+    </div>
+
+    <!-- Executive Philosophy Banner (.exec-theme-box) -->
+    <div class="exec-theme-box">
+      <span class="exec-label">Desk Philosophy:</span>
+      Catch early Stan Weinstein Stage 2 sector and stock breakouts with institutional volume confirmation, underwrite every company as a comprehensive multi-vertical business monograph, and execute strictly on a No-FOMO framework (<em>Immediate Buy</em> vs. <em>Wait for 20/50 DMA Support</em>).
+    </div>
+
+    <main class="shell">
+      <section class="section" aria-labelledby="recent-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Latest activity</p>
+            <h2 id="recent-heading">Recently Updated</h2>
+          </div>
+          <p class="section-meta" id="recent-meta"></p>
+        </div>
+        <div class="recent-strip" id="recent-list"></div>
+      </section>
+
+      <section class="section" aria-labelledby="workflows-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Market &amp; portfolio workflows</p>
+            <h2 id="workflows-heading">Operating Reports</h2>
+          </div>
+          <p class="section-meta" id="report-meta"></p>
+        </div>
+        <div class="report-grid" id="report-list"></div>
+      </section>
+
+      <section class="section" aria-labelledby="dossiers-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Single-name underwriting</p>
+            <h2 id="dossiers-heading">Company Monographs &amp; Dossiers</h2>
+          </div>
+          <p class="section-meta" id="dossier-meta"></p>
+        </div>
+        <div class="dossier-list" id="dossier-list" role="list"></div>
+      </section>
+
+      <section class="empty-state" id="empty-state" hidden>
+        <h2>No published reports or dossiers yet</h2>
+        <p>Run a Stage 2 Sector Momentum, Market Intelligence, Watchlist-to-Shortlist, or Portfolio Audit workflow to populate the catalog in the new theme.</p>
+      </section>
+    </main>
+
+    <div class="footer">
+      Portfolio Research Desk &bull; Curated by <a href="https://rajasekharmekala.github.io/">Rajasekhar Mekala</a> &bull;
+      <a href="#top">Back to Top &uarr;</a>
+    </div>
+  </div>
+
+  <script src="portal.js" defer></script>
 </body>
 </html>

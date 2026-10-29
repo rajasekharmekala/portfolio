@@ -23,9 +23,10 @@ Code has already checked: every number against the ledger, research record, posi
 
 ## What you judge
 
-### A. Source
-- Section 2 numbers: for each id, decide whether the number is derivable from the numbers around it (the writer's own arithmetic) or unsupported. "Untraced" is not "wrong". Unsupported or underivable is a finding.
-- Section 3 verdicts: the verdict follows from the rule and the number the note cites; those numbers match the ledger slice; every claim about the company (business, catalyst, guidance, pledge, order book) is in the research slice. A claim from memory is a finding. A verdict that contradicts the ledger is BLOCK.
+### A. Source & Business-Monograph Depth
+- Section 2 numbers: for each id, decide whether the number is derivable from the numbers around it (or from the TradingView / Screener / Finviz / Stage 2 snapshot) or unsupported. "Untraced" is not "wrong". Unsupported or underivable is a finding.
+- Section 3 verdicts & No-FOMO discipline: the verdict follows from the Stage 2 + valuation + No-FOMO support rule (`scoring.json`); a stock extended `>10%` above its 10-week EMA (`>12%` above 50D SMA) or with `RSI(14) > 73` must be routed to `WAIT_FOR_SUPPORT` / `ACCUMULATE_ON_DIP` rather than `IMMEDIATE_BUY` at CMP. Every claim about the company (vertical operations, catalyst, guidance, order book) is backed by the research record or citations.
+- **For company dossiers (`kind = dossier`):** verify that the dossier is a thorough business monograph covering: (1) day-to-day operational processes across business verticals (`ch-1`), (2) an External Learning Hub with links to websites, videos, presentations, or concalls (`ch-2`), (3) the core operational KPIs of the business, whether the company is reaching its structural potential, and a concrete CEO "Walk-the-Talk" audit comparing past promises against delivered reality (`ch-2b`), and (4) a clear multi-horizon view (short-term momentum, medium-term catalysts, and No-FOMO support entry zone). If any of these monograph pillars is superficial or missing, raise a `REVISE` finding.
 - A figure whose as-of is not the session date is labelled as prior-session.
 - Any FAIL line from the citation check is a BLOCK that quotes the checker's line. Exception: `PASS WITH EXCEPTIONS` is not a failure when every `EXCEPTION AS-OF` line, with its age and cure date, is in the report's `gate-exceptions` section; raise those as NOTE. A missing exception in that section is BLOCK.
 

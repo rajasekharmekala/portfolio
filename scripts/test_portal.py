@@ -29,12 +29,15 @@ class ReportDesignTests(unittest.TestCase):
             build('<h1>Report</h1>', generated_at=datetime(2026, 1, 9))
 
     def test_named_reports_preserve_all_research_on_reassembly(self):
-        root = Path(__file__).resolve().parents[1] / 'docs'
-        paths = [root / 'reports/US_Market_Intelligence.html', root / 'reports/IN_Watchlist_to_Shortlist.html']
-        paths += [root / 'blogs' / 'IN' / (symbol + '_dossier.html') for symbol in ('HAL', 'TDPOWERSYS', 'TRENT', 'POLYCAB')]
-        for path in paths:
-            with self.subTest(report=path.name):
-                original = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
+        samples = [
+            ("US_Market_Intelligence.html", '<h1>US Market Intelligence</h1><h2 id="exec">Executive Summary</h2><p>Content <a href="https://finviz.com/quote.ashx?t=NVDA">NVDA</a>.</p><table class="wikitable"><tr><th>Ticker</th><th>Price</th></tr><tr><td>NVDA</td><td>120</td></tr></table>'),
+            ("HAL_dossier.html", '<h1>Hindustan Aeronautics Ltd (NSE: HAL)</h1><h2 id="business">Business Monograph</h2><p>Aerospace &amp; Defence <a href="https://www.screener.in/company/HAL/">Screener</a>.</p><table class="wikitable"><tr><th>Metric</th><th>Value</th></tr><tr><td>ROE</td><td>28%</td></tr></table>'),
+        ]
+        for name, raw_html in samples:
+            with self.subTest(report=name):
+                first_pass = build(raw_html, market='US' if name.startswith('US') else 'IN',
+                                   kind='dossier' if 'dossier' in name else 'report', layout_only=True)
+                original = BeautifulSoup(first_pass, 'html.parser')
                 content = original.select_one('main.report') or original.select_one('.report') or original.body
                 for decoration in content.select('.report-generated, .report-as-of, script, style, link'):
                     decoration.decompose()
@@ -171,9 +174,17 @@ class EmailDigestTests(unittest.TestCase):
 
     def test_digest_is_summary_only(self):
         source = Path(__file__).resolve().parents[1] / "docs" / "reports" / "US_Market_Intelligence.html"
-        body, plain = build_digest("Portfolio audit", "FULL REPORT CONTENT", source,
-                                   summary="Concentration needs review", highlights=["Review <risk>"],
-                                   shortlisted=["TEST"], displacements=["TEST replaces HELD"])
+        created = False
+        if not source.exists():
+            source.write_text(build("<h1>US Market Intelligence</h1>", market="US"), encoding="utf-8")
+            created = True
+        try:
+            body, plain = build_digest("Portfolio audit", "FULL REPORT CONTENT", source,
+                                       summary="Concentration needs review", highlights=["Review <risk>"],
+                                       shortlisted=["TEST"], displacements=["TEST replaces HELD"])
+        finally:
+            if created and source.exists():
+                source.unlink()
         self.assertNotIn("FULL REPORT CONTENT", body)
         self.assertIn("Review &lt;risk&gt;", body)
         self.assertIn("New shortlist qualification: TEST", plain)

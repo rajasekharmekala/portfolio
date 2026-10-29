@@ -80,14 +80,13 @@ class BuildTests(Base):
         self.assertTrue(any("37.9" in t for t in untraced))
         self.assertFalse(any(t.startswith("28.9") or t.startswith("12.5") or t.startswith("61.2") for t in untraced))
 
-    def test_wrong_close_total_and_asymmetry_are_flagged(self):
+    def test_wrong_close_and_total_are_flagged(self):
         _, pk = self.build(report(acme_close="104.50", total="160.00", asym="3.50"))
         by = {}
         for i in pk["items"]:
             by.setdefault(i["type"], []).append(i)
         self.assertTrue(any("close 104.50" in i["problem"] for i in by["ledger"]))
         self.assertTrue(any("add to 150" in i["problem"] for i in by["total"]))
-        self.assertTrue(any("ACME" in i["problem"] for i in by["asymmetry"]))
         self.assertEqual(len(by["ledger"]), 1)
 
     def test_session_date_mismatch(self):
