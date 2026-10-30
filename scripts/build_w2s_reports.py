@@ -250,3 +250,4 @@ print("Running:", " ".join(cmd_us))
 subprocess.check_call(cmd_us)
 
 print("Successfully assembled both IN and US Watchlist to Shortlist reports!")
+
