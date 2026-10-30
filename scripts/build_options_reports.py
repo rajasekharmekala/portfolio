@@ -35,6 +35,7 @@ for p in in_opts.get("positions", []):
     """
 
 in_body = f"""
+<h1>India Options &amp; NSE F&amp;O Underwriting Audit (29 Oct 2026)</h1>
 <div class="exec-theme-box">
   <div class="exec-theme-title">Executive Summary — NSE F&O Derivative Risk & Underwriting Audit</div>
   <p class="exec-theme-p">
@@ -158,6 +159,7 @@ for p in us_opts.get("positions", []):
     """
 
 us_body = f"""
+<h1>US Options &amp; LEAPS Derivative Underwriting Audit (29 Oct 2026)</h1>
 <div class="exec-theme-box">
   <div class="exec-theme-title">Executive Summary — US Listed Options & LEAPS Underwriting Audit</div>
   <p class="exec-theme-p">

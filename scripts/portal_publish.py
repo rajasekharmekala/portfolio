@@ -116,7 +116,7 @@ def extract_verdict(soup, info, metadata):
                 if badge and badge.get_text(" ", strip=True):
                     return badge.get_text(" ", strip=True)
                 return value.get_text(" ", strip=True)
-    badge = soup.select_one("span.verdict, .verdict-badge, .decision-badge")
+    badge = soup.select_one("span.verdict, .verdict-badge, .decision-badge, td span.badge, .badge-accent")
     if badge and badge.get_text(" ", strip=True):
         return badge.get_text(" ", strip=True)
     table_verdict = next((value for key, value in info.items()
@@ -238,7 +238,7 @@ def read_entry(path, dates, updates):
             sector = record_sector
     sector = sector or MISSING
     description = soup.find("meta", attrs={"name": "description"})
-    paragraph = soup.select_one(".executive-summary p, section#executive-summary p")
+    paragraph = soup.select_one(".exec-theme-p, .exec-theme-box p, .executive-summary p, section#executive-summary p, #primer p")
     if paragraph is None:
         summary_heading = soup.find(["h2", "h3"], string=re.compile(r"executive|summary|verdict|underwriting|analyst primer", re.I))
         if summary_heading:

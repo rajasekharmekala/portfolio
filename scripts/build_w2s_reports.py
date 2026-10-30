@@ -9,6 +9,7 @@ from pathlib import Path
 # IN Watchlist to Shortlist Body
 # ==========================================
 in_body = """
+<h1>India Watchlist to Shortlist &amp; Stage 2 Rationalization (29 Oct 2026)</h1>
 <div class="exec-theme-box">
   <div class="exec-theme-title">Executive Summary — Stage 2 Momentum & Watchlist Rationalization</div>
   <p class="exec-theme-p">
@@ -116,6 +117,7 @@ in_body = """
 # US Watchlist to Shortlist Body
 # ==========================================
 us_body = """
+<h1>US Watchlist to Shortlist &amp; Stage 2 Rationalization (29 Oct 2026)</h1>
 <div class="exec-theme-box">
   <div class="exec-theme-title">Executive Summary — Stage 2 Momentum & Watchlist Rationalization</div>
   <p class="exec-theme-p">

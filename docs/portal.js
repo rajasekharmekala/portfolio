@@ -1,105 +1,311 @@
 "use strict";
-const byId = id => document.getElementById(id);
-const state = { entries: [], market: "All", limit: 12, read: {} };
-try { state.read = JSON.parse(localStorage.getItem("research-read-v1") || "{}"); } catch { state.read = {}; }
-if (!state.read || typeof state.read !== "object" || Array.isArray(state.read)) state.read = {};
-const escapeText = value => String(value ?? "").replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
-const version = entry => entry.updatedAt || entry.reportDate || "undated";
-const unread = entry => state.read[entry.id] !== version(entry);
-const MISSING = "Not specified";
-const VERDICT_ORDER = ["IMMEDIATE BUY", "ACCUMULATE ON DIP", "KEEP COMPOUNDING", "TRIM / HARVEST", "REPLACE UNDERPERFORMER", "WAIT FOR SUPPORT", "WATCHLIST / HOLD", "AVOID / REJECTED"];
-const display = value => (!value || value === MISSING ? "—" : value);
-const dateText = value => value && Number.isFinite(Date.parse(value)) ? new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)) : "Date unavailable";
-const safeUrl = value => typeof value === "string" && /^(blogs|reports)\/[A-Za-z0-9_./%& -]+\.html$/.test(value) && !value.includes("..") ? value.split("/").map(part => encodeURIComponent(decodeURIComponent(part))).join("/") : null;
-function link(entry, label = entry.title) { return `<a data-entry="${escapeText(entry.id)}" href="${escapeText(safeUrl(entry.url))}">${escapeText(label)}</a>`; }
-function stamp(entry) { return `<time title="${escapeText(entry.timestampSource === "workflow" ? "Workflow completion" : entry.timestampSource === "git" ? "Last Git commit" : "No timestamp recorded")}">${escapeText(dateText(entry.updatedAt))}</time>`; }
-function filtered() {
-  const query = byId("search").value.trim().toLowerCase();
-  return state.entries.filter(entry => (state.market === "All" || entry.market === state.market) && [entry.title, entry.symbol, entry.sector, entry.workflow, entry.verdict, entry.summary].join(" ").toLowerCase().includes(query));
-}
-function activity() {
-  const days = byId("period").value;
-  return filtered().filter(entry => (!byId("unread-only").checked || unread(entry)) && (days === "all" || (Date.parse(entry.updatedAt) >= Date.now() - Number(days) * 86400000)));
-}
-function saveRead(entries) {
-  entries.forEach(entry => { state.read[entry.id] = version(entry); });
-  try { localStorage.setItem("research-read-v1", JSON.stringify(state.read)); } catch { /* Read state remains available for this session. */ }
-}
-function render() {
-  const entries = filtered();
-  const recent = activity();
-  const visible = recent.slice(0, state.limit);
-  const latest = new Map();
-  entries.filter(entry => entry.kind === "report").forEach(entry => {
-    const key = `${entry.market}:${entry.workflow.toLowerCase()}`;
-    if (!latest.has(key)) latest.set(key, entry);
-  });
-  const metrics = [[entries.length, "Published pages"], [entries.filter(unread).length, "Unread updates"], [entries.filter(entry => Date.parse(entry.updatedAt) >= Date.now() - 86400000).length, "Updated in 24 hours"], [latest.size, "Workflow reports"]];
-  byId("metrics").innerHTML = metrics.map(([count, label]) => `<div><strong>${count}</strong><span>${label}</span></div>`).join("");
-  byId("recent-list").innerHTML = visible.map(entry => `<article class="activity-row ${unread(entry) ? "is-unread" : ""}"><div class="activity-date">${stamp(entry)}<span>${escapeText(entry.market)} / ${entry.kind === "dossier" ? "Dossier" : "Report"}</span></div><div class="activity-main"><div class="activity-title">${link(entry)}${unread(entry) ? '<span class="unread-dot" title="Unread update" aria-label="Unread update"></span>' : ""}</div><p class="workflow">${escapeText(entry.workflow)}${entry.completed ? " / Completed" : ""}</p>${entry.summary ? `<p class="summary">${escapeText(entry.summary)}</p>` : ""}${entry.highlights?.length ? `<ul class="highlights">${entry.highlights.map(highlight => `<li>${escapeText(highlight)}</li>`).join("")}</ul>` : ""}</div><span class="verdict">${escapeText(display(entry.verdict))}</span></article>`).join("") || '<p class="empty">No updates match these filters.</p>';
-  byId("more").hidden = recent.length <= state.limit;
-  byId("mark-read").disabled = !visible.some(unread);
-  byId("report-count").textContent = `${latest.size} latest reports`;
-  byId("report-list").innerHTML = [...latest.values()].map(entry => `<article class="report-item"><div class="report-meta"><span>${escapeText(entry.market)}</span>${stamp(entry)}</div><h3>${link(entry)}</h3>${entry.summary ? `<p>${escapeText(entry.summary)}</p>` : ""}<span class="workflow">${escapeText(entry.workflow)}</span></article>`).join("") || '<p class="empty">No workflow reports match these filters.</p>';
-  let dossiers = entries.filter(entry => entry.kind === "dossier" && (byId("sector").value === "all" || entry.sector === byId("sector").value) && (byId("verdict").value === "all" || entry.verdict === byId("verdict").value));
-  if (byId("sort").value !== "updated") {
-    const key = byId("sort").value === "symbol" ? "symbol" : "title";
-    dossiers = dossiers.toSorted ? dossiers.toSorted((first, second) => first[key].localeCompare(second[key])) : [...dossiers].sort((first, second) => first[key].localeCompare(second[key]));
-  }
-  const dossierRow = entry => `<tr><td><span class="symbol">${escapeText(entry.symbol)}</span>${link(entry)}</td><td>${escapeText(entry.market)}</td><td>${escapeText(display(entry.sector))}</td><td><span class="verdict">${escapeText(display(entry.verdict))}</span></td><td>${stamp(entry)}</td></tr>`;
-  const emptyRows = '<tr><td colspan="5" class="empty">No dossiers match these filters.</td></tr>';
-  const renderLibrary = (bodyId, countId, sectionId, market, list) => {
-    byId(countId).textContent = `${list.length} dossiers`;
-    byId(bodyId).innerHTML = list.map(dossierRow).join("") || emptyRows;
-    byId(sectionId).hidden = state.market !== "All" && state.market !== market;
+
+(() => {
+  const byId = id => document.getElementById(id);
+  const state = {
+    entries: [],
+    market: "ALL",
+    verdict: "ALL",
+    sort: "updated",
+    search: "",
   };
-  renderLibrary("dossier-list-in", "library-count-in", "library-in", "IN", dossiers.filter(entry => entry.market === "IN"));
-  renderLibrary("dossier-list-us", "library-count-us", "library-us", "US", dossiers.filter(entry => entry.market === "US"));
-}
-async function load() {
-  const button = byId("refresh");
-  button.disabled = true;
-  byId("error").hidden = true;
-  try {
-    const response = await fetch(`portal-data.json?t=${Date.now()}`, { cache: "no-store" });
-    if (!response.ok) throw new Error(`Catalog request failed (${response.status})`);
-    const catalog = await response.json();
-    if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.entries)) throw new Error("Unsupported catalog format");
-    if (catalog.entries.some(entry => !safeUrl(entry.url))) throw new Error("Catalog contains an invalid destination");
-    state.entries = catalog.entries.sort((first, second) => (second.updatedAt || "").localeCompare(first.updatedAt || ""));
-    for (const [id, key, label] of [["sector", "sector", "All sectors"], ["verdict", "verdict", "All verdicts"]]) {
-      const control = byId(id);
-      const previous = control.value;
-      const values = [...new Set(state.entries.filter(entry => entry.kind === "dossier").map(entry => entry[key]))].filter(value => value && value !== MISSING);
-      values.sort((first, second) => id === "verdict" ? (VERDICT_ORDER.indexOf(first) === -1 ? VERDICT_ORDER.length : VERDICT_ORDER.indexOf(first)) - (VERDICT_ORDER.indexOf(second) === -1 ? VERDICT_ORDER.length : VERDICT_ORDER.indexOf(second)) || first.localeCompare(second) : first.localeCompare(second));
-      control.innerHTML = `<option value="all">${label}</option>` + values.map(value => `<option value="${escapeText(value)}">${escapeText(value)}</option>`).join("");
-      if ([...control.options].some(option => option.value === previous)) control.value = previous;
-    }
-    byId("catalog-time").textContent = `Catalog refreshed ${dateText(catalog.generatedAt)}`;
-    byId("footer-status").textContent = `${state.entries.length} published pages`;
-    render();
-  } catch (error) {
-    byId("error").textContent = `Research catalog unavailable. ${error.message}. Try refreshing. ${location.protocol === "file:" ? "Open this page through the local server or GitHub Pages." : ""}`;
-    byId("error").hidden = false;
-    byId("catalog-time").textContent = state.entries.length ? "Refresh failed; showing previous catalog" : "Catalog unavailable";
-  } finally { button.disabled = false; }
-}
-document.querySelectorAll("[data-market]").forEach(button => button.addEventListener("click", () => {
-  state.market = button.dataset.market;
-  state.limit = 12;
-  document.querySelectorAll("[data-market]").forEach(control => control.setAttribute("aria-pressed", String(control === button)));
-  render();
-}));
-for (const id of ["search", "unread-only", "period", "sector", "verdict", "sort"]) byId(id).addEventListener(id === "search" ? "input" : "change", () => { state.limit = 12; render(); });
-byId("more").addEventListener("click", () => { state.limit += 12; render(); });
-byId("mark-read").addEventListener("click", () => { saveRead(activity().slice(0, state.limit)); render(); });
-byId("refresh").addEventListener("click", load);
-document.addEventListener("click", event => {
-  const anchor = event.target.closest("a[data-entry]");
-  if (anchor) {
-    const entry = state.entries.find(item => item.id === anchor.dataset.entry);
-    if (entry) saveRead([entry]);
+
+  const escapeHtml = value =>
+    String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[c]));
+
+  function formatDate(value) {
+    if (!value) return "Latest";
+    const d = new Date(value);
+    if (!Number.isFinite(d.getTime())) return "Latest";
+    return new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "America/Los_Angeles",
+    }).format(d);
   }
-});
-window.addEventListener("pageshow", () => { if (state.entries.length) render(); });
-load();
+
+  function formatDateTime(value) {
+    if (!value) return "Latest";
+    const d = new Date(value);
+    if (!Number.isFinite(d.getTime())) return "Latest";
+    return new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short",
+      timeZone: "America/Los_Angeles",
+    }).format(d);
+  }
+
+  function verdictClass(v) {
+    if (!v || v === "Not specified") return "verdict-neutral";
+    const upper = v.toUpperCase();
+    if (upper.includes("BUY") || upper.includes("ACCUMULATE") || upper.includes("COMPOUND") || upper.includes("PASSED")) {
+      return "verdict-good";
+    }
+    if (upper.includes("WAIT") || upper.includes("TRIM") || upper.includes("REPLACE") || upper.includes("HOLD") || upper.includes("WATCH")) {
+      return "verdict-warn";
+    }
+    if (upper.includes("REJECT") || upper.includes("AVOID") || upper.includes("STAGE 4") || upper.includes("FAIL")) {
+      return "verdict-bad";
+    }
+    return "verdict-neutral";
+  }
+
+  function filterEntries() {
+    return state.entries.filter(e => {
+      if (state.market !== "ALL" && e.market !== state.market) return false;
+      if (state.verdict !== "ALL" && e.verdict !== state.verdict) return false;
+      if (state.search) {
+        const q = state.search.toLowerCase();
+        const text = [
+          e.title,
+          e.symbol,
+          e.market,
+          e.workflow,
+          e.verdict,
+          e.summary,
+          e.sector,
+        ].join(" ").toLowerCase();
+        if (!text.includes(q)) return false;
+      }
+      return true;
+    });
+  }
+
+  function sortEntries(list) {
+    const sorted = [...list];
+    if (state.sort === "symbol") {
+      sorted.sort((a, b) => (a.symbol || a.title).localeCompare(b.symbol || b.title));
+    } else if (state.sort === "title") {
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else {
+      sorted.sort((a, b) => (b.updatedAt || b.generatedAt || "").localeCompare(a.updatedAt || a.generatedAt || ""));
+    }
+    return sorted;
+  }
+
+  function renderCard(e, isRecent = false) {
+    const className = isRecent ? "recent-item" : "report-card";
+    const hasVerdict = e.verdict && e.verdict !== "Not specified";
+    const label = e.workflow || (e.kind === "dossier" ? "Company Research" : "Operating Report");
+    return `
+      <a class="${className}" href="${escapeHtml(e.url)}">
+        <div class="card-top">
+          <div class="badge-row">
+            <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
+            ${e.symbol ? `<span class="symbol-pill">${escapeHtml(e.symbol)}</span>` : ""}
+            ${hasVerdict ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>` : ""}
+          </div>
+          <span class="stamp">${escapeHtml(formatDate(e.updatedAt || e.generatedAt))}</span>
+        </div>
+        <div class="card-title">${escapeHtml(e.title)}</div>
+        ${e.summary ? `<p class="card-summary">${escapeHtml(e.summary)}</p>` : ""}
+        <div class="card-foot">
+          <span>${escapeHtml(label)}</span>
+          <span>Read &rarr;</span>
+        </div>
+      </a>
+    `;
+  }
+
+  function renderDossierRow(e) {
+    const hasVerdict = e.verdict && e.verdict !== "Not specified";
+    const sub = e.sector && e.sector !== "Not specified" ? e.sector : "Stage 2 Leader";
+    return `
+      <a class="dossier-row" href="${escapeHtml(e.url)}">
+        <div class="dossier-code">
+          <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
+          <span class="symbol-pill">${escapeHtml(e.symbol || e.title.slice(0, 8))}</span>
+        </div>
+        <div>
+          <div class="dossier-title">${escapeHtml(e.symbol || e.title)}</div>
+          <div class="dossier-sub">${escapeHtml(sub)}</div>
+        </div>
+        <p class="dossier-summary">${escapeHtml(e.summary || e.title)}</p>
+        <div>
+          ${hasVerdict ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>` : ""}
+        </div>
+        <div class="dossier-date">${escapeHtml(formatDate(e.updatedAt || e.generatedAt))}</div>
+      </a>
+    `;
+  }
+
+  function render() {
+    const filtered = filterEntries();
+    const sorted = sortEntries(filtered);
+
+    const reports = sorted.filter(e => e.kind === "report");
+    const dossiers = sorted.filter(e => e.kind === "dossier");
+    const recent = sorted.slice(0, 6);
+
+    // Update Stats Hero
+    const totalPages = state.entries.length;
+    const intelCount = state.entries.filter(e => (e.workflow || "").toLowerCase().includes("intelligence")).length;
+    const auditCount = state.entries.filter(e => e.kind === "report" && !(e.workflow || "").toLowerCase().includes("intelligence")).length;
+    const monographCount = state.entries.filter(e => e.kind === "dossier").length;
+
+    const statsEl = byId("portal-stats");
+    if (statsEl) {
+      statsEl.innerHTML = `
+        <div><dt>Published</dt><dd>${totalPages} pages</dd></div>
+        <div><dt>Market Intel</dt><dd>${intelCount} reports</dd></div>
+        <div><dt>Shortlist &amp; Audits</dt><dd>${auditCount} reports</dd></div>
+        <div><dt>Monographs</dt><dd>${monographCount} books</dd></div>
+      `;
+    }
+
+    // Update Section Head Metas
+    const recentMeta = byId("recent-meta");
+    if (recentMeta) recentMeta.textContent = `Showing ${recent.length} recent publications`;
+
+    const reportMeta = byId("report-meta");
+    if (reportMeta) reportMeta.textContent = `${reports.length} workflow reports available`;
+
+    const dossierMeta = byId("dossier-meta");
+    if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monograph dossiers available`;
+
+    // Render Lists
+    const recentList = byId("recent-list");
+    if (recentList) {
+      recentList.innerHTML = recent.map(e => renderCard(e, true)).join("");
+    }
+
+    const reportList = byId("report-list");
+    if (reportList) {
+      reportList.innerHTML = reports.map(e => renderCard(e, false)).join("");
+    }
+
+    const dossierList = byId("dossier-list");
+    if (dossierList) {
+      dossierList.innerHTML = dossiers.map(renderDossierRow).join("");
+    }
+
+    // Toggle Empty State
+    const emptyState = byId("empty-state");
+    if (emptyState) {
+      emptyState.hidden = sorted.length > 0;
+    }
+
+    // Toggle Reset Button
+    const resetBtn = byId("reset-filters");
+    if (resetBtn) {
+      const isFiltered = state.market !== "ALL" || state.verdict !== "ALL" || Boolean(state.search);
+      resetBtn.hidden = !isFiltered;
+    }
+  }
+
+  function setupFilters() {
+    // Market Segmented Buttons
+    document.querySelectorAll("#market-filters button.segment").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#market-filters button.segment").forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        state.market = btn.dataset.market || "ALL";
+        render();
+      });
+    });
+
+    // Search Input
+    const searchInput = byId("search-input");
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        state.search = searchInput.value.trim();
+        render();
+      });
+    }
+
+    // Global / shortcut key
+    window.addEventListener("keydown", e => {
+      if (e.key === "/" && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput?.focus();
+      }
+    });
+
+    // Verdict Filter
+    const verdictSelect = byId("verdict-filter");
+    if (verdictSelect) {
+      verdictSelect.addEventListener("change", () => {
+        state.verdict = verdictSelect.value;
+        render();
+      });
+    }
+
+    // Sort Select
+    const sortSelect = byId("sort-select");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", () => {
+        state.sort = sortSelect.value;
+        render();
+      });
+    }
+
+    // Reset Button
+    const resetBtn = byId("reset-filters");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        state.market = "ALL";
+        state.verdict = "ALL";
+        state.search = "";
+        if (searchInput) searchInput.value = "";
+        if (verdictSelect) verdictSelect.value = "ALL";
+        document.querySelectorAll("#market-filters button.segment").forEach(b => {
+          b.classList.toggle("is-active", b.dataset.market === "ALL");
+        });
+        render();
+      });
+    }
+  }
+
+  function populateVerdictDropdown() {
+    const select = byId("verdict-filter");
+    if (!select) return;
+    const verdicts = [...new Set(state.entries.map(e => e.verdict))]
+      .filter(v => v && v !== "Not specified")
+      .sort();
+    select.innerHTML = '<option value="ALL">All verdicts</option>' +
+      verdicts.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join("");
+  }
+
+  async function init() {
+    setupFilters();
+    const metaEl = byId("catalog-meta");
+
+    try {
+      const res = await fetch(`portal-data.json?t=${Date.now()}`, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      state.entries = Array.isArray(data.entries) ? data.entries : [];
+
+      if (metaEl) {
+        metaEl.textContent = `Catalog updated: ${formatDateTime(data.generatedAt || new Date())} • ${state.entries.length} published pages`;
+      }
+
+      populateVerdictDropdown();
+      render();
+    } catch (err) {
+      console.error("Failed to load catalog:", err);
+      if (metaEl) {
+        metaEl.textContent = "Catalog offline. Refresh to retry.";
+      }
+      const emptyState = byId("empty-state");
+      if (emptyState) emptyState.hidden = false;
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
