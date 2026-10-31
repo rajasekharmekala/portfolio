@@ -19,9 +19,13 @@ import time
 from datetime import datetime
 
 # Import chrome_ctl from macos-browser-automation skill
-SKILL_PATH = os.path.expanduser("~/.agents/skills-dangerously-allow/macos-browser-automation/scripts")
-if SKILL_PATH not in sys.path:
-    sys.path.insert(0, SKILL_PATH)
+SKILL_PATHS = [
+    os.path.expanduser("~/.agents/skills/macos-browser-automation/scripts"),
+    os.path.expanduser("~/.agents/skills-dangerously-allow/macos-browser-automation/scripts"),
+]
+for p in SKILL_PATHS:
+    if os.path.exists(p) and p not in sys.path:
+        sys.path.insert(0, p)
 
 try:
     import chrome_ctl
@@ -32,8 +36,8 @@ except ImportError:
 POWERBI_URLS = {
     "IN": {
         "wrap_url": "https://thewrap.in/data-tools/stage2",
-        "pbi_url": "https://app.powerbi.com/view?r=eyJrIjoiMDlmNzhkZWItNDA5ZS00NjhmLTlkOTItOTM2MjkzYzYxMWZkIiwidCI6ImE3ODlmNjk1LTUxZWYtNGExMy1hZTMyLTk3NDFiNGRmMDBiNyJ9",
-        "pbi_match": "MDlmNzhkZWIt",
+        "pbi_url": "https://app.powerbi.com/view?r=eyJrIjoiOTJhNWMwODgtZTk0OS00NDM0LTgwM2MtNjYzZTQ0ZjgzNGM1IiwidCI6ImE3ODlmNjk1LTUxZWYtNGExMy1hZTMyLTk3NDFiNGRmMDBiNyJ9",
+        "pbi_match": "OTJhNWMwODgt",
         "default_min_mcap": 1000.0,
     },
     "US": {
