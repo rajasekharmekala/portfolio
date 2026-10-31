@@ -984,7 +984,7 @@ def build(args):
     sample = tone_sample(parsed, changed)
     P.append("## 4. Prose for the tone read (%s)" % ("every prose block of the changed sections" if changed is not None else "deterministic sample"))
     P.append("")
-    P.append("Judge against the tone checklist in the rubric. Banned phrases, readability grade and glossary first-use are already in the code checks above.")
+    P.append("Judge against the tone checklist in the rubric. Banned phrases and readability grade are already in the code checks above.")
     P.append("")
     cur = None
     for b in sample:

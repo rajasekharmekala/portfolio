@@ -34,8 +34,7 @@ Rules per chapter:
 
 - **Before you read.** Three to five sentences only: what the company is, what
   the report concludes, and what would make the conclusion wrong.
-- **Chapter 1** is explained as if to a friend, and ends with a short glossary
-  of the terms the report uses (the terms from `GLOSSARY.md` that appear).
+- **Chapter 1** explains who pays the company, for what, and how each business vertical works day-to-day. Do NOT include glossaries or textbook definitions of standard financial terms.
 - **Chapter 2** states the competitive position with reasons and evidence. Each
   claim cites a source.
 - **Chapter 3** shows revenue, profit, cash and debt over five years. Every
@@ -115,11 +114,7 @@ The verifier runs these in code and flags failures:
 
 1. **Reading level.** Flesch–Kincaid grade of each chapter at or below the
    agreed threshold (default 13, `--max-grade`). Failing chapter is listed.
-2. **Glossary terms defined on first use.** Every term in
-   `.agents/config/glossary.json` that appears in the report must, at its first
-   occurrence, be wrapped in `<dfn>`, and the same paragraph must contain the
-   plain-English expansion (for acronyms) or a defining sentence (for phrase
-   terms).
+2. **Anti-fluff policy.** No glossaries, no <dfn> tags, and no textbook definitions of standard financial metrics or acronyms.
 3. **No bare tables.** Every `<table>` is followed by at least one explanatory
    paragraph (80+ characters) before the next table or heading.
 4. **Estimates show their working.** Every `<section class="estimate">`
@@ -137,7 +132,6 @@ HTML conventions the checker relies on:
 - the primer is `<section class="primer" id="primer">`;
 - notes are `<section id="notes">` with an `<ol class="sources">`;
 - estimates are `<section class="estimate">` with the five `<h4>` labels;
-- glossary terms at first use: `<dfn>relative strength index (RSI)</dfn>`;
 - every table sits in `<div class="table-wrap">`.
 
 Readability is checked by code and then by the tone reviewer. A report does

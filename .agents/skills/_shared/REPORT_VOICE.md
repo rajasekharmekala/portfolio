@@ -21,7 +21,7 @@ Each explanation does four things, roughly in this order:
 
 Then it ties the subsection to the next one. Ending a subsection on a bridge sentence is what makes a report read as one argument instead of a pile of tables.
 
-A subsection with a table gets prose before the table (what to look for and how to read one row) and prose after it (what the numbers add up to). Do not copy cells into sentences. Explain what the cells mean together.
+A subsection with a table provides analytical context and takeaway findings. Never include "how to read this table" reading guides. Do not copy cells into sentences. Explain what the numbers mean together.
 
 ## 3. Reasoning, consequences, and tie-ups
 
@@ -34,7 +34,7 @@ A subsection with a table gets prose before the table (what to look for and how 
 ## 4. Writing style
 
 - Plain English. Short sentences are fine. Vary their length and their openings.
-- Define each technical term the first time it appears, with an analogy. After that, use it consistently.
+- Use standard institutional and technical terminology naturally. Never insert condescending definitions, everyday analogies, glossaries, or `<dfn>` tags.
 - Address the reader as "you" when giving advice, and "the company" or "the index" when describing.
 - One idea per paragraph. Three to six sentences is typical for a subsection paragraph.
 - Explain the number and then the meaning. "RSI is 27.7. Below 30 is called oversold, which means the stock has fallen unusually fast. It does not mean it has to bounce, and here the trend is still down."

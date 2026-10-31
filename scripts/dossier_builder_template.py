@@ -384,12 +384,6 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         ch1_parts.append(f"<h3>{sub['title']}</h3>")
         for p in sub.get("paragraphs", []):
             ch1_parts.append(f"<p>{p}</p>")
-    if ch1.get("glossary_items"):
-        ch1_parts.append("<h3>Plain-English glossary for this monograph</h3>")
-        ch1_parts.append("<ul>")
-        for item in ch1["glossary_items"]:
-            ch1_parts.append(f"<li>{item}</li>")
-        ch1_parts.append("</ul>")
     ch1_parts.append("</section>")
 
     # Chapter 2: External Learning Hub, Competitive Moat & Industry Story

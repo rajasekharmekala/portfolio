@@ -36,8 +36,8 @@ BANNED = [
 ]
 STOP = {"N/A", "ETF", "USD", "INR", "NSE", "BSE", "CFO", "NET", "PASS", "EXIT", "HOLD", "TRIM", "BUY", "CORE", "TOTAL"}
 THRESH = {
-    "market_intel": dict(h2=600, total=9000, intro=50, take=120, casenotes=12, howto=6, triggers=6, primer=450),
-    "portfolio_audit": dict(h2=500, total=9000, intro=50, take=120, casenotes=12, howto=6, triggers=8, primer=450),
+    "market_intel": dict(h2=150, total=2500, intro=0, take=60, casenotes=6, triggers=4),
+    "portfolio_audit": dict(h2=150, total=2500, intro=0, take=60, casenotes=6, triggers=4),
 }
 CASE_MIN_WORDS = 80
 # Checks that are meaningful on one section fragment. Whole-report floors (total words, primer, glossary, list counts)
@@ -203,20 +203,13 @@ def main():
     if total < T["total"]:
         errors.append(f"TOTAL PROSE {total} words < {T['total']} (not book-length; a beginner cannot learn the reasoning from this)")
 
-    # 2. beginner scaffolding: primer, how-to-read blocks, worked example, triggers, case notes
+    # 2. executive scaffolding: triggers, case notes
     def blocks_with(c):
         return [b for b in B if b["kind"] == "p" and c in b.get("cls", "")]
-    primers = blocks_with("primer")
-    if not primers or max(words(p["text"]) for p in primers) < T["primer"]:
-        errors.append(f"NO 'START HERE' PRIMER (<div class=\"primer\">, >= {T['primer']} words explaining the report, key terms with analogies, and how to read it)")
-    if len(blocks_with("howto")) < T["howto"]:
-        errors.append(f"HOW-TO-READ blocks: {len(blocks_with('howto'))} < {T['howto']} (<div class=\"howto\"> before tables; explain each column and read one real row aloud)")
-    if not blocks_with("example"):
-        errors.append("NO WORKED EXAMPLE (<div class=\"example\"> walking one real number chain from data to decision, e.g. position-size and stop arithmetic)")
-    if len(blocks_with("triggers")) < T["triggers"]:
+    if len(blocks_with("triggers")) < T.get("triggers", 0):
         errors.append(f"TRIGGER blocks: {len(blocks_with('triggers'))} < {T['triggers']} (<div class=\"triggers\">: 'what would change this view' with explicit if/then levels)")
     cases = blocks_with("casenote")
-    if len(cases) < T["casenotes"]:
+    if len(cases) < T.get("casenotes", 0):
         errors.append(f"CASE NOTES: {len(cases)} < {T['casenotes']} (<div class=\"casenote\"> per stock/position: story, numbers with meaning, verdict, rule that triggered it, what changes it)")
     for c in cases:
         t = c["text"]
@@ -230,18 +223,13 @@ def main():
         missing = [s for s in holds if not re.search(rf"(?<![A-Z0-9]){re.escape(s)}(?![A-Z0-9])", alltext)]
         if missing:
             errors.append(f"HOLDINGS WITHOUT A CASE NOTE ({len(missing)}/{len(holds)}): {', '.join(missing[:20])}")
-    if not any(re.search(r"glossary", b["text"], re.I) for b in B if b["kind"] in ("h2", "h3")):
-        errors.append("NO GLOSSARY heading")
 
-    # 3. every data table needs a reading-guide before it and a takeaway after it
+    # 3. data table takeaways
     tables = [i for i, b in enumerate(B) if b["kind"] == "table" and not b["infobox"] and len(b["rows"]) > 2]
     for i in tables:
-        prev = next((B[j] for j in range(i - 1, -1, -1) if B[j]["kind"] != "h3"), None)
         nxt = B[i + 1] if i + 1 < len(B) else None
         title = next((B[j]["text"] for j in range(i - 1, -1, -1) if B[j]["kind"] in ("h3", "h2")), "?")[:55]
-        if not prev or prev["kind"] != "p" or words(prev["text"]) < T["intro"]:
-            errors.append(f"TABLE WITHOUT INTRO / HOW-TO-READ (>= {T['intro']} words) under '{title}'")
-        if not nxt or nxt["kind"] != "p" or words(nxt["text"]) < T["take"]:
+        if T.get("take", 0) > 0 and (not nxt or nxt["kind"] != "p" or words(nxt["text"]) < T["take"]):
             errors.append(f"TABLE WITHOUT TAKEAWAY (>= {T['take']} words explaining what the numbers mean) under '{title}'")
 
     # 4. N/A budget

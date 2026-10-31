@@ -58,15 +58,26 @@ def main():
         # ---- shortlist
         path = REPO / "data" / "shortlist" / f"{market}.json"
         data = json.loads(path.read_text(encoding="utf-8"))
-        for sheet, rows in data["sheets"].items():
-            validator = swap_v if sheet == "Swap_Decision_Matrix" else shortlist_v
-            errs = validate_rows(rows, validator, f"{market}/{sheet}")
-            total_rows += len(rows)
-            total_errors += len(errs)
-            for e in errs[:10]:
-                print(e)
-            if len(errs) > 10:
-                print(f"  ... and {len(errs) - 10} more errors in {market}/{sheet}")
+        if "sheets" in data:
+            for sheet, rows in data["sheets"].items():
+                validator = swap_v if sheet == "Swap_Decision_Matrix" else shortlist_v
+                errs = validate_rows(rows, validator, f"{market}/{sheet}")
+                total_rows += len(rows)
+                total_errors += len(errs)
+                for e in errs[:10]:
+                    print(e)
+                if len(errs) > 10:
+                    print(f"  ... and {len(errs) - 10} more errors in {market}/{sheet}")
+        else:
+            for key in ("active", "archived", "archive"):
+                rows = data.get(key, [])
+                errs = validate_rows(rows, shortlist_v, f"{market}/shortlist/{key}")
+                total_rows += len(rows)
+                total_errors += len(errs)
+                for e in errs[:10]:
+                    print(e)
+                if len(errs) > 10:
+                    print(f"  ... and {len(errs) - 10} more errors in {market}/shortlist/{key}")
 
         # ---- watchlist
         path = REPO / "data" / "watchlist" / f"{market}.json"
@@ -84,15 +95,24 @@ def main():
     for market in ("US", "IN"):
         path = REPO / "data" / "shortlist" / f"{market}.json"
         data = json.loads(path.read_text(encoding="utf-8"))
-        for sheet, rows in data["sheets"].items():
-            if sheet == "Swap_Decision_Matrix":
-                continue
-            for row in rows:
-                p = row.get("research_dossier_path")
-                if p and not (REPO / p).exists():
-                    missing_dossiers += 1
-                    if missing_dossiers <= 10:
-                        print(f"  [warn] {market}/{sheet} {row.get('symbol')}: dossier not found: {p}")
+        if "sheets" in data:
+            for sheet, rows in data["sheets"].items():
+                if sheet == "Swap_Decision_Matrix":
+                    continue
+                for row in rows:
+                    p = row.get("research_dossier_path")
+                    if p and not (REPO / p).exists():
+                        missing_dossiers += 1
+                        if missing_dossiers <= 10:
+                            print(f"  [warn] {market}/{sheet} {row.get('symbol')}: dossier not found: {p}")
+        else:
+            for key in ("active", "archived", "archive"):
+                for row in data.get(key, []):
+                    p = row.get("research_dossier_path")
+                    if p and not (REPO / p).exists():
+                        missing_dossiers += 1
+                        if missing_dossiers <= 10:
+                            print(f"  [warn] {market}/shortlist/{key} {row.get('symbol')}: dossier not found: {p}")
 
     print(f"\nrows checked: {total_rows}, schema errors: {total_errors}, missing dossier files: {missing_dossiers}")
     sys.exit(1 if total_errors else 0)

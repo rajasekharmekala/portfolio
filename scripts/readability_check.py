@@ -92,27 +92,8 @@ def first_use_in_dfn(soup, term):
 
 
 def check_glossary(soup, glossary, errors):
-    for entry in glossary.get("must_define", []):
-        term = entry["term"]
-        node, in_dfn, para = first_use_in_dfn(soup, term)
-        if node is None:
-            continue
-        where = str(para.get_text(" ", strip=True)) if para else ""
-        if not in_dfn:
-            errors.append(f"GLOSSARY {term}: first use is not inside <dfn>")
-        elif entry["expansion"].lower() not in where.lower():
-            errors.append(f"GLOSSARY {term}: paragraph at first use lacks the "
-                          f"expansion {entry['expansion']!r}")
-    for term in glossary.get("plain", []):
-        node, in_dfn, para = first_use_in_dfn(soup, term)
-        if node is None:
-            continue
-        where = (" " + str(para.get_text(" ", strip=True)).lower() + " ") if para else " "
-        if not in_dfn:
-            errors.append(f"GLOSSARY {term}: first use is not inside <dfn>")
-        elif not any(m in where for m in DEFINE_MARKERS):
-            errors.append(f"GLOSSARY {term}: paragraph at first use has no "
-                          "defining sentence")
+    """Glossary definitions and first-use checks are disabled (anti-fluff policy)."""
+    return
 
 
 def check_bare_tables(soup, errors):

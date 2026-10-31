@@ -15,7 +15,7 @@ description: >-
 
 > **Zero LLM Math (binding):** never compute moving averages, RSI, volume multiples, or financial ratios in your head. All technical and valuation figures must come from `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz + TheWrap Stage 2 snapshot) and verified primary filings.
 
-> **Voice & Readability (binding):** read `../_shared/REPORT_VOICE.md`. Write like an investigative business biographer and institutional investor explaining the company to a smart, curious reader. Define technical terms at first use per `.agents/config/glossary.json`, avoid banned filler phrases, and ensure `scripts/readability_check.py` and `scripts/citation_check.py` pass.
+> **Voice & Readability (binding):** read `../_shared/REPORT_VOICE.md`. Write like an investigative business biographer and institutional investor analyzing the company. Avoid banned filler phrases, do NOT include glossaries or generic term definitions, and ensure `scripts/readability_check.py` and `scripts/citation_check.py` pass.
 
 # Deep Business-Monograph & Multi-Horizon Company Dossier (`IN` & `US`)
 
@@ -31,7 +31,7 @@ Each dossier is a complete deep-research monograph ("like a small book on the co
 | Order | ID | Chapter Title | Core Questions Answered |
 |---|---|---|---|
 | 0 | `primer` | **Before you read** | 3–5 sentences: what the company does, our multi-horizon conclusion, and what would invalidate it. |
-| 1 | `ch-1` | **1. What the company does & day-to-day vertical operations** | What products/services do they sell? Who pays and why? How does each business vertical actually work day-to-day (raw materials/sourcing, manufacturing/engineering workflows, distribution, customer onboarding, billing & working-capital cycle)? Ends with a plain-English glossary. |
+| 1 | `ch-1` | **1. What the company does & day-to-day vertical operations** | What products/services do they sell? Who pays and why? How does each business vertical actually work day-to-day (raw materials/sourcing, manufacturing/engineering workflows, distribution, customer onboarding, billing & working-capital cycle)? Purely focused on the business; no glossaries or textbook definitions. |
 | 2 | `ch-2` | **2. Competitive moat, industry structure & external learning hub** | Why does this company win or lose against competitors? Includes the **External Learning Hub** table with clickable links to official product pages, YouTube factory tours / CEO interviews / product explainers, investor presentations, and concall transcripts so the reader can explore further. |
 | 2B | `ch-2b` | **2B. Operational business KPIs, structural potential & CEO walk-the-talk** | What are the 4–6 real operational KPIs that drive this business? **Is the company reaching its structural potential?** (Capacity utilization, TAM capture, margin ceiling). **Are the CEOs walking the talk?** Forensic audit comparing past management guidance/promises over the last 2–3 years against actual delivered results. |
 | 3 | `ch-3` | **3. Financial trajectory & valuation sanity check** | Multi-year revenue, operating profit, margins, PAT/EPS, cash flow, and balance-sheet tables grounded in Screener.in (`IN`) or Finviz / SEC filings (`US`), peer comparison matrix (3–5 direct peers), and whether the current valuation multiple is cheap, fair, or rich relative to growth. |

@@ -1,7 +1,7 @@
 ---
 name: options_underwriting
 description: >-
-  Options position audit and setup structuring for one market (IN = NSE F&O, US = listed US options). Audits every open position against the 4-action matrix, screens setups, and writes a beginner-friendly report. Market-specific blocks are marked.
+  Options position audit and setup structuring for one market (IN = NSE F&O, US = listed US options). Audits every open position against the 4-action matrix, screens setups, and writes an executive institutional report. Market-specific blocks are marked.
 
 ---
 

@@ -97,11 +97,11 @@ Run `.venv/bin/python scripts/data_layer.py --market <MKT> --validate` immediate
 
 ## 3. Deliverable Structure (`docs/reports/<MKT>_Stage2_Sector_Momentum.html`)
 
-Write a comprehensive, beginner-friendly Research Desk report (`<RUN_DIR>/work/body.html`) and assemble it with `scripts/assemble_report.py --market <MKT> --kind report --workflow stage2_sector_momentum --as-of <date>`:
+Write a comprehensive, high-signal Research Desk report (`<RUN_DIR>/work/body.html`) and assemble it with `scripts/assemble_report.py --market <MKT> --kind report --workflow stage2_sector_momentum --as-of <date>`:
 
 1. **Executive Summary & Breadth Pulse:**
    - Summary KPI cards (`<dl class="key-figures">`): Universe filtered count, Continuing/Breakout counts, Top Stage 2 Sector, Watchlist Pruned count, and New Watchlist Additions.
-   - Plain-English `primer` explaining Stan Weinstein's 4 stages and why we combine Sector Breadth + TradingView Support Distance + Valuation Sanity to avoid FOMO.
+   - Executive synthesis explaining sector breadth, institutional momentum, and No-FOMO entry timing.
 2. **Sector & Industry Rotation Matrix:**
    - Full ranked table of leading and lagging sectors/industries (`% in Stage 2` for IN; `% Outperforming S&P 500`, `% Above 200D/50D/20D EMA`, and `1W/1M/3M Returns` for US).
    - Narrative breakdown of Super-Clusters vs. Emerging Rotation Themes vs. Capital Outflow Zones.
