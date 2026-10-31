@@ -23,24 +23,22 @@ Read `_COMMON.md` first.
      --prune-watchlist \
      --out "<RUN_DIR>/cache/snapshots_<MKT>_<date>.json"
    ```
-3. Claim the next batch of up to 4 eligible symbols:
+3. Claim the next single eligible candidate (`--size 1` for deep, thorough underwriting):
    ```bash
-   .venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size 4
+   .venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size 1
    ```
-   Ensure the claimed batch symbols are included in `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (re-run `stock_snapshot.py --symbols ...` if needed).
+   Ensure the claimed symbol is included in `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (re-run `stock_snapshot.py --symbols ...` if needed).
 
-## 2. Dedicated Per-Company Deep Business-Monograph Dossiers
+## 2. Dedicated Single-Company Deep Business-Monograph Dossier
 
-Spawn **1 dedicated subagent per company** (`invoke_subagent`) for each symbol in the batch:
-- Each subagent reads its symbol's TradingView + Screener.in/Finviz + TheWrap Stage 2 snapshot from `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` and follows `.agents/skills/company_report/SKILL.md`.
-- Each subagent writes and assembles `docs/blogs/<MKT>/<SYMBOL>_dossier.html` (`scripts/assemble_report.py --market <MKT> --kind dossier --workflow "Company research" --as-of <date>`) covering:
-  1. What the company does & day-to-day operational processes across each business vertical.
-  2. External learning hub (curated links to websites, YouTube videos/interviews/factory tours, investor presentations, and concalls).
-  3. Core operational KPIs, moat, and business story.
-  4. Management "Walk the Talk" audit (past guidance vs. delivered reality) and whether the company is reaching its potential.
-  5. Financials & valuation sanity (Screener.in / Finviz).
-  6. Stage 2 & TradingView technical structure (`30W SMA`, `10W EMA`, `50D/200D SMA`, `RSI-14`, volume, pivots).
-  7. Multi-horizon view (Short-term momentum, Medium-term catalysts, Long-term compounding) and **No-FOMO Action Plan** (`IMMEDIATE_BUY` at CMP vs. `WAIT_FOR_SUPPORT` limit zone vs. `REJECTED`).
+Dedicate the full research budget, browser tooling, and multi-stage verification to **one company**:
+- Read the candidate's TradingView + Screener.in/Finviz + TheWrap Stage 2 snapshot from `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` and follow `.agents/skills/company_report/SKILL.md`.
+- Run the 4-loop persistent agentic research workflow:
+  1. **Loop 1 (Quantitative Ground Truth):** Verify TradingView indicators (30W SMA, 10W EMA, 50D/200D SMA, RSI-14, volume, classic pivots) and valuation metrics (P/E, EV/Sales, ROIC/ROCE, Net Cash/Debt).
+  2. **Loop 2 (Operational Forensics & Concall Ingestion):** Ingest recent earnings call transcripts and primary SEC 10-K/10-Q / BSE filings; extract at least 2 verified management quotes (CEO on product/demand, CFO on margins/guidance); analyze business verticals, unit economics, customer concentration, and true operational KPIs.
+  3. **Loop 3 (Valuation Modeling & No-FOMO Execution):** Build multi-scenario valuation models (Bull/Base/Bear) and define explicit limit-order entry zones (`20D EMA / 10W EMA / 50D SMA`), invalidation stops, and catalyst event management.
+  4. **Loop 4 (Interactive Dossier Assembly):** Render `docs/blogs/<MKT>/<SYMBOL>_dossier.html` with an embedded interactive TradingView chart widget, rich external learning hub links, and institutional voice (free of robotic phrasing or fake filler text).
+- Assemble using `scripts/assemble_report.py --market <MKT> --kind dossier --workflow "Company research" --as-of <date>`.
 
 ## 3. Shortlist & Watchlist Updates
 

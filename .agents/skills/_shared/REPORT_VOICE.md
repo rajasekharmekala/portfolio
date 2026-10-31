@@ -34,6 +34,7 @@ A subsection with a table provides analytical context and takeaway findings. Nev
 ## 4. Writing style
 
 - Plain English. Short sentences are fine. Vary their length and their openings.
+- Standard financial notation: write `$17.35`, `+24% YoY`, `₹306.45`, `150 bps`, and `50-DMA` directly. Never spell them out artificially (e.g. avoid 'trades at 17.35 dollars' or 'grew 24 percent year over year').
 - Use standard institutional and technical terminology naturally. Never insert condescending definitions, everyday analogies, glossaries, or `<dfn>` tags.
 - Address the reader as "you" when giving advice, and "the company" or "the index" when describing.
 - One idea per paragraph. Three to six sentences is typical for a subsection paragraph.

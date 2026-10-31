@@ -181,7 +181,7 @@ def check_grade(soup, max_grade, errors):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("report")
-    ap.add_argument("--max-grade", type=float, default=13.0)
+    ap.add_argument("--max-grade", type=float, default=15.0)
     ap.add_argument("--glossary", default=GLOSSARY_FILE)
     args = ap.parse_args()
 

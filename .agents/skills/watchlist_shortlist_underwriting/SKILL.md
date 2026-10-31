@@ -51,18 +51,17 @@ Before claiming or underwriting the batch, run `scripts/stock_snapshot.py` acros
 ```
 - **Automatic Watchlist Pruning:** `--prune-watchlist` automatically moves any active watchlist entry that has fallen into a confirmed `STAGE_4` breakdown or carries a `REJECTED` verdict from `watchlist.active` to `watchlist.archive`, keeping the active watchlist focused on viable setups.
 
-### Step 2: Claim the Batch of 4 Candidates
-Claim up to **4 eligible securities** from `watchlist.active`:
+### Step 2: Claim 1 Single Candidate for Deep Underwriting
+Claim the next single eligible candidate (`--size 1`) from `watchlist.active`:
 ```bash
-.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <RUN_ID> --size 4
+.venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <RUN_ID> --size 1
 ```
 
-### Step 3: Spawn 1 Dedicated Subagent Per Company
-- **Strict Single-Company Subagent Rule:** Never write multiple company dossiers in a single agent loop. Launch **1 dedicated subagent per company** (`invoke_subagent`).
-- Pass each subagent:
-  1. Its symbol's exact JSON block from `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (TradingView moving averages, RSI, volume, pivots, Screener.in/Finviz valuation, TheWrap Stage 2 data, and `stage2_evaluation`).
-  2. Instructions to follow `.agents/skills/company_report/SKILL.md` to research and write the complete **Deep Business-Monograph Dossier** (`docs/blogs/<MKT>/<SYMBOL>_dossier.html`, $\ge 35\text{ KB}$, 25–40+ citations, including external website/video links, day-to-day vertical operations, business KPIs, management walk-the-talk audit, and multi-horizon Stage 2 + valuation view).
-  3. Instructions to return the structured shortlist/watchlist decision payload (`action_verdict`, `entry_posture`, `entry_zone_low`, `entry_zone_high`, `stop_loss`, `target_base`, `target_bull`, `weinstein_stage`, `primary_catalyst`, `primary_kpi_summary`, `moat_description`, `invalidation_condition`).
+### Step 3: Dedicated Single-Company Underwriting & Monograph Creation
+- **Single-Company Focus Rule:** Never split attention across multiple stocks in one run. Dedicate the entire reasoning context, browser tools, and multi-stage verification to **one company**:
+  1. Read the symbol's exact JSON block from `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (TradingView moving averages, RSI, volume, pivots, Screener.in/Finviz valuation, TheWrap Stage 2 data, and `stage2_evaluation`).
+  2. Follow `.agents/skills/company_report/SKILL.md` to research and write the complete **Deep Business-Monograph Dossier** (`docs/blogs/<MKT>/<SYMBOL>_dossier.html`, $\ge 35\text{ KB}$, 25–40+ citations, including primary concall quotes from CEO/CFO, external website/video links, day-to-day vertical operations, business KPIs, management walk-the-talk audit, embedded interactive TradingView chart, and multi-horizon Stage 2 + valuation view).
+  3. Enforce the structured shortlist/watchlist decision payload (`action_verdict`, `entry_posture`, `entry_zone_low`, `entry_zone_high`, `stop_loss`, `target_base`, `target_bull`, `weinstein_stage`, `primary_catalyst`, `primary_kpi_summary`, `moat_description`, `invalidation_condition`).
 
 ### Step 4: Update `data/shortlist/<MKT>.json` & `data/watchlist/<MKT>.json`
 1. **Dossier-First Gate:** Verify `docs/blogs/<MKT>/<SYMBOL>_dossier.html` exists on disk, is $\ge 30\text{ KB}$, and passes `scripts/portal_publish.py` modern-layout checks before marking any candidate `COMPLETED`.

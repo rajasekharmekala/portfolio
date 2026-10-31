@@ -35,6 +35,17 @@
     },
     "core_names": [5, 10],
     "total_names": [6, 12],
+    "watchlist_capacity": {
+      "max_active_names_per_market": 25,
+      "rule": "Strict maximum 25 active candidates in data/watchlist/<MKT>.json. Never dump incidental research peers into active watchlist. New breakout additions must replace an inactive/archived row or prune the lowest-ranked candidate."
+    },
+    "shortlist_capacity": {
+      "max_active_names_per_market": 15,
+      "core_alpha_max": 8,
+      "tactical_momentum_max": 7,
+      "staleness_ttl_days": 60,
+      "rule": "Only companies with verified, published deep business-monograph dossiers may enter data/shortlist/<MKT>.json. Candidates deteriorating into Stage 4 or breaking 200D SMA are retired to shortlist.archived."
+    },
     "tier_table": {
       "TIER_1": { "min_pct": 7, "max_pct": 10 },
       "TIER_2": { "min_pct": 4, "max_pct": 6.5 },

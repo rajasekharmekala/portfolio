@@ -15,7 +15,12 @@ description: >-
 
 > **Zero LLM Math (binding):** never compute moving averages, RSI, volume multiples, or financial ratios in your head. All technical and valuation figures must come from `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz + TheWrap Stage 2 snapshot) and verified primary filings.
 
-> **Voice & Readability (binding):** read `../_shared/REPORT_VOICE.md`. Write like an investigative business biographer and institutional investor analyzing the company. Avoid banned filler phrases, do NOT include glossaries or generic term definitions, and ensure `scripts/readability_check.py` and `scripts/citation_check.py` pass.
+> **Voice & Readability (binding):** read `../_shared/REPORT_VOICE.md`. Write with senior institutional precision and an investigative mindset. Use natural financial syntax (`$17.35`, `+24% YoY`, `EBITDA margin`, `CAGR`). Never dumb down vocabulary or spell out currencies/percentages as text (avoid robotic phrasing like "trades at 17.35 dollars"). Do NOT include glossaries, and ensure `scripts/readability_check.py` and `scripts/citation_check.py` pass.
+
+> **Primary Source Ingestion (binding):** every dossier must cite and quote primary evidence:
+> - At least **2 direct quotes** from the latest quarterly concall transcript (CEO on product/demand inflection, CFO on margins and forward guidance).
+> - Core operational KPIs extracted from 10-K/10-Q MD&A or annual reports (customer retention/churn, backlog/RPO, unit economics, SBC dilution).
+> - An embedded interactive TradingView chart in Chapter 4 (auto-populated by `dossier_builder_template.py`).
 
 # Deep Business-Monograph & Multi-Horizon Company Dossier (`IN` & `US`)
 

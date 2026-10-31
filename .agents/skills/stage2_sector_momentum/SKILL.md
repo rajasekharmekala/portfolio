@@ -80,7 +80,9 @@ For the top 8–12 candidate stocks, run targeted web searches (`search_web`) to
 - Log every source URL in `<RUN_DIR>/cache/research_<MKT>_<date>.json` using `scripts/research_log.py`.
 
 ### Step 4: Watchlist Ingestion (`data/watchlist/<MKT>.json`)
-Add the top 2–5 fresh, unowned Stage 2 breakout candidates into `data/watchlist/<MKT>.json` (`active` array). Every record **must** include all 9 required fields defined in `schemas/watchlist_record.schema.json`:
+Add the top 2–5 fresh, unowned Stage 2 breakout candidates into `data/watchlist/<MKT>.json` (`active` array).
+- **Watchlist Capacity Cap (Strict Maximum 25):** The active watchlist is strictly capped at **25 candidates**. If adding new breakout candidates would cause the count to exceed 25, displace the lowest-conviction or stale names into `watchlist.archive` so active attention remains concentrated on the best 25 setups. Never dump research peers or non-Stage-2 tickers into the active watchlist.
+Every record **must** include all 9 required fields defined in `schemas/watchlist_record.schema.json`:
 - `symbol`: Ticker symbol
 - `company_name`: Full company name
 - `date_added`: `<YYYY-MM-DD>`

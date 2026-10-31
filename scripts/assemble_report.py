@@ -87,8 +87,14 @@ def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional
         raise ValueError("Choose market IN/US and kind report/dossier")
     source = BeautifulSoup(body_raw, "html.parser")
     content = source.select_one("main.report") or source.select_one(".report") or source.body or source
-    for decoration in content.select("style, script, link, .report-generated, .report-as-of"):
+    for decoration in content.select("style, link, .report-generated, .report-as-of"):
         decoration.decompose()
+    for sc in content.select("script"):
+        src = sc.get("src", "")
+        txt = sc.get_text()
+        if "tradingview" in src.lower() or "tradingview" in txt.lower() or sc.has_attr("data-tradingview"):
+            continue
+        sc.decompose()
     for wrapper in list(content.select(".report-header, .report")):
         wrapper.unwrap()
     for table in content.select("table:not(.infobox)"):

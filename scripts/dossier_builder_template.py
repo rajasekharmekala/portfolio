@@ -97,10 +97,7 @@ def _esc(val) -> str:
 
 
 def _clean_cell(c: str) -> str:
-    s = str(c).strip()
-    if s and not s.endswith((".", "!", "?", ":", ";", ">")):
-        return s + "."
-    return s
+    return str(c).strip()
 
 
 def _render_table(caption: str, headers: list[str], rows: list[list[str]], explanatory_p: str) -> str:
@@ -111,18 +108,14 @@ def _render_table(caption: str, headers: list[str], rows: list[list[str]], expla
         tr_list.append(f"<tr>{tds}</tr>")
     body_html = "\n".join(tr_list)
     cap_html = f"<caption>{caption}</caption>\n" if caption else ""
-    if len(explanatory_p.strip()) < 85:
-        explanatory_p = (
-            explanatory_p.strip()
-            + " This table grounds the chapter's analysis in verified figures from our browser snapshots and cited company filings."
-        )
+    p_html = f"<p>{explanatory_p.strip()}</p>" if explanatory_p and explanatory_p.strip() else ""
     return (
         f'<div class="table-wrap"><table class="wikitable">\n'
         f"{cap_html}"
         f"<thead><tr>{th_html}</tr></thead>\n"
         f"<tbody>\n{body_html}\n</tbody>\n"
         f"</table></div>\n"
-        f"<p>{explanatory_p}</p>"
+        f"{p_html}"
     )
 
 
@@ -293,10 +286,40 @@ def _build_ch4_from_snapshot_or_ledger(
         ),
     )
 
+    exchange = (tv.get("exchange") or ("NSE" if market == "IN" else "NASDAQ")).upper()
+    tv_symbol = f"{exchange}:{sym}"
+    tv_widget_html = (
+        f'<div class="tradingview-widget-container" style="height: 520px; width: 100%; margin: 1.25rem 0;">\n'
+        f'  <div id="tradingview_{sym.lower()}_chart" style="height: 100%; width: 100%;"></div>\n'
+        f'  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>\n'
+        f'  <script type="text/javascript">\n'
+        f'  new TradingView.widget({{\n'
+        f'    "autosize": true,\n'
+        f'    "symbol": "{tv_symbol}",\n'
+        f'    "interval": "D",\n'
+        f'    "timezone": "Etc/UTC",\n'
+        f'    "theme": "light",\n'
+        f'    "style": "1",\n'
+        f'    "locale": "en",\n'
+        f'    "toolbar_bg": "#f4f6f8",\n'
+        f'    "enable_publishing": false,\n'
+        f'    "hide_top_toolbar": false,\n'
+        f'    "allow_symbol_change": true,\n'
+        f'    "studies": [\n'
+        f'      "MASimple@tv-basicstudies",\n'
+        f'      "MAExp@tv-basicstudies"\n'
+        f'    ],\n'
+        f'    "container_id": "tradingview_{sym.lower()}_chart"\n'
+        f'  }});\n'
+        f'  </script>\n'
+        f'</div>\n'
+    )
+
     return (
         '<section class="chapter" id="ch-4">\n'
         "<h2>4. Stage 2 trend &amp; TradingView technical structure</h2>\n"
         f"<p>{ch4_spec['intro_prose']}</p>\n"
+        f"{tv_widget_html}\n"
         f"{t1_html}\n"
         "<h3>Stage 2 momentum &amp; No-FOMO support evaluation</h3>\n"
         f"<p>{ch4_spec.get('gate_intro_prose', 'We evaluate whether the stock is in an actionable early Stage 2 zone or requires patience for a support retest.')}</p>\n"

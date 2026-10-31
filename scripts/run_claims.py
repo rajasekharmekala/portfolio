@@ -13,7 +13,7 @@ its heartbeat is older than its TTL, so a crashed run cannot hold names forever.
 
 Usage:
   run_claims.py singleton --workflow market_intelligence --market US --run-id RUN
-  run_claims.py batch --workflow watchlist_to_shortlist --market US --run-id RUN --size 4 [--pool watchlist|archive]
+  run_claims.py batch --workflow watchlist_to_shortlist --market US --run-id RUN --size 1 [--pool watchlist|archive]
   run_claims.py names --workflow company_report --market US --run-id RUN SYMBOL...
   run_claims.py heartbeat --run-id RUN
   run_claims.py release --run-id RUN [--symbol SYMBOL ...]
@@ -281,7 +281,7 @@ def main():
     common(sub.add_parser("singleton"))
     batch = sub.add_parser("batch")
     common(batch)
-    batch.add_argument("--size", type=int, required=True)
+    batch.add_argument("--size", type=int, default=1, help="number of companies to claim (default: 1)")
     batch.add_argument("--pool", choices=["watchlist", "archive"], default="watchlist")
     batch.add_argument("--ref", default="origin/main", help="git ref to read eligibility from, or WORKTREE")
     batch.add_argument("--no-fetch", action="store_true")
