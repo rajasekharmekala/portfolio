@@ -256,7 +256,7 @@ def _build_ch4_from_snapshot_or_ledger(
             _esc(w_explain),
         ],
         [
-            "No-FOMO entry timing posture",
+            "Technical scanner posture (not portfolio action)",
             _esc(s2_ev.get("entry_timing_posture", ch4_spec.get("entry_posture", "N/A"))),
             _esc(s2_ev.get("timing_rationale") or "Determines whether to buy at CMP or wait for a pullback to support."),
         ],
@@ -286,11 +286,17 @@ def _build_ch4_from_snapshot_or_ledger(
         ),
     )
 
-    exchange = (tv.get("exchange") or ("NSE" if market == "IN" else "NASDAQ")).upper()
+    tv_symbol_source = tv.get("tv_symbol") or ""
+    exchange = (
+        tv.get("exchange")
+        or tv.get("_exchange_prefix")
+        or (tv_symbol_source.split(":", 1)[0] if ":" in tv_symbol_source else None)
+        or ("NSE" if market == "IN" else "NASDAQ")
+    ).upper()
     tv_symbol = f"{exchange}:{sym}"
     tv_widget_html = (
         f'<div class="tradingview-widget-container" style="height: 520px; width: 100%; margin: 1.25rem 0;">\n'
-        f'  <div id="tradingview_{sym.lower()}_chart" style="height: 100%; width: 100%;"></div>\n'
+        f'  <div id="tradingview_{sym.lower()}_chart" role="img" aria-label="Interactive TradingView daily chart for {tv_symbol}" style="height: 100%; width: 100%;"></div>\n'
         f'  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>\n'
         f'  <script type="text/javascript">\n'
         f'  new TradingView.widget({{\n'
