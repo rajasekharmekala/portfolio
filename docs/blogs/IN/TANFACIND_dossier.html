@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-30">
+<meta name="generated-at" content="2026-11-01T12:20:48.619199-08:00">
+<title>Report</title>
+<style>
+:root {
+  /* Page & surface (Techmeme / Morning Brief unified theme) */
+  --paper:          #ffffff;
+  --paper-top:      #f4f6f8;
+  --ink:            #111111;
+  --ink-strong:     #174a61;
+  --muted:          #556677;
+  --rule:           #cccccc;
+  --rule-soft:      #d8e0e6;
+  --surface:        #ffffff;
+  --surface-alt:    #f4f6f8;
+  --link:           #002848;
+  --link-visited:   #902050;
+  --link-hover-bg:  #d0e8f4;
+  --navy:           #174a61;
+  --navy-hover:     #578aa1;
+  --sisnav-hover:   #25607b;
+
+  /* Verdict semantic tokens — four distinct hues, colour-blind safe when paired with text labels */
+  --keep-ink:       #145a32;   /* forest green — KEEP / HOLD / SHORTLIST */
+  --keep-bg:        #e8f4ec;
+  --keep-rule:      #8ec5a1;
+
+  --accumulate-ink: #0f4c81;   /* slate blue — ACCUMULATE / BUY / ADD / STAGE 2 BREAKOUT */
+  --accumulate-bg:  #e7f0f9;
+  --accumulate-rule:#8fb4da;
+
+  --trim-ink:       #7c4700;   /* warm amber — TRIM / WAIT FOR SUPPORT / ROLL */
+  --trim-bg:        #fbf2e1;
+  --trim-rule:      #dfba73;
+
+  --exit-ink:       #8b1e1e;   /* brick red — EXIT / REJECT / CLOSE / STAGE 4 */
+  --exit-bg:        #fbeaea;
+  --exit-rule:      #dca1a1;
+
+  --watch-ink:      #424b54;   /* neutral slate — WATCH / ARCHIVED / PENDING */
+  --watch-bg:       #eef0f2;
+  --watch-rule:     #b8c0c8;
+
+  /* Callout accents (matching personal-wiki .exec-theme-box and .deepdive-container) */
+  --primer-accent:  #d4a017;   /* gold — Executive Synthesis / Primer box */
+  --primer-tint:    #fdfbe8;
+  --rule-accent:    #0f4c81;   /* slate blue — Rule Explained box */
+  --rule-tint:      #eef4fa;
+  --case-accent:    #174a61;   /* Techmeme navy — Deep-Dive / Case Note box */
+  --case-tint:      #fcfdfe;
+  --warn-accent:    #8b1e1e;   /* brick — Risk / Conflict callout */
+  --warn-tint:      #fcf1f1;
+}
+/* report_base v2 */
+* { box-sizing: border-box; }
+html { font-size: 15.5px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+.report {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 18px 56px;
+}
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--link-visited);
+}
+a:hover {
+  background-color: var(--link-hover-bg);
+  text-decoration: underline;
+}
+
+/* Headings — Techmeme / Research Desk style */
+h1, h2, h3, h4 {
+  color: var(--ink-strong);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.hatnote {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--navy);
+  clear: left;
+  color: var(--navy);
+}
+h3 {
+  font-size: 1.05rem;
+  margin: 1.35rem 0 0.45rem;
+  color: var(--ink-strong);
+}
+h4 {
+  font-size: 0.96rem;
+  margin: 1rem 0 0.35rem;
+  color: var(--ink);
+}
+p { margin: 0.55rem 0 0.9rem; }
+ul, ol { margin: 0.45rem 0 0.95rem; padding-left: 1.5rem; }
+li { margin: 0.28rem 0; }
+hr { border: 0; border-top: 1px solid var(--rule-soft); margin: 1.5rem 0; }
+
+/* Lead & TOC */
+.lead { font-size: 1.01rem; }
+.toc {
+  display: table;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  padding: 0.75rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+.toc-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: 0.18rem 0; }
+
+/* Infobox */
+.infobox {
+  float: right;
+  clear: right;
+  width: 310px;
+  margin: 0 0 1.25rem 1.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.infobox caption, .infobox .infobox-title {
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+}
+.infobox th, .infobox td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--rule-soft);
+  vertical-align: top;
+  text-align: left;
+}
+.infobox th {
+  width: 44%;
+  color: var(--muted);
+  font-weight: 600;
+}
+.infobox td {
+  font-variant-numeric: tabular-nums;
+}
+.infobox .infobox-subhead th {
+  background: var(--surface-alt);
+  color: var(--navy);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Data tables (wikitable) — responsive & sticky headers */
+.table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0.85rem 0 1.35rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+table.wikitable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  background: var(--surface);
+}
+table.wikitable caption {
+  font-weight: 700;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  color: var(--navy);
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule-soft);
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid var(--rule-soft);
+  padding: 0.44rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+table.wikitable thead th, table.wikitable tr:first-child th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule);
+}
+table.wikitable tbody tr:nth-child(even) {
+  background: var(--paper);
+}
+table.wikitable tbody tr:hover {
+  background: var(--rule-tint);
+}
+.num, td.num, th.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Verdict pills */
+.verdict {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.verdict-keep       { color: var(--keep-ink);       background: var(--keep-bg);       border-color: var(--keep-rule); }
+.verdict-accumulate { color: var(--accumulate-ink); background: var(--accumulate-bg); border-color: var(--accumulate-rule); }
+.verdict-trim       { color: var(--trim-ink);       background: var(--trim-bg);       border-color: var(--trim-rule); }
+.verdict-exit       { color: var(--exit-ink);       background: var(--exit-bg);       border-color: var(--exit-rule); }
+.verdict-watch      { color: var(--watch-ink);      background: var(--watch-bg);      border-color: var(--watch-rule); }
+
+/* Footnotes & references */
+sup.reference { font-size: 0.75em; line-height: 0; }
+.reflist {
+  font-size: 0.84rem;
+  color: var(--muted);
+  column-width: 28rem;
+  column-gap: 2rem;
+  padding-left: 1.5rem;
+}
+.reflist li { margin: 0.25rem 0; break-inside: avoid; }
+
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-alt);
+  padding: 0.08rem 0.3rem;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .report { padding: 14px 12px 40px; }
+  .infobox { float: none; width: 100%; margin: 0 0 1.25rem 0; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; }
+}
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  .report { max-width: none; padding: 0; }
+  a { color: #000; text-decoration: underline; }
+  h2, h3 { page-break-after: avoid; }
+  table, .callout, .case-note { page-break-inside: avoid; }
+}
+
+/* === Book-report teaching components (Techmeme / Morning Brief unified theme) === */
+
+/* Key-figures strip: 3–5 headline numbers at the top of a report or section */
+.key-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 1.4rem;
+  clear: left;
+}
+.key-figures > div {
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  padding: 0.65rem 0.85rem;
+}
+.key-figures .kf-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+.key-figures .kf-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+.key-figures .kf-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Callout boxes: Primer (matches .exec-theme-box), Rule Explained, Risk/Warning */
+.callout {
+  border: 1px solid var(--rule-soft);
+  border-left: 5px solid var(--primer-accent);
+  background: var(--primer-tint);
+  padding: 0.75rem 1.05rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.93rem;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--trim-ink);
+  margin: 0 0 0.35rem;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout-rule {
+  border-left-color: var(--rule-accent);
+  background: var(--rule-tint);
+}
+.callout-rule .callout-title { color: var(--rule-accent); }
+.callout-warn {
+  border-left-color: var(--warn-accent);
+  background: var(--warn-tint);
+}
+.callout-warn .callout-title { color: var(--warn-accent); }
+
+/* Case note: one box per holding / option / candidate (matches .deepdive-container) */
+.case-note {
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--case-accent);
+  background: var(--case-tint);
+  padding: 0.95rem 1.15rem;
+  margin: 1.15rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.case-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.case-note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+.case-note-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.case-note dl.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface-alt);
+  border-left: 3px solid var(--navy);
+  font-size: 0.84rem;
+}
+.case-note dl.case-facts div { margin: 0; }
+.case-note dl.case-facts dt {
+  color: var(--muted);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.case-note dl.case-facts dd {
+  margin: 0.05rem 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* First-use glossary term */
+dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+/* Chapter lead / section summary */
+.section-summary {
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface-alt);
+  border-left: 4px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Horizontal bar meter for allocations / weights */
+.weight-bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: var(--navy);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border-radius: 1px;
+}
+
+/* === Techmeme / Morning Brief Unified Research Desk Chrome === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+code, .mono, .num, td.num, th.num, .infobox td, .key-figures .kf-value, .case-note dl.case-facts dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.desk-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  border: 0;
+  background: transparent;
+}
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value { background: var(--navy-hover); }
+.desk-progress::-moz-progress-bar { background: var(--navy-hover); }
+
+/* Top prenavbar + logo header + navy navbar inside .desk-masthead */
+.desk-prenav {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 8px 18px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.desk-prenav-links a {
+  color: var(--link);
+  font-weight: 600;
+}
+.desk-logotab {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px 18px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.desk-brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.desk-brand-title:visited { color: var(--navy); }
+.desk-brand-title:hover { background: transparent; text-decoration: none; color: var(--navy-hover); }
+.desk-brand-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.desk-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  padding: 0 18px;
+  background: var(--navy);
+  color: #ffffff;
+  border-bottom: 1px solid var(--navy);
+}
+.desk-wordmark {
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  background: var(--navy-hover);
+  text-decoration: none;
+}
+.desk-wordmark:visited { color: #ffffff !important; }
+.desk-wordmark:hover { background: var(--navy-hover); text-decoration: none; }
+.desk-label {
+  color: var(--paper);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.desk-sisnav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+.desk-sisnav a {
+  color: #ffffff !important;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+.desk-sisnav a:hover {
+  background: var(--sisnav-hover);
+  text-decoration: none;
+}
+.desk-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desk-tools select, .desk-tools button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: var(--navy);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.desk-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  padding: 0;
+}
+.desk-tools button svg { width: 14px; height: 14px; }
+.desk-tools select:hover, .desk-tools button:hover {
+  background: var(--navy-hover);
+}
+.desk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.desk-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 20px 18px 64px;
+}
+.report {
+  max-width: 960px;
+  margin: 0;
+  padding: 0;
+}
+.report-header {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: var(--primer-tint);
+  border: 1px solid var(--primer-accent);
+  border-left: 5px solid var(--primer-accent);
+}
+.report-header h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.report-generated, .report-as-of {
+  margin: 6px 0 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.report-as-of { font-weight: 500; color: var(--muted); }
+
+.toc { display: none; }
+.desk-contents { display: none; }
+
+.desk-footer {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 16px 18px 36px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 1120px) {
+  .desk-tools select { display: none; }
+  .desk-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 940px) 250px;
+    justify-content: space-between;
+    align-items: start;
+    gap: 28px;
+  }
+  .desk-contents:not([hidden]) {
+    display: block;
+    position: sticky;
+    top: 52px;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 10px 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--rule-soft);
+    border-top: 3px solid var(--navy);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+  .desk-contents-label {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .desk-contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .desk-contents li { margin: 0; }
+  .desk-contents a {
+    display: block;
+    padding: 4px 6px;
+    color: var(--link);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+  .desk-contents a:visited { color: var(--link); }
+  .desk-contents a:hover, .desk-contents a.is-active {
+    color: var(--navy);
+    background: var(--link-hover-bg);
+    border-left-color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .desk-prenav, .desk-logotab { padding-left: 12px; padding-right: 12px; }
+  .desk-masthead { padding: 0 10px; }
+  .desk-sisnav { display: none; }
+  .desk-layout { padding: 14px 12px 44px; }
+}
+
+@media print {
+  .desk-progress, .desk-prenav, .desk-logotab, .desk-masthead, .desk-contents, .desk-footer { display: none !important; }
+  .desk-layout, .report { display: block; max-width: none; padding: 0; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<div class="desk-prenav"><span>November 01, 2026 &bull; India (NSE/BSE)</span><span class="desk-prenav-links"><a href="https://rajasekharmekala.github.io/">Home</a> | <a href="../../index.html">Portfolio Desk</a> | <a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> | <a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a></span></div>
+<div class="desk-logotab"><a class="desk-brand-title" href="../../index.html">Portfolio Research Desk</a><span class="desk-brand-sub">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</span></div>
+<header class="desk-masthead"><a class="desk-wordmark" href="../../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><nav class="desk-sisnav" aria-label="Sister sites"><a href="https://rajasekharmekala.github.io/">Profile</a><a href="https://rajasekharmekala.github.io/personal-wiki/">Morning Brief</a><a href="https://rajasekharmekala.github.io/travel-research/">Travel</a></nav><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>Report</h1><p class="report-generated">Generated Date: <time datetime="2026-11-01T12:20:48.619199-08:00">01 Nov 2026, 12:20 PM PST</time></p><p class="report-as-of">Research as of 2026-10-30</p></header><dl class="key-figures">
+<div><dt>Verdict</dt><dd><span class="verdict verdict-watch">WAIT_FOR_SUPPORT</span> (CONTRACTED FLUOROCHEMICAL PLATFORM)</dd></div>
+<div><dt>Session Price (2026-10-30)</dt><dd>₹3,499.85</dd></div>
+<div><dt>Strategy Bucket</dt><dd>CORE_ALPHA</dd></div>
+<div><dt>Weinstein Stage</dt><dd>STAGE_2</dd></div>
+<div><dt>No-FOMO Entry Posture</dt><dd>WAIT_FOR_SUPPORT_PULLBACK; no new allocation at CMP</dd></div>
+<div><dt>Support Buy Zone</dt><dd>₹3,256.67 – ₹3,437.68 (Stop: ₹2,695.74)</dd></div>
+<div><dt>Base / Bull Target</dt><dd>₹5,200.00 / ₹7,200.00 (R:R 2.11:1)</dd></div>
+<div><dt>Risk-Unit Sizing</dt><dd>2.32% of net worth (TIER_3)</dd></div>
+<div><dt>Report status</dt><dd>PUBLISHED_WITH_GATE_EXCEPTIONS</dd></div>
+</dl>
+<section class="primer" id="primer">
+<p>TANFAC makes hydrofluoric acid and downstream fluorine chemicals at one Cuddalore site. Its solar-grade diluted HF line now has contracted orders, while a 20,000-tonne HFC-32 project is the next major earnings test. The chart is in Stage 2, but the share price sits above the support band and at roughly 105–112 times trailing earnings. We would wait for the ₹3,256.67–₹3,437.68 band and for better evidence on margins and project commissioning; the thesis weakens if the project slips, contracts fail to convert, or margins stay near current levels.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. What the company does &amp; day-to-day vertical operations</h2>
+<p>TANFAC Industries is a fluorochemical manufacturer based in Cuddalore, Tamil Nadu. It is a joint-sector company promoted by Anupam Rasayan and Tamil Nadu Industrial Development Corporation. Its product list spans anhydrous HF, diluted HF, solar-grade DHF, sulphuric acid, aluminium fluoride, potassium fluoride, potassium bifluoride and specialty complexes. Company filings describe the Cuddalore site as the manufacturing base; they do not publish a segment revenue split or a full product-level profit bridge. That limits how precisely an investor can model each line. <sup>[24]</sup> <sup>[25]</sup></p>
+<p>The platform starts with fluorspar, sulphur and other inputs that must arrive on time and meet tight quality controls. The company says it sources fluorspar from a range of countries and discusses sulphur-price swings on calls. The broad operating sequence is inbound receipt, safe storage, chemical conversion, product finishing, laboratory checks, packaging or bulk transfer, then customer dispatch. TANFAC does not disclose a proprietary process flow or unit cost by product, so this account stays at the operating level the company reports. <sup>[1]</sup> <sup>[3]</sup></p>
+<p>Hydrofluoric acid is the central intermediate. AHF and dilute HF feed direct industrial demand and downstream products. Captive HF also supports solar-grade DHF and the planned HFC-32 refrigerant line. The value-chain benefit is real only when a downstream line earns more after conversion, utilities, depreciation and customer qualification than the acid it consumes would earn elsewhere. Management describes backward integration as a source of supply security, but the filings do not give a per-tonne transfer price or return on capital by product. <sup>[3]</sup> <sup>[8]</sup></p>
+<p>Solar-grade DHF is a high-purity product sold to solar-cell and wafer manufacturers for silicon surface treatment, cleaning and etching. TANFAC states that its product is designed for very low trace impurities, and identifies wafer texturing, cleaning and etching as uses. That makes batch consistency, contamination control, packaging and customer qualification central to the sale. A customer must validate the chemical in its line; repeat volumes depend on yield and process compatibility, not just a published specification. <sup>[29]</sup></p>
+<p>The legacy acid and fluoride lines serve a broader industrial set. AHF goes in ISO containers for refrigerants, fluorine compounds and petrochemical uses. Diluted HF and aluminium fluoride are supplied for customer-specific industrial applications. Sulphuric acid is both a saleable product and part of the site’s chemical system. The public product pages describe specification and application, but they do not give utilization or profit by product. The investor has to read the capacity data alongside total margins rather than mistake a long catalogue for a broad earnings base. <sup>[28]</sup> <sup>[30]</sup> <sup>[31]</sup></p>
+<p>For a new product, the commercial work begins well before full-rate output. TANFAC must qualify customer samples, agree purity and packaging, secure shipment requirements and establish a contract or order. Long-term supply terms can reduce the risk of an empty plant, but they do not guarantee take-or-pay cash flow unless the filed contract says so. The public filings describe several arrangements as supply contracts or orders; customer names and full formula terms are not always public. We treat the company’s contracted volume claims as management disclosures, not as proof of margin or payment quality. <sup>[13]</sup> <sup>[14]</sup> <sup>[16]</sup></p>
+<p>The daily operating risks are unusually tangible for an acid and fluorine site: feedstock quality, corrosion, storage, process safety, power, environmental controls, planned shutdowns and logistics. The annual report describes formal safety and environmental systems. This matters because a single-site interruption can affect every vertical, while a customer switching a qualified chemical may require another approval cycle. The company does not disclose a separate-site backup or detailed insurance recovery for a prolonged shutdown. <sup>[4]</sup> <sup>[24]</sup></p>
+<p>The working-capital loop runs from imported and domestic inputs, through production and laboratory release, to dispatch and customer collection. FY26’s reported working-capital cycle was 91 days, eight days better than the prior year. That remains a meaningful use of capital for a company funding projects at the same time. Strong orders improve utilization visibility; they do not remove receivable, inventory or shipment timing risk. <sup>[3]</sup> <sup>[7]</sup></p>
+<h3>Where the value is created</h3>
+<p>TANFAC is trying to move from merchant acid sales toward higher-value grades and fluorinated products. Higher-purity DHF has qualification and contamination barriers. HFC-32 adds a larger market and a new product set, but also adds commissioning risk, startup yield, gas-handling requirements and fresh customer acceptance. The company has already raised capacity in HF, but the next margin step depends on downstream plants running at saleable quality and converting contracted volume into cash. <sup>[3]</sup> <sup>[8]</sup></p>
+<p>This is an asset-heavy chemical business. Maintenance and safety spend protect uptime; capex has added depreciation and diluted near-term margins. Growth is not automatically value creating: the relevant test is incremental after-tax return on the funds invested. TANFAC has not yet published HFC-32 operating data, realized prices, customer-level contribution margins or a cash-payback bridge. Until it does, the project should be valued as an opportunity with execution risk, not a completed profit stream. <sup>[3]</sup> <sup>[9]</sup></p>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. Competitive moat, industry structure &amp; external learning hub</h2>
+<p>TANFAC’s edge is its larger HF base, plant experience and approved high-purity products. The company reports about 30,000 tonnes per year of HF capacity, with FY26 utilization at 95%. Its solar DHF line is the first domestic supply position claimed by management. High purity and repeat approvals can make a switch harder. They do not stop a customer from choosing another source on price, quality or supply. <sup>[3]</sup> <sup>[4]</sup> <sup>[9]</sup></p>
+<p>That edge has limits. TANFAC is smaller and more concentrated than the large listed fluorochemical groups. SRF sells refrigerants, propellants, industrial chemicals and fluoropolymers. Gujarat Fluorochemicals has a wide fluorine product range. Navin Fluorine has a larger mix of specialty products and advanced chemistry. Their size, product mix, research spend and end markets differ. We compare business breadth, not share valuation. <sup>[36]</sup> <sup>[37]</sup> <sup>[38]</sup></p>
+<p>HFC-32 has a different test. Management says the project is supported by agreements for about 65% of capacity, with cost pass-through and a fixed EBITDA contribution on the contracted share. That can speed market entry and reduce raw-material volatility, but the remaining capacity and future renewals will face spot pricing and supply competition. Customers are not named in the Q1 call, so independent concentration analysis is not possible. <sup>[1]</sup> <sup>[8]</sup></p>
+<p>Fluorspar supply and sulphur prices are key outside risks. Management reported that sulphur moved sharply during Q1 and said pass-through contracts take 30–45 days to catch up. That delay can cut reported margin before prices reset. The 15.3% Q1 operating EBITDA margin shows that pass-through does not prevent near-term volatility. <sup>[1]</sup> <sup>[2]</sup></p>
+<p>HFC-32 has a lower global-warming impact than some older blends. It is still an HFC, so future rules and other refrigerants can limit demand. We have not used a long-run quota path in the valuation because the company has not disclosed a product-level demand forecast. New electronic-grade chemicals also need customer approval and investment. <sup>[1]</sup> <sup>[8]</sup></p>
+<h3>Competitive set: different scale, overlapping chemistry</h3>
+<p>SRF is a broad peer in refrigerants and fluorochemicals, with more sites and a wider product set. Gujarat Fluorochemicals combines refrigerants, fluoropolymers and other fluorochemicals. Navin Fluorine has a larger research-led mix of specialty and advanced products. TANFAC may grow faster from a smaller base, but it depends more on one site, a few large projects and a smaller group of customers. Plant execution and customer approval matter more here than a broad demand headline. <sup>[36]</sup> <sup>[37]</sup> <sup>[38]</sup></p>
+<p>We do not compare peer ratios because the businesses, fiscal periods and project costs differ. Better tests are product range, customer mix, plant use, cash collection, research and the ability to fund growth without repeated share sales. The reported ₹250 crore QIP improves funding flexibility, but it also increases the share count and raises the bar for incremental returns. <sup>[17]</sup> <sup>[18]</sup></p>
+<h3>External learning hub: websites, videos, factory tours &amp; primary links</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Official operating and investor sources for a deeper TANFAC review</caption>
+<thead><tr><th>Resource</th><th>Why it helps</th></tr></thead>
+<tbody>
+<tr><td><a href="https://tanfac.com/company">Company profile</a></td><td>Joint-venture history, site and management.</td></tr>
+<tr><td><a href="https://tanfac.com/product/solar-grade-dilute-hydrofluoric-acid-dhf">Solar-grade DHF specification</a></td><td>Purity and stated solar or semiconductor uses.</td></tr>
+<tr><td><a href="https://tanfac.com/product/anhydrous-hydrofluoric-acid">Anhydrous HF product page</a></td><td>Applications, handling and product specification.</td></tr>
+<tr><td><a href="https://tanfac.com/investors/investor-information/calls-conferences-and-transcripts">Earnings-call transcripts</a></td><td>Management explanations and Q&amp;A by quarter.</td></tr>
+<tr><td><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/be9ce6c0-80bc-4ff9-a45a-ec2c45d550bc.pdf">Q1 FY27 presentation</a></td><td>Latest investor slides available at the cutoff.</td></tr>
+<tr><td><a href="https://tanfac.com/investors/results-reports/half-yearly-and-quarterly-financial-results">Quarterly results archive</a></td><td>Financial releases and reporting periods.</td></tr>
+<tr><td><a href="https://tanfac.com/investors/disclosures-announcements/press-release">Company press releases</a></td><td>Project and customer-contract notices.</td></tr>
+<tr><td><a href="https://www.tradingview.com/symbols/BSE-TANFACIND/technicals/">TradingView chart and indicators</a></td><td>Daily price and technical view.</td></tr>
+</tbody>
+</table></div>
+<p>Start with the call, audited report and exchange filings; product pages explain stated use but are not proof of market share or realized margins.</p>
+</section>
+<section class="chapter" id="ch-2b">
+<h2>2B. Operational business KPIs, structural potential &amp; CEO walk-the-talk</h2>
+<p>Five operating indicators give a cleaner view than a generic revenue-growth target: HF utilization, solar-grade contract coverage, HFC-32 commissioning, margin recovery after raw-material shocks, and cash conversion. A sixth indicator is specialty-fluoride utilization, which shows whether the existing product base is gaining traction. TANFAC reports most of these at company level; it does not publish unit economics by vertical. <sup>[3]</sup> <sup>[7]</sup> <sup>[8]</sup></p>
+<p>The growth plan now has three steps: run the solar-grade DHF capacity at its intended rate, complete and ramp HFC-32, and turn the downstream pipeline into products with repeat orders. The first step is in execution; HFC-32 remained under construction as of the cutoff. Revenue guidance is ambitious, while Q1 profit was lower year on year. The evidence therefore supports a growth option, not yet a proven earnings inflection. <sup>[1]</sup> <sup>[3]</sup></p>
+<h3>The business KPIs that actually matter</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Operational indicators that will decide whether new capacity earns its cost</caption>
+<thead><tr><th>KPI</th><th>Latest company disclosure</th><th>What would improve the thesis</th></tr></thead>
+<tbody>
+<tr><td>HF utilization</td><td>95% in FY26 on about 30,000 TPA installed capacity.</td><td>Maintain high uptime without margin loss or safety events.</td></tr>
+<tr><td>Solar DHF commercial loading</td><td>20,000 TPA total capacity; reported orders cover close to 85% of annual capacity through FY29.</td><td>Show quarterly volume, realized contribution and repeat orders.</td></tr>
+<tr><td>HFC-32 construction and customer coverage</td><td>20,000 TPA planned; about 65% of capacity said to be covered by long-term agreements.</td><td>Commission on schedule, hit specification and demonstrate offtake.</td></tr>
+<tr><td>HFC-32 capital deployed</td><td>Q1 call said ₹315 crore was committed against a ₹395 crore project cost; the FY26 annual report disclosed a broader ₹495 crore scope including utilities and other value-added products.</td><td>Reconcile final project scope, cost and startup capital before the plant is valued.</td></tr>
+<tr><td>Specialty-fluoride utilization</td><td>41% in FY26.</td><td>Raise utilization without tying up working capital in low-return inventory.</td></tr>
+<tr><td>Margin and working capital</td><td>FY26 EBITDA margin 15.8%; Q1 FY27 15.3%; cash cycle 91 days in FY26.</td><td>Recover sulfur costs promptly and convert sales to cash.</td></tr>
+</tbody>
+</table></div>
+<p>Capacity exists; utilization, contribution after depreciation, and cash collection determine whether it compounds value.</p>
+<h3>Is the company reaching its potential &amp; are the CEOs walking the talk?</h3>
+<p>The HF expansion provides one completed promise to audit. In February 2023, TANFAC announced an increase from 14,850 to 29,700 tonnes per year and gave a 15–18 month implementation window. On 7 October 2024 it announced the capacity expansion, roughly 20 months after the announcement. That is about two months beyond the upper end of the original window, despite management describing the project as on time on the FY26 call. Once commissioned, the HF line reached 95% utilization in FY26. The record is mixed: a modest schedule miss, followed by strong operating use. <sup>[3]</sup> <sup>[7]</sup> <sup>[9]</sup></p>
+<p>The solar DHF build is a better execution result. TANFAC’s FY25 report expected capacity to reach 20,000 TPA within the next financial year; company notices record phase commissioning in June and October 2025. The FY26 annual report confirms both phases and an order book of ₹1,068 crore through FY29. That meets the stated window and supports real loading, although sales, margins and cash conversion still need to be shown by quarter. <sup>[6]</sup> <sup>[11]</sup> <sup>[12]</sup> <sup>[4]</sup></p>
+<p>HFC-32 is not yet a delivered commitment at this cutoff. The Q1 FY27 call kept the commissioning target at the end of Q3 FY27, with about 65% of capacity under long-term arrangements. We cannot score timing, first-pass quality, ramp rate or project return until a later filing reports production and customer deliveries. The November 3 Q2 call falls after this report’s 30 October market cutoff and has not been used. <sup>[1]</sup> <sup>[20]</sup></p>
+<p>In the Q1 FY27 call, Chief Executive Officer Hemango Gupta said, “our focus has shifted from commissioning to ramping up production” <sup>[1]</sup>. That makes DHF throughput and customer execution the next proof points. President and Chief Financial Officer N. R. Ravichandran said, “pricing contracts generally operate on a cost pass-through mechanism” <sup>[1]</sup>. The contract design cushions input swings over time, but it does not remove the 30–45 day recovery lag or the margin pressure already visible in Q1.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Management commitments compared with what had been delivered by 30 October 2026</caption>
+<thead><tr><th>Commitment</th><th>Original window or claim</th><th>Observed outcome by cutoff</th><th>Assessment</th></tr></thead>
+<tbody>
+<tr><td>HF capacity expansion</td><td>14,850 to 29,700 TPA; 15–18 months from Feb 2023.</td><td>Announced expanded capacity on 7 Oct 2024; FY26 use reached 95%.</td><td>Late by roughly two months versus the outer window; then operated at high utilization.</td></tr>
+<tr><td>Solar-grade DHF</td><td>FY25 report expected the full 20,000 TPA within FY26.</td><td>Both 10,000 TPA phases were commissioned Jun–Oct 2025; ₹1,068 crore order book through FY29.</td><td>Delivered within the stated year; revenue and margin capture remain to prove.</td></tr>
+<tr><td>HFC-32</td><td>20,000 TPA; commissioning targeted for end Q3 FY27; roughly 65% contracted.</td><td>Under construction in Q1 FY27; ₹315 crore committed against ₹395 crore stated project cost.</td><td>Open milestone; do not count the earnings contribution before operation.</td></tr>
+<tr><td>Margin outlook</td><td>Q1 call guided to 16–19% near-term EBITDA margin; around 25% for the overall business once HFC-32 operates, with about 30% at the HFC-32 project level. <sup>[1]</sup></td><td>Q1 FY27 overall margin was 15.3%; FY26 was 15.8%.</td><td>Neither target is yet delivered; distinguish consolidated from project margin and track sulfur pass-through and startup costs.</td></tr>
+</tbody>
+</table></div>
+<p>The historical record is mixed. The next judgment should wait for HFC-32 commissioning and two or more quarters of saleable output.</p>
+<p>The HFC-32 return case hinges on full project cost and sustainable netback. The filings show two project-cost figures, ₹395 crore on the Q1 call and about ₹495 crore in the FY26 annual report and January project approval. They may cover different scope, but the company has not reconciled them in the material reviewed. That uncertainty widens the return range and matters more than the headline order value. <sup>[1]</sup> <sup>[3]</sup> <sup>[15]</sup></p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. Financial trajectory &amp; valuation sanity check</h2>
+<p>TANFAC has grown revenue quickly, but recent profit has not grown with it. FY26 revenue from operations reached ₹711.1 crore, up from ₹557.0 crore in FY25 and ₹378.1 crore in FY24. Operating EBITDA rose sharply in FY25, then eased to ₹112.1 crore in FY26 as raw-material cost and depreciation increased. PAT fell from ₹88.1 crore to ₹70.1 crore in FY26. The quality of growth depends on the next project expanding both revenue and margin. <sup>[4]</sup> <sup>[5]</sup> <sup>[6]</sup></p>
+<p>The table uses company annual reports and audited releases, converted to ₹ crore where statements report lakhs. Reported FY26 ROE was 20.48% and ROCE 20.19%; the values are respectable, but those returns reflect the existing business before the full new capex base is earning. FY26 net debt was ₹46.6 crore at year-end. Following the ₹250 crore QIP in June 2026, management said the company had become net-debt-free. The new equity funds growth but lowers the per-share return if projects underperform. <sup>[3]</sup> <sup>[16]</sup> <sup>[18]</sup></p>
+<p>At ₹3,499.85, the snapshot provider’s trailing P/E was 104.77x; the live Screener page displayed 112x while reporting TTM EPS of ₹33.35. Dividing price by EPS implies about 105x, so this report uses a 105–112x vendor and calculation range rather than choosing the higher or lower print. Trailing EPS growth was negative in the market snapshot, and the price-to-book screen was about 18.7x. The market is already paying for a large future earnings step. <sup>[25]</sup> <sup>[26]</sup> <sup>[27]</sup></p>
+<p>The company’s own reported FY26 multiples are not a clean comp for today because the QIP changed share count after the audited year. We use the current TTM EPS from Screener only as a live cross-check and the annual report for audited profit, cash-flow and return figures. The valuation arithmetic is an example. It is not an analyst consensus forecast, and it does not treat the full contract value as annual revenue. <sup>[3]</sup> <sup>[26]</sup></p>
+<h3>Three-year operating trajectory</h3>
+<p>The FY24–FY26 sequence captures a strong top-line recovery and margin normalization. Values are ₹ crore except margins and EPS.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>TANFAC audited financial trend, FY24–FY26</caption>
+<thead><tr><th>Fiscal year</th><th>Revenue</th><th>Operating EBITDA</th><th>EBITDA margin</th><th>PAT</th><th>PAT margin</th><th>EPS (₹)</th></tr></thead>
+<tbody>
+<tr><td>FY24</td><td>378.1</td><td>70.7</td><td>18.7%</td><td>52.5</td><td>13.9%</td><td>26.24</td></tr>
+<tr><td>FY25</td><td>557.0</td><td>128.9</td><td>23.1%</td><td>88.1</td><td>15.8%</td><td>44.08</td></tr>
+<tr><td>FY26</td><td>711.1</td><td>112.1</td><td>15.8%</td><td>70.1</td><td>9.9%</td><td>35.16</td></tr>
+</tbody>
+</table></div>
+<p>FY26 sales grew while EBITDA and PAT fell from FY25; new capacity must restore profit growth, not only lift shipments.</p>
+<h3>Balance-sheet and return checks</h3>
+<p>QIP proceeds improved funding headroom after year-end, while project returns remain unproven.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Reported funding and capital-use indicators</caption>
+<thead><tr><th>Measure</th><th>Reported figure</th><th>Period and reading</th></tr></thead>
+<tbody>
+<tr><td>Net debt</td><td>₹46.6 crore</td><td>31 March 2026; before the June QIP.</td></tr>
+<tr><td>QIP proceeds</td><td>₹250 crore</td><td>Completed June 2026; planned for HFC-32, downstream capacity and general corporate purposes.</td></tr>
+<tr><td>ROE / ROCE</td><td>20.48% / 20.19%</td><td>FY26 audited; returns will need to hold as new capital enters the base.</td></tr>
+<tr><td>Working-capital cycle</td><td>91 days</td><td>FY26; improved by 8 days, but remains a cash drag.</td></tr>
+</tbody>
+</table></div>
+<p>A stronger balance sheet reduces financing pressure, but capital efficiency still depends on new plant utilization and collections.</p>
+<h3>Financial health, rate-of-change trajectory &amp; valuation multiples</h3>
+<p>Current valuation compares a high share price with earnings that have not yet reflected the new projects. Vendor P/E figures differ, but both imply a premium multiple.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Live valuation and audited return cross-check</caption>
+<thead><tr><th>Measure</th><th>Reading</th><th>Use in the decision</th></tr></thead>
+<tbody>
+<tr><td>Price / trailing P/E</td><td>₹3,499.85; 104.77x in snapshot, 112x on Screener.</td><td>Use an indicative 105–112x range; do not treat a single screen print as precise.</td></tr>
+<tr><td>TTM EPS / growth</td><td>₹33.35 EPS on Screener; TradingView snapshot EPS growth -30.73%.</td><td>Latest reported profit base is not yet showing the growth priced into the share.</td></tr>
+<tr><td>Market capitalization</td><td>₹7,571 crore on the live Screener page.</td><td>Equity value gives the market a high bar for HFC-32 delivery.</td></tr>
+<tr><td>FY26 return ratios</td><td>ROE 20.48%; ROCE 20.19% in annual report.</td><td>Audited pre-full-ramp returns; forward returns could move with capex.</td></tr>
+<tr><td>FY26 net debt</td><td>₹46.6 crore before QIP; net-debt-free claim after raise.</td><td>Funding risk eased; dilution and project returns remain.</td></tr>
+</tbody>
+</table></div>
+<p>The price assumes a strong earnings ramp. A pullback helps entry but does not remove valuation risk.</p>
+<h3>Peer comparison matrix</h3>
+<p>These are business-model comparators, not direct valuation comps. Product range, scale and customer mix differ.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Competitive context across Indian fluorochemicals</caption>
+<thead><tr><th>Company</th><th>Portfolio and operating model</th><th>What the comparison means</th></tr></thead>
+<tbody>
+<tr><td>TANFAC</td><td>Hydrofluoric acid, sulphuric acid, fluorides, solar DHF and planned HFC-32.</td><td>Narrower, more concentrated platform; the upside depends on utilization of recent capex.</td></tr>
+<tr><td>SRF</td><td>Refrigerants, propellants, industrial chemicals and fluoropolymers.</td><td>Broader portfolio and larger R&amp;D base; useful competitive benchmark, not a pure peer.</td></tr>
+<tr><td>Gujarat Fluorochemicals</td><td>Fluoropolymers, refrigerants and specialty fluorochemicals.</td><td>Broader fluorine chain with different capital intensity and end-market mix.</td></tr>
+<tr><td>Navin Fluorine</td><td>Specialty fluorochemicals and advanced chemistry.</td><td>Research-led product mix differs from TANFAC’s acid and commodity-linked base.</td></tr>
+</tbody>
+</table></div>
+<p>TANFAC can grow faster from its smaller base, but it has less product and site diversification than the larger listed groups.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. Trend and TradingView technical structure</h2>
+<p>The 30 October close was ₹3,499.85. TANFAC remains in Stage 2 with a rising 50-day average, but it is about 5.9% above the 10-week EMA, below its recent high by only 4.1%, and about 25.8% above the 30-week average. RSI is not stretched; valuation and entry location are the constraints. TheWrap tagged 24 weeks in Stage 2, but this is no longer an early breakout setup. <sup>[27]</sup> <sup>[28]</sup></p>
+<div class="tradingview-widget-container" style="height: 520px; width: 100%; margin: 1.25rem 0;">
+<div aria-label="Interactive TradingView daily chart for BSE:TANFACIND" id="tradingview_tanfacind_chart" role="img" style="height: 100%; width: 100%;"></div>
+<script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script>
+<script type="text/javascript">
+  new TradingView.widget({
+    "autosize": true,
+    "symbol": "BSE:TANFACIND",
+    "interval": "D",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f4f6f8",
+    "enable_publishing": false,
+    "hide_top_toolbar": false,
+    "allow_symbol_change": true,
+    "studies": [
+      "MASimple@tv-basicstudies",
+      "MAExp@tv-basicstudies"
+    ],
+    "container_id": "tradingview_tanfacind_chart"
+  });
+  </script>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>TradingView price and dashboard snapshot for TANFACIND as of 2026-10-30</caption>
+<thead><tr><th>Technical dimension</th><th>Browser / Scanner reading</th><th>Institutional &amp; No-FOMO interpretation</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-10-30).</td><td>₹3,499.85.</td><td>1D: -0.91%, 1W: 7.19%, 1M: 5.26%.</td></tr>
+<tr><td>Market-facts trend &amp; dashboard tag.</td><td>Stage 2 (Markup) (TheWrap tag: STAGE_2; in list: True; weeks tagged: 24.0).</td><td>Strong Stage 2 trend, but extended (+5.9% above 10-week EMA, RSI 58.47) or valuation or entry inputs require verification (Rich trailing multiple (P/E 104.8x vs growth)). Do not chase on FOMO; wait for pullback to support zone 3256.67–3437.68.</td></tr>
+<tr><td>30-week SMA / 10-week EMA (Weekly).</td><td>₹2,782.62 / ₹3,306.26.</td><td>Extension from 10-week EMA: +5.86% (No-FOMO immediate-buy ceiling: +10.0%).</td></tr>
+<tr><td>20-day / 50-day / 200-day SMA (Daily).</td><td>₹3,343.35 / ₹3,327.80 / ₹2,548.39.</td><td>Extension from 50-day SMA: +5.17% (No-FOMO ceiling: +12.0%).</td></tr>
+<tr><td>RSI (14-day) / ATR (14-day).</td><td>58.47 / ₹173.76.</td><td>TradingView Technical Rating: Buy (+0.49) (RSI &gt; 73 signals short-term overextension).</td></tr>
+<tr><td>52-week high / low.</td><td>₹3,648.00 / ₹1,632.60.</td><td>Classic Pivots — Support S1: ₹2,926.50, Mid Pivot: ₹3,270.25, Resistance R1: ₹3,607.50.</td></tr>
+<tr><td>Relative volume &amp; institutional sponsorship.</td><td>0.65x vs 30d avg.</td><td>TheWrap industry (Bulk Chemicals); relative-strength rank 19.03%; sector breadth N/A.</td></tr>
+</tbody>
+</table></div>
+<p>The trend is positive; the price is still above the reference band and has limited margin of safety at today’s multiple.</p>
+<h3>Momentum screen and No-FOMO support evaluation</h3>
+<p>A strong trend does not override a rich multiple. The decision is to wait for the support band and reassess the valuation after the next disclosed results.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Trend and No-FOMO Entry Timing Evaluation for TANFACIND</caption>
+<thead><tr><th>Evaluation dimension</th><th>Reading / Posture</th><th>Rule &amp; practical implication</th></tr></thead>
+<tbody>
+<tr><td>Market-facts trend classification.</td><td>Stage 2 (Markup).</td><td>Strong Stage 2 trend, but extended (+5.9% above 10-week EMA, RSI 58.47) or valuation or entry inputs require verification (Rich trailing multiple (P/E 104.8x vs growth)). Do not chase on FOMO; wait for pullback to support zone 3256.67–3437.68.</td></tr>
+<tr><td>Entry decision (not portfolio action).</td><td>WAIT_FOR_SUPPORT_PULLBACK.</td><td>Do not chase above the band; reassess on a pullback and after the next reported results.</td></tr>
+<tr><td>Screen band (20D EMA / 10W EMA / 50D SMA).</td><td>₹3,256.67 – ₹3,437.68.</td><td>Deterministic screen band from daily and weekly support inputs; reference only, not a standing order.</td></tr>
+<tr><td>Structural invalidation stop.</td><td>₹2,695.74.</td><td>Anchored below the 50-day SMA / 30-week SMA minus 1.0x ATR(14).</td></tr>
+<tr><td>Valuation sanity check (Screener.in / Finviz).</td><td>Rich trailing multiple (P/E 104.8x vs growth).</td><td>Compares current P/E against earnings growth and ROE/ROCE.</td></tr>
+</tbody>
+</table></div>
+<p>The band is a chart screen. A limit order is not justified unless the earnings path and project cost still support the valuation.</p>
+<p>A decisive close below ₹2,695.74 breaks the current structural setup. A pullback into the band without better earnings evidence is not enough to buy.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. Multi-horizon investment view: short-term momentum, medium-term catalysts &amp; scenarios</h2>
+<p>In the next 1–12 weeks, trend momentum is positive but the stock is only 4.1% below its 52-week high. Volume on the latest session was 0.65 times its 30-day average. The near-term catalyst is the Q2 FY27 call scheduled for November 3, after the cutoff; no Q2 operating figures are included here. Investors should listen for commissioning timing, final project scope, HFC-32 quota or customer details, solar-grade shipments, and cash conversion. <sup>[20]</sup> <sup>[26]</sup> <sup>[27]</sup></p>
+<p>Over 3–18 months, the solar DHF order book provides visibility through FY29 and HFC-32 is the main step-up opportunity. The Japanese contract begins in January 2027. That value is spread across a seven-year term; it is not revenue booked in the current year. Order value, production volume, revenue recognition and cash collection are different measures. We use contract disclosures as visibility, not as a forecast. <sup>[3]</sup> <sup>[13]</sup> <sup>[14]</sup> <sup>[16]</sup></p>
+<p>Over 2–5 years, the company could earn more from a wider set of value-added fluorochemicals if customer approvals and internal capability expand. The route is not guaranteed. High-purity capacity needs consistent yield; HFC-32 economics depend on raw-material cost, refrigerant policy, realized pricing and utilization. The company has not published product-level capital employed or customer concentration, so the long-term story cannot yet be validated through vertical returns. <sup>[1]</sup> <sup>[3]</sup> <sup>[8]</sup></p>
+<h3>Short-term, medium-term, and long-term synthesis</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>What matters by investment horizon</caption>
+<thead><tr><th>Horizon</th><th>Evidence now</th><th>What changes the view</th></tr></thead>
+<tbody>
+<tr><td>1–12 weeks</td><td>Stage 2; close 4.1% below 52-week high; support band ₹3,256.67–₹3,437.68.</td><td>Pullback into support with stable results, or close below ₹2,695.74.</td></tr>
+<tr><td>3–18 months</td><td>Solar orders through FY29; HFC-32 targeted for end Q3 FY27; Q2 call Nov 3.</td><td>Commissioning, first saleable batches, shipment pace, margin and capex reconciliation.</td></tr>
+<tr><td>2–5 years</td><td>Expanded HF platform and new downstream products can lift value-added mix.</td><td>Incremental ROCE, recurring cash conversion, regulatory path and repeat contracts.</td></tr>
+</tbody>
+</table></div>
+<p>The short-term signal is stronger than the reported earnings trend; operating proof is the key catalyst.</p>
+<h3>Medium-term catalyst pipeline &amp; variant perception</h3>
+<p>The optimistic view sees a near-doubling of scale from contracted HFC-32 and solar-grade shipments, supported by an integrated HF base. The cautious view notes that FY26 EBITDA was below FY25, Q1 margin remained 15.3%, and the stock already trades around 105–112x trailing earnings. Our variant is that the business opportunity is credible, but the market is paying before the margins, project cost and cash returns are verified. We therefore keep the name qualified but wait for price support and fresh disclosures. <sup>[1]</sup> <sup>[2]</sup> <sup>[3]</sup> <sup>[25]</sup></p>
+<p>The scenario table is an explicit stress test for 18–24 months. EPS and exit P/E are analyst assumptions, not company guidance or consensus. The base assumes EPS of ₹65 and a still-premium 80x P/E, producing ₹5,200; this embeds meaningful earnings growth and leaves a high multiple. The Q1 call guided roughly 30% FY27 revenue growth, over 60% FY28 growth and around 25% overall EBITDA margin after HFC-32, but it did not give a per-share earnings bridge to ₹65. The EPS input remains a stress-test assumption until filings show production, margins and cash conversion. The bear assumes only ₹35 EPS and compression to 40x; the bull assumes ₹80 EPS at 90x. It is deliberately wide because execution and terminal valuation dominate the range. <sup>[1]</sup> <sup>[25]</sup> <sup>[26]</sup></p>
+<h3>Bull, base, and bear scenarios</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Illustrative 18–24 month valuation stress test; not consensus targets</caption>
+<thead><tr><th>Case</th><th>Assumed EPS and exit multiple</th><th>Return vs current price</th><th>Reward / risk from top of entry band</th><th>Main condition</th></tr></thead>
+<tbody>
+<tr><td>Bear</td><td>₹35 assumed EPS × 40x assumed P/E = ₹1,400</td><td>-60.0% from ₹3,499.85</td><td>-2.75:1 from top of the screen band</td><td>HFC32 ramp or delay and multiple sensitivity; not a forecast</td></tr>
+<tr><td>Base</td><td>₹65 assumed EPS × 80x assumed P/E = ₹5,200</td><td>+48.6% from ₹3,499.85</td><td>2.38:1 from top of the screen band</td><td>HFC32 ramp or delay and multiple sensitivity; not a forecast</td></tr>
+<tr><td>Bull</td><td>₹80 assumed EPS × 90x assumed P/E = ₹7,200</td><td>+105.7% from ₹3,499.85</td><td>5.07:1 from top of the screen band</td><td>HFC32 ramp or delay and multiple sensitivity; not a forecast</td></tr>
+</tbody>
+</table></div>
+<p>The base case requires a large earnings step and still assigns 80x earnings; a higher share price is not a low-risk outcome.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. Key risks, thesis breakers &amp; bear case</h2>
+<p>The bear case starts with price. A company can deliver revenue growth and still disappoint if margins, cash conversion or per-share returns fall short. TANFAC’s current valuation leaves little room for a commissioning delay or a lower HFC-32 netback. The strongest counterpoint is that the market may already be discounting high growth; that is why waiting for support alone does not solve the fundamental risk. <sup>[1]</sup> <sup>[3]</sup> <sup>[25]</sup></p>
+<p>The thesis rests on one hinge: can the expanded HF base feed qualified downstream products at attractive incremental returns without a long period of low utilization or working-capital strain? If HFC-32 is late, if contracted volumes are conditional, or if pass-through terms lag input costs, the promised earnings slope flattens while depreciation and equity dilution remain. <sup>[1]</sup> <sup>[3]</sup> <sup>[17]</sup></p>
+<h3>A high multiple can unwind faster than earnings grow</h3>
+<p>The live earnings base is around ₹33.35 per share on Screener, with negative TTM EPS growth in the consumer snapshot. At roughly 105–112x trailing earnings, a lower exit multiple could offset operating progress. The valuation assumes a high probability that new plants work well. <sup>[25]</sup> <sup>[26]</sup></p>
+<h3>Project cost and timing are not fully reconciled</h3>
+<p>The current disclosures cite ₹395 crore and ₹495 crore project costs. The larger number may include utility and other value-added scope, but no reconciliation is present in the reviewed filings. The original HF expansion also slipped beyond the outer implementation window. Each new project therefore needs a dated cost-to-complete and a commissioning milestone, not just a target quarter. <sup>[1]</sup> <sup>[3]</sup> <sup>[9]</sup> <sup>[15]</sup></p>
+<h3>Margins depend on raw materials, ramp and pass-through lag</h3>
+<p>Sulphur and fluorspar move with global supply, shipping and currency. TANFAC says customer contracts pass costs through, yet the Q1 call described a 30–45 day lag and reported 15.3% EBITDA margin. At a premium valuation, even temporary margin pressure can move earnings estimates. <sup>[1]</sup> <sup>[2]</sup></p>
+<h3>Customer and site concentration are hard to measure</h3>
+<p>The company does not identify every HFC customer or publish a customer concentration table. Its major manufacturing base is Cuddalore. Any prolonged outage, delayed customer qualification or loss of a large contract could weigh heavily on a small earnings base. Order values over multiple years should not be read as guaranteed annual sales. <sup>[3]</sup> <sup>[13]</sup> <sup>[16]</sup></p>
+<h3>Equity raising helps funding, but dilutes per-share returns</h3>
+<p>The ₹250 crore QIP reduced reliance on debt and was intended to fund strategic projects. Shareholders accepted dilution before the main investment had reached full output. If incremental return on capital trails the existing business, the balance sheet can be safer while per-share value still falls. <sup>[18]</sup> <sup>[19]</sup></p>
+<h3>Fluorochemical rules and substitution change demand</h3>
+<p>HFC-32 has a near-term role in air conditioning and refrigeration, but long-run refrigerant choice depends on regulation, equipment design and lower-GWP alternatives. Solar-grade DHF depends on continued customer expansion and competitive pricing. Neither market should be extrapolated in a straight line from current contracts. <sup>[1]</sup> <sup>[3]</sup></p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Events that would weaken the investment case</caption>
+<thead><tr><th>Thesis risk</th><th>Watch item</th><th>What would break the case</th></tr></thead>
+<tbody>
+<tr><td>HFC-32 execution</td><td>No production or first saleable output by planned Q3 FY27 end.</td><td>Repeated commissioning slip, further cost increase or no customer acceptance.</td></tr>
+<tr><td>Margin recovery</td><td>Q1 FY27 margin was 15.3%; sulphur pass-through has a lag.</td><td>Existing-line margins stay below 15% after input costs normalize.</td></tr>
+<tr><td>Solar DHF conversion</td><td>Orders extend through FY29.</td><td>Shipments, collections or repeat orders fail to follow contracted visibility.</td></tr>
+<tr><td>Capital efficiency</td><td>HFC project cost has two published figures.</td><td>A reconciled cost base produces weak incremental return after depreciation.</td></tr>
+<tr><td>Technical trend</td><td>Price is above the screen band and close to 52-week high.</td><td>Close below ₹2,695.74 or Stage 3/4 deterioration.</td></tr>
+</tbody>
+</table></div>
+<p>A deterioration in any two operating tests or a decisive technical break would remove the current qualification.</p>
+<p>If HFC-32 is commissioned, reaches contracted deliveries and reports margins near management’s target while solar DHF continues to convert orders into cash, the premium can be earned. Without those results, the stock is a high-expectation asset with a thin margin for execution error. The next test is the November 3 call and the following quarter’s reported output. <sup>[1]</sup> <sup>[20]</sup></p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. What we would do, and when (No-FOMO action plan)</h2>
+<p>Action: keep TANFAC on the shortlist as WAIT_FOR_SUPPORT, but do not add at ₹3,499.85. The company already appears as a current holding in the market records, so this is not a fresh-position instruction. The stock trades above the computed ₹3,256.67–₹3,437.68 support band. Recheck the band and valuation after Q2 FY27 data; the November 3 call comes after this report’s 30 October cutoff. <sup>[20]</sup> <sup>[26]</sup> <sup>[27]</sup></p>
+<p>The stop at ₹2,695.74 is a structural invalidation reference from the Stage 2 screen. It is not a guaranteed loss limit because gaps can occur. A stop close would break the setup; an intraday wick alone would not. Before any additional capital, require the commissioning date, total project cost, first saleable HFC-32 production, contracted volume conditions, and realized margin to remain consistent with the thesis. <sup>[1]</sup> <sup>[3]</sup></p>
+<p>For a hypothetical new Tier 3 position, the scoring formula uses a 50-basis-point risk budget and limits notional by the stop distance. At the top of the entry band, the formula gives approximately 2.32% of net asset value. This is only a sizing reference; it should not be added to an existing holding without an account-level portfolio audit. Base-case reward-to-risk is about 2.38:1 from the top of the band under the 18–24 month assumptions, but the scenario depends on a still-premium exit multiple. <sup>[26]</sup></p>
+<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>No-FOMO execution levels and risk-unit position sizing for TANFACIND</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Strategy bucket &amp; conviction tier.</td><td>CORE_ALPHA (TIER_3).</td><td>Aligns new capital with durable trend and business quality.</td></tr>
+<tr><td>Action verdict &amp; No-FOMO posture.</td><td><span class="verdict verdict-watch">WAIT_FOR_SUPPORT</span> (WAIT_FOR_SUPPORT_PULLBACK; no new allocation at CMP).</td><td>Wait for the support band, then recheck project evidence and valuation. A touch of support alone is not a buy signal.</td></tr>
+<tr><td>Recommended buy / accumulation zone.</td><td>₹3,256.67 to ₹3,437.68.</td><td>Current price ₹3,499.85; anchored to TradingView 20D EMA / 10W EMA / 50D SMA support.</td></tr>
+<tr><td>Structural invalidation stop.</td><td>₹2,695.74 (screen reference).</td><td>Below nearest structural support (50-day SMA, 10-week EMA, or recent consolidation swing low minus 1.0 x ATR14).</td></tr>
+<tr><td>Base / Bull / Bear scenario values.</td><td>₹5,200.00 / ₹7,200.00 / ₹1,400.00.</td><td>At CMP: 2.11:1; at entry-band top: 2.38:1.</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat).</td><td>2.32% of net worth (TIER_3, 50 bps risk budget).</td><td>Formula: min(Tier cap 2–3.5%, 50 bps / 21.58% stop distance).</td></tr>
+<tr><td>Let-winners-run rule.</td><td>No company-level weight ceiling set in this dossier.</td><td>Set any appreciated-position cap in the account-level portfolio audit; trail to the rising 21-EMA / 50-SMA while trend and fundamentals remain intact.</td></tr>
+</tbody>
+</table></div>
+<p>The levels are research references. Any order, stop or position size must reflect the current holding and the investor’s full portfolio constraints.</p>
+<p class="trigger">Reassess if the closing price enters ₹3,256.67–₹3,437.68 and the Q2 update confirms schedule and total project cost.</p>
+<p class="trigger">Remove the Stage 2 setup on a closing break below ₹2,695.74 or on a repeated HFC-32 delay.</p>
+<p class="trigger">Raise conviction only after reported HFC-32 production, customer acceptance, margins and cash collections support the earnings case.</p>
+</section>
+<section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p>Ledger checker line: `failures: ["DUMMYHEG.NS"]`. This unrelated broad-screen row is outside the active watchlist, shortlist and holdings; no TANFAC figure or N/A cell depends on it, so the exception does not change the verdict. It cannot be cured inside this one-symbol run without altering an unrelated alias or source row. Cure: refresh or alias that row before any future report that uses it.</p><p>Citation checker line: `WARN  EXCEPTION AS-OF TANFACIND:q1fy27_financial_results: 2026-06-30 is 122 days older than report date 2026-10-30 (max 60)`. Q1 FY27 is the newest reported quarter available at the cutoff; the Q2 call was scheduled for 3 November, after the market cutoff. The financial run-rate is therefore less certain than usual. Cure: replace the quarter figures after Q2 results are filed.</p><p>Citation checker line: `WARN  EXCEPTION AS-OF TANFACIND:q1fy27_management_guidance_and_contracts: 2026-06-30 is 122 days older than report date 2026-10-30 (max 60)`. The commissioning and margin guidance is the latest management statement in the evidence packet but is not a verified outcome. This lowers confidence in near-term timing. Cure: update with the Q2 call and filings when available.</p><p>Citation checker line: `WARN  EXCEPTION AS-OF TANFACIND:fy26_revenue_ebitda_pat: 2026-03-31 is 213 days older than report date 2026-10-30 (max 60)`. The audited FY26 result remains the latest complete annual baseline. It cannot be made newer by changing its date. This limits confidence in current margins, not in the filed historical figures. Cure: use the next audited annual statements when published.</p><p>Citation checker line: `WARN  EXCEPTION AS-OF TANFACIND:fy26_capacity_and_balance_sheet: 2026-03-31 is 213 days older than report date 2026-10-30 (max 60)`; `WARN  EXCEPTION AS-OF TANFACIND:fy26_utilisation_and_cash_cycle: 2026-03-31 is 213 days older than report date 2026-10-30 (max 60)`; and `WARN  EXCEPTION AS-OF TANFACIND:solar_orders_and_capacity: 2026-03-31 is 213 days older than report date 2026-10-30 (max 60)`. These annual operating measures are the latest audited disclosures and remain the basis for capacity and utilization. New quarterly disclosures can update current run-rate, but cannot replace audited FY26 history. This lowers confidence in present-day utilization and cash conversion.</p><p>Citation checker line: `WARN  EXCEPTION AS-OF TANFACIND:hf_expansion_original_timeline: 2023-02-10 is 1358 days older than report date 2026-10-30 (max 60)` and `WARN  EXCEPTION AS-OF TANFACIND:hf_expansion_completion: 2024-10-07 is 753 days older than report date 2026-10-30 (max 60)`. These are dated source records kept to audit the promised and actual HF build timing. Their age is inherent to the historical comparison. The schedule conclusion has lower confidence than current operational facts; cure is not to refresh history, but to retain both original notices and update the audit when the next project is delivered.</p><p>Citation checker line: `WARN  EXCEPTION AS-OF TANFACIND:japanese_fluorinated_supply_contract: 2026-01-12 is 291 days older than report date 2026-10-30 (max 60)`. The contract notice is the only reviewed source for its volume and term; it remains a future start commitment, not booked current revenue. This lowers confidence in current commercial conversion. Cure: confirm deliveries and collection after the 1 January 2027 start.</p><p>The live Screener page reported P/E 112x while the market snapshot calculated 104.77x from its feed. The page also showed TTM EPS of ₹33.35, which implies about 105x at the 30 October price. Both source values are retained; the report uses an indicative 105–112x range. The exact multiple is uncertain, but both readings remain expensive. Cure: refresh the two feeds after the next result and use the same EPS and price basis.</p><p>The FY26 annual report and January project release cite about ₹495 crore for the HFC-32/downstream project scope, while the Q1 call cites ₹395 crore and ₹315 crore committed. The reviewed material does not reconcile project scope. The payback estimate is therefore less precise and the dossier does not treat the announced capex as a single reconciled value. Cure: obtain a later presentation or written company clarification.</p><p>The Q2 call had not happened by the 30 October session cutoff. Q1 guidance is not verified as a result, and no Q2 numbers are included. The scheduled 3 November call is the next evidence point; subsequent filed results will cure the freshness gap.</p><p>Reviewer-model exception: .agents/config/reviewer.json selects ao-claude-lc/claude-sonnet-5-5, but the collaboration runtime returned “Unknown model.” The required independent review therefore ran with the runtime default as a fallback. Model behavior may affect judgment comparability. Cure: repeat the review with the configured model when it becomes available; the review verdict is recorded in the run manifest.</p><p>Red-team model exception: the configured ao-foundry-lc/gpt-6.1-sol was unavailable to the collaboration runtime, so the required adversarial pass ran with the runtime default. This may affect model-to-model coverage. Cure: rerun with the configured model when available; the completed pass and its verdict are recorded in the run manifest.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/d8855fc0-9b61-498d-92f4-35355935a751.pdf">1. Q1 FY27 earnings call transcript</a>. Primary company or market reference.</li>
+<li id="cite_note-2"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/745cd1f8-9699-4d58-8fdd-5963b43d0fda.pdf">2. Q1 FY27 financial results filing</a>. Primary company or market reference.</li>
+<li id="cite_note-3"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Industries-Q4-FY-26-Earnings-Call-Transcript.pdf">3. Q4 and FY26 earnings call transcript</a>. Primary company or market reference.</li>
+<li id="cite_note-4"><a href="https://tanfaccms.tinglabs.in/uploads/52nd-Annual-Report-2025-26.pdf">4. TANFAC FY26 annual report</a>. Primary company or market reference.</li>
+<li id="cite_note-5"><a href="https://tanfaccms.tinglabs.in/uploads/Press-Release-for-Audited-financial-results-for-the-quarter-and-full-year-ended-March-31-2026.pdf">5. FY26 audited results release</a>. Primary company or market reference.</li>
+<li id="cite_note-6"><a href="https://tanfaccms.tinglabs.in/uploads/51st-Annual-Report-2024-25.pdf">6. TANFAC FY25 annual report</a>. Primary company or market reference.</li>
+<li id="cite_note-7"><a href="https://tanfaccms.tinglabs.in/uploads/50th-Annual-Report-2023-24.pdf">7. TANFAC FY24 annual report</a>. Primary company or market reference.</li>
+<li id="cite_note-8"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/be9ce6c0-80bc-4ff9-a45a-ec2c45d550bc.pdf">8. Q1 FY27 investor presentation</a>. Primary company or market reference.</li>
+<li id="cite_note-9"><a href="https://tanfaccms.tinglabs.in/uploads/Regulation-30-Intimitation-for-expansion-of-project-10-02-2023.pdf">9. HFC-32 project commitment, Feb 2023</a>. Primary company or market reference.</li>
+<li id="cite_note-10"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Announces-expansion-of-project-of-our-Hydrofluoric-Acid-Capacity-07-10-2024.pdf">10. Hydrofluoric-acid capacity completion notice, Oct 2024</a>. Primary company or market reference.</li>
+<li id="cite_note-11"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Announces-Successful-Commissioning-of-its-5-000-TPA-High-Purity-Solar-13-06-2025.pdf">11. Solar-grade DHF phase 1 commissioning</a>. Primary company or market reference.</li>
+<li id="cite_note-12"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Announces-Successful-Commissioning-of-its-second-phase-of-5000-TPA-High-Purity-Solar-Grade-DHF-Plant-06-10-2025.pdf">12. Solar-grade DHF phase 2 commissioning</a>. Primary company or market reference.</li>
+<li id="cite_note-13"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Secures-Major-Order-for-Supply-of-Solar-Grade-Diluted-Hydrofluoric-Acid-05-11-2025.pdf">13. Solar-grade DHF order, Nov 2025</a>. Primary company or market reference.</li>
+<li id="cite_note-14"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Signed-Contract-for-Supply-of-Solar-Grade-Diluted-Hydrofluoric-Acid-28-11-2025.pdf">14. Solar-grade DHF contract, Nov 2025</a>. Primary company or market reference.</li>
+<li id="cite_note-15"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Approves-Downstream-Expansion-and-Key-Strategic-Decisions-09-01-2026.pdf">15. Downstream fluorinated-chemicals project approval</a>. Primary company or market reference.</li>
+<li id="cite_note-16"><a href="https://tanfaccms.tinglabs.in/uploads/TANFAC-Signs-Long-Term-Supply-Contract-with-Japanese-Customer-for-Fluorinated-Chemicals-12-01-2026.pdf">16. Japanese customer supply contract</a>. Primary company or market reference.</li>
+<li id="cite_note-17"><a href="https://tanfaccms.tinglabs.in/uploads/Tanfac-Industries-Limited-enters-into-Long-Term-Agreement-with-Blue-Star.pdf">17. Blue Star long-term supply agreement</a>. Primary company or market reference.</li>
+<li id="cite_note-18"><a href="https://tanfaccms.tinglabs.in/uploads/Press-Release-TANFAC-Raises-INR-250-Crore-Through-QIP-to-Accelerate-Strategic-Growth.pdf">18. QIP completion and use of proceeds</a>. Primary company or market reference.</li>
+<li id="cite_note-19"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/e51185f7-87f1-4dc9-97ea-1f2080417fc9.pdf">19. BSE QIP disclosure</a>. Primary company or market reference.</li>
+<li id="cite_note-20"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/863ba479-a096-47ce-8f13-8948d2aff6f9.pdf">20. Q2 FY27 earnings call notice</a>. Primary company or market reference.</li>
+<li id="cite_note-21"><a href="https://tanfac.com/investors/investor-information/calls-conferences-and-transcripts">21. Investor call transcripts and recordings</a>. Primary company or market reference.</li>
+<li id="cite_note-22"><a href="https://tanfac.com/investors/results-reports/half-yearly-and-quarterly-financial-results">22. Quarterly and half-year results archive</a>. Primary company or market reference.</li>
+<li id="cite_note-23"><a href="https://tanfac.com/investors/disclosures-announcements/press-release">23. Company disclosure and press-release archive</a>. Primary company or market reference.</li>
+<li id="cite_note-24"><a href="https://tanfac.com/company">24. Company profile and operating location</a>. Primary company or market reference.</li>
+<li id="cite_note-25"><a href="https://tanfac.com/">25. TANFAC corporate product portfolio</a>. Primary company or market reference.</li>
+<li id="cite_note-26"><a href="https://www.screener.in/company/TANFACIND/">26. Screener company and financial snapshot</a>. Primary company or market reference.</li>
+<li id="cite_note-27"><a href="https://thewrap.in/data-tools/stage2">27. TheWrap Stage 2 dashboard</a>. Primary company or market reference.</li>
+<li id="cite_note-28"><a href="https://www.tradingview.com/symbols/BSE-TANFACIND/technicals/">28. TradingView technical dashboard</a>. Primary company or market reference.</li>
+<li id="cite_note-29"><a href="https://tanfac.com/product/anhydrous-hydrofluoric-acid">29. Anhydrous hydrofluoric acid product page</a>. Primary company or market reference.</li>
+<li id="cite_note-30"><a href="https://tanfac.com/product/solar-grade-dilute-hydrofluoric-acid-dhf">30. Solar-grade diluted hydrofluoric acid product page</a>. Primary company or market reference.</li>
+<li id="cite_note-31"><a href="https://tanfac.com/product/diluted-hydrofluoric-acid">31. Diluted hydrofluoric acid product page</a>. Primary company or market reference.</li>
+<li id="cite_note-32"><a href="https://tanfac.com/product/aluminum-fluoride">32. Aluminium fluoride product page</a>. Primary company or market reference.</li>
+<li id="cite_note-33"><a href="https://tanfac.com/product/sulphuric-acid-98">33. Sulphuric acid product page</a>. Primary company or market reference.</li>
+<li id="cite_note-34"><a href="https://tanfac.com/product/boron-trifluoride-complexes">34. Boron trifluoride complexes product page</a>. Primary company or market reference.</li>
+<li id="cite_note-35"><a href="https://gfl.co.in/Annual_Reports.php">35. Gujarat Fluorochemicals annual-report archive</a>. Primary company or market reference.</li>
+<li id="cite_note-36"><a href="https://gfl.co.in/upload/pages/GFCL%20-%20Integrated%20Annual%20Report%20-2024-25.pdf">36. Gujarat Fluorochemicals FY25 integrated annual report</a>. Primary company or market reference.</li>
+<li id="cite_note-37"><a href="https://beta.srf.com/storage/files/annual-report/SRF-Limited_Annual-Report-2025.pdf">37. SRF FY25 annual report</a>. Primary company or market reference.</li>
+<li id="cite_note-38"><a href="https://www.nfil.in/investors">38. Navin Fluorine investor relations</a>. Primary company or market reference.</li>
+</ol>
+</section>
+</main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk &bull; Curated by Rajasekhar Mekala</span><a href="#top">Back to top &uarr;</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
