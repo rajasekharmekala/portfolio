@@ -233,6 +233,7 @@ class PortalTests(unittest.TestCase):
         scripts = [s for s in soup.find_all("script") if not s.get("src")]
         self.assertEqual(len(scripts), 1)
         self.assertEqual(scripts[0].string.strip(), (docs / "portal.js").read_text(encoding="utf-8").strip())
+        self.assertTrue(soup.select_one('link[rel="stylesheet"]')["href"].startswith("portal.css?v="))
 
 
 class EmailDigestTests(unittest.TestCase):
