@@ -122,11 +122,11 @@ def _render_table(caption: str, headers: list[str], rows: list[list[str]], expla
 def _render_estimate(est: dict) -> str:
     return (
         '<section class="estimate">\n'
-        f'<h4>The number</h4>\n<p>{est["the_number"]}</p>\n'
-        f'<h4>How it was calculated</h4>\n<p>{est["how_calculated"]}</p>\n'
-        f'<h4>The inputs</h4>\n<p>{est["the_inputs"]}</p>\n'
-        f'<h4>The range</h4>\n<p>{est["the_range"]}</p>\n'
-        f'<h4>If the number is off</h4>\n<p>{est["if_off"]}</p>\n'
+        f'<h4>The number:</h4>\n<p>{est["the_number"]}</p>\n'
+        f'<h4>How it was calculated:</h4>\n<p>{est["how_calculated"]}</p>\n'
+        f'<h4>The inputs:</h4>\n<p>{est["the_inputs"]}</p>\n'
+        f'<h4>The range:</h4>\n<p>{est["the_range"]}</p>\n'
+        f'<h4>If the number is off:</h4>\n<p>{est["if_off"]}</p>\n'
         "</section>"
     )
 
@@ -387,7 +387,6 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     # Primer (must be 3-5 sentences)
     primer_html = (
         f'<section class="primer" id="primer">\n'
-        f"<h2>Before you read</h2>\n"
         f"<p>{spec['primer']}</p>\n"
         f"</section>"
     )
