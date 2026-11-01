@@ -335,8 +335,17 @@ def match_stage2_symbol(symbol: str, market: str, tv: Dict[str, Any], s2_data: D
     if market == "IN":
         new_syms = {r.get("TradingView Code", "").upper(): r for r in s2_data.get("new_additions_this_week", [])}
         top25_syms = {r.get("TradingView Code", "").upper(): r for r in s2_data.get("top_25_stage2", [])}
-        uni_syms = {r.get("TradingView Code", "").upper(): r for r in s2_data.get("stage2_universe", [])}
-        row = uni_syms.get(symbol) or new_syms.get(symbol) or top25_syms.get(symbol)
+        removed_syms = {
+            r.get("TradingView Code", "").upper()
+            for r in s2_data.get("stage2_universe", []) + s2_data.get("removed_this_week", [])
+            if r.get("Stage2 Status", "").strip().casefold() == "removed"
+        }
+        uni_syms = {
+            r.get("TradingView Code", "").upper(): r
+            for r in s2_data.get("stage2_universe", [])
+            if r.get("Stage2 Status", "").strip().casefold() != "removed"
+        }
+        row = None if symbol in removed_syms else (uni_syms.get(symbol) or new_syms.get(symbol) or top25_syms.get(symbol))
         if row:
             ind = (row.get("Industry") or "").strip()
             sec_info = sector_ranks.get(ind.lower(), {})
@@ -352,7 +361,7 @@ def match_stage2_symbol(symbol: str, market: str, tv: Dict[str, Any], s2_data: D
                 "weeks_in_stage2": _parse_float(row.get("Weeks")),
                 "stage2_return_pct": _parse_float(row.get("% Return")),
                 "avg_weekly_vol_cr": _parse_float(row.get("Avg Weekly Vol (in cr.)")),
-                "asm_status": row.get("ASM") or row.get("Stage2 Status"),
+                "asm_status": row.get("ASM ESM GSM") or row.get("ASM") or None,
             }
         return {
             "stage2_snapshot_available": True,
@@ -440,11 +449,11 @@ def evaluate_stage2_and_entry_posture(
     support_zone_high = _round(nearest_support * 1.015, 2)
 
     # Valuation sanity check
-    pe = tv.get("pe_ttm") or val_card.get("stock_pe")
+    pe = tv.get("pe_ttm") if tv.get("pe_ttm") is not None else val_card.get("stock_pe")
     fwd_pe = val_card.get("forward_pe")
     peg = val_card.get("peg")
-    rev_g = tv.get("revenue_yoy_growth_ttm_pct") or val_card.get("sales_qq_pct")
-    valuation_note = "Reasonable / In-line"
+    rev_g = tv.get("revenue_yoy_growth_ttm_pct") if tv.get("revenue_yoy_growth_ttm_pct") is not None else val_card.get("sales_qq_pct")
+    valuation_note = "Valuation unavailable" if pe is None or rev_g is None else "Reasonable / In-line"
     valuation_stretched = False
     if pe and pe > 85 and (rev_g is None or rev_g < 25):
         valuation_note = f"Rich trailing multiple (P/E {pe:.1f}x vs growth)"
@@ -458,10 +467,12 @@ def evaluate_stage2_and_entry_posture(
     # No-FOMO Entry Timing Decision
     weeks = s2.get("weeks_in_stage2")
     is_extended = (
-        (ext_10w_pct is not None and ext_10w_pct > 12.0)
-        or (ext_50d_pct is not None and ext_50d_pct > 14.0)
-        or (rsi is not None and rsi > 74.0)
+        (ema10w is not None and ema10w > 0 and close / ema10w > 1.10)
+        or (sma50 is not None and sma50 > 0 and close / sma50 > 1.12)
+        or (rsi is not None and rsi > 73.0)
     )
+    entry_inputs_available = (all(x is not None for x in (tv.get("ema10_weekly"), sma50, rsi, pe, rev_g))
+                              and tv["ema10_weekly"] > 0 and sma50 > 0 and pe > 0)
 
     if stage == "STAGE_4":
         posture = "AVOID_STAGE4_OR_BROKEN"
@@ -470,7 +481,7 @@ def evaluate_stage2_and_entry_posture(
             f"Below 30-week SMA ({sma30w}) and 50-day SMA ({sma50}) with weak trend structure. "
             "Prune from watchlist / avoid until Stage 1 base and Stage 2 breakout form."
         )
-    elif stage == "STAGE_2" and not is_extended and not valuation_stretched:
+    elif stage == "STAGE_2" and not is_extended and not valuation_stretched and entry_inputs_available:
         posture = "BUY_AT_CMP_NO_FOMO"
         verdict = "IMMEDIATE_BUY"
         wk_str = f" (Week {int(weeks)} in Stage 2)" if weeks else ""
@@ -478,12 +489,12 @@ def evaluate_stage2_and_entry_posture(
             f"Confirmed Stage 2 uptrend{wk_str}, trading within a non-extended {ext_10w_pct or 0:+.1f}% of its "
             f"10-week EMA ({ema10w}) with RSI {rsi} and {valuation_note.lower()}."
         )
-    elif stage == "STAGE_2" and (is_extended or valuation_stretched):
+    elif stage == "STAGE_2":
         posture = "WAIT_FOR_SUPPORT_PULLBACK"
         verdict = "WAIT_FOR_SUPPORT"
         rationale = (
             f"Strong Stage 2 trend, but extended ({ext_10w_pct or 0:+.1f}% above 10-week EMA, RSI {rsi}) "
-            f"or valuation requires discipline ({valuation_note}). Do not chase on FOMO; wait for pullback "
+            f"or valuation or entry inputs require verification ({valuation_note}). Do not chase on FOMO; wait for pullback "
             f"to support zone {support_zone_low}–{support_zone_high}."
         )
     elif stage in ("STAGE_3", "STAGE_1"):
@@ -701,4 +712,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

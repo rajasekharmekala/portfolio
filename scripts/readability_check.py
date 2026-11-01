@@ -165,7 +165,7 @@ def check_banned(soup, errors):
             errors.append(f"VOICE: banned phrase {phrase!r} present")
 
 
-def check_grade(soup, max_grade, errors):
+def check_grade(soup, max_grade, errors, prose_only=False):
     chapters = [soup.find("section", id="primer")] + \
         soup.find_all("section", class_="chapter")
     chapters = [c for c in chapters if c]
@@ -173,7 +173,12 @@ def check_grade(soup, max_grade, errors):
         errors.append("CHAPTERS: no .primer or .chapter sections found")
     for c in chapters:
         label = c.get("id") or (c.find("h2").get_text()[:24] if c.find("h2") else "?")
-        g = fk_grade(c.get_text(" ", strip=True))
+        if prose_only:
+            text = " ".join(p.get_text(" ", strip=True) for p in c.find_all(["p", "li"])
+                            if not p.find_parent(["table", "nav", "ol"]))
+        else:
+            text = c.get_text(" ", strip=True)
+        g = fk_grade(text)
         if g > max_grade:
             errors.append(f"GRADE {label}: Flesch-Kincaid {g:.1f} > {max_grade}")
 
@@ -183,18 +188,20 @@ def main():
     ap.add_argument("report")
     ap.add_argument("--max-grade", type=float, default=15.0)
     ap.add_argument("--glossary", default=GLOSSARY_FILE)
+    ap.add_argument("--kind", choices=["stage2_sector_momentum"], help="apply the Stage 2 report structure")
     args = ap.parse_args()
 
     soup = BeautifulSoup(open(args.report, encoding="utf-8").read(), "html.parser")
     glossary = json.load(open(args.glossary, encoding="utf-8"))
 
     errors = []
-    check_grade(soup, args.max_grade, errors)
+    check_grade(soup, args.max_grade, errors, prose_only=args.kind == "stage2_sector_momentum")
     check_glossary(soup, glossary, errors)
     check_bare_tables(soup, errors)
     check_estimates(soup, errors)
-    check_chapter7(soup, errors)
-    check_primer_and_notes(soup, errors)
+    if args.kind != "stage2_sector_momentum":
+        check_chapter7(soup, errors)
+        check_primer_and_notes(soup, errors)
     check_banned(soup, errors)
 
     if errors:

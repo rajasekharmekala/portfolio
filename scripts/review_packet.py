@@ -44,7 +44,7 @@ import sys
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KINDS = ("market_intel", "portfolio_audit", "dossier")
+KINDS = ("market_intel", "portfolio_audit", "dossier", "stage2_sector_momentum")
 SKIP_TAGS = {"style", "script", "head", "nav", "noscript"}
 SKIP_CLS = re.compile(r"\b(toc|reflist|references|bibliography)\b", re.I)
 SKIP_ID = re.compile(r"^(toc|references|bibliography|reflist)$", re.I)
@@ -698,7 +698,7 @@ def sibling_items(parsed, sibling, facts, only_sids=None):
     return items
 
 
-def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale):
+def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, snapshots_path=None, stage2_path=None):
     py = sys.executable
     results = {}
 
@@ -712,11 +712,18 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale):
         except Exception as e:  # noqa: BLE001
             results[name] = {"exit": None, "ok": False, "lines": ["could not run: %s" % e]}
 
-    vkind = "market_intel" if kind == "market_intel" else "portfolio_audit"
+    vkind = kind if kind in ("market_intel", "stage2_sector_momentum") else "portfolio_audit"
     if kind != "dossier":
         cmd = [py, "scripts/validate_report.py", "--report", report, "--kind", vkind]
         if facts_path:
             cmd += ["--facts", facts_path]
+        if kind == "stage2_sector_momentum":
+            if research_path:
+                cmd += ["--research", research_path]
+            if snapshots_path:
+                cmd += ["--snapshots", snapshots_path]
+            if stage2_path:
+                cmd += ["--stage2-file", stage2_path]
         run("validate_report", cmd)
     cmd = [py, "scripts/citation_check.py", report]
     if research_path:
@@ -725,11 +732,16 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale):
         cmd += ["--cache-dir", cache_dir]
     if allow_stale:
         cmd.append("--allow-stale-asof")
-    if kind != "dossier":
+    if kind == "stage2_sector_momentum":
+        cmd += ["--min-sources", "12"]
+    elif kind != "dossier":
         cmd += ["--min-sources", "0"]
     run("citation_check", cmd)
-    run("readability_check", [py, "scripts/readability_check.py", report,
-                              "--glossary", os.path.join(".agents", "config", "glossary.json"), "--max-grade", "13.0"])
+    read_cmd = [py, "scripts/readability_check.py", report,
+                "--glossary", os.path.join(".agents", "config", "glossary.json"), "--max-grade", "13.0"]
+    if kind == "stage2_sector_momentum":
+        read_cmd += ["--kind", "stage2_sector_momentum"]
+    run("readability_check", read_cmd)
     if kind != "dossier" and "readability_check" in results:
         # the primer/estimate/chapter-7/notes structure belongs to the company-report book standard only
         r = results["readability_check"]
@@ -738,6 +750,14 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale):
         r["lines"] = kept or r["lines"][-1:]
         r["ok"] = not kept
     return results
+
+
+def check_label(result):
+    if not result["ok"]:
+        return "FAIL (lines in section 2)"
+    if any("EXCEPTION AS-OF" in line for line in result.get("lines", [])):
+        return "PASS WITH EXCEPTIONS"
+    return "PASS"
 
 
 # ---------------------------------------------------------------- packet rendering
@@ -844,12 +864,14 @@ def build(args):
             record_paths.append(os.path.join(args.inputs_dir, os.path.basename(pth)))
     for extra in (
         "data/options/%s.json" % facts_json.get("market", ""),
-        "data/views/stage2_%s_latest.json" % facts_json.get("market", ""),
+        *(("data/views/stage2_%s_latest.json" % facts_json.get("market", ""),) if kind != "stage2_sector_momentum" else ()),
     ):
         if os.path.isfile(os.path.join(ROOT, extra)) and os.path.join(ROOT, extra) not in record_paths:
             record_paths.append(os.path.join(ROOT, extra))
     if getattr(args, "snapshots", None) and os.path.isfile(args.snapshots):
         record_paths.append(args.snapshots)
+    if getattr(args, "stage2_file", None) and os.path.isfile(args.stage2_file):
+        record_paths.append(args.stage2_file)
     facts = Facts(facts_json, research_json, record_paths)
     default_symbol = args.symbol or ""
     if not default_symbol and kind == "dossier":
@@ -889,7 +911,8 @@ def build(args):
     checks = {}
     if not args.skip_checks:
         rpath = args.research
-        checks = run_checks(kind, report, args.facts, rpath, args.cache_dir, args.allow_stale_asof)
+        checks = run_checks(kind, report, args.facts, rpath, args.cache_dir, args.allow_stale_asof,
+                            getattr(args, "snapshots", None), getattr(args, "stage2_file", None))
         for name, r in checks.items():
             if not r["ok"]:
                 for line in r["lines"][:25]:
@@ -929,7 +952,9 @@ def build(args):
                  listed, unlisted,
                  ("; %d numbers sit in cited prose and cannot be machine-traced" % cited_untraced) if kind == "dossier" else ""))
     for name, r in checks.items():
-        P.append("- %s: **%s**" % (name, "PASS" if r["ok"] else "FAIL (lines in section 2)"))
+        P.append("- %s: **%s**" % (name, check_label(r)))
+        if check_label(r) == "PASS WITH EXCEPTIONS":
+            P.extend("  - " + line for line in r["lines"] if "EXCEPTION AS-OF" in line)
     if not checks:
         P.append("- validators were not run (--skip-checks)")
     P.append("- date, ticker Stage/RSI/close claims, table totals, asymmetry recompute, verdict conflicts%s: checked; only failures are listed" % (
@@ -1029,9 +1054,11 @@ def build(args):
     pk = {"report": report, "report_sha256": sha256_file(report), "kind": kind, "round": args.round,
           "mode": "delta" if prev_packet else "full", "asof": facts.asof,
           "files": {"facts": args.facts, "research": args.research, "sibling": sibling_path,
-                    "inputs_dir": args.inputs_dir},
+                    "inputs_dir": args.inputs_dir, "snapshots": getattr(args, "snapshots", None),
+                    "stage2": getattr(args, "stage2_file", None)},
           "file_sha256": {k: sha256_file(v) for k, v in (("facts", args.facts), ("research", args.research),
-                                                          ("sibling", sibling_path)) if v and os.path.isfile(v)},
+                                                          ("sibling", sibling_path), ("snapshots", getattr(args, "snapshots", None)),
+                                                          ("stage2", getattr(args, "stage2_file", None))) if v and os.path.isfile(v)},
           "item_ids": [i["id"] for i in items], "items": items,
           "verdict_rows": len(verdict_rows), "changed_sections": sorted(changed) if changed is not None else None,
           "sections": hashes, "previous_findings": prev_status,
@@ -1073,6 +1100,10 @@ def check(args):
         problems.append("verdict must be APPROVE, REVISE or BLOCK")
     if args.report and sha256_file(args.report) != pk.get("report_sha256"):
         problems.append("STALE: the report changed after the packet was built; rebuild the packet and re-run the review")
+    for name, digest in pk.get("file_sha256", {}).items():
+        path = pk.get("files", {}).get(name)
+        if not path or not os.path.isfile(path) or sha256_file(path) != digest:
+            problems.append("STALE: %s evidence changed or disappeared after the packet was built" % name)
     if rv.get("report_sha256") and rv["report_sha256"][:16] != pk.get("report_sha256", "")[:16]:
         problems.append("review was written against a different report hash")
     text = ""
@@ -1125,6 +1156,7 @@ def main():
     b.add_argument("--facts")
     b.add_argument("--research")
     b.add_argument("--snapshots", help="optional path to snapshots_<MKT>_<date>.json from stock_snapshot.py")
+    b.add_argument("--stage2-file", help="run-specific freshly extracted Stage 2 dashboard")
     b.add_argument("--out-dir", required=True)
     b.add_argument("--round", type=int, default=1)
     b.add_argument("--sibling")

@@ -7,7 +7,7 @@ web-research record, or has unrendered/boilerplate content.
 Usage:
   python3 scripts/validate_report.py --report docs/reports/US_Market_Intelligence_2026-09-28.html \
       --kind market_intel --facts scripts/.cache/facts_US_2026-09-28.json
-  --kind: market_intel | portfolio_audit
+  --kind: market_intel | portfolio_audit | stage2_sector_momentum
 
 Structural markers the writer must use (CSS classes on <div>, all styled as callouts):
   primer    "Start here" beginner guide (report opening)          howto    how to read the next table
@@ -38,6 +38,7 @@ STOP = {"N/A", "ETF", "USD", "INR", "NSE", "BSE", "CFO", "NET", "PASS", "EXIT", 
 THRESH = {
     "market_intel": dict(h2=150, total=2500, intro=0, take=60, casenotes=6, triggers=4),
     "portfolio_audit": dict(h2=150, total=2500, intro=0, take=60, casenotes=6, triggers=4),
+    "stage2_sector_momentum": dict(h2=150, total=2500, intro=0, take=60, casenotes=8, triggers=4),
 }
 CASE_MIN_WORDS = 80
 # Checks that are meaningful on one section fragment. Whole-report floors (total words, primer, glossary, list counts)
@@ -127,6 +128,20 @@ class Doc(HTMLParser):
             self.cur["text"].append(data)
 
 
+class Stage2Markers(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.cases = set()
+        self.meta = {}
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "div" and "casenote" in attrs.get("class", "").split() and attrs.get("data-symbol"):
+            self.cases.add(attrs["data-symbol"].upper())
+        if tag == "meta" and attrs.get("name"):
+            self.meta[attrs["name"]] = attrs.get("content", "")
+
+
 def words(s):
     return len(re.findall(r"[A-Za-z0-9$₹%.,'’-]+", s))
 
@@ -136,6 +151,9 @@ def main():
     ap.add_argument("--report", required=True)
     ap.add_argument("--kind", required=True, choices=list(THRESH))
     ap.add_argument("--facts")
+    ap.add_argument("--research", help="run-specific research record")
+    ap.add_argument("--snapshots", help="run-specific technical snapshots")
+    ap.add_argument("--stage2-file", help="run-specific freshly extracted dashboard snapshot")
     ap.add_argument("--max-na-pct", type=float, default=5.0)
     ap.add_argument("--price-tol-pct", type=float, default=1.5)
     ap.add_argument("--partial", action="store_true",
@@ -342,7 +360,7 @@ def main():
 
         # web-research record (duck-duck-go MCP)
         rf = F.get("research_file", "")
-        rpath = os.path.join(os.path.dirname(os.path.abspath(args.facts)), os.path.basename(rf))
+        rpath = args.research or os.path.join(os.path.dirname(os.path.abspath(args.facts)), os.path.basename(rf))
         if not os.path.isfile(rpath):
             rpath = os.path.join(os.path.dirname(os.path.abspath(args.facts)), "..", "..", rf)
         if not os.path.isfile(rpath):
@@ -351,7 +369,7 @@ def main():
             got = {}
             for it in json.load(open(rpath)).get("items", []):
                 got.setdefault(it.get("key"), []).append(it)
-            for need in F.get("research_needs", []):
+            for need in ([] if args.kind == "stage2_sector_momentum" else F.get("research_needs", [])):
                 items = got.get(need["key"])
                 if not items:
                     errors.append(f"RESEARCH MISSING: {need['key']}")
@@ -371,6 +389,101 @@ def main():
                             errors.append(f"RESEARCH ITEM '{need['key']}' is single-source: add 'confirmed_by' (a second independent URL)")
                     elif len(it.get("queries_tried", [])) < 3:
                         errors.append(f"RESEARCH ITEM '{need['key']}' marked not_found after <3 distinct queries/sources")
+
+    if args.kind == "stage2_sector_momentum" and not args.partial:
+        if not F:
+            errors.append("STAGE2 INPUT: session facts ledger required")
+        required_sections = ("s2-sector-rotation", "s2-setups", "s2-case-notes", "s2-health", "s2-watchlist")
+        for section in required_sections:
+            if not re.search(r'id=["\']' + section + r'["\']', raw):
+                errors.append(f"STAGE2 SECTION MISSING: {section}")
+        markers = Stage2Markers()
+        markers.feed(raw)
+        case_names = markers.cases
+        if len(case_names) < 8:
+            errors.append(f"STAGE2 CANDIDATES: {len(case_names)} distinct case notes < 8")
+        try:
+            snapshots = json.load(open(args.snapshots, encoding="utf-8"))["snapshots"]
+            dashboard = json.load(open(args.stage2_file, encoding="utf-8"))
+            record = json.load(open(args.research, encoding="utf-8"))["items"]
+        except (TypeError, OSError, ValueError, KeyError) as error:
+            errors.append(f"STAGE2 INPUT: fresh dashboard, snapshots and research required ({error})")
+        else:
+            if not dashboard.get("summary", {}).get("last_updated") or not dashboard.get("extracted_at"):
+                errors.append("STAGE2 FRESHNESS: dashboard update date and extraction time are required")
+            elif dashboard["summary"]["last_updated"] not in raw:
+                errors.append("STAGE2 FRESHNESS: dashboard update date must be disclosed")
+            if not dashboard.get("sector_chart_complete") or not dashboard.get("stage2_universe_complete"):
+                gate = re.search(r'<section\b[^>]*id=["\']gate-exceptions["\'][^>]*>(.*?)</section>', raw, re.I | re.S)
+                if not gate or not re.search(r'incomplete|partial|unknown|not complete', gate.group(1), re.I):
+                    errors.append("STAGE2 COVERAGE: incomplete extraction must be disclosed in gate exceptions")
+            if dashboard.get("market") == "IN":
+                states = dashboard.get("slicer_verification", {}).get("states", {})
+                core = ("Industry", "TradingView Code", "SME Only Flag", "ASM ESM GSM", "Stage2 Status", "Cheat Entry")
+                if any(states.get(key) != "All" for key in core):
+                    gate = re.search(r'<section\b[^>]*id=["\']gate-exceptions["\'][^>]*>(.*?)</section>', raw, re.I | re.S)
+                    if not gate or not re.search(r'slicer|filter', gate.group(1), re.I):
+                        errors.append("STAGE2 FILTERS: unverified dashboard slicers must be disclosed in gate exceptions")
+            if F and markers.meta.get("research-as-of") != F.get("asof"):
+                errors.append("STAGE2 SESSION: research-as-of metadata must match the ledger session")
+            removed = {r.get("TradingView Code", "") for r in dashboard.get("removed_this_week", [])}
+            if removed.intersection(case_names):
+                errors.append("STAGE2 MEMBERSHIP: a case note uses a dashboard-removed stock")
+            found = {str(r.get("symbol", "")).upper() for r in record if r.get("status") == "found"}
+            for symbol in sorted(case_names):
+                if symbol not in snapshots:
+                    errors.append(f"STAGE2 SNAPSHOT MISSING: {symbol}")
+                elif not snapshots[symbol].get("thewrap_stage2", {}).get("stage2_snapshot_available"):
+                    errors.append(f"STAGE2 MEMBERSHIP UNAVAILABLE: {symbol}")
+                if symbol not in found:
+                    errors.append(f"STAGE2 RESEARCH MISSING: {symbol}")
+            if F:
+                expected_holdings = {name for name, item in F.get("instruments", {}).items()
+                                     if "holding" in item.get("roles", []) and not item.get("error")}
+                health_rows = set()
+                for i in tables:
+                    header = [h.strip().lower() for h in B[i]["rows"][0]]
+                    if "holding" in header:
+                        column = header.index("holding")
+                        health_rows.update(row[column].strip().upper() for row in B[i]["rows"][1:] if len(row) > column)
+                missing_holdings = expected_holdings - health_rows
+                if missing_holdings:
+                    errors.append("STAGE2 HOLDINGS MISSING: " + ", ".join(sorted(missing_holdings)))
+                expected_shortlist = {name for name, item in F.get("instruments", {}).items()
+                                      if "shortlist" in item.get("roles", []) and not item.get("error")}
+                health = re.search(r'<section\b[^>]*id=["\']s2-health["\'][^>]*>(.*?)</section>', raw, re.I | re.S)
+                health_text = re.sub(r'<[^>]+>', ' ', health.group(1)) if health else ""
+                missing_shortlist = {name for name in expected_shortlist
+                                     if not re.search(r'(?<![A-Z0-9])' + re.escape(name) + r'(?![A-Z0-9])', health_text, re.I)}
+                if missing_shortlist:
+                    errors.append("STAGE2 SHORTLIST MISSING: " + ", ".join(sorted(missing_shortlist)))
+            for i in tables:
+                table = B[i]
+                hdr = [h.strip().lower() for h in table["rows"][0]]
+                if "symbol" not in hdr or "timing screen" not in hdr:
+                    continue
+                sym_i, action_i = hdr.index("symbol"), hdr.index("timing screen")
+                for row in table["rows"][1:]:
+                    if max(sym_i, action_i) >= len(row):
+                        continue
+                    action = re.sub(r"[\s_-]+", " ", row[action_i].upper())
+                    if "IMMEDIATE BUY" not in action:
+                        continue
+                    symbol = row[sym_i].strip().upper()
+                    item = snapshots.get(symbol, {})
+                    tv, ev = item.get("tradingview", {}), item.get("stage2_evaluation", {})
+                    a, b, rsi = ev.get("extension_from_10w_ema_pct"), ev.get("extension_from_50d_sma_pct"), tv.get("rsi_14_daily")
+                    pe = tv.get("pe_ttm") if tv.get("pe_ttm") is not None else item.get("fundamental_card", {}).get("stock_pe")
+                    growth = tv.get("revenue_yoy_growth_ttm_pct") if tv.get("revenue_yoy_growth_ttm_pct") is not None else item.get("fundamental_card", {}).get("sales_qq_pct")
+                    close, ema, sma = tv.get("close"), tv.get("ema10_weekly"), tv.get("sma50")
+                    if (any(x is None for x in (a, b, rsi, pe, growth, close, ema, sma))
+                            or ema <= 0 or sma <= 0 or pe <= 0 or close / ema > 1.10 or close / sma > 1.12
+                            or rsi > 73 or ev.get("recommended_verdict") != "IMMEDIATE_BUY"):
+                        errors.append(f"STAGE2 ENTRY RULE: {symbol} cannot be presented as immediate buy")
+            if F and F.get("asof") not in raw:
+                errors.append("STAGE2 SESSION: verified ledger session must appear in the report")
+            if not re.search(r"run date", raw, re.I):
+                errors.append("STAGE2 SESSION: run date must be disclosed separately")
 
     # 7b. colour palette: only the tokens defined in .agents/skills/_shared/REPORT_PALETTE.md
     pal_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".agents", "skills", "_shared", "REPORT_PALETTE.md")
@@ -398,7 +511,7 @@ def main():
     if args.kind and not args.partial:
         if not re.search(r'name="viewport"', raw):
             errors.append("NO VIEWPORT META: the report will not scale on phones")
-        if "report_base v2" not in raw:
+        if "report_base v2" not in raw and not (args.kind == "stage2_sector_momentum" and 'name="report-design" content="research-desk-v1"' in raw):
             errors.append("STYLE NOT BUILT FROM report_base.css (marker 'report_base v2' missing); rebuild the head as SECTION_DRAFTING.md says")
         if not re.search(r'<dl class="key-figures"', raw):
             errors.append("NO KEY FIGURES strip (<dl class=\"key-figures\">): put 4-6 headline numbers under the title")

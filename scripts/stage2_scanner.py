@@ -17,6 +17,7 @@ import re
 import sys
 import time
 from datetime import datetime
+from uuid import uuid4
 
 # Import chrome_ctl from macos-browser-automation skill
 SKILL_PATHS = [
@@ -75,6 +76,12 @@ def clean_duplicated_label(t: str) -> str:
 def ensure_powerbi_open(market: str) -> str:
     """Verify or open TheWrap PowerBI dashboard for the given market in Chrome."""
     cfg = POWERBI_URLS[market]
+    if market == "IN":
+        # Own a fresh tab: existing dashboard tabs can carry another user's filters.
+        match_token = "portfolio-stage2-" + uuid4().hex
+        chrome_ctl.navigate(cfg["pbi_url"] + "#" + match_token, new_tab=True)
+        time.sleep(6.0)
+        return match_token
     match_token = cfg["pbi_match"]
     tabs = chrome_ctl.list_tabs()
     if any(match_token in t.get("url", "") for t in tabs):
@@ -103,6 +110,55 @@ def ensure_powerbi_open(market: str) -> str:
     chrome_ctl.navigate(cfg["pbi_url"], new_tab=True)
     time.sleep(6.0)
     return match_token
+
+
+def clear_india_slicers(match_token: str) -> dict:
+    """Clear saved category and range selections before applying the cap filter."""
+    js = """(() => {
+        const labels = ['Industry', 'TradingView Code', 'SME Only Flag', 'ASM ESM GSM',
+                        'Stage2 Status', 'Cheat Entry', 'Percentage Return Range:',
+                        '# of Weeks in TheWrap List:', 'Market Cap Range (in cr.):',
+                        'Relative Strength Range:', 'Avg Weekly Vol (in cr):'];
+        const visuals = Array.from(document.querySelectorAll('visual-container'));
+        return JSON.stringify(labels.map(label => {
+            const v = visuals.find(x => x.innerText.trim().split('\\n')[0].trim() === label);
+            const button = v && v.querySelector('[aria-label="Clear selections"]');
+            if (button) button.dispatchEvent(new MouseEvent('click', {bubbles:true, cancelable:true}));
+            return {label, found: !!v, cleared: !!button};
+        }));
+    })()"""
+    rows = json.loads(run_js(js, match=match_token) or "[]")
+    time.sleep(2)
+    core = {"Industry", "TradingView Code", "SME Only Flag", "ASM ESM GSM", "Stage2 Status", "Cheat Entry"}
+    ranges = {"Percentage Return Range:", "# of Weeks in TheWrap List:", "Market Cap Range (in cr.):",
+              "Relative Strength Range:", "Avg Weekly Vol (in cr):"}
+    cleared = {r["label"] for r in rows if r.get("found") and r.get("cleared")}
+    if not (core | ranges).issubset(cleared):
+        raise RuntimeError("Could not clear all Stage 2 slicers: " + ", ".join(sorted((core | ranges) - cleared)))
+    state_js = """(() => JSON.stringify(Array.from(document.querySelectorAll('visual-container'))
+        .map(v => v.innerText.trim().split('\\n').map(x => x.trim()))
+        .filter(x => ['Industry','TradingView Code','SME Only Flag','ASM ESM GSM','Stage2 Status','Cheat Entry'].includes(x[0]))))()"""
+    states = json.loads(run_js(state_js, match=match_token) or "[]")
+    state_map = {row[0]: row[1] if len(row) > 1 else "" for row in states}
+    if any(state_map.get(label) != "All" for label in core):
+        raise RuntimeError("Stage 2 category slicers did not reset to All: " + str(state_map))
+    return {"category_slicers_cleared": sorted(cleared), "states": state_map, "results": rows}
+
+
+def close_owned_tab(match_token: str):
+    """Close only the scanner's uniquely tagged tab, even if tab indices change."""
+    script = f'''tell application "Google Chrome"
+        repeat with w in windows
+            repeat with t in tabs of w
+                if URL of t contains {json.dumps("#" + match_token)} then
+                    close t
+                    return "closed"
+                end if
+            end repeat
+        end repeat
+        return "not found"
+    end tell'''
+    chrome_ctl.run_applescript(script)
 
 
 def apply_market_cap_filter(match_token: str, slicer_label: str, min_mcap: float):
@@ -157,6 +213,56 @@ def extract_bar_chart_sectors(match_token: str, title_snippet: str, value_key: s
         val = int(numbers[i]) if numbers[i].is_integer() else numbers[i]
         out.append({"sector": names[i], value_key: val})
     return out
+
+
+def extract_scrollable_sectors(match_token: str, title_snippet: str, value_key: str):
+    """Read all visible chart pages, and report whether the bottom was reached."""
+    js = f"""(() => {{
+        const v = Array.from(document.querySelectorAll('visual-container'))
+            .find(x => x.innerText.includes({json.dumps(title_snippet)}));
+        const chart = v && v.querySelector('svg');
+        if (!chart) return JSON.stringify({{found:false}});
+        const brush = v.querySelector('g.brush');
+        const overlay = brush && brush.querySelector('rect.overlay');
+        const selection = brush && brush.querySelector('rect.selection');
+        const top = !selection || +selection.getAttribute('y') <= 1;
+        const bottom = !overlay || !selection ||
+            (+selection.getAttribute('y') + +selection.getAttribute('height') >= +overlay.getAttribute('height') - 1);
+        return JSON.stringify({{found:true, top, bottom}});
+    }})()"""
+    wheel = f"""(() => {{
+        const v = Array.from(document.querySelectorAll('visual-container'))
+            .find(x => x.innerText.includes({json.dumps(title_snippet)}));
+        const chart = v && v.querySelector('svg');
+        if (chart) chart.dispatchEvent(new WheelEvent('wheel', {{deltaY:300, bubbles:true, cancelable:true}}));
+    }})()"""
+    for _ in range(100):
+        state = json.loads(run_js(js, match=match_token) or "{}")
+        if not state.get("found"):
+            return [], False
+        if state.get("top"):
+            break
+        run_js(wheel.replace("deltaY:300", "deltaY:-300"), match=match_token)
+        time.sleep(0.8)
+    else:
+        return [], False
+    rows = {}
+    no_growth = 0
+    for _ in range(100):
+        previous = len(rows)
+        for row in extract_bar_chart_sectors(match_token, title_snippet, value_key):
+            rows[row["sector"]] = row
+        state = json.loads(run_js(js, match=match_token) or "{}")
+        if not state.get("found"):
+            return list(rows.values()), False
+        if state.get("bottom"):
+            return list(rows.values()), True
+        no_growth = no_growth + 1 if len(rows) == previous else 0
+        if no_growth >= 5:
+            return list(rows.values()), False
+        run_js(wheel, match=match_token)
+        time.sleep(0.8)
+    return list(rows.values()), False
 
 
 def extract_table_by_title(match_token: str, title_snippet: str):
@@ -259,6 +365,7 @@ def scroll_and_extract_table(
     captured = {}
     headers = None
     stop_col_idx = None
+    no_growth = 0
 
     for _ in range(max_scrolls):
         js = f"""
@@ -299,8 +406,15 @@ def scroll_and_extract_table(
                     captured[key] = [clean_cell(c) for c in r]
                     new_found += 1
 
-        if hit_stop_val or data.get("scrollTop", 0) + data.get("clientHeight", 0) >= data.get("scrollHeight", 0) or new_found == 0:
+        if hit_stop_val or data.get("scrollTop", 0) + data.get("clientHeight", 0) >= data.get("scrollHeight", 0):
             break
+        if new_found == 0:
+            no_growth += 1
+            if no_growth >= 3:
+                break
+            time.sleep(1.0)
+            continue
+        no_growth = 0
 
         step_px = max(200, data.get("clientHeight", 300) - 80)
         run_js(
@@ -317,7 +431,7 @@ def scroll_and_extract_table(
             """,
             match=match_token,
         )
-        time.sleep(0.5)
+        time.sleep(0.8)
 
     cleaned = []
     if not headers:
@@ -330,9 +444,29 @@ def scroll_and_extract_table(
     return cleaned
 
 
+def split_stage2_rows(rows: list) -> tuple:
+    """Separate dashboard exits from the active Stage 2 universe."""
+    removed = [r for r in rows if r.get("Stage2 Status", "").strip().casefold() == "removed"]
+    current = [r for r in rows if r.get("Stage2 Status", "").strip().casefold() != "removed"]
+    return current, removed
+
+
 def extract_in(match_token: str, min_mcap: float) -> dict:
     print(f"[*] [IN] Applying Market Cap filter >= ₹{min_mcap:g} Cr...")
-    apply_market_cap_filter(match_token, "Market Cap Range (in cr.)", min_mcap)
+    filter_result = apply_market_cap_filter(match_token, "Market Cap Range (in cr.)", min_mcap)
+    if not filter_result.get("ok"):
+        raise RuntimeError(f"Market cap filter failed: {filter_result}")
+    verify_filter = """(() => {
+        const v=Array.from(document.querySelectorAll('visual-container')).find(x=>x.innerText.includes('Market Cap Range (in cr.)'));
+        const input=v && v.querySelector('input'); return input ? input.value : '';
+    })()"""
+    visible_min = run_js(verify_filter, match=match_token).replace(",", "").strip()
+    try:
+        cap_verified = float(visible_min) == min_mcap
+    except ValueError:
+        cap_verified = False
+    if not cap_verified:
+        raise RuntimeError(f"Market cap filter was not verified: {visible_min!r}")
 
     print("[*] [IN] Extracting summary cards...")
     summary_js = """
@@ -361,7 +495,7 @@ def extract_in(match_token: str, min_mcap: float) -> dict:
     summary = json.loads(run_js(summary_js, match=match_token) or "{}")
 
     print("[*] [IN] Extracting sector breadth rankings...")
-    sectors = extract_bar_chart_sectors(
+    sectors, sector_chart_complete = extract_scrollable_sectors(
         match_token,
         "Which sector is the strongest with maximum percentage",
         "pct_in_stage2",
@@ -379,24 +513,32 @@ def extract_in(match_token: str, min_mcap: float) -> dict:
         match_token,
         "All Stocks In Stage2 with All Details",
         key_col_index=1,
-        max_scrolls=55,
+        max_scrolls=160,
     )
+    # The dashboard's all-stocks table also includes this week's exits.
+    current_stocks, removed_stocks = split_stage2_rows(all_stocks)
+    active_counts = [summary.get(k) for k in ("continuing_trend", "new_additions", "re_entries")]
+    expected_active = sum(active_counts) if all(isinstance(x, int) for x in active_counts) else None
 
     return {
         "market": "IN",
         "source_url": POWERBI_URLS["IN"]["wrap_url"],
-        "as_of": summary.get("last_updated") or datetime.now().strftime("%Y-%m-%d"),
+        "as_of": summary.get("last_updated") or None,
         "extracted_at": datetime.now().isoformat(),
         "min_mcap_cr": min_mcap,
         "summary": summary,
         "strongest_sectors": sectors,
+        "sector_chart_complete": sector_chart_complete,
         "new_additions_this_week": new_stage2,
         "top_25_stage2": top_25,
         "relative_strength_leaders": rs_details,
         "volume_trend_leaders": vol_details,
         "momentum_leaders": momentum_details,
-        "stage2_universe_count": len(all_stocks),
-        "stage2_universe": all_stocks,
+        "stage2_universe_count": len(current_stocks),
+        "expected_active_count": expected_active,
+        "stage2_universe_complete": expected_active is not None and len(current_stocks) == expected_active,
+        "stage2_universe": current_stocks,
+        "removed_this_week": removed_stocks,
     }
 
 
@@ -498,7 +640,12 @@ def main():
     match_token = ensure_powerbi_open(market)
 
     if market == "IN":
-        payload = extract_in(match_token, min_mcap)
+        try:
+            slicers = clear_india_slicers(match_token)
+            payload = extract_in(match_token, min_mcap)
+            payload["slicer_verification"] = slicers
+        finally:
+            close_owned_tab(match_token)
     else:
         payload = extract_us(match_token, min_mcap)
 

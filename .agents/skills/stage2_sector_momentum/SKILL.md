@@ -77,10 +77,10 @@ For the top 8–12 candidate stocks, run targeted web searches (`search_web`) to
 - Latest quarterly Revenue and PAT/EPS YoY growth and margin trajectory.
 - Concrete catalysts: order-book wins, capacity expansion, debt reduction, new product cycles, regulatory approvals, or guidance raises.
 - Exchange surveillance (`IN`: Mainboard vs SME, ASM/ESM flags) or earnings dates (`US`).
-- Log every source URL in `<RUN_DIR>/cache/research_<MKT>_<date>.json` using `scripts/research_log.py`.
+- Log every source and claim in `<RUN_DIR>/cache/research_<MKT>_<date>.json` under `../_shared/RESEARCH_CONTRACT.md`; fetch into this run's private cache and check citations against that cache.
 
 ### Step 4: Watchlist Ingestion (`data/watchlist/<MKT>.json`)
-Add the top 2–5 fresh, unowned Stage 2 breakout candidates into `data/watchlist/<MKT>.json` (`active` array).
+Add up to 2–5 independently verified fresh, unowned Stage 2 breakout candidates into `data/watchlist/<MKT>.json` (`active` array). An unchanged weekly dashboard is not a new daily scan; when no fresh candidate is supported, add none and explain why.
 - **Watchlist Capacity Cap (Strict Maximum 25):** The active watchlist is strictly capped at **25 candidates**. If adding new breakout candidates would cause the count to exceed 25, displace the lowest-conviction or stale names into `watchlist.archive` so active attention remains concentrated on the best 25 setups. Never dump research peers or non-Stage-2 tickers into the active watchlist.
 Every record **must** include all 9 required fields defined in `schemas/watchlist_record.schema.json`:
 - `symbol`: Ticker symbol
@@ -99,7 +99,7 @@ Run `.venv/bin/python scripts/data_layer.py --market <MKT> --validate` immediate
 
 ## 3. Deliverable Structure (`docs/reports/<MKT>_Stage2_Sector_Momentum.html`)
 
-Write a comprehensive, high-signal Research Desk report (`<RUN_DIR>/work/body.html`) and assemble it with `scripts/assemble_report.py --market <MKT> --kind report --workflow stage2_sector_momentum --as-of <date>`:
+Write a comprehensive, high-signal Research Desk report (`<RUN_DIR>/work/body.html`) and assemble it with `scripts/assemble_report.py --market <MKT> --kind report --workflow stage2_sector_momentum --as-of <date>`. At the top state the verified latest completed market-session date and local run date; explain normal weekend or holiday differences without implying a data failure. Separately label the dashboard's verified update date and weekly freshness, or state that its date is unknown.
 
 1. **Executive Summary & Breadth Pulse:**
    - Summary KPI cards (`<dl class="key-figures">`): Universe filtered count, Continuing/Breakout counts, Top Stage 2 Sector, Watchlist Pruned count, and New Watchlist Additions.

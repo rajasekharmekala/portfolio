@@ -24,6 +24,8 @@ After the full validator prints `RESULT: PASS`, build the round's packet:
 
 Use `--kind portfolio_audit` for audits, options reviews, the capital allocation and archive/watchlist batches that are not single-company dossiers; use `--kind dossier` for a single-company dossier. Pass `--sibling` when a sibling report for the same session exists. Pass `--allow-stale-asof` exactly when the citation check was run with it.
 
+For Stage 2 sector momentum use `--kind stage2_sector_momentum` with the run's explicit `--facts`, `--research`, `--snapshots`, `--stage2-file`, and `--cache-dir`. It runs the Stage 2 report validator and the 12-source citation floor; do not apply market-intelligence or portfolio-audit-only requirements to this different report, and do not disable the checks.
+
 It writes `review_packet.md`, `conclusions_digest.md`, `report_text.md` and `packet.json` (item ids, the SHA-256 of the report, ledger, research record and sibling, and section hashes for round 2). A review whose report hash does not match the current report is stale and must be re-run.
 
 What it does in code, so no agent does it: traces every number to the ledger, the research record, the positions replay from `data/accounts/` and simple arithmetic on them; checks Stage, RSI and close claims, session date, table totals, asymmetry ratios, verdict conflicts and sibling differences; and runs the validator, citation check and readability check. It lists only what code could not settle.

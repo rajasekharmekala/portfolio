@@ -31,6 +31,7 @@ Exit 1 on any error.
 import argparse
 import datetime as _dt
 import glob
+from html.parser import HTMLParser
 import json
 import os
 import re
@@ -84,7 +85,27 @@ def source_count(html):
     return (refs if refs > 0 else len(urls), urls, refs)
 
 
+class _SessionDateParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.value = None
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'meta' and attrs.get('name', '').lower() == 'research-as-of':
+            self.value = attrs.get('content')
+
+
 def report_date(path):
+    """Prefer the verified session metadata over the stable filename or run date."""
+    parser = _SessionDateParser()
+    with open(path, encoding='utf-8') as report:
+        parser.feed(report.read())
+    if parser.value:
+        try:
+            return _dt.date.fromisoformat(parser.value)
+        except ValueError:
+            pass
     m = REPORT_DATE_RE.search(os.path.basename(path))
     if m:
         try:
