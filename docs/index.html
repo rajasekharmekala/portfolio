@@ -35,6 +35,7 @@
     <!-- Main Navy Navigation Bar (#174a61) -->
     <div class="navbar">
       <div class="navtabs">
+        <a href="#queue-heading">Watchlist &amp; Shortlist</a>
         <a href="#recent-heading" class="active">Latest Activity</a>
         <a href="#workflows-heading">Workflow Reports</a>
         <a href="#dossiers-heading">Company Monographs</a>
@@ -89,6 +90,18 @@
     </div>
 
     <main class="shell">
+      <section class="section" aria-labelledby="queue-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Research pipeline</p>
+            <h2 id="queue-heading">Watchlist &amp; Shortlist Status</h2>
+          </div>
+          <p class="section-meta" id="queue-meta">Loading status&hellip;</p>
+        </div>
+        <p class="queue-note">Active lists from the last publication; live claims are not shown. Cycle is the scheduler's research round, not a live run ID. Missing or invalid cycles default to 1. Archived names are not included.</p>
+        <div id="queue-list" class="queue-grid" aria-live="polite"></div>
+      </section>
+
       <section class="section" aria-labelledby="recent-heading">
         <div class="section-head">
           <div>
@@ -141,6 +154,7 @@
   const byId = id => document.getElementById(id);
   const state = {
     entries: [],
+    queues: null,
     market: "ALL",
     verdict: "ALL",
     sort: "updated",
@@ -277,7 +291,69 @@
     `;
   }
 
+  function queueMatch(row) {
+    if (state.verdict !== "ALL" && row.verdict !== state.verdict) return false;
+    if (!state.search) return true;
+    return [row.symbol, row.company, row.status, row.verdict, row.gateStatus]
+      .join(" ").toLowerCase().includes(state.search.toLowerCase());
+  }
+
+  function queueSymbol(row) {
+    const symbol = escapeHtml(row.symbol);
+    const safe = /^blogs\/(IN|US)\/[A-Za-z0-9._-]+_dossier\.html$/.test(row.dossierUrl || "");
+    return safe ? `<a href="${escapeHtml(row.dossierUrl)}">${symbol}</a>` : symbol;
+  }
+
+  function queueTable(market, kind, data) {
+    const label = kind === "watchlist" ? "Watchlist" : "Shortlist";
+    if (!data || !data.available || !Array.isArray(data.rows)) return `<p class="queue-empty">${label} data unavailable.</p>`;
+    const rows = data.rows.filter(queueMatch);
+    if (!data.rows.length) return `<p class="queue-empty">No active ${label.toLowerCase()} names.</p>`;
+    if (!rows.length) return `<p class="queue-empty">No ${label.toLowerCase()} names match these filters.</p>`;
+    const headings = kind === "watchlist"
+      ? "<th scope=\"col\">Stock</th><th scope=\"col\">Cycle</th><th scope=\"col\">Status</th><th scope=\"col\">Queue</th><th scope=\"col\">Last researched</th>"
+      : "<th scope=\"col\">Stock</th><th scope=\"col\">Decision</th><th scope=\"col\">Gate</th><th scope=\"col\">As of</th>";
+    const body = rows.map(row => {
+      const name = `<strong>${queueSymbol(row)}</strong><span class="queue-company">${escapeHtml(row.company)}</span>`;
+      if (kind === "watchlist") {
+        const tone = row.status === "Completed" ? "verdict-good" : row.status === "Pending" ? "verdict-warn" : "verdict-neutral";
+        return `<tr><td>${name}</td><td>${escapeHtml(row.cycle)}</td><td><span class="verdict-pill ${tone}">${escapeHtml(row.status)}</span></td><td>${escapeHtml(row.queuePosition ?? "—")}</td><td>${escapeHtml(row.lastResearched || "—")}</td></tr>`;
+      }
+      const verdict = row.verdict && row.verdict !== "Not specified" ? row.verdict : "Not specified";
+      const gate = row.gateStatus ? row.gateStatus.replace(/_/g, " ") : "Not specified";
+      return `<tr><td>${name}</td><td><span class="verdict-pill ${verdictClass(verdict)}">${escapeHtml(verdict)}</span></td><td>${escapeHtml(gate)}</td><td>${escapeHtml(row.asOf || "—")}</td></tr>`;
+    }).join("");
+    return `<div class="queue-scroll" role="region" tabindex="0" aria-label="${escapeHtml(market)} ${label} table"><table class="queue-table"><caption class="sr-only">${escapeHtml(market)} ${label}</caption><thead><tr>${headings}</tr></thead><tbody>${body}</tbody></table></div>`;
+  }
+
+  function renderQueues() {
+    const root = byId("queue-list");
+    const meta = byId("queue-meta");
+    if (!root) return;
+    if (!state.queues || typeof state.queues !== "object") {
+      root.innerHTML = '<p class="queue-empty">Queue status is unavailable until the catalog is rebuilt.</p>';
+      if (meta) meta.textContent = "Status unavailable";
+      return;
+    }
+    const markets = ["US", "IN"].filter(m => state.market === "ALL" || state.market === m);
+    root.innerHTML = markets.map(market => {
+      const group = state.queues[market] || {};
+      const watch = group.watchlist;
+      const short = group.shortlist;
+      const all = watch && watch.available && Array.isArray(watch.rows) ? watch.rows : [];
+      const pending = all.filter(row => row.status === "Pending").length;
+      const completed = all.filter(row => row.status === "Completed").length;
+      const unknown = all.length - pending - completed;
+      const cycle = watch && watch.available ? (watch.targetCycle ? `Next target: cycle ${escapeHtml(watch.targetCycle)}${watch.rollover ? " (next round)" : ""}` : "No active cycle") : "Cycle unavailable";
+      const count = watch && watch.available && Array.isArray(watch.rows) ? `${pending} pending · ${completed} completed${unknown ? ` · ${unknown} unknown` : ""} total` : "Watchlist unavailable";
+      const shortlistCount = short && short.available && Array.isArray(short.rows) ? `${short.rows.length} active total` : "Unavailable";
+      return `<section class="queue-market" aria-labelledby="queue-${market}"><div class="queue-market-head"><h3 id="queue-${market}"><span class="market-pill market-${market}">${market}</span> ${market === "US" ? "United States" : "India"}</h3><span>${cycle}</span></div><div class="queue-subhead"><h4>Watchlist</h4><span>${count}</span></div>${queueTable(market, "watchlist", watch)}<div class="queue-subhead"><h4>Shortlist</h4><span>${shortlistCount}</span></div>${queueTable(market, "shortlist", short)}</section>`;
+    }).join("");
+    if (meta) meta.textContent = "Updated with the published catalog";
+  }
+
   function render() {
+    renderQueues();
     const filtered = filterEntries();
     const sorted = sortEntries(filtered);
 
@@ -331,6 +407,10 @@
     const emptyState = byId("empty-state");
     if (emptyState) {
       emptyState.hidden = sorted.length > 0;
+      if (!emptyState.hidden && state.entries.length) {
+        emptyState.querySelector("h2").textContent = "No matching publications";
+        emptyState.querySelector("p").textContent = "Try another filter; the research queue may still contain matching names.";
+      }
     }
 
     // Toggle Reset Button
@@ -423,6 +503,7 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       state.entries = Array.isArray(data.entries) ? data.entries : [];
+      state.queues = data.queues || null;
 
       if (metaEl) {
         metaEl.textContent = `Catalog updated: ${formatDateTime(data.generatedAt || new Date())} • ${state.entries.length} published pages`;
@@ -435,6 +516,7 @@
       if (metaEl) {
         metaEl.textContent = "Catalog offline. Refresh to retry.";
       }
+      renderQueues();
       const emptyState = byId("empty-state");
       if (emptyState) emptyState.hidden = false;
     }

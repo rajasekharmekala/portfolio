@@ -280,6 +280,29 @@ class EndToEndTests(unittest.TestCase):
         self.assertEqual(got6["target_research_cycle"], 2)
         self.assertFalse(got6["round_robin_rollover"])
 
+    def test_portal_queue_is_rebuilt_from_latest_merged_origin(self):
+        # Use the real catalog builder while keeping this temporary git fixture
+        # independent of production data validators and account files.
+        for name in ("portal_publish.py", "build_dossier_portal.py"):
+            shutil.copy(SCRIPTS / name, self.main / "scripts" / name)
+        self.write(self.main, "data/shortlist/US.json", {"market": "US", "active": [], "archived": []})
+        self.sh("git", "add", "-A", cwd=self.main)
+        self.sh("git", "commit", "-q", "-m", "add catalog builder", cwd=self.main)
+        self.sh("git", "push", "-q", "origin", "main", cwd=self.main)
+
+        homepage, later = self.start("company_report", "homepage"), self.start("company_report", "later")
+        (homepage / "docs/index.html").write_text("<h1>Homepage</h1>")
+        self.complete(later, ["A"])
+        self.publish(later, "later")
+        result = self.py("publish_run.py", "--run-id", "homepage", "--market", "US", "--message", "publish homepage",
+                         "--no-validate", cwd=homepage)
+        self.assertEqual(json.loads(result.stdout)["status"], "PUBLISHED")
+        queue = self.origin_file("docs/portal-data.json")["queues"]["US"]["watchlist"]
+        by_symbol = {row["symbol"]: row for row in queue["rows"]}
+        self.assertEqual(by_symbol["A"]["status"], "Completed")
+        self.assertEqual(by_symbol["B"]["status"], "Pending")
+        self.assertTrue(queue["available"])
+
     def test_concurrent_batch_requests_never_overlap(self):
         trees = [self.start("watchlist_to_shortlist", f"p{i}") for i in range(4)]
         procs = [subprocess.Popen([sys.executable, str(t / "scripts/run_claims.py"), "batch", "--workflow",

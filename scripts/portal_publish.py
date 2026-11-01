@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 from bs4 import BeautifulSoup
+from run_claims import _is_pending_row, _row_cycle
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
 BASE_URL = "https://rajasekharmekala.github.io/portfolio/"
@@ -286,6 +287,87 @@ def require_modern_report(path, require_generated=False):
     return True
 
 
+def public_queue(entries):
+    """Project only public queue fields; never publish private records or live claims.
+
+    The snapshot is generated after record merging, so it follows the same state
+    as the publication. Cycle and eligibility rules come from run_claims.
+    """
+    dossiers = {
+        (e.get("market"), e.get("symbol")): e["url"]
+        for e in entries
+        if e.get("kind") == "dossier" and e.get("symbol")
+        and re.fullmatch(r"blogs/(?:IN|US)/[A-Za-z0-9._-]+_dossier\.html", e.get("url", ""))
+    }
+
+    def active_rows(market, kind):
+        path = DOCS.parent / "data" / kind / (market + ".json")
+        if not path.exists():
+            return None
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ValueError(f"Cannot read {kind} records for {market}") from exc
+        if not isinstance(data, dict) or not isinstance(data.get("active"), list):
+            raise ValueError(f"Invalid {kind} active records for {market}")
+        rows = data["active"]
+        if any(not isinstance(row, dict) or not isinstance(row.get("symbol"), str)
+               or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,39}", row["symbol"].strip()) for row in rows):
+            raise ValueError(f"Invalid {kind} symbol for {market}")
+        return rows
+
+    def text(row, field):
+        value = row.get(field)
+        return value.strip()[:160] if isinstance(value, str) and value.strip() else None
+
+    def date(row, field):
+        value = text(row, field)
+        return value if value and re.fullmatch(r"\d{4}-\d{2}-\d{2}", value) else None
+
+    def identity(row, market):
+        symbol = row["symbol"].strip()
+        return {"symbol": symbol, "company": text(row, "company_name") or symbol,
+                "dossierUrl": dossiers.get((market, symbol))}
+
+    result = {}
+    for market in ("IN", "US"):
+        active = active_rows(market, "watchlist")
+        shortlist = active_rows(market, "shortlist")
+        watch = {"available": active is not None, "rows": [], "currentCycle": None,
+                 "targetCycle": None, "rollover": False}
+        if active:
+            current = max(_row_cycle(row) for row in active)
+            pending = [i for i, row in enumerate(active) if _is_pending_row(row)]
+            behind = [i for i, row in enumerate(active)
+                      if not _is_pending_row(row) and _row_cycle(row) < current]
+            eligible = pending + behind
+            rollover = not eligible
+            ordered = eligible or list(range(len(active)))
+            positions = {idx: n + 1 for n, idx in enumerate(ordered)}
+            watch.update(currentCycle=current, targetCycle=current + 1 if rollover else current,
+                         rollover=rollover)
+            for idx in ordered + [i for i in range(len(active)) if i not in positions]:
+                row = active[idx]
+                is_pending = idx in pending or idx in behind
+                completed = row.get("status") == "COMPLETED" or row.get("deep_research_status") == "COMPLETED"
+                item = identity(row, market)
+                item.update(cycle=_row_cycle(row), status="Pending" if is_pending else "Completed" if completed else "Unknown",
+                            queuePosition=positions.get(idx), lastResearched=date(row, "last_researched_date"),
+                            verdict=normalize_verdict(row.get("action_verdict")))
+                watch["rows"].append(item)
+        short = {"available": shortlist is not None, "rows": []}
+        for row in shortlist or []:
+            item = identity(row, market)
+            gate = text(row, "gate_status")
+            if gate not in ("PASSED", "PASSED_CONDITIONAL", "PARTIAL", "FAIL", "PENDING", "UNKNOWN"):
+                gate = None
+            item.update(verdict=normalize_verdict(row.get("action_verdict")),
+                        gateStatus=gate, asOf=date(row, "as_of_date"))
+            short["rows"].append(item)
+        result[market] = {"watchlist": watch, "shortlist": short}
+    return result
+
+
 def build_catalog(completed=(), workflow=None, market=None, summary=None, highlights=(), repair_links=False):
     updates = json.loads(UPDATES.read_text()) if UPDATES.exists() else {}
     now = datetime.now(timezone.utc).isoformat()
@@ -302,7 +384,8 @@ def build_catalog(completed=(), workflow=None, market=None, summary=None, highli
     dates = git_dates()
     entries = [read_entry(path, dates, updates) for path in paths]
     entries.sort(key=lambda entry: entry["updatedAt"] or "", reverse=True)
-    catalog = {"schemaVersion": 1, "generatedAt": now, "baseUrl": BASE_URL, "entries": entries}
+    catalog = {"schemaVersion": 1, "generatedAt": now, "baseUrl": BASE_URL, "entries": entries,
+               "queues": public_queue(entries)}
     UPDATES.write_text(json.dumps(updates, indent=2) + "\n", encoding="utf-8")
     CATALOG.write_text(json.dumps(catalog, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
     if repair_links:
