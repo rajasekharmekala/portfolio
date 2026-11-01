@@ -189,8 +189,8 @@ def _build_ch4_from_snapshot_or_ledger(
     piv_s1, piv_m, piv_r1 = tv.get("pivot_s1"), tv.get("pivot_middle"), tv.get("pivot_r1")
     ext_10w = s2_ev.get("extension_from_10w_ema_pct")
     ext_50d = s2_ev.get("extension_from_50d_sma_pct")
-    w_stage = s2_ev.get("weinstein_stage") or inst_m.get("stage_label", "N/A")
-    w_explain = s2_ev.get("stage_explanation") or s2_ev.get("summary_rationale") or "Stage 2 is rising institutional markup; Stage 4 is breakdown."
+    w_stage = ch4_spec.get("stage_override") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
+    w_explain = ch4_spec.get("stage_explanation") or s2_ev.get("stage_explanation") or s2_ev.get("summary_rationale") or "Trend classification should be read against the market-facts ledger and the latest moving averages."
     cite_tag = ch4_spec.get("ledger_cite_tag", "")
 
     def fmt_px(v):
@@ -205,8 +205,8 @@ def _build_ch4_from_snapshot_or_ledger(
             f"1M: {tv.get('perf_1m_pct') or inst_m.get('chg_1m_pct', 'N/A')}%",
         ],
         [
-            "Stan Weinstein Stage & TheWrap status",
-            f"{_esc(w_stage)} (In TheWrap Stage 2 list: {w_s2.get('in_thewrap_stage2', w_s2.get('in_stage2_list', 'N/A'))}; weeks in Stage 2: {w_s2.get('weeks_in_stage2', 'N/A')})",
+            "Market-facts trend & dashboard tag",
+            f"{_esc(w_stage)} (TheWrap tag: STAGE_2; in list: {w_s2.get('in_thewrap_stage2', w_s2.get('in_stage2_list', 'N/A'))}; weeks tagged: {w_s2.get('weeks_in_stage2', 'N/A')})",
             _esc(w_explain),
         ],
         [
@@ -235,35 +235,36 @@ def _build_ch4_from_snapshot_or_ledger(
             "Relative volume & institutional sponsorship",
             f"{round(rvol, 2) if isinstance(rvol, (int, float)) else 'N/A'}x vs 30d avg",
             f"TheWrap industry ({_esc(w_s2.get('thewrap_industry') or w_s2.get('sector_name') or tv.get('industry', 'N/A'))}); "
-            f"relative-strength rank {w_s2.get('rs_pct', 'N/A')}%; sector Stage 2 density "
+            f"relative-strength rank {w_s2.get('rs_pct', 'N/A')}%; sector breadth "
             f"{w_s2.get('sector_stage2_density_pct') or w_s2.get('sector_pct_in_stage2') or w_s2.get('industry_pct_outperforming_sp500') or 'N/A'}",
         ],
     ]
+    tech_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in tech_rows]
     t1_html = _render_table(
-        f"Verified TradingView & TheWrap Stage 2 technical snapshot for {sym} as of {as_of}",
+        f"TradingView price and dashboard snapshot for {sym} as of {as_of}",
         ["Technical dimension", "Browser / Scanner reading", "Institutional & No-FOMO interpretation"],
         tech_rows,
         ch4_spec.get(
             "tech_table_takeaway",
-            f"This table summarizes the live TradingView and TheWrap Stage 2 technical readings for {sym}, showing its trend stage, moving-average support levels, and extension distance.",
+            f"This table summarizes TradingView prices and the dashboard tag for {sym}, including the moving averages and distance from its recent high.",
         ),
     )
 
     eval_rows = [
         [
-            "Weinstein Stage classification",
+            "Market-facts trend classification",
             _esc(w_stage),
             _esc(w_explain),
         ],
         [
-            "Technical scanner posture (not portfolio action)",
-            _esc(s2_ev.get("entry_timing_posture", ch4_spec.get("entry_posture", "N/A"))),
-            _esc(s2_ev.get("timing_rationale") or "Determines whether to buy at CMP or wait for a pullback to support."),
+            "Entry decision (not portfolio action)",
+            _esc(ch4_spec.get("posture_override") or s2_ev.get("entry_timing_posture", ch4_spec.get("entry_posture", "N/A"))),
+            _esc(ch4_spec.get("posture_explanation") or s2_ev.get("timing_rationale") or "Use price, trend and valuation together before setting an order."),
         ],
         [
-            "Support buy zone (20D EMA / 10W EMA / 50D SMA)",
+            "Screen band (20D EMA / 10W EMA / 50D SMA)",
             f"{fmt_px(_zone(s2_ev.get('support_buy_zone'))[0])} – {fmt_px(_zone(s2_ev.get('support_buy_zone'))[1])}",
-            "Primary institutional pullback accumulation zone on TradingView",
+            _esc(ch4_spec.get("support_zone_explanation", "Reference band only; require a trend and valuation review before considering an entry.")),
         ],
         [
             "Structural invalidation stop",
@@ -276,13 +277,14 @@ def _build_ch4_from_snapshot_or_ledger(
             _esc(_valuation(s2_ev.get("valuation_assessment"))[1]),
         ],
     ]
+    eval_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in eval_rows]
     t2_html = _render_table(
-        f"Stage 2 & No-FOMO Entry Timing Evaluation for {sym}",
+        f"Trend and No-FOMO Entry Timing Evaluation for {sym}",
         ["Evaluation dimension", "Reading / Posture", "Rule & practical implication"],
         eval_rows,
         ch4_spec.get(
             "gate_table_takeaway",
-            f"This evaluation separates {sym}'s medium-term Stage 2 trend durability from near-term entry timing so we capture early momentum without chasing extended FOMO spikes.",
+            f"This evaluation separates {sym}'s medium-term trend from entry timing, so a screen signal does not become an unsupported order.",
         ),
     )
 
@@ -323,11 +325,11 @@ def _build_ch4_from_snapshot_or_ledger(
 
     return (
         '<section class="chapter" id="ch-4">\n'
-        "<h2>4. Stage 2 trend &amp; TradingView technical structure</h2>\n"
+        "<h2>4. Trend and TradingView technical structure</h2>\n"
         f"<p>{ch4_spec['intro_prose']}</p>\n"
         f"{tv_widget_html}\n"
         f"{t1_html}\n"
-        "<h3>Stage 2 momentum &amp; No-FOMO support evaluation</h3>\n"
+        "<h3>Momentum screen and No-FOMO support evaluation</h3>\n"
         f"<p>{ch4_spec.get('gate_intro_prose', 'We evaluate whether the stock is in an actionable early Stage 2 zone or requires patience for a support retest.')}</p>\n"
         f"{t2_html}\n"
         f"<p>{ch4_spec['closing_prose']}</p>\n"
@@ -368,8 +370,9 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
 
     tier = spec.get("conviction_tier", "TIER_2")
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
-    w_stage = s2_ev.get("weinstein_stage") or inst_m.get("stage_label") or spec.get("weinstein_stage", "Stage 2")
+    w_stage = spec.get("weinstein_stage") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
+    no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith("NO_NEW_ALLOCATION")
 
     # Key figures strip
     kf_items = [
@@ -378,8 +381,8 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         ("Strategy Bucket", _esc(bucket)),
         ("Weinstein Stage", _esc(w_stage)),
         ("No-FOMO Entry Posture", _esc(entry_posture)),
-        ("Support Buy Zone", f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})"),
-        ("Base / Bull Target", f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (R:R {asym:.2f}:1)"),
+        ("Scanner band (monitor only)" if str(entry_posture).startswith("NO_NEW_ALLOCATION") else "Support Buy Zone", f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})"),
+        ("Base / Bull Target", f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)" if no_new_allocation else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (R:R {asym:.2f}:1)"),
         ("Risk-Unit Sizing", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)})"),
     ]
     if spec.get("report_status"):
@@ -593,7 +596,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         [
             "Strategy bucket & conviction tier",
             f"{_esc(bucket)} ({_esc(tier)})",
-            "Aligns capital allocation with Stage 2 durability and business quality",
+            "Aligns new capital with durable trend and business quality",
         ],
         [
             "Action verdict & No-FOMO posture",
@@ -601,19 +604,19 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
             _esc(ch7.get("verdict_rule_summary", "Buy at CMP only when in early Stage 2 near support; wait for support when extended")),
         ],
         [
-            "Recommended buy / accumulation zone",
+            "Screen band (monitor only)" if no_new_allocation else "Recommended buy / accumulation zone",
             f"{cur}{entry_low:,.2f} to {cur}{entry_high:,.2f}",
-            f"Current price {cur}{close:,.2f}; anchored to TradingView 20D EMA / 10W EMA / 50D SMA support",
+            (f"Current price {cur}{close:,.2f}; band is above price and no entry is recommended" if no_new_allocation else f"Current price {cur}{close:,.2f}; anchored to TradingView 20D EMA / 10W EMA / 50D SMA support"),
         ],
         [
-            "Structural invalidation stop",
-            f"{cur}{stop_loss:,.2f} (-{ru['stop_distance_pct']}% from entry)",
-            _esc(scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"])),
+            "Screen stop (monitor only)" if no_new_allocation else "Structural invalidation stop",
+            f"{cur}{stop_loss:,.2f} (screen reference)",
+            ("Reference only; it is not an order or an instruction to sell" if no_new_allocation else _esc(scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"]))),
         ],
         [
-            "Base / Bull / Bear targets",
+            "Base / Bull / Bear scenario values",
             f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}",
-            f"Reward-to-risk ratio: {asym:.2f}:1",
+            ("Illustrative 12-month values; no entry risk/reward applies" if no_new_allocation else f"Reward-to-risk ratio: {asym:.2f}:1"),
         ],
         [
             "Risk-unit initial sizing (portfolio heat)",
@@ -626,6 +629,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
             "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break",
         ],
     ]
+    l3_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in l3_rows]
     ch7_parts.append(
         _render_table(
             f"No-FOMO execution levels and risk-unit position sizing for {sym}",
