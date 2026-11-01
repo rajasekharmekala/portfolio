@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-10-30">
+<meta name="generated-at" content="2026-10-31T18:55:19.517835-07:00">
+<title>RNIT AI Solutions: cash, contracts and valuation</title>
+<style>
+:root {
+  /* Page & surface (Techmeme / Morning Brief unified theme) */
+  --paper:          #ffffff;
+  --paper-top:      #f4f6f8;
+  --ink:            #111111;
+  --ink-strong:     #174a61;
+  --muted:          #556677;
+  --rule:           #cccccc;
+  --rule-soft:      #d8e0e6;
+  --surface:        #ffffff;
+  --surface-alt:    #f4f6f8;
+  --link:           #002848;
+  --link-visited:   #902050;
+  --link-hover-bg:  #d0e8f4;
+  --navy:           #174a61;
+  --navy-hover:     #578aa1;
+  --sisnav-hover:   #25607b;
+
+  /* Verdict semantic tokens — four distinct hues, colour-blind safe when paired with text labels */
+  --keep-ink:       #145a32;   /* forest green — KEEP / HOLD / SHORTLIST */
+  --keep-bg:        #e8f4ec;
+  --keep-rule:      #8ec5a1;
+
+  --accumulate-ink: #0f4c81;   /* slate blue — ACCUMULATE / BUY / ADD / STAGE 2 BREAKOUT */
+  --accumulate-bg:  #e7f0f9;
+  --accumulate-rule:#8fb4da;
+
+  --trim-ink:       #7c4700;   /* warm amber — TRIM / WAIT FOR SUPPORT / ROLL */
+  --trim-bg:        #fbf2e1;
+  --trim-rule:      #dfba73;
+
+  --exit-ink:       #8b1e1e;   /* brick red — EXIT / REJECT / CLOSE / STAGE 4 */
+  --exit-bg:        #fbeaea;
+  --exit-rule:      #dca1a1;
+
+  --watch-ink:      #424b54;   /* neutral slate — WATCH / ARCHIVED / PENDING */
+  --watch-bg:       #eef0f2;
+  --watch-rule:     #b8c0c8;
+
+  /* Callout accents (matching personal-wiki .exec-theme-box and .deepdive-container) */
+  --primer-accent:  #d4a017;   /* gold — Executive Synthesis / Primer box */
+  --primer-tint:    #fdfbe8;
+  --rule-accent:    #0f4c81;   /* slate blue — Rule Explained box */
+  --rule-tint:      #eef4fa;
+  --case-accent:    #174a61;   /* Techmeme navy — Deep-Dive / Case Note box */
+  --case-tint:      #fcfdfe;
+  --warn-accent:    #8b1e1e;   /* brick — Risk / Conflict callout */
+  --warn-tint:      #fcf1f1;
+}
+/* report_base v2 */
+* { box-sizing: border-box; }
+html { font-size: 15.5px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+.report {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 18px 56px;
+}
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--link-visited);
+}
+a:hover {
+  background-color: var(--link-hover-bg);
+  text-decoration: underline;
+}
+
+/* Headings — Techmeme / Research Desk style */
+h1, h2, h3, h4 {
+  color: var(--ink-strong);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.hatnote {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--navy);
+  clear: left;
+  color: var(--navy);
+}
+h3 {
+  font-size: 1.05rem;
+  margin: 1.35rem 0 0.45rem;
+  color: var(--ink-strong);
+}
+h4 {
+  font-size: 0.96rem;
+  margin: 1rem 0 0.35rem;
+  color: var(--ink);
+}
+p { margin: 0.55rem 0 0.9rem; }
+ul, ol { margin: 0.45rem 0 0.95rem; padding-left: 1.5rem; }
+li { margin: 0.28rem 0; }
+hr { border: 0; border-top: 1px solid var(--rule-soft); margin: 1.5rem 0; }
+
+/* Lead & TOC */
+.lead { font-size: 1.01rem; }
+.toc {
+  display: table;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  padding: 0.75rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+.toc-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: 0.18rem 0; }
+
+/* Infobox */
+.infobox {
+  float: right;
+  clear: right;
+  width: 310px;
+  margin: 0 0 1.25rem 1.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.infobox caption, .infobox .infobox-title {
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+}
+.infobox th, .infobox td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--rule-soft);
+  vertical-align: top;
+  text-align: left;
+}
+.infobox th {
+  width: 44%;
+  color: var(--muted);
+  font-weight: 600;
+}
+.infobox td {
+  font-variant-numeric: tabular-nums;
+}
+.infobox .infobox-subhead th {
+  background: #e9eff4;
+  color: var(--navy);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Data tables (wikitable) — responsive & sticky headers */
+.table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0.85rem 0 1.35rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+table.wikitable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  background: var(--surface);
+}
+table.wikitable caption {
+  font-weight: 700;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  color: var(--navy);
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule-soft);
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid var(--rule-soft);
+  padding: 0.44rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+table.wikitable thead th, table.wikitable tr:first-child th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule);
+}
+table.wikitable tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+table.wikitable tbody tr:hover {
+  background: #eef5fa;
+}
+.num, td.num, th.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Verdict pills */
+.verdict {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.verdict-keep       { color: var(--keep-ink);       background: var(--keep-bg);       border-color: var(--keep-rule); }
+.verdict-accumulate { color: var(--accumulate-ink); background: var(--accumulate-bg); border-color: var(--accumulate-rule); }
+.verdict-trim       { color: var(--trim-ink);       background: var(--trim-bg);       border-color: var(--trim-rule); }
+.verdict-exit       { color: var(--exit-ink);       background: var(--exit-bg);       border-color: var(--exit-rule); }
+.verdict-watch      { color: var(--watch-ink);      background: var(--watch-bg);      border-color: var(--watch-rule); }
+
+/* Footnotes & references */
+sup.reference { font-size: 0.75em; line-height: 0; }
+.reflist {
+  font-size: 0.84rem;
+  color: var(--muted);
+  column-width: 28rem;
+  column-gap: 2rem;
+  padding-left: 1.5rem;
+}
+.reflist li { margin: 0.25rem 0; break-inside: avoid; }
+
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-alt);
+  padding: 0.08rem 0.3rem;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .report { padding: 14px 12px 40px; }
+  .infobox { float: none; width: 100%; margin: 0 0 1.25rem 0; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; }
+}
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  .report { max-width: none; padding: 0; }
+  a { color: #000; text-decoration: underline; }
+  h2, h3 { page-break-after: avoid; }
+  table, .callout, .case-note { page-break-inside: avoid; }
+}
+
+/* === Book-report teaching components (Techmeme / Morning Brief unified theme) === */
+
+/* Key-figures strip: 3–5 headline numbers at the top of a report or section */
+.key-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 1.4rem;
+  clear: left;
+}
+.key-figures > div {
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  padding: 0.65rem 0.85rem;
+}
+.key-figures .kf-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+.key-figures .kf-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+.key-figures .kf-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Callout boxes: Primer (matches .exec-theme-box), Rule Explained, Risk/Warning */
+.callout {
+  border: 1px solid var(--rule-soft);
+  border-left: 5px solid var(--primer-accent);
+  background: var(--primer-tint);
+  padding: 0.75rem 1.05rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.93rem;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8a6300;
+  margin: 0 0 0.35rem;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout-rule {
+  border-left-color: var(--rule-accent);
+  background: var(--rule-tint);
+}
+.callout-rule .callout-title { color: var(--rule-accent); }
+.callout-warn {
+  border-left-color: var(--warn-accent);
+  background: var(--warn-tint);
+}
+.callout-warn .callout-title { color: var(--warn-accent); }
+
+/* Case note: one box per holding / option / candidate (matches .deepdive-container) */
+.case-note {
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--case-accent);
+  background: var(--case-tint);
+  padding: 0.95rem 1.15rem;
+  margin: 1.15rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.case-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.case-note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+.case-note-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.case-note dl.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: #f4f8fb;
+  border-left: 3px solid var(--navy);
+  font-size: 0.84rem;
+}
+.case-note dl.case-facts div { margin: 0; }
+.case-note dl.case-facts dt {
+  color: var(--muted);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.case-note dl.case-facts dd {
+  margin: 0.05rem 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* First-use glossary term */
+dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+/* Chapter lead / section summary */
+.section-summary {
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #f4f8fb;
+  border-left: 4px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Horizontal bar meter for allocations / weights */
+.weight-bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: var(--navy);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border-radius: 1px;
+}
+
+/* === Techmeme / Morning Brief Unified Research Desk Chrome === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+code, .mono, .num, td.num, th.num, .infobox td, .key-figures .kf-value, .case-note dl.case-facts dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.desk-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  border: 0;
+  background: transparent;
+}
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value { background: var(--navy-hover); }
+.desk-progress::-moz-progress-bar { background: var(--navy-hover); }
+
+/* Top prenavbar + logo header + navy navbar inside .desk-masthead */
+.desk-prenav {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 8px 18px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.desk-prenav-links a {
+  color: var(--link);
+  font-weight: 600;
+}
+.desk-logotab {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px 18px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.desk-brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.desk-brand-title:visited { color: var(--navy); }
+.desk-brand-title:hover { background: transparent; text-decoration: none; color: var(--navy-hover); }
+.desk-brand-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.desk-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  padding: 0 18px;
+  background: var(--navy);
+  color: #ffffff;
+  border-bottom: 1px solid #0f3547;
+}
+.desk-wordmark {
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  background: var(--navy-hover);
+  text-decoration: none;
+}
+.desk-wordmark:visited { color: #ffffff !important; }
+.desk-wordmark:hover { background: var(--navy-hover); text-decoration: none; }
+.desk-label {
+  color: #e6f0f5;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.desk-sisnav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+.desk-sisnav a {
+  color: #ffffff !important;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+.desk-sisnav a:hover {
+  background: var(--sisnav-hover);
+  text-decoration: none;
+}
+.desk-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desk-tools select, .desk-tools button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: #10384a;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.desk-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  padding: 0;
+}
+.desk-tools button svg { width: 14px; height: 14px; }
+.desk-tools select:hover, .desk-tools button:hover {
+  background: var(--navy-hover);
+}
+.desk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.desk-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 20px 18px 64px;
+}
+.report {
+  max-width: 960px;
+  margin: 0;
+  padding: 0;
+}
+.report-header {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: var(--primer-tint);
+  border: 1px solid #d8c878;
+  border-left: 5px solid var(--primer-accent);
+}
+.report-header h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.report-generated, .report-as-of {
+  margin: 6px 0 0;
+  color: #4a4530;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.report-as-of { font-weight: 500; color: var(--muted); }
+
+.toc { display: none; }
+.desk-contents { display: none; }
+
+.desk-footer {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 16px 18px 36px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 1120px) {
+  .desk-tools select { display: none; }
+  .desk-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 940px) 250px;
+    justify-content: space-between;
+    align-items: start;
+    gap: 28px;
+  }
+  .desk-contents:not([hidden]) {
+    display: block;
+    position: sticky;
+    top: 52px;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 10px 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--rule-soft);
+    border-top: 3px solid var(--navy);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+  .desk-contents-label {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .desk-contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .desk-contents li { margin: 0; }
+  .desk-contents a {
+    display: block;
+    padding: 4px 6px;
+    color: var(--link);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+  .desk-contents a:visited { color: var(--link); }
+  .desk-contents a:hover, .desk-contents a.is-active {
+    color: var(--navy);
+    background: var(--link-hover-bg);
+    border-left-color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .desk-prenav, .desk-logotab { padding-left: 12px; padding-right: 12px; }
+  .desk-masthead { padding: 0 10px; }
+  .desk-sisnav { display: none; }
+  .desk-layout { padding: 14px 12px 44px; }
+}
+
+@media print {
+  .desk-progress, .desk-prenav, .desk-logotab, .desk-masthead, .desk-contents, .desk-footer { display: none !important; }
+  .desk-layout, .report { display: block; max-width: none; padding: 0; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<div class="desk-prenav"><span>October 31, 2026 &bull; India (NSE/BSE)</span><span class="desk-prenav-links"><a href="https://rajasekharmekala.github.io/">Home</a> | <a href="../../index.html">Portfolio Desk</a> | <a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> | <a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a></span></div>
+<div class="desk-logotab"><a class="desk-brand-title" href="../../index.html">Portfolio Research Desk</a><span class="desk-brand-sub">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</span></div>
+<header class="desk-masthead"><a class="desk-wordmark" href="../../index.html">RESEARCH / DESK</a><span class="desk-label">India / Company research</span><nav class="desk-sisnav" aria-label="Sister sites"><a href="https://rajasekharmekala.github.io/">Profile</a><a href="https://rajasekharmekala.github.io/personal-wiki/">Morning Brief</a><a href="https://rajasekharmekala.github.io/travel-research/">Travel</a></nav><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>RNIT AI Solutions: cash, contracts and valuation</h1><p class="report-generated">Generated Date: <time datetime="2026-10-31T18:55:19.517835-07:00">31 Oct 2026, 06:55 PM PDT</time></p><p class="report-as-of">Research as of 2026-10-30</p></header>
+<dl class="key-figures"><div><dt>Decision</dt><dd>REJECTED for new capital</dd></div><div><dt>Market session</dt><dd>30 October 2026</dd></div><div><dt>Close</dt><dd>₹99.00</dd></div><div><dt>Operating cash flow, H1 FY27</dt><dd>−₹710.32 lakh</dd></div><div><dt>Status</dt><dd>PUBLISHED_WITH_GATE_EXCEPTIONS; BEST_EFFORT_AFTER_REVIEW_LIMIT</dd></div></dl>
+<section class="primer" id="primer"><h2>Before you read</h2><p>RNIT AI Solutions builds identity, governance and enterprise software. The recommendation is REJECTED for a new shortlist allocation, because cash conversion and valuation do not provide enough margin of safety. The ledger and the automated scanner disagree on its technical stage. This report is PUBLISHED_WITH_GATE_EXCEPTIONS, including missing recent management-call evidence and the source conflicts described near the end.</p></section><section class="chapter" id="ch-1">
+<h2>Chapter 1. What RNIT actually does</h2>
+<p>RNIT AI Solutions sells software and services for identity checks, office workflows and reporting. Its clearest evidence of work is in government education and skills programmes. It is also trying to reuse its technology for private firms. RNIT reports a single segment. Its accounts do not show revenue or profit by product, or split it between public and private clients. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY2026 annual report, management discussion and segment disclosure</a>.</p>
+<h3>Identity and facial recognition: the event is not the outcome</h3>
+<p>RNIT describes facial recognition systems (FRS) for staff attendance, identity checks and beneficiary workflows. It offers them via mobile, browser, CCTV and its Faceify device. An attendance system must link a face match to a roster, rules and a dashboard. Only then can an institution act on the result. RNIT presents that full workflow and its reports as the product, not just the face-matching algorithm. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">May 2026 investor presentation, company overview and product portfolio</a>.</p>
+<p>Management says it has processed more than 3 billion facial templates to date. It claims capacity for 15 million face identifications a day. It also says it has served or enabled more than 300 departments and corporate ecosystems. These claims are not independent audit results. Templates are not unique people; capacity is not actual daily volume. “Served or enabled” does not establish 300 paying customers. The goals of 5 billion templates and 50 million daily capacity are not delivered figures. Rejection rates, uptime, active users and renewal economics would help test reliability and profit. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">May 2026 investor presentation, accomplishments</a>.</p>
+<h3>Education: from a running portal to additional work orders</h3>
+<p>Education offers a clearer example than the total template count. On 13 May 2026 RNIT said it had rolled out AMAAA for Andhra Pradesh's State Board of Technical Education and Training (SBTET AP). AMAAA stands for Academic Monitoring &amp; Administrative Automation Application. RNIT said the portal served about 1,00,000 students and staff. That is its own report at that date. It is not a verified count of monthly active users or paying accounts. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/8dff89f7-74a2-40e1-a30e-db5b02d102a5.pdf">13 May 2026 AMAAA rollout filing</a>.</p>
+<p>On 9 June 2026 the board awarded two new modules for the existing platform. One manages exams, including pre- and post-exam work, question-paper controls and results. The other manages affiliation, including applications, inspections and approvals. About 4,00,000 students fall within the broader scope, the filing says. This is not proof that they already use the new modules. Exam charges are per student per semester or year. The orders also provide for three years of post-deployment operations and maintenance. The exam order is Tier 2 (₹1 crore–₹10 crore). The affiliation order is Tier 1 (up to ₹1 crore). Both bands include GST under this filing's classification. Neither is an exact contract value or cash collected. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">9 June 2026 SBTET work-order filing</a>.</p>
+<p>The work extends an installed portal into exams and institutional approvals. If the modules work and remain in use, they could embed RNIT more deeply in daily tasks. But extra setup, support and security costs could absorb the benefit. The orders offer a chance to deepen the relationship. They do not establish future adoption, margin or renewal. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">SBTET work orders</a>.</p>
+<h3>NIA and APSSDC: usage is the economic hinge</h3>
+<p>NIA, or Neural Intellectual Assistant, is RNIT's conversational AI platform. Management says it uses custom large and small language models. It is designed to work in several languages and domains. These are company claims, not independent proof of model quality. They do not prove RNIT owns every underlying component or beats its rivals. For skills, RNIT describes mock interviews, tailored feedback and skill-gap checks. It does not guarantee a job. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY2026 annual report, managing director's message</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">May 2026 investor presentation</a>.</p>
+<p>On 22 September 2026 Andhra Pradesh State Skill Development Corporation (APSSDC) gave RNIT an award for a multilingual interview and skills platform using NIA. The work covers design, development, integration and maintenance. Its scope is <em>up to</em> 20 lakh users/interview sessions. Some students may have two attempts. The figure is neither a distinct-person count nor proof of completed sessions. English, Hindi and Telugu are planned from go-live. The system is to link with the Naipunyam portal and assess skills against stated occupational and qualification frameworks. The filing schedules setup, integration and deployment within 15 working days of the award, subject to dependencies and approvals. It describes a five-year service agreement from signing. It does not prove launch or five years of service. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">22 September 2026 APSSDC award</a>.</p>
+<p>RNIT will bill per minute per user. Payment depends on actual use and satisfactory delivery. The filing places the project in Tier 7: above ₹25 crore including GST. It gives no exact amount or guaranteed minimum collection. The disclosed value band can still mean modest early revenue if use, interview length or acceptance is low. Inference and support costs matter too. Watch for a signed agreement, launch status, accepted paid minutes, realised price and cash receipts. The maximum scope alone cannot show what RNIT will earn. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">APSSDC award, terms and value-band annexure</a>.</p>
+<h3>Private-sector expansion: 1FC is a development agreement</h3>
+<p>The annual report describes Faceify Edu and Faceify Corp as tools for institutions and firms. Their intended uses include admin, attendance, visitor and access workflows. The descriptions do not show private subscriber counts or product revenue. A named private client is 1FC Technology Private Limited. On 28 August 2026 RNIT disclosed a master development services agreement with 1FC. It covers the proposed 1FCode financial and wealth technology solution and 1FC Insure insurance technology solution. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY2026 annual report</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/4483187e-8bb9-47be-b667-4bba07994767.pdf">28 August 2026 1FC agreement disclosure</a>.</p>
+<p>The scope includes NIA conversation and access to financial information. It also covers software integration, onboarding, analytics and insurance workflows. The project is planned to take about six months. Timing depends on module sequence, approvals, changes and other dependencies. Delivery, testing and acceptance are by module. A 90-day warranty covers specified defects after production acceptance. RNIT says it keeps its background IP, including NIA and reusable components. Ownership of client-specific work follows the agreement's terms. This filing defines Tier 3 as ₹5 crore–₹15 crore including GST. That band differs from those in the SBTET and APSSDC filings. This is one development agreement. It does not prove 1FC products are live, that RNIT gives regulated financial advice, or that it has a broad base of bank or insurer clients. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/4483187e-8bb9-47be-b667-4bba07994767.pdf">1FC agreement, scope and annexure</a>.</p>
+<h3>How an award becomes cash</h3>
+<p>RNIT lists usage-based SaaS, long-term platform work, maintenance and enterprise subscriptions as business models. These are possible contract types, not a recurring-revenue breakdown. Its FY2026 policy says fixed-price maintenance can be recognised over the service period. It may instead use percentage of completion, depending on the service pattern. Other fixed-price contracts use percentage of completion based on estimated effort or costs. A contract award, recognised revenue and cash receipt can thus occur at different times. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">May 2026 presentation, business models</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY2026 annual report, revenue recognition policy</a>.</p>
+<p>Cash matters in practice. In the six months ended 30 September 2026, RNIT reported ₹710.32 lakh of net operating cash outflow. Trade receivables were ₹3,084.54 lakh, up from ₹2,063.34 lakh on 31 March 2026. That does not prove a named customer is late or identify a contract that caused the rise. It does show why profit, billing and cash are not the same thing. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">29 October 2026 results, balance sheet and cash-flow statement</a>.</p>
+<p><strong>What this means for an owner:</strong> the strongest evidence is a working education portal followed by named expansion orders. NIA's larger award and the 1FC deal widen the opportunity. Both still need proof of acceptance, paid use and collection. Lasting pricing power also depends on rivals and the risks of handling identity and interview data.</p>
+</section><section class="chapter" id="ch-2">
+<h2>Chapter 2. Competition, moat and learning resources</h2>
+<p>RNIT competes in face matching, AI interview practice, government workflows and enterprise software integration. These are distinct markets. A cloud API is not a full state programme. A general-purpose AI assistant is not a government contract. Each offers a possible substitute for part of RNIT's work. That does not prove either provider bid against RNIT or could replace it at once.</p>
+<h3>Where the advantage may sit</h3>
+<p>Amazon Rekognition offers APIs to compare faces and search stored face metadata. Face matching is therefore available outside RNIT. AWS sells a component; its cited docs do not show it running the same Andhra Pradesh programme. RNIT's possible edge is the full system. That includes local workflows, institution onboarding, links to other systems and support. An existing relationship may also open the way to new modules. These features could make replacement harder. The sources do not prove exclusive rights, switching costs, bid-win rates or better face matching. <a href="https://docs.aws.amazon.com/rekognition/latest/dg/faces.html">AWS developer documentation: detecting and analysing faces</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">SBTET work-order filing</a>.</p>
+<p>AI interview practice has substitutes too. Google describes using Gemini Live for real-time mock interviews and feedback. This is a general-purpose option. It is not proof of an equivalent APSSDC deployment or similar quality in Indian languages. RNIT's proposed package combines Telugu, Hindi and English voice use with occupational-framework mapping and the Naipunyam link. Its edge will rest on accepted outcomes, cost per paid minute, assessment quality and renewals. A chatbot alone is not enough. <a href="https://grow.google/certificates/interview-warmup/">Google's interview-preparation guide, 11 December 2025</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">APSSDC award</a>.</p>
+<p>A credible moat needs more evidence than deployment claims. Look for repeat wins after competitive bids, customer retention and independent benchmarks. Comparable contract economics and revenue left after support and model costs also matter. The SBTET additions suggest a deeper relationship. They do not by themselves prove a lasting moat. RNIT names large technology firms, niche providers and startups as competitive threats. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">SBTET orders</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY2026 annual report, opportunities and threats</a>.</p>
+<h3>Privacy, error and delivery risk</h3>
+<p>Identity systems hold sensitive personal data. Failed matches can also exclude people or identify them wrongly. A 2019 NIST study found demographic differences in many tested face-recognition algorithms. Results varied widely by algorithm and task. NIST did not test RNIT's system, so the study does not establish RNIT's error rates. Ask for false-match and false-non-match rates for each deployment. Ask too about subgroup tests, liveness controls, manual options and ways to correct errors. A high template count cannot establish dependable service on its own. <a href="https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software">NIST, face-recognition demographic-effects study</a>.</p>
+<p>Both FRS and NIA warrant privacy checks. Who is responsible for data collection, and on what legal basis? What are the retention and deletion rules? Ask about encryption, access controls, incident response and independent security tests. Also ask whether voice, interview or biometric data is reused to train models. These are diligence questions, not claims of a breach or non-compliance. RNIT's annual report names cybersecurity, data protection, changing rules, project delivery and competition as risks. The cited disclosures do not establish the controls or independent audit results for each deployment. A serious incident, strict bid rule or material failure rate could raise costs and put renewal at risk. That remains true even if the technology otherwise works. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY2026 annual report, management discussion and risks</a>.</p>
+<h3>Primary sources for further study</h3>
+<p>Start with RNIT's account of its work. Test it against the contract filings and outside technical evidence. Each source has limits. A presentation describes the firm's position. An award sets out proposed terms. An outside study shows an industry risk; it does not validate RNIT.</p>
+<ul>
+<li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">RNIT May 2026 investor presentation</a> — products, business models, deployment claims and reported wins. Separate current claims from targets.</li>
+<li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">RNIT FY2026 annual report</a> — management's NIA and Faceify account, single-segment reporting, risks and revenue-recognition policy.</li>
+<li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/8dff89f7-74a2-40e1-a30e-db5b02d102a5.pdf">AMAAA rollout notice</a> and <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">SBTET module orders</a> — compare the reported rollout with later work in scope.</li>
+<li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">APSSDC award</a> and <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/4483187e-8bb9-47be-b667-4bba07994767.pdf">1FC agreement</a> — read the terms for acceptance, usage billing and ownership. Note the distinct value bands.</li>
+<li><a href="https://docs.aws.amazon.com/rekognition/latest/dg/faces.html">AWS face-analysis documentation</a> and <a href="https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software">NIST demographic-effects study</a> — see what a rival component offers. Learn why face-matching errors must be judged in context.</li>
+</ul>
+<p><strong>What this means for an owner:</strong> RNIT's possible edge is in building and running programmes. It has no established monopoly on AI. Paid use, cash collection, independent accuracy tests and repeat wins would strengthen the case. Until then, an award's scope is not proof of durable earnings. The financial and valuation analysis must test whether the share price already assumes that conversion.</p>
+</section><section class="chapter" id="ch-2b">
+<h2>Chapter 2B. Operational KPIs and management evidence</h2>
+<p>RNIT must turn usage into accepted work, bills and cash. A large user base alone does not prove that it has done so. The company reports the scale of its deployments. But it does not disclose recurring revenue as a share of sales, paid usage, renewal rates or cash collected by project. These gaps matter because government contracts can depend on usage and client acceptance.</p>
+<h3>Scale, scope and the execution test</h3>
+<p>The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">3 May 2026 investor presentation</a> covers the year ended 31 March 2026. It describes a model based on SaaS and transaction fees. The deployment figures are company claims, not independently verified volumes. Capacity does not prove that systems process that many identifications each day.</p>
+<div class="table-wrap"><table class="wikitable"><thead><tr><th>Indicator and source date</th><th>What was disclosed</th><th>What it does not establish</th></tr></thead><tbody>
+<tr><td>Facial recognition scale, March 2026</td><td>The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">presentation</a> claims more than 3 billion templates processed to date. It cites capacity for 15 million identifications per day. It also cites 300+ departments and corporate ecosystems served or enabled.</td><td>Unique users, actual daily transactions, paying users or revenue from these systems.</td></tr>
+<tr><td>Education rollout, 13 May 2026</td><td>The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/8dff89f7-74a2-40e1-a30e-db5b02d102a5.pdf">rollout notice</a> says AMAAA served about 1,00,000 students and staff for Andhra Pradesh's technical education board.</td><td>Paid active users, contract receipts or churn.</td></tr>
+<tr><td>Education work orders, 9 June 2026</td><td>Two new modules cover about 4,00,000 students in scope. The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">filing</a> sets examination charges per student per semester or year.</td><td>Actual adoption, revenue or collections. The two user counts cannot be assumed to be additive.</td></tr>
+<tr><td>APSSDC award, 22 September 2026</td><td>The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">award notice</a> covers up to 20 lakh users/interview sessions. Billing is per minute per user, based on actual usage and satisfactory delivery. Tier 7 means above ₹25 crore, including GST.</td><td>Actual sessions, exact contract value, guaranteed revenue or a signed five-year service agreement.</td></tr>
+<tr><td>1FC agreement, 28 August 2026</td><td>The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/4483187e-8bb9-47be-b667-4bba07994767.pdf">filing</a> puts the development deal in Tier 3: ₹5 crore–₹15 crore, including GST. Testing and acceptance are by module.</td><td>Exact consideration, completed milestones, recognized revenue or cash received.</td></tr>
+</tbody></table></div>
+<p class="takeaway">The APSSDC notice is an award. It does not prove deployment at the maximum scale. The plan called for configuration and integration within 15 working days, subject to dependencies and approvals. The RFP envisaged five years of service from signing. The 1FC project was planned to take about six months, subject to dependencies. It includes a 90-day warranty after production acceptance. Track delivery milestones, billed usage and cash receipts instead of relying on headline bands. The tier scales differ by filing and cannot be interchanged.</p>
+<h3>Management's record and the evidence gap</h3>
+<p>In the May 2026 presentation, managing director Raja Srinivas Nandigam highlighted new regional orders, product development and a preferential equity allotment. These are stated priorities, not a quantified forecast. The cover letter says no analyst or institutional investor meeting was held for the presentation. Searches for a Q2 FY27 call and 2026 investor calls found no recent, accessible CEO or CFO transcript. There is no verified recent management explanation for the September cash outflow, receivables aging, expected collection dates or award conversion. The next filed results, a detailed management update or an accessible transcript could help close that gap.</p>
+<p>In that May message, Nandigam said RNIT was “expanding our deployment footprint, enhancing product capabilities”. Later, RNIT disclosed the August 1FC development agreement and the September APSSDC award. Those filings show new signed or awarded work consistent with the stated direction. They do not prove completed deployment, paid use or cash receipts. This is partial evidence of action, not a measurable hit against a dated forecast. Verify delivery and collection in subsequent filings before judging the full promise fulfilled. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">May management message</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/4483187e-8bb9-47be-b667-4bba07994767.pdf">1FC agreement</a>; <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">APSSDC award</a>.</p>
+<p>For an owner, the test is whether projects and usage lead to bills and cash over time. The financial statements show why that link matters now.</p>
+</section><section class="chapter" id="ch-3">
+<h2>Chapter 3. Financials, valuation and cash conversion</h2>
+<p>Revenue and profit have grown. Yet the latest half-year accounts show an operating cash outflow and rising receivables. Fiscal years end in March. Q2 FY27 ended on 30 September 2026. Financial tables use ₹ lakh, not ₹ crore: 100 lakh equals ₹1 crore. FY25 and FY26 annual results are audited. FY27 quarter and half-year figures are unaudited and had a limited review, not a full-year audit.</p>
+<h3>Revenue, profit and expenses</h3>
+<p>Audited FY26 sales grew, but several expense lines rose too. The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/5df6789a-e64e-4eaf-a59f-6d3c92e1228c.pdf">29 April 2026 BSE results</a> and <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">29 October 2026 Q2 results</a> separate operating revenue from other income. That distinction matters because interest and other non-operating income can lift profit without adding to sales from the core business.</p>
+<div class="table-wrap"><table class="wikitable"><thead><tr><th>₹ lakh</th><th>FY25 audited</th><th>FY26 audited</th><th>Q2 FY26 unaudited</th><th>Q2 FY27 unaudited</th><th>H1 FY27 unaudited</th></tr></thead><tbody>
+<tr><td>Revenue from operations</td><td class="num">3,222.59</td><td class="num">5,149.88</td><td class="num">1,371.95</td><td class="num">1,640.55</td><td class="num">2,425.85</td></tr>
+<tr><td>Other income</td><td class="num">5.68</td><td class="num">78.03</td><td class="num">0</td><td class="num">46.02</td><td class="num">80.96</td></tr>
+<tr><td>Operating expenses</td><td class="num">788.69</td><td class="num">1,460.27</td><td class="num">378.87</td><td class="num">389.48</td><td class="num">459.51</td></tr>
+<tr><td>Employee benefits</td><td class="num">859.75</td><td class="num">795.29</td><td class="num">217.18</td><td class="num">246.64</td><td class="num">485.20</td></tr>
+<tr><td>Finance cost</td><td class="num">21.97</td><td class="num">84.95</td><td class="num">21.63</td><td class="num">72.94</td><td class="num">109.21</td></tr>
+<tr><td>Depreciation and amortisation</td><td class="num">275.63</td><td class="num">400.16</td><td class="num">99.89</td><td class="num">85.17</td><td class="num">188.41</td></tr>
+<tr><td>Other expenses</td><td class="num">551.70</td><td class="num">826.22</td><td class="num">227.71</td><td class="num">325.33</td><td class="num">524.25</td></tr>
+<tr><td>Total expenses</td><td class="num">2,497.74</td><td class="num">3,566.88</td><td class="num">945.28</td><td class="num">1,119.56</td><td class="num">1,766.58</td></tr>
+<tr><td>Profit after tax</td><td class="num">720.94</td><td class="num">1,201.73</td><td class="num">325.16</td><td class="num">424.30</td><td class="num">550.92</td></tr>
+</tbody></table></div>
+<p class="takeaway">The May 2026 <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">investor presentation</a> reports FY26 revenue growth of 59.8% and PAT growth of 66.7% versus FY25. Its EBITDA measure rose to ₹2,146.13 lakh from ₹1,028.12 lakh. EBITDA is not a cash receipt. Q2 FY27 operating revenue of ₹1,640.55 lakh and PAT of ₹424.30 lakh both beat the prior-year quarter. Other income of ₹46.02 lakh is separate from operating revenue.</p>
+<p>Costs still need close attention. Q2 finance cost rose to ₹72.94 lakh from ₹21.63 lakh a year earlier. Other expenses rose to ₹325.33 lakh from ₹227.71 lakh. Operating expenses rose less, from ₹378.87 lakh to ₹389.48 lakh. The company reported ₹785.30 lakh of operating revenue in the June 2026 quarter, well below the September figure. That uneven quarterly pattern makes one strong quarter a weak basis for assuming a steady run rate. The next test is whether the profit turns into cash.</p>
+<h3>Cash conversion, working capital and funding</h3>
+<p>Cash conversion shows whether earnings become cash that can fund the business. In H1 FY27, profit and cash flow diverged sharply. Higher receivables and other current assets absorbed cash. Investing outflows also reduced the cash balance. The FY26 cash-flow column covers a full year, not a half-year.</p>
+<div class="table-wrap"><table class="wikitable"><thead><tr><th>₹ lakh</th><th>31 March 2026 / FY26 audited</th><th>30 September 2026 / H1 FY27 unaudited</th></tr></thead><tbody>
+<tr><td>Trade receivables, period end</td><td class="num">2,063.34</td><td class="num">3,084.54</td></tr>
+<tr><td>Cash and cash equivalents, period end</td><td class="num">2,867.86</td><td class="num">468.72</td></tr>
+<tr><td>Current plus non-current borrowings, period end</td><td class="num">1,804.01</td><td class="num">2,634.87</td></tr>
+<tr><td>Goodwill, period end</td><td class="num">3,997.91</td><td class="num">3,997.91</td></tr>
+<tr><td>Net operating cash flow, period</td><td class="num">1,123.16*</td><td class="num">−710.32</td></tr>
+<tr><td>Net investing cash flow, period</td><td class="num">−3,654.03</td><td class="num">−2,414.29</td></tr>
+<tr><td>Net financing cash flow, period</td><td class="num">4,598.26</td><td class="num">721.64</td></tr>
+</tbody></table></div>
+<p class="takeaway">In the <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">September filing</a>, the H1 cash-flow adjustments include ₹1,021.21 lakh for higher receivables. A rise in other current assets used another ₹617.19 lakh. Investing cash flow includes ₹1,482.93 lakh of capital work in progress and a ₹1,000.01 lakh rise in other financial assets. These are separate from the operating outflow. Receivables rose ₹1,021.20 lakh between the balance-sheet dates. That is ₹0.01 lakh less than the cash-flow adjustment, a rounding difference. Cash fell by about ₹2,399.14 lakh. Financing included ₹830.86 lakh of loans taken net of repayment. Goodwill relates to an acquisition; it is not cash available to pay lenders.</p>
+<p>*The September filing reports FY26 operating cash flow of ₹1,123.16 lakh. The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/5df6789a-e64e-4eaf-a59f-6d3c92e1228c.pdf">original audited FY26 results</a> report ₹1,123.15 lakh. The cited statements do not reconcile the ₹0.01 lakh difference. The FY26 operating cash-flow adjustments also include a ₹983.46 lakh rise in borrowings. Until that classification is reconciled, the headline is not a clean measure of cash generated solely from customers. H1 FY27 PAT was ₹550.92 lakh, but operating cash flow was an outflow of ₹710.32 lakh. The records do not establish receivable aging or collectability.</p>
+<h3>Equity dilution and use of proceeds</h3>
+<p>RNIT has funded growth with new shares as well as debt. The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/5df6789a-e64e-4eaf-a59f-6d3c92e1228c.pdf">audited FY26 results</a> report an allotment of 52,66,537 preferential shares in the March quarter. The price was ₹50 each, including a ₹40 premium. Paid-up equity capital was ₹7,179.20 lakh in March 2025 and ₹8,479.21 lakh in March 2026. Face value was ₹10 per share. The rise spans the whole year, so it should not all be assigned to that one allotment. Q2 FY27 paid-up capital was unchanged from March 2026. It was higher than the ₹7,479.20 lakh reported for September 2025. More shares dilute an existing owner's stake unless that owner participates, even when the company receives cash.</p>
+<p>The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/3aec3beb-e24a-461a-afdf-7dff48d003d5.pdf">29 October utilization statement</a> covers the public-category preferential issue of 28 March 2026. It reports ₹26.33 crore raised. RNIT used ₹11.65 crore in the June quarter and the remaining ₹14.68 crore in the September quarter. The stated purposes were business expansion, working capital and general corporate needs. The audit committee recorded no deviation. The filing does not show returns by project. Using the proceeds is not the same as earning revenue.</p>
+<h3>Valuation: vendor figures are not interchangeable</h3>
+<p>The correct <a href="https://www.screener.in/company/517286/">Screener page for BSE 517286</a> showed a ₹99.0 close on 30 October 2026. When retrieved on 31 October, it showed stock P/E of 62.4×, ROCE of 20.2% and ROE of 16.6%. These are vendor calculations, not company guidance. The run's <a href="https://www.tradingview.com/symbols/BSE-RNITAI/financials-overview/">TradingView BSE:RNITAI snapshot</a> was retrieved earlier on 31 October. It recorded trailing P/E of 59.26×, market capitalization of ₹839.44 crore and ROE of 11.77%. The accessible text on the public TradingView page did not show those figures. Its business classification also appears stale. The run's snapshot is the evidence for the quoted TradingView values.</p>
+<p>Vendors may use different methods, earnings periods, update times or share counts. The exact cause of this gap was not verified. Do not average the ratios or treat them as reconciled. Both P/E figures place weight on sustained profits. Neither resolves the cash-conversion concern. For an owner, stronger evidence would be positive operating cash flow over time. It would also include lower receivables relative to business activity, plus disclosure of accepted deployments and collections. Those tests lead into the dossier's risk and execution assessment.</p>
+</section><section class="chapter" id="ch-4">
+<h2>Technical assessment: a pullback with conflicting stage labels</h2>
+<p>On the completed <strong>30 October 2026</strong> market session, RNIT AI Solutions closed at <strong>₹99.00</strong>, below its ₹99.54 50-day simple moving average (50-DMA), although the average itself was rising. The session ledger labels the stock <strong>Stage 3 (Topping / Pullback)</strong>; the separate snapshot evaluator labels it <strong>Stage 2</strong>. These are competing classifications, not confirmation from two independent stage screens. The ledger's more cautious description is the stronger presentation for the dossier because the close is below the 50-DMA, even while the longer-term averages remain below price.</p>
+<h3>Trend and momentum</h3>
+<p>The ledger's 20-DMA is ₹105.49, 50-DMA ₹99.54 and 200-DMA ₹69.49. The 50-DMA was ₹94.56 ten trading days earlier, so its rising direction coexists with a close beneath it. Daily RSI(14) is 44.64; the ledger records a one-week change of +0.30%, two-week change of −9.22% and one-month change of −8.01%. This combination describes a near-term retreat within a longer-term structure that has not, by itself, resolved the stage disagreement.</p>
+<p>The TradingView snapshot places the 10-week EMA at ₹98.21 and the 30-week SMA at ₹78.03. Its evaluator reports price as +0.8% from the 10-week EMA and −0.54% from the 50-DMA. Being above the weekly EMA does not erase the close below the daily SMA, and the available inputs do not establish the direction of the 30-week SMA or independently validate a Stage 2 classification. The ledger's 20-day swing low is ₹95.00; these averages and the swing low are observations, not proposed orders or price targets.</p>
+<h3>Source differences and liquidity</h3>
+<p>The session ledger reports a 52-week high of ₹130.20, a 52-week low of ₹37.00 and a distance from the high of −23.96%; the <a href="https://www.tradingview.com/symbols/BSE-RNITAI/technicals/">TradingView snapshot</a>, retrieved on 31 October, reports a high of ₹114.10, the same low of ₹37.00 and a distance of −13.23%. Its ATR(14) is ₹3.16 versus ₹3.17 in the ledger. The supplied records do not explain the differing highs or ATRs; neither high should be presented as definitively reconciled. The ledger's one-month return of −8.01% also differs from the snapshot's −6.16%, with the basis unresolved.</p>
+<p>Trading volume on 30 October was 31,008 shares. The ledger records 0.5 times its 20-day volume measure; the snapshot reports a 10-day average of 39,849 shares, a 30-day average of 83,176 shares and a 0.37 ratio versus that 30-day average. These use different comparison windows. Volume alone does not establish executable liquidity: bid–ask spread, order-book depth and market impact are not in the supplied inputs, so actual execution conditions remain unverified.</p>
+<h3>TheWrap coverage and automated labels</h3>
+<p>The <a href="https://thewrap.in/data-tools/stage2">TheWrap dashboard</a> showed <strong>31 October 2026</strong> when checked live during this run. That dashboard date is not a new 31 October market close. The live view did not establish RNITAI's membership or its sector breadth, so neither is used to confirm its stage. The TradingView snapshot reports RNITAI's market cap at ₹839.44 crore. A filtered list does not establish the stock's absence from the unfiltered dashboard or the reason for any absence.</p>
+<p>The snapshot evaluator's automatic <code>BUY_AT_CMP_NO_FOMO</code>, <code>IMMEDIATE_BUY</code> and “Reasonable / In-line” valuation labels are unverified outputs, not independent investment or valuation conclusions. A stage determination needs the underlying weekly chart and classification rules reconciled; valuation needs its own evidence. The live TradingView widget uses <strong>BSE:RNITAI</strong> and may show data newer than the fixed session figures above.</p>
+<div class="tradingview-widget-container">
+<div class="tradingview-widget-container__widget"></div>
+<div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/chart/?symbol=BSE%3ARNITAI" rel="noopener noreferrer" target="_blank">BSE:RNITAI chart on TradingView</a></div>
+<script async="" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" type="text/javascript">{"autosize":false,"width":"100%","height":400,"symbol":"BSE:RNITAI","interval":"W","timezone":"Asia/Kolkata","theme":"light","style":"1","locale":"en","allow_symbol_change":false,"support_host":"https://www.tradingview.com"}</script>
+</div>
+<p>For the wider assessment, the unresolved stage classification, source-dependent high and trading depth are constraints to carry alongside the business and valuation evidence, rather than a stand-alone recommendation.</p>
+</section><section class="chapter" id="ch-5">
+<h2>5. Investment horizons and scenario discipline</h2>
+<p>The evidence supports a commercially meaningful software franchise, but it does not yet establish that new contract awards will turn into reliable cash at the pace implied by the current valuation. The decision is to reject RNITAI for a new shortlist allocation, not to assert that it is a broken business. This is a risk decision for new capital; the existing holding is a separate portfolio decision. A higher stock price alone would not prove that the cash and execution questions have been answered.</p>
+<h3>What matters over each horizon</h3>
+<p>In the next one to twelve weeks, monitor whether price can recover and hold the ₹99.54 50-day average and whether trading volume improves. The ledger shows a rising 50-day average but a close below it; its Stage 3 assessment is therefore more cautious than the snapshot's Stage 2 label. Neither indicator provides a guarantee of a bounce. The ₹95.00 20-session swing low is a reference for renewed downside pressure, not an instruction to place an order at that level.</p>
+<p>Over the next three to eighteen months, the important milestones are acceptance and billing under the Andhra Pradesh skills award, delivery of the SBTET education modules and the 1FC agreement, followed by evidence of collection. The APSSDC filing says payment is based on actual usage and satisfactory delivery. An award with a large value band is not a revenue forecast and the sources do not establish paid volumes, a signed final agreement, or completion of the projects. <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">APSSDC award terms</a>.</p>
+<p>Over two to five years, reusable identity, education and conversational tools could increase the value of an installed customer relationship. That opportunity competes with procurement risk, delivery costs, technical alternatives and biometric governance. A durable moat would require evidence of repeat wins, reliable operation, positive unit economics and collections; a template-processing count alone does not establish any of those. This long view leads directly to the valuation stress test.</p>
+<h3>Illustrative earnings and valuation scenarios</h3>
+<p>The company reported FY26 basic earnings per share of ₹1.57 in its <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">September results</a>. The following are deliberately hypothetical one-year sensitivity cases, not forecasts, analyst targets or management guidance. EPS change and the ending P/E are assumptions selected to expose the interaction of profit growth and multiple compression; they are not inferred future facts. Returns exclude dividends, tax and trading costs and are calculated against the ₹99.00 session close.</p>
+<div class="table-wrap"><table class="wikitable"><caption>Illustrative per-share valuation sensitivity</caption><thead><tr><th>Case</th><th>EPS change assumption</th><th>Implied EPS</th><th>P/E assumption</th><th>Implied value</th><th>Change vs ₹99</th></tr></thead><tbody>
+<tr><td>Bear</td><td>−10%</td><td>₹1.413</td><td>20×</td><td>₹28.26</td><td>−71.45%</td></tr>
+<tr><td>Base</td><td>+10%</td><td>₹1.727</td><td>35×</td><td>₹60.44</td><td>−38.94%</td></tr>
+<tr><td>Bull</td><td>+30%</td><td>₹2.041</td><td>50×</td><td>₹102.05</td><td>+3.08%</td></tr>
+</tbody></table></div>
+<p class="takeaway">Each scenario multiplies reported FY26 EPS by its assumed change and then by the assumed P/E. These choices are judgmental and do not establish intrinsic value or a fair target; other combinations produce different outcomes. They show why a premium starting multiple can offset profit growth. The bull case is not a ceiling on the share price, and none of these values is an order level. This asymmetry makes the cash-conversion and collection risks especially consequential.</p>
+</section><section class="chapter" id="ch-6">
+<h2>6. Risks, bear case and falsification</h2>
+<p>The strongest bear case does not deny demand for facial recognition. RNIT has named customers and reported sales. The risk is that its market value assumes a fast-growing subscription business that generates cash. The accounts instead show a highly valued small company. Its billing, collections and returns on capital have yet to catch up with its growth story.</p>
+<h3>Working capital and funding</h3>
+<p>In the six months ended 30 September 2026, operating cash outflow was ₹710.32 lakh. Trade receivables rose to ₹3,084.54 lakh from ₹2,063.34 lakh at 31 March. The accessible <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">filing</a> does not give an aging schedule or name the customers responsible. A rise in receivables alone is not proof of default. Still, repeated weak collections would make growth less valuable to shareholders. They could also create a need for more debt or equity funding.</p>
+<p>The company reported FY26 goodwill of ₹3,997.91 lakh, unchanged at September. Goodwill is not cash available to distribute. The risk of a write-down depends on future cash generation. Preferential financing supported the growth plan but increased shares outstanding. The October use-of-proceeds notice says the March issue was fully used for broadly stated purposes. It does not show the return on each project. The next results should disclose collection progress, cash flows and funding needs.</p>
+<h3>Execution, customers and data</h3>
+<p>Government contracts may need approvals, reliable service, acceptance and renewals. Their duration and scale do not guarantee every rupee in a value band as revenue. The September APSSDC award is tied to usage. The 1FC agreement depends on acceptance of modules. A delayed launch can affect near-term expectations. The sources do not quantify overall customer concentration or the number of paying users. There is no basis for a precise customer concentration figure.</p>
+<p>Face recognition and voice interaction carry privacy, security and accuracy risks. The NIST study cited earlier is industry context, not an audit of RNIT. Company-specific evidence should include consent and retention terms, independent security tests and error rates. It should also cover grievance paths and contract renewals. Market liquidity is another unknown. The session saw 31,008 shares trade, but the data does not establish order-book depth or the impact of an order. A stop order cannot guarantee a fill at a quoted price.</p>
+<h3>The hinge claim</h3>
+<p>The hinge is whether projects and usage produce recurring cash that RNIT can collect, at an acceptable return on capital. The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">APSSDC award terms</a> tie payment to actual usage and satisfactory delivery. A large award value therefore cannot by itself prove paid usage or cash collection. The <a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">September results</a> show an operating cash outflow and higher receivables. They do not show which customers owe the amounts or how old the debts are. Evidence against the cautious stance would include sustained positive operating cash flow and a lower receivable burden. It would also include documented contract acceptance, paid usage and a valuation with enough margin of safety. Positive quarterly earnings alone do not settle the claim. Longer collection delays, dilution or failure to deliver contracts would weaken the thesis further. The action plan keeps this test separate from the decision on the existing holding.</p>
+</section><section class="chapter" id="ch-7">
+<h2>7. Action plan: no new shortlist allocation</h2>
+<p><strong>REJECTED for new capital.</strong> The rules allow rejection when a severe valuation disconnect comes with worsening fundamentals. The correctly identified Screener page reports 62.4× P/E at the 30 October close. The latest half-year operating cash flow is negative, and receivables have risen. The stock is not in a confirmed, independently reconciled early Stage 2 setup. The ledger says Stage 3; the scanner says Stage 2. These facts do not prove misconduct, imminent failure or an inevitable decline. They do not support an immediate-buy recommendation.</p>
+<p>No support limit order is recommended. The snapshot's ₹96.74–₹99.68 band and ₹76.45 invalidation output are mechanical references. They are not approved entry or stop orders. The ledger's ₹95.00 swing low is a separate observed technical level. The three scenario values above are hypothetical sensitivities, not recommended targets. A later review can reconsider the name after verified collection improvement, stronger valuation support and reconciled trend evidence. This does not imply an arbitrary expiry date or an unverified management target.</p>
+<p>The frozen transaction replay shows an existing 10,000-share holding. It was worth ₹990,000 at the 30 October close, or 23.04% of the recorded portfolio. The transaction log is assumed accurate, not independently reconciled. It contains activity through 31 October, while market prices are dated 30 October. Rejecting a new shortlist allocation does not sell, change or independently audit this holding. Portfolio concentration and any decision to reduce it belong to the separate portfolio-audit workflow. That review remains subject to liquidity and the existing mandate.</p>
+<p class="trigger">If a later filing shows durable positive operating cash flow and improved collections, re-underwrite the business. Then rerun the valuation and stage checks. If the evidence does not improve, keep new capital out. If the price crosses ₹95.00, treat that only as a technical warning for a separate holdings review. It is not an assured execution price.</p>
+</section><section class="chapter" id="gate-exceptions">
+<h2>Run notes and gate exceptions</h2>
+<p><strong>PUBLISHED_WITH_GATE_EXCEPTIONS.</strong> The company did not make a recent CEO/CFO earnings-call transcript available in the sources searched. Its May presentation says no analyst or institutional meeting was held for that presentation. We therefore cannot supply the required two current call quotations. The missing context weakens the management assessment. A future transcript or detailed management update could cure this gap.</p>
+<p>The citation check passed with dated-source exceptions. The source dates below are true dates, not estimates. The FY26 report and the May and June notices are used as historical evidence, not as proof of current activity. The August agreement is the latest accessible primary disclosure of its terms. New company filings on project progress, cash collection and operating scale would improve confidence. Recheck each of the seven items for newer evidence by 14 November 2026. This is a research follow-up date, not a claimed company filing date; historical facts retain their original dates even if newer evidence appears. The checker uses the run date for a stable filename; the market-session cutoff remains 30 October 2026.</p>
+<ul>
+<li>Contract: EXCEPTION AS-OF RNITAI:1fc_project: 2026-08-28 is 64 days older than report date 2026-10-31 (max 60). Recheck for delivery updates by 14 November 2026.</li>
+<li>Annual results: EXCEPTION AS-OF RNITAI:annual_operating_results: 2026-03-31 is 214 days older than report date 2026-10-31 (max 60). Recheck for later financial results by 14 November 2026.</li>
+<li>Audited accounts: EXCEPTION AS-OF RNITAI:audited_annual_financials: 2026-03-31 is 214 days older than report date 2026-10-31 (max 60). Recheck for newer audited accounts by 14 November 2026.</li>
+<li>EPS baseline: EXCEPTION AS-OF RNITAI:fy26_basic_eps: 2026-03-31 is 214 days older than report date 2026-10-31 (max 60). Recheck for a newer audited baseline by 14 November 2026.</li>
+<li>Deployment claims: EXCEPTION AS-OF RNITAI:deployment_claims: 2026-03-31 is 214 days older than report date 2026-10-31 (max 60). Recheck for current operating measures by 14 November 2026.</li>
+<li>Education orders: EXCEPTION AS-OF RNITAI:education_modules: 2026-06-09 is 144 days older than report date 2026-10-31 (max 60). Recheck for implementation updates by 14 November 2026.</li>
+<li>Portal rollout: EXCEPTION AS-OF RNITAI:education_rollout: 2026-05-13 is 171 days older than report date 2026-10-31 (max 60). Recheck for active-use figures by 14 November 2026.</li>
+</ul>
+<p>The ledger and TradingView snapshot use different stage labels, 52-week highs and trailing valuation figures. We did not reconcile their data conventions. That lowers confidence in the stage and price-range read; a verified common adjusted-price history and vendor definitions would cure it. The live TheWrap dashboard was checked, but RNITAI's membership and sector breadth were not established. A filtered list cannot establish its status in the full dashboard.</p>
+<p>The batch summary did not pass the available full portfolio-audit validator. One checker line was <code>CASE NOTES: 1 &lt; 6 (&lt;div class="casenote"&gt; per stock/position: story, numbers with meaning, verdict, rule that triggered it, what changes it)</code>. It also reported <code>HOLDINGS WITHOUT A CASE NOTE (20/21)</code>, missing market-audit research fields, and a summary shorter than its 2,500-word audit floor. A single-company queue report is not an audit of the other holdings. Adding those analyses would exceed this run's scope. A dedicated one-company summary validator would resolve the compatibility question; until then, these findings lower confidence in that validator's coverage rather than establish a passed gate. An earlier stylesheet-marker warning was resolved by incorporating the updated stylesheet on origin and reassembling both pages.</p>
+<p>After the final review, the candidate-specific records were supplemented. <a href="https://trendlyne.com/equity/share-holding/82274/517286/latest/rnit-ai-solutions-ltd/">Trendlyne</a> showed promoter holding of 63.23% and a pledged figure of 0.0% for September 2026. The APSSDC award is recorded as a company catalyst. Searches found no confirmed later results-meeting date after the 29 October meeting. These checks do not cover the other holdings or cure the portfolio-wide validator failure.</p>
+<p>The configured reviewer and red-team providers were not present in the runner's model catalog. Independent default agents were used for those reviews, with the substitution recorded in the run manifest. This limits cross-model diversity; restoring the configured providers would cure it on a later run.</p>
+<p><strong>BEST_EFFORT_AFTER_REVIEW_LIMIT.</strong> The final dossier review remained REVISE because the latest-quarter CEO and CFO transcript quotations were unavailable. The summary's final red team remained REVISE because the full portfolio-audit validator did not pass and because its valuation sensitivity needed a clearer answer. The sensitivity is now shown in the summary with its assumptions. The validator issue and transcript gap remain open. Neither report received overall approval from every required pass. No third review was run; all post-review edits and unresolved findings are recorded in the run manifest.</p>
+</section>
+<section id="notes"><h2 id="references">Notes and sources</h2><p>Company filings are dated to the event or period they describe. Earlier notices are included to make the governance and contract chronology inspectable; none is treated as a forecast or an independent audit of company claims.</p><ol class="sources reflist"><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/3aec3beb-e24a-461a-afdf-7dff48d003d5.pdf">September 2026 preferential proceeds utilization</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/f734f5e8-70cd-4b7e-8cf6-2a2a7061280a.pdf">September 2026 results and cash-flow statement</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/078435f7-8469-4d1d-9553-f29b0a2c092b.pdf">October results board-meeting notice</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/XBRL1/517286_1410202612229_SHP.xml">September 2026 shareholding disclosure</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:23.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/9946c0df-9c88-463a-b58c-eb4157a4e00e.pdf">October promoter-reclassification no-objection</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/XBRLFILES/CIMGDuplicateUploadDocument/CIMG_517286_4102026131312_CIMG.html">October internal-auditor management filing</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/68236a8f-c900-4c25-b81b-e8343d344689.pdf">October internal-auditor board outcome</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:25.</li><li><a href="https://www.bseindia.com/XBRLFILES/REG30PARABDuplicateUploadDocument/REG30PARAB_517286_2292026155310_REG30PARAB.html">September APSSDC award XBRL</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/d300f908-4054-4c42-b482-c77f0e93ab2f.pdf">September APSSDC award notice and terms</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/4483187e-8bb9-47be-b667-4bba07994767.pdf">August 1FC services agreement</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:24.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/249c09d1-c703-4952-924b-3d53c1b3c021.pdf">August price-movement clarification</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:25.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/03eedaa8-43c1-4db8-af21-0a7033165554.pdf">August promoter reclassification application</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:25.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/dbbdfd46-1963-4156-bc92-617f9e106a8f.pdf">July annual general meeting proceedings</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:25.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachLive/54ede409-57b2-4f1a-b25c-37bfadf8119f.pdf">June-quarter results and board outcome</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:25.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/660fcf0e-04df-40f9-a4dc-3ce5041b7df8.pdf">July board-meeting notice</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:25.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f3036242-8b51-40cb-9de7-51be430caa42.pdf">July promoter reclassification requests</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:27.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/7721ecdb-31e4-4a0d-baa8-1bf5bbf5ab20.pdf">FY26 annual report and audited statements</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:31.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/388831ec-8aa4-4bd5-870f-6710d8146693.pdf">FY26 annual general meeting notice</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:27.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/9a9125a5-a14e-4db2-b0e8-50a0d2196fb6.pdf">July project-delivery appointment disclosure</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:28.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/af09b6f4-0a73-49d0-a483-7d8d13be9812.pdf">July board outcome and appointments</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:27.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/1151c616-e031-4f49-a405-c4c8b990b858.pdf">June SBTET education work orders</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:28.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/50d81650-4ce3-45c7-ae4d-65be9412ff65.pdf">FY26 secretarial compliance filing</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:29.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/8dff89f7-74a2-40e1-a30e-db5b02d102a5.pdf">May SBTET AMAAA rollout</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:30.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/f8aacbc5-78de-4a8a-b92f-f94178c54d3d.pdf">May FY26 investor presentation</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:32.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/60de217e-d8d3-4fad-9886-02190bdf2c60.pdf">April large-corporate criteria disclosure</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:30.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/86f48e75-44e1-4f18-ad14-61ecab88e543.pdf">March preferential proceeds utilization</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:31.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/5df6789a-e64e-4eaf-a59f-6d3c92e1228c.pdf">Audited FY26 and FY25 financial results</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:33.</li><li><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/3537445d-42ae-4ccc-82ab-b2be4ebb9e3d.pdf">April audited-results meeting notice</a>, RNIT/BSE filing; retrieved 2026-10-31T18:27:31.</li><li><a href="https://docs.aws.amazon.com/rekognition/latest/dg/faces.html">AWS Rekognition face analysis documentation</a>, retrieved 31 October 2026.</li><li><a href="https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software">NIST face-recognition demographic-effects study</a>, 2019; not an RNIT test.</li><li><a href="https://grow.google/certificates/interview-warmup/">Google interview preparation resource</a>, 11 December 2025.</li></ol></section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk &bull; Curated by Rajasekhar Mekala</span><a href="#top">Back to top &uarr;</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+})();
+
+</script></body></html>
