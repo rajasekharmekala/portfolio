@@ -209,7 +209,7 @@ def main():
     if len(blocks_with("triggers")) < T.get("triggers", 0):
         errors.append(f"TRIGGER blocks: {len(blocks_with('triggers'))} < {T['triggers']} (<div class=\"triggers\">: 'what would change this view' with explicit if/then levels)")
     cases = blocks_with("casenote")
-    if len(cases) < T.get("casenotes", 0):
+    if not args.partial and len(cases) < T.get("casenotes", 0):
         errors.append(f"CASE NOTES: {len(cases)} < {T['casenotes']} (<div class=\"casenote\"> per stock/position: story, numbers with meaning, verdict, rule that triggered it, what changes it)")
     for c in cases:
         t = c["text"]
@@ -217,7 +217,7 @@ def main():
             errors.append(f"CASE NOTE TOO SHORT ({words(t)} words < {CASE_MIN_WORDS}): '{t[:50]}...'")
         elif not re.search(r"\d", t) or not re.search(r"\b(if|unless|until|would|trigger|below|above|breaks?|closes?)\b", t, re.I):
             errors.append(f"CASE NOTE LACKS NUMBERS OR IF/THEN TRIGGER: '{t[:50]}...'")
-    if args.kind == "portfolio_audit" and F:
+    if not args.partial and args.kind == "portfolio_audit" and F:
         holds = [s for s, m in F["instruments"].items() if "holding" in m.get("roles", []) and not m.get("error")]
         alltext = " ".join(c["text"] for c in cases)
         missing = [s for s in holds if not re.search(rf"(?<![A-Z0-9]){re.escape(s)}(?![A-Z0-9])", alltext)]
@@ -402,7 +402,8 @@ def main():
             errors.append("STYLE NOT BUILT FROM report_base.css (marker 'report_base v2' missing); rebuild the head as SECTION_DRAFTING.md says")
         if not re.search(r'<dl class="key-figures"', raw):
             errors.append("NO KEY FIGURES strip (<dl class=\"key-figures\">): put 4-6 headline numbers under the title")
-        unwrapped = len(re.findall(r"<table(?![^>]*infobox)", raw)) - len(re.findall(r'<div class="table-wrap">\s*<table', raw))
+        wrapped = re.findall(r'<div\b(?=[^>]*\bclass=["\'][^"\']*\btable-wrap\b[^"\']*["\'])[^>]*>\s*<table\b', raw, re.I)
+        unwrapped = len(re.findall(r"<table(?![^>]*infobox)", raw)) - len(wrapped)
         if unwrapped > 0:
             warns.append(f"{unwrapped} data table(s) not inside <div class=\"table-wrap\"> (they will break the layout on phones)")
         # citations: every ticker linked, and enough distinct sources
@@ -428,7 +429,7 @@ def main():
         warns.append(f"Average sentence is {sum(len(s.split()) for s in sents) / len(sents):.0f} words; aim for <= 22 so a beginner can follow")
 
     print(f"{args.report}\n  prose words: {total} | sections: {len(sections)} | data tables: {len(tables)} | "
-          f"primer/howto/example/triggers/casenotes: {len(primers)}/{len(blocks_with('howto'))}/{len(blocks_with('example'))}/"
+          f"primer/howto/example/triggers/casenotes: {len(blocks_with('primer'))}/{len(blocks_with('howto'))}/{len(blocks_with('example'))}/"
           f"{len(blocks_with('triggers'))}/{len(cases)} | N/A cells: {na}/{cells} ({pct:.1f}%)")
     if args.partial:
         errors = [e for e in errors if e.startswith(PARTIAL_CHECKS)]

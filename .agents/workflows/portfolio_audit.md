@@ -12,7 +12,7 @@ Read `_COMMON.md` first.
 
 Start the run session first (`_COMMON.md`, "Run session"): `run_session.py start --workflow portfolio_audit --market <MKT>`. It is refused while another portfolio audit for this market is live; stop and report the holder. Work only in the printed worktree.
 
-As in `market_intelligence.md` §1–2: the report date is the latest completed session with a verified benchmark close, which can be earlier than the run's calendar date. Use that same resolved date throughout the audit, including the sibling-report lookup.
+As in `market_intelligence.md` §1–2: run on scheduled days even when the exchange is closed, and use the latest completed session with a verified benchmark close, which can be earlier than the run's calendar date. Use that same resolved date throughout the audit, including the sibling-report lookup. At the top of the audit, prominently state the verified session date and explain any difference from the run date; distinguish a normal weekend or holiday from an actual data delay. When following a market intelligence run, use its verified session date and its published same-session report; if that report is unavailable, stop rather than substituting another date.
 
 ## 2. Accounts and holdings
 
