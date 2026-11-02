@@ -6,9 +6,7 @@ description: Stan Weinstein Stage 2 sector rotation, TradingView technicals, and
 
 Read `_COMMON.md` first. Choose `<MKT>` = `IN` or `US` and look up its row in `.agents/config/markets.json`.
 
-**Target Cadence:**
-- `IN`: Daily at 07:15 Asia/Kolkata and on demand, including weekends and exchange holidays. Do not skip a run because the exchange is closed or the start is outside a pre-open window. TheWrap's India dashboard updates weekly; a daily run is not necessarily a new dashboard scan.
-- `US`: Daily or multiple times per week (TheWrap's US Stocks dashboard updates daily).
+**Execution timing:** Run whenever this workflow is invoked, including weekends, exchange holidays, closed-market days, and triggers that arrive earlier or later than usual. This workflow has no time-of-day or market-open window. Resolve the latest completed session for market data, then verify TheWrap's dashboard date and freshness independently; an unchanged weekly India dashboard is not a new scan.
 
 ---
 
@@ -19,7 +17,7 @@ Read `_COMMON.md` first. Choose `<MKT>` = `IN` or `US` and look up its row in `.
    .venv/bin/python scripts/run_session.py start --workflow stage2_sector_momentum --market <MKT>
    ```
    Work only in the printed `worktree`; create a private `RUN_DIR` per RUN_PROTOCOL §1.
-2. Resolve the latest completed exchange session and verify its final benchmark close per `_COMMON.md` preflight and ledger rules, including the retry and fallback. Run the input check and build the ledger for that exact session. Record the run date and session date separately in the manifest; do not infer the session from the current date or assume weekends cannot have special sessions.
+2. Resolve the latest completed exchange session and verify its final benchmark close per `_COMMON.md` preflight and ledger rules, including the retry and fallback. Run the input check and build the ledger for that exact session. Record the run date and session date separately in the manifest; do not infer the session from the current date or assume weekends cannot have special sessions. A closed market or late trigger does not cancel this workflow.
 3. Verify Google Chrome is running with Apple Events JavaScript enabled (`View > Developer > Allow JavaScript from Apple Events`). If browser extraction is unavailable, make the required best effort with independently verifiable current inputs and disclose missing data; never reuse a prior run's cached scan or invent a figure. A missing required input or other `_COMMON.md` hard stop remains a blocker.
 
 ---

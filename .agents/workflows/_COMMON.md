@@ -19,7 +19,7 @@ Runs may overlap, so no run works in the shared checkout. RUN_PROTOCOL §8 is bi
 
 `.venv/bin/python scripts/run_session.py start --workflow <workflow> --market <MKT>`
 
-Workflow names: `market_intelligence`, `portfolio_audit`, `options_audit`, `displacement` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `watchlist_to_shortlist`, `reject_to_watchlist`, `company_report` (per-company; take names with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
+Workflow names: `market_intelligence`, `portfolio_audit`, `options_audit`, `stage2_sector_momentum`, `displacement` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `watchlist_to_shortlist`, `reject_to_watchlist`, `company_report` (per-company; take names with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
 
 ## Run directory
 
@@ -27,10 +27,12 @@ Create it as RUN_PROTOCOL §1 says. Every file this run creates lives there. The
 
 ## Preflight (every run)
 
+Scheduled triggers are calendar- and clock-independent: run when invoked on weekends, exchange holidays, closed-market days, and late triggers. Never add a weekday, market-open, or time-of-day gate in a workflow or schedule prompt. Resolve the latest completed session with a verified close below; trading hours only affect the selected data cutoff.
+
 1. Resolve the **latest completed market session** under `../skills/_shared/RUN_PROTOCOL.md` §0. Do not default to the calendar date of the run. Check exchange holidays and close time, then confirm the benchmark's final daily bar; if today's session is incomplete or its final bar is not available, date the report to the most recent earlier completed session with a verified close. Record `run_date` and `session_date` separately when they differ.
 2. Check inputs: `.venv/bin/python scripts/market_facts.py --market <MKT> --check-inputs --run-dir "<RUN_DIR>"`. A missing or mis-shaped source stops the run. The manifest records the SHA-256 of every input.
 3. Read `.env` for the email settings: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `GMAIL_RECIPIENT`. The recipient comes from `.env`, not from this document.
-4. Sync is part of the run session: `run_session.py start` fetches origin and cuts the worktree from `origin/main`, so the worktree is already synced and unrelated changes in the main checkout never reach it. Never `merge`, `pull` or `checkout` in the main checkout. Read every JSON record file (watchlist, shortlist, holdings) from the worktree, and record `base_commit` in the manifest. Batch eligibility comes from freshly fetched `origin/main` through `run_claims.py batch`, so a name that origin already holds as `COMPLETED`, or that another live run has claimed, is not offered.
+4. Sync is part of the run session: `run_session.py start` fetches origin and cuts the worktree from `origin/main`, so the worktree is already synced and unrelated changes in the main checkout never reach it. Never `merge`, `pull` or `checkout` in the main checkout. Read every JSON record file (watchlist, shortlist, holdings) from the worktree, and record `base_commit` in the manifest. Batch eligibility comes from freshly fetched `origin/main` through `run_claims.py batch`; completed names are excluded, while names held by another run appear in `skipped_held_by_other_runs` and are skipped so the next available candidate can be claimed.
 
 ## The ledger
 

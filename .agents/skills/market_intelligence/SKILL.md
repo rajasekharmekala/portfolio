@@ -24,6 +24,8 @@ description: >-
 
 > **Report date (binding):** date the briefing to the latest completed Indian/US exchange session with a verified final benchmark close, following `../_shared/RUN_PROTOCOL.md` §0. Do not use the run's calendar date by default. Use the same session date in the facts ledger, HTML, filename, research queries, watchlist updates, and validation; disclose any data delay when the latest available completed session predates the run date.
 
+> **Execution timing (binding):** run whenever scheduled or invoked, including weekends, exchange holidays, closed-market days, and late triggers. Never gate this workflow on weekday, market-open status, or time of day. Market hours determine the report's verified data cutoff, not whether the run starts.
+
 <!-- MARKET IN -->
 Act as a **Senior Institutional Equity Research Analyst**, **Derivatives Strategist**, and **Wikipedia Financial Editor** covering Indian Equity Markets (NSE/BSE).
 <!-- /MARKET -->

@@ -6,6 +6,8 @@ description: >-
 
 # Stan Weinstein Stage 2 Sector Rotation & Momentum Scanner Skill (IN & US)
 
+> **Execution timing (binding):** run whenever scheduled or invoked, including weekends, exchange holidays, closed-market days, and late triggers. Do not impose a time-of-day or market-open window. Resolve the latest verified market session for market data, and check the dashboard's own date and freshness separately.
+
 > **Design & Quality Standards (binding):**
 > - Read `../_shared/REPORT_DESIGN.md`, `../_shared/REPORT_VOICE.md`, and `../_shared/REPORT_PALETTE.md`.
 > - **Zero LLM Math:** Never compute moving averages, RSI, volume ratios, or P/E multiples in your head. All numbers must come directly from `scripts/stage2_scanner.py` (`data/views/stage2_<MKT>_latest.json`) and `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz).

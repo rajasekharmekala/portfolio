@@ -27,6 +27,7 @@ Read `_COMMON.md` first.
    ```bash
    .venv/bin/python scripts/run_claims.py batch --workflow watchlist_to_shortlist --market <MKT> --run-id <run_id> --size 1
    ```
+   Do not skip this scheduled run because another run holds a ticker. The batch command skips held tickers in queue order and claims the next available one; record its `skipped_held_by_other_runs` result and work only on the returned symbol. If it returns no symbol, report a temporary lockout when the skipped map is non-empty, or an empty eligible queue when it is empty; do not retry in a loop or widen the batch. Remove any unused `<RUN_DIR>`, then finish that no-work session with `run_session.py finish --run-id <run_id>`.
    Ensure the claimed symbol is included in `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (re-run `stock_snapshot.py --symbols ...` if needed).
 
 ## 2. Dedicated Single-Company Deep Business-Monograph Dossier

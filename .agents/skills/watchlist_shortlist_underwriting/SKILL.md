@@ -12,6 +12,8 @@ description: >-
 
 > **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Two complete rounds is a strict maximum.
 
+> **Concurrent queue claims (binding):** each scheduled invocation may start even when another run has a live ticker claim. Use `scripts/run_claims.py batch`; it skips each held ticker and claims the next available candidate in queue order. Record the claimed symbols and `skipped_held_by_other_runs`. If no symbol is returned, distinguish an empty eligible queue from candidates temporarily held by other runs, then finish the no-work run without widening or repeatedly retrying the batch.
+
 # Stage 2 & Deep Business-Monograph Watchlist-to-Shortlist Underwriting Engine (`IN` & `US`)
 
 ## 1. Philosophy & Architecture
