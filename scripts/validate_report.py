@@ -38,6 +38,9 @@ STOP = {"N/A", "ETF", "USD", "INR", "NSE", "BSE", "CFO", "NET", "PASS", "EXIT", 
 THRESH = {
     "market_intel": dict(h2=150, total=2500, intro=0, take=60, casenotes=6, triggers=4),
     "portfolio_audit": dict(h2=150, total=2500, intro=0, take=60, casenotes=6, triggers=4),
+    # A watchlist batch summary covers only the name(s) claimed by that run;
+    # it must not be held to portfolio-wide case-note or research-needs floors.
+    "watchlist": dict(h2=100, total=1200, intro=0, take=45, casenotes=1, triggers=4),
     "stage2_sector_momentum": dict(h2=150, total=2500, intro=0, take=60, casenotes=8, triggers=4),
 }
 CASE_MIN_WORDS = 80
@@ -229,6 +232,11 @@ def main():
     cases = blocks_with("casenote")
     if not args.partial and len(cases) < T.get("casenotes", 0):
         errors.append(f"CASE NOTES: {len(cases)} < {T['casenotes']} (<div class=\"casenote\"> per stock/position: story, numbers with meaning, verdict, rule that triggered it, what changes it)")
+    if not args.partial and args.kind == "watchlist":
+        markers = Stage2Markers()
+        markers.feed(raw)
+        if len(markers.cases) != 1:
+            errors.append(f"WATCHLIST SCOPE: expected one underwritten symbol in case notes, found {len(markers.cases)}")
     for c in cases:
         t = c["text"]
         if words(t) < CASE_MIN_WORDS:
@@ -369,7 +377,7 @@ def main():
             got = {}
             for it in json.load(open(rpath)).get("items", []):
                 got.setdefault(it.get("key"), []).append(it)
-            for need in ([] if args.kind == "stage2_sector_momentum" else F.get("research_needs", [])):
+            for need in ([] if args.kind in ("stage2_sector_momentum", "watchlist") else F.get("research_needs", [])):
                 items = got.get(need["key"])
                 if not items:
                     errors.append(f"RESEARCH MISSING: {need['key']}")

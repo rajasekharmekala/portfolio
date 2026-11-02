@@ -50,5 +50,5 @@ Dedicate the full research budget, browser tooling, and multi-stage verification
 ## 4. Batch Report, Review Gate & Publication
 
 1. Assemble `docs/reports/<MKT>_Watchlist_to_Shortlist.html` using `scripts/assemble_report.py --market <MKT> --kind report --workflow "Watchlist underwriting" --as-of <date>`.
-2. Run the reviewer and red-team gate (`scripts/review_packet.py`, `report_reviewer`, `red_team`) on each dossier and the batch summary report.
+2. Run the reviewer and red-team gate (`scripts/review_packet.py`, `report_reviewer`, `red_team`) on each dossier with `--kind dossier` and on the batch summary with `--kind watchlist`.
 3. Publish via `scripts/publish_run.py` (email delivery is disabled for `watchlist_to_shortlist`).

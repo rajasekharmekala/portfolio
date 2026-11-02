@@ -79,7 +79,7 @@ Claim the next single eligible candidate (`--size 1`) from `watchlist.active`:
 ### Step 5: Write Batch Summary Report & Run Reviewer Gate
 1. Assemble the batch underwriting report at `docs/reports/<MKT>_Watchlist_to_Shortlist.html` summarizing:
    - Watchlist hygiene & Stage 4 names pruned to archive.
-   - Side-by-side comparison table of the 4 underwritten companies (Stage 2 status, TradingView MAs/RSI, Screener/Finviz valuation, Management Walk-the-Talk verdict, and No-FOMO Entry Zone).
-   - Deep-dive summary and direct link to each company's new monograph dossier (`blogs/<MKT>/<SYMBOL>_dossier.html`).
-2. Run `scripts/review_packet.py`, `report_reviewer`, and `red_team` per `../_shared/REVIEWER_OPERATIONS.md`.
+   - Comparison table for exactly the symbols returned by this run's claim batch (a scheduled run claims one): Stage 2 status, TradingView MAs/RSI, Screener/Finviz valuation, Management Walk-the-Talk verdict, and No-FOMO Entry Zone.
+   - Deep-dive summary and direct link to each claimed company's new monograph dossier (`blogs/<MKT>/<SYMBOL>_dossier.html`).
+2. Run `scripts/review_packet.py`, `report_reviewer`, and `red_team` per `../_shared/REVIEWER_OPERATIONS.md`; use `--kind dossier` for each company monograph and `--kind watchlist` for the batch summary.
 3. Rebuild the portal catalog (`.venv/bin/python scripts/portal_publish.py`) and publish via `scripts/publish_run.py`.

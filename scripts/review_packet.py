@@ -44,7 +44,7 @@ import sys
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-KINDS = ("market_intel", "portfolio_audit", "dossier", "stage2_sector_momentum")
+KINDS = ("market_intel", "portfolio_audit", "watchlist", "dossier", "stage2_sector_momentum")
 SKIP_TAGS = {"style", "script", "head", "nav", "noscript"}
 SKIP_CLS = re.compile(r"\b(toc|reflist|references|bibliography)\b", re.I)
 SKIP_ID = re.compile(r"^(toc|references|bibliography|reflist)$", re.I)
@@ -712,11 +712,13 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, 
         except Exception as e:  # noqa: BLE001
             results[name] = {"exit": None, "ok": False, "lines": ["could not run: %s" % e]}
 
-    vkind = kind if kind in ("market_intel", "stage2_sector_momentum") else "portfolio_audit"
+    vkind = kind if kind in ("market_intel", "watchlist", "stage2_sector_momentum") else "portfolio_audit"
     if kind != "dossier":
         cmd = [py, "scripts/validate_report.py", "--report", report, "--kind", vkind]
         if facts_path:
             cmd += ["--facts", facts_path]
+        if kind == "watchlist" and research_path:
+            cmd += ["--research", research_path]
         if kind == "stage2_sector_momentum":
             if research_path:
                 cmd += ["--research", research_path]
@@ -734,6 +736,8 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, 
         cmd.append("--allow-stale-asof")
     if kind == "stage2_sector_momentum":
         cmd += ["--min-sources", "12"]
+    elif kind == "watchlist":
+        cmd += ["--min-sources", "25"]
     elif kind != "dossier":
         cmd += ["--min-sources", "0"]
     run("citation_check", cmd)
@@ -742,7 +746,7 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, 
     if kind == "stage2_sector_momentum":
         read_cmd += ["--kind", "stage2_sector_momentum"]
     run("readability_check", read_cmd)
-    if kind != "dossier" and "readability_check" in results:
+    if kind not in ("dossier", "watchlist") and "readability_check" in results:
         # the primer/estimate/chapter-7/notes structure belongs to the company-report book standard only
         r = results["readability_check"]
         findings = [l for l in r["lines"] if l.strip().startswith("- ")]

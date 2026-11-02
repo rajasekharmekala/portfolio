@@ -34,6 +34,14 @@ def load_validator(name):
     return Draft7Validator(schema)
 
 
+def dossier_path_exists(value):
+    """Resolve public dossier paths from either repo root or docs/ root."""
+    rel = Path(value)
+    if rel.is_absolute() or ".." in rel.parts:
+        return False
+    return (REPO / rel).is_file() or (REPO / "docs" / rel).is_file()
+
+
 def validate_rows(rows, validator, label):
     errors = []
     for i, row in enumerate(rows):
@@ -101,7 +109,7 @@ def main():
                     continue
                 for row in rows:
                     p = row.get("research_dossier_path")
-                    if p and not (REPO / p).exists():
+                    if p and not dossier_path_exists(p):
                         missing_dossiers += 1
                         if missing_dossiers <= 10:
                             print(f"  [warn] {market}/{sheet} {row.get('symbol')}: dossier not found: {p}")
@@ -109,7 +117,7 @@ def main():
             for key in ("active", "archived", "archive"):
                 for row in data.get(key, []):
                     p = row.get("research_dossier_path")
-                    if p and not (REPO / p).exists():
+                    if p and not dossier_path_exists(p):
                         missing_dossiers += 1
                         if missing_dossiers <= 10:
                             print(f"  [warn] {market}/shortlist/{key} {row.get('symbol')}: dossier not found: {p}")

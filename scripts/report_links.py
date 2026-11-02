@@ -7,11 +7,14 @@ Used by assemble_report.py (adds the links and the References list) and by valid
 A ticker is any bold symbol in the body, written as <b>SYMBOL</b>, that is in the universe of
 symbols found in the ledger or research record (or ends in .NS / .BO). Each such ticker must carry
 a chart link and a screener link inside the ticker-links span, which the skills template already defines:
-  India: TradingView NSE:SYMBOL + screener.in/company/SYMBOL/
+  India: TradingView NSE:SYMBOL + screener.in/company/<configured Screener ID or SYMBOL>/
   US:    TradingView SYMBOL      + finviz.com/quote.ashx?t=SYMBOL
 """
 import json
 import re
+from pathlib import Path
+
+SCREENER_ALIASES_FILE = Path(__file__).resolve().parent / "config" / "screener_aliases.json"
 
 TICKER_BOLD = re.compile(r"<b>([A-Z][A-Z0-9&\-]{1,15}(?:\.NS|\.BO)?)</b>")
 EXTERNAL_HREF = re.compile(r'<a\s+[^>]*href="(https?://[^"]+)"[^>]*>(.*?)</a>', re.S | re.I)
@@ -55,7 +58,12 @@ def nav_links(sym: str, market: str) -> tuple:
     base = sym.split(".")[0]
     if market == "IN":
         chart = f"https://www.tradingview.com/chart/?symbol=NSE%3A{base}"
-        second = f"https://www.screener.in/company/{base}/"
+        try:
+            aliases = json.loads(SCREENER_ALIASES_FILE.read_text(encoding="utf-8"))
+            screener_symbol = aliases.get("IN", {}).get(base, base)
+        except Exception:
+            screener_symbol = base
+        second = f"https://www.screener.in/company/{screener_symbol}/"
         second_label = "Screener"
     else:
         chart = f"https://www.tradingview.com/chart/?symbol={base}"

@@ -38,6 +38,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 ALIASES_FILE = ROOT / "scripts" / "config" / "aliases.json"
+SCREENER_ALIASES_FILE = ROOT / "scripts" / "config" / "screener_aliases.json"
 
 TV_COLUMNS = [
     "name",
@@ -117,6 +118,16 @@ def load_aliases(market: str) -> Dict[str, str]:
         return {}
     try:
         data = json.loads(ALIASES_FILE.read_text(encoding="utf-8"))
+        return data.get(market, {})
+    except Exception:
+        return {}
+
+
+def load_screener_aliases(market: str) -> Dict[str, str]:
+    if not SCREENER_ALIASES_FILE.exists():
+        return {}
+    try:
+        data = json.loads(SCREENER_ALIASES_FILE.read_text(encoding="utf-8"))
         return data.get(market, {})
     except Exception:
         return {}
@@ -240,8 +251,9 @@ def fetch_tradingview_batch(market: str, symbols: List[str]) -> Dict[str, Dict[s
 
 def fetch_screener_in(symbol: str) -> Dict[str, Any]:
     """Extract top ratios and quarterly highlights from Screener.in for an Indian symbol."""
+    screener_symbol = load_screener_aliases("IN").get(symbol.upper(), symbol)
     for suffix in ("consolidated/", ""):
-        url = f"https://www.screener.in/company/{symbol}/{suffix}"
+        url = f"https://www.screener.in/company/{screener_symbol}/{suffix}"
         try:
             r = requests.get(url, headers=HEADERS, timeout=10)
             if r.status_code != 200:
@@ -254,6 +266,11 @@ def fetch_screener_in(symbol: str) -> Dict[str, Any]:
                 if name_el and val_el:
                     k = re.sub(r"\s+", " ", name_el.get_text(" ", strip=True)).strip()
                     v = re.sub(r"\s+", " ", val_el.get_text(" ", strip=True)).strip()
+                    # Screener's consolidated route can render labels with empty values
+                    # when it has no consolidated statement. Treat that as a miss so the
+                    # standalone route is tried instead of returning placeholder ratios.
+                    if _parse_float(v) is None:
+                        continue
                     ratios[k] = v
             if not ratios:
                 continue
@@ -273,7 +290,7 @@ def fetch_screener_in(symbol: str) -> Dict[str, Any]:
             }
         except Exception:
             continue
-    return {"source_url": f"https://www.screener.in/company/{symbol}/", "ratios": {}}
+    return {"source_url": f"https://www.screener.in/company/{screener_symbol}/", "ratios": {}}
 
 
 def fetch_finviz_us(symbol: str) -> Dict[str, Any]:
@@ -416,7 +433,6 @@ def evaluate_stage2_and_entry_posture(
     ema20d = tv.get("ema20") or tv.get("sma20")
     rsi = tv.get("rsi_14_daily")
     atr = tv.get("atr_14")
-    in_wrap_s2 = bool(s2.get("in_thewrap_stage2"))
 
     if close is None:
         return {
@@ -429,8 +445,9 @@ def evaluate_stage2_and_entry_posture(
     ext_50d_pct = _round((close / sma50 - 1.0) * 100.0, 2) if (sma50 and sma50 > 0) else None
     ext_30w_pct = _round((close / sma30w - 1.0) * 100.0, 2) if (sma30w and sma30w > 0) else None
 
-    # Determine Weinstein Stage
-    if in_wrap_s2 or (sma30w and sma50 and close > sma30w and close >= sma50 * 0.98):
+    # TheWrap membership is an industry context signal, not a stock-stage
+    # verdict. Classify the stock from its own price and moving averages.
+    if sma30w and sma50 and close > sma30w and close >= sma50 * 0.98:
         stage = "STAGE_2"
     elif sma30w and close >= sma30w and sma50 and close < sma50:
         stage = "STAGE_3"  # Pullback / consolidation above 30-week / 200-day average
@@ -498,11 +515,12 @@ def evaluate_stage2_and_entry_posture(
             f"to support zone {support_zone_low}–{support_zone_high}."
         )
     elif stage in ("STAGE_3", "STAGE_1"):
-        posture = "AT_STAGE2_SUPPORT_RETEST"
+        posture = "WAIT_FOR_SUPPORT_RETEST"
         verdict = "WAIT_FOR_SUPPORT"
         rationale = (
             f"Consolidating / pulling back near 30-week SMA ({sma30w}) and 50-day SMA ({sma50}). "
-            f"Accumulate only if support holds in {support_zone_low}–{support_zone_high} and volume expands on turn."
+            f"Reassess only if support holds in {support_zone_low}–{support_zone_high} and volume expands on turn; "
+            "require trend and valuation confirmation before any entry."
         )
     else:
         posture = "WAIT_FOR_SUPPORT_PULLBACK"

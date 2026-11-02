@@ -73,11 +73,24 @@ def _zone(zone) -> tuple:
 
 
 def _valuation(val) -> tuple:
+    unavailable_note = (
+        "Cutoff-compatible current valuation ratios are unavailable or excluded. "
+        "Chapter 3 presents filing-based analyst sensitivities, not a current P/E-versus-growth "
+        "or ROE/ROCE comparison."
+    )
     if isinstance(val, dict):
-        return val.get("posture", "N/A"), val.get("note", "Compares current P/E against earnings growth and ROE/ROCE.")
+        note = val.get("note")
+        if note:
+            return val.get("posture", "N/A"), note
+        posture = val.get("posture", "N/A")
+        if "unavailable" in str(posture).casefold():
+            return posture, unavailable_note
+        return posture, "Compares current P/E against earnings growth and ROE/ROCE."
     if isinstance(val, str) and val:
+        if "unavailable" in val.casefold():
+            return val, unavailable_note
         return val, "Compares current P/E against earnings growth and ROE/ROCE."
-    return "N/A", "Compares current P/E against earnings growth and ROE/ROCE."
+    return "N/A", unavailable_note
 
 
 def _tv_rating_label(score) -> str:
@@ -184,7 +197,12 @@ def _build_ch4_from_snapshot_or_ledger(
     atr = next((v for v in (tv.get("atr14"), tv.get("atr_14"), inst_m.get("atr14")) if v is not None), None)
     hi52 = tv.get("high_52w") or inst_m.get("hi52")
     lo52 = tv.get("low_52w") or inst_m.get("lo52")
-    rvol = tv.get("rel_vol_10d") or tv.get("vol_ratio_vs_30d") or inst_m.get("vol_mult_20d")
+    if tv.get("rel_vol_10d") is not None:
+        rvol, rvol_period = tv.get("rel_vol_10d"), "10-day"
+    elif tv.get("vol_ratio_vs_30d") not in (None, 0):
+        rvol, rvol_period = tv.get("vol_ratio_vs_30d"), "30-day"
+    else:
+        rvol, rvol_period = inst_m.get("vol_mult_20d"), "20-day"
     tv_label = tv.get("tv_rating_label") or _tv_rating_label(tv.get("tv_rating_overall"))
     piv_s1, piv_m, piv_r1 = tv.get("pivot_s1"), tv.get("pivot_middle"), tv.get("pivot_r1")
     ext_10w = s2_ev.get("extension_from_10w_ema_pct")
@@ -233,7 +251,7 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Relative volume & institutional sponsorship",
-            f"{round(rvol, 2) if isinstance(rvol, (int, float)) else 'N/A'}x vs 30d avg",
+            f"{round(rvol, 2)}x vs {rvol_period} avg" if isinstance(rvol, (int, float)) else "N/A",
             f"TheWrap industry ({_esc(w_s2.get('thewrap_industry') or w_s2.get('sector_name') or tv.get('industry', 'N/A'))}); "
             f"relative-strength rank {w_s2.get('rs_pct', 'N/A')}%; sector breadth "
             f"{w_s2.get('sector_stage2_density_pct') or w_s2.get('sector_pct_in_stage2') or w_s2.get('industry_pct_outperforming_sp500') or 'N/A'}",
@@ -241,8 +259,8 @@ def _build_ch4_from_snapshot_or_ledger(
     ]
     tech_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in tech_rows]
     t1_html = _render_table(
-        f"TradingView price and dashboard snapshot for {sym} as of {as_of}",
-        ["Technical dimension", "Browser / Scanner reading", "Institutional & No-FOMO interpretation"],
+        f"Market-facts ledger and consumer-tool snapshot for {sym} as of {as_of}",
+        ["Technical dimension", "Observed value (source-specific)", "Institutional & No-FOMO interpretation"],
         tech_rows,
         ch4_spec.get(
             "tech_table_takeaway",
@@ -250,6 +268,12 @@ def _build_ch4_from_snapshot_or_ledger(
         ),
     )
 
+    zone_low, zone_high = _zone(s2_ev.get("support_buy_zone"))
+    band_position = (
+        "below price" if close is not None and zone_high is not None and zone_high < close
+        else "above price" if close is not None and zone_low is not None and zone_low > close
+        else "overlapping current price"
+    )
     eval_rows = [
         [
             "Market-facts trend classification",
@@ -262,14 +286,14 @@ def _build_ch4_from_snapshot_or_ledger(
             _esc(ch4_spec.get("posture_explanation") or s2_ev.get("timing_rationale") or "Use price, trend and valuation together before setting an order."),
         ],
         [
-            "Screen band (20D EMA / 10W EMA / 50D SMA)",
-            f"{fmt_px(_zone(s2_ev.get('support_buy_zone'))[0])} – {fmt_px(_zone(s2_ev.get('support_buy_zone'))[1])}",
+            "Screen support band (nearest support)",
+            f"{fmt_px(zone_low)} – {fmt_px(zone_high)}",
             _esc(ch4_spec.get("support_zone_explanation", "Reference band only; require a trend and valuation review before considering an entry.")),
         ],
         [
             "Structural invalidation stop",
             fmt_px(s2_ev.get("invalidation_stop")),
-            "Anchored below the 50-day SMA / 30-week SMA minus 1.0x ATR(14)",
+            "Nearest support less 0.5× ATR(14); a monitoring reference, not an order.",
         ],
         [
             "Valuation sanity check (Screener.in / Finviz)",
@@ -359,6 +383,11 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
     stop_loss = spec["stop_loss"]
+    band_position = (
+        "below price" if close is not None and entry_high < close
+        else "above price" if close is not None and entry_low > close
+        else "overlapping current price"
+    )
     target_base = spec["target_base"]
     target_bull = spec["target_bull"]
     target_bear = spec["target_bear"]
@@ -606,7 +635,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         [
             "Screen band (monitor only)" if no_new_allocation else "Recommended buy / accumulation zone",
             f"{cur}{entry_low:,.2f} to {cur}{entry_high:,.2f}",
-            (f"Current price {cur}{close:,.2f}; band is above price and no entry is recommended" if no_new_allocation else f"Current price {cur}{close:,.2f}; anchored to TradingView 20D EMA / 10W EMA / 50D SMA support"),
+            (f"Current price {cur}{close:,.2f}; band is {band_position}; no entry is recommended" if no_new_allocation else f"Current price {cur}{close:,.2f}; use the support band only after trend and valuation checks"),
         ],
         [
             "Screen stop (monitor only)" if no_new_allocation else "Structural invalidation stop",
