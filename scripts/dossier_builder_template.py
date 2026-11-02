@@ -253,7 +253,7 @@ def _build_ch4_from_snapshot_or_ledger(
             "Relative volume & institutional sponsorship",
             f"{round(rvol, 2)}x vs {rvol_period} avg" if isinstance(rvol, (int, float)) else "N/A",
             f"TheWrap industry ({_esc(w_s2.get('thewrap_industry') or w_s2.get('sector_name') or tv.get('industry', 'N/A'))}); "
-            f"relative-strength rank {w_s2.get('rs_pct', 'N/A')}%; sector breadth "
+            f"relative-strength reading {w_s2.get('rs_pct', 'N/A')}%; formal sector rank {w_s2.get('sector_rank') if w_s2.get('sector_rank') is not None else 'unavailable'}; sector breadth "
             f"{w_s2.get('sector_stage2_density_pct') or w_s2.get('sector_pct_in_stage2') or w_s2.get('industry_pct_outperforming_sp500') or 'N/A'}",
         ],
     ]
@@ -293,7 +293,7 @@ def _build_ch4_from_snapshot_or_ledger(
         [
             "Structural invalidation stop",
             fmt_px(s2_ev.get("invalidation_stop")),
-            "Nearest support less 0.5× ATR(14); a monitoring reference, not an order.",
+            ch4_spec.get("stop_placement_explanation", "Below the lower of nearest support and the lower of the 50-day and 30-week averages, less 0.5× ATR14; structural reference, not a tactical entry stop or order."),
         ],
         [
             "Valuation sanity check (Screener.in / Finviz)",
@@ -640,7 +640,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         [
             "Screen stop (monitor only)" if no_new_allocation else "Structural invalidation stop",
             f"{cur}{stop_loss:,.2f} (screen reference)",
-            ("Reference only; it is not an order or an instruction to sell" if no_new_allocation else _esc(scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"]))),
+            ("Reference only; it is not an order or an instruction to sell" if no_new_allocation else _esc(spec.get("ch4", {}).get("stop_placement_explanation") or scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"]))),
         ],
         [
             "Base / Bull / Bear scenario values",
