@@ -557,7 +557,14 @@ def download(tickers, period="2y"):
                            threads=True, progress=False)
         for t in chunk:
             try:
-                df = data[t] if len(chunk) > 1 else data
+                df = data
+                if isinstance(data.columns, pd.MultiIndex):
+                    for level in range(data.columns.nlevels):
+                        if t in data.columns.get_level_values(level):
+                            df = data.xs(t, axis=1, level=level, drop_level=True)
+                            break
+                    else:
+                        raise KeyError(f"Yahoo response has no columns for {t}")
                 df = df.dropna(subset=["Close"])
                 if df.empty:
                     raise ValueError("no data")
