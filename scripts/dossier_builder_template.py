@@ -293,7 +293,7 @@ def _build_ch4_from_snapshot_or_ledger(
         [
             "Market-facts trend classification",
             _esc(w_stage),
-            _esc(w_explain),
+            _esc(ch4_spec.get("evaluation_stage_explanation") or w_explain),
         ],
         [
             "Entry decision (not portfolio action)",
