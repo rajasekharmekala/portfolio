@@ -209,6 +209,21 @@ def _build_ch4_from_snapshot_or_ledger(
     ext_50d = s2_ev.get("extension_from_50d_sma_pct")
     w_stage = ch4_spec.get("stage_override") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
     w_explain = ch4_spec.get("stage_explanation") or s2_ev.get("stage_explanation") or s2_ev.get("summary_rationale") or "Trend classification should be read against the market-facts ledger and the latest moving averages."
+    dashboard_tag = w_s2.get("breakout_type") or w_s2.get("stage_tag") or "not available"
+    dashboard_membership = w_s2.get("in_thewrap_stage2", w_s2.get("in_stage2_list"))
+    dashboard_membership = "yes" if dashboard_membership is True else "no" if dashboard_membership is False else "not available"
+    breadth_parts = []
+    breadth_200 = w_s2.get("industry_pct_above_200d_ema")
+    breadth_50 = w_s2.get("industry_pct_above_50d_ema")
+    if isinstance(breadth_200, (int, float)):
+        breadth_parts.append(f"{breadth_200:g}% above 200-day EMA")
+    if isinstance(breadth_50, (int, float)):
+        breadth_parts.append(f"{breadth_50:g}% above 50-day EMA")
+    breadth_text = ", ".join(breadth_parts) if breadth_parts else "not available"
+    sector_rank = w_s2.get("sector_rank")
+    sector_rank_text = str(sector_rank) if sector_rank is not None else "unavailable"
+    rs_pct = w_s2.get("rs_pct")
+    rs_pct_text = f"{rs_pct:g}%" if isinstance(rs_pct, (int, float)) else "unavailable"
     cite_tag = ch4_spec.get("ledger_cite_tag", "")
 
     def fmt_px(v):
@@ -224,7 +239,7 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Market-facts trend & dashboard tag",
-            f"{_esc(w_stage)} (TheWrap tag: STAGE_2; in list: {w_s2.get('in_thewrap_stage2', w_s2.get('in_stage2_list', 'N/A'))}; weeks tagged: {w_s2.get('weeks_in_stage2', 'N/A')})",
+            f"{_esc(w_stage)} (TheWrap breakout tag: {_esc(dashboard_tag)}; Stage 2 list membership: {dashboard_membership}; weeks tagged: {w_s2.get('weeks_in_stage2', 'not available')})",
             _esc(w_explain),
         ],
         [
@@ -253,8 +268,8 @@ def _build_ch4_from_snapshot_or_ledger(
             "Relative volume & institutional sponsorship",
             f"{round(rvol, 2)}x vs {rvol_period} avg" if isinstance(rvol, (int, float)) else "N/A",
             f"TheWrap industry ({_esc(w_s2.get('thewrap_industry') or w_s2.get('sector_name') or tv.get('industry', 'N/A'))}); "
-            f"relative-strength reading {w_s2.get('rs_pct', 'N/A')}%; formal sector rank {w_s2.get('sector_rank') if w_s2.get('sector_rank') is not None else 'unavailable'}; sector breadth "
-            f"{w_s2.get('sector_stage2_density_pct') or w_s2.get('sector_pct_in_stage2') or w_s2.get('industry_pct_outperforming_sp500') or 'N/A'}",
+            f"extracted breadth: {breadth_text}; formal sector rank {sector_rank_text}; "
+            f"formal relative-strength percentile {rs_pct_text}",
         ],
     ]
     tech_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in tech_rows]
