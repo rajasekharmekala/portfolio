@@ -398,10 +398,16 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     )
 
     tier = spec.get("conviction_tier", "TIER_2")
-    ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
     w_stage = spec.get("weinstein_stage") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
     no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith("NO_NEW_ALLOCATION")
+    ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
+    if no_new_allocation:
+        # A monitor-only setup has no live risk budget or initial position size.
+        # Keep the conviction tier visible, but do not display a hypothetical entry weight as an allocation.
+        ru["risk_adjusted_weight_pct"] = 0.0
+        ru["raw_risk_unit_weight_pct"] = 0.0
+        ru["risk_budget_bps"] = 0.0
 
     # Key figures strip
     kf_items = [
@@ -480,6 +486,8 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     for p in ch2b.get("intro_paragraphs", []):
         ch2b_parts.append(f"<p>{p}</p>")
     ch2b_parts.append("<h3>The business KPIs that actually matter</h3>")
+    for p in ch2b.get("kpi_intro_paragraphs", []):
+        ch2b_parts.append(f"<p>{p}</p>")
     kpi_t = ch2b["kpi_table"]
     ch2b_parts.append(
         _render_table(
@@ -560,6 +568,8 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     if ch5.get("horizon_table"):
         ht = ch5["horizon_table"]
         ch5_parts.append("<h3>Short-term, medium-term, and long-term synthesis</h3>")
+        if ht.get("intro"):
+            ch5_parts.append(f"<p>{ht['intro']}</p>")
         ch5_parts.append(
             _render_table(
                 ht.get("caption", f"Multi-horizon investment outlook for {sym}"),
@@ -576,6 +586,8 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         ch5_parts.append(_render_estimate(est))
     sc_t = ch5["scenario_table"]
     ch5_parts.append("<h3>Bull, base, and bear scenarios</h3>")
+    if sc_t.get("intro"):
+        ch5_parts.append(f"<p>{sc_t['intro']}</p>")
     ch5_parts.append(
         _render_table(
             sc_t.get("caption", f"12-month scenario table for {sym}"), sc_t["headers"], sc_t["rows"], sc_t.get("takeaway", "")
@@ -650,12 +662,12 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         [
             "Risk-unit initial sizing (portfolio heat)",
             f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)}, {ru['risk_budget_bps']:.0f} bps risk budget)",
-            f"Formula: min(Tier cap {ru['tier_range_pct']}, {ru['risk_budget_bps']:.0f} bps / {ru['stop_distance_pct']}% stop distance)",
+            ("No allocation while entry gates are unresolved; recalculate only after a fresh review" if no_new_allocation else f"Formula: min(Tier cap {ru['tier_range_pct']}, {ru['risk_budget_bps']:.0f} bps / {ru['stop_distance_pct']}% stop distance)"),
         ],
         [
             "Let-winners-run rule",
-            f"Appreciated weight ceiling up to {ru['runaway_winner_cap_pct']}%",
-            "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break",
+            ("Not applicable; no position is open" if no_new_allocation else f"Appreciated weight ceiling up to {ru['runaway_winner_cap_pct']}%"),
+            ("Do not allocate or place an order before the entry gates pass" if no_new_allocation else "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break"),
         ],
     ]
     l3_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in l3_rows]
