@@ -9,6 +9,8 @@
     verdict: "ALL",
     sort: "updated",
     search: "",
+    scope: "held",
+    holdings: {},
   };
 
   const escapeHtml = value =>
@@ -214,7 +216,7 @@
     const sorted = sortEntries(filtered);
 
     const reports = sorted.filter(e => e.kind === "report");
-    const dossiers = sorted.filter(e => e.kind === "dossier");
+    const dossiers = sorted.filter(e => e.kind === "dossier" && (state.scope === "all" || e.held === true));
     const recent = sorted.slice(0, 6);
 
     // Update Stats Hero
@@ -241,7 +243,18 @@
     if (reportMeta) reportMeta.textContent = `${reports.length} workflow reports available`;
 
     const dossierMeta = byId("dossier-meta");
-    if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monograph dossiers available`;
+    if (dossierMeta) {
+      dossierMeta.textContent = state.scope === "held"
+        ? `${dossiers.length} of your holdings have a monograph`
+        : `${dossiers.length} monograph dossiers available`;
+    }
+
+    const dossierMissing = byId("dossier-missing");
+    if (dossierMissing) {
+      const missing = state.scope === "held" ? heldWithoutMonograph() : [];
+      dossierMissing.hidden = missing.length === 0;
+      dossierMissing.textContent = missing.length ? `Held, no monograph published yet: ${missing.join(", ")}` : "";
+    }
 
     // Render Lists
     const recentList = byId("recent-list");
@@ -277,7 +290,30 @@
     }
   }
 
+  function heldWithoutMonograph() {
+    const markets = ["US", "IN"].filter(m => state.market === "ALL" || state.market === m);
+    return markets.flatMap(m => (state.holdings[m] || [])
+      .filter(sym => !state.entries.some(e => e.kind === "dossier" && e.market === m && e.symbol === sym))
+      .map(sym => `${sym} (${m})`));
+  }
+
   function setupFilters() {
+    // Holdings scope: remembered between visits, so the page opens on the same view
+    let savedScope = null;
+    try { savedScope = localStorage.getItem("portal.dossierScope"); } catch (err) { savedScope = null; }
+    if (savedScope === "all" || savedScope === "held") state.scope = savedScope;
+    document.querySelectorAll("#dossier-scope button.segment").forEach(btn => {
+      btn.classList.toggle("is-active", btn.dataset.scope === state.scope);
+      btn.addEventListener("click", () => {
+        state.scope = btn.dataset.scope === "all" ? "all" : "held";
+        document.querySelectorAll("#dossier-scope button.segment").forEach(b => {
+          b.classList.toggle("is-active", b === btn);
+        });
+        try { localStorage.setItem("portal.dossierScope", state.scope); } catch (err) { /* storage unavailable */ }
+        render();
+      });
+    });
+
     // Market Segmented Buttons
     document.querySelectorAll("#market-filters button.segment").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -360,6 +396,7 @@
       const data = await res.json();
       state.entries = Array.isArray(data.entries) ? data.entries : [];
       state.queues = data.queues || null;
+      state.holdings = data.holdings || {};
 
       if (metaEl) {
         metaEl.textContent = `Catalog updated: ${formatDateTime(data.generatedAt || new Date())} • ${state.entries.length} published pages`;

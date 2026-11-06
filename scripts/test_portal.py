@@ -68,6 +68,19 @@ class ReportDesignTests(unittest.TestCase):
 
 
 class PortalTests(unittest.TestCase):
+    def test_held_symbols_lists_open_positions_only(self):
+        positions = {
+            "a.jsonl": {"AAA": {"quantity": 5.0}, "BBB": {"quantity": 0.0}},
+            "b.jsonl": {"AAA": {"quantity": 2.0}, "CCC": {"quantity": 1.0}},
+        }
+        def fake_accounts(market):
+            return list(positions) if market == "IN" else []
+        def fake_state(path):
+            return {}, positions[path], 0.0
+        with patch.object(portal, "accounts_for", side_effect=fake_accounts), \
+             patch.object(portal, "account_state", side_effect=fake_state):
+            self.assertEqual(portal.held_symbols(), {"IN": ["AAA", "CCC"], "US": []})
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

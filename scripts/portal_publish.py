@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 from bs4 import BeautifulSoup
+from data_layer import accounts_for, account_state
 from run_claims import _is_pending_row, _row_cycle
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
@@ -374,6 +375,18 @@ def public_queue(entries):
     return result
 
 
+def held_symbols():
+    """Held tickers per market (quantity > 0 in any account). Quantities are never published."""
+    held = {}
+    for market in ("IN", "US"):
+        symbols = set()
+        for path in accounts_for(market):
+            _, pos, _ = account_state(path)
+            symbols.update(symbol for symbol, p in pos.items() if p["quantity"] > 0)
+        held[market] = sorted(symbols)
+    return held
+
+
 def build_catalog(completed=(), workflow=None, market=None, summary=None, highlights=(), repair_links=False):
     updates = json.loads(UPDATES.read_text()) if UPDATES.exists() else {}
     now = datetime.now(timezone.utc).isoformat()
@@ -391,8 +404,11 @@ def build_catalog(completed=(), workflow=None, market=None, summary=None, highli
     dates = git_dates()
     entries = [read_entry(path, dates, updates) for path in paths]
     entries.sort(key=lambda entry: entry["updatedAt"] or "", reverse=True)
+    holdings = held_symbols()
+    for entry in entries:
+        entry["held"] = entry["kind"] == "dossier" and entry["symbol"] in holdings.get(entry["market"], [])
     catalog = {"schemaVersion": 1, "generatedAt": now, "baseUrl": BASE_URL, "entries": entries,
-               "queues": public_queue(entries)}
+               "holdings": holdings, "queues": public_queue(entries)}
     UPDATES.write_text(json.dumps(updates, indent=2) + "\n", encoding="utf-8")
     CATALOG.write_text(json.dumps(catalog, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
     if repair_links:
