@@ -2,83 +2,73 @@
 name: company_report
 description: >-
   Deep-research company monograph and multi-horizon Stage 2 investment dossier
-  for one listed company (IN or US), written like a small book on the company:
-  what they do and how each vertical operates day-to-day, curated links to
-  external websites/videos/presentations to learn more, the true operational
-  KPIs and story of the business, whether the company is reaching its potential
-  and the CEOs are walking the talk, Screener.in/Finviz financials & valuation,
-  TheWrap Stage 2 & TradingView technical readout, and a No-FOMO execution plan
-  (Immediate Buy vs. Wait for Support).
+  for one listed company (IN or US), delivered in 4 synchronized formats
+  (Web Research Dossier HTML, Audiobook/Book Reader HTML, EPUB 3 e-book, and
+  Narrative Markdown) at book-length depth (12,000–18,000 words, ~75–90 min
+  audiobook). Explains what the company does, every business segment with
+  revenue/profit mix and concrete real-world examples, distribution and unit
+  economics, 5–10 year financial forensics, Why the Price Is What It Is, and
+  unbiased Two-Sided (Bull vs. Bear) investment judgment across Short-Term
+  Trading/Momentum, Medium-Term Inflection, and Long-Term Compounding (or Stay Away).
 ---
 
-> **Design (binding):** read `../_shared/REPORT_DESIGN.md`. Build the dossier via `scripts/dossier_builder_template.py --spec <spec.json> --snapshot <snapshots.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html` (which calls `scripts/assemble_report.py --market <MARKET> --kind dossier --workflow "Company research" --as-of <verified-session-date>`). Never copy an old dossier shell.
+> **Design & 4-Edition Compiler (binding):** read `../_shared/REPORT_DESIGN.md`. Author the monograph chapter-by-chapter in `<RUN_DIR>/work/<SYMBOL>/` (`spine.json` + `chapters/ch00.json` .. `ch09.json`) and compile all four synchronized editions with `scripts/dossier_builder_template.py --spec <RUN_DIR>/work/<SYMBOL> --snapshot <snapshots.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html`:
+> 1. `docs/blogs/<MARKET>/<SYMBOL>_dossier.html` — Web Research Desk Edition (10-year tables, unit-economics matrices, interactive TradingView chart, External Learning Hub, inline `[N]` citations).
+> 2. `docs/blogs/<MARKET>/<SYMBOL>_book.html` — Book & Audiobook Web Reader Edition (12,000–18,000 words, ~75–90 min audio, zero raw tables or `<sup>` tags in spoken prose, built-in Web Speech / Voice Companion player bar).
+> 3. `docs/blogs/<MARKET>/<SYMBOL>_book.epub` — Downloadable EPUB 3 e-book.
+> 4. `docs/blogs/<MARKET>/<SYMBOL>_book.md` — Downloadable Narrative Markdown book for `book-companion` / `live-companion`.
 
 > **Zero LLM Math (binding):** never compute moving averages, RSI, volume multiples, or financial ratios in your head. All technical and valuation figures must come from `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz + TheWrap Stage 2 snapshot) and verified primary filings.
 
-> **Voice & Readability (binding):** read `../_shared/REPORT_VOICE.md`. Write with senior institutional precision and an investigative mindset. Use natural financial syntax (`$17.35`, `+24% YoY`, `EBITDA margin`, `CAGR`). Never dumb down vocabulary or spell out currencies/percentages as text (avoid robotic phrasing like "trades at 17.35 dollars"). Do NOT include glossaries, and ensure `scripts/readability_check.py` and `scripts/citation_check.py` pass.
+> **Unbiased Two-Sided Research & Independent Judgment (binding):**
+> - Actively search **both sides of the aisle**: (1) the Bull narrative (management guidance, secular tailwinds, operating leverage, order book) and (2) the Bear / Skeptic narrative (working-capital/DSO stretch, cash-flow gaps, cyclicality, customer/platform concentration, competitive threats, valuation stretch).
+> - Never cheerlead management and never pad paragraphs with robotic defensive disclaimers ("This is a company claim, not verified"). Instead, attribute claims cleanly, weigh both sides against the financial record, and state **our own independent judgment** based on the probability-weighted likely outcomes.
 
-> **Primary Source Ingestion (binding):** every dossier must cite and quote primary evidence:
-> - At least **2 direct quotes** from the latest quarterly concall transcript (CEO on product/demand inflection, CFO on margins and forward guidance).
-> - Core operational KPIs extracted from 10-K/10-Q MD&A or annual reports (customer retention/churn, backlog/RPO, unit economics, SBC dilution).
-> - An embedded interactive TradingView chart in Chapter 4 (auto-populated by `dossier_builder_template.py`).
+> **Concrete Segment & Distribution Walkthroughs (binding):**
+> - Every business segment in Chapter 2 must include its share of revenue/profit AND **at least one concrete, end-to-end real-world example** (who the customer is, what problem they face, what exact product/service they buy, how it is engineered/built/delivered, and how it is priced).
+> - Chapter 3 must explain **distribution and go-to-market mechanics** (direct sales, channel/MSP partners, dealer networks, OEM qualification, geographical delivery) and trace a worked **$100 / ₹100 revenue-to-free-cash-flow waterfall**.
 
-# Deep Business-Monograph & Multi-Horizon Company Dossier (`IN` & `US`)
+# 10-Chapter Institutional Monograph & Audiobook Blueprint (12,000–18,000 Words)
 
-Your deliverable is a standalone, self-contained HTML monograph saved directly in:
-`docs/blogs/<MARKET>/<SYMBOL>_dossier.html` (e.g. `docs/blogs/IN/FSL_dossier.html`, `docs/blogs/US/AVPT_dossier.html`).
+Both the Web Dossier (`_dossier.html`) and the Book/Audiobook Edition (`_book.html`, `.epub`, `.md`) follow the same 10-chapter structure and share **100% identical numbers, verdicts, and Short / Medium / Long-Term outlooks**:
 
----
-
-## 1. Monograph Book Structure (Binding)
-
-Each dossier is a complete deep-research monograph ("like a small book on the company itself") combined with a multi-horizon Stage 2 & valuation view:
-
-| Order | ID | Chapter Title | Core Questions Answered |
-|---|---|---|---|
-| 0 | `primer` | **Before you read** | 3–5 sentences: what the company does, our multi-horizon conclusion, and what would invalidate it. |
-| 1 | `ch-1` | **1. What the company does & day-to-day vertical operations** | What products/services do they sell? Who pays and why? How does each business vertical actually work day-to-day (raw materials/sourcing, manufacturing/engineering workflows, distribution, customer onboarding, billing & working-capital cycle)? Purely focused on the business; no glossaries or textbook definitions. |
-| 2 | `ch-2` | **2. Competitive moat, industry structure & external learning hub** | Why does this company win or lose against competitors? Includes the **External Learning Hub** table with clickable links to official product pages, YouTube factory tours / CEO interviews / product explainers, investor presentations, and concall transcripts so the reader can explore further. |
-| 2B | `ch-2b` | **2B. Operational business KPIs, structural potential & CEO walk-the-talk** | What are the 4–6 real operational KPIs that drive this business? **Is the company reaching its structural potential?** (Capacity utilization, TAM capture, margin ceiling). **Are the CEOs walking the talk?** Forensic audit comparing past management guidance/promises over the last 2–3 years against actual delivered results. |
-| 3 | `ch-3` | **3. Financial trajectory & valuation sanity check** | Multi-year revenue, operating profit, margins, PAT/EPS, cash flow, and balance-sheet tables grounded in Screener.in (`IN`) or Finviz / SEC filings (`US`), peer comparison matrix (3–5 direct peers), and whether the current valuation multiple is cheap, fair, or rich relative to growth. |
-| 4 | `ch-4` | **4. Stage 2 trend & TradingView technical structure** | Auto-populated by `dossier_builder_template.py` from `stock_snapshot.py`: TheWrap Stage 2 sector/stock breadth, TradingView 30-week SMA, 10-week EMA, 20/50/200-day SMAs, RSI(14), relative volume, classic pivots, and deterministic No-FOMO support distance. |
-| 5 | `ch-5` | **5. Multi-horizon investment view: short-term momentum, medium-term catalysts & scenarios** | **Short-term view (1–12 weeks):** momentum, volume, extension from support. **Medium-term view (3–18 months):** order book / product cycle catalysts, earnings inflection. **Long-term view (2–5 years):** structural compounding potential. Plus Bull / Base / Bear scenarios. |
-| 6 | `ch-6` | **6. Key risks, thesis breakers & bear case** | The strongest honest bear arguments (demand, execution, margin compression, balance sheet, technical breakdown) and the single hinge claim the thesis rests on. |
-| 7 | `ch-7` | **7. What we would do, and when (No-FOMO action plan)** | Clear decision (`IMMEDIATE_BUY` at CMP vs. `WAIT_FOR_SUPPORT` / `ACCUMULATE_ON_DIP` limit zone vs. `REJECTED`), exact TradingView support buy zone (`20D EMA` / `10W EMA` / `50D SMA`), invalidation stop, risk-unit sizing, let-winners-run rule, and `<p class="trigger">` conditions. |
-| 8 | `notes` | **Notes and sources** | 25–40+ numbered primary filings, concalls, Screener/Finviz/TradingView snapshots, and external web/video references. |
+| Ch # | ID | Target Words | Web Dossier Section (`_dossier.html`) | Book / Audiobook Chapter (`_book.html`, `.epub`, `.md`) | Core Content, Examples & Investment Judgment |
+|---|---|---|---|---|---|
+| 0 | `ch-0` | 700–1,000 | **0. Executive Thesis, Price Verdict & Opportunity Matrix** | **Prologue: The Business, The Price & Our Independent Verdict** | What the company does, why the stock trades at today's price, the core Bull vs. Bear debate, our independent judgment across **Short-Term Trade**, **Medium-Term Inflection**, and **Long-Term Compounding** (or **Stay Away**), and exact No-FOMO levels. |
+| 1 | `ch-1` | 1,400–2,000 | **1. Origin, Corporate Evolution & Past Stock Cycles** | **Chapter 1: How the Business & Stock Got Here — Past Cycles & Pivots** | How the company was built, major strategic pivots and acquisitions, and how its revenue, margins, and stock price performed across prior boom-bust cycles to arrive at today's market cap. |
+| 2 | `ch-2` | 1,800–2,500 | **2. What the Company Does: Segments, Revenue Mix & Concrete Examples** | **Chapter 2: Inside Every Segment — Products, Customers & Real-World Examples** | Deep segment-by-segment breakdown: exact share of revenue/profit by vertical and geography; plain-English explanation of each segment; and **at least one concrete, end-to-end real-world example per segment** showing who buys, why they buy, and how the product/service works in practice. |
+| 3 | `ch-3` | 1,400–2,000 | **3. Distribution, Supply Chain & Unit Economics** | **Chapter 3: How It Is Sold & Delivered — Distribution & Unit Economics** | Distribution & Go-To-Market anatomy: direct sales vs. dealers/distributors/channel partners, supply-chain/manufacturing footprint, customer qualification, pricing model, billing/DSO cycle, and a worked **$100 / ₹100 revenue-to-free-cash-flow waterfall**. |
+| 4 | `ch-4` | 1,300–1,800 | **4. Industry Structure, Competitive Moat & External Learning Hub** | **Chapter 4: The Battlefield — Rivals, Switching Costs & Moat Reality** | Unbiased assessment of competitive advantages vs. vulnerabilities: market share shifts, customer lock-in, pricing power vs. competitor pushback, and the curated **External Learning Hub** (product demos, factory tours, interviews, filings). |
+| 5 | `ch-5` | 1,300–1,800 | **5. Leading KPIs, Structural Potential & CEO Walk-the-Talk Audit** | **Chapter 5: Management on Trial — Leading KPIs & Walking the Talk** | The 5–6 operational KPIs that lead financial results; capacity utilization & TAM runway; and an unbiased 3–5 year audit comparing what the CEO/CFO promised against what was actually delivered. |
+| 6 | `ch-6` | 1,500–2,100 | **6. 10-Year Financial Forensics, Cash Conversion & Balance Sheet** | **Chapter 6: Following the Cash — 10-Year Financials & Earnings Quality** | Full 5–10 year P&L, margin bridge, balance sheet & debt/lease forensics, working capital & DSO trends, CFO-to-PAT conversion, ROIC/ROCE vs. WACC, and share dilution—separating genuine cash compounding from accounting optics. |
+| 7 | `ch-7` | 1,300–1,800 | **7. Why the Price Is What It Is: Valuation, Reverse DCF & Peer Comps** | **Chapter 7: Why the Stock Trades Here — Market Expectations vs. Peers** | Deconstructs today's stock price: historical valuation multiple bands, Reverse DCF (what growth/margin today's price already assumes), and quantitative head-to-head comparison against 3–5 listed peers. |
+| 8 | `ch-8` | 1,100–1,500 | **8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup** | **Chapter 8: Reading the Tape — Trend, Volume & Momentum Opportunity** | Stan Weinstein Stage (1, 2, 3, or 4), 30-week SMA / 10-week EMA / 50 & 200-DMA structure, volume accumulation vs. distribution, relative strength, and whether there is an actionable short-term trading/momentum edge right now. |
+| 9 | `ch-9` | 1,600–2,200 | **9. Both Sides of the Aisle, Likely Outcomes & No-FOMO Action Plan** | **Chapter 9: Bull vs. Bear, Likely Outcomes & Our Action Plan** | Side-by-side steelman of Bull vs. Bear narratives + **Our Independent Judgment**; probability-weighted Bull / Base / Bear outcomes; explicit verdict across **Short-Term Trading (1–12w)**, **Medium-Term Inflection (3–18m)**, and **Long-Term Compounding (3–10y)** (or **Stay Away**); and exact No-FOMO execution levels & triggers. |
 
 ---
 
-## 2. Step-by-Step Execution Protocol
+## Step-by-Step Execution Protocol
 
-### Step 1: Pull Live Browser & Consumer-Tool Snapshot (`scripts/stock_snapshot.py`)
-Ensure you have the live TradingView + Screener.in/Finviz + TheWrap Stage 2 snapshot for `<SYMBOL>`:
-```bash
-.venv/bin/python scripts/stock_snapshot.py \
-  --market <MARKET> \
-  --symbols <SYMBOL> \
-  --stage2-file data/views/stage2_<MARKET>_latest.json \
-  --out "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json"
-```
-
-### Step 2: Deep Multi-Source Research & External Link Discovery
-1. **Financials & Filings:**
-   - **IN:** Fetch Screener.in (`https://www.screener.in/company/<SYMBOL>/consolidated/` or standalone), BSE/NSE investor presentations, annual reports, and concall transcripts.
-   - **US:** Fetch Finviz (`https://finviz.com/quote.ashx?t=<SYMBOL>`), SEC EDGAR 10-K/10-Q filings, investor day presentations, and earnings call transcripts.
-2. **Day-to-Day Vertical Processes & External Learning Hub (`search_web`):**
-   - Search for the company's official product/vertical pages, YouTube factory tours, management interviews, industry conference talks, and customer case studies.
-   - Cache fetched pages with `scripts/fetch_cache.py` and log research records in `<RUN_DIR>/cache/research_<MARKET>_<date>.json` using `scripts/research_log.py`.
-
-### Step 3: Build the Dossier via `scripts/dossier_builder_template.py`
-Write `<RUN_DIR>/work/<SYMBOL>_spec.json` and render the HTML dossier:
-```bash
-.venv/bin/python scripts/dossier_builder_template.py \
-  --spec "<RUN_DIR>/work/<SYMBOL>_spec.json" \
-  --snapshot "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json" \
-  --out "docs/blogs/<MARKET>/<SYMBOL>_dossier.html"
-```
-
-### Step 4: Run Quality Gates & Reviewer
-1. `.venv/bin/python scripts/readability_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html`
-2. `.venv/bin/python scripts/citation_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html --research <RUN_DIR>/cache/research_<MARKET>_<date>.json --allow-stale-asof`
-3. `.venv/bin/python scripts/review_packet.py build --report docs/blogs/<MARKET>/<SYMBOL>_dossier.html --kind dossier --snapshots <RUN_DIR>/cache/snapshots_<MARKET>_<date>.json --research <RUN_DIR>/cache/research_<MARKET>_<date>.json --out-dir <RUN_DIR>/review/round_1 --round 1 --symbol <SYMBOL>`
-4. Run `report_reviewer` and `red_team` per `../_shared/REVIEWER_OPERATIONS.md`.
+1. **Pull Live Consumer-Tool & 10-Year Financial Snapshot (`scripts/stock_snapshot.py`):**
+   ```bash
+   .venv/bin/python scripts/stock_snapshot.py \
+     --market <MARKET> \
+     --symbols <SYMBOL> \
+     --stage2-file data/views/stage2_<MARKET>_latest.json \
+     --out "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json"
+   ```
+2. **Two-Sided Multi-Source Research:**
+   - Pull primary filings (Screener.in 10-year tables, BSE/NSE or SEC EDGAR 10-K/10-Q, investor presentations, latest concall transcripts) AND run dedicated web searches for both the **Bull thesis** and the **Bear/Skeptic thesis** (short-seller critiques, working-capital/cash conversion debates, competitive threats, analyst downgrades).
+3. **Multi-Stage Chapter Authoring (`<RUN_DIR>/work/<SYMBOL>/`):**
+   - Write `spine.json` and author `chapters/ch00.json` through `chapters/ch09.json` individually so each chapter achieves full 1,200–2,500 word analytical and narrative depth.
+4. **Compile All 4 Synchronized Formats (`scripts/dossier_builder_template.py`):**
+   ```bash
+   .venv/bin/python scripts/dossier_builder_template.py \
+     --spec "<RUN_DIR>/work/<SYMBOL>" \
+     --snapshot "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json" \
+     --out "docs/blogs/<MARKET>/<SYMBOL>_dossier.html"
+   ```
+5. **Run Quality Gates:**
+   - `.venv/bin/python scripts/readability_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html`
+   - `.venv/bin/python scripts/readability_check.py docs/blogs/<MARKET>/<SYMBOL>_book.html --book --min-words 11000`
+   - `.venv/bin/python scripts/citation_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html --research <RUN_DIR>/cache/research_<MARKET>_<date>.json --allow-stale-asof`

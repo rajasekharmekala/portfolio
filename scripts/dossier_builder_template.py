@@ -19,11 +19,15 @@ import argparse
 import html
 import json
 import os
+import re
 import sys
 from pathlib import Path
+from typing import List
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from assemble_report import build  # noqa: E402
+from dossier_schema import load_monograph_spec, strip_html, validate_monograph_spec, word_count  # noqa: E402
+from epub_builder import build_epub_book, build_markdown_book  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCORING_FILE = os.path.join(ROOT, ".agents", "config", "scoring.json")
@@ -741,15 +745,409 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     )
 
 
+def _render_callout_block(blk: dict) -> str:
+    variant = blk.get("variant", "primer")
+    title = blk.get("title", "")
+    ps = "".join(f"<p>{p}</p>" for p in blk.get("paragraphs", []))
+    if variant == "case":
+        sub = blk.get("subtitle", "")
+        sub_html = f'<span class="case-note-sub">{sub}</span>' if sub else ""
+        return (
+            '<div class="case-note">\n'
+            f'<div class="case-note-head"><h4 class="case-note-title">{title}</h4>{sub_html}</div>\n'
+            f"{ps}\n"
+            "</div>"
+        )
+    cls_map = {
+        "primer": "callout",
+        "rule": "callout callout-rule",
+        "warn": "callout callout-warn",
+    }
+    cls = cls_map.get(variant, "callout")
+    title_html = f'<p class="callout-title">{title}</p>\n' if title else ""
+    return f'<div class="{cls}">\n{title_html}{ps}\n</div>'
+
+
+def _build_edition_switcher(sym: str, active: str, web_words: int, book_words: int, audio_mins: int) -> str:
+    dossier_cls = "edition-tab is-active" if active == "dossier" else "edition-tab"
+    book_cls = "edition-tab is-active" if active == "book" else "edition-tab"
+    return (
+        '<div class="edition-switcher" role="navigation" aria-label="Dossier &amp; Book Editions">\n'
+        '  <div class="edition-tabs">\n'
+        f'    <a class="{dossier_cls}" href="{sym}_dossier.html">Web Research Dossier ({web_words:,} words • Tables &amp; Charts)</a>\n'
+        f'    <a class="{book_cls}" href="{sym}_book.html">Book &amp; Audiobook Edition ({book_words:,} words • ~{audio_mins} min listen)</a>\n'
+        '  </div>\n'
+        '  <div class="edition-downloads">\n'
+        f'    <a class="edition-dl-link" href="{sym}_book.epub" download="{sym}_book.epub">Download EPUB 3</a>\n'
+        f'    <a class="edition-dl-link" href="{sym}_book.md" download="{sym}_book.md">Download Markdown Book</a>\n'
+        '  </div>\n'
+        '</div>'
+    )
+
+
+def _build_audio_bar(sym: str, book_words: int, audio_mins: int) -> str:
+    return (
+        '<div class="book-audio-bar" role="region" aria-label="Audiobook Player Controls">\n'
+        '  <div class="book-audio-controls">\n'
+        '    <button type="button" class="book-audio-btn" data-audio-action="play">Play Audiobook</button>\n'
+        '    <button type="button" class="book-audio-btn secondary" data-audio-action="prev" title="Previous paragraph">&larr; Prev</button>\n'
+        '    <button type="button" class="book-audio-btn secondary" data-audio-action="next" title="Next paragraph">Next &rarr;</button>\n'
+        '    <button type="button" class="book-audio-btn secondary" data-audio-action="stop">Stop</button>\n'
+        '    <label>Speed: <select class="book-audio-select" data-audio-rate>\n'
+        '      <option value="1.0" selected>1.0x</option>\n'
+        '      <option value="1.15">1.15x</option>\n'
+        '      <option value="1.25">1.25x</option>\n'
+        '      <option value="1.5">1.5x</option>\n'
+        '    </select></label>\n'
+        '  </div>\n'
+        f'  <span class="book-audio-status" data-audio-status>Audiobook Edition • {book_words:,} words (~{audio_mins} min) • Ready to listen</span>\n'
+        '</div>'
+    )
+
+
+def render_10chapter_monograph_editions(
+    spec: dict,
+    facts: dict | None = None,
+    snapshots: dict | None = None,
+    out_dossier_path: str | Path = "",
+) -> dict:
+    """Compile Web Dossier HTML, Book/Audiobook HTML, EPUB 3, and Narrative Markdown from a 10-chapter spec."""
+    facts = facts or {}
+    snapshots = snapshots or {}
+    sym = spec["symbol"].upper()
+    market = spec["market"].upper()
+    as_of = spec.get("as_of") or snapshots.get("as_of") or facts.get("asof") or "latest"
+    inst_m = (facts.get("instruments") or {}).get(sym, {})
+    snap_sym = _lookup_snapshot(snapshots, sym)
+    scoring = json.load(open(SCORING_FILE, encoding="utf-8"))
+    cur = "₹" if market == "IN" else "$"
+
+    verdict = spec["verdict"]
+    v_cls = VERDICT_CLASS_MAP.get(verdict.upper(), "verdict-watch")
+    archetype = spec.get("archetype", "STAGE2_LEADER")
+    bucket = spec.get("strategy_bucket", "TACTICAL_MOMENTUM")
+
+    tv = snap_sym.get("tradingview") or {}
+    s2_ev = snap_sym.get("stage2_evaluation") or {}
+    close = tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
+    entry_low = spec["entry_zone_low"]
+    entry_high = spec["entry_zone_high"]
+    stop_loss = spec["stop_loss"]
+    band_position = (
+        "below price" if close is not None and entry_high < close
+        else "above price" if close is not None and entry_low > close
+        else "overlapping current price"
+    )
+    target_base = spec["target_base"]
+    target_bull = spec["target_bull"]
+    target_bear = spec["target_bear"]
+    asym = (
+        round((target_base - close) / (close - stop_loss), 2)
+        if (close and stop_loss and close > stop_loss)
+        else spec.get("asymmetry_ratio", 0.0)
+    )
+    entry_asym = (
+        round((target_base - entry_high) / (entry_high - stop_loss), 2)
+        if (entry_high and stop_loss and entry_high > stop_loss)
+        else asym
+    )
+
+    tier = spec.get("conviction_tier", "TIER_2")
+    w_stage = spec.get("weinstein_stage") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
+    entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
+    no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith(("NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
+    ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
+    if no_new_allocation:
+        ru["risk_adjusted_weight_pct"] = 0.0
+        ru["raw_risk_unit_weight_pct"] = 0.0
+        ru["risk_budget_bps"] = 0.0
+
+    kf_items = [
+        ("Verdict", f'<span class="verdict {v_cls}">{_esc(verdict)}</span> ({_esc(archetype)})'),
+        ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
+        ("Strategy Bucket", _esc(bucket)),
+        ("Weinstein Stage", _esc(w_stage)),
+        ("No-FOMO Entry Posture", _esc(entry_posture)),
+        (
+            "Scanner band (monitor only)" if no_new_allocation else "Support Buy Zone",
+            f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})",
+        ),
+        (
+            "Base / Bull Target",
+            f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)"
+            if no_new_allocation
+            else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)",
+        ),
+        ("Risk-Unit Sizing", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)})"),
+    ]
+    if spec.get("report_status"):
+        kf_items.append(("Report status", _esc(spec["report_status"])))
+    kf_html = (
+        '<dl class="key-figures">\n'
+        + "\n".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in kf_items)
+        + "\n</dl>"
+    )
+
+    _, stats = validate_monograph_spec(spec, min_total_words=1000)
+    web_words = stats.get("web_words", 0)
+    book_words = stats.get("book_words", 0)
+    audio_mins = max(1, stats.get("estimated_audio_minutes", round(book_words / 155)))
+
+    # Pre-build deterministic technical block (ch4_html) and sizing table (l3_html)
+    ch4_spec = spec.get("ch4") or spec.get("technical_spec") or {}
+    ch4_full_section = _build_ch4_from_snapshot_or_ledger(
+        sym,
+        market,
+        snap_sym,
+        inst_m,
+        {
+            "intro_prose": ch4_spec.get("intro_prose", f"We evaluate {sym}'s live TradingView moving averages, volume signature, and Stage 2 posture as of {as_of}."),
+            "gate_intro_prose": ch4_spec.get("gate_intro_prose", "We separate medium-term trend durability from immediate No-FOMO entry timing."),
+            "closing_prose": ch4_spec.get("closing_prose", "Technical structure and support distance govern when and how capital is deployed."),
+            **ch4_spec,
+        },
+        as_of,
+    )
+    # Extract inner content of ch4_full_section (without outer <section><h2>) when embedded inside a chapter
+    ch4_inner = re.sub(r"^<section[^>]*>\s*<h2>.*?</h2>\s*", "", ch4_full_section, flags=re.S)
+    ch4_inner = re.sub(r"</section>\s*$", "", ch4_inner, flags=re.S)
+
+    l3_rows = [
+        [
+            "Strategy bucket & conviction tier",
+            f"{_esc(bucket)} ({_esc(tier)})",
+            "Aligns capital allocation with durable trend, business quality, and balance-sheet resilience",
+        ],
+        [
+            "Action verdict & No-FOMO posture",
+            f'<span class="verdict {v_cls}">{_esc(verdict)}</span> ({_esc(entry_posture)})',
+            _esc(spec.get("verdict_rule_summary", "Buy at CMP only in early Stage 2 near support; wait for support when extended; avoid when Stage 4 or risk-reward fails")),
+        ],
+        [
+            "Screen band (monitor only)" if no_new_allocation else "Recommended buy / accumulation zone",
+            f"{cur}{entry_low:,.2f} to {cur}{entry_high:,.2f}",
+            (
+                f"Current price {cur}{close:,.2f}; band is {band_position}; no immediate allocation is recommended"
+                if no_new_allocation
+                else f"Current price {cur}{close:,.2f}; accumulate inside the support band after trend and valuation gates pass"
+            ),
+        ],
+        [
+            "Screen stop (monitor only)" if no_new_allocation else "Structural invalidation stop",
+            f"{cur}{stop_loss:,.2f} (screen reference)" if no_new_allocation else f"{cur}{stop_loss:,.2f}",
+            (
+                "Reference level only; not an active order while no position is authorized"
+                if no_new_allocation
+                else _esc(ch4_spec.get("stop_placement_explanation") or scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"]))
+            ),
+        ],
+        [
+            "Base / Bull / Bear scenario values",
+            f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}",
+            (
+                "Probability-weighted 12-month scenario values; no live entry reward/risk applies until trend/valuation gates clear"
+                if no_new_allocation
+                else f"Reward-to-risk ratio: {asym:.2f}:1 at CMP ({entry_asym:.2f}:1 from top of support zone)"
+            ),
+        ],
+        [
+            "Risk-unit initial sizing (portfolio heat)",
+            f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)}, {ru['risk_budget_bps']:.0f} bps risk budget)",
+            (
+                "Zero live allocation while entry or trend gates remain unresolved; recalculate on trigger confirmation"
+                if no_new_allocation
+                else f"Formula: min(Tier cap {ru['tier_range_pct']}, {ru['risk_budget_bps']:.0f} bps / {ru['stop_distance_pct']}% stop distance)"
+            ),
+        ],
+        [
+            "Let-winners-run rule",
+            ("Not applicable while no position is open" if no_new_allocation else f"Appreciated weight ceiling up to {ru['runaway_winner_cap_pct']}%"),
+            (
+                "Do not allocate or place an order before the entry gates pass"
+                if no_new_allocation
+                else "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break"
+            ),
+        ],
+    ]
+    l3_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in l3_rows]
+    l3_html = _render_table(
+        f"No-FOMO execution levels and risk-unit position sizing for {sym}",
+        ["Execution item", "Level / Sizing", "Rule and derivation"],
+        l3_rows,
+        spec.get(
+            "sizing_table_takeaway",
+            f"This execution table translates our {verdict} verdict on {sym} into concrete price levels, invalidation stops, and portfolio risk-budget sizing.",
+        ),
+    )
+
+    primer_html = (
+        '<section class="primer" id="primer">\n'
+        "<h2>Executive Thesis &amp; Before You Read</h2>\n"
+        f"<p>{spec['primer']}</p>\n"
+        "</section>"
+    )
+    primer_book_html = (
+        '<section class="primer" id="primer">\n'
+        "<h2>Executive Thesis &amp; Before You Listen</h2>\n"
+        f"<p>{strip_html(spec['primer'])}</p>\n"
+        "</section>"
+    )
+
+    web_sections: List[str] = []
+    book_sections: List[str] = []
+    chapters = spec.get("chapters", [])
+
+    for idx, ch in enumerate(chapters):
+        cid = ch.get("id") or f"ch-{idx}"
+        w_title = ch.get("web_title") or ch.get("book_title") or f"Chapter {idx}"
+        b_title = ch.get("book_title") or ch.get("web_title") or f"Chapter {idx}"
+        question = ch.get("question") or ch.get("kicker") or ""
+
+        # 1. Web section
+        w_parts = [f'<section class="chapter" id="{_esc(cid)}">', f"<h2>{_esc(w_title)}</h2>"]
+        if question:
+            w_parts.append(f'<div class="section-summary"><strong>Core Investor Question:</strong> {_esc(question)}</div>')
+        for blk in ch.get("web_blocks", []):
+            btype = blk.get("type", "p")
+            if btype == "p":
+                w_parts.append(f"<p>{blk.get('html') or blk.get('text', '')}</p>")
+            elif btype == "h3":
+                w_parts.append(f"<h3>{_esc(blk.get('title', ''))}</h3>")
+            elif btype == "table":
+                w_parts.append(
+                    _render_table(
+                        blk.get("caption", ""),
+                        blk.get("headers", []),
+                        blk.get("rows", []),
+                        blk.get("takeaway", ""),
+                    )
+                )
+            elif btype == "callout":
+                w_parts.append(_render_callout_block(blk))
+            elif btype == "estimate":
+                w_parts.append(_render_estimate(blk))
+            elif btype == "tradingview_chart":
+                w_parts.append(ch4_inner)
+            elif btype == "sizing_table":
+                w_parts.append("<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>")
+                w_parts.append(l3_html)
+            elif btype == "trigger":
+                w_parts.append(f'<p class="trigger">{blk.get("html") or blk.get("text", "")}</p>')
+        w_parts.append("</section>")
+        web_sections.append("\n".join(w_parts))
+
+        # 2. Book / Audiobook section
+        ch_b_words = sum(word_count(p) for p in ch.get("book_paragraphs", [])) + sum(
+            word_count(p) for sub in ch.get("book_subsections", []) for p in sub.get("paragraphs", [])
+        )
+        ch_mins = max(1, round(ch_b_words / 155))
+        b_parts = [
+            f'<section class="chapter book-chapter" id="{_esc(cid)}" data-audio-chapter="{idx}">',
+            f"<h2>{_esc(b_title)}</h2>",
+            '<div class="chapter-meta-strip">'
+            f'<span class="chapter-question">{_esc(strip_html(question))}</span>'
+            f'<span class="chapter-listen-time">~{ch_mins} min listen • {ch_b_words:,} words</span>'
+            "</div>",
+        ]
+        for bp in ch.get("book_paragraphs", []):
+            b_parts.append(f"<p>{_esc(strip_html(bp))}</p>")
+        for sub in ch.get("book_subsections", []):
+            if sub.get("title"):
+                b_parts.append(f"<h3>{_esc(strip_html(sub['title']))}</h3>")
+            for bp in sub.get("paragraphs", []):
+                b_parts.append(f"<p>{_esc(strip_html(bp))}</p>")
+        b_parts.append("</section>")
+        book_sections.append("\n".join(b_parts))
+
+    ge_html = ""
+    if spec.get("gate_exceptions"):
+        ge_ps = "".join(f"<p>{p}</p>" for p in spec["gate_exceptions"])
+        ge_html = f'<section class="chapter" id="gate-exceptions">\n<h2>Run notes and gate exceptions</h2>\n{ge_ps}\n</section>\n'
+
+    cites_li = "\n".join(f'<li id="cite_note-{i}">{c}</li>' for i, c in enumerate(spec["citations"], 1))
+    notes_html = (
+        '<section id="notes">\n'
+        '<h2 id="references">Notes and sources</h2>\n'
+        f'<ol class="sources reflist">\n{cites_li}\n</ol>\n'
+        "</section>"
+    )
+
+    web_body_html = "\n\n".join(
+        [
+            f"<h1>{_esc(spec['title'])}</h1>",
+            _build_edition_switcher(sym, "dossier", web_words, book_words, audio_mins),
+            kf_html,
+            primer_html,
+            "\n\n".join(web_sections),
+            ge_html + notes_html,
+        ]
+    )
+
+    book_title = spec.get("book_title") or f"{spec['title']} — The Investment & Audiobook Monograph"
+    book_body_html = "\n\n".join(
+        [
+            f"<h1>{_esc(book_title)}</h1>",
+            _build_edition_switcher(sym, "book", web_words, book_words, audio_mins),
+            _build_audio_bar(sym, book_words, audio_mins),
+            kf_html,
+            primer_book_html,
+            "\n\n".join(book_sections),
+            ge_html + notes_html,
+        ]
+    )
+
+    dossier_html = build(
+        web_body_html,
+        market=market,
+        facts=spec.get("facts_path", ""),
+        research=spec.get("research_paths", []),
+        kind="dossier",
+        workflow="Company research",
+        as_of=as_of,
+    )
+    book_html = build(
+        book_body_html,
+        market=market,
+        facts=spec.get("facts_path", ""),
+        research=spec.get("research_paths", []),
+        kind="dossier",
+        workflow="Company audiobook monograph",
+        as_of=as_of,
+    )
+
+    out_d_path = Path(out_dossier_path)
+    out_dir = out_d_path.parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_book_html_path = out_dir / f"{sym}_book.html"
+    out_epub_path = out_dir / f"{sym}_book.epub"
+    out_md_path = out_dir / f"{sym}_book.md"
+
+    # Write EPUB and Markdown first so assemble/portal link checks see them on disk
+    build_epub_book(spec, chapters, kf_items, audio_mins, book_words, out_epub_path)
+    build_markdown_book(spec, chapters, kf_items, audio_mins, book_words, out_md_path)
+    out_book_html_path.write_text(book_html, encoding="utf-8")
+    out_d_path.write_text(dossier_html, encoding="utf-8")
+
+    return {
+        "dossier_html": str(out_d_path),
+        "book_html": str(out_book_html_path),
+        "epub": str(out_epub_path),
+        "markdown": str(out_md_path),
+        "web_words": web_words,
+        "book_words": book_words,
+        "audio_minutes": audio_mins,
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--spec", required=True, help="Path to structured company spec JSON")
+    ap.add_argument("--spec", required=True, help="Path to structured company spec JSON or chapter directory")
     ap.add_argument("--snapshot", default="", help="Path to stock_snapshot.py JSON output")
     ap.add_argument("--facts", default="", help="Optional path to market_facts JSON ledger")
     ap.add_argument("--out", required=True, help="Output dossier HTML path")
     args = ap.parse_args()
 
-    spec = json.loads(Path(args.spec).read_text(encoding="utf-8"))
+    spec = load_monograph_spec(args.spec)
     if args.facts:
         spec.setdefault("facts_path", args.facts)
     facts = json.loads(Path(args.facts).read_text(encoding="utf-8")) if args.facts and Path(args.facts).exists() else {}
@@ -758,10 +1156,20 @@ def main() -> None:
         if args.snapshot and Path(args.snapshot).exists()
         else {}
     )
-    html_out = render_book_dossier(spec, facts=facts, snapshots=snapshots)
-    os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
-    Path(args.out).write_text(html_out, encoding="utf-8")
-    print(f"wrote book dossier: {args.out} ({len(html_out):,} bytes)")
+    if isinstance(spec.get("chapters"), list) and spec["chapters"]:
+        res = render_10chapter_monograph_editions(spec, facts=facts, snapshots=snapshots, out_dossier_path=args.out)
+        print(
+            f"wrote 4-edition monograph for {spec['symbol']}:\n"
+            f"  - Web Dossier: {res['dossier_html']} ({res['web_words']:,} words)\n"
+            f"  - Book HTML:   {res['book_html']} ({res['book_words']:,} words, ~{res['audio_minutes']} min audio)\n"
+            f"  - EPUB 3:      {res['epub']}\n"
+            f"  - Markdown:    {res['markdown']}"
+        )
+    else:
+        html_out = render_book_dossier(spec, facts=facts, snapshots=snapshots)
+        os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+        Path(args.out).write_text(html_out, encoding="utf-8")
+        print(f"wrote book dossier: {args.out} ({len(html_out):,} bytes)")
 
 
 if __name__ == "__main__":

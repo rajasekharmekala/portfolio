@@ -256,7 +256,7 @@ def read_entry(path, dates, updates):
         if re.search(pattern, workflow, re.I):
             workflow = name
             break
-    return {"id": relative, "url": relative, "title": title[:220], "kind": kind,
+    entry_out = {"id": relative, "url": relative, "title": title[:220], "kind": kind,
             "symbol": symbol, "market": market,
             "sector": sector, "verdict": verdict, "summary": summary[:360],
             "generatedAt": generated_at,
@@ -267,6 +267,12 @@ def read_entry(path, dates, updates):
             "reportDate": metadata.get("research-as-of") or (report_date.group() if report_date else None),
             "workflow": completion.get("workflow") or metadata.get("report-workflow") or ("Company research" if kind == "dossier" else workflow),
             "highlights": completion.get("highlights", []), "completed": bool(completion)}
+    if kind == "dossier" and symbol:
+        for field, ext in (("bookUrl", "_book.html"), ("epubUrl", "_book.epub"), ("mdUrl", "_book.md")):
+            sib = path.parent / f"{symbol}{ext}"
+            if sib.is_file():
+                entry_out[field] = sib.relative_to(DOCS).as_posix()
+    return entry_out
 
 
 def require_modern_report(path, require_generated=False):
@@ -377,7 +383,8 @@ def build_catalog(completed=(), workflow=None, market=None, summary=None, highli
         if not path.is_file() or path.suffix != ".html" or not relative.startswith(("blogs/", "reports/")):
             raise ValueError("Completion must reference an existing published HTML report")
         require_modern_report(path, require_generated=True)
-        updates[relative] = {"completedAt": now, "workflow": workflow, "market": market, "summary": summary, "highlights": list(highlights)}
+        file_market = relative.split("/")[1] if relative.startswith(("blogs/IN/", "blogs/US/")) else market
+        updates[relative] = {"completedAt": now, "workflow": workflow, "market": file_market, "summary": summary, "highlights": list(highlights)}
     paths = sorted(set(DOCS.glob("blogs/**/*_dossier.html")) | set(DOCS.glob("reports/**/*.html")))
     paths = [path for path in paths if not BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser").select_one('meta[name="report-redirect"]')]
     updates = {key: value for key, value in updates.items() if (DOCS / key).is_file()}

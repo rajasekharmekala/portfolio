@@ -272,6 +272,12 @@
   function renderDossierRow(e) {
     const hasVerdict = e.verdict && e.verdict !== "Not specified";
     const sub = e.sector && e.sector !== "Not specified" ? e.sector : "Stage 2 Leader";
+    const bookBadge = e.bookUrl
+      ? ` <span class="symbol-pill" role="link" tabindex="0" title="Open Audiobook &amp; Book Edition" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='${escapeHtml(e.bookUrl)}'">Book / Audio</span>`
+      : "";
+    const epubBadge = e.epubUrl
+      ? ` <span class="symbol-pill" role="link" tabindex="0" title="Download EPUB 3 E-Book" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='${escapeHtml(e.epubUrl)}'">EPUB</span>`
+      : "";
     return `
       <a class="dossier-row" href="${escapeHtml(e.url)}">
         <div class="dossier-code">
@@ -279,7 +285,7 @@
           <span class="symbol-pill">${escapeHtml(e.symbol || e.title.slice(0, 8))}</span>
         </div>
         <div>
-          <div class="dossier-title">${escapeHtml(e.symbol || e.title)}</div>
+          <div class="dossier-title">${escapeHtml(e.symbol || e.title)}${bookBadge}${epubBadge}</div>
           <div class="dossier-sub">${escapeHtml(sub)}</div>
         </div>
         <p class="dossier-summary">${escapeHtml(e.summary || e.title)}</p>

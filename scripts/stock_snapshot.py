@@ -249,13 +249,32 @@ def fetch_tradingview_batch(market: str, symbols: List[str]) -> Dict[str, Dict[s
     return out
 
 
+def _extract_screener_table(soup: BeautifulSoup, section_id: str) -> Dict[str, Any]:
+    """Extract headers and rows from a Screener.in data-table section."""
+    sec = soup.select_one(f"#{section_id}")
+    if not sec:
+        return {}
+    tbl = sec.select_one("table.data-table")
+    if not tbl:
+        return {}
+    headers = [re.sub(r"\s+", " ", th.get_text(" ", strip=True)).strip() for th in tbl.select("thead th")]
+    rows: Dict[str, List[str]] = {}
+    for tr in tbl.select("tbody tr"):
+        cells = [re.sub(r"\s+", " ", td.get_text(" ", strip=True)).strip() for td in tr.select("td, th")]
+        if len(cells) >= 2:
+            label = cells[0].rstrip("+").strip()
+            if label:
+                rows[label] = cells[1:]
+    return {"headers": headers[1:] if len(headers) > 1 else headers, "rows": rows}
+
+
 def fetch_screener_in(symbol: str) -> Dict[str, Any]:
-    """Extract top ratios and quarterly highlights from Screener.in for an Indian symbol."""
+    """Extract top ratios, 10-year financial tables, and quarterly highlights from Screener.in for an Indian symbol."""
     screener_symbol = load_screener_aliases("IN").get(symbol.upper(), symbol)
     for suffix in ("consolidated/", ""):
         url = f"https://www.screener.in/company/{screener_symbol}/{suffix}"
         try:
-            r = requests.get(url, headers=HEADERS, timeout=10)
+            r = requests.get(url, headers=HEADERS, timeout=12)
             if r.status_code != 200:
                 continue
             soup = BeautifulSoup(r.text, "html.parser")
@@ -266,19 +285,18 @@ def fetch_screener_in(symbol: str) -> Dict[str, Any]:
                 if name_el and val_el:
                     k = re.sub(r"\s+", " ", name_el.get_text(" ", strip=True)).strip()
                     v = re.sub(r"\s+", " ", val_el.get_text(" ", strip=True)).strip()
-                    # Screener's consolidated route can render labels with empty values
-                    # when it has no consolidated statement. Treat that as a miss so the
-                    # standalone route is tried instead of returning placeholder ratios.
                     if _parse_float(v) is None:
                         continue
                     ratios[k] = v
             if not ratios:
                 continue
-            # Also extract pros/cons if available
-            pros = [li.get_text(" ", strip=True) for li in soup.select(".pros ul li")[:4]]
-            cons = [li.get_text(" ", strip=True) for li in soup.select(".cons ul li")[:4]]
+            pros = [li.get_text(" ", strip=True) for li in soup.select(".pros ul li")[:6]]
+            cons = [li.get_text(" ", strip=True) for li in soup.select(".cons ul li")[:6]]
+            about_el = soup.select_one(".company-profile .about p") or soup.select_one(".about p")
+            about_text = re.sub(r"\s+", " ", about_el.get_text(" ", strip=True)).strip() if about_el else ""
             return {
                 "source_url": url,
+                "about": about_text,
                 "ratios": ratios,
                 "roce_pct": _parse_float(ratios.get("ROCE")),
                 "roe_pct": _parse_float(ratios.get("ROE")),
@@ -287,6 +305,14 @@ def fetch_screener_in(symbol: str) -> Dict[str, Any]:
                 "dividend_yield_pct": _parse_float(ratios.get("Dividend Yield")),
                 "pros": pros,
                 "cons": cons,
+                "tables": {
+                    "quarters": _extract_screener_table(soup, "quarters"),
+                    "profit_loss": _extract_screener_table(soup, "profit-loss"),
+                    "balance_sheet": _extract_screener_table(soup, "balance-sheet"),
+                    "cash_flow": _extract_screener_table(soup, "cash-flow"),
+                    "ratios": _extract_screener_table(soup, "ratios"),
+                    "shareholding": _extract_screener_table(soup, "shareholding"),
+                },
             }
         except Exception:
             continue
@@ -447,7 +473,7 @@ def evaluate_stage2_and_entry_posture(
 
     # TheWrap membership is an industry context signal, not a stock-stage
     # verdict. Classify the stock from its own price and moving averages.
-    if sma30w and sma50 and close > sma30w and close >= sma50 * 0.98:
+    if sma30w and sma50 and close >= sma30w and close >= sma50 * 0.98:
         stage = "STAGE_2"
     elif sma30w and close >= sma30w and sma50 and close < sma50:
         stage = "STAGE_3"  # Pullback / consolidation above 30-week / 200-day average

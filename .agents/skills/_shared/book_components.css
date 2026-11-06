@@ -147,3 +147,151 @@ dfn {
   margin-right: 0.4rem;
   border-radius: 1px;
 }
+
+/* === Dual-Edition Switcher & Audiobook Reader Components === */
+.edition-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin: 0.85rem 0 1.25rem;
+  padding: 0.65rem 0.95rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--navy);
+  font-size: 0.86rem;
+}
+.edition-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.edition-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--link);
+  font-weight: 700;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.edition-tab.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #ffffff !important;
+}
+.edition-tab.is-active:visited {
+  color: #ffffff !important;
+}
+.edition-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.edition-dl-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+  color: var(--ink-strong);
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* Built-in Audiobook / TTS Reader Bar for SYMBOL_book.html */
+.book-audio-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin: 0.75rem 0 1.35rem;
+  padding: 0.75rem 1rem;
+  background: var(--primer-tint);
+  border: 1px solid var(--primer-accent);
+  border-left: 5px solid var(--primer-accent);
+  font-size: 0.86rem;
+}
+.book-audio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.book-audio-btn {
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--navy);
+  background: var(--navy);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.book-audio-btn.secondary {
+  background: var(--surface);
+  color: var(--navy);
+}
+.book-audio-btn:hover {
+  background: var(--navy-hover);
+  color: #ffffff;
+}
+.book-audio-select {
+  padding: 0.28rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+}
+.book-audio-status {
+  color: var(--ink-strong);
+  font-weight: 600;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Book-edition typography & chapter banners */
+.book-chapter p {
+  font-size: 1.03rem;
+  line-height: 1.72;
+  margin: 0.75rem 0 1.05rem;
+}
+.book-chapter p.is-speaking {
+  background: var(--primer-tint);
+  border-left: 3px solid var(--primer-accent);
+  padding-left: 0.65rem;
+}
+.chapter-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.35rem 0 0.95rem;
+  padding: 0.55rem 0.85rem;
+  background: var(--surface-alt);
+  border-left: 4px solid var(--navy);
+  font-size: 0.88rem;
+}
+.chapter-question {
+  font-weight: 600;
+  color: var(--ink-strong);
+}
+.chapter-listen-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}

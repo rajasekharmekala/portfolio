@@ -76,4 +76,77 @@
   addEventListener('resize', schedule);
   addEventListener('load', schedule, {once: true});
   update();
+
+  // Interactive Audiobook / Narrative Reader Bar (activates on *_book.html pages)
+  const audioBar = document.querySelector('.book-audio-bar');
+  if (audioBar && 'speechSynthesis' in window) {
+    const playBtn = audioBar.querySelector('[data-audio-action="play"]');
+    const prevBtn = audioBar.querySelector('[data-audio-action="prev"]');
+    const nextBtn = audioBar.querySelector('[data-audio-action="next"]');
+    const stopBtn = audioBar.querySelector('[data-audio-action="stop"]');
+    const rateSel = audioBar.querySelector('[data-audio-rate]');
+    const statusEl = audioBar.querySelector('[data-audio-status]');
+    const paragraphs = [...report.querySelectorAll('.book-chapter p')];
+    let idx = 0;
+    let playing = false;
+
+    const clearHighlight = () => paragraphs.forEach(p => p.classList.remove('is-speaking'));
+    const speakCurrent = () => {
+      if (!playing || idx < 0 || idx >= paragraphs.length) {
+        playing = false;
+        clearHighlight();
+        if (playBtn) playBtn.textContent = 'Play Audiobook';
+        if (statusEl) statusEl.textContent = 'Ready to listen';
+        return;
+      }
+      speechSynthesis.cancel();
+      clearHighlight();
+      const para = paragraphs[idx];
+      para.classList.add('is-speaking');
+      para.scrollIntoView({block: 'center', behavior: 'smooth'});
+      const sec = para.closest('.book-chapter');
+      const chTitle = sec?.querySelector('h2')?.textContent.trim() || 'Book';
+      if (statusEl) statusEl.textContent = `Reading (${idx + 1}/${paragraphs.length}) • ${chTitle.slice(0, 48)}`;
+      const utter = new SpeechSynthesisUtterance(para.textContent.trim());
+      utter.rate = parseFloat(rateSel?.value || '1.0') || 1.0;
+      utter.onend = () => {
+        if (!playing) return;
+        idx += 1;
+        speakCurrent();
+      };
+      speechSynthesis.speak(utter);
+    };
+
+    playBtn?.addEventListener('click', () => {
+      if (playing) {
+        playing = false;
+        speechSynthesis.cancel();
+        playBtn.textContent = 'Resume Audiobook';
+        if (statusEl) statusEl.textContent = `Paused at paragraph ${idx + 1}/${paragraphs.length}`;
+      } else {
+        playing = true;
+        playBtn.textContent = 'Pause';
+        speakCurrent();
+      }
+    });
+    prevBtn?.addEventListener('click', () => {
+      idx = Math.max(0, idx - 1);
+      if (playing) speakCurrent();
+    });
+    nextBtn?.addEventListener('click', () => {
+      idx = Math.min(paragraphs.length - 1, idx + 1);
+      if (playing) speakCurrent();
+    });
+    stopBtn?.addEventListener('click', () => {
+      playing = false;
+      idx = 0;
+      speechSynthesis.cancel();
+      clearHighlight();
+      if (playBtn) playBtn.textContent = 'Play Audiobook';
+      if (statusEl) statusEl.textContent = 'Ready to listen';
+    });
+    rateSel?.addEventListener('change', () => {
+      if (playing) speakCurrent();
+    });
+  }
 })();
