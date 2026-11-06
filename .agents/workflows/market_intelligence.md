@@ -24,6 +24,10 @@ Build the ledger with `ledger_screen` from `markets.<MKT>`. Check the output: `r
 
 Work through the ledger's `research_needs` for the market (`research_key` in `markets.json`), using the duck-duck-go MCP as `_COMMON.md` describes. Record results in the research file.
 
+## 4A. Stage 2 pass (IN only)
+
+Run the stage2 skill's Sections 1–2 (`.agents/skills/stage2_sector_momentum`): `stage2_scanner.py --market IN --min-mcap 1000`, then `stock_snapshot.py` with `--from-watchlist --from-shortlist --from-holdings --prune-watchlist`. Save both outputs in `<RUN_DIR>/cache/`. Apply the skill's 50% IN cluster line and its No-FOMO rule. The results become Section 2A of the report and feed the story brief, Section 6 and Section 7.
+
 ## 5. Story brief
 
 Write the private story brief (6–8 bullets) as `<RUN_DIR>/work/brief.md`, following the market intelligence skill (`skills[market_intelligence]`). Every section must serve it.
@@ -44,7 +48,7 @@ It must print `RESULT: PASS`.
 
 ## 8. Watchlist ingestion
 
-Update the watchlist JSON record file for this market with the names from the screen that the skill's section 7 allows. Use header names to find columns. Do not add a name the report does not name in its ingestion section.
+Update the watchlist JSON record file for this market with the names from the screen that the skill's section 7 allows. For IN, also add the Stage 2 names that Section 2A.4 records (2–5 maximum, 25-name cap). Use header names to find columns. Do not add a name the report does not name in its ingestion section.
 
 ## 9. Reviewer gate and delivery
 

@@ -65,7 +65,7 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
 <!-- MARKET IN -->
 1. **Data first:** run `.venv/bin/python scripts/market_facts.py --market IN --date <session> --screen nifty500 --run-dir "<RUN_DIR>"`. Every price, DMA, RSI, ATR, volume multiple, Weinstein stage, regime label, breadth figure, sector quadrant and both 30-name lists must come from `<RUN_DIR>/cache/facts_IN_<date>.json`. `N/A` is a last resort after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results recorded in `<RUN_DIR>/cache/research_IN_<date>.json` with source URL and as-of date) and a second source have all failed (max 5% of table cells). FII/DII flows, NSE option-chain OI/PCR, FII index futures, bulk/block deals, delivery %, results dates and catalysts come from that pass, not from memory. Use precise date-stamped queries, fetch and read the actual page (snippets are not evidence), try direct NSE archive URLs first, and cross-check headline figures with a second source. Never carry forward the previous report's names or publish a "revalidation pending" list; publish exactly `screen.bull_pick` and `screen.bear_pick` (10 per cap tier, company names and sectors from the pick rows, `qualifier` shown and explained).
 2. **Write high-signal institutional intelligence (zero fluff):** start directly with the 150-300 word executive lede; each section opens with analytical context and closes with a takeaway; `casenote` analyses (80+ words: what the company does, numbers with meaning, verdict, rule behind it, what changes it, with prices) for the Top 3 setups and spotlight leaders; `triggers` if/then blocks per section; methodology & data-gaps note. Strictly NO beginner primers explaining the report, NO 'how to read this table' blocks, and NO glossaries. Focus on data-density, causal reasoning, and trade decisions.
-3. **One story:** one regime label (ledger `regime.label`) used verbatim in the infobox, Section 1 and Section 6; the Bull List is drawn from leading sectors and the Bear List from lagging ones (exceptions named); the Section 6 Top 3 come only from Section 3 and are sized by the regime table; Section 7 ingests only those names. Read the same-date `Portfolio_Audit_*.html` first and reconcile every shared ticker's price and stage.
+3. **One story:** one regime label (ledger `regime.label`) used verbatim in the infobox, Section 1 and Section 6; the Bull List is drawn from leading sectors and the Bear List from lagging ones (exceptions named); the Section 6 Top 3 come only from Section 3 and are sized by the regime table; Section 7 ingests only those names. Read the same-date `Portfolio_Audit_*.html` first and reconcile every shared ticker's price and stage. For IN, Section 2A is part of the same story: a Section 3 Bull List name must not carry a Stage 3 or Stage 4 verdict in 2A, Section 6 setups must cite their 2A No-FOMO verdict, and the regime stance in Section 6 must say whether the 2A cluster breadth supports or contradicts it.
 4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/Daily_Market_Intelligence_<date>.html --kind market_intel --facts <RUN_DIR>/cache/facts_IN_<date>.json` must print `PASS` before the Drive save and email. The HTML skeleton below is table scaffolding only: every `{{NARRATIVE_*}}` slot, plus an intro `<p>` before and a takeaway `<p>` after every table, must be written as full prose.
 <!-- /MARKET -->
 <!-- MARKET US -->
@@ -711,6 +711,44 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <!-- /MARKET -->
 <!-- MARKET US -->
 <p>{{NARRATIVE_S2_THEMES}}</p><!-- 3-4 paragraphs, one per theme actually visible in the ledger (e.g. AI infrastructure, software, power/grid, defense): operational driver, ledger evidence, best proxy, what would invalidate it. Close with the bridge to the Bull/Bear lists. -->
+<!-- /MARKET -->
+
+<!-- MARKET IN -->
+<!-- SECTION 2A: STAGE 2 BREADTH & MOMENTUM RADAR (IN ONLY; from .agents/skills/stage2_sector_momentum, Sections 1-6 of that skill) -->
+<h2 id="section2a">2A. Stage 2 Breadth &amp; Momentum Radar</h2>
+<p>{{NARRATIVE_S2A_OPENING}}</p><!-- dashboard's own as-of date and weekly freshness; new additions and continuing count; the cluster line used (IN 50%) and why; which sectors are Super-Clusters, Emerging and Avoid. -->
+
+<h3>2A.1 Sector Cluster Matrix (IN line 50%)</h3>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr><th>Sector</th><th class="num">% in Stage 2</th><th>Cluster</th><th>Evidence &amp; Read-Through to Section 3</th></tr>
+  </thead>
+  <tbody>
+    <!-- every sector from the Stage 2 dashboard at or above the 40% Emerging floor; Not Classified excluded; cluster from the stage2 skill's IN line -->
+  </tbody>
+</table>
+</div>
+<p>{{NARRATIVE_S2A_CLUSTERS}}</p><!-- takeaway: which clusters the Bull List should draw from and which the Bear List should flag. -->
+
+<h3>2A.2 Stage 2 Breakout &amp; Momentum Setups (No-FOMO verdicts)</h3>
+<div class="table-wrapper">
+<table class="wikitable">
+  <thead>
+    <tr><th>Security &amp; Links</th><th>Stage 2 Status</th><th class="num">CMP (₹)</th><th class="num">Support Zone (₹)</th><th class="num">Extension from 10W EMA</th><th class="num">RSI(14)</th><th>No-FOMO Verdict</th></tr>
+  </thead>
+  <tbody>
+    <!-- new additions and top Stage 2 names from the snapshot; verdict IMMEDIATE_BUY or WAIT_FOR_SUPPORT with the stage2 skill's rule named -->
+  </tbody>
+</table>
+</div>
+<p>{{NARRATIVE_S2A_SETUPS}}</p><!-- takeaway: which setups pass the No-FOMO rule, which are extended, and which names Section 6 may use. -->
+
+<h3>2A.3 Holdings &amp; Shortlist Stage 2 Health Check</h3>
+<p>{{NARRATIVE_S2A_HEALTH}}</p><!-- each holding and shortlist name against its Stage 2 stage and TradingView trend: leaders to let run, extended names, and any Stage 3/4 warning. -->
+
+<h3>2A.4 Watchlist Pruning &amp; Ingestion</h3>
+<p>{{NARRATIVE_S2A_INGESTION}}</p><!-- names pruned to archive (Stage 4 or rejected) and names added to data/watchlist/IN.json (2-5 maximum, 25-name cap); say when no fresh candidate qualified. -->
 <!-- /MARKET -->
 
 <!-- SECTION 3: THE BULL LIST (30 STAGE 2 LONGS) -->

@@ -27,8 +27,9 @@ Execute the **Stage 2 Sector Momentum & Consumer-Tool Snapshot Engine**:
    - Query live TradingView technicals (`SMA10`, `SMA20`, `SMA50`, `SMA200`, `SMA30|1W` [30-week SMA], `EMA10`, `EMA20`, `EMA50`, `EMA200`, `EMA10|1W`, `RSI-14`, `ATR-14`, 10d/30d volume ratios, classic pivots, Technical Rating) and Screener.in (`IN`) / Finviz (`US`) valuation metrics.
    - Automatically prune broken `STAGE_4` / rejected entries from `data/watchlist/<MKT>.json` (`active` $\to$ `archive`) so the watchlist stays focused.
 3. **Rank Momentum Sectors & Industries:**
-   - Identify **Super-Clusters** ($>60\%$ in Stage 2 for IN; $>75\%$ outperforming S&P 500 and $>65\%$ above 200D/50D EMA for US).
-   - Identify **Emerging Rotation Clusters** ($40\text{--}60\%$ in Stage 2 or surging 1W/2W industry returns with low stock correlation).
+   - Identify **Super-Clusters** ($>50\%$ in Stage 2 for IN; $>75\%$ outperforming S&P 500 and $>65\%$ above 200D/50D EMA for US).
+   - Identify **Emerging Rotation Clusters** ($40\text{--}50\%$ in Stage 2 for IN, $40\text{--}60\%$ for US, or surging 1W/2W industry returns with low stock correlation).
+    - **Cluster lines differ by market on purpose.** The IN line was lowered from 60% to 50% on 2026-11-06 to match the breadth TheWrap publishes. The US rule is not interchangeable: TheWrap US publishes benchmark-relative and moving-average breadth, so the US line uses those measures. Never apply the IN line to US or the US rule to IN.
    - Identify **Deteriorating / Avoid Zones** ($<30\%$ in Stage 2 or $<35\%$ above 50D EMA).
 4. **Categorize Candidate Stocks into Conviction Tiers & No-FOMO Entry Groups:**
    - **Conviction Tiers:**
@@ -41,7 +42,7 @@ Execute the **Stage 2 Sector Momentum & Consumer-Tool Snapshot Engine**:
 5. **Audit Current Holdings & Shortlist Against Stage 2 Trends:**
    - Show how each open holding and shortlist candidate stacks up in the Stage 2 sector matrix and TradingView trend structure.
 6. **Synchronize `data/watchlist/<MKT>.json` & Publish Report:**
-   - Ingest top fresh Stage 2 breakout leads into `data/watchlist/<MKT>.json` (validated via `scripts/data_layer.py --market <MKT> --validate`) and assemble `docs/reports/<MKT>_Stage2_Sector_Momentum.html`.
+   - Ingest top fresh Stage 2 breakout leads into `data/watchlist/<MKT>.json` (validated via `scripts/data_layer.py --market <MKT> --validate`) and pass the results to the Market Intelligence run as its Section 2A. This skill no longer publishes a standalone page.
 
 ---
 
@@ -99,9 +100,9 @@ Run `.venv/bin/python scripts/data_layer.py --market <MKT> --validate` immediate
 
 ---
 
-## 3. Deliverable Structure (`docs/reports/<MKT>_Stage2_Sector_Momentum.html`)
+## 3. Deliverable Structure (Market Intelligence Section 2A, IN)
 
-Write a comprehensive, high-signal Research Desk report (`<RUN_DIR>/work/body.html`) and assemble it with `scripts/assemble_report.py --market <MKT> --kind report --workflow stage2_sector_momentum --as-of <date>`. At the top state the verified latest completed market-session date and local run date; explain normal weekend or holiday differences without implying a data failure. Separately label the dashboard's verified update date and weekly freshness, or state that its date is unknown.
+Write Section 2A as an HTML fragment (`<RUN_DIR>/work/sections/02a_stage2.html`) that the Market Intelligence workflow assembles into its report, following its skeleton and voice rules. Keep the six sub-parts below; Section 2A does not restate Section 3's full bull list. At the top state the verified latest completed market-session date and local run date; explain normal weekend or holiday differences without implying a data failure. Separately label the dashboard's verified update date and weekly freshness, or state that its date is unknown.
 
 1. **Executive Summary & Breadth Pulse:**
    - Summary KPI cards (`<dl class="key-figures">`): Universe filtered count, Continuing/Breakout counts, Top Stage 2 Sector, Watchlist Pruned count, and New Watchlist Additions.
