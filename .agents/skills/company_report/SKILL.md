@@ -12,11 +12,17 @@ description: >-
   Trading/Momentum, Medium-Term Inflection, and Long-Term Compounding (or Stay Away).
 ---
 
-> **Design & 4-Edition Compiler (binding):** read `../_shared/REPORT_DESIGN.md`. Author the monograph chapter-by-chapter in `<RUN_DIR>/work/<SYMBOL>/` (`spine.json` + `chapters/ch00.json` .. `ch09.json`) and compile all four synchronized editions with `scripts/dossier_builder_template.py --spec <RUN_DIR>/work/<SYMBOL> --snapshot <snapshots.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html`:
-> 1. `docs/blogs/<MARKET>/<SYMBOL>_dossier.html` — Web Research Desk Edition (10-year tables, unit-economics matrices, interactive TradingView chart, External Learning Hub, inline `[N]` citations).
-> 2. `docs/blogs/<MARKET>/<SYMBOL>_book.html` — Book & Audiobook Web Reader Edition (12,000–18,000 words, ~75–90 min audio, zero raw tables or `<sup>` tags in spoken prose, built-in Web Speech / Voice Companion player bar).
-> 3. `docs/blogs/<MARKET>/<SYMBOL>_book.epub` — Downloadable EPUB 3 e-book.
-> 4. `docs/blogs/<MARKET>/<SYMBOL>_book.md` — Downloadable Narrative Markdown book for `book-companion` / `live-companion`.
+> **Design & 5-Edition Compiler (binding):** read `../_shared/REPORT_DESIGN.md`. Author the monograph chapter-by-chapter in `<RUN_DIR>/work/<SYMBOL>/` (`spine.json` + `chapters/ch00.json` .. `ch09.json`) and compile all five synchronized editions with `scripts/dossier_builder_template.py --spec <RUN_DIR>/work/<SYMBOL> --snapshot <snapshots.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html`:
+> 1. `docs/blogs/<MARKET>/<SYMBOL>_dossier.html` — Web Research Desk Edition (`research-desk-v1`: 10-year tables, unit-economics matrices, interactive TradingView chart, External Learning Hub, inline `[N]` citations).
+> 2. `docs/blogs/<MARKET>/<SYMBOL>_book.html` — Masterclass Companion Book & Audiobook Web Reader (`masterclass-book-v1`: warm cream `#fdfbf7` paper, `Cinzel` / `Newsreader` literary serif typography, full Book Cover page, Roman-numeral TOC with 5-stat strip, chapter Epigraph Quotes, Drop-Caps, `NARRATOR'S REFLECTION`, `GLOBAL PARALLEL (US/INDIA/EUROPE)`, and `MENTAL MODEL` boxes, plus interactive Web Speech audio player).
+> 3. `docs/blogs/<MARKET>/<SYMBOL>_book.pdf` — WeasyPrint Masterclass Companion PDF Book.
+> 4. `docs/blogs/<MARKET>/<SYMBOL>_book.epub` — Standalone Masterclass EPUB 3 e-book.
+> 5. `docs/blogs/<MARKET>/<SYMBOL>_book.md` — Narrative Masterclass Markdown book for `book-companion` / `live-companion`.
+
+> **Lively Audiobook & Masterclass Book Narrative Rules (binding for `book_paragraphs`, `epigraph`, and `book_callouts`):**
+> - **Second-Person Mentor Voice:** Write the Book chapters as a seasoned institutional analyst sitting across the desk from the listener (`"you and I"`), using engaging rhetorical questions, vivid factory/customer walkthroughs, and clear spoken transitions.
+> - **3 Layers of Quotations:** (1) Every chapter opens with a framed `epigraph` quote (`{"quote": "...", "author": "..."}`); (2) weave verbatim CEO/CFO concall quotes and investor maxims into the prose; (3) include `NARRATOR'S REFLECTION` callout boxes (`"kind": "reflection"`).
+> - **Global Parallel Company Examples (US, India, and Europe):** Every chapter must connect the company's economics, moat, working-capital cycle, or valuation to concrete historical parallels across the US, India, or Europe (via prose and `"kind": "parallel"` callout boxes) so the listener grasps how similar business models and stock setups have played out globally.
 
 > **Zero LLM Math (binding):** never compute moving averages, RSI, volume multiples, or financial ratios in your head. All technical and valuation figures must come from `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz + TheWrap Stage 2 snapshot) and verified primary filings.
 

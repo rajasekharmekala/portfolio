@@ -269,7 +269,7 @@ def read_entry(path, dates, updates):
             "workflow": completion.get("workflow") or metadata.get("report-workflow") or ("Company research" if kind == "dossier" else workflow),
             "highlights": completion.get("highlights", []), "completed": bool(completion)}
     if kind == "dossier" and symbol:
-        for field, ext in (("bookUrl", "_book.html"), ("epubUrl", "_book.epub"), ("mdUrl", "_book.md")):
+        for field, ext in (("bookUrl", "_book.html"), ("pdfUrl", "_book.pdf"), ("epubUrl", "_book.epub"), ("mdUrl", "_book.md")):
             sib = path.parent / f"{symbol}{ext}"
             if sib.is_file():
                 entry_out[field] = sib.relative_to(DOCS).as_posix()

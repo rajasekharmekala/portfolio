@@ -123,16 +123,27 @@ def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) 
                     w_cnt += word_count(blk.get(k, ""))
 
         b_cnt = 0
+        ep = ch.get("epigraph") or {}
+        if isinstance(ep, dict):
+            b_cnt += word_count(ep.get("quote", "")) + word_count(ep.get("author", ""))
         for bp in ch.get("book_paragraphs", []):
             b_cnt += word_count(bp)
             if "<table" in bp.lower() or "<sup" in bp.lower():
                 errors.append(f"Chapter {cid}: book_paragraphs must not contain raw <table> or <sup> tags")
+        for c in ch.get("book_callouts", []):
+            b_cnt += word_count(c.get("title", "")) + word_count(c.get("quote", "")) + word_count(c.get("text", ""))
+            for b in c.get("bullets", []):
+                b_cnt += word_count(b)
         for sub in ch.get("book_subsections", []):
             b_cnt += word_count(sub.get("title", ""))
             for bp in sub.get("paragraphs", []):
                 b_cnt += word_count(bp)
                 if "<table" in bp.lower() or "<sup" in bp.lower():
                     errors.append(f"Chapter {cid}: book_subsections must not contain raw <table> or <sup> tags")
+            for c in sub.get("callouts", []):
+                b_cnt += word_count(c.get("title", "")) + word_count(c.get("quote", "")) + word_count(c.get("text", ""))
+                for b in c.get("bullets", []):
+                    b_cnt += word_count(b)
 
         web_words += w_cnt
         book_words += b_cnt

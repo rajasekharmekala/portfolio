@@ -27,7 +27,12 @@ from typing import List
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from assemble_report import build  # noqa: E402
 from dossier_schema import load_monograph_spec, strip_html, validate_monograph_spec, word_count  # noqa: E402
-from epub_builder import build_epub_book, build_markdown_book  # noqa: E402
+from epub_builder import (  # noqa: E402
+    build_epub_book,
+    build_markdown_book,
+    build_pdf_book,
+    render_masterclass_book_html,
+)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCORING_FILE = os.path.join(ROOT, ".agents", "config", "scoring.json")
@@ -775,9 +780,10 @@ def _build_edition_switcher(sym: str, active: str, web_words: int, book_words: i
         '<div class="edition-switcher" role="navigation" aria-label="Dossier &amp; Book Editions">\n'
         '  <div class="edition-tabs">\n'
         f'    <a class="{dossier_cls}" href="{sym}_dossier.html">Web Research Dossier ({web_words:,} words • Tables &amp; Charts)</a>\n'
-        f'    <a class="{book_cls}" href="{sym}_book.html">Book &amp; Audiobook Edition ({book_words:,} words • ~{audio_mins} min listen)</a>\n'
+        f'    <a class="{book_cls}" href="{sym}_book.html">Masterclass Book &amp; Audiobook ({book_words:,} words • ~{audio_mins} min listen)</a>\n'
         '  </div>\n'
         '  <div class="edition-downloads">\n'
+        f'    <a class="edition-dl-link" href="{sym}_book.pdf" download="{sym}_book.pdf">Download PDF Book</a>\n'
         f'    <a class="edition-dl-link" href="{sym}_book.epub" download="{sym}_book.epub">Download EPUB 3</a>\n'
         f'    <a class="edition-dl-link" href="{sym}_book.md" download="{sym}_book.md">Download Markdown Book</a>\n'
         '  </div>\n'
@@ -1083,19 +1089,6 @@ def render_10chapter_monograph_editions(
         ]
     )
 
-    book_title = spec.get("book_title") or f"{spec['title']} — The Investment & Audiobook Monograph"
-    book_body_html = "\n\n".join(
-        [
-            f"<h1>{_esc(book_title)}</h1>",
-            _build_edition_switcher(sym, "book", web_words, book_words, audio_mins),
-            _build_audio_bar(sym, book_words, audio_mins),
-            kf_html,
-            primer_book_html,
-            "\n\n".join(book_sections),
-            ge_html + notes_html,
-        ]
-    )
-
     dossier_html = build(
         web_body_html,
         market=market,
@@ -1105,32 +1098,27 @@ def render_10chapter_monograph_editions(
         workflow="Company research",
         as_of=as_of,
     )
-    book_html = build(
-        book_body_html,
-        market=market,
-        facts=spec.get("facts_path", ""),
-        research=spec.get("research_paths", []),
-        kind="dossier",
-        workflow="Company audiobook monograph",
-        as_of=as_of,
-    )
+    book_html = render_masterclass_book_html(spec, chapters, kf_items, web_words, book_words, audio_mins)
 
     out_d_path = Path(out_dossier_path)
     out_dir = out_d_path.parent
     out_dir.mkdir(parents=True, exist_ok=True)
     out_book_html_path = out_dir / f"{sym}_book.html"
+    out_pdf_path = out_dir / f"{sym}_book.pdf"
     out_epub_path = out_dir / f"{sym}_book.epub"
     out_md_path = out_dir / f"{sym}_book.md"
 
-    # Write EPUB and Markdown first so assemble/portal link checks see them on disk
+    # Write EPUB, Markdown, Book HTML, and PDF first so assemble/portal link checks see them on disk
     build_epub_book(spec, chapters, kf_items, audio_mins, book_words, out_epub_path)
     build_markdown_book(spec, chapters, kf_items, audio_mins, book_words, out_md_path)
     out_book_html_path.write_text(book_html, encoding="utf-8")
+    build_pdf_book(out_book_html_path, out_pdf_path)
     out_d_path.write_text(dossier_html, encoding="utf-8")
 
     return {
         "dossier_html": str(out_d_path),
         "book_html": str(out_book_html_path),
+        "pdf": str(out_pdf_path) if out_pdf_path.exists() else None,
         "epub": str(out_epub_path),
         "markdown": str(out_md_path),
         "web_words": web_words,
