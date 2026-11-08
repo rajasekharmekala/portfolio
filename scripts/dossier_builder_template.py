@@ -196,16 +196,20 @@ def _build_ch4_from_snapshot_or_ledger(
     w_s2 = snap_sym.get("thewrap_stage2") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
 
-    close = tv.get("close") or inst_m.get("close")
-    s20 = tv.get("sma20") or inst_m.get("sma20")
-    s50 = tv.get("sma50") or inst_m.get("sma50")
-    s200 = tv.get("sma200") or inst_m.get("sma200")
+    # The dated ledger is authoritative for session-specific price and
+    # technical readings. A live consumer snapshot can be newer than the
+    # requested market-session cutoff, so use it only when the ledger lacks
+    # that field; never blend an undated current quote into a dated report.
+    close = inst_m.get("close") or tv.get("close")
+    s20 = inst_m.get("sma20") or tv.get("sma20")
+    s50 = inst_m.get("sma50") or tv.get("sma50")
+    s200 = inst_m.get("sma200") or tv.get("sma200")
     w30 = tv.get("sma30_weekly") or s200
     w10_ema = tv.get("ema10_weekly") or tv.get("ema50") or s50
-    rsi = next((v for v in (tv.get("rsi14_daily"), tv.get("rsi_14_daily"), tv.get("rsi14"), inst_m.get("rsi14")) if v is not None), None)
-    atr = next((v for v in (tv.get("atr14"), tv.get("atr_14"), inst_m.get("atr14")) if v is not None), None)
-    hi52 = tv.get("high_52w") or inst_m.get("hi52")
-    lo52 = tv.get("low_52w") or inst_m.get("lo52")
+    rsi = next((v for v in (inst_m.get("rsi14"), tv.get("rsi14_daily"), tv.get("rsi_14_daily"), tv.get("rsi14")) if v is not None), None)
+    atr = next((v for v in (inst_m.get("atr14"), tv.get("atr14"), tv.get("atr_14")) if v is not None), None)
+    hi52 = inst_m.get("hi52") or tv.get("high_52w")
+    lo52 = inst_m.get("lo52") or tv.get("low_52w")
     if tv.get("rel_vol_10d") is not None:
         rvol, rvol_period = tv.get("rel_vol_10d"), "10-day"
     elif tv.get("vol_ratio_vs_30d") not in (None, 0):
@@ -403,7 +407,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
 
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
-    close = tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
+    close = inst_m.get("close") or tv.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
     stop_loss = spec["stop_loss"]
@@ -835,7 +839,7 @@ def render_10chapter_monograph_editions(
 
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
-    close = tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
+    close = inst_m.get("close") or tv.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
     stop_loss = spec["stop_loss"]

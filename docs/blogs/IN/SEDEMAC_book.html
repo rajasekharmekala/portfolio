@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="report-design" content="masterclass-book-v1">
+  <meta name="report-market" content="IN">
+  <meta name="report-kind" content="book">
+  <meta name="research-as-of" content="2026-11-06">
+  <meta name="generated-at" content="2026-11-08T12:44:17.283958-08:00">
+  <title>SEDEMAC Mechatronics Ltd. (NSE: SEDEMAC) — Control Electronics, Cash Conversion and the Price of Growth — Masterclass Companion Book</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap');
+
+:root {
+  --mc-paper:        #fdfbf7;
+  --mc-paper-alt:    #f6f1e7;
+  --mc-ink:          #1a1a1a;
+  --mc-ink-muted:    #475467;
+  --mc-navy:         #0f2738;
+  --mc-navy-mid:     #17344a;
+  --mc-blue:         #1a5276;
+  --mc-gold:         #c99738;
+  --mc-gold-bright:  #d4af37;
+  --mc-gold-soft:    #ebd8ab;
+  --mc-gold-tint:    #fbf6e9;
+  --mc-blue-tint:    #f2f7fb;
+  --mc-green-tint:   #eef6f0;
+  --mc-green-ink:    #145a32;
+  --mc-crimson:      #8b1e1e;
+  --mc-rule:         #dcd3c2;
+  --font-display:    'Cinzel', 'Trajan Pro', 'Palatino Linotype', Georgia, serif;
+  --font-serif:      'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-sans:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:       'JetBrains Mono', 'Inconsolata', 'SFMono-Regular', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background: #ebe5d8;
+}
+
+body {
+  margin: 0;
+  background: var(--mc-paper);
+  color: var(--mc-ink);
+  font-family: var(--font-serif);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Top Interactive Audiobook & Edition Bar (Screen only) */
+.mc-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--mc-navy);
+  color: #ffffff;
+  border-bottom: 2px solid var(--mc-gold);
+  padding: 0.55rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+}
+.mc-topbar-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+}
+.mc-edition-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.mc-edition-links a {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+.mc-edition-links a:hover,
+.mc-edition-links a.is-active {
+  background: var(--mc-gold);
+  color: var(--mc-navy);
+  border-color: var(--mc-gold);
+}
+.mc-audio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+.mc-audio-btn {
+  padding: 0.28rem 0.68rem;
+  border: 1px solid var(--mc-gold);
+  background: var(--mc-gold);
+  color: var(--mc-navy);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.mc-audio-btn.secondary {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.mc-audio-btn:hover {
+  background: #e5c158;
+  color: var(--mc-navy);
+}
+.mc-audio-select {
+  padding: 0.24rem 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: var(--mc-navy-mid);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+}
+.mc-audio-status {
+  color: var(--mc-gold-soft);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* Book Container */
+.mc-book-shell {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2.5rem 3.25rem 5rem;
+  background: var(--mc-paper);
+  box-shadow: 0 4px 28px rgba(15, 39, 56, 0.08);
+}
+
+/* Page 1: Masterclass Cover Page */
+.mc-cover {
+  min-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3.2rem 2.6rem;
+  margin-bottom: 3.5rem;
+  background: linear-gradient(165deg, #0f2738 0%, #17344a 65%, #102a3d 100%);
+  color: #ffffff;
+  border: 2px solid var(--mc-gold);
+  box-shadow: inset 0 0 0 6px rgba(212, 175, 55, 0.18);
+  page-break-after: always;
+}
+.mc-cover-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--mc-gold-bright);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  padding-bottom: 0.85rem;
+  margin-bottom: 2rem;
+}
+.mc-cover-center {
+  margin: auto 0;
+  padding: 1.5rem 0;
+}
+.mc-cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  margin: 0 0 1.15rem;
+}
+.mc-cover-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.18rem;
+  line-height: 1.62;
+  color: #e2e8f0;
+  margin: 0 0 1.8rem;
+  max-width: 92%;
+}
+.mc-cover-rule {
+  width: 90px;
+  height: 3px;
+  background: var(--mc-gold-bright);
+  border: 0;
+  margin: 1.5rem 0;
+}
+.mc-cover-meta {
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+  padding-top: 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+.mc-cover-meta strong {
+  color: var(--mc-gold-soft);
+  font-weight: 600;
+}
+
+/* Page 2: Table of Contents & Executive Stat Strip */
+.mc-toc {
+  padding: 2rem 0 2.5rem;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--mc-rule);
+  page-break-after: always;
+}
+.mc-toc-kicker {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--mc-navy);
+  text-align: center;
+  margin: 0 0 0.25rem;
+}
+.mc-toc-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--mc-ink-muted);
+  text-align: center;
+  margin: 0 0 1.75rem;
+}
+.mc-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  border-top: 1px solid var(--mc-rule);
+}
+.mc-toc-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.62rem 0.25rem;
+  border-bottom: 1px dotted var(--mc-rule);
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+}
+.mc-toc-list a {
+  color: var(--mc-navy);
+  text-decoration: none;
+  font-weight: 600;
+}
+.mc-toc-list a:hover {
+  color: var(--mc-blue);
+  text-decoration: underline;
+}
+.mc-toc-roman {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--mc-gold);
+  white-space: nowrap;
+}
+
+/* 5-Card Executive Stat Strip */
+.mc-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 0.65rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-sans);
+}
+.mc-stat-card {
+  background: var(--mc-paper-alt);
+  border: 1px solid var(--mc-rule);
+  border-top: 3px solid var(--mc-navy);
+  padding: 0.65rem 0.75rem;
+  text-align: center;
+}
+.mc-stat-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mc-ink-muted);
+}
+.mc-stat-val {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--mc-navy);
+  margin-top: 0.2rem;
+}
+
+/* Primer / Preface Box */
+.primer {
+  background: var(--mc-gold-tint);
+  border: 1px solid var(--mc-gold-soft);
+  border-left: 4px solid var(--mc-gold);
+  padding: 1.15rem 1.4rem;
+  margin: 1.5rem 0 2.5rem;
+}
+.primer h2 {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mc-gold);
+  margin: 0 0 0.45rem;
+  border: 0;
+}
+.primer p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.68;
+}
+
+/* Chapter Architecture */
+.mc-chapter {
+  padding-top: 2.2rem;
+  margin-bottom: 3.4rem;
+  border-top: 2px solid var(--mc-navy);
+  page-break-before: always;
+}
+.mc-chapter-kicker {
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mc-gold);
+  text-align: center;
+  margin: 0 0 0.4rem;
+}
+.mc-chapter h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.6vw, 2.05rem);
+  font-weight: 700;
+  line-height: 1.24;
+  color: var(--mc-navy);
+  text-align: center;
+  margin: 0 0 1.2rem;
+  border: 0;
+}
+.mc-epigraph {
+  margin: 0 auto 1.85rem;
+  max-width: 92%;
+  padding: 0.85rem 1.35rem;
+  background: var(--mc-paper-alt);
+  border-left: 3px solid var(--mc-gold);
+  border-right: 3px solid var(--mc-gold);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.03rem;
+  line-height: 1.6;
+  color: var(--mc-navy-mid);
+  text-align: center;
+}
+.mc-epigraph footer {
+  margin-top: 0.4rem;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mc-ink-muted);
+}
+
+.mc-chapter h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--mc-navy);
+  margin: 2rem 0 0.65rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--mc-rule);
+}
+
+.mc-chapter p {
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  line-height: 1.8;
+  margin: 0.8rem 0 1.1rem;
+  text-align: justify;
+  color: var(--mc-ink);
+}
+
+/* Drop-Cap on the opening paragraph of every chapter */
+.mc-chapter p.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.35rem;
+  line-height: 0.84;
+  padding-top: 0.06rem;
+  padding-right: 0.55rem;
+  padding-bottom: 0.05rem;
+  color: var(--mc-navy);
+  font-weight: 700;
+}
+
+.mc-chapter p.is-speaking {
+  background: var(--mc-gold-tint);
+  border-left: 4px solid var(--mc-gold);
+  padding-left: 0.75rem;
+}
+
+/* Masterclass Callout Boxes (Narrator's Reflection, Global Parallel, Mental Model, Execution) */
+.mc-box {
+  margin: 1.55rem 0;
+  padding: 1.1rem 1.35rem;
+  border-radius: 2px;
+  page-break-inside: avoid;
+}
+.mc-box-reflection {
+  background: var(--mc-gold-tint);
+  border: 1px solid var(--mc-gold-soft);
+  border-left: 5px solid var(--mc-gold);
+}
+.mc-box-parallel {
+  background: var(--mc-blue-tint);
+  border: 1px solid #cde0ed;
+  border-left: 5px solid var(--mc-blue);
+}
+.mc-box-model {
+  background: var(--mc-paper-alt);
+  border: 1px solid var(--mc-rule);
+  border-left: 5px solid var(--mc-navy);
+}
+.mc-box-exec {
+  background: var(--mc-green-tint);
+  border: 1px solid #b7dfc2;
+  border-left: 5px solid var(--mc-green-ink);
+}
+.mc-box-header {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--mc-navy);
+  margin-bottom: 0.45rem;
+}
+.mc-box-reflection .mc-box-header { color: #8c6d1f; }
+.mc-box-parallel .mc-box-header { color: var(--mc-blue); }
+.mc-box-exec .mc-box-header { color: var(--mc-green-ink); }
+.mc-box p.mc-box-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--mc-navy);
+  margin: 0.35rem 0 0.5rem;
+  text-align: left;
+}
+.mc-box p.mc-box-body {
+  font-family: var(--font-serif);
+  font-size: 1.01rem;
+  line-height: 1.68;
+  color: var(--mc-ink);
+  margin: 0.35rem 0 0;
+  text-align: left;
+}
+.mc-box ul.mc-box-list {
+  margin: 0.45rem 0 0;
+  padding-left: 1.25rem;
+  font-family: var(--font-serif);
+  font-size: 0.99rem;
+  line-height: 1.62;
+}
+.mc-box ul.mc-box-list li {
+  margin: 0.25rem 0;
+}
+
+/* Endnotes & Colophon */
+.mc-notes {
+  padding-top: 2rem;
+  border-top: 2px solid var(--mc-navy);
+  page-break-before: always;
+}
+.mc-notes h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--mc-navy);
+}
+.mc-notes ol {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--mc-ink-muted);
+  padding-left: 1.4rem;
+}
+.mc-notes li { margin: 0.35rem 0; }
+.mc-notes a { color: var(--mc-blue); text-decoration: none; }
+.mc-colophon {
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--mc-rule);
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--mc-ink-muted);
+}
+
+@media (max-width: 720px) {
+  .mc-book-shell { padding: 1.25rem 1.1rem 3.5rem; }
+  .mc-cover { padding: 2rem 1.35rem; min-height: auto; }
+  .mc-chapter p { font-size: 1.04rem; text-align: left; }
+}
+
+@page {
+  size: A4;
+  margin: 22mm 20mm 22mm 20mm;
+  @bottom-center {
+    content: "— " counter(page) " —";
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 9pt;
+    color: #556677;
+  }
+}
+@page :first {
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+@media print {
+  html, body { background: var(--mc-paper); font-size: 11pt; }
+  .mc-topbar { display: none !important; }
+  .mc-book-shell { max-width: none; padding: 0; box-shadow: none; }
+  .mc-cover { min-height: 250mm; margin: 0; border-width: 3px; }
+}
+
+  </style>
+</head>
+<body id="top">
+  <header class="mc-topbar" role="navigation" aria-label="Masterclass Companion Book &amp; Audiobook Controls">
+    <div class="mc-topbar-inner">
+      <div class="mc-edition-links">
+        <a href="../../index.html">&larr; Portfolio Desk</a>
+        <a href="SEDEMAC_dossier.html">Web Research Dossier (14,938w)</a>
+        <a class="is-active" href="SEDEMAC_book.html">Masterclass Book (16,214w &bull; ~105m)</a>
+        <a href="SEDEMAC_book.pdf" download="SEDEMAC_book.pdf">PDF Book</a>
+        <a href="SEDEMAC_book.epub" download="SEDEMAC_book.epub">EPUB 3</a>
+        <a href="SEDEMAC_book.md" download="SEDEMAC_book.md">Markdown</a>
+      </div>
+      <div class="mc-audio-controls book-audio-bar">
+        <button type="button" class="mc-audio-btn" data-audio-action="play">Play Audiobook</button>
+        <button type="button" class="mc-audio-btn secondary" data-audio-action="prev">&larr; Prev</button>
+        <button type="button" class="mc-audio-btn secondary" data-audio-action="next">Next &rarr;</button>
+        <button type="button" class="mc-audio-btn secondary" data-audio-action="stop">Stop</button>
+        <select class="mc-audio-select" data-audio-rate aria-label="Playback speed">
+          <option value="1.0" selected>1.0x</option>
+          <option value="1.15">1.15x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+        </select>
+        <span class="mc-audio-status" data-audio-status>Ready to narrate</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="mc-book-shell report">
+    <section class="mc-cover" aria-label="Book Cover">
+      <div class="mc-cover-kicker">I N S T I T U T I O N A L &nbsp; R E S E A R C H &nbsp; D E S K &nbsp;&bull;&nbsp; M A S T E R C L A S S &nbsp; M O N O G R A P H</div>
+      <div class="mc-cover-center">
+        <h1 class="mc-cover-title">SEDEMAC Mechatronics Ltd. (NSE: SEDEMAC) — Control Electronics, Cash Conversion and the Price of Growth — Masterclass Companion Book</h1>
+        <hr class="mc-cover-rule">
+        <p class="mc-cover-subtitle">A step-by-step narrative walkthrough and audio companion to SEDEMAC Mechatronics Ltd. (NSE: SEDEMAC) — Control Electronics, Cash Conversion and the Price of Growth: deconstructing the business engine, global historical parallels, ten-year financial forensics, both sides of the institutional debate, and the discipline of high-asymmetry execution.</p>
+      </div>
+      <div class="mc-cover-meta">
+        <div><strong>Company &amp; Market:</strong> SEDEMAC Mechatronics Ltd. (NSE: SEDEMAC) — Control Electronics, Cash Conversion and the Price of Growth (IN)</div>
+        <div><strong>Research Session Cutoff:</strong> 2026-11-06 &bull; <strong>Generated:</strong> <time datetime="2026-11-08T12:44:17.283958-08:00">08 Nov 2026, 12:44 PM PST</time></div>
+        <div><strong>Core Verdict:</strong> WATCH (NO_NEW_ALLOCATION_UNTIL_VALUE_TREND_AND_CASH_GATES_CLEAR)</div>
+        <div><strong>Authored &amp; Narrated by:</strong> Senior Institutional Equity Research Desk &bull; Masterclass Companion Audio-Reader Edition (16,214 words &bull; ~105 min listen)</div>
+      </div>
+    </section>
+
+    <nav class="mc-toc" aria-label="Table of Contents">
+      <h2 class="mc-toc-kicker">CONTENTS</h2>
+      <p class="mc-toc-sub">A Sequential Guide to the Business Engine, Global Parallels, Financial Forensics &amp; High-Asymmetry Execution</p>
+      <ol class="mc-toc-list">
+                <li><a href="#primer">The Business, The Price &amp; Our Independent Verdict</a><span class="mc-toc-roman">PROLOGUE</span></li>
+        <li><a href="#ch-1">How the Business and Stock Got Here — Past Cycles and Pivots</a><span class="mc-toc-roman">CHAPTER I</span></li>
+        <li><a href="#ch-2">Inside the Segments — Products, Customers and Real-World Examples</a><span class="mc-toc-roman">CHAPTER II</span></li>
+        <li><a href="#ch-3">How It Is Sold and Delivered — Distribution and Unit Economics</a><span class="mc-toc-roman">CHAPTER III</span></li>
+        <li><a href="#ch-4">The Battlefield — Rivals, Switching Costs &amp; Moat Reality</a><span class="mc-toc-roman">CHAPTER IV</span></li>
+        <li><a href="#ch-5">Management on Trial — Leading KPIs &amp; Walking the Talk</a><span class="mc-toc-roman">CHAPTER V</span></li>
+        <li><a href="#ch-6">Following the Cash — 10-Year Financials &amp; Earnings Quality</a><span class="mc-toc-roman">CHAPTER VI</span></li>
+        <li><a href="#ch-7">Why the Stock Trades Here — Expectations, Cash and Peers</a><span class="mc-toc-roman">CHAPTER VII</span></li>
+        <li><a href="#ch-8">Reading the Tape — Trend, Volume &amp; No-FOMO Timing</a><span class="mc-toc-roman">CHAPTER VIII</span></li>
+        <li><a href="#ch-9">Bull vs. Bear, Likely Outcomes &amp; Our Action Plan</a><span class="mc-toc-roman">CHAPTER IX</span></li>
+      </ol>
+      <div class="mc-stat-strip">
+<div class="mc-stat-card"><span class="mc-stat-label">SESSION PRICE</span><span class="mc-stat-val">₹3,023.90</span></div>
+<div class="mc-stat-card"><span class="mc-stat-label">VERDICT</span><span class="mc-stat-val">WATCH</span></div>
+<div class="mc-stat-card"><span class="mc-stat-label">STAGE POSTURE</span><span class="mc-stat-val">N/A (insufficient listed history)</span></div>
+<div class="mc-stat-card"><span class="mc-stat-label">BUY / SUPPORT ZONE</span><span class="mc-stat-val">₹2,749.40–2,910.00</span></div>
+<div class="mc-stat-card"><span class="mc-stat-label">PRICE TARGET</span><span class="mc-stat-val">₹3,133.43 / ₹3,650.00</span></div>
+</div>
+      <section class="primer" id="primer">
+        <h2>Preface &amp; Core Thesis</h2>
+        <p>SEDEMAC is a Pune-based control-electronics supplier whose ECUs are designed into vehicle and industrial platforms. Recent revenue and unit growth are strong, but customer concentration, working-capital needs, negative FY26 free cash flow, a premium valuation and only 163 post-listing bars argue for WATCH. We would reconsider after the customer base broadens, operating cash follows earnings, the plant transition stabilizes and the short trend recovers. Price references in this dossier are monitoring levels, not guaranteed targets or orders.</p>
+      </section>
+    </nav>
+
+    <section class="chapter book-chapter mc-chapter" id="primer" data-audio-chapter="0">
+  <div class="mc-chapter-kicker">PROLOGUE</div>
+  <h2>The Business, The Price &amp; Our Independent Verdict</h2>
+  <blockquote class="mc-epigraph">"A sound business deserves a patient price; a compelling story does not remove the need for evidence."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">Welcome to the first conversation across our desk. Before we discuss a chart or a forecast, we need to answer a plain question: what is the machine that produces the revenue? SEDEMAC makes control-intensive electronic control units, or ECUs, for vehicles and industrial engines. An ECU senses what an engine or motor is doing, runs software against those inputs, and commands components to respond. It is not a decorative box. When it works well, the vehicle starts, idles, accelerates, charges or operates with the timing and reliability the OEM designed.</p>
+<p>You and I should separate three things that often get blended together: a capable engineering organization, a growing order book, and a stock worth buying today. The first can be true while the second is uneven, and both can be true while the share price offers poor prospective returns. Our job in this book is to keep those questions distinct. The evidence supports real engineering depth and a strong growth trajectory. It also shows material dependence on a few customers, pressure in working capital, and a valuation that requires years of execution to justify.</p>
+<p>SEDEMAC is a Pune-based business founded in 2007, but its stock has a much shorter public record. Shares started trading in March 2026. That difference matters. We can study the company&#x27;s operating history before its listing, subject to the years and disclosures that filings make available. We cannot pretend that the market has already supplied a decade of price cycles. A new public company gives you less evidence about how investors behave when demand weakens, customers defer launches or margins compress.</p>
+<p>The company sells to original equipment manufacturers, or OEMs. Its engineers work with customer teams to adapt control products to an engine, vehicle platform or generator. The OEM then incorporates those controls into a product it sells. A named account can provide repeat volumes when a program succeeds, but that same relationship creates exposure if the customer changes sourcing, delays a launch or sells fewer vehicles. The RHP disclosed that TVS Motor accounted for 80.46% of FY25 revenue from operations. That concentration is not a footnote; it is the central variable behind both the growth story and the downside case.</p>
+<p>The latest operating evidence is strong. FY26 revenue from operations was ₹1,058.38 crore, compared with ₹658.36 crore in FY25. During the first half of FY27, revenue was ₹710.41 crore versus ₹503.84 crore in the comparable half-year. The company and its investor presentation attribute the recent trajectory to launches and ramp-ups of control-intensive products. We can acknowledge that growth without projecting the same rate indefinitely. A high base, customer mix, component costs and program timing can all change the growth slope.</p>
+<p>At the desk, I would underline the difference between volume growth and economic quality. More units can spread engineering and factory costs across a larger base, which may help margins. Yet components still have to be sourced, assembled, tested and paid for. Customers may pay after shipment and acceptance. If receivables and inventory grow faster than earnings, a strong income statement may coexist with a weaker cash profile. We will follow the cash through the later chapters instead of using revenue growth as a substitute for it.</p>
+<p>We also need to respect the company’s own description of its market. Mobility products are the majority of disclosed revenue, while industrial controls provide a smaller but meaningful second end market. Inside mobility, two- and three-wheeler control systems are important. ISG technology can add starter-generator functionality and support features such as silent starting, torque assist and start-stop behavior. The industrial business includes engine controls used in generator applications. Those are distinct customer problems, but the available evidence does not give us a complete customer-by-product price list or a profit split for every product family. We should not invent either.</p>
+<p>The latest results call adds useful detail and useful restraint. Management described almost 4.6 million control-intensive ECUs sold on a trailing-twelve-month basis through the second quarter of FY27, a 44% year-over-year increase. It also said raw-material inflation had reduced the EBITDA percentage, with operating leverage offsetting part of that pressure. Management discussed a new plant and customer program ramps, but the timing is flexible. The transcript records management saying its target is not simply to reduce borrowings; it wants a healthy debt-to-equity ratio. That language deserves to be tested against future balance sheets.</p>
+<p>Now let us put a price discipline around the excitement. The date-stamped market-facts ledger closes SEDEMAC at ₹3,023.90 on 6 November. It shows the share below the 20-day average of ₹3,142.49 and the 50-day average of ₹3,133.43. There are 163 daily bars, which is enough to evaluate short moving averages, but not enough for a full 200-day or 30-week trend assessment. A separate consumer snapshot quotes ₹3,105, a conflicting mark. I use the market-dated ledger for the report and keep the mismatch visible until the source timing is reconciled.</p>
+<p>This leads us to a measured short-term verdict: watch. The chart does not support an immediate momentum purchase, and a nearby swing low is not a promise of support. We would want a stable base, a recovery above relevant averages and more convincing participation. The medium-term decision is also wait, because the next few filings should show whether launches broaden the customer base, whether margins hold against component inflation, and whether cash catches up with reported growth. A long-term compounding case remains possible, but it has not yet earned a blank cheque.</p>
+<p>Consider the same distinction in three markets. A US embedded-electronics supplier can have technically impressive products and still be vulnerable to one large platform buyer. An Indian auto supplier may scale rapidly when one OEM model succeeds, then face a pause when its customer refreshes the line-up. A European industrial-controls business can show decades of demand cycles and cash resilience in its listed record. SEDEMAC offers the engineering proposition, but the market history is too short to offer the same public proof. The global comparison is useful precisely because it tells us what evidence to wait for.</p>
+<p>Here is our working opportunity matrix in plain language. For a short-term trader, the current answer is no entry on momentum: price is below short averages and the long-term stage gate cannot be established. For an investor looking three to eighteen months ahead, the answer is conditional patience: monitor receivables, customer diversification, product launches, the new plant and the next two results. For a long-horizon owner, the business merits continued study, but a compelling product story is not yet equivalent to a proven, diversified compounding record at a sensible price.</p>
+<p>If you already own shares, this is not a mechanical sell signal. A holder&#x27;s tax position, cost basis, portfolio weight and personal time horizon are outside this company monograph. The public evidence does, however, argue against adding simply because the company is growing quickly. Keep the position sized for customer and liquidity risk, and revisit the thesis when the next results clarify margins, debt, receivables and program economics. We are making a business judgment, not replaying an individual portfolio.</p>
+<p>What would change my mind? I would become more constructive if disclosed revenue from customers beyond the anchor account rises in a sustained way, new programs reach repeat production, and cash from operations follows earnings instead of lagging them. I would also want plant expansion to produce customer-accepted shipments without a lasting drop in margins or a ballooning in inventory. On the market side, a stable base and recovery above the short trend measures would remove one obstacle, though it would not resolve valuation. Each test should be visible in a filing or a dated market snapshot.</p>
+<p>And what would make the thesis weaker? A significant reduction in orders from the anchor customer, loss of a nominated platform, repeated receivable expansion, or raw-material inflation that cannot be passed through would each challenge the earnings path. Delays at a new plant could tie up capital before it contributes. A premium share price can then fall even if the company remains operationally sound, because expectations may reset faster than the factory can adjust. We will carry both the product promise and those failure modes through the chapters that follow.</p>
+<p>So our opening conclusion is deliberately restrained: SEDEMAC is an interesting control-technology manufacturer whose recent operating growth is real, but the evidence does not yet justify an immediate buy or an unconditional long-term compounding verdict. You and I will examine its origins, segments, customer routes, economics, financial statements, valuation and chart. At each step, we will ask what is disclosed, what can be derived, and what remains unknown. That is how we keep a promising business from becoming an unquestioned stock story.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • Keep the business and the stock in separate columns</div>
+<p class="mc-box-body">You can admire engineering progress and still wait for price, diversification and cash evidence. A watch verdict preserves the right to change your mind when the facts improve.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • Platform dependence travels across borders</div>
+<p class="mc-box-body">US electronics suppliers, Indian vehicle-component makers and European controls companies all face the same bargaining tension: a successful OEM program brings repeat demand, while one platform can dominate the supplier&#x27;s economics. SEDEMAC&#x27;s present customer concentration makes that universal risk unusually immediate.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • A four-part entry test</div>
+<p class="mc-box-body">Ask whether the product is valuable, whether demand is diversifying, whether earnings convert to cash, and whether the share price leaves room for disappointment. SEDEMAC currently passes the first test more clearly than the other three.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-1" data-audio-chapter="1">
+  <div class="mc-chapter-kicker">CHAPTER I</div>
+  <h2>How the Business and Stock Got Here — Past Cycles and Pivots</h2>
+  <blockquote class="mc-epigraph">"A company’s origin matters when it explains what it learned to do unusually well."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">You and I should begin with the thing that predates the ticker: a technical problem. SEDEMAC was incorporated in 2007 in Pune and built around control electronics, the software and hardware that make a machine respond to changing conditions. An electronic control unit is easy to underestimate when you see it on an invoice. Its value is not the circuit board alone. The controller has to sense, interpret and command within the limits of an engine, motor, generator, vehicle architecture and safety envelope. That work is customer-specific, tested against demanding operating conditions, and embedded in a product whose end user may never know the supplier’s name. The company’s own description is that its product development, technology development and manufacturing are performed in-house. That is a meaningful capability claim, but investors should test it through repeat programs, yield, quality, margins and cash conversion rather than treating the phrase ‘in-house’ as proof of a moat.</p>
+<p>The founders’ engineering orientation helps explain why SEDEMAC chose a small number of deep OEM relationships instead of a broad catalogue sold through retail distribution. The commercial reward is a path from technical validation to recurring production volumes. The cost is concentration: the customer that validates the controller can also shape the supplier’s schedule, price and working-capital needs. The RHP disclosed TVS Motor as 80.46% of FY25 revenue and 83.46% in FY24. That history gives the business a clear anchor and a clear fragility. A long relationship can reflect product integration and trust; it does not guarantee exclusive sourcing or a minimum purchase obligation. When you and I evaluate a supplier, we have to hold those two ideas together.</p>
+<p>The company’s evolution is visible in the mix it reports. It began with control electronics in mobility and expanded product propositions across engine control, integrated starter-generator systems and industrial applications such as genset controllers. The RHP’s latest pre-IPO split shows mobility at 85.69% of FY25 revenue, with industrial at 14.31%; for the nine months to December 2025 the split was 84.63% and 15.37%. That is evidence of an adjacent portfolio, not yet evidence that the company has diversified its economic dependence. The same customer, manufacturing footprint and engineering model can serve multiple products while leaving revenue exposed to a limited number of OEM decisions.</p>
+<p>The 2026 listing created a new kind of cycle: the transition from private-company operating evidence to a public share price that moves every session. SEDEMAC’s shares listed on 11 March 2026. By 6 November, the verified market-facts series contained 163 daily bars, too short for a ten-year public-market cycle study or a supportable long-horizon trend classification. The ledger closes at ₹3,023.90 on that date. We should not draw a decade-long chart from a few months of history. The proper comparison is between the business’s longer operating record and the new stock’s much shorter valuation record. A compelling private-company growth arc can coexist with an unproven public-market price cycle.</p>
+<p>The recent operating cycle has been unusually strong. The snapshot reports sales of ₹658 crore in FY25 and ₹1,058 crore in FY26, while operating profit moved from ₹121 crore to ₹217 crore. That acceleration followed a smaller base and a rising contribution from control-intensive products. The first half of FY27 continued the momentum: the exchange filing records ₹710.41 crore of revenue versus ₹503.84 crore in the comparable prior half, with ₹72.49 crore of profit versus ₹47.21 crore. The Q2 call also described trailing twelve-month control-intensive ECU shipments of about 4.6 million, up 44% year over year. Strong output is real evidence. It does not settle how much of the current growth is repeatable, how margins respond to material inflation, or whether receivables and inventory grow more slowly than sales.</p>
+<p>Here is the distinction I want you to keep in view. Corporate history can tell you how capabilities formed; it cannot certify future returns. The company has built a specialized engineering and manufacturing platform, expanded beyond one product family and now reports rapid scale. Its next chapter must prove that new programs reduce dependence rather than merely add volume, that capacity expansion improves resilience rather than dilutes returns, and that public-company disclosure can sustain confidence. Until then, the stock’s own cycle is too young to serve as a reassuring precedent.</p>
+<p>A useful parallel is the path followed by European automotive electronics suppliers such as Bosch: decades of embedded engineering can produce sticky programs, but the economics still depend on customer platforms, manufacturing quality and the transition between propulsion technologies. In the United States, specialist control suppliers have also grown by winning OEM design-ins, then faced the challenge of replacing revenue as platforms mature. India’s own auto-component leaders show that localization and supplier qualification can create durable franchises, while customer concentration and cyclicality remain visible in the accounts. These are comparisons of business mechanics, not claims that SEDEMAC has the scale, customer diversity or balance sheet of those firms.</p>
+<p>So as we turn to what SEDEMAC sells, ask a more demanding question than ‘Is electronics content rising?’ Ask who selected the controller, which vehicle or machine carries it, what qualification work was required, how long the program can last, and what the supplier earns after warranty, materials, working capital and capex. Those questions connect the origin story to the segment economics that follow.</p>
+<p>There is also an ownership transition to understand. SEDEMAC’s March 2026 public offer was an offer for sale by existing shareholders, according to the RHP and subsequent exchange disclosures; it did not raise fresh primary capital for the company. That structure lets early investors and employees realize value while public investors receive a tradable security, but it means the listing itself should not be mistaken for a new corporate investment budget. The company’s capacity plan, product development and working capital must be financed from operating cash, borrowings and any other disclosed funding, not from an assumption that IPO proceeds flowed into the factory. In an early public-market phase, separate the ownership event from the operating event.</p>
+<p>The operating record also needs a time boundary. The snapshot offers annual data from FY21 through FY26, which is useful for examining scale and volatility, but it is not a full decade of comparable financials. The RHP restated three annual years and a stub period for its offer disclosure. We can therefore describe the available trajectory without pretending that every earlier year is on the same basis or present. Over FY21–FY26, the snapshot shows sales rising from ₹240 crore to ₹1,058 crore; the path includes slower growth in some years and acceleration in FY23 and FY26. Profit also moved unevenly before the FY25–FY26 step-up. That record argues for a multi-year lens: the latest growth burst deserves credit, but investors should observe whether the underlying economics survive a less favorable cycle.</p>
+<p>A second way to read the transition is to distinguish the private operating company from the newly listed security. Before listing, investors could see financial statements and customer relationships through periodic offer documents, but they did not have a daily traded price to express changing expectations. The RHP gives the more disciplined historical base: its restated information covers FY23, FY24, FY25 and a nine-month FY26 stub, while the consumer snapshot now shows annual series from FY21 onward. Each has a boundary. The offer document is the formal source for its offer-period facts; the snapshot is a convenient presentation of the more recent financial series. Use neither to imply a ten-year continuous listed record. We can say the operating company has more history than its public stock, but we should separate the two clocks every time we discuss returns or cycles.</p>
+<p>The listing also changes what good management evidence should look like. A founder-led business can rely on long customer relationships and tacit engineering knowledge; a listed supplier must add the routines that make those strengths legible to outside owners: consistent segment disclosure, timely results, transparent cash-flow explanations, board oversight and a credible method for measuring program maturity. SEDEMAC’s listed-company filings now give investors quarterly results and presentations, while the management page identifies the founders and the board. That is the beginning of an observable accountability record, not proof that governance risk has disappeared. As years pass, you and I should compare promises with disclosed delivery, question changes in definitions and watch how clearly management explains customer additions, capacity and returns on capital.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • Capability is an operating result</div>
+<p class="mc-box-body">A claim of in-house engineering matters when it can be observed in repeated customer awards, dependable production, product refreshes and resilient margins. Treat it as a hypothesis to test against disclosures and cash, not as a conclusion.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • Design-ins travel across markets</div>
+<p class="mc-box-body">US powertrain suppliers, Indian auto-component champions and European electronics groups all show how OEM qualification can create recurring volume. Their scale and diversification differ from SEDEMAC; the transferable lesson is the need to renew programs before a customer platform ages.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • Separate capability from dependence</div>
+<p class="mc-box-body">Map engineering capability, customer bargaining power and customer concentration as three separate variables. A strong first can coexist with a weak second and a high third.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-2" data-audio-chapter="2">
+  <div class="mc-chapter-kicker">CHAPTER II</div>
+  <h2>Inside the Segments — Products, Customers and Real-World Examples</h2>
+  <blockquote class="mc-epigraph">"A product becomes a business when it passes from prototype to the customer’s production line."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">Let us make the product tangible. A vehicle controller is a rugged electronic system that receives signals from sensors, applies control logic and sends commands to actuators. In an engine application it may coordinate fuel injection, ignition or related functions; in an integrated starter-generator system, the control electronics support engine start-stop and electrical functions. The unit is not a generic box. It must work with the OEM’s engine, wiring, diagnostics, software interfaces, packaging constraints and quality process. The customer is paying for a validated solution that performs reliably inside a larger machine. SEDEMAC says most of its present revenue comes from ECUs, and its latest earnings-call presentation described a close relationship between control-intensive ECU shipment volumes and revenue.</p>
+<p>The RHP reports two operating segments: mobility and industrial. In FY25, mobility contributed 85.69% of revenue and industrial 14.31%; in the nine months ended December 2025, those proportions were 84.63% and 15.37%. These are segment revenue shares, not segment profit shares. The disclosed company-level segment schedule and public filings do not provide a basis here for a precise allocation of profit by product line, so we will not manufacture one. The mix is important because a single headline growth rate can hide two different demand engines: vehicles and industrial equipment. Yet both remain part of one supplier with shared engineering and manufacturing exposure.</p>
+<p>Start with mobility. The company’s public materials identify engine control systems, integrated starter-generator controllers, ISG-plus-EFI combinations and motor controllers among the product propositions. A concrete example is a TVS Motor vehicle program using a control-intensive ECU. TVS is a named customer and the RHP reports its large revenue share, while the company’s presentation describes products rather than disclosing each vehicle’s commercial terms. The end-to-end sequence is: the OEM defines system requirements; SEDEMAC engineers hardware and control software for the relevant engine or vehicle architecture; prototypes are tested and calibrated; the OEM validates the system within its vehicle; production parts are manufactured and delivered against the OEM’s launch and forecast schedule. The OEM then installs the ECU in vehicles assembled for dealers and consumers. This is a documented business-model example, not a claim about a specific unpublished model award or a hidden unit price.</p>
+<p>The commercial value of a mobility controller comes from more than the bill of materials. If it is integrated into vehicle start-stop, engine management or motor-control functions, the OEM must weigh performance, reliability, cost, regulatory needs and serviceability. Qualification creates switching friction because replacing a controller requires new engineering, validation and supply assurance. But switching costs are not absolute: an OEM can dual-source, redesign, renegotiate or move a program at a model refresh. The RHP itself names product acceptance, customer concentration, delivery quality and customer platform performance among business risks. You should therefore treat program integration as a potential moat that has to be renewed, not a permanent lock.</p>
+<p>Now consider industrial. SEDEMAC’s disclosures identify genset and other industrial control applications. A representative end-to-end example is a generator-set manufacturer requiring an engine controller matched to its engine and electrical system. The OEM specifies start, sensing, protection and operating behaviors; the supplier develops and validates the ECU with that hardware; accepted production units ship to the genset maker; the maker integrates the controller into a generator package sold to an end user that needs backup or prime power. The source record supports the industrial segment and genset exposure, but it does not name the particular customer in this hypothetical walkthrough. Nor does it disclose a standard list price. Pricing is therefore best described as a negotiated OEM program price for a qualified unit, potentially affected by volume, components, engineering scope and contractual terms; exact customer prices are unavailable.</p>
+<p>A segment label is not the same as diversification. Industrial represented 14.31% of FY25 revenue and 15.37% of nine-month FY26 revenue. That is a modest but visible second demand stream. The mobility segment itself also contains different technologies and vehicle classes, but public disclosures in this evidence set do not give enough contribution detail to calculate individual product-family revenue or profit margins. The current presentation’s shipment metric can help investors track the broad ECU engine, but it should not be allocated to a particular product or customer unless the company provides that bridge.</p>
+<p>Think of the supply chain in three linked loops. First, the engineering loop: customer requirements, prototype, calibration, validation and design freeze. Second, the production loop: sourcing of semiconductor and PCB inputs, manufacturing, testing, quality release and delivery. Third, the commercial loop: forecasts, purchase orders, invoicing, collections and warranty feedback. A delay or defect in one loop can have consequences in the others. The prospectus reports dependence on top suppliers and imports of critical items, including semiconductors and printed circuit boards from China. That creates exposure to availability, lead times and geopolitical disruption even when the customer relationship is sound.</p>
+<p>Across the US, India and Europe, the closest parallel is the embedded supplier model: a US engine-control specialist selling into OEM platforms, an Indian electronics supplier serving a two-wheeler maker, or a European powertrain-control company supporting generator or vehicle systems. The analogy explains the qualification cycle, not the unreported economics. The buyer is an OEM; the end user is often remote from the supplier; and each new production program has to earn its place through reliability, cost and timing. The next chapter will ask who manages that relationship from sale to cash, because a controller shipped is not yet a controller paid for.</p>
+<p>Two details help you avoid confusing technical novelty with earnings power. First, a controller’s engineering content can be high while its selling price remains constrained by an OEM’s target cost. The customer compares performance against alternatives, total vehicle cost and the program’s volume commitments. Second, product categories can overlap. A single integrated system may combine functions that earlier required separate modules, so counting product labels can overstate the number of independent revenue engines. The company’s public unit metric—control-intensive ECUs shipped—offers a useful volume indicator, but management says the figure has a strong correlation with revenue rather than providing a fully disclosed price-volume-mix bridge. An investor should watch shipments, realized sales and margins together.</p>
+<p>Geography needs the same discipline. The company’s RHP says India represented more than 90% of revenue in the periods presented. It also serves OEMs in the US and Europe, but the existence of export customers does not yet make the business geographically diversified. A region may be strategically important before it becomes material to reported revenue. When the company adds international programs, you and I should ask whether those wins contribute meaningful sales, bring different customers and reduce dependence on domestic two-wheeler platforms—or simply add another destination for the same concentrated product strategy. Until a disclosure quantifies the mix, treat overseas reach as an opportunity and a diligence question, not as a completed hedge.</p>
+<p>The unit volume disclosure makes the transition from engineering story to manufacturing story easier to test. In the Q2 FY27 call, management described about 4.6 million control-intensive ECUs sold on a trailing-twelve-month basis, up 44% year over year, and said this measure correlates strongly with revenue. That does not disclose average selling price, nor does it isolate revenue by product family. It does create a useful cross-check: if unit shipments keep growing, sales should broadly respond unless price and mix move materially against the company. If they diverge, investors should ask whether the difference reflects lower-priced products, customer mix, timing, or a changed definition. The metric is valuable precisely because it is repeated quarterly, but it must be read alongside revenue and operating margin rather than as a substitute for either.</p>
+<p>The product adoption stages matter too. An early proposition can require intensive engineering and customer attention while contributing little revenue; once it is validated and adopted across additional models, volume may scale faster than the fixed engineering base. The inverse is also true: a program can stall before broader adoption, or a platform can be discontinued before the supplier has recovered its development effort. Management’s call emphasized that it does not disclose unannounced products or detailed future program information, which is understandable from a competitive standpoint but leaves external investors with limited pipeline visibility. That information gap should affect how confidently we capitalize announced opportunities. Track shipped units, named customer breadth, realized margin and cash collections as adoption moves from trial to scale.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • A named customer is not a complete customer story</div>
+<p class="mc-box-body">TVS Motor is named and economically important. Public evidence here does not disclose the model-level contract, unit price or exclusive-sourcing status. We can explain the OEM qualification process without pretending to know those confidential terms.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • One embedded control pattern, three markets</div>
+<p class="mc-box-body">In the US, engine and power-equipment OEMs qualify controllers; in India, two-wheeler platforms create high-volume integration opportunities; in Europe, suppliers serve mature vehicle and industrial ecosystems. Similar engineering gates recur, but their scale, customer breadth and disclosed economics are not interchangeable.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • Revenue mix versus bargaining mix</div>
+<p class="mc-box-body">Track segment share and customer share separately. A wider product list can still be a concentrated business if one buyer dominates the purchase orders.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-3" data-audio-chapter="3">
+  <div class="mc-chapter-kicker">CHAPTER III</div>
+  <h2>How It Is Sold and Delivered — Distribution and Unit Economics</h2>
+  <blockquote class="mc-epigraph">"The sale is only the midpoint; the cash arrives after engineering, production, delivery and collection."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">SEDEMAC sells business-to-business, primarily to OEMs. The end user may be a rider, a fleet operator or a facility manager, but the purchasing relationship sits upstream with the company that designs and assembles the vehicle or equipment. That changes the sales motion. The supplier must enter early enough in a product program to understand technical requirements, develop and test the electronics, clear the customer’s validation process and align manufacturing to a launch schedule. This is not the same as placing a commodity part on a distributor shelf. A successful design-in may create repeat production orders over a model’s life, while the next program requires another round of customer confidence.</p>
+<p>The practical route to market is direct OEM engagement and program integration. The RHP describes relationships with a select group of anchor customers, including TVS Motor, and notes that products are delivered to customers in India mainly by road and to international customers primarily by sea through third-party logistics providers engaged on a need basis. That gives the company flexibility but leaves transportation performance partly outside its control. The filing also identifies concentration among top suppliers and imported critical inputs such as semiconductors and PCBs, including imports from China. The distribution map therefore runs from a small set of vendors, through Pune manufacturing, to OEM plants and export destinations.</p>
+<p>Let’s walk through a ₹100 revenue example using FY26 audited company-level results as the base, not a quoted contract. Revenue from operations was ₹1,058.38 crore. Cost of materials consumed was ₹662.11 crore, or about ₹62.6 per ₹100 revenue. Inventory changes were a net reduction in expense of roughly ₹1.5 per ₹100; employee expense was about ₹8.2; depreciation and amortization about ₹6.0; finance costs about ₹0.8; other expenses about ₹10.3. The resulting pre-tax profit was approximately ₹14.2 and net profit about ₹9.8 per ₹100 of revenue. Small differences can appear from rounding. This gives you a reported income-statement waterfall, not a unit-level contribution margin.</p>
+<p>Now follow that same ₹100 beyond accrual profit. The snapshot’s FY26 cash-flow series records cash from operations of ₹128 crore and free cash flow of negative ₹47 crore against ₹1,058 crore of sales. That equates to around ₹12.1 of operating cash inflow and negative ₹4.4 of free cash flow per ₹100 revenue. The precise bridge from net income to operating cash includes working-capital movements, taxes and non-cash charges; free cash flow depends on the dataset’s treatment of investment spending. It would be wrong to subtract the income-statement depreciation number from PAT and call the result cash. What matters is that reported profit and capital available after operating and investing needs are different measures.</p>
+<p>The business has a customer-credit cycle as well as an engineering cycle. The RHP reports receivables, customer concentration and credit risk; the consumer snapshot flags debtor days rising from 29.7 to 46.1. The date basis and calculation definitions differ between the RHP and snapshot, so you should avoid splicing their ratios into one continuous series without reconciliation. Still, the direction deserves attention: faster sales growth often consumes cash if receivables, inventory and supplier terms do not keep pace. A design win can be economically attractive on the income statement while requiring the supplier to finance components and finished goods before collecting from an OEM.</p>
+<p>The procurement chain adds another timing problem. Long component lead times can prompt precautionary inventory accumulation. If materials arrive before production, cash has left but revenue has not yet been recognized. If finished units ship under customer credit terms, revenue may be recognized before cash arrives. The earnings-call discussion linked working capital with supply-side pressures, while management also described raw-material inflation as a reason EBITDA margin eased in Q2 FY27. Management’s explanation is relevant; the balance-sheet and cash-flow statements are the test of whether the pressure reverses.</p>
+<p>A US industrial-control supplier, an Indian automotive electronics maker and a European OEM supplier may all use direct technical selling, but the contract structure differs by buyer, regulation, logistics and scale. The common lesson is to trace four clocks: design and validation time, component lead time, production and delivery time, and collection time. The first clock determines how long engineering resources are tied up before a program scales. The second and third determine inventory and delivery risk. The fourth decides when accounting earnings become usable cash.</p>
+<p>The result is a company whose distribution advantage is not geographic reach through thousands of outlets. It is technical access to OEM programs, dependable qualification and execution at production volume. That channel can be sticky after a product succeeds, but it concentrates bargaining power in a few customers and makes operational reliability central to renewal. When you and I assess unit economics, we should therefore ask not just how much margin a controller earns, but how many rupees are tied up between supplier payment and customer collection, and how much capacity must be funded before the next contract is proven.</p>
+<p>For the investment case, this leads to a useful set of operating checks. Compare revenue growth with trade receivables and inventory growth; compare operating profit with cash from operations over a rolling multi-year window; inspect capex against plant commissioning and utilization; and watch whether customer concentration moderates as new programs scale. The company has discussed a new facility that is multiple times the size of its existing primary plant and said initial production had begun. Management also said the transition would be gradual and not governed by a hard deadline. That is a sensible way to protect customer supply during a plant move, but it creates a period when new capacity, depreciation, staffing and old-plant operations may overlap. The decisive evidence will be output, quality and cash returns after the ramp, not the building itself.</p>
+<p>A further caution is that ‘cash from investing’ is not identical to capital expenditure: it can include multiple investing items, while a standardized free-cash-flow series may use a particular definition. Our ₹100 illustration intentionally places reported FY26 operating cash and free cash flow beside the income-statement waterfall so that you see the gap; it does not claim to reconcile every cash-flow line. Before making a valuation model, retrieve audited cash-flow statements and reconcile purchases of property, plant and equipment, capital advances, taxes and working capital for each year. If the cash profile proves stronger after the facility ramp, that would support the compounding case. If reported earnings rise while collection and investment needs absorb the cash, the market should apply a higher discount rate to those earnings.</p>
+<p>The Q2 FY27 results add a current example of the margin and cash debate. Revenue in the September quarter was ₹400.64 crore, while EBITDA was ₹76 crore according to the earnings-call discussion; the company’s reported operating margin was approximately 19% in the snapshot, compared with 21% in the corresponding September 2025 quarter. Management attributed the dip primarily to raw-material inflation and said operating leverage had offset part of that pressure. Those two observations should sit side by side: scale supported absolute operating profit, yet margin percentage eased. If input costs rise faster than OEM pricing adjustments, volume growth may not translate into the same rate of profit growth. If pricing resets, mix and operational leverage restore margins, the concern may prove temporary. The next filings should show which mechanism is winning.</p>
+<p>Working capital and capacity are connected. A plant transition requires equipment, validation runs, people and process controls before it can operate at stable yields. Management said the new plant had begun initial production, while substantially shifting production by the end of FY27 was an expectation rather than a hard commitment. The same call connected working-capital pressure with supply-side issues and discussed the company’s approach to borrowings. We should not convert those remarks into a firm timetable or debt forecast. Instead, monitor whether the new facility reduces congestion at the highly utilized existing site, whether inventory is managed through the transition, whether customer deliveries remain reliable and whether borrowing remains proportionate to the cash cycle. The execution scorecard is operational and financial at once.</p>
+<p>For comparability, use a simple bridge and keep the definitions visible. FY26 revenue of ₹1,058.38 crore against PAT of ₹103.58 crore yields roughly ₹9.8 PAT per ₹100 of sales. The operating cash figure of ₹128 crore implies about ₹12.1 per ₹100, while the snapshot’s free-cash-flow figure of negative ₹47 crore implies about negative ₹4.4. These are annual aggregates, rounded, and the cash series may not match the statutory cash-flow presentation line for line. The exercise is still useful: it tells you not to equate customer invoices, accounting profit and distributable cash. For a capital-intensive growth phase, the crucial question is whether future collections and capacity productivity improve the cash residual after the current build-out.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • A ₹100 waterfall has two endings</div>
+<p class="mc-box-body">The income statement ends at PAT; the investor’s cash question continues through working capital and investment. FY26 generated about ₹9.8 PAT per ₹100 sales in the snapshot, yet its reported free-cash-flow series was about negative ₹4.4 per ₹100.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • OEM channels share a cash-cycle risk</div>
+<p class="mc-box-body">A US power-equipment controller maker, an Indian two-wheeler supplier and a European automotive electronics vendor all sell into OEM procurement systems. The currencies and terms vary, but suppliers still fund engineering and materials before collecting receivables.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • Four clocks determine cash</div>
+<p class="mc-box-body">Measure design qualification, component lead time, shipment timing and customer collection separately. Sales growth is healthy only when those clocks produce acceptable returns on working capital and capacity.</p>
+</aside>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • Put growth beside the investment it needs</div>
+<p class="mc-box-quote">"For INR 100 crore of additional revenue, we would need a one-time investment of about INR 20 crore in fixed assets."</p>
+<p class="mc-box-body">Amit Dixit made the capital requirement explicit in the May 2026 call. The estimate is management guidance from FY26 and should be tested against actual capex, receivables and cash flow as the newer plants ramp.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-4" data-audio-chapter="4">
+  <div class="mc-chapter-kicker">CHAPTER IV</div>
+  <h2>The Battlefield — Rivals, Switching Costs &amp; Moat Reality</h2>
+  <blockquote class="mc-epigraph">"A moat is a pattern of customer behavior that survives a competitor&#x27;s next offer."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">You and I can start the competitive analysis at the point where an OEM has to choose a controller for a real machine. The purchase decision is not simply a bid for a box of electronics. It is a decision about which supplier will help the vehicle or engine behave as designed, pass its validation program, meet the applicable requirements and keep production moving after launch. The controller is a component, but the engineering work around it reaches into the customer&#x27;s product. That is where switching costs can arise.</p>
+<p>Imagine a two-wheeler program moving from design into testing. The OEM and supplier settle the interface, define how the controller responds to operating conditions, check diagnostics and test the application across a range of conditions. Engineers work through failures and revisions. After qualification, the supplier has learned the quirks of that program and the OEM has accumulated test evidence around the chosen part. Replacing the supplier mid-program can mean repeating work, delaying a launch or accepting reliability risk. That friction protects an incumbent. It does not prevent the OEM from re-bidding the next platform or adding a second source.</p>
+<p>The distinction matters because investors often compress the entire story into the word &#x27;moat.&#x27; A more useful question is: what would the customer have to redo to switch, and what would it gain by switching? If a rival offers a meaningful cost or performance improvement, the OEM can decide that new qualification expense is worthwhile. If SEDEMAC helps solve a difficult application and supplies consistently, the customer may prefer continuity. You should treat the moat as a relationship between engineering value and switching cost, not as a permanent property of the company.</p>
+<p>The business has reported that a large share of sales comes from a small group of customers. The RHP states that TVS Motor contributed 80.46% of revenue in FY2025 and 83.46% in FY2024; the top ten customers contributed 98.7% in the nine months ended December 2025. High concentration can be the natural result of landing a major OEM program, and it can let a specialist grow rapidly when a product is adopted. But it also leaves the supplier dependent on a few production plans. If the anchor customer builds fewer vehicles, changes sourcing, or migrates to a different design, revenue can fall faster than the supplier can replace it.</p>
+<p>That is why the best evidence of a broadening moat is not a patent count in isolation. Look for customer diversification, repeat nominations, additional programs within existing customers, and shipped products that continue to perform. One new program is encouraging; several programs across customers are more persuasive. Revenue mix can tell you whether diversification is happening, while receivables can reveal whether the growth is being financed by slower collections. A moat that grows sales but stretches the balance sheet deserves a lower quality rating than one that compounds with cash.</p>
+<p>You should also define the competitive field correctly. A specialist electronics supplier may face a large global Tier-1 company, an Indian engineering business, a supplier recommended by the OEM, or an internal customer team. Bosch, Continental and ZF provide European examples of deeply embedded control and automotive-system suppliers. Bosch India and Sona BLW can help frame the Indian supplier ecosystem, while Cummins in the United States illustrates the importance of control systems around engines and industrial power. These are learning parallels, not direct peers: the products, size, margins and diversification are different.</p>
+<p>The danger of choosing only famous peers is that scale can hide the most relevant question. Can a competitor qualify a similar application at the same economics and support a launch reliably? If yes, SEDEMAC&#x27;s customer may have bargaining power. If no, engineering history may protect the incumbent. The RHP&#x27;s risk discussion also notes dependence on concentrated suppliers and imported critical materials. That means the moat has two sides: customers must value the product, and the company must secure the components needed to deliver it. A supplier interruption can damage trust even when the design itself is excellent.</p>
+<p>Management has described product development, technology development and manufacturing as in-house. That can make iteration faster because design and production teams can respond together. It can also create an organization that is difficult for a customer to replace once a controller is integrated. Yet &#x27;in-house&#x27; does not prove lower cost, superior reliability or a patent barrier. The useful follow-up is whether engineering investment produces repeat launches, stable quality, and margins that remain healthy as volumes rise.</p>
+<p>When you listen to the November 2026 call, notice both what management says and where it draws a boundary. The founders discussed shipment volumes and manufacturing capacity, but also declined to disclose future product or monthly run-rate details. That restraint may protect competitive information; it also limits how precisely an outside investor can forecast the launch pipeline. Our job is not to punish management for keeping sensitive details private. It is to assign less certainty to future revenue that cannot yet be independently observed.</p>
+<p>The External Learning Hub should be read in sequence. Begin with the RHP, because it contains the formal risk disclosures and business description. Move to the November results and investor presentation for the current numbers. Then read the call transcript alongside those filings: compare the answers on utilization and raw materials with the filed balance-sheet and margin data. Finally, check the board page to know who holds the operating and oversight roles. Each source answers a different question, and none by itself proves the investment case.</p>
+<p>A useful parallel is a European automotive electronics supplier that wins a long-running OEM platform. The embedded relationship can persist because changing a validated component carries cost and execution risk. But a product cycle still ends, and the supplier must win the next design. In India, a diversified component maker can absorb a lost program more easily because its customer and product base is broader. In the United States, Cummins shows how an industrial supplier can link controls to an installed engine base while serving multiple end markets. SEDEMAC must build its own version of that resilience; the analogy is a question for the numbers, not a conclusion.</p>
+<p>NARRATOR&#x27;S REFLECTION: When a company tells you that its technology is difficult to replicate, ask what the customer would need to requalify, how often the product is redesigned, and whether a second source already exists. Then ask the next question: how many customers pay for that capability? The first answer speaks to product-level switching costs. The second speaks to company-level resilience. SEDEMAC&#x27;s reported concentration makes that second question central to any valuation.</p>
+<p>GLOBAL PARALLEL (US / INDIA / EUROPE): Cummins in the US, Bosch India, and Bosch, Continental or ZF in Europe show how control electronics can sit inside larger customer systems. Their scale and diversification differ from SEDEMAC&#x27;s, so compare operating logic rather than headline multiples. The shared lesson is that embedded technology earns trust through field performance, engineering support and dependable supply. The difference is that a smaller specialist has less room to absorb the loss of an anchor account.</p>
+<p>MENTAL MODEL: Think of the moat as two gates. The first is technical qualification: can the product satisfy the application and earn production approval? The second is commercial durability: does the supplier retain the program, collect the cash and broaden its customer base? Passing the first gate can create attractive economics. Passing both is what turns a promising product into a resilient company.</p>
+<p>The moat also has an upstream test. The RHP says purchases from the ten largest suppliers represented 63.63% of purchases in the nine months ended December 2025, and identifies imported semiconductors and printed circuit boards from China among critical inputs. That concentration can reflect a specialized bill of materials rather than weak procurement, but it leaves production exposed to supplier delays, component allocation and geopolitical disruption. For an OEM, a controller supplier is valuable only when it can deliver qualified units on schedule. For SEDEMAC, sourcing resilience therefore belongs in the competitive analysis alongside software and design capability. Track whether future filings show a broader supplier base, alternate qualification for critical components, or disruptions that affect launches and working capital. If the firm can preserve delivery reliability through component scarcity, it strengthens customer trust; if shortages interrupt production, the same concentrated customer relationships may magnify the damage.</p>
+<p>What this means for you is conditional confidence. SEDEMAC&#x27;s engineering-intensive products can create real program friction and repeat business, but the customer concentration disclosed in the RHP is a live counterweight. I would raise the moat assessment only after customer concentration eases and additional programs show up in repeatable revenue. In the next chapter, we translate that view into a short list of operating indicators that can be checked each quarter.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION</div>
+<p class="mc-box-body">A qualification barrier is valuable only if it survives the next program decision. Follow customer additions, renewal evidence and receivable quality together.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE)</div>
+<p class="mc-box-body">Cummins in the US, Bosch India, and Bosch, Continental or ZF in Europe illustrate embedded control-system economics at much greater scale. They are strategic parallels, not direct comparables; the practical lesson is how design-in status and customer breadth interact.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL</div>
+<p class="mc-box-body">Two gates define the moat: technical qualification and commercial durability. A product can clear the first while the company remains exposed at the second.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-5" data-audio-chapter="5">
+  <div class="mc-chapter-kicker">CHAPTER V</div>
+  <h2>Management on Trial — Leading KPIs &amp; Walking the Talk</h2>
+  <blockquote class="mc-epigraph">"A forecast is a claim about tomorrow; a KPI is a way to test it today."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">You and I need a dashboard that tells us what is changing before the annual report tells us what has already happened. For SEDEMAC, the first leading indicator is the number of control-intensive electronic control units shipped. The company has said it publishes the figure quarterly and that it correlates reasonably closely with revenue. In the November 2026 call, management reported nearly 4.6 million such units over the trailing twelve months, up 44% year over year. That is useful because it gives us a product-volume signal alongside the rupee sales number.</p>
+<p>But one indicator never deserves the whole thesis. A unit can be sold at a different price, contain a different feature set, or belong to a program with a different margin. So when shipments rise, ask whether revenue rises at a similar pace, whether operating margin holds, and whether new customers contribute. If the unit number grows but sales do not, mix or pricing may have changed. If sales grow but cash does not follow, the business may be financing customers through working capital. The KPI is a question generator, not a shortcut around the accounts.</p>
+<p>The second leading signal is program progression. A nominated product still has to pass design work, testing, validation and a production launch. A launch can be delayed because the customer&#x27;s vehicle program shifts, because a component is unavailable, or because a manufacturing process needs more work. Management described recent revenue growth as reflecting launches and ramp-ups, including programs launched in FY2026 that had fully ramped by the time of the call. The next useful evidence is whether those mature programs sustain shipment growth and whether new launches add incremental volume.</p>
+<p>Customer concentration belongs on the same dashboard because one large customer&#x27;s production plan can overwhelm a dozen smaller operating signals. The RHP disclosed that TVS Motor was more than four-fifths of FY2025 revenue and that the ten largest customers represented 98.7% of revenue for the nine months ended December 2025. You should track the same concentration measures over time. A new customer logo is not enough; the question is whether that customer becomes meaningful in revenue and persists through a production cycle.</p>
+<p>Capacity utilization is the third place where the narrative can turn. Management said on the November call that the existing primary plant was at or above 90% utilization, and that initial production had started at a new facility described as three times the size. The stated purpose included relieving congestion as well as supporting scale. That is plausible: a highly loaded plant can be a bottleneck even before accounting for demand growth. Yet capacity is a fixed-cost commitment. If new programs do not fill it, depreciation and other fixed costs can dilute returns.</p>
+<p>We should treat the announced production migration as a test with a clock. Management expected substantial production to shift by the end of FY2027, but called the timing flexible and said there was no urgency because the existing plant remained operational. That wording matters. It is not a hard revenue target. In later filings, check whether the transfer happened, whether production quality held, whether customers experienced delivery disruption, and whether the balance sheet shows the cost of the added capacity. If the date moves, ask what changed and whether the economics still make sense.</p>
+<p>Raw-material inflation is the fourth indicator. The November call connected a decline in EBITDA margin percentage with higher raw-material costs, while saying operating leverage offset part of the increase. The Q2 results show revenue growth alongside lower quarterly EBITDA margin compared with the prior-year quarter, according to the filed results and presentation. That pattern suggests volume is not automatically producing higher margins. The test is whether the company can pass through cost changes, redesign around constrained inputs, improve mix, or recover margins after inflation moderates.</p>
+<p>Receivables and cash from operations complete the dashboard. A customer relationship can be strategically attractive while still consuming cash. If invoices are collected slowly, the supplier must fund payroll, inventory and production during the delay. The snapshot reports debtor days rising from 29.7 to 46.1, while annual operating cash flow rose from ₹91 crore in FY2025 to ₹128 crore in FY2026. Those figures need to be read with inventory, payables and the filing&#x27;s accounting detail; a single year can be affected by timing. Still, rising debtor days are a reason to keep the cash-conversion test visible.</p>
+<p>The management audit must be fair about the short history. SEDEMAC listed in March 2026, which leaves a limited set of listed guidance cycles. We cannot manufacture a five-year scorecard from a company that has not yet been public for five years. The RHP does provide older company financial history and descriptions, but that is not the same thing as a public record of management forecasts. The correct conclusion is that the long-form walk-the-talk test remains incomplete.</p>
+<p>We can still audit what has actually been said. Management&#x27;s quarterly unit disclosure is observable; the November call&#x27;s 4.6 million TTM figure can be checked against the next quarterly update. The plant migration expectation has a time window and can be checked against future results. By contrast, management declined to quantify the entire product pipeline and would not provide exact monthly run rates. That makes near-term forecasting less precise. It does not prove that the opportunity is weak, but it means we should require more reported evidence before assigning a high probability to unannounced programs.</p>
+<p>Across the US, a diversified industrial controller supplier such as Cummins can use a broad installed base and multiple product lines to smooth customer or end-market cycles. In India, a large auto supplier can benefit from local engineering relationships and several OEM programs. In Europe, companies such as Bosch, Continental and ZF operate across broader vehicle systems and geographies. SEDEMAC&#x27;s operating test is whether it can translate specialist engineering into a wider base while keeping its new capacity productive. The peers offer a lens, not a promised destination.</p>
+<p>There is another timing issue you and I should keep in mind: OEM programs do not ramp in a straight line. A vehicle launch can shift between quarters, and a supplier may need to build components or finished goods ahead of the customer&#x27;s scheduled production. That can make quarterly sales, inventory and collections move in different directions without any one number being false. It also creates a risk: if the customer delays a program after inventory has been built, cash can remain tied up longer than planned. The RHP&#x27;s disclosure of concentrated customers and counterparty exposure makes this operating cycle especially relevant here. So when shipments accelerate, compare the following periods as well as the current one. Look for whether inventory is consumed, receivables are collected and operating cash flow catches up. The filed H1 results provide a current financial checkpoint; the next quarterly filing can show whether the production run-rate and working-capital pattern are settling. A strong operating record is not a single impressive quarter. It is a sequence in which launches convert into repeat shipments, repeat shipments convert into acceptable margins, and those margins ultimately support cash generation.</p>
+<p>NARRATOR&#x27;S REFLECTION: When management gives you a number, place it in a ledger with four columns: the date spoken, the precise claim, the later filing that can verify it, and the result. A statement about capacity is not a forecast of sales. A shipment metric is not a margin promise. Separating those categories lets you judge management without either cheerleading or unfairly treating caution as failure.</p>
+<p>GLOBAL PARALLEL (US / INDIA / EUROPE): Cummins, Bosch India, and European Tier-1 suppliers all show why product launches and factory execution matter in complex OEM relationships. Their breadth may diversify outcomes; SEDEMAC has a narrower customer base and a shorter listed record. Compare the questions each faces—utilization, launch quality, input costs and receivables—then judge whether SEDEMAC&#x27;s evidence is improving quarter by quarter.</p>
+<p>MENTAL MODEL: Follow a chain, not a slogan: shipment units lead revenue; launch execution determines whether units arrive; customer mix affects durability; margin shows pricing and cost absorption; receivables and CFO show whether earnings become cash. A break anywhere in the chain is a reason to slow the forecast.</p>
+<p>What this means for you is that the company offers measurable leading indicators, but not yet a long public history of commitments and outcomes. I would score the unit disclosures positively for transparency, keep the plant migration expectation open until verified, and give no credit to pipeline details management has not disclosed. The next chapter follows the cash to see whether the operating system has produced durable financial quality.</p>
+<p>On the new plant, management said, “It is not a hard timeline.” That is an unusually useful sentence for an investor: it tells you to treat the end-of-year transfer expectation as flexible, then verify progress in subsequent filings rather than converting it into a guaranteed date.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION</div>
+<p class="mc-box-body">Keep dated management statements separate from forecasts and targets. Record exactly what was said and wait for the filing that can confirm it.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE)</div>
+<p class="mc-box-body">Cummins, Bosch India, and European Tier-1 suppliers provide context for launch execution and factory utilization, while their scale and breadth differ. Use them to frame the operating questions, not to assume SEDEMAC will reach their economics.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL</div>
+<p class="mc-box-body">Units → launches → customer breadth → margins → cash. Each link needs independent confirmation; growth at the first link does not prove success at the last.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-6" data-audio-chapter="6">
+  <div class="mc-chapter-kicker">CHAPTER VI</div>
+  <h2>Following the Cash — 10-Year Financials &amp; Earnings Quality</h2>
+  <blockquote class="mc-epigraph">"Earnings describe performance; cash tells you what the business could actually fund."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">You and I should start with what the financial record can actually say. The stock snapshot in this run contains annual financial figures from FY2021 through FY2026, six years, plus a trailing-twelve-month column. It does not contain ten annual observations. That distinction is not cosmetic. A table with six years cannot honestly be titled a ten-year history, so we will analyze the available series and identify the additional filings needed to extend it. The RHP contains older audited periods, but those figures must be extracted and checked for accounting and share-count comparability before they are combined.</p>
+<p>Over the six years shown, sales rose from ₹240 crore to ₹1,058 crore. That is substantial growth, but the path was uneven. Sales moved from ₹240 crore in FY2021 to ₹283 crore in FY2022, then ₹423 crore, ₹531 crore, ₹658 crore and ₹1,058 crore. Operating margin fell from 12% to 10% early in the series, then expanded through 11%, 15%, 18% and 20%. The evidence supports a company that scaled while improving its operating margin, though it does not prove that the same pace can continue from a much larger base.</p>
+<p>The movement in profit before tax helps us avoid a simplistic growth narrative. PBT was ₹9 crore in FY2021, ₹4 crore in FY2022, ₹8 crore in FY2023 and ₹9 crore in FY2024, before rising to ₹68 crore in FY2025 and ₹150 crore in FY2026. Interest cost in FY2024 was ₹38 crore against operating profit of ₹78 crore, then declined to ₹12 crore in FY2025 and ₹9 crore in FY2026. Part of the earnings acceleration therefore reflects more than sales: margins improved and financing costs changed. You should ask whether current growth can preserve both operating economics and financing discipline.</p>
+<p>Net profit moved from ₹7 crore in FY2021 to ₹104 crore in FY2026, with FY2025 at ₹47 crore. The recent acceleration is real in the reported series, but one must be careful when comparing per-share figures across corporate actions. The company issued bonus shares in September 2025 at a ratio of 1,499 to 1. That changes the number of shares and requires historical EPS to be compared on a consistently adjusted basis. The 2026 IPO was an offer for sale, so it did not inject new primary capital into the company. Those details prevent a misleading reading of share count, EPS and cash raised.</p>
+<p>Now follow the cash. Cash from operations was positive in all six periods in the snapshot: ₹16 crore, ₹10 crore, ₹78 crore, ₹61 crore, ₹91 crore and ₹128 crore. That is encouraging because the company has not relied on accounting profit alone to show operating cash inflow. But free cash flow was volatile: -₹7 crore, -₹40 crore, ₹22 crore, -₹6 crore, ₹5 crore and -₹47 crore. The difference matters because factories, equipment and working capital consume cash before the business can distribute or reinvest it elsewhere.</p>
+<p>FY2026 shows the tension clearly. CFO was ₹128 crore, while investing cash flow was -₹148 crore and free cash flow was -₹47 crore. The company was investing heavily while the business was growing. That may be rational if the new capacity supports profitable programs. It may also depress near-term returns if utilization arrives later than expected. We cannot decide between those outcomes from the annual cash-flow total alone. We need subsequent disclosures on plant commissioning, production transfer, capital expenditure and the cash returned by the programs that use the new assets.</p>
+<p>The CFO-to-operating-profit conversion measure in the snapshot ranges from 39% in FY2022 to 166% in FY2023, with 71% in FY2026. This is a useful prompt, not a complete earnings-quality score. Working capital can move the ratio sharply from year to year. A release of receivables or inventory can lift CFO once; a buildup can lower it even when customer demand is healthy. The RHP warns about receivables and counterparty concentration, and the snapshot notes debtor days moving from 29.7 to 46.1. We should track customer balances and aging, not simply celebrate a single year&#x27;s cash conversion.</p>
+<p>The latest interim numbers show continuing growth. H1 FY2027 revenue was ₹710.41 crore, against ₹503.84 crore in the comparable half-year, and profit was ₹72.49 crore versus ₹47.21 crore. Q2 revenue was ₹400.64 crore and profit was ₹39.18 crore. Yet management said raw-material inflation was pressuring EBITDA margin percentage. This is exactly why sales and profit need to be read together with margin. A faster top line can coexist with weaker economics per rupee of sales if component costs rise or product mix changes.</p>
+<p>The balance sheet provides the funding context. Snapshot borrowings were ₹64 crore at March 2025, ₹72 crore at March 2026 and ₹352 crore at September 2026. Reserves rose from ₹303 crore to ₹405 crore and then ₹478 crore. That interim increase in borrowing cannot be explained conclusively from the snapshot alone. The company is expanding capacity, and working capital may also have grown, but we should reconcile short-term and long-term debt, cash balances, lease obligations and the use of proceeds from the audited and interim filings before concluding that leverage is either comfortable or alarming.</p>
+<p>There are at least three different cash questions here. First, does the existing operation generate cash after ordinary expenses? The annual CFO series says yes, although it fluctuates. Second, how much must be reinvested to support growth? The FY2026 investing outflow and the new plant indicate that this is material. Third, do customers pay on terms that allow the supplier to fund that expansion without excessive borrowing? The rising debtor-day observation makes this a live question. These questions should not be merged into one label such as &#x27;cash rich&#x27; or &#x27;cash poor.&#x27;</p>
+<p>A mature global industrial supplier gives us a useful contrast. Cummins in the United States can spread capital investment and end-market swings over a much broader installed base. In India, a diversified supplier can similarly absorb a program pause if several customers and products contribute. European suppliers such as Bosch, Continental and ZF operate across multiple vehicle systems and geographies. These comparisons do not imply that SEDEMAC will reach their scale. They clarify why concentration and factory economics deserve more weight for a smaller, faster-growing specialist.</p>
+<p>On ROIC and WACC, we should resist the temptation to fill a gap with a generic ratio. The current pack does not provide a consistently defined invested-capital series, a complete cash/debt reconciliation and a source-backed company-specific cost of capital. ROCE and ROE cards from a data provider are not a substitute for a reconciled return-on-invested-capital calculation. The right next step is to build that bridge from audited balance sheets and cash flows, then compare it with a transparent cost-of-capital assumption. Until then, we can discuss margin and cash trends without claiming a precise economic-profit spread.</p>
+<p>The ten-year request is important because a long history can show how the business behaved through different product and demand cycles. The six periods currently available show significant expansion but do not span a full decade. We should extend the table from the RHP&#x27;s older audited statements and company annual reports, preserving each period&#x27;s unit, standalone or consolidated basis and any retrospective share adjustments. If those source records cannot be reconciled, the correct disclosure is that the decade view remains incomplete. More rows are useful only when they are comparable.</p>
+<p>NARRATOR&#x27;S REFLECTION: A profit can fund a plan only after it becomes cash. When you see earnings accelerate, ask how much cash operations produced, how much went to factories and inventory, and how much remains after those commitments. SEDEMAC&#x27;s FY2026 combination—₹128 crore CFO and -₹47 crore free cash flow—makes the distinction concrete. Growth can be sound and cash-intensive at once; the investment question is whether returns on that investment eventually justify the outflow.</p>
+<p>GLOBAL PARALLEL (US / INDIA / EUROPE): Compare the capital cycle with Cummins in the US, a diversified Indian component supplier, and Bosch, Continental or ZF in Europe. All must fund engineering, inventory and production capacity, but broader companies can spread those costs across more customers and product lines. SEDEMAC&#x27;s smaller scale makes each plant transition and customer payment pattern more consequential.</p>
+<p>MENTAL MODEL: Read the income statement as the rate of reported progress, the cash-flow statement as the funding source, and the balance sheet as the accumulated commitments. A good growth year is strongest when all three improve together. Here sales, operating margin and CFO expanded across the available years, while free cash flow fluctuated and interim borrowings rose. That combination warrants confidence in execution with restraint about the cash multiple.</p>
+<p>What this means for you is that SEDEMAC has demonstrated rapid growth and better operating margins, but its investment program, working capital and interim borrowing require close monitoring. The current evidence is a six-year snapshot, not a complete ten-year forensic series, and it does not support a precise ROIC-versus-WACC conclusion. We can still judge the trajectory; the next chapter asks what price already assumes about its continuation.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION</div>
+<p class="mc-box-body">A growth company can be profitable and cash hungry at the same time. Ask whether new capacity produces returns that compensate for the cash and balance-sheet commitments.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE)</div>
+<p class="mc-box-body">Cummins, diversified Indian suppliers and European Tier-1 groups all manage investment and working capital, but their scale and customer breadth differ. SEDEMAC&#x27;s narrower base raises the importance of each launch, factory transition and payment cycle.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL</div>
+<p class="mc-box-body">Income statement = reported progress; cash flow = funding; balance sheet = accumulated commitments. The thesis strengthens when all three move in a healthy direction.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-7" data-audio-chapter="7">
+  <div class="mc-chapter-kicker">CHAPTER VII</div>
+  <h2>Why the Stock Trades Here — Expectations, Cash and Peers</h2>
+  <blockquote class="mc-epigraph">"Price is a summary of expectations; valuation is the work of unpacking them."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">Let us put the valuation question on the table carefully. When you look at SEDEMAC, you are looking at a company whose product sits inside a vehicle or machine and influences how that machine behaves. That can earn a supplier an important role in an OEM program. It does not automatically tell us what the equity is worth. Value depends on the cash left after the company pays its people, buys components, funds production and waits for customers to pay.</p>
+<p>The numbers give us a compelling beginning, not a completed valuation. FY2026 revenue was ₹1,058.38 crore and reported profit was ₹103.58 crore in the available snapshot. The half-year result through September 2026 showed revenue of ₹710.41 crore and profit of ₹72.49 crore. Growth is clearly powerful. But you and I should ask what must stay true for that growth to become durable cash compounding: programs must continue to ramp, customers must retain the supplier, input costs must be passed through or absorbed efficiently, and incremental receivables must eventually turn into cash.</p>
+<p>A reverse DCF is often presented as if it were a machine that prints one answer. It is only as good as its starting values. We need market capitalization on the exact cutoff, enterprise value after reconciling cash and borrowings, normalized free cash flow, a defensible discount rate and a terminal-growth assumption. The available files do not supply a fully reconciled set at the same date. So I will not tell you that the market price secretly assumes a particular annual growth rate. That would be a made-up answer wearing a spreadsheet costume.</p>
+<p>We can still reverse the question without pretending to solve it. At the observed equity-value scale, the company must grow into a much larger pool of earnings and cash while preserving attractive economics. If the advantage is real, the path could include deeper penetration of existing programs, new OEM wins and a broader product mix. The latest management commentary connected recent growth to launches and ramp-ups and also noted that raw-material inflation had pressured EBITDA margins. That pairing matters: volume can rise while the return on each rupee of sales slips. Your valuation case needs both growth and disciplined conversion.</p>
+<p>A rough snapshot calculation places the market-cap estimate near ₹13,737 crore. Dividing this by FY2026 reported profit of ₹103.58 crore produces about 132 times earnings; dividing by FY2026 revenue gives about 13 times sales. Treat these as scale checks only. They combine a snapshot market-cap capture with audited full-year figures, and they are not a cutoff-matched enterprise-value DCF. The lesson is not that a single multiple proves the stock is wrong. The lesson is that the future has to do substantial work before today’s equity value feels ordinary.</p>
+<p>Now consider the peer set. Bosch India brings a broad industrial and automotive electronics heritage; Schaeffler India combines engineering with precision components; Sona BLW has a different product and electrification profile; ZF Commercial Vehicle Control Systems India serves another vehicle class. Each can teach you something about qualification cycles, program longevity or engineering economics. None is a plug-and-play multiple. Their scale, customer mix and product portfolios differ. A comparison is useful when it asks whether SEDEMAC converts R&amp;D into sticky, profitable programs. It becomes misleading when it simply places four unrelated P/E ratios beside one another.</p>
+<p>Here is the practical test I want you to carry forward. Watch whether sales growth is followed by stable or improving operating margins, whether receivables and inventory grow more slowly than revenue over time, whether customer concentration declines, and whether the new production footprint supports output without uncontrolled capital needs. If those signals improve across several reporting periods, the premium can become easier to defend. If growth is strong but cash and margins lag, the premium can shrink even while the company remains strategically interesting.</p>
+<p>You can see similar valuation tensions across geographies. In the United States, a specialized automotive electronics supplier may win a valuable design position, yet its bargaining power still depends on program economics and customer renewal. In India, a component maker with a fast-growing anchor customer can post impressive headline numbers while remaining exposed to one buyer’s model mix. In Europe, established industrial suppliers show how long qualification histories can support durable relationships, but they also illustrate that scale and process discipline matter. These are parallels in business mechanics, not claims that the companies are identical.</p>
+<p>So the valuation judgment is deliberately restrained. The market appears to price a high-quality technology supplier with a long runway. The evidence supports a strong growth record and meaningful engineering capability, while the customer concentration and cash conversion questions remain central. Until a same-date cash-flow bridge and a longer public record are available, we should not convert an attractive company into a precise target price. We should demand evidence that the future the market is paying for is arriving in cash.</p>
+<p>One way to discipline the valuation debate is to separate four claims that often get collapsed into one. First, the product may solve a difficult engineering problem. Second, the OEM may choose to keep the supplier on a program. Third, the supplier may earn an attractive margin on that program. Fourth, the supplier may turn the accounting profit into distributable cash after capacity and working capital needs. Evidence for the first claim does not prove all four. The RHP and company presentation describe the product and development model; the quarterly statements show recent profit; the receivable and cash-flow history must show the conversion. That chain is the real moat test.</p>
+<p>A long program can create switching friction because the OEM has integrated a validated control unit into a vehicle platform, and replacing the design can require engineering, testing and launch work. But switching friction is not contractual exclusivity. The offer document explicitly describes a high dependence on a few customers and warns that customers can reduce or change business. The better valuation case therefore assigns some persistence to programs, but does not assume perpetual rents. In our review, customer retention should be observed through program awards, revenue share, receivable behavior and margin performance rather than inferred from the technical importance of a controller.</p>
+<p>The reverse-DCF question can also be framed as a set of hurdles instead of a single growth estimate. What sales base does the company need to reach before the equity value looks less demanding? What operating margin can it retain when raw materials rise? How much reinvestment is required to serve new programs? How much incremental borrowing accompanies receivable growth? The present record can inform the direction of these questions, but it cannot settle them. A scenario spreadsheet would need to show each assumption explicitly and test a range of discount rates and reinvestment rates. Without that, one output number would be an opinion disguised as a measurement.</p>
+<p>Peer comparisons need similar restraint. Sona BLW, Bosch India, Schaeffler India and ZF Commercial Vehicle Control Systems India occupy adjacent parts of the OEM ecosystem, but their portfolio breadth, export exposure and earnings mix differ. An investor who takes a peer multiple without normalizing those differences is likely to overstate precision. The practical benchmark is not whether SEDEMAC deserves the highest multiple; it is whether its growth and return on incremental capital stay strong enough to justify a premium after the novelty of a new listing fades. The next several annual and interim statements will matter more than the visual neatness of a peer table.</p>
+<p>A useful way to monitor premium risk is to define what would disconfirm the quality thesis. The thesis weakens if revenue concentration remains extreme while the largest customer’s demand becomes less favorable, if operating profit grows but receivables and inventory absorb the cash, or if capacity additions depress returns for longer than management expects. It strengthens if several customers increase production with SEDEMAC’s products, if cash generation broadly follows earnings, and if margins hold through input-cost changes. Each of these tests can be tied to a filing line or a customer-mix disclosure. That gives valuation work a future checklist instead of a one-time declaration.</p>
+<p>For perspective, think about three named reference businesses without treating them as valuation twins. BorgWarner in the United States illustrates why the automotive supply chain is exposed to technology transitions and platform timing. Sona BLW in India shows how an engineering-led component supplier can be discussed in relation to electrification and OEM programs. Bosch and Continental in Europe show the breadth and capital intensity of established automotive electronics businesses. These are learning references only; their scale and product mix differ sharply from SEDEMAC. The parallel is that technology content matters, but the customer program and cash economics determine shareholder value.</p>
+<p>The conclusion is not that SEDEMAC should trade at a particular multiple. It is that current evidence supports a high-growth, engineering-led company while leaving fair value unusually sensitive to assumptions about customer breadth, durable margins and reinvestment. Your work as an investor is to wait for those variables to become observable. A valuation premium can be deserved and still leave little room for disappointment. That distinction is why we retain a demanding posture until the cash-flow bridge and customer diversification improve.</p>
+<p>Now we can make the valuation question concrete without pretending that a short forecast is a fact. At the 6 November close, the ledger price and reported paid-up capital imply an equity value near ₹13,357 crore. In a simple steady-state reverse DCF, an 11% discount rate and 4% perpetual growth require about ₹935 crore of annual free cash flow: ₹13,357 crore multiplied by the 7% spread between discount and terminal growth. That is a sensitivity, not a prediction. It ignores net debt, cash and dilution, and the latest annual snapshot shows free cash flow of negative ₹47 crore. The gap tells you what the price needs the business eventually to become; it does not tell you when or whether the company will get there.</p>
+<p>The peer table is a set of lenses, not a league table. Bosch is much broader, Schaeffler&#x27;s product mix is different, Sona BLW is tied to precision driveline and EV content, and ZF Commercial Vehicle Control Systems India serves another vehicle cycle. The latest snapshot P/E readings put SEDEMAC above each of these reference names, while its reported return ratios are also higher than some peers. Because the quotes and financial periods do not line up perfectly, we should use the table to frame questions about growth, margin, capital intensity and customer breadth, not to claim that one company is categorically cheap or expensive.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • Growth is the beginning of the valuation case</div>
+<p class="mc-box-body">You and I can admire rapid growth while still asking whether the next rupee of revenue produces durable cash. A premium is defended by quality over time, not by a single growth year.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • Qualification creates value, concentration sets the limit</div>
+<p class="mc-box-body">A US controls supplier, an Indian two-wheeler component maker and a European automotive electronics firm can all benefit from long OEM validation. Their economics still depend on customer breadth, program economics and cash collection.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • Reverse the burden of proof</div>
+<p class="mc-box-body">At a demanding equity value, ask what has to remain true for a decade: growth, margins, cash conversion, customer retention and capital efficiency. Then track each condition against filings rather than a single headline multiple.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-8" data-audio-chapter="8">
+  <div class="mc-chapter-kicker">CHAPTER VIII</div>
+  <h2>Reading the Tape — Trend, Volume &amp; No-FOMO Timing</h2>
+  <blockquote class="mc-epigraph">"A good business can be a poor entry when price and evidence disagree."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">Now we move from the company’s story to the price line. The first discipline is to know what the chart cannot tell us. SEDEMAC began trading in March 2026, and the 6 November ledger contains 163 daily bars. That is enough for a few short moving averages. It is not enough for a full 200-day comparison or a reliable 30-week trend through a complete cycle. So when somebody says the stock is firmly in Stage 2, ask what long-term data supports that label. Here, the answer is: not enough.</p>
+<p>At the verified cutoff, the close was ₹3,023.90. The 20-day average was ₹3,142.49, and the 50-day average was ₹3,133.43. Price sat below both. The ledger described the 50-day average as falling or flat. RSI was 41.89, while volume was 0.92 times its 20-day average. These figures do not prove a breakdown, but they do not offer a clean momentum entry either. The stock was about 0.77 ATR below its 50-day average and about 0.81 ATR above the ₹2,910 support reference.</p>
+<p>Let us interpret that with care. A declining short average often reflects a recent pullback, but one short average cannot tell us whether long-term sponsorship is returning. A relative-volume figure near average is simply ordinary participation; it is not a strong accumulation signal. RSI near 42 is soft, but it is not a mechanical invitation to buy. The chart offers a map of conditions, not an order ticket. We want price to stabilize, reclaim relevant averages and do so with participation before treating a rebound as durable.</p>
+<p>The ₹2,910 area is a reference drawn from the recent swing low. It may attract attention because traders can see it. It may also fail. If price falls through it, the next lower reference in the ledger is a base low near ₹2,749.40, but that level is not a guaranteed floor either. Liquidity, gaps and market-wide selling can produce an execution well away from any line on a chart. We use these levels to define the next review conditions, not to promise protection.</p>
+<p>There is one important data discrepancy. The consumer-tool snapshot captured a ₹3,105 close and different short averages, while the date-stamped market-facts ledger identifies ₹3,023.90 for 6 November. For the report, the ledger governs the session close because it carries an exact market date. The snapshot remains useful for company fundamentals but cannot be blended into this technical reading without resolving its timing. This is a practical lesson in research: a number without a verified date is not a current number.</p>
+<p>The short post-listing record also shapes our institutional-flow judgment. We cannot read months of accumulation and distribution as if they represented several years. The listed float, IPO-related ownership transitions and new-holder behavior deserve attention, yet the data here does not establish a durable institutional accumulation pattern. We should avoid telling ourselves that the share has a stable long-term support structure simply because it has traded above its offer price for a period.</p>
+<p>Think of comparable setups in three markets. A US technology supplier can surge after listing and still need time to build a base. An Indian auto component stock can outperform on a new customer program, then retrace when early holders take profits. A European industrial controls company with a long chart history can be assessed against a decade of cycles; SEDEMAC does not yet have that listed record. The parallel is the need for confirmation; the difference is the evidence horizon.</p>
+<p>My action is therefore simple and disciplined: watch, do not chase. I would want a stable base, a close back above the 50-day average, evidence of improved participation and a fresh check that the ledger and snapshot agree. I would also want the business thesis to remain intact after reviewing working capital and customer concentration. If those conditions arrive, rerun the entry analysis. Until then, the chart says patience has value.</p>
+<p>We should also distinguish a support test from a support hold. The ledger’s ₹2,910 swing-low anchor records where price recently found a low. It does not show who bought there, whether their bids remain, or whether a new catalyst will arrive. A proper test would watch the next sessions: does price approach the area on lower volume, stabilize, then reclaim short averages on stronger volume? Or does it break below the reference with broad selling? The chart at this point supplies the question, not the answer.</p>
+<p>The lack of a 200-day average is especially important because IPO charts can create a false sense of structure. If you see a share price well above its offer price, the first impulse may be to draw a long-term rising trend. Yet an early public-market phase may include a small float, concentrated ownership changes, lock-up expiries and fresh price discovery. The 163 bars do not let us test how the company behaves through a full market drawdown or an industry downturn. Calling that trend a proven compounding setup would mix business potential with chart evidence that is not yet present.</p>
+<p>Relative strength also needs a careful label. The market-facts file gives a positive 63-day relative-strength reading against its benchmark but a negative 28-day reading. That tells us the shorter window has weakened while the broader recent window remains ahead. It does not establish institutional accumulation, because relative performance measures price behavior and not the identity or intent of buyers. The combination is consistent with a pullback after strength, but the short listing history means we cannot tell whether this is a healthy pause or a more durable loss of demand.</p>
+<p>The snapshot and ledger disagreement gives us a second technical lesson. A consumer tool gathered a ₹3,105 price, while the date-stamped ledger has ₹3,023.90. If we mixed the first price with the ledger’s moving averages, even a simple percentage extension would be wrong. So we anchor every figure in this discussion to the verified ledger and retain the conflict as a data-quality note for the next refresh. Before any live order, the price, timestamp, venue and share series should be reconciled. That small discipline often prevents larger mistakes in trend classification.</p>
+<p>A market-wide backdrop can influence a setup without answering the company-specific question. On 6 November the broader Indian market ledger described an uptrend but narrow breadth, with only 45.4% of the tracked names above their 50-day averages. This does not determine SEDEMAC’s path, but it suggests that headline index strength was not evenly shared. A single-name breakout in narrow breadth deserves stronger confirmation, since fewer stocks are participating in the advance. We should not translate a broadly positive index label into a green light for every recent IPO.</p>
+<p>Here is the conditional route we would follow. First, verify the quote and wait for a stable area rather than buying into a falling short average. Second, look for a recovery above the 50-day average, ideally with volume stronger than the recent norm, while checking whether the 50-day average itself turns upward. Third, after enough trading history accumulates, evaluate the 30-week and 200-day structure. Fourth, rerun valuation and business checks; a technical recovery does not erase customer concentration or working-capital risk. If one stage fails, the position remains a watch rather than a trade.</p>
+<p>Compare the setup with long-listed European industrial companies such as Bosch or Continental, where decades of weekly bars make it possible to inspect several recessions and recoveries. Compare it next with BorgWarner in the United States, where automotive technology transitions and platform timing remain important to the supplier’s story, and Sona BLW in India, where listed trading history is longer than SEDEMAC’s but the business is still exposed to automotive cycles. These are not chart twins or valuation twins. The shared lesson is that trend evidence improves with a longer public record. SEDEMAC’s business roots go back to 2007; its public chart began only in 2026.</p>
+<p>For the short-term trader, the verdict is wait. A close above ₹3,133.43 would place price above the current 50-day average as it stood at the cutoff, but one close is not a trend change. A stronger confirmation would require follow-through, supportive volume and a flattening or rising average. A move below ₹2,910 would weaken the nearby support thesis and prompt another review, though it would not tell us the eventual low. These are observable checkpoints; they are not automatic promises about execution or returns.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • The chart is a set of conditions</div>
+<p class="mc-box-body">You and I are not trying to predict tomorrow from a line. We are deciding what evidence would make a trade sensible and what observation would tell us to wait.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • A new listing needs time to reveal its rhythm</div>
+<p class="mc-box-body">US growth listings, Indian supplier IPOs and long-established European industrial shares all benefit from trend confirmation. Only the older European chart currently offers a long public-market history; SEDEMAC’s 163 bars limit the conclusion.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • Support is a question, not an answer</div>
+<p class="mc-box-body">At ₹2,910, ask whether demand appears and whether price can reclaim its averages. Do not assume the level will hold, and do not confuse proximity to support with attractive business value.</p>
+</aside>
+</section>
+<section class="chapter book-chapter mc-chapter" id="ch-9" data-audio-chapter="9">
+  <div class="mc-chapter-kicker">CHAPTER IX</div>
+  <h2>Bull vs. Bear, Likely Outcomes &amp; Our Action Plan</h2>
+  <blockquote class="mc-epigraph">"The purpose of a forecast is not confidence; it is to make the conditions of being wrong visible."<footer>&mdash; Research Desk maxim</footer></blockquote>
+  <p class="drop-cap">We have reached the point where you should hear both arguments at full strength. The bull does not need to pretend that customer concentration is harmless. It can say something more credible: SEDEMAC sells control-intensive electronic units that must work reliably in demanding applications; management describes in-house development and manufacturing; and the company has translated launches into a sharp increase in sales and unit shipments. FY2026 revenue was ₹1,058.38 crore, and the first half of FY2027 produced ₹710.41 crore. Management reported nearly 4.6 million control-intensive ECUs in trailing twelve-month shipments to Q2 FY2027, 44% higher year over year. If those products remain qualified and expand across models and customers, the earnings base could grow materially.</p>
+<p>The best bull case also recognizes the margin question. Raw-material inflation pressed EBITDA margin in the latest period, but management said operating leverage offset part of the input-cost increase. If new launches lift output, procurement improves and customers accept pricing that protects the supplier’s economics, the business could absorb cost shocks and still compound. The bull sees a technical capability that is difficult to replicate quickly, then sees the OEM relationship as a channel for broader product adoption. That is a coherent thesis, provided the economics appear in audited cash flows rather than only in volume claims.</p>
+<p>Now give the bear its strongest form. The RHP identifies TVS Motor as 80.46% of FY2025 revenue and 75.48% for the nine months through December 2025. Mobility accounted for 85.69% of FY2025 revenue and 84.63% for that nine-month period. The same filing flags dependence on a concentrated supplier base and imported critical materials. This is not a minor footnote. A model change, sourcing decision, price reset or demand slowdown at an anchor OEM can affect utilization, cash collection and profit at the same time.</p>
+<p>The bear also points to valuation and proof. The company has a strong recent growth record, but that record is short as a listed equity. The latest call describes cost inflation and margin pressure; the facts ledger shows the price below the 20-day and 50-day averages, with no sufficient history to classify a 30-week Stage 2 trend. If growth slows before margins and cash conversion mature, shareholders can lose through both lower earnings expectations and a lower valuation multiple. A good engineering business can still be an expensive security.</p>
+<p>Here is a transparent scenario exercise. At the 6 November close of ₹3,023.90, revisiting the observed 52-week high of ₹3,650 would imply about 20.7% upside: ₹3,650 divided by ₹3,023.90, less one. A return to the observed 50-day average of ₹3,133.43 would imply about 3.6% upside. A stress reference of ₹2,600, which is an assumption rather than a chart-derived target, would imply about 14.0% downside. These price cases are not discounted cash-flow outcomes. They exclude dividends, execution costs, liquidity effects and the possibility of a gap through a level. Their purpose is to make the uncertainty legible, not to forecast a destination.</p>
+<p>For a wider lens, compare BorgWarner in the United States, Sona BLW in India and Bosch or Continental in Europe. Each is a useful reference point for how engineering capability meets OEM qualification, platform timing and technology change. They differ in scale and product mix, so we are not importing their financial outcomes into SEDEMAC’s forecast. The lesson is narrower: a design win travels through a customer system, and broad customer relationships can make the economics more resilient than a fast-growing but concentrated revenue stream.</p>
+<p>Our independent verdict is cautious. In the short term, WATCH and WAIT FOR SUPPORT. A stable base, close above the 50-day average and stronger volume would improve timing, but would not establish fair value. In the medium term, keep the name on a conditional watch: we need evidence of diversification, disciplined receivable growth and margins that withstand commodity pressure. Over a long horizon, we see a promising business candidate, but not yet enough public cash-flow history and customer breadth to call it a high-conviction compounder at this price.</p>
+<p>The next filings can change the verdict. We would upgrade the business case if non-anchor customers contribute more, cash from operations tracks earnings over multiple periods, receivables stay controlled and the new production footprint ramps without weakening returns. We would tighten it if the leading customer share rises, launches slip, input inflation compresses margins for longer, or working capital expands faster than sales. On the chart, a close below ₹2,910 prompts a review; it is not a guaranteed stop. A stronger close above the 50-day average with participation improves timing; it does not erase concentration. That is how you and I keep the business judgment and the entry decision separate.</p>
+<p>A complete steelman does not caricature the bear as someone who dislikes technology or growth. The bear can accept that SEDEMAC’s control units are technically important and that the company has grown quickly. The bear asks whether the economic value created is captured by the supplier or passed to OEM customers through price reductions, whether new customer programs can be won at similar margins, and whether any qualification advantage survives a change in vehicle architecture. The public material establishes product capability and current growth, but it cannot prove the lifetime profitability of every program.</p>
+<p>The bull’s strongest answer is not to dismiss the concentration numbers. It is to point to the firm’s operating record, recurring design relationships and new product categories, then argue that the largest customer’s programs have provided a platform from which capability can travel to more customers. That could be a sound path. It remains a path to demonstrate. We should track the revenue share from each customer, not simply count announced relationships. We should track actual shipments, not pipeline mentions. We should track cash collected, not only invoices issued. The next evidence must be realized in results.</p>
+<p>The scenario table is intentionally modest in what it claims. The bull reference at ₹3,650 is the observed 52-week high in the ledger, not a forecast. The base reference at ₹3,133.43 is the 50-day average and is not fair value. The bear reference at ₹2,600 is an analyst stress assumption. These are simple price sensitivities around the ₹3,023.90 session close, not probability-weighted intrinsic values. We do not assign a precise expected return because that would require a defensible horizon, target methodology, outcome probabilities and event assumptions that the available data cannot support.</p>
+<p>If we wanted to calculate an expected value later, we would need to state the probabilities and the fundamental price outcomes explicitly. For example, a probability-weighted average of bull, base and bear prices is only meaningful if each target is derived from a consistent earnings or cash-flow framework and each probability reflects evidence. Here, the high and moving-average references describe chart landmarks while the bear number is assumed. Treating them as comparable fundamental targets would create false rigor. The appropriate current action is therefore conditional, with monitoring triggers rather than a fabricated expected-return figure.</p>
+<p>There are also non-price actions embedded in the long-term verdict. Review whether customer concentration declines as other OEM programs scale. Examine trade receivables against sales and compare operating cash flow with net profit over multiple reporting periods. Check whether raw-material price increases are passed through, absorbed or offset by mix and productivity. Monitor the new plant transition against capacity utilization and capital expenditure. Each measure goes to the hinge in the thesis: can SEDEMAC turn engineering capability into diversified, cash-generative growth without losing its negotiating position?</p>
+<p>The management record should be assessed with the same fairness. The latest call linked recent growth with launches and ramp-ups, and management discussed input inflation and margin effects. It also said that production at the new facility had begun and that the migration timetable was flexible. A flexible timetable is not automatically a missed promise; it is a disclosed execution choice. The walk-the-talk test is whether production moves safely, customer supply remains uninterrupted and returns justify the added footprint. We should compare subsequent filings to what was said rather than demand a rigid date the company did not promise.</p>
+<p>Our verdict differs by horizon because each horizon faces a different uncertainty. Over one to twelve weeks, price structure dominates: the share is below short averages and volume is not showing exceptional accumulation, so wait. Over three to eighteen months, results and customer mix dominate: keep it on a conditional watch while cash conversion and margins are tested. Over three to ten years, the engineering story could matter greatly, but the evidence needs time to show customer breadth, program longevity and returns on investment. We are not rejecting the business; we are withholding a high-conviction compounding verdict until the crucial evidence is visible.</p>
+<p>This is the point where a reader can make the framework their own. If you already own shares, review your position size against the concentration and valuation risks rather than treating the business quality as a reason to ignore price. If you are considering a new position, avoid chasing a price that has not confirmed its short-term trend. Set a reminder to revisit the next exchange filing and refresh the technical snapshot only after the session closes. If the evidence improves, the decision can improve. If it worsens, a disciplined watchlist has already done its job by keeping attention without forcing capital into the story.</p>
+<p>Management also said of working capital, “We do not see this situation substantially changing.” That view is a forecast about funding needs, not proof that receivables and inventory will normalize. We should compare the next balance sheet and cash-flow statement with the ₹258 crore working-capital figure discussed on the call, and test whether it rises in proportion to sales.</p>
+<aside class="mc-box mc-box-reflection">
+<div class="mc-box-header">NARRATOR&#x27;S REFLECTION • Admire the capability; underwrite the dependence</div>
+<p class="mc-box-body">The strongest investment case can contain a serious risk. Our job is to size the risk, ask what evidence reduces it, and avoid treating a good product as proof of a good entry.</p>
+</aside>
+<aside class="mc-box mc-box-parallel">
+<div class="mc-box-header">GLOBAL PARALLEL (US / INDIA / EUROPE) • A design win travels through a local customer system</div>
+<p class="mc-box-body">A US controls supplier, an Indian OEM component maker and a European automotive electronics group all depend on qualification and program longevity. Customer breadth and contract economics determine how durable those wins become.</p>
+</aside>
+<aside class="mc-box mc-box-model">
+<div class="mc-box-header">MENTAL MODEL • Separate thesis, price and trigger</div>
+<p class="mc-box-body">The thesis asks whether the business can grow cash flows. Price asks what is already expected. The trigger asks what evidence warrants action today. One can be attractive while another remains unresolved.</p>
+</aside>
+</section>
+
+    <section class="mc-notes" id="notes">
+      <h2 id="references">Notes, Filings &amp; Primary Sources</h2>
+      <ol class="sources reflist">
+        <li id="cite_note-1">[1] Market-facts ledger — India, verified 6 November 2026 — Dated local market ledger; primary close and indicators used for session-specific claims.</li>
+<li id="cite_note-2"><a href="https://www.screener.in/company/SEDEMAC/consolidated/">[2] Stock snapshot and Screener company record</a> — Retrieved 8 November 2026; fundamental tables and financial ratios used as a separate snapshot.</li>
+<li id="cite_note-3"><a href="https://assets.ipopremium.in/images/ipo/sedemac_mechatronics_ltd_mainboard_rhp_1772262342.pdf">[3] Red Herring Prospectus (RHP)</a> — Filed February 2026; customer and supplier concentration, risk factors, products and restated history.</li>
+<li id="cite_note-4"><a href="https://nsearchives.nseindia.com/corporate/SEDEMAC2007_03112026162947_20261103-OutcomeofBoardMeeting.pdf">[4] Q2 and H1 FY2027 results</a> — NSE filing dated 3 November 2026; quarter and half-year statements and segment tables.</li>
+<li id="cite_note-5"><a href="https://nsearchives.nseindia.com/corporate/SEDEMAC2007_03112026163855_20261103_InvestorPresentation.pdf">[5] Q2 FY2027 Investor/Analyst Presentation</a> — NSE filing dated 3 November 2026; operating indicators, launch status, capacity and outlook.</li>
+<li id="cite_note-6"><a href="https://stockanalysis.com/quote/nse/SEDEMAC/transcripts/738277-q2-26-27/">[6] Q2 FY2027 earnings call transcript</a> — Call held 3 November 2026; MD and Joint MD remarks attributed as management commentary.</li>
+<li id="cite_note-7"><a href="https://www.sedemac.com/investors/board-of-directors-management-team">[7] Board and management roster</a> — Official company page; current leadership and committee membership.</li>
+<li id="cite_note-8"><a href="https://www.sedemac.com/isg">[8] Sensorless ISG product page</a> — Official company explanation of technology and intended vehicle applications.</li>
+<li id="cite_note-9"><a href="https://www.bseindia.com/xml-data/corpfiling/AttachHis/4d60e08b-4c9b-4242-bdc8-cc0fed1143e7.pdf">[9] FY2025-26 Annual Report (BSE attachment)</a> — Company annual report filed 17 August 2026; audited statements, production, R&D and governance.</li>
+<li id="cite_note-10"><a href="https://www.nseindia.com/get-quote/equity/SEDEMAC/SEDEMAC-Mechatronics-Limited">[10] NSE security and listing page</a> — Exchange listing date and security information; the session close comes from the dated ledger.</li>
+<li id="cite_note-11"><a href="https://www.screener.in/company/BOSCHLTD/; https://www.screener.in/company/SCHAEFFLER/; https://www.screener.in/company/SONACOMS/; https://www.screener.in/company/ZFCVINDIA/">[11] Peer metric snapshot</a> — Peer P/E and ROCE are latest provider snapshots retrieved 8 November; not cutoff-matched multiples.</li>
+<li id="cite_note-12"><a href="https://stockanalysis.com/quote/nse/SEDEMAC/transcripts/737875-q4-25-26/">[12] Q4 FY2026 earnings-call transcript</a> — May 2026 management call; per-incremental-revenue capex and working-capital discussion.</li>
+<li id="cite_note-13"><a href="https://www.sedemac.com/static/media/SEDEMAC_Result_9M_2025-26.a1eb517e65309473c820.pdf">[13] Company RHP restated financial information</a> — Issuer restated financial information through December 2025, with FY2023-FY2025 comparatives.</li>
+<li id="cite_note-14"><a href="https://nsearchives.nseindia.com/corporate/ixbrl/INTEGRATED_FILING_INDAS_179522_28072026225604_iXBRL_WEB.html">[14] Q1 FY2027 integrated filing</a> — NSE integrated filing for quarter ended June 2026.</li>
+<li id="cite_note-15"><a href="https://nsearchives.nseindia.com/corporate/ixbrl/INTEGRATED_FILING_INDAS_158568_18052026172612_iXBRL_WEB.html">[15] FY2026 audited results filing</a> — NSE integrated filing for audited year ended March 2026.</li>
+<li id="cite_note-16"><a href="https://stockanalysis.com/quote/nse/SEDEMAC/transcripts/737875-q4-25-26/">[16] Q4 FY2026 management call — prior transcript</a> — Cited for management's stated incremental plant and working-capital requirements.</li>
+<li id="cite_note-17"><a href="https://nsearchives.nseindia.com/corporate/SEDEMAC2007_22052026164419_20260522_IntimationofTransciptofCall.pdf">[17] Company Q4 FY2026 call transcript intimation</a> — NSE filing identifying the May 2026 call and management participants.</li>
+<li id="cite_note-18"><a href="https://www.sedemac.com/static/media/SEDEMAC_AnnualReport_2024-25.1e8736c84c62450d11d1.pdf">[18] FY2024-25 Annual Report</a> — Issuer annual report; historical financial and governance context.</li>
+<li id="cite_note-19"><a href="https://www.sedemac.com/blog/isgefi">[19] ISG plus EFI integration article</a> — Company explanation of combined-controller proposition; claims are attributed to the issuer.</li>
+<li id="cite_note-20"><a href="https://www.sedemac.com/products/small-evs">[20] Small-EV products</a> — Official product range and application descriptions for electric two- and three-wheelers.</li>
+<li id="cite_note-21"><a href="https://www.sedemac.com/motors">[21] Electric motors</a> — Official motor and controller descriptions for EV and outdoor-power-equipment uses.</li>
+<li id="cite_note-22"><a href="https://www.sedemac.com/investors/financial-information/financial-performance">[22] Investor financial-performance resource page</a> — Issuer investor resource index, including its commissioned CRISIL report.</li>
+<li id="cite_note-23"><a href="https://www.sedemac.com/static/media/CodeOfPracticesFairDisclosureOfUPSI.e62e011dea7a11bbde25.pdf">[23] Code of fair disclosure</a> — Issuer policy for uniform dissemination of price-sensitive information.</li>
+<li id="cite_note-24"><a href="https://www.sedemac.com/static/media/Archival-Policy.421bfdccaf1f815674f2.pdf">[24] Archival policy</a> — Issuer policy describing retention of exchange disclosures.</li>
+<li id="cite_note-25"><a href="https://www.sedemac.com/static/media/Policy-for-Determination-of-Materiality.481b3600266b894308e2.pdf">[25] Policy for determination of materiality</a> — Issuer policy governing disclosure decisions.</li>
+<li id="cite_note-26"><a href="https://www.sedemac.com/static/media/Sedemac-RHP-Final-Report-Feb-26.6ab19b3d0d82f0c06e44.pdf">[26] SEDEMAC RHP competitive and industry section</a> — Issuer-published prospectus section; market, product and competitor context, dated February 2026.</li>
+<li id="cite_note-27"><a href="https://financialfilings.com/filings/sedemac-mechatronics-limited/annual-report/2026/56437200/">[27] FY2026 Annual Report digital copy</a> — Accessible annual-report text copy; cited figures cross-checked to exchange filing.</li>
+<li id="cite_note-28"><a href="https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=5ed65cb4-fffb-4efd-8660-98cc750123cf.pdf">[28] May 2026 investor presentation</a> — Exchange presentation for FY2026; BSE-hosted link was blocked to automated fetch, listed for direct reader access.</li>
+<li id="cite_note-29"><a href="https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=b7a11a18-9e08-4b2d-94ba-6b5f44e7b574.pdf">[29] July 2026 investor presentation</a> — Exchange presentation for Q1 FY2027; BSE-hosted link was blocked to automated fetch, listed for direct reader access.</li>
+<li id="cite_note-30"><a href="https://financialfilings.com/filings/sedemac-mechatronics-limited/earnings-release/2026/46384611/">[30] FY2026 earnings release and audited cash flow</a> — FY2026 earnings release with cash-flow statement and audit opinion.</li>
+<li id="cite_note-31"><a href="https://www.screener.in/company/SEDEMAC/">[31] Annual-report and filing index</a> — Issuer-document index used for source discovery, not as authority for audited values.</li>
+<li id="cite_note-32"><a href="https://www.sebi.gov.in/filings/public-issues/mar-2026/sedemac-mechatronics-limited_100214.html">[32] SEBI public-issue filing record</a> — Regulator's filing index for the issuer's public issue.</li>
+      </ol>
+      <div class="mc-colophon">
+        &bull; &bull; &bull;<br>
+        This Masterclass Companion Book was authored for private study, audiobook narration, and disciplined portfolio execution.<br>
+        Verified against the IN Research Ledger &bull; Session Cutoff 2026-11-06
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (() => {
+    'use strict';
+    const bar = document.querySelector('.book-audio-bar');
+    if (!bar || !('speechSynthesis' in window)) return;
+    const playBtn = bar.querySelector('[data-audio-action="play"]');
+    const prevBtn = bar.querySelector('[data-audio-action="prev"]');
+    const nextBtn = bar.querySelector('[data-audio-action="next"]');
+    const stopBtn = bar.querySelector('[data-audio-action="stop"]');
+    const rateSel = bar.querySelector('[data-audio-rate]');
+    const statusEl = bar.querySelector('[data-audio-status]');
+    const nodes = [...document.querySelectorAll('.mc-chapter p, .mc-chapter blockquote')];
+    let idx = 0;
+    let playing = false;
+    const clear = () => nodes.forEach(n => n.classList.remove('is-speaking'));
+    const speak = () => {
+      if (!playing || idx < 0 || idx >= nodes.length) {
+        playing = false;
+        clear();
+        if (playBtn) playBtn.textContent = 'Play Audiobook';
+        if (statusEl) statusEl.textContent = 'Ready to narrate';
+        return;
+      }
+      speechSynthesis.cancel();
+      clear();
+      const node = nodes[idx];
+      node.classList.add('is-speaking');
+      node.scrollIntoView({block: 'center', behavior: 'smooth'});
+      const ch = node.closest('.mc-chapter')?.querySelector('h2')?.textContent.trim() || 'Book';
+      if (statusEl) statusEl.textContent = ` (${idx + 1}/${nodes.length}) • ${ch.slice(0, 36)}`;
+      const u = new SpeechSynthesisUtterance(node.textContent.trim());
+      u.rate = parseFloat(rateSel?.value || '1.0') || 1.0;
+      u.onend = () => { if (playing) { idx += 1; speak(); } };
+      speechSynthesis.speak(u);
+    };
+    playBtn?.addEventListener('click', () => {
+      if (playing) {
+        playing = false;
+        speechSynthesis.cancel();
+        playBtn.textContent = 'Resume';
+        if (statusEl) statusEl.textContent = `Paused (${idx + 1}/${nodes.length})`;
+      } else {
+        playing = true;
+        playBtn.textContent = 'Pause';
+        speak();
+      }
+    });
+    prevBtn?.addEventListener('click', () => { idx = Math.max(0, idx - 1); if (playing) speak(); });
+    nextBtn?.addEventListener('click', () => { idx = Math.min(nodes.length - 1, idx + 1); if (playing) speak(); });
+    stopBtn?.addEventListener('click', () => {
+      playing = false;
+      idx = 0;
+      speechSynthesis.cancel();
+      clear();
+      if (playBtn) playBtn.textContent = 'Play Audiobook';
+      if (statusEl) statusEl.textContent = 'Ready to narrate';
+    });
+    rateSel?.addEventListener('change', () => { if (playing) speak(); });
+  })();
+  </script>
+</body>
+</html>
