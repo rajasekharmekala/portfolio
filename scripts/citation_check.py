@@ -163,6 +163,16 @@ def value_variants(v):
     num = re.sub(r'[^0-9.\-]', '', s)
     if num and num not in ('.', '-', '.-'):
         out.append(num)
+        # Financial filings commonly group thousands in decimal values too
+        # (for example, 58,310.84). Preserve that source surface form when
+        # the evidence ledger stores the same value as an ungrouped number.
+        if num.count('.') == 1:
+            whole, frac = num.split('.', 1)
+            if whole.lstrip('-').isdigit() and frac.isdigit():
+                sign = '-' if whole.startswith('-') else ''
+                out.append(f"{sign}{int(whole):,}.{frac}")
+                if sign:
+                    out.append(f"({int(whole.lstrip('-')):,}.{frac})")
         if num.lstrip('-').isdigit():
             out.append(f"{int(num):,}")
             try:

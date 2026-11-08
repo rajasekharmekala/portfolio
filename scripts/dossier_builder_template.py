@@ -417,7 +417,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     target_bear = spec["target_bear"]
     asym = (
         round((target_base - close) / (close - stop_loss), 2)
-        if (close and stop_loss and close > stop_loss)
+        if (target_base is not None and close and stop_loss and close > stop_loss)
         else spec.get("asymmetry_ratio", 0.0)
     )
 
@@ -441,7 +441,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         ("Weinstein Stage", _esc(w_stage)),
         ("No-FOMO Entry Posture", _esc(entry_posture)),
         ("Scanner band (monitor only)" if str(entry_posture).startswith("NO_NEW_ALLOCATION") else "Support Buy Zone", f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})"),
-        ("Base / Bull Target", f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)" if no_new_allocation else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (R:R {asym:.2f}:1)"),
+        ("Price target", "Not set; valuation bridge is not decision-grade" if target_base is None else (f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)" if no_new_allocation else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (R:R {asym:.2f}:1)")),
         ("Risk-Unit Sizing", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)})"),
     ]
     if spec.get("report_status"):
@@ -679,9 +679,9 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
             ("Reference only; it is not an order or an instruction to sell" if no_new_allocation else _esc(spec.get("ch4", {}).get("stop_placement_explanation") or scoring["stop_placement"].get(bucket, scoring["stop_placement"]["CORE_ALPHA"]))),
         ],
         [
-            "Base / Bull / Bear scenario values",
-            f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}",
-            ("Illustrative 12-month values; no entry risk/reward applies" if no_new_allocation else f"Reward-to-risk ratio: {asym:.2f}:1"),
+            "Scenario values",
+            ("Not assigned" if target_base is None else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}"),
+            ("Per-share values require a reconciled share count and lease-consistent valuation bridge." if target_base is None else ("Illustrative 12-month values; no entry risk/reward applies" if no_new_allocation else f"Reward-to-risk ratio: {asym:.2f}:1")),
         ],
         [
             "Risk-unit initial sizing (portfolio heat)",
@@ -849,12 +849,12 @@ def render_10chapter_monograph_editions(
     target_bear = spec["target_bear"]
     asym = (
         round((target_base - close) / (close - stop_loss), 2)
-        if (close and stop_loss and close > stop_loss)
+        if (target_base is not None and close and stop_loss and close > stop_loss)
         else spec.get("asymmetry_ratio", 0.0)
     )
     entry_asym = (
         round((target_base - entry_high) / (entry_high - stop_loss), 2)
-        if (entry_high and stop_loss and entry_high > stop_loss)
+        if (target_base is not None and entry_high and stop_loss and entry_high > stop_loss)
         else asym
     )
 
@@ -879,8 +879,10 @@ def render_10chapter_monograph_editions(
             f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})",
         ),
         (
-            "Base / Bull Target",
-            f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)"
+            "Price target",
+            "Not set; valuation bridge is not decision-grade"
+            if target_base is None
+            else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)"
             if no_new_allocation
             else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)",
         ),
@@ -948,13 +950,14 @@ def render_10chapter_monograph_editions(
             ),
         ],
         [
-            "Base / Bull / Bear scenario values",
-            f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}",
-            (
+            "Scenario values",
+            "Not assigned" if target_base is None else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}",
+            ("Per-share values require a reconciled share count and lease-consistent valuation bridge." if target_base is None else
+             (
                 "Probability-weighted 12-month scenario values; no live entry reward/risk applies until trend/valuation gates clear"
                 if no_new_allocation
                 else f"Reward-to-risk ratio: {asym:.2f}:1 at CMP ({entry_asym:.2f}:1 from top of support zone)"
-            ),
+            )),
         ],
         [
             "Risk-unit initial sizing (portfolio heat)",
