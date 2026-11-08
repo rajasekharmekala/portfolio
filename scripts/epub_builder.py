@@ -678,7 +678,16 @@ def render_masterclass_book_html(
         ("VERDICT", _clean_audio_text(spec.get("verdict", ""))),
         ("STAGE POSTURE", _clean_audio_text(spec.get("weinstein_stage", ""))),
         ("BUY / SUPPORT ZONE", f"{'₹' if market == 'IN' else '$'}{spec['entry_zone_low']:,.2f}–{spec['entry_zone_high']:,.2f}"),
-        ("PRICE TARGET", "Not assigned; valuation bridge is not decision-grade" if spec.get("target_base") is None else f"{'₹' if market == 'IN' else '$'}{spec['target_base']:,.2f} / {'₹' if market == 'IN' else '$'}{spec['target_bull']:,.2f}"),
+        (
+            f"{str(spec['scenario_horizon']).upper()} SCENARIO RANGE" if spec.get("scenario_horizon") else "PRICE TARGET",
+            "Not assigned; valuation bridge is not decision-grade"
+            if spec.get("target_base") is None
+            else (
+                f"Bear {'₹' if market == 'IN' else '$'}{spec['target_bear']:,.2f} / Base {'₹' if market == 'IN' else '$'}{spec['target_base']:,.2f} / Bull {'₹' if market == 'IN' else '$'}{spec['target_bull']:,.2f}"
+                if spec.get("scenario_horizon")
+                else f"{'₹' if market == 'IN' else '$'}{spec['target_base']:,.2f} / {'₹' if market == 'IN' else '$'}{spec['target_bull']:,.2f}"
+            ),
+        ),
     ]
     stat_strip_html = (
         '<div class="mc-stat-strip">\n'

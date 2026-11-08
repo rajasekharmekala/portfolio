@@ -872,6 +872,20 @@ def render_10chapter_monograph_editions(
         ru["raw_risk_unit_weight_pct"] = 0.0
         ru["risk_budget_bps"] = 0.0
 
+    scenario_horizon = str(spec.get("scenario_horizon") or "").strip()
+    if scenario_horizon and target_base is not None:
+        target_label = f"{scenario_horizon.title()} scenario range"
+        target_value = f"Bear {cur}{target_bear:,.2f} / Base {cur}{target_base:,.2f} / Bull {cur}{target_bull:,.2f}"
+        if no_new_allocation:
+            target_value += " (new-entry R:R: N/A)"
+    else:
+        target_label = "Price target"
+        target_value = "Not set; valuation bridge is not decision-grade" if target_base is None else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f}"
+        if no_new_allocation and target_base is not None:
+            target_value += " (new-entry R:R: N/A)"
+        elif target_base is not None:
+            target_value += f" (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)"
+
     kf_items = [
         ("Verdict", f'<span class="verdict {v_cls}">{_esc(verdict)}</span> ({_esc(archetype)})'),
         ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
@@ -882,14 +896,7 @@ def render_10chapter_monograph_editions(
             "Scanner band (monitor only)" if no_new_allocation else "Support Buy Zone",
             f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})",
         ),
-        (
-            "Price target",
-            "Not set; valuation bridge is not decision-grade"
-            if target_base is None
-            else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (new-entry R:R: N/A)"
-            if no_new_allocation
-            else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)",
-        ),
+        (target_label, target_value),
         ("Risk-Unit Sizing", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)})"),
     ]
     if spec.get("report_status"):
@@ -958,7 +965,7 @@ def render_10chapter_monograph_editions(
             "Not assigned" if target_base is None else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f} / {cur}{target_bear:,.2f}",
             ("Per-share values require a reconciled share count and lease-consistent valuation bridge." if target_base is None else
              (
-                "Probability-weighted 12-month scenario values; no live entry reward/risk applies until trend/valuation gates clear"
+                 f"Probability-weighted {scenario_horizon or '12-month'} scenario values; no live entry reward/risk applies until trend/valuation gates clear"
                 if no_new_allocation
                 else f"Reward-to-risk ratio: {asym:.2f}:1 at CMP ({entry_asym:.2f}:1 from top of support zone)"
             )),
