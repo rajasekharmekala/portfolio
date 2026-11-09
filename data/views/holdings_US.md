@@ -1,10 +1,10 @@
 # US holdings (generated from the transaction log; do not edit)
 
-Generated 2026-10-31T12:57:53. Quantities and cost from `data/accounts/US/`. Market values need the ledger close and are added by the daily build.
+Generated 2026-11-09T13:29:50. Quantities and cost from `data/accounts/US/`. Market values need the ledger close and are added by the daily build.
 
 ## Robinhood
 
-Last transaction: 2026-10-31. Cash: 12.46.
+Last transaction: 2026-11-06. Cash: 547.74.
 
 | Symbol | Quantity | Cost basis | Cost known | Realized P&L |
 |---|---:|---:|:---:|---:|
@@ -13,14 +13,14 @@ Last transaction: 2026-10-31. Cash: 12.46.
 | DOCN | 29.4443 | 3,500.00 | yes | 0.00 |
 | ETHE | 26.0213 | 500.00 | yes | 0.00 |
 | KORU | 224.765 | 3,457.78 | yes | 0.00 |
-| MSTX | 178.481 | 2,000.00 | yes | 0.00 |
+| MSTX | 148.481 | 1,663.83 | yes | 117.43 |
 | NBIL | 50 | 1,017.45 | yes | 0.00 |
 | NKE | 74.5773 | 2,850.00 | yes | 0.00 |
 | QCOM | 15 | 2,434.88 | yes | 0.00 |
 
 ## Charles Schwab
 
-Last transaction: 2026-10-30. Cash: 609.56.
+Last transaction: 2026-11-04. Cash: 110.20.
 
 | Symbol | Quantity | Cost basis | Cost known | Realized P&L |
 |---|---:|---:|:---:|---:|
@@ -36,7 +36,7 @@ Last transaction: 2026-10-30. Cash: 609.56.
 | ISRG | 1.1099 | 499.95 | yes | 0.00 |
 | LNG | 6.2472 | 1,999.95 | yes | 0.00 |
 | MSTR | 21.414 | 2,699.99 | yes | 0.00 |
-| OCNL | 41.6651 | 500.00 | yes | 0.00 |
+| OCNL | 100.507 | 1,000.00 | yes | 0.00 |
 | ORCL | 46.7096 | 6,327.93 | yes | 117.73 |
 | QCOM | 15 | 2,433.90 | yes | 0.00 |
 | SKHY | 17.764 | 2,999.99 | yes | 0.00 |
