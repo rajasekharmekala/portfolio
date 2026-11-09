@@ -35,10 +35,10 @@ Read `_COMMON.md` first.
 Dedicate the full research budget, browser tooling, and multi-stage verification to **one company**:
 - Read the candidate's TradingView + Screener.in/Finviz + TheWrap Stage 2 snapshot from `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` and follow `.agents/skills/company_report/SKILL.md`.
 - Run the 4-loop persistent agentic research workflow:
-  1. **Loop 1 (Quantitative Ground Truth):** Verify TradingView indicators (30W SMA, 10W EMA, 50D/200D SMA, RSI-14, volume, classic pivots) and valuation metrics (P/E, EV/Sales, ROIC/ROCE, Net Cash/Debt).
+  1. **Loop 1 (Quantitative Ground Truth):** Verify TradingView indicators (30W SMA, 10W EMA, 50D/200D SMA, RSI-14, volume, classic pivots) and valuation metrics (P/E, EV/Sales, ROIC/ROCE, Net Cash/Debt). Treat the snapshot's `technical_timing_gate` as a ceiling on entry posture, not a buy signal.
   2. **Loop 2 (Operational Forensics & Concall Ingestion):** Ingest recent earnings call transcripts and primary SEC 10-K/10-Q / BSE filings; extract at least 2 verified management quotes (CEO on product/demand, CFO on margins/guidance); analyze business verticals, unit economics, customer concentration, and true operational KPIs.
   3. **Loop 3 (Valuation Modeling & No-FOMO Execution):** Build multi-scenario valuation models (Bull/Base/Bear) and define explicit limit-order entry zones (`20D EMA / 10W EMA / 50D SMA`), invalidation stops, and catalyst event management.
-  4. **Loop 4 (Interactive Dossier Assembly):** Render `docs/blogs/<MKT>/<SYMBOL>_dossier.html` with an embedded interactive TradingView chart widget, rich external learning hub links, and institutional voice (free of robotic phrasing or fake filler text).
+  4. **Loop 4 (Evidence-First Dossier Assembly):** Author Chapters 1–8 and then Chapter 9 (Bull vs. Bear), **derive the verdict from that research**, then render `docs/blogs/<MKT>/<SYMBOL>_dossier.html` and the `_book.pdf` companion with an embedded interactive TradingView chart widget, rich external learning hub links, and institutional voice (free of robotic phrasing or fake filler text).
 - Assemble using `scripts/assemble_report.py --market <MKT> --kind dossier --workflow "Company research" --as-of <date>`.
 
 ## 3. Shortlist & Watchlist Updates

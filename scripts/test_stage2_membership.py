@@ -62,22 +62,22 @@ class Stage2MembershipTest(unittest.TestCase):
               "ema10_weekly": 100, "rsi_14_daily": 60, "pe_ttm": 20,
               "revenue_yoy_growth_ttm_pct": 20}
         s2 = {"in_thewrap_stage2": True}
-        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["recommended_verdict"], "WAIT_FOR_SUPPORT")
+        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["technical_timing_gate"], "CAP_WAIT_FOR_SUPPORT")
         tv.update(close=110.001)
-        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["recommended_verdict"], "WAIT_FOR_SUPPORT")
+        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["technical_timing_gate"], "CAP_WAIT_FOR_SUPPORT")
         tv.update(close=112.1, ema10_weekly=110)
-        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["recommended_verdict"], "WAIT_FOR_SUPPORT")
+        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["technical_timing_gate"], "CAP_WAIT_FOR_SUPPORT")
         tv.update(close=100, rsi_14_daily=73.1)
-        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["recommended_verdict"], "WAIT_FOR_SUPPORT")
+        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["technical_timing_gate"], "CAP_WAIT_FOR_SUPPORT")
         tv.update(rsi_14_daily=60, pe_ttm=None)
-        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["recommended_verdict"], "WAIT_FOR_SUPPORT")
+        self.assertEqual(evaluate_stage2_and_entry_posture(tv, s2, {}, "IN")["technical_timing_gate"], "CAP_WAIT_FOR_SUPPORT")
 
     def test_exact_thresholds_and_zero_growth_are_not_missing(self):
         tv = {"close": 110, "sma50": 100, "sma30_weekly": 100,
               "ema10_weekly": 100, "rsi_14_daily": 73, "pe_ttm": 20,
               "revenue_yoy_growth_ttm_pct": 0}
         result = evaluate_stage2_and_entry_posture(tv, {"in_thewrap_stage2": True}, {}, "IN")
-        self.assertEqual(result["recommended_verdict"], "IMMEDIATE_BUY")
+        self.assertEqual(result["technical_timing_gate"], "CLEAR_FOR_CONSIDERATION")
 
 
 if __name__ == "__main__":

@@ -269,7 +269,7 @@ def read_entry(path, dates, updates):
             "workflow": completion.get("workflow") or metadata.get("report-workflow") or ("Company research" if kind == "dossier" else workflow),
             "highlights": completion.get("highlights", []), "completed": bool(completion)}
     if kind == "dossier" and symbol:
-        for field, ext in (("bookUrl", "_book.html"), ("pdfUrl", "_book.pdf"), ("epubUrl", "_book.epub"), ("mdUrl", "_book.md")):
+        for field, ext in (("pdfUrl", "_book.pdf"),):
             sib = path.parent / f"{symbol}{ext}"
             if sib.is_file():
                 entry_out[field] = sib.relative_to(DOCS).as_posix()
@@ -327,14 +327,44 @@ def public_queue(entries):
         value = row.get(field)
         return value.strip()[:160] if isinstance(value, str) and value.strip() else None
 
+    def normalize_stage(raw):
+        """Collapse messy stage strings into one canonical Stage 1-4 label (or UNKNOWN)."""
+        if not raw:
+            return None
+        s = str(raw).upper()
+        if "STAGE_4" in s or "STAGE 4" in s:
+            return "STAGE_4"
+        if "STAGE_3" in s or "STAGE 3" in s:
+            return "STAGE_3"
+        if "STAGE_2" in s or "STAGE 2" in s:
+            return "STAGE_2"
+        if "STAGE_1" in s or "STAGE 1" in s:
+            return "STAGE_1"
+        return None
+
+    def normalize_sector(raw):
+        """Keep the lead macro-sector token, dropping the verbose tail."""
+        if not isinstance(raw, str) or not raw.strip():
+            return None
+        lead = raw.split("/")[0].strip()
+        return lead[:60] if lead and lead.lower() != "none" else None
+
+    def stage_and_sector(row):
+        return {
+            "stage": normalize_stage(row.get("weinstein_stage") or row.get("snapshot_weinstein_stage")),
+            "sector": normalize_sector(row.get("macro_sector")),
+        }
+
     def date(row, field):
         value = text(row, field)
         return value if value and re.fullmatch(r"\d{4}-\d{2}-\d{2}", value) else None
 
     def identity(row, market):
         symbol = row["symbol"].strip()
-        return {"symbol": symbol, "company": text(row, "company_name") or symbol,
+        item = {"symbol": symbol, "company": text(row, "company_name") or symbol,
                 "dossierUrl": dossiers.get((market, symbol))}
+        item.update(stage_and_sector(row))
+        return item
 
     result = {}
     for market in ("IN", "US"):

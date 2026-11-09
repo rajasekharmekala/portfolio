@@ -123,7 +123,7 @@ def check_estimates(soup, errors):
                 errors.append(f"ESTIMATE #{i}: missing the {part!r} part")
 
 
-def check_chapter7(soup, errors, is_book=False):
+def check_chapter7(soup, errors):
     ch7 = (
         soup.find("section", id="ch-9")
         or soup.find("section", id="ch-7")
@@ -141,8 +141,6 @@ def check_chapter7(soup, errors, is_book=False):
     )
     if not ch7:
         errors.append("CHAPTER 7/9: action-plan section not found (id=\"ch-7\" or id=\"ch-9\")")
-        return
-    if is_book:
         return
     triggers = ch7.find_all("p", class_="trigger")
     if not triggers:
@@ -171,24 +169,6 @@ def check_primer_and_notes(soup, errors):
         ol = notes.find("ol")
         if not ol or ol.find_all("li") == []:
             errors.append("NOTES: sources must be a numbered <ol>")
-
-
-def check_book_audio_clean(soup, errors, min_words=0):
-    book_chapters = soup.find_all("section", class_="book-chapter")
-    if not book_chapters:
-        errors.append("BOOK: no .book-chapter sections found in book edition")
-        return
-    total_words = 0
-    for ch in book_chapters:
-        cid = ch.get("id") or "?"
-        if ch.find("table"):
-            errors.append(f"BOOK {cid}: raw <table> found inside audiobook chapter")
-        for p in ch.find_all("p"):
-            if p.find("sup"):
-                errors.append(f"BOOK {cid}: inline <sup> citation tag found inside audiobook paragraph")
-            total_words += len(re.findall(r"[A-Za-z0-9']+", p.get_text(" ", strip=True)))
-    if min_words and total_words < min_words:
-        errors.append(f"BOOK DEPTH: {total_words} words < required {min_words}")
 
 
 def check_banned(soup, errors):
@@ -222,14 +202,11 @@ def main():
     ap.add_argument("--max-grade", type=float, default=15.0)
     ap.add_argument("--glossary", default=GLOSSARY_FILE)
     ap.add_argument("--kind", choices=["stage2_sector_momentum"], help="apply the Stage 2 report structure")
-    ap.add_argument("--book", action="store_true", help="validate audio-clean book edition rules")
-    ap.add_argument("--min-words", type=int, default=0, help="minimum spoken/prose word count")
     args = ap.parse_args()
 
     soup = BeautifulSoup(open(args.report, encoding="utf-8").read(), "html.parser")
     glossary = json.load(open(args.glossary, encoding="utf-8"))
-    is_book = args.book or args.report.endswith("_book.html")
-    is_dossier = is_book or args.report.endswith("_dossier.html") or bool(
+    is_dossier = args.report.endswith("_dossier.html") or bool(
         soup.find("meta", attrs={"name": "report-kind", "content": "dossier"})
     )
     eff_grade = max(args.max_grade, 16.5) if is_dossier else args.max_grade
@@ -237,13 +214,10 @@ def main():
     errors = []
     check_grade(soup, eff_grade, errors, prose_only=(args.kind == "stage2_sector_momentum" or is_dossier))
     check_glossary(soup, glossary, errors)
-    if is_book:
-        check_book_audio_clean(soup, errors, min_words=args.min_words)
-    else:
-        check_bare_tables(soup, errors)
-        check_estimates(soup, errors)
+    check_bare_tables(soup, errors)
+    check_estimates(soup, errors)
     if args.kind != "stage2_sector_momentum":
-        check_chapter7(soup, errors, is_book=is_book)
+        check_chapter7(soup, errors)
         check_primer_and_notes(soup, errors)
     check_banned(soup, errors)
 

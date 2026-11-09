@@ -450,6 +450,12 @@ def evaluate_stage2_and_entry_posture(
     Deterministic Stage 2 + Valuation + No-FOMO Entry Timing Evaluator.
     Uses TradingView's pre-computed moving averages (30-week SMA, 10-week EMA, 50-day SMA, 200-day SMA)
     and RSI without any LLM math.
+
+    The output `technical_timing_gate` is a *ceiling* on entry posture, never a
+    buy signal: the business, valuation and management evidence must earn the
+    call. It can clear a setup for consideration (`CLEAR_FOR_CONSIDERATION`),
+    cap an extended/unverified one at a support pullback (`CAP_WAIT_FOR_SUPPORT`),
+    or cap a broken one at avoidance (`CAP_REJECTED`). It never returns a verdict.
     """
     close = tv.get("close")
     sma50 = tv.get("sma50")
@@ -464,7 +470,7 @@ def evaluate_stage2_and_entry_posture(
         return {
             "weinstein_stage": "UNKNOWN",
             "entry_timing_posture": "DATA_UNAVAILABLE",
-            "action_recommendation": "RESEARCH_REQUIRED",
+            "technical_timing_gate": "DATA_UNAVAILABLE",
         }
 
     ext_10w_pct = _round((close / ema10w - 1.0) * 100.0, 2) if (ema10w and ema10w > 0) else None
@@ -519,44 +525,45 @@ def evaluate_stage2_and_entry_posture(
 
     if stage == "STAGE_4":
         posture = "AVOID_STAGE4_OR_BROKEN"
-        verdict = "REJECTED"
+        gate = "CAP_REJECTED"
         rationale = (
             f"Below 30-week SMA ({sma30w}) and 50-day SMA ({sma50}) with weak trend structure. "
-            "Prune from watchlist / avoid until Stage 1 base and Stage 2 breakout form."
+            "Technical ceiling: avoid for new entries until a Stage 1 base and Stage 2 breakout form."
         )
     elif stage == "STAGE_2" and not is_extended and not valuation_stretched and entry_inputs_available:
         posture = "BUY_AT_CMP_NO_FOMO"
-        verdict = "IMMEDIATE_BUY"
+        gate = "CLEAR_FOR_CONSIDERATION"
         wk_str = f" (Week {int(weeks)} in Stage 2)" if weeks else ""
         rationale = (
             f"Confirmed Stage 2 uptrend{wk_str}, trading within a non-extended {ext_10w_pct or 0:+.1f}% of its "
-            f"10-week EMA ({ema10w}) with RSI {rsi} and {valuation_note.lower()}."
+            f"10-week EMA ({ema10w}) with RSI {rsi} and {valuation_note.lower()}. No technical objection to "
+            "entry at CMP, but the buy case must be earned by the business, valuation and management evidence."
         )
     elif stage == "STAGE_2":
         posture = "WAIT_FOR_SUPPORT_PULLBACK"
-        verdict = "WAIT_FOR_SUPPORT"
+        gate = "CAP_WAIT_FOR_SUPPORT"
         rationale = (
             f"Strong Stage 2 trend, but extended ({ext_10w_pct or 0:+.1f}% above 10-week EMA, RSI {rsi}) "
-            f"or valuation or entry inputs require verification ({valuation_note}). Do not chase on FOMO; wait for pullback "
-            f"to support zone {support_zone_low}–{support_zone_high}."
+            f"or valuation or entry inputs require verification ({valuation_note}). Technical ceiling: do not chase; "
+            f"wait for a pullback to support zone {support_zone_low}–{support_zone_high}."
         )
     elif stage in ("STAGE_3", "STAGE_1"):
         posture = "WAIT_FOR_SUPPORT_RETEST"
-        verdict = "WAIT_FOR_SUPPORT"
+        gate = "CAP_WAIT_FOR_SUPPORT"
         rationale = (
             f"Consolidating / pulling back near 30-week SMA ({sma30w}) and 50-day SMA ({sma50}). "
-            f"Reassess only if support holds in {support_zone_low}–{support_zone_high} and volume expands on turn; "
-            "require trend and valuation confirmation before any entry."
+            f"Technical ceiling: wait; reassess only if support holds in {support_zone_low}–{support_zone_high} and "
+            "volume expands on the turn."
         )
     else:
         posture = "WAIT_FOR_SUPPORT_PULLBACK"
-        verdict = "WAIT_FOR_SUPPORT"
-        rationale = "Monitor for low-risk support entry."
+        gate = "CAP_WAIT_FOR_SUPPORT"
+        rationale = "Monitor for a low-risk support entry."
 
     return {
         "weinstein_stage": stage,
         "entry_timing_posture": posture,
-        "recommended_verdict": verdict,
+        "technical_timing_gate": gate,
         "extension_from_10w_ema_pct": ext_10w_pct,
         "extension_from_50d_sma_pct": ext_50d_pct,
         "extension_from_30w_sma_pct": ext_30w_pct,

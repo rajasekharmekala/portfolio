@@ -2,27 +2,26 @@
 name: company_report
 description: >-
   Deep-research company monograph and multi-horizon Stage 2 investment dossier
-  for one listed company (IN or US), delivered in 4 synchronized formats
-  (Web Research Dossier HTML, Audiobook/Book Reader HTML, EPUB 3 e-book, and
-  Narrative Markdown) at book-length depth (12,000–18,000 words, ~75–90 min
-  audiobook). Explains what the company does, every business segment with
-  revenue/profit mix and concrete real-world examples, distribution and unit
-  economics, 5–10 year financial forensics, Why the Price Is What It Is, and
-  unbiased Two-Sided (Bull vs. Bear) investment judgment across Short-Term
-  Trading/Momentum, Medium-Term Inflection, and Long-Term Compounding (or Stay Away).
+  for one listed company (IN or US), delivered in 2 synchronized formats
+  (Web Research Dossier HTML and a narrative PDF companion) at book-length
+  depth (12,000–18,000 words). Explains what the company does, every business
+  segment with revenue/profit mix and concrete real-world examples,
+  distribution and unit economics, 5–10 year financial forensics, Why the
+  Price Is What It Is, and unbiased Two-Sided (Bull vs. Bear) investment
+  judgment across Short-Term Trading/Momentum, Medium-Term Inflection, and
+  Long-Term Compounding (or Stay Away).
 ---
 
-> **Design & 5-Edition Compiler (binding):** read `../_shared/REPORT_DESIGN.md`. Author the monograph chapter-by-chapter in `<RUN_DIR>/work/<SYMBOL>/` (`spine.json` + `chapters/ch00.json` .. `ch09.json`) and compile all five synchronized editions with `scripts/dossier_builder_template.py --spec <RUN_DIR>/work/<SYMBOL> --snapshot <snapshots.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html`:
+> **Design & Two-Format Compiler (binding):** read `../_shared/REPORT_DESIGN.md`. Author the monograph chapter-by-chapter in `<RUN_DIR>/work/<SYMBOL>/` (`spine.json` + `chapters/ch00.json` .. `ch09.json`) and compile both synchronized formats with `scripts/dossier_builder_template.py --spec <RUN_DIR>/work/<SYMBOL> --snapshot <snapshots.json> --out docs/blogs/<MARKET>/<SYMBOL>_dossier.html`:
 > 1. `docs/blogs/<MARKET>/<SYMBOL>_dossier.html` — Web Research Desk Edition (`research-desk-v1`: 10-year tables, unit-economics matrices, interactive TradingView chart, External Learning Hub, inline `[N]` citations).
-> 2. `docs/blogs/<MARKET>/<SYMBOL>_book.html` — Masterclass Companion Book & Audiobook Web Reader (`masterclass-book-v1`: warm cream `#fdfbf7` paper, `Cinzel` / `Newsreader` literary serif typography, full Book Cover page, Roman-numeral TOC with 5-stat strip, chapter Epigraph Quotes, Drop-Caps, `NARRATOR'S REFLECTION`, `GLOBAL PARALLEL (US/INDIA/EUROPE)`, and `MENTAL MODEL` boxes, plus interactive Web Speech audio player).
-> 3. `docs/blogs/<MARKET>/<SYMBOL>_book.pdf` — WeasyPrint Masterclass Companion PDF Book.
-> 4. `docs/blogs/<MARKET>/<SYMBOL>_book.epub` — Standalone Masterclass EPUB 3 e-book.
-> 5. `docs/blogs/<MARKET>/<SYMBOL>_book.md` — Narrative Masterclass Markdown book for `book-companion` / `live-companion`.
+> 2. `docs/blogs/<MARKET>/<SYMBOL>_book.pdf` — narrative PDF companion, printed by WeasyPrint from the same chapter data. There is **no** standalone `_book.html`, `.epub`, or `.md`; the narrative HTML is an internal build intermediate that the compiler writes and removes.
 
-> **Lively Audiobook & Masterclass Book Narrative Rules (binding for `book_paragraphs`, `epigraph`, and `book_callouts`):**
-> - **Second-Person Mentor Voice:** Write the Book chapters as a seasoned institutional analyst sitting across the desk from the listener (`"you and I"`), using engaging rhetorical questions, vivid factory/customer walkthroughs, and clear spoken transitions.
+> **Evidence-First Decision Order (binding):** the verdict is a *conclusion*, never an input. Author **Chapters 1–8 first** — business & history (ch-1)–(ch-2), distribution/unit economics (ch-3), moat (ch-4), management walk-the-talk (ch-5), 10-year financial forensics (ch-6), valuation & Reverse DCF (ch-7), and the Stage 2 technical structure (ch-8) — then author **Chapter 9** (Bull vs. Bear steelman + probability-weighted outcomes). Only once Chapter 9 is written do you **derive** the `verdict`, `archetype`, `conviction_tier`, `entry_zone_low/high`, `stop_loss`, `target_base/bull/bear`, and `strategy_bucket` into `spine.json` and write the `ch-0` Prologue. Do not open a spine with a pre-committed verdict and then write chapters to fit it. The technical snapshot (`scripts/stock_snapshot.py`) outputs a `technical_timing_gate` — a ceiling that can cap the call at `WAIT_FOR_SUPPORT`/`REJECTED` but never grants `IMMEDIATE_BUY` on its own; the business, valuation and management evidence must earn the call.
+
+> **Narrative Companion Narrative Rules (binding for `book_paragraphs`, `epigraph`, and `book_callouts`):**
+> - **Second-Person Mentor Voice:** Write the narrative chapters as a seasoned institutional analyst sitting across the desk from the reader (`"you and I"`), using engaging rhetorical questions, vivid factory/customer walkthroughs, and clear transitions.
 > - **3 Layers of Quotations:** (1) Every chapter opens with a framed `epigraph` quote (`{"quote": "...", "author": "..."}`); (2) weave verbatim CEO/CFO concall quotes and investor maxims into the prose; (3) include `NARRATOR'S REFLECTION` callout boxes (`"kind": "reflection"`).
-> - **Global Parallel Company Examples (US, India, and Europe):** Every chapter must connect the company's economics, moat, working-capital cycle, or valuation to concrete historical parallels across the US, India, or Europe (via prose and `"kind": "parallel"` callout boxes) so the listener grasps how similar business models and stock setups have played out globally.
+> - **Global Parallel Company Examples (US, India, and Europe):** Every chapter must connect the company's economics, moat, working-capital cycle, or valuation to concrete historical parallels across the US, India, or Europe (via prose and `"kind": "parallel"` callout boxes) so the reader grasps how similar business models and stock setups have played out globally.
 
 > **Zero LLM Math (binding):** never compute moving averages, RSI, volume multiples, or financial ratios in your head. All technical and valuation figures must come from `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz + TheWrap Stage 2 snapshot) and verified primary filings.
 
@@ -34,11 +33,11 @@ description: >-
 > - Every business segment in Chapter 2 must include its share of revenue/profit AND **at least one concrete, end-to-end real-world example** (who the customer is, what problem they face, what exact product/service they buy, how it is engineered/built/delivered, and how it is priced).
 > - Chapter 3 must explain **distribution and go-to-market mechanics** (direct sales, channel/MSP partners, dealer networks, OEM qualification, geographical delivery) and trace a worked **$100 / ₹100 revenue-to-free-cash-flow waterfall**.
 
-# 10-Chapter Institutional Monograph & Audiobook Blueprint (12,000–18,000 Words)
+# 10-Chapter Institutional Monograph & Narrative Companion Blueprint (12,000–18,000 Words)
 
-Both the Web Dossier (`_dossier.html`) and the Book/Audiobook Edition (`_book.html`, `.epub`, `.md`) follow the same 10-chapter structure and share **100% identical numbers, verdicts, and Short / Medium / Long-Term outlooks**:
+Both the Web Dossier (`_dossier.html`) and the narrative PDF companion (`_book.pdf`) follow the same 10-chapter structure and share **100% identical numbers, verdicts, and Short / Medium / Long-Term outlooks**:
 
-| Ch # | ID | Target Words | Web Dossier Section (`_dossier.html`) | Book / Audiobook Chapter (`_book.html`, `.epub`, `.md`) | Core Content, Examples & Investment Judgment |
+| Ch # | ID | Target Words | Web Dossier Section (`_dossier.html`) | PDF Companion Section (`_book.pdf`) | Core Content, Examples & Investment Judgment |
 |---|---|---|---|---|---|
 | 0 | `ch-0` | 700–1,000 | **0. Executive Thesis, Price Verdict & Opportunity Matrix** | **Prologue: The Business, The Price & Our Independent Verdict** | What the company does, why the stock trades at today's price, the core Bull vs. Bear debate, our independent judgment across **Short-Term Trade**, **Medium-Term Inflection**, and **Long-Term Compounding** (or **Stay Away**), and exact No-FOMO levels. |
 | 1 | `ch-1` | 1,400–2,000 | **1. Origin, Corporate Evolution & Past Stock Cycles** | **Chapter 1: How the Business & Stock Got Here — Past Cycles & Pivots** | How the company was built, major strategic pivots and acquisitions, and how its revenue, margins, and stock price performed across prior boom-bust cycles to arrive at today's market cap. |
@@ -65,16 +64,18 @@ Both the Web Dossier (`_dossier.html`) and the Book/Audiobook Edition (`_book.ht
    ```
 2. **Two-Sided Multi-Source Research:**
    - Pull primary filings (Screener.in 10-year tables, BSE/NSE or SEC EDGAR 10-K/10-Q, investor presentations, latest concall transcripts) AND run dedicated web searches for both the **Bull thesis** and the **Bear/Skeptic thesis** (short-seller critiques, working-capital/cash conversion debates, competitive threats, analyst downgrades).
-3. **Multi-Stage Chapter Authoring (`<RUN_DIR>/work/<SYMBOL>/`):**
-   - Write `spine.json` and author `chapters/ch00.json` through `chapters/ch09.json` individually so each chapter achieves full 1,200–2,500 word analytical and narrative depth.
-4. **Compile All 4 Synchronized Formats (`scripts/dossier_builder_template.py`):**
+3. **Evidence-First Chapter Authoring (`<RUN_DIR>/work/<SYMBOL>/`):**
+   - Author **Chapters 1–8 first** (`chapters/ch01.json` .. `chapters/ch08.json`) so the research and technicals are complete before any decision exists. Write the narrative fields (`epigraph`, `book_paragraphs`, `book_callouts`, `book_subsections`) for each as you go.
+   - Author **Chapter 9** (`chapters/ch09.json`): the Bull vs. Bear steelman and probability-weighted outcomes, ending in an explicit verdict and No-FOMO action plan.
+   - **Derive** `spine.json` from the Chapter 9 conclusion (`verdict`, `archetype`, `conviction_tier`, `entry_zone_low/high`, `stop_loss`, `target_base/bull/bear`, `strategy_bucket`), then write `chapters/ch00.json` (the Prologue) last from that spine.
+4. **Compile Both Synchronized Formats (`scripts/dossier_builder_template.py`):**
    ```bash
    .venv/bin/python scripts/dossier_builder_template.py \
      --spec "<RUN_DIR>/work/<SYMBOL>" \
      --snapshot "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json" \
      --out "docs/blogs/<MARKET>/<SYMBOL>_dossier.html"
    ```
+   This writes the Web Dossier and the `_book.pdf` companion. It does not emit `_book.html`, `.epub`, or `.md`.
 5. **Run Quality Gates:**
    - `.venv/bin/python scripts/readability_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html`
-   - `.venv/bin/python scripts/readability_check.py docs/blogs/<MARKET>/<SYMBOL>_book.html --book --min-words 11000`
    - `.venv/bin/python scripts/citation_check.py docs/blogs/<MARKET>/<SYMBOL>_dossier.html --research <RUN_DIR>/cache/research_<MARKET>_<date>.json --allow-stale-asof`

@@ -484,9 +484,10 @@ def main():
                     pe = tv.get("pe_ttm") if tv.get("pe_ttm") is not None else item.get("fundamental_card", {}).get("stock_pe")
                     growth = tv.get("revenue_yoy_growth_ttm_pct") if tv.get("revenue_yoy_growth_ttm_pct") is not None else item.get("fundamental_card", {}).get("sales_qq_pct")
                     close, ema, sma = tv.get("close"), tv.get("ema10_weekly"), tv.get("sma50")
+                    gate = ev.get("technical_timing_gate") or ev.get("recommended_verdict")
                     if (any(x is None for x in (a, b, rsi, pe, growth, close, ema, sma))
                             or ema <= 0 or sma <= 0 or pe <= 0 or close / ema > 1.10 or close / sma > 1.12
-                            or rsi > 73 or ev.get("recommended_verdict") != "IMMEDIATE_BUY"):
+                            or rsi > 73 or gate not in ("CLEAR_FOR_CONSIDERATION", "IMMEDIATE_BUY")):
                         errors.append(f"STAGE2 ENTRY RULE: {symbol} cannot be presented as immediate buy")
             if F and F.get("asof") not in raw:
                 errors.append("STAGE2 SESSION: verified ledger session must appear in the report")

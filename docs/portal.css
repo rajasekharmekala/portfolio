@@ -592,12 +592,101 @@ a:hover {
   border: 0;
 }
 
+/* Unified research pipeline table */
+.pipeline-counts {
+  margin: 8px 2px 0;
+  font-size: 0.82em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.pipeline-scroll {
+  max-height: 34rem;
+  overflow: auto;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+.pipeline-scroll:focus-visible { outline: 2px solid var(--navy-hover); outline-offset: -2px; }
+.pipeline-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86em;
+  table-layout: auto;
+}
+.pipeline-table th,
+.pipeline-table td {
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #eeeeee;
+}
+.pipeline-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-subtle);
+  color: var(--muted);
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.pipeline-table tbody tr:hover { background: #f5f9fc; }
+.pipeline-table td:last-child,
+.pipeline-table th:last-child { text-align: center; }
+.pipe-status { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.status-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  border: 1px solid var(--neutral-line);
+  background: var(--neutral-soft);
+  color: var(--muted);
+  font-size: 0.72em;
+  font-weight: 700;
+}
+.pipe-ticker {
+  font-weight: 700;
+  color: #004860;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.pipe-company { color: var(--ink-secondary); max-width: 240px; }
+.pipe-sector { color: var(--muted); }
+.pipe-muted { color: var(--faint); }
+.pipe-doc { font-weight: 700; white-space: nowrap; }
+
+.stage-pill, .status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border: 1px solid var(--neutral-line);
+  background: var(--neutral-soft);
+  color: var(--neutral);
+  font-size: 0.74em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.stage-pill.stage-2 { border-color: var(--good-line); background: var(--good-soft); color: var(--good); }
+.stage-pill.stage-1 { border-color: var(--navy-hover); background: #e7f0f9; color: var(--navy); }
+.stage-pill.stage-3 { border-color: var(--warn-line); background: var(--warn-soft); color: var(--warn); }
+.stage-pill.stage-4 { border-color: var(--bad-line); background: var(--bad-soft); color: var(--bad); }
+.status-pill.status-held { border-color: var(--navy); background: #e7f0f9; color: var(--navy); }
+.status-pill.status-shortlist { border-color: var(--good-line); background: var(--good-soft); color: var(--good); }
+.status-pill.status-watchlist { border-color: var(--neutral-line); background: var(--neutral-soft); color: var(--neutral); }
+
 @media (max-width: 980px) {
   .queue-grid { grid-template-columns: minmax(0, 1fr); }
   .dossier-row {
     grid-template-columns: 115px minmax(180px, 1fr) auto 100px;
   }
   .dossier-summary { display: none; }
+  /* Ticker is the key identifier; drop the long company name and sector
+     on narrower frames so Stage, Status, Verdict and Monograph stay visible. */
+  .pipeline-table th:nth-child(2),
+  .pipeline-table td:nth-child(2),
+  .pipeline-table th:nth-child(5),
+  .pipeline-table td:nth-child(5) { display: none; }
+  .pipeline-table { font-size: 0.84em; }
 }
 @media (max-width: 720px) {
   .topline { flex-direction: column; gap: 4px; }

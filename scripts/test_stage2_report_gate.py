@@ -87,7 +87,7 @@ class Stage2GateTest(unittest.TestCase):
             snapshots = root / "snapshots.json"
             snapshots.write_text(json.dumps({"snapshots": {"TEST": {
                 "tradingview": {"ema10_weekly": 100, "rsi_14_daily": 74, "pe_ttm": 20, "revenue_yoy_growth_ttm_pct": 10},
-                "stage2_evaluation": {"extension_from_10w_ema_pct": 11, "extension_from_50d_sma_pct": 5, "recommended_verdict": "IMMEDIATE_BUY"}}}}))
+                "stage2_evaluation": {"extension_from_10w_ema_pct": 11, "extension_from_50d_sma_pct": 5, "technical_timing_gate": "CLEAR_FOR_CONSIDERATION"}}}}))
             dashboard = root / "dashboard.json"
             dashboard.write_text(json.dumps({"market": "IN", "summary": {"last_updated": "2026-10-31"}, "extracted_at": "2026-11-01"}))
             result = subprocess.run([sys.executable, str(Path(__file__).with_name("validate_report.py")),

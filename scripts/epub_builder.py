@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Masterclass Companion Book Builder (HTML + EPUB 3 + WeasyPrint PDF + Narrative Markdown).
+Monograph Companion Book Builder (narrative HTML + WeasyPrint PDF).
+
+The narrative HTML is an internal intermediate: it is never published as a
+standalone page. It is rasterized by WeasyPrint into the single PDF edition
+that accompanies the Web Research Dossier.
 
 Matches the literary design and narrative flow of:
   - Indian_Market_Intelligence_Nov4_2026_Book_Companion.pdf ("The Anatomy of the Tape")
@@ -24,8 +28,6 @@ import html
 import re
 import shutil
 import subprocess
-import uuid
-import zipfile
 from pathlib import Path
 from typing import Any, Dict, List
 from zoneinfo import ZoneInfo
@@ -659,7 +661,7 @@ def render_masterclass_book_html(
     book_words: int,
     audio_minutes: int,
 ) -> str:
-    """Render the standalone Masterclass Companion Book HTML (`SYMBOL_book.html`) and print source for `SYMBOL_book.pdf`."""
+    """Render the narrative monograph HTML and print source for the companion PDF (`SYMBOL_book.pdf`)."""
     sym = spec["symbol"].upper()
     market = spec["market"].upper()
     as_of = spec.get("as_of", dt.date.today().isoformat())
@@ -772,10 +774,7 @@ def render_masterclass_book_html(
       <div class="mc-edition-links">
         <a href="../../index.html">&larr; Portfolio Desk</a>
         <a href="{sym}_dossier.html">Web Research Dossier ({web_words:,}w)</a>
-        <a class="is-active" href="{sym}_book.html">Masterclass Book ({book_words:,}w &bull; ~{audio_minutes}m)</a>
-        <a href="{sym}_book.pdf" download="{sym}_book.pdf">PDF Book</a>
-        <a href="{sym}_book.epub" download="{sym}_book.epub">EPUB 3</a>
-        <a href="{sym}_book.md" download="{sym}_book.md">Markdown</a>
+        <a class="is-active" href="{sym}_book.pdf" download="{sym}_book.pdf">Download PDF ({book_words:,}w)</a>
       </div>
       <div class="mc-audio-controls book-audio-bar">
         <button type="button" class="mc-audio-btn" data-audio-action="play">Play Audiobook</button>
@@ -903,7 +902,7 @@ def render_masterclass_book_html(
 
 
 def build_pdf_book(book_html_path: str | Path, out_pdf_path: str | Path) -> Path | None:
-    """Compile the Masterclass Companion PDF Book using WeasyPrint when available."""
+    """Compile the companion PDF book using WeasyPrint when available."""
     weasy = shutil.which("weasyprint") or (
         "/opt/homebrew/bin/weasyprint" if Path("/opt/homebrew/bin/weasyprint").exists() else None
     )
@@ -914,321 +913,3 @@ def build_pdf_book(book_html_path: str | Path, out_pdf_path: str | Path) -> Path
     subprocess.run([weasy, str(book_html_path), str(out_p)], check=True, capture_output=True, text=True)
     return out_p
 
-
-def build_markdown_book(
-    spec: Dict[str, Any],
-    chapters: List[Dict[str, Any]],
-    key_figures: List[tuple[str, str]],
-    audio_minutes: int,
-    total_words: int,
-    out_md_path: str | Path,
-) -> Path:
-    sym = spec["symbol"].upper()
-    market = spec["market"].upper()
-    as_of = spec.get("as_of", "")
-    title = spec.get("book_masterclass_title") or spec.get("book_title") or f"{spec['title']} — Masterclass Companion Book"
-
-    lines: List[str] = [
-        "---",
-        f'title: "{title.replace(chr(34), chr(39))}"',
-        f"symbol: {sym}",
-        f"market: {market}",
-        f"as_of: {as_of}",
-        f"verdict: {spec.get('verdict', '')}",
-        f"entry_posture: {spec.get('entry_posture', '')}",
-        f"word_count: {total_words}",
-        f"estimated_audio_minutes: {audio_minutes}",
-        "---",
-        "",
-        f"# {title}",
-        "",
-        f"**Market:** {market} | **Symbol:** `{sym}` | **Research Cutoff:** {as_of} | "
-        f"**Length:** {total_words:,} words (~{audio_minutes} min audiobook)",
-        "",
-        "## Executive Verdict & Price Card",
-        "",
-    ]
-    for k, v in key_figures:
-        clean_v = _clean_audio_text(v)
-        lines.append(f"- **{k}:** {clean_v}")
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-
-    for idx, ch in enumerate(chapters):
-        roman = ROMAN[idx] if idx < len(ROMAN) else f"CHAPTER {idx}"
-        b_title = _strip_chapter_prefix(ch.get("book_title") or ch.get("web_title") or f"Chapter {idx}")
-        lines.append(f"## {roman}: {b_title}")
-        lines.append("")
-        epigraph = ch.get("epigraph") or {}
-        epi_quote = _clean_audio_text(epigraph.get("quote") or ch.get("question") or "")
-        epi_author = _clean_audio_text(epigraph.get("author") or "Institutional Research Desk")
-        if epi_quote:
-            lines.append(f'> *"{epi_quote}"*')
-            lines.append(f"> — **{epi_author}**")
-            lines.append("")
-
-        for p in ch.get("book_paragraphs", []):
-            lines.append(_clean_audio_text(p))
-            lines.append("")
-        for c in ch.get("book_callouts", []):
-            hdr = _clean_audio_text(c.get("title") or c.get("label") or "NARRATOR'S REFLECTION")
-            lines.append(f"> ### {hdr}")
-            if c.get("quote"):
-                lines.append(f'> *"{_clean_audio_text(c["quote"])}"*')
-            if c.get("text"):
-                lines.append(f"> {_clean_audio_text(c['text'])}")
-            for b in c.get("bullets", []):
-                lines.append(f"> - {_clean_audio_text(b)}")
-            lines.append("")
-
-        for sub in ch.get("book_subsections", []):
-            if sub.get("title"):
-                lines.append(f"### {_clean_audio_text(sub['title'])}")
-                lines.append("")
-            for p in sub.get("paragraphs", []):
-                lines.append(_clean_audio_text(p))
-                lines.append("")
-            for c in sub.get("callouts", []):
-                hdr = _clean_audio_text(c.get("title") or c.get("label") or "NARRATOR'S REFLECTION")
-                lines.append(f"> ### {hdr}")
-                if c.get("quote"):
-                    lines.append(f'> *"{_clean_audio_text(c["quote"])}"*')
-                if c.get("text"):
-                    lines.append(f"> {_clean_audio_text(c['text'])}")
-                for b in c.get("bullets", []):
-                    lines.append(f"> - {_clean_audio_text(b)}")
-                lines.append("")
-        lines.append("---")
-        lines.append("")
-
-    lines.append("## Sources & Primary Filings Appendix")
-    lines.append("")
-    for i, c in enumerate(spec.get("citations", []), 1):
-        lines.append(f"{i}. {_clean_audio_text(c)}")
-    lines.append("")
-
-    out_p = Path(out_md_path)
-    out_p.parent.mkdir(parents=True, exist_ok=True)
-    out_p.write_text("\n".join(lines), encoding="utf-8")
-    return out_p
-
-
-def build_epub_book(
-    spec: Dict[str, Any],
-    chapters: List[Dict[str, Any]],
-    key_figures: List[tuple[str, str]],
-    audio_minutes: int,
-    total_words: int,
-    out_epub_path: str | Path,
-) -> Path:
-    """Build a standalone Masterclass-themed EPUB 3 book (`SYMBOL_book.epub`)."""
-    sym = spec["symbol"].upper()
-    market = spec["market"].upper()
-    as_of = spec.get("as_of", dt.date.today().isoformat())
-    book_title = spec.get("book_masterclass_title") or spec.get("book_title") or f"{spec['title']} — Masterclass Companion Book"
-    book_subtitle = spec.get("book_subtitle") or (
-        f"A step-by-step narrative walkthrough and audio companion to {spec['title']}: "
-        "deconstructing the business engine, global parallels, financial forensics, and high-asymmetry execution."
-    )
-    book_uid = f"urn:uuid:{uuid.uuid5(uuid.NAMESPACE_URL, f'https://rajasekharmekala.github.io/portfolio/{market}/{sym}/{as_of}/masterclass')}"
-    modified_iso = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-    out_p = Path(out_epub_path)
-    out_p.parent.mkdir(parents=True, exist_ok=True)
-
-    xhtml_files: List[tuple[str, str, str, str]] = []
-
-    # 1. Cover & Executive Summary Card
-    kf_rows = "\n".join(
-        f"<p><strong>{html.escape(k)}:</strong> {html.escape(_clean_audio_text(v))}</p>"
-        for k, v in key_figures
-    )
-    cover_xhtml = f"""<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>{html.escape(book_title)}</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <div class="mc-cover">
-    <div class="mc-cover-kicker">INSTITUTIONAL RESEARCH DESK &bull; MASTERCLASS MONOGRAPH</div>
-    <div class="mc-cover-center">
-      <h1 class="mc-cover-title">{html.escape(book_title)}</h1>
-      <hr class="mc-cover-rule" />
-      <p class="mc-cover-subtitle">{html.escape(_clean_audio_text(book_subtitle))}</p>
-    </div>
-    <div class="mc-cover-meta">
-      <p><strong>Session Cutoff:</strong> {html.escape(as_of)} &bull; <strong>Edition:</strong> {total_words:,} words (~{audio_minutes} min audiobook)</p>
-      {kf_rows}
-    </div>
-  </div>
-</body>
-</html>"""
-    xhtml_files.append(("cover", "cover.xhtml", "Cover & Executive Verdict", cover_xhtml))
-
-    # 2. Chapters with Roman numeral kickers, Epigraphs, Drop-Caps, and Callouts
-    for idx, ch in enumerate(chapters):
-        ch_id = f"ch_{idx:02d}"
-        fname = f"{ch_id}.xhtml"
-        roman = ROMAN[idx] if idx < len(ROMAN) else f"CHAPTER {idx}"
-        clean_title = _strip_chapter_prefix(ch.get("book_title") or ch.get("web_title") or f"Chapter {idx}")
-        epigraph = ch.get("epigraph") or {}
-        epi_quote = _clean_audio_text(epigraph.get("quote") or ch.get("question") or "")
-        epi_author = _clean_audio_text(epigraph.get("author") or "Institutional Research Desk Maxim")
-        epi_html = (
-            f'<blockquote class="mc-epigraph">"{html.escape(epi_quote)}"'
-            f"<footer>&#8212; {html.escape(epi_author)}</footer></blockquote>"
-            if epi_quote
-            else ""
-        )
-
-        body_blocks = _interleave_paragraphs_and_callouts(
-            ch.get("book_paragraphs", []),
-            ch.get("book_callouts", []),
-            is_first_block=True,
-        )
-        for sub in ch.get("book_subsections", []):
-            if sub.get("title"):
-                body_blocks.append(f"<h3>{html.escape(_clean_audio_text(sub['title']))}</h3>")
-            body_blocks.extend(
-                _interleave_paragraphs_and_callouts(
-                    sub.get("paragraphs", []),
-                    sub.get("callouts", []),
-                    is_first_block=False,
-                )
-            )
-
-        ch_xhtml = f"""<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>{html.escape(roman)}: {html.escape(clean_title)}</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <section class="mc-chapter">
-    <div class="mc-chapter-kicker">{html.escape(roman)}</div>
-    <h2>{html.escape(clean_title)}</h2>
-    {epi_html}
-    {chr(10).join(body_blocks)}
-  </section>
-</body>
-</html>"""
-        xhtml_files.append((ch_id, fname, f"{roman}: {clean_title}", ch_xhtml))
-
-    # 3. Sources Appendix
-    cite_items = "\n".join(
-        f"<li>{html.escape(_clean_audio_text(c))}</li>"
-        for c in spec.get("citations", [])
-    )
-    sources_xhtml = f"""<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Sources &amp; Primary Filings</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <section class="mc-notes">
-    <h2>Sources &amp; Primary Filings</h2>
-    <ol>
-      {cite_items}
-    </ol>
-  </section>
-</body>
-</html>"""
-    xhtml_files.append(("sources", "sources.xhtml", "Sources & Primary Filings", sources_xhtml))
-
-    nav_lis = "\n      ".join(
-        f'<li><a href="{fname}">{html.escape(t)}</a></li>'
-        for _, fname, t, _ in xhtml_files
-    )
-    nav_xhtml = f"""<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en" lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Contents &#8212; {html.escape(book_title)}</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-</head>
-<body>
-  <nav epub:type="toc" id="toc" class="mc-toc">
-    <h1 class="mc-toc-kicker">CONTENTS</h1>
-    <ol class="mc-toc-list">
-      {nav_lis}
-    </ol>
-  </nav>
-</body>
-</html>"""
-
-    ncx_points = "\n    ".join(
-        f'<navPoint id="navPoint-{i}" playOrder="{i}"><navLabel><text>{html.escape(t)}</text></navLabel><content src="{fname}"/></navPoint>'
-        for i, (_, fname, t, _) in enumerate(xhtml_files, 1)
-    )
-    toc_ncx = f"""<?xml version="1.0" encoding="utf-8"?>
-<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
-  <head>
-    <meta name="dtb:uid" content="{book_uid}"/>
-    <meta name="dtb:depth" content="1"/>
-    <meta name="dtb:totalPageCount" content="0"/>
-    <meta name="dtb:maxPageNumber" content="0"/>
-  </head>
-  <docTitle><text>{html.escape(book_title)}</text></docTitle>
-  <navMap>
-    {ncx_points}
-  </navMap>
-</ncx>"""
-
-    manifest_items = [
-        '<item id="style" href="style.css" media-type="text/css"/>',
-        '<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>',
-        '<item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>',
-    ] + [
-        f'<item id="{cid}" href="{fname}" media-type="application/xhtml+xml"/>'
-        for cid, fname, _, _ in xhtml_files
-    ]
-    spine_items = [f'<itemref idref="{cid}"/>' for cid, _, _, _ in xhtml_files]
-
-    content_opf = f"""<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="BookId" xml:lang="en">
-  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
-    <dc:identifier id="BookId">{book_uid}</dc:identifier>
-    <dc:title>{html.escape(book_title)}</dc:title>
-    <dc:language>en</dc:language>
-    <dc:creator>Portfolio Research Desk</dc:creator>
-    <dc:publisher>Portfolio Research Desk • Masterclass Library</dc:publisher>
-    <dc:date>{html.escape(as_of)}</dc:date>
-    <dc:description>{html.escape(_clean_audio_text(book_subtitle))}</dc:description>
-    <meta property="dcterms:modified">{modified_iso}</meta>
-  </metadata>
-  <manifest>
-    {chr(10).join("    " + m for m in manifest_items)}
-  </manifest>
-  <spine toc="ncx">
-    {chr(10).join("    " + s for s in spine_items)}
-  </spine>
-</package>"""
-
-    container_xml = """<?xml version="1.0" encoding="UTF-8"?>
-<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
-  <rootfiles>
-    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
-  </rootfiles>
-</container>"""
-
-    with zipfile.ZipFile(out_p, "w") as zf:
-        zf.writestr("mimetype", "application/epub+zip", compress_type=zipfile.ZIP_STORED)
-        zf.writestr("META-INF/container.xml", container_xml, compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/style.css", MASTERCLASS_BOOK_CSS, compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/content.opf", content_opf, compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/nav.xhtml", nav_xhtml, compress_type=zipfile.ZIP_DEFLATED)
-        zf.writestr("OEBPS/toc.ncx", toc_ncx, compress_type=zipfile.ZIP_DEFLATED)
-        for _, fname, _, content in xhtml_files:
-            zf.writestr(f"OEBPS/{fname}", content, compress_type=zipfile.ZIP_DEFLATED)
-
-    return out_p

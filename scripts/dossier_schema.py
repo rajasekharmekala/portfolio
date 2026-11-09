@@ -47,6 +47,11 @@ CANONICAL_10_CHAPTERS = [
     ("ch-9", "9. Both Sides of the Aisle, Likely Outcomes & No-FOMO Action Plan"),
 ]
 
+# The synthesis chapter that carries the Bull/Bear steelman and the
+# probability-weighted outcomes. The spine verdict and price levels are derived
+# from this chapter, not the other way round.
+SYNTHESIS_CHAPTER_ID = "ch-9"
+
 
 def load_monograph_spec(spec_path: str | Path) -> Dict[str, Any]:
     """Load a monograph spec from either a directory (spine.json + chapters/*.json) or a JSON file."""
@@ -97,6 +102,21 @@ def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) 
     chapters = spec.get("chapters")
     if not isinstance(chapters, list) or not chapters:
         return errors, {"mode": "legacy", "web_words": 0, "book_words": 0}
+
+    # Evidence-first gate: the synthesis chapter must exist, and when the spine
+    # declares a decision_basis it must point at that chapter. A spine whose
+    # verdict predates the research is exactly what this guards against.
+    chapter_ids = {ch.get("id") for ch in chapters if ch.get("id")}
+    if SYNTHESIS_CHAPTER_ID not in chapter_ids:
+        errors.append(
+            f"Missing synthesis chapter {SYNTHESIS_CHAPTER_ID!r}: the verdict and price "
+            "levels must be derived from the Bull/Bear outcomes chapter, not declared first"
+        )
+    decision_basis = spec.get("decision_basis")
+    if decision_basis not in (None, "") and decision_basis != SYNTHESIS_CHAPTER_ID:
+        errors.append(
+            f"decision_basis must reference {SYNTHESIS_CHAPTER_ID!r}, got {decision_basis!r}"
+        )
 
     web_words = 0
     book_words = 0

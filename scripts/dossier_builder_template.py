@@ -28,8 +28,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from assemble_report import build  # noqa: E402
 from dossier_schema import load_monograph_spec, strip_html, validate_monograph_spec, word_count  # noqa: E402
 from epub_builder import (  # noqa: E402
-    build_epub_book,
-    build_markdown_book,
     build_pdf_book,
     render_masterclass_book_html,
 )
@@ -779,38 +777,14 @@ def _render_callout_block(blk: dict) -> str:
 
 def _build_edition_switcher(sym: str, active: str, web_words: int, book_words: int, audio_mins: int) -> str:
     dossier_cls = "edition-tab is-active" if active == "dossier" else "edition-tab"
-    book_cls = "edition-tab is-active" if active == "book" else "edition-tab"
     return (
-        '<div class="edition-switcher" role="navigation" aria-label="Dossier &amp; Book Editions">\n'
+        '<div class="edition-switcher" role="navigation" aria-label="Dossier Editions">\n'
         '  <div class="edition-tabs">\n'
         f'    <a class="{dossier_cls}" href="{sym}_dossier.html">Web Research Dossier ({web_words:,} words • Tables &amp; Charts)</a>\n'
-        f'    <a class="{book_cls}" href="{sym}_book.html">Masterclass Book &amp; Audiobook ({book_words:,} words • ~{audio_mins} min listen)</a>\n'
         '  </div>\n'
         '  <div class="edition-downloads">\n'
-        f'    <a class="edition-dl-link" href="{sym}_book.pdf" download="{sym}_book.pdf">Download PDF Book</a>\n'
-        f'    <a class="edition-dl-link" href="{sym}_book.epub" download="{sym}_book.epub">Download EPUB 3</a>\n'
-        f'    <a class="edition-dl-link" href="{sym}_book.md" download="{sym}_book.md">Download Markdown Book</a>\n'
+        f'    <a class="edition-dl-link" href="{sym}_book.pdf" download="{sym}_book.pdf">Download PDF ({book_words:,} words)</a>\n'
         '  </div>\n'
-        '</div>'
-    )
-
-
-def _build_audio_bar(sym: str, book_words: int, audio_mins: int) -> str:
-    return (
-        '<div class="book-audio-bar" role="region" aria-label="Audiobook Player Controls">\n'
-        '  <div class="book-audio-controls">\n'
-        '    <button type="button" class="book-audio-btn" data-audio-action="play">Play Audiobook</button>\n'
-        '    <button type="button" class="book-audio-btn secondary" data-audio-action="prev" title="Previous paragraph">&larr; Prev</button>\n'
-        '    <button type="button" class="book-audio-btn secondary" data-audio-action="next" title="Next paragraph">Next &rarr;</button>\n'
-        '    <button type="button" class="book-audio-btn secondary" data-audio-action="stop">Stop</button>\n'
-        '    <label>Speed: <select class="book-audio-select" data-audio-rate>\n'
-        '      <option value="1.0" selected>1.0x</option>\n'
-        '      <option value="1.15">1.15x</option>\n'
-        '      <option value="1.25">1.25x</option>\n'
-        '      <option value="1.5">1.5x</option>\n'
-        '    </select></label>\n'
-        '  </div>\n'
-        f'  <span class="book-audio-status" data-audio-status>Audiobook Edition • {book_words:,} words (~{audio_mins} min) • Ready to listen</span>\n'
         '</div>'
     )
 
@@ -821,7 +795,7 @@ def render_10chapter_monograph_editions(
     snapshots: dict | None = None,
     out_dossier_path: str | Path = "",
 ) -> dict:
-    """Compile Web Dossier HTML, Book/Audiobook HTML, EPUB 3, and Narrative Markdown from a 10-chapter spec."""
+    """Compile the Web Dossier HTML and the companion PDF from a 10-chapter spec."""
     facts = facts or {}
     snapshots = snapshots or {}
     sym = spec["symbol"].upper()
@@ -1117,24 +1091,23 @@ def render_10chapter_monograph_editions(
     out_d_path = Path(out_dossier_path)
     out_dir = out_d_path.parent
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_book_html_path = out_dir / f"{sym}_book.html"
     out_pdf_path = out_dir / f"{sym}_book.pdf"
-    out_epub_path = out_dir / f"{sym}_book.epub"
-    out_md_path = out_dir / f"{sym}_book.md"
 
-    # Write EPUB, Markdown, Book HTML, and PDF first so assemble/portal link checks see them on disk
-    build_epub_book(spec, chapters, kf_items, audio_mins, book_words, out_epub_path)
-    build_markdown_book(spec, chapters, kf_items, audio_mins, book_words, out_md_path)
-    out_book_html_path.write_text(book_html, encoding="utf-8")
-    build_pdf_book(out_book_html_path, out_pdf_path)
     out_d_path.write_text(dossier_html, encoding="utf-8")
+
+    # The narrative HTML feeds WeasyPrint only; it is a build intermediate and
+    # is never published as a standalone page. Keep it beside the PDF so the
+    # print stylesheet's relative asset paths resolve, then remove it.
+    tmp_book_html = out_dir / f".{sym}_book_print_source.html"
+    tmp_book_html.write_text(book_html, encoding="utf-8")
+    try:
+        build_pdf_book(tmp_book_html, out_pdf_path)
+    finally:
+        tmp_book_html.unlink(missing_ok=True)
 
     return {
         "dossier_html": str(out_d_path),
-        "book_html": str(out_book_html_path),
         "pdf": str(out_pdf_path) if out_pdf_path.exists() else None,
-        "epub": str(out_epub_path),
-        "markdown": str(out_md_path),
         "web_words": web_words,
         "book_words": book_words,
         "audio_minutes": audio_mins,
@@ -1161,17 +1134,15 @@ def main() -> None:
     if isinstance(spec.get("chapters"), list) and spec["chapters"]:
         res = render_10chapter_monograph_editions(spec, facts=facts, snapshots=snapshots, out_dossier_path=args.out)
         print(
-            f"wrote 4-edition monograph for {spec['symbol']}:\n"
+            f"wrote monograph for {spec['symbol']}:\n"
             f"  - Web Dossier: {res['dossier_html']} ({res['web_words']:,} words)\n"
-            f"  - Book HTML:   {res['book_html']} ({res['book_words']:,} words, ~{res['audio_minutes']} min audio)\n"
-            f"  - EPUB 3:      {res['epub']}\n"
-            f"  - Markdown:    {res['markdown']}"
+            f"  - PDF:         {res['pdf'] or 'not built (weasyprint unavailable)'} ({res['book_words']:,} words, ~{res['audio_minutes']} min)"
         )
     else:
         html_out = render_book_dossier(spec, facts=facts, snapshots=snapshots)
         os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
         Path(args.out).write_text(html_out, encoding="utf-8")
-        print(f"wrote book dossier: {args.out} ({len(html_out):,} bytes)")
+        print(f"wrote monograph: {args.out} ({len(html_out):,} bytes)")
 
 
 if __name__ == "__main__":
