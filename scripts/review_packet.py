@@ -1047,7 +1047,7 @@ def build(args):
             D += ["**%s**" % b["sec"], block_plain(b), ""]
     D.append("## Triggers and risks")
     for b in parsed["blocks"]:
-        if b["kind"] == "prose" and re.search(r"triggers|estimate", b.get("cls", "")):
+        if b["kind"] in ("prose", "p") and re.search(r"triggers|estimate|trigger", b.get("cls", "")):
             D += ["- [%s] %s" % (b["sid"], b["text"][:700])]
     ge = [b for b in parsed["blocks"] if "gate" in b["sec"].lower() and b["kind"] in ("p", "prose")]
     if ge:

@@ -242,7 +242,7 @@ body {
   font-family: var(--font-sans);
   font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--mc-gold-bright);
   border-bottom: 1px solid rgba(212, 175, 55, 0.4);
