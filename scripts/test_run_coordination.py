@@ -283,7 +283,7 @@ class EndToEndTests(unittest.TestCase):
     def test_portal_queue_is_rebuilt_from_latest_merged_origin(self):
         # Use the real catalog builder while keeping this temporary git fixture
         # independent of production data validators and account files.
-        for name in ("portal_publish.py", "build_dossier_portal.py"):
+        for name in ("portal_publish.py", "build_dossier_portal.py", "data_layer.py"):
             shutil.copy(SCRIPTS / name, self.main / "scripts" / name)
         self.write(self.main, "data/shortlist/US.json", {"market": "US", "active": [], "archived": []})
         self.sh("git", "add", "-A", cwd=self.main)
