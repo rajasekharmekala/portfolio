@@ -508,7 +508,7 @@ def date_items(parsed, facts, report_path):
 def claim_regexes():
     return {
         "stage": re.compile(r"\bStage ([1-4])\b"),
-        "rsi": re.compile(r"\bRSI(?:\s?\(14\))?\D{0,12}(\d{1,3}(?:\.\d+)?)"),
+        "rsi": re.compile(r"\bRSI(?:\s?\(14\))?\D{0,12}(\d{1,3}(?:\.\d+)?)(?!\d)(?!\s*[- ]?(?:day|period|session)\b)"),
         "close": re.compile(r"(?:\bCMP|\bclose[sd]?|\blatest close)(?!\s*(?:above|below|over|under|through|beyond|near))\D{0,6}[$\u20b9]?\s?(\d[\d,]*\.\d+|\d[\d,]{2,})", re.I),
     }
 

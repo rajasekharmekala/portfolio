@@ -240,9 +240,10 @@ body {
 }
 .mc-cover-kicker {
   font-family: var(--font-sans);
-  font-size: 0.76rem;
+  font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.10em;
+  white-space: nowrap;
   text-transform: uppercase;
   color: var(--mc-gold-bright);
   border-bottom: 1px solid rgba(212, 175, 55, 0.4);
@@ -797,7 +798,7 @@ def render_masterclass_book_html(
 
   <main class="mc-book-shell report">
     <section class="mc-cover" aria-label="Book Cover">
-      <div class="mc-cover-kicker">I N S T I T U T I O N A L &nbsp; R E S E A R C H &nbsp; D E S K &nbsp;&bull;&nbsp; M A S T E R C L A S S &nbsp; M O N O G R A P H</div>
+      <div class="mc-cover-kicker">INSTITUTIONAL RESEARCH DESK &nbsp;&bull;&nbsp; MASTERCLASS MONOGRAPH</div>
       <div class="mc-cover-center">
         <h1 class="mc-cover-title">{html.escape(book_title)}</h1>
         <hr class="mc-cover-rule">

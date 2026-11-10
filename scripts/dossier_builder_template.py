@@ -269,9 +269,9 @@ def _build_ch4_from_snapshot_or_ledger(
             f"(No-FOMO ceiling: +12.0%)",
         ],
         [
-            "RSI (14-day) / ATR (14-day)",
+            "Momentum oscillator / ATR",
             f"{round(rsi, 2) if isinstance(rsi, (int, float)) else 'N/A'} / {fmt_px(atr)}",
-            f"TradingView Technical Rating: {_esc(tv_label)} (RSI > 73 signals short-term overextension)",
+            f"TradingView Technical Rating: {_esc(tv_label)} (high oscillator readings can signal short-term overextension)",
         ],
         [
             "52-week high / low",
@@ -288,16 +288,16 @@ def _build_ch4_from_snapshot_or_ledger(
     ]
     tech_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in tech_rows]
     t1_html = _render_table(
-        f"Market-facts ledger and consumer-tool snapshot for {sym} as of {as_of}",
+        f"Dated market-facts ledger for {sym} as of {as_of}",
         ["Technical dimension", "Observed value (source-specific)", "Institutional & No-FOMO interpretation"],
         tech_rows,
         ch4_spec.get(
             "tech_table_takeaway",
-            f"This table summarizes TradingView prices and the dashboard tag for {sym}, including the moving averages and distance from its recent high.",
+            f"This table summarizes dated market-facts indicators for {sym}; weekly averages and dashboard fields are shown only when supplied for the stated cutoff.",
         ),
     )
 
-    zone_low, zone_high = _zone(s2_ev.get("support_buy_zone"))
+    zone_low, zone_high = _zone(ch4_spec.get("support_band_override") or s2_ev.get("support_buy_zone"))
     band_position = (
         "below price" if close is not None and zone_high is not None and zone_high < close
         else "above price" if close is not None and zone_low is not None and zone_low > close
@@ -321,7 +321,7 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Structural invalidation stop",
-            fmt_px(s2_ev.get("invalidation_stop")),
+            fmt_px(ch4_spec.get("stop_override", s2_ev.get("invalidation_stop"))),
             ch4_spec.get("stop_placement_explanation", "Below the lower of nearest support and the lower of the 50-day and 30-week averages, less 0.5× ATR14; structural reference, not a tactical entry stop or order."),
         ],
         [
