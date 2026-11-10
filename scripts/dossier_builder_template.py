@@ -310,9 +310,9 @@ def _build_ch4_from_snapshot_or_ledger(
             _esc(ch4_spec.get("evaluation_stage_explanation") or w_explain),
         ],
         [
-            "Entry decision (not portfolio action)",
+            "Consumer snapshot timing-screen result",
             _esc(ch4_spec.get("posture_override") or s2_ev.get("entry_timing_posture", ch4_spec.get("entry_posture", "N/A"))),
-            _esc(ch4_spec.get("posture_explanation") or s2_ev.get("timing_rationale") or "Use price, trend and valuation together before setting an order."),
+            _esc((ch4_spec.get("posture_explanation") or s2_ev.get("timing_rationale") or "Use price, trend and valuation together before setting an order.") + f" Consumer snapshot result only; the dossier action remains {ch4_spec.get('dossier_verdict', 'the overall dossier verdict')}.") ,
         ],
         [
             "Screen support band (nearest support)",
