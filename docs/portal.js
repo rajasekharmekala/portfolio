@@ -75,7 +75,7 @@
         rows.set(key, {
           market, symbol, company: company || symbol,
           stages: new Set(), sectors: new Set(), statuses: new Set(),
-          verdicts: new Set(), dossierUrl: null,
+          verdict: null, dossierUrl: null,
         });
       }
       const row = rows.get(key);
@@ -93,9 +93,11 @@
           const row = ensure(market, r.symbol, r.company);
           if (r.stage) row.stages.add(r.stage);
           if (r.sector) row.sectors.add(r.sector);
-          if (r.verdict && r.verdict !== "Not specified") row.verdicts.add(r.verdict);
           row.statuses.add(kind === "shortlist" ? "SHORTLIST" : "WATCHLIST");
-          if (r.dossierUrl) row.dossierUrl = r.dossierUrl;
+          if (r.dossierUrl) {
+            row.dossierUrl = r.dossierUrl;
+            if (r.verdict && r.verdict !== "Not specified") row.verdict = r.verdict;
+          }
         }
       }
     }
@@ -107,11 +109,11 @@
       }
     }
 
-    // Dossier entries carry verdict, sector, symbol and a published page.
+    // Published monographs are the authoritative source of truth for single-name underwriting verdicts and links.
     for (const e of state.entries) {
       if (e.kind !== "dossier" || !e.symbol) continue;
       const row = ensure(e.market, e.symbol, e.symbol);
-      if (e.verdict && e.verdict !== "Not specified") row.verdicts.add(e.verdict);
+      if (e.verdict && e.verdict !== "Not specified") row.verdict = e.verdict;
       if (e.sector && e.sector !== "Not specified") row.sectors.add(e.sector);
       if (e.url) row.dossierUrl = e.url;
     }
@@ -124,7 +126,7 @@
       sector: [...r.sectors][0] || null,
       statuses: [...r.statuses],
       status: primaryStatus([...r.statuses]),
-      verdict: [...r.verdicts][0] || null,
+      verdict: r.dossierUrl ? r.verdict : null,
       dossierUrl: r.dossierUrl,
     }));
   }
@@ -205,7 +207,7 @@
         (extra.length ? ` <span class="status-more" title="${escapeHtml(statusTitle)}">+${extra.length}</span>` : "");
       const verdict = row.verdict && row.verdict !== "Not specified"
         ? `<span class="verdict-pill ${verdictClass(row.verdict)}">${escapeHtml(row.verdict)}</span>`
-        : '<span class="pipe-muted">—</span>';
+        : '<span class="pipe-muted" title="Underwriting pending">—</span>';
       const mono = row.dossierUrl
         ? `<a class="pipe-doc" href="${escapeHtml(row.dossierUrl)}">Read &rarr;</a>`
         : '<span class="pipe-muted">—</span>';
@@ -363,7 +365,7 @@
 
     const verdicts = [...new Set([
       ...pipeline.map(r => r.verdict),
-      ...state.entries.map(e => e.verdict),
+      ...state.entries.filter(e => e.kind === "dossier").map(e => e.verdict),
     ].filter(v => v && v !== "Not specified"))].sort();
     fillSelect(byId("verdict-filter"), verdicts, "All verdicts");
   }

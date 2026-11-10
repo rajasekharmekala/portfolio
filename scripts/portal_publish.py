@@ -306,6 +306,18 @@ def public_queue(entries):
         if e.get("kind") == "dossier" and e.get("symbol")
         and re.fullmatch(r"blogs/(?:IN|US)/[A-Za-z0-9._-]+_dossier\.html", e.get("url", ""))
     }
+    dossier_verdicts = {
+        (e.get("market"), e.get("symbol")): e.get("verdict")
+        for e in entries
+        if e.get("kind") == "dossier" and e.get("symbol")
+        and e.get("verdict") and e.get("verdict") != MISSING
+    }
+
+    def resolved_verdict(market, symbol, row_action_verdict):
+        """Only companies with a published monograph have an official underwriting verdict."""
+        if not dossiers.get((market, symbol)):
+            return None
+        return dossier_verdicts.get((market, symbol)) or normalize_verdict(row_action_verdict)
 
     def active_rows(market, kind):
         path = DOCS.parent / "data" / kind / (market + ".json")
@@ -390,7 +402,7 @@ def public_queue(entries):
                 item = identity(row, market)
                 item.update(cycle=_row_cycle(row), status="Pending" if is_pending else "Completed" if completed else "Unknown",
                             queuePosition=positions.get(idx), lastResearched=date(row, "last_researched_date"),
-                            verdict=normalize_verdict(row.get("action_verdict")))
+                            verdict=resolved_verdict(market, item["symbol"], row.get("action_verdict")))
                 watch["rows"].append(item)
         short = {"available": shortlist is not None, "rows": []}
         for row in shortlist or []:
@@ -398,7 +410,7 @@ def public_queue(entries):
             gate = text(row, "gate_status")
             if gate not in ("PASSED", "PASSED_CONDITIONAL", "PARTIAL", "FAIL", "PENDING", "UNKNOWN"):
                 gate = None
-            item.update(verdict=normalize_verdict(row.get("action_verdict")),
+            item.update(verdict=resolved_verdict(market, item["symbol"], row.get("action_verdict")),
                         gateStatus=gate, asOf=date(row, "as_of_date"))
             short["rows"].append(item)
         result[market] = {"watchlist": watch, "shortlist": short}
