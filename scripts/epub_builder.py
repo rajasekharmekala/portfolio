@@ -678,8 +678,11 @@ def render_masterclass_book_html(
     stat_cards = [
         ("SESSION PRICE", next((v for k, v in kf_map.items() if "Session Price" in k), str(spec.get("cmp", "")))),
         ("VERDICT", _clean_audio_text(spec.get("verdict", ""))),
-        ("STAGE POSTURE", _clean_audio_text(spec.get("weinstein_stage", ""))),
-        ("BUY / SUPPORT ZONE", f"{'₹' if market == 'IN' else '$'}{spec['entry_zone_low']:,.2f}–{spec['entry_zone_high']:,.2f}"),
+        ("STAGE POSTURE", _clean_audio_text(spec.get("weinstein_stage") or (spec.get("stage2") or {}).get("stage", ""))),
+        (
+            "VALUATION WATCH ZONE (CONDITIONAL)" if str(spec.get("entry_posture", "")).startswith("NO_NEW_ALLOCATION") else "BUY / SUPPORT ZONE",
+            f"{'₹' if market == 'IN' else '$'}{spec['entry_zone_low']:,.2f}–{spec['entry_zone_high']:,.2f}",
+        ),
         (
             f"{str(spec['scenario_horizon']).upper()} SCENARIO RANGE" if spec.get("scenario_horizon") else "PRICE TARGET",
             "Not assigned; valuation bridge is not decision-grade"

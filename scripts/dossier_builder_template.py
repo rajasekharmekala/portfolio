@@ -194,20 +194,23 @@ def _build_ch4_from_snapshot_or_ledger(
     w_s2 = snap_sym.get("thewrap_stage2") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
 
-    # The dated ledger is authoritative for session-specific price and
-    # technical readings. A live consumer snapshot can be newer than the
-    # requested market-session cutoff, so use it only when the ledger lacks
-    # that field; never blend an undated current quote into a dated report.
-    close = inst_m.get("close") or tv.get("close")
-    s20 = inst_m.get("sma20") or tv.get("sma20")
-    s50 = inst_m.get("sma50") or tv.get("sma50")
-    s200 = inst_m.get("sma200") or tv.get("sma200")
+    # Prefer the market-facts ledger only when this instrument row is actually
+    # dated to the requested session. Consumer snapshots are timestamped and
+    # can be fresher; allowing an older ledger value to win silently mixes
+    # sessions (for example, a Nov 6 close under a Nov 9 report header).
+    ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    primary = inst_m if ledger_is_asof else tv
+    secondary = tv if ledger_is_asof else inst_m
+    close = primary.get("close") or secondary.get("close")
+    s20 = primary.get("sma20") or secondary.get("sma20")
+    s50 = primary.get("sma50") or secondary.get("sma50")
+    s200 = primary.get("sma200") or secondary.get("sma200")
     w30 = tv.get("sma30_weekly") or s200
     w10_ema = tv.get("ema10_weekly") or tv.get("ema50") or s50
-    rsi = next((v for v in (inst_m.get("rsi14"), tv.get("rsi14_daily"), tv.get("rsi_14_daily"), tv.get("rsi14")) if v is not None), None)
-    atr = next((v for v in (inst_m.get("atr14"), tv.get("atr14"), tv.get("atr_14")) if v is not None), None)
-    hi52 = inst_m.get("hi52") or tv.get("high_52w")
-    lo52 = inst_m.get("lo52") or tv.get("low_52w")
+    rsi = next((v for v in (primary.get("rsi14"), tv.get("rsi14_daily"), tv.get("rsi_14_daily"), tv.get("rsi14"), secondary.get("rsi14")) if v is not None), None)
+    atr = next((v for v in (primary.get("atr14"), tv.get("atr14"), tv.get("atr_14"), secondary.get("atr14")) if v is not None), None)
+    hi52 = primary.get("hi52") or tv.get("high_52w") or secondary.get("hi52")
+    lo52 = primary.get("lo52") or tv.get("low_52w") or secondary.get("lo52")
     if tv.get("rel_vol_10d") is not None:
         rvol, rvol_period = tv.get("rel_vol_10d"), "10-day"
     elif tv.get("vol_ratio_vs_30d") not in (None, 0):
@@ -218,7 +221,7 @@ def _build_ch4_from_snapshot_or_ledger(
     piv_s1, piv_m, piv_r1 = tv.get("pivot_s1"), tv.get("pivot_middle"), tv.get("pivot_r1")
     ext_10w = s2_ev.get("extension_from_10w_ema_pct")
     ext_50d = s2_ev.get("extension_from_50d_sma_pct")
-    w_stage = ch4_spec.get("stage_override") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
+    w_stage = ch4_spec.get("stage_override") or (inst_m.get("stage_label") if ledger_is_asof else None) or s2_ev.get("weinstein_stage", "N/A")
     w_explain = ch4_spec.get("stage_explanation") or s2_ev.get("stage_explanation") or s2_ev.get("summary_rationale") or "Trend classification should be read against the market-facts ledger and the latest moving averages."
     dashboard_tag = w_s2.get("breakout_type") or w_s2.get("stage_tag") or "not available"
     dashboard_membership = w_s2.get("in_thewrap_stage2", w_s2.get("in_stage2_list"))
@@ -244,12 +247,12 @@ def _build_ch4_from_snapshot_or_ledger(
         [
             f"Session close ({_esc(as_of)})",
             fmt_px(close) + cite_tag,
-            f"1D: {tv.get('change_1d_pct') or inst_m.get('chg_1d_pct', 'N/A')}%, "
-            f"1W: {tv.get('perf_1w_pct') or inst_m.get('chg_1w_pct', 'N/A')}%, "
-            f"1M: {tv.get('perf_1m_pct') or inst_m.get('chg_1m_pct', 'N/A')}%",
+            f"1D: {tv.get('change_1d_pct') if not ledger_is_asof else (inst_m.get('chg_1d_pct') if inst_m.get('chg_1d_pct') is not None else tv.get('change_1d_pct', 'N/A'))}%, "
+            f"1W: {tv.get('perf_1w_pct') if not ledger_is_asof else (inst_m.get('chg_1w_pct') if inst_m.get('chg_1w_pct') is not None else tv.get('perf_1w_pct', 'N/A'))}%, "
+            f"1M: {tv.get('perf_1m_pct') if not ledger_is_asof else (inst_m.get('chg_1m_pct') if inst_m.get('chg_1m_pct') is not None else tv.get('perf_1m_pct', 'N/A'))}%",
         ],
         [
-            "Market-facts trend & dashboard tag",
+            ("Market-facts trend & dashboard tag" if ledger_is_asof else "Current snapshot trend & dashboard tag"),
             f"{_esc(w_stage)} (TheWrap breakout tag: {_esc(dashboard_tag)}; Stage 2 list membership: {dashboard_membership}; weeks tagged: {w_s2.get('weeks_in_stage2', 'not available')})",
             _esc(w_explain),
         ],
@@ -302,7 +305,7 @@ def _build_ch4_from_snapshot_or_ledger(
     )
     eval_rows = [
         [
-            "Market-facts trend classification",
+            ("Market-facts trend classification" if ledger_is_asof else "Current snapshot trend classification"),
             _esc(w_stage),
             _esc(ch4_spec.get("evaluation_stage_explanation") or w_explain),
         ],
@@ -323,8 +326,8 @@ def _build_ch4_from_snapshot_or_ledger(
         ],
         [
             "Valuation sanity check (Screener.in / Finviz)",
-            _esc(_valuation(s2_ev.get("valuation_assessment"))[0]),
-            _esc(_valuation(s2_ev.get("valuation_assessment"))[1]),
+            _esc(_valuation(ch4_spec.get("valuation_assessment") or s2_ev.get("valuation_assessment"))[0]),
+            _esc(_valuation(ch4_spec.get("valuation_assessment") or s2_ev.get("valuation_assessment"))[1]),
         ],
     ]
     eval_rows = [[cell if str(cell).rstrip().endswith((".", "!", "?")) else f"{cell}." for cell in row] for row in eval_rows]
@@ -405,7 +408,8 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
 
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
-    close = inst_m.get("close") or tv.get("close") or spec.get("cmp") or 0.0
+    ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    close = (inst_m.get("close") if ledger_is_asof else None) or tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
     stop_loss = spec["stop_loss"]
@@ -424,7 +428,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     )
 
     tier = spec.get("conviction_tier", "TIER_2")
-    w_stage = spec.get("weinstein_stage") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
+    w_stage = spec.get("weinstein_stage") or (inst_m.get("stage_label") if ledger_is_asof else None) or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
     no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith("NO_NEW_ALLOCATION")
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
@@ -813,7 +817,8 @@ def render_10chapter_monograph_editions(
 
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
-    close = inst_m.get("close") or tv.get("close") or spec.get("cmp") or 0.0
+    ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    close = (inst_m.get("close") if ledger_is_asof else None) or tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
     stop_loss = spec["stop_loss"]
@@ -837,7 +842,7 @@ def render_10chapter_monograph_editions(
     )
 
     tier = spec.get("conviction_tier", "TIER_2")
-    w_stage = spec.get("weinstein_stage") or inst_m.get("stage_label") or s2_ev.get("weinstein_stage", "N/A")
+    w_stage = spec.get("weinstein_stage") or (inst_m.get("stage_label") if ledger_is_asof else None) or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
     no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith(("NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
@@ -867,8 +872,8 @@ def render_10chapter_monograph_editions(
         ("Weinstein Stage", _esc(w_stage)),
         ("No-FOMO Entry Posture", _esc(entry_posture)),
         (
-            "Scanner band (monitor only)" if no_new_allocation else "Support Buy Zone",
-            f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f} (Stop: {cur}{stop_loss:,.2f})",
+            "Valuation watch zone (conditional)" if no_new_allocation else "Support Buy Zone",
+            f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f}" + (" (no live stop; recalculate before entry)" if no_new_allocation else f" (Stop: {cur}{stop_loss:,.2f})"),
         ),
         (target_label, target_value),
         ("Risk-Unit Sizing", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)})"),
@@ -926,8 +931,8 @@ def render_10chapter_monograph_editions(
             ),
         ],
         [
-            "Screen stop (monitor only)" if no_new_allocation else "Structural invalidation stop",
-            f"{cur}{stop_loss:,.2f} (screen reference)" if no_new_allocation else f"{cur}{stop_loss:,.2f}",
+            "No live stop (monitor only)" if no_new_allocation else "Structural invalidation stop",
+            "Recalculate after an entry is authorized" if no_new_allocation else f"{cur}{stop_loss:,.2f}",
             (
                 "Reference level only; not an active order while no position is authorized"
                 if no_new_allocation
