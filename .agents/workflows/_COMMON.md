@@ -19,7 +19,7 @@ Runs may overlap, so no run works in the shared checkout. RUN_PROTOCOL §8 is bi
 
 `.venv/bin/python scripts/run_session.py start --workflow <workflow> --market <MKT>`
 
-Workflow names: `market_intelligence`, `portfolio_audit`, `options_audit`, `stage2_sector_momentum`, `displacement` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `watchlist_to_shortlist`, `reject_to_watchlist`, `company_report` (per-company; take names with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
+Workflow names: `market_intelligence`, `portfolio_audit`, and `options_audit` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `company_report` (per-company; take a name with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
 
 ## Run directory
 
@@ -85,18 +85,15 @@ Only after the validator and reviewer process are complete, with every unmet gat
 2. Edit the reports, dossiers and record files inside the run's worktree only. Do not run `build_dossier_portal.py` and do not commit or push by hand: `publish_run.py` stamps completion and regenerates the catalog on top of the newest origin copy (the catalog files are never merged).
 3. Publish from the worktree: `.venv/bin/python scripts/publish_run.py --run-id "<run_id>" --market "<IN or US>" --message "<descriptive commit message>" --workflow "<stable workflow name>" --completed "<published HTML path>" [more paths] --summary "<one-sentence decision overview>" --highlight "<key change or risk>" --manifest "<RUN_DIR>/manifest.json"`. Include updated dossiers as separate `--completed` paths; never list a failed run's output. It commits only `docs/`, `data/`, `.agents/` and `scripts/` changes, replays them onto the newest `origin/main` (records merge symbol by symbol; the "Overriding earlier publications" rules decide a page both runs changed), validates the data, pushes as a fast-forward, releases the run's claims, and automatically removes the run's worktree and branch after a successful push (pass `--keep-worktree` to preserve them). Exit 5 means refused (a conflict or a newer page on origin): nothing was pushed, so report it. Never force-push.
 4. Verify the published destinations on origin. Do not email links when publication fails. `publish_run.py` removes the worktree automatically upon successful push; if `--keep-worktree` was passed, clean it up manually with `.venv/bin/python scripts/run_session.py finish --run-id "<run_id>"`.
-5. After successful publication, apply the email policy below. All emails are short digests: one decision summary, up to five highlights, qualifying events when present, and an absolute GitHub Pages link to the full report. Never email the complete HTML report.
-6. Send with `.venv/bin/python scripts/send_email.py --html-file "<published HTML path>" --subject "<configured subject>" --report-type "<type>" --summary "<decision overview>" --highlight "<key change>"`, adding event flags only when verified. Repeat `--highlight`, `--shortlisted`, and `--displacement` as needed. Record sent/skipped/failed status and qualifying evidence in the manifest. An email failure must retain the run for retry; an intentional skip is successful delivery.
+5. After successful publication, apply the email policy below. Emails are short digests: one decision summary, up to five highlights, and an absolute GitHub Pages link to the full report. Never email the complete HTML report.
+6. Send with `.venv/bin/python scripts/send_email.py --html-file "<published HTML path>" --subject "<configured subject>" --report-type "<type>" --summary "<decision overview>" --highlight "<key change>"`. Repeat `--highlight` as needed. Record sent/skipped/failed status in the manifest. An email failure must retain the run for retry; an intentional skip is successful delivery.
 
 ### Email Policy
 
 - `market-intelligence` and `portfolio-audit`: always send a summary email after successful publication.
-- `watchlist`: do not send emails. Watchlist-to-shortlist reports and dossiers are published to GitHub Pages only; email delivery is permanently disabled and intentionally skipped.
-- `archive` and `displacement`: no routine emails. Send only when a company newly becomes eligible for the shortlist (`--shortlisted SYMBOL`) or a shortlisted candidate newly becomes eligible to replace an actual current holding (`--displacement "CANDIDATE replaces HOLDING: passed gate and reason"`).
-- Compare validated results with the frozen starting state. Already-shortlisted companies, unchanged previously eligible replacements, archive-to-watchlist promotions, tentative ideas and failed gates do not qualify. Do not fabricate events to bypass the sender. Displacement must pass the deterministic displacement gates, including bucket, transaction costs, return hurdle and portfolio caps; this is an eligibility alert, not an executed trade.
-- Archive resurrection alone remains silent. If that workflow also completes full shortlist underwriting and newly qualifies a company, send the shortlist event; otherwise only publish the report.
+- `company-report`: do not send emails. Company dossiers are published to GitHub Pages only; email delivery is intentionally skipped.
 - Preserve existing email eligibility for other report types, but send only a digest and the published report link.
-- Use `--dry-run` to preview the policy/digest without accessing credentials or sending mail. The sender centrally skips conditional types without qualifying event flags.
+- Use `--dry-run` to preview the policy/digest without accessing credentials or sending mail.
 
 Publication, including portfolio holdings, remains pre-authorized after the validation gates.
 

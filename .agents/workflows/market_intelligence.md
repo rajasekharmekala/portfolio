@@ -24,9 +24,20 @@ Build the ledger with `ledger_screen` from `markets.<MKT>`. Check the output: `r
 
 Work through the ledger's `research_needs` for the market (`research_key` in `markets.json`), using the duck-duck-go MCP as `_COMMON.md` describes. Record results in the research file.
 
-## 4A. Stage 2 pass (IN only)
+## 4A. Integrated Stage 2 sector and stock scan (IN and US)
 
-Run the stage2 skill's Sections 1–2 (`.agents/skills/stage2_sector_momentum`): `stage2_scanner.py --market IN --min-mcap 1000`, then `stock_snapshot.py` with `--from-watchlist --from-shortlist --from-holdings --prune-watchlist`. Save both outputs in `<RUN_DIR>/cache/`. Apply the skill's 50% IN cluster line and its No-FOMO rule. The results become Section 2A of the report and feed the story brief, Section 6 and Section 7.
+Run `stage2_scanner.py` once for the target market and write its fresh result to `<RUN_DIR>/cache/stage2_<MKT>_<date>.json` (IN minimum market cap ₹1,000 Cr; US minimum market cap $1.0B). Independently verify dashboard date, coverage, and filters. Then run:
+
+```bash
+.venv/bin/python scripts/stock_snapshot.py \
+  --market <MKT> \
+  --from-watchlist --from-shortlist --from-holdings --from-stage2-archive \
+  --stage2-file "<RUN_DIR>/cache/stage2_<MKT>_<date>.json" \
+  --prune-watchlist --resurface-stage2-archive --as-of <date> \
+  --out "<RUN_DIR>/cache/snapshots_<MKT>_<date>.json"
+```
+
+The archive scan snapshots only archived symbols present in current dashboard candidates; it returns one to active research only when the fresh dashboard signal and TradingView Stage 2 structure agree and the 25-name active cap has room. Apply market-specific breadth rules and the No-FOMO entry gate; research the report's selected setups. The integrated results become Section 2A and feed the market playbook and watchlist ingestion. This is a single report and review cycle for the scan.
 
 ## 5. Story brief
 
@@ -48,7 +59,7 @@ It must print `RESULT: PASS`.
 
 ## 8. Watchlist ingestion
 
-Update the watchlist JSON record file for this market with the names from the screen that the skill's section 7 allows. For IN, also add the Stage 2 names that Section 2A.4 records (2–5 maximum, 25-name cap). Use header names to find columns. Do not add a name the report does not name in its ingestion section.
+Update the watchlist JSON record file for this market with names allowed by the market-intelligence skill. Include only independently verified fresh Stage 2 candidates named in Section 2A.4 (2–5 maximum, 25-name cap); returning archived names must be explicitly named as rediscoveries. Use header names to find columns. Do not add a name the report does not name in its ingestion section.
 
 ## 9. Reviewer gate and delivery
 

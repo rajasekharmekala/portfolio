@@ -676,12 +676,17 @@ def render_masterclass_book_html(
 
     # Extract 5 headline stats for the TOC Executive Stat Strip
     kf_map = {k: _clean_audio_text(v) for k, v in key_figures}
+    monitor_only = (
+        str(spec.get("new_capital_verdict", spec.get("verdict", ""))).upper() in {"WAIT_FOR_SUPPORT", "REJECTED"}
+        or str(spec.get("entry_posture", "")).startswith(("WAIT_FOR_SUPPORT", "NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
+    )
     stat_cards = [
         ("SESSION PRICE", next((v for k, v in kf_map.items() if "Session Price" in k), str(spec.get("cmp", "")))),
-        ("VERDICT", _clean_audio_text(spec.get("verdict", ""))),
+        ("NEW CAPITAL VERDICT", _clean_audio_text(spec.get("new_capital_verdict", spec.get("verdict", "")))),
+        ("CURRENT HOLDING ACTION", kf_map.get("Current Holding Action", "NOT HELD")),
         ("STAGE POSTURE", _clean_audio_text(spec.get("weinstein_stage") or (spec.get("stage2") or {}).get("stage", ""))),
         (
-            "VALUATION WATCH ZONE (CONDITIONAL)" if str(spec.get("entry_posture", "")).startswith("NO_NEW_ALLOCATION") else "BUY / SUPPORT ZONE",
+            "VALUATION WATCH ZONE (CONDITIONAL)" if monitor_only else "BUY / SUPPORT ZONE",
             f"{'₹' if market == 'IN' else '$'}{spec['entry_zone_low']:,.2f}–{spec['entry_zone_high']:,.2f}",
         ),
         (
@@ -916,4 +921,3 @@ def build_pdf_book(book_html_path: str | Path, out_pdf_path: str | Path) -> Path
     out_p.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run([weasy, str(book_html_path), str(out_p)], check=True, capture_output=True, text=True)
     return out_p
-

@@ -201,7 +201,6 @@ def main():
     ap.add_argument("report")
     ap.add_argument("--max-grade", type=float, default=15.0)
     ap.add_argument("--glossary", default=GLOSSARY_FILE)
-    ap.add_argument("--kind", choices=["stage2_sector_momentum"], help="apply the Stage 2 report structure")
     args = ap.parse_args()
 
     soup = BeautifulSoup(open(args.report, encoding="utf-8").read(), "html.parser")
@@ -212,13 +211,14 @@ def main():
     eff_grade = max(args.max_grade, 16.5) if is_dossier else args.max_grade
 
     errors = []
-    check_grade(soup, eff_grade, errors, prose_only=(args.kind == "stage2_sector_momentum" or is_dossier))
+    check_grade(soup, eff_grade, errors, prose_only=is_dossier)
     check_glossary(soup, glossary, errors)
     check_bare_tables(soup, errors)
     check_estimates(soup, errors)
-    if args.kind != "stage2_sector_momentum":
-        check_chapter7(soup, errors)
-        check_primer_and_notes(soup, errors)
+    check_chapter7(soup, errors)
+    check_primer_and_notes(soup, errors)
+    if is_dossier:
+        check_dossier_decisions(soup, errors)
     check_banned(soup, errors)
 
     if errors:
@@ -227,6 +227,42 @@ def main():
             print(" -", e)
         sys.exit(1)
     print(f"PASS: {args.report} (readability, max grade {eff_grade})")
+
+
+def check_dossier_decisions(soup, errors):
+    holding = soup.find(attrs={"id": "holding-action"})
+    if not holding:
+        errors.append("DOSSIER HOLDING ACTION: current holding action and alert plan are required")
+    else:
+        action = holding.get("data-holding-action", "")
+        allowed = {"KEEP_COMPOUNDING", "HOLD_WITH_HARD_STOP", "TRIM_INTO_STRENGTH", "TRIM_OVERWEIGHT",
+                   "EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE", "NOT_HELD", "DEFER"}
+        if action not in allowed:
+            errors.append("DOSSIER HOLDING ACTION: missing or invalid action verdict")
+        if not holding.find("table") or not holding.find("table").find_all("tr")[1:]:
+            errors.append("DOSSIER ALERT PLAN: at least one holding or entry trigger is required")
+    redeployment = soup.find(attrs={"id": "capital-redeployment"})
+    if not redeployment:
+        errors.append("DOSSIER REDEPLOYMENT: cash, shortlist, and outside alternatives are required")
+        return
+    table = redeployment.find("table")
+    if not table:
+        errors.append("DOSSIER REDEPLOYMENT: allocation table is required")
+        return
+    rows = table.find_all("tr")[1:]
+    types = {row.get("data-destination") for row in rows}
+    if not {"CASH", "SHORTLIST", "OUTSIDE"} <= types:
+        errors.append("DOSSIER REDEPLOYMENT: assess CASH, SHORTLIST, and OUTSIDE options")
+    percentages = []
+    for row in rows:
+        cells = row.find_all(["td", "th"])
+        if len(cells) < 3:
+            continue
+        value = re.search(r"-?\d+(?:\.\d+)?", cells[2].get_text(" ", strip=True))
+        if value:
+            percentages.append(float(value.group(0)))
+    if not percentages or abs(sum(percentages) - 100.0) > 0.01:
+        errors.append("DOSSIER REDEPLOYMENT: capital allocations must total 100%, including cash")
 
 
 if __name__ == "__main__":

@@ -99,18 +99,18 @@ class ClaimTests(unittest.TestCase):
 
     def test_batches_never_overlap_and_skip_held_names(self):
         pool = list("ABCDEFGHIJ")
-        a, _ = run_claims.claim_batch("watchlist_to_shortlist", "US", "r1", 4, pool)
-        b, skipped = run_claims.claim_batch("watchlist_to_shortlist", "US", "r2", 4, pool)
+        a, _ = run_claims.claim_batch("company_report", "US", "r1", 4, pool)
+        b, skipped = run_claims.claim_batch("company_report", "US", "r2", 4, pool)
         self.assertEqual(a, list("ABCD"))
         self.assertEqual(b, list("EFGH"))
         self.assertEqual(set(skipped), set("ABCD"))
-        again, _ = run_claims.claim_batch("watchlist_to_shortlist", "US", "r1", 4, pool)
+        again, _ = run_claims.claim_batch("company_report", "US", "r1", 4, pool)
         self.assertEqual(sorted(again), list("ABCD"))                          # a restart gets the same names
-        c, _ = run_claims.claim_batch("watchlist_to_shortlist", "US", "r3", 4, pool)
+        c, _ = run_claims.claim_batch("company_report", "US", "r3", 4, pool)
         self.assertEqual(c, ["I", "J"])                                        # short batch, no widening
 
     def test_names_are_exclusive_across_workflows_and_markets_are_separate(self):
-        run_claims.claim_batch("watchlist_to_shortlist", "US", "r1", 1, ["A"])
+        run_claims.claim_batch("company_report", "US", "r1", 1, ["A"])
         with self.assertRaises(run_claims.ClaimConflict):
             run_claims.claim_names("company_report", "US", "r2", ["A"])
         run_claims.claim_names("company_report", "IN", "r2", ["A"])
@@ -124,9 +124,9 @@ class ClaimTests(unittest.TestCase):
         self.assertNotIn("name:US:A", run_claims.list_claims())
 
     def test_expired_claims_are_ignored(self):
-        run_claims.claim_batch("watchlist_to_shortlist", "US", "dead", 2, ["A", "B"], ttl_hours=0)
+        run_claims.claim_batch("company_report", "US", "dead", 2, ["A", "B"], ttl_hours=0)
         time.sleep(0.05)
-        taken, _ = run_claims.claim_batch("watchlist_to_shortlist", "US", "r2", 2, ["A", "B"])
+        taken, _ = run_claims.claim_batch("company_report", "US", "r2", 2, ["A", "B"])
         self.assertEqual(taken, ["A", "B"])
 
     def test_heartbeat_keeps_a_claim_alive(self):
@@ -211,11 +211,11 @@ class EndToEndTests(unittest.TestCase):
             self.write(tree, "data/shortlist/US.json", sheet)
 
     def test_two_runs_work_in_parallel_and_both_land_on_main(self):
-        one, two = self.start("watchlist_to_shortlist", "r1"), self.start("watchlist_to_shortlist", "r2")
+        one, two = self.start("company_report", "r1"), self.start("company_report", "r2")
         self.assertNotEqual(one, two)
-        got1 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+        got1 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r1", "--size", "3", cwd=one).stdout)["symbols"]
-        got2 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+        got2 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r2", "--size", "3", cwd=two).stdout)["symbols"]
         self.assertEqual(got1, list("ABC"))
         self.assertEqual(got2, list("DEF"))
@@ -237,8 +237,8 @@ class EndToEndTests(unittest.TestCase):
         self.assertEqual(run_claims_list(self.main, self.env), "")      # claims released after the pushes
 
         # a third run now starts from the new origin and is offered only what is left
-        three = self.start("watchlist_to_shortlist", "r3")
-        got3 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+        three = self.start("company_report", "r3")
+        got3 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r3", "--size", "3", cwd=three).stdout)
         self.assertEqual(got3["symbols"], ["G", "H"])
         self.assertTrue(got3["short_batch"])
@@ -250,10 +250,10 @@ class EndToEndTests(unittest.TestCase):
         self.publish(three, "r3")
 
         # Now all 8 rows in watchlist.active are COMPLETED at cycle 1 -> round-robin rolls over to cycle 2!
-        four, five = self.start("watchlist_to_shortlist", "r4"), self.start("watchlist_to_shortlist", "r5")
-        got4 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+        four, five = self.start("company_report", "r4"), self.start("company_report", "r5")
+        got4 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r4", "--size", "3", cwd=four).stdout)
-        got5 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+        got5 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r5", "--size", "3", cwd=five).stdout)
         self.assertEqual(got4["symbols"], ["A", "B", "C"])
         self.assertEqual(got4["target_research_cycle"], 2)
@@ -273,8 +273,8 @@ class EndToEndTests(unittest.TestCase):
         self.publish(five, "r5")
 
         # Next run r6 sees A..F at cycle 2 and G, H still at cycle 1 -> offers G, H for cycle 2!
-        six = self.start("watchlist_to_shortlist", "r6")
-        got6 = json.loads(self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US",
+        six = self.start("company_report", "r6")
+        got6 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r6", "--size", "3", cwd=six).stdout)
         self.assertEqual(got6["symbols"], ["G", "H"])
         self.assertEqual(got6["target_research_cycle"], 2)
@@ -304,9 +304,9 @@ class EndToEndTests(unittest.TestCase):
         self.assertTrue(queue["available"])
 
     def test_concurrent_batch_requests_never_overlap(self):
-        trees = [self.start("watchlist_to_shortlist", f"p{i}") for i in range(4)]
+        trees = [self.start("company_report", f"p{i}") for i in range(4)]
         procs = [subprocess.Popen([sys.executable, str(t / "scripts/run_claims.py"), "batch", "--workflow",
-                                   "watchlist_to_shortlist", "--market", "US", "--run-id", f"p{i}", "--size", "2",
+                                   "company_report", "--market", "US", "--run-id", f"p{i}", "--size", "2",
                                    "--no-fetch"], cwd=t, env=self.env, stdout=subprocess.PIPE, text=True)
                  for i, t in enumerate(trees)]
         taken = [json.loads(p.communicate()[0])["symbols"] for p in procs]
@@ -372,16 +372,16 @@ class EndToEndTests(unittest.TestCase):
         self.assertIn("2026-10-16", self.sh("git", "show", f"main:{report}", cwd=self.origin).stdout)
 
     def test_finish_removes_worktree_and_claims(self):
-        tree = self.start("watchlist_to_shortlist", "f1")
-        self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US", "--run-id", "f1",
+        tree = self.start("company_report", "f1")
+        self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US", "--run-id", "f1",
                 "--size", "2", cwd=tree)
         self.py("run_session.py", "finish", "--run-id", "f1")
         self.assertFalse(tree.exists())
         self.assertEqual(run_claims_list(self.main, self.env), "")
 
     def test_finish_from_inside_worktree_succeeds(self):
-        tree = self.start("watchlist_to_shortlist", "f2")
-        self.py("run_claims.py", "batch", "--workflow", "watchlist_to_shortlist", "--market", "US", "--run-id", "f2",
+        tree = self.start("company_report", "f2")
+        self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US", "--run-id", "f2",
                 "--size", "2", cwd=tree)
         self.py("run_session.py", "finish", "--run-id", "f2", cwd=tree)
         self.assertFalse(tree.exists())

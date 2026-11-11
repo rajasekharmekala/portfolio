@@ -51,6 +51,11 @@ CANONICAL_10_CHAPTERS = [
 # probability-weighted outcomes. The spine verdict and price levels are derived
 # from this chapter, not the other way round.
 SYNTHESIS_CHAPTER_ID = "ch-9"
+HOLDING_ACTIONS = {
+    "KEEP_COMPOUNDING", "HOLD_WITH_HARD_STOP", "TRIM_INTO_STRENGTH", "TRIM_OVERWEIGHT",
+    "EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE", "NOT_HELD", "DEFER",
+}
+REDEPLOYMENT_TYPES = {"CASH", "SHORTLIST", "OUTSIDE"}
 
 
 def load_monograph_spec(spec_path: str | Path) -> Dict[str, Any]:
@@ -102,6 +107,74 @@ def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) 
     chapters = spec.get("chapters")
     if not isinstance(chapters, list) or not chapters:
         return errors, {"mode": "legacy", "web_words": 0, "book_words": 0}
+
+    for field in ("new_capital_verdict", "holding_action", "holding_shares_to_sell", "holding_rationale", "holding_alerts", "redeployment_plan"):
+        if field not in spec or spec[field] is None:
+            errors.append(f"Missing required decision field: {field}")
+    if spec.get("holding_action") not in HOLDING_ACTIONS:
+        errors.append(f"holding_action must be one of {sorted(HOLDING_ACTIONS)}")
+    if spec.get("new_capital_verdict") != spec.get("verdict"):
+        errors.append("new_capital_verdict must match the evidence-derived dossier verdict")
+    if spec.get("new_capital_verdict") not in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP", "WAIT_FOR_SUPPORT", "REJECTED"}:
+        errors.append("new_capital_verdict must be IMMEDIATE_BUY, ACCUMULATE_ON_DIP, WAIT_FOR_SUPPORT, or REJECTED")
+    if not isinstance(spec.get("holding_rationale"), str) or not spec["holding_rationale"].strip():
+        errors.append("holding_rationale must explain the action")
+    shares_to_sell = spec.get("holding_shares_to_sell")
+    if not isinstance(shares_to_sell, (int, float)) or isinstance(shares_to_sell, bool) or shares_to_sell < 0:
+        errors.append("holding_shares_to_sell must be a non-negative number")
+    if spec.get("holding_action") == "NOT_HELD" and shares_to_sell != 0:
+        errors.append("NOT_HELD requires holding_shares_to_sell = 0")
+    if spec.get("holding_action") in {"TRIM_INTO_STRENGTH", "TRIM_OVERWEIGHT", "EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE"} and shares_to_sell == 0:
+        errors.append("trim and exit actions require a positive holding_shares_to_sell")
+    alerts = spec.get("holding_alerts")
+    if not isinstance(alerts, list) or not alerts:
+        errors.append("holding_alerts must contain at least one executable price or event trigger")
+    elif any(not isinstance(a, dict) or not str(a.get("trigger", "")).strip()
+             or not str(a.get("instruction", "")).strip()
+             or not isinstance(a.get("shares"), (int, float)) or isinstance(a.get("shares"), bool)
+             or a.get("shares", -1) < 0 for a in alerts):
+        errors.append("each holding_alerts row requires trigger, instruction, and non-negative shares")
+    if isinstance(alerts, list) and any(
+            a.get("trigger_price") is not None
+            and (not isinstance(a.get("trigger_price"), (int, float)) or isinstance(a.get("trigger_price"), bool))
+            for a in alerts if isinstance(a, dict)):
+        errors.append("holding alert trigger_price must be numeric when supplied")
+    plan = spec.get("redeployment_plan")
+    if not isinstance(plan, dict) or not str(plan.get("capital_source", "")).strip():
+        errors.append("redeployment_plan requires a capital_source")
+    else:
+        destinations = plan.get("destinations")
+        if not isinstance(destinations, list) or not destinations:
+            errors.append("redeployment_plan.destinations must not be empty")
+        else:
+            types = set()
+            total = 0.0
+            for row in destinations:
+                if not isinstance(row, dict):
+                    errors.append("each redeployment destination must be an object")
+                    continue
+                dest_type = row.get("destination_type")
+                types.add(dest_type)
+                if dest_type not in REDEPLOYMENT_TYPES:
+                    errors.append(f"destination_type must be one of {sorted(REDEPLOYMENT_TYPES)}")
+                pct = row.get("allocation_pct")
+                if not isinstance(pct, (int, float)) or isinstance(pct, bool) or not 0 <= pct <= 100:
+                    errors.append("each redeployment allocation_pct must be between 0 and 100")
+                else:
+                    total += pct
+                for key in ("recommendation", "rationale", "entry_condition"):
+                    if not isinstance(row.get(key), str) or not row[key].strip():
+                        errors.append(f"redeployment destination requires {key}")
+                if dest_type in {"SHORTLIST", "OUTSIDE"} and (row.get("symbol") or pct):
+                    if not isinstance(row.get("symbol"), str) or not row["symbol"].strip():
+                        errors.append("a named equity redeployment requires symbol")
+                    for key in ("target_base", "asymmetry_ratio"):
+                        if not isinstance(row.get(key), (int, float)) or isinstance(row.get(key), bool):
+                            errors.append(f"named equity redeployment requires numeric {key}")
+            if not REDEPLOYMENT_TYPES <= types:
+                errors.append("redeployment_plan must assess CASH, SHORTLIST, and OUTSIDE options")
+            if abs(total - 100.0) > 0.01:
+                errors.append(f"redeployment allocations must total 100%, got {total:.2f}%")
 
     # Evidence-first gate: the synthesis chapter must exist, and when the spine
     # declares a decision_basis it must point at that chapter. A spine whose

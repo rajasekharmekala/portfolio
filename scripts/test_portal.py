@@ -251,25 +251,16 @@ class PortalTests(unittest.TestCase):
 
 class EmailDigestTests(unittest.TestCase):
     def test_delivery_matrix(self):
-        self.assertFalse(should_email("watchlist"))
-        self.assertFalse(should_email("watchlist", shortlisted=["TEST"]))
-        self.assertFalse(should_email("watchlist", displacements=["TEST replaces HELD"]))
-        for kind in ("archive", "displacement"):
-            self.assertFalse(should_email(kind))
-            self.assertTrue(should_email(kind, shortlisted=["TEST"]))
-            self.assertTrue(should_email(kind, displacements=["TEST replaces HELD"]))
-        for kind in ("market-intelligence", "portfolio-audit"):
+        self.assertFalse(should_email("company-report"))
+        for kind in ("market-intelligence", "portfolio-audit", "options-audit", "other"):
             self.assertTrue(should_email(kind))
-        self.assertEqual(report_type("Indian Watchlist to Shortlist"), "watchlist")
-        self.assertEqual(report_type("US Watchlist to Shortlist"), "watchlist")
-        self.assertEqual(report_type("Archive Resurrection Review"), "archive")
-        self.assertEqual(report_type("Rejected to Watchlist"), "archive")
+        self.assertEqual(report_type("Company Report | ACME"), "company-report")
+        self.assertEqual(report_type("US dossier"), "company-report")
+        self.assertEqual(report_type("US Options Audit"), "options-audit")
 
     def test_skips_before_credentials_and_smtp(self):
         with patch.object(send_email, "load_env") as load_env, patch.object(send_email.smtplib, "SMTP_SSL") as smtp:
-            self.assertFalse(send_email.send_email_html("Watchlist to Shortlist", "FULL REPORT"))
-            self.assertFalse(send_email.send_email_html("Watchlist to Shortlist", "FULL REPORT", shortlisted=["TEST"]))
-            self.assertFalse(send_email.send_email_html("Archive Resurrection", "FULL REPORT"))
+            self.assertFalse(send_email.send_email_html("Company Report | ACME", "FULL REPORT"))
             load_env.assert_not_called()
             smtp.assert_not_called()
 
@@ -281,15 +272,13 @@ class EmailDigestTests(unittest.TestCase):
             created = True
         try:
             body, plain = build_digest("Portfolio audit", "FULL REPORT CONTENT", source,
-                                       summary="Concentration needs review", highlights=["Review <risk>"],
-                                       shortlisted=["TEST"], displacements=["TEST replaces HELD"])
+                                       summary="Concentration needs review", highlights=["Review <risk>"])
         finally:
             if created and source.exists():
                 source.unlink()
         self.assertNotIn("FULL REPORT CONTENT", body)
         self.assertIn("Review &lt;risk&gt;", body)
-        self.assertIn("New shortlist qualification: TEST", plain)
-        self.assertIn("Eligible holding displacement: TEST replaces HELD", plain)
+        self.assertIn("Review <risk>", plain)
         self.assertIn("https://rajasekharmekala.github.io/portfolio/reports/", body)
         with self.assertRaises(ValueError):
             build_digest("Audit", "Full report", None)

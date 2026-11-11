@@ -18,21 +18,26 @@ As in `market_intelligence.md` §1–2, run every time this workflow is invoked,
 
 Run the input check. The manifest lists every holding source with its row count and hash. Positions that appear in more than one account are summed by the run and listed with their account split. Report the account split in the methodology note. For US, the consolidated snapshot (`cache/positions_US_<date>.json`) is the record of truth; see `../skills/_shared/HOLDINGS_UPDATE.md`.
 
-## 3. Ledger & Stage 2 Consumer-Tool Snapshots
+## 3. Ledger & fresh Stage 2 Consumer-Tool Snapshots
 
 1. Build the ledger for this market and session:
    ```bash
    .venv/bin/python scripts/market_facts.py --market <MKT> --date <session> --screen <screen> --run-dir "<RUN_DIR>" --allow-stale-holdings
    ```
-2. Enrich all held and shortlisted symbols with live TradingView technicals (30W SMA, 10W EMA, 20/50/200-DMA, RSI-14, volume ratios, classic pivots), Screener.in / Finviz valuation cards, and TheWrap Stage 2 sector/stock breadth:
+2. Extract a fresh TheWrap Stage 2 dashboard into the private run directory; do not read a prior `data/views/stage2_*_latest.json` as this run's market evidence:
+   ```bash
+   .venv/bin/python scripts/stage2_scanner.py --market <MKT> --min-mcap <MIN_MCAP> --out "<RUN_DIR>/cache/stage2_<MKT>_<date>.json"
+   ```
+   Use `MIN_MCAP=1000` for IN (₹ Cr) and `MIN_MCAP=1.0` for US ($B).
+3. Enrich all held and shortlisted symbols with live TradingView technicals (30W SMA, 10W EMA, 20/50/200-DMA, RSI-14, volume ratios, classic pivots), Screener.in / Finviz valuation cards, and that run's Stage 2 snapshot:
    ```bash
    .venv/bin/python scripts/stock_snapshot.py \
      --market <MKT> \
      --from-holdings --from-shortlist \
-     --stage2-file data/views/stage2_<MKT>_latest.json \
+      --stage2-file "<RUN_DIR>/cache/stage2_<MKT>_<date>.json" \
      --out "<RUN_DIR>/cache/snapshots_<MKT>_<date>.json"
    ```
-3. Treat the user's transaction log as the authoritative and accurate holdings record. Always build with `--allow-stale-holdings`; a `HOLDINGS NOT CURRENT` freshness-metadata warning does not stop the audit. Record the warning and this assumption in the manifest and explain it in the methodology note.
+4. Treat the user's transaction log as the authoritative and accurate holdings record. Always build with `--allow-stale-holdings`; a `HOLDINGS NOT CURRENT` freshness-metadata warning does not stop the audit. Record the warning and this assumption in the manifest and explain it in the methodology note.
 
 ## 4. Research and story brief
 
@@ -48,7 +53,7 @@ Assemble `<RUN_DIR>/report.html`, then run the full validator with `--kind portf
 
 ## 7. Orders and JSON record files
 
-Chapter 6 orders are exactly the deltas in Chapter 5. Update the holdings and shortlist JSON record files for this market only with changes the audit approves, and only through header-name lookup.
+Chapter 6 advisory alerts must match the recommended actions and cash bridge. Do not edit transaction logs to reflect hypothetical trades; only broker transaction sync records an executed trade. Update a shortlist record only for a verified research correction, and do not represent an unexecuted recommendation as a changed position.
 
 ## 8. Reviewer gate and delivery
 

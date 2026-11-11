@@ -7,7 +7,6 @@ This directory contains the canonical investment constitution, research database
 ## 1. Operating Constitution & Philosophy
 - [00_Investment_Philosophy_and_Portfolio_Operating_Constitution.md](00_Investment_Philosophy_and_Portfolio_Operating_Constitution.md) — Master investment rules, 4-engine return architecture, support-aware entry discipline, and risk controls.
 - [01_Master_Portfolio_Dashboard.md](01_Master_Portfolio_Dashboard.md) — Portfolio-level overview and allocation tracking.
-- [08_Allocation_Decision_Framework_Gaps_and_E2E.md](08_Allocation_Decision_Framework_Gaps_and_E2E.md) — End-to-end decision framework and risk controls.
 - [09_Transcript_to_Portfolio_Research_Workflow.md](09_Transcript_to_Portfolio_Research_Workflow.md) — Multi-agent research architecture.
 - [10_Bucket_Aware_Portfolio_Action_Requirements.md](10_Bucket_Aware_Portfolio_Action_Requirements.md) — Action requirements and decision hierarchy per strategy book.
 

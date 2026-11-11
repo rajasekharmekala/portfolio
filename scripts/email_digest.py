@@ -6,7 +6,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from portal_publish import BASE_URL, published_url, read_entry
 
-TYPES = ("market-intelligence", "portfolio-audit", "watchlist", "archive", "displacement", "other")
+TYPES = ("market-intelligence", "portfolio-audit", "company-report", "options-audit", "other")
 
 
 def report_type(subject, source=None):
@@ -15,26 +15,22 @@ def report_type(subject, source=None):
         return "market-intelligence"
     if "portfolio" in text and "audit" in text:
         return "portfolio-audit"
-    if "displacement" in text or "displace" in text:
-        return "displacement"
-    if "archive" in text or "resurrection" in text or ("reject" in text and "watchlist" in text):
-        return "archive"
-    if "watchlist" in text or "shortlist" in text or "dossier" in text:
-        return "watchlist"
+    if "option" in text:
+        return "options-audit"
+    if "company report" in text or "dossier" in text:
+        return "company-report"
     return "other"
 
 
-def should_email(kind, shortlisted=(), displacements=()):
-    if kind == "watchlist":
+def should_email(kind):
+    if kind == "company-report":
         return False
     if kind in ("market-intelligence", "portfolio-audit"):
         return True
-    if kind in ("archive", "displacement"):
-        return any(str(item).strip() for item in (*shortlisted, *displacements))
     return True
 
 
-def build_digest(subject, content, source, summary=None, highlights=(), shortlisted=(), displacements=()):
+def build_digest(subject, content, source, summary=None, highlights=()):
     if source is None:
         raise ValueError("Summary emails require source_path pointing to the published report")
     destination = published_url(str(Path(source).resolve()))
@@ -50,9 +46,7 @@ def build_digest(subject, content, source, summary=None, highlights=(), shortlis
         paragraph = soup.find("p")
         summary = paragraph.get_text(" ", strip=True) if paragraph else "The latest research report is available on the Research Desk."
     summary = re.sub(r"\s+", " ", summary).strip()[:600]
-    bullets = [f"New shortlist qualification: {str(symbol).strip()[:120]}" for symbol in shortlisted if str(symbol).strip()]
-    bullets.extend(f"Eligible holding displacement: {str(event).strip()[:240]}" for event in displacements if str(event).strip())
-    bullets.extend(str(item)[:240] for item in highlights[:5])
+    bullets = [str(item)[:240] for item in highlights[:5]]
     escape = html.escape
     items = "".join(f"<li>{escape(item)}</li>" for item in bullets)
     body = ('<!doctype html><html><body style="font-family:Helvetica,Arial,sans-serif;color:#202923;max-width:640px;margin:24px auto;padding:20px;line-height:1.6">'

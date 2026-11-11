@@ -713,19 +713,18 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <p>{{NARRATIVE_S2_THEMES}}</p><!-- 3-4 paragraphs, one per theme actually visible in the ledger (e.g. AI infrastructure, software, power/grid, defense): operational driver, ledger evidence, best proxy, what would invalidate it. Close with the bridge to the Bull/Bear lists. -->
 <!-- /MARKET -->
 
-<!-- MARKET IN -->
-<!-- SECTION 2A: STAGE 2 BREADTH & MOMENTUM RADAR (IN ONLY; from .agents/skills/stage2_sector_momentum, Sections 1-6 of that skill) -->
+<!-- SECTION 2A: INTEGRATED STAGE 2 BREADTH & MOMENTUM RADAR (IN AND US) -->
 <h2 id="section2a">2A. Stage 2 Breadth &amp; Momentum Radar</h2>
-<p>{{NARRATIVE_S2A_OPENING}}</p><!-- dashboard's own as-of date and weekly freshness; new additions and continuing count; the cluster line used (IN 50%) and why; which sectors are Super-Clusters, Emerging and Avoid. -->
+<p>{{NARRATIVE_S2A_OPENING}}</p><!-- dashboard's own as-of date and freshness; market-specific breadth/cluster rule; continuing and new setups; leading, emerging, and avoid sectors. -->
 
-<h3>2A.1 Sector Cluster Matrix (IN line 50%)</h3>
+<h3>2A.1 Sector / Industry Breadth Matrix</h3>
 <div class="table-wrapper">
 <table class="wikitable">
   <thead>
-    <tr><th>Sector</th><th class="num">% in Stage 2</th><th>Cluster</th><th>Evidence &amp; Read-Through to Section 3</th></tr>
+    <tr><th>Sector / Industry</th><th class="num">Stage 2 / relative-strength breadth</th><th>Cluster</th><th>Evidence &amp; Read-Through to Section 3</th></tr>
   </thead>
   <tbody>
-    <!-- every sector from the Stage 2 dashboard at or above the 40% Emerging floor; Not Classified excluded; cluster from the stage2 skill's IN line -->
+    <!-- IN: % in Stage 2 using the verified 50% cluster line; US: % outperforming S&P 500 and % above 200D/50D EMAs. Disclose incomplete extraction. -->
   </tbody>
 </table>
 </div>
@@ -735,10 +734,10 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <div class="table-wrapper">
 <table class="wikitable">
   <thead>
-    <tr><th>Security &amp; Links</th><th>Stage 2 Status</th><th class="num">CMP (₹)</th><th class="num">Support Zone (₹)</th><th class="num">Extension from 10W EMA</th><th class="num">RSI(14)</th><th>No-FOMO Verdict</th></tr>
+    <tr><th>Security &amp; Links</th><th>Stage 2 Status</th><th class="num">CMP</th><th class="num">Support Zone</th><th class="num">Extension from 10W EMA</th><th class="num">RSI(14)</th><th>No-FOMO Verdict</th></tr>
   </thead>
   <tbody>
-    <!-- new additions and top Stage 2 names from the snapshot; verdict IMMEDIATE_BUY or WAIT_FOR_SUPPORT with the stage2 skill's rule named -->
+    <!-- fresh breakouts and strong Stage 2 candidates from stock_snapshot; immediate entries must pass the full No-FOMO gate -->
   </tbody>
 </table>
 </div>
@@ -748,8 +747,7 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <p>{{NARRATIVE_S2A_HEALTH}}</p><!-- each holding and shortlist name against its Stage 2 stage and TradingView trend: leaders to let run, extended names, and any Stage 3/4 warning. -->
 
 <h3>2A.4 Watchlist Pruning &amp; Ingestion</h3>
-<p>{{NARRATIVE_S2A_INGESTION}}</p><!-- names pruned to archive (Stage 4 or rejected) and names added to data/watchlist/IN.json (2-5 maximum, 25-name cap); say when no fresh candidate qualified. -->
-<!-- /MARKET -->
+<p>{{NARRATIVE_S2A_INGESTION}}</p><!-- names pruned to archive, archived names resurfaced after fresh dashboard membership plus confirmed Stage 2, and new names added to data/watchlist/<MKT>.json (2-5 maximum, 25-name cap); say when no candidate qualified. -->
 
 <!-- SECTION 3: THE BULL LIST (30 STAGE 2 LONGS) -->
 <!-- MARKET IN -->

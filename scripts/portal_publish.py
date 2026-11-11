@@ -22,7 +22,7 @@ UPDATES = DOCS / "portal-updates.json"
 # parenthetical gate explanations), so every raw value is mapped into one of
 # these buckets. Display style matches docs/blogs/dossiers.json.
 VERDICT_ORDER = ["IMMEDIATE BUY", "ACCUMULATE ON DIP", "KEEP COMPOUNDING",
-                 "TRIM / HARVEST", "REPLACE UNDERPERFORMER", "WAIT FOR SUPPORT",
+                 "TRIM / HARVEST", "WAIT FOR SUPPORT",
                  "WATCHLIST / HOLD", "AVOID / REJECTED"]
 MISSING = "Not specified"
 
@@ -42,8 +42,6 @@ def normalize_verdict(raw):
     if "REJECT" in text or "AVOID" in text or "NO MOMENTUM" in text or "NO_MOMENTUM" in text \
             or "HARD GATE" in text or "DO NOT ADD" in text or "BREAKDOWN" in text or "STAGE 4" in text:
         return "AVOID / REJECTED"
-    if "REPLACE" in text:
-        return "REPLACE UNDERPERFORMER"
     if "TRIM" in text or "HARVEST" in text:
         return "TRIM / HARVEST"
     if "WAIT" in text or "SUPPORT" in text or "DEFERRED" in text:
@@ -77,8 +75,6 @@ def record_lookup(symbol):
         except ValueError:
             continue
         for sheet, rows in sheets.items():
-            if "swap" in sheet.lower():
-                continue
             for row in rows:
                 if row.get("symbol") == symbol:
                     verdict = verdict or row.get("action_verdict")
@@ -253,7 +249,7 @@ def read_entry(path, dates, updates):
     summary = completion.get("summary") or (paragraph.get_text(" ", strip=True) if paragraph else description.get("content", "") if description else "")
     report_date = re.search(r"20\d{2}-\d{2}-\d{2}", path.stem)
     workflow = re.sub(r"_?20\d{2}-\d{2}-\d{2}.*", "", path.stem).replace("_", " ")
-    for pattern, name in (("Market.*Intelligence", "Market intelligence"), ("Portfolio.*Audit", "Portfolio audit"), ("Watchlist.*Shortlist", "Watchlist underwriting"), ("Options", "Options audit"), ("Stage2|Stage 2", "Stage 2 momentum"), ("Displacement", "Displacement review"), ("Reject|Archive", "Archive review")):
+    for pattern, name in (("Market.*Intelligence", "Market intelligence"), ("Portfolio.*Audit", "Portfolio audit"), ("Options", "Options audit"), ("Company.*Report", "Company report")):
         if re.search(pattern, workflow, re.I):
             workflow = name
             break

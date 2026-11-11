@@ -1,7 +1,11 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
-from stock_snapshot import evaluate_stage2_and_entry_posture, match_stage2_symbol
+import stock_snapshot
+from stock_snapshot import collect_symbols_from_records, evaluate_stage2_and_entry_posture, match_stage2_symbol
 from stage2_scanner import clear_india_slicers, extract_in, extract_scrollable_sectors, split_stage2_rows
 
 
@@ -78,6 +82,57 @@ class Stage2MembershipTest(unittest.TestCase):
               "revenue_yoy_growth_ttm_pct": 0}
         result = evaluate_stage2_and_entry_posture(tv, {"in_thewrap_stage2": True}, {}, "IN")
         self.assertEqual(result["technical_timing_gate"], "CLEAR_FOR_CONSIDERATION")
+
+    def test_archived_candidate_resurfaces_only_after_dashboard_and_chart_confirm_stage2(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            watch = root / "data/watchlist/IN.json"
+            watch.parent.mkdir(parents=True)
+            watch.write_text(json.dumps({"active": [], "archive": [{"symbol": "OLD", "notes": "prior rejection"}]}))
+            config = root / ".agents/config/scoring.json"
+            config.parent.mkdir(parents=True)
+            config.write_text(json.dumps({"position_sizing": {"watchlist_capacity": {"max_active_names_per_market": 25}}}))
+            with patch.object(stock_snapshot, "ROOT", root):
+                candidates = stock_snapshot.archived_stage2_candidates("IN", {
+                    "stage2_universe": [{"TradingView Code": "OLD", "Stage2 Status": "Continuing"}],
+                })
+                self.assertEqual(candidates, ["OLD"])
+                result = stock_snapshot.resurface_stage2_archives("IN", {
+                    "OLD": {
+                        "thewrap_stage2": {"in_thewrap_stage2": True},
+                        "stage2_evaluation": {"weinstein_stage": "STAGE_2"},
+                    }
+                }, as_of="2026-11-09")
+            self.assertEqual(result["resurfaced_count"], 1)
+            updated = json.loads(watch.read_text())
+            self.assertEqual(updated["active"][0]["status"], "RESEARCH_REQUIRED")
+            self.assertEqual(updated["archive"], [])
+
+    def test_archived_candidate_stays_archived_without_chart_confirmation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            watch = root / "data/watchlist/US.json"
+            watch.parent.mkdir(parents=True)
+            watch.write_text(json.dumps({"active": [], "archive": [{"symbol": "OLD"}]}))
+            config = root / ".agents/config/scoring.json"
+            config.parent.mkdir(parents=True)
+            config.write_text(json.dumps({"position_sizing": {"watchlist_capacity": {"max_active_names_per_market": 25}}}))
+            with patch.object(stock_snapshot, "ROOT", root):
+                result = stock_snapshot.resurface_stage2_archives("US", {
+                    "OLD": {"thewrap_stage2": {"breakout_type": "Fresh Breakout"},
+                            "stage2_evaluation": {"weinstein_stage": "STAGE_3"}}
+                }, as_of="2026-11-09")
+            self.assertEqual(result["resurfaced_count"], 0)
+            self.assertEqual(json.loads(watch.read_text())["archive"][0]["symbol"], "OLD")
+
+    def test_snapshot_collection_reads_active_shortlist_records(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "data/shortlist/US.json"
+            path.parent.mkdir(parents=True)
+            path.write_text(json.dumps({"active": [{"symbol": "AAA"}, {"symbol": "BBB"}]}))
+            with patch.object(stock_snapshot, "ROOT", root):
+                self.assertEqual(collect_symbols_from_records("US", False, True, False), ["AAA", "BBB"])
 
 
 if __name__ == "__main__":

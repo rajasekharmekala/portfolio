@@ -51,10 +51,15 @@ VERDICT_CLASS_MAP = {
     "QUALIFIED_DEFERRED": "verdict-watch",
     "TRIM_PROFIT_BOOKING": "verdict-trim",
     "TRIM / HARVEST": "verdict-trim",
-    "REPLACE_UNDERPERFORMER": "verdict-exit",
-    "REPLACE UNDERPERFORMER": "verdict-exit",
     "REJECTED": "verdict-exit",
     "AVOID / REJECTED": "verdict-exit",
+    "EXIT_IMMEDIATELY": "verdict-exit",
+    "EXIT_ON_BOUNCE": "verdict-exit",
+    "TRIM_INTO_STRENGTH": "verdict-trim",
+    "TRIM_OVERWEIGHT": "verdict-trim",
+    "HOLD_WITH_HARD_STOP": "verdict-watch",
+    "NOT_HELD": "verdict-watch",
+    "DEFER": "verdict-watch",
 }
 
 
@@ -77,6 +82,141 @@ def _zone(zone) -> tuple:
     if isinstance(zone, (list, tuple)) and len(zone) == 2:
         return zone[0], zone[1]
     return None, None
+
+
+def _shortlist_rows(data: dict) -> list[dict]:
+    if isinstance(data.get("active"), list):
+        return data["active"]
+    sheets = data.get("sheets") or {}
+    return [row for rows in sheets.values() if isinstance(rows, list) for row in rows if isinstance(row, dict)]
+
+
+def _position_for_symbol(positions: dict, symbol: str) -> dict | None:
+    return next((row for row in positions.get("consolidated", []) if row.get("symbol", "").upper() == symbol), None)
+
+
+def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
+                     snapshots: dict, shortlist: dict) -> tuple[dict, str, str, str]:
+    cur = "₹" if market == "IN" else "$"
+    position = _position_for_symbol(positions, symbol)
+    action = spec["holding_action"]
+    shares_to_sell = spec["holding_shares_to_sell"]
+    if position:
+        quantity = position.get("quantity", 0)
+        if shares_to_sell > quantity:
+            raise ValueError(f"holding_shares_to_sell ({shares_to_sell}) exceeds current quantity ({quantity}) for {symbol}")
+        if any(alert["shares"] > quantity for alert in spec["holding_alerts"]):
+            raise ValueError(f"holding alert sells more than the current quantity for {symbol}")
+        if action == "EXIT_IMMEDIATELY" and shares_to_sell != quantity:
+            raise ValueError("EXIT_IMMEDIATELY must sell the full current holding")
+        value = position.get("market_value")
+        cost = position.get("cost_basis")
+        gain = position.get("gain")
+        net_worth = positions.get("net_worth")
+        weight = value / net_worth * 100 if isinstance(value, (int, float)) and net_worth else None
+        accounts = ", ".join(
+            f"{row.get('account', 'account')}: {row.get('quantity', 0):g} shares"
+            for row in position.get("accounts", [])
+        ) or "Account split unavailable"
+        holding_summary = (
+            f"{quantity:g} shares across {accounts}; market value "
+            f"{cur}{value:,.2f}" if isinstance(value, (int, float))
+            else f"{quantity:g} shares across {accounts}; market value unavailable"
+        )
+        holding_summary += f"; cost basis {cur}{cost:,.2f}" if isinstance(cost, (int, float)) else "; cost basis unknown"
+        holding_summary += f"; unrealized P&L {cur}{gain:,.2f}" if isinstance(gain, (int, float)) else "; unrealized P&L unavailable"
+        holding_summary += f"; portfolio weight {weight:.2f}%" if weight is not None else "; portfolio weight unavailable"
+        holding_summary += f"; recommend selling {shares_to_sell:g} shares and retaining {quantity - shares_to_sell:g}"
+    else:
+        quantity = 0
+        value = cost = gain = weight = None
+        if shares_to_sell != 0:
+            raise ValueError("holding_shares_to_sell must be zero when the company is not held")
+        if any(alert["shares"] != 0 for alert in spec["holding_alerts"]):
+            raise ValueError("NOT_HELD alerts must not recommend selling shares")
+        holding_summary = "NOT HELD (0 shares); no current holding to trim or exit."
+
+    active_shortlist = {row.get("symbol", "").upper(): row for row in _shortlist_rows(shortlist)}
+    snapshot_map = snapshots.get("snapshots") or snapshots.get("symbols") or snapshots
+    destinations = spec["redeployment_plan"]["destinations"]
+    for row in destinations:
+        symbol_name = str(row.get("symbol") or "").upper()
+        if row["destination_type"] == "SHORTLIST" and row["allocation_pct"] > 0 and symbol_name not in active_shortlist:
+            raise ValueError(f"redeployment shortlist symbol {symbol_name} is not in the active shortlist")
+        if row["destination_type"] != "CASH" and symbol_name and symbol_name not in snapshot_map:
+            raise ValueError(f"redeployment candidate {symbol_name} is missing from the fresh stock snapshot")
+        if row["destination_type"] != "CASH" and row["allocation_pct"] > 0:
+            live = snapshot_map[symbol_name]
+            live_eval = live.get("stage2_evaluation", {})
+            live_tv = live.get("tradingview", {})
+            if not isinstance(live_tv.get("close"), (int, float)) or not _zone(live_eval.get("support_buy_zone"))[0] or not live_eval.get("invalidation_stop"):
+                raise ValueError(f"funded redeployment candidate {symbol_name} lacks a fresh price, support zone, or stop")
+
+    action_label = action.replace("_", " ")
+    alerts = spec["holding_alerts"]
+    alert_rows = []
+    for alert in alerts:
+        trigger = str(alert.get("trigger"))
+        if isinstance(alert.get("trigger_price"), (int, float)):
+            trigger += f" ({cur}{alert['trigger_price']:,.2f})"
+        amount = (f"; approx. proceeds {cur}{alert['shares'] * alert['trigger_price']:,.2f}"
+                  if isinstance(alert.get("trigger_price"), (int, float)) else "")
+        alert_rows.append([_esc(trigger), f"{alert['shares']:g}", _esc(alert.get("instruction") + amount)])
+    holding_html = (
+        f'<section class="chapter" id="holding-action" data-holding-action="{_esc(action)}">'
+        "<h2>Current Portfolio Holding Verdict &amp; Alert Plan</h2>"
+        f'<p><strong>{_esc(action_label)}:</strong> {_esc(holding_summary)} {_esc(spec["holding_rationale"])}</p>'
+        + _render_table(f"Holding action and broker-alert plan for {symbol}",
+                        ["Price / event trigger", "Shares affected", "Recommended alert / action"], alert_rows,
+                        "These are advisory alert levels for the stated session, not broker orders; verify current holdings and prices before placing or changing any order.")
+        + "</section>"
+    )
+    redeploy_rows = []
+    for row in destinations:
+        kind = row["destination_type"]
+        fallback_candidate = {"CASH": "Cash reserve", "SHORTLIST": "No selected shortlist name",
+                             "OUTSIDE": "No selected outside name"}[kind]
+        candidate = str(row.get("symbol") or fallback_candidate)
+        detail = row["recommendation"]
+        live = snapshot_map.get(str(row.get("symbol") or "").upper(), {})
+        eval_data = live.get("stage2_evaluation", {}) if isinstance(live, dict) else {}
+        tv_data = live.get("tradingview", {}) if isinstance(live, dict) else {}
+        technical = eval_data.get("weinstein_stage") or "Not applicable"
+        if kind != "CASH" and live:
+            detail += f" — current snapshot stage: {technical}; posture: {eval_data.get('entry_timing_posture', 'not supplied')}"
+        low, high = _zone(eval_data.get("support_buy_zone")) if kind != "CASH" else (None, None)
+        price_text = f"{cur}{tv_data['close']:,.2f}" if isinstance(tv_data.get("close"), (int, float)) else "N/A"
+        zone_text = f"{cur}{low:,.2f}–{cur}{high:,.2f}" if isinstance(low, (int, float)) and isinstance(high, (int, float)) else "Not supplied"
+        stop = eval_data.get("invalidation_stop") if kind != "CASH" else None
+        redeploy_rows.append([
+            _esc(kind), _esc(candidate), f"{row['allocation_pct']:.2f}%",
+            _esc(price_text), _esc(zone_text), f"{cur}{stop:,.2f}" if isinstance(stop, (int, float)) else "Not supplied",
+            f"{cur}{row['target_base']:,.2f}" if isinstance(row.get("target_base"), (int, float)) else "N/A",
+            f"{row['asymmetry_ratio']:.2f}:1" if isinstance(row.get("asymmetry_ratio"), (int, float)) else "N/A",
+            _esc(detail), _esc(row["entry_condition"]), _esc(row["rationale"]),
+        ])
+    base = _esc(spec["redeployment_plan"]["capital_source"])
+    redeploy_html = (
+        f'<section class="chapter" id="capital-redeployment" data-capital-base="{base}">'
+        "<h2>Capital Redeployment &amp; Opportunity Cost</h2>"
+        f"<p>Capital under review: {base}. Cash is an explicit destination; the plan compares it with current shortlist ideas and outside opportunities rather than assuming every dollar must be invested.</p>"
+        + _render_table(f"Capital redeployment choices for {symbol}",
+                        ["Destination", "Candidate", "Share of capital", "CMP", "Entry zone", "Stop", "Base target", "Asymmetry", "Recommendation", "Entry / activation condition", "Why this use of capital"],
+                        redeploy_rows,
+                        "The allocation percentages refer to the capital source named above and reconcile to 100%; a cash allocation is deliberate when no equity opportunity clears the evidence and entry hurdles.",
+                        row_attrs=[{"data-destination": row["destination_type"]} for row in destinations])
+        + "</section>"
+    )
+    book_summary = [
+        f"Current holding decision: {action_label}. {strip_html(holding_summary)}. {strip_html(spec['holding_rationale'])}",
+        "Alert plan: " + "; ".join(f"{a['trigger']} — {a['instruction']}" for a in alerts),
+        "Capital redeployment: " + "; ".join(
+            f"{r['allocation_pct']:.2f}% to {r.get('symbol') or r['destination_type']} ({r['destination_type']}): {r['recommendation']}; {r['entry_condition']}"
+            for r in destinations
+        ),
+    ]
+    return {"position": position, "quantity": quantity, "value": value, "cost": cost, "gain": gain,
+            "weight": weight, "summary": holding_summary, "action": action, "net_worth": positions.get("net_worth")}, holding_html, redeploy_html, " ".join(book_summary)
 
 
 def _valuation(val) -> tuple:
@@ -120,12 +260,15 @@ def _clean_cell(c: str) -> str:
     return str(c).strip()
 
 
-def _render_table(caption: str, headers: list[str], rows: list[list[str]], explanatory_p: str) -> str:
+def _render_table(caption: str, headers: list[str], rows: list[list[str]], explanatory_p: str,
+                  row_attrs: list[dict] | None = None) -> str:
     th_html = "".join(f"<th>{_clean_cell(h)}</th>" for h in headers)
     tr_list = []
-    for r in rows:
+    for idx, r in enumerate(rows):
         tds = "".join(f"<td>{_clean_cell(c)}</td>" for c in r)
-        tr_list.append(f"<tr>{tds}</tr>")
+        attrs = "".join(f' {html.escape(str(k), quote=True)}="{html.escape(str(v), quote=True)}"'
+                        for k, v in (row_attrs[idx] if row_attrs and idx < len(row_attrs) else {}).items())
+        tr_list.append(f"<tr{attrs}>{tds}</tr>")
     body_html = "\n".join(tr_list)
     cap_html = f"<caption>{caption}</caption>\n" if caption else ""
     p_html = f"<p>{explanatory_p.strip()}</p>" if explanatory_p and explanatory_p.strip() else ""
@@ -430,7 +573,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     tier = spec.get("conviction_tier", "TIER_2")
     w_stage = spec.get("weinstein_stage") or (inst_m.get("stage_label") if ledger_is_asof else None) or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
-    no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith("NO_NEW_ALLOCATION")
+    no_new_allocation = verdict.upper() in {"REJECTED", "WAIT_FOR_SUPPORT"} or str(entry_posture).startswith(("WAIT_FOR_SUPPORT", "NO_NEW_ALLOCATION"))
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
     if no_new_allocation:
         # A monitor-only setup has no live risk budget or initial position size.
@@ -797,11 +940,16 @@ def render_10chapter_monograph_editions(
     spec: dict,
     facts: dict | None = None,
     snapshots: dict | None = None,
+    positions: dict | None = None,
+    shortlist: dict | None = None,
     out_dossier_path: str | Path = "",
 ) -> dict:
     """Compile the Web Dossier HTML and the companion PDF from a 10-chapter spec."""
     facts = facts or {}
     snapshots = snapshots or {}
+    if positions is None:
+        raise ValueError("10-chapter dossiers require a fresh positions ledger via --positions")
+    shortlist = shortlist or {}
     sym = spec["symbol"].upper()
     market = spec["market"].upper()
     as_of = spec.get("as_of") or snapshots.get("as_of") or facts.get("asof") or "latest"
@@ -809,6 +957,10 @@ def render_10chapter_monograph_editions(
     snap_sym = _lookup_snapshot(snapshots, sym)
     scoring = json.load(open(SCORING_FILE, encoding="utf-8"))
     cur = "₹" if market == "IN" else "$"
+
+    schema_errors, _ = validate_monograph_spec(spec, min_total_words=0)
+    if schema_errors:
+        raise ValueError("Invalid 10-chapter dossier spec: " + "; ".join(schema_errors))
 
     verdict = spec["verdict"]
     v_cls = VERDICT_CLASS_MAP.get(verdict.upper(), "verdict-watch")
@@ -844,7 +996,11 @@ def render_10chapter_monograph_editions(
     tier = spec.get("conviction_tier", "TIER_2")
     w_stage = spec.get("weinstein_stage") or (inst_m.get("stage_label") if ledger_is_asof else None) or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
-    no_new_allocation = verdict.upper() == "REJECTED" or str(entry_posture).startswith(("NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
+    no_new_allocation = (
+        verdict.upper() in {"REJECTED", "WAIT_FOR_SUPPORT"}
+        or str(entry_posture).startswith(("WAIT_FOR_SUPPORT", "NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
+    )
+    holding, holding_html, redeploy_html, book_decision = _decision_panels(spec, market, sym, positions, snapshots, shortlist)
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
     if no_new_allocation:
         ru["risk_adjusted_weight_pct"] = 0.0
@@ -866,7 +1022,8 @@ def render_10chapter_monograph_editions(
             target_value += f" (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)"
 
     kf_items = [
-        ("Verdict", f'<span class="verdict {v_cls}">{_esc(verdict)}</span> ({_esc(archetype)})'),
+        ("New Capital Verdict", f'<span class="verdict {v_cls}">{_esc(spec["new_capital_verdict"])}</span> ({_esc(archetype)})'),
+        ("Current Holding Action", f'<span class="verdict {VERDICT_CLASS_MAP.get(holding["action"], "verdict-watch")}">{_esc(holding["action"].replace("_", " "))}</span> — {_esc(holding["summary"])}'),
         ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
         ("Strategy Bucket", _esc(bucket)),
         ("Weinstein Stage", _esc(w_stage)),
@@ -886,7 +1043,6 @@ def render_10chapter_monograph_editions(
         + "\n</dl>"
     )
 
-    _, stats = validate_monograph_spec(spec, min_total_words=1000)
     web_words = stats.get("web_words", 0)
     book_words = stats.get("book_words", 0)
     audio_mins = max(1, stats.get("estimated_audio_minutes", round(book_words / 155)))
@@ -995,6 +1151,15 @@ def render_10chapter_monograph_editions(
     web_sections: List[str] = []
     book_sections: List[str] = []
     chapters = spec.get("chapters", [])
+    for chapter in chapters:
+        if chapter.get("id") == "ch-9":
+            chapter.setdefault("book_paragraphs", []).append(book_decision)
+    schema_errors, stats = validate_monograph_spec(spec, min_total_words=11000)
+    if schema_errors:
+        raise ValueError("Incomplete 10-chapter dossier spec: " + "; ".join(schema_errors))
+    web_words = stats.get("web_words", 0)
+    book_words = stats.get("book_words", 0)
+    audio_mins = max(1, stats.get("estimated_audio_minutes", round(book_words / 155)))
 
     for idx, ch in enumerate(chapters):
         cid = ch.get("id") or f"ch-{idx}"
@@ -1034,6 +1199,8 @@ def render_10chapter_monograph_editions(
                 w_parts.append(f'<p class="trigger">{blk.get("html") or blk.get("text", "")}</p>')
         w_parts.append("</section>")
         web_sections.append("\n".join(w_parts))
+        if cid == "ch-9":
+            web_sections.extend([holding_html, redeploy_html])
 
         # 2. Book / Audiobook section
         ch_b_words = sum(word_count(p) for p in ch.get("book_paragraphs", [])) + sum(
@@ -1124,6 +1291,8 @@ def main() -> None:
     ap.add_argument("--spec", required=True, help="Path to structured company spec JSON or chapter directory")
     ap.add_argument("--snapshot", default="", help="Path to stock_snapshot.py JSON output")
     ap.add_argument("--facts", default="", help="Optional path to market_facts JSON ledger")
+    ap.add_argument("--positions", default="", help="Path to the same-session market_facts positions ledger")
+    ap.add_argument("--shortlist", default="", help="Path to this market's active shortlist records")
     ap.add_argument("--out", required=True, help="Output dossier HTML path")
     args = ap.parse_args()
 
@@ -1136,8 +1305,14 @@ def main() -> None:
         if args.snapshot and Path(args.snapshot).exists()
         else {}
     )
+    positions = json.loads(Path(args.positions).read_text(encoding="utf-8")) if args.positions else None
+    shortlist_path = Path(args.shortlist) if args.shortlist else Path(ROOT) / "data" / "shortlist" / f"{spec['market'].upper()}.json"
+    shortlist = json.loads(shortlist_path.read_text(encoding="utf-8")) if shortlist_path.exists() else {}
     if isinstance(spec.get("chapters"), list) and spec["chapters"]:
-        res = render_10chapter_monograph_editions(spec, facts=facts, snapshots=snapshots, out_dossier_path=args.out)
+        res = render_10chapter_monograph_editions(
+            spec, facts=facts, snapshots=snapshots, positions=positions, shortlist=shortlist,
+            out_dossier_path=args.out,
+        )
         print(
             f"wrote monograph for {spec['symbol']}:\n"
             f"  - Web Dossier: {res['dossier_html']} ({res['web_words']:,} words)\n"

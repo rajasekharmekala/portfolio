@@ -73,15 +73,14 @@ Both should print `RESULT: PASS`.
 │   ├── workflows/             Step-by-step runs. Start here for a daily run.
 │   │   ├── _COMMON.md          Rules that apply to every workflow
 │   │   ├── market_intelligence.md, portfolio_audit.md, options_audit.md,
-│   │   │   watchlist_to_shortlist.md, reject_to_watchlist.md
+│   │   │   company_report.md
 │   └── skills/                Analysis and writing rules, one folder per skill
 │       ├── _shared/           Shared standards: run protocol, voice, palette, data layer,
 │       │                      section drafting, holdings update, editorial standard
 │       ├── report_reviewer/   The single reviewer's rubric (judgment only)
 │       ├── red_team/          The conditional bear-case pass
-│       └── market_intelligence, portfolio_audit, options_underwriting, company_report,
-│           watchlist_shortlist_underwriting, archive_resurrection_review,
-│           shortlist_capital_allocator   (each covers both markets)
+│       └── market_intelligence, portfolio_audit, options_underwriting,
+│           company_report   (each covers both markets)
 ├── googledrive/                Generated reports and dossiers, plus your research notes (gitignored)
 │   ├── newsletters/            Daily reports and audits
 │   ├── blogs/                  Company dossiers
@@ -168,8 +167,7 @@ The workflow sets the steps. The rules it refers to are in `_COMMON.md`. Every r
 | `market_intelligence.md` | Daily market briefing for one market: regime, sectors, Stage 2 and Stage 4 lists, tactical playbook |
 | `portfolio_audit.md` | Audit of every holding, with actions and the reasons for them |
 | `options_audit.md` | Review of open option contracts and setup ideas |
-| `watchlist_to_shortlist.md` | Underwrites the next batch of watchlist names, writes a dossier for each |
-| `reject_to_watchlist.md` | Re-examines the next batch of archived names for resurrection |
+| `company_report.md` | Underwrites one requested or queued company, audits any current holding, and writes its dossier and portfolio action plan |
 
 ---
 

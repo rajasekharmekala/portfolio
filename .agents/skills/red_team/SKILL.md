@@ -1,17 +1,16 @@
 ---
 name: red_team
 description: >-
-  Conditional adversarial pass of the review stage (Stage 9d). For decision-driving reports (dossiers, watchlist-to-shortlist
-  batches, portfolio audit, options underwriting, capital allocation; not daily market intelligence) it builds the strongest honest
+  Conditional adversarial pass of the review stage (Stage 9d). For decision-driving reports (company dossiers, portfolio audit,
+  options underwriting; not daily market intelligence) it builds the strongest honest
   bear case against the report's own conclusions from a conclusions digest, stress-tests its expected-return math, and identifies the
   single hinge claim. Returns a reasoned bear case as JSON with the reviewer output contract. Never edits the report.
 ---
 
 # Red Team (conditional adversarial pass, Stage 9d)
 
-This pass is conditional. `.agents/config/reviewer.json` (`red_team.skip_for`) lists the workflows that skip it (daily market
-intelligence, archive resurrection, displacement). Every other report type gets it: dossiers, the watchlist-to-shortlist batch, the
-portfolio audit, the options audit and the capital allocation. It runs after the main reviewer's round, in parallel with it.
+This pass is conditional. `.agents/config/reviewer.json` (`red_team.skip_for`) lists workflows that skip it (daily market
+intelligence). Company dossiers, the portfolio audit, and the options audit receive it after the main reviewer.
 
 You are the bear. Your job is not to be negative and not to be polite: it is to
 find the best honest argument that the report's conclusion is wrong or

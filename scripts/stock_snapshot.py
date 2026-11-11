@@ -20,6 +20,7 @@ Usage:
   .venv/bin/python scripts/stock_snapshot.py --market IN --symbols FSL IGIL EXIDEIND
   .venv/bin/python scripts/stock_snapshot.py --market IN --from-watchlist --from-holdings --out <RUN_DIR>/cache/snapshots_IN.json
   .venv/bin/python scripts/stock_snapshot.py --market IN --prune-watchlist
+  .venv/bin/python scripts/stock_snapshot.py --market IN --from-stage2-archive --resurface-stage2-archive --stage2-file <RUN_DIR>/cache/stage2_IN.json
 """
 
 from __future__ import annotations
@@ -588,11 +589,13 @@ def collect_symbols_from_records(market: str, from_wl: bool, from_sl: bool, from
         sl_path = ROOT / "data" / "shortlist" / f"{market}.json"
         if sl_path.exists():
             sl = json.loads(sl_path.read_text(encoding="utf-8"))
-            for rows in (sl.get("sheets") or {}).values():
-                if isinstance(rows, list):
-                    for row in rows:
-                        if isinstance(row, dict) and row.get("symbol") and row["symbol"] not in syms:
-                            syms.append(row["symbol"])
+            rows = sl.get("active")
+            if not isinstance(rows, list):
+                rows = [row for sheet_rows in (sl.get("sheets") or {}).values()
+                        if isinstance(sheet_rows, list) for row in sheet_rows]
+            for row in rows:
+                if isinstance(row, dict) and row.get("symbol") and row["symbol"] not in syms:
+                    syms.append(row["symbol"])
     if from_hold:
         acc_dir = ROOT / "data" / "accounts" / market
         if acc_dir.exists():
@@ -616,7 +619,27 @@ def collect_symbols_from_records(market: str, from_wl: bool, from_sl: bool, from
     return syms
 
 
-def prune_watchlist(market: str, snapshots: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+def archived_stage2_candidates(market: str, stage2_data: Dict[str, Any]) -> List[str]:
+    """Return archived symbols present in the dashboard's current Stage 2 candidate tables."""
+    path = ROOT / "data" / "watchlist" / f"{market}.json"
+    if not path.exists() or not stage2_data:
+        return []
+    archived = json.loads(path.read_text(encoding="utf-8")).get("archive", [])
+    if market == "IN":
+        rows = (stage2_data.get("stage2_universe", [])
+                + stage2_data.get("new_additions_this_week", [])
+                + stage2_data.get("top_25_stage2", []))
+        dashboard_symbols = {str(row.get("TradingView Code", "")).strip().upper()
+                             for row in rows if row.get("Stage2 Status", "").strip().casefold() != "removed"}
+    else:
+        rows = stage2_data.get("breakout_scanner", [])
+        dashboard_symbols = {str(row.get("Symbol", "")).strip().upper() for row in rows}
+    return [row["symbol"].strip().upper() for row in archived
+            if isinstance(row.get("symbol"), str) and row["symbol"].strip().upper() in dashboard_symbols]
+
+
+def prune_watchlist(market: str, snapshots: Dict[str, Any], dry_run: bool = False,
+                    as_of: Optional[str] = None) -> Dict[str, Any]:
     """
     Prune dead-weight or broken-trend stocks from data/watchlist/<MKT>.json (active -> archive)
     so the active watchlist remains focused on Stage 2 / emerging momentum candidates.
@@ -631,7 +654,7 @@ def prune_watchlist(market: str, snapshots: Dict[str, Any], dry_run: bool = Fals
     archive = wl.get("archive", [])
     kept = []
     pruned = []
-    today_str = dt.date.today().isoformat()
+    today_str = as_of or dt.date.today().isoformat()
 
     for row in active:
         sym = row.get("symbol", "")
@@ -680,6 +703,64 @@ def prune_watchlist(market: str, snapshots: Dict[str, Any], dry_run: bool = Fals
     return {"pruned_count": len(pruned), "kept_active_count": len(kept), "pruned": pruned}
 
 
+def resurface_stage2_archives(market: str, snapshots: Dict[str, Any], dry_run: bool = False,
+                              as_of: Optional[str] = None) -> Dict[str, Any]:
+    """Move archived candidates back to the research queue after a fresh Stage 2 confirmation."""
+    path = ROOT / "data" / "watchlist" / f"{market}.json"
+    if not path.exists():
+        return {"resurfaced_count": 0, "resurfaced": []}
+    watchlist = json.loads(path.read_text(encoding="utf-8"))
+    active = watchlist.get("active", [])
+    active_symbols = {row.get("symbol", "").upper() for row in active}
+    scoring = json.loads((ROOT / ".agents" / "config" / "scoring.json").read_text(encoding="utf-8"))
+    active_limit = scoring["position_sizing"]["watchlist_capacity"]["max_active_names_per_market"]
+    archive, remaining, resurfaced = watchlist.get("archive", []), [], []
+    capacity_skipped = []
+    for row in archive:
+        symbol = str(row.get("symbol") or "").upper()
+        snapshot = snapshots.get(symbol, {})
+        evaluation = snapshot.get("stage2_evaluation", {})
+        dashboard = snapshot.get("thewrap_stage2", {})
+        confirmed = (
+            symbol not in active_symbols
+            and evaluation.get("weinstein_stage") == "STAGE_2"
+            and (dashboard.get("in_thewrap_stage2") is True
+                 or dashboard.get("breakout_type") not in (None, "", "None", "No Breakout"))
+        )
+        if not confirmed:
+            remaining.append(row)
+            continue
+        if len(active) >= active_limit:
+            remaining.append(row)
+            capacity_skipped.append(symbol)
+            continue
+        restored = dict(row)
+        restored.update({
+            "status": "RESEARCH_REQUIRED",
+            "action_verdict": "RESEARCH_REQUIRED",
+            "gate_status": "PENDING",
+            "kpi_health": "PENDING",
+            "deep_research_status": "PENDING",
+            "source_type": "STAGE2_BREAKOUT_REDISCOVERY",
+            "as_of_date": as_of or dt.date.today().isoformat(),
+            "last_researched_date": as_of or dt.date.today().isoformat(),
+            "entry_posture": "RESEARCH_REQUIRED_AFTER_STAGE2_REDISCOVERY",
+        })
+        restored["notes"] = (
+            f"Resurfaced from archive after a fresh dashboard Stage 2 signal and confirmed TradingView Stage 2 "
+            f"structure on {as_of or dt.date.today().isoformat()}. Full company underwriting is required before shortlist consideration. "
+            + str(restored.get("notes") or "")
+        ).strip()
+        active.append(restored)
+        resurfaced.append({"symbol": symbol, "reason": "fresh dashboard signal and confirmed Stage 2 technical structure"})
+    if resurfaced and not dry_run:
+        watchlist["active"] = active
+        watchlist["archive"] = remaining
+        path.write_text(json.dumps(watchlist, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return {"resurfaced_count": len(resurfaced), "resurfaced": resurfaced,
+            "capacity_skipped": capacity_skipped}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--market", choices=["IN", "US"], required=True)
@@ -687,15 +768,19 @@ def main():
     parser.add_argument("--from-watchlist", action="store_true", help="Include all active watchlist symbols")
     parser.add_argument("--from-shortlist", action="store_true", help="Include all shortlist symbols")
     parser.add_argument("--from-holdings", action="store_true", help="Include all current holding symbols")
+    parser.add_argument("--from-stage2-archive", action="store_true", help="Snapshot archived names appearing in the current Stage 2 candidate tables")
     parser.add_argument("--stage2-file", default=None, help="Path to stage2_<MKT>_latest.json")
     parser.add_argument("--skip-web-card", action="store_true", help="Skip per-symbol Screener/Finviz HTTP fetch for fast bulk scan")
     parser.add_argument("--prune-watchlist", action="store_true", help="Prune Stage 4 / rejected names from active watchlist to archive")
+    parser.add_argument("--resurface-stage2-archive", action="store_true", help="Return archived names to research when a fresh Stage 2 signal is technically confirmed")
+    parser.add_argument("--as-of", help="Market session date used for watchlist status updates")
     parser.add_argument("--dry-run", action="store_true", help="Preview watchlist pruning without modifying watchlist JSON")
     parser.add_argument("--out", default=None, help="Output JSON path")
     args = parser.parse_args()
 
     market = args.market.upper()
     symbols = list(dict.fromkeys([s.upper() for s in args.symbols]))
+    stage2_data = load_stage2_context(market, args.stage2_file)
     if args.from_watchlist or args.from_shortlist or args.from_holdings or args.prune_watchlist:
         extra = collect_symbols_from_records(
             market,
@@ -706,6 +791,10 @@ def main():
         for s in extra:
             if s not in symbols:
                 symbols.append(s)
+    if args.from_stage2_archive or args.resurface_stage2_archive:
+        for s in archived_stage2_candidates(market, stage2_data):
+            if s not in symbols:
+                symbols.append(s)
 
     if not symbols:
         print("No symbols specified.", file=sys.stderr)
@@ -713,7 +802,7 @@ def main():
 
     print(f"[*] Fetching TradingView technical & fundamental snapshot for {len(symbols)} {market} symbols...")
     tv_map = fetch_tradingview_batch(market, symbols)
-    s2_data = load_stage2_context(market, args.stage2_file)
+    s2_data = stage2_data
 
     snapshots: Dict[str, Any] = {}
     for sym in symbols:
@@ -738,17 +827,23 @@ def main():
 
     prune_summary = None
     if args.prune_watchlist:
-        prune_summary = prune_watchlist(market, snapshots, dry_run=args.dry_run)
+        prune_summary = prune_watchlist(market, snapshots, dry_run=args.dry_run, as_of=args.as_of)
         print(
             f"[*] Watchlist prune ({market}): {prune_summary['pruned_count']} pruned, "
             f"{prune_summary['kept_active_count']} active remaining."
         )
+
+    resurface_summary = None
+    if args.resurface_stage2_archive:
+        resurface_summary = resurface_stage2_archives(market, snapshots, dry_run=args.dry_run, as_of=args.as_of)
+        print(f"[*] Archived Stage 2 rediscovery ({market}): {resurface_summary['resurfaced_count']} returned to research queue.")
 
     output = {
         "market": market,
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
         "symbol_count": len(snapshots),
         "watchlist_prune": prune_summary,
+        "archive_resurface": resurface_summary,
         "snapshots": snapshots,
     }
 

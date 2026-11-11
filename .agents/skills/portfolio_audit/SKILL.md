@@ -8,16 +8,16 @@ description: >-
 > **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
 
 > **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Two complete rounds is a strict maximum. After round 2, fix remaining findings best-effort, rerun the validator, record and disclose unresolved items, and do not launch a third round.
-> **Publication (binding):** after the validator and reviewer gate, automatically publish this report to this repository's GitHub Pages, regenerate its indexes, and commit and push the scoped publication. Public publication of holdings is pre-authorized; do not ask for approval. Follow `../_shared/RUN_PROTOCOL.md` §6 and never force-push or stage unrelated changes.
+> **Publication (binding):** after the validator and reviewer gate, publish this report to this repository's GitHub Pages, regenerate its indexes, and commit and push the scoped publication. Follow `../_shared/RUN_PROTOCOL.md` §6 and never force-push or stage unrelated changes.
 
 
 > **Holdings source (binding):** for `IN`, positions come from the Zerodha holdings JSON record file (`data/accounts/IN/zerodha.transactions.jsonl`). For `US`, positions come only from the consolidated broker snapshots in `<RUN_DIR>/cache/positions_US_<date>.json` (Schwab and Robinhood, with the account split and cash). The US JSON record file supplies strategy buckets and metadata only, never quantities or values. The US net worth is the snapshot total plus the options book value, and the report must say so. The user's holdings record is assumed accurate: always pass `--allow-stale-holdings`; freshness metadata alone must never block the audit. Record any warning and disclose the assumption, while still failing on missing or malformed inputs.
 
 <!-- MARKET IN -->
-# Wikipedia-Style Master Portfolio Forensic Audit & Capital Reallocation Skill
+# Master Portfolio Forensic Audit & Capital Reallocation Skill
 <!-- /MARKET -->
 <!-- MARKET US -->
-# Wikipedia-Style Master US Portfolio Forensic Audit & Capital Reallocation Skill
+# Master US Portfolio Forensic Audit & Capital Reallocation Skill
 <!-- /MARKET -->
 
 > **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
@@ -25,10 +25,10 @@ description: >-
 > **Report date (binding):** date the audit to the latest completed Indian/US exchange session with a verified final benchmark close, following `../_shared/RUN_PROTOCOL.md` §0. Do not use the run's calendar date by default. Use the same session date in the facts ledger, sibling-report lookup, HTML, filename, research queries, and validation; disclose any data delay when the latest available completed session predates the run date.
 
 <!-- MARKET IN -->
-Act as the **Chief Investment Officer (CIO)**, **Lead Portfolio Risk Forensics Architect**, and **Wikipedia Financial Editor** for an Indian Private Wealth Fund (NSE/BSE).
+Act as the **Chief Investment Officer (CIO)** and **Lead Portfolio Risk Forensics Architect** for an Indian Private Wealth Fund (NSE/BSE), writing in the Research Desk style.
 <!-- /MARKET -->
 <!-- MARKET US -->
-Act as the **Chief Investment Officer (CIO)**, **Lead US Portfolio Risk Forensics Architect**, and **Wikipedia Financial Editor** for a US Private Wealth Fund (NYSE / NASDAQ).
+Act as the **Chief Investment Officer (CIO)** and **Lead US Portfolio Risk Forensics Architect** for a US Private Wealth Fund (NYSE / NASDAQ), writing in the Research Desk style.
 <!-- /MARKET -->
 
 <!-- MARKET IN -->
@@ -38,14 +38,14 @@ Execute the **Master Portfolio Audit & Capital Reallocation Blueprint**:
 Execute the **Master US Portfolio Audit & Capital Reallocation Blueprint**:
 <!-- /MARKET -->
 1. Conduct an exhaustive, adversarial, multi-agent portfolio forensic audit and capital reallocation analysis.
-2. Render the final output as a standalone, self-contained HTML document in authentic **Wikipedia Design System** (NPOV encyclopedic tone, floating infobox, wikitables, footnotes, verified citations).
+2. Write the complete research body and assemble it with `scripts/assemble_report.py` in the shared Research Desk design; retain all required analysis, tables, and citations.
 <!-- MARKET IN -->
-3. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html`**, where the date is the resolved latest completed market session (not necessarily the run date). Maintain strictly the single latest generated report and display that session date on the page.
+3. Publish the stable deliverable **`docs/reports/IN_Portfolio_Audit.html`** with the resolved latest completed market session displayed on the page.
 <!-- /MARKET -->
 <!-- MARKET US -->
-3. Maintain and synchronize the deliverable in Google Drive at **`docs/reports/US_Portfolio_Audit_<YYYY-MM-DD>.html`**, where the date is the resolved latest completed market session (not necessarily the run date). Maintain strictly the single latest generated report and display that session date on the page.
+3. Publish the stable deliverable **`docs/reports/US_Portfolio_Audit.html`** with the resolved latest completed market session displayed on the page.
 <!-- /MARKET -->
-4. Transmit the complete deliverable via Gmail to **`rajasekharreddymekala732@gmail.com`**.
+4. After successful publication, send the short decision digest required by `_COMMON.md`; never email the complete report.
 
 ---
 
@@ -56,14 +56,14 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
 <!-- MARKET IN -->
 1. **Data first:** build it in this run (reuse of another run's ledger is not allowed) for the latest completed market session resolved under `../_shared/RUN_PROTOCOL.md` §0: `.venv/bin/python scripts/market_facts.py --market IN --date <session> --screen nifty500 --run-dir "<RUN_DIR>"`. Every CMP, DMA, RSI, ATR, stage, regime label, breadth figure and sector quadrant in every chapter comes from `<RUN_DIR>/cache/facts_IN_<date>.json`. If the JSON record file's `Current Price` differs from the ledger close, value positions at the ledger close and state the JSON record file price once in the methodology note. Never write a technical claim ("Stage 2", "above rising 50-DMA", "support at X") that the ledger does not back. `N/A` only after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results in `<RUN_DIR>/cache/research_IN_<date>.json`) and a second source all fail (max 5% of cells). Results dates, promoter pledge, catalysts behind every EXIT/TRIM and any market-flow figure you quote come from that pass; use precise date-stamped queries, read the fetched page, and cite URL + as-of date.
 2. **Write high-signal institutional intelligence (zero fluff):** start directly with the 150-300 word executive lede; each chapter opens with analytical context and closes with a takeaway; a `casenote` for every holding (what it is, why you own it, numbers with meaning, verdict, rule behind it, what changes it, with prices); money-at-risk table and cash waterfall; actionable execution orders; methodology & data-gaps note. Strictly NO beginner primers explaining the audit, NO 'how to read this table' blocks, and NO glossaries. Focus on capital reallocation, risk math, and execution.
-3. **One story:** read the same-date `Daily_Market_Intelligence_*.html` first. Chapter 1 restates its regime label and sector map verbatim; Chapter 2 verdicts cite that regime; Chapter 3 uses the same gates and stages; Chapter 4 explains every displacement or non-displacement; Chapter 5 totals reconcile to the rupee with Chapters 2 and 3; Chapter 6 orders are exactly the Chapter 5 deltas. A held name on the market report's Bull or Bear list must be addressed explicitly.
-4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/Portfolio_Audit_<date>.html --kind portfolio_audit --facts <RUN_DIR>/cache/facts_IN_<date>.json` must print `PASS` before the Drive save and email. The skeleton below is scaffolding only: every `{{NARRATIVE_*}}` slot, and an intro `<p>` before and takeaway `<p>` after every table, must be written as full prose.
+3. **One story:** read the same-date `IN_Market_Intelligence.html` first. Chapter 1 restates its regime label and sector map verbatim; Chapter 2 verdicts cite that regime; Chapter 3 allocates only available cash and recommended sale proceeds across actionable shortlist entries or cash; Chapter 4 explains shortlist gate results; Chapter 5 reconciles with Chapters 2 and 3; Chapter 6 alerts match the recommended actions. Address held names on the market report's Bull or Bear list.
+4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/IN_Portfolio_Audit.html --kind portfolio_audit --facts <RUN_DIR>/cache/facts_IN_<date>.json` must print `RESULT: PASS` before publication. The skeleton below is scaffolding only: every `{{NARRATIVE_*}}` slot, and an intro `<p>` before and takeaway `<p>` after every table, must be written as full prose.
 <!-- /MARKET -->
 <!-- MARKET US -->
-1. **Data first:** Always generate a fresh facts ledger from scratch for the latest completed market session resolved under `../_shared/RUN_PROTOCOL.md` §0: `.venv/bin/python scripts/market_facts.py --market US --date <session> --screen sp1500 --run-dir "<RUN_DIR>"`. Every price, DMA, RSI, ATR, stage, regime label, breadth figure, Treasury yield and sector quadrant in every chapter comes from `<RUN_DIR>/cache/facts_US_<date>.json`. If the JSON record file's `Current Price` differs from the ledger close, value positions at the ledger close and state the JSON record file price once in the methodology note. Never write a technical claim ("Stage 2", "above rising 50-DMA", "support at X") that the ledger does not back. `N/A` only after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results in `<RUN_DIR>/cache/research_US_<date>.json`) and a second source all fail (max 5% of cells); for the greenfield gates (ROIC, CFO/NI, net debt/EBITDA) pull SEC companyfacts / Finviz pages through that pass rather than blanket-marking every candidate N/A. Earnings dates, catalysts behind every EXIT/TRIM and any market-flow figure you quote come from the same pass; use precise date-stamped queries, read the fetched page, and cite URL + as-of date.
+1. **Data first:** Always generate a fresh facts ledger from scratch for the latest completed market session resolved under `../_shared/RUN_PROTOCOL.md` §0: `.venv/bin/python scripts/market_facts.py --market US --date <session> --screen sp1500 --run-dir "<RUN_DIR>"`. Every price, DMA, RSI, ATR, stage, regime label, breadth figure, Treasury yield and sector quadrant in every chapter comes from `<RUN_DIR>/cache/facts_US_<date>.json`. If the JSON record file's `Current Price` differs from the ledger close, value positions at the ledger close and state the JSON record file price once in the methodology note. Never write a technical claim ("Stage 2", "above rising 50-DMA", "support at X") that the ledger does not back. `N/A` only after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results in `<RUN_DIR>/cache/research_US_<date>.json`) and a second source all fail (max 5% of cells); verify shortlist candidates against primary financials and current price/support evidence rather than blanket-marking metrics unavailable. Earnings dates, catalysts behind every EXIT/TRIM and any market-flow figure you quote come from the same pass; use precise date-stamped queries, read the fetched page, and cite URL + as-of date.
 2. **Write high-signal institutional intelligence (zero fluff):** start directly with the 150-300 word executive lede; each chapter opens with analytical context and closes with a takeaway; a `casenote` for every holding and LEAPS position (what it is, why you own it, numbers with meaning, verdict, rule behind it, what changes it, with prices); money-at-risk table and cash waterfall; actionable execution orders; methodology & data-gaps note. Strictly NO beginner primers explaining the audit, NO 'how to read this table' blocks, and NO glossaries. Focus on capital reallocation, risk math, and execution.
-3. **One story:** read the same-date `US_Market_Intelligence_*.html` first. Chapter 1 restates its regime label and sector map verbatim; Chapter 2 verdicts cite that regime; Chapter 3 uses the same gates and stages; Chapter 4 explains every displacement or non-displacement; Chapter 5 totals reconcile to the dollar with Chapters 2 and 3; Chapter 6 orders are exactly the Chapter 5 deltas. A held name on the market report's Bull or Bear list must be addressed explicitly.
-4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/US_Portfolio_Audit_<date>.html --kind portfolio_audit --facts <RUN_DIR>/cache/facts_US_<date>.json` must print `PASS` before the Drive save and email. The skeleton below is scaffolding only: every `{{NARRATIVE_*}}` slot, and an intro `<p>` before and takeaway `<p>` after every table, must be written as full prose.
+3. **One story:** read the same-date `US_Market_Intelligence.html` first. Chapter 1 restates its regime label and sector map verbatim; Chapter 2 verdicts cite that regime; Chapter 3 allocates only available cash and recommended sale proceeds across actionable shortlist entries or cash; Chapter 4 explains shortlist gate results; Chapter 5 reconciles with Chapters 2 and 3; Chapter 6 alerts match the recommended actions. Address held names on the market report's Bull or Bear list.
+4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/US_Portfolio_Audit.html --kind portfolio_audit --facts <RUN_DIR>/cache/facts_US_<date>.json` must print `RESULT: PASS` before publication. The skeleton below is scaffolding only: every `{{NARRATIVE_*}}` slot, and an intro `<p>` before and takeaway `<p>` after every table, must be written as full prose.
 <!-- /MARKET -->
 
 ---
@@ -100,9 +100,9 @@ Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md`
 
 ---
 
-### DECOUPLED MULTI-AGENT ARCHITECTURE (ZERO-BIAS EXECUTION):
+### EVIDENCE-LED PORTFOLIO REVIEW:
 
-To eliminate incumbent holding bias, the audit is synthesized across 3 decoupled specialist subagents and 1 master CIO orchestrator:
+The audit combines a market-regime review and an adversarial holding review. One CIO synthesis compares every funded action with the current shortlist and an explicit cash alternative; it does not construct a separate hypothetical all-cash portfolio.
 
 <!-- MARKET IN -->
 #### 1. Subagent 1: `macro_regime_specialist` (Independent Market Intelligence Agent)
@@ -125,19 +125,10 @@ To eliminate incumbent holding bias, the audit is synthesized across 3 decoupled
 <!-- /MARKET -->
 
 <!-- MARKET IN -->
-#### 3. Subagent 3: `shortlist_capital_allocator` (Unconstrained Greenfield Stock Picker Agent)
-- **Absolute Zero-Holding-Bias Mandate:** Operates with **NO data about current holdings, cost bases, or unrealized P&L**. It solves: *"If given ₹Total Net Worth in 100% pure cash today, what is the optimal capital allocation across the vetted shortlist?"*
-<!-- /MARKET -->
-<!-- MARKET US -->
-#### 3. Subagent 3: `us_shortlist_capital_allocator` (Unconstrained Greenfield Stock Picker Agent)
-- **Absolute Zero-Holding-Bias Mandate:** Operates with **NO data about current holdings, cost bases, or unrealized P&L**. It solves: *"If given $Total Net Worth in 100% pure cash today, what is the optimal capital allocation across the vetted US shortlist?"*
-<!-- /MARKET -->
-- Selectively concentrates capital into top 6–12 highest-conviction ideas at support, assigning **0.0% weight (PASS)** to extended or lower-conviction names.
-
-#### 4. Master Orchestrator / CIO Reconciler
-- Ingests outputs from Subagents 1, 2, and 3.
-- Builds Chapter 1 (Macro Alignment), Chapter 2 (Holdings Extraction Ladder), Chapter 3 (Greenfield Target Portfolio), Chapter 4 (Shortlist Strategy Funnel), Chapter 5 (Master Capital Reallocation & Money Bridge), and Chapter 6 (3-Phase Actionable Execution Orders).
-- Formats in authentic Wikipedia Design System, syncs Google Drive, and dispatches via Gmail.
+#### 3. CIO Synthesis
+- Builds Chapter 1 (Market Alignment), Chapter 2 (Holding Actions), Chapter 3 (Incremental Cash Allocation), Chapter 4 (Shortlist Quality and Entry Gates), Chapter 5 (Cash Waterfall), and Chapter 6 (Advisory Execution Alerts).
+- Compares fundable shortlist entries against retaining cash. Cash is a valid final allocation when no candidate clears current evidence, risk, and entry hurdles.
+- Assemble in the Research Desk design; do not place broker orders.
 
 ---
 
@@ -178,7 +169,7 @@ To eliminate incumbent holding bias, the audit is synthesized across 3 decoupled
    - **The Let-Winners-Run Rule (`runaway_winner_cap_pct: 22%`):** Never mechanically trim a Stage 2 winner with intact fundamentals and stable/rising earnings solely because $\text{RSI}(14) > 70$ or its appreciated weight crossed $15.0\%$. Allow appreciated weight up to $22.0\%$ while trailing the stop.
    - **`ACCUMULATE_ON_DIP` (`ADD AT SUPPORT`):** High-conviction Stage 2 leader or Core compounder pulling back into its verified support zone (`20D EMA`, `10W EMA`, or `50D SMA`, within $10\%$ of 10W EMA and $\text{RSI}(14) \le 73$) with attractive Screener/Finviz valuation and position-size headroom below the $10\%$ initial cost cap.
    - **`TRIM_PROFIT_BOOKING` (`TRIM`):** Holding has exceeded the $22.0\%$ runaway winner cap, OR is in a climax parabolic spike ($>25\%$ above 10-week EMA with $\text{RSI}(14) > 80$ and deteriorating sector breadth), OR its fundamental catalyst is maturing into Stage 3 distribution.
-   - **`REPLACE_UNDERPERFORMER` (`EXIT`):** Holding has broken down into **Stage 4** (closed below falling 30-week SMA and falling 50-day SMA on TradingView without an Undercut-and-Reclaim shakeout recovery), OR its sector is in structural outflow with deteriorating earnings/management execution. Liberate capital immediately.
+    - **`EXIT`**: The thesis is materially broken, or a verified hard risk line is breached. State whether the recommendation is an immediate sale or a conditional exit, the exact shares, and the trigger; proceeds may be allocated to a qualifying shortlist entry or retained as cash.
    - **Undercut & Reclaim (Shakeout) Rule (`undercut_and_reclaim_rule`):** Evaluate stops on the current session's close. If a holding briefly undercut support during a market shakeout and reclaimed its 50-day SMA / 10-week EMA (or bounced on positive volume with $\text{RSI}(14) \ge 32$), retain the holding (`HOLD / HARD STOP`) and anchor the stop below the shakeout low.
 3. **No-FOMO Deployment into Shortlist Challengers (`IMMEDIATE_BUY` vs. `WAIT_FOR_SUPPORT`):**
    - When deploying cash or capital liberated from `EXIT`/`TRIM` actions into `data/shortlist/<MKT>.json` challengers:
@@ -190,7 +181,7 @@ To eliminate incumbent holding bias, the audit is synthesized across 3 decoupled
      - **"Which holdings move in lockstep" (`plain_english_overlap`):** Any pair or cluster of holdings (`lockstep_clusters`, `high_correlation_pairs`) with 1-year daily return correlation $\ge 0.65$ that acts as one combined bet.
 5. **Action Labels:**
    - Holding Actions: `HOLD / TRAIL`, `HOLD / HARD STOP`, `ADD AT SUPPORT`, `TRIM`, `EXIT`.
-   - Holding Verdicts: `KEEP_COMPOUNDING`, `ACCUMULATE_ON_DIP`, `TRIM_PROFIT_BOOKING`, `REPLACE_UNDERPERFORMER`.
+    - Holding Verdicts: `KEEP_COMPOUNDING`, `ACCUMULATE_ON_DIP`, `TRIM_PROFIT_BOOKING`, `EXIT`.
    - Pipeline Verdicts: `IMMEDIATE_BUY`, `ACCUMULATE_ON_DIP`, `WAIT_FOR_SUPPORT`, `REJECTED`.
 
 ---
@@ -384,16 +375,17 @@ Write only the HTML body fragments (`<h1>`, `<dl class="key-figures">`, `<table 
 </table>
 </div>
 
-<!-- CHAPTER 3: GREENFIELD UNCONSTRAINED SHORTLIST ALLOCATION -->
-<h2 id="chapter3">Chapter 3: Greenfield Unconstrained Shortlist Capital Allocation (Zero-Bias Stock Picker)</h2>
+<!-- CHAPTER 3: INCREMENTAL CASH ALLOCATION -->
+<h2 id="chapter3">Chapter 3: Incremental Cash Allocation (Shortlist or Cash)</h2>
 <div class="callout-box">
 <!-- MARKET IN -->
-  <strong>Zero-Holding-Bias Framework:</strong> This allocation is generated by the dedicated <code>shortlist_capital_allocator</code> agent operating with 100% independence from incumbent holdings. If deploying ₹{{NET_WORTH}} in pure cash across the vetted shortlist candidates today, this table reflects the optimal conviction-weighted capital distribution.
+  <strong>Funding rule:</strong> Allocate only available cash plus proceeds from recommended trims or exits. Compare shortlisted opportunities with retaining cash; no target allocation is required when no entry clears the gates.
 <!-- /MARKET -->
 <!-- MARKET US -->
-  <strong>Zero-Holding-Bias Framework:</strong> This allocation is generated by the dedicated <code>us_shortlist_capital_allocator</code> agent operating with 100% independence from incumbent holdings. If deploying ${{NET_WORTH}} in pure cash across the vetted shortlist candidates today, this table reflects the optimal conviction-weighted capital distribution.
+  <strong>Funding rule:</strong> Allocate only available cash plus proceeds from recommended trims or exits. Compare shortlisted opportunities with retaining cash; no target allocation is required when no entry clears the gates.
 <!-- /MARKET -->
 </div>
+<p>{{NARRATIVE_CH3_ALLOCATION}}</p><!-- state the verified cash plus sale proceeds available, funded allocations, and why any remaining capital stays in cash. -->
 
 <div class="table-wrapper">
 <table class="wikitable">
@@ -402,36 +394,36 @@ Write only the HTML body fragments (`<h1>`, `<dl class="key-figures">`, `<table 
       <th>Rank</th>
       <th>Security &amp; Links</th>
       <th>Bucket</th>
-      <th>Conviction Tier</th>
-      <th class="num">Target Wt (%)</th>
+      <th>Current Gate</th>
+      <th class="num">Share of Deployable Capital (%)</th>
 <!-- MARKET IN -->
-      <th class="num">Capital (₹)</th>
+      <th class="num">Capital from Cash / Sales (₹)</th>
       <th>Entry Zone (₹)</th>
       <th>Stop Loss (₹)</th>
       <th>Base Target (₹)</th>
 <!-- /MARKET -->
 <!-- MARKET US -->
-      <th class="num">Capital ($)</th>
+      <th class="num">Capital from Cash / Sales ($)</th>
       <th>Entry Zone ($)</th>
       <th>Stop Loss ($)</th>
       <th>Base Target ($)</th>
 <!-- /MARKET -->
-      <th>Asymmetry (R:R)</th>
-      <th>Catalyst &amp; Moat</th>
+      <th>Stage &amp; Entry Posture</th>
+      <th>Why Allocate or Wait</th>
     </tr>
   </thead>
   <tbody>
 <!-- MARKET IN -->
-    <!-- Top conviction shortlisted ideas -->
+    <!-- Actionable shortlisted ideas only; no new money before evidence and entry gates pass -->
 <!-- /MARKET -->
 <!-- MARKET US -->
-    <!-- Top conviction shortlisted US ideas -->
+    <!-- Actionable shortlisted US ideas only; no new money before evidence and entry gates pass -->
 <!-- /MARKET -->
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4" style="text-align: right;">Total Active Equities Deployed:</td>
-      <td class="num">{{TOTAL_TARGET_EQUITIES_WT}}%</td>
+      <td colspan="4" style="text-align: right;">Total New Equities Deployed:</td>
+      <td class="num">{{TOTAL_INCREMENTAL_EQUITY_WT}}%</td>
 <!-- MARKET IN -->
       <td class="num">₹{{TOTAL_TARGET_EQUITIES_CAP}}</td>
 <!-- /MARKET -->
@@ -441,8 +433,8 @@ Write only the HTML body fragments (`<h1>`, `<dl class="key-figures">`, `<table 
       <td colspan="5"></td>
     </tr>
     <tr>
-      <td colspan="4" style="text-align: right;">Dry Powder Cash Reserve:</td>
-      <td class="num">{{TARGET_CASH_WT}}%</td>
+      <td colspan="4" style="text-align: right;">Cash Retained from Deployable Capital:</td>
+      <td class="num">{{RETAINED_CASH_WT}}%</td>
 <!-- MARKET IN -->
       <td class="num">₹{{TARGET_CASH_CAP}}</td>
 <!-- /MARKET -->
@@ -462,7 +454,7 @@ Write only the HTML body fragments (`<h1>`, `<dl class="key-figures">`, `<table 
 <!-- MARKET US -->
 <h2 id="chapter4">Chapter 4: US Shortlist Strategy Funnel &amp; Deep Underwriting Pipeline</h2>
 <!-- /MARKET -->
-<p>{{NARRATIVE_CH4_FUNNEL}}</p><!-- how each candidate fared against the 3 layers, which displaced which holding and why, which were rejected and the specific gate they failed. -->
+<p>{{NARRATIVE_CH4_FUNNEL}}</p><!-- explain the financial, technical, and asymmetry gates; identify passing candidates and why cash is retained for every deferred setup. -->
 <div class="table-wrapper">
 <table class="wikitable">
   <thead>
@@ -677,44 +669,9 @@ Write only the HTML body fragments (`<h1>`, `<dl class="key-figures">`, `<table 
 
 ---
 
-### DELIVERABLES, GOOGLE DRIVE MAINTENANCE & EMAIL TRANSMISSION:
+### DELIVERABLES & PUBLICATION
 
-- **Recipient:** `rajasekharreddymekala732@gmail.com`
-<!-- MARKET IN -->
-- **Subject:** `Subject: Master Portfolio Forensic Audit & Capital Reallocation Blueprint | [Session Date] — Net Worth: ₹[Amount]`
-<!-- /MARKET -->
-<!-- MARKET US -->
-- **Subject:** `Subject: Master US Portfolio Forensic Audit & Capital Reallocation Blueprint | [Session Date] — Net Worth: $[Amount]`
-<!-- /MARKET -->
-- **Pre-Send Audit:** Zero omissions across all 6 chapters. Complete mathematical reconciliation verified.
-- **Google Drive Maintenance (Single Latest Version Lifecycle):**
-<!-- MARKET IN -->
-  - **Target Location:** `docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html`
-<!-- /MARKET -->
-<!-- MARKET US -->
-  - **Target Location:** `docs/reports/US_Portfolio_Audit_<YYYY-MM-DD>.html`
-<!-- /MARKET -->
-  - **Date Display:** The resolved market session date (`YYYY-MM-DD` / formatted session date), which is the latest completed data-verified session and may be earlier than the run date, must be prominently displayed in the document title, subtitle, and Wikipedia Infobox metadata.
-<!-- MARKET IN -->
-  - **Prune Prior Versions:** Automatically scan `docs/reports/` and delete / remove all previous versions matching `Portfolio_Audit_*.html` prior to or upon saving the new file, ensuring only the single latest report is maintained in docs/reports/.
-<!-- /MARKET -->
-<!-- MARKET US -->
-  - **Prune Prior Versions:** Automatically scan `docs/reports/` and delete / remove all previous versions matching `US_Portfolio_Audit_*.html` prior to or upon saving the new file, ensuring only the single latest report is maintained in docs/reports/.
-<!-- /MARKET -->
-- **Automated Dispatch Execution (MANDATORY):**
-<!-- MARKET IN -->
-  - Persist the complete HTML audit to `docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html`.
-<!-- /MARKET -->
-<!-- MARKET US -->
-  - Persist the complete HTML audit to `docs/reports/US_Portfolio_Audit_<YYYY-MM-DD>.html`.
-<!-- /MARKET -->
-  - Dispatch the email immediately and automatically via `scripts/send_email.py` using credentials from `.env` (Do NOT prompt the user or request manual confirmation):
-    ```bash
-<!-- MARKET IN -->
-    .venv/bin/python scripts/send_email.py --subject "Master Portfolio Forensic Audit & Capital Reallocation Blueprint | [Session Date] — Net Worth: ₹[Amount]" --html-file "docs/reports/Portfolio_Audit_<YYYY-MM-DD>.html" --recipient "rajasekharreddymekala732@gmail.com"
-<!-- /MARKET -->
-<!-- MARKET US -->
-    .venv/bin/python scripts/send_email.py --subject "Master US Portfolio Forensic Audit & Capital Reallocation Blueprint | [Session Date] — Net Worth: $[Amount]" --html-file "docs/reports/US_Portfolio_Audit_<YYYY-MM-DD>.html" --recipient "rajasekharreddymekala732@gmail.com"
-<!-- /MARKET -->
-    ```
-  - Confirm successful SMTP execution in the final turn summary.
+- Use the stable output path from `.agents/config/markets.json`: `docs/reports/IN_Portfolio_Audit.html` or `docs/reports/US_Portfolio_Audit.html`.
+- Display the resolved market-session date and keep all ledger figures on that same cutoff.
+- Run the validator and configured review process before publication. Publish through `scripts/publish_run.py` as `_COMMON.md` requires.
+- After successful publication, send only the short digest required by `_COMMON.md`; never email the complete HTML report and never send a broker order.

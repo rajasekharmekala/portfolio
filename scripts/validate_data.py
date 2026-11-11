@@ -3,7 +3,7 @@
 W1 — Schema validation for portfolio data records.
 
 Validates every record in:
-    data/shortlist/{US,IN}.json   (all sheets; Swap_Decision_Matrix uses its own schema)
+    data/shortlist/{US,IN}.json   (all sheets)
     data/watchlist/{US,IN}.json   (active + archive)
 
 against the draft-07 schemas in scripts/schemas/. Also warns when a
@@ -55,7 +55,6 @@ def validate_rows(rows, validator, label):
 
 def main():
     shortlist_v = load_validator("shortlist_record.schema.json")
-    swap_v = load_validator("swap_decision.schema.json")
     watch_v = load_validator("watchlist_record.schema.json")
 
     total_errors = 0
@@ -68,8 +67,7 @@ def main():
         data = json.loads(path.read_text(encoding="utf-8"))
         if "sheets" in data:
             for sheet, rows in data["sheets"].items():
-                validator = swap_v if sheet == "Swap_Decision_Matrix" else shortlist_v
-                errs = validate_rows(rows, validator, f"{market}/{sheet}")
+                errs = validate_rows(rows, shortlist_v, f"{market}/{sheet}")
                 total_rows += len(rows)
                 total_errors += len(errs)
                 for e in errs[:10]:
@@ -105,8 +103,6 @@ def main():
         data = json.loads(path.read_text(encoding="utf-8"))
         if "sheets" in data:
             for sheet, rows in data["sheets"].items():
-                if sheet == "Swap_Decision_Matrix":
-                    continue
                 for row in rows:
                     p = row.get("research_dossier_path")
                     if p and not dossier_path_exists(p):

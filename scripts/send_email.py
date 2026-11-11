@@ -38,16 +38,13 @@ def load_env(env_path='.env'):
                 if k and k not in os.environ:
                     os.environ[k] = v
 
-def send_email_html(subject, html_content, recipient=None, text_fallback=None, *, source_path=None, kind=None, summary=None, highlights=(), shortlisted=(), displacements=(), dry_run=False):
+def send_email_html(subject, html_content, recipient=None, text_fallback=None, *, source_path=None, kind=None, summary=None, highlights=(), dry_run=False):
     """Send a short published-report digest, subject to the report/event policy."""
     kind = kind or report_type(subject, source_path)
-    if not should_email(kind, shortlisted, displacements):
-        if kind == "watchlist":
-            print(f"EMAIL SKIPPED: {kind}; email notifications are permanently disabled for Watchlist -> Shortlist reports.")
-        else:
-            print(f"EMAIL SKIPPED: {kind}; no new shortlist qualification or eligible holding displacement.")
+    if not should_email(kind):
+        print(f"EMAIL SKIPPED: {kind}; company dossiers are published without email notifications.")
         return False
-    html_content, text_fallback = build_digest(subject, html_content, source_path, summary, highlights, shortlisted, displacements)
+    html_content, text_fallback = build_digest(subject, html_content, source_path, summary, highlights)
     if dry_run:
         print(f"EMAIL WOULD SEND: {kind}\n{text_fallback}")
         return True
@@ -110,8 +107,6 @@ def main():
     parser.add_argument('--report-type', choices=TYPES, default=None)
     parser.add_argument('--summary', help='One-sentence decision overview')
     parser.add_argument('--highlight', action='append', default=[], help='Repeat for decision-relevant highlights')
-    parser.add_argument('--shortlisted', action='append', default=[], help='Repeat for each company newly eligible for the shortlist')
-    parser.add_argument('--displacement', action='append', default=[], help='Repeat for each eligible candidate-to-holding replacement')
     parser.add_argument('--dry-run', action='store_true', help='Show delivery decision and digest without sending')
     
     args = parser.parse_args()
@@ -126,7 +121,7 @@ def main():
     try:
         send_email_html(args.subject, html_content, recipient=args.recipient, source_path=args.html_file,
                         kind=args.report_type, summary=args.summary, highlights=args.highlight,
-                        shortlisted=args.shortlisted, displacements=args.displacement, dry_run=args.dry_run)
+                        dry_run=args.dry_run)
     except Exception as e:
         print(f"❌ Failed to send email: {e}", file=sys.stderr)
         sys.exit(1)
