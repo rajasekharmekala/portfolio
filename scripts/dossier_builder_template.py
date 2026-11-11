@@ -199,7 +199,7 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
     redeploy_html = (
         f'<section class="chapter" id="capital-redeployment" data-capital-base="{base}">'
         "<h2>Capital Redeployment &amp; Opportunity Cost</h2>"
-        f"<p>Capital under review: {base}. Cash is an explicit destination; the plan compares it with current shortlist ideas and outside opportunities rather than assuming every dollar must be invested.</p>"
+        f"<p>Capital under review: {base}. Cash is an active choice. We compare cash with shortlist ideas and outside names. We do not assume every dollar must be invested right away.</p>"
         + _render_table(f"Capital redeployment choices for {symbol}",
                         ["Destination", "Candidate", "Share of capital", "CMP", "Entry zone", "Stop", "Base target", "Asymmetry", "Recommendation", "Entry / activation condition", "Why this use of capital"],
                         redeploy_rows,
@@ -958,7 +958,7 @@ def render_10chapter_monograph_editions(
     scoring = json.load(open(SCORING_FILE, encoding="utf-8"))
     cur = "₹" if market == "IN" else "$"
 
-    schema_errors, _ = validate_monograph_spec(spec, min_total_words=0)
+    schema_errors, stats = validate_monograph_spec(spec, min_total_words=0)
     if schema_errors:
         raise ValueError("Invalid 10-chapter dossier spec: " + "; ".join(schema_errors))
 
@@ -1135,18 +1135,19 @@ def render_10chapter_monograph_editions(
         ),
     )
 
+    primer_text = spec.get("primer") or ""
     primer_html = (
         '<section class="primer" id="primer">\n'
         "<h2>Executive Thesis &amp; Before You Read</h2>\n"
-        f"<p>{spec['primer']}</p>\n"
+        f"<p>{primer_text}</p>\n"
         "</section>"
-    )
+    ) if primer_text else ""
     primer_book_html = (
         '<section class="primer" id="primer">\n'
         "<h2>Executive Thesis &amp; Before You Listen</h2>\n"
-        f"<p>{strip_html(spec['primer'])}</p>\n"
+        f"<p>{strip_html(primer_text)}</p>\n"
         "</section>"
-    )
+    ) if primer_text else ""
 
     web_sections: List[str] = []
     book_sections: List[str] = []
