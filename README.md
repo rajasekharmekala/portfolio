@@ -51,7 +51,7 @@ Both should print `RESULT: PASS`.
 │   ├── accounts/IN/            Zerodha transaction log (zerodha.transactions.jsonl)
 │   ├── accounts/US/            Schwab and Robinhood transaction logs
 │   ├── metadata/symbols.json   Company name, strategy bucket and mandate per symbol, by market
-│   ├── watchlist/IN.json, US.json     Active candidates and archived (rejected) names
+│   ├── watchlist/IN.json, US.json     Active candidates
 │   ├── shortlist/IN.json, US.json     Shortlist sheets, one array per sheet
 │   ├── options/IN.json, US.json       Open option contracts
 │   └── views/                  Generated readable tables (do not edit)

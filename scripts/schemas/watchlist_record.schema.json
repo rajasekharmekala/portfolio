@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "portfolio/watchlist_record.schema.json",
   "title": "Watchlist record (shared IN + US)",
-  "description": "Canonical record for rows of the watchlist 'active' and 'archive' lists. One field set is shared by both markets. The redundant legacy 'strategy_book' field was merged into 'strategy_bucket' during normalization.",
+  "description": "Canonical record for rows of the watchlist 'active' list. One field set is shared by both markets. The redundant legacy 'strategy_book' field was merged into 'strategy_bucket' during normalization.",
   "type": "object",
   "required": [
     "symbol",
@@ -20,7 +20,7 @@
     "company_name": { "type": "string", "minLength": 1 },
     "source_type": { "type": "string", "minLength": 1 },
 
-    "status": { "enum": ["COMPLETED", "RESEARCH_REQUIRED", "REJECTED", "UNDERWRITTEN", "ARCHIVED", "PENDING", "UNKNOWN"] },
+    "status": { "enum": ["COMPLETED", "RESEARCH_REQUIRED", "REJECTED", "UNDERWRITTEN", "PENDING", "UNKNOWN"] },
     "action_verdict": {
       "enum": ["IMMEDIATE_BUY", "ACCUMULATE_ON_DIP", "KEEP_COMPOUNDING", "WAIT_FOR_SUPPORT", "TRIM_PROFIT_BOOKING", "REPLACE_UNDERPERFORMER", "REJECTED", "QUALIFIED", "PENDING", "RESEARCH_REQUIRED"]
     },

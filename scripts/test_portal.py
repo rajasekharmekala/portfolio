@@ -171,7 +171,7 @@ class PortalTests(unittest.TestCase):
              "last_researched_date": "PRIVATE-DATE", "notes": "PRIVATE-NOTE", "account_scope": "PRIVATE-ACCOUNT", "cmp": 123456},
             {"symbol": "DONE", "status": "COMPLETED", "research_cycle": 2},
             {"symbol": "UNKNOWN", "status": "UNDERWRITTEN", "research_cycle": 2},
-        ], "archive": [{"symbol": "SECRET_ARCHIVE"}]}
+        ]}
         (data / "watchlist" / "IN.json").write_text(json.dumps(watch))
         (data / "shortlist" / "IN.json").write_text(json.dumps({"active": [
             {"symbol": "DONE", "action_verdict": "WAIT_FOR_SUPPORT", "gate_status": "PASSED", "notes": "PRIVATE-SHORTLIST"},
@@ -207,7 +207,7 @@ class PortalTests(unittest.TestCase):
         self.assertIsNone(usa["rows"][0]["dossierUrl"])
         self.assertEqual(queue["US"]["shortlist"]["rows"], [])
         encoded = json.dumps(queue)
-        for secret in ("PRIVATE-NOTE", "PRIVATE-ACCOUNT", "PRIVATE-SHORTLIST", "PRIVATE-GATE", "PRIVATE-DATE", "SECRET_ARCHIVE", "123456"):
+        for secret in ("PRIVATE-NOTE", "PRIVATE-ACCOUNT", "PRIVATE-SHORTLIST", "PRIVATE-GATE", "PRIVATE-DATE", "123456"):
             self.assertNotIn(secret, encoded)
 
     def test_queue_missing_differs_from_empty_and_invalid_records_fail(self):

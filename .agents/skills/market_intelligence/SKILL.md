@@ -746,8 +746,8 @@ ol.reflist li { margin-bottom: 8px; word-break: break-word; }
 <h3>2A.3 Holdings &amp; Shortlist Stage 2 Health Check</h3>
 <p>{{NARRATIVE_S2A_HEALTH}}</p><!-- each holding and shortlist name against its Stage 2 stage and TradingView trend: leaders to let run, extended names, and any Stage 3/4 warning. -->
 
-<h3>2A.4 Watchlist Pruning &amp; Ingestion</h3>
-<p>{{NARRATIVE_S2A_INGESTION}}</p><!-- names pruned to archive, archived names resurfaced after fresh dashboard membership plus confirmed Stage 2, and new names added to data/watchlist/<MKT>.json (2-5 maximum, 25-name cap); say when no candidate qualified. -->
+<h3>2A.4 Watchlist Ingestion</h3>
+<p>{{NARRATIVE_S2A_INGESTION}}</p><!-- new names added to data/watchlist/<MKT>.json (2-5 maximum, 25-name cap); say when no candidate qualified. -->
 
 <!-- SECTION 3: THE BULL LIST (30 STAGE 2 LONGS) -->
 <!-- MARKET IN -->

@@ -48,12 +48,12 @@ class RecordMergeTests(unittest.TestCase):
         self.assertIn("[A].status", caught.exception.conflicts[0])
 
     def test_adds_deletes_and_moves(self):
-        base = {"active": rows("A", "B"), "archive": []}
-        ours = {"active": rows("A"), "archive": rows("B", status="REJECTED")}      # B archived
-        theirs = {"active": rows("A", "B", "N"), "archive": []}                      # N added
+        base = {"active": rows("A", "B"), "closed": []}
+        ours = {"active": rows("A"), "closed": rows("B", status="REJECTED")}        # B closed
+        theirs = {"active": rows("A", "B", "N"), "closed": []}                       # N added
         merged = rm.merge3(base, ours, theirs)
         self.assertEqual([r["symbol"] for r in merged["active"]], ["A", "N"])
-        self.assertEqual([r["symbol"] for r in merged["archive"]], ["B"])
+        self.assertEqual([r["symbol"] for r in merged["closed"]], ["B"])
 
     def test_delete_versus_modify_conflicts(self):
         base = {"active": rows("A", "B")}
@@ -155,7 +155,7 @@ class EndToEndTests(unittest.TestCase):
         (config / "portfolios.json").write_text(json.dumps({"US": {"sources": [
             {"id": "watchlist_active", "role": "watchlist", "kind": "records", "path": "data/watchlist/US.json"}]}}))
         (self.main / ".gitignore").write_text(".worktrees/\n__pycache__/\n")
-        self.write(self.main, "data/watchlist/US.json", {"market": "US", "active": rows(*"ABCDEFGH"), "archive": []})
+        self.write(self.main, "data/watchlist/US.json", {"market": "US", "active": rows(*"ABCDEFGH")})
         self.write(self.main, "data/shortlist/US.json", {"market": "US", "sheets": {"Master_Shortlist": []}})
         (self.main / "docs/blogs/US").mkdir(parents=True)
         (self.main / "docs/blogs/US/.gitkeep").write_text("")

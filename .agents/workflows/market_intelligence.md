@@ -31,13 +31,12 @@ Run `stage2_scanner.py` once for the target market and write its fresh result to
 ```bash
 .venv/bin/python scripts/stock_snapshot.py \
   --market <MKT> \
-  --from-watchlist --from-shortlist --from-holdings --from-stage2-archive \
+  --from-watchlist --from-shortlist --from-holdings \
   --stage2-file "<RUN_DIR>/cache/stage2_<MKT>_<date>.json" \
-  --prune-watchlist --resurface-stage2-archive --as-of <date> \
   --out "<RUN_DIR>/cache/snapshots_<MKT>_<date>.json"
 ```
 
-The archive scan snapshots only archived symbols present in current dashboard candidates; it returns one to active research only when the fresh dashboard signal and TradingView Stage 2 structure agree and the 25-name active cap has room. Apply market-specific breadth rules and the No-FOMO entry gate; research the report's selected setups. The integrated results become Section 2A and feed the market playbook and watchlist ingestion. This is a single report and review cycle for the scan.
+Apply market-specific breadth rules and the No-FOMO entry gate; research the report's selected setups. The integrated results become Section 2A and feed the market playbook and watchlist ingestion. This is a single report and review cycle for the scan.
 
 ## 5. Story brief
 
@@ -59,7 +58,7 @@ It must print `RESULT: PASS`.
 
 ## 8. Watchlist ingestion
 
-Update the watchlist JSON record file for this market with names allowed by the market-intelligence skill. Include only independently verified fresh Stage 2 candidates named in Section 2A.4 (2–5 maximum, 25-name cap); returning archived names must be explicitly named as rediscoveries. Use header names to find columns. Do not add a name the report does not name in its ingestion section.
+Update the watchlist JSON record file for this market with names allowed by the market-intelligence skill. Include only independently verified fresh Stage 2 candidates named in Section 2A.4 (2–5 maximum, 25-name cap). Use header names to find columns. Do not add a name the report does not name in its ingestion section.
 
 ## 9. Reviewer gate and delivery
 

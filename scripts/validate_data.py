@@ -4,7 +4,7 @@ W1 — Schema validation for portfolio data records.
 
 Validates every record in:
     data/shortlist/{US,IN}.json   (all sheets)
-    data/watchlist/{US,IN}.json   (active + archive)
+    data/watchlist/{US,IN}.json   (active)
 
 against the draft-07 schemas in scripts/schemas/. Also warns when a
 research_dossier_path does not resolve to an existing file under the repo.
@@ -75,7 +75,7 @@ def main():
                 if len(errs) > 10:
                     print(f"  ... and {len(errs) - 10} more errors in {market}/{sheet}")
         else:
-            for key in ("active", "archived", "archive"):
+            for key in ("active",):
                 rows = data.get(key, [])
                 errs = validate_rows(rows, shortlist_v, f"{market}/shortlist/{key}")
                 total_rows += len(rows)
@@ -88,7 +88,7 @@ def main():
         # ---- watchlist
         path = REPO / "data" / "watchlist" / f"{market}.json"
         data = json.loads(path.read_text(encoding="utf-8"))
-        for bucket in ("active", "archive"):
+        for bucket in ("active",):
             errs = validate_rows(data[bucket], watch_v, f"{market}/watchlist/{bucket}")
             total_rows += len(data[bucket])
             total_errors += len(errs)
@@ -110,7 +110,7 @@ def main():
                         if missing_dossiers <= 10:
                             print(f"  [warn] {market}/{sheet} {row.get('symbol')}: dossier not found: {p}")
         else:
-            for key in ("active", "archived", "archive"):
+            for key in ("active",):
                 for row in data.get(key, []):
                     p = row.get("research_dossier_path")
                     if p and not dossier_path_exists(p):

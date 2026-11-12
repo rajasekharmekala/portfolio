@@ -90,7 +90,7 @@ def record_lookup(symbol):
                 data = json.loads(path.read_text(encoding="utf-8"))
             except ValueError:
                 continue
-            for row in data.get("active", []) + data.get("archive", []):
+            for row in data.get("active", []):
                 if row.get("symbol") == symbol and row.get("action_verdict"):
                     verdict = row.get("action_verdict")
                     break

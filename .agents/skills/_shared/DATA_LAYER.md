@@ -8,7 +8,7 @@ Holdings, watchlists, shortlists, options, and metadata live in JSON under `data
 |---|---|---|
 | Holdings (per account) | `data/accounts/<MKT>/<account>.transactions.jsonl` | the user, when a trade happens (one JSON line per transaction) |
 | Strategy bucket and name per symbol | `data/metadata/symbols.json` | the user, when a new name is bought |
-| Watchlist (active and archive) | `data/watchlist/<MKT>.json` | the watchlist workflows |
+| Watchlist (active) | `data/watchlist/<MKT>.json` | the watchlist workflows |
 | Shortlist (one array per sheet) | `data/shortlist/<MKT>.json` | the shortlist workflows |
 | Options positions | `data/options/<MKT>.json` | the options workflow, and the user for new trades |
 | Generated holdings view | `data/views/holdings_<MKT>.md` | `scripts/data_layer.py --view` (never edit) |
@@ -29,7 +29,7 @@ Holdings are replayed with the average-cost method. A position whose cost is unk
 
 - Find the record by its `symbol` (or `underlying` for US options), then change only the fields you need. Never change field order or add fields that the schema does not use.
 - Column names in older text map to JSON keys: lowercase the name and replace spaces and punctuation with underscores. For example, "Action Verdict" is `action_verdict`, "Deep Research Status" is `deep_research_stat`, and "Strategy Bucket" is `strategy_bucket`.
-- The watchlist file has two arrays: `active` (names being researched or held as candidates) and `archive` (rejected names). Moving a name between them means moving the whole record.
+- The watchlist file has one array, `active` (names being researched). There is no archive: a name that is rejected or dropped is removed from the file.
 - The shortlist file has one array per former sheet under `sheets`. The workflows read `sheets.Master_Shortlist` unless the skill says otherwise.
 - After any edit, run `.venv/bin/python scripts/data_layer.py --market <MKT> --validate`. It must print `RESULT: PASS` before the run continues.
 
