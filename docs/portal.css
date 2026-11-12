@@ -145,24 +145,42 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-  height: 30px;
-  font-size: 0.9em;
+  height: 36px;
+  font-size: 0.92em;
+  position: sticky;
+  top: 0;
+  z-index: 25;
 }
 .navtabs {
   display: flex;
   height: 100%;
+  gap: 2px;
 }
 .navtabs a {
-  color: #ffffff !important;
-  padding: 0 12px;
+  color: rgba(255, 255, 255, 0.86) !important;
+  padding: 0 14px;
   display: flex;
   align-items: center;
   font-weight: 700;
   text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
-.navtabs a:hover, .navtabs a.active {
-  background-color: var(--navy-hover);
+.navtabs a:hover {
+  background-color: var(--sisnav-hover);
+  color: #ffffff !important;
   text-decoration: none;
+}
+.navtabs a.active,
+.navtabs a[aria-selected="true"] {
+  background-color: #246482;
+  color: #ffffff !important;
+  border-bottom-color: #f2c14e;
+  text-decoration: none;
+}
+.navtabs a:focus-visible {
+  outline: 2px solid #f2c14e;
+  outline-offset: -2px;
 }
 .sisnav {
   display: flex;
@@ -195,7 +213,7 @@ a:hover {
   padding: 6px 10px;
   margin-bottom: 12px;
   position: sticky;
-  top: 0;
+  top: 36px;
   z-index: 20;
 }
 .control-row {
@@ -314,7 +332,7 @@ a:hover {
 
 /* Main Sections */
 .section {
-  margin-top: 22px;
+  margin-top: 16px;
 }
 .section-head {
   display: flex;
@@ -689,9 +707,10 @@ a:hover {
 }
 @media (max-width: 720px) {
   .topline { flex-direction: column; gap: 4px; }
-  .navbar { height: auto; flex-direction: column; align-items: stretch; padding: 0; }
+  .navbar { height: auto; flex-direction: column; align-items: stretch; padding: 0; position: static; }
+  .subnavbar { position: static; }
   .navtabs { flex-wrap: wrap; border-bottom: 1px solid #2b6077; }
-  .navtabs a { padding: 7px 10px; }
+  .navtabs a { padding: 8px 10px; }
   .sisnav { padding: 5px 10px; flex-wrap: wrap; }
   .dossier-row { grid-template-columns: 1fr auto; gap: 6px; }
   .dossier-Code { grid-column: 1 / -1; }

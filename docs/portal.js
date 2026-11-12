@@ -14,10 +14,37 @@
     sort: "market",
     search: "",
     viewMode: "tree",
+    activeTab: "pipeline",
     perf: null,
     perfProfileId: null,
     perfPeriod: "1Y",
   };
+
+  const TABS = [
+    { id: "pipeline", hash: "#pipeline", searchPlaceholder: "Search ticker, company, sector…" },
+    { id: "performance", hash: "#performance", searchPlaceholder: "" },
+    { id: "reports", hash: "#reports", searchPlaceholder: "Search report title, market, summary…" },
+    { id: "dossiers", hash: "#monographs", searchPlaceholder: "Search ticker, company, summary…" },
+  ];
+
+  const HASH_TO_TAB = {
+    "#pipeline": "pipeline",
+    "#pipeline-heading": "pipeline",
+    "#performance": "performance",
+    "#performance-heading": "performance",
+    "#reports": "reports",
+    "#reports-heading": "reports",
+    "#monographs": "dossiers",
+    "#dossiers": "dossiers",
+    "#dossiers-heading": "dossiers",
+  };
+
+  function resolveTabFromHash(hash) {
+    const key = String(hash || "").toLowerCase();
+    if (!key) return "pipeline";
+    if (key === "#top") return null;
+    return HASH_TO_TAB[key] || "pipeline";
+  }
 
   const escapeHtml = value =>
     String(value ?? "").replace(/[&<>"']/g, c => ({
@@ -207,6 +234,17 @@
       || state.status !== "ALL" || state.verdict !== "ALL" || Boolean(state.search);
   }
 
+  function isCurrentTabFiltered() {
+    if (state.activeTab === "pipeline") return isFiltered();
+    if (state.activeTab === "dossiers") {
+      return state.market !== "ALL" || state.verdict !== "ALL" || Boolean(state.search);
+    }
+    if (state.activeTab === "reports") {
+      return state.market !== "ALL" || Boolean(state.search);
+    }
+    return false;
+  }
+
   function pipelineRowHtml(row) {
     const company = row.company && row.company !== row.symbol ? escapeHtml(row.company) : "";
     const tickerLink = row.dossierUrl
@@ -301,10 +339,11 @@
     }
   }
 
-  function filterEntries() {
+  function filterEntries(kind) {
     return state.entries.filter(e => {
+      if (kind && e.kind !== kind) return false;
       if (state.market !== "ALL" && e.market !== state.market) return false;
-      if (state.verdict !== "ALL" && e.verdict !== state.verdict) return false;
+      if (kind === "dossier" && state.verdict !== "ALL" && e.verdict !== state.verdict) return false;
       if (state.search) {
         const q = state.search.toLowerCase();
         const text = [e.title, e.symbol, e.market, e.workflow, e.verdict, e.summary, e.sector]
@@ -387,14 +426,21 @@
     renderPipeline(pipeline);
     renderTree(pipeline);
 
-    const filteredEntries = filterEntries();
-    const reports = filteredEntries.filter(e => e.kind === "report");
-    const dossiers = filteredEntries.filter(e => e.kind === "dossier");
+    const reports = filterEntries("report");
+    const dossiers = filterEntries("dossier");
 
     const reportMeta = byId("report-meta");
     if (reportMeta) reportMeta.textContent = `${reports.length} report${reports.length === 1 ? "" : "s"}`;
     const reportList = byId("report-list");
     if (reportList) reportList.innerHTML = reports.map(e => renderCard(e)).join("");
+
+    const reportEmpty = byId("report-empty");
+    if (reportEmpty) {
+      const allReportsCount = state.entries.filter(e => e.kind === "report").length;
+      const none = allReportsCount > 0 && reports.length === 0;
+      reportEmpty.hidden = !none;
+      reportEmpty.textContent = none ? "No operating reports match these filters." : "";
+    }
 
     const dossierMeta = byId("dossier-meta");
     if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monograph${dossiers.length === 1 ? "" : "s"}`;
@@ -403,10 +449,13 @@
 
     const dossierEmpty = byId("dossier-empty");
     if (dossierEmpty) {
+      const allDossiersCount = state.entries.filter(e => e.kind === "dossier").length;
       const none = dossiers.length === 0;
       dossierEmpty.hidden = !none;
       dossierEmpty.textContent = none
-        ? "No monographs are published right now; they are being regenerated from scratch under the new evidence-first workflow."
+        ? (allDossiersCount === 0
+          ? "No monographs are published right now; they are being regenerated from scratch under the new evidence-first workflow."
+          : "No monographs match these filters.")
         : "";
     }
 
@@ -415,7 +464,7 @@
 
     const resetBtn = byId("reset-filters");
     if (resetBtn) {
-      resetBtn.hidden = !isFiltered();
+      resetBtn.hidden = !isCurrentTabFiltered();
     }
   }
 
@@ -450,6 +499,100 @@
     });
   }
 
+  function activateTab(tabId, { pushHash = false, scrollTop = false } = {}) {
+    const tabConfig = TABS.find(t => t.id === tabId) || TABS[0];
+    const activeId = tabConfig.id;
+    state.activeTab = activeId;
+
+    document.querySelectorAll(".navtabs [data-tab]").forEach(tab => {
+      const selected = tab.dataset.tab === activeId;
+      tab.classList.toggle("active", selected);
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+
+    TABS.forEach(t => {
+      const panel = byId(`panel-${t.id}`);
+      if (panel) panel.hidden = t.id !== activeId;
+    });
+
+    const subnavbar = byId("subnavbar");
+    if (subnavbar) subnavbar.hidden = activeId === "performance";
+
+    const philosophy = byId("desk-philosophy");
+    if (philosophy) philosophy.hidden = activeId !== "pipeline";
+
+    document.querySelectorAll("[data-tab-scope]").forEach(el => {
+      const scopes = (el.dataset.tabScope || "").split(/\s+/).filter(Boolean);
+      el.hidden = !scopes.includes(activeId);
+    });
+
+    const searchInput = byId("search-input");
+    if (searchInput && tabConfig.searchPlaceholder) {
+      searchInput.placeholder = tabConfig.searchPlaceholder;
+    }
+
+    const resetBtn = byId("reset-filters");
+    if (resetBtn) {
+      resetBtn.hidden = !isCurrentTabFiltered();
+    }
+
+    if (pushHash && window.location.hash !== tabConfig.hash) {
+      history.pushState(null, "", tabConfig.hash);
+    }
+
+    if (scrollTop && window.scrollY > 140) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }
+
+  function setupTabs() {
+    const tabs = Array.from(document.querySelectorAll(".navtabs [data-tab]"));
+    tabs.forEach(tab => {
+      tab.addEventListener("click", ev => {
+        ev.preventDefault();
+        activateTab(tab.dataset.tab, { pushHash: true, scrollTop: true });
+      });
+      tab.addEventListener("keydown", ev => {
+        const idx = tabs.indexOf(tab);
+        let next = -1;
+        if (ev.key === "ArrowRight") next = (idx + 1) % tabs.length;
+        else if (ev.key === "ArrowLeft") next = (idx - 1 + tabs.length) % tabs.length;
+        else if (ev.key === "Home") next = 0;
+        else if (ev.key === "End") next = tabs.length - 1;
+        if (next >= 0) {
+          ev.preventDefault();
+          const nextTab = tabs[next];
+          activateTab(nextTab.dataset.tab, { pushHash: true, scrollTop: true });
+          nextTab.focus();
+        }
+      });
+    });
+
+    window.addEventListener("hashchange", () => {
+      const mapped = resolveTabFromHash(window.location.hash);
+      if (mapped) activateTab(mapped);
+    });
+
+    document.querySelectorAll('a[href="#top"]').forEach(link => {
+      link.addEventListener("click", ev => {
+        ev.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    const rawHash = window.location.hash;
+    const initial = resolveTabFromHash(rawHash) || "pipeline";
+    activateTab(initial);
+    if (rawHash && HASH_TO_TAB[rawHash.toLowerCase()]) {
+      const canonical = TABS.find(t => t.id === initial)?.hash;
+      if (canonical && rawHash !== canonical) {
+        history.replaceState(null, "", canonical);
+      }
+      window.scrollTo(0, 0);
+    }
+  }
+
   function setupFilters() {
     document.querySelectorAll("#market-filters button.segment").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -469,7 +612,9 @@
     }
 
     window.addEventListener("keydown", e => {
-      if (e.key === "/" && document.activeElement !== searchInput) {
+      const tag = document.activeElement?.tagName;
+      if (e.key === "/" && state.activeTab !== "performance" && document.activeElement !== searchInput
+          && tag !== "INPUT" && tag !== "TEXTAREA" && tag !== "SELECT") {
         e.preventDefault();
         searchInput?.focus();
       }
@@ -1049,6 +1194,7 @@
   }
 
   async function init() {
+    setupTabs();
     setupFilters();
     const metaEl = byId("catalog-meta");
 

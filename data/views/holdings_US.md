@@ -1,6 +1,6 @@
 # US holdings (generated from the transaction log; do not edit)
 
-Generated 2026-11-09T13:29:50. Quantities and cost from `data/accounts/US/`. Market values need the ledger close and are added by the daily build.
+Generated 2026-11-12T13:44:23. Quantities and cost from `data/accounts/US/`. Market values need the ledger close and are added by the daily build.
 
 ## Robinhood
 
@@ -20,7 +20,7 @@ Last transaction: 2026-11-06. Cash: 547.74.
 
 ## Charles Schwab
 
-Last transaction: 2026-11-04. Cash: 110.20.
+Last transaction: 2026-11-10. Cash: 2,407.37.
 
 | Symbol | Quantity | Cost basis | Cost known | Realized P&L |
 |---|---:|---:|:---:|---:|
@@ -30,7 +30,6 @@ Last transaction: 2026-11-04. Cash: 110.20.
 | DOCN | 25.1144 | 2,399.99 | yes | 2,427.79 |
 | ETHE | 26.0449 | 500.00 | yes | 0.00 |
 | FAS | 10 | 1,189.13 | yes | 0.00 |
-| GGLL | 34.3234 | 2,999.99 | yes | 0.00 |
 | GOOG | 31.8666 | 10,253.71 | yes | 0.00 |
 | HALO | 3.9227 | 499.99 | yes | 0.00 |
 | ISRG | 1.1099 | 499.95 | yes | 0.00 |
