@@ -60,28 +60,41 @@ def normalize_verdict(raw):
 _record_cache = {}
 
 
+def _clean_lead_sector(raw):
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    lead = raw.split("/")[0].strip()
+    return lead[:60] if lead and lead.lower() not in ("none", "not specified") else None
+
+
 def record_lookup(symbol):
-    """Backfill (action_verdict, macro_sector) for a symbol from shortlist/watchlist records."""
-    if not symbol or symbol in _record_cache:
-        return _record_cache.get(symbol, (None, None))
-    verdict, sector = None, None
+    """Backfill (action_verdict, macro_sector) for a symbol from shortlist/watchlist/metadata records."""
+    if not symbol:
+        return (None, None)
     root = DOCS.parent / "data"
+    cache_key = (str(root), symbol)
+    if cache_key in _record_cache:
+        return _record_cache[cache_key]
+    verdict, sector = None, None
     for name in ("shortlist/IN.json", "shortlist/US.json"):
         path = root / name
         if not path.exists():
             continue
         try:
-            sheets = json.loads(path.read_text(encoding="utf-8")).get("sheets", {})
+            payload = json.loads(path.read_text(encoding="utf-8"))
         except ValueError:
             continue
-        for sheet, rows in sheets.items():
-            for row in rows:
-                if row.get("symbol") == symbol:
-                    verdict = verdict or row.get("action_verdict")
-                    sector = sector or row.get("macro_sector")
+        rows = list(payload.get("active") or [])
+        for sheet_rows in (payload.get("sheets") or {}).values():
+            if isinstance(sheet_rows, list):
+                rows.extend(r for r in sheet_rows if isinstance(r, dict))
+        for row in rows:
+            if row.get("symbol") == symbol:
+                verdict = verdict or row.get("action_verdict")
+                sector = sector or _clean_lead_sector(row.get("macro_sector"))
         if verdict and sector:
             break
-    if not verdict:
+    if not verdict or not sector:
         for name in ("watchlist/IN.json", "watchlist/US.json"):
             path = root / name
             if not path.exists():
@@ -91,12 +104,23 @@ def record_lookup(symbol):
             except ValueError:
                 continue
             for row in data.get("active", []):
-                if row.get("symbol") == symbol and row.get("action_verdict"):
-                    verdict = row.get("action_verdict")
-                    break
-            if verdict:
+                if row.get("symbol") == symbol:
+                    verdict = verdict or row.get("action_verdict")
+                    sector = sector or _clean_lead_sector(row.get("macro_sector"))
+            if verdict and sector:
                 break
-    _record_cache[symbol] = (verdict, sector)
+    if not sector:
+        reg_path = root / "metadata" / "symbols.json"
+        if reg_path.exists():
+            try:
+                reg = json.loads(reg_path.read_text(encoding="utf-8"))
+                for mkt in ("IN", "US"):
+                    meta_row = (reg.get(mkt, {}).get("symbols") or {}).get(symbol, {})
+                    if isinstance(meta_row, dict):
+                        sector = sector or _clean_lead_sector(meta_row.get("sector") or meta_row.get("sub_theme"))
+            except ValueError:
+                pass
+    _record_cache[cache_key] = (verdict, sector)
     return verdict, sector
 
 
@@ -249,7 +273,7 @@ def read_entry(path, dates, updates):
     summary = completion.get("summary") or (paragraph.get_text(" ", strip=True) if paragraph else description.get("content", "") if description else "")
     report_date = re.search(r"20\d{2}-\d{2}-\d{2}", path.stem)
     workflow = re.sub(r"_?20\d{2}-\d{2}-\d{2}.*", "", path.stem).replace("_", " ")
-    for pattern, name in (("Market.*Intelligence", "Market intelligence"), ("Portfolio.*Audit", "Portfolio audit"), ("Options", "Options audit"), ("Company.*Report", "Company report")):
+    for pattern, name in (("Market.*Intelligence", "Market intelligence"), ("Portfolio.*Audit", "Portfolio audit"), ("Company.*Report", "Company report")):
         if re.search(pattern, workflow, re.I):
             workflow = name
             break

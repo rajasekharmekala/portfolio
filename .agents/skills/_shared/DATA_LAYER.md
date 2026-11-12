@@ -10,7 +10,7 @@ Holdings, watchlists, shortlists, options, and metadata live in JSON under `data
 | Strategy bucket and name per symbol | `data/metadata/symbols.json` | the user, when a new name is bought |
 | Watchlist (active) | `data/watchlist/<MKT>.json` | the watchlist workflows |
 | Shortlist (one array per sheet) | `data/shortlist/<MKT>.json` | the shortlist workflows |
-| Options positions | `data/options/<MKT>.json` | the options workflow, and the user for new trades |
+| Options positions | `data/options/<MKT>.json` | the user for new trades |
 | Generated holdings view | `data/views/holdings_<MKT>.md` | `scripts/data_layer.py --view` (never edit) |
 
 ## Transactions

@@ -72,15 +72,14 @@ Both should print `RESULT: PASS`.
 │   │   └── reviewer.json       Reviewer model, red-team scope and round limit
 │   ├── workflows/             Step-by-step runs. Start here for a daily run.
 │   │   ├── _COMMON.md          Rules that apply to every workflow
-│   │   ├── market_intelligence.md, portfolio_audit.md, options_audit.md,
-│   │   │   company_report.md
+│   │   ├── market_intelligence.md, portfolio_audit.md, company_report.md
 │   └── skills/                Analysis and writing rules, one folder per skill
 │       ├── _shared/           Shared standards: run protocol, voice, palette, data layer,
 │       │                      section drafting, holdings update, editorial standard
 │       ├── report_reviewer/   The single reviewer's rubric (judgment only)
 │       ├── red_team/          The conditional bear-case pass
-│       └── market_intelligence, portfolio_audit, options_underwriting,
-│           company_report   (each covers both markets)
+│       └── market_intelligence, portfolio_audit, company_report
+│           (each covers both markets)
 ├── googledrive/                Generated reports and dossiers, plus your research notes (gitignored)
 │   ├── newsletters/            Daily reports and audits
 │   ├── blogs/                  Company dossiers
@@ -150,7 +149,7 @@ The workflow sets the steps. The rules it refers to are in `_COMMON.md`. Every r
    ```bash
    .venv/bin/python scripts/validate_report.py --report "$RUN_DIR/report.html" --kind market_intel --facts "$RUN_DIR/cache/facts_US_2026-10-08.json"
    ```
-   Use `--kind portfolio_audit` for audits and option reviews. The result must be `RESULT: PASS`. Don't lower a threshold to pass a report.
+   Use `--kind portfolio_audit` for portfolio audits. The result must be `RESULT: PASS`. Don't lower a threshold to pass a report.
 9. **Reviewer gate.** Code first builds a review packet (`scripts/review_packet.py`): it traces every number to the ledger and research record, checks tickers, dates, totals and verdict conflicts, and runs the validators. One independent reviewer agent then judges what code could not settle: untraced numbers, verdicts against their evidence, company claims, consistency and plain language. A red team challenges the conclusions for decision-driving reports (not the daily market intelligence). The reviewer's model is set in `.agents/config/reviewer.json`. At most two review rounds, and round 2 only looks at the sections that changed. A report is delivered with `APPROVE` and `RESULT: PASS`, or best-effort after round 2 with the unresolved findings disclosed.
 10. **Delivery.**
     ```bash
@@ -166,7 +165,6 @@ The workflow sets the steps. The rules it refers to are in `_COMMON.md`. Every r
 |---|---|
 | `market_intelligence.md` | Daily market briefing for one market: regime, sectors, Stage 2 and Stage 4 lists, tactical playbook |
 | `portfolio_audit.md` | Audit of every holding, with actions and the reasons for them |
-| `options_audit.md` | Review of open option contracts and setup ideas |
 | `company_report.md` | Underwrites one requested or queued company, audits any current holding, and writes its dossier and portfolio action plan |
 
 ---

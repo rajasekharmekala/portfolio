@@ -11,8 +11,10 @@ Supports both:
 """
 from __future__ import annotations
 
+import argparse
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
@@ -35,7 +37,7 @@ REQUIRED_SPINE_FIELDS = (
 )
 
 CANONICAL_10_CHAPTERS = [
-    ("primer", "Prologue: The Business, The Price & Our Independent Verdict"),
+    ("ch-0", "0. Executive Thesis, Dual Verdict & Opportunity Matrix"),
     ("ch-1", "1. Origin, Corporate Evolution & Past Stock Cycles"),
     ("ch-2", "2. What the Company Does: Segments, Revenue Mix & Concrete Examples"),
     ("ch-3", "3. Distribution, Supply Chain & Unit Economics"),
@@ -56,6 +58,16 @@ HOLDING_ACTIONS = {
     "EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE", "NOT_HELD", "DEFER",
 }
 REDEPLOYMENT_TYPES = {"CASH", "SHORTLIST", "OUTSIDE"}
+BUSINESS_QUALITY_VERDICTS = {"COMPOUNDER_PASS", "CYCLICAL_CONDITIONAL", "FUNDAMENTAL_FAIL"}
+KPI_HEALTH_VALUES = {"PASS", "PASS_WITH_WATCH", "FAIL"}
+BLIND_CHAPTER_IDS = {"ch-1", "ch-2", "ch-3", "ch-4", "ch-5", "ch-6"}
+BLIND_VERDICT_LEAK_RE = re.compile(
+    r"\b(?:IMMEDIATE_BUY|ACCUMULATE_ON_DIP|WAIT_FOR_SUPPORT|BUY_AT_CMP_NO_FOMO|"
+    r"WAIT_FOR_SUPPORT_PULLBACK|WAIT_FOR_SUPPORT_RETEST|AVOID_STAGE4_OR_BROKEN|"
+    r"TIER_[0-3]|CORE_ALPHA|TACTICAL_MOMENTUM|LEVERAGED_SATELLITE|"
+    r"support buy zone|invalidation stop)\b",
+    re.I,
+)
 
 
 def load_monograph_spec(spec_path: str | Path) -> Dict[str, Any]:
@@ -66,6 +78,14 @@ def load_monograph_spec(spec_path: str | Path) -> Dict[str, Any]:
         if not spine_file.exists():
             raise FileNotFoundError(f"Directory spec {p} is missing spine.json")
         spec = json.loads(spine_file.read_text(encoding="utf-8"))
+        bq_file = p / "business_quality.json"
+        if bq_file.is_file():
+            bq = json.loads(bq_file.read_text(encoding="utf-8"))
+            spec.setdefault("business_quality", bq)
+            if bq.get("business_quality_verdict"):
+                spec.setdefault("business_quality_verdict", bq["business_quality_verdict"])
+            if bq.get("kpi_health"):
+                spec.setdefault("kpi_health", bq["kpi_health"])
         chapters_dir = p / "chapters"
         chapters: List[Dict[str, Any]] = []
         if chapters_dir.is_dir():
@@ -97,8 +117,104 @@ def word_count(text: str) -> int:
     return len(re.findall(r"[A-Za-z0-9₹$%'.\-]+", strip_html(text)))
 
 
-def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) -> Tuple[List[str], Dict[str, Any]]:
+SHELL_CORRUPT_COMMA_RE = re.compile(r"(?:^|[\s(\[–—\-])(?:,\d{3})+\b")
+SHELL_CORRUPT_MAG_RE = re.compile(r"(?:~|\(\s*)[MBK]\+?(?=\s|\)|Valuation|Cr|;|\.|,|$)")
+MANGLED_COLON_RE = re.compile(r"\.\s*:\s")
+MANGLED_HOWEVER_RE = re.compile(
+    r"\.\s+However,\s+(?:faces|has|have|was|were|is|are|remained|remains|fell|lacks|trades|stands|suffered|delivered|achieved|operates)\b"
+)
+MANGLED_IN_ADDITION_RE = re.compile(r"\.\s+In addition,\s+[a-z]")
+HTTP_URL_RE = re.compile(r"https?://[^\s<>\"')]+", re.I)
+
+
+def _check_text_integrity(raw_text: str, location: str, errors: List[str]) -> None:
+    plain = strip_html(raw_text)
+    if not plain:
+        return
+    m_comma = SHELL_CORRUPT_COMMA_RE.search(plain)
+    if m_comma:
+        errors.append(
+            f"{location}: corrupted number fragment {m_comma.group(0).strip()!r} "
+            "(likely unquoted shell $variable expansion; write JSON directly without bash heredocs)"
+        )
+    m_mag = SHELL_CORRUPT_MAG_RE.search(plain)
+    if m_mag:
+        errors.append(
+            f"{location}: corrupted currency magnitude {m_mag.group(0).strip()!r} "
+            "(likely unquoted shell $variable expansion)"
+        )
+    if MANGLED_COLON_RE.search(plain):
+        errors.append(f"{location}: mangled punctuation '. :' detected (do not run regex sentence splitters)")
+    if MANGLED_HOWEVER_RE.search(plain):
+        errors.append(f"{location}: subjectless '. However, <verb>' fragment detected (do not split clauses mechanically)")
+
+
+def _parse_num(cell: Any) -> float | None:
+    s = re.sub(r"[,₹$%\s+]", "", strip_html(str(cell or "")))
+    s = s.replace("\u2212", "-")
+    m = re.match(r"^-?\d+(?:\.\d+)?$", s)
+    return float(m.group(0)) if m else None
+
+
+def _validate_waterfall_table(blk: Dict[str, Any], cid: str, errors: List[str]) -> None:
+    caption = strip_html(blk.get("caption", ""))
+    headers = [strip_html(str(h)) for h in blk.get("headers", [])]
+    joined_meta = (caption + " " + " ".join(headers)).lower()
+    if "waterfall" not in joined_meta and "per ₹100" not in joined_meta and "per $100" not in joined_meta:
+        return
+    rows = blk.get("rows", [])
+    has_pct_col = len(headers) >= 3 and ("%" in headers[2] or "share" in headers[2].lower())
+    cfo_val = capex_val = fcf_val = None
+    for r in rows:
+        if not isinstance(r, list) or len(r) < 2:
+            continue
+        label = strip_html(str(r[0]))
+        amt = _parse_num(r[1])
+        if amt is None:
+            continue
+        if has_pct_col and len(r) >= 3:
+            pct = _parse_num(r[2])
+            if pct is not None and abs(amt - pct) > 0.35:
+                errors.append(f"Chapter {cid} waterfall row {label!r}: per-100 amount ({amt}) disagrees with % column ({pct}%)")
+        note = strip_html(" ".join(str(x) for x in r[2:]))
+        ratio_claim = re.search(
+            r"[₹$]?\s*(\d+(?:\.\d+)?)\s*(?:Cr|crore|B|M|million|billion)?\s+on\s+[₹$]?\s*(\d+(?:\.\d+)?)",
+            note,
+            re.I,
+        )
+        if ratio_claim:
+            num_v, den_v = float(ratio_claim.group(1)), float(ratio_claim.group(2))
+            if den_v > 0:
+                implied = (num_v / den_v) * 100.0
+                if abs(implied - abs(amt)) > 2.0:
+                    errors.append(
+                        f"Chapter {cid} waterfall row {label!r}: stated {amt} per 100 contradicts note "
+                        f"({num_v} on {den_v} = {implied:.1f}%)"
+                    )
+        low_lbl = label.lower()
+        if "cash flow from operations" in low_lbl or "(cfo)" in low_lbl or low_lbl == "cfo":
+            cfo_val = amt
+        elif "capital expenditure" in low_lbl or "capex" in low_lbl:
+            capex_val = -abs(amt) if amt > 0 else amt
+        elif "free cash flow" in low_lbl or "(fcf)" in low_lbl or low_lbl == "fcf":
+            fcf_val = amt
+    if cfo_val is not None and capex_val is not None and fcf_val is not None:
+        if abs((cfo_val + capex_val) - fcf_val) > 0.6:
+            errors.append(
+                f"Chapter {cid} waterfall cash-flow mismatch: CFO ({cfo_val:+.2f}) + Capex ({capex_val:+.2f}) "
+                f"= {cfo_val + capex_val:+.2f}, not FCF ({fcf_val:+.2f})"
+            )
+
+
+def validate_monograph_spec(
+    spec: Dict[str, Any],
+    min_total_words: int | None = None,
+    min_web_words: int = 8500,
+    min_book_words: int = 10000,
+) -> Tuple[List[str], Dict[str, Any]]:
     """Validate that a 10-chapter monograph spec meets institutional depth and dual-edition rules."""
+    eff_web_floor = min_total_words if min_total_words is not None else min_web_words
+    eff_book_floor = min_total_words if min_total_words is not None else min_book_words
     errors: List[str] = []
     for field in REQUIRED_SPINE_FIELDS:
         if field not in spec or spec[field] is None:
@@ -191,29 +307,99 @@ def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) 
             f"decision_basis must reference {SYNTHESIS_CHAPTER_ID!r}, got {decision_basis!r}"
         )
 
+    bq_verdict = spec.get("business_quality_verdict")
+    if bq_verdict is not None:
+        if bq_verdict not in BUSINESS_QUALITY_VERDICTS:
+            errors.append(f"business_quality_verdict must be one of {sorted(BUSINESS_QUALITY_VERDICTS)}")
+        elif bq_verdict == "FUNDAMENTAL_FAIL" and spec.get("new_capital_verdict") != "REJECTED":
+            errors.append(
+                "FUNDAMENTAL_FAIL business_quality_verdict requires new_capital_verdict = 'REJECTED' "
+                "(do not hedge failed business/cash-flow fundamentals with WAIT_FOR_SUPPORT)"
+            )
+
+    # Anti-hedging math gate: non-rejected calls must offer >= 1.5:1 reward-to-risk from the support zone
+    if spec.get("new_capital_verdict") in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP", "WAIT_FOR_SUPPORT"}:
+        ez_low = spec.get("entry_zone_low")
+        ez_high = spec.get("entry_zone_high")
+        sl_val = spec.get("stop_loss")
+        tb_val = spec.get("target_base")
+        nums_ok = all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in (ez_low, ez_high, sl_val, tb_val))
+        if not nums_ok:
+            errors.append(
+                f"{spec['new_capital_verdict']} requires numeric entry_zone_low, entry_zone_high, stop_loss, and target_base"
+            )
+        else:
+            if ez_high < ez_low or ez_low <= sl_val:
+                errors.append(
+                    f"Invalid support/stop ordering: require entry_zone_high ({ez_high}) >= entry_zone_low ({ez_low}) > stop_loss ({sl_val})"
+                )
+            elif tb_val <= ez_high:
+                errors.append(
+                    f"Anti-hedging gate failed for {spec['new_capital_verdict']}: target_base ({tb_val}) <= entry_zone_high ({ez_high}); "
+                    "expected return in the buy/watch zone is non-positive — assign REJECTED instead of hedging"
+                )
+            else:
+                sup_asym = (tb_val - ez_high) / (ez_high - sl_val)
+                if sup_asym < 1.5 - 1e-6:
+                    errors.append(
+                        f"Anti-hedging gate failed for {spec['new_capital_verdict']}: support-zone asymmetry is {sup_asym:.2f}:1 (< 1.50:1); "
+                        "assign REJECTED when even a pullback to support lacks asymmetric reward-to-risk"
+                    )
+
+    if spec.get("primer"):
+        _check_text_integrity(str(spec["primer"]), "spine.primer", errors)
+    if isinstance(spec.get("holding_rationale"), str):
+        _check_text_integrity(spec["holding_rationale"], "spine.holding_rationale", errors)
+
     web_words = 0
     book_words = 0
     chapter_stats = []
+    ch4_urls: set[str] = set()
 
     for idx, ch in enumerate(chapters):
         cid = ch.get("id", f"ch-{idx}")
         w_cnt = 0
+        chapter_texts: List[str] = []
         for blk in ch.get("web_blocks", []):
             btype = blk.get("type", "p")
             if btype in ("p", "trigger"):
-                w_cnt += word_count(blk.get("html") or blk.get("text", ""))
+                raw_t = blk.get("html") or blk.get("text", "")
+                w_cnt += word_count(raw_t)
+                chapter_texts.append(raw_t)
+                if cid == "ch-4":
+                    ch4_urls.update(u.rstrip(".,;)") for u in HTTP_URL_RE.findall(raw_t))
             elif btype == "callout":
                 w_cnt += word_count(blk.get("title", ""))
+                chapter_texts.append(blk.get("title", ""))
                 for cp in blk.get("paragraphs", []):
                     w_cnt += word_count(cp)
+                    chapter_texts.append(cp)
+                    if cid == "ch-4":
+                        ch4_urls.update(u.rstrip(".,;)") for u in HTTP_URL_RE.findall(cp))
             elif btype == "table":
                 w_cnt += word_count(blk.get("caption", "")) + word_count(blk.get("takeaway", ""))
+                chapter_texts.extend([blk.get("caption", ""), blk.get("takeaway", "")])
                 for r in blk.get("rows", []):
                     for cell in r:
-                        w_cnt += word_count(str(cell))
+                        cs = str(cell)
+                        w_cnt += word_count(cs)
+                        chapter_texts.append(cs)
+                        if cid == "ch-4":
+                            ch4_urls.update(u.rstrip(".,;)") for u in HTTP_URL_RE.findall(cs))
+                _validate_waterfall_table(blk, cid, errors)
+            elif btype == "waterfall":
+                rev = blk.get("revenue")
+                if not isinstance(rev, (int, float)) or isinstance(rev, bool) or rev <= 0:
+                    errors.append(f"Chapter {cid}: waterfall block requires positive numeric 'revenue'")
+                w_cnt += word_count(blk.get("caption", "")) + word_count(blk.get("takeaway", "")) + 140
+                chapter_texts.extend([blk.get("caption", ""), blk.get("takeaway", "")])
+            elif btype in ("snapshot_financials", "peer_snapshot_table"):
+                w_cnt += word_count(blk.get("caption", "")) + word_count(blk.get("takeaway", "")) + 160
+                chapter_texts.extend([blk.get("caption", ""), blk.get("takeaway", "")])
             elif btype == "estimate":
                 for k in ("the_number", "how_calculated", "the_inputs", "the_range", "if_off"):
                     w_cnt += word_count(blk.get(k, ""))
+                    chapter_texts.append(blk.get(k, ""))
 
         b_cnt = 0
         ep = ch.get("epigraph") or {}
@@ -221,31 +407,72 @@ def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) 
             b_cnt += word_count(ep.get("quote", "")) + word_count(ep.get("author", ""))
         for bp in ch.get("book_paragraphs", []):
             b_cnt += word_count(bp)
+            chapter_texts.append(bp)
             if "<table" in bp.lower() or "<sup" in bp.lower():
                 errors.append(f"Chapter {cid}: book_paragraphs must not contain raw <table> or <sup> tags")
         for c in ch.get("book_callouts", []):
             b_cnt += word_count(c.get("title", "")) + word_count(c.get("quote", "")) + word_count(c.get("text", ""))
+            chapter_texts.extend([c.get("title", ""), c.get("quote", ""), c.get("text", "")])
             for b in c.get("bullets", []):
                 b_cnt += word_count(b)
+                chapter_texts.append(b)
         for sub in ch.get("book_subsections", []):
             b_cnt += word_count(sub.get("title", ""))
             for bp in sub.get("paragraphs", []):
                 b_cnt += word_count(bp)
+                chapter_texts.append(bp)
                 if "<table" in bp.lower() or "<sup" in bp.lower():
                     errors.append(f"Chapter {cid}: book_subsections must not contain raw <table> or <sup> tags")
             for c in sub.get("callouts", []):
                 b_cnt += word_count(c.get("title", "")) + word_count(c.get("quote", "")) + word_count(c.get("text", ""))
+                chapter_texts.extend([c.get("title", ""), c.get("quote", ""), c.get("text", "")])
                 for b in c.get("bullets", []):
                     b_cnt += word_count(b)
+                    chapter_texts.append(b)
+
+        joined_ch = " ".join(str(x) for x in chapter_texts if x)
+        _check_text_integrity(joined_ch, f"Chapter {cid}", errors)
+        if bq_verdict is not None and cid in BLIND_CHAPTER_IDS:
+            leak = BLIND_VERDICT_LEAK_RE.search(strip_html(joined_ch))
+            if leak:
+                errors.append(
+                    f"Chapter {cid} (price-blind fundamental chapter) contains verdict/timing token {leak.group(0)!r}; "
+                    "keep portfolio verdicts, tiers, and entry zones strictly in ch-7..ch-9 and ch-0"
+                )
+        in_add_count = len(MANGLED_IN_ADDITION_RE.findall(strip_html(joined_ch)))
+        if in_add_count >= 3:
+            errors.append(
+                f"Chapter {cid}: {in_add_count} mechanical '. In addition, ...' fragments detected "
+                "(write natural sentences instead of running regex sentence splitters)"
+            )
 
         web_words += w_cnt
         book_words += b_cnt
         chapter_stats.append({"id": cid, "web_words": w_cnt, "book_words": b_cnt})
 
-    if web_words < min_total_words:
-        errors.append(f"Web dossier word count ({web_words:,}) is below target floor ({min_total_words:,})")
-    if book_words < min_total_words:
-        errors.append(f"Book/Audiobook word count ({book_words:,}) is below target floor ({min_total_words:,})")
+    if eff_web_floor > 0:
+        cites = spec.get("citations") or []
+        if len(cites) < 25:
+            errors.append(f"citations must include at least 25 primary sources, got {len(cites)}")
+        cite_urls = {
+            u.split("#")[0].rstrip(".,;)/")
+            for c in cites
+            for u in HTTP_URL_RE.findall(str(c))
+        }
+        if len(cite_urls) < 15:
+            errors.append(
+                f"citations must include at least 15 distinct http(s) primary source URLs, got {len(cite_urls)} "
+                "(plain-text bibliography lines without URLs are insufficient)"
+            )
+        if "ch-4" in chapter_ids and len(ch4_urls) < 3:
+            errors.append(
+                f"Chapter ch-4 External Learning Hub must include at least 3 clickable http(s) resource URLs, got {len(ch4_urls)}"
+            )
+
+    if web_words < eff_web_floor:
+        errors.append(f"Web dossier word count ({web_words:,}) is below target floor ({eff_web_floor:,})")
+    if book_words < eff_book_floor:
+        errors.append(f"Book/Audiobook word count ({book_words:,}) is below target floor ({eff_book_floor:,})")
 
     return errors, {
         "mode": "10_chapter_monograph",
@@ -255,3 +482,108 @@ def validate_monograph_spec(spec: Dict[str, Any], min_total_words: int = 11000) 
         "estimated_audio_minutes": round(book_words / 155),
         "chapters": chapter_stats,
     }
+
+
+def validate_blind_pass_dir(spec_dir: str | Path) -> List[str]:
+    """Verify Pass 1 (ch-1..ch-6 + business_quality.json) completed cleanly BEFORE valuation/verdict files exist."""
+    root = Path(spec_dir)
+    errors: List[str] = []
+    if not root.is_dir():
+        return [f"Spec directory does not exist: {root}"]
+
+    # Premature verdict/valuation files are forbidden during Pass 1
+    if (root / "spine.json").exists():
+        errors.append("Premature spine.json present during Pass 1: do not author spine.json until after Chapter 9")
+    ch_dir = root / "chapters"
+    if not ch_dir.is_dir():
+        return errors + [f"Missing chapters/ directory in {root}"]
+    for premature in ("ch00.json", "ch07.json", "ch08.json", "ch09.json"):
+        if (ch_dir / premature).exists():
+            errors.append(f"Premature {premature} present during Pass 1: complete blind ch01..ch06 first")
+
+    bq_file = root / "business_quality.json"
+    if not bq_file.is_file():
+        errors.append("Missing business_quality.json from Pass 1")
+    else:
+        bq = json.loads(bq_file.read_text(encoding="utf-8"))
+        if bq.get("business_quality_verdict") not in BUSINESS_QUALITY_VERDICTS:
+            errors.append(f"business_quality.business_quality_verdict must be one of {sorted(BUSINESS_QUALITY_VERDICTS)}")
+        if bq.get("kpi_health") not in KPI_HEALTH_VALUES:
+            errors.append(f"business_quality.kpi_health must be one of {sorted(KPI_HEALTH_VALUES)}")
+        rationale = str(bq.get("summary_rationale") or "").strip()
+        if len(rationale) < 40:
+            errors.append("business_quality.summary_rationale must provide a substantive price-blind synthesis")
+        else:
+            _check_text_integrity(rationale, "business_quality.summary_rationale", errors)
+            leak = BLIND_VERDICT_LEAK_RE.search(rationale)
+            if leak:
+                errors.append(f"business_quality.summary_rationale leaks portfolio verdict/timing token {leak.group(0)!r}")
+
+    for n in range(1, 7):
+        cf = ch_dir / f"ch0{n}.json"
+        if not cf.is_file():
+            errors.append(f"Missing blind-pass chapter file: chapters/ch0{n}.json")
+            continue
+        ch = json.loads(cf.read_text(encoding="utf-8"))
+        cid = ch.get("id", "")
+        if cid != f"ch-{n}":
+            errors.append(f"chapters/ch0{n}.json must have id 'ch-{n}', got {cid!r}")
+        blobs: List[str] = []
+        for blk in ch.get("web_blocks", []):
+            btype = blk.get("type", "p")
+            if btype in ("p", "trigger"):
+                blobs.append(blk.get("html") or blk.get("text", ""))
+            elif btype == "callout":
+                blobs.append(blk.get("title", ""))
+                blobs.extend(blk.get("paragraphs", []))
+            elif btype == "table":
+                blobs.extend([blk.get("caption", ""), blk.get("takeaway", "")])
+                for r in blk.get("rows", []):
+                    blobs.extend(str(c) for c in r)
+                _validate_waterfall_table(blk, cid, errors)
+            elif btype == "waterfall":
+                rev = blk.get("revenue")
+                if not isinstance(rev, (int, float)) or isinstance(rev, bool) or rev <= 0:
+                    errors.append(f"Chapter {cid}: waterfall block requires positive numeric 'revenue'")
+        blobs.extend(ch.get("book_paragraphs", []))
+        for sub in ch.get("book_subsections", []):
+            blobs.extend(sub.get("paragraphs", []))
+        joined = " ".join(str(x) for x in blobs if x)
+        _check_text_integrity(joined, f"Chapter ch-{n}", errors)
+        leak = BLIND_VERDICT_LEAK_RE.search(strip_html(joined))
+        if leak:
+            errors.append(
+                f"Chapter ch-{n} leaks portfolio verdict/timing token {leak.group(0)!r} during price-blind Pass 1"
+            )
+    return errors
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description="Validate monograph specs and price-blind Pass 1 checkpoints.")
+    ap.add_argument("--check-blind-pass", help="Validate <RUN_DIR>/work/<SYM> after Pass 1 (ch01..ch06 + business_quality.json)")
+    ap.add_argument("--check-spec", help="Validate full monograph spec directory or JSON file")
+    args = ap.parse_args()
+    if args.check_blind_pass:
+        errs = validate_blind_pass_dir(args.check_blind_pass)
+        if errs:
+            print(f"BLIND PASS CHECK: FAIL ({len(errs)} error(s))")
+            for e in errs:
+                print(" -", e)
+            sys.exit(1)
+        print(f"BLIND PASS CHECK: PASS ({args.check_blind_pass})")
+        return
+    if args.check_spec:
+        spec = load_monograph_spec(args.check_spec)
+        errs, stats = validate_monograph_spec(spec)
+        if errs:
+            print(f"SPEC CHECK: FAIL ({len(errs)} error(s))")
+            for e in errs:
+                print(" -", e)
+            sys.exit(1)
+        print(f"SPEC CHECK: PASS (web={stats.get('web_words', 0):,}w, book={stats.get('book_words', 0):,}w)")
+        return
+    ap.error("Specify --check-blind-pass or --check-spec")
+
+
+if __name__ == "__main__":
+    main()

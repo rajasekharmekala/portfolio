@@ -4,16 +4,12 @@ W7/6.5 readability gate: the code checks that a book-standard company report
 actually reads like the book standard says.
 
 Checks (see .agents/skills/_shared/BOOK_STANDARD.md section 5):
-  1. Flesch-Kincaid grade per chapter <= --max-grade (default 13)
-  2. glossary terms (agents/config/glossary.json) defined at first use:
-     first occurrence inside <dfn>, same paragraph carries the expansion
-     (acronyms) or a defining sentence (phrase terms)
-  3. no bare tables: every <table> is followed by an explanatory paragraph
-     (>= 80 chars) before the next table or heading
+  1. Flesch-Kincaid grade per chapter <= --max-grade (default 15.0; dossiers score prose paragraphs at <= 15.0, or <= 16.5 on #gate-exceptions, with average sentence length <= 24 words)
+  2. prose & number integrity: no unquoted shell $variable corruption (e.g. ',000/MT', '~M+ Valuation'), no mechanical sentence-splitter artifacts ('. :', subjectless '. However, <verb>', repeated '. In addition, ...'), and no duplicate section IDs
+  3. no bare tables: every <table> is followed by an explanatory paragraph (>= 80 chars) before the next table or heading
   4. every <section class="estimate"> has the five working parts
-  5. chapter 7 exists and carries >= 1 <p class="trigger"> (>= 20 chars each)
-  6. banned filler phrases (REPORT_VOICE section 5) are absent; the primer has
-     3-5 sentences; Notes and sources exist and are numbered
+  5. chapter 7/9 exists and carries >= 1 <p class="trigger"> (>= 20 chars each), plus validated holding-action, redeployment, TradingView chart (ch-8), and clickable External Learning Hub links (ch-4) on 10-chapter dossiers
+  6. banned filler phrases (REPORT_VOICE section 5) are absent; the primer has 3-5 sentences; Notes and sources exist and are numbered
 
 Usage: python3 scripts/readability_check.py docs/blogs/US/ADBE_dossier.html [--max-grade 13]
 Exit 0 = pass, 1 = failures.
@@ -171,6 +167,55 @@ def check_primer_and_notes(soup, errors):
             errors.append("NOTES: sources must be a numbered <ol>")
 
 
+SHELL_CORRUPT_COMMA_RE = re.compile(r"(?:^|[\s(\[–—\-])(?:,\d{3})+\b")
+SHELL_CORRUPT_MAG_RE = re.compile(r"(?:~|\(\s*)[MBK]\+?(?=\s|\)|Valuation|Cr|;|\.|,|$)")
+MANGLED_COLON_RE = re.compile(r"\.\s*:\s")
+MANGLED_HOWEVER_RE = re.compile(
+    r"\.\s+However,\s+(?:faces|has|have|was|were|is|are|remained|remains|fell|lacks|trades|stands|suffered|delivered|achieved|operates)\b"
+)
+MANGLED_IN_ADDITION_RE = re.compile(r"\.\s+In addition,\s+[a-z]")
+
+
+def check_prose_integrity(soup, errors):
+    root = soup.find("main") or soup.body or soup
+    seen_ids = set()
+    for sec in root.find_all("section"):
+        sid = sec.get("id")
+        if sid:
+            if sid in seen_ids:
+                errors.append(f"DUPLICATE SECTION ID: #{sid} appears on multiple <section> elements")
+            seen_ids.add(sid)
+
+    text_blocks = [
+        el.get_text(" ", strip=True)
+        for el in root.find_all(["p", "td", "li"])
+        if not el.find_parent(["script", "style", "nav"])
+    ]
+    joined = " ".join(text_blocks)
+    m_comma = SHELL_CORRUPT_COMMA_RE.search(joined)
+    if m_comma:
+        errors.append(
+            f"SHELL CORRUPTION: orphaned number fragment {m_comma.group(0).strip()!r} "
+            "(likely unquoted bash $variable expansion)"
+        )
+    m_mag = SHELL_CORRUPT_MAG_RE.search(joined)
+    if m_mag:
+        errors.append(
+            f"SHELL CORRUPTION: stripped currency magnitude {m_mag.group(0).strip()!r} "
+            "(likely unquoted bash $variable expansion)"
+        )
+    if MANGLED_COLON_RE.search(joined):
+        errors.append("MANGLED PROSE: '. :' colon fragment present (do not run regex sentence splitters)")
+    if MANGLED_HOWEVER_RE.search(joined):
+        errors.append("MANGLED PROSE: subjectless '. However, <verb>' fragment present")
+    in_add = len(MANGLED_IN_ADDITION_RE.findall(joined))
+    if in_add >= 6:
+        errors.append(
+            f"MANGLED PROSE: {in_add} mechanical '. In addition, ...' fragments present "
+            "(write natural prose instead of regex-splitting commas)"
+        )
+
+
 def check_banned(soup, errors):
     text = " " + soup.get_text(" ", strip=True).lower() + " "
     for phrase in BANNED:
@@ -184,16 +229,31 @@ def check_grade(soup, max_grade, errors, prose_only=False):
     chapters = [c for c in chapters if c]
     if not chapters:
         errors.append("CHAPTERS: no .primer or .chapter sections found")
+    all_prose_sentences = []
     for c in chapters:
         label = c.get("id") or (c.find("h2").get_text()[:24] if c.find("h2") else "?")
         if prose_only:
             text = " ".join(p.get_text(" ", strip=True) for p in c.find_all(["p", "li"])
                             if not p.find_parent(["table", "nav", "ol", "dl"]))
+            if label != "gate-exceptions":
+                p_only = " ".join(p.get_text(" ", strip=True) for p in c.find_all("p")
+                                  if not p.find_parent(["table", "nav", "ol", "dl"]))
+                ch_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", p_only) if len(s.split()) > 3]
+                all_prose_sentences.extend(ch_sents)
+                if ch_sents:
+                    ch_avg = sum(len(re.findall(r"[A-Za-z0-9'₹$%.-]+", s)) for s in ch_sents) / len(ch_sents)
+                    if ch_avg > 26.0:
+                        errors.append(f"SENTENCE LENGTH {label}: average prose sentence is {ch_avg:.1f} words > 26.0; write crisper sentences")
         else:
             text = c.get_text(" ", strip=True)
+        cap = max(max_grade, 16.5) if (prose_only and label == "gate-exceptions") else max_grade
         g = fk_grade(text)
-        if g > max_grade:
-            errors.append(f"GRADE {label}: Flesch-Kincaid {g:.1f} > {max_grade}")
+        if g > cap:
+            errors.append(f"GRADE {label}: Flesch-Kincaid {g:.1f} > {cap}")
+    if prose_only and all_prose_sentences:
+        avg_words = sum(len(re.findall(r"[A-Za-z0-9'₹$%.-]+", s)) for s in all_prose_sentences) / len(all_prose_sentences)
+        if avg_words > 24.0:
+            errors.append(f"SENTENCE LENGTH: average prose sentence is {avg_words:.1f} words > 24.0; write crisper sentences")
 
 
 def main():
@@ -208,7 +268,7 @@ def main():
     is_dossier = args.report.endswith("_dossier.html") or bool(
         soup.find("meta", attrs={"name": "report-kind", "content": "dossier"})
     )
-    eff_grade = max(args.max_grade, 16.5) if is_dossier else args.max_grade
+    eff_grade = max(args.max_grade, 15.0) if is_dossier else args.max_grade
 
     errors = []
     check_grade(soup, eff_grade, errors, prose_only=is_dossier)
@@ -217,6 +277,7 @@ def main():
     check_estimates(soup, errors)
     check_chapter7(soup, errors)
     check_primer_and_notes(soup, errors)
+    check_prose_integrity(soup, errors)
     if is_dossier:
         check_dossier_decisions(soup, errors)
     check_banned(soup, errors)
@@ -263,6 +324,15 @@ def check_dossier_decisions(soup, errors):
             percentages.append(float(value.group(0)))
     if not percentages or abs(sum(percentages) - 100.0) > 0.01:
         errors.append("DOSSIER REDEPLOYMENT: capital allocations must total 100%, including cash")
+
+    ch8 = soup.find("section", id="ch-8")
+    if ch8 and not ch8.select_one(".tradingview-widget-container"):
+        errors.append("DOSSIER TECHNICAL CHART: section #ch-8 is missing the embedded TradingView chart")
+    ch4 = soup.find("section", id="ch-4")
+    if ch8 and ch4:
+        ext_links = [a for a in ch4.find_all("a", href=True) if str(a["href"]).startswith(("http://", "https://"))]
+        if len(ext_links) < 3:
+            errors.append("DOSSIER LEARNING HUB: section #ch-4 must include at least 3 clickable http(s) resource links")
 
 
 if __name__ == "__main__":

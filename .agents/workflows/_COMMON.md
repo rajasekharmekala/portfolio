@@ -19,7 +19,7 @@ Runs may overlap, so no run works in the shared checkout. RUN_PROTOCOL §8 is bi
 
 `.venv/bin/python scripts/run_session.py start --workflow <workflow> --market <MKT>`
 
-Workflow names: `market_intelligence`, `portfolio_audit`, and `options_audit` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `company_report` (per-company; take a name with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
+Workflow names: `market_intelligence` and `portfolio_audit` (one live run per workflow and market; a second is **refused**, exit code 3, so stop and report who holds it), and `company_report` (per-company; take a name with `scripts/run_claims.py batch` or `names`). The command prints `run_id` and `worktree`. From then on, every command of the run (scripts, ledger, validators, file edits) uses that worktree as its working directory, and `.venv/bin/python` resolves there. Record `run_id`, the worktree path and `base_commit` in the manifest.
 
 ## Run directory
 

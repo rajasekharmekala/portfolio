@@ -690,13 +690,13 @@ def render_masterclass_book_html(
             f"{'₹' if market == 'IN' else '$'}{spec['entry_zone_low']:,.2f}–{spec['entry_zone_high']:,.2f}",
         ),
         (
-            f"{str(spec['scenario_horizon']).upper()} SCENARIO RANGE" if spec.get("scenario_horizon") else "PRICE TARGET",
+            f"{str(spec['scenario_horizon']).upper()} SCENARIO RANGE" if spec.get("scenario_horizon") else "SCENARIO TARGETS",
             "Not assigned; valuation bridge is not decision-grade"
             if spec.get("target_base") is None
             else (
                 f"Bear {'₹' if market == 'IN' else '$'}{spec['target_bear']:,.2f} / Base {'₹' if market == 'IN' else '$'}{spec['target_base']:,.2f} / Bull {'₹' if market == 'IN' else '$'}{spec['target_bull']:,.2f}"
-                if spec.get("scenario_horizon")
-                else f"{'₹' if market == 'IN' else '$'}{spec['target_base']:,.2f} / {'₹' if market == 'IN' else '$'}{spec['target_bull']:,.2f}"
+                if spec.get("target_bear") is not None
+                else f"Base {'₹' if market == 'IN' else '$'}{spec['target_base']:,.2f} / Bull {'₹' if market == 'IN' else '$'}{spec['target_bull']:,.2f}"
             ),
         ),
     ]
@@ -714,7 +714,8 @@ def render_masterclass_book_html(
     chapter_sections = []
 
     for idx, ch in enumerate(chapters):
-        cid = ch.get("id") or f"ch-{idx}"
+        raw_cid = ch.get("id") or f"ch-{idx}"
+        cid = "ch-0" if (idx == 0 and raw_cid == "primer") else raw_cid
         roman = ROMAN[idx] if idx < len(ROMAN) else f"CHAPTER {idx}"
         clean_title = _strip_chapter_prefix(ch.get("book_title") or ch.get("web_title") or f"Chapter {idx}")
         toc_items.append(

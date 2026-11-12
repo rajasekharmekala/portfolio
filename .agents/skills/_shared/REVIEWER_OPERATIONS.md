@@ -22,7 +22,7 @@ After the full validator prints `RESULT: PASS`, build the round's packet:
   [--allow-stale-asof] [--symbol <TICKER>]
 ```
 
-Use `--kind portfolio_audit` for portfolio and options audits, and `--kind dossier` for a single-company dossier. Stage 2 scanning is reviewed as part of market intelligence using the same session's dashboard and stock-snapshot evidence. Pass `--sibling` when a sibling report for the same session exists. Pass `--allow-stale-asof` exactly when the citation check was run with it.
+Use `--kind portfolio_audit` for portfolio audits, and `--kind dossier` for a single-company dossier. Stage 2 scanning is reviewed as part of market intelligence using the same session's dashboard and stock-snapshot evidence. Pass `--sibling` when a sibling report for the same session exists. Pass `--allow-stale-asof` exactly when the citation check was run with it.
 
 It writes `review_packet.md`, `conclusions_digest.md`, `report_text.md` and `packet.json` (item ids, the SHA-256 of the report, ledger, research record and sibling, and section hashes for round 2). A review whose report hash does not match the current report is stale and must be re-run.
 

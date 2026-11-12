@@ -27,4 +27,4 @@ The user's transaction log is the authoritative holdings record and is assumed a
 
 ## Options
 
-The options file `data/options/<MKT>.json` is a state file for now: one record per open contract with its current value. Add a record when you open a position, and remove or mark it closed when you close one. Option transactions will move to a log when the options workflow is next revised.
+The options file `data/options/<MKT>.json` is a state file for open contracts: one record per open contract with its current value. Add a record when you open a position, and remove or mark it closed when you close one.

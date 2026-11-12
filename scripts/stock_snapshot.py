@@ -267,6 +267,72 @@ def _extract_screener_table(soup: BeautifulSoup, section_id: str) -> Dict[str, A
     return {"headers": headers[1:] if len(headers) > 1 else headers, "rows": rows}
 
 
+def _build_screener_waterfall_100(pl_tbl: Dict[str, Any], cf_tbl: Dict[str, Any]) -> Dict[str, Any]:
+    """Compute a period-matched ₹100 waterfall from Screener's latest common audited FY column."""
+    pl_headers = pl_tbl.get("headers") or []
+    cf_headers = cf_tbl.get("headers") or []
+    pl_rows = pl_tbl.get("rows") or {}
+    cf_rows = cf_tbl.get("rows") or {}
+    common = [h for h in pl_headers if h in cf_headers and h.upper() != "TTM"]
+    if not common:
+        return {}
+    period = common[-1]
+    p_idx = pl_headers.index(period)
+    c_idx = cf_headers.index(period)
+
+    def cell(rows_map: Dict[str, List[str]], idx: int, *names: str) -> Optional[float]:
+        for name in names:
+            vals = rows_map.get(name)
+            if vals and idx < len(vals):
+                v = _parse_float(vals[idx])
+                if v is not None:
+                    return v
+        return None
+
+    sales = cell(pl_rows, p_idx, "Sales", "Revenue", "Financing Profit")
+    if not sales or sales <= 0:
+        return {}
+    expenses = cell(pl_rows, p_idx, "Expenses", "Operating Expenses")
+    op_profit = cell(pl_rows, p_idx, "Operating Profit", "Financing Profit")
+    other_inc = cell(pl_rows, p_idx, "Other Income") or 0.0
+    interest = cell(pl_rows, p_idx, "Interest") or 0.0
+    depr = cell(pl_rows, p_idx, "Depreciation") or 0.0
+    pbt = cell(pl_rows, p_idx, "Profit before tax")
+    net_profit = cell(pl_rows, p_idx, "Net Profit")
+    cfo = cell(cf_rows, c_idx, "Cash from Operating Activity")
+    cfi = cell(cf_rows, c_idx, "Cash from Investing Activity")
+
+    def per100(val: Optional[float]) -> Optional[float]:
+        return _round((val / sales) * 100.0, 2) if val is not None else None
+
+    return {
+        "period": period,
+        "unit": "INR_Cr",
+        "sales": sales,
+        "expenses": expenses,
+        "operating_profit": op_profit,
+        "other_income": other_inc,
+        "interest": interest,
+        "depreciation": depr,
+        "profit_before_tax": pbt,
+        "net_profit": net_profit,
+        "cfo": cfo,
+        "investing_cash_flow": cfi,
+        "per_100_revenue": {
+            "revenue": 100.0,
+            "operating_expenses": per100(-abs(expenses)) if expenses is not None else None,
+            "operating_ebitda": per100(op_profit),
+            "depreciation": per100(-abs(depr)),
+            "interest": per100(-abs(interest)),
+            "other_income": per100(other_inc),
+            "profit_before_tax": per100(pbt),
+            "net_profit": per100(net_profit),
+            "cfo": per100(cfo),
+            "investing_cash_flow": per100(cfi),
+        },
+    }
+
+
 def fetch_screener_in(symbol: str) -> Dict[str, Any]:
     """Extract top ratios, 10-year financial tables, and quarterly highlights from Screener.in for an Indian symbol."""
     screener_symbol = load_screener_aliases("IN").get(symbol.upper(), symbol)
@@ -293,9 +359,23 @@ def fetch_screener_in(symbol: str) -> Dict[str, Any]:
             cons = [li.get_text(" ", strip=True) for li in soup.select(".cons ul li")[:6]]
             about_el = soup.select_one(".company-profile .about p") or soup.select_one(".about p")
             about_text = re.sub(r"\s+", " ", about_el.get_text(" ", strip=True)).strip() if about_el else ""
+            peer_links = [re.sub(r"\s+", " ", a.get_text(" ", strip=True)).strip()
+                          for a in soup.select("#peers p.sub a") if a.get_text(strip=True)]
+            sector_name = peer_links[0] if peer_links else None
+            industry_name = peer_links[-1] if len(peer_links) >= 2 else sector_name
+            tables = {
+                "quarters": _extract_screener_table(soup, "quarters"),
+                "profit_loss": _extract_screener_table(soup, "profit-loss"),
+                "balance_sheet": _extract_screener_table(soup, "balance-sheet"),
+                "cash_flow": _extract_screener_table(soup, "cash-flow"),
+                "ratios": _extract_screener_table(soup, "ratios"),
+                "shareholding": _extract_screener_table(soup, "shareholding"),
+            }
             return {
                 "source_url": url,
                 "about": about_text,
+                "sector": sector_name,
+                "industry": industry_name,
                 "ratios": ratios,
                 "roce_pct": _parse_float(ratios.get("ROCE")),
                 "roe_pct": _parse_float(ratios.get("ROE")),
@@ -304,14 +384,8 @@ def fetch_screener_in(symbol: str) -> Dict[str, Any]:
                 "dividend_yield_pct": _parse_float(ratios.get("Dividend Yield")),
                 "pros": pros,
                 "cons": cons,
-                "tables": {
-                    "quarters": _extract_screener_table(soup, "quarters"),
-                    "profit_loss": _extract_screener_table(soup, "profit-loss"),
-                    "balance_sheet": _extract_screener_table(soup, "balance-sheet"),
-                    "cash_flow": _extract_screener_table(soup, "cash-flow"),
-                    "ratios": _extract_screener_table(soup, "ratios"),
-                    "shareholding": _extract_screener_table(soup, "shareholding"),
-                },
+                "tables": tables,
+                "latest_waterfall_100": _build_screener_waterfall_100(tables["profit_loss"], tables["cash_flow"]),
             }
         except Exception:
             continue
@@ -332,8 +406,12 @@ def fetch_finviz_us(symbol: str) -> Dict[str, Any]:
             for i in range(0, len(tds) - 1, 2):
                 if tds[i]:
                     ratios[tds[i]] = tds[i + 1]
+        sector_el = soup.select_one('a[href*="f=sec_"]')
+        ind_el = soup.select_one('a[href*="f=ind_"]')
         return {
             "source_url": url,
+            "sector": sector_el.get_text(" ", strip=True) if sector_el else None,
+            "industry": ind_el.get_text(" ", strip=True) if ind_el else None,
             "ratios": ratios,
             "forward_pe": _parse_float(ratios.get("Forward P/E")),
             "peg": _parse_float(ratios.get("PEG")),
@@ -617,6 +695,38 @@ def collect_symbols_from_records(market: str, from_wl: bool, from_sl: bool, from
     return syms
 
 
+_BLIND_DROP_RATIO_RE = re.compile(
+    r"price|p/e|peg|p/s|p/b|p/fcf|market\s*cap|high|low|52w|rsi|sma|ema|perf|target|beta|atr|volat",
+    re.I,
+)
+_BLIND_DROP_PROS_CONS_RE = re.compile(r"trading at|times its book|p/e|market cap", re.I)
+
+
+def _strip_price_fields_for_blind_pass(val_card: Dict[str, Any]) -> Dict[str, Any]:
+    """Return only price-blind operating, profitability, and statement fields for Pass 1."""
+    raw_ratios = val_card.get("ratios") or {}
+    blind_ratios = {k: v for k, v in raw_ratios.items() if not _BLIND_DROP_RATIO_RE.search(k)}
+    out: Dict[str, Any] = {
+        "source_url": val_card.get("source_url"),
+        "sector": val_card.get("sector"),
+        "industry": val_card.get("industry"),
+        "ratios": blind_ratios,
+    }
+    if val_card.get("about"):
+        out["about"] = val_card["about"]
+    for key in ("roce_pct", "roe_pct", "roic_pct", "dividend_yield_pct", "eps_qq_pct", "sales_qq_pct"):
+        if key in val_card and val_card[key] is not None:
+            out[key] = val_card[key]
+    for key in ("pros", "cons"):
+        if isinstance(val_card.get(key), list):
+            out[key] = [item for item in val_card[key] if not _BLIND_DROP_PROS_CONS_RE.search(str(item))]
+    if val_card.get("tables"):
+        out["tables"] = val_card["tables"]
+    if val_card.get("latest_waterfall_100"):
+        out["latest_waterfall_100"] = val_card["latest_waterfall_100"]
+    return out
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--market", choices=["IN", "US"], required=True)
@@ -626,11 +736,42 @@ def main():
     parser.add_argument("--from-holdings", action="store_true", help="Include all current holding symbols")
     parser.add_argument("--stage2-file", default=None, help="Path to stage2_<MKT>_latest.json")
     parser.add_argument("--skip-web-card", action="store_true", help="Skip per-symbol Screener/Finviz HTTP fetch for fast bulk scan")
+    parser.add_argument("--blind-only", action="store_true", help="Fetch only price-blind operating & financial statement data (strips prices, multiples, and Stage 2 posture)")
     parser.add_argument("--out", default=None, help="Output JSON path")
     args = parser.parse_args()
 
     market = args.market.upper()
     symbols = list(dict.fromkeys([s.upper() for s in args.symbols]))
+    explicit_symbols = set(symbols)
+    if args.blind_only:
+        if not symbols:
+            print("--blind-only requires explicit --symbols.", file=sys.stderr)
+            sys.exit(1)
+        blind_map: Dict[str, Any] = {}
+        for sym in symbols:
+            raw_card = fetch_screener_in(sym) if market == "IN" else fetch_finviz_us(sym)
+            blind_map[sym] = {
+                "symbol": sym,
+                "market": market,
+                "retrieved_at": dt.datetime.now().isoformat(timespec="seconds"),
+                "fundamental_card": _strip_price_fields_for_blind_pass(raw_card),
+            }
+        output = {
+            "mode": "blind_fundamentals",
+            "market": market,
+            "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
+            "symbol_count": len(blind_map),
+            "snapshots": blind_map,
+        }
+        if args.out:
+            out_p = Path(args.out)
+            out_p.parent.mkdir(parents=True, exist_ok=True)
+            out_p.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            print(f"[+] Wrote price-blind fundamentals for {len(blind_map)} symbols to {args.out}")
+        else:
+            print(json.dumps(output, indent=2, ensure_ascii=False))
+        return
+
     stage2_data = load_stage2_context(market, args.stage2_file)
     if args.from_watchlist or args.from_shortlist or args.from_holdings:
         extra = collect_symbols_from_records(
@@ -654,7 +795,7 @@ def main():
     for sym in symbols:
         tv = tv_map.get(sym, {})
         s2 = match_stage2_symbol(sym, market, tv, s2_data)
-        if not args.skip_web_card and len(symbols) <= 25:
+        if not args.skip_web_card and (sym in explicit_symbols or len(symbols) <= 25):
             val_card = fetch_screener_in(sym) if market == "IN" else fetch_finviz_us(sym)
         else:
             val_card = {

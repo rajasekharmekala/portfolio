@@ -32,7 +32,7 @@ SHARED = os.path.join(ROOT, ".agents", "skills", "_shared")
 
 
 def palette_root() -> str:
-    text = open(os.path.join(SHARED, "REPORT_PALETTE.md"), encoding="utf-8").read()
+    text = Path(SHARED, "REPORT_PALETTE.md").read_text(encoding="utf-8")
     m = re.search(r"```css\s*(:root\s*\{.*?\})\s*```", text, re.S)
     if not m:
         sys.exit("assemble: no :root block found in REPORT_PALETTE.md")
@@ -78,7 +78,7 @@ def references_block(body: str, research: list) -> str:
 
 def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional[list] = None,
           generated_at: Optional[datetime] = None, kind: str = "report", workflow: str = "",
-          as_of: str = "", layout_only: bool = False) -> str:
+          as_of: str = "", layout_only: bool = False, sector: str = "") -> str:
     generated = generated_at or datetime.now(ZoneInfo("America/Los_Angeles"))
     if generated.tzinfo is None or generated.utcoffset() is None:
         raise ValueError("generated_at must include a timezone")
@@ -144,6 +144,9 @@ def build(body_raw: str, market: str = "IN", facts: str = "", research: Optional
     metadata = {"report-design": "research-desk-v1", "report-market": market,
                 "report-kind": kind, "report-workflow": workflow, "research-as-of": as_of,
                 "layout-updated-at" if layout_only else "generated-at": generated.isoformat()}
+    clean_sector = (sector or "").strip()
+    if clean_sector and clean_sector.lower() != "not specified":
+        metadata["report-sector"] = clean_sector
     meta = "\n".join(f'<meta name="{name}" content="{html.escape(value, quote=True)}">' for name, value in metadata.items())
     home_href = "../../index.html" if kind == "dossier" else "../index.html"
     return (
@@ -195,11 +198,12 @@ def main() -> None:
     ap.add_argument("--kind", choices=["report", "dossier"], default="report")
     ap.add_argument("--workflow", default="")
     ap.add_argument("--as-of", default="", help="Verified research cutoff, not generation time")
+    ap.add_argument("--sector", default="", help="Optional sector / industry metadata for catalog filtering")
     ap.add_argument("--layout-only", action="store_true", help="Restyle existing research; label date as layout update, never new research")
     a = ap.parse_args()
     raw = Path(a.body).read_text(encoding="utf-8")
     out = build(raw, a.market, a.facts, a.research, kind=a.kind, workflow=a.workflow,
-                as_of=a.as_of, layout_only=a.layout_only)
+                as_of=a.as_of, layout_only=a.layout_only, sector=a.sector)
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     with open(a.out, "w", encoding="utf-8") as f:
         f.write(out)

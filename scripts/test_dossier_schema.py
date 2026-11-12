@@ -1,9 +1,21 @@
+import json
+import tempfile
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 from bs4 import BeautifulSoup
 
-from dossier_schema import validate_monograph_spec
-from dossier_builder_template import _decision_panels
-from readability_check import check_dossier_decisions
+import citation_check
+from dossier_schema import validate_blind_pass_dir, validate_monograph_spec
+from dossier_builder_template import (
+    _decision_panels,
+    _linkify_html_fragment,
+    _render_waterfall_block,
+    render_10chapter_monograph_editions,
+)
+from readability_check import check_dossier_decisions, check_grade, check_prose_integrity
+from stock_snapshot import _strip_price_fields_for_blind_pass
+from sync_dossier_pipeline import apply_pipeline_transition, verify_review_and_quality_gates
 
 
 def valid_spec():
@@ -84,6 +96,349 @@ class DossierDecisionSchemaTests(unittest.TestCase):
         errors = []
         check_dossier_decisions(soup, errors)
         self.assertEqual(errors, [])
+
+    def test_rejects_shell_variable_corruption_and_mangled_sanitizer_prose(self):
+        spec = valid_spec()
+        spec["chapters"] = [{
+            "id": "ch-9",
+            "web_blocks": [
+                {"type": "p", "text": "Cocoa futures breached ,000/MT while rival valuations hit ~M+ Valuation."},
+                {"type": "p", "text": "Kody commands a premium. : trailing earnings stalled. However, faces margin pressure."},
+                {"type": "p", "text": "A. In addition, b. In addition, c. In addition, d."},
+            ],
+            "book_paragraphs": [],
+        }]
+        errors, _ = validate_monograph_spec(spec, min_total_words=0)
+        joined = " | ".join(errors)
+        self.assertIn("corrupted number fragment", joined)
+        self.assertIn("corrupted currency magnitude", joined)
+        self.assertIn("mangled punctuation", joined)
+        self.assertIn("subjectless '. However, <verb>'", joined)
+        self.assertIn("mechanical '. In addition, ...'", joined)
+
+        html_doc = (
+            '<main><section id="primer"><p>Thesis.</p></section>'
+            '<section id="primer"><p>Breached ,000/MT. : bad split.</p></section></main>'
+        )
+        r_errors = []
+        check_prose_integrity(BeautifulSoup(html_doc, "html.parser"), r_errors)
+        r_joined = " | ".join(r_errors)
+        self.assertIn("DUPLICATE SECTION ID", r_joined)
+        self.assertIn("SHELL CORRUPTION", r_joined)
+        self.assertIn("MANGLED PROSE", r_joined)
+
+    def test_validates_waterfall_math_and_renders_deterministic_waterfall(self):
+        spec = valid_spec()
+        spec["chapters"] = [{
+            "id": "ch-3",
+            "web_blocks": [{
+                "type": "table",
+                "caption": "Worked $100 Revenue-to-FCF Waterfall",
+                "headers": ["Line Item", "Amount per $100", "Share (%)", "Notes"],
+                "rows": [
+                    ["Profit Before Tax (PBT)", "24.80", "24.8%", "($26M on $84M revenue in FY26)"],
+                    ["Cash Flow from Operations (CFO)", "14.29", "14.3%", "Audited CFO"],
+                    ["Capital Expenditures (Capex)", "-28.00", "-28.0%", "Audited Capex"],
+                    ["Free Cash Flow (FCF)", "-53.00", "-53.0%", "Broken FCF"],
+                ],
+                "takeaway": "Broken waterfall table.",
+            }],
+            "book_paragraphs": [],
+        }, {"id": "ch-9", "web_blocks": [], "book_paragraphs": []}]
+        errors, _ = validate_monograph_spec(spec, min_total_words=0)
+        joined = " | ".join(errors)
+        self.assertIn("contradicts note", joined)
+        self.assertIn("waterfall cash-flow mismatch", joined)
+
+        wf_html = _render_waterfall_block(
+            {"period": "FY26", "unit": "Cr", "revenue": 84.0, "cogs": 38.9, "employee_cost": 14.6,
+             "other_opex": 6.5, "da": 3.0, "interest": 2.0, "other_income": 7.0, "tax": 9.0,
+             "cfo": 12.0, "capex": 86.0},
+            "IN", "TEST", max_cite=5,
+        )
+        wf_text = BeautifulSoup(wf_html, "html.parser").get_text(" ", strip=True)
+        # CFO (12/84 = 14.29) + Capex (-86/84 = -102.38) = FCF (-74/84 = -88.10)
+        self.assertIn("14.29", wf_text)
+        self.assertIn("-102.38", wf_text)
+        self.assertIn("-88.10", wf_text)
+
+    def test_enforces_url_floor_on_citations_and_learning_hub(self):
+        spec = valid_spec()
+        spec["citations"] = [f"Plain text reference {i} with no URL" for i in range(1, 26)]
+        spec["chapters"] = [
+            {"id": "ch-4", "web_blocks": [{"type": "p", "text": " ".join(["word"] * 20)}], "book_paragraphs": [" ".join(["word"] * 20)]},
+            {"id": "ch-9", "web_blocks": [{"type": "p", "text": " ".join(["word"] * 20)}], "book_paragraphs": [" ".join(["word"] * 20)]},
+        ]
+        errors, _ = validate_monograph_spec(spec, min_web_words=10, min_book_words=10)
+        joined = " | ".join(errors)
+        self.assertIn("at least 15 distinct http(s) primary source URLs", joined)
+        self.assertIn("Chapter ch-4 External Learning Hub must include at least 3 clickable http(s) resource URLs", joined)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            rep = Path(tmp) / "unlinked_dossier.html"
+            li = "".join(f"<li>Plain citation {i}</li>" for i in range(26))
+            rep.write_text(f'<html><body><h2 id="references">Notes</h2><ol>{li}</ol></body></html>', encoding="utf-8")
+            c_errors, _ = citation_check.check(str(rep), [], None, min_sources=25, max_age_days=60)
+            self.assertTrue(any("URL FLOOR" in e for e in c_errors))
+
+    def test_compiler_dedups_primer_id_autolinks_injects_tv_and_emits_sector(self):
+        self.assertEqual(
+            _linkify_html_fragment("Revenue grew [1, 2] in [2026]; see https://sec.gov/filing.", max_cite=5),
+            'Revenue grew <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a></sup> '
+            'in [2026]; see <a href="https://sec.gov/filing" target="_blank" rel="noopener">https://sec.gov/filing</a>.',
+        )
+
+        spec = valid_spec()
+        spec["primer"] = "Test Co builds power systems. Revenue grew 30% in FY26. Margins expanded steadily."
+        spec["citations"] = [f"Filing {i}: https://sec{i}.example.com/10k" for i in range(1, 26)]
+        filler = " ".join(["institutional"] * 950)
+        book_filler = " ".join(["narrative"] * 1150)
+        spec["chapters"] = [
+            {"id": "primer", "web_title": "0. Executive Thesis", "web_blocks": [{"type": "p", "text": filler + " [1]"}], "book_paragraphs": [book_filler]},
+            *[{"id": f"ch-{i}", "web_title": f"{i}. Chapter", "web_blocks": [
+                {"type": "p", "text": filler + (" https://a.example.com/1 https://b.example.com/2 https://c.example.com/3" if i == 4 else "")}
+            ], "book_paragraphs": [book_filler]} for i in range(1, 9)],
+            {"id": "ch-9", "web_title": "9. Synthesis", "web_blocks": [
+                {"type": "p", "text": filler},
+                {"type": "trigger", "text": "Close below $85 invalidates the thesis and requires full exit."},
+            ], "book_paragraphs": [book_filler]},
+        ]
+        snapshots = {"snapshots": {"TEST": {
+            "tradingview": {"close": 100.0, "sector": "Technology", "exchange": "NASDAQ"},
+            "stage2_evaluation": {"weinstein_stage": "STAGE_2", "entry_timing_posture": "BUY_AT_CMP_NO_FOMO",
+                                  "support_buy_zone": [90.0, 95.0], "invalidation_stop": 85.0},
+        }}}
+        with tempfile.TemporaryDirectory() as tmp, patch("dossier_builder_template.build_pdf_book"):
+            out = Path(tmp) / "TEST_dossier.html"
+            render_10chapter_monograph_editions(
+                spec, facts={}, snapshots=snapshots, positions={"consolidated": [], "net_worth": 1000},
+                shortlist={"active": []}, out_dossier_path=out,
+            )
+            soup = BeautifulSoup(out.read_text(encoding="utf-8"), "html.parser")
+
+        sec_ids = [s.get("id") for s in soup.select("main.report section[id]")]
+        self.assertEqual(sec_ids.count("primer"), 1)
+        self.assertIn("ch-0", sec_ids)
+        self.assertIsNotNone(soup.select_one("#ch-8 .tradingview-widget-container"))
+        self.assertIsNotNone(soup.select_one('meta[name="report-sector"][content="Technology"]'))
+        self.assertIsNotNone(soup.select_one('#ch-0 sup.reference a[href="#cite_note-1"]'))
+        self.assertGreaterEqual(len(soup.select('#notes a[href^="https://"]')), 25)
+        kf_text = soup.select_one("dl.key-figures").get_text(" ", strip=True)
+        self.assertIn("Technical Screen Signal", kf_text)
+        self.assertIn("technical ceiling only", kf_text)
+        self.assertIn("Bear $70.00 / Base $120.00 / Bull $140.00", kf_text)
+
+    def test_blind_pass_strips_prices_and_blocks_premature_verdict_anchoring(self):
+        raw_card = {
+            "source_url": "https://www.screener.in/company/TEST/",
+            "sector": "Industrials",
+            "industry": "Electrical Equipment",
+            "about": "Manufactures industrial generators.",
+            "roce_pct": 28.4,
+            "roe_pct": 22.1,
+            "stock_pe": 128.0,
+            "book_value": 159.0,
+            "ratios": {
+                "Market Cap": "2,240",
+                "Current Price": "1,551",
+                "Stock P/E": "128",
+                "ROCE": "28.4%",
+                "ROE": "22.1%",
+            },
+            "cons": ["Stock is trading at 9.76 times its book value", "Debtor days have increased from 120 to 192 days."],
+            "tables": {"profit_loss": {"headers": ["Mar 2026"], "rows": {"Sales": ["84"]}}},
+        }
+        blind = _strip_price_fields_for_blind_pass(raw_card)
+        self.assertNotIn("stock_pe", blind)
+        self.assertNotIn("Stock P/E", blind["ratios"])
+        self.assertNotIn("Current Price", blind["ratios"])
+        self.assertIn("ROCE", blind["ratios"])
+        self.assertEqual(blind["cons"], ["Debtor days have increased from 120 to 192 days."])
+
+        with tempfile.TemporaryDirectory() as tmp:
+            wdir = Path(tmp) / "TEST"
+            (wdir / "chapters").mkdir(parents=True)
+            (wdir / "business_quality.json").write_text(json.dumps({
+                "business_quality_verdict": "COMPOUNDER_PASS",
+                "kpi_health": "PASS",
+                "summary_rationale": "Strong ROCE of 28%, clean cash conversion above 90% of PAT, and sticky OEM qualification moat.",
+            }), encoding="utf-8")
+            for i in range(1, 7):
+                (wdir / "chapters" / f"ch0{i}.json").write_text(json.dumps({
+                    "id": f"ch-{i}",
+                    "web_blocks": [{"type": "p", "text": "Pure operational analysis of customer contracts and cash conversion."}],
+                    "book_paragraphs": ["Pure narrative walkthrough of the factory floor."],
+                }), encoding="utf-8")
+            self.assertEqual(validate_blind_pass_dir(wdir), [])
+
+            # Premature spine.json or leaked verdict token in ch-2 must fail Pass 1
+            (wdir / "spine.json").write_text("{}", encoding="utf-8")
+            (wdir / "chapters" / "ch02.json").write_text(json.dumps({
+                "id": "ch-2",
+                "web_blocks": [{"type": "p", "text": "We assign WAIT_FOR_SUPPORT in TIER_2 due to rich valuation."}],
+                "book_paragraphs": [],
+            }), encoding="utf-8")
+            errs = validate_blind_pass_dir(wdir)
+            joined = " | ".join(errs)
+            self.assertIn("Premature spine.json", joined)
+            self.assertIn("leaks portfolio verdict/timing token", joined)
+
+    def test_anti_hedging_and_technical_ceiling_gates(self):
+        # 1. FUNDAMENTAL_FAIL cannot be hedged as WAIT_FOR_SUPPORT
+        spec1 = valid_spec()
+        spec1["business_quality_verdict"] = "FUNDAMENTAL_FAIL"
+        errs1, _ = validate_monograph_spec(spec1, min_total_words=0)
+        self.assertTrue(any("FUNDAMENTAL_FAIL" in e for e in errs1))
+
+        # 2. Target base <= entry_zone_high (e.g. KODYTECH ₹1,450 target vs ₹1,543 zone) is rejected
+        spec2 = valid_spec()
+        spec2["entry_zone_low"] = 1467
+        spec2["entry_zone_high"] = 1543
+        spec2["stop_loss"] = 1213
+        spec2["target_base"] = 1450
+        errs2, _ = validate_monograph_spec(spec2, min_total_words=0)
+        self.assertTrue(any("Anti-hedging gate failed" in e for e in errs2))
+
+        # 3. Technical timing ceiling CAP_WAIT_FOR_SUPPORT blocks IMMEDIATE_BUY
+        spec3 = valid_spec()
+        spec3["verdict"] = "IMMEDIATE_BUY"
+        spec3["new_capital_verdict"] = "IMMEDIATE_BUY"
+        snaps = {"snapshots": {"TEST": {
+            "tradingview": {"close": 115.0},
+            "stage2_evaluation": {"weinstein_stage": "STAGE_2", "entry_timing_posture": "WAIT_FOR_SUPPORT_PULLBACK",
+                                  "technical_timing_gate": "CAP_WAIT_FOR_SUPPORT"},
+        }}}
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(ValueError, "Technical ceiling violation"):
+                render_10chapter_monograph_editions(
+                    spec3, snapshots=snaps, positions={"consolidated": [], "net_worth": 1000},
+                    shortlist={"active": []}, out_dossier_path=Path(tmp) / "TEST_dossier.html",
+                )
+
+    def test_tightened_dossier_readability_grade_and_sentence_cap(self):
+        # Regular chapter > 15.0 fails, while #gate-exceptions between 15.0 and 16.5 passes; >24 word avg fails
+        long_sent = (
+            "The company manufactures industrial automation controllers and distributes integrated "
+            "power conversion modules across regional enterprise customers while expanding factory "
+            "utilization and maintaining strict contractual delivery schedules across every plant."
+        )
+        run_on = " ".join([long_sent] * 4)
+        legal = (
+            "As of September 30, 2026, promoter shares remain pledged to Catalyst Trusteeship Limited under acquisition debentures. "
+            "This debt reflects parent acquisition financing rather than operating distress, yet exceeds our standard threshold."
+        )
+        soup = BeautifulSoup(
+            f'<main><section id="primer"><p>Short crisp sentence one. Short crisp sentence two. Short crisp sentence three.</p></section>'
+            f'<section class="chapter" id="ch-1"><p>{run_on}</p></section>'
+            f'<section class="chapter" id="gate-exceptions"><p>{legal}</p></section></main>',
+            "html.parser",
+        )
+        errs = []
+        check_grade(soup, 15.0, errs, prose_only=True)
+        joined = " | ".join(errs)
+        self.assertIn("GRADE ch-1", joined)
+        self.assertIn("SENTENCE LENGTH", joined)
+        self.assertNotIn("GRADE gate-exceptions", joined)
+
+    def test_deterministic_pipeline_sync_promote_monitor_discard_and_review_gate(self):
+        snapshots = {"snapshots": {"TEST": {
+            "tradingview": {"close": 96.0, "company_name": "Test Systems Inc", "sector": "Technology",
+                            "industry": "Semiconductors", "market_cap": 15.0, "pe_ttm": 28.0, "roe_pct": 24.0,
+                            "rsi_14_daily": 58.0},
+            "stage2_evaluation": {"weinstein_stage": "STAGE_2", "entry_timing_posture": "BUY_AT_CMP_NO_FOMO"},
+        }}}
+        wl_init = {"active": [{
+            "symbol": "TEST", "company_name": "Test Systems Inc", "source_type": "SCANNER",
+            "status": "RESEARCH_REQUIRED", "action_verdict": "RESEARCH_REQUIRED",
+            "kpi_health": "PENDING", "gate_status": "PENDING", "strategy_bucket": "CORE_ALPHA",
+            "as_of_date": "2026-11-01", "research_cycle": 2,
+        }]}
+        sl_init = {"market": "US", "active": []}
+
+        # 1. Qualified TIER_1 COMPOUNDER_PASS -> PROMOTE_TO_SHORTLIST (and mark watchlist COMPLETED at cycle 2)
+        promote_spec = {
+            **valid_spec(),
+            "verdict": "IMMEDIATE_BUY",
+            "new_capital_verdict": "IMMEDIATE_BUY",
+            "conviction_tier": "TIER_1",
+            "business_quality_verdict": "COMPOUNDER_PASS",
+            "kpi_health": "PASS",
+            "primer": "High-ROIC semiconductor leader in early Stage 2.",
+        }
+        r1 = apply_pipeline_transition(promote_spec, snapshots, wl_init, sl_init, today_iso="2026-11-12")
+        self.assertEqual(r1["transition"], "PROMOTE_TO_SHORTLIST")
+        self.assertEqual(len(r1["shortlist"]["active"]), 1)
+        self.assertEqual(r1["shortlist"]["active"][0]["action_verdict"], "IMMEDIATE_BUY")
+        self.assertEqual(r1["watchlist"]["active"][0]["status"], "COMPLETED")
+        self.assertEqual(r1["watchlist"]["active"][0]["research_cycle"], 2)
+
+        # 2. Conditional TIER_3 WAIT_FOR_SUPPORT -> KEEP_ON_WATCHLIST (and demote from shortlist)
+        monitor_spec = {
+            **valid_spec(),
+            "conviction_tier": "TIER_3",
+            "business_quality_verdict": "CYCLICAL_CONDITIONAL",
+            "kpi_health": "PASS_WITH_WATCH",
+        }
+        r2 = apply_pipeline_transition(monitor_spec, snapshots, r1["watchlist"], r1["shortlist"], today_iso="2026-11-12")
+        self.assertEqual(r2["transition"], "KEEP_ON_WATCHLIST")
+        self.assertEqual(r2["shortlist"]["active"], [])
+        self.assertEqual(r2["watchlist"]["active"][0]["status"], "COMPLETED")
+        self.assertEqual(r2["watchlist"]["active"][0]["shortlist_action"], "MONITOR_ON_WATCHLIST")
+
+        # 3. REJECTED -> DISCARD from both watchlist and shortlist
+        reject_spec = {
+            **valid_spec(),
+            "verdict": "REJECTED",
+            "new_capital_verdict": "REJECTED",
+            "conviction_tier": "TIER_0",
+            "business_quality_verdict": "FUNDAMENTAL_FAIL",
+            "kpi_health": "FAIL",
+        }
+        r3 = apply_pipeline_transition(reject_spec, snapshots, r1["watchlist"], r1["shortlist"], today_iso="2026-11-12")
+        self.assertEqual(r3["transition"], "DISCARD")
+        self.assertEqual(r3["watchlist"]["active"], [])
+        self.assertEqual(r3["shortlist"]["active"], [])
+
+        # 4. Reviewer & Red-Team gate blocks unapproved dossiers and passes approved ones
+        with tempfile.TemporaryDirectory() as tmp, patch("dossier_builder_template.build_pdf_book"):
+            tdir = Path(tmp)
+            dossier_file = tdir / "TEST_dossier.html"
+            filler = " ".join(["The plant ships clean power racks to cloud buyers."] * 140)
+            b_filler = " ".join(["You and I can see how the factory builds each unit on time."] * 140)
+            full_spec = {
+                **promote_spec,
+                "primer": (
+                    "Test Systems builds clean power racks for cloud data centers. "
+                    "Sales grew 32% this year while cash flow stayed above net income. "
+                    "We rate the stock an immediate buy with strong risk-reward."
+                ),
+                "citations": [f"SEC Filing {i}: https://sec{i}.example.com/10k" for i in range(1, 26)],
+                "chapters": [
+                    {"id": "ch-0", "web_title": "0. Executive Thesis", "web_blocks": [{"type": "p", "text": filler}], "book_paragraphs": [b_filler]},
+                    *[{"id": f"ch-{i}", "web_title": f"{i}. Chapter", "web_blocks": [
+                        {"type": "p", "text": filler + (" https://a.example.com/1 https://b.example.com/2 https://c.example.com/3" if i == 4 else "")}
+                    ], "book_paragraphs": [b_filler]} for i in range(1, 7)],
+                    {"id": "ch-7", "web_title": "7. Valuation", "web_blocks": [{"type": "p", "text": filler}], "book_paragraphs": [b_filler]},
+                    {"id": "ch-8", "web_title": "8. Tape", "web_blocks": [{"type": "p", "text": filler}], "book_paragraphs": [b_filler]},
+                    {"id": "ch-9", "web_title": "9. Synthesis", "web_blocks": [
+                        {"type": "p", "text": filler},
+                        {"type": "trigger", "text": "Daily close below $85 invalidates the Stage 2 breakout."},
+                    ], "book_paragraphs": [b_filler]},
+                ],
+            }
+            render_10chapter_monograph_editions(
+                full_spec, snapshots=snapshots, positions={"consolidated": [], "net_worth": 1000},
+                shortlist={"active": []}, out_dossier_path=dossier_file,
+            )
+            rev_dir = tdir / "review"
+            (rev_dir / "round_1").mkdir(parents=True)
+            (rev_dir / "round_1" / "round_1_review.json").write_text('{"verdict": "REVISE"}', encoding="utf-8")
+            (rev_dir / "round_1" / "round_1_red_team.json").write_text('{"verdict": "APPROVE"}', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "not APPROVE"):
+                verify_review_and_quality_gates(dossier_file, review_dir=rev_dir)
+
+            (rev_dir / "round_1" / "round_1_review.json").write_text('{"verdict": "APPROVE"}', encoding="utf-8")
+            verify_review_and_quality_gates(dossier_file, review_dir=rev_dir)
 
 
 if __name__ == "__main__":

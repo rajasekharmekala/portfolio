@@ -1,6 +1,6 @@
 # Report Voice: how every report should read
 
-Read this before writing any section of any report (newsletter, audit, options review, company dossier, archive review).
+Read this before writing any section of any report (market intelligence, portfolio audit, company dossier).
 It applies on top of REPORT_EDITORIAL_STANDARD.md, which covers structure, data, and the validator floors.
 
 ## 1. The model

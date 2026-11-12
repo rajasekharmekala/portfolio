@@ -16,6 +16,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import copy
 import html
 import json
 import os
@@ -888,6 +889,15 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         ]
     )
 
+    sector = (
+        spec.get("sector")
+        or tv.get("sector")
+        or (snap_sym.get("fundamental_card") or {}).get("sector")
+        or (snap_sym.get("thewrap_stage2") or {}).get("thewrap_industry")
+        or tv.get("industry")
+        or ""
+    )
+
     return build(
         body_html,
         market=market,
@@ -896,6 +906,208 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
         kind="dossier",
         workflow="Company research",
         as_of=as_of,
+        sector=sector,
+    )
+
+
+_TAG_TOKEN_RE = re.compile(r"(<(?:a|code|sup|script)\b[^>]*>.*?</(?:a|code|sup|script)>|<[^>]+>)", re.S | re.I)
+_BARE_URL_RE = re.compile(r"(https?://[^\s<>)\"']+)", re.I)
+_BRACKET_CITE_RE = re.compile(r"\[(\d+(?:\s*[,\u2013\-]\s*\d+)*)\]")
+
+
+def _linkify_html_fragment(fragment: str, max_cite: int = 0) -> str:
+    """Auto-link bare http(s) URLs and inline [N] references without touching existing HTML tags."""
+    if not fragment:
+        return ""
+
+    def repl_url(m: re.Match) -> str:
+        raw_url = m.group(1)
+        clean = raw_url.rstrip(".,;:!?")
+        tail = raw_url[len(clean):]
+        esc_u = html.escape(clean, quote=True)
+        return f'<a href="{esc_u}" target="_blank" rel="noopener">{html.escape(clean)}</a>{tail}'
+
+    def repl_cite(m: re.Match) -> str:
+        if max_cite <= 0:
+            return m.group(0)
+        inner = m.group(1)
+        parts = [p.strip() for p in inner.split(",")]
+        rendered = []
+        for part in parts:
+            rng = re.split(r"[\u2013\-]", part)
+            nums = [int(x.strip()) for x in rng if x.strip().isdigit()]
+            if not nums or any(n < 1 or n > max_cite for n in nums):
+                return m.group(0)
+            if len(nums) == 2:
+                rendered.append(
+                    f'<a href="#cite_note-{nums[0]}">[{nums[0]}]</a>&ndash;<a href="#cite_note-{nums[1]}">[{nums[1]}]</a>'
+                )
+            else:
+                rendered.append(f'<a href="#cite_note-{nums[0]}">[{nums[0]}]</a>')
+        return f'<sup class="reference">{", ".join(rendered)}</sup>'
+
+    tokens = _TAG_TOKEN_RE.split(str(fragment))
+    out = []
+    for tok in tokens:
+        if not tok or tok.startswith("<"):
+            out.append(tok)
+        else:
+            step = _BARE_URL_RE.sub(repl_url, tok)
+            if max_cite > 0:
+                sub_tokens = _TAG_TOKEN_RE.split(step)
+                step = "".join(
+                    t if t.startswith("<") else _BRACKET_CITE_RE.sub(repl_cite, t)
+                    for t in sub_tokens
+                )
+            out.append(step)
+    return "".join(out)
+
+
+def _render_waterfall_block(blk: dict, market: str, sym: str, max_cite: int = 0) -> str:
+    """Deterministically compute per-100 and % of revenue rows from raw audited figures (Zero LLM Math)."""
+    cur = "₹" if market == "IN" else "$"
+    rev = float(blk["revenue"])
+    unit = blk.get("unit") or ("Cr" if market == "IN" else "M")
+    period = blk.get("period") or "Latest Audited FY"
+
+    def fmt_raw(v: float) -> str:
+        sign = "-" if v < 0 else ""
+        return f"{sign}{cur}{abs(v):,.2f} {unit}".strip()
+
+    rows = []
+    if isinstance(blk.get("lines"), list) and blk["lines"]:
+        for item in blk["lines"]:
+            amt = float(item["amount"])
+            per100 = (amt / rev) * 100.0
+            note = _linkify_html_fragment(item.get("note") or f"Audited {period}: {fmt_raw(amt)}", max_cite)
+            rows.append([
+                _esc(item["label"]),
+                f"{per100:+.2f}" if item.get("signed", amt < 0) else f"{per100:.2f}",
+                f"{per100:+.1f}%" if item.get("signed", amt < 0) else f"{per100:.1f}%",
+                note,
+            ])
+    else:
+        cogs = -abs(float(blk.get("cogs", 0.0)))
+        emp = -abs(float(blk.get("employee_cost", 0.0)))
+        opex = -abs(float(blk.get("other_opex", 0.0)))
+        ebitda = rev + cogs + emp + opex if ("cogs" in blk or "employee_cost" in blk or "other_opex" in blk) else float(blk.get("ebitda", 0.0))
+        da = -abs(float(blk.get("da", 0.0)))
+        ebit = ebitda + da
+        interest = -abs(float(blk.get("interest", 0.0)))
+        other_inc = float(blk.get("other_income", 0.0))
+        pbt = ebit + interest + other_inc
+        tax = -abs(float(blk.get("tax", 0.0)))
+        pat = float(blk["pat"]) if "pat" in blk else (pbt + tax)
+        cfo = float(blk.get("cfo", pat))
+        wc_delta = float(blk["working_capital_change"]) if "working_capital_change" in blk else (cfo - pat - abs(da))
+        capex = -abs(float(blk.get("capex", 0.0)))
+        fcf = cfo + capex
+        notes = blk.get("notes") or {}
+
+        spec_lines = [
+            ("Gross Billed Revenue", rev, False, notes.get("revenue") or f"{period} audited revenue: {fmt_raw(rev)}."),
+            ("Direct Materials / COGS", cogs, True, notes.get("cogs") or f"Direct cost of goods/services: {fmt_raw(cogs)}."),
+            ("Employee Expenses", emp, True, notes.get("employee_cost") or f"Payroll & engineering talent: {fmt_raw(emp)}."),
+            ("Other Operating Overhead", opex, True, notes.get("other_opex") or f"SG&A, facilities & overhead: {fmt_raw(opex)}."),
+            ("Operating EBITDA", ebitda, False, notes.get("ebitda") or f"Core operating profit: {fmt_raw(ebitda)}."),
+            ("Depreciation & Amortization", da, True, notes.get("da") or f"Non-cash asset depreciation: {fmt_raw(da)}."),
+            ("Operating EBIT", ebit, False, notes.get("ebit") or f"Operating income after D&A: {fmt_raw(ebit)}."),
+            ("Finance Costs (Interest)", interest, True, notes.get("interest") or f"Debt service cost: {fmt_raw(interest)}."),
+            ("Other Non-Operating Income", other_inc, True, notes.get("other_income") or f"Treasury & non-operating income: {fmt_raw(other_inc)}."),
+            ("Profit Before Tax (PBT)", pbt, False, notes.get("pbt") or f"Pre-tax profit: {fmt_raw(pbt)}."),
+            ("Income Tax", tax, True, notes.get("tax") or f"Corporate tax expense: {fmt_raw(tax)}."),
+            ("Reported Profit After Tax (PAT)", pat, False, notes.get("pat") or f"Bottom-line accounting profit: {fmt_raw(pat)}."),
+            ("Working Capital & Non-Cash Bridge", wc_delta, True, notes.get("working_capital") or f"Net working-capital & non-cash operating bridge."),
+            ("Cash Flow from Operations (CFO)", cfo, False, notes.get("cfo") or f"Audited operating cash flow: {fmt_raw(cfo)}."),
+            ("Capital Expenditures (Capex)", capex, True, notes.get("capex") or f"Fixed-asset & tooling capex: {fmt_raw(capex)}."),
+            ("Free Cash Flow (FCF)", fcf, True, notes.get("fcf") or f"Reconciled CFO less Capex: {fmt_raw(fcf)}."),
+        ]
+        for lbl, val, signed, nt in spec_lines:
+            p100 = (val / rev) * 100.0
+            rows.append([
+                _esc(lbl),
+                f"{p100:+.2f}" if signed else f"{p100:.2f}",
+                f"{p100:+.1f}%" if signed else f"{p100:.1f}%",
+                _linkify_html_fragment(nt, max_cite),
+            ])
+
+    caption = blk.get("caption") or f"{sym}: Worked {cur}100 Revenue-to-Free-Cash-Flow Waterfall ({period})"
+    takeaway = _linkify_html_fragment(
+        blk.get("takeaway")
+        or f"Every row above is scaled deterministically to {cur}100.00 of {period} audited revenue ({fmt_raw(rev)}) so accounting profit and cash conversion reconcile without period mixing.",
+        max_cite,
+    )
+    return _render_table(
+        _esc(caption),
+        ["Financial Line Item", f"Amount per {cur}100 Rev ({cur})", "Share of Revenue (%)", "Audited Reality & Notes"],
+        rows,
+        takeaway,
+    )
+
+
+def _render_snapshot_financials(blk: dict, snap_sym: dict, sym: str, max_cite: int = 0) -> str:
+    stmt = blk.get("statement", "profit_loss")
+    tbl = ((snap_sym.get("fundamental_card") or {}).get("tables") or {}).get(stmt) or {}
+    headers = list(tbl.get("headers") or [])
+    row_map = tbl.get("rows") or {}
+    if not headers or not row_map:
+        return ""
+    max_cols = int(blk.get("max_columns", 10))
+    start_idx = max(0, len(headers) - max_cols)
+    sel_headers = ["Line Item"] + [_esc(h) for h in headers[start_idx:]]
+    wanted = blk.get("rows")
+    keys = [k for k in (wanted if isinstance(wanted, list) and wanted else row_map.keys()) if k in row_map]
+    rows = [[_esc(k)] + [_esc(v) for v in row_map[k][start_idx:]] for k in keys]
+    caption = blk.get("caption") or f"{sym}: Multi-Year {stmt.replace('_', ' ').title()} (Snapshot Extracted)"
+    takeaway = _linkify_html_fragment(
+        blk.get("takeaway")
+        or f"Figures above are extracted directly from the verified {sym} financial snapshot across {len(headers[start_idx:])} reporting periods.",
+        max_cite,
+    )
+    return _render_table(_esc(caption), sel_headers, rows, takeaway)
+
+
+def _render_peer_snapshot_table(blk: dict, snapshots: dict, sym: str, market: str, max_cite: int = 0) -> str:
+    cur = "₹" if market == "IN" else "$"
+    mcap_lbl = "Mkt Cap (₹ Cr)" if market == "IN" else "Mkt Cap ($B)"
+    peer_syms = list(dict.fromkeys([sym] + [str(s).upper() for s in (blk.get("peers") or blk.get("symbols") or [])]))
+    rows = []
+    for ps in peer_syms:
+        ps_snap = _lookup_snapshot(snapshots, ps)
+        tv = ps_snap.get("tradingview") or {}
+        fc = ps_snap.get("fundamental_card") or {}
+        ev = ps_snap.get("stage2_evaluation") or {}
+        close = tv.get("close")
+        mcap = tv.get("market_cap")
+        pe = tv.get("pe_ttm") if tv.get("pe_ttm") is not None else fc.get("stock_pe")
+        pb = tv.get("pb_fq")
+        roe = tv.get("roe_pct") if tv.get("roe_pct") is not None else fc.get("roe_pct")
+        rev_g = tv.get("revenue_yoy_growth_ttm_pct")
+        opm = tv.get("operating_margin_ttm_pct")
+        stage = ev.get("weinstein_stage") or "N/A"
+        rows.append([
+            f"<strong>{_esc(ps)}</strong>" if ps == sym else _esc(ps),
+            _esc(tv.get("company_name") or ps),
+            f"{cur}{close:,.2f}" if isinstance(close, (int, float)) else "N/A",
+            f"{mcap:,.2f}" if isinstance(mcap, (int, float)) else "N/A",
+            f"{pe:.1f}x" if isinstance(pe, (int, float)) else "N/A",
+            f"{pb:.2f}x" if isinstance(pb, (int, float)) else "N/A",
+            f"{roe:.1f}%" if isinstance(roe, (int, float)) else "N/A",
+            f"{rev_g:+.1f}%" if isinstance(rev_g, (int, float)) else "N/A",
+            f"{opm:.1f}%" if isinstance(opm, (int, float)) else "N/A",
+            _esc(stage),
+        ])
+    caption = blk.get("caption") or f"{sym} vs. Listed Peers: Snapshot Valuation, Profitability & Stage 2 Matrix"
+    takeaway = _linkify_html_fragment(
+        blk.get("takeaway")
+        or f"Peer multiples, growth rates, margins, and Weinstein stages are pulled deterministically from the same-session TradingView and fundamental snapshot.",
+        max_cite,
+    )
+    return _render_table(
+        _esc(caption),
+        ["Ticker", "Company", "CMP", mcap_lbl, "P/E (TTM)", "P/B", "ROE", "Rev YoY", "OPM", "Stage"],
+        rows,
+        takeaway,
     )
 
 
@@ -996,6 +1208,17 @@ def render_10chapter_monograph_editions(
     tier = spec.get("conviction_tier", "TIER_2")
     w_stage = spec.get("weinstein_stage") or (inst_m.get("stage_label") if ledger_is_asof else None) or s2_ev.get("weinstein_stage", "N/A")
     entry_posture = spec.get("entry_posture") or s2_ev.get("entry_timing_posture") or verdict
+    tech_gate = str(s2_ev.get("technical_timing_gate") or "").upper()
+    if tech_gate == "CAP_REJECTED" and spec["new_capital_verdict"] in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP"}:
+        raise ValueError(
+            f"Technical ceiling violation for {sym}: snapshot technical_timing_gate is CAP_REJECTED ({w_stage}), "
+            f"which forbids {spec['new_capital_verdict']}"
+        )
+    if tech_gate == "CAP_WAIT_FOR_SUPPORT" and spec["new_capital_verdict"] == "IMMEDIATE_BUY":
+        raise ValueError(
+            f"Technical ceiling violation for {sym}: snapshot technical_timing_gate is CAP_WAIT_FOR_SUPPORT "
+            f"({entry_posture}), which caps new capital at WAIT_FOR_SUPPORT or ACCUMULATE_ON_DIP"
+        )
     no_new_allocation = (
         verdict.upper() in {"REJECTED", "WAIT_FOR_SUPPORT"}
         or str(entry_posture).startswith(("WAIT_FOR_SUPPORT", "NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
@@ -1008,18 +1231,23 @@ def render_10chapter_monograph_editions(
         ru["risk_budget_bps"] = 0.0
 
     scenario_horizon = str(spec.get("scenario_horizon") or "").strip()
-    if scenario_horizon and target_base is not None:
-        target_label = f"{scenario_horizon.title()} scenario range"
-        target_value = f"Bear {cur}{target_bear:,.2f} / Base {cur}{target_base:,.2f} / Bull {cur}{target_bull:,.2f}"
+    if target_base is None:
+        target_label = f"{scenario_horizon.title()} scenario range" if scenario_horizon else "Scenario targets"
+        target_value = "Not set; valuation bridge is not decision-grade"
+    else:
+        target_label = f"{scenario_horizon.title()} scenario range" if scenario_horizon else "Scenario targets"
+        if target_bear is not None:
+            target_value = f"Bear {cur}{target_bear:,.2f} / Base {cur}{target_base:,.2f} / Bull {cur}{target_bull:,.2f}"
+        else:
+            target_value = f"Base {cur}{target_base:,.2f} / Bull {cur}{target_bull:,.2f}"
         if no_new_allocation:
             target_value += " (new-entry R:R: N/A)"
-    else:
-        target_label = "Price target"
-        target_value = "Not set; valuation bridge is not decision-grade" if target_base is None else f"{cur}{target_base:,.2f} / {cur}{target_bull:,.2f}"
-        if no_new_allocation and target_base is not None:
-            target_value += " (new-entry R:R: N/A)"
-        elif target_base is not None:
+        else:
             target_value += f" (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)"
+
+    screen_signal_text = _esc(entry_posture)
+    if no_new_allocation and str(entry_posture).upper() == "BUY_AT_CMP_NO_FOMO":
+        screen_signal_text += " (technical ceiling only — overridden by fundamental/valuation gate)"
 
     kf_items = [
         ("New Capital Verdict", f'<span class="verdict {v_cls}">{_esc(spec["new_capital_verdict"])}</span> ({_esc(archetype)})'),
@@ -1027,7 +1255,7 @@ def render_10chapter_monograph_editions(
         ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
         ("Strategy Bucket", _esc(bucket)),
         ("Weinstein Stage", _esc(w_stage)),
-        ("No-FOMO Entry Posture", _esc(entry_posture)),
+        ("Technical Screen Signal", screen_signal_text),
         (
             "Valuation watch zone (conditional)" if no_new_allocation else "Support Buy Zone",
             f"{cur}{entry_low:,.2f} – {cur}{entry_high:,.2f}" + (" (no live stop; recalculate before entry)" if no_new_allocation else f" (Stop: {cur}{stop_loss:,.2f})"),
@@ -1135,27 +1363,22 @@ def render_10chapter_monograph_editions(
         ),
     )
 
+    max_cite = len(spec.get("citations") or [])
     primer_text = spec.get("primer") or ""
     primer_html = (
         '<section class="primer" id="primer">\n'
         "<h2>Executive Thesis &amp; Before You Read</h2>\n"
-        f"<p>{primer_text}</p>\n"
-        "</section>"
-    ) if primer_text else ""
-    primer_book_html = (
-        '<section class="primer" id="primer">\n'
-        "<h2>Executive Thesis &amp; Before You Listen</h2>\n"
-        f"<p>{strip_html(primer_text)}</p>\n"
+        f"<p>{_linkify_html_fragment(primer_text, max_cite)}</p>\n"
         "</section>"
     ) if primer_text else ""
 
     web_sections: List[str] = []
-    book_sections: List[str] = []
-    chapters = spec.get("chapters", [])
+    spec_for_build = copy.deepcopy(spec)
+    chapters = spec_for_build.get("chapters", [])
     for chapter in chapters:
         if chapter.get("id") == "ch-9":
             chapter.setdefault("book_paragraphs", []).append(book_decision)
-    schema_errors, stats = validate_monograph_spec(spec, min_total_words=11000)
+    schema_errors, stats = validate_monograph_spec(spec_for_build)
     if schema_errors:
         raise ValueError("Incomplete 10-chapter dossier spec: " + "; ".join(schema_errors))
     web_words = stats.get("web_words", 0)
@@ -1163,75 +1386,83 @@ def render_10chapter_monograph_editions(
     audio_mins = max(1, stats.get("estimated_audio_minutes", round(book_words / 155)))
 
     for idx, ch in enumerate(chapters):
-        cid = ch.get("id") or f"ch-{idx}"
+        raw_cid = ch.get("id") or f"ch-{idx}"
+        cid = "ch-0" if (idx == 0 and raw_cid == "primer") else raw_cid
         w_title = ch.get("web_title") or ch.get("book_title") or f"Chapter {idx}"
-        b_title = ch.get("book_title") or ch.get("web_title") or f"Chapter {idx}"
         question = ch.get("question") or ch.get("kicker") or ""
 
-        # 1. Web section
         w_parts = [f'<section class="chapter" id="{_esc(cid)}">', f"<h2>{_esc(w_title)}</h2>"]
         if question:
             w_parts.append(f'<div class="section-summary"><strong>Core Investor Question:</strong> {_esc(question)}</div>')
+        saw_tv = False
+        saw_sizing = False
         for blk in ch.get("web_blocks", []):
             btype = blk.get("type", "p")
             if btype == "p":
-                w_parts.append(f"<p>{blk.get('html') or blk.get('text', '')}</p>")
+                w_parts.append(f"<p>{_linkify_html_fragment(blk.get('html') or blk.get('text', ''), max_cite)}</p>")
             elif btype == "h3":
                 w_parts.append(f"<h3>{_esc(blk.get('title', ''))}</h3>")
             elif btype == "table":
+                linked_rows = [
+                    [_linkify_html_fragment(str(c), max_cite) for c in r]
+                    for r in blk.get("rows", [])
+                ]
                 w_parts.append(
                     _render_table(
-                        blk.get("caption", ""),
+                        _linkify_html_fragment(blk.get("caption", ""), max_cite),
                         blk.get("headers", []),
-                        blk.get("rows", []),
-                        blk.get("takeaway", ""),
+                        linked_rows,
+                        _linkify_html_fragment(blk.get("takeaway", ""), max_cite),
                     )
                 )
+            elif btype == "waterfall":
+                w_parts.append(_render_waterfall_block(blk, market, sym, max_cite))
+            elif btype == "snapshot_financials":
+                sf_html = _render_snapshot_financials(blk, snap_sym, sym, max_cite)
+                if sf_html:
+                    w_parts.append(sf_html)
+            elif btype == "peer_snapshot_table":
+                w_parts.append(_render_peer_snapshot_table(blk, snapshots, sym, market, max_cite))
             elif btype == "callout":
-                w_parts.append(_render_callout_block(blk))
+                linked_blk = {
+                    **blk,
+                    "title": _linkify_html_fragment(blk.get("title", ""), max_cite),
+                    "paragraphs": [_linkify_html_fragment(p, max_cite) for p in blk.get("paragraphs", [])],
+                }
+                w_parts.append(_render_callout_block(linked_blk))
             elif btype == "estimate":
                 w_parts.append(_render_estimate(blk))
             elif btype == "tradingview_chart":
+                saw_tv = True
                 w_parts.append(ch4_inner)
             elif btype == "sizing_table":
+                saw_sizing = True
                 w_parts.append("<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>")
                 w_parts.append(l3_html)
             elif btype == "trigger":
-                w_parts.append(f'<p class="trigger">{blk.get("html") or blk.get("text", "")}</p>')
+                w_parts.append(f'<p class="trigger">{_linkify_html_fragment(blk.get("html") or blk.get("text", ""), max_cite)}</p>')
+
+        if cid == "ch-8" and not saw_tv:
+            w_parts.append("<h3>Interactive TradingView Tape &amp; Deterministic Stage 2 Ledger</h3>")
+            w_parts.append(ch4_inner)
+        if cid == "ch-9" and not saw_sizing:
+            w_parts.append("<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>")
+            w_parts.append(l3_html)
+
         w_parts.append("</section>")
         web_sections.append("\n".join(w_parts))
         if cid == "ch-9":
             web_sections.extend([holding_html, redeploy_html])
 
-        # 2. Book / Audiobook section
-        ch_b_words = sum(word_count(p) for p in ch.get("book_paragraphs", [])) + sum(
-            word_count(p) for sub in ch.get("book_subsections", []) for p in sub.get("paragraphs", [])
-        )
-        ch_mins = max(1, round(ch_b_words / 155))
-        b_parts = [
-            f'<section class="chapter book-chapter" id="{_esc(cid)}" data-audio-chapter="{idx}">',
-            f"<h2>{_esc(b_title)}</h2>",
-            '<div class="chapter-meta-strip">'
-            f'<span class="chapter-question">{_esc(strip_html(question))}</span>'
-            f'<span class="chapter-listen-time">~{ch_mins} min listen • {ch_b_words:,} words</span>'
-            "</div>",
-        ]
-        for bp in ch.get("book_paragraphs", []):
-            b_parts.append(f"<p>{_esc(strip_html(bp))}</p>")
-        for sub in ch.get("book_subsections", []):
-            if sub.get("title"):
-                b_parts.append(f"<h3>{_esc(strip_html(sub['title']))}</h3>")
-            for bp in sub.get("paragraphs", []):
-                b_parts.append(f"<p>{_esc(strip_html(bp))}</p>")
-        b_parts.append("</section>")
-        book_sections.append("\n".join(b_parts))
-
     ge_html = ""
     if spec.get("gate_exceptions"):
-        ge_ps = "".join(f"<p>{p}</p>" for p in spec["gate_exceptions"])
+        ge_ps = "".join(f"<p>{_linkify_html_fragment(p, max_cite)}</p>" for p in spec["gate_exceptions"])
         ge_html = f'<section class="chapter" id="gate-exceptions">\n<h2>Run notes and gate exceptions</h2>\n{ge_ps}\n</section>\n'
 
-    cites_li = "\n".join(f'<li id="cite_note-{i}">{c}</li>' for i, c in enumerate(spec["citations"], 1))
+    cites_li = "\n".join(
+        f'<li id="cite_note-{i}">{_linkify_html_fragment(str(c), 0)}</li>'
+        for i, c in enumerate(spec["citations"], 1)
+    )
     notes_html = (
         '<section id="notes">\n'
         '<h2 id="references">Notes and sources</h2>\n'
@@ -1250,6 +1481,15 @@ def render_10chapter_monograph_editions(
         ]
     )
 
+    sector = (
+        spec.get("sector")
+        or tv.get("sector")
+        or (snap_sym.get("fundamental_card") or {}).get("sector")
+        or (snap_sym.get("thewrap_stage2") or {}).get("thewrap_industry")
+        or tv.get("industry")
+        or ""
+    )
+
     dossier_html = build(
         web_body_html,
         market=market,
@@ -1258,8 +1498,9 @@ def render_10chapter_monograph_editions(
         kind="dossier",
         workflow="Company research",
         as_of=as_of,
+        sector=sector,
     )
-    book_html = render_masterclass_book_html(spec, chapters, kf_items, web_words, book_words, audio_mins)
+    book_html = render_masterclass_book_html(spec_for_build, chapters, kf_items, web_words, book_words, audio_mins)
 
     out_d_path = Path(out_dossier_path)
     out_dir = out_d_path.parent

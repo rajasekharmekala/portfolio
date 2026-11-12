@@ -6,7 +6,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from portal_publish import BASE_URL, published_url, read_entry
 
-TYPES = ("market-intelligence", "portfolio-audit", "company-report", "options-audit", "other")
+TYPES = ("market-intelligence", "portfolio-audit", "company-report", "other")
 
 
 def report_type(subject, source=None):
@@ -15,8 +15,6 @@ def report_type(subject, source=None):
         return "market-intelligence"
     if "portfolio" in text and "audit" in text:
         return "portfolio-audit"
-    if "option" in text:
-        return "options-audit"
     if "company report" in text or "dossier" in text:
         return "company-report"
     return "other"

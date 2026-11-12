@@ -195,6 +195,13 @@ def check(report, research_paths, cache_dir, min_sources, max_age_days,
                       f"({refs} bibliography entries, {len(urls)} distinct "
                       f"source URLs) < {min_sources} (a full company report "
                       f"needs at least {min_sources} distinct primary sources)")
+    elif min_sources > 0:
+        min_urls = min(min_sources, max(1, int(min_sources * 0.6)))
+        if len(urls) < min_urls:
+            errors.append(f"URL FLOOR: only {len(urls)} distinct external http(s) "
+                          f"source URL(s) in report ({refs} bibliography entries); "
+                          f"at least {min_urls} clickable primary source URLs are required "
+                          f"(unlinked plain-text bibliography entries do not satisfy the URL floor)")
 
     cache = load_cache(cache_dir)
     no_cache = cache is None
