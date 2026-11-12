@@ -698,3 +698,242 @@ a:hover {
   .dossier-Code { grid-column: 1 / -1; }
   .dossier-date { text-align: left; }
 }
+
+/* Pipeline Tree & Accordion Styles */
+.pipeline-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.tree-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.view-switcher {
+  display: inline-flex;
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.view-btn {
+  background: var(--surface);
+  color: var(--navy);
+  border: none;
+  padding: 6px 14px;
+  font-family: inherit;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.view-btn:hover {
+  background: var(--link-hover-bg);
+}
+
+.view-btn.is-active {
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.tree-toggle-btn {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--line-strong);
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.82em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tree-toggle-btn:hover {
+  background: var(--link-hover-bg);
+  border-color: var(--navy);
+}
+
+/* Accordion Branch */
+details.accordion-branch {
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+details.accordion-branch::details-content {
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  contain: layout;
+}
+
+details.accordion-branch:not([open])::details-content {
+  block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details.accordion-branch::details-content {
+    transition: block-size 0.25s ease-in-out, content-visibility 0.25s allow-discrete;
+  }
+}
+
+summary.branch-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 15px;
+  background: #f8fafc;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+
+summary.branch-summary::-webkit-details-marker {
+  display: none;
+}
+
+details.accordion-branch[open] > summary.branch-summary {
+  border-bottom-color: var(--line-strong);
+}
+
+summary.branch-summary:hover {
+  background: #edf3f7;
+}
+
+.branch-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.branch-chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--navy);
+  border-bottom: 2px solid var(--navy);
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+details.accordion-branch[open] > summary .branch-chevron {
+  transform: rotate(45deg);
+}
+
+.branch-icon {
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+.branch-title {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+
+.branch-subtitle {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.branch-badge {
+  font-size: 0.8em;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--line);
+  color: var(--ink-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Stage color accents */
+details.branch-watchlist {
+  border-left: 5px solid #006699;
+}
+details.branch-watchlist summary .branch-badge {
+  background: #eef6fa;
+  border-color: #bcdbe8;
+  color: #005580;
+}
+
+details.branch-shortlist {
+  border-left: 5px solid #b87333;
+}
+details.branch-shortlist summary .branch-badge {
+  background: #faf3e8;
+  border-color: #ecd2b0;
+  color: #7c4700;
+}
+
+details.branch-holdings {
+  border-left: 5px solid #145a32;
+}
+details.branch-holdings summary .branch-badge {
+  background: #e8f4ec;
+  border-color: #a4d4b4;
+  color: #145a32;
+}
+
+/* Sub-branch / Market groups inside each accordion */
+.branch-content {
+  padding: 12px 14px 14px;
+}
+
+.market-subgroup {
+  margin-bottom: 14px;
+}
+.market-subgroup:last-child {
+  margin-bottom: 0;
+}
+
+.market-subhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #f1f5f8;
+  border-left: 3px solid var(--navy);
+  margin-bottom: 8px;
+  border-radius: 0 3px 3px 0;
+}
+
+.market-subhead-title {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.market-subhead-count {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.branch-empty {
+  padding: 15px;
+  margin: 0;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.9em;
+  text-align: center;
+}

@@ -13,6 +13,7 @@
     verdict: "ALL",
     sort: "market",
     search: "",
+    viewMode: "tree",
   };
 
   const escapeHtml = value =>
@@ -179,6 +180,126 @@
     return sorted;
   }
 
+  function renderBranchTable(items, kind) {
+    if (!items.length) {
+      return `<p class="branch-empty">No ${escapeHtml(kind)} names match the current filters.</p>`;
+    }
+    const byMarket = {
+      IN: items.filter(r => r.market === "IN"),
+      US: items.filter(r => r.market === "US"),
+    };
+    let html = "";
+    for (const [mkt, mktItems] of Object.entries(byMarket)) {
+      if (!mktItems.length) continue;
+      const mktTitle = mkt === "IN" ? "🇮🇳 India Equities (NSE/BSE · Zerodha)" : "🇺🇸 United States Equities (NYSE/NASDAQ · Schwab & Robinhood)";
+      html += `
+        <div class="market-subgroup">
+          <div class="market-subhead">
+            <span class="market-subhead-title">${escapeHtml(mktTitle)}</span>
+            <span class="market-subhead-count">${mktItems.length} name${mktItems.length === 1 ? "" : "s"}</span>
+          </div>
+          <div class="pipeline-scroll" role="region" tabindex="0" aria-label="${escapeHtml(kind)} ${escapeHtml(mkt)} table">
+            <table class="pipeline-table">
+              <thead>
+                <tr>
+                  <th scope="col">Ticker</th>
+                  <th scope="col">Company</th>
+                  <th scope="col">Stage</th>
+                  <th scope="col">Sector</th>
+                  <th scope="col">Verdict</th>
+                  <th scope="col">Monograph</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${mktItems.map(row => {
+                  const company = row.company && row.company !== row.symbol ? escapeHtml(row.company) : "";
+                  const tickerLink = row.dossierUrl
+                    ? `<a class="pipe-ticker" href="${escapeHtml(row.dossierUrl)}">${escapeHtml(row.symbol)}</a>`
+                    : `<span class="pipe-ticker">${escapeHtml(row.symbol)}</span>`;
+                  const verdict = row.verdict && row.verdict !== "Not specified"
+                    ? `<span class="verdict-pill ${verdictClass(row.verdict)}">${escapeHtml(row.verdict)}</span>`
+                    : '<span class="pipe-muted" title="Underwriting pending">—</span>';
+                  const mono = row.dossierUrl
+                    ? `<a class="pipe-doc" href="${escapeHtml(row.dossierUrl)}">Read &rarr;</a>`
+                    : '<span class="pipe-muted">—</span>';
+                  return `<tr>
+                    <td>${tickerLink}</td>
+                    <td class="pipe-company">${company || '<span class="pipe-muted">&mdash;</span>'}</td>
+                    <td><span class="stage-pill ${stageClass(row.stage)}">${escapeHtml(stageLabel(row.stage))}</span></td>
+                    <td class="pipe-sector">${row.sector ? escapeHtml(row.sector) : '<span class="pipe-muted">&mdash;</span>'}</td>
+                    <td>${verdict}</td>
+                    <td>${mono}</td>
+                  </tr>`;
+                }).join("")}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+    return html;
+  }
+
+  function renderTree(all) {
+    const treeEl = byId("pipeline-tree");
+    if (!treeEl) return;
+
+    const filtered = sortPipeline(all.filter(pipelineMatch));
+
+    const watchlistItems = filtered.filter(r => r.statuses.includes("WATCHLIST"));
+    const shortlistItems = filtered.filter(r => r.statuses.includes("SHORTLIST"));
+    const holdingsItems = filtered.filter(r => r.statuses.includes("HELD"));
+
+    const countW = byId("count-watchlist");
+    const countS = byId("count-shortlist");
+    const countH = byId("count-holdings");
+
+    if (countW) {
+      const inW = watchlistItems.filter(r => r.market === "IN").length;
+      const usW = watchlistItems.filter(r => r.market === "US").length;
+      countW.textContent = `${watchlistItems.length} names · IN ${inW} · US ${usW}`;
+    }
+    if (countS) {
+      const inS = shortlistItems.filter(r => r.market === "IN").length;
+      const usS = shortlistItems.filter(r => r.market === "US").length;
+      countS.textContent = `${shortlistItems.length} names · IN ${inS} · US ${usS}`;
+    }
+    if (countH) {
+      const inH = holdingsItems.filter(r => r.market === "IN").length;
+      const usH = holdingsItems.filter(r => r.market === "US").length;
+      countH.textContent = `${holdingsItems.length} names · IN ${inH} · US ${usH}`;
+    }
+
+    const contentW = byId("content-watchlist");
+    const contentS = byId("content-shortlist");
+    const contentH = byId("content-holdings");
+
+    if (contentW) contentW.innerHTML = renderBranchTable(watchlistItems, "Watchlist");
+    if (contentS) contentS.innerHTML = renderBranchTable(shortlistItems, "Shortlist");
+    if (contentH) contentH.innerHTML = renderBranchTable(holdingsItems, "Holdings");
+
+    if (state.search || state.status !== "ALL") {
+      const bW = byId("branch-watchlist");
+      const bS = byId("branch-shortlist");
+      const bH = byId("branch-holdings");
+      if (bW) bW.open = watchlistItems.length > 0;
+      if (bS) bS.open = shortlistItems.length > 0;
+      if (bH) bH.open = holdingsItems.length > 0;
+    }
+
+    updateToggleAllButton();
+  }
+
+  function updateToggleAllButton() {
+    const toggleAllBtn = byId("toggle-all-branches");
+    if (!toggleAllBtn) return;
+    const branches = document.querySelectorAll(".accordion-branch");
+    if (!branches.length) return;
+    const allOpen = Array.from(branches).every(b => b.open);
+    toggleAllBtn.textContent = allOpen ? "Collapse All Branches" : "Expand All Branches";
+    toggleAllBtn.setAttribute("aria-expanded", String(allOpen));
+  }
+
   function renderPipeline(all) {
     const body = byId("pipeline-body");
     const meta = byId("pipeline-meta");
@@ -191,7 +312,7 @@
     if (counts) {
       const byMarket = m => filtered.filter(r => r.market === m).length;
       const byStatus = s => filtered.filter(r => r.statuses.includes(s)).length;
-      counts.textContent = `${filtered.length} names shown · US ${byMarket("US")} · IN ${byMarket("IN")} · Held ${byStatus("HELD")} · Shortlist ${byStatus("SHORTLIST")} · Watchlist ${byStatus("WATCHLIST")}`;
+      counts.textContent = `${filtered.length} names shown · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")}`;
     }
     if (meta) meta.textContent = `${filtered.length} of ${all.length} tracked names`;
 
@@ -271,60 +392,64 @@
   function renderDossierRow(e) {
     const hasVerdict = e.verdict && e.verdict !== "Not specified";
     const sub = e.sector && e.sector !== "Not specified" ? e.sector : "Company monograph";
-    const pdfBadge = e.pdfUrl
-      ? ` <span class="symbol-pill" role="link" tabindex="0" title="Download PDF" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='${escapeHtml(e.pdfUrl)}'">PDF</span>`
+    const pdf = e.pdfUrl
+      ? `<a class="dossier-pdf" href="${escapeHtml(e.pdfUrl)}" target="_blank" rel="noopener">PDF</a>`
       : "";
     return `
-      <a class="dossier-row" href="${escapeHtml(e.url)}">
-        <div class="dossier-code">
+      <div class="dossier-row" role="listitem">
+        <div class="dossier-ticker-col">
+          <a class="dossier-symbol" href="${escapeHtml(e.url)}">${escapeHtml(e.symbol || "—")}</a>
           <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
-          <span class="symbol-pill">${escapeHtml(e.symbol || e.title.slice(0, 8))}</span>
         </div>
-        <div>
-          <div class="dossier-title">${escapeHtml(e.symbol || e.title)}${pdfBadge}</div>
+        <div class="dossier-main">
+          <a class="dossier-title-link" href="${escapeHtml(e.url)}">${escapeHtml(e.title)}</a>
           <div class="dossier-sub">${escapeHtml(sub)}</div>
         </div>
-        <p class="dossier-summary">${escapeHtml(e.summary || e.title)}</p>
-        <div>${hasVerdict ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>` : ""}</div>
+        <div class="dossier-meta">
+          ${hasVerdict ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>` : ""}
+          ${pdf}
+        </div>
         <div class="dossier-date">${escapeHtml(formatDate(e.updatedAt || e.generatedAt))}</div>
-      </a>
+      </div>
+    `;
+  }
+
+  function renderStats(pipeline) {
+    const statsEl = byId("portal-stats");
+    if (!statsEl) return;
+    const publishedDossiers = state.entries.filter(e => e.kind === "dossier").length;
+    const reports = state.entries.filter(e => e.kind === "report").length;
+    const heldTotal = (state.holdings?.US?.length || 0) + (state.holdings?.IN?.length || 0);
+    const watchTotal = (state.queues?.US?.watchlist?.rows?.length || 0) + (state.queues?.IN?.watchlist?.rows?.length || 0);
+    const shortTotal = (state.queues?.US?.shortlist?.rows?.length || 0) + (state.queues?.IN?.shortlist?.rows?.length || 0);
+
+    statsEl.innerHTML = `
+      <div><dt>Tracked</dt><dd>${pipeline.length}</dd></div>
+      <div><dt>Watchlist</dt><dd>${watchTotal}</dd></div>
+      <div><dt>Shortlist</dt><dd>${shortTotal}</dd></div>
+      <div><dt>Held</dt><dd>${heldTotal}</dd></div>
+      <div><dt>Monographs</dt><dd>${publishedDossiers}</dd></div>
+      <div><dt>Reports</dt><dd>${reports}</dd></div>
     `;
   }
 
   function render() {
-    const pipelineAll = buildPipeline();
-    renderPipeline(pipelineAll);
+    const pipeline = buildPipeline();
+    renderStats(pipeline);
+    renderPipeline(pipeline);
+    renderTree(pipeline);
 
-    const filtered = filterEntries();
-
-    const reports = filtered.filter(e => e.kind === "report")
-      .sort((a, b) => (b.updatedAt || b.generatedAt || "").localeCompare(a.updatedAt || a.generatedAt || ""));
-    const dossiers = filtered.filter(e => e.kind === "dossier")
-      .sort((a, b) => (a.symbol || a.title).localeCompare(b.symbol || b.title));
-
-    const statsEl = byId("portal-stats");
-    if (statsEl) {
-      const totalPages = state.entries.length;
-      const intelCount = state.entries.filter(e => (e.workflow || "").toLowerCase().includes("intelligence")).length;
-      const auditCount = state.entries.filter(e => e.kind === "report" && !(e.workflow || "").toLowerCase().includes("intelligence")).length;
-      const monographCount = state.entries.filter(e => e.kind === "dossier").length;
-      statsEl.innerHTML = `
-        <div><dt>Tracked</dt><dd>${pipelineAll.length} names</dd></div>
-        <div><dt>Market Intel</dt><dd>${intelCount}</dd></div>
-        <div><dt>Audits &amp; Shortlist</dt><dd>${auditCount}</dd></div>
-        <div><dt>Monographs</dt><dd>${monographCount}</dd></div>
-      `;
-    }
+    const filteredEntries = filterEntries();
+    const reports = filteredEntries.filter(e => e.kind === "report");
+    const dossiers = filteredEntries.filter(e => e.kind === "dossier");
 
     const reportMeta = byId("report-meta");
-    if (reportMeta) reportMeta.textContent = `${reports.length} reports`;
-
-    const dossierMeta = byId("dossier-meta");
-    if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monographs`;
-
+    if (reportMeta) reportMeta.textContent = `${reports.length} report${reports.length === 1 ? "" : "s"}`;
     const reportList = byId("report-list");
     if (reportList) reportList.innerHTML = reports.map(e => renderCard(e)).join("");
 
+    const dossierMeta = byId("dossier-meta");
+    if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monograph${dossiers.length === 1 ? "" : "s"}`;
     const dossierList = byId("dossier-list");
     if (dossierList) dossierList.innerHTML = dossiers.map(renderDossierRow).join("");
 
@@ -425,6 +550,45 @@
         render();
       });
     }
+
+    const btnTree = byId("view-mode-tree");
+    const btnTable = byId("view-mode-table");
+    const treeWrap = byId("pipeline-tree");
+    const tableWrap = byId("pipeline-table-wrap");
+
+    if (btnTree && btnTable && treeWrap && tableWrap) {
+      btnTree.addEventListener("click", () => {
+        state.viewMode = "tree";
+        btnTree.classList.add("is-active");
+        btnTable.classList.remove("is-active");
+        treeWrap.hidden = false;
+        tableWrap.hidden = true;
+      });
+      btnTable.addEventListener("click", () => {
+        state.viewMode = "table";
+        btnTable.classList.add("is-active");
+        btnTree.classList.remove("is-active");
+        treeWrap.hidden = true;
+        tableWrap.hidden = false;
+      });
+    }
+
+    const toggleAllBtn = byId("toggle-all-branches");
+    if (toggleAllBtn) {
+      toggleAllBtn.addEventListener("click", () => {
+        const branches = document.querySelectorAll(".accordion-branch");
+        const allOpen = Array.from(branches).every(b => b.open);
+        const targetOpen = !allOpen;
+        branches.forEach(b => { b.open = targetOpen; });
+        updateToggleAllButton();
+      });
+    }
+
+    document.addEventListener("toggle", event => {
+      if (event.target && event.target.classList && event.target.classList.contains("accordion-branch")) {
+        updateToggleAllButton();
+      }
+    }, { capture: true });
   }
 
   async function init() {
