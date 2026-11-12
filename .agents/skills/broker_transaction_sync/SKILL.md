@@ -9,7 +9,7 @@ description: >-
 ## 0. Rules that override everything else
 
 - Never read `.env` or any credentials file. Never copy cookies, session data or passwords out of a browser profile.
-- Never log in on the user's behalf. Browser automation is allowed only in a separate, automation-only Chromium profile that the user logs into themselves (for example, `--remote-debugging-port` with a temp `--user-data-dir`). Stop that browser when finished and delete its profile directory.
+- Never log in on the user's behalf. Browser automation is allowed in the user's signed-in Chrome profile, whether a new window or an existing one, after the user explicitly authorizes it for the run. The user logs into every session themselves; never enter credentials on their behalf. Stop any browser the run opened when finished, and delete only profiles the run created.
 - Do not invent cost, quantity, strategy bucket or exchange. Ask the user for anything missing.
 - Do not commit or push without explicit user approval.
 
@@ -17,7 +17,7 @@ description: >-
 
 | Broker | Preferred source | Notes |
 |---|---|---|
-| Zerodha (IN) | Console → Reports → Tradebook, one CSV per financial year | Export each FY separately. Full history requires the earliest FY. Holdings snapshot: Console → Holdings. Funds: Console → Funds → Overview (withdrawable balance). |
+| Zerodha (IN) | Console → Reports → Tradebook, one CSV per financial year; cross-check against Kite → Orders (`https://kite.zerodha.com/orders`), Kite → Holdings (`https://kite.zerodha.com/holdings`), Kite → Positions (`https://kite.zerodha.com/positions`), and Console → Funds (`https://console.zerodha.com/funds/overview`) | Export each FY separately. Full history requires the earliest FY. Kite Orders shows only the current trading day, aggregates executions per order, and may carry a series suffix (`-BE`, `-SM`); use it to confirm the day's fills, but take quantities and prices from Tradebook. Kite Holdings shows the **settled** quantity; Kite Positions adds the current day's **unsettled (T1)** legs, which Holdings has not yet reflected — the two together are the live quantity. Console Funds gives the closing and withdrawable balance for cash reconciliation. |
 | Schwab (US) | Transactions CSV (`Date, Action, Symbol, Description, Quantity, Price, Fees & Comm, Amount`) | Covers the full history in one file when the export starts at the account opening. |
 | Robinhood (US) | Activity CSV (`Activity Date ... Trans Code, Quantity, Price, Amount`) plus monthly statement PDFs | The CSV may stop before the latest month. Use the statements for the gap. Options (`BTO`/`STC`) are not stock transactions. |
 
@@ -27,7 +27,7 @@ Ask the user to place every file in one folder (for example `~/Downloads/<broker
 
 Sort by date, then by execution time or line order. Use the trade date for `as of` rows.
 
-- **Zerodha:** Map `symbol` to the repo symbol used in `symbols.json`. Quantities are decimals with `.000000`; convert to int when whole. Amount = quantity × price (Tradebook has no fees; say so in the report). Watch for symbol renames (for example `ORIANA` → `ORIANA-SM`) and bonus, split or demerger legs that are absent from the export. Infer them only when live holdings confirm the quantities, and label the line as inferred.
+- **Zerodha:** Map `symbol` to the repo symbol used in `symbols.json`, stripping series suffixes (`-BE`, `-SM`, `-BZ`). Quantities are decimals with `.000000`; convert to int when whole. Assume zero transaction fees: Amount = quantity × price (Tradebook and Kite Orders carry no fees; say so in the report). Watch for symbol renames (for example `ORIANA` → `ORIANA-SM`) and bonus, split or demerger legs that are absent from the export. Infer them only when live holdings confirm the quantities, and label the line as inferred.
 - **Schwab:** Buy `amount` = −`Amount` (includes fees). Sell `amount` = `Amount` (net proceeds). Reverse split and stock split rows carry quantity only. Journals, dividends and interest → `cash`. ADR fees and foreign tax → `fee` with a positive amount.
 - **Robinhood:** Parse `(…)` as negative. Buy `amount` = −`Amount`. Sell `amount` = `Amount`. `ACH`, `RTP`, `CDIV`, `INT`, `SLIP` → `cash`. `GOLD` → `fee`. Ignore `SXCH` symbol-change pairs for closed names. Statement `Buy`/`Sell` lines look like `CUSIP: … SYM Margin Buy MM/DD/YYYY qty $price $amount`.
 
@@ -39,8 +39,8 @@ Only trades for symbols that have an entry in `data/metadata/symbols.json` are i
 
 ## 4. Reconcile before writing
 
-1. **Cash:** Cumulative cash through each month-end must match the statement balance, plus any constant offset. A constant offset is an opening balance. Record it on the first date as `cash` with the note `implied opening balance`. Do not hide it in a balancing entry.
-2. **Holdings:** Replayed quantities must match the latest live holdings or statement positions. Lent shares count as held. Fractional shares must match to the decimal.
+1. **Cash:** Cumulative cash through each month-end must match the statement balance, plus any constant offset. A constant offset is an opening balance. Record it on the first date as `cash` with the note `implied opening balance`. Do not hide it in a balancing entry. Reconcile the final balance against Console → Funds (closing and withdrawable). Under the zero-fee assumption the ledger sits **above** the broker by the fees the broker actually charged (DP charges of ₹15.34 per sale, plus STT, exchange, GST and stamp duty); state that gap and its cause rather than forcing a match. Ask the user if they want the real fees recorded instead.
+2. **Holdings:** Replayed quantities must match the live quantity, which is Kite Holdings (settled) **plus** Kite Positions (unsettled T1 legs) — a buy or sell made today appears only in Positions, so Holdings alone will look stale. Lent shares count as held. Fractional shares must match to the decimal.
 3. **Costs:** Compare the replayed cost basis with the live cost column. Differences from fees alone should be small. Report any larger gap rather than forcing a match.
 4. **Snapshot conflicts:** If the existing log lists a symbol that no transaction supports, ask the user which source to trust. Do not keep an unsupported position.
 
