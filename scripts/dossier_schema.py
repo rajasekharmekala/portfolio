@@ -12,6 +12,7 @@ Supports both:
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import re
 import sys
@@ -86,6 +87,12 @@ def load_monograph_spec(spec_path: str | Path) -> Dict[str, Any]:
                 spec.setdefault("business_quality_verdict", bq["business_quality_verdict"])
             if bq.get("kpi_health"):
                 spec.setdefault("kpi_health", bq["kpi_health"])
+        ra_file = p / "refresh_audit.json"
+        if ra_file.is_file():
+            spec.setdefault("refresh_audit", json.loads(ra_file.read_text(encoding="utf-8")))
+        pa_file = p / "prior_anchor_locked.json"
+        if pa_file.is_file():
+            spec.setdefault("prior_anchor", json.loads(pa_file.read_text(encoding="utf-8")))
         chapters_dir = p / "chapters"
         chapters: List[Dict[str, Any]] = []
         if chapters_dir.is_dir():
@@ -556,6 +563,104 @@ def validate_blind_pass_dir(spec_dir: str | Path) -> List[str]:
                 f"Chapter ch-{n} leaks portfolio verdict/timing token {leak.group(0)!r} during price-blind Pass 1"
             )
     return errors
+
+
+def enforce_stop_loss_ratchet(
+    spec: Dict[str, Any],
+    held_quantity: float,
+    live_close: float | None = None,
+) -> List[str]:
+    """Enforce upward-only stop ratchet on held Stage 2 positions (never widen stops downward on losers)."""
+    prior = spec.get("prior_anchor")
+    if not isinstance(prior, dict) or held_quantity <= 0 or spec.get("split_adjusted"):
+        return []
+    prior_stop = prior.get("stop_loss")
+    new_stop = spec.get("stop_loss")
+    if not isinstance(prior_stop, (int, float)) or not isinstance(new_stop, (int, float)):
+        return []
+    action = str(spec.get("holding_action") or "").upper()
+    exit_actions = {"EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE"}
+    errors: List[str] = []
+    if new_stop < float(prior_stop) - 0.01 and action not in exit_actions:
+        errors.append(
+            f"Stop-loss ratchet violation for held position ({held_quantity:g} shares): "
+            f"new stop_loss ({new_stop}) lowers prior structural stop ({prior_stop}); "
+            "trail stops upward behind rising support or set holding_action to EXIT_IMMEDIATELY / EXIT_ON_BOUNCE"
+        )
+    if isinstance(live_close, (int, float)) and live_close <= float(prior_stop) and action not in exit_actions:
+        errors.append(
+            f"Prior structural stop ({prior_stop}) breached at close {live_close} on held position ({held_quantity:g} shares): "
+            "holding_action must be EXIT_IMMEDIATELY or EXIT_ON_BOUNCE"
+        )
+    return errors
+
+
+def persist_monograph_spec(spec: Dict[str, Any], target_dir: str | Path, mode: str = "full_underwrite") -> Path:
+    """Persist canonical spine.json, business_quality.json, chapters/ch00..ch09.json, and revision_log.json."""
+    out = Path(target_dir)
+    ch_out = out / "chapters"
+    ch_out.mkdir(parents=True, exist_ok=True)
+
+    transient_keys = {"chapters", "business_quality", "refresh_audit", "prior_anchor", "facts_path", "research_paths"}
+    spine_clean = {k: v for k, v in spec.items() if k not in transient_keys}
+    (out / "spine.json").write_text(json.dumps(spine_clean, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    bq = spec.get("business_quality")
+    if isinstance(bq, dict) and bq:
+        (out / "business_quality.json").write_text(json.dumps(bq, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    elif spec.get("business_quality_verdict"):
+        bq_synth = {
+            "symbol": str(spec.get("symbol", "")).upper(),
+            "business_quality_verdict": spec["business_quality_verdict"],
+            "kpi_health": spec.get("kpi_health") or "PASS_WITH_WATCH",
+            "summary_rationale": strip_html(spec.get("primer") or spec.get("holding_rationale") or ""),
+        }
+        (out / "business_quality.json").write_text(json.dumps(bq_synth, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    chapters = spec.get("chapters") or []
+    for idx, ch in enumerate(chapters):
+        raw_cid = ch.get("id") or f"ch-{idx}"
+        norm_cid = "ch-0" if (idx == 0 and raw_cid == "primer") else raw_cid
+        ch_copy = {**ch, "id": norm_cid}
+        (ch_out / f"ch{idx:02d}.json").write_text(json.dumps(ch_copy, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    rev_path = out / "revision_log.json"
+    rev_data = {"symbol": str(spec["symbol"]).upper(), "market": str(spec["market"]).upper(), "history": []}
+    if rev_path.is_file():
+        try:
+            loaded = json.loads(rev_path.read_text(encoding="utf-8"))
+            if isinstance(loaded.get("history"), list):
+                rev_data["history"] = loaded["history"]
+        except ValueError:
+            pass
+
+    ra = spec.get("refresh_audit") if isinstance(spec.get("refresh_audit"), dict) else {}
+    rev_entry = {
+        "recorded_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
+        "as_of": spec.get("as_of"),
+        "mode": ra.get("recommended_tier") or mode,
+        "verdict": spec.get("new_capital_verdict") or spec.get("verdict"),
+        "holding_action": spec.get("holding_action"),
+        "conviction_tier": spec.get("conviction_tier"),
+        "business_quality_verdict": spec.get("business_quality_verdict"),
+        "entry_zone_low": spec.get("entry_zone_low"),
+        "entry_zone_high": spec.get("entry_zone_high"),
+        "stop_loss": spec.get("stop_loss"),
+        "target_base": spec.get("target_base"),
+        "blind_spots_patched": [
+            b.get("what_was_missed")
+            for b in (ra.get("blind_spots_discovered") or [])
+            if isinstance(b, dict) and b.get("materiality") == "MATERIAL_PATCHED"
+        ],
+        "assumptions_changed": [
+            f"{a.get('disposition')}: {a.get('claim')}"
+            for a in (ra.get("assumptions_checked") or [])
+            if isinstance(a, dict) and a.get("disposition") in {"WEAKENED", "BROKEN", "CONFIRMED"}
+        ],
+    }
+    rev_data["history"].append(rev_entry)
+    rev_path.write_text(json.dumps(rev_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return out
 
 
 def main() -> None:

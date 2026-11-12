@@ -25,6 +25,7 @@ import contextlib
 import fcntl
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -33,7 +34,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 DEFAULT_TTL_HOURS = 6.0
 SINGLETON_WORKFLOWS = {"market_intelligence", "portfolio_audit"}
-NAME_WORKFLOWS = {"company_report"}
+NAME_WORKFLOWS = {"company_report", "dossier_refresh"}
 ELIGIBLE_WATCHLIST_STATUS = {"RESEARCH_REQUIRED", "PENDING_RESEARCH", "PENDING"}
 MARKETS = ("IN", "US")
 
@@ -238,6 +239,53 @@ def watchlist_queue_info(market, ref="origin/main"):
     return [r["symbol"] for r in active], max_cycle + 1, True
 
 
+def refresh_queue_info(market, ref="origin/main"):
+    """Return ordered symbols that already have a published dossier, stalest research-as-of first.
+
+    Prioritizes held and shortlisted names with published dossiers before watchlist-only names so
+    active capital and ready-to-buy setups are refreshed first.
+    """
+    dossier_dir = REPO / "docs" / "blogs" / market
+    if not dossier_dir.is_dir():
+        return [], 1, False
+    asof_map = {}
+    for p in sorted(dossier_dir.glob("*_dossier.html")):
+        txt = p.read_text(encoding="utf-8", errors="replace")
+        if 'name="report-redirect"' in txt:
+            continue
+        sym = p.stem.replace("_dossier", "").upper()
+        m = re.search(r'<meta[^>]*name=["\']research-as-of["\'][^>]*content=["\']([^"\']*)["\']', txt, re.I)
+        if not m:
+            m = re.search(r'<meta[^>]*content=["\']([^"\']*)["\'][^>]*name=["\']research-as-of["\']', txt, re.I)
+        asof_map[sym] = (m.group(1)[:10] if m and m.group(1) else "0000-00-00")
+    if not asof_map:
+        return [], 1, False
+
+    priority = set()
+    sl_path = REPO / "data" / "shortlist" / f"{market}.json"
+    if sl_path.is_file():
+        sl = json.loads(sl_path.read_text(encoding="utf-8"))
+        priority.update(r.get("symbol", "").upper() for r in sl.get("active", []) if isinstance(r, dict))
+    acc_dir = REPO / "data" / "accounts" / market
+    if acc_dir.is_dir():
+        qty = {}
+        for p in acc_dir.glob("*.transactions.jsonl"):
+            for line in p.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                tx = json.loads(line)
+                s = (tx.get("symbol") or "").upper()
+                q = float(tx.get("quantity") or 0)
+                if tx.get("type") in ("opening", "buy", "split"):
+                    qty[s] = qty.get(s, 0.0) + q
+                elif tx.get("type") == "sell":
+                    qty[s] = qty.get(s, 0.0) - q
+        priority.update(s for s, q in qty.items() if q > 1e-6)
+
+    ordered = sorted(asof_map.keys(), key=lambda s: (0 if s in priority else 1, asof_map[s], s))
+    return ordered, 1, False
+
+
 def candidate_symbols(market, ref="origin/main"):
     """Ordered candidate names for a batch, read from `ref` (default: the freshly fetched origin/main).
 
@@ -284,7 +332,10 @@ def main():
                 fetched = _git("fetch", "origin", check=False)
                 if fetched.returncode != 0:
                     print("warning: git fetch origin failed; eligibility may be stale", file=sys.stderr)
-            candidates, target_cycle, rollover = watchlist_queue_info(args.market, args.ref)
+            if args.workflow == "dossier_refresh":
+                candidates, target_cycle, rollover = refresh_queue_info(args.market, args.ref)
+            else:
+                candidates, target_cycle, rollover = watchlist_queue_info(args.market, args.ref)
             symbols, skipped = claim_batch(args.workflow, args.market, args.run_id, args.size, candidates, args.ttl_hours)
             print(json.dumps({"symbols": symbols, "skipped_held_by_other_runs": skipped,
                               "short_batch": len(symbols) < args.size,

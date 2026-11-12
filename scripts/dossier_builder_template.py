@@ -27,7 +27,14 @@ from typing import List
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from assemble_report import build  # noqa: E402
-from dossier_schema import load_monograph_spec, strip_html, validate_monograph_spec, word_count  # noqa: E402
+from dossier_schema import (  # noqa: E402
+    enforce_stop_loss_ratchet,
+    load_monograph_spec,
+    persist_monograph_spec,
+    strip_html,
+    validate_monograph_spec,
+    word_count,
+)
 from epub_builder import (  # noqa: E402
     build_pdf_book,
     render_masterclass_book_html,
@@ -1155,6 +1162,7 @@ def render_10chapter_monograph_editions(
     positions: dict | None = None,
     shortlist: dict | None = None,
     out_dossier_path: str | Path = "",
+    persist_spec_dir: str | Path | None = None,
 ) -> dict:
     """Compile the Web Dossier HTML and the companion PDF from a 10-chapter spec."""
     facts = facts or {}
@@ -1224,6 +1232,9 @@ def render_10chapter_monograph_editions(
         or str(entry_posture).startswith(("WAIT_FOR_SUPPORT", "NO_NEW_ALLOCATION", "AVOID", "STAY_AWAY"))
     )
     holding, holding_html, redeploy_html, book_decision = _decision_panels(spec, market, sym, positions, snapshots, shortlist)
+    ratchet_errors = enforce_stop_loss_ratchet(spec, holding["quantity"], close if isinstance(close, (int, float)) else None)
+    if ratchet_errors:
+        raise ValueError("Stop-loss ratchet check failed: " + "; ".join(ratchet_errors))
     ru = _compute_risk_unit_sizing(close, entry_high, stop_loss, tier, scoring)
     if no_new_allocation:
         ru["risk_adjusted_weight_pct"] = 0.0
@@ -1375,6 +1386,50 @@ def render_10chapter_monograph_editions(
     web_sections: List[str] = []
     spec_for_build = copy.deepcopy(spec)
     chapters = spec_for_build.get("chapters", [])
+    refresh_audit = spec.get("refresh_audit") if isinstance(spec.get("refresh_audit"), dict) else None
+    prior_anchor = spec.get("prior_anchor") if isinstance(spec.get("prior_anchor"), dict) else {}
+    revision_web_html = ""
+    if refresh_audit:
+        prior_as_of = prior_anchor.get("as_of") or refresh_audit.get("prior_as_of") or "prior session"
+        prior_verdict = prior_anchor.get("verdict") or "N/A"
+        prior_stop = prior_anchor.get("stop_loss")
+        prior_stop_txt = f"{cur}{prior_stop:,.2f}" if isinstance(prior_stop, (int, float)) else "N/A"
+        new_stop_txt = f"{cur}{stop_loss:,.2f}" if isinstance(stop_loss, (int, float)) else "N/A"
+        tier_mode = _esc(refresh_audit.get("recommended_tier") or "REFRESH")
+        patched = [
+            f"<strong>{_esc(b.get('target_chapter', ''))}:</strong> {_linkify_html_fragment(str(b.get('what_was_missed', '')), max_cite)}"
+            for b in (refresh_audit.get("blind_spots_discovered") or [])
+            if isinstance(b, dict) and b.get("materiality") == "MATERIAL_PATCHED"
+        ]
+        changed_assumptions = [
+            f"<strong>{_esc(a.get('disposition', ''))} ({_esc(a.get('chapter', ''))}):</strong> {_linkify_html_fragment(str(a.get('claim', '')), max_cite)}"
+            for a in (refresh_audit.get("assumptions_checked") or [])
+            if isinstance(a, dict) and a.get("disposition") in {"WEAKENED", "BROKEN", "CONFIRMED"}
+        ]
+        rev_ps = [
+            f"<strong>Companion Audit ({tier_mode}) — { _esc(prior_as_of) } &rarr; { _esc(as_of) }:</strong> "
+            f"Verdict {_esc(prior_verdict)} &rarr; <strong>{_esc(spec['new_capital_verdict'])}</strong>; "
+            f"Structural Stop {prior_stop_txt} &rarr; <strong>{new_stop_txt}</strong>."
+        ]
+        if changed_assumptions:
+            rev_ps.append("<strong>Assumptions Re-Tested:</strong> " + " | ".join(changed_assumptions[:4]))
+        if patched:
+            rev_ps.append("<strong>Blind Spots Newly Underwritten:</strong> " + " | ".join(patched[:4]))
+        revision_web_html = (
+            '<div class="callout callout-rule" id="revision-audit-summary">\n'
+            '<p class="callout-title">Companion Dossier Refresh &amp; Blind-Spot Audit</p>\n'
+            + "".join(f"<p>{p}</p>\n" for p in rev_ps)
+            + "</div>"
+        )
+        for chapter in chapters:
+            if chapter.get("id") in {"ch-0", "primer"}:
+                chapter.setdefault("book_callouts", []).insert(0, {
+                    "kind": "mental_model",
+                    "title": f"Companion Refresh ({prior_as_of} to {as_of})",
+                    "text": strip_html(" ".join(rev_ps)),
+                })
+                break
+
     for chapter in chapters:
         if chapter.get("id") == "ch-9":
             chapter.setdefault("book_paragraphs", []).append(book_decision)
@@ -1394,6 +1449,8 @@ def render_10chapter_monograph_editions(
         w_parts = [f'<section class="chapter" id="{_esc(cid)}">', f"<h2>{_esc(w_title)}</h2>"]
         if question:
             w_parts.append(f'<div class="section-summary"><strong>Core Investor Question:</strong> {_esc(question)}</div>')
+        if idx == 0 and revision_web_html:
+            w_parts.append(revision_web_html)
         saw_tv = False
         saw_sizing = False
         for blk in ch.get("web_blocks", []):
@@ -1519,9 +1576,20 @@ def render_10chapter_monograph_editions(
     finally:
         tmp_book_html.unlink(missing_ok=True)
 
+    # Persist canonical spec under data/dossiers/<MKT>/<SYM>/ when publishing to docs/blogs/ (or explicit dir)
+    persisted_dir = None
+    docs_blogs_root = (Path(ROOT) / "docs" / "blogs").resolve()
+    resolved_out = out_d_path.resolve()
+    target_persist = Path(persist_spec_dir) if persist_spec_dir else (
+        Path(ROOT) / "data" / "dossiers" / market / sym if docs_blogs_root in resolved_out.parents else None
+    )
+    if target_persist is not None:
+        persisted_dir = str(persist_monograph_spec(spec, target_persist))
+
     return {
         "dossier_html": str(out_d_path),
         "pdf": str(out_pdf_path) if out_pdf_path.exists() else None,
+        "persisted_spec_dir": persisted_dir,
         "web_words": web_words,
         "book_words": book_words,
         "audio_minutes": audio_mins,
@@ -1535,6 +1603,7 @@ def main() -> None:
     ap.add_argument("--facts", default="", help="Optional path to market_facts JSON ledger")
     ap.add_argument("--positions", default="", help="Path to the same-session market_facts positions ledger")
     ap.add_argument("--shortlist", default="", help="Path to this market's active shortlist records")
+    ap.add_argument("--persist-spec-dir", default="", help="Optional directory to persist canonical chapter JSON spec")
     ap.add_argument("--out", required=True, help="Output dossier HTML path")
     args = ap.parse_args()
 
@@ -1554,6 +1623,7 @@ def main() -> None:
         res = render_10chapter_monograph_editions(
             spec, facts=facts, snapshots=snapshots, positions=positions, shortlist=shortlist,
             out_dossier_path=args.out,
+            persist_spec_dir=args.persist_spec_dir or None,
         )
         print(
             f"wrote monograph for {spec['symbol']}:\n"

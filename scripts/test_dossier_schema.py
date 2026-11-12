@@ -14,6 +14,12 @@ from dossier_builder_template import (
     render_10chapter_monograph_editions,
 )
 from readability_check import check_dossier_decisions, check_grade, check_prose_integrity
+from dossier_refresh import (
+    bootstrap_from_html,
+    prepare_refresh_workspace,
+    validate_refresh_audit,
+)
+import run_claims
 from stock_snapshot import _strip_price_fields_for_blind_pass
 from sync_dossier_pipeline import apply_pipeline_transition, verify_review_and_quality_gates
 
@@ -439,6 +445,179 @@ class DossierDecisionSchemaTests(unittest.TestCase):
 
             (rev_dir / "round_1" / "round_1_review.json").write_text('{"verdict": "APPROVE"}', encoding="utf-8")
             verify_review_and_quality_gates(dossier_file, review_dir=rev_dir)
+
+    def test_companion_dossier_refresh_blindspot_brainstorm_and_stop_ratchet_e2e(self):
+        with tempfile.TemporaryDirectory() as tmp, patch("dossier_builder_template.build_pdf_book"):
+            repo = Path(tmp)
+            (repo / "docs" / "blogs" / "US").mkdir(parents=True)
+            (repo / "data" / "dossiers" / "US").mkdir(parents=True)
+            (repo / "data" / "shortlist").mkdir(parents=True)
+            (repo / "data" / "accounts" / "US").mkdir(parents=True)
+
+            filler = " ".join(["The plant ships clean power racks to cloud buyers."] * 140)
+            b_filler = " ".join(["You and I can see how the factory builds each unit on time."] * 140)
+            init_spec = {
+                **valid_spec(),
+                "as_of": "2026-10-01",
+                "verdict": "ACCUMULATE_ON_DIP",
+                "new_capital_verdict": "ACCUMULATE_ON_DIP",
+                "holding_action": "KEEP_COMPOUNDING",
+                "holding_shares_to_sell": 0,
+                "holding_rationale": "Retain active core position above structural stop.",
+                "conviction_tier": "TIER_1",
+                "business_quality_verdict": "COMPOUNDER_PASS",
+                "kpi_health": "PASS",
+                "primer": (
+                    "Test Systems builds clean power racks for cloud data centers. "
+                    "Sales grew 32% this year while cash flow stayed above net income. "
+                    "We accumulate on pullbacks with disciplined risk management."
+                ),
+                "citations": [f"SEC Filing {i}: https://sec{i}.example.com/10k" for i in range(1, 26)],
+                "chapters": [
+                    {"id": "ch-0", "web_title": "0. Executive Thesis", "web_blocks": [{"type": "p", "text": filler}], "book_paragraphs": [b_filler]},
+                    *[{"id": f"ch-{i}", "web_title": f"{i}. Chapter", "web_blocks": [
+                        {"type": "p", "text": filler + (" https://a.example.com/1 https://b.example.com/2 https://c.example.com/3" if i == 4 else "")}
+                    ], "book_paragraphs": [b_filler]} for i in range(1, 7)],
+                    {"id": "ch-7", "web_title": "7. Valuation", "web_blocks": [{"type": "p", "text": filler}], "book_paragraphs": [b_filler]},
+                    {"id": "ch-8", "web_title": "8. Tape", "web_blocks": [{"type": "p", "text": filler}], "book_paragraphs": [b_filler]},
+                    {"id": "ch-9", "web_title": "9. Synthesis", "web_blocks": [
+                        {"type": "p", "text": filler},
+                        {"type": "trigger", "text": "Daily close below $85 invalidates the Stage 2 breakout."},
+                    ], "book_paragraphs": [b_filler]},
+                ],
+            }
+            snapshots_v1 = {"snapshots": {"TEST": {
+                "tradingview": {"close": 96.0, "sector": "Technology", "exchange": "NASDAQ"},
+                "stage2_evaluation": {"weinstein_stage": "STAGE_2", "entry_timing_posture": "BUY_AT_CMP_NO_FOMO",
+                                      "support_buy_zone": [90.0, 95.0], "invalidation_stop": 85.0},
+            }}}
+            held_positions = {"net_worth": 5000, "consolidated": [{
+                "symbol": "TEST", "quantity": 10, "market_value": 960, "cost_basis": 800, "gain": 160,
+                "accounts": [{"account": "Schwab", "quantity": 10}],
+            }]}
+            html_out = repo / "docs" / "blogs" / "US" / "TEST_dossier.html"
+            render_10chapter_monograph_editions(
+                init_spec, snapshots=snapshots_v1, positions=held_positions,
+                shortlist={"active": []}, out_dossier_path=html_out,
+            )
+
+            # Bootstrap legacy HTML into canonical spec directory cleanly
+            boot_dir = repo / "data" / "dossiers" / "US" / "TEST"
+            bootstrap_from_html(html_out, boot_dir, "US", "TEST")
+            self.assertTrue((boot_dir / "spine.json").is_file())
+            self.assertTrue((boot_dir / "revision_log.json").is_file())
+
+            # Prepare verdict-stripped refresh workspace
+            work_dir = repo / "work" / "TEST"
+            prep_info = prepare_refresh_workspace("US", "TEST", work_dir, repo_root=repo)
+            packet_txt = Path(prep_info["blind_packet"]).read_text(encoding="utf-8")
+            self.assertIn("CUSTOMER_SUPPLIER_CONCENTRATION", packet_txt)
+            self.assertNotIn("ACCUMULATE_ON_DIP", packet_txt)
+            self.assertFalse((work_dir / "spine.json").exists())
+            self.assertFalse((work_dir / "chapters" / "ch09.json").exists())
+
+            # Fake audit claiming MATERIAL_PATCHED without editing ch03.json must FAIL hash check
+            audit_data = {
+                "recommended_tier": "TIER_2_QUARTERLY_OR_BLINDSPOT",
+                "assumptions_checked": [
+                    {"chapter": "ch-2", "claim": "Cloud data center rack revenue mix above 60%", "disposition": "CONFIRMED",
+                     "evidence": "Q3 10-Q confirmed 64% cloud mix.", "source_url": "https://sec.example.com/q3"},
+                    {"chapter": "ch-5", "claim": "Management guided DSO under 65 days", "disposition": "WEAKENED",
+                     "evidence": "Q3 DSO rose to 74 days on hyperscaler payment terms.", "source_url": "https://sec.example.com/q3-ar"},
+                    {"chapter": "ch-6", "claim": "Operating cash conversion exceeds 90% of net income", "disposition": "UNCHANGED",
+                     "evidence": "TTM CFO/PAT held at 93%.", "source_url": "https://sec.example.com/q3-cf"},
+                ],
+                "blind_spots_discovered": [
+                    {"vector": "CUSTOMER_SUPPLIER_CONCENTRATION", "target_chapter": "ch-3",
+                     "what_was_missed": "Original dossier omitted single-source silicon carbide MOSFET supplier reliance.",
+                     "materiality": "MATERIAL_PATCHED",
+                     "evidence": "10-K Item 1A discloses 82% SiC MOSFET supply from one fab.", "source_url": "https://sec.example.com/10k-risk"},
+                    {"vector": "REGULATORY_TARIFF_FX_EXPOSURE", "target_chapter": "ch-4",
+                     "what_was_missed": "Evaluated Section 301 tariff exposure on Mexican sub-assemblies.",
+                     "materiality": "IMMATERIAL_VERIFIED",
+                     "evidence": "USMCA-compliant North American assembly exempts 96% of COGS.", "source_url": "https://sec.example.com/usmca"},
+                ],
+            }
+            (work_dir / "refresh_audit.json").write_text(json.dumps(audit_data, indent=2), encoding="utf-8")
+            unpatched_errs = validate_refresh_audit(work_dir)
+            self.assertTrue(any("ch03.json was NOT updated" in e for e in unpatched_errs))
+            self.assertTrue(any("ch05.json was NOT updated" in e for e in unpatched_errs))
+
+            # Patch ch03.json and ch05.json with the newly discovered blind spot & Q3 DSO update -> PASS!
+            for ch_num, note in ((3, "Single-source fab supplies 82% of SiC power modules [26]."),
+                                 (5, "Q3 DSO rose to 74 days on extended hyperscaler terms [26].")):
+                cf = work_dir / "chapters" / f"ch0{ch_num}.json"
+                cdata = json.loads(cf.read_text(encoding="utf-8"))
+                cdata["web_blocks"].append({"type": "p", "text": note})
+                cdata["book_paragraphs"].append(note.replace(" [26]", ""))
+                cf.write_text(json.dumps(cdata, indent=2), encoding="utf-8")
+            self.assertEqual(validate_refresh_audit(work_dir), [])
+
+            # Pass 2: Author ch07..ch09, spine, ch00 — verify lowering held stop ($85 -> $80) is BLOCKED
+            for ch_num, extra in ((0, ""), (7, ""), (8, ""), (9, "")):
+                blocks = [{"type": "p", "text": filler}]
+                if ch_num == 9:
+                    blocks.append({"type": "trigger", "text": "Daily close below $90 triggers immediate exit."})
+                (work_dir / "chapters" / f"ch0{ch_num}.json").write_text(json.dumps({
+                    "id": f"ch-{ch_num}", "web_title": f"{ch_num}. Chapter",
+                    "web_blocks": blocks, "book_paragraphs": [b_filler],
+                }), encoding="utf-8")
+
+            bad_spine = {
+                **init_spec,
+                "as_of": "2026-11-12",
+                "stop_loss": 80.0,  # Illegally lowered below prior $85.0 on held shares!
+                "citations": init_spec["citations"] + ["Q3 10-Q: https://sec.example.com/q3"],
+            }
+            bad_spine.pop("chapters", None)
+            (work_dir / "spine.json").write_text(json.dumps(bad_spine, indent=2), encoding="utf-8")
+            from dossier_schema import load_monograph_spec
+            loaded_bad = load_monograph_spec(work_dir)
+            with self.assertRaisesRegex(ValueError, "Stop-loss ratchet violation"):
+                render_10chapter_monograph_editions(
+                    loaded_bad, snapshots=snapshots_v1, positions=held_positions,
+                    shortlist={"active": []}, out_dossier_path=html_out,
+                )
+
+            # Ratchet stop UP ($85 -> $90) as stock advances to $106 -> compiles & injects #revision-audit-summary!
+            good_spine = {
+                **bad_spine,
+                "entry_zone_low": 96.0,
+                "entry_zone_high": 100.0,
+                "stop_loss": 90.0,
+                "target_base": 135.0,
+                "target_bull": 160.0,
+            }
+            (work_dir / "spine.json").write_text(json.dumps(good_spine, indent=2), encoding="utf-8")
+            snapshots_v2 = {"snapshots": {"TEST": {
+                "tradingview": {"close": 106.0, "sector": "Technology", "exchange": "NASDAQ"},
+                "stage2_evaluation": {"weinstein_stage": "STAGE_2", "entry_timing_posture": "WAIT_FOR_SUPPORT_PULLBACK",
+                                      "technical_timing_gate": "CAP_WAIT_FOR_SUPPORT",
+                                      "support_buy_zone": [96.0, 100.0], "invalidation_stop": 90.0},
+            }}}
+            loaded_good = load_monograph_spec(work_dir)
+            render_10chapter_monograph_editions(
+                loaded_good, snapshots=snapshots_v2, positions=held_positions,
+                shortlist={"active": []}, out_dossier_path=html_out, persist_spec_dir=boot_dir,
+            )
+            refreshed_soup = BeautifulSoup(html_out.read_text(encoding="utf-8"), "html.parser")
+            rev_banner = refreshed_soup.select_one("#revision-audit-summary")
+            self.assertIsNotNone(rev_banner)
+            self.assertIn("silicon carbide MOSFET", rev_banner.get_text(" ", strip=True))
+            self.assertIn("$85.00", rev_banner.get_text(" ", strip=True))
+            self.assertIn("$90.00", rev_banner.get_text(" ", strip=True))
+            rev_log = json.loads((boot_dir / "revision_log.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(rev_log["history"]), 2)
+
+            # Verify refresh_queue_info prioritizes held/shortlisted stalest dossiers
+            older_html = repo / "docs" / "blogs" / "US" / "OLDER_dossier.html"
+            older_html.write_text('<meta name="research-as-of" content="2026-09-01"><h1>Older</h1>', encoding="utf-8")
+            (repo / "data" / "shortlist" / "US.json").write_text(
+                json.dumps({"market": "US", "active": [{"symbol": "TEST"}]}), encoding="utf-8"
+            )
+            with patch.object(run_claims, "REPO", repo):
+                ordered, _, _ = run_claims.refresh_queue_info("US", ref="WORKTREE")
+            self.assertEqual(ordered, ["TEST", "OLDER"])
 
 
 if __name__ == "__main__":

@@ -30,7 +30,6 @@ def yf_candidates(symbol: str, market: str) -> list[str]:
         return cands
     return [symbol]
 
-
 def fetch_symbol_history(
     symbol: str,
     market: str,
