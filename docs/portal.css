@@ -34,6 +34,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -682,10 +683,8 @@ a:hover {
   .dossier-summary { display: none; }
   /* Ticker is the key identifier; drop the long company name and sector
      on narrower frames so Stage, Status, Verdict and Monograph stay visible. */
-  .pipeline-table th:nth-child(2),
-  .pipeline-table td:nth-child(2),
-  .pipeline-table th:nth-child(5),
-  .pipeline-table td:nth-child(5) { display: none; }
+  .pipeline-table .col-company,
+  .pipeline-table .col-sector { display: none; }
   .pipeline-table { font-size: 0.84em; }
 }
 @media (max-width: 720px) {
@@ -768,25 +767,7 @@ a:hover {
 /* Accordion Branch */
 details.accordion-branch {
   border: 1px solid var(--line-strong);
-  border-radius: 4px;
   background: var(--surface);
-  overflow: hidden;
-}
-
-details.accordion-branch::details-content {
-  interpolate-size: allow-keywords;
-  overflow: clip;
-  contain: layout;
-}
-
-details.accordion-branch:not([open])::details-content {
-  block-size: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  details.accordion-branch::details-content {
-    transition: block-size 0.25s ease-in-out, content-visibility 0.25s allow-discrete;
-  }
 }
 
 summary.branch-summary {
@@ -833,11 +814,6 @@ summary.branch-summary:hover {
 
 details.accordion-branch[open] > summary .branch-chevron {
   transform: rotate(45deg);
-}
-
-.branch-icon {
-  font-size: 1.15em;
-  line-height: 1;
 }
 
 .branch-title {
@@ -893,40 +869,14 @@ details.branch-holdings summary .branch-badge {
   color: #145a32;
 }
 
-/* Sub-branch / Market groups inside each accordion */
 .branch-content {
   padding: 12px 14px 14px;
 }
 
-.market-subgroup {
-  margin-bottom: 14px;
-}
-.market-subgroup:last-child {
-  margin-bottom: 0;
-}
-
-.market-subhead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 10px;
-  background: #f1f5f8;
-  border-left: 3px solid var(--navy);
-  margin-bottom: 8px;
-  border-radius: 0 3px 3px 0;
-}
-
-.market-subhead-title {
-  font-size: 0.88em;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.market-subhead-count {
-  font-size: 0.82em;
-  font-weight: 600;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+.branch-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
 }
 
 .branch-empty {
@@ -936,4 +886,310 @@ details.branch-holdings summary .branch-badge {
   font-style: italic;
   font-size: 0.9em;
   text-align: center;
+}
+
+
+/* ---- Portfolio Performance, Timelines & XIRR ---- */
+.perf-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid var(--line-strong);
+  margin-bottom: 16px;
+}
+
+.perf-tablist {
+  display: flex;
+  overflow-x: auto;
+  gap: 4px;
+  scrollbar-width: thin;
+}
+
+.perf-tab {
+  position: relative;
+  flex: none;
+  background: transparent;
+  border: none;
+  padding: 10px 16px 12px;
+  font-family: inherit;
+  font-size: 0.92em;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+}
+
+.perf-tab:hover {
+  color: var(--navy);
+  background: var(--link-hover-bg);
+}
+
+.perf-tab[aria-selected="true"] {
+  color: var(--navy);
+}
+
+.perf-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  border-block-end: 3px solid var(--navy);
+}
+
+.perf-tab-cur {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 0.78em;
+  font-weight: 600;
+  border-radius: 3px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--line);
+  color: var(--ink-secondary);
+}
+
+.perf-periods {
+  display: inline-flex;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.perf-period-btn {
+  background: var(--surface);
+  color: var(--ink-secondary);
+  border: none;
+  border-right: 1px solid var(--line);
+  padding: 5px 11px;
+  font-family: inherit;
+  font-size: 0.82em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.perf-period-btn:last-child {
+  border-right: none;
+}
+
+.perf-period-btn:hover {
+  background: var(--link-hover-bg);
+  color: var(--navy);
+}
+
+.perf-period-btn.is-active {
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.perf-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.perf-kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--navy);
+  border-radius: 4px;
+  padding: 11px 14px;
+}
+
+.perf-kpi-card.is-positive {
+  border-top-color: #145a32;
+}
+
+.perf-kpi-card.is-negative {
+  border-top-color: #9e2a2b;
+}
+
+.perf-kpi-label {
+  font-size: 0.76em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.perf-kpi-value {
+  font-size: 1.25em;
+  font-weight: 800;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.perf-kpi-value.pos {
+  color: #145a32;
+}
+
+.perf-kpi-value.neg {
+  color: #9e2a2b;
+}
+
+.perf-kpi-sub {
+  margin-top: 4px;
+  font-size: 0.78em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.perf-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.perf-chart-card {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+
+.perf-chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.perf-chart-title {
+  font-size: 0.94em;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+
+.perf-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78em;
+  color: var(--muted);
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.perf-chart-readout {
+  min-height: 20px;
+  font-size: 0.8em;
+  color: var(--ink-secondary);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  background: #f8fafc;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.perf-svg-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.perf-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  cursor: crosshair;
+}
+
+.perf-period-table-wrap {
+  margin-bottom: 14px;
+}
+
+.perf-period-row {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.perf-period-row:hover {
+  background: #f2f7fa;
+}
+
+.perf-period-row.is-selected {
+  background: #e9f2f8;
+  font-weight: 700;
+}
+
+.perf-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.perf-pos {
+  color: #145a32;
+  font-weight: 700;
+}
+
+.perf-neg {
+  color: #9e2a2b;
+  font-weight: 700;
+}
+
+.perf-holdings-details {
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  margin-bottom: 12px;
+}
+
+.perf-holdings-details summary {
+  padding: 10px 14px;
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  background: #f8fafc;
+  user-select: none;
+}
+
+.perf-holdings-details[open] summary {
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.perf-holdings-body {
+  padding: 10px 14px 12px;
+}
+
+.perf-notes {
+  margin: 0;
+  padding: 10px 14px;
+  background: #fbfcfd;
+  border-left: 3px solid var(--line-strong);
+  font-size: 0.82em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.perf-notes li {
+  margin-left: 16px;
+}
+
+@media (max-width: 640px) {
+  .perf-charts-grid {
+    grid-template-columns: 1fr;
+  }
 }
