@@ -1,0 +1,70 @@
+{
+  "symbol": "LNG",
+  "market": "US",
+  "generated_at": "2026-11-13T15:46:41+00:00",
+  "business_quality_verdict": "CYCLICAL_CONDITIONAL",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:LNG",
+    "exchange": "NYSE",
+    "company_name": "Cheniere Energy, Inc.",
+    "close": 307.44,
+    "change_1d_pct": -0.66,
+    "perf_1w_pct": 10.47,
+    "perf_1m_pct": 6.21,
+    "perf_3m_pct": 14.38,
+    "rsi_1d": 57.76,
+    "rsi_4h": 58.43,
+    "rsi_1w": 59.12,
+    "sma20": 297.97,
+    "sma50": 284.43,
+    "sma200": 261.0,
+    "sma30_weekly": 265.7,
+    "ema10_weekly": 290.43,
+    "ema20_4h": 298.89,
+    "sma50_4h": 294.44,
+    "atr14": 10.93,
+    "bb_width_pct": 17.79,
+    "pivot_s1": 282.97,
+    "pivot_s2": 235.62,
+    "pivot_r1": 354.2,
+    "pivot_r2": 378.08,
+    "high_52w": 330.73,
+    "low_52w": 186.2,
+    "dist_to_200d_pct": 17.79,
+    "major_shelf": 282.97,
+    "intraday_4h_turn": true,
+    "setup_archetype": "STAGE2_EXTENDED",
+    "setup_summary": "Intraday 1W/1D/4H TradingView snapshot captured 13 Nov 2026 at 10:46 ET, after the dossier's verified 12 Nov close. The current technical picture is Stage 2, but the 12 Nov ledger governs all entry and stop decisions; refresh the chain after a completed session before any options trade."
+  },
+  "options_plan": {
+    "symbol": "LNG",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 35.0,
+    "hv20_pct": 52.1,
+    "open_positions_audit": [],
+    "headline": "NO_OPTIONS_EDGE: no options trade is recommended from this run. The public chain was captured intraday on 13 Nov after the 12 Nov dossier cutoff; refresh after a completed session before pricing a spread or LEAPS contract.",
+    "recommended_trade": null,
+    "decision_note": "The raw chain scanner produced an illustrative spread candidate, but it is not adopted because it is outside the report cutoff and relies on an intraday quote."
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (LNG)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x LNG 2027-01-15 $300/$350 Bull Call Spread (63 DTE) at $16.85 net debit ($1,685.00 max loss -&gt; $3,315.00 max profit, 1.97:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> In Stage 2 uptrend, but extended above 50D SMA (284.43); chasing short-dated calls carries pullback risk. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: Selling the upper $350 call collects $4.05/sh upfront, lowering your breakeven to $316.85 and protecting you against post-news volatility crush.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $300 Call for $20.90 and simultaneously sell the $350 Call for $4.05, paying $16.85/sh net ($1,685.00 total for 1 spread(s)). That $1,685.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $316.85 (+3.1% from $307.44). Anywhere at or above $350, your $1,685.00 turns into $5,000.00 (+$3,315.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in LNG adds ~$40.00 to your spread (Net Delta), while sitting flat costs ~$5.32/day in time decay (Net Theta) — much lower than an unhedged call because the sold $350 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for LNG</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $300 CALL @ $20.90 mid (bid $20.30 / ask $21.50, OI 1071) + SELL 2027-01-15 $350 CALL @ $4.05 mid (bid $3.80 / ask $4.30, OI 853)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,685.00 (168.5 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$316.85 (+3.06% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$3,315.00 (1.97:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+40.00 per $1 move | $-5.32/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($2,320.50 gain) or exit early if LNG closes below $282.97.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 63 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $1,685.00 Across Stock Scenarios (LNG)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $300 at Expiry</td><td>$282.97 (-8.0%)</td><td>$0.00</td><td>$-1,685.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($316.85)</td><td>$316.85 (+3.1%)</td><td>$1,685.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($350)</td><td>$350.00 (+13.8%)</td><td>$5,000.00</td><td>$+3,315.00</td><td><strong>+196.7%</strong></td></tr><tr><td>Bull Overshoot ($407.33)</td><td>$407.33 (+32.5%)</td><td>$5,000.00</td><td>$+3,315.00</td><td><strong>+196.7%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>",
+  "capture_time_et": "2026-11-13T10:46:41-05:00"
+}

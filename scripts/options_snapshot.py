@@ -830,6 +830,25 @@ def render_options_section_html(plan: Dict[str, Any], mtf: Optional[Dict[str, An
         f'<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> {html.escape(tv_note)} '
         f'<em>Account / Chain Feed: {html.escape(rh_note)}</em></p>',
     ]
+    raw_tv_symbol = str((mtf or {}).get("tv_symbol") or f"{'NSE' if mkt == 'IN' else 'NYSE'}:{sym}").upper()
+    symbol_parts = raw_tv_symbol.split(":", 1)
+    exchange = re.sub(r"[^A-Z0-9]", "", symbol_parts[0]) if len(symbol_parts) == 2 else ("NSE" if mkt == "IN" else "NYSE")
+    ticker = re.sub(r"[^A-Z0-9._-]", "", symbol_parts[-1])
+    chart_symbol = f"{exchange}:{ticker}"
+    chart_id = f"tradingview_{re.sub(r'[^a-z0-9]+', '_', ticker.lower())}_options_chart"
+    parts.extend([
+        f'<p><strong>Interactive TradingView chart:</strong> public live chart for {html.escape(chart_symbol)}. '
+        "Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>",
+        '<div class="tradingview-widget-container" style="height: 520px; width: 100%; margin: 1.25rem 0;">'
+        f'<div id="{chart_id}" role="img" aria-label="Interactive TradingView daily chart for {html.escape(chart_symbol)}" style="height: 100%; width: 100%;"></div>'
+        '<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>'
+        '<script type="text/javascript">'
+        f'new TradingView.widget({{"autosize":true,"symbol":{json.dumps(chart_symbol)},"interval":"D",'
+        '"timezone":"Etc/UTC","theme":"light","style":"1","locale":"en",'
+        '"toolbar_bg":"#f4f6f8","enable_publishing":false,"hide_top_toolbar":false,'
+        f'"allow_symbol_change":true,"container_id":{json.dumps(chart_id)}}});'
+        '</script></div>',
+    ])
 
     # Existing open options audit if present
     open_audits = plan.get("open_positions_audit") or []
