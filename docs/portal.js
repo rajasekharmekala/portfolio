@@ -11,21 +11,22 @@
     sector: "ALL",
     status: "ALL",
     verdict: "ALL",
-    sort: "market",
+    sort: { key: "market", dir: "asc" },
     search: "",
     viewMode: "tree",
-    activeTab: "pipeline",
+    activeTab: "performance",
     perf: null,
     perfProfileId: null,
     perfPeriod: "1Y",
   };
 
   const TABS = [
-    { id: "pipeline", hash: "#pipeline", searchPlaceholder: "Search ticker, company, sector…" },
     { id: "performance", hash: "#performance", searchPlaceholder: "" },
+    { id: "pipeline", hash: "#pipeline", searchPlaceholder: "Search ticker, company, sector…" },
     { id: "reports", hash: "#reports", searchPlaceholder: "Search report title, market, summary…" },
     { id: "dossiers", hash: "#monographs", searchPlaceholder: "Search ticker, company, summary…" },
   ];
+  const DEFAULT_TAB = "performance";
 
   const HASH_TO_TAB = {
     "#pipeline": "pipeline",
@@ -41,9 +42,9 @@
 
   function resolveTabFromHash(hash) {
     const key = String(hash || "").toLowerCase();
-    if (!key) return "pipeline";
+    if (!key) return DEFAULT_TAB;
     if (key === "#top") return null;
-    return HASH_TO_TAB[key] || "pipeline";
+    return HASH_TO_TAB[key] || DEFAULT_TAB;
   }
 
   const escapeHtml = value =>
@@ -192,36 +193,72 @@
     return true;
   }
 
-  function sortPipeline(list) {
-    const sorted = [...list];
-    const stageRank = { STAGE_2: 0, STAGE_1: 1, STAGE_3: 2, STAGE_4: 3 };
-    if (state.sort === "stage") {
-      sorted.sort((a, b) =>
-        (stageRank[a.stage] ?? 9) - (stageRank[b.stage] ?? 9) ||
-        (a.symbol || "").localeCompare(b.symbol || ""));
-    } else if (state.sort === "sector") {
-      sorted.sort((a, b) =>
-        (a.sector || "~").localeCompare(b.sector || "~") ||
-        (a.symbol || "").localeCompare(b.symbol || ""));
-    } else {
-      sorted.sort((a, b) =>
-        a.market.localeCompare(b.market) || (a.symbol || "").localeCompare(b.symbol || ""));
+  // Ascending puts the most favourable value first: Stage 2 before 4, Immediate Buy before Avoid,
+  // Held before Shortlist before Watchlist. Missing values sort last in both directions.
+  const STAGE_RANK = { STAGE_2: 0, STAGE_1: 1, STAGE_3: 2, STAGE_4: 3 };
+  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, WATCHLIST: 2 };
+  const VERDICT_RANK = {
+    "IMMEDIATE BUY": 0,
+    "ACCUMULATE ON DIP": 1,
+    "KEEP COMPOUNDING": 2,
+    "WAIT FOR SUPPORT": 3,
+    "WATCHLIST / HOLD": 4,
+    "TRIM / HARVEST": 5,
+    "AVOID / REJECTED": 6,
+  };
+
+  const PIPELINE_COLUMNS = [
+    { key: "ticker", label: "Ticker" },
+    { key: "company", label: "Company", className: "col-company" },
+    { key: "market", label: "Market" },
+    { key: "stage", label: "Stage" },
+    { key: "sector", label: "Sector", className: "col-sector" },
+    { key: "status", label: "Status" },
+    { key: "verdict", label: "Verdict" },
+    { key: "monograph", label: "Monograph" },
+  ];
+
+  function sortValue(key, row) {
+    switch (key) {
+      case "ticker": return row.symbol || "";
+      case "company": return row.company && row.company !== row.symbol ? row.company : null;
+      case "stage": return row.stage ? (STAGE_RANK[row.stage] ?? 9) : null;
+      case "sector": return row.sector || null;
+      // Held names with more memberships first; the direction flips the whole order.
+      case "status": return STATUS_RANK[row.status] * 3 + (3 - row.statuses.length);
+      case "verdict": return row.verdict ? (VERDICT_RANK[row.verdict] ?? 7) : null;
+      case "monograph": return row.dossierUrl ? 0 : 1;
+      default: return row.market;
     }
-    return sorted;
   }
 
-  const PIPELINE_THEAD = `<thead>
-    <tr>
-      <th scope="col">Ticker</th>
-      <th scope="col" class="col-company">Company</th>
-      <th scope="col">Market</th>
-      <th scope="col">Stage</th>
-      <th scope="col" class="col-sector">Sector</th>
-      <th scope="col">Status</th>
-      <th scope="col">Verdict</th>
-      <th scope="col">Monograph</th>
-    </tr>
-  </thead>`;
+  function sortPipeline(list) {
+    const { key, dir } = state.sort;
+    const sign = dir === "desc" ? -1 : 1;
+    return [...list].sort((a, b) => {
+      const va = sortValue(key, a);
+      const vb = sortValue(key, b);
+      let cmp;
+      if (va === null || vb === null) {
+        cmp = (va === null) - (vb === null);
+      } else if (typeof va === "number") {
+        cmp = (va - vb) * sign;
+      } else {
+        cmp = String(va).localeCompare(String(vb)) * sign;
+      }
+      return cmp || (a.symbol || "").localeCompare(b.symbol || "") || a.market.localeCompare(b.market);
+    });
+  }
+
+  function pipelineHeadRow() {
+    const cells = PIPELINE_COLUMNS.map(col => {
+      const active = state.sort.key === col.key;
+      const ariaSort = active ? (state.sort.dir === "desc" ? "descending" : "ascending") : "none";
+      const cls = col.className ? ` class="${col.className}"` : "";
+      return `<th scope="col"${cls} aria-sort="${ariaSort}"><button type="button" class="th-sort" data-sort-key="${col.key}">${escapeHtml(col.label)}<span class="sort-ind" aria-hidden="true"></span></button></th>`;
+    });
+    return `<tr>${cells.join("")}</tr>`;
+  }
 
   const SECTIONS = [
     { status: "HELD", id: "holdings", label: "Holdings" },
@@ -277,7 +314,7 @@
       const scope = isFiltered() ? " match the current filters" : " yet";
       return `<p class="branch-empty">No ${escapeHtml(label.toLowerCase())} names${scope}.</p>`;
     }
-    return `<div class="branch-table-wrap"><table class="pipeline-table">${PIPELINE_THEAD}<tbody>${items.map(pipelineRowHtml).join("")}</tbody></table></div>`;
+    return `<div class="branch-table-wrap"><table class="pipeline-table"><thead>${pipelineHeadRow()}</thead><tbody>${items.map(pipelineRowHtml).join("")}</tbody></table></div>`;
   }
 
   // Each name sits in exactly one section (its primary status), so section counts sum to the tracked total.
@@ -330,6 +367,8 @@
     }
     if (meta) meta.textContent = `${filtered.length} of ${all.length} tracked names`;
 
+    const head = byId("pipeline-head");
+    if (head) head.innerHTML = pipelineHeadRow();
     body.innerHTML = filtered.map(pipelineRowHtml).join("");
 
     if (emptyNote) {
@@ -422,6 +461,8 @@
 
   function render() {
     const pipeline = buildPipeline();
+    const sortSelect = byId("sort-select");
+    if (sortSelect) sortSelect.value = state.sort.key;
     renderStats(pipeline);
     renderPipeline(pipeline);
     renderTree(pipeline);
@@ -437,9 +478,13 @@
     const reportEmpty = byId("report-empty");
     if (reportEmpty) {
       const allReportsCount = state.entries.filter(e => e.kind === "report").length;
-      const none = allReportsCount > 0 && reports.length === 0;
+      const none = reports.length === 0;
       reportEmpty.hidden = !none;
-      reportEmpty.textContent = none ? "No operating reports match these filters." : "";
+      reportEmpty.textContent = none
+        ? (allReportsCount === 0
+          ? "No operating reports are published right now."
+          : "No operating reports match these filters.")
+        : "";
     }
 
     const dossierMeta = byId("dossier-meta");
@@ -582,7 +627,7 @@
     });
 
     const rawHash = window.location.hash;
-    const initial = resolveTabFromHash(rawHash) || "pipeline";
+    const initial = resolveTabFromHash(rawHash) || DEFAULT_TAB;
     activateTab(initial);
     if (rawHash && HASH_TO_TAB[rawHash.toLowerCase()]) {
       const canonical = TABS.find(t => t.id === initial)?.hash;
@@ -624,7 +669,29 @@
     wireFilter("sector-filter", "sector");
     wireFilter("status-filter", "status");
     wireFilter("verdict-filter", "verdict");
-    wireFilter("sort-select", "sort");
+
+    const sortSelect = byId("sort-select");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", () => {
+        state.sort = { key: sortSelect.value, dir: "asc" };
+        render();
+      });
+    }
+
+    const pipelinePanel = byId("panel-pipeline");
+    if (pipelinePanel) {
+      pipelinePanel.addEventListener("click", ev => {
+        const button = ev.target.closest(".th-sort");
+        if (!button) return;
+        const key = button.dataset.sortKey;
+        const index = Array.from(pipelinePanel.querySelectorAll(".th-sort")).indexOf(button);
+        state.sort = state.sort.key === key
+          ? { key, dir: state.sort.dir === "asc" ? "desc" : "asc" }
+          : { key, dir: "asc" };
+        render();
+        pipelinePanel.querySelectorAll(".th-sort")[index]?.focus({ preventScroll: true });
+      });
+    }
 
     const resetBtn = byId("reset-filters");
     if (resetBtn) {

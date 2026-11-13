@@ -648,6 +648,27 @@ a:hover {
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.th-sort:hover { color: var(--navy); }
+.th-sort:focus-visible { outline: 2px solid var(--navy-hover); outline-offset: 2px; }
+.sort-ind::after { content: "\2195"; opacity: 0.35; }
+th[aria-sort="ascending"], th[aria-sort="descending"] { color: var(--navy); }
+th[aria-sort="ascending"] .sort-ind::after { content: "\25B2"; opacity: 1; }
+th[aria-sort="descending"] .sort-ind::after { content: "\25BC"; opacity: 1; }
 .pipeline-table tbody tr:hover { background: #f5f9fc; }
 .pipeline-table td:last-child,
 .pipeline-table th:last-child { text-align: center; }
