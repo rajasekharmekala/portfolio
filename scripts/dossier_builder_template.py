@@ -1566,6 +1566,9 @@ def render_10chapter_monograph_editions(
             elif btype == "sizing_table":
                 saw_sizing = True
                 w_parts.append("<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>")
+                intro_html = blk.get("intro") or blk.get("html") or blk.get("text")
+                if intro_html:
+                    w_parts.append(f"<p>{_linkify_html_fragment(intro_html, max_cite)}</p>")
                 w_parts.append(l3_html)
             elif btype == "trigger":
                 w_parts.append(f'<p class="trigger">{_linkify_html_fragment(blk.get("html") or blk.get("text", ""), max_cite)}</p>')
