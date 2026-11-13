@@ -16,15 +16,16 @@ This directory contains the canonical investment constitution, research database
 - [02_Core_Holdings_Database.md](02_Core_Holdings_Database.md) — **Core Alpha** high-conviction 3–5 year compounders (Target: 35%–40%).
 - [03_Short_Term_and_Momentum_Database.md](03_Short_Term_and_Momentum_Database.md) — **Tactical Momentum** Stage 2 breakout & catalyst swings (Target: 45%–50%).
 - [04_Leveraged_Holdings_Database.md](04_Leveraged_Holdings_Database.md) — Leveraged and thematic instruments.
-- [05_Options_Book.md](05_Options_Book.md) — **Options Book**: 10% Portfolio Allocation, Max 2% per bet, up to 7–8 long call positions (6-month LEAPS / 60-day catalyst calls, explicit selling & loss-cutting rules).
 - [06_Quarterly_Portfolio_Reviews.md](06_Quarterly_Portfolio_Reviews.md) — Historical thesis reviews and audit notes.
 - [07_Research_and_KPI_Library.md](07_Research_and_KPI_Library.md) — Fine-grained fundamental KPIs and industry metrics.
 
+> **Options Book & Tactical Call-Convexity:** Canonical open option contracts live in `data/options/{IN,US}.json` and are evaluated through the single standalone `.agents/workflows/options_desk.md` workflow (`.agents/skills/options_desk/SKILL.md` + `scripts/options_snapshot.py`).
+
 ---
 
-## 3. Scheduled NSE/BSE Agentic Prompts (Moved to [`docs/india/`](../india/))
-- [`docs/india/11_Scheduled_Transcript_Watchlist_Maintenance_Prompt.md`](../india/11_Scheduled_Transcript_Watchlist_Maintenance_Prompt.md) — Stage 1 Transcript Ingestion & Watchlist Maintenance.
-- [`docs/india/12_Scheduled_Watchlist_to_Shortlist_Research_Prompt.md`](../india/12_Scheduled_Watchlist_to_Shortlist_Research_Prompt.md) — Stage 2 Real-Time Online Web Underwriting & Curated Shortlist.
-- [`docs/india/market_intelligence.md`](../india/market_intelligence.md) — Daily Institutional Market Intelligence & Volatility Regime.
-- [`docs/india/master_portfolio_reallocation.md`](../india/master_portfolio_reallocation.md) — Master CIO Capital Reallocation Blueprint.
-- [`docs/india/sector_subsector_taxonomy.md`](../india/sector_subsector_taxonomy.md) — 2-Tier Sector & Subsector Taxonomy.
+## 3. Canonical Agentic Workflows (`.agents/workflows/`)
+- [`.agents/workflows/market_intelligence.md`](../.agents/workflows/market_intelligence.md) — Daily Market Intelligence & Stage 2 Sector/Stock Screening (`IN` / `US`).
+- [`.agents/workflows/portfolio_audit.md`](../.agents/workflows/portfolio_audit.md) — Forensic Portfolio Audit & Capital Reallocation (`IN` / `US`).
+- [`.agents/workflows/company_report.md`](../.agents/workflows/company_report.md) — Inaugural 10-Chapter Blind-First Company Monograph (`IN` / `US`).
+- [`.agents/workflows/dossier_refresh.md`](../.agents/workflows/dossier_refresh.md) — Companion Dossier Refresh, Blind-Spot Brainstorm & Stop-Loss Ratchet (`IN` / `US`).
+- [`.agents/workflows/options_desk.md`](../.agents/workflows/options_desk.md) — Standalone Tactical Options & Call-Convexity Desk (`IN` / `US`).

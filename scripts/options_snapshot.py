@@ -476,11 +476,18 @@ def structure_options_setup(
 
     # Audit any existing open contracts on this symbol
     open_audits = []
+    today_date = dt.date.today()
     for pos in open_positions:
-        dte = int(pos.get("dte") or 60)
+        exp_raw = str(pos.get("expiry_date") or "").strip()
+        try:
+            dte = (dt.date.fromisoformat(exp_raw) - today_date).days if exp_raw else int(pos.get("dte") or 60)
+        except ValueError:
+            dte = int(pos.get("dte") or 60)
         inv = pos.get("invalidation_stop_usd") or pos.get("invalidation_stop_inr")
         pnl_pct = pos.get("pnl_pct") or 0.0
-        if business_quality_verdict == "FUNDAMENTAL_FAIL" or (isinstance(inv, (int, float)) and spot <= inv):
+        if dte < 0:
+            act, why = "EXPIRED_REMOVE_FROM_LEDGER", f"Contract expired on {exp_raw} ({abs(dte)}d ago); reconcile and remove from data/options/{market}.json."
+        elif business_quality_verdict == "FUNDAMENTAL_FAIL" or (isinstance(inv, (int, float)) and spot <= inv):
             act, why = "CLOSE", f"Underlying ({cur}{spot:,.2f}) breached invalidation ({cur}{inv}) or fundamentals failed."
         elif dte <= 30:
             act, why = "ROLL_OR_CLOSE", f"Only {dte} DTE left; accelerating daily theta decay requires rolling out or closing."

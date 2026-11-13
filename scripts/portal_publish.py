@@ -273,7 +273,7 @@ def read_entry(path, dates, updates):
     summary = completion.get("summary") or (paragraph.get_text(" ", strip=True) if paragraph else description.get("content", "") if description else "")
     report_date = re.search(r"20\d{2}-\d{2}-\d{2}", path.stem)
     workflow = re.sub(r"_?20\d{2}-\d{2}-\d{2}.*", "", path.stem).replace("_", " ")
-    for pattern, name in (("Market.*Intelligence", "Market intelligence"), ("Portfolio.*Audit", "Portfolio audit"), ("Company.*Report", "Company report")):
+    for pattern, name in (("Market.*Intelligence", "Market intelligence"), ("Portfolio.*Audit", "Portfolio audit"), ("Options.*Desk", "Options desk"), ("Company.*Report", "Company report")):
         if re.search(pattern, workflow, re.I):
             workflow = name
             break

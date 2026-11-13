@@ -72,14 +72,15 @@ Both should print `RESULT: PASS`.
 │   │   └── reviewer.json       Reviewer model, red-team scope and round limit
 │   ├── workflows/             Step-by-step runs. Start here for a daily run.
 │   │   ├── _COMMON.md          Rules that apply to every workflow
-│   │   ├── market_intelligence.md, portfolio_audit.md, company_report.md
+│   │   ├── market_intelligence.md, portfolio_audit.md, options_desk.md
+│   │   └── company_report.md, dossier_refresh.md
 │   └── skills/                Analysis and writing rules, one folder per skill
 │       ├── _shared/           Shared standards: run protocol, voice, palette, data layer,
 │       │                      section drafting, holdings update, editorial standard
 │       ├── report_reviewer/   The single reviewer's rubric (judgment only)
 │       ├── red_team/          The conditional bear-case pass
-│       └── market_intelligence, portfolio_audit, company_report
-│           (each covers both markets)
+│       └── market_intelligence, portfolio_audit, options_desk,
+│           company_report, dossier_refresh (each covers both markets)
 ├── googledrive/                Generated reports and dossiers, plus your research notes (gitignored)
 │   ├── newsletters/            Daily reports and audits
 │   ├── blogs/                  Company dossiers
@@ -165,7 +166,9 @@ The workflow sets the steps. The rules it refers to are in `_COMMON.md`. Every r
 |---|---|
 | `market_intelligence.md` | Daily market briefing for one market: regime, sectors, Stage 2 and Stage 4 lists, tactical playbook |
 | `portfolio_audit.md` | Audit of every holding, with actions and the reasons for them |
-| `company_report.md` | Underwrites one requested or queued company, audits any current holding, and writes its dossier and portfolio action plan |
+| `company_report.md` | Underwrites one requested or queued company (blind-first), syncs pipeline state, and writes its dossier + PDF |
+| `dossier_refresh.md` | Re-evaluates an existing dossier without full rewrite: blind-spot brainstorm, live valuation/Stage 2, and stop ratchet |
+| `options_desk.md` | Fast standalone tactical Call/LEAPS & multi-timeframe chart desk, plus surgical `#options-overlay` dossier updates |
 
 ---
 

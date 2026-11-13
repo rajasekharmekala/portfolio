@@ -6,7 +6,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from portal_publish import BASE_URL, published_url, read_entry
 
-TYPES = ("market-intelligence", "portfolio-audit", "company-report", "other")
+TYPES = ("market-intelligence", "portfolio-audit", "options-desk", "company-report", "other")
 
 
 def report_type(subject, source=None):
@@ -15,7 +15,9 @@ def report_type(subject, source=None):
         return "market-intelligence"
     if "portfolio" in text and "audit" in text:
         return "portfolio-audit"
-    if "company report" in text or "dossier" in text:
+    if "options desk" in text or "tactical options" in text:
+        return "options-desk"
+    if "company report" in text or "company refresh" in text or "dossier" in text:
         return "company-report"
     return "other"
 
@@ -23,7 +25,7 @@ def report_type(subject, source=None):
 def should_email(kind):
     if kind == "company-report":
         return False
-    if kind in ("market-intelligence", "portfolio-audit"):
+    if kind in ("market-intelligence", "portfolio-audit", "options-desk"):
         return True
     return True
 

@@ -1,3 +1,4 @@
+import datetime
 import json
 import tempfile
 import unittest
@@ -682,15 +683,22 @@ class DossierDecisionSchemaTests(unittest.TestCase):
         # 1. Dislocation below 50D SMA at 200D shelf + elevated IV -> Bull Call Debit Spread (with open contract audit)
         disloc_mtf = {"setup_archetype": "DISLOCATION_AT_MAJOR_SHELF", "major_shelf": 94.0, "pivot_r1": 115.0,
                       "setup_summary": "Pulled back into 200D SMA shelf ($94) on news while 4H RSI curls up."}
+        near_exp = (datetime.date.today() + datetime.timedelta(days=20)).isoformat()
+        past_exp = (datetime.date.today() - datetime.timedelta(days=7)).isoformat()
         spread_plan = structure_options_setup(
             "TEST", "US", spot=100.0, mtf=disloc_mtf, chain_data=fake_chains, hv20=0.32,
             business_quality_verdict="COMPOUNDER_PASS", target_base=115.0, target_bull=130.0,
             stop_underlying=92.0, net_worth=200000.0,
-            open_positions=[{"contract_symbol": "TEST261218C110", "type": "Call", "strike_usd": 110,
-                             "expiry_date": "2026-12-18", "dte": 25, "contracts": 2, "invalidation_stop_usd": 90}],
+            open_positions=[
+                {"contract_symbol": "TEST_NEAR_C110", "type": "Call", "strike_usd": 110,
+                 "expiry_date": near_exp, "dte": 99, "contracts": 2, "invalidation_stop_usd": 90},
+                {"contract_symbol": "TEST_EXP_C105", "type": "Call", "strike_usd": 105,
+                 "expiry_date": past_exp, "dte": 31, "contracts": 1, "invalidation_stop_usd": 90},
+            ],
         )
         self.assertEqual(spread_plan["options_verdict"], "BULL_CALL_DEBIT_SPREAD")
         self.assertEqual(spread_plan["open_positions_audit"][0]["action"], "ROLL_OR_CLOSE")
+        self.assertEqual(spread_plan["open_positions_audit"][1]["action"], "EXPIRED_REMOVE_FROM_LEDGER")
         tr = spread_plan["recommended_trade"]
         self.assertEqual(len(tr["legs"]), 2)
         self.assertGreater(tr["max_loss_total"], 0)

@@ -252,11 +252,13 @@ class PortalTests(unittest.TestCase):
 class EmailDigestTests(unittest.TestCase):
     def test_delivery_matrix(self):
         self.assertFalse(should_email("company-report"))
-        for kind in ("market-intelligence", "portfolio-audit", "other"):
+        for kind in ("market-intelligence", "portfolio-audit", "options-desk", "other"):
             self.assertTrue(should_email(kind))
         self.assertEqual(report_type("Company Report | ACME"), "company-report")
+        self.assertEqual(report_type("Company Refresh | ACME"), "company-report")
         self.assertEqual(report_type("US dossier"), "company-report")
         self.assertEqual(report_type("US Portfolio Audit"), "portfolio-audit")
+        self.assertEqual(report_type("US Tactical Options Desk | 2026-11-12"), "options-desk")
 
     def test_skips_before_credentials_and_smtp(self):
         with patch.object(send_email, "load_env") as load_env, patch.object(send_email.smtplib, "SMTP_SSL") as smtp:
