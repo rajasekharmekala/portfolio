@@ -136,13 +136,11 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
         if action == "HOLD_WITH_HARD_STOP":
             holding_summary += f"; retain all {quantity:g} shares now; {shares_to_sell:g} shares are subject to the listed conditional trigger(s)"
         elif shares_to_sell:
-            holding_summary += f"; recommend selling {shares_to_sell:g} shares"
+            holding_summary += f"; recommend selling {shares_to_sell:g} shares and retaining {quantity - shares_to_sell:g} shares"
         else:
-            holding_summary += "; no shares recommended for sale now"
+            holding_summary += f"; no shares recommended for sale; retain all {quantity:g} shares"
         holding_summary += f"; unrealized P&L {cur}{gain:,.2f}" if isinstance(gain, (int, float)) else "; unrealized P&L unavailable"
         holding_summary += f"; portfolio weight {weight:.2f}%" if weight is not None else "; portfolio weight unavailable"
-        if action != "HOLD_WITH_HARD_STOP":
-            holding_summary += f"; recommend selling {shares_to_sell:g} shares and retaining {quantity - shares_to_sell:g}"
     else:
         quantity = 0
         value = cost = gain = weight = None
@@ -178,10 +176,13 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
         amount = (f"; approx. proceeds {cur}{alert['shares'] * alert['trigger_price']:,.2f}"
                   if isinstance(alert.get("trigger_price"), (int, float)) else "")
         alert_rows.append([_esc(trigger), f"{alert['shares']:g}", _esc(alert.get("instruction") + amount)])
+    holding_summary_html = _esc(holding_summary)
+    if not holding_summary.rstrip().endswith((".", "!", "?")):
+        holding_summary_html += "."
     holding_html = (
         f'<section class="chapter" id="holding-action" data-holding-action="{_esc(action)}">'
         "<h2>Current Portfolio Holding Verdict &amp; Alert Plan</h2>"
-        f'<p><strong>{_esc(action_label)}:</strong> {_esc(holding_summary)} {_esc(spec["holding_rationale"])}</p>'
+        f'<p><strong>{_esc(action_label)}:</strong> {holding_summary_html} {_esc(spec["holding_rationale"])}</p>'
         + _render_table(f"Holding action and broker-alert plan for {symbol}",
                         ["Price / event trigger", "Shares affected", "Recommended alert / action"], alert_rows,
                         "These are advisory alert levels for the stated session, not broker orders; verify current holdings and prices before placing or changing any order.")
@@ -358,6 +359,12 @@ def _build_ch4_from_snapshot_or_ledger(
     # can be fresher; allowing an older ledger value to win silently mixes
     # sessions (for example, a Nov 6 close under a Nov 9 report header).
     ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    target_bar_date = str(inst_m.get("asof_bar") or as_of)[:10]
+    price_label = (
+        f"Session Price ({_esc(as_of)})"
+        if ledger_is_asof
+        else f"Last verified target bar ({_esc(target_bar_date)})"
+    )
     primary = inst_m if ledger_is_asof else tv
     secondary = tv if ledger_is_asof else inst_m
     close = primary.get("close") or secondary.get("close")
@@ -404,7 +411,7 @@ def _build_ch4_from_snapshot_or_ledger(
 
     tech_rows = [
         [
-            f"Session close ({_esc(as_of)})",
+            f"Session close ({_esc(as_of)})" if ledger_is_asof else f"Last verified close ({_esc(target_bar_date)})",
             fmt_px(close) + cite_tag,
             f"1D: {tv.get('change_1d_pct') if not ledger_is_asof else (inst_m.get('chg_1d_pct') if inst_m.get('chg_1d_pct') is not None else tv.get('change_1d_pct', 'N/A'))}%, "
             f"1W: {tv.get('perf_1w_pct') if not ledger_is_asof else (inst_m.get('chg_1w_pct') if inst_m.get('chg_1w_pct') is not None else tv.get('perf_1w_pct', 'N/A'))}%, "
@@ -568,6 +575,11 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
     ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    price_label = (
+        f"Session Price ({_esc(as_of)})"
+        if ledger_is_asof
+        else f"Last verified target bar ({_esc(str(inst_m.get('asof_bar') or as_of)[:10])})"
+    )
     close = (inst_m.get("close") if ledger_is_asof else None) or tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
@@ -601,7 +613,7 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     # Key figures strip
     kf_items = [
         ("Verdict", f'<span class="verdict {v_cls}">{_esc(verdict)}</span> ({_esc(archetype)})'),
-        ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
+        (price_label, f"{cur}{close:,.2f}"),
         ("Strategy Bucket", _esc(bucket)),
         ("Weinstein Stage", _esc(w_stage)),
         ("No-FOMO Entry Posture", _esc(entry_posture)),
@@ -1231,6 +1243,11 @@ def render_10chapter_monograph_editions(
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
     ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    price_label = (
+        f"Session Price ({_esc(as_of)})"
+        if ledger_is_asof
+        else f"Last verified target bar ({_esc(str(inst_m.get('asof_bar') or as_of)[:10])})"
+    )
     close = (inst_m.get("close") if ledger_is_asof else None) or tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
     entry_high = spec["entry_zone_high"]
@@ -1304,7 +1321,7 @@ def render_10chapter_monograph_editions(
     kf_items = [
         ("New Capital Verdict", f'<span class="verdict {v_cls}">{_esc(spec["new_capital_verdict"])}</span> ({_esc(archetype)})'),
         ("Current Holding Action", f'<span class="verdict {VERDICT_CLASS_MAP.get(holding["action"], "verdict-watch")}">{_esc(holding["action"].replace("_", " "))}</span> — {_esc(holding["summary"])}'),
-        ("Session Price (" + _esc(as_of) + ")", f"{cur}{close:,.2f}"),
+        (price_label, f"{cur}{close:,.2f}"),
         ("Strategy Bucket", _esc(bucket)),
         ("Weinstein Stage", _esc(w_stage)),
         ("Technical Screen Signal", screen_signal_text),
