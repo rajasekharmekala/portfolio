@@ -1312,7 +1312,7 @@ def render_10chapter_monograph_editions(
         if no_new_allocation:
             target_value += " (new-entry R:R: N/A)"
         else:
-            target_value += f" (CMP R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)"
+            target_value += f" (Current R:R {asym:.2f}:1 | Support R:R {entry_asym:.2f}:1)"
 
     screen_signal_text = _esc(entry_posture)
     if no_new_allocation and str(entry_posture).upper() == "BUY_AT_CMP_NO_FOMO":
