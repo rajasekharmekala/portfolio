@@ -3,7 +3,7 @@
 
   start   claim the run (singleton workflows are refused when another live run holds them), fetch
           origin, and create .worktrees/<run_id> on branch run/<run_id> cut from origin/main.
-          `.venv` and `.env` are symlinked in from the main checkout. Prints JSON.
+          `.venv`, `.env` and `data/accounts` are symlinked in from the main checkout. Prints JSON.
   finish  release the run's claims and remove its worktree and branch.
   list    show the live claims and the run worktrees.
 
@@ -23,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_claims
 
-LINKED = (".venv", ".env")
+LINKED = (".venv", ".env", "data/accounts")
 
 
 def git(*args, cwd=run_claims.REPO, check=True):
