@@ -668,6 +668,8 @@ def render_masterclass_book_html(
     as_of = spec.get("as_of", dt.date.today().isoformat())
     generated = dt.datetime.now(ZoneInfo("America/Los_Angeles"))
     book_title = spec.get("book_masterclass_title") or spec.get("book_title") or f"{spec['title']} — Masterclass Companion Book"
+    entry_posture_text = _clean_audio_text(spec.get("entry_posture", ""))
+    entry_posture_meta = f" ({html.escape(entry_posture_text)})" if entry_posture_text else ""
     book_subtitle = spec.get("book_subtitle") or (
         f"A step-by-step narrative walkthrough and audio companion to {spec['title']}: "
         "deconstructing the business engine, global historical parallels, ten-year financial forensics, "
@@ -813,7 +815,7 @@ def render_masterclass_book_html(
       <div class="mc-cover-meta">
         <div><strong>Company &amp; Market:</strong> {html.escape(spec['title'])} ({html.escape(market)})</div>
         <div><strong>Research Session Cutoff:</strong> {html.escape(as_of)} &bull; <strong>Generated:</strong> <time datetime="{html.escape(generated.isoformat())}">{html.escape(generated.strftime('%d %b %Y, %I:%M %p %Z'))}</time></div>
-        <div><strong>Core Verdict:</strong> {html.escape(_clean_audio_text(spec.get('verdict', '')))} ({html.escape(_clean_audio_text(spec.get('entry_posture', '')))})</div>
+        <div><strong>Core Verdict:</strong> {html.escape(_clean_audio_text(spec.get('verdict', '')))}{entry_posture_meta}</div>
         <div><strong>Authored &amp; Narrated by:</strong> Senior Institutional Equity Research Desk &bull; Masterclass Companion Audio-Reader Edition ({book_words:,} words &bull; ~{audio_minutes} min listen)</div>
       </div>
     </section>
