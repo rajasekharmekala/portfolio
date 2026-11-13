@@ -1,0 +1,68 @@
+{
+  "symbol": "BE",
+  "market": "US",
+  "generated_at": "2026-11-13T16:59:38+00:00",
+  "business_quality_verdict": "CYCLICAL_CONDITIONAL",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "unavailable",
+      "note": "Robinhood live data could not be accessed (module 'chrome_ctl' has no attribute 'eval_js'); using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:BE",
+    "exchange": "NYSE",
+    "company_name": "Bloom Energy Corporation Class A",
+    "close": 187.19,
+    "change_1d_pct": -7.3,
+    "perf_1w_pct": 2.12,
+    "perf_1m_pct": -27.3,
+    "perf_3m_pct": -19.89,
+    "rsi_1d": 42.45,
+    "rsi_4h": 43.86,
+    "rsi_1w": 43.98,
+    "sma20": 205.19,
+    "sma50": 243.95,
+    "sma200": 223.51,
+    "sma30_weekly": 245.48,
+    "ema10_weekly": 217.78,
+    "ema20_4h": 198.49,
+    "sma50_4h": 214.89,
+    "atr14": 21.69,
+    "bb_width_pct": 38.97,
+    "pivot_s1": 161.18,
+    "pivot_s2": 119.19,
+    "pivot_r1": 272.98,
+    "pivot_r2": 342.79,
+    "high_52w": 351.28,
+    "low_52w": 75.7,
+    "dist_to_200d_pct": -16.25,
+    "major_shelf": 161.18,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Supplemental 13 Nov intraday structure, not the 12 Nov close underwriting: price was below both 50D and 200D/30W structural floors. No options trade is authorized."
+  },
+  "options_plan": {
+    "symbol": "BE",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 88.8,
+    "hv20_pct": 127.9,
+    "open_positions_audit": [],
+    "headline": "No options edge. The public chain was captured intraday on 13 Nov 2026 at 08:59 PT, after the 12 Nov dossier cutoff. The later snapshot shows a broken trend, while Pass 1 rated business quality CYCLICAL_CONDITIONAL; this overlay is supplemental and does not set the dossier verdict.",
+    "recommended_trade": null
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (BE)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at CMP ($187.19): stock is in an active Stage 4 correction below 50D/200D averages. If BE tests its major $161.18 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $185/$270) at $22.86 debit toward $272.98 ($2,286.00 max loss -&gt; $6,214.00 max profit, 2.72:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (243.95) and 200D/30W floor (223.51); trend is broken. <em>Account / Chain Feed: Robinhood live data could not be accessed (module &#x27;chrome_ctl&#x27; has no attribute &#x27;eval_js&#x27;); using public options chain.</em></p>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: BE is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($187.19) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($185/$270) is structured to be deployed once BE tests its major $161.18 support shelf and stabilizes. Selling the upper $270 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $2,286.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $185 Call for $29.48 and simultaneously sell the $270 Call for $6.62, paying $22.86/sh net ($2,286.00 total for 1 spread(s)). That $2,286.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $207.86 (+11.0% from $187.19). Anywhere at or above $270, your $2,286.00 turns into $8,500.00 (+$6,214.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in BE adds ~$39.20 to your spread (Net Delta), while sitting flat costs ~$7.05/day in time decay (Net Theta) — much lower than an unhedged call because the sold $270 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for BE</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $185 CALL @ $29.48 mid (bid $28.65 / ask $30.30, OI 478) + SELL 2027-01-15 $270 CALL @ $6.62 mid (bid $6.25 / ask $7.00, OI 5421)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$2,286.00 (228.6 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$207.86 (+11.04% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$6,214.00 (2.72:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+39.20 per $1 move | $-7.05/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($4,349.80 gain) or exit early if BE closes below $161.18.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 63 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $2,286.00 Across Stock Scenarios (BE)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $185 at Expiry</td><td>$161.18 (-13.9%)</td><td>$0.00</td><td>$-2,286.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($207.86)</td><td>$207.86 (+11.0%)</td><td>$2,286.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($270)</td><td>$270.00 (+44.2%)</td><td>$8,500.00</td><td>$+6,214.00</td><td><strong>+271.8%</strong></td></tr><tr><td>Bull Overshoot ($313.93)</td><td>$313.93 (+67.7%)</td><td>$8,500.00</td><td>$+6,214.00</td><td><strong>+271.8%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
