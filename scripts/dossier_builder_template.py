@@ -133,9 +133,16 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
             else f"{quantity:g} shares across {accounts}; market value unavailable"
         )
         holding_summary += f"; cost basis {cur}{cost:,.2f}" if isinstance(cost, (int, float)) else "; cost basis unknown"
+        if action == "HOLD_WITH_HARD_STOP":
+            holding_summary += f"; retain all {quantity:g} shares now; {shares_to_sell:g} shares are subject to the listed conditional trigger(s)"
+        elif shares_to_sell:
+            holding_summary += f"; recommend selling {shares_to_sell:g} shares"
+        else:
+            holding_summary += "; no shares recommended for sale now"
         holding_summary += f"; unrealized P&L {cur}{gain:,.2f}" if isinstance(gain, (int, float)) else "; unrealized P&L unavailable"
         holding_summary += f"; portfolio weight {weight:.2f}%" if weight is not None else "; portfolio weight unavailable"
-        holding_summary += f"; recommend selling {shares_to_sell:g} shares and retaining {quantity - shares_to_sell:g}"
+        if action != "HOLD_WITH_HARD_STOP":
+            holding_summary += f"; recommend selling {shares_to_sell:g} shares and retaining {quantity - shares_to_sell:g}"
     else:
         quantity = 0
         value = cost = gain = weight = None
