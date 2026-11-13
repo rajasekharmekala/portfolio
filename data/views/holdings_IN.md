@@ -1,10 +1,10 @@
 # IN holdings (generated from the transaction log; do not edit)
 
-Generated 2026-11-11T16:43:13. Quantities and cost from `data/accounts/IN/`. Market values need the ledger close and are added by the daily build.
+Generated 2026-11-13T11:59:16. Quantities and cost from `data/accounts/IN/`. Market values need the ledger close and are added by the daily build.
 
 ## Zerodha
 
-Last transaction: 2026-11-11. Cash: 318,497.13.
+Last transaction: 2026-11-13. Cash: 574,581.75.
 
 | Symbol | Quantity | Cost basis | Cost known | Realized P&L |
 |---|---:|---:|:---:|---:|
@@ -20,9 +20,9 @@ Last transaction: 2026-11-11. Cash: 318,497.13.
 | MANORAMA | 85 | 157,604.20 | yes | 55.65 |
 | MARINE | 25 | 10,124.15 | yes | 0.00 |
 | NETWEB | 73 | 321,590.58 | yes | -11,468.42 |
-| RNITAI | 10000 | 555,481.37 | yes | 73,607.12 |
+| RNITAI | 6500 | 361,062.89 | yes | 186,358.14 |
 | SEDEMAC | 200 | 405,098.25 | yes | 0.00 |
 | SSWL | 1 | 490.00 | yes | 0.00 |
-| TANFACIND | 55 | 173,945.55 | yes | 0.00 |
+| TANFACIND | 70 | 224,192.40 | yes | 0.00 |
 | TARIL | 850 | 263,741.10 | yes | 0.00 |
 | TDPOWERSYS | 470 | 299,162.95 | yes | -3,599.70 |

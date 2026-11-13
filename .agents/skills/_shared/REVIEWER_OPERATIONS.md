@@ -6,7 +6,7 @@ The design in one paragraph: code does the mechanical review once, in `scripts/r
 
 ## 1. Choosing the model
 
-- The model is a setting, not part of the workflow. Set `"model"` in `.agents/config/reviewer.json` (default `ao-claude-lc/claude-sonnet-5-5`). Any model id the runner supports works.
+- The model is a setting, not part of the workflow. Set `"model"` in `.agents/config/reviewer.json` (default `azure//claude-sonnet-5-5`). Any model id the runner supports works.
 - Workflows never name a model. If a workflow text names one, that text is wrong: fix the workflow, not the config.
 - The red team uses the same model unless `red_team.model` is set.
 - Calibrate a new model before trusting it: run the reviewer on a report already known to be good (APPROVE expected) and on one with a planted error (REVISE or BLOCK expected).
