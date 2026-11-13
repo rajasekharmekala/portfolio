@@ -19,6 +19,9 @@ from dossier_refresh import (
     prepare_refresh_workspace,
     validate_refresh_audit,
 )
+from options_desk_builder import patch_existing_dossier_html, render_options_desk_report
+from options_snapshot import probe_browser_sessions, structure_options_setup
+import portal_publish
 import run_claims
 from stock_snapshot import _strip_price_fields_for_blind_pass
 from sync_dossier_pipeline import apply_pipeline_transition, verify_review_and_quality_gates
@@ -618,6 +621,141 @@ class DossierDecisionSchemaTests(unittest.TestCase):
             with patch.object(run_claims, "REPO", repo):
                 ordered, _, _ = run_claims.refresh_queue_info("US", ref="WORKTREE")
             self.assertEqual(ordered, ["TEST", "OLDER"])
+
+    def test_situational_parallels_reject_cliches_and_require_failure_base_rate(self):
+        # 1. Cliché mega-cap + missing FAILURE_BASE_RATE twin must be rejected
+        bad_spec = valid_spec()
+        bad_spec["chapters"] = [{
+            "id": "ch-9",
+            "web_blocks": [
+                {"type": "parallel", "role": "MOAT_SCALING", "company": "Danaher", "region_era": "US (1990s-2020s)",
+                 "mechanism": "Serial industrial M&A roll-up playbook.", "outcome_numbers": "Compounded 20% for 30 years.",
+                 "lesson_for_symbol": "Shows serial acquisitions can work."},
+                {"type": "parallel", "role": "MOAT_SCALING", "company": "AAK AB", "region_era": "Sweden (2010-2025)",
+                 "mechanism": "Specialty vegetable fats co-development with global chocolatiers.",
+                 "outcome_numbers": "Expanded EBIT/kg by 65% over 10 years.",
+                 "lesson_for_symbol": "Co-developed formulations lock in confectionery margins."},
+            ],
+            "book_paragraphs": [],
+        }]
+        errs, _ = validate_monograph_spec(bad_spec, min_total_words=0)
+        joined = " | ".join(errs)
+        self.assertIn("cliché mega-cap analogy", joined)
+        self.assertIn("FAILURE_BASE_RATE", joined)
+
+        # 2. Dynamic scaling twin + failure-mode base-rate twin passes cleanly
+        good_spec = valid_spec()
+        good_spec["chapters"] = [{
+            "id": "ch-9",
+            "web_blocks": [
+                {"type": "parallel", "role": "MOAT_SCALING", "company": "AAK AB", "region_era": "Sweden (2010-2025)",
+                 "mechanism": "Specialty cocoa-butter equivalent co-development with global confectionery OEMs.",
+                 "outcome_numbers": "Expanded operating profit per kilo by 65% with 18% ROIC.",
+                 "lesson_for_symbol": "Proves specialty formulation moat scales when working capital stays disciplined."},
+                {"type": "parallel", "role": "FAILURE_BASE_RATE", "company": "Knightscope", "region_era": "US (2022-2025)",
+                 "mechanism": "Autonomous security hardware scaled with heavy field-maintenance burn and equity dilution.",
+                 "outcome_numbers": "Gross margin stayed negative (-28%) and shares de-rated >90% from IPO.",
+                 "lesson_for_symbol": "Hardware fleet growth destroys equity value unless DSO and field service turn cash-positive."},
+            ],
+            "book_paragraphs": [],
+        }]
+        errs2, _ = validate_monograph_spec(good_spec, min_total_words=0)
+        self.assertEqual(errs2, [])
+
+    def test_options_engine_dislocation_spread_leaps_interlocks_and_standalone_desk(self):
+        fake_chains = {
+            "optionable": True,
+            "expiries": ["2027-01-15", "2027-10-15"],
+            "chains": {
+                "2027-01-15": [
+                    {"contract": "TEST270115C95", "expiry": "2027-01-15", "dte": 64, "strike": 95.0, "bid": 8.2, "ask": 8.6, "mid": 8.4, "last": 8.4, "open_interest": 850, "iv": 0.48, "spread_pct": 0.047},
+                    {"contract": "TEST270115C100", "expiry": "2027-01-15", "dte": 64, "strike": 100.0, "bid": 5.4, "ask": 5.8, "mid": 5.6, "last": 5.6, "open_interest": 1200, "iv": 0.46, "spread_pct": 0.071},
+                    {"contract": "TEST270115C115", "expiry": "2027-01-15", "dte": 64, "strike": 115.0, "bid": 1.5, "ask": 1.7, "mid": 1.6, "last": 1.6, "open_interest": 950, "iv": 0.44, "spread_pct": 0.125},
+                ],
+                "2027-10-15": [
+                    {"contract": "TEST271015C90", "expiry": "2027-10-15", "dte": 337, "strike": 90.0, "bid": 19.5, "ask": 20.5, "mid": 20.0, "last": 20.0, "open_interest": 600, "iv": 0.31, "spread_pct": 0.05},
+                    {"contract": "TEST271015C100", "expiry": "2027-10-15", "dte": 337, "strike": 100.0, "bid": 13.8, "ask": 14.2, "mid": 14.0, "last": 14.0, "open_interest": 720, "iv": 0.30, "spread_pct": 0.028},
+                ],
+            },
+        }
+
+        # 1. Dislocation below 50D SMA at 200D shelf + elevated IV -> Bull Call Debit Spread (with open contract audit)
+        disloc_mtf = {"setup_archetype": "DISLOCATION_AT_MAJOR_SHELF", "major_shelf": 94.0, "pivot_r1": 115.0,
+                      "setup_summary": "Pulled back into 200D SMA shelf ($94) on news while 4H RSI curls up."}
+        spread_plan = structure_options_setup(
+            "TEST", "US", spot=100.0, mtf=disloc_mtf, chain_data=fake_chains, hv20=0.32,
+            business_quality_verdict="COMPOUNDER_PASS", target_base=115.0, target_bull=130.0,
+            stop_underlying=92.0, net_worth=200000.0,
+            open_positions=[{"contract_symbol": "TEST261218C110", "type": "Call", "strike_usd": 110,
+                             "expiry_date": "2026-12-18", "dte": 25, "contracts": 2, "invalidation_stop_usd": 90}],
+        )
+        self.assertEqual(spread_plan["options_verdict"], "BULL_CALL_DEBIT_SPREAD")
+        self.assertEqual(spread_plan["open_positions_audit"][0]["action"], "ROLL_OR_CLOSE")
+        tr = spread_plan["recommended_trade"]
+        self.assertEqual(len(tr["legs"]), 2)
+        self.assertGreater(tr["max_loss_total"], 0)
+        self.assertEqual(len(tr["scenarios"]), 4)
+        self.assertTrue(any("maximum you can lose" in s for s in tr["beginner_explainer"]))
+
+        # 2. Calm IV + Stage 2 VCP squeeze on US compounder -> 0.70-delta LEAPS Call
+        vcp_mtf = {"setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE", "major_shelf": 96.0, "pivot_r1": 115.0}
+        calm_chains = copy.deepcopy(fake_chains) if "copy" in globals() else json.loads(json.dumps(fake_chains))
+        for r in calm_chains["chains"]["2027-01-15"]:
+            r["iv"] = 0.29
+        leaps_plan = structure_options_setup(
+            "TEST", "US", spot=100.0, mtf=vcp_mtf, chain_data=calm_chains, hv20=0.32,
+            business_quality_verdict="COMPOUNDER_PASS", target_base=120.0, target_bull=140.0,
+        )
+        self.assertEqual(leaps_plan["options_verdict"], "LONG_CALL_LEAPS")
+        self.assertGreaterEqual(leaps_plan["recommended_trade"]["dte"], 240)
+
+        # 3. FUNDAMENTAL_FAIL blocks rebound calls even at a shelf
+        fail_plan = structure_options_setup(
+            "TEST", "US", spot=100.0, mtf=disloc_mtf, chain_data=fake_chains, hv20=0.32,
+            business_quality_verdict="FUNDAMENTAL_FAIL",
+        )
+        self.assertEqual(fail_plan["options_verdict"], "NO_OPTIONS_EDGE")
+        self.assertIsNone(fail_plan["recommended_trade"])
+
+        # 4. Non-F&O Indian SME -> NOT_OPTIONABLE_OR_ILLIQUID
+        sme_plan = structure_options_setup(
+            "KODYTECH", "IN", spot=1551.0, mtf=vcp_mtf, chain_data={"optionable": False, "chains": {}}, hv20=0.40,
+        )
+        self.assertEqual(sme_plan["options_verdict"], "NOT_OPTIONABLE_OR_ILLIQUID")
+
+        # 5. Graceful browser probe when disabled/logged out + Standalone Options Desk report + Zero-rewrite dossier patch
+        b_status = probe_browser_sessions("TEST", "US", enabled=False)
+        self.assertFalse(b_status["robinhood"]["logged_in"])
+
+        snap_bundle = {
+            "market": "US",
+            "packages": {
+                "TEST": {
+                    "symbol": "TEST",
+                    "market": "US",
+                    "business_quality_verdict": "COMPOUNDER_PASS",
+                    "browser_sessions": b_status,
+                    "multitimeframe_chart": disloc_mtf,
+                    "options_plan": spread_plan,
+                }
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            desk_path = Path(tmp) / "US_Options_Desk.html"
+            desk_html = render_options_desk_report(snap_bundle, as_of="2026-11-12")
+            desk_path.write_text(desk_html, encoding="utf-8")
+            self.assertTrue(portal_publish.require_modern_report(desk_path, require_generated=True))
+            self.assertIn("Beginner Guide: How This Call Trade Works in Plain Dollars", desk_html)
+
+            # Surgically patch #options-overlay into an existing dossier HTML without rewriting chapters
+            dummy_dossier = Path(tmp) / "TEST_dossier.html"
+            dummy_dossier.write_text(
+                '<html><body><main class="report"><section class="chapter" id="ch-9"><h2>9. Synthesis</h2></section></main></body></html>',
+                encoding="utf-8",
+            )
+            self.assertTrue(patch_existing_dossier_html(dummy_dossier, snap_bundle["packages"]["TEST"]))
+            patched_soup = BeautifulSoup(dummy_dossier.read_text(encoding="utf-8"), "html.parser")
+            self.assertIsNotNone(patched_soup.select_one('section#options-overlay[data-options-verdict="BULL_CALL_DEBIT_SPREAD"]'))
 
 
 if __name__ == "__main__":

@@ -61,6 +61,11 @@ HOLDING_ACTIONS = {
 REDEPLOYMENT_TYPES = {"CASH", "SHORTLIST", "OUTSIDE"}
 BUSINESS_QUALITY_VERDICTS = {"COMPOUNDER_PASS", "CYCLICAL_CONDITIONAL", "FUNDAMENTAL_FAIL"}
 KPI_HEALTH_VALUES = {"PASS", "PASS_WITH_WATCH", "FAIL"}
+PARALLEL_ROLES = {"MOAT_SCALING", "FAILURE_BASE_RATE", "CYCLE_VALUATION"}
+CLICHE_PARALLELS = {
+    "apple", "berkshire hathaway", "constellation software", "danaher",
+    "bajaj finance", "titan company",
+}
 BLIND_CHAPTER_IDS = {"ch-1", "ch-2", "ch-3", "ch-4", "ch-5", "ch-6"}
 BLIND_VERDICT_LEAK_RE = re.compile(
     r"\b(?:IMMEDIATE_BUY|ACCUMULATE_ON_DIP|WAIT_FOR_SUPPORT|BUY_AT_CMP_NO_FOMO|"
@@ -93,6 +98,9 @@ def load_monograph_spec(spec_path: str | Path) -> Dict[str, Any]:
         pa_file = p / "prior_anchor_locked.json"
         if pa_file.is_file():
             spec.setdefault("prior_anchor", json.loads(pa_file.read_text(encoding="utf-8")))
+        opt_file = p / "options_plan.json"
+        if opt_file.is_file():
+            spec.setdefault("options_package", json.loads(opt_file.read_text(encoding="utf-8")))
         chapters_dir = p / "chapters"
         chapters: List[Dict[str, Any]] = []
         if chapters_dir.is_dir():
@@ -362,6 +370,7 @@ def validate_monograph_spec(
     book_words = 0
     chapter_stats = []
     ch4_urls: set[str] = set()
+    parallel_roles_seen: List[str] = []
 
     for idx, ch in enumerate(chapters):
         cid = ch.get("id", f"ch-{idx}")
@@ -383,6 +392,28 @@ def validate_monograph_spec(
                     chapter_texts.append(cp)
                     if cid == "ch-4":
                         ch4_urls.update(u.rstrip(".,;)") for u in HTTP_URL_RE.findall(cp))
+            elif btype == "parallel":
+                role = str(blk.get("role") or "").upper()
+                comp = strip_html(str(blk.get("company") or ""))
+                reg = strip_html(str(blk.get("region_era") or ""))
+                mech = str(blk.get("mechanism") or "")
+                out_nums = str(blk.get("outcome_numbers") or "")
+                lesson = str(blk.get("lesson_for_symbol") or "")
+                if role not in PARALLEL_ROLES:
+                    errors.append(f"Chapter {cid}: parallel block role must be one of {sorted(PARALLEL_ROLES)}, got {role!r}")
+                else:
+                    parallel_roles_seen.append(role)
+                if not comp or not reg or len(strip_html(mech)) < 20 or len(strip_html(lesson)) < 20:
+                    errors.append(f"Chapter {cid}: parallel block requires company, region_era, mechanism, and lesson_for_symbol")
+                if not re.search(r"\d", strip_html(out_nums)):
+                    errors.append(f"Chapter {cid}: parallel block for {comp!r} requires concrete historical figures in 'outcome_numbers'")
+                if comp.lower().strip() in CLICHE_PARALLELS and not blk.get("direct_competitor_or_customer"):
+                    errors.append(
+                        f"Chapter {cid}: cliché mega-cap analogy {comp!r} rejected; select a dynamic, situation-specific structural twin"
+                    )
+                for p_txt in (comp, reg, mech, out_nums, lesson):
+                    w_cnt += word_count(p_txt)
+                    chapter_texts.append(p_txt)
             elif btype == "table":
                 w_cnt += word_count(blk.get("caption", "")) + word_count(blk.get("takeaway", ""))
                 chapter_texts.extend([blk.get("caption", ""), blk.get("takeaway", "")])
@@ -456,6 +487,12 @@ def validate_monograph_spec(
         web_words += w_cnt
         book_words += b_cnt
         chapter_stats.append({"id": cid, "web_words": w_cnt, "book_words": b_cnt})
+
+    if len(parallel_roles_seen) >= 2 and "FAILURE_BASE_RATE" not in parallel_roles_seen:
+        errors.append(
+            "When 2+ situational parallel blocks are used, at least one must have role='FAILURE_BASE_RATE' "
+            "to test historical downside/failure base rates rather than bull-only analogies"
+        )
 
     if eff_web_floor > 0:
         cites = spec.get("citations") or []
@@ -601,9 +638,11 @@ def persist_monograph_spec(spec: Dict[str, Any], target_dir: str | Path, mode: s
     ch_out = out / "chapters"
     ch_out.mkdir(parents=True, exist_ok=True)
 
-    transient_keys = {"chapters", "business_quality", "refresh_audit", "prior_anchor", "facts_path", "research_paths"}
+    transient_keys = {"chapters", "business_quality", "refresh_audit", "prior_anchor", "options_package", "facts_path", "research_paths"}
     spine_clean = {k: v for k, v in spec.items() if k not in transient_keys}
     (out / "spine.json").write_text(json.dumps(spine_clean, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if isinstance(spec.get("options_package"), dict) and spec["options_package"]:
+        (out / "options_plan.json").write_text(json.dumps(spec["options_package"], indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     bq = spec.get("business_quality")
     if isinstance(bq, dict) and bq:

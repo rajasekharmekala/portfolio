@@ -39,6 +39,7 @@ from epub_builder import (  # noqa: E402
     build_pdf_book,
     render_masterclass_book_html,
 )
+from options_snapshot import render_options_section_html  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCORING_FILE = os.path.join(ROOT, ".agents", "config", "scoring.json")
@@ -1118,6 +1119,39 @@ def _render_peer_snapshot_table(blk: dict, snapshots: dict, sym: str, market: st
     )
 
 
+def _render_parallel_block(blk: dict, sym: str, max_cite: int = 0) -> str:
+    role = str(blk.get("role") or "MOAT_SCALING").upper()
+    role_lbl = {
+        "MOAT_SCALING": "Situational Scaling & Moat Twin",
+        "FAILURE_BASE_RATE": "Historical Failure-Mode & Base-Rate Twin",
+        "CYCLE_VALUATION": "Historical Cycle & Valuation Twin",
+    }.get(role, "Situational Structural Parallel")
+    comp = _esc(blk.get("company") or "")
+    reg = _esc(blk.get("region_era") or "")
+    mech = _linkify_html_fragment(str(blk.get("mechanism") or ""), max_cite)
+    nums = _linkify_html_fragment(str(blk.get("outcome_numbers") or ""), max_cite)
+    lesson = _linkify_html_fragment(str(blk.get("lesson_for_symbol") or ""), max_cite)
+    cls = "callout callout-warn" if role == "FAILURE_BASE_RATE" else "case-note"
+    if cls == "case-note":
+        return (
+            '<div class="case-note">\n'
+            f'<div class="case-note-head"><h4 class="case-note-title">{_esc(role_lbl)}: {comp}</h4>'
+            f'<span class="case-note-sub">{reg}</span></div>\n'
+            f"<p><strong>Shared Mechanism:</strong> {mech}</p>\n"
+            f"<p><strong>Historical Numbers &amp; Outcome:</strong> {nums}</p>\n"
+            f"<p><strong>Direct Implication for {_esc(sym)}:</strong> {lesson}</p>\n"
+            "</div>"
+        )
+    return (
+        '<div class="callout callout-warn">\n'
+        f'<p class="callout-title">{_esc(role_lbl)}: {comp} ({reg})</p>\n'
+        f"<p><strong>Shared Vulnerability:</strong> {mech}</p>\n"
+        f"<p><strong>Historical Numbers &amp; Base Rate:</strong> {nums}</p>\n"
+        f"<p><strong>How {_esc(sym)} Compares Today:</strong> {lesson}</p>\n"
+        "</div>"
+    )
+
+
 def _render_callout_block(blk: dict) -> str:
     variant = blk.get("variant", "primer")
     title = blk.get("title", "")
@@ -1274,6 +1308,15 @@ def render_10chapter_monograph_editions(
         (target_label, target_value),
         ("Risk-Unit Sizing", f"{ru['risk_adjusted_weight_pct']}% of net worth ({_esc(tier)})"),
     ]
+    opt_pkg = spec.get("options_package") if isinstance(spec.get("options_package"), dict) else None
+    opt_plan = (opt_pkg.get("options_plan") if opt_pkg else None) or {}
+    if opt_plan.get("options_verdict"):
+        ov = str(opt_plan["options_verdict"])
+        ov_cls = "verdict-keep" if ov in {"LONG_CALL_LEAPS", "BULL_CALL_DEBIT_SPREAD"} else "verdict-watch"
+        kf_items.append((
+            "Options / Call Playbook",
+            f'<span class="verdict {ov_cls}">{_esc(ov.replace("_", " "))}</span> — {_esc(opt_plan.get("headline") or "")}',
+        ))
     if spec.get("report_status"):
         kf_items.append(("Report status", _esc(spec["report_status"])))
     kf_html = (
@@ -1431,8 +1474,22 @@ def render_10chapter_monograph_editions(
                 break
 
     for chapter in chapters:
+        for blk in chapter.get("web_blocks", []):
+            if blk.get("type") == "parallel":
+                chapter.setdefault("book_callouts", []).append({
+                    "kind": "parallel",
+                    "label": str(blk.get("region_era") or "SITUATIONAL PARALLEL"),
+                    "title": f"{blk.get('company', '')} ({blk.get('role', 'PARALLEL')})",
+                    "text": strip_html(f"{blk.get('mechanism', '')} {blk.get('outcome_numbers', '')} {blk.get('lesson_for_symbol', '')}"),
+                })
         if chapter.get("id") == "ch-9":
             chapter.setdefault("book_paragraphs", []).append(book_decision)
+            if opt_plan.get("headline"):
+                opt_book_text = f"Options and Call-Convexity Playbook ({opt_plan.get('options_verdict', '').replace('_', ' ')}): {opt_plan['headline']}"
+                tr = opt_plan.get("recommended_trade") or {}
+                if tr.get("beginner_explainer"):
+                    opt_book_text += " " + " ".join(tr["beginner_explainer"])
+                chapter.setdefault("book_paragraphs", []).append(strip_html(opt_book_text))
     schema_errors, stats = validate_monograph_spec(spec_for_build)
     if schema_errors:
         raise ValueError("Incomplete 10-chapter dossier spec: " + "; ".join(schema_errors))
@@ -1487,6 +1544,8 @@ def render_10chapter_monograph_editions(
                     "paragraphs": [_linkify_html_fragment(p, max_cite) for p in blk.get("paragraphs", [])],
                 }
                 w_parts.append(_render_callout_block(linked_blk))
+            elif btype == "parallel":
+                w_parts.append(_render_parallel_block(blk, sym, max_cite))
             elif btype == "estimate":
                 w_parts.append(_render_estimate(blk))
             elif btype == "tradingview_chart":
@@ -1510,6 +1569,14 @@ def render_10chapter_monograph_editions(
         web_sections.append("\n".join(w_parts))
         if cid == "ch-9":
             web_sections.extend([holding_html, redeploy_html])
+            if opt_pkg and opt_plan:
+                web_sections.append(
+                    render_options_section_html(
+                        opt_plan,
+                        opt_pkg.get("multitimeframe_chart"),
+                        opt_pkg.get("browser_sessions"),
+                    )
+                )
 
     ge_html = ""
     if spec.get("gate_exceptions"):
@@ -1603,11 +1670,18 @@ def main() -> None:
     ap.add_argument("--facts", default="", help="Optional path to market_facts JSON ledger")
     ap.add_argument("--positions", default="", help="Path to the same-session market_facts positions ledger")
     ap.add_argument("--shortlist", default="", help="Path to this market's active shortlist records")
+    ap.add_argument("--options-snapshot", default="", help="Optional path to options_snapshot.py JSON output")
     ap.add_argument("--persist-spec-dir", default="", help="Optional directory to persist canonical chapter JSON spec")
     ap.add_argument("--out", required=True, help="Output dossier HTML path")
     args = ap.parse_args()
 
     spec = load_monograph_spec(args.spec)
+    if args.options_snapshot and Path(args.options_snapshot).is_file():
+        opt_all = json.loads(Path(args.options_snapshot).read_text(encoding="utf-8"))
+        sym_key = str(spec.get("symbol") or "").upper()
+        pkg = (opt_all.get("packages") or {}).get(sym_key) or (opt_all if opt_all.get("symbol") == sym_key else None)
+        if pkg:
+            spec["options_package"] = pkg
     if args.facts:
         spec.setdefault("facts_path", args.facts)
     facts = json.loads(Path(args.facts).read_text(encoding="utf-8")) if args.facts and Path(args.facts).exists() else {}

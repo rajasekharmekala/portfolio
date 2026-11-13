@@ -28,7 +28,8 @@ description: >-
 > **Narrative Companion Narrative Rules (binding for `book_paragraphs`, `epigraph`, and `book_callouts`):**
 > - **Second-Person Mentor Voice:** Write the narrative chapters as a seasoned institutional analyst sitting across the desk from the reader (`"you and I"`), using engaging rhetorical questions, vivid factory/customer walkthroughs, and clear transitions.
 > - **3 Layers of Quotations:** (1) Every chapter opens with a framed `epigraph` quote (`{"quote": "...", "author": "..."}`); (2) weave verbatim CEO/CFO concall quotes and investor maxims into the prose; (3) include `NARRATOR'S REFLECTION` callout boxes (`"kind": "reflection"`).
-> - **Global Parallel Company Examples (US, India, and Europe):** Every chapter must connect the company's economics, moat, working-capital cycle, or valuation to concrete historical parallels across the US, India, or Europe (via prose and `"kind": "parallel"` callout boxes) so the reader grasps how similar business models and stock setups have played out globally.
+> - **Dynamic, Situational Mechanism Twins (NO Regional Quota):** Do **not** force repetitive US/India/Europe analogies into every chapter or recycle mega-cap clichés (*Apple, Berkshire, Danaher, Constellation Software, Bajaj Finance, Titan*). Instead, include **2–4 researched Situational Parallels per dossier** (`{"type": "parallel", "role": "MOAT_SCALING" | "FAILURE_BASE_RATE" | "CYCLE_VALUATION", "company": "...", "region_era": "...", "mechanism": "...", "outcome_numbers": "...", "lesson_for_symbol": "..."}` in `web_blocks`, automatically synced to the PDF) from **any** global market or era where that exact mechanism played out — including **at least one `FAILURE_BASE_RATE` twin** that had the same working-capital, concentration, or valuation vulnerability and de-rated or failed.
+> - **Beginner-Clear Options & Multi-Timeframe Chart Lens (`options_snapshot.py` + `macos-browser-automation`):** In Pass 2, run `scripts/options_snapshot.py` (which inspects Weekly `1W` / Daily `1D` / 4-Hour `4H` TradingView structure, checks NSE F&O / US chain liquidity and IV-vs-HV20, and performs a graceful read-only check of any logged-in Chrome Robinhood / TradingView session — continuing cleanly on public data if not logged in) and pass `--options-snapshot` to `dossier_builder_template.py` so `#options-overlay` explains in plain beginner dollars what any Call Spread or LEAPS Call costs, its worst-case loss, breakeven, and scenario payoffs (or stamps `NOT_OPTIONABLE_OR_ILLIQUID` / `NO_OPTIONS_EDGE`).
 
 > **Zero LLM Math & Deterministic Blocks (binding):** never compute moving averages, RSI, volume multiples, per-100 waterfall percentages, or peer multiples in your head. All technical and valuation figures must come from `scripts/stock_snapshot.py` (TradingView + Screener.in / Finviz + TheWrap Stage 2 snapshot) and verified primary filings:
 > - Use `{"type": "waterfall", "period": "<FY>", "unit": "<Cr|M>", "revenue": ..., "cogs": ..., "employee_cost": ..., "other_opex": ..., "da": ..., "interest": ..., "other_income": ..., "tax": ..., "cfo": ..., "capex": ...}` in `ch-3` so Python scales every row to $100 / ₹100 of a **single period-matched** audited fiscal year (never mix `TTM` P&L with annual Cash Flow).
@@ -85,7 +86,7 @@ Both the Web Dossier (`_dossier.html`) and the narrative PDF companion (`_book.p
      .venv/bin/python scripts/dossier_schema.py --check-blind-pass "<RUN_DIR>/work/<SYMBOL>"
      ```
 3. **Pass 2 — Unlock Market Ledger, Stage 2 Tape & Peer Valuation (`ch07`..`ch09` -> `spine.json` -> `ch00`):**
-   - Build a fresh same-session `market_facts.py` ledger (`facts_<MARKET>_<date>.json` and `positions_<MARKET>_<date>.json`), run `stage2_scanner.py` into `<RUN_DIR>/cache/stage2_<MARKET>_<date>.json` (`IN --min-mcap 1000`; `US --min-mcap 1.0`), and snapshot the target company, listed peers from Chapters 4/7, active shortlist names, and current holdings:
+   - Build a fresh same-session `market_facts.py` ledger (`facts_<MARKET>_<date>.json` and `positions_<MARKET>_<date>.json`), run `stage2_scanner.py` into `<RUN_DIR>/cache/stage2_<MARKET>_<date>.json` (`IN --min-mcap 1000`; `US --min-mcap 1.0`), snapshot the target company, listed peers from Chapters 4/7, active shortlist names, and current holdings, AND pull the multi-timeframe chart + beginner-clear options setup (with graceful Chrome Robinhood/TradingView check; inspect live TradingView `1W`/`1D` charts via `macos-browser-automation` when Chrome is available):
      ```bash
      .venv/bin/python scripts/stock_snapshot.py \
        --market <MARKET> \
@@ -93,14 +94,18 @@ Both the Web Dossier (`_dossier.html`) and the narrative PDF companion (`_book.p
        --from-shortlist --from-holdings \
        --stage2-file "<RUN_DIR>/cache/stage2_<MARKET>_<date>.json" \
        --out "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json"
+     .venv/bin/python scripts/options_snapshot.py \
+       --market <MARKET> --symbols <SYMBOL> \
+       --out "<RUN_DIR>/cache/options_<MARKET>_<SYMBOL>.json"
      ```
-   - Author `chapters/ch07.json` (Reverse DCF & `peer_snapshot_table` weighed against `business_quality.json`), `ch08.json` (Stage 2 technical structure), and `ch09.json` (Bull vs. Bear steelman, probability-weighted outcomes, explicit 3-horizon verdict, current position action, alert plan, and capital redeployment).
+   - Author `chapters/ch07.json` (Reverse DCF & `peer_snapshot_table` weighed against `business_quality.json`), `ch08.json` (Stage 2 + multi-timeframe `1W/1D/4H` shelves, gaps, and VCP structure), and `ch09.json` (Bull vs. Bear steelman, probability-weighted outcomes, explicit 3-horizon verdict, current position action, alert plan, and capital redeployment).
    - **Derive** `spine.json` from Chapter 9 (including `sector`, `business_quality_verdict`, `kpi_health`, dual verdicts, and structured alert/redeployment fields), then write `chapters/ch00.json` (`id: "ch-0"`) last. Minimum floors: `8,500+` Web words + dense tables, `10,000+` narrative PDF words.
 4. **Compile Both Synchronized Formats (`scripts/dossier_builder_template.py`):**
    ```bash
    .venv/bin/python scripts/dossier_builder_template.py \
       --spec "<RUN_DIR>/work/<SYMBOL>" \
       --snapshot "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json" \
+      --options-snapshot "<RUN_DIR>/cache/options_<MARKET>_<SYMBOL>.json" \
       --facts "<RUN_DIR>/cache/facts_<MARKET>_<date>.json" \
       --positions "<RUN_DIR>/cache/positions_<MARKET>_<date>.json" \
       --shortlist "data/shortlist/<MARKET>.json" \

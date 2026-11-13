@@ -33,7 +33,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 DEFAULT_TTL_HOURS = 6.0
-SINGLETON_WORKFLOWS = {"market_intelligence", "portfolio_audit"}
+SINGLETON_WORKFLOWS = {"market_intelligence", "portfolio_audit", "options_desk"}
 NAME_WORKFLOWS = {"company_report", "dossier_refresh"}
 ELIGIBLE_WATCHLIST_STATUS = {"RESEARCH_REQUIRED", "PENDING_RESEARCH", "PENDING"}
 MARKETS = ("IN", "US")

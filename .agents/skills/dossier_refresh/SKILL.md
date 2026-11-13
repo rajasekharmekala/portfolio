@@ -52,9 +52,9 @@ description: >-
      .venv/bin/python scripts/dossier_refresh.py validate-audit --work-dir "<RUN_DIR>/work/<SYMBOL>"
      ```
 3. **Pass 2 — Live Valuation, Stage 2 Tape, Stop Ratchet & Compilation (`ch07..ch09` -> `spine.json` -> `ch00`):**
-   - Run `market_facts.py`, `stage2_scanner.py`, and full `stock_snapshot.py --market <MARKET> --symbols <SYMBOL> <PEERS...> --from-shortlist --from-holdings --stage2-file ... --out "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json"`.
-   - Author fresh `ch07.json` (Reverse DCF & `peer_snapshot_table`), `ch08.json` (Stage 2 tape), `ch09.json` (Bull vs. Bear + holding/redeployment), derive `spine.json` (honoring `prior_anchor_locked.json` stop-ratchet and anti-hedging gates) and `ch00.json` (`id: "ch-0"`), and append new sources to `prior_anchor_locked.json["citations"]`.
-   - Verify stop ratchet and compile synchronized Web HTML + PDF + canonical `data/dossiers/<MARKET>/<SYMBOL>/` spec:
+   - Run `market_facts.py`, `stage2_scanner.py`, full `stock_snapshot.py`, AND `scripts/options_snapshot.py --market <MARKET> --symbols <SYMBOL> --out "<RUN_DIR>/cache/options_<MARKET>_<SYMBOL>.json"` (which checks multi-timeframe `1W/1D/4H` TradingView structure, IV-vs-HV20, and any logged-in Robinhood/TradingView Chrome tab, gracefully continuing on public data if logged out). Also replace any cliché regional analogies in edited chapters with dynamic, searched Situational Mechanism Twins (`"type": "parallel"`, including at least one `FAILURE_BASE_RATE` twin).
+   - Author fresh `ch07.json` (Reverse DCF & `peer_snapshot_table`), `ch08.json` (Stage 2 + multi-timeframe `1W/1D/4H` tape), `ch09.json` (Bull vs. Bear + holding/redeployment), derive `spine.json` (honoring `prior_anchor_locked.json` stop-ratchet and anti-hedging gates) and `ch00.json` (`id: "ch-0"`), and append new sources to `prior_anchor_locked.json["citations"]`.
+   - Verify stop ratchet and compile synchronized Web HTML + PDF + `#options-overlay` + canonical `data/dossiers/<MARKET>/<SYMBOL>/` spec:
      ```bash
      .venv/bin/python scripts/dossier_refresh.py check-ratchet \
        --work-dir "<RUN_DIR>/work/<SYMBOL>" \
@@ -63,6 +63,7 @@ description: >-
      .venv/bin/python scripts/dossier_builder_template.py \
        --spec "<RUN_DIR>/work/<SYMBOL>" \
        --snapshot "<RUN_DIR>/cache/snapshots_<MARKET>_<date>.json" \
+       --options-snapshot "<RUN_DIR>/cache/options_<MARKET>_<SYMBOL>.json" \
        --facts "<RUN_DIR>/cache/facts_<MARKET>_<date>.json" \
        --positions "<RUN_DIR>/cache/positions_<MARKET>_<date>.json" \
        --shortlist "data/shortlist/<MARKET>.json" \
