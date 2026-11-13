@@ -827,7 +827,7 @@ def render_masterclass_book_html(
       {stat_strip_html}
       <section class="primer" id="primer">
         <h2>Preface &amp; Core Thesis</h2>
-        <p>{html.escape(_clean_audio_text(spec['primer']))}</p>
+        <p>{html.escape(_clean_audio_text(spec.get('primer') or ''))}</p>
       </section>
     </nav>
 

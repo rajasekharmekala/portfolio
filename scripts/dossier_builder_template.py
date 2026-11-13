@@ -1337,7 +1337,7 @@ def render_10chapter_monograph_editions(
         snap_sym,
         inst_m,
         {
-            "intro_prose": ch4_spec.get("intro_prose", f"We evaluate {sym}'s live TradingView moving averages, volume signature, and Stage 2 posture as of {as_of}."),
+            "intro_prose": ch4_spec.get("intro_prose", f"We evaluate {sym}'s live TradingView moving averages, volume signature, and technical stage posture as of {as_of}."),
             "gate_intro_prose": ch4_spec.get("gate_intro_prose", "We separate medium-term trend durability from immediate No-FOMO entry timing."),
             "closing_prose": ch4_spec.get("closing_prose", "Technical structure and support distance govern when and how capital is deployed."),
             **ch4_spec,
@@ -1418,6 +1418,18 @@ def render_10chapter_monograph_editions(
     )
 
     max_cite = len(spec.get("citations") or [])
+    if not spec.get("primer"):
+        for ch in spec.get("chapters", []):
+            if ch.get("id") in {"ch-0", "primer"}:
+                for blk in ch.get("web_blocks", []):
+                    if blk.get("type") == "p":
+                        spec["primer"] = strip_html(blk.get("html") or blk.get("text") or "")
+                        break
+                if not spec.get("primer") and ch.get("book_paragraphs"):
+                    spec["primer"] = ch["book_paragraphs"][0]
+                break
+        if not spec.get("primer"):
+            spec["primer"] = f"Executive investment monograph on {sym} ({company_name}) as of {as_of}."
     primer_text = spec.get("primer") or ""
     primer_html = (
         '<section class="primer" id="primer">\n'
@@ -1559,7 +1571,7 @@ def render_10chapter_monograph_editions(
                 w_parts.append(f'<p class="trigger">{_linkify_html_fragment(blk.get("html") or blk.get("text", ""), max_cite)}</p>')
 
         if cid == "ch-8" and not saw_tv:
-            w_parts.append("<h3>Interactive TradingView Tape &amp; Deterministic Stage 2 Ledger</h3>")
+            w_parts.append("<h3>Interactive TradingView Tape &amp; Deterministic Technical Structure Ledger</h3>")
             w_parts.append(ch4_inner)
         if cid == "ch-9" and not saw_sizing:
             w_parts.append("<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>")
