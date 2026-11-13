@@ -529,13 +529,13 @@ def structure_options_setup(
         }
 
     setup_type = mtf.get("setup_archetype") or "STAGE2_SUPPORT_PULLBACK"
-    if setup_type == "STAGE4_BELOW_STRUCTURAL_FLOOR":
+    if setup_type == "STAGE4_BELOW_STRUCTURAL_FLOOR" and business_quality_verdict != "COMPOUNDER_PASS":
         return {
             "symbol": symbol,
             "market": market,
             "optionable": True,
             "options_verdict": "NO_OPTIONS_EDGE",
-            "headline": f"No call setup on {symbol}: price ({cur}{spot:,.2f}) is below both 50D and 200D/30W structural floors without an institutional support shelf.",
+            "headline": f"No call setup on {symbol}: price ({cur}{spot:,.2f}) is below both 50D and 200D/30W structural floors and fundamentals do not qualify as COMPOUNDER_PASS.",
             "open_positions_audit": open_audits,
             "recommended_trade": None,
         }
@@ -736,26 +736,48 @@ def structure_options_setup(
         scenarios.append({"scenario": name, "stock_price": round(px, 2), "stock_move_pct": eq_pct,
                           "contract_value": cv, "net_pnl": pnl, "return_on_risk_pct": pct})
 
-    why_lens = (
-        f"{symbol} pulled back into its major {cur}{mtf.get('major_shelf') or eff_stop:,.2f} support shelf while Pass 1 confirmed {business_quality_verdict} fundamentals — "
-        "even though Stage 2 equity rules wait for trend repair, a defined-risk Bull Call Spread captures a rebound with strictly capped downside."
-        if setup_type == "DISLOCATION_AT_MAJOR_SHELF"
-        else f"Selling the upper {cur}{short_leg['strike']:g} call collects {cur}{short_leg['mid']:.2f}/sh upfront, lowering your breakeven to {cur}{breakeven:,.2f} and protecting you against post-news volatility crush."
-    )
+    is_stage4_conditional = (setup_type == "STAGE4_BELOW_STRUCTURAL_FLOOR")
+    final_verdict = "WAIT_FOR_SUPPORT_OR_BASE" if is_stage4_conditional else "BULL_CALL_DEBIT_SPREAD"
+    if is_stage4_conditional:
+        why_lens = (
+            f"{symbol} is in an active Stage 4 correction below its 50D and 200D averages. "
+            f"While buying calls right now at CMP ({cur}{spot:,.2f}) is a trap due to accelerating theta decay on an unconfirmed knife-drop, "
+            f"this defined-risk Bull Call Spread ({cur}{long_leg['strike']:g}/{cur}{short_leg['strike']:g}) is structured to be deployed once "
+            f"{symbol} tests its major {cur}{eff_stop:,.2f} support shelf and stabilizes. "
+            f"Selling the upper {cur}{short_leg['strike']:g} call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at {cur}{total_debit:,.2f}."
+        )
+        final_headline = (
+            f"Stand aside at CMP ({cur}{spot:,.2f}): stock is in an active Stage 4 correction below 50D/200D averages. "
+            f"If {symbol} tests its major {cur}{eff_stop:,.2f} support shelf and stabilizes, deploy this conditional defined-risk Call Spread "
+            f"({tactical_exp} {cur}{long_leg['strike']:g}/{cur}{short_leg['strike']:g}) at {cur}{net_debit_sh:.2f} debit toward {cur}{eff_base:,.2f} "
+            f"({cur}{total_debit:,.2f} max loss -> {cur}{total_max_profit:,.2f} max profit, {rr_ratio:.2f}:1 R:R)."
+        )
+    elif setup_type == "DISLOCATION_AT_MAJOR_SHELF":
+        why_lens = (
+            f"{symbol} pulled back into its major {cur}{mtf.get('major_shelf') or eff_stop:,.2f} support shelf while Pass 1 confirmed {business_quality_verdict} fundamentals — "
+            "even though Stage 2 equity rules wait for trend repair, a defined-risk Bull Call Spread captures a rebound with strictly capped downside."
+        )
+        final_headline = (
+            f"Buy {contracts}x {symbol} {tactical_exp} {cur}{long_leg['strike']:g}/{cur}{short_leg['strike']:g} Bull Call Spread "
+            f"({long_leg['dte']} DTE) at {cur}{net_debit_sh:.2f} net debit ({cur}{total_debit:,.2f} max loss -> {cur}{total_max_profit:,.2f} max profit, {rr_ratio:.2f}:1 R:R)."
+        )
+    else:
+        why_lens = f"Selling the upper {cur}{short_leg['strike']:g} call collects {cur}{short_leg['mid']:.2f}/sh upfront, lowering your breakeven to {cur}{breakeven:,.2f} and protecting you against post-news volatility crush."
+        final_headline = (
+            f"Buy {contracts}x {symbol} {tactical_exp} {cur}{long_leg['strike']:g}/{cur}{short_leg['strike']:g} Bull Call Spread "
+            f"({long_leg['dte']} DTE) at {cur}{net_debit_sh:.2f} net debit ({cur}{total_debit:,.2f} max loss -> {cur}{total_max_profit:,.2f} max profit, {rr_ratio:.2f}:1 R:R)."
+        )
 
     return {
         "symbol": symbol,
         "market": market,
         "optionable": True,
-        "options_verdict": "BULL_CALL_DEBIT_SPREAD",
+        "options_verdict": final_verdict,
         "iv_regime": iv_regime,
         "atm_iv_pct": round(atm_iv * 100.0, 1),
         "hv20_pct": round(hv20 * 100.0, 1) if hv20 else None,
         "open_positions_audit": open_audits,
-        "headline": (
-            f"Buy {contracts}x {symbol} {tactical_exp} {cur}{long_leg['strike']:g}/{cur}{short_leg['strike']:g} Bull Call Spread "
-            f"({long_leg['dte']} DTE) at {cur}{net_debit_sh:.2f} net debit ({cur}{total_debit:,.2f} max loss -> {cur}{total_max_profit:,.2f} max profit, {rr_ratio:.2f}:1 R:R)."
-        ),
+        "headline": final_headline,
         "recommended_trade": {
             "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
             "expiry": tactical_exp,
