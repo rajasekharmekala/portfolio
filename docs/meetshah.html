@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@MeetshahV — 12M Stock Mentions & Disclosures</title>
+<style>
+:root {
+  --bg: #1d2021; --bg1: #282828; --raised: #3c3836; --line: #504945;
+  --fg: #ebdbb2; --muted: #928374; --num: #7c6f64;
+  --red: #fb4934; --yellow: #fabd2f; --blue: #83a598; --aqua: #8ec07c; --orange: #fe8019;
+  --purple: #d3869b; --green: #b8bb26;
+  --mode: #928374;
+  --lh: 22px;
+  --mono: "MesloLGL Nerd Font", Menlo, monospace;
+}
+body[data-part="intro"] { --mode: #928374; }
+body[data-part="core"] { --mode: #8ec07c; }
+body[data-part="turnarounds"] { --mode: #fe8019; }
+body[data-part="watchlist"] { --mode: #83a598; }
+body[data-part="archive"] { --mode: #d3869b; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: flex; flex-direction: column;
+  background: var(--bg); color: var(--fg);
+  font: 14px/var(--lh) var(--mono);
+  overflow: hidden;
+}
+
+/* tabline */
+#tabline {
+  display: flex; align-items: stretch; height: 28px; flex: none;
+  background: var(--bg); border-bottom: 1px solid var(--raised);
+  font-size: 13px; line-height: 27px;
+}
+#tabline .brand { padding: 0 16px; color: var(--muted); font-style: italic; margin-right: auto; }
+#tabline .tab {
+  padding: 0 16px; color: var(--muted); border-top: 2px solid transparent; cursor: pointer;
+  background: none; border-left: 0; border-right: 0; border-bottom: 0; font: inherit; line-height: 25px;
+}
+#tabline .tab.is-active { background: var(--raised); color: var(--fg); border-top-color: var(--tab-c); }
+#tabline .tab[data-part="intro"] { --tab-c: #928374; }
+#tabline .tab[data-part="core"] { --tab-c: #8ec07c; }
+#tabline .tab[data-part="turnarounds"] { --tab-c: #fe8019; }
+#tabline .tab[data-part="watchlist"] { --tab-c: #83a598; }
+#tabline .tab[data-part="archive"] { --tab-c: #d3869b; }
+
+/* stage + gutter */
+#stage { display: flex; flex: 1; min-height: 0; }
+#gutter {
+  width: 56px; flex: none; padding-top: var(--lh); text-align: right; overflow: hidden;
+  color: var(--num); user-select: none; padding-right: 10px; border-right: 1px solid var(--bg);
+}
+#gutter div { height: var(--lh); }
+#gutter .cur { color: var(--orange); font-weight: 700; }
+#slides { position: relative; flex: 1; min-width: 0; }
+.slide {
+  position: absolute; inset: 0; opacity: 0; visibility: hidden;
+  transition: opacity 120ms ease, visibility 0s linear 120ms;
+}
+.slide.is-active { opacity: 1; visibility: visible; transition: opacity 120ms ease; }
+.slide .body { height: 100%; overflow-y: auto; padding: 18px 40px 24px 24px; }
+
+h1 { margin: 0 0 14px; font-size: 20px; line-height: 32px; color: var(--yellow); }
+h1::before { content: "# "; color: var(--mode); }
+p { margin: 0 0 14px; }
+
+.cmt { color: var(--muted); font-style: italic; }
+.cmt::before { content: "-- "; }
+.path { color: var(--aqua); }
+.gate { color: var(--orange); }
+.gate::before { content: "\25C6  "; }
+.chip {
+  display: inline-block; padding: 0 8px; border-radius: 3px; line-height: 20px; font-size: 12px;
+  font-weight: 700; background: var(--c, var(--muted)); color: var(--bg);
+}
+.card {
+  background: var(--bg1); border: 1px solid var(--raised); border-left: 3px solid var(--c, var(--muted));
+  padding: 8px 14px; border-radius: 3px;
+}
+.hero { font-size: 32px; line-height: 56px; margin-top: 48px; }
+.lead { font-size: 16px; }
+.pt { margin: 0 0 10px; }
+.pt .n { color: var(--mode); font-weight: 700; margin-right: 10px; }
+.flow { display: flex; align-items: stretch; gap: 6px; margin-top: 28px; font-size: 13px; line-height: 20px; }
+.flow .step { flex: 1; min-width: 0; text-align: center; padding: 10px 8px; }
+.flow .arr { align-self: center; color: var(--muted); }
+.flow .step .chip { margin-bottom: 4px; }
+
+/* Stock List Items */
+ul.stock-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+li.stock-item {
+  background: var(--bg1); border: 1px solid var(--raised); border-left: 3px solid var(--c, var(--aqua));
+  padding: 8px 14px; border-radius: 3px;
+}
+.stock-hdr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin-bottom: 4px; }
+.stock-hdr b { color: var(--yellow); font-size: 15px; }
+.stock-hdr .dates { margin-left: auto; font-size: 12px; }
+ul.sublist { list-style: disc; margin: 4px 0 0 18px; padding: 0; font-size: 13px; line-height: 20px; }
+ul.sublist li { margin-bottom: 2px; }
+ul.sublist .k { font-weight: 700; margin-right: 6px; }
+ul.sublist .k.owns { color: var(--aqua); }
+ul.sublist .k.ind { color: var(--blue); }
+
+/* statusline */
+#statusline {
+  display: flex; align-items: stretch; height: 28px; flex: none; background: var(--bg1);
+  border-top: 1px solid var(--raised); font-size: 13px; line-height: 27px; position: relative;
+}
+#statusline .seg { position: relative; padding: 0 14px; white-space: nowrap; }
+#statusline .mode { background: var(--mode); color: var(--bg); font-weight: 700; padding-right: 10px; z-index: 3; }
+#statusline .file { background: var(--raised); color: var(--fg); padding-left: 22px; z-index: 2; }
+#statusline .spacer { flex: 1; }
+#statusline .progress { background: var(--line); color: var(--fg); padding-left: 22px; z-index: 2; }
+#statusline .loc { background: var(--mode); color: var(--bg); font-weight: 700; padding-left: 22px; z-index: 3; }
+#statusline .mode::after, #statusline .file::after {
+  content: ""; position: absolute; top: 0; left: 100%; width: 12px; height: 100%;
+  background: var(--arrow); clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+#statusline .mode { --arrow: var(--mode); }
+#statusline .file { --arrow: var(--raised); }
+#statusline .progress::before, #statusline .loc::before {
+  content: ""; position: absolute; top: 0; right: 100%; width: 12px; height: 100%;
+  background: var(--arrow); clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+#statusline .progress { --arrow: var(--line); }
+#statusline .loc { --arrow: var(--mode); }
+
+/* palette */
+#palette {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(60ch, 90vw); background: var(--bg1); border: 1px solid #665c54; border-radius: 6px;
+  padding: 14px 16px 10px; z-index: 10; box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+}
+#palette .title { position: absolute; top: -11px; left: 14px; padding: 0 8px; background: var(--bg1); color: var(--muted); font-size: 12px; }
+#palette .row { display: flex; align-items: center; gap: 8px; }
+#palette .prompt { color: var(--orange); font-weight: 700; }
+#palette-input {
+  flex: 1; background: none; border: 0; outline: 0; color: var(--fg); font: inherit;
+  caret-color: var(--orange);
+}
+#palette-error { min-height: var(--lh); color: var(--red); font-size: 13px; }
+#palette .hint { color: var(--muted); font-size: 12px; font-style: italic; }
+</style>
+</head>
+<body data-slide="1" data-part="intro">
+
+<nav id="tabline">
+  <span class="brand">meetshah-stocks-overview.md</span>
+  <button class="tab" data-part="intro">0 INTRO</button>
+  <button class="tab" data-part="core">1 CORE HOLDINGS</button>
+  <button class="tab" data-part="turnarounds">2 CONVICTION &amp; TURNAROUNDS</button>
+  <button class="tab" data-part="watchlist">3 WATCHLIST &amp; DEMERGERS</button>
+  <button class="tab" data-part="archive">4 BENCHMARKS &amp; INDEX</button>
+</nav>
+
+<div id="stage">
+  <div id="gutter" aria-hidden="true"></div>
+  <main id="slides">
+    <section class="slide is-active" id="s1" data-part="intro" data-file="01-overview.md"><div class="body">
+      <h1 class="hero">@MeetshahV &middot; 12M Stock Ledger</h1>
+      <p class="lead">Complete breakdown of all <span class="path">39 stocks</span> mentioned between <span class="path">2025-11-12</span> and <span class="path">2026-11-12</span> across <span class="path">459 tweets</span>.</p>
+      <p class="pt"><span class="n">1</span><b>Fund Status:</b> Not a SEBI-registered PMS or commercial AIF; operates as a private/proprietary &amp; family-office investor.</p>
+      <p class="pt"><span class="n">2</span><b>Position Rule:</b> Top 15 stocks = <span class="path">75% allocation</span>; long tail of low-allocation tracking &amp; turnaround bets.</p>
+      <p class="pt"><span class="n">3</span><b>Disclosures:</b> Explicit <span class="path">Disclosure: Invested</span> tags + blanket notice: <i>"We hold beneficial interest in the stocks that I tweet about."</i></p>
+      <div class="flow">
+        <div class="card step" style="--c:#8ec07c"><span class="chip" style="--c:#8ec07c">1 CORE (11)</span><br>Explicitly disclosed active holdings</div>
+        <span class="arr">&rarr;</span>
+        <div class="card step" style="--c:#fe8019"><span class="chip" style="--c:#fe8019">2 CONVICTION (8)</span><br>Turnarounds, ATHs &amp; order wins</div>
+        <span class="arr">&rarr;</span>
+        <div class="card step" style="--c:#83a598"><span class="chip" style="--c:#83a598">3 WATCHLIST (12)</span><br>Demergers &amp; weekend study lists</div>
+        <span class="arr">&rarr;</span>
+        <div class="card step" style="--c:#d3869b"><span class="chip" style="--c:#d3869b">4 ARCHIVE (8)</span><br>100-bagger benchmarks &amp; sceptical calls</div>
+      </div>
+      <p class="cmt" style="margin-top:24px">press : to jump, h / l or j / k or Arrow keys to move between slides</p>
+    </div></section>
+    <section class="slide" id="s2" data-part="core" data-file="02-core-holdings-1.md"><div class="body">
+      <h1>Tier 1 · Core Disclosed Holdings (1–4)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#01 CREATIVE / 539523</span>
+            <b>Creative Newtech Ltd</b>
+            <span class="cmt">High-Conviction Core Holding · IT/Drone Distribution &amp; Demerger</span>
+            <span class="dates path">2026-11-11, 2026-11-04, 2026-10-28, 2026-08-27, 2026-08-05, 2026-07-09, 2026-02-18, 2025-12-30, 2025-11-20 (14 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Repeatedly cheered &#x27;Creative Newtech - All Time High&#x27;, highlighted ₹3,194.83 Cr consortium advance work order (vs ₹950 Cr Mcap), potential demerger value unlocking, and pan-India indigenous drone distribution deals (PDRL, Drona Aviation, Jupiter Electric Mobility).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Highlighted &#x27;Insane volumes today in Creative Newtech&#x27; and &#x27;Tod Fod Numbers&#x27;.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Explicitly stated &#x27;Disclosure: Invested&#x27; and &#x27;No new companies. Adding the ones which I am already holding: Creative Newtech&#x27; (Nov 20, 2025). Personal/proprietary portfolio (no external SEBI PMS/AIF fund).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#02 SOFTTECH / 543470</span>
+            <b>SoftTech Engineers Ltd</b>
+            <span class="cmt">High-Conviction Core Holding · GovTech BIM/CAD &amp; Digital Twin</span>
+            <span class="dates path">2026-09-17, 2026-08-06, 2026-05-27, 2026-05-25, 2025-11-20 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Highlighted ₹92.95 Cr JNPA AI-enabled Digital Twin &amp; command centre order win (Sep 17, 2026) and strong operating cash flow (₹31.26 Cr CFO on ₹600 Cr Mcap).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Consistent inclusion in core holding lists across multiple quarters.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Disclosure: Invested&#x27; (May 27, 2026) and listed among existing holdings being added to (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#03 PROVENTUS / 543915</span>
+            <b>Proventus Agrocom Ltd</b>
+            <span class="cmt">Disclosed Active Long Position · Branded Dry Fruits &amp; Agro-Processing</span>
+            <span class="dates path">2026-09-18, 2026-07-09 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted commissioning of Phase 1 of its state-of-the-art manufacturing facility at Surat, Gujarat, and celebrated &#x27;Proventus Agrocom - All Time High&#x27;.</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Capex-to-revenue inflection thesis.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Disclosure: Invested&#x27; (Jul 9, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#04 XPROINDIA / 590013</span>
+            <b>Xpro India Ltd</b>
+            <span class="cmt">Disclosed Core Holding · Dielectric Capacitor Films (Birla Group)</span>
+            <span class="dates path">2026-08-06, 2026-06-25, 2026-04-16, 2025-12-30, 2025-11-20 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Long-term conviction in specialty polymer/dielectric film capacity expansion; actively averaging up/down across market cycles.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Repeatedly grouped with top core portfolio compounders.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Portfolio Update: Added More to Xpro&#x27; (Apr 16, 2026) and &#x27;Adding the ones which I am already holding: Xpro&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s3" data-part="core" data-file="03-core-holdings-2.md"><div class="body">
+      <h1>Tier 1 · Core Disclosed Holdings (5–8)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#05 PCBL / 506590</span>
+            <b>PCBL Ltd (PCBL Chemical)</b>
+            <span class="cmt">Disclosed Core Holding · Specialty Carbon Black &amp; Battery Chemicals</span>
+            <span class="dates path">2026-11-10, 2026-11-03, 2026-10-10, 2026-08-18, 2026-07-29, 2026-04-16 (6 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Highlighted Q1 FY27 consolidated results (Revenue ₹2,473.4 Cr +17% YoY, EBITDA ₹396 Cr +24% YoY, Net Profit ₹155 Cr +65% YoY) and ECMS approval for ₹329 Cr Acetylene Black project.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Frequent tracking of specialty chemical transition.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Portfolio Update: Added More to Xpro, Eimco Elecon &amp; PCBL Chemicals&#x27; (Apr 16, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#06 EIMCOELECO / 523732</span>
+            <b>Eimco Elecon (India) Ltd</b>
+            <span class="cmt">Disclosed Core Holding · Mining &amp; Construction Machinery</span>
+            <span class="dates path">2026-10-27, 2026-10-13, 2026-04-16 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cheered &#x27;Eimco Elecon 🔥&#x27; (Oct 13, 2026) and highlighted launch of DW-220 hydraulic diaphragm wall grab for heavy civil engineering.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — New product rollouts and order cycle tracking.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Portfolio Update: Added More to Xpro, Eimco Elecon &amp; PCBL Chemicals&#x27; (Apr 16, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#07 MPSLTD / 532440</span>
+            <b>MPS Ltd</b>
+            <span class="cmt">Disclosed Core Holding · Content, EdTech &amp; Publishing Platforms</span>
+            <span class="dates path">2026-09-30, 2026-08-06, 2025-12-30, 2025-12-20, 2025-11-20 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Core high-cash-generation B2B learning/content platform.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Repeatedly listed in core portfolio roll-calls (Nov &amp; Dec 2025).</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Adding the ones which I am already holding: Creative Newtech. MPS. Xpro. Sofftech. Aluwind. PDS. Bajaj&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#08 ALUWIND / 544158</span>
+            <b>Aluwind Infra Ltd</b>
+            <span class="cmt">Disclosed Holding · Architectural Aluminum Glazing &amp; Façades</span>
+            <span class="dates path">2026-08-26, 2026-01-09, 2025-12-30, 2025-11-20 (4 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Conviction in real-estate/commercial façade execution proxy.</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Featured in core SME/microcap basket updates.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim listed under &#x27;Adding the ones which I am already holding: Aluwind&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s4" data-part="core" data-file="04-core-holdings-3.md"><div class="body">
+      <h1>Tier 1 · Core Disclosed Holdings (9–11)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#09 PDS / 538730</span>
+            <b>PDS Ltd</b>
+            <span class="cmt">Disclosed Holding · Global Fashion Sourcing &amp; Supply Chain Platform</span>
+            <span class="dates path">2026-08-18, 2026-08-07, 2026-08-06, 2026-07-13, 2025-12-30, 2025-11-20 (6 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Strong conviction in asset-light global apparel sourcing model.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Consistently cited in core portfolio updates.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim listed under &#x27;Adding the ones which I am already holding: PDS&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#10 RAYMOND / 500330</span>
+            <b>Raymond Ltd</b>
+            <span class="cmt">Disclosed Position · Demerger Special Situation &amp; Aerospace/Defence</span>
+            <span class="dates path">2026-07-06, 2026-06-30, 2026-06-27 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted appointment of former BEL CMD Bhanu Prakash Srivastava as CEO – Defence (&#x27;Interesting development&#x27;) alongside demerger unlocking.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Listed on weekend deep-dive research list prior to position build.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Disclosure: Invested&#x27; (Jul 6, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fabd2f">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fabd2f">#11 GREAVESCOT / 501455</span>
+            <b>Greaves Cotton Ltd (Greaves Electric Mobility)</b>
+            <span class="cmt">Disclosed Tracking Allocation · EV 2W/3W &amp; Powertrain Turnaround</span>
+            <span class="dates path">2026-07-09 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Noted &#x27;Finally some good development in Greaves Electric Mobility Division&#x27; while tracking Vahan registration dashboard.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Cautious optimism on EV subsidiary turnaround.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED LOW ALLOCATION — Verbatim &#x27;Tracking while keeping a low allocation because developments are good&#x27; (Jul 9, 2026).</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s5" data-part="turnarounds" data-file="05-turnarounds-1.md"><div class="body">
+      <h1>Tier 2 · Conviction &amp; Turnarounds (12–15)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#12 ZFSTEERING / 505160</span>
+            <b>ZF Steering Gear (India) Ltd / DriveSys</b>
+            <span class="cmt">Active Focus · CV Steering Systems &amp; Aluminum Die-Casting Subsidiary</span>
+            <span class="dates path">2026-11-12, 2026-09-07, 2026-06-29, 2025-12-31 (4 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted DriveSys subsidiary commencing commercial production of its aluminum division (Nov 12, 2026) and major order wins (Dec 31, 2025).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Close tracking of subsidiary capex commissioning and CV replacement cycle.</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED BENEFICIAL INTEREST — Covered under general blanket disclaimer (&#x27;We hold beneficial interest in the stocks that I tweet about&#x27;).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#13 IPCL / 543311</span>
+            <b>IPCL (India Pesticides / Indian Petrochemicals)</b>
+            <span class="cmt">High Conviction · Agrochemicals &amp; Defence Components (LMG Order)</span>
+            <span class="dates path">2026-11-01, 2026-09-23, 2026-09-07, 2026-08-13 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Posted &#x27;IPCL ❤️&#x27; (Nov 1, 2026), &#x27;IPCL - All Time High&#x27; (Sep 23, 2026), and highlighted order from PLR Systems for Light Machine Gun (LMG) components (&#x27;Father-Son Duo working again&#x27;).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Repeated praise for promoter execution across multiple months.</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED ACTIVE POSITION — High-conviction recurring praise under general beneficial-interest policy.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#14 MSPL / 532659</span>
+            <b>MSP Steel &amp; Power Ltd</b>
+            <span class="cmt">Cyclical Turnaround · Integrated Steel, Pellets &amp; Captive Power</span>
+            <span class="dates path">2026-05-31, 2025-12-30, 2025-12-16 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted Q4 FY26 earnings inflection (Revenue ₹816 Cr vs ₹760 Cr YoY; PAT ₹85 Cr vs ₹-34 Cr loss; FY26 PBT ₹78 Cr vs ₹2.5 Cr; OCF ₹148 Cr). Grouped as 2025&#x27;s premier steel turnaround alongside Jayaswal Neco.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Listed alongside core holdings in Dec 30, 2025 tweet.</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED ACTIVE POSITION — Included in Dec 2025 core stock list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#15 MACPOWER / 541310</span>
+            <b>Macpower CNC Machines Ltd</b>
+            <span class="cmt">Bullish Conviction · CNC Turning Centers, VMC &amp; Defence Machining</span>
+            <span class="dates path">2026-09-18, 2026-08-18, 2026-07-29 (4 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Praised promoter Rupesh Mehta (&#x27;Rupeshbhai delivers a superb set of numbers again&#x27;, Jul 29, 2026) and celebrated &#x27;Macpower CNC - All Time High&#x27; twice (Aug &amp; Sep 2026).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Endorsed both Macpower and Jyoti CNC (&#x27;Macpower &amp; Jyoti Both&#x27;).</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED BENEFICIAL INTEREST — Strong bullish conviction; no separate tweet-level tag.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s6" data-part="turnarounds" data-file="06-turnarounds-2.md"><div class="body">
+      <h1>Tier 2 · Conviction &amp; Turnarounds (16–19)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#16 JYOTICNC / 544081</span>
+            <b>Jyoti CNC Automation Ltd</b>
+            <span class="cmt">Sector Conviction · 5-Axis CNC &amp; Aerospace/EMS Machinery</span>
+            <span class="dates path">2026-08-18, 2026-08-17 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Explicitly backed alongside Macpower (&#x27;Macpower &amp; Jyoti Both&#x27;, Aug 18, 2026).</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Tailwinds in domestic manufacturing &amp; defence capex.</li>
+            <li><span class="k gate">fund / position</span> <b>NO EXPLICIT TAG — Sector conviction call.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#17 ESCORTS / 500495</span>
+            <b>Escorts Kubota Ltd</b>
+            <span class="cmt">Operational &amp; Capex Tracking · Tractors &amp; Construction Equipment</span>
+            <span class="dates path">2026-10-01, 2026-09-01, 2026-08-19, 2026-08-18, 2026-08-11, 2026-07-01, 2026-02-10, 2026-01-01 (9 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Posted &#x27;Escorts Kubota Strong 💪&#x27;, &#x27;Solid numbers from Escorts Kubota 🚜&#x27;, and highlighted groundbreaking on 154-acre UP plant with ₹2,000+ Cr investment.</li>
+            <li><span class="k ind">indirect confidence</span> Very High (Indirect) — Most frequently tracked large/mid-cap industrial; posts monthly tractor &amp; construction equipment volume updates (+92.5% YoY CE volume in Sep 2026).</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL &amp; TRACKED HOLDING — Cited in his multi-bagger list (&#x27;Apollo Tricoat. Safari. Escorts. SML Isuzu&#x27;).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#18 TAMBOLI / 532694</span>
+            <b>Tamboli Castings Ltd</b>
+            <span class="cmt">Order-Win Catalyst · Precision Investment Castings</span>
+            <span class="dates path">2026-10-12 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Highlighted global OEM programme win generating ~₹20 Cr potential recurring annual revenue over 2–3 years (material relative to microcap base).</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Microcap export order book inflection.</li>
+            <li><span class="k gate">fund / position</span> <b>NO EXPLICIT TAG — Fundamental catalyst highlight.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#19 JAYNECOIND / 522285</span>
+            <b>Jayaswal Neco Industries Ltd</b>
+            <span class="cmt">Cyclical Turnaround · Alloy Steel &amp; Iron/Steel Castings</span>
+            <span class="dates path">2025-12-16 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Named alongside MSP Steel as the defining 2025 cyclical steel/debt-restructuring turnaround winner (&#x27;2025 - Jayaswal Neco &amp; MSP Steel. Same pattern. Different companies&#x27;).</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Pattern-recognition thesis on distressed-to-performing metal cyclicals.</li>
+            <li><span class="k gate">fund / position</span> <b>NO EXPLICIT TAG — Thematic turnaround study.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s7" data-part="watchlist" data-file="07-demergers-study-1.md"><div class="body">
+      <h1>Tier 3 · Demergers &amp; Special Situations (20–24)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#20 PROTEAN / 544021</span>
+            <b>Protean eGov Technologies Ltd</b>
+            <span class="cmt">Turnaround Watchlist · Digital Public Infrastructure (PAN/NPS/ONDC)</span>
+            <span class="dates path">2026-10-07, 2026-07-15 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Included in his 5-stock follower study list (Oct 7, 2026).</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — &#x27;Interesting developments with Protean E-Governance; we need to monitor whether they can successfully turn it around&#x27; (Jul 15, 2026).</li>
+            <li><span class="k gate">fund / position</span> <b>WATCHLIST / STUDY — Explicitly stated &#x27;need to monitor&#x27;.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#21 WENDT / 505412</span>
+            <b>Wendt (India) Ltd</b>
+            <span class="cmt">Deep-Dive Research · Super-Abrasives &amp; Grinding Machines (Murugappa Group)</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Published &#x27;Wendt India - Short Assessment&#x27; evaluating its monopoly-like super-abrasive moat and Murugappa governance.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Noted lack of management concalls requires filing-driven tracking.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH PIPELINE — Listed under &#x27;Time to start researching a few companies this weekend&#x27; (Jun 27, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#22 HEG / 509631</span>
+            <b>HEG Ltd</b>
+            <span class="cmt">Special Situation · Graphite Electrodes &amp; Greentech Demerger</span>
+            <span class="dates path">2026-09-18 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Highlighted in &#x27;Weekend Study: HEG &amp; India Glycol&#x27;s demerger&#x27; amid his recurring theme &#x27;Aag lage basti mein, Special situations (demergers) apni masti mein&#x27;.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Strong thematic conviction in demerger value unlocking.</li>
+            <li><span class="k gate">fund / position</span> <b>WEEKEND STUDY — Event-driven special situation candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#23 INDIAGLYCO / 500201</span>
+            <b>India Glycols Ltd</b>
+            <span class="cmt">Special Situation · Bio-Based Specialties, Potable Spirits &amp; Demerger</span>
+            <span class="dates path">2026-09-18, 2026-06-28 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Paired with HEG in &#x27;Weekend Study: HEG &amp; India Glycol&#x27;s demerger&#x27;; noted &#x27;Growth guidance and opportunity looks more interesting in Chemical vertical as of now. Need to see valuation post demerger&#x27;.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Post-demerger sum-of-the-parts re-rating thesis.</li>
+            <li><span class="k gate">fund / position</span> <b>WEEKEND STUDY — Evaluating post-demerger valuation.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#24 ASTRAL / 532830</span>
+            <b>Astral Ltd</b>
+            <span class="cmt">Special Situation · CPVC Pipes, Adhesives &amp; Restructuring</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Shortlisted specifically as &#x27;6) Astral (demerger)&#x27; in weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Corporate restructuring watch.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s8" data-part="watchlist" data-file="08-demergers-study-2.md"><div class="body">
+      <h1>Tier 3 · Public Study &amp; Research List (25–28)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#25 GNA / 540124</span>
+            <b>GNA Axles Ltd</b>
+            <span class="cmt">Study List · Heavy-Duty Rear Axle Shafts &amp; Spindles</span>
+            <span class="dates path">2026-10-23, 2026-10-07 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Tweeted &#x27;GNA Axles 👍&#x27; (Oct 23, 2026) after listing it as &#x27;#2 GNA Axles&#x27; under &#x27;You can study&#x27; (Oct 7, 2026).</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Follow-up thumbs-up signals positive study conclusion.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Shared publicly for follower research.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#26 GMMPFAUDLR / 505255</span>
+            <b>GMM Pfaudler Ltd</b>
+            <span class="cmt">Study List · Glass-Lined Chemical Reactors &amp; Mixing Systems</span>
+            <span class="dates path">2026-10-07 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#3 GMM Pfaudler&#x27; in his 5-stock &#x27;You can study&#x27; post.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Valuation/cycle bottoming play in agro/pharma capex equipment.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Public study list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#27 GEELTD / 504028</span>
+            <b>GEE Ltd</b>
+            <span class="cmt">Study List · Welding Electrodes, Flux-Cored Wires &amp; Consumables</span>
+            <span class="dates path">2026-10-07 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#1 GEE Ltd&#x27; in his 5-stock &#x27;You can study&#x27; post.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Industrial consumables microcap screen.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Public study list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#28 AMANTA / Sterile Pharma</span>
+            <b>Amanta Healthcare Ltd</b>
+            <span class="cmt">Study List · Sterile Liquid Parenterals &amp; Blow-Fill-Seal (BFS)</span>
+            <span class="dates path">2026-10-07, 2026-09-02 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Highlighted commissioning of new SteriPort line at Kheda (Sep 2, 2026) and included as &#x27;#5 Amanta Healthcare&#x27; on his Oct 7 study list.</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Capacity expansion trigger.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Public study list.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s9" data-part="watchlist" data-file="09-demergers-study-3.md"><div class="body">
+      <h1>Tier 3 · Weekend Research Pipeline (29–31)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#29 PRIVISCL / 530117</span>
+            <b>Privi Speciality Chemicals Ltd</b>
+            <span class="cmt">Research Pipeline · Aroma &amp; Fragrance Chemicals</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#3 Privi Speciality&#x27; in his June 27, 2026 weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Specialty chemical export recovery theme.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#30 BANSALWIRE / 544203</span>
+            <b>Bansal Wire Industries Ltd</b>
+            <span class="cmt">Research Pipeline · Stainless &amp; High-Carbon Steel Wires</span>
+            <span class="dates path">2026-11-10, 2026-06-30, 2026-06-27 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#5 Bansal Wires&#x27; in his June 27, 2026 weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Volume/scale play in steel wire manufacturing.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#31 KSH / Winding Wires</span>
+            <b>KSH International Ltd</b>
+            <span class="cmt">Research Pipeline · Magnet &amp; Insulated Winding Wires</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#2 KSH International&#x27; in his June 27, 2026 weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Transformer/HVDC power equipment supply chain proxy.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s10" data-part="archive" data-file="10-benchmarks-archive-1.md"><div class="body">
+      <h1>Tier 4 · Compounding Benchmarks &amp; Winners (32–35)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#32 TITAN / 500114</span>
+            <b>Titan Company Ltd</b>
+            <span class="cmt">Ultimate Compounding Benchmark · Jewellery, Watches &amp; Eyewear</span>
+            <span class="dates path">2026-01-06, 2025-12-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Maximum Benchmark (Direct) — &#x27;Definition of Moat, Growth, Megatrend, Terminal Value, Able &amp; Adaptive Management, Corporate Governance, Culture -&gt; All In One - Titan. Finding a Titan may be someone&#x27;s luck, but holding it through decades is the superpower.&#x27;</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Shared 100-bagger journey accumulating Titan from 2006–2008 compounding at 27% CAGR over 19 years.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL / FAMILY 100-BAGGER — Cited as the gold-standard multi-decade holding.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#33 BAJAJ / 507944</span>
+            <b>Bajaj Group (Bajaj Auto / Bajaj Finance / Bajaj Steel)</b>
+            <span class="cmt">Core Holding &amp; Historical Turnaround · Auto, NBFC &amp; Cotton Machinery</span>
+            <span class="dates path">2026-10-01, 2025-12-16, 2025-11-20 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Listed &#x27;Bajaj&#x27; among core holdings being added to (Nov 20, 2025) and cited &#x27;Bajaj Steel&#x27; as his 2023 cyclical pattern multibagger (Dec 16, 2025).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Long-term group conviction.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED HOLDING — Included in Nov 20, 2025 existing holdings list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#34 APLAPOLLO / 533758</span>
+            <b>Apollo Tricoat Tubes Ltd (APL Apollo Tubes)</b>
+            <span class="cmt">Historical Multibagger Case Study · Structural Steel Tubes</span>
+            <span class="dates path">2026-07-01 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited in &#x27;Apollo Tricoat. Safari. Escorts. SML Isuzu. Etc.&#x27; as examples of special situations that evolved into long-term multibaggers.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Archetype for capacity + branding re-rating.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL PORTFOLIO WINNER — Past/legacy multibagger.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#35 SAFARI / 523025</span>
+            <b>Safari Industries (India) Ltd</b>
+            <span class="cmt">Historical Multibagger Case Study · Hard &amp; Soft Luggage</span>
+            <span class="dates path">2026-07-01 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited alongside Apollo Tricoat and SML Isuzu as a hallmark past multibagger winner.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Consumer discretionary management-change turnaround archetype.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL PORTFOLIO WINNER — Past/legacy multibagger.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s11" data-part="archive" data-file="11-benchmarks-archive-2.md"><div class="body">
+      <h1>Tier 4 · Historical Turnarounds &amp; Sceptical Calls (36–39)</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#36 SMLISUZU / 505192</span>
+            <b>SML Isuzu Ltd</b>
+            <span class="cmt">Historical Turnaround Winner · Light &amp; Medium Commercial Vehicles</span>
+            <span class="dates path">2026-07-01 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited in July 1, 2026 roster of big winners (&#x27;Apollo Tricoat. Safari. Escorts. SML Isuzu&#x27;).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — School bus &amp; CV cyclical recovery play.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL PORTFOLIO WINNER — Past/legacy multibagger.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#37 GPIL / SARDAEN</span>
+            <b>Godawari Power &amp; Ispat Ltd (GPIL) &amp; Sarda Energy</b>
+            <span class="cmt">Historical Turnaround Case Study · Iron Ore Pellets &amp; Ferro Alloys</span>
+            <span class="dates path">2025-12-16 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited &#x27;2024 - GPIL &amp; Sarda&#x27; as textbook examples of deleveraging + captive-mining cyclical re-rating.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Blueprint for his 2025 MSP Steel &amp; Jayaswal Neco thesis.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL CASE STUDY — 2024 cycle winners.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#38 KIRLOSKAR / USHAMART</span>
+            <b>Kirloskar Group &amp; Usha Martin Ltd</b>
+            <span class="cmt">Historical Turnaround Case Study · Industrial Pumps/Engines &amp; Wire Ropes</span>
+            <span class="dates path">2025-12-16 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited &#x27;2022 - Kirloskar &amp; Usha Martin Group&#x27; as foundational examples of family/corporate restructuring and balance-sheet cleanup.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Template for special-situation restructuring.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL CASE STUDY — 2022 cycle winners.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fb4934">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fb4934">#39 NYKAA / 543384</span>
+            <b>Nykaa (FSN E-Commerce Ventures Ltd)</b>
+            <span class="cmt">Bearish / Satirical Mention · Beauty &amp; Personal Care E-Commerce</span>
+            <span class="dates path">2025-11-26, 2025-11-15 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Bearish / Sceptical (Direct) — Mocked valuation/sentiment as &#x27;Bhaykaa (Inspired from Nykaa)&#x27; alongside warnings against overpaying for narrative IPOs.</li>
+            <li><span class="k ind">indirect confidence</span> Negative (Indirect) — Consistent criticism of fund managers taking anchor allotments in overpriced IPOs.</li>
+            <li><span class="k gate">fund / position</span> <b>NO POSITION (AVOID) — Cautionary/satirical mention.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+    <section class="slide" id="s12" data-part="archive" data-file="12-all-39-index.md"><div class="body">
+      <h1>Master Index · All 39 Stocks List</h1>
+      <ul class="rhythm stock-list">
+        
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#01 CREATIVE / 539523</span>
+            <b>Creative Newtech Ltd</b>
+            <span class="cmt">High-Conviction Core Holding · IT/Drone Distribution &amp; Demerger</span>
+            <span class="dates path">2026-11-11, 2026-11-04, 2026-10-28, 2026-08-27, 2026-08-05, 2026-07-09, 2026-02-18, 2025-12-30, 2025-11-20 (14 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Repeatedly cheered &#x27;Creative Newtech - All Time High&#x27;, highlighted ₹3,194.83 Cr consortium advance work order (vs ₹950 Cr Mcap), potential demerger value unlocking, and pan-India indigenous drone distribution deals (PDRL, Drona Aviation, Jupiter Electric Mobility).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Highlighted &#x27;Insane volumes today in Creative Newtech&#x27; and &#x27;Tod Fod Numbers&#x27;.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Explicitly stated &#x27;Disclosure: Invested&#x27; and &#x27;No new companies. Adding the ones which I am already holding: Creative Newtech&#x27; (Nov 20, 2025). Personal/proprietary portfolio (no external SEBI PMS/AIF fund).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#02 SOFTTECH / 543470</span>
+            <b>SoftTech Engineers Ltd</b>
+            <span class="cmt">High-Conviction Core Holding · GovTech BIM/CAD &amp; Digital Twin</span>
+            <span class="dates path">2026-09-17, 2026-08-06, 2026-05-27, 2026-05-25, 2025-11-20 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Highlighted ₹92.95 Cr JNPA AI-enabled Digital Twin &amp; command centre order win (Sep 17, 2026) and strong operating cash flow (₹31.26 Cr CFO on ₹600 Cr Mcap).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Consistent inclusion in core holding lists across multiple quarters.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Disclosure: Invested&#x27; (May 27, 2026) and listed among existing holdings being added to (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#03 PROVENTUS / 543915</span>
+            <b>Proventus Agrocom Ltd</b>
+            <span class="cmt">Disclosed Active Long Position · Branded Dry Fruits &amp; Agro-Processing</span>
+            <span class="dates path">2026-09-18, 2026-07-09 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted commissioning of Phase 1 of its state-of-the-art manufacturing facility at Surat, Gujarat, and celebrated &#x27;Proventus Agrocom - All Time High&#x27;.</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Capex-to-revenue inflection thesis.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Disclosure: Invested&#x27; (Jul 9, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#04 XPROINDIA / 590013</span>
+            <b>Xpro India Ltd</b>
+            <span class="cmt">Disclosed Core Holding · Dielectric Capacitor Films (Birla Group)</span>
+            <span class="dates path">2026-08-06, 2026-06-25, 2026-04-16, 2025-12-30, 2025-11-20 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Long-term conviction in specialty polymer/dielectric film capacity expansion; actively averaging up/down across market cycles.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Repeatedly grouped with top core portfolio compounders.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Portfolio Update: Added More to Xpro&#x27; (Apr 16, 2026) and &#x27;Adding the ones which I am already holding: Xpro&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#05 PCBL / 506590</span>
+            <b>PCBL Ltd (PCBL Chemical)</b>
+            <span class="cmt">Disclosed Core Holding · Specialty Carbon Black &amp; Battery Chemicals</span>
+            <span class="dates path">2026-11-10, 2026-11-03, 2026-10-10, 2026-08-18, 2026-07-29, 2026-04-16 (6 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Highlighted Q1 FY27 consolidated results (Revenue ₹2,473.4 Cr +17% YoY, EBITDA ₹396 Cr +24% YoY, Net Profit ₹155 Cr +65% YoY) and ECMS approval for ₹329 Cr Acetylene Black project.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Frequent tracking of specialty chemical transition.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Portfolio Update: Added More to Xpro, Eimco Elecon &amp; PCBL Chemicals&#x27; (Apr 16, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#06 EIMCOELECO / 523732</span>
+            <b>Eimco Elecon (India) Ltd</b>
+            <span class="cmt">Disclosed Core Holding · Mining &amp; Construction Machinery</span>
+            <span class="dates path">2026-10-27, 2026-10-13, 2026-04-16 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cheered &#x27;Eimco Elecon 🔥&#x27; (Oct 13, 2026) and highlighted launch of DW-220 hydraulic diaphragm wall grab for heavy civil engineering.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — New product rollouts and order cycle tracking.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Portfolio Update: Added More to Xpro, Eimco Elecon &amp; PCBL Chemicals&#x27; (Apr 16, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#07 MPSLTD / 532440</span>
+            <b>MPS Ltd</b>
+            <span class="cmt">Disclosed Core Holding · Content, EdTech &amp; Publishing Platforms</span>
+            <span class="dates path">2026-09-30, 2026-08-06, 2025-12-30, 2025-12-20, 2025-11-20 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Core high-cash-generation B2B learning/content platform.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Repeatedly listed in core portfolio roll-calls (Nov &amp; Dec 2025).</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Adding the ones which I am already holding: Creative Newtech. MPS. Xpro. Sofftech. Aluwind. PDS. Bajaj&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#08 ALUWIND / 544158</span>
+            <b>Aluwind Infra Ltd</b>
+            <span class="cmt">Disclosed Holding · Architectural Aluminum Glazing &amp; Façades</span>
+            <span class="dates path">2026-08-26, 2026-01-09, 2025-12-30, 2025-11-20 (4 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Conviction in real-estate/commercial façade execution proxy.</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Featured in core SME/microcap basket updates.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim listed under &#x27;Adding the ones which I am already holding: Aluwind&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#09 PDS / 538730</span>
+            <b>PDS Ltd</b>
+            <span class="cmt">Disclosed Holding · Global Fashion Sourcing &amp; Supply Chain Platform</span>
+            <span class="dates path">2026-08-18, 2026-08-07, 2026-08-06, 2026-07-13, 2025-12-30, 2025-11-20 (6 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Strong conviction in asset-light global apparel sourcing model.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Consistently cited in core portfolio updates.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim listed under &#x27;Adding the ones which I am already holding: PDS&#x27; (Nov 20, 2025).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#8ec07c">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#8ec07c">#10 RAYMOND / 500330</span>
+            <b>Raymond Ltd</b>
+            <span class="cmt">Disclosed Position · Demerger Special Situation &amp; Aerospace/Defence</span>
+            <span class="dates path">2026-07-06, 2026-06-30, 2026-06-27 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted appointment of former BEL CMD Bhanu Prakash Srivastava as CEO – Defence (&#x27;Interesting development&#x27;) alongside demerger unlocking.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Listed on weekend deep-dive research list prior to position build.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED ACTIVE HOLDING — Verbatim &#x27;Disclosure: Invested&#x27; (Jul 6, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fabd2f">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fabd2f">#11 GREAVESCOT / 501455</span>
+            <b>Greaves Cotton Ltd (Greaves Electric Mobility)</b>
+            <span class="cmt">Disclosed Tracking Allocation · EV 2W/3W &amp; Powertrain Turnaround</span>
+            <span class="dates path">2026-07-09 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Noted &#x27;Finally some good development in Greaves Electric Mobility Division&#x27; while tracking Vahan registration dashboard.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Cautious optimism on EV subsidiary turnaround.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED LOW ALLOCATION — Verbatim &#x27;Tracking while keeping a low allocation because developments are good&#x27; (Jul 9, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#12 ZFSTEERING / 505160</span>
+            <b>ZF Steering Gear (India) Ltd / DriveSys</b>
+            <span class="cmt">Active Focus · CV Steering Systems &amp; Aluminum Die-Casting Subsidiary</span>
+            <span class="dates path">2026-11-12, 2026-09-07, 2026-06-29, 2025-12-31 (4 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted DriveSys subsidiary commencing commercial production of its aluminum division (Nov 12, 2026) and major order wins (Dec 31, 2025).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Close tracking of subsidiary capex commissioning and CV replacement cycle.</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED BENEFICIAL INTEREST — Covered under general blanket disclaimer (&#x27;We hold beneficial interest in the stocks that I tweet about&#x27;).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#13 IPCL / 543311</span>
+            <b>IPCL (India Pesticides / Indian Petrochemicals)</b>
+            <span class="cmt">High Conviction · Agrochemicals &amp; Defence Components (LMG Order)</span>
+            <span class="dates path">2026-11-01, 2026-09-23, 2026-09-07, 2026-08-13 (5 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Very High (Direct) — Posted &#x27;IPCL ❤️&#x27; (Nov 1, 2026), &#x27;IPCL - All Time High&#x27; (Sep 23, 2026), and highlighted order from PLR Systems for Light Machine Gun (LMG) components (&#x27;Father-Son Duo working again&#x27;).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Repeated praise for promoter execution across multiple months.</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED ACTIVE POSITION — High-conviction recurring praise under general beneficial-interest policy.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#14 MSPL / 532659</span>
+            <b>MSP Steel &amp; Power Ltd</b>
+            <span class="cmt">Cyclical Turnaround · Integrated Steel, Pellets &amp; Captive Power</span>
+            <span class="dates path">2026-05-31, 2025-12-30, 2025-12-16 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Highlighted Q4 FY26 earnings inflection (Revenue ₹816 Cr vs ₹760 Cr YoY; PAT ₹85 Cr vs ₹-34 Cr loss; FY26 PBT ₹78 Cr vs ₹2.5 Cr; OCF ₹148 Cr). Grouped as 2025&#x27;s premier steel turnaround alongside Jayaswal Neco.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Listed alongside core holdings in Dec 30, 2025 tweet.</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED ACTIVE POSITION — Included in Dec 2025 core stock list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#15 MACPOWER / 541310</span>
+            <b>Macpower CNC Machines Ltd</b>
+            <span class="cmt">Bullish Conviction · CNC Turning Centers, VMC &amp; Defence Machining</span>
+            <span class="dates path">2026-09-18, 2026-08-18, 2026-07-29 (4 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Praised promoter Rupesh Mehta (&#x27;Rupeshbhai delivers a superb set of numbers again&#x27;, Jul 29, 2026) and celebrated &#x27;Macpower CNC - All Time High&#x27; twice (Aug &amp; Sep 2026).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Endorsed both Macpower and Jyoti CNC (&#x27;Macpower &amp; Jyoti Both&#x27;).</li>
+            <li><span class="k gate">fund / position</span> <b>IMPLIED BENEFICIAL INTEREST — Strong bullish conviction; no separate tweet-level tag.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#16 JYOTICNC / 544081</span>
+            <b>Jyoti CNC Automation Ltd</b>
+            <span class="cmt">Sector Conviction · 5-Axis CNC &amp; Aerospace/EMS Machinery</span>
+            <span class="dates path">2026-08-18, 2026-08-17 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Explicitly backed alongside Macpower (&#x27;Macpower &amp; Jyoti Both&#x27;, Aug 18, 2026).</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Tailwinds in domestic manufacturing &amp; defence capex.</li>
+            <li><span class="k gate">fund / position</span> <b>NO EXPLICIT TAG — Sector conviction call.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#17 ESCORTS / 500495</span>
+            <b>Escorts Kubota Ltd</b>
+            <span class="cmt">Operational &amp; Capex Tracking · Tractors &amp; Construction Equipment</span>
+            <span class="dates path">2026-10-01, 2026-09-01, 2026-08-19, 2026-08-18, 2026-08-11, 2026-07-01, 2026-02-10, 2026-01-01 (9 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Posted &#x27;Escorts Kubota Strong 💪&#x27;, &#x27;Solid numbers from Escorts Kubota 🚜&#x27;, and highlighted groundbreaking on 154-acre UP plant with ₹2,000+ Cr investment.</li>
+            <li><span class="k ind">indirect confidence</span> Very High (Indirect) — Most frequently tracked large/mid-cap industrial; posts monthly tractor &amp; construction equipment volume updates (+92.5% YoY CE volume in Sep 2026).</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL &amp; TRACKED HOLDING — Cited in his multi-bagger list (&#x27;Apollo Tricoat. Safari. Escorts. SML Isuzu&#x27;).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#18 TAMBOLI / 532694</span>
+            <b>Tamboli Castings Ltd</b>
+            <span class="cmt">Order-Win Catalyst · Precision Investment Castings</span>
+            <span class="dates path">2026-10-12 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Highlighted global OEM programme win generating ~₹20 Cr potential recurring annual revenue over 2–3 years (material relative to microcap base).</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Microcap export order book inflection.</li>
+            <li><span class="k gate">fund / position</span> <b>NO EXPLICIT TAG — Fundamental catalyst highlight.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fe8019">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fe8019">#19 JAYNECOIND / 522285</span>
+            <b>Jayaswal Neco Industries Ltd</b>
+            <span class="cmt">Cyclical Turnaround · Alloy Steel &amp; Iron/Steel Castings</span>
+            <span class="dates path">2025-12-16 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Named alongside MSP Steel as the defining 2025 cyclical steel/debt-restructuring turnaround winner (&#x27;2025 - Jayaswal Neco &amp; MSP Steel. Same pattern. Different companies&#x27;).</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Pattern-recognition thesis on distressed-to-performing metal cyclicals.</li>
+            <li><span class="k gate">fund / position</span> <b>NO EXPLICIT TAG — Thematic turnaround study.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#20 PROTEAN / 544021</span>
+            <b>Protean eGov Technologies Ltd</b>
+            <span class="cmt">Turnaround Watchlist · Digital Public Infrastructure (PAN/NPS/ONDC)</span>
+            <span class="dates path">2026-10-07, 2026-07-15 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Included in his 5-stock follower study list (Oct 7, 2026).</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — &#x27;Interesting developments with Protean E-Governance; we need to monitor whether they can successfully turn it around&#x27; (Jul 15, 2026).</li>
+            <li><span class="k gate">fund / position</span> <b>WATCHLIST / STUDY — Explicitly stated &#x27;need to monitor&#x27;.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#21 WENDT / 505412</span>
+            <b>Wendt (India) Ltd</b>
+            <span class="cmt">Deep-Dive Research · Super-Abrasives &amp; Grinding Machines (Murugappa Group)</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Published &#x27;Wendt India - Short Assessment&#x27; evaluating its monopoly-like super-abrasive moat and Murugappa governance.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Noted lack of management concalls requires filing-driven tracking.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH PIPELINE — Listed under &#x27;Time to start researching a few companies this weekend&#x27; (Jun 27, 2026).</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#22 HEG / 509631</span>
+            <b>HEG Ltd</b>
+            <span class="cmt">Special Situation · Graphite Electrodes &amp; Greentech Demerger</span>
+            <span class="dates path">2026-09-18 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Highlighted in &#x27;Weekend Study: HEG &amp; India Glycol&#x27;s demerger&#x27; amid his recurring theme &#x27;Aag lage basti mein, Special situations (demergers) apni masti mein&#x27;.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Strong thematic conviction in demerger value unlocking.</li>
+            <li><span class="k gate">fund / position</span> <b>WEEKEND STUDY — Event-driven special situation candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#23 INDIAGLYCO / 500201</span>
+            <b>India Glycols Ltd</b>
+            <span class="cmt">Special Situation · Bio-Based Specialties, Potable Spirits &amp; Demerger</span>
+            <span class="dates path">2026-09-18, 2026-06-28 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Paired with HEG in &#x27;Weekend Study: HEG &amp; India Glycol&#x27;s demerger&#x27;; noted &#x27;Growth guidance and opportunity looks more interesting in Chemical vertical as of now. Need to see valuation post demerger&#x27;.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Post-demerger sum-of-the-parts re-rating thesis.</li>
+            <li><span class="k gate">fund / position</span> <b>WEEKEND STUDY — Evaluating post-demerger valuation.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#24 ASTRAL / 532830</span>
+            <b>Astral Ltd</b>
+            <span class="cmt">Special Situation · CPVC Pipes, Adhesives &amp; Restructuring</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Shortlisted specifically as &#x27;6) Astral (demerger)&#x27; in weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Corporate restructuring watch.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#25 GNA / 540124</span>
+            <b>GNA Axles Ltd</b>
+            <span class="cmt">Study List · Heavy-Duty Rear Axle Shafts &amp; Spindles</span>
+            <span class="dates path">2026-10-23, 2026-10-07 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Tweeted &#x27;GNA Axles 👍&#x27; (Oct 23, 2026) after listing it as &#x27;#2 GNA Axles&#x27; under &#x27;You can study&#x27; (Oct 7, 2026).</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Follow-up thumbs-up signals positive study conclusion.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Shared publicly for follower research.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#26 GMMPFAUDLR / 505255</span>
+            <b>GMM Pfaudler Ltd</b>
+            <span class="cmt">Study List · Glass-Lined Chemical Reactors &amp; Mixing Systems</span>
+            <span class="dates path">2026-10-07 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#3 GMM Pfaudler&#x27; in his 5-stock &#x27;You can study&#x27; post.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Valuation/cycle bottoming play in agro/pharma capex equipment.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Public study list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#27 GEELTD / 504028</span>
+            <b>GEE Ltd</b>
+            <span class="cmt">Study List · Welding Electrodes, Flux-Cored Wires &amp; Consumables</span>
+            <span class="dates path">2026-10-07 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#1 GEE Ltd&#x27; in his 5-stock &#x27;You can study&#x27; post.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Industrial consumables microcap screen.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Public study list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#28 AMANTA / Sterile Pharma</span>
+            <b>Amanta Healthcare Ltd</b>
+            <span class="cmt">Study List · Sterile Liquid Parenterals &amp; Blow-Fill-Seal (BFS)</span>
+            <span class="dates path">2026-10-07, 2026-09-02 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium-High (Direct) — Highlighted commissioning of new SteriPort line at Kheda (Sep 2, 2026) and included as &#x27;#5 Amanta Healthcare&#x27; on his Oct 7 study list.</li>
+            <li><span class="k ind">indirect confidence</span> Medium-High (Indirect) — Capacity expansion trigger.</li>
+            <li><span class="k gate">fund / position</span> <b>STUDY RECOMMENDATION — Public study list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#29 PRIVISCL / 530117</span>
+            <b>Privi Speciality Chemicals Ltd</b>
+            <span class="cmt">Research Pipeline · Aroma &amp; Fragrance Chemicals</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#3 Privi Speciality&#x27; in his June 27, 2026 weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Specialty chemical export recovery theme.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#30 BANSALWIRE / 544203</span>
+            <b>Bansal Wire Industries Ltd</b>
+            <span class="cmt">Research Pipeline · Stainless &amp; High-Carbon Steel Wires</span>
+            <span class="dates path">2026-11-10, 2026-06-30, 2026-06-27 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#5 Bansal Wires&#x27; in his June 27, 2026 weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Volume/scale play in steel wire manufacturing.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#83a598">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#83a598">#31 KSH / Winding Wires</span>
+            <b>KSH International Ltd</b>
+            <span class="cmt">Research Pipeline · Magnet &amp; Insulated Winding Wires</span>
+            <span class="dates path">2026-06-30, 2026-06-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Medium (Direct) — Listed as &#x27;#2 KSH International&#x27; in his June 27, 2026 weekend research queue.</li>
+            <li><span class="k ind">indirect confidence</span> Medium (Indirect) — Transformer/HVDC power equipment supply chain proxy.</li>
+            <li><span class="k gate">fund / position</span> <b>RESEARCH SHORTLIST — Weekend study candidate.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#32 TITAN / 500114</span>
+            <b>Titan Company Ltd</b>
+            <span class="cmt">Ultimate Compounding Benchmark · Jewellery, Watches &amp; Eyewear</span>
+            <span class="dates path">2026-01-06, 2025-12-27 (2 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Maximum Benchmark (Direct) — &#x27;Definition of Moat, Growth, Megatrend, Terminal Value, Able &amp; Adaptive Management, Corporate Governance, Culture -&gt; All In One - Titan. Finding a Titan may be someone&#x27;s luck, but holding it through decades is the superpower.&#x27;</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Shared 100-bagger journey accumulating Titan from 2006–2008 compounding at 27% CAGR over 19 years.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL / FAMILY 100-BAGGER — Cited as the gold-standard multi-decade holding.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#33 BAJAJ / 507944</span>
+            <b>Bajaj Group (Bajaj Auto / Bajaj Finance / Bajaj Steel)</b>
+            <span class="cmt">Core Holding &amp; Historical Turnaround · Auto, NBFC &amp; Cotton Machinery</span>
+            <span class="dates path">2026-10-01, 2025-12-16, 2025-11-20 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Listed &#x27;Bajaj&#x27; among core holdings being added to (Nov 20, 2025) and cited &#x27;Bajaj Steel&#x27; as his 2023 cyclical pattern multibagger (Dec 16, 2025).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Long-term group conviction.</li>
+            <li><span class="k gate">fund / position</span> <b>DISCLOSED HOLDING — Included in Nov 20, 2025 existing holdings list.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#34 APLAPOLLO / 533758</span>
+            <b>Apollo Tricoat Tubes Ltd (APL Apollo Tubes)</b>
+            <span class="cmt">Historical Multibagger Case Study · Structural Steel Tubes</span>
+            <span class="dates path">2026-07-01 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited in &#x27;Apollo Tricoat. Safari. Escorts. SML Isuzu. Etc.&#x27; as examples of special situations that evolved into long-term multibaggers.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Archetype for capacity + branding re-rating.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL PORTFOLIO WINNER — Past/legacy multibagger.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#35 SAFARI / 523025</span>
+            <b>Safari Industries (India) Ltd</b>
+            <span class="cmt">Historical Multibagger Case Study · Hard &amp; Soft Luggage</span>
+            <span class="dates path">2026-07-01 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited alongside Apollo Tricoat and SML Isuzu as a hallmark past multibagger winner.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Consumer discretionary management-change turnaround archetype.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL PORTFOLIO WINNER — Past/legacy multibagger.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#36 SMLISUZU / 505192</span>
+            <b>SML Isuzu Ltd</b>
+            <span class="cmt">Historical Turnaround Winner · Light &amp; Medium Commercial Vehicles</span>
+            <span class="dates path">2026-07-01 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited in July 1, 2026 roster of big winners (&#x27;Apollo Tricoat. Safari. Escorts. SML Isuzu&#x27;).</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — School bus &amp; CV cyclical recovery play.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL PORTFOLIO WINNER — Past/legacy multibagger.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#37 GPIL / SARDAEN</span>
+            <b>Godawari Power &amp; Ispat Ltd (GPIL) &amp; Sarda Energy</b>
+            <span class="cmt">Historical Turnaround Case Study · Iron Ore Pellets &amp; Ferro Alloys</span>
+            <span class="dates path">2025-12-16 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited &#x27;2024 - GPIL &amp; Sarda&#x27; as textbook examples of deleveraging + captive-mining cyclical re-rating.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Blueprint for his 2025 MSP Steel &amp; Jayaswal Neco thesis.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL CASE STUDY — 2024 cycle winners.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#d3869b">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#d3869b">#38 KIRLOSKAR / USHAMART</span>
+            <b>Kirloskar Group &amp; Usha Martin Ltd</b>
+            <span class="cmt">Historical Turnaround Case Study · Industrial Pumps/Engines &amp; Wire Ropes</span>
+            <span class="dates path">2025-12-16 (1 tweet)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> High (Direct) — Cited &#x27;2022 - Kirloskar &amp; Usha Martin Group&#x27; as foundational examples of family/corporate restructuring and balance-sheet cleanup.</li>
+            <li><span class="k ind">indirect confidence</span> High (Indirect) — Template for special-situation restructuring.</li>
+            <li><span class="k gate">fund / position</span> <b>HISTORICAL CASE STUDY — 2022 cycle winners.</b></li>
+          </ul>
+        </li>
+        <li class="stock-item" style="--c:#fb4934">
+          <div class="stock-hdr">
+            <span class="chip" style="--c:#fb4934">#39 NYKAA / 543384</span>
+            <b>Nykaa (FSN E-Commerce Ventures Ltd)</b>
+            <span class="cmt">Bearish / Satirical Mention · Beauty &amp; Personal Care E-Commerce</span>
+            <span class="dates path">2025-11-26, 2025-11-15 (3 tweets)</span>
+          </div>
+          <ul class="sublist">
+            <li><span class="k owns">direct confidence</span> Bearish / Sceptical (Direct) — Mocked valuation/sentiment as &#x27;Bhaykaa (Inspired from Nykaa)&#x27; alongside warnings against overpaying for narrative IPOs.</li>
+            <li><span class="k ind">indirect confidence</span> Negative (Indirect) — Consistent criticism of fund managers taking anchor allotments in overpriced IPOs.</li>
+            <li><span class="k gate">fund / position</span> <b>NO POSITION (AVOID) — Cautionary/satirical mention.</b></li>
+          </ul>
+        </li>
+      </ul>
+    </div></section>
+  </main>
+</div>
+
+<footer id="statusline">
+  <span class="seg mode">NORMAL</span>
+  <span class="seg file"></span>
+  <span class="spacer"></span>
+  <span class="seg progress"></span>
+  <span class="seg loc"></span>
+</footer>
+
+<div id="palette" hidden>
+  <span class="title">Command</span>
+  <div class="row"><span class="prompt">:</span><input id="palette-input" type="text" autocomplete="off" spellcheck="false" aria-label="Jump to slide"></div>
+  <div id="palette-error"></div>
+  <div class="hint">slide number (1-12), intro, core, turnarounds, watchlist, archive, index</div>
+</div>
+
+<script>
+(function () {
+  var TOTAL = 12;
+  var PARTS = [
+    { name: "intro", mode: "NORMAL", from: 1 },
+    { name: "core", mode: "CORE", from: 2 },
+    { name: "turnarounds", mode: "CONVICTION", from: 5 },
+    { name: "watchlist", mode: "WATCHLIST", from: 7 },
+    { name: "archive", mode: "ARCHIVE", from: 10 }
+  ];
+  var NAMES = { intro: 1, core: 2, turnarounds: 5, watchlist: 7, archive: 10, index: 12, all: 12 };
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var tabs = Array.prototype.slice.call(document.querySelectorAll("#tabline .tab"));
+  var gutter = document.getElementById("gutter");
+  var stMode = document.querySelector("#statusline .mode");
+  var stFile = document.querySelector("#statusline .file");
+  var stProgress = document.querySelector("#statusline .progress");
+  var stLoc = document.querySelector("#statusline .loc");
+  var palette = document.getElementById("palette");
+  var input = document.getElementById("palette-input");
+  var perr = document.getElementById("palette-error");
+  var current = 1;
+
+  function clamp(n) {
+    n = Math.round(Number(n));
+    if (!isFinite(n)) return 1;
+    return Math.max(1, Math.min(TOTAL, n));
+  }
+  function partFor(n) {
+    var p = PARTS[0];
+    PARTS.forEach(function (x) { if (n >= x.from) p = x; });
+    return p;
+  }
+  function render() {
+    var part = partFor(current);
+    slides.forEach(function (s, i) { s.classList.toggle("is-active", i + 1 === current); });
+    document.body.dataset.slide = String(current);
+    document.body.dataset.part = part.name;
+    tabs.forEach(function (t) { t.classList.toggle("is-active", t.dataset.part === part.name); });
+    stMode.textContent = part.mode;
+    stFile.textContent = slides[current - 1].dataset.file;
+    stProgress.textContent = Math.round(100 * current / TOTAL) + "%";
+    stLoc.textContent = current + ":" + TOTAL;
+    if (location.hash !== "#" + current) history.replaceState(null, "", "#" + current);
+  }
+  function goto(n) { current = clamp(n); render(); }
+  function parseCommand(text) {
+    var t = String(text).trim().toLowerCase();
+    if (/^\d+$/.test(t)) {
+      var n = parseInt(t, 10);
+      return n >= 1 && n <= TOTAL ? n : null;
+    }
+    return Object.prototype.hasOwnProperty.call(NAMES, t) ? NAMES[t] : null;
+  }
+  function fromHash() {
+    var m = /^#(\d+)$/.exec(location.hash);
+    var n = m ? parseInt(m[1], 10) : 1;
+    return n >= 1 && n <= TOTAL ? n : 1;
+  }
+
+  function drawGutter() {
+    var rows = Math.max(1, Math.floor((gutter.clientHeight - 22) / 22));
+    var html = "";
+    for (var i = 0; i < rows; i++) {
+      html += i === 0 ? '<div class="cur">1</div>' : "<div>" + i + "</div>";
+    }
+    gutter.innerHTML = html;
+  }
+
+  function openPalette() {
+    input.value = "";
+    perr.textContent = "";
+    palette.hidden = false;
+    input.focus();
+  }
+  function closePalette() {
+    palette.hidden = true;
+    input.blur();
+  }
+  function runCommand() {
+    var n = parseCommand(input.value);
+    if (n === null) {
+      perr.textContent = "E492: not a slide or part: " + (input.value.trim() || "(empty)");
+      return;
+    }
+    closePalette();
+    goto(n);
+  }
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); runCommand(); }
+    else if (e.key === "Escape") { e.preventDefault(); closePalette(); }
+    e.stopPropagation();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (!palette.hidden) {
+      if (e.key === "Escape") { e.preventDefault(); closePalette(); }
+      return;
+    }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    switch (e.key) {
+      case "l": case "ArrowRight": case " ":
+        e.preventDefault(); goto(current + 1); break;
+      case "h": case "ArrowLeft":
+        e.preventDefault(); goto(current - 1); break;
+      case ":":
+        e.preventDefault(); openPalette(); break;
+    }
+  });
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () { goto(NAMES[t.dataset.part]); });
+  });
+  window.addEventListener("hashchange", function () { goto(fromHash()); });
+  window.addEventListener("resize", drawGutter);
+
+  window.deck = {
+    goto: goto,
+    next: function () { goto(current + 1); },
+    prev: function () { goto(current - 1); },
+    parseCommand: parseCommand
+  };
+  drawGutter();
+  goto(fromHash());
+})();
+</script>
+</body>
+</html>
