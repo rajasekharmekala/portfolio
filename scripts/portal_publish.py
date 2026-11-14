@@ -150,7 +150,7 @@ def dossier_decision(market, symbol):
     if not spine_path.is_file():
         return None
     spine = json.loads(spine_path.read_text(encoding="utf-8"))
-    cmp, cmp_as_of, cmp_source = spine.get("cmp"), spine.get("as_of"), "monograph"
+    cmp, cmp_as_of, cmp_source = spine.get("cmp"), spine.get("cmp_as_of") or spine.get("as_of"), "monograph"
     if not _is_number(cmp):
         cmp, cmp_as_of = record_price(market, symbol)
         cmp_source = "record" if cmp is not None else None
