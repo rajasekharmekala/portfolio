@@ -124,6 +124,68 @@ def record_lookup(symbol):
     return verdict, sector
 
 
+def _is_number(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def record_price(market, symbol):
+    """Last close and its as-of date from the market's shortlist or watchlist record."""
+    for name in (f"shortlist/{market}.json", f"watchlist/{market}.json"):
+        path = DOCS.parent / "data" / name
+        if not path.exists():
+            continue
+        try:
+            rows = json.loads(path.read_text(encoding="utf-8")).get("active") or []
+        except ValueError:
+            continue
+        for row in rows:
+            if row.get("symbol") == symbol and _is_number(row.get("cmp")):
+                return row["cmp"], row.get("as_of_date")
+    return None, None
+
+
+def dossier_decision(market, symbol):
+    """The monograph's own ranges and holding plan, read from its canonical spine."""
+    spine_path = DOCS.parent / "data" / "dossiers" / market / symbol / "spine.json"
+    if not spine_path.is_file():
+        return None
+    spine = json.loads(spine_path.read_text(encoding="utf-8"))
+    cmp, cmp_as_of, cmp_source = spine.get("cmp"), spine.get("as_of"), "monograph"
+    if not _is_number(cmp):
+        cmp, cmp_as_of = record_price(market, symbol)
+        cmp_source = "record" if cmp is not None else None
+    redeployment = (spine.get("redeployment_plan") or {}).get("destinations") or []
+    return {
+        "newCapitalVerdict": spine.get("new_capital_verdict"),
+        "holdingAction": spine.get("holding_action"),
+        "holdingRationale": spine.get("holding_rationale"),
+        "alerts": [{"trigger": a.get("trigger"), "triggerPrice": a.get("trigger_price"),
+                    "shares": a.get("shares"), "instruction": a.get("instruction")}
+                   for a in spine.get("holding_alerts") or [] if isinstance(a, dict)],
+        "redeployment": [{"type": d.get("destination_type"), "allocationPct": d.get("allocation_pct"),
+                          "recommendation": d.get("recommendation"), "rationale": d.get("rationale"),
+                          "entryCondition": d.get("entry_condition")}
+                         for d in redeployment if isinstance(d, dict)],
+        "entryLow": spine.get("entry_zone_low"),
+        "entryHigh": spine.get("entry_zone_high"),
+        "stop": spine.get("stop_loss"),
+        "targetBear": spine.get("target_bear"),
+        "targetBase": spine.get("target_base"),
+        "targetBull": spine.get("target_bull"),
+        "expectedValue12m": spine.get("expected_value_12m"),
+        "cmp": cmp if _is_number(cmp) else None,
+        "cmpAsOf": cmp_as_of,
+        "cmpSource": cmp_source,
+        "asOf": spine.get("as_of"),
+        "tier": spine.get("conviction_tier"),
+        "archetype": spine.get("archetype"),
+        "strategyBucket": spine.get("strategy_bucket"),
+        "businessQuality": spine.get("business_quality_verdict"),
+        "kpiHealth": spine.get("kpi_health"),
+        "weinsteinStage": spine.get("weinstein_stage"),
+    }
+
+
 def extract_verdict(soup, info, metadata):
     """Verdict across dossier generations: meta > key-figures > badge span > table > dek."""
     if metadata.get("report-verdict"):
@@ -293,6 +355,7 @@ def read_entry(path, dates, updates):
             sib = path.parent / f"{symbol}{ext}"
             if sib.is_file():
                 entry_out[field] = sib.relative_to(DOCS).as_posix()
+        entry_out["decision"] = dossier_decision(market, symbol)
     return entry_out
 
 

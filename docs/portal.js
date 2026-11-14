@@ -12,6 +12,8 @@
     status: "ALL",
     verdict: "ALL",
     sort: { key: "market", dir: "asc" },
+    dossierSort: { key: "verdict", dir: "asc" },
+    openDossiers: new Set(),
     search: "",
     viewMode: "tree",
     activeTab: "performance",
@@ -417,29 +419,181 @@
     `;
   }
 
-  function renderDossierRow(e) {
-    const hasVerdict = e.verdict && e.verdict !== "Not specified";
-    const sub = e.sector && e.sector !== "Not specified" ? e.sector : "Company monograph";
-    const pdf = e.pdfUrl
-      ? `<a class="dossier-pdf" href="${escapeHtml(e.pdfUrl)}" target="_blank" rel="noopener">PDF</a>`
+  const isNum = v => typeof v === "number" && Number.isFinite(v);
+  const humanize = v => (v ? String(v).replace(/_/g, " ").toLowerCase().replace(/^./, c => c.toUpperCase()) : null);
+  const vsMid = (mid, v) => (mid !== null && isNum(v) ? v / mid - 1 : null);
+
+  const DOSSIER_COLUMNS = [
+    { label: "Ticker", key: "ticker" },
+    { label: "Verdict", key: "verdict" },
+    { label: "Holding" },
+    { label: "CMP", key: "zone", num: true, title: "Latest price and its distance from the entry zone" },
+    { label: "Entry zone", num: true },
+    { label: "Stop", num: true },
+    { label: "Range" },
+    { label: "Bear", num: true },
+    { label: "Base", key: "base", num: true },
+    { label: "Bull", num: true },
+    { label: "EV 12m", key: "ev", num: true },
+    { label: "Read" },
+  ];
+  const DOSSIER_DEFAULT_DIR = { ticker: "asc", verdict: "asc", zone: "asc", base: "desc", ev: "desc" };
+
+  function dossierMetrics(e) {
+    const d = e.decision;
+    if (!d) return null;
+    const hasZone = isNum(d.entryLow) && isNum(d.entryHigh);
+    const mid = hasZone ? (d.entryLow + d.entryHigh) / 2 : null;
+    let zoneGap = null;
+    let zoneState = null;
+    if (hasZone && isNum(d.cmp)) {
+      if (d.cmp > d.entryHigh) { zoneGap = d.cmp / d.entryHigh - 1; zoneState = "above"; }
+      else if (d.cmp < d.entryLow) { zoneGap = d.cmp / d.entryLow - 1; zoneState = "below"; }
+      else { zoneGap = 0; zoneState = "in"; }
+    }
+    return {
+      mid,
+      zoneGap,
+      zoneState,
+      baseUpside: vsMid(mid, d.targetBase),
+      evUpside: vsMid(mid, d.expectedValue12m),
+    };
+  }
+
+  function dossierSortValue(key, e) {
+    const m = dossierMetrics(e);
+    switch (key) {
+      case "ticker": return e.symbol || "";
+      case "verdict": return e.verdict ? (VERDICT_RANK[e.verdict] ?? 7) : null;
+      case "zone": return m ? m.zoneGap : null;
+      case "base": return m ? m.baseUpside : null;
+      case "ev": return m ? m.evUpside : null;
+      default: return null;
+    }
+  }
+
+  function sortDossiers(list) {
+    const { key, dir } = state.dossierSort;
+    const sign = dir === "desc" ? -1 : 1;
+    return [...list].sort((a, b) => {
+      const va = dossierSortValue(key, a);
+      const vb = dossierSortValue(key, b);
+      let cmp;
+      if (va === null || vb === null) {
+        cmp = (va === null) - (vb === null);
+      } else if (typeof va === "number") {
+        cmp = (va - vb) * sign;
+      } else {
+        cmp = String(va).localeCompare(String(vb)) * sign;
+      }
+      return cmp || (a.symbol || "").localeCompare(b.symbol || "") || a.market.localeCompare(b.market);
+    });
+  }
+
+  function dossierHeadRow() {
+    const { key, dir } = state.dossierSort;
+    const cells = DOSSIER_COLUMNS.map(col => {
+      const cls = col.num ? ' class="num"' : "";
+      const title = col.title ? ` title="${escapeHtml(col.title)}"` : "";
+      if (!col.key) return `<th scope="col"${cls}${title}>${escapeHtml(col.label)}</th>`;
+      const active = state.dossierSort.key === col.key;
+      const ariaSort = active ? (dir === "desc" ? "descending" : "ascending") : "none";
+      return `<th scope="col"${cls}${title} aria-sort="${ariaSort}"><button type="button" class="th-sort" data-dossier-sort="${col.key}">${escapeHtml(col.label)}<span class="sort-ind" aria-hidden="true"></span></button></th>`;
+    });
+    return `<tr>${cells.join("")}</tr>`;
+  }
+
+  function rangeBarHtml(d, cur) {
+    const points = d ? [d.stop, d.entryLow, d.entryHigh, d.targetBase, d.cmp].filter(isNum) : [];
+    if (points.length < 2) return '<span class="pipe-muted">—</span>';
+    const lo = Math.min(...points);
+    const span = Math.max(...points) - lo || 1;
+    const at = v => 3 + ((v - lo) / span) * 94;
+    const hasZone = isNum(d.entryLow) && isNum(d.entryHigh);
+    const zone = hasZone
+      ? `<span class="range-zone" style="left:${at(d.entryLow).toFixed(2)}%;width:${(((d.entryHigh - d.entryLow) / span) * 94).toFixed(2)}%"></span>`
       : "";
-    return `
-      <div class="dossier-row" role="listitem">
-        <div class="dossier-ticker-col">
-          <a class="dossier-symbol" href="${escapeHtml(e.url)}">${escapeHtml(e.symbol || "—")}</a>
-          <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
-        </div>
-        <div class="dossier-main">
-          <a class="dossier-title-link" href="${escapeHtml(e.url)}">${escapeHtml(e.title)}</a>
-          <div class="dossier-sub">${escapeHtml(sub)}</div>
-        </div>
-        <div class="dossier-meta">
-          ${hasVerdict ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>` : ""}
-          ${pdf}
-        </div>
-        <div class="dossier-date">${escapeHtml(formatDate(e.updatedAt || e.generatedAt))}</div>
-      </div>
-    `;
+    const mark = (v, cls, label) => (isNum(v)
+      ? `<span class="range-mark ${cls}" style="left:${at(v).toFixed(2)}%" title="${label} ${escapeHtml(fmtMoney(v, cur))}"></span>`
+      : "");
+    const ref = d.newCapitalVerdict === "REJECTED" ? " is-ref" : "";
+    return `<span class="range-bar${ref}" role="img" aria-label="Stop, entry zone, base target and CMP on one price scale">${zone}${mark(d.stop, "mark-stop", "Stop")}${mark(d.targetBase, "mark-base", "Base")}${mark(d.cmp, "mark-cmp", "CMP")}</span>`;
+  }
+
+  function dossierRowsHtml(e, index) {
+    const d = e.decision;
+    const m = dossierMetrics(e) || { mid: null, zoneState: null, zoneGap: null };
+    const cur = e.market === "IN" ? "INR" : "USD";
+    const money = v => fmtMoney(v, cur);
+    const versus = v => (m.mid !== null && isNum(v) ? `<span class="cell-sub">${escapeHtml(fmtPct(v / m.mid - 1))} vs mid</span>` : "");
+    const ref = d?.newCapitalVerdict === "REJECTED";
+    const hasZone = isNum(d?.entryLow) && isNum(d?.entryHigh);
+    const gapText = m.zoneState === "in" ? "In zone"
+      : m.zoneState ? `${fmtPct(Math.abs(m.zoneGap), false)} ${m.zoneState} zone` : "";
+    const id = `dossier-detail-${index}`;
+    const open = state.openDossiers.has(e.url);
+    const verdict = e.verdict && e.verdict !== "Not specified"
+      ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>`
+      : '<span class="pipe-muted">—</span>';
+    const sector = e.sector && e.sector !== "Not specified"
+      ? `<div class="pipe-sector dossier-sector">${escapeHtml(e.sector)}</div>` : "";
+    const pdf = e.pdfUrl ? `<a class="pipe-doc" href="${escapeHtml(e.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : "";
+
+    const profileItems = [
+      ["Conviction tier", d?.tier],
+      ["Archetype", d?.archetype],
+      ["Strategy bucket", d?.strategyBucket],
+      ["Business quality", d?.businessQuality],
+      ["KPI health", d?.kpiHealth],
+      ["Weinstein stage", d?.weinsteinStage],
+      ["Research as of", d?.asOf],
+      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist/watchlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
+    ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(/^[A-Z0-9_]+$/.test(v) ? humanize(v) : v)}</dd></div>`).join("");
+    const alerts = (d?.alerts || []).map(a => `<li><strong>${escapeHtml(a.trigger || "Trigger")}</strong>${a.instruction ? `<br>${escapeHtml(a.instruction)}` : ""}</li>`).join("");
+    const redeploy = (d?.redeployment || []).map(r => `<li><strong>${escapeHtml(humanize(r.type) || "Destination")}${isNum(r.allocationPct) ? ` · ${escapeHtml(String(r.allocationPct))}%` : ""}</strong>${r.recommendation ? `<br>${escapeHtml(r.recommendation)}` : ""}${r.entryCondition ? `<br><span class="detail-note">Entry: ${escapeHtml(r.entryCondition)}</span>` : ""}</li>`).join("");
+    const highlights = (e.highlights || []).map(h => `<li>${escapeHtml(h)}</li>`).join("");
+    const section = (title, body) => (body ? `<section><h4>${title}</h4>${body}</section>` : "");
+    const holdingBody = [d?.holdingRationale ? `<p>${escapeHtml(d.holdingRationale)}</p>` : "", alerts ? `<ul>${alerts}</ul>` : ""].join("");
+    const summaryBody = [e.summary ? `<p>${escapeHtml(e.summary)}</p>` : "", highlights ? `<ul>${highlights}</ul>` : ""].join("");
+    const detailBody = [
+      section("Holding plan", holdingBody),
+      section("Redeployment", redeploy ? `<ul>${redeploy}</ul>` : ""),
+      section("Profile", profileItems ? `<dl class="detail-kv">${profileItems}</dl>` : ""),
+      section("Summary", summaryBody),
+    ].join("") || '<p class="detail-note">No decision data for this monograph yet.</p>';
+
+    return `<tr>
+      <td><div class="dossier-id">
+        <button type="button" class="dossier-toggle" aria-expanded="${open}" aria-controls="${id}" data-url="${escapeHtml(e.url)}" aria-label="Show details for ${escapeHtml(e.symbol || e.title)}" data-dossier-toggle>${open ? "−" : "+"}</button>
+        <a class="pipe-ticker" href="${escapeHtml(e.url)}">${escapeHtml(e.symbol || "—")}</a>
+        <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
+        ${pdf}
+      </div>${sector}</td>
+      <td>${verdict}</td>
+      <td>${d?.holdingAction ? escapeHtml(humanize(d.holdingAction)) : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.cmp) ? `${money(d.cmp)}<span class="cell-sub ${m.zoneState ? `gap-${m.zoneState}` : ""}">${escapeHtml(gapText)}</span>` : '<span class="pipe-muted">—</span>'}${d?.cmpAsOf ? `<span class="cell-sub">as of ${escapeHtml(d.cmpAsOf)}</span>` : ""}</td>
+      <td class="num${ref ? " is-ref" : ""}">${hasZone ? `${money(d.entryLow)} – ${money(d.entryHigh)}${ref ? '<span class="cell-sub">reference only</span>' : ""}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.stop) ? `${money(d.stop)}${versus(d.stop)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td>${rangeBarHtml(d, cur)}</td>
+      <td class="num">${isNum(d?.targetBear) ? `${money(d.targetBear)}${versus(d.targetBear)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.targetBase) ? `${money(d.targetBase)}${versus(d.targetBase)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.targetBull) ? `${money(d.targetBull)}${versus(d.targetBull)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.expectedValue12m) ? `${money(d.expectedValue12m)}${versus(d.expectedValue12m)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td><a class="pipe-doc" href="${escapeHtml(e.url)}">Read &rarr;</a></td>
+    </tr>
+    <tr class="dossier-detail" id="${id}"${open ? "" : " hidden"}>
+      <td colspan="${DOSSIER_COLUMNS.length}"><div class="dossier-detail-grid">${detailBody}</div></td>
+    </tr>`;
+  }
+
+  function renderDossierTable(list) {
+    const wrap = byId("dossier-table-wrap");
+    const head = byId("dossier-head");
+    const body = byId("dossier-body");
+    if (!wrap || !head || !body) return;
+    wrap.hidden = list.length === 0;
+    head.innerHTML = dossierHeadRow();
+    body.innerHTML = list.map(dossierRowsHtml).join("");
   }
 
   function renderStats(pipeline) {
@@ -468,7 +622,7 @@
     renderTree(pipeline);
 
     const reports = filterEntries("report");
-    const dossiers = filterEntries("dossier");
+    const dossiers = sortDossiers(filterEntries("dossier"));
 
     const reportMeta = byId("report-meta");
     if (reportMeta) reportMeta.textContent = `${reports.length} report${reports.length === 1 ? "" : "s"}`;
@@ -489,8 +643,7 @@
 
     const dossierMeta = byId("dossier-meta");
     if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monograph${dossiers.length === 1 ? "" : "s"}`;
-    const dossierList = byId("dossier-list");
-    if (dossierList) dossierList.innerHTML = dossiers.map(renderDossierRow).join("");
+    renderDossierTable(dossiers);
 
     const dossierEmpty = byId("dossier-empty");
     if (dossierEmpty) {
@@ -690,6 +843,30 @@
           : { key, dir: "asc" };
         render();
         pipelinePanel.querySelectorAll(".th-sort")[index]?.focus({ preventScroll: true });
+      });
+    }
+
+    const dossierPanel = byId("panel-dossiers");
+    if (dossierPanel) {
+      dossierPanel.addEventListener("click", ev => {
+        const toggle = ev.target.closest("[data-dossier-toggle]");
+        if (toggle) {
+          const detail = byId(toggle.getAttribute("aria-controls"));
+          const open = toggle.getAttribute("aria-expanded") !== "true";
+          if (open) state.openDossiers.add(toggle.dataset.url); else state.openDossiers.delete(toggle.dataset.url);
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.textContent = open ? "−" : "+";
+          if (detail) detail.hidden = !open;
+          return;
+        }
+        const button = ev.target.closest(".th-sort");
+        if (!button) return;
+        const key = button.dataset.dossierSort;
+        state.dossierSort = state.dossierSort.key === key
+          ? { key, dir: state.dossierSort.dir === "asc" ? "desc" : "asc" }
+          : { key, dir: DOSSIER_DEFAULT_DIR[key] || "asc" };
+        render();
+        dossierPanel.querySelector(`.th-sort[data-dossier-sort="${key}"]`)?.focus({ preventScroll: true });
       });
     }
 

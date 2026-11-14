@@ -39,6 +39,7 @@ def valid_spec():
         "archetype": "COMPOUNDER",
         "strategy_bucket": "CORE_ALPHA",
         "conviction_tier": "TIER_2",
+        "cmp": 92.0,
         "entry_zone_low": 90,
         "entry_zone_high": 95,
         "stop_loss": 85,
@@ -324,6 +325,20 @@ class DossierDecisionSchemaTests(unittest.TestCase):
                     spec3, snapshots=snaps, positions={"consolidated": [], "net_worth": 1000},
                     shortlist={"active": []}, out_dossier_path=Path(tmp) / "TEST_dossier.html",
                 )
+
+    def test_actionable_monograph_requires_positive_numeric_cmp(self):
+        spec = valid_spec()
+        spec.pop("cmp", None)
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertTrue(any("requires a positive numeric cmp" in e for e in errs))
+        spec["cmp"] = 0
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertTrue(any("requires a positive numeric cmp" in e for e in errs))
+        spec = valid_spec()
+        spec["new_capital_verdict"] = "REJECTED"
+        spec.pop("cmp", None)
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertFalse(any("requires a positive numeric cmp" in e for e in errs))
 
     def test_tightened_dossier_readability_grade_and_sentence_cap(self):
         # Regular chapter > 15.0 fails, while #gate-exceptions between 15.0 and 16.5 passes; >24 word avg fails

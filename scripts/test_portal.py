@@ -161,6 +161,32 @@ class PortalTests(unittest.TestCase):
         self.assertEqual(published_url("TESTIN_dossier.html", self.report, self.docs),
                          "https://rajasekharmekala.github.io/portfolio/blogs/IN/TESTIN_dossier.html")
 
+    def test_monograph_decision_reads_spine_and_falls_back_to_record_cmp(self):
+        root = self.docs.parent
+        (self.docs / "blogs" / "US").mkdir(parents=True)
+        (self.docs / "blogs" / "US" / "TESTUS_dossier.html").write_text('<h1>Test US (NASDAQ: TESTUS)</h1>')
+        spine_dir = root / "data" / "dossiers" / "US" / "TESTUS"
+        spine_dir.mkdir(parents=True)
+        spine = {"symbol": "TESTUS", "market": "US", "as_of": "2026-11-12", "new_capital_verdict": "WAIT_FOR_SUPPORT",
+                 "holding_action": "NOT_HELD", "entry_zone_low": 90, "entry_zone_high": 100, "stop_loss": 80,
+                 "target_bear": 60, "target_base": 130, "target_bull": 160, "expected_value_12m": 120,
+                 "conviction_tier": "B"}
+        (spine_dir / "spine.json").write_text(json.dumps(spine))
+        (root / "data" / "watchlist").mkdir(parents=True)
+        (root / "data" / "watchlist" / "US.json").write_text(
+            json.dumps({"active": [{"symbol": "TESTUS", "cmp": 95.5, "as_of_date": "2026-11-12"}]}))
+        with patch.object(portal, "DOCS", self.docs), patch.object(portal, "CATALOG", self.docs / "portal-data.json"), patch.object(portal, "UPDATES", self.docs / "portal-updates.json"), patch.object(portal, "git_dates", return_value={}):
+            catalog = portal.build_catalog()
+            entry = next(e for e in catalog["entries"] if e["url"] == "blogs/US/TESTUS_dossier.html")
+            self.assertEqual(entry["decision"]["cmp"], 95.5)
+            self.assertEqual(entry["decision"]["cmpSource"], "record")
+            self.assertEqual(entry["decision"]["cmpAsOf"], "2026-11-12")
+            self.assertEqual((entry["decision"]["entryLow"], entry["decision"]["entryHigh"], entry["decision"]["stop"]), (90, 100, 80))
+            spine["cmp"] = 97.0
+            (spine_dir / "spine.json").write_text(json.dumps(spine))
+            entry = next(e for e in portal.build_catalog()["entries"] if e["url"] == "blogs/US/TESTUS_dossier.html")
+            self.assertEqual((entry["decision"]["cmp"], entry["decision"]["cmpSource"]), (97.0, "monograph"))
+
     def test_public_queue_follows_scheduler_and_only_projects_public_fields(self):
         data = self.docs.parent / "data"
         for kind in ("watchlist", "shortlist"):

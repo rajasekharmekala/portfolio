@@ -334,6 +334,12 @@ def validate_monograph_spec(
 
     # Anti-hedging math gate: non-rejected calls must offer >= 1.5:1 reward-to-risk from the support zone
     if spec.get("new_capital_verdict") in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP", "WAIT_FOR_SUPPORT"}:
+        cmp_val = spec.get("cmp")
+        if not isinstance(cmp_val, (int, float)) or isinstance(cmp_val, bool) or cmp_val <= 0:
+            errors.append(
+                f"{spec['new_capital_verdict']} requires a positive numeric cmp (current price) "
+                "so the homepage can show the distance to the entry zone"
+            )
         ez_low = spec.get("entry_zone_low")
         ez_high = spec.get("entry_zone_high")
         sl_val = spec.get("stop_loss")
