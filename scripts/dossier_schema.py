@@ -60,6 +60,7 @@ HOLDING_ACTIONS = {
 }
 REDEPLOYMENT_TYPES = {"CASH", "SHORTLIST", "OUTSIDE"}
 BUSINESS_QUALITY_VERDICTS = {"COMPOUNDER_PASS", "CYCLICAL_CONDITIONAL", "FUNDAMENTAL_FAIL"}
+REJECTION_REASON_CLASSES = {"VALUATION", "CASH_FLOW", "TREND", "BUSINESS"}
 KPI_HEALTH_VALUES = {"PASS", "PASS_WITH_WATCH", "FAIL"}
 PARALLEL_ROLES = {"MOAT_SCALING", "FAILURE_BASE_RATE", "CYCLE_VALUATION"}
 CLICHE_PARALLELS = {
@@ -321,6 +322,17 @@ def validate_monograph_spec(
         errors.append(
             f"decision_basis must reference {SYNTHESIS_CHAPTER_ID!r}, got {decision_basis!r}"
         )
+
+    if spec.get("new_capital_verdict") == "REJECTED":
+        reasons = spec.get("rejection_reasons")
+        if (
+            not isinstance(reasons, list)
+            or not reasons
+            or any(r not in REJECTION_REASON_CLASSES for r in reasons)
+        ):
+            errors.append(
+                f"REJECTED requires rejection_reasons: a non-empty list drawn from {sorted(REJECTION_REASON_CLASSES)}"
+            )
 
     bq_verdict = spec.get("business_quality_verdict")
     if bq_verdict is not None:

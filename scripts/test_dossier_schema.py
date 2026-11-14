@@ -340,6 +340,21 @@ class DossierDecisionSchemaTests(unittest.TestCase):
         errs, _ = validate_monograph_spec(spec, min_total_words=0)
         self.assertFalse(any("requires a positive numeric cmp" in e for e in errs))
 
+    def test_rejected_monograph_requires_known_rejection_reason_classes(self):
+        spec = valid_spec()
+        spec["verdict"] = spec["new_capital_verdict"] = "REJECTED"
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertTrue(any("REJECTED requires rejection_reasons" in e for e in errs))
+        spec["rejection_reasons"] = []
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertTrue(any("REJECTED requires rejection_reasons" in e for e in errs))
+        spec["rejection_reasons"] = ["VALUATION", "GUESSWORK"]
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertTrue(any("REJECTED requires rejection_reasons" in e for e in errs))
+        spec["rejection_reasons"] = ["VALUATION", "CASH_FLOW"]
+        errs, _ = validate_monograph_spec(spec, min_total_words=0)
+        self.assertFalse(any("rejection_reasons" in e for e in errs))
+
     def test_tightened_dossier_readability_grade_and_sentence_cap(self):
         # Regular chapter > 15.0 fails, while #gate-exceptions between 15.0 and 16.5 passes; >24 word avg fails
         long_sent = (

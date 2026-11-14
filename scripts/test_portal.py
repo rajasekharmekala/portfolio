@@ -187,6 +187,12 @@ class PortalTests(unittest.TestCase):
             (spine_dir / "spine.json").write_text(json.dumps(spine))
             entry = next(e for e in portal.build_catalog()["entries"] if e["url"] == "blogs/US/TESTUS_dossier.html")
             self.assertEqual((entry["decision"]["cmp"], entry["decision"]["cmpSource"], entry["decision"]["cmpAsOf"]), (97.0, "monograph", "2026-11-11"))
+            self.assertEqual(entry["decision"]["rejectionReasons"], [])
+            spine["new_capital_verdict"] = "REJECTED"
+            spine["rejection_reasons"] = ["VALUATION", "TREND"]
+            (spine_dir / "spine.json").write_text(json.dumps(spine))
+            entry = next(e for e in portal.build_catalog()["entries"] if e["url"] == "blogs/US/TESTUS_dossier.html")
+            self.assertEqual(entry["decision"]["rejectionReasons"], ["VALUATION", "TREND"])
 
     def test_public_queue_follows_scheduler_and_only_projects_public_fields(self):
         data = self.docs.parent / "data"

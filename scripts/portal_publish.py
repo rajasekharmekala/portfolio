@@ -159,6 +159,7 @@ def dossier_decision(market, symbol):
         "newCapitalVerdict": spine.get("new_capital_verdict"),
         "holdingAction": spine.get("holding_action"),
         "holdingRationale": spine.get("holding_rationale"),
+        "rejectionReasons": spine.get("rejection_reasons") or [],
         "alerts": [{"trigger": a.get("trigger"), "triggerPrice": a.get("trigger_price"),
                     "shares": a.get("shares"), "instruction": a.get("instruction")}
                    for a in spine.get("holding_alerts") or [] if isinstance(a, dict)],

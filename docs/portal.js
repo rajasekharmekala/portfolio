@@ -426,6 +426,7 @@
   const DOSSIER_COLUMNS = [
     { label: "Ticker", key: "ticker" },
     { label: "Verdict", key: "verdict" },
+    { label: "Why rejected", title: "Reason classes from the monograph's rejection_reasons" },
     { label: "Holding" },
     { label: "CMP", key: "zone", num: true, title: "Latest price and its distance from the entry zone" },
     { label: "Entry zone", num: true },
@@ -570,6 +571,7 @@
         ${pdf}
       </div>${sector}</td>
       <td>${verdict}</td>
+      <td>${d?.rejectionReasons?.length ? d.rejectionReasons.map(r => `<span class="reason-chip">${escapeHtml(humanize(r))}</span>`).join("") : '<span class="pipe-muted">—</span>'}</td>
       <td>${d?.holdingAction ? escapeHtml(humanize(d.holdingAction)) : '<span class="pipe-muted">—</span>'}</td>
       <td class="num">${isNum(d?.cmp) ? `${money(d.cmp)}<span class="cell-sub ${m.zoneState ? `gap-${m.zoneState}` : ""}">${escapeHtml(gapText)}</span>` : '<span class="pipe-muted">—</span>'}${d?.cmpAsOf ? `<span class="cell-sub">as of ${escapeHtml(d.cmpAsOf)}</span>` : ""}</td>
       <td class="num${ref ? " is-ref" : ""}">${hasZone ? `${money(d.entryLow)} – ${money(d.entryHigh)}${ref ? '<span class="cell-sub">reference only</span>' : ""}` : '<span class="pipe-muted">—</span>'}</td>
