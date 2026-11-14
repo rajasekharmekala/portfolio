@@ -310,11 +310,18 @@ def fetch_multitimeframe_chart(market: str, symbols: List[str]) -> Dict[str, Dic
             or (close < sma200 * 0.95 and confirmed_base_turn)
         ):
             setup_type = "DISLOCATION_AT_MAJOR_SHELF"
-            setup_note = (
-                f"Dislocated below 50D SMA ({sma50}) after a {perf_1m or 0:+.1f}% 1M move, now stabilizing above "
-                f"structural support ({major_shelf}) with 4H momentum turning up (4H RSI {rsi_4h} vs Daily RSI {rsi_d}, "
-                f"above 4H EMA20 {ema20_4h}) — actionable mean-reversion call-spread window toward {sma50}."
-            )
+            if confirmed_base_turn:
+                setup_note = (
+                    f"Dislocated below 50D SMA ({sma50}) after a {perf_1m or 0:+.1f}% 1M move, now stabilizing above "
+                    f"structural support ({major_shelf}) with 4H momentum turning up (4H RSI {rsi_4h} vs Daily RSI {rsi_d}, "
+                    f"above 4H EMA20 {ema20_4h}) — actionable mean-reversion call-spread window toward {sma50}."
+                )
+            else:
+                setup_note = (
+                    f"Dislocated below 50D SMA ({sma50}) after a {perf_1m or 0:+.1f}% 1M move near structural support "
+                    f"({major_shelf}), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI {rsi_4h} vs Daily RSI {rsi_d}; "
+                    f"close {close} vs 4H EMA20 {ema20_4h}), so there is no confirmed mean-reversion window yet."
+                )
         elif close and sma50 and sma30w and close >= sma30w and close >= sma50 * 0.99 and bb_width_pct is not None and bb_width_pct <= 14.0:
             setup_type = "STAGE2_VCP_VOLATILITY_SQUEEZE"
             setup_note = (
@@ -820,6 +827,8 @@ def render_options_section_html(plan: Dict[str, Any], mtf: Optional[Dict[str, An
         else "verdict-watch"
     )
     rh_note = ((browser_info or {}).get("robinhood") or {}).get("note") or "Public options chain snapshot."
+    if mkt == "IN":
+        rh_note = "Public NSE data only; the Robinhood account feed does not apply to India symbols."
     tv_note = (mtf or {}).get("setup_summary") or "Multi-timeframe structure evaluated against daily/weekly moving averages."
 
     parts = [

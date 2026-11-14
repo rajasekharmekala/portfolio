@@ -148,7 +148,7 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
             raise ValueError("holding_shares_to_sell must be zero when the company is not held")
         if any(alert["shares"] != 0 for alert in spec["holding_alerts"]):
             raise ValueError("NOT_HELD alerts must not recommend selling shares")
-        holding_summary = "NOT HELD (0 shares); no current holding to trim or exit."
+        holding_summary = "0 shares in the positions ledger; no current holding to trim or exit."
 
     active_shortlist = {row.get("symbol", "").upper(): row for row in _shortlist_rows(shortlist)}
     snapshot_map = snapshots.get("snapshots") or snapshots.get("symbols") or snapshots
@@ -216,7 +216,7 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
     redeploy_html = (
         f'<section class="chapter" id="capital-redeployment" data-capital-base="{base}">'
         "<h2>Capital Redeployment &amp; Opportunity Cost</h2>"
-        f"<p>Capital under review: {base}. Cash is an active choice. We compare cash with shortlist ideas and outside names. We do not assume every dollar must be invested right away.</p>"
+        f"<p>Capital under review: {base}. Cash is an active choice. We compare cash with shortlist ideas and outside names. We do not assume every {'rupee' if market == 'IN' else 'dollar'} must be invested right away.</p>"
         + _render_table(f"Capital redeployment choices for {symbol}",
                         ["Destination", "Candidate", "Share of capital", "CMP", "Entry zone", "Stop", "Base target", "Asymmetry", "Recommendation", "Entry / activation condition", "Why this use of capital"],
                         redeploy_rows,
@@ -437,7 +437,7 @@ def _build_ch4_from_snapshot_or_ledger(
         [
             "Momentum oscillator / ATR",
             f"{round(rsi, 2) if isinstance(rsi, (int, float)) else 'N/A'} / {fmt_px(atr)}",
-            f"TradingView Technical Rating: {_esc(tv_label)} (high oscillator readings can signal short-term overextension)",
+            f"TradingView Technical Rating: {_esc(tv_label)}" + (" (high oscillator readings can signal short-term overextension)" if isinstance(rsi, (int, float)) and rsi >= 70 else ""),
         ],
         [
             "52-week high / low",
