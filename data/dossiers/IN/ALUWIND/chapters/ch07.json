@@ -1,0 +1,179 @@
+{
+  "id": "ch-7",
+  "title": "Why the Price Is What It Is: A Cheap Multiple on Cash That Has Not Arrived",
+  "web_title": "7. Why the Price Is What It Is: Valuation, Reverse DCF & Peer Comps",
+  "book_title": "Chapter 7: Why the Stock Trades Here — Market Expectations vs. Peers",
+  "epigraph": {
+    "quote": "“Price is what you pay. Value is what you get.”",
+    "author": "Warren Buffett, Berkshire Hathaway 2008 shareholder letter"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "<p>At the 13 November 2026 close, Aluwind Infra-Tech traded at ₹44.90 on NSE Emerge, for a market value of ₹110.6 Cr. That is a trailing P/E of 9.25 and about 1.45 times book value (book value is ₹30.9 a share) [43][6]. The IPO was priced at ₹45 in March 2024 [3]. After 2.6 years the stock sits on its issue price, while trailing earnings per share (EPS) are ₹4.85 against ₹4.13 for FY24 [6][4]. The price is not far from where outside investors first put money in, although the company has since grown revenue from ₹83.4 Cr to ₹138.6 Cr and then to a ₹147 Cr trailing run-rate [4][1][6].</p>"
+    },
+    {
+      "type": "p",
+      "html": "<p>The path matters. Month-end prices on Yahoo Finance rose from ₹51 in April 2024 to ₹90.9 in October 2025, after a run of Larsen and Toubro order wins and the Eternia partnership. The stock has since fallen about 51% from that close, and the 52-week range is ₹40.0 to ₹85.0 [44][43]. During the fall, FY26 results were audited and showed revenue up 27% and profit up 29% [2]. What changed was the cash-flow statement, the new borrowing and the cost of carrying inventory and receivables. The market de-rated the stock as the profit stopped arriving as cash, and it did so on very thin trading: the 30-day average volume is 9,650 shares a day, worth about ₹4.3 lakh [43].</p>"
+    },
+    {
+      "type": "p",
+      "html": "<p>Cheap on earnings does not mean cheap on cash. Enterprise value (EV) adds net debt to the market value, so it prices the whole business rather than just the equity. Consolidated borrowings at 30 September 2026 were ₹46.06 Cr, against ₹4.80 Cr of cash and ₹14.25 Cr of non-current investments, which are mostly bank deposits pledged to lenders, gold and property [5]. Treating all of those as offsets leaves net debt of ₹27.0 Cr and an EV of ₹137.6 Cr. Against trailing operating EBITDA of ₹18.32 Cr (the last two half-years before other income), that is 7.5 times. If you only net the cash and keep the pledged deposits as debt-like, it is 8.3 times [5]. These are our own sums from filed figures, not company metrics.</p>"
+    },
+    {
+      "type": "p",
+      "html": "<p>A reverse DCF (discounted cash flow) asks what the price already assumes. A normal DCF starts from forecasts and ends with a price. Here we start with the price and solve for the growth it needs. The usual input, free cash flow, is negative for Aluwind in each of the last three years, so we cannot extrapolate it. Instead we use trailing profit of ₹12.14 Cr and ask how fast profit must grow for five years, and how much of it must turn into free cash for the owner, to justify ₹110.6 Cr. Conversion is the swing factor.</p>"
+    },
+    {
+      "type": "estimate",
+      "the_number": "At ₹110.6 Cr the price needs profit to grow about 12% a year for five years if 80% of profit turns into cash, about 20% a year if only 60% does, and about 6% a year if conversion is a full 100%.",
+      "how_calculated": "We discount five years of profit growth plus a terminal value at 5% growth, with each year's free cash to equity set at a fixed share of profit, and solve the growth rate that makes the present value equal today's market value. The solver is a short deterministic script run on the same-session snapshot.",
+      "the_inputs": "Market value ₹110.57 Cr [43]; trailing profit ₹12.14 Cr (H2 FY26 ₹5.45 Cr plus H1 FY27 ₹6.69 Cr, standalone) [5]; discount rate 17% as a mid case for an illiquid SME-listed company (15% and 20% shown in the grid); terminal growth 5%; cash conversion of 40%, 60%, 80% and 100% of profit.",
+      "the_range": "At a 15% discount rate the 80%-conversion case needs 7.0% growth; at 20% it needs 18.5%. The realised record is far below any of these: operating cash flow was negative in each of FY24, FY25 and FY26, a total of ₹-37.5 Cr against profit of ₹26.1 Cr [4][1].",
+      "if_off": "If working capital normalises and conversion reaches 80% or more, the stock is priced for modest growth and today's price looks low. If conversion stays near 40% to 60%, the price needs 20% to 31% growth for five years and is not cheap at all. The same P/E can mean either, which is why the cash-flow statement outranks the multiple."
+    },
+    {
+      "type": "table",
+      "caption": "Reverse DCF grid: five-year profit growth (CAGR) the ₹110.6 Cr market value requires",
+      "headers": [
+        "Free cash converted from profit",
+        "Discount rate 15%",
+        "Discount rate 17%",
+        "Discount rate 20%"
+      ],
+      "rows": [
+        [
+          "40% (still better than the last three years)",
+          "25.5%",
+          "31.3%",
+          "39.3%"
+        ],
+        [
+          "60%",
+          "14.4%",
+          "19.7%",
+          "26.9%"
+        ],
+        [
+          "80% (working capital normalising)",
+          "7.0%",
+          "11.9%",
+          "18.5%"
+        ],
+        [
+          "100% (full conversion)",
+          "1.5%",
+          "6.0%",
+          "12.2%"
+        ]
+      ],
+      "takeaway": "The grid is our own deterministic calculation from trailing profit of ₹12.14 Cr, a 5-year explicit period and a 5% terminal growth rate. Management's FY27 revenue target (₹200 Cr) and the order book of about ₹300 Cr make 12% to 20% profit growth plausible for a year or two, but they say nothing about conversion."
+    },
+    {
+      "type": "p",
+      "html": "<p>Read the grid as a statement about the bet. At 80% conversion the market asks for 12% annual profit growth, which the order book can underwrite. At 60% it asks for about 20%, which would need the revenue ramp that management guided plus no margin slip. At 40% the price is demanding. So the debate on valuation is really a debate about receivables, retention money, inventory and unbilled revenue, the items covered in Chapter 6. A buyer today is paying for an assumption that conversion recovers toward 80%. H1 FY27 operating cash flow of ₹+0.8 Cr is the first sign, not yet a trend [5].</p>"
+    },
+    {
+      "type": "p",
+      "html": "<p>Now the peers. The table below pulls same-session valuation and technical data for the closest listed comparisons we could find. They are imperfect: Innovators Facade Systems is the nearest facade contractor but is a small, thinly traded stock too (about 11,600 shares a day); Glass Wall Systems is a premium, export-led facade maker that listed on the main board on 16 September 2026; Ahluwalia Contracts and Capacit'e are building contractors with the same receivable and retention mechanics, but with far larger balance sheets [48][49][50].</p>"
+    },
+    {
+      "type": "peer_snapshot_table",
+      "peers": [
+        "INNOVATORS",
+        "GLASSWALL",
+        "AHLUCONT",
+        "CAPACITE"
+      ],
+      "caption": "Aluwind and listed facade and building-contractor peers: same-session valuation, profitability and technical snapshot",
+      "takeaway": "No listed peer matches Aluwind's mix. Treat the table as a range for how the market prices facade and contractor profit, not a precise comparison."
+    },
+    {
+      "type": "p",
+      "html": "<p>Three readings follow. First, the direct facade peer, Innovators Facade Systems, trades at a trailing P/E of 12.4 and 1.15 times book value on 47% trailing revenue growth and about a 10% operating margin [45]. Aluwind's 9.25 times and 1.45 times book value therefore sit at a modest discount on earnings, and at a premium on book value. The market is not treating it as an outlier. Second, the premium peer, Glass Wall Systems, carries 6.2 times book value and a trailing P/E of 25.4 on a 23% EBITDA margin, a 43% return on capital employed and net cash, per the Ken Research report prepared for its IPO [35][48]. That is what a facade business that converts profit to cash and exports earns. Third, the contractor pair splits: Ahluwalia at 15.7 times earnings and Capacit'e at 8.0, a spread that is at least consistent with Capacit'e's working-capital history [46][47]. Aluwind's 9.25 sits near the working-capital-stressed end.</p>"
+    },
+    {
+      "type": "parallel",
+      "role": "FAILURE_BASE_RATE",
+      "company": "Capacit'e Infraprojects Ltd (single-case analogue)",
+      "region_era": "India, Mumbai Metropolitan Region, FY2019 to FY2023; building contractor for developers and public clients",
+      "mechanism": "Capacit'e is a listed Mumbai contractor whose profit stayed positive while its net working capital stretched. Ind-Ra put the net working capital cycle at 24.8% of revenue in FY19 and 40.3% in FY23. A Mumbai-concentrated order book, slow-paying clients and retention money absorbed the cash, bank limits ran at about 98% use, and the rating moved from IND A with a negative outlook in June 2020 to IND D in August 2021 after delays in servicing debt, then to IND BB+ in February 2023.",
+      "outcome_numbers": "The shares fell 16.58% to ₹165.25 on the August 2021 downgrade day. Ind-Ra later recorded unbilled revenue of ₹930 Cr in FY23 against ₹570 Cr in FY22, and the company raised ₹96.3 Cr of equity in July 2023 to repair liquidity.",
+      "lesson_for_symbol": "On our measure, Aluwind's net trade working capital rose from about 41% of revenue in FY24 to about 66% of trailing revenue at September 2026. That definition is not identical to Ind-Ra's, but the direction and the funding (short-term bank lines) rhyme. This is one case, not a statistical base rate, and the differences are large: Capacit'e had FY23 revenue of about ₹1,791 Cr against Aluwind's ₹139 Cr, a large public-sector client in CIDCO and a Mumbai-concentrated order book, and it now trades at 8.0 times earnings on a Stage 1 base in the peer table above. The analogue shows what a stretched cash cycle can do to ratings, equity and the share price when collections slip; it does not say Aluwind will follow. Watch bank-limit use, retention money and any equity raise [4][5][51][52][54]."
+    },
+    {
+      "type": "p",
+      "html": "<p>The market is therefore pricing three things at once. It pays about 9 times for reported profit, which is a fair multiple for a small contractor. It charges a discount for illiquidity: with about ₹4.3 lakh traded on an average day, a large holder cannot exit without moving the price [43]. And it charges for the unproven cash conversion. If any of the three eases, the multiple can move; none is within management's control in the next six months except conversion.</p>"
+    },
+    {
+      "type": "table",
+      "caption": "Illustrative two-year (FY28) value scenarios, ₹ per share (analyst estimates, not company guidance)",
+      "headers": [
+        "Case",
+        "Revenue / EBITDA margin",
+        "Profit and EPS",
+        "P/E assumption",
+        "Value per share",
+        "What must happen"
+      ],
+      "rows": [
+        [
+          "Bear",
+          "₹155 Cr / 11.0%",
+          "PAT ₹6.8 Cr; EPS ₹2.73",
+          "10x",
+          "₹27",
+          "FY27 target missed badly; collections stay slow; interest cost rises with debt; Eternia terms tighten"
+        ],
+        [
+          "Base",
+          "₹190 Cr / 12.5%",
+          "PAT ₹12.6 Cr; EPS ₹5.06",
+          "11x",
+          "₹56",
+          "FY27 lands near ₹165 Cr, FY28 grows about 15%; margin holds near 12.5%; working-capital intensity stops rising"
+        ],
+        [
+          "Bull",
+          "₹215 Cr / 13.5%",
+          "PAT ₹16.0 Cr; EPS ₹6.44",
+          "13x",
+          "₹84",
+          "Order book converts on schedule; facade mix lifts margin; operating cash flow turns clearly positive and debt stabilises"
+        ]
+      ],
+      "takeaway": "Profit is built from revenue and margin less depreciation (₹3.0–3.2 Cr), interest (₹6.0–6.5 Cr) plus other income (₹1.5–2.0 Cr) and a 25% tax rate on 2.48 crore shares (the snapshot's market value implies about 2.46 crore, a 0.9% difference). The multiples are anchored on the peer range of 8x to 15.7x; they are not forecasts of where the market will price the stock."
+    },
+    {
+      "type": "p",
+      "html": "<p>A base value of ₹56 asks for EPS to rise only about 4% in total over two years, from the trailing ₹4.85 to ₹5.06, because we expect higher interest and depreciation on a larger balance sheet to absorb most of the margin gain. That makes the base case mostly a re-rating call: about 80% of its uplift comes from the multiple moving from 9.25 times to 11 times, and at an unchanged 9.25 times the same EPS is worth about ₹47. The base also needs FY27 revenue near ₹165 Cr, which means about ₹91 Cr in H2 FY27, up about 24% on the second half of FY26 against 13% growth in H1 and a flat order book of about ₹300 Cr. That sits at the top of our ₹150 Cr to ₹170 Cr range, and the base assumes only that working-capital intensity stops rising, not that cash flow turns strongly positive. That is deliberately conservative against a ₹200 Cr FY27 target we think has a low probability of being met in full. The bull case needs both the facade mix and the cash cycle to cooperate. The bear case is not a collapse; it is a year in which profit shrinks and the stock trades near 0.8 times book value.</p>"
+    },
+    {
+      "type": "trigger",
+      "html": "<p>Revisit the ₹56 base value if H2 FY27 results (due around May 2027) show operating cash flow below ₹5 Cr for the second half, if borrowings pass ₹60 Cr without a matching rise in revenue, or if the Eternia anchor agreement due in December 2026 is not renewed on similar terms; revisit upward only if cash conversion improves alongside the revenue ramp [33].</p>"
+    }
+  ],
+  "book_paragraphs": [
+    "Let us start with the number everyone looks at first. On the last close you could buy a share of Aluwind for ₹44.90, which values the whole company at about ₹110.6 Cr. That is roughly nine times the profit of the last twelve months, and about one and a half times the book value the accounts show. If you had bought at the IPO in April 2024 you would have paid ₹45. You would own the same price today, in a company whose revenue has grown from ₹83 Cr to ₹138 Cr in the audited year and ₹147 Cr over the last twelve months [43][3][4][1][6].",
+    "How can that be? Look at the path rather than the end points. By October 2025 the stock had closed near ₹91, almost double its IPO price, after a run of order announcements from Larsen and Toubro, Godrej and others. Since then it has fallen about 51%, and the 52-week range is ₹40 to ₹85. During that fall nothing broke in the profit and loss account. FY26 was a good year on that statement. What the market read, and I think read correctly, was the cash-flow statement and the borrowing line [44][43][2].",
+    "Here is the part that surprises people. A cheap multiple is not the same as a cheap business. Think of enterprise value as the price of the whole house, including the mortgage, not just your share of the equity. Aluwind has ₹46.06 Cr of borrowings, ₹4.80 Cr of cash and ₹14.25 Cr of investments that are mostly deposits pledged to banks, plus some gold and property. Net those off and the debt is about ₹27 Cr, so the whole business is priced at about ₹138 Cr, or 7.5 times trailing operating profit before other income. That is cheap for a growing contractor. It is also the price of a company that needs its lenders [5].",
+    "So let me ask the question a reverse DCF asks. We usually forecast and then arrive at a value. Here I want to start with the price and ask what you have to believe. If the owners could take home every rupee of profit as free cash, the price would need only about 6% annual growth for five years at a 17% required return, which is a sensible hurdle for a small, thinly traded stock. If they can take home 80%, you need about 12% growth. If they can take home 60%, you need about 20%. If they can take home 40%, which is closer to the last three years, you need more than 30% a year, and nobody should pay for that [43].",
+    "Do you see where this goes? The multiple is not the argument. Conversion is. Over FY24 to FY26 the company earned ₹26 Cr and its operations absorbed ₹37.5 Cr, with banks and the IPO filling the gap. In the first half of FY27, operations finally returned a small positive ₹0.8 Cr. One half-year is a hopeful sign, not a pattern. A buyer at today's price is making a bet that the receivables, the retention money and the unbilled revenue shrink back toward a normal share of sales. That is possible. It has not yet been shown [5].",
+    "What do other listed companies tell us? I could not find a clean twin, so I looked at four. Innovators Facade Systems is the closest facade contractor. It trades at a trailing P/E of 12.4 and 1.15 times book value, on 47% trailing revenue growth. Glass Wall Systems listed in September 2026 and sits at 6.2 times book value and a P/E of 25, because it earns a 23% operating margin and a 43% return on capital, holds net cash and exports. Ahluwalia Contracts is at 15.7 times and Capacit'e at 8.0 times, and the gap between those two is at least consistent with a working-capital story [45][46][47][48][35].",
+    "That last name deserves a pause, because it is the closest thing to a warning label. Capacit'e is a Mumbai contractor that kept reporting profit while its net working capital cycle grew from about 25% of revenue in FY19 to about 40% in FY23. Bank limits ran at nearly 98% use. The credit rating slid from A to D in August 2021, on the day the stock dropped almost 17% to ₹165, and the company raised ₹96 Cr of equity in 2023. On my measure Aluwind's working capital has climbed from about 41% to about 66% of sales, and the funding is short-term bank lines. The two measures are not identical. I am not predicting the same ending. It is one case, not a statistical base rate, and the scale, client mix and balance sheet differ a great deal: Capacit'e had FY23 revenue of about ₹1,791 Cr, and it now trades at 8.0 times earnings. It shows what stretched cash can do to ratings and equity when collections slip [51][52][54].",
+    "So what is the market doing? It pays about nine times for reported profit, a fair price for a small contractor. It charges a discount because the shares barely trade: roughly ₹4.3 lakh changes hands on an average day. And it charges for the cash that has not shown up. If conversion improves, the multiple can move without any change in the profit line. If it does not, the price needs the heroic growth in the grid above [43].",
+    "Here is how I frame the next two years. In the bear case, revenue reaches only ₹155 Cr, margins slip to 11%, interest cost rises and profit falls to about ₹6.8 Cr. At ten times that, the stock is worth about ₹27, roughly 0.8 times book value. In the base case revenue reaches ₹190 Cr at a 12.5% margin, profit is about ₹12.6 Cr, and at eleven times the stock is worth about ₹56. In the bull case, revenue reaches ₹215 Cr at 13.5%, profit is about ₹16 Cr and at thirteen times the stock is worth about ₹84. These are my estimates, not the company's [43].",
+    "The base case is sober on profit but generous on the multiple. Profit of ₹12.6 Cr is only a little above today's ₹12.1 Cr, because I expect interest and depreciation to absorb most of the margin gain on a larger balance sheet. About 80% of the base case's gain is the multiple moving from nine times to eleven, and at nine times the same profit is worth about ₹47. It also needs about ₹91 Cr of revenue in the second half of FY27, 24% above last year's second half, with the order book flat at about ₹300 Cr. I do not rate the ₹200 Cr FY27 target as likely, for the reasons in Chapter 5. You can disagree with me. If you do, the arithmetic above lets you swap your own revenue and margin into the same formula and see how far the answer moves.",
+    "Let me walk through the reverse DCF slowly, because the idea is simpler than the name. Imagine you owned the whole company. Today it earns about ₹12.1 Cr after tax. If every rupee of that could be taken out and spent, and the profit grew for five years and then 5% a year forever, what growth would make the present value equal the ₹110.6 Cr the market asks? At a 17% required return, the answer is about 6%. Now imagine only 60 paise of each rupee is free to take out, because 40 paise must stay in the business to fund bigger inventories and slower customers. Then the profit has to grow about 20% a year to justify the same price. The business did not change. Only the conversion did [43].",
+    "The 17% deserves a word. I use it because this is a small, thinly traded stock listed on an SME platform, where an investor may wait days to sell. A large, liquid company might deserve 12% or 13%. At 15% the grid is a little kinder and at 20% it is harsher, and I show all three so that you can pick your own. What I will not do is pretend that one number is right. The point of the exercise is to see how steeply the required growth rises as conversion falls.",
+    "Think about what a rupee of extra sales costs this company. On my numbers, net trade working capital, which is inventory plus bills owed to the company plus unbilled work, less what it owes suppliers, rose by about ₹55 Cr between March 2024 and March 2026 while revenue rose by about ₹55 Cr. That is close to one rupee of working capital for every extra rupee of sales. If that ratio persists, every rupee of growth the order book promises is financed by lenders, and the equity holders see the profit but not the cash [4][1][5].",
+    "So where does this leave you? The price looks reasonable if you believe cash will follow profit, and demanding if you do not. The next chapter looks at what the tape is saying about who is buying and selling, because on a stock this thinly traded the chart can mislead as easily as it can inform."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "A multiple is a fraction, and the denominator here is profit that has not yet turned into cash. If you only remember one thing from this chapter, remember that the same nine-times P/E means two very different things depending on whether conversion is 40% or 80%."
+    }
+  ]
+}
