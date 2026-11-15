@@ -1,0 +1,149 @@
+{
+  "symbol": "VRT",
+  "market": "US",
+  "generated_at": "2026-11-15T21:00:51+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": true,
+      "status": "connected",
+      "active_tabs": [
+        {
+          "title": "BE 191.99 ▼ −4.92% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
+        }
+      ]
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:VRT",
+    "exchange": "NYSE",
+    "company_name": "Vertiv Holdings Co. Class A",
+    "close": 202.07,
+    "change_1d_pct": -3.61,
+    "perf_1w_pct": 6.09,
+    "perf_1m_pct": -13.62,
+    "perf_3m_pct": -29.61,
+    "rsi_1d": 45.05,
+    "rsi_4h": 47.25,
+    "rsi_1w": 41.5,
+    "sma20": 208.98,
+    "sma50": 231.31,
+    "sma200": 271.58,
+    "sma30_weekly": 277.53,
+    "ema10_weekly": 224.06,
+    "ema20_4h": 205.1,
+    "sma50_4h": 212.0,
+    "atr14": 17.25,
+    "bb_width_pct": 36.06,
+    "pivot_s1": 193.79,
+    "pivot_s2": 155.09,
+    "pivot_r1": 264.65,
+    "pivot_r2": 296.81,
+    "high_52w": 379.94,
+    "low_52w": 147.82,
+    "dist_to_200d_pct": -25.59,
+    "major_shelf": 193.79,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (231.31) and 200D/30W floor (271.58); trend is broken."
+  },
+  "options_plan": {
+    "symbol": "VRT",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "WAIT_FOR_SUPPORT_OR_BASE",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 65.6,
+    "hv20_pct": 112.7,
+    "open_positions_audit": [],
+    "headline": "Stand aside at CMP ($202.07): stock is in an active Stage 4 correction below 50D/200D averages. If VRT tests its major $193.79 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $200/$260) at $18.06 debit toward $264.65 ($1,806.00 max loss -> $4,194.00 max profit, 2.32:1 R:R).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 61,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 200.0,
+          "mid": 22.68,
+          "bid": 21.85,
+          "ask": 23.5,
+          "open_interest": 1431
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 260.0,
+          "mid": 4.62,
+          "bid": 4.4,
+          "ask": 4.85,
+          "open_interest": 4687
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 18.06,
+      "max_loss_total": 1806.0,
+      "max_loss_nav_bps": 180.6,
+      "max_profit_total": "$4,194.00 (2.32:1 reward-to-risk)",
+      "breakeven_at_expiry": 218.06,
+      "breakeven_move_pct": 7.91,
+      "net_delta_dollars_per_1_move": 38.6,
+      "daily_theta_dollars": -6.89,
+      "underlying_stop_trigger": 193.79,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($2,935.80 gain) or exit early if VRT closes below $193.79.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $200 at Expiry",
+          "stock_price": 193.79,
+          "stock_move_pct": -4.1,
+          "contract_value": 0.0,
+          "net_pnl": -1806.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($218.06)",
+          "stock_price": 218.06,
+          "stock_move_pct": 7.9,
+          "contract_value": 1806.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($260)",
+          "stock_price": 260.0,
+          "stock_move_pct": 28.7,
+          "contract_value": 6000.0,
+          "net_pnl": 4194.0,
+          "return_on_risk_pct": 232.2
+        },
+        {
+          "scenario": "Bull Overshoot ($304.35)",
+          "stock_price": 304.35,
+          "stock_move_pct": 50.6,
+          "contract_value": 6000.0,
+          "net_pnl": 4194.0,
+          "return_on_risk_pct": 232.2
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: VRT is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($202.07) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($200/$260) is structured to be deployed once VRT tests its major $193.79 support shelf and stabilizes. Selling the upper $260 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $1,806.00.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $200 Call for $22.68 and simultaneously sell the $260 Call for $4.62, paying $18.06/sh net ($1,806.00 total for 1 spread(s)). That $1,806.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $218.06 (+7.9% from $202.07). Anywhere at or above $260, your $1,806.00 turns into $6,000.00 (+$4,194.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in VRT adds ~$38.60 to your spread (Net Delta), while sitting flat costs ~$6.89/day in time decay (Net Theta) — much lower than an unhedged call because the sold $260 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (VRT)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at CMP ($202.07): stock is in an active Stage 4 correction below 50D/200D averages. If VRT tests its major $193.79 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $200/$260) at $18.06 debit toward $264.65 ($1,806.00 max loss -&gt; $4,194.00 max profit, 2.32:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (231.31) and 200D/30W floor (271.58); trend is broken. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:VRT. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_vrt_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:VRT\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:VRT\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_vrt_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: VRT is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($202.07) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($200/$260) is structured to be deployed once VRT tests its major $193.79 support shelf and stabilizes. Selling the upper $260 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $1,806.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $200 Call for $22.68 and simultaneously sell the $260 Call for $4.62, paying $18.06/sh net ($1,806.00 total for 1 spread(s)). That $1,806.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $218.06 (+7.9% from $202.07). Anywhere at or above $260, your $1,806.00 turns into $6,000.00 (+$4,194.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in VRT adds ~$38.60 to your spread (Net Delta), while sitting flat costs ~$6.89/day in time decay (Net Theta) — much lower than an unhedged call because the sold $260 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for VRT</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $200 CALL @ $22.68 mid (bid $21.85 / ask $23.50, OI 1431) + SELL 2027-01-15 $260 CALL @ $4.62 mid (bid $4.40 / ask $4.85, OI 4687)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,806.00 (180.6 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$218.06 (+7.91% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$4,194.00 (2.32:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+38.60 per $1 move | $-6.89/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($2,935.80 gain) or exit early if VRT closes below $193.79.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $1,806.00 Across Stock Scenarios (VRT)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $200 at Expiry</td><td>$193.79 (-4.1%)</td><td>$0.00</td><td>$-1,806.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($218.06)</td><td>$218.06 (+7.9%)</td><td>$1,806.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($260)</td><td>$260.00 (+28.7%)</td><td>$6,000.00</td><td>$+4,194.00</td><td><strong>+232.2%</strong></td></tr><tr><td>Bull Overshoot ($304.35)</td><td>$304.35 (+50.6%)</td><td>$6,000.00</td><td>$+4,194.00</td><td><strong>+232.2%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
