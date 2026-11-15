@@ -1,0 +1,147 @@
+{
+  "id": "ch-2",
+  "title": "2. What the Company Does: Segments, Revenue Mix & Concrete Examples",
+  "web_title": "2. What the Company Does: Segments, Revenue Mix & Concrete Examples",
+  "book_title": "Chapter 2: Inside Every Segment — Products, Customers & Real-World Examples",
+  "question": "What does SK hynix actually sell, how does revenue split across HBM, conventional DRAM, and NAND/Solidigm, and how do those chips work inside real AI data centers?",
+  "epigraph": {
+    "quote": "Without memory, the artificial intelligence industry cannot exist.",
+    "author": "Kwak Noh-jung, CEO of SK hynix Inc., September 2026"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "title": "Segment architecture: DRAM (HBM + Conventional) and NAND Flash (including Solidigm)"
+    },
+    {
+      "type": "p",
+      "html": "SK hynix is a pure-play memory chipmaker with two main product families: DRAM and NAND Flash [1, 7]. Unlike Samsung Electronics, SK hynix does not build phones, TVs, or logic foundries. Nearly all its capital and engineers focus on memory and storage. Within DRAM, the business runs two engines. High-margin High Bandwidth Memory (HBM) and server DDR5 serve AI data centers, while commodity DRAM serves PCs and phones [2, 15]."
+    },
+    {
+      "type": "p",
+      "html": "Within NAND Flash, SK hynix pairs Korean 3D TLC NAND with U.S. unit Solidigm, a leader in QLC enterprise SSDs [12, 16]. Across 2024–2026, DRAM drove most of the company's revenue and profit. SK hynix holds 50%–58% of global HBM revenue and ~70% of initial HBM4 allocations [15]. It also holds 17%–22% of global NAND revenue and 30%–34% of the enterprise SSD market [15]."
+    },
+    {
+      "type": "table",
+      "caption": "SK hynix product segments, market share position, and operating economics (2024–2026)",
+      "headers": [
+        "Segment / Product Line",
+        "Primary End Markets",
+        "Global Market Share (2025–2026)",
+        "Margin & Contract Profile",
+        "Key Competitive Edge"
+      ],
+      "rows": [
+        [
+          "HBM (HBM3E / HBM4)",
+          "AI GPUs, custom AI ASICs, hyperscale training/inference",
+          "50%–58% HBM revenue; ~70% initial HBM4 share [15]",
+          "Highest margin; 12–18 month LTAs with 14 key customers [2, 13]",
+          "Advanced MR-MUF thermal packaging and early NVIDIA/hyperscaler qualification [9, 15]"
+        ],
+        [
+          "Server & Conventional DRAM (DDR5 / LPDDR5)",
+          "Cloud servers, AI host CPUs, flagship smartphones, PCs",
+          "25%–30% total DRAM revenue [15]",
+          "High cyclical sensitivity; shifting toward high-density 128GB/256GB server DDR5",
+          "1b/1c nm EUV node transition and low-power mobile leadership"
+        ],
+        [
+          "NAND Flash & Solidigm eSSD",
+          "AI data lakes, hyperscale cold/warm storage, client SSDs",
+          "17%–22% total NAND; 30%–34% enterprise SSD [15]",
+          "Turned profitable in 2024–2025 after heavy 2022–2023 losses [20]",
+          "321-layer TLC NAND + Solidigm 122TB+ QLC eSSD controller firmware [2, 12]"
+        ]
+      ],
+      "takeaway": "SK hynix's profit engine is concentrated in HBM and high-density server DDR5, while Solidigm's QLC enterprise SSDs have transformed NAND from a 2023 cash drain into a profitable AI storage pillar."
+    },
+    {
+      "type": "p",
+      "html": "HBM and standard DRAM no longer behave like the same product. Standard DRAM dies are interchangeable and sell on quarterly spot or contract prices for PCs and phones. By contrast, HBM4 uses a custom base logic die tuned to each buyer's AI chip [2, 13]. Customers co-validate HBM4 over many months and sign multi-quarter supply deals [2, 13]. Meanwhile, Solidigm's turnaround shows how AI inference drives storage demand. Once models train, cloud firms need petabytes of fast QLC SSDs to feed data without burning rack power [12, 20]."
+    },
+    {
+      "type": "h3",
+      "title": "Concrete end-to-end example 1: HBM3E/HBM4 inside an AI training accelerator"
+    },
+    {
+      "type": "p",
+      "html": "Consider a cloud provider deploying next-generation NVIDIA AI GPU racks. The main bottleneck is the 'memory wall.' Modern AI chips perform trillions of math steps per second, but standard DDR5 sits too far away on the board to feed data fast enough. Without faster memory, expensive GPU cores sit idle. To solve this, chipmakers order 12-high or 16-high HBM3E and HBM4 stacks from SK hynix [2, 9]."
+    },
+    {
+      "type": "p",
+      "html": "In Icheon and Cheongju, SK hynix makes ultra-thin 1b-nanometer DRAM wafers. Engineers drill thousands of tiny vertical copper paths, called Through-Silicon Vias (TSVs), through each die. They stack 12 or 16 dies vertically and bond them with Advanced MR-MUF liquid epoxy [9]. Finished HBM stacks ship to TSMC in Taiwan, where CoWoS packaging places them millimeters from the GPU die. Buyers pay a steep premium under annual contracts because HBM bandwidth sets the rack's token output speed."
+    },
+    {
+      "type": "h3",
+      "title": "Concrete end-to-end example 2: Solidigm 122TB QLC eSSD for AI data lakes"
+    },
+    {
+      "type": "p",
+      "html": "Now look at the storage tier of that same AI data center. A cloud operator building an AI cluster must store petabytes of checkpoints, video frames, and vector databases. Spinning hard disks (HDDs) are too slow and use too much floor space. Standard TLC SSDs cost too much at petabyte scale. Instead, the operator buys Solidigm's 61.44TB and 122TB QLC enterprise SSDs, built by SK hynix's San Jose team [12]."
+    },
+    {
+      "type": "p",
+      "html": "SK hynix supplies the 3D NAND wafers for these drives. Solidigm adds custom ASIC controllers and error-correction firmware so four-bit-per-cell (QLC) flash runs reliably 24/7. The drives slide straight into NVMe server bays, replacing racks of spinning disks while cutting power draw. This turns raw NAND wafer capacity into a high-value enterprise storage system."
+    },
+    {
+      "type": "h3",
+      "title": "Concrete end-to-end example 3: High-density server DDR5 and mobile LPDDR5X"
+    },
+    {
+      "type": "p",
+      "html": "Every AI server rack still needs host CPUs to manage networking and orchestration. Cloud buyers configure those dual-socket servers with SK hynix 128GB and 256GB DDR5 RDIMMs built on 1b-nm EUV DRAM [2]. Outside the data center, flagship smartphones use low-power LPDDR5X and LPDDR5T chips stacked atop the mobile processor. That setup keeps battery drain low when running local AI assistants. Together, server DDR5 and mobile LPDDR5 absorb most of SK hynix's non-HBM DRAM wafers."
+    },
+    {
+      "type": "h3",
+      "title": "Why HBM creates a structural wafer-allocation squeeze across all DRAM"
+    },
+    {
+      "type": "p",
+      "html": "One physical rule drives SK hynix's high margins. Making one gigabyte of HBM uses roughly three times the DRAM wafer area of one gigabyte of standard DDR5. The extra area covers TSV interconnects, spare cells, and packaging yield losses. Whenever SK hynix shifts cleanroom wafers to HBM3E and HBM4, fewer wafers remain for PC, mobile, and server DDR5 [15]. That wafer penalty tightens supply across all DRAM, even when PC or phone unit growth is flat."
+    },
+    {
+      "type": "p",
+      "html": "In Q3 2026, this supply squeeze appeared across both product lines. HBM4 entered mass production and was set to pass HBM3E in Q4 2026 revenue share [2, 13]. At the same time, server DDR5 and 321-layer TLC enterprise SSDs posted strong pricing on tight wafer supply [2, 13]. Solidigm also completed its shift from a distressed 2021 buyout to a profitable 122TB QLC eSSD leader [12, 20]. That gave SK hynix a second AI pillar winning inference storage budgets from nearline HDDs."
+    }
+  ],
+  "book_paragraphs": [
+    "To see what SK hynix actually sells, picture an AI data center from the inside out. Most people talk about the GPU—the shiny processor doing the math. Yet a GPU without ultra-fast memory sitting right next to it is like a Formula 1 engine fed through a drinking straw.",
+    "SK hynix builds the fuel delivery system. Its business runs on two main silicon engines: DRAM, which acts as the high-speed working desk for active calculations, and NAND Flash, which acts as the permanent filing cabinet. Inside DRAM, the crown jewel is High Bandwidth Memory, or HBM.",
+    "Instead of laying memory chips flat on a circuit board far from the processor, SK hynix slices DRAM wafers paper-thin, drills thousands of vertical microscopic copper elevators through them, and stacks twelve to sixteen chips on top of each other like a skyscraper. Those towers sit millimeters away from the AI processor on the same package, passing terabytes of data every second.",
+    "Alongside HBM, SK hynix sells high-density DDR5 memory sticks for cloud servers, low-power LPDDR5 chips for AI smartphones, and—through its San Jose subsidiary Solidigm—massive 122-terabyte enterprise solid-state drives that replace rows of spinning hard disks in AI data lakes.",
+    "There is a hidden physics rule inside every DRAM fab that explains why HBM tightens the entire memory market. To make one gigabyte of HBM, SK hynix uses roughly three times as much silicon wafer space as it needs for one gigabyte of standard DDR5.",
+    "Why? Because each stacked die needs room for thousands of vertical copper highways, extra spare cells to protect packaging yields, and wider test margins. So every time an AI customer orders another million gigabytes of HBM4, SK hynix has to pull wafers away from regular server and smartphone memory. That shrinks supply everywhere else at the same time.",
+    "Meanwhile, on the storage side of the data center, Solidigm has turned what looked like a bad 2021 acquisition into an AI workhorse. After losing roughly KRW 7.3 trillion across 2022 and 2023, Solidigm refocused on ultra-dense 61TB and 122TB QLC enterprise SSDs—giving AI clusters fast, low-power access to massive training datasets."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION: Why Pure-Play Focus Matters in Silicon",
+      "text": "Samsung Electronics splits its executive attention across phones, TVs, appliances, foundry, and memory. SK hynix does one thing: memory and storage. When HBM required years of messy packaging trial-and-error with zero immediate payoff, that single-minded focus kept SK hynix from flinching."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "Walkthrough: From Korean Wafer to Taiwan Interposer to U.S. Cloud Rack",
+      "paragraphs": [
+        "Let's trace one real order so the mechanics are concrete. An AI hyperscaler needs thousands of next-generation GPU servers. It does not buy HBM4 directly from SK hynix at retail; instead, it locks in accelerator allocations from NVIDIA, which in turn signs 12-to-18-month capacity commitments with SK hynix.",
+        "In Cheongju and Icheon, SK hynix patterns 1b-nanometer DRAM wafers, stacks 12 or 16 dies using its MR-MUF liquid epoxy process, tests every stack for thermal and electrical integrity, and ships them to TSMC in Taiwan. TSMC bonds the HBM stacks beside the GPU die, and the finished module lands in an American or European data center. Because each HBM stack consumes roughly three times the wafer area of standard DDR5 for the same gigabyte count, every HBM order tightens supply across the rest of the DRAM market too."
+      ]
+    },
+    {
+      "title": "Example 2: How a 122TB Solidigm eSSD Replaces Rows of Spinning Disks",
+      "paragraphs": [
+        "Walk into an AI inference data center and look at the storage racks. Storing petabytes of video frames, vector embeddings, and model checkpoints on traditional spinning hard drives is cheap per terabyte, but those drives are painfully slow and eat up massive floor space and cooling power.",
+        "Solidigm solves that bottleneck by pairing SK hynix's 3D NAND wafers with custom enterprise controllers and error-correction software. By packing four bits into every flash cell—known as QLC—without sacrificing data-center reliability, a single 122-terabyte Solidigm drive replaces an entire shelf of mechanical disks. That is why SK hynix and Solidigm together hold roughly 30% to 34% of the global enterprise SSD market."
+      ]
+    },
+    {
+      "title": "Example 3: Server DDR5 and Mobile LPDDR5X Outside the GPU",
+      "paragraphs": [
+        "Even inside an AI server, the GPU cannot run alone. Host CPUs manage networking, security, and memory pooling using 128GB and 256GB DDR5 modules built on SK hynix's 1b-nanometer EUV process. Outside the data center, flagship smartphones running on-device AI assistants rely on SK hynix's low-power LPDDR5X chips stacked directly over the mobile processor.",
+        "Together, those three engines—HBM stacks, server DDR5 plus mobile LPDDR5, and Solidigm enterprise SSDs—give SK hynix exposure to every layer of AI compute, from model training in hyperscale clusters down to inference on the edge."
+      ]
+    }
+  ]
+}

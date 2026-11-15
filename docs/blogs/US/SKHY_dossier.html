@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="US">
+<meta name="report-kind" content="dossier">
+<meta name="report-workflow" content="Company research">
+<meta name="research-as-of" content="2026-11-13">
+<meta name="generated-at" content="2026-11-15T13:59:28.699762-08:00">
+<meta name="report-sector" content="Semiconductors / Memory">
+<title>SK hynix Inc. (NASDAQ: SKHY): AI Memory Monopoly vs. Stage 4 Markdown &amp; ADR Parity</title>
+<style>
+:root {
+  /* Page & surface (Techmeme / Morning Brief unified theme) */
+  --paper:          #ffffff;
+  --paper-top:      #f4f6f8;
+  --ink:            #111111;
+  --ink-strong:     #174a61;
+  --muted:          #556677;
+  --rule:           #cccccc;
+  --rule-soft:      #d8e0e6;
+  --surface:        #ffffff;
+  --surface-alt:    #f4f6f8;
+  --link:           #002848;
+  --link-visited:   #902050;
+  --link-hover-bg:  #d0e8f4;
+  --navy:           #174a61;
+  --navy-hover:     #578aa1;
+  --sisnav-hover:   #25607b;
+
+  /* Verdict semantic tokens — four distinct hues, colour-blind safe when paired with text labels */
+  --keep-ink:       #145a32;   /* forest green — KEEP / HOLD / SHORTLIST */
+  --keep-bg:        #e8f4ec;
+  --keep-rule:      #8ec5a1;
+
+  --accumulate-ink: #0f4c81;   /* slate blue — ACCUMULATE / BUY / ADD / STAGE 2 BREAKOUT */
+  --accumulate-bg:  #e7f0f9;
+  --accumulate-rule:#8fb4da;
+
+  --trim-ink:       #7c4700;   /* warm amber — TRIM / WAIT FOR SUPPORT / ROLL */
+  --trim-bg:        #fbf2e1;
+  --trim-rule:      #dfba73;
+
+  --exit-ink:       #8b1e1e;   /* brick red — EXIT / REJECT / CLOSE / STAGE 4 */
+  --exit-bg:        #fbeaea;
+  --exit-rule:      #dca1a1;
+
+  --watch-ink:      #424b54;   /* neutral slate — WATCH / ARCHIVED / PENDING */
+  --watch-bg:       #eef0f2;
+  --watch-rule:     #b8c0c8;
+
+  /* Callout accents (matching personal-wiki .exec-theme-box and .deepdive-container) */
+  --primer-accent:  #d4a017;   /* gold — Executive Synthesis / Primer box */
+  --primer-tint:    #fdfbe8;
+  --rule-accent:    #0f4c81;   /* slate blue — Rule Explained box */
+  --rule-tint:      #eef4fa;
+  --case-accent:    #174a61;   /* Techmeme navy — Deep-Dive / Case Note box */
+  --case-tint:      #fcfdfe;
+  --warn-accent:    #8b1e1e;   /* brick — Risk / Conflict callout */
+  --warn-tint:      #fcf1f1;
+}
+/* report_base v2 */
+* { box-sizing: border-box; }
+html { font-size: 15.5px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+.report {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 18px 56px;
+}
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--link-visited);
+}
+a:hover {
+  background-color: var(--link-hover-bg);
+  text-decoration: underline;
+}
+
+/* Headings — Techmeme / Research Desk style */
+h1, h2, h3, h4 {
+  color: var(--ink-strong);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.hatnote {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--navy);
+  clear: left;
+  color: var(--navy);
+}
+h3 {
+  font-size: 1.05rem;
+  margin: 1.35rem 0 0.45rem;
+  color: var(--ink-strong);
+}
+h4 {
+  font-size: 0.96rem;
+  margin: 1rem 0 0.35rem;
+  color: var(--ink);
+}
+p { margin: 0.55rem 0 0.9rem; }
+ul, ol { margin: 0.45rem 0 0.95rem; padding-left: 1.5rem; }
+li { margin: 0.28rem 0; }
+hr { border: 0; border-top: 1px solid var(--rule-soft); margin: 1.5rem 0; }
+
+/* Lead & TOC */
+.lead { font-size: 1.01rem; }
+.toc {
+  display: table;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  padding: 0.75rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+.toc-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: 0.18rem 0; }
+
+/* Infobox */
+.infobox {
+  float: right;
+  clear: right;
+  width: 310px;
+  margin: 0 0 1.25rem 1.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.infobox caption, .infobox .infobox-title {
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+}
+.infobox th, .infobox td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--rule-soft);
+  vertical-align: top;
+  text-align: left;
+}
+.infobox th {
+  width: 44%;
+  color: var(--muted);
+  font-weight: 600;
+}
+.infobox td {
+  font-variant-numeric: tabular-nums;
+}
+.infobox .infobox-subhead th {
+  background: var(--surface-alt);
+  color: var(--navy);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Data tables (wikitable) — responsive & sticky headers */
+.table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0.85rem 0 1.35rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+table.wikitable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  background: var(--surface);
+}
+table.wikitable caption {
+  font-weight: 700;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  color: var(--navy);
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule-soft);
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid var(--rule-soft);
+  padding: 0.44rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+table.wikitable thead th, table.wikitable tr:first-child th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule);
+}
+table.wikitable tbody tr:nth-child(even) {
+  background: var(--paper);
+}
+table.wikitable tbody tr:hover {
+  background: var(--rule-tint);
+}
+.num, td.num, th.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Verdict pills */
+.verdict {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.verdict-keep       { color: var(--keep-ink);       background: var(--keep-bg);       border-color: var(--keep-rule); }
+.verdict-accumulate { color: var(--accumulate-ink); background: var(--accumulate-bg); border-color: var(--accumulate-rule); }
+.verdict-trim       { color: var(--trim-ink);       background: var(--trim-bg);       border-color: var(--trim-rule); }
+.verdict-exit       { color: var(--exit-ink);       background: var(--exit-bg);       border-color: var(--exit-rule); }
+.verdict-watch      { color: var(--watch-ink);      background: var(--watch-bg);      border-color: var(--watch-rule); }
+
+/* Footnotes & references */
+sup.reference { font-size: 0.75em; line-height: 0; }
+.reflist {
+  font-size: 0.84rem;
+  color: var(--muted);
+  column-width: 28rem;
+  column-gap: 2rem;
+  padding-left: 1.5rem;
+}
+.reflist li { margin: 0.25rem 0; break-inside: avoid; }
+
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-alt);
+  padding: 0.08rem 0.3rem;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .report { padding: 14px 12px 40px; }
+  .infobox { float: none; width: 100%; margin: 0 0 1.25rem 0; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; }
+}
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  .report { max-width: none; padding: 0; }
+  a { color: #000; text-decoration: underline; }
+  h2, h3 { page-break-after: avoid; }
+  table, .callout, .case-note { page-break-inside: avoid; }
+}
+
+/* === Book-report teaching components (Techmeme / Morning Brief unified theme) === */
+
+/* Key-figures strip: 3–5 headline numbers at the top of a report or section */
+.key-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 1.4rem;
+  clear: left;
+}
+.key-figures > div {
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  padding: 0.65rem 0.85rem;
+}
+.key-figures .kf-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+.key-figures .kf-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+.key-figures .kf-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Callout boxes: Primer (matches .exec-theme-box), Rule Explained, Risk/Warning */
+.callout {
+  border: 1px solid var(--rule-soft);
+  border-left: 5px solid var(--primer-accent);
+  background: var(--primer-tint);
+  padding: 0.75rem 1.05rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.93rem;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--trim-ink);
+  margin: 0 0 0.35rem;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout-rule {
+  border-left-color: var(--rule-accent);
+  background: var(--rule-tint);
+}
+.callout-rule .callout-title { color: var(--rule-accent); }
+.callout-warn {
+  border-left-color: var(--warn-accent);
+  background: var(--warn-tint);
+}
+.callout-warn .callout-title { color: var(--warn-accent); }
+
+/* Case note: one box per holding / option / candidate (matches .deepdive-container) */
+.case-note {
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--case-accent);
+  background: var(--case-tint);
+  padding: 0.95rem 1.15rem;
+  margin: 1.15rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.case-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.case-note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+.case-note-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.case-note dl.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface-alt);
+  border-left: 3px solid var(--navy);
+  font-size: 0.84rem;
+}
+.case-note dl.case-facts div { margin: 0; }
+.case-note dl.case-facts dt {
+  color: var(--muted);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.case-note dl.case-facts dd {
+  margin: 0.05rem 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* First-use glossary term */
+dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+/* Chapter lead / section summary */
+.section-summary {
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface-alt);
+  border-left: 4px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Horizontal bar meter for allocations / weights */
+.weight-bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: var(--navy);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border-radius: 1px;
+}
+
+/* === Dual-Edition Switcher & Audiobook Reader Components === */
+.edition-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin: 0.85rem 0 1.25rem;
+  padding: 0.65rem 0.95rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--navy);
+  font-size: 0.86rem;
+}
+.edition-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.edition-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--link);
+  font-weight: 700;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.edition-tab.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #ffffff !important;
+}
+.edition-tab.is-active:visited {
+  color: #ffffff !important;
+}
+.edition-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.edition-dl-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+  color: var(--ink-strong);
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* Built-in Audiobook / TTS Reader Bar for SYMBOL_book.html */
+.book-audio-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin: 0.75rem 0 1.35rem;
+  padding: 0.75rem 1rem;
+  background: var(--primer-tint);
+  border: 1px solid var(--primer-accent);
+  border-left: 5px solid var(--primer-accent);
+  font-size: 0.86rem;
+}
+.book-audio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.book-audio-btn {
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--navy);
+  background: var(--navy);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.book-audio-btn.secondary {
+  background: var(--surface);
+  color: var(--navy);
+}
+.book-audio-btn:hover {
+  background: var(--navy-hover);
+  color: #ffffff;
+}
+.book-audio-select {
+  padding: 0.28rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+}
+.book-audio-status {
+  color: var(--ink-strong);
+  font-weight: 600;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Book-edition typography & chapter banners */
+.book-chapter p {
+  font-size: 1.03rem;
+  line-height: 1.72;
+  margin: 0.75rem 0 1.05rem;
+}
+.book-chapter p.is-speaking {
+  background: var(--primer-tint);
+  border-left: 3px solid var(--primer-accent);
+  padding-left: 0.65rem;
+}
+.chapter-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.35rem 0 0.95rem;
+  padding: 0.55rem 0.85rem;
+  background: var(--surface-alt);
+  border-left: 4px solid var(--navy);
+  font-size: 0.88rem;
+}
+.chapter-question {
+  font-weight: 600;
+  color: var(--ink-strong);
+}
+.chapter-listen-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === Techmeme / Morning Brief Unified Research Desk Chrome === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+code, .mono, .num, td.num, th.num, .infobox td, .key-figures .kf-value, .case-note dl.case-facts dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.desk-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  border: 0;
+  background: transparent;
+}
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value { background: var(--navy-hover); }
+.desk-progress::-moz-progress-bar { background: var(--navy-hover); }
+
+/* Top prenavbar + logo header + navy navbar inside .desk-masthead */
+.desk-prenav {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 8px 18px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.desk-prenav-links a {
+  color: var(--link);
+  font-weight: 600;
+}
+.desk-logotab {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px 18px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.desk-brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.desk-brand-title:visited { color: var(--navy); }
+.desk-brand-title:hover { background: transparent; text-decoration: none; color: var(--navy-hover); }
+.desk-brand-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.desk-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  padding: 0 18px;
+  background: var(--navy);
+  color: #ffffff;
+  border-bottom: 1px solid var(--navy);
+}
+.desk-wordmark {
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  background: var(--navy-hover);
+  text-decoration: none;
+}
+.desk-wordmark:visited { color: #ffffff !important; }
+.desk-wordmark:hover { background: var(--navy-hover); text-decoration: none; }
+.desk-label {
+  color: var(--paper);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.desk-sisnav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+.desk-sisnav a {
+  color: #ffffff !important;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+.desk-sisnav a:hover {
+  background: var(--sisnav-hover);
+  text-decoration: none;
+}
+.desk-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desk-tools select, .desk-tools button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: var(--navy);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.desk-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  padding: 0;
+}
+.desk-tools button svg { width: 14px; height: 14px; }
+.desk-tools select:hover, .desk-tools button:hover {
+  background: var(--navy-hover);
+}
+.desk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.desk-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 20px 18px 64px;
+}
+.report {
+  max-width: 960px;
+  margin: 0;
+  padding: 0;
+}
+.report-header {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: var(--primer-tint);
+  border: 1px solid var(--primer-accent);
+  border-left: 5px solid var(--primer-accent);
+}
+.report-header h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.report-generated, .report-as-of {
+  margin: 6px 0 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.report-as-of { font-weight: 500; color: var(--muted); }
+
+.toc { display: none; }
+.desk-contents { display: none; }
+
+.desk-footer {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 16px 18px 36px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 1120px) {
+  .desk-tools select { display: none; }
+  .desk-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 940px) 250px;
+    justify-content: space-between;
+    align-items: start;
+    gap: 28px;
+  }
+  .desk-contents:not([hidden]) {
+    display: block;
+    position: sticky;
+    top: 52px;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 10px 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--rule-soft);
+    border-top: 3px solid var(--navy);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+  .desk-contents-label {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .desk-contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .desk-contents li { margin: 0; }
+  .desk-contents a {
+    display: block;
+    padding: 4px 6px;
+    color: var(--link);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+  .desk-contents a:visited { color: var(--link); }
+  .desk-contents a:hover, .desk-contents a.is-active {
+    color: var(--navy);
+    background: var(--link-hover-bg);
+    border-left-color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .desk-prenav, .desk-logotab { padding-left: 12px; padding-right: 12px; }
+  .desk-masthead { padding: 0 10px; }
+  .desk-sisnav { display: none; }
+  .desk-layout { padding: 14px 12px 44px; }
+}
+
+@media print {
+  .desk-progress, .desk-prenav, .desk-logotab, .desk-masthead, .desk-contents, .desk-footer { display: none !important; }
+  .desk-layout, .report { display: block; max-width: none; padding: 0; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<div class="desk-prenav"><span>November 15, 2026 &bull; United States (NYSE/NASDAQ)</span><span class="desk-prenav-links"><a href="https://rajasekharmekala.github.io/">Home</a> | <a href="../../index.html">Portfolio Desk</a> | <a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> | <a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a></span></div>
+<div class="desk-logotab"><a class="desk-brand-title" href="../../index.html">Portfolio Research Desk</a><span class="desk-brand-sub">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</span></div>
+<header class="desk-masthead"><a class="desk-wordmark" href="../../index.html">RESEARCH / DESK</a><span class="desk-label">US / Company research</span><nav class="desk-sisnav" aria-label="Sister sites"><a href="https://rajasekharmekala.github.io/">Profile</a><a href="https://rajasekharmekala.github.io/personal-wiki/">Morning Brief</a><a href="https://rajasekharmekala.github.io/travel-research/">Travel</a></nav><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>SK hynix Inc. (NASDAQ: SKHY): AI Memory Monopoly vs. Stage 4 Markdown &amp; ADR Parity</h1><p class="report-generated">Generated Date: <time datetime="2026-11-15T13:59:28.699762-08:00">15 Nov 2026, 01:59 PM PST</time></p><p class="report-as-of">Research as of 2026-11-13</p></header>
+<div aria-label="Dossier Editions" class="edition-switcher" role="navigation">
+<div class="edition-tabs">
+<a class="edition-tab is-active" href="SKHY_dossier.html">Web Research Dossier (8,680 words • Tables &amp; Charts)</a>
+</div>
+<div class="edition-downloads">
+<a class="edition-dl-link" download="SKHY_book.pdf" href="SKHY_book.pdf">Download PDF (10,985 words)</a>
+</div>
+</div>
+<dl class="key-figures">
+<div><dt>New Capital Verdict</dt><dd><span class="verdict verdict-exit">REJECTED</span> (CYCLICAL_CONDITIONAL)</dd></div>
+<div><dt>Current Holding Action</dt><dd><span class="verdict verdict-exit">EXIT IMMEDIATELY</span> — 17.764 shares across schwab: 17.764 shares; market value $2,341.12; cost basis $2,999.99; recommend selling 17.764 shares and retaining 0 shares; unrealized P&amp;L $-658.87; portfolio weight 2.64%</dd></div>
+<div><dt>Session Price (2026-11-13)</dt><dd>$131.79</dd></div>
+<div><dt>Strategy Bucket</dt><dd>TACTICAL_MOMENTUM</dd></div>
+<div><dt>Weinstein Stage</dt><dd>N/A (insufficient history)</dd></div>
+<div><dt>Technical Screen Signal</dt><dd>AVOID_STAGE4_OR_BROKEN</dd></div>
+<div><dt>Valuation watch zone (conditional)</dt><dd>$119.52 – $123.16 (no live stop; recalculate before entry)</dd></div>
+<div><dt>Scenario targets</dt><dd>Bear $93.48 / Base $125.00 / Bull $186.52 (new-entry R:R: N/A)</dd></div>
+<div><dt>Risk-Unit Sizing</dt><dd>0.0% of net worth (TIER_3)</dd></div>
+<div><dt>Options / Call Playbook</dt><dd><span class="verdict verdict-watch">WAIT FOR SUPPORT OR BASE</span> — Stand aside at CMP ($131.79): stock is in an active Stage 4 correction below 50D/200D averages. If SKHY tests its major $122.20 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $130/$160) at $10.31 debit toward $186.52 ($1,031.00 max loss -&gt; $1,969.00 max profit, 1.91:1 R:R).</dd></div>
+</dl>
+<section class="primer" id="primer">
+<h2>Executive Thesis &amp; Before You Read</h2>
+<p>SK hynix (NASDAQ: SKHY / KRX: 000660) has engineered a historic fundamental ascent, capturing 50%–58% of global HBM revenue, ~70% of initial HBM4 allocations, and &gt;50% LTA coverage for 2027–2028 capacity . FY2025 revenue reached KRW 97.15T (48.6% operating margin), while Q3 2026 revenue hit KRW 104.62T (79.7% margin) with 71.84% ROIC and ~$42.96B net cash . Yet strong operations do not make a safe stock at $131.79. We assign **CYCLICAL_CONDITIONAL** business quality (`PASS` KPIs), **REJECTED** (`TREND`) for new capital, and **EXIT_IMMEDIATELY** for our 17.764 held Schwab shares .</p>
+</section>
+<section class="chapter" id="ch-0">
+<h2>0. Executive Thesis, Dual Verdict &amp; Opportunity Matrix</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> What is the bottom-line institutional verdict on SK hynix (NASDAQ: SKHY) for both new capital and our 17.764 held Schwab shares?</div>
+<h3>Executive Thesis &amp; Dual Verdict Summary</h3>
+<p>SK hynix (NASDAQ: SKHY / KRX: 000660) has engineered a historic fundamental ascent, capturing 50%–58% of global HBM revenue, ~70% of initial HBM4 allocations, and &gt;50% LTA coverage for 2027–2028 capacity <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a>, <a href="#cite_note-15">[15]</a></sup>. FY2025 revenue reached KRW 97.15T (48.6% operating margin), while Q3 2026 revenue hit KRW 104.62T (79.7% margin) with 71.84% ROIC and ~$42.96B net cash <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a>, <a href="#cite_note-21">[21]</a></sup>. Yet strong operations do not make a safe stock at $131.79. We assign **CYCLICAL_CONDITIONAL** business quality (`PASS` KPIs), **REJECTED** (`TREND`) for new capital, and **EXIT_IMMEDIATELY** for our 17.764 held Schwab shares <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SKHY Dual-Verdict &amp; Opportunity Matrix (as of 2026-11-13)</caption>
+<thead><tr><th>Decision Dimension</th><th>Official Rating / Level</th><th>Primary Evidence &amp; Execution Trigger</th></tr></thead>
+<tbody>
+<tr><td>Business Quality &amp; KPI Health</td><td>CYCLICAL_CONDITIONAL / PASS</td><td>HBM moat &amp; 71.84% ROIC offset by ~30% revenue capex intensity and 2023 loss history <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-21">[21]</a></sup>.</td></tr>
+<tr><td>New Capital Verdict</td><td>REJECTED (TREND)</td><td>Stage 4 markdown (-19.64% vs. $164.00 50D SMA), 6 S&amp;P 500 dist. days, 43.6% ADR premium <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>.</td></tr>
+<tr><td>Held Position (17.764 Schwab sh)</td><td>EXIT_IMMEDIATELY (17.764 sh)</td><td>Cost basis $168.88 (-21.96%). Sell immediately at CMP $131.79 (~$2,341.12); hard stop &lt; $121.34 / $116.28 if staged <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>Valuation &amp; Parity Reality</td><td>8.56x P/E | 3.25x Fwd P/E | 5.53x P/B</td><td>NASDAQ $960.57B mcap vs. KRX $660.29B parity (~43.6% ADR premium) <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>.</td></tr>
+<tr><td>12-Month Expected Value</td><td>$130.92 (-0.7% EV)</td><td>25% Bull ($186.52) / 45% Base ($125.00) / 30% Bear ($93.48); Bear-regime stress $111.35 (-15.5%) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>Redeployment Plan (100%)</td><td>100% CASH | 0% MSFT | 0% TSM</td><td>Park 100% in Schwab cash (~4.86% 2Y benchmark); MSFT ($523.88 &lt; $529.39 20D SMA) &amp; TSM (Stage 4) stay at 0% <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+</tbody>
+</table></div>
+<p>New capital stands aside until SKHY builds a Stage 1 base and reclaims $164.00, while held shares exit immediately at $131.79 into 100% CASH.</p>
+<p>Optical cheapness at 3.25x forward earnings masks three real hazards <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>. First, the chart sits in a Stage 4 downtrend (-19.64% below its $164.00 50D SMA, 9 distribution days, -24.64% 28D RS) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Second, the 5.53x ADR price-to-book multiple embeds a 43.6% premium over Seoul KRX:000660 parity ($93.48) <sup class="reference"><a href="#cite_note-23">[23]</a>, <a href="#cite_note-25">[25]</a></sup>. Third, SKHY carries a 3.20x beta during an active S&amp;P 500 Correction, making waiting for a bounce to $141.36–$149.69 a negative-EV gamble <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Exiting immediately protects capital and preserves 100% cash.</p>
+<h3>What Would Change Our Mind</h3>
+<p>Our rejection depends strictly on price, parity, and trend <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. To upgrade SKHY back to actionable status, we require three clear shifts. First, price must reclaim the $164.00 50-day SMA on &gt;=1.5x average volume (~34.2M shares/day), or build a tight VCP base above $122.20 <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Second, the S&amp;P 500 must exit its Correction regime <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Third, Q4/FY2026 earnings (January 27–28, 2027) must confirm durable HBM4 gross margins and 2027–2028 LTAs <sup class="reference"><a href="#cite_note-13">[13]</a>, <a href="#cite_note-28">[28]</a></sup>. Until then, both equity and options capital stay on the sidelines.</p>
+<p>This monograph separates price-blind business analysis (Chapters 1–6) from valuation, tape, and portfolio action (Chapters 7–9). Inside, you will find a 10-year financial audit, a unit-economics waterfall, and an ADR-to-KRX parity check. It closes with exact dollar-and-share execution triggers for Charles Schwab.</p>
+</section>
+<section class="chapter" id="ch-1">
+<h2>1. Origin, Corporate Evolution &amp; Past Stock Cycles</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> How did a debt-laden Hyundai spin-off survive three brutal memory downturns to become the world's dominant AI high-bandwidth memory supplier?</div>
+<h3>From Hyundai Electronics to creditor-led survival (1983–2011)</h3>
+<p>SK hynix began in February 1983 as Hyundai Electronics Industries, founded by Hyundai Group's Chung Ju-yung to push South Korea into semiconductors and telecommunications. During the 1990s, the company expanded aggressively through debt-funded fabrication plants, acquiring U.S. disk-drive maker Maxtor in 1996 and absorbing LG Semicon in 1998 under government-directed post-crisis restructuring. When global DRAM prices collapsed in 2000–2001, that leverage nearly ended the business. Strangled by debt, the firm shed its mobile phone, PC, and LCD divisions, severed ties with the Hyundai Group in March 2001, and rebranded as Hynix Semiconductor under creditor control.</p>
+<p>Survival required a decade of balance-sheet triage. During the 2008–2009 global financial crisis, memory pricing plunged below cash manufacturing costs again, forcing creditors into repeated failed stake-sale attempts while rivals Qimonda and later Elpida filed for insolvency. Hynix survived by keeping fab utilization disciplined and securing Intel validation for the world's first ultra-high-speed DDR3 memory in 2009. That technical execution kept engineering teams intact until a permanent industrial parent arrived.</p>
+<h3>SK Group stewardship, Solidigm, and the 2026 Nasdaq debut (2012–2026)</h3>
+<p>In February 2012, SK Telecom led a consortium to acquire a controlling stake, renaming the company SK hynix Inc. in March 2012. Backed by SK Group's capital stability, SK hynix modernized its Icheon and Cheongju fabs, expanded R&amp;D, and made an early, counter-consensus bet on High Bandwidth Memory (HBM) starting in 2013. In late 2020, management announced a $9 billion agreement to acquire Intel's NAND flash and SSD business, closing the first phase in December 2021 to form San Jose-based subsidiary Solidigm <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-20">[20]</a></sup>.</p>
+<p>That acquisition initially amplified cyclical pain. Just as Solidigm was integrated, the 2022–2023 memory downturn hit, saddling Solidigm with roughly KRW 7.3 trillion in cumulative net losses across 2022 and 2023 and pushing SK hynix to a consolidated operating loss of KRW 7.73 trillion in FY2023 <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup>. Yet the company refused to abandon its HBM3 and HBM3E roadmap. When generative AI training clusters exploded in 2024, SK hynix was the sole qualified volume supplier of HBM3E for NVIDIA's flagship accelerators <sup class="reference"><a href="#cite_note-15">[15]</a></sup>. Revenue doubled to KRW 66.19 trillion in FY2024, surged to KRW 97.15 trillion in FY2025, and crossed KRW 104.62 trillion in a single quarter by Q3 2026 <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a>, <a href="#cite_note-7">[7]</a></sup>. In July 2026, SK hynix listed American Depositary Shares (each representing 1/10th of a common share) on the Nasdaq Global Select Market under ticker SKHY, raising cross-border capital for Yongin, Cheongju P&amp;T7, and EUV lithography <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-5">[5]</a>, <a href="#cite_note-6">[6]</a>, <a href="#cite_note-11">[11]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SK hynix business and margin cycles across major industry regimes (FY2016–Q3 2026)</caption>
+<thead><tr><th>Cycle Phase</th><th>Period</th><th>Revenue (KRW T)</th><th>Operating Profit (KRW T)</th><th>Op. Margin</th><th>Primary Business Driver</th></tr></thead>
+<tbody>
+<tr><td>Cloud Server Boom</td><td>FY2016–FY2018</td><td>17.20 to 40.45</td><td>3.28 to 20.84</td><td>19.1% to 51.5%</td><td>Hyperscale data-center DRAM buildout and tight wafer supply</td></tr>
+<tr><td>Inventory Digestion</td><td>FY2019</td><td>26.99</td><td>2.71</td><td>10.0%</td><td>Hyperscale capex pause and sharp commodity DRAM ASP drop</td></tr>
+<tr><td>Pandemic &amp; Pull-Forward</td><td>FY2020–FY2022</td><td>31.90 to 44.62</td><td>5.01 to 12.41 to 6.81</td><td>15.7% to 28.9% to 15.3%</td><td>Remote-work PC/server demand followed by 2022 inflation slowdown</td></tr>
+<tr><td>Historic Memory Trough</td><td>FY2023</td><td>32.77</td><td>-7.73</td><td>-23.6%</td><td>Severe PC/smartphone glut, NAND price collapse, Solidigm losses <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup></td></tr>
+<tr><td>AI HBM Supercycle</td><td>FY2024–FY2025</td><td>66.19 to 97.15</td><td>23.47 to 47.21</td><td>35.5% to 48.6%</td><td>HBM3E leadership, server DDR5, Solidigm eSSD turnaround <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup></td></tr>
+<tr><td>HBM4 Scale-Up</td><td>Q1–Q3 2026</td><td>52.58 / 79.32 / 104.62</td><td>37.61 / 60.54 / 83.33</td><td>71.5% to 79.7%</td><td>HBM4 mass production, 2027–2028 LTAs, tight AI supply <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-3">[3]</a>, <a href="#cite_note-13">[13]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>Across ten years, operating margins swung from +51.5% in 2018 to -23.6% in 2023 and +79.7% in Q3 2026, proving that memory economics remain violently cyclical even as HBM shifts the mix toward custom contracts.</p>
+<p>The cycle table reveals two truths that every long-term owner must hold simultaneously. First, SK hynix has repeatedly demonstrated extreme operating leverage: when wafer supply tightens, incremental pricing flows straight to operating profit, lifting margins by over 100 percentage points from the 2023 trough to Q3 2026 <sup class="reference"><a href="#cite_note-2">[2]</a></sup>. Second, every prior peak—2018 and 2021—was followed by an inventory hangover that crushed margins within four to six quarters. Whether long-term agreements (LTAs) for HBM4 dampen the next downcycle or merely delay it is the central underwriting question.</p>
+<div class="callout callout-warn">
+<p class="callout-title">Historical Failure-Mode &amp; Base-Rate Twin: Qimonda AG &amp; Elpida Memory (Germany &amp; Japan (2006–2012))</p>
+<p><strong>Shared Vulnerability:</strong> Pure-play DRAM producers funded massive 300mm fab expansions with debt during the 2006–2007 upcycle. When commodity DRAM prices fell over 80% during 2008–2009 and 2011, fixed depreciation and interest costs wiped out equity.</p>
+<p><strong>Historical Numbers &amp; Base Rate:</strong> Qimonda filed for insolvency in January 2009 under heavy debt and collapsing DRAM prices; Elpida filed for bankruptcy protection in February 2012 before Micron acquired its assets.</p>
+<p><strong>How SKHY Compares Today:</strong> Memory manufacturers with high fixed fab costs and debt cannot survive a prolonged commodity glut without a deep-pocketed balance sheet or differentiated, contracted product mix. SK hynix's net-cash build in 2025–2026 and HBM LTAs are essential buffers against the historical base rate.</p>
+</div>
+<h3>The 2013 HBM genesis and why patience mattered</h3>
+<p>Most investors trace SK hynix's AI dominance to 2024, yet the decisive engineering bet happened eleven years earlier. In 2013, SK hynix co-developed the first generation of High Bandwidth Memory (HBM1) alongside AMD for high-end graphics cards. Commercial adoption was tiny for nearly a decade because standard GDDR and DDR memory remained cheaper for gaming and general servers. While rivals scaled back stacked-die packaging research during lean years, SK hynix kept iterating through HBM2, HBM2E, and HBM3, refining Through-Silicon Via (TSV) drilling and thermal underfill chemistry <sup class="reference"><a href="#cite_note-9">[9]</a></sup>.</p>
+<p>That decade of unglamorous iteration paid off when large language models hit memory-bandwidth walls in 2023–2024. Because HBM3E required tight co-qualification with GPU architectures and TSMC's CoWoS interposer, competitors could not replicate a decade of yield learning in two quarters <sup class="reference"><a href="#cite_note-9">[9]</a>, <a href="#cite_note-15">[15]</a></sup>. Even as SK hynix absorbed a KRW 7.73 trillion operating loss in FY2023—compounded by KRW 4.0 trillion in net losses at Solidigm—management preserved its HBM engineering budget <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup>.</p>
+<h3>The July 2026 Nasdaq ADR listing: Structure and strategic intent</h3>
+<p>On June 24, 2026, SK hynix filed Form F-1 with the U.S. SEC, followed by Form F-6 on July 1, 2026, to list American Depositary Shares on the Nasdaq Global Select Market under the ticker SKHY <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-5">[5]</a>, <a href="#cite_note-6">[6]</a></sup>. Each ADS represents one-tenth (1/10th) of a common share listed on Korea's KOSPI (000660), with Citibank, N.A. acting as depositary and BofA Securities, Citigroup, Goldman Sachs, and J.P. Morgan leading the underwriting syndicate <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-5">[5]</a>, <a href="#cite_note-6">[6]</a></sup>. Proceeds were earmarked directly for capital-intensive multi-year projects: the Yongin Semiconductor Cluster, Cheongju P&amp;T7 advanced packaging lines, and EUV lithography procurement <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-5">[5]</a></sup>. Listing in New York broadened institutional access to U.S. capital pools at the exact moment SK hynix was committing $3.87B–$4B to build its West Lafayette, Indiana packaging plant <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-10">[10]</a></sup>.</p>
+</section>
+<section class="chapter" id="ch-2">
+<h2>2. What the Company Does: Segments, Revenue Mix &amp; Concrete Examples</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> What does SK hynix actually sell, how does revenue split across HBM, conventional DRAM, and NAND/Solidigm, and how do those chips work inside real AI data centers?</div>
+<h3>Segment architecture: DRAM (HBM + Conventional) and NAND Flash (including Solidigm)</h3>
+<p>SK hynix is a pure-play memory chipmaker with two main product families: DRAM and NAND Flash <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-7">[7]</a></sup>. Unlike Samsung Electronics, SK hynix does not build phones, TVs, or logic foundries. Nearly all its capital and engineers focus on memory and storage. Within DRAM, the business runs two engines. High-margin High Bandwidth Memory (HBM) and server DDR5 serve AI data centers, while commodity DRAM serves PCs and phones <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-15">[15]</a></sup>.</p>
+<p>Within NAND Flash, SK hynix pairs Korean 3D TLC NAND with U.S. unit Solidigm, a leader in QLC enterprise SSDs <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-16">[16]</a></sup>. Across 2024–2026, DRAM drove most of the company's revenue and profit. SK hynix holds 50%–58% of global HBM revenue and ~70% of initial HBM4 allocations <sup class="reference"><a href="#cite_note-15">[15]</a></sup>. It also holds 17%–22% of global NAND revenue and 30%–34% of the enterprise SSD market <sup class="reference"><a href="#cite_note-15">[15]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SK hynix product segments, market share position, and operating economics (2024–2026)</caption>
+<thead><tr><th>Segment / Product Line</th><th>Primary End Markets</th><th>Global Market Share (2025–2026)</th><th>Margin &amp; Contract Profile</th><th>Key Competitive Edge</th></tr></thead>
+<tbody>
+<tr><td>HBM (HBM3E / HBM4)</td><td>AI GPUs, custom AI ASICs, hyperscale training/inference</td><td>50%–58% HBM revenue; ~70% initial HBM4 share <sup class="reference"><a href="#cite_note-15">[15]</a></sup></td><td>Highest margin; 12–18 month LTAs with 14 key customers <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup></td><td>Advanced MR-MUF thermal packaging and early NVIDIA/hyperscaler qualification <sup class="reference"><a href="#cite_note-9">[9]</a>, <a href="#cite_note-15">[15]</a></sup></td></tr>
+<tr><td>Server &amp; Conventional DRAM (DDR5 / LPDDR5)</td><td>Cloud servers, AI host CPUs, flagship smartphones, PCs</td><td>25%–30% total DRAM revenue <sup class="reference"><a href="#cite_note-15">[15]</a></sup></td><td>High cyclical sensitivity; shifting toward high-density 128GB/256GB server DDR5</td><td>1b/1c nm EUV node transition and low-power mobile leadership</td></tr>
+<tr><td>NAND Flash &amp; Solidigm eSSD</td><td>AI data lakes, hyperscale cold/warm storage, client SSDs</td><td>17%–22% total NAND; 30%–34% enterprise SSD <sup class="reference"><a href="#cite_note-15">[15]</a></sup></td><td>Turned profitable in 2024–2025 after heavy 2022–2023 losses <sup class="reference"><a href="#cite_note-20">[20]</a></sup></td><td>321-layer TLC NAND + Solidigm 122TB+ QLC eSSD controller firmware <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-12">[12]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>SK hynix's profit engine is concentrated in HBM and high-density server DDR5, while Solidigm's QLC enterprise SSDs have transformed NAND from a 2023 cash drain into a profitable AI storage pillar.</p>
+<p>HBM and standard DRAM no longer behave like the same product. Standard DRAM dies are interchangeable and sell on quarterly spot or contract prices for PCs and phones. By contrast, HBM4 uses a custom base logic die tuned to each buyer's AI chip <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Customers co-validate HBM4 over many months and sign multi-quarter supply deals <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Meanwhile, Solidigm's turnaround shows how AI inference drives storage demand. Once models train, cloud firms need petabytes of fast QLC SSDs to feed data without burning rack power <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-20">[20]</a></sup>.</p>
+<h3>Concrete end-to-end example 1: HBM3E/HBM4 inside an AI training accelerator</h3>
+<p>Consider a cloud provider deploying next-generation NVIDIA AI GPU racks. The main bottleneck is the 'memory wall.' Modern AI chips perform trillions of math steps per second, but standard DDR5 sits too far away on the board to feed data fast enough. Without faster memory, expensive GPU cores sit idle. To solve this, chipmakers order 12-high or 16-high HBM3E and HBM4 stacks from SK hynix <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-9">[9]</a></sup>.</p>
+<p>In Icheon and Cheongju, SK hynix makes ultra-thin 1b-nanometer DRAM wafers. Engineers drill thousands of tiny vertical copper paths, called Through-Silicon Vias (TSVs), through each die. They stack 12 or 16 dies vertically and bond them with Advanced MR-MUF liquid epoxy <sup class="reference"><a href="#cite_note-9">[9]</a></sup>. Finished HBM stacks ship to TSMC in Taiwan, where CoWoS packaging places them millimeters from the GPU die. Buyers pay a steep premium under annual contracts because HBM bandwidth sets the rack's token output speed.</p>
+<h3>Concrete end-to-end example 2: Solidigm 122TB QLC eSSD for AI data lakes</h3>
+<p>Now look at the storage tier of that same AI data center. A cloud operator building an AI cluster must store petabytes of checkpoints, video frames, and vector databases. Spinning hard disks (HDDs) are too slow and use too much floor space. Standard TLC SSDs cost too much at petabyte scale. Instead, the operator buys Solidigm's 61.44TB and 122TB QLC enterprise SSDs, built by SK hynix's San Jose team <sup class="reference"><a href="#cite_note-12">[12]</a></sup>.</p>
+<p>SK hynix supplies the 3D NAND wafers for these drives. Solidigm adds custom ASIC controllers and error-correction firmware so four-bit-per-cell (QLC) flash runs reliably 24/7. The drives slide straight into NVMe server bays, replacing racks of spinning disks while cutting power draw. This turns raw NAND wafer capacity into a high-value enterprise storage system.</p>
+<h3>Concrete end-to-end example 3: High-density server DDR5 and mobile LPDDR5X</h3>
+<p>Every AI server rack still needs host CPUs to manage networking and orchestration. Cloud buyers configure those dual-socket servers with SK hynix 128GB and 256GB DDR5 RDIMMs built on 1b-nm EUV DRAM <sup class="reference"><a href="#cite_note-2">[2]</a></sup>. Outside the data center, flagship smartphones use low-power LPDDR5X and LPDDR5T chips stacked atop the mobile processor. That setup keeps battery drain low when running local AI assistants. Together, server DDR5 and mobile LPDDR5 absorb most of SK hynix's non-HBM DRAM wafers.</p>
+<h3>Why HBM creates a structural wafer-allocation squeeze across all DRAM</h3>
+<p>One physical rule drives SK hynix's high margins. Making one gigabyte of HBM uses roughly three times the DRAM wafer area of one gigabyte of standard DDR5. The extra area covers TSV interconnects, spare cells, and packaging yield losses. Whenever SK hynix shifts cleanroom wafers to HBM3E and HBM4, fewer wafers remain for PC, mobile, and server DDR5 <sup class="reference"><a href="#cite_note-15">[15]</a></sup>. That wafer penalty tightens supply across all DRAM, even when PC or phone unit growth is flat.</p>
+<p>In Q3 2026, this supply squeeze appeared across both product lines. HBM4 entered mass production and was set to pass HBM3E in Q4 2026 revenue share <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. At the same time, server DDR5 and 321-layer TLC enterprise SSDs posted strong pricing on tight wafer supply <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Solidigm also completed its shift from a distressed 2021 buyout to a profitable 122TB QLC eSSD leader <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-20">[20]</a></sup>. That gave SK hynix a second AI pillar winning inference storage budgets from nearline HDDs.</p>
+</section>
+<section class="chapter" id="ch-3">
+<h2>3. Distribution, Supply Chain &amp; Unit Economics</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> How does SK hynix qualify, price, and deliver memory across Korea, China, and the U.S., and how does $100 of FY2025 revenue flow down to free cash flow?</div>
+<h3>Go-to-market model: Direct OEM qualification, LTAs, and foundry co-packaging</h3>
+<p>SK hynix sells almost entirely through direct B2B engineering teams rather than retail channels. For HBM3E and HBM4, the sales cycle runs an 18-month technical loop. Engineers co-design base-die interfaces, signal integrity, and heat profiles with GPU and ASIC teams like NVIDIA and AMD <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. They then qualify the physical stack through foundry partners such as TSMC <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Once qualified, Long-Term Agreements (LTAs) govern volume and price bands. By Q3 2026, LTAs with 14 key clients already covered over 50% of 2027–2028 capacity <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>.</p>
+<p>For server DDR5, mobile LPDDR5, and Solidigm eSSDs, SK hynix sells directly to hyperscalers (AWS, Microsoft, Google, Meta) and OEMs. Pricing resets through quarterly contract talks, with a small channel network for client PC SSDs. Because HBM stacks are custom-fit to specific accelerator boards, mid-generation switching costs are high. That gives SK hynix far better pricing visibility than traditional spot DRAM.</p>
+<h3>Global manufacturing footprint: Korea core, China legacy exposure, and U.S. expansion</h3>
+<p>Core production sits in South Korea at Icheon (M14, M16 EUV DRAM) and Cheongju (M15, M15X DRAM/HBM, and NAND) <sup class="reference"><a href="#cite_note-18">[18]</a></sup>. To serve 2027–2030 demand, SK hynix sped up tool move-ins at M15X and is building the Yongin Semiconductor Cluster <sup class="reference"><a href="#cite_note-18">[18]</a>, <a href="#cite_note-19">[19]</a></sup>. Yongin targets early 2027 cleanroom readiness <sup class="reference"><a href="#cite_note-19">[19]</a></sup>. In August 2026, SK hynix also broke ground on a $3.87B–$4B packaging hub in West Lafayette, Indiana <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-10">[10]</a></sup>. Backed by up to $458M in CHIPS Act grants and $500M in loans, Indiana will package Korean wafers domestically by 2028–2029 <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-10">[10]</a></sup>.</p>
+<p>The main geographic risk sits in China. SK hynix runs a large legacy DRAM fab in Wuxi and acquired Intel's Dalian NAND fab via Solidigm <sup class="reference"><a href="#cite_note-16">[16]</a></sup>. U.S. export rules restrict advanced American chipmaking tools from entering China <sup class="reference"><a href="#cite_note-14">[14]</a>, <a href="#cite_note-16">[16]</a></sup>. That complicates upgrades at Wuxi and Dalian. In response, SK hynix is shifting leading-edge nodes back to Korea and HBM packaging to Indiana <sup class="reference"><a href="#cite_note-14">[14]</a>, <a href="#cite_note-16">[16]</a></sup>.</p>
+<h3>Worked $100 Revenue-to-Free-Cash-Flow Waterfall (Audited FY2025)</h3>
+<p>Audited FY2025 results (ended December 31, 2025) show how a fab-heavy model converts sales into cash <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-17">[17]</a></sup>. At ~1,426 KRW/USD, FY2025 revenue of $68.13B (KRW 97.15T) produced $42.88B in EBITDA (62.9% margin) <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. Operating profit reached $33.11B (48.6% margin) after $9.77B in non-cash depreciation <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. Heavy capex of $20.06B (KRW 28.60T) absorbed just over half of $37.36B in operating cash flow <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. That still left $17.30B in free cash flow, or $25.39 per $100 of sales.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Audited FY2025 $100 Revenue-to-Free-Cash-Flow Waterfall (converted from KRW 97.15T audited consolidated results)</caption>
+<thead><tr><th>Financial Line Item</th><th>Amount per $100 Rev ($)</th><th>Share of Revenue (%)</th><th>Audited Reality &amp; Notes</th></tr></thead>
+<tbody>
+<tr><td>Gross Billed Revenue</td><td>100.00</td><td>100.0%</td><td>FY2025 audited revenue: $68.13 B USD.</td></tr>
+<tr><td>Direct Materials / COGS</td><td>-25.25</td><td>-25.2%</td><td>Direct cost of goods/services: -$17.20 B USD.</td></tr>
+<tr><td>Employee Expenses</td><td>-6.93</td><td>-6.9%</td><td>Payroll &amp; engineering talent: -$4.72 B USD.</td></tr>
+<tr><td>Other Operating Overhead</td><td>-4.89</td><td>-4.9%</td><td>SG&amp;A, facilities &amp; overhead: -$3.33 B USD.</td></tr>
+<tr><td>Operating EBITDA</td><td>62.94</td><td>62.9%</td><td>Core operating profit: $42.88 B USD.</td></tr>
+<tr><td>Depreciation &amp; Amortization</td><td>-14.34</td><td>-14.3%</td><td>Non-cash asset depreciation: -$9.77 B USD.</td></tr>
+<tr><td>Operating EBIT</td><td>48.60</td><td>48.6%</td><td>Operating income after D&amp;A: $33.11 B USD.</td></tr>
+<tr><td>Finance Costs (Interest)</td><td>-1.19</td><td>-1.2%</td><td>Debt service cost: -$0.81 B USD.</td></tr>
+<tr><td>Other Non-Operating Income</td><td>+4.54</td><td>+4.5%</td><td>Treasury &amp; non-operating income: $3.09 B USD.</td></tr>
+<tr><td>Profit Before Tax (PBT)</td><td>51.94</td><td>51.9%</td><td>Pre-tax profit: $35.39 B USD.</td></tr>
+<tr><td>Income Tax</td><td>-7.74</td><td>-7.7%</td><td>Corporate tax expense: -$5.27 B USD.</td></tr>
+<tr><td>Reported Profit After Tax (PAT)</td><td>44.21</td><td>44.2%</td><td>Bottom-line accounting profit: $30.12 B USD.</td></tr>
+<tr><td>Working Capital &amp; Non-Cash Bridge</td><td>-3.71</td><td>-3.7%</td><td>Net working-capital &amp; non-cash operating bridge.</td></tr>
+<tr><td>Cash Flow from Operations (CFO)</td><td>54.84</td><td>54.8%</td><td>Audited operating cash flow: $37.36 B USD.</td></tr>
+<tr><td>Capital Expenditures (Capex)</td><td>-29.44</td><td>-29.4%</td><td>Fixed-asset &amp; tooling capex: -$20.06 B USD.</td></tr>
+<tr><td>Free Cash Flow (FCF)</td><td>+25.39</td><td>+25.4%</td><td>Reconciled CFO less Capex: $17.30 B USD.</td></tr>
+</tbody>
+</table></div>
+<p>Out of every $100 of FY2025 sales, SK hynix kept $62.94 in EBITDA, absorbed $14.34 in depreciation and $7.74 in taxes, generated $54.84 in operating cash flow, reinvested $29.44 into fab capex, and banked $25.39 in free cash flow.</p>
+<p>The waterfall shows the core trade-off of owning memory fabs. Even in a boom year with 48.6% operating margins, nearly 30% of every sales dollar went straight into cleanrooms and EUV tools ($20.06B capex). In a downturn, revenue can drop 30% to 40% while $9.77B in depreciation and fab shell costs stay fixed. When that happens, the $25.39 free cash flow cushion can turn negative fast unless management cuts equipment orders early.</p>
+<h3>Go-to-market channels and global manufacturing footprint summary</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>SK hynix distribution channels, qualification cycles, and global fab footprint (2026)</caption>
+<thead><tr><th>Channel / Facility</th><th>Location</th><th>Primary Output</th><th>Sales &amp; Qualification Model</th><th>Strategic Risk / Bottleneck</th></tr></thead>
+<tbody>
+<tr><td>Icheon &amp; Cheongju Fabs (M14, M15, M15X, M16)</td><td>South Korea</td><td>Leading-edge EUV DRAM, HBM3E/HBM4, 321L NAND <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-18">[18]</a></sup></td><td>Direct B2B OEM + 18-month GPU/foundry co-design + LTAs <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup></td><td>High domestic power/water demand and steep EUV capex</td></tr>
+<tr><td>Yongin Semiconductor Cluster</td><td>South Korea</td><td>Next-gen 1c/1d DRAM &amp; HBM (early 2027 cleanroom target) <sup class="reference"><a href="#cite_note-19">[19]</a></sup></td><td>Pre-contracted multi-year LTA capacity expansion <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup></td><td>Multi-trillion KRW fixed-cost commitment through 2030s <sup class="reference"><a href="#cite_note-19">[19]</a></sup></td></tr>
+<tr><td>West Lafayette Packaging Hub</td><td>Indiana, USA</td><td>Made-in-USA HBM advanced packaging &amp; R&amp;D (2028–2029) <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-10">[10]</a></sup></td><td>Direct U.S. hyperscaler &amp; AI accelerator supply <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-10">[10]</a></sup></td><td>$3.87B–$4B capex; relies on Korean front-end wafers <sup class="reference"><a href="#cite_note-8">[8]</a></sup></td></tr>
+<tr><td>Wuxi (DRAM) &amp; Dalian (NAND) Fabs</td><td>China</td><td>Legacy/mature DRAM and Solidigm NAND wafers <sup class="reference"><a href="#cite_note-16">[16]</a></sup></td><td>Direct OEM and enterprise storage supply</td><td>U.S. export controls blocking advanced tool upgrades <sup class="reference"><a href="#cite_note-14">[14]</a>, <a href="#cite_note-16">[16]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>SK hynix's leading-edge HBM engine sits inside South Korea and is expanding into Indiana packaging, while its legacy China fabs face ongoing U.S. equipment-upgrade restrictions.</p>
+<p>This geographic split drove capital spending to ~KRW 28.60T ($20.06B) in FY2025 and kept it high in 2026 <sup class="reference"><a href="#cite_note-19">[19]</a></sup>. Because U.S. export rules block advanced tool upgrades at Wuxi and Dalian, China fabs cannot supply next-generation bits <sup class="reference"><a href="#cite_note-16">[16]</a></sup>. Instead, SK hynix must fund new cleanrooms in Cheongju (M15X), Yongin, and Indiana at the same time <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-18">[18]</a>, <a href="#cite_note-19">[19]</a></sup>. Those builds lock in high fixed depreciation charges for the next decade.</p>
+</section>
+<section class="chapter" id="ch-4">
+<h2>4. Industry Structure, Competitive Moat &amp; External Learning Hub</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> What actually protects SK hynix's HBM lead against Samsung and Micron, where can that moat erode, and which primary sources verify the technology?</div>
+<h3>The memory oligopoly: Three global players and a rising Chinese challenger</h3>
+<p>Global DRAM manufacturing is a tight three-company oligopoly—Samsung Electronics, SK hynix, and Micron Technology—controlling over 90% of worldwide supply, while NAND Flash is slightly more fragmented across Samsung, SK hynix/Solidigm, Kioxia, Western Digital, and Micron <sup class="reference"><a href="#cite_note-15">[15]</a></sup>. High barriers to entry stem from $15B–$20B+ modern fab costs, EUV lithography scarcity, and decades of yield engineering. Yet in commodity DRAM and NAND, oligopolies still suffer brutal price wars whenever one player chases market share with excess wafer starts. Domestic Chinese producer CXMT adds a longer-term ceiling on legacy DDR4/DDR5 pricing, even as U.S. export controls slow China's advance into leading-edge nodes.</p>
+<h3>Where SK hynix's real moat sits: Advanced MR-MUF and co-design lock-in</h3>
+<p>SK hynix's competitive advantage in 2024–2026 is not general brand strength; it is a physical packaging and yield moat in stacked HBM <sup class="reference"><a href="#cite_note-9">[9]</a></sup>. Stacking 12 or 16 ultra-thin DRAM dies creates severe heat buildup and wafer warpage. Competitors historically relied on Thermal Compression Non-Conductive Film (TC-NCF), which inserts solid adhesive film layers between each die and slows heat escape. SK hynix bet on Mass Reflow Molded Underfill (MR-MUF), injecting a liquid epoxy molding compound with high thermal conductivity into the gaps between stacked chips and curing them simultaneously <sup class="reference"><a href="#cite_note-9">[9]</a></sup>.</p>
+<p>Advanced MR-MUF delivered materially higher production yields, lower thermal resistance, and faster throughput on 12-high HBM3E and early HBM4 stacks <sup class="reference"><a href="#cite_note-9">[9]</a></sup>. Combined with 18-month co-qualification cycles alongside NVIDIA and TSMC, that yield edge gave SK hynix 50%–58% of global HBM revenue and ~70% of initial HBM4 allocations <sup class="reference"><a href="#cite_note-15">[15]</a></sup>. However, a balanced assessment must recognize two real vulnerabilities. First, as HBM4E and HBM5 push past 16 layers, the industry is transitioning toward copper-to-copper hybrid bonding, which could neutralize MR-MUF's historical advantage if Samsung or Micron master hybrid bonding faster. Second, Samsung's sheer wafer scale (~38% total DRAM revenue share in 2026 vs SK hynix's ~25%) means any successful Samsung HBM4 qualification at hyperscalers directly compresses SK hynix's pricing power <sup class="reference"><a href="#cite_note-15">[15]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Competitive comparison across the three global memory oligopolists (2025–2026)</caption>
+<thead><tr><th>Competitor</th><th>HBM Packaging Approach</th><th>2025–2026 HBM Position</th><th>Total DRAM Share (2026)</th><th>Key Strategic Vulnerability</th></tr></thead>
+<tbody>
+<tr><td>SK hynix (KRX: 000660 / SKHY)</td><td>Advanced MR-MUF (moving toward hybrid bonding)</td><td>50%–58% HBM revenue; ~70% initial HBM4 share <sup class="reference"><a href="#cite_note-15">[15]</a></sup></td><td>~25%–30% <sup class="reference"><a href="#cite_note-15">[15]</a></sup></td><td>High customer concentration (NVIDIA) and China Wuxi/Dalian export exposure <sup class="reference"><a href="#cite_note-14">[14]</a>, <a href="#cite_note-16">[16]</a></sup></td></tr>
+<tr><td>Samsung Electronics</td><td>TC-NCF (evaluating hybrid bonding for HBM4+)</td><td>Catching up after HBM3E qualification delays</td><td>~38% <sup class="reference"><a href="#cite_note-15">[15]</a></sup></td><td>Yield consistency on 12-high/16-high stacks and split focus across foundry/mobile</td></tr>
+<tr><td>Micron Technology</td><td>TC-NCF + 1-beta/1-gamma DRAM nodes</td><td>Strong #3 scaling HBM3E/HBM4 capacity in U.S./Taiwan</td><td>~22%–25%</td><td>Smaller overall fab scale than Korean peers; higher U.S./Japan cost base</td></tr>
+</tbody>
+</table></div>
+<p>SK hynix leads in HBM profitability and packaging yields, while Samsung retains larger total DRAM wafer scale and Micron competes aggressively on power efficiency and U.S. supply-chain alignment.</p>
+<p>This competitive matrix explains why SK hynix deliberately sacrificed conventional DRAM volume share in 2026—dropping from ~35% toward ~25%—to dedicate cleanroom space and EUV wafers to HBM4 <sup class="reference"><a href="#cite_note-15">[15]</a></sup>. Trading lower-margin commodity bits for contracted HBM stacks lifted operating margins to 79.7% by Q3 2026 <sup class="reference"><a href="#cite_note-2">[2]</a></sup>, but it also leaves SK hynix more exposed if Samsung resolves its HBM4 yields or if AI accelerator demand pauses.</p>
+<div class="case-note">
+<div class="case-note-head"><h4 class="case-note-title">Situational Scaling &amp; Moat Twin: TSMC CoWoS Packaging Ecosystem</h4><span class="case-note-sub">Taiwan (2012–2025)</span></div>
+<p><strong>Shared Mechanism:</strong> When Moore's Law slowed monolithic chip scaling, TSMC's early investment in 2.5D Chip-on-Wafer-on-Substrate (CoWoS) interposer packaging turned a back-end assembly step into the decisive bottleneck for AI accelerators.</p>
+<p><strong>Historical Numbers &amp; Outcome:</strong> TSMC expanded CoWoS capacity more than 4x between 2023 and 2025 while maintaining &gt;50% consolidated gross margins and multi-year customer prepayments.</p>
+<p><strong>Direct Implication for SKHY:</strong> Just as CoWoS turned packaging into a high-margin tollbooth for TSMC, SK hynix's Advanced MR-MUF turned HBM stacking from commodity assembly into a high-yield moat—provided SK hynix stays ahead of the next transition to hybrid bonding.</p>
+</div>
+<h3>External Learning Hub: Primary filings, technical briefs, and fab disclosures</h3>
+<p>Readers who want to verify SK hynix's engineering claims and U.S. regulatory disclosures directly should start with four primary sources. First, the <a href="https://www.sec.gov/Archives/edgar/data/2120882/000119312526280172/d32785df1.htm" rel="noopener" target="_blank">SK hynix Form F-1 Registration Statement on SEC EDGAR</a> details audited multi-year financials, risk factors, China fab exposure, and Nasdaq ADS offering terms <sup class="reference"><a href="#cite_note-5">[5]</a></sup>. Second, <a href="https://news.skhynix.com/en/rulebreaker-revolutions-mr-muf-unlocks-hbm-heat-control/" rel="noopener" target="_blank">SK hynix Newsroom's MR-MUF Engineering Deep Dive</a> explains the thermal and warpage physics behind its HBM packaging lead <sup class="reference"><a href="#cite_note-9">[9]</a></sup>. Third, the <a href="https://www.nist.gov/chips/sk-hynix-indiana-west-lafayette" rel="noopener" target="_blank">NIST CHIPS for America Indiana Facility Brief</a> documents the $3.87B West Lafayette advanced packaging investment and federal grant structure <sup class="reference"><a href="#cite_note-8">[8]</a></sup>. Fourth, the <a href="https://news.skhynix.com/en/q3-2026-business-results/" rel="noopener" target="_blank">SK hynix Q3 2026 Official Business Results</a> provides management's latest HBM4 shipment crossover and 2027–2028 LTA disclosures <sup class="reference"><a href="#cite_note-2">[2]</a></sup>.</p>
+<h3>Geopolitical &amp; export-control risks: Smuggling scrutiny and China fab friction</h3>
+<p>Beyond Samsung and Micron, SK hynix's moat faces a regulatory wildcard that neither pure engineering nor customer LTAs can fully insulate. U.S. export controls already constrain equipment upgrades at SK hynix's Wuxi DRAM and Dalian NAND fabs in China, complicating Solidigm's long-term capital structure <sup class="reference"><a href="#cite_note-16">[16]</a></sup>. At the same time, investigations into grey-market AI chip smuggling—where banned HBM3E dies were packaged alongside unsanctioned low-end processors to reach Chinese buyers—have triggered heightened U.S. legislative scrutiny over end-use tracking <sup class="reference"><a href="#cite_note-14">[14]</a></sup>. Tighter compliance mandates or secondary sanctions on HBM routing could raise verification costs and disrupt legitimate Asian assembly channels.</p>
+<p>On the competitive front, investors should also watch the architectural shift from MR-MUF to copper-to-copper hybrid bonding as HBM stacks move from 12 and 16 layers toward 20 layers in HBM4E/HBM5. While SK hynix plans to extend Advanced MR-MUF deeper into HBM4, hybrid bonding removes bump gaps altogether and resets the manufacturing learning curve across all three memory rivals. Maintaining leadership will require SK hynix to match its MR-MUF yield discipline in hybrid bonding before Samsung or Micron can leapfrog.</p>
+</section>
+<section class="chapter" id="ch-5">
+<h2>5. Leading Operational KPIs, Structural Potential &amp; CEO Walk-the-Talk</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> Which operational KPIs lead SK hynix's financial results by 2–4 quarters, how big is the capacity runway, and has CEO Kwak Noh-jung delivered on past promises?</div>
+<h3>Six leading operational KPIs that telegraph revenue and margin turns</h3>
+<p>Quarterly memory earnings lag physical fab decisions by two to four quarters. Six operational KPIs give owners early warning before pricing shifts hit the income statement. First is the HBM4 crossover, with HBM4 overtaking HBM3E in Q4 2026 <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Second is LTA coverage, with &gt;50% of 2027–2028 capacity locked across 14 clients <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Third is 1b/1c nm DRAM node mix, and fourth is Solidigm eSSD QLC bit growth and profit <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-20">[20]</a></sup>. Fifth is R&amp;D intensity (KRW 6.73T in FY2025, +36% YoY) <sup class="reference"><a href="#cite_note-17">[17]</a></sup>. Sixth is cleanroom ramp speed at Cheongju M15X and Yongin <sup class="reference"><a href="#cite_note-18">[18]</a>, <a href="#cite_note-19">[19]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Leading operational KPI scorecard for SK hynix (2023–2026)</caption>
+<thead><tr><th>Operational KPI</th><th>2023–2024 Baseline</th><th>2025–Q3 2026 Status</th><th>Signal Health</th><th>Why It Leads Financial Results</th></tr></thead>
+<tbody>
+<tr><td>HBM4 Mix Crossover</td><td>HBM3/3E ramp in 2024</td><td>HBM4 mass production started Q2/Q3 2026; to pass HBM3E in Q4 2026 <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup></td><td>PASS</td><td>Higher pin-speed and custom base die command premium ASPs per stack</td></tr>
+<tr><td>LTA Capacity Coverage</td><td>Annual HBM allocations sold out</td><td>&gt;50% of 2027–2028 capacity contracted with 14 key clients <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup></td><td>PASS</td><td>Reduces spot-price volatility and secures fab utilization visibility</td></tr>
+<tr><td>Solidigm eSSD Turnaround</td><td>KRW ~7.3T cumulative net loss (2022–2023) <sup class="reference"><a href="#cite_note-20">[20]</a></sup></td><td>Returned to full-year profit in 2024; scaled 122TB QLC eSSDs in 2025–2026 <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-20">[20]</a></sup></td><td>PASS</td><td>Turns NAND from a cyclical drag into an AI inference cash contributor</td></tr>
+<tr><td>R&amp;D Investment Intensity</td><td>KRW 4.95T in FY2024 <sup class="reference"><a href="#cite_note-17">[17]</a></sup></td><td>KRW 6.73T in FY2025 (+36% YoY) <sup class="reference"><a href="#cite_note-17">[17]</a></sup></td><td>PASS</td><td>Funds 1c/1d nm EUV nodes, HBM4E, and hybrid bonding readiness</td></tr>
+<tr><td>Cleanroom &amp; Fab Expansion</td><td>M15X construction accelerated <sup class="reference"><a href="#cite_note-18">[18]</a></sup></td><td>M15X operational; Yongin targeting early 2027; Indiana broke ground Aug 2026 <sup class="reference"><a href="#cite_note-10">[10]</a>, <a href="#cite_note-18">[18]</a>, <a href="#cite_note-19">[19]</a></sup></td><td>WATCH</td><td>Essential for 2027–2030 supply, but raises fixed depreciation if demand slows</td></tr>
+<tr><td>China Fab Upgrade Access</td><td>U.S. equipment waiver friction</td><td>Dalian &amp; Wuxi export-control bottlenecks persist <sup class="reference"><a href="#cite_note-14">[14]</a>, <a href="#cite_note-16">[16]</a></sup></td><td>WATCH</td><td>Constrains modernization of legacy NAND/DRAM assets in China</td></tr>
+</tbody>
+</table></div>
+<p>Core product and contract KPIs (HBM4 crossover, 2027–2028 LTAs, Solidigm profitability, and R&amp;D) rate PASS, while heavy fab capex and China export-control friction warrant ongoing WATCH.</p>
+<p>The scorecard shows why operational health rates PASS with two watch items. In the 2018 cloud boom, buyers used short-term orders for standard DDR4 and stopped buying abruptly in 2019. By contrast, SK hynix's 2026 LTAs bind 14 major clients to multi-year capacity blocks <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. Still, building M15X, Yongin, and Indiana at once will push fixed depreciation higher from 2027 onward. That raises the stakes on keeping fabs full.</p>
+<h3>CEO Walk-the-Talk Audit: Guidance vs. Execution (2023–2026)</h3>
+<p>CEO Kwak Noh-jung (appointed in 2022) led one of the sharpest turnarounds in chip history. Reviewing management's promises from the 2023 trough through Q3 2026 shows strong delivery on tech and debt repair. However, management's bold long-term demand forecasts still require independent stress-testing.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Management Walk-the-Talk Audit: Stated targets vs. verified delivery (2023–2026)</caption>
+<thead><tr><th>Date &amp; Commitment</th><th>What Management Promised</th><th>Audited Delivery</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>2023 Trough Strategy</td><td>Cut legacy wafer output and capex while protecting HBM3E R&amp;D through the downturn</td><td>FY2023 op. loss (-KRW 7.73T) absorbed; HBM3E qualified first in 2024, capturing ~56%–64% HBM share <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-15">[15]</a></sup></td><td>DELIVERED</td></tr>
+<tr><td>2024 Solidigm Restructuring</td><td>Refocus Solidigm on high-margin enterprise QLC SSDs to end cash burn <sup class="reference"><a href="#cite_note-20">[20]</a></sup></td><td>Solidigm reversed KRW 7.3T cumulative losses and returned to full-year profitability in 2024–2025 <sup class="reference"><a href="#cite_note-20">[20]</a></sup></td><td>DELIVERED</td></tr>
+<tr><td>2024–2025 De-leveraging</td><td>Use AI cash generation to pay down downturn debt and rebuild liquidity <sup class="reference"><a href="#cite_note-7">[7]</a></sup></td><td>Total debt trimmed to ~KRW 22.3T–24.8T while cash &amp; short-term investments surged to ~KRW 35.1T in FY2025</td><td>DELIVERED</td></tr>
+<tr><td>2026 HBM4 &amp; Nasdaq Listing</td><td>Scale HBM4 mass production in 2026 and broaden global capital access <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-5">[5]</a></sup></td><td>HBM4 entered mass production Q2/Q3 2026; Nasdaq ADS listing (SKHY) completed July 2026 <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-4">[4]</a>, <a href="#cite_note-11">[11]</a></sup></td><td>DELIVERED</td></tr>
+<tr><td>2026 Long-Term Supply View</td><td>Forecast memory demand exceeding supply capacity beyond 2030 (Reuters interview, July 2026)</td><td>Supported by &gt;50% 2027–2028 LTAs today, but multi-year industry capex makes 2028–2030 balance unverified</td><td>UNVERIFIED / MONITOR</td></tr>
+</tbody>
+</table></div>
+<p>Management delivered on every operational, balance-sheet, and product-roadmap promise between 2023 and 2026, though its bold forecast of industry shortages lasting past 2030 remains an open bet.</p>
+<p>Credibility in cyclical hardware is earned in the downturn, not the boom. Kwak's team refused to cut HBM R&amp;D during the 2023 loss and refocused Solidigm on enterprise QLC drives <sup class="reference"><a href="#cite_note-12">[12]</a>, <a href="#cite_note-20">[20]</a></sup>. Those choices positioned SK hynix to lead the 2024–2026 AI memory wave. Still, when any chip CEO predicts shortages past 2030, prudent owners treat that as a bull case rather than a guarantee.</p>
+<h3>Structural potential: Custom HBM4, compensation alignment, and capacity runway</h3>
+<p>Legacy DDR4 sold as an identical off-the-shelf part. HBM4 changes that model by using a custom logic base die tuned to each AI chip's controller and power limits <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup>. That customization deepens engineering lock-in and raises value per stack. Keeping that lead is expensive: FY2025 R&amp;D jumped 36% to KRW 6.73T <sup class="reference"><a href="#cite_note-17">[17]</a></sup>. Profit-sharing bonuses also hit a record 2,964% of monthly base pay (~KRW 4.5T pool), tying talent retention directly to profits <sup class="reference"><a href="#cite_note-17">[17]</a></sup>.</p>
+<p>Capacity growth through 2029 rests on three staggered sites. Cheongju M15X is ramping HBM4 wafers today <sup class="reference"><a href="#cite_note-18">[18]</a></sup>. Yongin targets early 2027 cleanrooms for 1c/1d nm nodes <sup class="reference"><a href="#cite_note-19">[19]</a></sup>. West Lafayette, Indiana targets late-2028 cleanrooms and 2H 2029 HBM packaging <sup class="reference"><a href="#cite_note-8">[8]</a>, <a href="#cite_note-10">[10]</a></sup>. Whether those fabs earn strong returns depends on AI inference and agentic workloads sustaining cloud capex after training peaks.</p>
+</section>
+<section class="chapter" id="ch-6">
+<h2>6. 10-Year Financial Forensics, Cash Conversion &amp; Balance Sheet</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> How clean is SK hynix's cash conversion across a full 10-year memory cycle, how strong is the balance sheet today, and what non-operating items distort 2026 net income?</div>
+<h3>10-Year P&amp;L and margin trajectory (FY2016–Q3 2026)</h3>
+<p>From FY2016 through FY2025, SK hynix revenue grew more than fivefold from KRW 17.20T to KRW 97.15T <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-7">[7]</a></sup>. In the first three quarters of FY2026 alone, revenue surged to KRW 236.52T <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-3">[3]</a></sup>. Yet the path was volatile. Operating profit hit KRW 20.84T (51.5% margin) in FY2018, fell to KRW 2.71T (10.0%) in FY2019, and recovered to KRW 12.41T in FY2021. It then plunged to a KRW -7.73T loss (-23.6%) in FY2023 before rebounding to KRW 47.21T in FY2025 and KRW 83.33T (79.7%) in Q3 2026 <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a>, <a href="#cite_note-7">[7]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SK hynix 10-year consolidated financial trajectory and 2026 interim progression (KRW Trillion)</caption>
+<thead><tr><th>Fiscal Period</th><th>Revenue (KRW T)</th><th>Operating Profit (KRW T)</th><th>Op. Margin (%)</th><th>Net Income (KRW T)</th><th>Key Cycle &amp; Accounting Context</th></tr></thead>
+<tbody>
+<tr><td>FY2016</td><td>17.20</td><td>3.28</td><td>19.1%</td><td>2.96</td><td>Pre-cloud DRAM recovery</td></tr>
+<tr><td>FY2017</td><td>30.10</td><td>13.73</td><td>45.6%</td><td>10.64</td><td>Hyperscale server DRAM shortage</td></tr>
+<tr><td>FY2018</td><td>40.45</td><td>20.84</td><td>51.5%</td><td>15.54</td><td>Prior cloud-cycle peak</td></tr>
+<tr><td>FY2019</td><td>26.99</td><td>2.71</td><td>10.0%</td><td>N/A</td><td>Hyperscale inventory digestion</td></tr>
+<tr><td>FY2020</td><td>31.90</td><td>5.01</td><td>15.7%</td><td>N/A</td><td>Pandemic remote-work demand</td></tr>
+<tr><td>FY2021</td><td>43.00</td><td>12.41</td><td>28.9%</td><td>N/A</td><td>PC/server pull-forward; Solidigm Phase 1 close</td></tr>
+<tr><td>FY2022</td><td>44.62</td><td>6.81</td><td>15.3%</td><td>N/A</td><td>H2 memory downturn; Solidigm -KRW 3.3T loss <sup class="reference"><a href="#cite_note-20">[20]</a></sup></td></tr>
+<tr><td>FY2023</td><td>32.77</td><td>-7.73</td><td>-23.6%</td><td>-9.14</td><td>Historic memory trough; Solidigm -KRW 4.0T loss <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup></td></tr>
+<tr><td>FY2024</td><td>66.19</td><td>23.47</td><td>35.5%</td><td>19.80</td><td>HBM3E inflection; Solidigm return to profit <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup></td></tr>
+<tr><td>FY2025</td><td>97.15</td><td>47.21</td><td>48.6%</td><td>42.95</td><td>Record FY; R&amp;D KRW 6.73T; Capex ~KRW 28.6T <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-17">[17]</a></sup></td></tr>
+<tr><td>Q1 2026</td><td>52.58</td><td>37.61</td><td>71.5%</td><td>N/A</td><td>HBM3E scale-up &amp; server DDR5 strength <sup class="reference"><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>Q2 2026</td><td>79.32</td><td>60.54</td><td>76.3%</td><td>93.92</td><td>Includes non-operating Kioxia valuation gains <sup class="reference"><a href="#cite_note-3">[3]</a></sup></td></tr>
+<tr><td>Q3 2026</td><td>104.62</td><td>83.33</td><td>79.7%</td><td>39.78</td><td>First &gt;KRW 100T quarter; HBM4 mass production <sup class="reference"><a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>Operating profit is the cleanest measure of core earnings power: Q2 2026 net income of KRW 93.92T exceeded operating profit of KRW 60.54T due to one-time Kioxia stake valuation gains, which must be stripped out of recurring run-rate underwriting.</p>
+<p>Forensic review flags Q2 2026 net income (KRW 93.92T) as an accounting outlier. SK hynix booked non-operating valuation gains on its Kioxia stake in that quarter <sup class="reference"><a href="#cite_note-3">[3]</a></sup>. As a result, net income exceeded operating profit (KRW 60.54T) by more than KRW 33 trillion <sup class="reference"><a href="#cite_note-3">[3]</a></sup>. By contrast, Q3 2026 operating profit of KRW 83.33T yielded KRW 39.78T in net profit after taxes and adjustments <sup class="reference"><a href="#cite_note-2">[2]</a></sup>. Analysts must focus on operating profit, EBITDA, and operating cash flow rather than headline net income.</p>
+<h3>Cash conversion, balance-sheet repair, and capital intensity</h3>
+<p>Cash conversion during the 2024–2025 upcycle has been genuine, not paper-driven. In FY2025, SK hynix generated ~$37.36B in operating cash flow (~KRW 53.28T) against KRW 42.95T in net income <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. That &gt;120% conversion ratio was aided by KRW 13.93T in non-cash depreciation <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. Even after ~KRW 28.60T ($20.06B) in capex, free cash flow topped KRW 24.68T ($17.30B). Cash and short-term investments rose from KRW 14.2T at end-2024 to ~KRW 35.14T at end-2025, while debt fell to ~KRW 22.25T–24.76T. That flipped SK hynix to net cash with Debt/Equity at 0.08 and ROIC at 71.84%.</p>
+<p>Equity dilution has been modest relative to earnings scale. The July 2026 Nasdaq ADS offering added cross-border equity to pre-fund Yongin, Cheongju P&amp;T7, and EUV tools <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-5">[5]</a></sup>. Solvency is not the risk—SK hynix holds ample liquidity. The real watchpoint is capital-intensity creep. With annual capex at 29%–30% of peak sales, any cyclical revenue drop forces management to cut capex fast or burn cash.</p>
+<div class="case-note">
+<div class="case-note-head"><h4 class="case-note-title">Historical Cycle &amp; Valuation Twin: Micron Technology</h4><span class="case-note-sub">United States (FY2017–FY2020)</span></div>
+<p><strong>Shared Mechanism:</strong> Following a cloud-driven DRAM supercycle in FY2017–FY2018 where gross margins and operating cash flow surged, Micron ramped multi-year fab capex just as hyperscale customers entered an inventory digestion pause in 2019.</p>
+<p><strong>Historical Numbers &amp; Outcome:</strong> Micron suffered sharp revenue contraction and severe operating-margin compression across FY2019–FY2020 as DRAM pricing normalized, while multi-year fab capital expenditures remained elevated.</p>
+<p><strong>Direct Implication for SKHY:</strong> Even structurally healthier memory oligopolies see free cash flow compress sharply when multi-year fab commitments collide with a customer inventory pause. SK hynix's &gt;50% LTA coverage for 2027–2028 is a stronger shock absorber than Micron had in 2018, but it does not eliminate capex rigidity.</p>
+</div>
+<h3>Balance sheet, cash conversion, and capital efficiency (FY2022–FY2025)</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>Balance sheet repair, liquidity build, and capital intensity across the cycle (FY2022–FY2025)</caption>
+<thead><tr><th>Metric (KRW Trillion / Ratio)</th><th>FY2023 Trough</th><th>FY2024 Recovery</th><th>FY2025 Supercycle</th><th>Forensic Takeaway</th></tr></thead>
+<tbody>
+<tr><td>Revenue</td><td>32.77</td><td>66.19</td><td>97.15</td><td>+196% cumulative recovery from 2023 trough <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-7">[7]</a></sup></td></tr>
+<tr><td>Operating Profit / (Loss)</td><td>-7.73</td><td>23.47</td><td>47.21</td><td>48.6% FY2025 op. margin; &gt;62% EBITDA margin <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-7">[7]</a></sup></td></tr>
+<tr><td>Operating Cash Flow (approx.)</td><td>Depressed</td><td>Strong positive</td><td>~53.28 ($37.36B)</td><td>&gt;120% CFO/PAT conversion aided by KRW 13.93T D&amp;A</td></tr>
+<tr><td>Capital Expenditures (approx.)</td><td>Cut sharply</td><td>~15.95</td><td>~28.60 ($20.06B)</td><td>29.4% of FY2025 sales reinvested into M15X &amp; EUV <sup class="reference"><a href="#cite_note-19">[19]</a></sup></td></tr>
+<tr><td>Cash &amp; Short-Term Investments</td><td>~9.0</td><td>~14.20</td><td>~35.14</td><td>3.9x liquidity expansion in two years</td></tr>
+<tr><td>Total Borrowings / Debt</td><td>~29.5 (peak)</td><td>~22.70–25.45</td><td>~22.25–24.76</td><td>Net debt flipped to decisive net cash in FY2025</td></tr>
+<tr><td>R&amp;D Expense</td><td>Protected</td><td>4.95</td><td>6.73</td><td>+36% YoY investment in 1c nm &amp; HBM4E <sup class="reference"><a href="#cite_note-17">[17]</a></sup></td></tr>
+</tbody>
+</table></div>
+<p>SK hynix used its 2024–2025 cash surge to erase downturn net debt, building KRW 35.14T in cash and short-term investments against KRW 22.25T–24.76T in total debt while funding KRW 28.60T in annual capex.</p>
+<p>The balance-sheet bridge from FY2023 to FY2025 provides the strongest fundamental defense against historical memory-failure base rates. At the 2023 trough, borrowings climbed near KRW 29.5T as SK hynix absorbed -KRW 9.14T in consolidated net losses and Solidigm capital impairment <sup class="reference"><a href="#cite_note-7">[7]</a>, <a href="#cite_note-20">[20]</a></sup>. Two years later, cash and short-term investments reached ~KRW 35.14T against KRW 22.25T–24.76T in total debt, dropping Debt/Equity to 0.08 and lifting ROIC to 71.84% and ROE to 93.70%. That net-cash buffer—reinforced by the July 2026 Nasdaq ADS raise—ensures SK hynix can fund Yongin and Indiana without jeopardizing solvency even if margins normalize sharply from 2026 peaks.</p>
+</section>
+<section class="chapter" id="ch-7">
+<h2>7. Why the Price Is What It Is: Valuation, Reverse DCF &amp; Peer Comps</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> Why does SKHY trade at 8.56x trailing P/E and 3.25x forward P/E yet 5.53x P/B, and how does the NASDAQ ADR price reconcile with KRX 000660?</div>
+<h3>Reconciling NASDAQ:SKHY ($960.57B) vs. KRX:000660 ($660.29B)</h3>
+<p>Any institutional underwriting of SKHY must begin by resolving a glaring data discrepancy between U.S. quote feeds <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. On November 13, 2026, Finviz reports SKHY's market capitalization at $960.57B and enterprise value at $917.61B, while TradingView lists market capitalization at $660.29B <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. The gap is not a data bug; it is the mechanics of the 1:10 American Depositary Share (ADS) structure combined with a steep U.S. listing premium <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-21">[21]</a>, <a href="#cite_note-23">[23]</a></sup>. Each NASDAQ SKHY ADS represents one-tenth of one ordinary KRX:000660 share (10 ADSs = 1 common share) <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-6">[6]</a></sup>. Across approximately 729 million ordinary shares (7.29B ADS equivalents), multiplying 7.29B by the $131.79 ADR close yields $960.75B <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. Meanwhile, on the Korea Exchange, 000660 traded around KRW 1,216,000–1,289,000 (~KRW 1,250,000 midpoint) with USD/KRW at 1,361.89, implying a local equity value near KRW 899T–911T, or ~$660B USD <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a>, <a href="#cite_note-24">[24]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SKHY NASDAQ ADR vs. KRX:000660 Ordinary Parity Reconciliation (as of 2026-11-13)</caption>
+<thead><tr><th>Valuation Basis</th><th>Share Count Basis</th><th>Price / FX Rate</th><th>Implied Market Cap (USD)</th><th>Implied Net Cash / EV</th><th>Key Underwriting Implication</th></tr></thead>
+<tbody>
+<tr><td>NASDAQ:SKHY (Finviz ADS Basis)</td><td>7.29B ADS equivalents</td><td>$131.79 / ADS</td><td>$960.57B</td><td>$42.96B net cash / $917.61B EV</td><td>U.S. ADR buyers pay a ~44%–45% scarcity premium over Seoul parity <sup class="reference"><a href="#cite_note-21">[21]</a></sup>.</td></tr>
+<tr><td>KRX:000660 (TradingView / Seoul Parity)</td><td>~710M–729M ordinary shares</td><td>~KRW 1,250,000 @ 1,361.89 KRW/USD</td><td>$660.29B</td><td>~$42.96B net cash / ~$617.3B EV</td><td>10 ADSs at $131.79 equal KRW 1,794,835 vs. ~KRW 1,250,000 local close <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a>, <a href="#cite_note-24">[24]</a></sup>.</td></tr>
+</tbody>
+</table></div>
+<p>U.S. ADR investors at $131.79 are paying roughly 44% above Korean ordinary share parity due to restricted cross-border fungibility and U.S. AI-index demand.</p>
+<p>This parity gap matters directly for downside risk <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-23">[23]</a></sup>. At $131.79, 10 ADSs translate to KRW 1,794,835 at the 1,361.89 spot rate, representing a 43.6% premium over local KRX shares <sup class="reference"><a href="#cite_note-23">[23]</a>, <a href="#cite_note-24">[24]</a></sup>. If cross-border arbitrage expands or U.S. risk appetite cools, the ADR can compress toward KRX parity (~$91.80 per ADS) even if Seoul fundamentals remain intact <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-23">[23]</a></sup>.</p>
+<h3>Peer Valuation Matrix: Memory, Storage &amp; AI Foundry Comps</h3>
+<p>Comparing SKHY against its direct memory rival Micron (MU), enterprise storage peers Western Digital (WDC) and Seagate (STX), foundry partner TSMC (TSM), and anchor customer NVIDIA (NVDA) reveals a classic cyclical valuation split <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. On headline earnings multiples, SKHY trades at 8.56x trailing P/E and 3.25x forward P/E—nearly identical to Micron's 10.49x trailing and 3.69x forward P/E, and far below TSMC (17.26x forward) and NVIDIA (10.34x forward) <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. Yet on enterprise-value-to-EBITDA (9.39x) and price-to-book (5.53x), SKHY commands a premium to its own historical cycle because its 74.52% operating margin and 71.84% ROIC sit at generational highs <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-25">[25]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Live Peer Valuation &amp; Profitability Snapshot (as of 2026-11-13)</caption>
+<thead><tr><th>Ticker</th><th>Company</th><th>CMP</th><th>Mkt Cap ($B)</th><th>P/E (TTM)</th><th>P/B</th><th>ROE</th><th>Rev YoY</th><th>OPM</th><th>Stage</th></tr></thead>
+<tbody>
+<tr><td><strong>SKHY</strong></td><td>SK hynix Inc. Sponsored ADR</td><td>$131.79</td><td>660.29</td><td>N/A</td><td>N/A</td><td>N/A</td><td>+209.3%</td><td>74.5%</td><td>STAGE_4</td></tr>
+<tr><td>MU</td><td>Micron Technology, Inc.</td><td>$778.31</td><td>880.60</td><td>10.5x</td><td>6.36x</td><td>88.3%</td><td>+256.3%</td><td>75.0%</td><td>STAGE_4</td></tr>
+<tr><td>WDC</td><td>Western Digital Corporation</td><td>$295.65</td><td>110.67</td><td>11.5x</td><td>11.83x</td><td>130.4%</td><td>+20.7%</td><td>40.7%</td><td>STAGE_4</td></tr>
+<tr><td>STX</td><td>Seagate Technology Holdings PLC</td><td>$528.29</td><td>121.27</td><td>27.8x</td><td>35.14x</td><td>259.4%</td><td>+44.4%</td><td>40.5%</td><td>STAGE_4</td></tr>
+<tr><td>TSM</td><td>Taiwan Semiconductor Manufacturing Co., Ltd. Sponsored ADR</td><td>$398.73</td><td>1,844.69</td><td>25.7x</td><td>9.41x</td><td>42.0%</td><td>+35.2%</td><td>57.8%</td><td>STAGE_4</td></tr>
+<tr><td>NVDA</td><td>NVIDIA Corporation</td><td>$162.85</td><td>3,924.69</td><td>20.6x</td><td>17.17x</td><td>117.2%</td><td>+83.4%</td><td>65.2%</td><td>STAGE_4</td></tr>
+</tbody>
+</table></div>
+<p>SKHY and MU trade at single-digit trailing and forward P/Es despite &gt;70% operating margins, signaling market skepticism about cycle durability.</p>
+<p>Notice how every memory and storage name in the peer group (SKHY, MU, WDC, STX) trades at forward P/E multiples between 3.25x and 7.94x, alongside PEG ratios of 0.03 to 0.10 <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. The market is not ignoring SK hynix's 209.28% TTM revenue growth or 74.52% operating margin <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. Rather, institutional capital refuses to capitalize peak memory margins at a 20x secular multiple <sup class="reference"><a href="#cite_note-25">[25]</a></sup>.</p>
+<h3>Reverse DCF &amp; Historical Memory Valuation Bands</h3>
+<p>A Reverse DCF clarifies what $131.79 requires <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. With Finviz Enterprise Value at $917.61B, a 10.5% WACC (reflecting the 5.10% 10-year U.S. Treasury yield plus a 5.4% equity risk premium), and a 3.0% terminal growth rate, the market is pricing in roughly $68.8B of steady-state annual free cash flow in perpetuity <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. In FY2025, SK hynix generated approximately KRW 24.68T (~$18.1B) in free cash flow <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. Even though Q1–Q3 2026 operating profit exploded to KRW 181.48T, sustaining $68.8B of annual FCF after ~30% fab capex reinvestment requires AI HBM demand and pricing to remain elevated without a traditional memory downturn <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a>, <a href="#cite_note-13">[13]</a>, <a href="#cite_note-26">[26]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SK hynix Historical Memory Cycle Valuation Bands vs. November 2026</caption>
+<thead><tr><th>Cycle Phase &amp; Year</th><th>Operating Margin</th><th>P/B Ratio Band</th><th>Valuation Context &amp; Market Narrative</th></tr></thead>
+<tbody>
+<tr><td>2018 Cloud Peak</td><td>51.5%</td><td>~0.88x (year-end) – 1.50x</td><td>Market compressed P/B below 1.0x ahead of the 2019–2020 inventory glut <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-25">[25]</a></sup>.</td></tr>
+<tr><td>2023 Cyclical Winter / AI Pivot</td><td>-23.6%</td><td>~0.80x trough – 1.87x year-end</td><td>Trough losses gave way to an AI HBM re-rating before profits recovered <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-25">[25]</a></sup>.</td></tr>
+<tr><td>2025 AI Super-Cycle Boom</td><td>48.6%</td><td>~3.70x – 3.86x</td><td>HBM3E dominance and &gt;40% ROE drove a structural re-rating above 3.5x book <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-25">[25]</a></sup>.</td></tr>
+<tr><td>Nov 2026 (CMP $131.79 ADR)</td><td>74.52% (TTM)</td><td>5.53x (ADR) / ~3.85x (KRX)</td><td>Consensus sees FY26 rev KRW 259T–278T and FY27 growth, yet ADR P/B sits at 5.53x <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-25">[25]</a>, <a href="#cite_note-26">[26]</a></sup>.</td></tr>
+</tbody>
+</table></div>
+<p>While 3.25x forward P/E looks optically cheap, SKHY's 5.53x ADR P/B (and ~3.85x local KRX P/B) sits well above historical memory-cycle norms.</p>
+<p>Street consensus still projects strong top-line momentum, with FY2026 revenue estimated at KRW 259T–278T (~$190B–$204B) and FY2027 revenue climbing toward KRW 290T–300T+ backed by &gt;50% LTA coverage <sup class="reference"><a href="#cite_note-13">[13]</a>, <a href="#cite_note-26">[26]</a></sup>. Finviz lists a consensus sell-side target price of $264.30 (1.36 Buy rating) <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. However, history shows that memory multiples contract before earnings peak, and the 44% ADR premium leaves zero margin of safety if HBM4 pricing or hyperscaler capex moderates <sup class="reference"><a href="#cite_note-23">[23]</a>, <a href="#cite_note-25">[25]</a></sup>.</p>
+<h3>FCF Sensitivity &amp; Why Peak-Cycle EBITDA Overstates Owner Earnings</h3>
+<p>A subtle trap in semiconductor valuation is relying on EV/EBITDA (9.39x) when capital intensity is rising <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-21">[21]</a></sup>. In FY2025, SK hynix booked KRW 13.93T in depreciation and amortization but spent KRW 28.60T on fab capex—more than double its D&amp;A charge <sup class="reference"><a href="#cite_note-1">[1]</a></sup>. As Cheongju M15X, Yongin, and the West Lafayette packaging facility scale into 2027, capex near 30% of revenue keeps owner free cash flow well below accounting net income <sup class="reference"><a href="#cite_note-10">[10]</a>, <a href="#cite_note-18">[18]</a>, <a href="#cite_note-19">[19]</a></sup>. Even if mid-cycle FCF reaches $60B—more than triple FY2025's ~$18.1B—a 12x cyclical multiple implies $763B equity value ($104.66/ADR), or 20.6% below CMP <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-21">[21]</a></sup>. Blending that $104.66 mid-cycle FCF anchor 50/50 with a $145.00 HBM4 cycle-extension multiple sets our reconciled Base Case target at $125.00 (-5.2% vs. CMP) <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>.</p>
+</section>
+<section class="chapter" id="ch-8">
+<h2>8. Stage 2 Technical Structure, Institutional Flow &amp; Momentum Setup</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> What does SKHY's multi-timeframe price structure (1W/1D/4H), institutional volume, and options chain reveal about timing and risk?</div>
+<h3>Weinstein Stage Classification &amp; Multi-Timeframe Structure (1W / 1D / 4H)</h3>
+<p>On November 13, 2026, SKHY closed at $131.79 (-4.30% on the day), sitting 34.06% below its $199.87 post-IPO high and just 7.85% above its $122.20 52-week low <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. Because the NASDAQ ADS listed on July 10, 2026, SKHY does not yet have 200 daily bars or 30 weekly bars for a 200D/30W moving average <sup class="reference"><a href="#cite_note-4">[4]</a>, <a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. Nevertheless, every available trend gauge confirms an active Stage 4 markdown (`AVOID_STAGE4_OR_BROKEN`, `CAP_REJECTED`) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Price trades 19.64% below its 50-day SMA ($164.00), 11.96% below its 10-week EMA ($149.69), and 6.77% below its 20-day SMA ($141.36), while the 4-hour chart shows no bullish turn (`intraday_4h_turn = false`, below 4H 20-EMA at $137.48 and 4H 50-SMA at $143.12) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>SKHY Multi-Timeframe Technical &amp; Pivot Matrix (as of 2026-11-13)</caption>
+<thead><tr><th>Timeframe / Indicator</th><th>Current Level</th><th>Distance vs. CMP ($131.79)</th><th>Signal &amp; Structural Role</th></tr></thead>
+<tbody>
+<tr><td>Weekly (1W): 10W EMA / RSI-14</td><td>$149.69 / 40.95</td><td>-11.96%</td><td>Bearish weekly trend; first major overhead supply zone <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>Daily (1D): 50D SMA / 20D SMA</td><td>$164.00 / $141.36</td><td>-19.64% / -6.77%</td><td>Stage 4 markdown; must reclaim $164.00 on volume to repair trend <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>Daily (1D): RSI-14 / ATR-14 / BB Width</td><td>41.72 / $10.11 / 31.09%</td><td>7.67% daily ATR</td><td>Wide Bollinger Bands; not yet oversold (&lt;30) or tight (VCP) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>4-Hour (4H): 20-EMA / 50-SMA / RSI-14</td><td>$137.48 / $143.12 / 43.05</td><td>-4.14% / -7.92%</td><td>No 4H reversal turn (`intraday_4h_turn = false`) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>Support Shelf: 52W Low / Pivot S1 / Stop</td><td>$122.20 / $121.34 / $116.28</td><td>-7.28% / -7.93% / -11.77%</td><td>Support buy zone $119.52–$123.16; hard invalidation at $116.28 <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>Overhead Pivots: Middle / R1 / R2</td><td>$158.66 / $186.52 / $223.84</td><td>+20.39% / +41.53% / +69.85%</td><td>Key resistance zones on any Stage 4 relief rally <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+</tbody>
+</table></div>
+<p>SKHY is trapped below declining 4H, 1D, and 1W moving averages with 31.09% Bollinger Band width, offering no confirmed base or Stage 2 entry.</p>
+<p>The volatility profile underscores why chasing rebounds is hazardous <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. An ATR(14) of $10.11 represents 7.67% of the $131.79 share price, and SKHY's 1-year beta is 3.20x <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. At the same time, the broader U.S. market sits in a Correction regime. The S&amp;P 500 trades below its 50-DMA with 6 distribution days in 25 sessions and 52.6% breadth above the 50-DMA, while the 10-year yield has risen to 5.10% against a 4.86% 2-year yield <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. High-beta semiconductor ADRs rarely bottom cleanly until index distribution abates and peer leaders stabilize—yet MU, WDC, STX, TSM, and NVDA are all simultaneously in Stage 4 <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<h3>Institutional Flow, Short Interest &amp; Options Volatility Skew</h3>
+<p>Volume and ownership data reflect an ADR float still undergoing institutional seasoning <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. On November 13, SKHY traded 16.42M shares, or 0.72x its 30-day average of 22.80M shares—indicating steady selling pressure without a high-volume capitulation washout <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Finviz shows U.S. institutional ownership at just 1.55% (up 9.48% quarter-over-quarter) and short interest at 0.50% of float (36.42M shares, 1.75 days to cover) <sup class="reference"><a href="#cite_note-21">[21]</a></sup>. Meanwhile, across the broader market on November 13, Cboe reported a total put/call ratio of 0.85 and an equity put/call ratio of 0.63—showing hedging demand without extreme panic <sup class="reference"><a href="#cite_note-27">[27]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Conditional Options &amp; Call-Convexity Structure (2027-01-15 $130/$160 Bull Call Spread)</caption>
+<thead><tr><th>Options Metric</th><th>Observed Value</th><th>Interpretation &amp; Risk Discipline</th></tr></thead>
+<tbody>
+<tr><td>Volatility Regime</td><td>IV_CHEAP (ATM IV 70.0% vs. HV20 101.1%)</td><td>Options are cheap relative to realized volatility, favoring debit spreads over naked calls.</td></tr>
+<tr><td>Conditional Structure</td><td>BUY Jan 15 '27 $130C ($15.93) / SELL $160C ($5.62)</td><td>Net debit $10.31/sh ($1,031 max loss for 1 contract, 103.1 bps of NAV).</td></tr>
+<tr><td>Breakeven &amp; Max Profit</td><td>BE $140.31 (+6.46%) | Max Profit $1,969 (1.91:1 R:R)</td><td>Max profit reached at &gt;=$160.00; net delta +$29.40/$1, theta -$2.28/day.</td></tr>
+<tr><td>Deployment Gate</td><td>STAND_ASIDE (CALENDAR_MISMATCH)</td><td>Expires Jan 15 '27—12–13 days before Jan 27–28 earnings; wait for Stage 1 base &amp; Mar/Apr '27 expirations.</td></tr>
+</tbody>
+</table></div>
+<p>Although implied volatility (70.0%) sits below 20-day realized volatility (101.1%), the Jan 15, 2027 expiry precedes Q4 earnings (Jan 27–28) by 12–13 days, reinforcing standing aside until a Stage 1 base forms.</p>
+<p>The options chain confirms why patience pays: open interest is concentrated at the January 15, 2027 $130 Call (21,652 contracts) and $160 Call (3,896 contracts), creating natural gamma magnets at $130 and $160. Crucially, however, this `options_snapshot.py` conditional `2027-01-15 $130/$160` Bull Call Spread expires 12–13 days before the late-January Q4/FY2026 earnings catalyst (`2027-01-27`–`28`) <sup class="reference"><a href="#cite_note-28">[28]</a></sup>. That calendar mismatch—combined with 100% loss risk if SKHY breaks $122.20 toward Pivot S2 ($93.48)—reinforces standing aside on options until a Stage 1 base forms and post-earnings March/April 2027 expirations are evaluated <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<h3>What a Valid Stage 2 Repair Sequence Would Look Like</h3>
+<p>For SKHY to transition out of Stage 4 and earn fresh capital, three sequential tape milestones must occur <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. First, price must hold the $119.52–$123.16 support zone and carve a higher low on the 4-hour chart (`intraday_4h_turn = true`) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Second, daily Bollinger Band width must compress from 31.09% toward &lt;15% as volume dries up and sellers exhaust supply [22]. Third, SKHY must reclaim its 50-day SMA ($164.00) on &gt;=1.5x average volume (~34.2M shares/day) while the S&amp;P 500 exits its Correction <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Until those three conditions are met, rallies into $141.36–$149.69 remain selling opportunities rather than breakouts <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<p>Peer breadth confirms this patience: MU ($778.31 vs. $943.78 50D SMA), WDC ($295.65 vs. $391.72), STX ($528.29 vs. $740.61), TSM ($398.73 vs. $430.11), and NVDA ($162.85 vs. $214.65, RSI 24.86) are all in Stage 4 <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. When the entire semiconductor complex is below its 50-day averages, individual rebounds routinely stall at the 20-day SMA ($141.36) or 10-week EMA ($149.69) before retesting lows <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<h3>Interactive TradingView Tape &amp; Deterministic Technical Structure Ledger</h3>
+<p>We evaluate SKHY's live TradingView moving averages, volume signature, and technical stage posture as of 2026-11-13.</p>
+<div class="tradingview-widget-container" style="height: 520px; width: 100%; margin: 1.25rem 0;">
+<div aria-label="Interactive TradingView daily chart for NASDAQ:SKHY" id="tradingview_skhy_chart" role="img" style="height: 100%; width: 100%;"></div>
+<script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script>
+<script type="text/javascript">
+  new TradingView.widget({
+    "autosize": true,
+    "symbol": "NASDAQ:SKHY",
+    "interval": "D",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f4f6f8",
+    "enable_publishing": false,
+    "hide_top_toolbar": false,
+    "allow_symbol_change": true,
+    "studies": [
+      "MASimple@tv-basicstudies",
+      "MAExp@tv-basicstudies"
+    ],
+    "container_id": "tradingview_skhy_chart"
+  });
+  </script>
+</div>
+<div class="table-wrap"><table class="wikitable">
+<caption>Dated market-facts ledger for SKHY as of 2026-11-13</caption>
+<thead><tr><th>Technical dimension</th><th>Observed value (source-specific)</th><th>Institutional &amp; No-FOMO interpretation</th></tr></thead>
+<tbody>
+<tr><td>Session close (2026-11-13).</td><td>$131.79.</td><td>1D: -4.3%, 1W: 3.49%, 1M: -9.8%.</td></tr>
+<tr><td>Market-facts trend &amp; dashboard tag.</td><td>N/A (insufficient history) (TheWrap breakout tag: None; Stage 2 list membership: not available; weeks tagged: not available).</td><td>Below 30-week SMA (None) and 50-day SMA (164.0) with weak trend structure. Technical ceiling: avoid for new entries until a Stage 1 base and Stage 2 breakout form.</td></tr>
+<tr><td>30-week SMA / 10-week EMA (Weekly).</td><td>N/A / $149.69.</td><td>Extension from 10-week EMA: -11.96% (No-FOMO immediate-buy ceiling: +10.0%).</td></tr>
+<tr><td>20-day / 50-day / 200-day SMA (Daily).</td><td>$141.36 / $164.00 / N/A.</td><td>Extension from 50-day SMA: -19.64% (No-FOMO ceiling: +12.0%).</td></tr>
+<tr><td>Momentum oscillator / ATR.</td><td>41.59 / $10.10.</td><td>TradingView Technical Rating: Sell (-0.36).</td></tr>
+<tr><td>52-week high / low.</td><td>$199.87 / $122.20.</td><td>Classic Pivots — Support S1: $121.34, Mid Pivot: $158.66, Resistance R1: $186.52.</td></tr>
+<tr><td>Relative volume &amp; institutional sponsorship.</td><td>0.72x vs 30-day avg.</td><td>TheWrap industry (Semiconductors); extracted breadth: not available; formal sector rank 12; formal relative-strength percentile unavailable.</td></tr>
+</tbody>
+</table></div>
+<p>This table summarizes dated market-facts indicators for SKHY; weekly averages and dashboard fields are shown only when supplied for the stated cutoff.</p>
+<h3>Momentum screen and No-FOMO support evaluation</h3>
+<p>We separate medium-term trend durability from immediate No-FOMO entry timing.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Trend and No-FOMO Entry Timing Evaluation for SKHY</caption>
+<thead><tr><th>Evaluation dimension</th><th>Reading / Posture</th><th>Rule &amp; practical implication</th></tr></thead>
+<tbody>
+<tr><td>Market-facts trend classification.</td><td>N/A (insufficient history).</td><td>Below 30-week SMA (None) and 50-day SMA (164.0) with weak trend structure. Technical ceiling: avoid for new entries until a Stage 1 base and Stage 2 breakout form.</td></tr>
+<tr><td>Consumer snapshot timing-screen result.</td><td>AVOID_STAGE4_OR_BROKEN.</td><td>Use price, trend and valuation together before setting an order. Consumer snapshot result only; the dossier action remains the overall dossier verdict.</td></tr>
+<tr><td>Screen support band (nearest support).</td><td>$119.52 – $123.16.</td><td>Reference band only; require a trend and valuation review before considering an entry.</td></tr>
+<tr><td>Structural invalidation stop.</td><td>$116.28.</td><td>Below the lower of nearest support and the lower of the 50-day and 30-week averages, less 0.5× ATR14; structural reference, not a tactical entry stop or order.</td></tr>
+<tr><td>Valuation sanity check (Screener.in / Finviz).</td><td>Valuation unavailable.</td><td>Cutoff-compatible current valuation ratios are unavailable or excluded. Chapter 3 presents filing-based analyst sensitivities, not a current P/E-versus-growth or ROE/ROCE comparison.</td></tr>
+</tbody>
+</table></div>
+<p>This evaluation separates SKHY's medium-term trend from entry timing, so a screen signal does not become an unsupported order.</p>
+<p>Technical structure and support distance govern when and how capital is deployed.</p>
+</section>
+<section class="chapter" id="ch-9">
+<h2>9. Both Sides of the Aisle, Likely Outcomes &amp; No-FOMO Action Plan</h2>
+<div class="section-summary"><strong>Core Investor Question:</strong> Weighing SK hynix's HBM moat against its Stage 4 tape and 43.6% ADR premium, what is the exact verdict for new capital and the 17.764 held Schwab shares?</div>
+<h3>Two-Sided Steelman: The Strongest Bull Case vs. The Strongest Bear Case</h3>
+<p>Before issuing a capital decision, we steelman both sides of the SKHY debate <sup class="reference"><a href="#cite_note-1">[1]</a>, <a href="#cite_note-2">[2]</a>, <a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a></sup>. The Bull Case rests on extraordinary execution: SK hynix holds 50%–58% HBM share, ~70% initial HBM4 share, and &gt;50% LTA coverage for 2027–2028 <sup class="reference"><a href="#cite_note-13">[13]</a>, <a href="#cite_note-15">[15]</a></sup>. Trailing operating margin hit 74.52% with 71.84% ROIC and ~$42.96B net cash, while the stock trades at 3.25x forward P/E ahead of January 27–28, 2027 earnings <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-26">[26]</a>, <a href="#cite_note-28">[28]</a></sup>. The Bear Case is equally potent: SKHY sits in a Stage 4 markdown (-19.64% below its 50D SMA and -34.06% off its high) inside a market Correction <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. The ADR also trades at 5.53x book and a 43.6% premium over KRX:000660 parity (~$92–$95), while reinvesting ~30% of sales into capex amid Samsung/Micron HBM4 catch-up and China export friction <sup class="reference"><a href="#cite_note-14">[14]</a>, <a href="#cite_note-16">[16]</a>, <a href="#cite_note-21">[21]</a>, <a href="#cite_note-23">[23]</a>, <a href="#cite_note-25">[25]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>Probability-Weighted 12-Month Expected Value Scenarios (from CMP $131.79)</caption>
+<thead><tr><th>Scenario</th><th>Probability</th><th>Target Price</th><th>Return vs. CMP</th><th>Key Fundamental &amp; Technical Catalysts</th></tr></thead>
+<tbody>
+<tr><td>Bull Case</td><td>25%</td><td>$186.52</td><td>+41.5%</td><td>Holds $122.20 shelf, reclaims $164.00 50D SMA, and beats Jan 2027 Q4 HBM4 margin estimates <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-28">[28]</a></sup>.</td></tr>
+<tr><td>Base Case</td><td>45%</td><td>$125.00</td><td>-5.2%</td><td>50/50 blend of $104.66 mid-cycle FCF anchor and $145.00 HBM4 cycle-extension multiple as ADR premium compresses <sup class="reference"><a href="#cite_note-21">[21]</a>, <a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>.</td></tr>
+<tr><td>Bear Case</td><td>30%</td><td>$93.48</td><td>-29.1%</td><td>Breaks $122.20 shelf in broader market selloff and converges toward Pivot S2 / KRX parity <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>.</td></tr>
+</tbody>
+</table></div>
+<p>Probability-weighted expected value is $130.92 (-0.7%), and a Bear-regime stress test (15% Bull / 35% Base at $104.66 / 50% Bear at $93.48) yields $111.35 (-15.5%).</p>
+<p>Multiplying the three scenario weights (25% * $186.52 + 45% * $125.00 + 30% * $93.48 = $46.63 + $56.25 + $28.04) yields a probability-weighted 12-month expected price of $130.92, or -0.7% below the $131.79 close <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Under a Bear-regime stress test (15% Bull / 35% Base at the $104.66 mid-cycle FCF anchor / 50% Bear at $93.48), expected value drops to $111.35 (-15.5%) <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>. Accepting 29.1% downside risk and 3.20x beta for negative expected return violates our asymmetric standard, especially with 2-year Treasuries yielding 4.86% <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<h3>Three-Horizon Verdict &amp; New-Capital Rejection</h3>
+<p>Across all three horizons, discipline points away from fresh buying at $131.79 <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Over the Short-Term (1–3 months), SKHY is REJECTED: Stage 4 momentum, `intraday_4h_turn = false`, and 6 S&amp;P 500 distribution days warn against catching a falling knife <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Over the Medium-Term (3–12 months), capital must wait for a base above $122.20 or a volume reclaim of the $164.00 50D SMA after January 2027 earnings <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-28">[28]</a></sup>. Over the Long-Term (1–5 years), SK hynix earns `CYCLICAL_CONDITIONAL` quality with `PASS` KPIs, but U.S. buyers should not pay a 43.6% ADR premium over Seoul parity <sup class="reference"><a href="#cite_note-23">[23]</a></sup>. Accordingly, we assign **REJECTED** (`rejection_reasons: ["TREND"]`) for new capital.</p>
+<h3>Held Position Action Plan (17.764 Schwab Shares) &amp; 100% Redeployment</h3>
+<p>For our 17.764 Schwab shares (cost basis $2,999.99 or $168.88/sh; current value $2,341.12; unrealized loss -$658.87 or -21.96%; weight 2.64%), we issue **EXIT_IMMEDIATELY** (`holding_shares_to_sell: 17.764`) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. SKHY sits in a confirmed Stage 4 markdown (-19.64% below its $164.00 50D SMA, 9 distribution days, -24.64% 28D RS) with 3.20x beta inside an S&amp;P 500 `Correction` and a 43.6% NASDAQ ADS premium over KRX parity ($93.48) <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-23">[23]</a></sup>. Waiting for a relief bounce into $141.36–$149.69 is a negative-EV gamble; an immediate market or tight limit exit at CMP $131.79 recovers ~$2,341.12 and removes air-pocket risk <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. If any portion is staged for intraday liquidity, enforce a hard stop `&lt; $121.34` Pivot S1 / `$116.28` invalidation <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</p>
+<div class="table-wrap"><table class="wikitable">
+<caption>100%-Reconciled Capital Redeployment Plan for SKHY Exit Proceeds (~$2,341.12 at CMP)</caption>
+<thead><tr><th>Destination Type</th><th>Target / Ticker</th><th>Allocation (%)</th><th>Entry Condition &amp; Risk/Reward Math</th></tr></thead>
+<tbody>
+<tr><td>CASH</td><td>Schwab T-Bill / MMF Sweep</td><td>100%</td><td>Park 100% in Schwab cash sweep (~4.86% 2Y Treasury benchmark) while S&amp;P 500 remains in Correction (6 distribution days) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>SHORTLIST</td><td>MSFT (Microsoft Corp.)</td><td>0%</td><td>Evaluated at $523.88, but held at 0% because S&amp;P 500 is in Correction (6 distribution days) and MSFT sits below its 20D SMA ($529.39) without a fresh MSFT fundamental target in this bundle <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+<tr><td>OUTSIDE</td><td>TSM (Taiwan Semiconductor)</td><td>0%</td><td>Evaluated ($398.73) but 0% allocated while in Stage 1 (Basing) below its 50D SMA below $430.11 50D SMA <sup class="reference"><a href="#cite_note-22">[22]</a></sup>.</td></tr>
+</tbody>
+</table></div>
+<p>Exiting SKHY immediately rotates 100% of proceeds (~$2,341.12) out of 3.20x-beta Stage 4 risk into defensive Schwab cash while MSFT (0%) and TSM (0%) remain gated.</p>
+<p>This 100% CASH / 0% MSFT / 0% OUTSIDE (TSM) plan sums to 100% and eliminates portfolio beta on the SKHY sleeve. Also note that the `options_snapshot.py` conditional `2027-01-15 $130/$160` Bull Call Spread expires 12–13 days before the late-January Q4/FY2026 earnings catalyst (`2027-01-27`–`28`), creating a calendar mismatch that reinforces standing aside on options until a Stage 1 base forms and post-earnings March/April 2027 expirations are evaluated <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-28">[28]</a></sup>.</p>
+<h3>Actionable Price &amp; Event Alerts</h3>
+<p>Execution discipline removes emotion from volatile sessions <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Alert 1 is an immediate market or tight limit sell of all 17.764 Schwab shares (~$2,341.12 at CMP $131.79) <sup class="reference"><a href="#cite_note-22">[22]</a></sup>. Alert 2 is a hard stop-loss `&lt; $121.34` Pivot S1 / `$116.28` invalidation if any shares are staged intraday [22]. Alert 3 re-evaluates SKHY only after a Stage 1 base forms and price reclaims $164.00 on &gt;=1.5x volume (~34.2M shares/day) with confirmed HBM4 margin durability in Q4/FY2026 earnings (January 27–28, 2027), alongside March/April 2027 option expirations <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-28">[28]</a></sup>.</p>
+<p class="trigger"><strong>Decision Trigger:</strong> We maintain <strong>REJECTED</strong> on new capital and issue <strong>EXIT_IMMEDIATELY</strong> on our 17.764 Schwab shares (~$2,341.12 at CMP $131.79), rotating 100% into CASH (0% MSFT, 0% TSM). If staged intraday, enforce a hard stop `&lt; $121.34` Pivot S1 / `$116.28` invalidation. Re-entry or post-earnings March/April 2027 options evaluation requires a Stage 1 base and a high-volume reclaim of $164.00 after January 27–28, 2027 earnings <sup class="reference"><a href="#cite_note-22">[22]</a>, <a href="#cite_note-28">[28]</a></sup>.</p>
+<h3>No-FOMO support entry zone, stop placement &amp; position sizing</h3>
+<div class="table-wrap"><table class="wikitable">
+<caption>No-FOMO execution levels and risk-unit position sizing for SKHY</caption>
+<thead><tr><th>Execution item</th><th>Level / Sizing</th><th>Rule and derivation</th></tr></thead>
+<tbody>
+<tr><td>Strategy bucket &amp; conviction tier.</td><td>TACTICAL_MOMENTUM (TIER_3).</td><td>Aligns capital allocation with durable trend, business quality, and balance-sheet resilience.</td></tr>
+<tr><td>Action verdict &amp; No-FOMO posture.</td><td><span class="verdict verdict-exit">REJECTED</span> (AVOID_STAGE4_OR_BROKEN).</td><td>Buy at CMP only in early Stage 2 near support; wait for support when extended; avoid when Stage 4 or risk-reward fails.</td></tr>
+<tr><td>Screen band (monitor only).</td><td>$119.52 to $123.16.</td><td>Current price $131.79; band is below price; no immediate allocation is recommended.</td></tr>
+<tr><td>No live stop (monitor only).</td><td>Recalculate after an entry is authorized.</td><td>Reference level only; not an active order while no position is authorized.</td></tr>
+<tr><td>Scenario values.</td><td>$125.00 / $186.52 / $93.48.</td><td>Probability-weighted 12-month scenario values; no live entry reward/risk applies until trend/valuation gates clear.</td></tr>
+<tr><td>Risk-unit initial sizing (portfolio heat).</td><td>0.0% of net worth (TIER_3, 0 bps risk budget).</td><td>Zero live allocation while entry or trend gates remain unresolved; recalculate on trigger confirmation.</td></tr>
+<tr><td>Let-winners-run rule.</td><td>Not applicable while no position is open.</td><td>Do not allocate or place an order before the entry gates pass.</td></tr>
+</tbody>
+</table></div>
+<p>This execution table translates our REJECTED verdict on SKHY into concrete price levels, invalidation stops, and portfolio risk-budget sizing.</p>
+</section>
+<section class="chapter" data-holding-action="EXIT_IMMEDIATELY" id="holding-action"><h2>Current Portfolio Holding Verdict &amp; Alert Plan</h2><p><strong>EXIT IMMEDIATELY:</strong> 17.764 shares across schwab: 17.764 shares; market value $2,341.12; cost basis $2,999.99; recommend selling 17.764 shares and retaining 0 shares; unrealized P&amp;L $-658.87; portfolio weight 2.64%. SKHY is in a confirmed Stage 4 markdown (-19.64% below its $164.00 50D SMA). It has 9 distribution days and -24.64% 28D RS. It also carries 3.20x beta in an S&amp;P 500 Correction and a 43.6% ADS premium over KRX parity ($93.48). Waiting for a bounce to $141.36–$149.69 is a negative-EV gamble. Exit all 17.764 Schwab shares immediately (~$2,341.12 at $131.79).</p><div class="table-wrap"><table class="wikitable">
+<caption>Holding action and broker-alert plan for SKHY</caption>
+<thead><tr><th>Price / event trigger</th><th>Shares affected</th><th>Recommended alert / action</th></tr></thead>
+<tbody>
+<tr><td>Immediate market or tight limit exit at CMP ($131.79) ($131.79)</td><td>17.764</td><td>Sell all 17.764 Schwab shares immediately (~$2,341.12). This removes Stage 4 downside toward KRX parity ($93.48).; approx. proceeds $2,341.12</td></tr>
+<tr><td>Hard stop on daily close below $121.34 (Pivot S1 / $116.28 invalidation) if staged ($121.34)</td><td>17.764</td><td>If any shares are staged intraday, sell 100% below $121.34 (Pivot S1) or $116.28 invalidation.; approx. proceeds $2,155.48</td></tr>
+<tr><td>Stage 2 Trend Reclaim above $164.00 (50D SMA) after Q4 Earnings (2027-01-27/28) ($164.00)</td><td>0</td><td>Re-evaluate SKHY only after a Stage 1 base forms and price reclaims $164.00 on &gt;=34.2M shares/day.; approx. proceeds $0.00</td></tr>
+</tbody>
+</table></div>
+<p>These are advisory alert levels for the stated session, not broker orders; verify current holdings and prices before placing or changing any order.</p></section>
+<section class="chapter" data-capital-base="Proceeds from exiting 17.764 Schwab shares of SKHY immediately (~$2,341.12 at CMP $131.79)" id="capital-redeployment"><h2>Capital Redeployment &amp; Opportunity Cost</h2><p>Capital under review: Proceeds from exiting 17.764 Schwab shares of SKHY immediately (~$2,341.12 at CMP $131.79). Cash is an active choice. We compare cash with shortlist ideas and outside names. We do not assume every dollar must be invested right away.</p><div class="table-wrap"><table class="wikitable">
+<caption>Capital redeployment choices for SKHY</caption>
+<thead><tr><th>Destination</th><th>Candidate</th><th>Share of capital</th><th>CMP</th><th>Entry zone</th><th>Stop</th><th>Base target</th><th>Asymmetry</th><th>Recommendation</th><th>Entry / activation condition</th><th>Why this use of capital</th></tr></thead>
+<tbody>
+<tr data-destination="CASH"><td>CASH</td><td>Cash reserve</td><td>100.00%</td><td>N/A</td><td>Not supplied</td><td>Not supplied</td><td>N/A</td><td>N/A</td><td>Park 100% in Schwab Money Market / T-Bill Sweep (~4.86% 2Y Treasury yield)</td><td>Settle proceeds into Schwab cash sweep upon exit.</td><td>Respects the S&amp;P 500 Correction (6 distribution days, 52.6% breadth above 50DMA). Cuts 3.20x-beta Stage 4 risk.</td></tr>
+<tr data-destination="SHORTLIST"><td>SHORTLIST</td><td>MSFT</td><td>0.00%</td><td>$523.88</td><td>$507.61–$526.78</td><td>$452.41</td><td>$0.00</td><td>0.00:1</td><td>Evaluated Shortlist leader MSFT ($523.88); held at 0% today — current snapshot stage: STAGE_2; posture: BUY_AT_CMP_NO_FOMO</td><td>Wait for S&amp;P 500 Correction to end and MSFT to reclaim $529.39.</td><td>S&amp;P 500 is in Correction (6 distribution days). MSFT sits below its 20D SMA ($529.39) with no fresh target in this bundle.</td></tr>
+<tr data-destination="OUTSIDE"><td>OUTSIDE</td><td>TSM</td><td>0.00%</td><td>$398.73</td><td>$369.38–$380.64</td><td>$366.46</td><td>$0.00</td><td>0.00:1</td><td>Evaluated TSMC ($398.73); 0% allocated today — current snapshot stage: STAGE_4; posture: AVOID_STAGE4_OR_BROKEN</td><td>Do not buy in Stage 4. Wait for a reclaim of $430.11 on volume.</td><td>TSMC sits in Stage 1 (Basing) (-7.3% below its $430.11 50D SMA) during this Correction.</td></tr>
+</tbody>
+</table></div>
+<p>The allocation percentages refer to the capital source named above and reconcile to 100%; a cash allocation is deliberate when no equity opportunity clears the evidence and entry hurdles.</p></section>
+<section class="chapter" data-options-verdict="WAIT_FOR_SUPPORT_OR_BASE" id="options-overlay">
+<h2>Options &amp; Call-Convexity Playbook (SKHY)</h2>
+<p><span class="verdict verdict-watch">WAIT FOR SUPPORT OR BASE</span> — <strong>Stand aside at CMP ($131.79): stock is in an active Stage 4 correction below 50D/200D averages. If SKHY tests its major $122.20 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $130/$160) at $10.31 debit toward $186.52 ($1,031.00 max loss -&gt; $1,969.00 max profit, 1.91:1 R:R).</strong></p>
+<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (164.0) and 200D/30W floor (None); trend is broken. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>
+<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:SKHY. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>
+<div class="tradingview-widget-container" style="height: 520px; width: 100%; margin: 1.25rem 0;"><div aria-label="Interactive TradingView daily chart for NASDAQ:SKHY" id="tradingview_skhy_options_chart" role="img" style="height: 100%; width: 100%;"></div><script src="https://s3.tradingview.com/tv.js" type="text/javascript"></script><script type="text/javascript">new TradingView.widget({"autosize":true,"symbol":"NASDAQ:SKHY","interval":"D","timezone":"Etc/UTC","theme":"light","style":"1","locale":"en","toolbar_bg":"#f4f6f8","enable_publishing":false,"hide_top_toolbar":false,"allow_symbol_change":true,"container_id":"tradingview_skhy_options_chart"});</script></div>
+<div class="callout callout-rule">
+<p class="callout-title">Beginner Guide: How This Call Trade Works in Plain Dollars</p>
+<p>Why this spread works differently from buying shares: SKHY is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($131.79) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($130/$160) is structured to be deployed once SKHY tests its major $122.20 support shelf and stabilizes. Selling the upper $160 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $1,031.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $130 Call for $15.93 and simultaneously sell the $160 Call for $5.62, paying $10.31/sh net ($1,031.00 total for 1 spread(s)). That $1,031.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $140.31 (+6.5% from $131.79). Anywhere at or above $160, your $1,031.00 turns into $3,000.00 (+$1,969.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in SKHY adds ~$29.40 to your spread (Net Delta), while sitting flat costs ~$2.28/day in time decay (Net Theta) — much lower than an unhedged call because the sold $160 call decays in your favor.</p>
+</div>
+<div class="table-wrap"><table class="wikitable"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for SKHY</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $130 CALL @ $15.93 mid (bid $15.25 / ask $16.60, OI 21652) + SELL 2027-01-15 $160 CALL @ $5.62 mid (bid $5.35 / ask $5.90, OI 3896)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,031.00 (103.1 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$140.31 (+6.46% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$1,969.00 (1.91:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+29.40 per $1 move | $-2.28/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($1,378.30 gain) or exit early if SKHY closes below $122.20.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>
+<div class="table-wrap"><table class="wikitable"><caption>What Happens to Your $1,031.00 Across Stock Scenarios (SKHY)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $130 at Expiry</td><td>$122.20 (-7.3%)</td><td>$0.00</td><td>$-1,031.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($140.31)</td><td>$140.31 (+6.5%)</td><td>$1,031.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($160)</td><td>$160.00 (+21.4%)</td><td>$3,000.00</td><td>$+1,969.00</td><td><strong>+191.0%</strong></td></tr><tr><td>Bull Overshoot ($214.50)</td><td>$214.50 (+62.8%)</td><td>$3,000.00</td><td>$+1,969.00</td><td><strong>+191.0%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>
+</section>
+<section id="notes">
+<h2 id="references">Notes and sources</h2>
+<ol class="sources reflist">
+<li id="cite_note-1">SK hynix Inc. (2026-01), FY2025 Full-Year Financial Results Announcement — <a href="https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/" rel="noopener" target="_blank">https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/</a></li>
+<li id="cite_note-2">SK hynix Inc. (2026-10-28), Q3 2026 Business Results Announcement — <a href="https://news.skhynix.com/en/q3-2026-business-results/" rel="noopener" target="_blank">https://news.skhynix.com/en/q3-2026-business-results/</a></li>
+<li id="cite_note-3">SK hynix Inc. (2026-07-29), Q2 2026 Business Results Announcement — <a href="https://news.skhynix.com/en/q2-2026-business-results/" rel="noopener" target="_blank">https://news.skhynix.com/en/q2-2026-business-results/</a></li>
+<li id="cite_note-4">SK hynix Inc. (2026-07), US Nasdaq ADS Offering &amp; Listing Announcement — <a href="https://www.skhynix.com/ir/UI-FR-IR12_T1_view/?seq=6722" rel="noopener" target="_blank">https://www.skhynix.com/ir/UI-FR-IR12_T1_view/?seq=6722</a></li>
+<li id="cite_note-5">U.S. SEC EDGAR (2026-06-24), SK hynix Inc. Form F-1 Registration Statement — <a href="https://www.sec.gov/Archives/edgar/data/2120882/000119312526280172/d32785df1.htm" rel="noopener" target="_blank">https://www.sec.gov/Archives/edgar/data/2120882/000119312526280172/d32785df1.htm</a></li>
+<li id="cite_note-6">U.S. SEC EDGAR (2026-07-01), SK hynix Inc. Form F-6 ADS Registration Statement — <a href="https://www.sec.gov/Archives/edgar/data/2120882/000119380526000898/e665622_f6-skhynix.htm" rel="noopener" target="_blank">https://www.sec.gov/Archives/edgar/data/2120882/000119380526000898/e665622_f6-skhynix.htm</a></li>
+<li id="cite_note-7">SK hynix Inc. (2025-01), FY2024 &amp; 4Q24 Financial Results Announcement — <a href="https://news.skhynix.com/en/sk-hynix-announces-4q24-financial-results/" rel="noopener" target="_blank">https://news.skhynix.com/en/sk-hynix-announces-4q24-financial-results/</a></li>
+<li id="cite_note-8">U.S. Department of Commerce / NIST (2024), CHIPS for America SK hynix Indiana Advanced Packaging Facility — <a href="https://www.nist.gov/chips/sk-hynix-indiana-west-lafayette" rel="noopener" target="_blank">https://www.nist.gov/chips/sk-hynix-indiana-west-lafayette</a></li>
+<li id="cite_note-9"><a href="https://news.skhynix.com/en/rulebreaker-revolutions-mr-muf-unlocks-hbm-heat-control/" rel="noopener" target="_blank">SK hynix Newsroom, Rulebreaker Revolutions: MR-MUF Advances HBM Heat Control</a></li>
+<li id="cite_note-10">SK hynix Newsroom (2026-08-27), West Lafayette Indiana Advanced Packaging Groundbreaking — <a href="https://news.skhynix.com/en/indiana-groundbreaking-ceremony-sketch/" rel="noopener" target="_blank">https://news.skhynix.com/en/indiana-groundbreaking-ceremony-sketch/</a></li>
+<li id="cite_note-11">SK hynix Newsroom (2026-07), Nasdaq Opening Bell &amp; CEO Kwak Noh-jung Address — <a href="https://news.skhynix.com/en/fact-09/" rel="noopener" target="_blank">https://news.skhynix.com/en/fact-09/</a></li>
+<li id="cite_note-12">SK hynix Newsroom, SK hynix and Solidigm Introduce First Collaborative Product — <a href="https://news.skhynix.com/en/sk-hynix-and-solidigm-introduce-first-collaborative-product/" rel="noopener" target="_blank">https://news.skhynix.com/en/sk-hynix-and-solidigm-introduce-first-collaborative-product/</a></li>
+<li id="cite_note-13">DataPhoenix (2026-10-28), SK hynix Q3 2026 AI Memory Results, HBM4 &amp; 2027-2028 LTAs — <a href="https://dataphoenix.info/news/sk-hynix-third-quarter-2026-ai-memory-results" rel="noopener" target="_blank">https://dataphoenix.info/news/sk-hynix-third-quarter-2026-ai-memory-results</a></li>
+<li id="cite_note-14">Tom's Hardware (2026), AI Chip Smuggling &amp; HBM Export Control Loophole Analysis — <a href="https://www.tomshardware.com/tech-industry/semiconductors/ai-chip-smugglers-exploit-trade-control-loophole-to-bring-banned-hbm-from-south-korea-into-china-expensive-memory-chips-packaged-with-cheap-unsanctioned-processors-to-become-legal-exports" rel="noopener" target="_blank">https://www.tomshardware.com/tech-industry/semiconductors/ai-chip-smugglers-exploit-trade-control-loophole-to-bring-banned-hbm-from-south-korea-into-china-expensive-memory-chips-packaged-with-cheap-unsanctioned-processors-to-become-legal-exports</a></li>
+<li id="cite_note-15">Counterpoint Research (2026), Global DRAM and HBM Market Share Tracker — <a href="https://counterpointresearch.com/en/insights/global-dram-and-hbm-market-share" rel="noopener" target="_blank">https://counterpointresearch.com/en/insights/global-dram-and-hbm-market-share</a></li>
+<li id="cite_note-16">TrendForce (2026-08-07), Solidigm NAND Operations, Debt and Aging Fabs Analysis — <a href="https://www.trendforce.com/news/2026/08/07/news-sk-hynixs-u-s-nand-unit-solidigm-reportedly-eyes-nasdaq-but-debt-and-aging-fabs-cloud-the-path/" rel="noopener" target="_blank">https://www.trendforce.com/news/2026/08/07/news-sk-hynixs-u-s-nand-unit-solidigm-reportedly-eyes-nasdaq-but-debt-and-aging-fabs-cloud-the-path/</a></li>
+<li id="cite_note-17">The Korea Herald (2026), SK hynix Record 6.73 Trillion KRW R&amp;D &amp; Profit-Sharing Analysis — <a href="https://www.koreaherald.com/article/10694506" rel="noopener" target="_blank">https://www.koreaherald.com/article/10694506</a></li>
+<li id="cite_note-18">SK hynix Newsroom, Cheongju M15X DRAM &amp; HBM Expansion Announcement — <a href="https://news.skhynix.com/en/sk-hynix-to-produce-dram-from-m15x-in-cheongju/" rel="noopener" target="_blank">https://news.skhynix.com/en/sk-hynix-to-produce-dram-from-m15x-in-cheongju/</a></li>
+<li id="cite_note-19">SK hynix Newsroom (2026), Yongin Semiconductor Cluster &amp; Fab Facility Investment — <a href="https://news.skhynix.com/en/fab-facility-investment-2026/" rel="noopener" target="_blank">https://news.skhynix.com/en/fab-facility-investment-2026/</a></li>
+<li id="cite_note-20">BigGo Finance (2026), Solidigm 2022-2025 Turnaround from Capital Impairment to Profitability — <a href="https://finance.biggo.com/news/9fa7848f-5d11-4c05-8b70-aa733dcaf05c" rel="noopener" target="_blank">https://finance.biggo.com/news/9fa7848f-5d11-4c05-8b70-aa733dcaf05c</a></li>
+<li id="cite_note-21">Finviz (2026-11-13), SK hynix Inc. (SKHY) Fundamental &amp; Valuation Card — <a href="https://finviz.com/quote.ashx?t=SKHY" rel="noopener" target="_blank">https://finviz.com/quote.ashx?t=SKHY</a></li>
+<li id="cite_note-22">TradingView (2026-11-13), NASDAQ:SKHY Technicals &amp; Multi-Timeframe Chart — <a href="https://www.tradingview.com/symbols/NASDAQ-SKHY/technicals/" rel="noopener" target="_blank">https://www.tradingview.com/symbols/NASDAQ-SKHY/technicals/</a></li>
+<li id="cite_note-23">Investing.com (2026-11-13), SK hynix Inc. (000660) KRX Historical Price &amp; Share Data — <a href="https://www.investing.com/equities/sk-hynix-inc" rel="noopener" target="_blank">https://www.investing.com/equities/sk-hynix-inc</a></li>
+<li id="cite_note-24">TradingEconomics (2026-11-13), South Korean Won (USD/KRW) Spot Exchange Rate — <a href="https://tradingeconomics.com/south-korea/currency" rel="noopener" target="_blank">https://tradingeconomics.com/south-korea/currency</a></li>
+<li id="cite_note-25">CompaniesMarketCap (2026-11-13), SK hynix (000660.KS) Historical P/B Ratio &amp; Market Cap — <a href="https://companiesmarketcap.com/sk-hynix/pb-ratio/" rel="noopener" target="_blank">https://companiesmarketcap.com/sk-hynix/pb-ratio/</a></li>
+<li id="cite_note-26">Seeking Alpha / FnGuide (2026-11), SK hynix FY2026-FY2027 Consensus Revenue &amp; EPS Estimates — <a href="https://seekingalpha.com/symbol/SKHY/earnings/estimates" rel="noopener" target="_blank">https://seekingalpha.com/symbol/SKHY/earnings/estimates</a></li>
+<li id="cite_note-27">Cboe Global Markets (2026-11-13), Daily Market Statistics: Total &amp; Equity Put/Call Ratios — <a href="https://www.cboe.com/us/options/market_statistics/daily/" rel="noopener" target="_blank">https://www.cboe.com/us/options/market_statistics/daily/</a></li>
+<li id="cite_note-28">Earnings.report (2026-11), SK hynix Q4 2026 / FY2026 Expected Earnings Release Calendar — <a href="https://earnings.report/stocks/SKHY" rel="noopener" target="_blank">https://earnings.report/stocks/SKHY</a></li>
+</ol>
+</section></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk &bull; Curated by Rajasekhar Mekala</span><a href="#top">Back to top &uarr;</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+
+  // Interactive Audiobook / Narrative Reader Bar (activates on *_book.html pages)
+  const audioBar = document.querySelector('.book-audio-bar');
+  if (audioBar && 'speechSynthesis' in window) {
+    const playBtn = audioBar.querySelector('[data-audio-action="play"]');
+    const prevBtn = audioBar.querySelector('[data-audio-action="prev"]');
+    const nextBtn = audioBar.querySelector('[data-audio-action="next"]');
+    const stopBtn = audioBar.querySelector('[data-audio-action="stop"]');
+    const rateSel = audioBar.querySelector('[data-audio-rate]');
+    const statusEl = audioBar.querySelector('[data-audio-status]');
+    const paragraphs = [...report.querySelectorAll('.book-chapter p')];
+    let idx = 0;
+    let playing = false;
+
+    const clearHighlight = () => paragraphs.forEach(p => p.classList.remove('is-speaking'));
+    const speakCurrent = () => {
+      if (!playing || idx < 0 || idx >= paragraphs.length) {
+        playing = false;
+        clearHighlight();
+        if (playBtn) playBtn.textContent = 'Play Audiobook';
+        if (statusEl) statusEl.textContent = 'Ready to listen';
+        return;
+      }
+      speechSynthesis.cancel();
+      clearHighlight();
+      const para = paragraphs[idx];
+      para.classList.add('is-speaking');
+      para.scrollIntoView({block: 'center', behavior: 'smooth'});
+      const sec = para.closest('.book-chapter');
+      const chTitle = sec?.querySelector('h2')?.textContent.trim() || 'Book';
+      if (statusEl) statusEl.textContent = `Reading (${idx + 1}/${paragraphs.length}) • ${chTitle.slice(0, 48)}`;
+      const utter = new SpeechSynthesisUtterance(para.textContent.trim());
+      utter.rate = parseFloat(rateSel?.value || '1.0') || 1.0;
+      utter.onend = () => {
+        if (!playing) return;
+        idx += 1;
+        speakCurrent();
+      };
+      speechSynthesis.speak(utter);
+    };
+
+    playBtn?.addEventListener('click', () => {
+      if (playing) {
+        playing = false;
+        speechSynthesis.cancel();
+        playBtn.textContent = 'Resume Audiobook';
+        if (statusEl) statusEl.textContent = `Paused at paragraph ${idx + 1}/${paragraphs.length}`;
+      } else {
+        playing = true;
+        playBtn.textContent = 'Pause';
+        speakCurrent();
+      }
+    });
+    prevBtn?.addEventListener('click', () => {
+      idx = Math.max(0, idx - 1);
+      if (playing) speakCurrent();
+    });
+    nextBtn?.addEventListener('click', () => {
+      idx = Math.min(paragraphs.length - 1, idx + 1);
+      if (playing) speakCurrent();
+    });
+    stopBtn?.addEventListener('click', () => {
+      playing = false;
+      idx = 0;
+      speechSynthesis.cancel();
+      clearHighlight();
+      if (playBtn) playBtn.textContent = 'Play Audiobook';
+      if (statusEl) statusEl.textContent = 'Ready to listen';
+    });
+    rateSel?.addEventListener('change', () => {
+      if (playing) speakCurrent();
+    });
+  }
+})();
+
+</script></body></html>
