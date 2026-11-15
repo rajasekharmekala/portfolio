@@ -1,0 +1,144 @@
+{
+  "symbol": "COF",
+  "market": "US",
+  "generated_at": "2026-11-15T22:34:27+00:00",
+  "business_quality_verdict": "CYCLICAL_CONDITIONAL",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:COF",
+    "exchange": "NYSE",
+    "company_name": "Capital One Financial Corp",
+    "close": 195.08,
+    "change_1d_pct": 0.76,
+    "perf_1w_pct": -3.33,
+    "perf_1m_pct": -0.24,
+    "perf_3m_pct": -13.66,
+    "rsi_1d": 40.69,
+    "rsi_4h": 37.02,
+    "rsi_1w": 43.77,
+    "sma20": 202.44,
+    "sma50": 201.66,
+    "sma200": 199.95,
+    "sma30_weekly": 201.37,
+    "ema10_weekly": 201.96,
+    "ema20_4h": 199.21,
+    "sma50_4h": 201.76,
+    "atr14": 6.03,
+    "bb_width_pct": 9.45,
+    "pivot_s1": 192.59,
+    "pivot_s2": 180.33,
+    "pivot_r1": 214.3,
+    "pivot_r2": 223.75,
+    "high_52w": 259.63,
+    "low_52w": 174.24,
+    "dist_to_200d_pct": -2.44,
+    "major_shelf": 199.95,
+    "intraday_4h_turn": false,
+    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
+    "setup_summary": "Dislocated below the 50D SMA ($201.66) and overhead 200D SMA ($199.95) after a -1.9% 1M move, with immediate support at $189.58–$192.59. Repair is unconfirmed: 4H RSI sits at 37.02 vs. Daily RSI 40.69, and price ($195.08) remains below the 4H EMA20 ($199.21). No confirmed mean-reversion window exists."
+  },
+  "options_plan": {
+    "symbol": "COF",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "iv_regime": "IV_ELEVATED",
+    "atm_iv_pct": 34.5,
+    "hv20_pct": 23.3,
+    "open_positions_audit": [],
+    "headline": "NO OPTIONS EDGE — Do NOT buy calls or debit spreads while COF sits in Stage 1 (Basing) below overhead resistance in a market Correction. Reference only: 2027-01-15 $195/$220 Bull Call Spread ($8.45 debit) requires a +4.3% rally to $203.45 breakeven and should only be considered after COF reclaims $202.00 on >= 1.5x volume.",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 61,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 195.0,
+          "mid": 10.45,
+          "bid": 9.8,
+          "ask": 11.1,
+          "open_interest": 184
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 220.0,
+          "mid": 2.0,
+          "bid": 1.9,
+          "ask": 2.1,
+          "open_interest": 3481
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 8.45,
+      "max_loss_total": 845.0,
+      "max_loss_nav_bps": 84.5,
+      "max_profit_total": "$1,655.00 (1.96:1 reward-to-risk)",
+      "breakeven_at_expiry": 203.45,
+      "breakeven_move_pct": 4.29,
+      "net_delta_dollars_per_1_move": 36.1,
+      "daily_theta_dollars": -4.5,
+      "underlying_stop_trigger": 181.42,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($1,158.50 gain) or exit early if COF closes below $181.42.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $195 at Expiry",
+          "stock_price": 181.42,
+          "stock_move_pct": -7.0,
+          "contract_value": 0.0,
+          "net_pnl": -845.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($203.45)",
+          "stock_price": 203.45,
+          "stock_move_pct": 4.3,
+          "contract_value": 845.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($220)",
+          "stock_price": 220.0,
+          "stock_move_pct": 12.8,
+          "contract_value": 2500.0,
+          "net_pnl": 1655.0,
+          "return_on_risk_pct": 195.9
+        },
+        {
+          "scenario": "Bull Overshoot ($257.99)",
+          "stock_price": 257.99,
+          "stock_move_pct": 32.2,
+          "contract_value": 2500.0,
+          "net_pnl": 1655.0,
+          "return_on_risk_pct": 195.9
+        }
+      ],
+      "beginner_explainer": [
+        "Why this structure is conditional watch-only: COF sits in Stage 1 (Basing) below its overhead 200-day SMA ($199.95), 30-week SMA ($201.37), and 50-day SMA ($201.66), with immediate support at $189.58–$192.59. Pass 1 confirmed CYCLICAL_CONDITIONAL fundamentals (KPI Health: PASS_WITH_WATCH). Do NOT buy calls or debit spreads while equity capital is REJECTED on Trend; only re-evaluate this defined-risk Bull Call Spread if COF reclaims $202.00 on >= 1.5x volume.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $195 Call for $10.45 and simultaneously sell the $220 Call for $2.00, paying $8.45/sh net ($845.00 total for 1 spread(s)). That $845.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $203.45 (+4.3% from $195.08). Anywhere at or above $220, your $845.00 turns into $2,500.00 (+$1,655.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in COF adds ~$36.10 to your spread (Net Delta), while sitting flat costs ~$4.50/day in time decay (Net Theta). That decay is much lower than an unhedged call because the sold $220 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (COF)</h2>\n<p><span class=\"verdict verdict-avoid\">NO OPTIONS EDGE (CONDITIONAL WATCH ONLY)</span> &mdash; <strong>Do NOT deploy capital into calls or debit spreads today.</strong> Equity capital is REJECTED on Trend in a US market Correction, and a 61-DTE $195/$220 Bull Call Debit Spread ($8.45 debit, $845.00 max loss) requires a +4.3% rally above $203.45 just to break even while bleeding daily theta.</p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> COF trades in Stage 1 (Basing) below its overhead 200-day SMA ($199.95), 30-week SMA ($201.37), and 50-day SMA ($201.66) after a -1.9% 1M move. Immediate support sits at $189.58&ndash;$192.59, not $199.95. The 4H chart has not turned up (4H RSI 37.02 vs. Daily RSI 40.69; close $195.08 vs. 4H EMA20 $199.21), leaving zero short-term momentum edge.</p>\n<p><strong>Conditional Reclaim Trigger:</strong> Pass 1 confirmed <strong>CYCLICAL_CONDITIONAL</strong> fundamentals (KPI Health: <code>PASS_WITH_WATCH</code>) and 13.8% CET1 capital. Only if COF reclaims $202.00 on &ge; 1.5x volume with 4H RSI &gt; 50 would defined-risk call spreads become eligible for re-evaluation. <em>Account / Chain Feed: Public options chain used (ATM IV 34.5% vs. HV20 23.3%; no open Robinhood tab).</em></p>\n</section>\n"
+}
