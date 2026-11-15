@@ -1,0 +1,133 @@
+{
+  "id": "ch-3",
+  "web_title": "3. Distribution, Footprint, Pricing Mechanics & Unit Economics",
+  "book_title": "Chapter 3: How a Dollar of Compute Flows Through the P&L",
+  "question": "How does DigitalOcean acquire customers at low cost, price its infrastructure, and convert $901M of FY2025 revenue into operating cash flow?",
+  "epigraph": {
+    "quote": "In cloud infrastructure, gross margin is what you tell equity investors, but operating cash flow minus equipment leases is what pays for the next rack of GPUs.",
+    "author": "Infrastructure Capital Note"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "text": "Go-To-Market: PLG Inbound Funnel + Targeted Inside Sales"
+    },
+    {
+      "type": "p",
+      "html": "DigitalOcean does not build or own land-heavy data center campuses. Instead, it leases power, cooling, and cage space inside third-party colocation facilities across 20 sites in 13 regions [3][16]. It installs its own servers, storage, and GPU racks inside those leased footprints [3]. This model avoids multi-year greenfield permitting delays and speeds up capacity rollouts."
+    },
+    {
+      "type": "p",
+      "html": "However, colocation leases and rising GPU power density sit directly inside Cost of Goods Sold (COGS) [2][3]. As GPU revenue scaled in 2026, GAAP gross margin fell ~980 bps from 59.9% in FY2025 to ~50.1% in Q3 2026 [1][2][3]. Even so, operating expenses stay lean. In FY2025, Sales & Marketing (S&M) was just $82.4M, or 9.1% of revenue, thanks to organic PLG traffic [3]."
+    },
+    {
+      "type": "h3",
+      "text": "Data Center Footprint, Pricing Model & Billing Mechanics"
+    },
+    {
+      "type": "p",
+      "html": "Working capital and cash collection are clean. Self-serve users pay monthly by credit card, while larger accounts sign tight billing terms [3]. In FY2025, DigitalOcean converted $901.4M of revenue into $310.3M of operating cash flow (34.4% OCF margin) [3]. In 9M 2026, operating cash flow rose to $318.1M versus $252.3M in 9M 2025 [2]."
+    },
+    {
+      "type": "p",
+      "html": "The catch sits below operating cash flow. In FY2025, DigitalOcean spent $129.1M on cash P&E capex and $10.8M on internal software [3]. It also added $126.8M of equipment under financing arrangements—bringing total capital deployment to $266.7M (29.6% of revenue) [3]. In 9M 2026, cash P&E capex was $105.1M, software was $19.3M, and financed equipment jumped to $75.1M (up from $27.6M) [2]."
+    },
+    {
+      "type": "h3",
+      "text": "FY2025 Cash & Margin Waterfall"
+    },
+    {
+      "type": "p",
+      "html": "Tracing a FY2025 revenue dollar makes this trade-off clear. Out of every $100 in sales, COGS took $40.10, leaving $59.90 in gross profit [3]. R&D ($17.90), S&M ($9.10), and G&A ($15.40) left $17.40 in GAAP operating profit [3]. After cash capex and software ($15.50), headline Adjusted FCF was $18.60 per $100—before deducting $14.10 per $100 in financed hardware [3]."
+    },
+    {
+      "type": "waterfall",
+      "period": "FY2025",
+      "unit": "M",
+      "revenue": 901.4,
+      "cogs": 361.8,
+      "employee_cost": 80.3,
+      "other_opex": 302.3,
+      "da": 137.4,
+      "interest": 17.9,
+      "other_income": 67.6,
+      "tax": -52.6,
+      "cfo": 310.3,
+      "capex": 139.9,
+      "caption": "FY2025 Audited Revenue-to-Cash-Flow Waterfall ($M, Form 10-K)",
+      "takeaway": "GAAP Operating Income of $157.0M (17.4% margin) converted into $310.3M CFO; note that $137.4M D&A and $80.3M SBC are embedded in GAAP COGS/OpEx, and $126.8M of equipment financing sits outside cash capex ($139.9M)."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "Forensic Watch: Cash Capex vs. Equipment Financing",
+      "paragraphs": [
+        "DigitalOcean pairs a lean 9.1% S&M funnel with strong 34.4% operating cash flow margins [3]. Yet ~29.6% total capital intensity (cash capex plus equipment financing) caps true owner earnings."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Cash Conversion vs. Hardware Refresh Cycles"
+    },
+    {
+      "type": "p",
+      "html": "Understanding DigitalOcean's cash engine requires tracking both cash capex and leased gear. In FY2025, operating cash flow reached $310.3M on $901.4M of revenue [3]. Cash P&E capex took $129.1M and internal software took $10.8M [3]. That left $168M in headline Adjusted FCF, a 19% margin [3]. However, DigitalOcean also added $126.8M of equipment under financing deals [3]."
+    },
+    {
+      "type": "p",
+      "html": "In 9M 2026, that gap widened further [2]. Operating cash flow rose to $318.1M, while cash capex and software totaled $124.4M [2]. At the same time, financed equipment jumped to $75.1M, nearly triple the $27.6M in 9M 2025 [2]. GPUs depreciate fast as new chip generations arrive every two years. True owner earnings must deduct those financing payments to reflect real economic cash flow."
+    },
+    {
+      "type": "p",
+      "html": "Another nuance in DigitalOcean's cost stack is power and cooling density. Traditional CPU racks draw modest power inside standard colocation cages. Modern NVIDIA H100 and H200 GPU racks draw far more power per square foot and cost more to cool. That physical shift explains why GAAP gross margin dropped nearly ten points between FY2025 and Q3 2026 [1][3]."
+    },
+    {
+      "type": "p",
+      "html": "Colocation leases also create fixed overhead that bites if cluster utilization drops. When demand is hot, leased racks scale fast without long construction waits. When demand cools, those lease bills still come due every month. Watching gross margin hold above 50% is therefore essential [1]."
+    }
+  ],
+  "book_paragraphs": [
+    "Most enterprise software companies spend a quarter to a third of their revenue just knocking on doors to find customers. In FY2025, DigitalOcean spent $82.4 million on sales and marketing—barely 9.1% of its $901.4 million revenue. How do you grow a cloud business to nearly a billion dollars on a 9% marketing budget? You let the product and the documentation do the selling.",
+    "For more than a decade, DigitalOcean's front door has been technical content. Developers searching for how to configure a firewall, deploy a Docker container, or tune PostgreSQL land on DigitalOcean's tutorials, trust the clarity, and spin up a Droplet on a credit card. Under Paddy Srinivasan, the company didn't abandon that self-serve engine; it wired telemetry onto it. When a startup's monthly bill crosses $500 or its engineers start testing GPU Droplets, an inside-sales rep and a solutions architect reach out with committed-use pricing and architecture help. That warm-inbound model keeps customer acquisition costs remarkably low while still capturing $100k+ and $1M+ Scalers.",
+    "To understand DigitalOcean's economic engine, we have to trace how a dollar of compute revenue travels from the customer's credit card or annual commit down to free cash flow. Unlike hyperscalers that build and own massive multi-hundred-megawatt campuses on their own land, DigitalOcean employs an asset-light colocation model. It leases power, cooling, and physical cage space from third-party data center operators—such as Equinix and Digital Realty—and installs its own server racks, networking gear, and GPU clusters inside those leased footprints.",
+    "This leased-colocation architecture creates two immediate financial consequences. First, it avoids the multi-year land-and-power permitting bottlenecks of greenfield data center construction, allowing DigitalOcean to bring capacity online in quarters rather than years. Second, it embeds fixed lease obligations and rising power-density costs directly inside Cost of Goods Sold, which is why the rapid mix shift toward high-power GPU clusters compressed GAAP gross margin from 59.9 percent in FY2025 down to approximately 50.1 percent in Q3 2026.",
+    "This is why unit-economics analysis at DigitalOcean cannot stop at the gross-margin line. A 50.1% GAAP gross margin in Q3 2026 looks modest next to pure-play software peers, yet DigitalOcean's self-serve PLG funnel keeps sales and marketing below 10% of revenue—far leaner than enterprise cloud rivals that spend 35% of revenue on quota-carrying reps. The open question is whether those S&M savings are enough to offset rising colocation leases and financed GPU principal payments."
+  ],
+  "book_subsections": [
+    {
+      "title": "Leased Colocation, Predictable Bandwidth, and Fast Cash Collection",
+      "paragraphs": [
+        "Physically, DigitalOcean doesn't pour concrete for billion-dollar hyperscale campuses. It operates 20 data centers across 13 global regions by leasing colocation space and power, then installing its own servers and GPU racks. That asset-light real estate posture lets it expand into hubs like Atlanta, Richmond, or Kansas City without multi-year construction delays, though it does mean DigitalOcean is a price-taker on colocation power and rack leases.",
+        "To the customer, the pricing pitch is simple: no surprises. Every Droplet comes with a generous pooled monthly bandwidth allowance, and overages cost a flat $0.01 per GiB—roughly a ninth of what major hyperscalers charge for internet egress. Smaller accounts pay monthly via credit card, keeping working capital tight and Days Sales Outstanding minimal, while larger AI accounts increasingly sign committed annual contracts."
+      ]
+    },
+    {
+      "title": "Tracing the FY2025 Dollar",
+      "paragraphs": [
+        "If you trace every dollar of DigitalOcean's $901.4 million FY2025 revenue through the audited 10-K, the cash-generation mechanics become crystal clear. Cost of revenue took $361.8 million, leaving $539.6 million in gross profit (a 59.9% margin). Research and development ($161.6 million), sales and marketing ($82.4 million), and general and administrative expenses ($138.5 million) totaled $382.6 million, leaving $157.0 million in GAAP operating income.",
+        "Because $137.4 million of non-cash depreciation and amortization and $80.3 million of stock-based compensation were baked into those GAAP expenses, operating cash flow surged to $310.3 million. Subtract $139.9 million in cash capital expenditures (property, equipment, and capitalized software), and you get $168.0 million in Adjusted Free Cash Flow. Just remember the footnote: DigitalOcean also financed $126.8 million of equipment through leasing and financing arrangements in FY2025—a reminder that GPU expansion consumes more real capital than the cash-capex line alone reveals."
+      ]
+    },
+    {
+      "title": "The Bandwidth Wedge and Cash Collection Velocity",
+      "paragraphs": [
+        "On the revenue side, DigitalOcean's pricing model is built to exploit the single biggest pain point of hyperscale clouds: punitive data-egress fees. While AWS and GCP charge up to $0.08 to $0.09 per gigabyte for outbound internet traffic—turning data-heavy applications into unpredictable billing traps—DigitalOcean bundles generous pooled monthly bandwidth allowances into every Droplet and charges a flat $0.01 per GiB for overages. For video-streaming startups, developer tooling platforms, and API-heavy SaaS firms, that 80%-plus discount on egress is often the decisive economic reason to stay off AWS.",
+        "Meanwhile, cash collection is extraordinarily clean. Self-serve customers pay monthly via credit card, and upmarket enterprise contracts carry tight billing terms, keeping days sales outstanding low and working capital negative or near neutral. In FY2025, DigitalOcean converted $901.4 million of revenue into $310.3 million of operating cash flow (34.4% OCF margin). The catch lies below the operating cash flow line: when you combine $129.1 million of cash P&E capex, $10.8 million of capitalized internal-use software, and $126.8 million of equipment acquired under financing arrangements, total capital deployment reached $266.7 million—nearly 30 percent of revenue."
+      ]
+    },
+    {
+      "title": "Depreciation, Lease Commitments, and the True Cost of Capacity",
+      "paragraphs": [
+        "A subtle trap in analyzing infrastructure-as-a-service companies is taking traditional free cash flow—operating cash flow minus cash capital expenditures—at face value. In FY2025, DigitalOcean reported $310.3 million of operating cash flow and $129.1 million of cash P&E purchases, plus $10.8 million of capitalized internal-use software, yielding its headline $168 million Adjusted Free Cash Flow (a 19% margin). Yet buried in the supplemental cash flow disclosures is $126.8 million of equipment acquired under financing arrangements.",
+        "Because financed servers and GPUs enter the balance sheet as assets and debt obligations without hitting cash investing outflows on day one, looking solely at cash capex understates the true capital required to sustain 40% top-line growth. In the first nine months of 2026, operating cash flow climbed to $318.1 million, while cash P&E capex was $105.1 million and equipment under financing arrangements jumped to $75.1 million—up sharply from $27.6 million in the prior-year period. Every dollar of AI revenue must therefore be judged against its full economic capital charge, including principal repayments on financed iron."
+      ]
+    }
+  ],
+  "book_callouts": [
+    {
+      "title": "The 9.1% S&M Advantage",
+      "quote": "A 9.1% sales-and-marketing ratio is DigitalOcean's quiet superpower—it funds R&D and cushions lower GPU gross margins.",
+      "text": "As DigitalOcean courts $1M+ AI accounts, watch whether S&M stays near 9%–11% of revenue or creeps upward toward traditional enterprise software levels."
+    }
+  ]
+}
