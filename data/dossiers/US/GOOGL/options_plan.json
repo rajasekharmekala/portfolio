@@ -1,0 +1,149 @@
+{
+  "symbol": "GOOGL",
+  "market": "US",
+  "generated_at": "2026-11-15T21:40:24+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": true,
+      "status": "connected",
+      "active_tabs": [
+        {
+          "title": "BE 191.99 ▼ −4.92% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
+        }
+      ]
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NASDAQ:GOOGL",
+    "exchange": "NASDAQ",
+    "company_name": "Alphabet Inc. Class A",
+    "close": 295.77,
+    "change_1d_pct": -0.98,
+    "perf_1w_pct": 3.82,
+    "perf_1m_pct": -16.82,
+    "perf_3m_pct": -14.71,
+    "rsi_1d": 40.58,
+    "rsi_4h": 48.37,
+    "rsi_1w": 39.19,
+    "sma20": 303.42,
+    "sma50": 328.19,
+    "sma200": 338.48,
+    "sma30_weekly": 348.09,
+    "ema10_weekly": 316.89,
+    "ema20_4h": 294.55,
+    "sma50_4h": 312.94,
+    "atr14": 10.29,
+    "bb_width_pct": 29.32,
+    "pivot_s1": 251.37,
+    "pivot_s2": 222.91,
+    "pivot_r1": 333.85,
+    "pivot_r2": 387.87,
+    "high_52w": 408.61,
+    "low_52w": 272.11,
+    "dist_to_200d_pct": -12.62,
+    "major_shelf": 272.11,
+    "intraday_4h_turn": true,
+    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
+    "setup_summary": "GOOGL sits below its 50D SMA ($328.19) after a -16.8% one-month drop. Price now stabilizes above major support ($272.11) with 4H momentum turning up. 4H RSI (48.37) leads Daily RSI (40.58) above the 4H EMA20 ($294.55). This creates a conditional call-spread window toward $328.19 once Stage 1 repairs."
+  },
+  "options_plan": {
+    "symbol": "GOOGL",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 35.3,
+    "hv20_pct": 53.2,
+    "open_positions_audit": [],
+    "headline": "Buy 1x GOOGL 2027-01-15 $290/$340 Bull Call Spread (61 DTE) at $16.53 net debit ($1,653.00 max loss -> $3,347.00 max profit, 2.02:1 R:R).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 61,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 290.0,
+          "mid": 19.98,
+          "bid": 19.7,
+          "ask": 20.25,
+          "open_interest": 3244
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 340.0,
+          "mid": 3.45,
+          "bid": 3.35,
+          "ask": 3.55,
+          "open_interest": 7210
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 16.53,
+      "max_loss_total": 1653.0,
+      "max_loss_nav_bps": 165.3,
+      "max_profit_total": "$3,347.00 (2.02:1 reward-to-risk)",
+      "breakeven_at_expiry": 306.53,
+      "breakeven_move_pct": 3.64,
+      "net_delta_dollars_per_1_move": 41.7,
+      "daily_theta_dollars": -6.15,
+      "underlying_stop_trigger": 272.11,
+      "profit_taking_rule": "Close the spread at 65% to 75% of max profit ($2,342.90 gain). Exit early if GOOGL closes below $272.11.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $290 at Expiry",
+          "stock_price": 272.11,
+          "stock_move_pct": -8.0,
+          "contract_value": 0.0,
+          "net_pnl": -1653.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($306.53)",
+          "stock_price": 306.53,
+          "stock_move_pct": 3.6,
+          "contract_value": 1653.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($340)",
+          "stock_price": 340.0,
+          "stock_move_pct": 15.0,
+          "contract_value": 5000.0,
+          "net_pnl": 3347.0,
+          "return_on_risk_pct": 202.5
+        },
+        {
+          "scenario": "Bull Overshoot ($391.16)",
+          "stock_price": 391.16,
+          "stock_move_pct": 32.3,
+          "contract_value": 5000.0,
+          "net_pnl": 3347.0,
+          "return_on_risk_pct": 202.5
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: GOOGL pulled back into its major $272.11 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals — even though Stage 2 equity rules wait for trend repair, a defined-risk Bull Call Spread captures a rebound with strictly capped downside.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $290 Call for $19.98 and simultaneously sell the $340 Call for $3.45, paying $16.53/sh net ($1,653.00 total for 1 spread(s)). That $1,653.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $306.53 (+3.6% from $295.77). Anywhere at or above $340, your $1,653.00 turns into $5,000.00 (+$3,347.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in GOOGL adds ~$41.70 to your spread (Net Delta), while sitting flat costs ~$6.15/day in time decay (Net Theta) — much lower than an unhedged call because the sold $340 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (GOOGL)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x GOOGL 2027-01-15 $290/$340 Bull Call Spread (61 DTE) at $16.53 net debit ($1,653.00 max loss -&gt; $3,347.00 max profit, 2.02:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> GOOGL sits below its 50D SMA ($328.19) after a -16.8% one-month drop. Price now stabilizes above major support ($272.11) with 4H momentum turning up. 4H RSI (48.37) leads Daily RSI (40.58) above the 4H EMA20 ($294.55). This creates a conditional call-spread window toward $328.19 once Stage 1 repairs. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:GOOGL. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_googl_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:GOOGL\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:GOOGL\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_googl_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: GOOGL pulled back into its major $272.11 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals — even though Stage 2 equity rules wait for trend repair, a defined-risk Bull Call Spread captures a rebound with strictly capped downside.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $290 Call for $19.98 and simultaneously sell the $340 Call for $3.45, paying $16.53/sh net ($1,653.00 total for 1 spread(s)). That $1,653.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $306.53 (+3.6% from $295.77). Anywhere at or above $340, your $1,653.00 turns into $5,000.00 (+$3,347.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in GOOGL adds ~$41.70 to your spread (Net Delta), while sitting flat costs ~$6.15/day in time decay (Net Theta) — much lower than an unhedged call because the sold $340 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for GOOGL</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $290 CALL @ $19.98 mid (bid $19.70 / ask $20.25, OI 3244) + SELL 2027-01-15 $340 CALL @ $3.45 mid (bid $3.35 / ask $3.55, OI 7210)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,653.00 (165.3 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$306.53 (+3.64% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$3,347.00 (2.02:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+41.70 per $1 move | $-6.15/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close the spread at 65% to 75% of max profit ($2,342.90 gain). Exit early if GOOGL closes below $272.11.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $1,653.00 Across Stock Scenarios (GOOGL)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $290 at Expiry</td><td>$272.11 (-8.0%)</td><td>$0.00</td><td>$-1,653.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($306.53)</td><td>$306.53 (+3.6%)</td><td>$1,653.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($340)</td><td>$340.00 (+15.0%)</td><td>$5,000.00</td><td>$+3,347.00</td><td><strong>+202.5%</strong></td></tr><tr><td>Bull Overshoot ($391.16)</td><td>$391.16 (+32.3%)</td><td>$5,000.00</td><td>$+3,347.00</td><td><strong>+202.5%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
