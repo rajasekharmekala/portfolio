@@ -1,0 +1,188 @@
+{
+  "id": "ch-3",
+  "title": "3. Distribution, Supply Chain & Unit Economics",
+  "epigraph": {
+    "quote": "Fabless silicon is an asset-light illusion until leading-edge wafers tighten and memory prices spike; then working capital reveals who truly holds pricing power.",
+    "author": "Semiconductor Supply-Chain Axiom"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "Qualcomm runs a <b>fabless</b> chip supply chain. It outsources wafer fabrication, bumping, and most testing to outside partners [3, 22]. Key suppliers include TSMC at 3nm and 4nm nodes, Samsung Foundry, and OSAT packagers ASE Group and Amkor [3, 22]. Because Qualcomm owns no billion-dollar fabs, capital intensity stays low. FY2026 capex was $2,494 million, or 5.8% of revenue [2, 3]. That rose from $1,192 million (2.7%) in FY2025 due to data-center test gear and Alphawave [2, 3]. In return, Qualcomm signs multi-year wafer capacity deals and holds large chip inventories."
+    },
+    {
+      "type": "p",
+      "html": "Go-to-market (GTM) distribution differs sharply by segment. In <b>Handsets</b>, Qualcomm sells straight to top phone makers like Apple, Samsung, Xiaomi, Oppo, Vivo, and Honor [8, 22]. It bundles processors, modems, RF front-end modules, and power chips in annual flagship deals [8, 22]. In <b>Automotive</b>, sales run through Tier-1 integrators (Bosch, Continental, Harman, Valeo) and direct automaker deals (BMW, Mercedes-Benz, GM) [20]. Those car programs use 3-to-5-year design-win cycles [20]. In <b>IoT</b>, module partners (Quectel, Fibocom, Telit) and distributors (Arrow, Avnet) serve tens of thousands of buyers. Finally, <b>QTL</b> collects royalties directly via OEM audits and quarterly shipment reports [8]."
+    },
+    {
+      "type": "table",
+      "caption": "Table 3.1: Working Capital &amp; Cash-Conversion Cycle Forensics (FY2025 vs. FY2026)",
+      "headers": [
+        "Working Capital Metric ($M / Days)",
+        "FY2025 (Ended Sep 28, 2025)",
+        "FY2026 (Ended Sep 27, 2026)",
+        "YoY Shift &amp; Operational Driver"
+      ],
+      "rows": [
+        [
+          "Accounts Receivable, net ($M)",
+          "$4,315",
+          "$4,199",
+          "-$116M (-2.7%); DSO steady at ~35.5 days on $43.12B sales [1, 3]."
+        ],
+        [
+          "Inventories ($M)",
+          "$6,526",
+          "$8,640",
+          "+$2,114M (+32.4%); DIO jumped from ~121 days to ~156 days on 3nm/Auto/Data Center build [1, 3]."
+        ],
+        [
+          "Trade Accounts Payable ($M)",
+          "$2,791",
+          "$3,056",
+          "+$265M (+9.5%); DPO ~55 days, stable foundry payment terms [3]."
+        ],
+        [
+          "Net Working Capital (AR + Inv - AP)",
+          "$8,050",
+          "$9,783",
+          "+$1,733M cash absorbed by inventory expansion in FY26 [1, 3]."
+        ],
+        [
+          "QCT Gross Margin Proxy (Consol. GM%)",
+          "55.4% (FY25)",
+          "53.1% (FY26)",
+          "-230 bps compression from higher foundry/memory input costs; price hikes slated for 2H FY27 [3, 8]."
+        ]
+      ],
+      "takeaway": "FY2026 inventory jumped 32.4% to $8.64B (156 DIO) for 3nm mobile, auto, and data-center silicon. That build absorbed $1.73B of working capital and pulled operating cash flow down from $14.01B to $11.15B."
+    },
+    {
+      "type": "p",
+      "html": "Margin pressure also showed up in FY2026 product costs. Consolidated gross margin fell 230 basis points from 55.4% in FY2025 to 53.1% in FY2026 [3]. Higher memory and leading-edge foundry wafer prices drove that dip [8]. Meanwhile, accounts receivable stayed tight at $4,199 million, or roughly 35.5 days of sales [1, 3]. Trade payables rose 9.5% to $3,056 million (~55 days) [3]. Management has rolled out selective price hikes to pass through input inflation, though margin relief will not show up until the second half of FY2027 [8]."
+    },
+    {
+      "type": "waterfall",
+      "period": "FY2026",
+      "unit": "M",
+      "revenue": 43120,
+      "cogs": 20222,
+      "employee_cost": 0,
+      "other_opex": 12610,
+      "da": 1630,
+      "interest": 689,
+      "other_income": 1445,
+      "tax": 4214,
+      "pat": 13628,
+      "cfo": 11145,
+      "capex": 2494,
+      "lines": [
+        {
+          "label": "Gross Billed Revenue",
+          "amount": 43120,
+          "signed": false,
+          "note": "Audited FY2026 Form 10-K consolidated revenue: $43,120M [2, 3]."
+        },
+        {
+          "label": "Cost of Revenues (COGS)",
+          "amount": -20222,
+          "signed": true,
+          "note": "Foundry wafers, packaging, and product costs: -$20,222M (53.1% gross margin) [3]."
+        },
+        {
+          "label": "Research &amp; Development (R&amp;D)",
+          "amount": -10207,
+          "signed": true,
+          "note": "Core 5G/6G, Oryon CPU, AI NPU, and Data Center engineering: -$10,207M (23.7% of sales) [3]."
+        },
+        {
+          "label": "SG&amp;A and Other Operating Expenses",
+          "amount": -4033,
+          "signed": true,
+          "note": "SG&amp;A ($3,701M) + other operating expenses ($332M): -$4,033M [3]."
+        },
+        {
+          "label": "Operating EBIT (GAAP Operating Income)",
+          "amount": 8658,
+          "signed": false,
+          "note": "Audited GAAP Operating Income: $8,658M (20.1% operating margin) [2, 3]."
+        },
+        {
+          "label": "Add Back: Depreciation &amp; Amortization",
+          "amount": 1630,
+          "signed": false,
+          "note": "Non-cash D&amp;A embedded in COGS/OpEx: +$1,630M (Operating EBITDA = $10,288M) [3]."
+        },
+        {
+          "label": "Finance Costs (Interest Expense)",
+          "amount": -689,
+          "signed": true,
+          "note": "Interest on $15.1B debt stack: -$689M [3]."
+        },
+        {
+          "label": "Investment &amp; Other Income, net",
+          "amount": 1445,
+          "signed": false,
+          "note": "QSI equity/venture gains and treasury interest income: +$1,445M [3]."
+        },
+        {
+          "label": "Profit Before Tax (EBT)",
+          "amount": 9414,
+          "signed": false,
+          "note": "Audited Pre-Tax Income: $9,414M [3]."
+        },
+        {
+          "label": "Income Tax Benefit (FY26 Discrete)",
+          "amount": 4214,
+          "signed": false,
+          "note": "FY2026 net income tax benefit (vs. $7,122M expense in FY25): +$4,214M [2, 3]."
+        },
+        {
+          "label": "Reported Net Income (PAT)",
+          "amount": 13628,
+          "signed": false,
+          "note": "Audited FY2026 GAAP Net Income: $13,628M ($12.70 diluted EPS) [2, 3]."
+        },
+        {
+          "label": "Working Capital &amp; Non-Cash Bridge",
+          "amount": -4113,
+          "signed": true,
+          "note": "Inventory build (+$2.1B), tax-benefit non-cash reversal, and SBC/other adjustments: -$4,113M [3]."
+        },
+        {
+          "label": "Cash Flow from Operations (CFO)",
+          "amount": 11145,
+          "signed": false,
+          "note": "Audited FY2026 Operating Cash Flow: $11,145M [2, 3]."
+        },
+        {
+          "label": "Capital Expenditures (Capex)",
+          "amount": -2494,
+          "signed": true,
+          "note": "PP&amp;E and test/infrastructure additions: -$2,494M [2, 3]."
+        },
+        {
+          "label": "Free Cash Flow (FCF)",
+          "amount": 8651,
+          "signed": false,
+          "note": "Reconciled CFO ($11,145M) less Capex ($2,494M): $8,651M (20.1% FCF margin) [2, 3]."
+        }
+      ],
+      "caption": "Table 3.2: Qualcomm FY2026 $100 Revenue-to-Free-Cash-Flow Waterfall (Audited Form 10-K, $ Millions)",
+      "takeaway": "Out of every $100 of FY2026 sales ($43,120M), $46.90 went to COGS and $23.67 to R&amp;D, leaving $20.08 in GAAP EBIT. A discrete +$9.77 tax benefit and -$9.54 working-capital drag left $20.06 per $100 in Free Cash Flow ($8,651M)."
+    }
+  ],
+  "book_paragraphs": [
+    "Whenever a semiconductor company calls itself \"fabless,\" it is tempting to imagine a pure software-like cash machine with zero physical friction. You and I need to be more disciplined than that. Qualcomm does not own multi-billion-dollar wafer fabrication plants—it outsources manufacturing to TSMC in Taiwan and Samsung Foundry in South Korea, and packaging to OSAT partners like ASE and Amkor. That keeps capital expenditures remarkably modest: $2.49 billion in fiscal 2026, or just 5.8% of sales. Yet fabless does not mean risk-free.",
+    "To secure leading-edge 3-nanometer wafer capacity for flagship Snapdragon processors, Qualcomm has to commit to multi-year supply agreements and absorb the timing risk between wafer fabrication and phone launches. You can see that friction directly on the fiscal 2026 balance sheet. While accounts receivable stayed disciplined at $4.20 billion—a brisk 35.5 days of sales—inventories swelled 32.4% in a single year to $8.64 billion, pushing days inventory outstanding from 121 days to roughly 156 days. At the same time, rising memory and foundry input costs shaved 230 basis points off consolidated gross margin, bringing it down to 53.1%. Management has already rolled out selective product price increases to offset those input costs, though the margin relief won't fully show up until the second half of fiscal 2027.",
+    "Look also at how differently Qualcomm reaches its customers across its three main divisions. In Handsets, it is a concentrated, high-stakes courtship: a handful of giants—Apple, Samsung, Xiaomi, Oppo, and Vivo—account for the vast majority of volume, negotiating annual flagship bundles of processors, modems, and RF front-end modules. In Automotive, the sales cycle stretches across three to five years of safety validation, flowing through Tier-1 integrators like Bosch and Continental or directly into automaker architectures like BMW's Neue Klasse. In IoT, where no single customer can justify a bespoke engineering team, Qualcomm relies on module partners like Quectel and global distributors like Arrow and Avnet to reach tens of thousands of industrial buyers.",
+    "Now walk down the fiscal 2026 unit-economics waterfall with me, $100 at a time. Out of every $100 Qualcomm billed in FY2026, $46.90 paid for wafers, packaging, and product cost of goods sold, leaving $53.10 in gross profit. Next came the lifeblood of the business: $23.67 went straight into R&D—$10.21 billion in a single year—to fund custom Oryon CPU cores, 6G research, automotive ADAS stacks, and data-center silicon. After $9.35 for SG&A and other operating overhead, Qualcomm earned $20.08 in GAAP operating profit. A one-time discrete tax benefit lifted accounting net income to $31.60 per $100 of sales, or $13.63 billion, but the cash flow statement tells the truer operational story: after funding $2.1 billion of extra inventory and $5.78 per $100 in capital expenditures, Qualcomm still generated $20.06 of pure Free Cash Flow on every $100 of revenue—$8.65 billion in cold, hard cash."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "FY2026 GAAP Net Income ($13.63B) was flatteringly boosted by a $4.21B discrete tax benefit. Free Cash Flow ($8.65B, 20.1% margin)—despite a $2.1B inventory build—is the cleaner measure of Qualcomm's underlying unit economics."
+    }
+  ]
+}

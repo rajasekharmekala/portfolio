@@ -1,0 +1,149 @@
+{
+  "symbol": "QCOM",
+  "market": "US",
+  "generated_at": "2026-11-15T21:38:43+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": true,
+      "status": "connected",
+      "active_tabs": [
+        {
+          "title": "BE 191.99 ▼ −4.92% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
+        }
+      ]
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NASDAQ:QCOM",
+    "exchange": "NASDAQ",
+    "company_name": "QUALCOMM Incorporated",
+    "close": 172.47,
+    "change_1d_pct": -2.64,
+    "perf_1w_pct": 6.94,
+    "perf_1m_pct": -0.67,
+    "perf_3m_pct": 4.13,
+    "rsi_1d": 48.8,
+    "rsi_4h": 49.73,
+    "rsi_1w": 49.19,
+    "sma20": 173.3,
+    "sma50": 178.73,
+    "sma200": 170.2,
+    "sma30_weekly": 184.35,
+    "ema10_weekly": 173.24,
+    "ema20_4h": 172.59,
+    "sma50_4h": 173.49,
+    "atr14": 9.23,
+    "bb_width_pct": 17.01,
+    "pivot_s1": 154.69,
+    "pivot_s2": 144.59,
+    "pivot_r1": 181.92,
+    "pivot_r2": 199.05,
+    "high_52w": 259.92,
+    "low_52w": 121.99,
+    "dist_to_200d_pct": 1.33,
+    "major_shelf": 170.2,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below 50D SMA (178.73) and declining 30W SMA (184.35), while holding +1.33% above its 200D SMA (170.20)."
+  },
+  "options_plan": {
+    "symbol": "QCOM",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "WAIT_FOR_SUPPORT_OR_BASE",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 49.6,
+    "hv20_pct": 67.8,
+    "open_positions_audit": [],
+    "headline": "Stand aside at CMP ($172.47): stock is in a Stage 3 pullback (screened CAP_REJECTED) below 50D/30W SMAs and 1.33% above its 200D SMA ($170.20). If QCOM tests its major $152.37–$157.01 support shelf (or stabilizes above $170.20), deploy a defined-risk Call Spread (2027-01-15 $170/$200 at $10.25 debit, or Feb/Mar 2027 post-earnings) toward $195.00 ($1,025.00 max loss -> $1,975.00 max profit, 1.93:1 R:R).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 61,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 170.0,
+          "mid": 14.97,
+          "bid": 14.75,
+          "ask": 15.2,
+          "open_interest": 4480
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 200.0,
+          "mid": 4.72,
+          "bid": 4.5,
+          "ask": 4.95,
+          "open_interest": 16226
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 10.25,
+      "max_loss_total": 1025.0,
+      "max_loss_nav_bps": 102.5,
+      "max_profit_total": "$1,975.00 (1.93:1 reward-to-risk)",
+      "breakeven_at_expiry": 180.25,
+      "breakeven_move_pct": 4.51,
+      "net_delta_dollars_per_1_move": 31.2,
+      "daily_theta_dollars": -2.4,
+      "underlying_stop_trigger": 170.2,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($1,382.50 gain) or exit early if QCOM closes below $170.20.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $170 at Expiry",
+          "stock_price": 170.0,
+          "stock_move_pct": -1.4,
+          "contract_value": 0.0,
+          "net_pnl": -1025.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($180.25)",
+          "stock_price": 180.25,
+          "stock_move_pct": 4.5,
+          "contract_value": 1025.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($200)",
+          "stock_price": 200.0,
+          "stock_move_pct": 16.0,
+          "contract_value": 3000.0,
+          "net_pnl": 1975.0,
+          "return_on_risk_pct": 192.7
+        },
+        {
+          "scenario": "Bull Overshoot ($228.09)",
+          "stock_price": 228.09,
+          "stock_move_pct": 32.2,
+          "contract_value": 3000.0,
+          "net_pnl": 1975.0,
+          "return_on_risk_pct": 192.7
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: QCOM is in a Stage 3 pullback (screened CAP_REJECTED) below its 50D ($178.73) and 30W ($184.35) averages, holding just +1.33% above its 200D SMA ($170.20). Buying outright calls at CMP ($172.47) risks theta decay during consolidation. Note that 2027-01-15 expires before Q1 FY27 earnings (late Jan / early Feb 2027), so catalyst-driven traders should select Feb/Mar 2027 expirations once support stabilizes.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $170 Call for $14.97 and simultaneously sell the $200 Call for $4.72, paying $10.25/sh net ($1,025.00 total for 1 spread(s)). That $1,025.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $180.25 (+4.5% from $172.47). Anywhere at or above $200, your $1,025.00 turns into $3,000.00 (+$1,975.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in QCOM adds ~$31.20 to your spread (Net Delta), while sitting flat costs ~$2.40/day in time decay (Net Theta) — much lower than an unhedged call because the sold $200 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (QCOM)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at CMP ($172.47): stock is in a Stage 3 pullback (screened CAP_REJECTED) below 50D/30W SMAs and +1.33% above its 200D SMA ($170.20). Once support stabilizes ($152.37–$157.01 or reclaimed 50D/30W), deploy this defined-risk Call Spread (2027-01-15 $170/$200 at $10.25 debit, or Feb/Mar 2027 to capture Q1 FY27 earnings) toward $195.00 ($1,025.00 max loss -&gt; $1,975.00 max profit, 1.93:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below 50D SMA (178.73) and declining 30W SMA (184.35), while holding +1.33% above its 200D SMA (170.20). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:QCOM. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_qcom_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:QCOM\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:QCOM\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_qcom_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: QCOM is in a Stage 3 pullback (screened CAP_REJECTED) below its 50D ($178.73) and 30W ($184.35) averages, holding +1.33% above its 200D SMA ($170.20). Buying calls at CMP ($172.47) risks theta decay during consolidation; note also that 2027-01-15 expires before Q1 FY27 earnings (late Jan / early Feb 2027), so catalyst-focused traders should consider Feb/Mar 2027 expirations once support stabilizes. Selling the upper $200 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $1,025.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $170 Call for $14.97 and simultaneously sell the $200 Call for $4.72, paying $10.25/sh net ($1,025.00 total for 1 spread(s)). That $1,025.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $180.25 (+4.5% from $172.47). Anywhere at or above $200, your $1,025.00 turns into $3,000.00 (+$1,975.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in QCOM adds ~$31.20 to your spread (Net Delta), while sitting flat costs ~$2.40/day in time decay (Net Theta) — much lower than an unhedged call because the sold $200 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for QCOM</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $170 CALL @ $14.97 mid (bid $14.75 / ask $15.20, OI 4480) + SELL 2027-01-15 $200 CALL @ $4.72 mid (bid $4.50 / ask $4.95, OI 16226)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,025.00 (102.5 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$180.25 (+4.51% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$1,975.00 (1.93:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+31.20 per $1 move | $-2.40/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($1,382.50 gain) or exit early if QCOM closes below $170.20.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $1,025.00 Across Stock Scenarios (QCOM)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $170 at Expiry</td><td>$170.00 (-1.4%)</td><td>$0.00</td><td>$-1,025.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($180.25)</td><td>$180.25 (+4.5%)</td><td>$1,025.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($200)</td><td>$200.00 (+16.0%)</td><td>$3,000.00</td><td>$+1,975.00</td><td><strong>+192.7%</strong></td></tr><tr><td>Bull Overshoot ($228.09)</td><td>$228.09 (+32.2%)</td><td>$3,000.00</td><td>$+1,975.00</td><td><strong>+192.7%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
