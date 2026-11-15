@@ -1,0 +1,211 @@
+{
+  "id": "ch-7",
+  "title": "7. Why the Price Is What It Is: Valuation, Reverse DCF & Peer Comps",
+  "book_title": "Chapter 7: Why the Stock Trades Here — Market Expectations vs. Peers",
+  "epigraph": {
+    "quote": "Volatility is not a risk-free source of return; when compounded daily at three-to-one, variance becomes a silent tax on anyone who mistakes a trading instrument for an equity.",
+    "author": "Institutional Derivatives Desk Maxim"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "At the November 13, 2026 close, KORU traded at <strong>$7.68</strong>, down 5.42% on the day [8]. It sits <strong>-88.00%</strong> below its $63.98 52-week high and just above its $6.28 52-week low [8]. Unlike an operating company, a 3x daily leveraged ETF has no enterprise value or free cash flow multiple. Instead, three forces drive KORU's price: the valuation of the MSCI Korea 25/50 Index, 300% daily compounding, and fee plus swap financing drag [1, 2, 5]."
+    },
+    {
+      "type": "p",
+      "html": "Separating <em>cheap equities in Seoul</em> from <em>structural decay in New York</em> explains the $7.68 price. The MSCI Korea 25/50 Index trades near <strong>8.5x trailing P/E</strong> and roughly <strong>4.0x forward P/E</strong> [14]. Surging AI High-Bandwidth Memory (HBM) profits at Samsung Electronics and SK Hynix drive those low multiples [4, 14]. Samsung (~22%–25% index weight) trades near 9.1x–10.5x trailing earnings, while SK Hynix (~19%–25%) trades near 6.0x–7.3x [4, 14]. Even so, unleveraged EWY fell -21.61% over three months to $142.78 [9]. KORU amplified that drop into a <strong>-65.79%</strong> three-month loss and a <strong>-79.52%</strong> six-month collapse [8]."
+    },
+    {
+      "type": "table",
+      "caption": "Reverse-Implied Return & Volatility-Drag Audit for KORU at $7.68 (2026-11-13)",
+      "headers": [
+        "Economic Driver",
+        "Observed / Contractual Parameter",
+        "Annualized Impact on 3x Holder",
+        "Valuation Implication"
+      ],
+      "rows": [
+        [
+          "Underlying Index Valuation",
+          "MSCI Korea 25/50 (~8.5x TTM P/E, ~4.0x Fwd P/E) [14]",
+          "Cyclical HBM/DRAM earnings peak risk",
+          "Cheap multiples do not protect against multiple compression or FX drag"
+        ],
+        [
+          "Prospectus Expense Ratio",
+          "1.32% net (incl. AFFE); 0.95% operating cap [2, 6]",
+          "-1.32% to -1.68% audited drag [1]",
+          "Guaranteed annual fee bleed regardless of market direction"
+        ],
+        [
+          "Swap Financing Cost",
+          "SOFR + 60 to 85 bps on $461.65M notional (200% borrowed exposure) [1, 25]",
+          "Approx. -9.0% to -11.0% gross financing drag before collateral yield",
+          "Partially offset by T-bill/MMF collateral yield ($2.22M FY25) [1]"
+        ],
+        [
+          "Realized Volatility (HV20)",
+          "224.1% annualized on KORU (~74.7% implied index vol) [8]",
+          "Variance drag = -3 * sigma_index^2 = -167% annualized at current vol [5]",
+          "Choppy sideways or down regimes rapidly erode NAV toward zero"
+        ],
+        [
+          "5-Year & 10-Year NAV Reality",
+          "Finviz 5Y return -8.61%; FY2022 -76.86% vs. FY2025 +231.64% [1, 6]",
+          "Extreme path dependency",
+          "Requires sustained low-volatility Stage 2 uptrend to outperform 1x"
+        ]
+      ],
+      "explanatory_p": "Reverse-engineering what KORU's $7.68 price requires for a new buyer to break even or compound: at 224.1% HV20, volatility decay overwhelms single-digit P/E multiples unless the underlying index enters a directional, low-volatility uptrend.",
+      "takeaway": "Buying KORU because Samsung and SK Hynix trade at 4x–10x earnings is a classic category error: equity valuation belongs to the 1x index, whereas 3x daily compounding is governed by trend persistence minus variance drag."
+    },
+    {
+      "type": "peer_snapshot_table",
+      "caption": "Peer Snapshot Comparison: KORU vs. Unleveraged Korea ETFs (EWY, FLKR) & 3x Leveraged Peers (YINN, SOXL) as of 2026-11-13",
+      "peers": [
+        "EWY",
+        "FLKR",
+        "YINN",
+        "SOXL"
+      ],
+      "takeaway": "Unleveraged Korea peers EWY (-11.82% 1M, +48.59% 1Y) and FLKR (+54.58% 1Y Finviz, 0.09% ER) preserved massive 1-year gains while KORU (-10.39% 1Y) gave back its entire rally due to 3x compounding erosion."
+    },
+    {
+      "type": "p",
+      "html": "Look closely at the 1-year divergence in our peer table. Over the trailing 12 months, unleveraged <strong>EWY</strong> gained <strong>+48.59%</strong> ($142.78) [9]. Low-cost peer <strong>FLKR</strong> ($47.36, 0.09% ER) posted a similar gain [11, 20]. Over that exact same year, 3x-leveraged <strong>KORU</strong> fell <strong>-10.39%</strong> [8]. That 59-point negative gap proves how fast quadratic volatility drag erodes a 3x daily fund [5, 24]. Peers <strong>YINN</strong> ($23.15, -56.01% 1Y) and <strong>SOXL</strong> ($58.32, -65.08% 6M) show the exact same pattern when volatility spikes [12, 13, 21, 22]."
+    },
+    {
+      "type": "table",
+      "caption": "6-Month Path-Dependency Matrix: Implied KORU Return Across Underlying Index Paths & Volatility Regimes",
+      "headers": [
+        "Underlying 6M Index Return",
+        "Low-Vol Uptrend (20% Index Vol)",
+        "Moderate Vol (40% Index Vol)",
+        "Current Stress Regime (75% Index Vol)"
+      ],
+      "rows": [
+        [
+          "+20% (Strong Korea Rally)",
+          "+68.5% (Positive Compounding)",
+          "+50.2% (Modest Drag)",
+          "-8.4% (Volatility Drag Wipes Out Gain)"
+        ],
+        [
+          "+10% (Gradual Advance)",
+          "+29.1% (Healthy 3x)",
+          "+15.1% (Slippage Visible)",
+          "-29.8% (Severe Negative Divergence)"
+        ],
+        [
+          "0% (Flat / Sideways Chop)",
+          "-4.4% (Fee + Mild Variance Drag)",
+          "-14.8% (Structural Bleed)",
+          "-48.0% (Half of Capital Lost on Flat Index)"
+        ],
+        [
+          "-15% (Pullback / Correction)",
+          "-41.2% (3x Loss + Drag)",
+          "-47.6% (Compounded Drawdown)",
+          "-68.1% (Matches Actual -65.8% 3M Drop)"
+        ]
+      ],
+      "explanatory_p": "Illustrative 6-month continuous-compounding sensitivity using exp(3*r - 3*sigma^2*t - fee_drag*t) assuming ~3% annualized net fee/swap spread after collateral yield.",
+      "takeaway": "In a 75% underlying volatility regime (matching KORU's 224.1% HV20), the Korean index must rally more than +25% in six months just for a KORU holder to break even."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "The 1x-vs-3x Mathematical Trap",
+      "paragraphs": [
+        "If an investor wants exposure to South Korea's 4x forward P/E semiconductor cycle or the KRX Corporate Value-Up program [14, 26], FLKR charges 0.09% [11] and EWY charges 0.59% [15] with zero daily leverage reset. Paying 1.32%–1.68% [1, 2] plus swap financing to hold KORU across a choppy or Stage 4 correction turns a +48.59% underlying year into a -10.39% loss [8, 9]."
+      ]
+    },
+    {
+      "type": "estimate",
+      "the_number": "Estimated -167% annualized variance drag at 224.1% KORU HV20 (plus -1.68% audited expense ratio)",
+      "how_calculated": "Continuous-time leveraged ETF variance drag formula: -0.5 * L * (L - 1) * sigma_index^2, where L = 3 and implied index volatility sigma_index = 224.1% / 3 = 74.7% [5, 8].",
+      "the_inputs": "KORU HV20 = 224.1% [8]; Audited FY2025 Net Expense Ratio = 1.68% [1]; Swap financing = SOFR + 60–85 bps on $461.65M notional offset by $2.22M collateral yield [1, 25].",
+      "the_range": "If index volatility normalizes to 25%–30%, variance drag drops to -18.8% to -27.0% annualized; at current 74.7% stress volatility, drag exceeds -160% annualized.",
+      "if_off": "Even if realized volatility halves tomorrow to 37% on the index, 3x variance drag remains -41% annualized—requiring a +15%–20% directional index rally just to stay flat."
+    },
+    {
+      "type": "p",
+      "html": "Unhedged <strong>KRW/USD currency exposure</strong> adds a second valuation drag. KORU settles in US dollars against a USD-priced index [1, 4]. A 5% drop in the Korean won creates a 15% daily-compounded headwind for KORU holders. Meanwhile, the Korea Exchange's Corporate Value-Up program [26] aims to lift dividends and buybacks over many years. Investors should capture that multi-year reform through FLKR (0.09% ER) [11] or EWY (0.59% ER) [10], not a 3x daily swap fund."
+    },
+    {
+      "type": "parallel",
+      "role": "CYCLE_VALUATION",
+      "company": "Direxion Daily Semiconductor Bull 3X Shares (SOXL)",
+      "region_era": "United States / 2021–2026 Semiconductor Cycles",
+      "mechanism": "3x daily reset on a concentrated semiconductor index with heavy single-sector cyclicality; booming AI/memory demand drives low forward multiples while high realized volatility erodes multi-quarter 3x returns during pullbacks.",
+      "outcome_numbers": "SOXL peaked at $302.00 (52W high) before collapsing -65.08% over 6 months to $58.32 (-80.69% off peak) with 5-year Finviz return of -0.25% despite secular AI chip growth [13, 18, 22].",
+      "lesson_for_symbol": "Even when the underlying semiconductor thesis is structurally sound, 3x daily compounding turns multi-month Stage 4 corrections into 65%–88% drawdowns that wipe out years of gains."
+    },
+    {
+      "type": "p",
+      "html": "In sum, KORU at $7.68 is priced as a high-volatility derivative reflecting both a -21.61% three-month pullback in EWY [9] and severe 3x compounding drag [5, 8]. Without an enterprise-value floor, even cheap 4.0x forward Korean equity multiples [14] cannot prevent further NAV erosion if realized volatility remains elevated."
+    },
+    {
+      "type": "trigger",
+      "text": "What would change this valuation call: KORU's underlying 20-day index volatility must fall below 30% annualized while EWY reclaims its 30-week SMA ($175.43) so 3x compounding works for holders rather than against them."
+    }
+  ],
+  "book_paragraphs": [
+    "When you and I sit down to value a normal company, we ask what its free cash flow will look like five years from now and what multiple a rational buyer would pay for that cash stream. With KORU trading at $7.68 as of the November 13, 2026 close—an 88.00% collapse from its 52-week high of $63.98—that entire mental framework has to be thrown out the window. KORU is not a business. It has no factories, no customers, and no terminal value. Its price is a mathematical output of three moving parts: the valuation of the MSCI Korea 25/50 Index, the path-dependent compounding of 300% daily returns, and the relentless drag of management fees, swap financing, and realized volatility.",
+    "Here is the paradox that traps so many smart investors. If you look underneath the hood at the MSCI Korea 25/50 Index, the fundamental equities look almost absurdly cheap. The index trades around 8.5 times trailing earnings and roughly 4.0 times forward earnings because AI-driven High-Bandwidth Memory demand has sent consensus profit forecasts soaring for Samsung Electronics and SK Hynix, which together command roughly 42% to 48% of the capped index. An investor glances at a 4x forward P/E, sees KORU down 88% from its peak, and thinks, 'How much lower can it go?'",
+    "The answer, unfortunately, is that it can go much lower—even if the underlying Korean stock market goes up over a twelve-month stretch. You do not need a theoretical textbook to prove this; the November 13, 2026 market tape hands us the smoking gun on a silver platter. Over the trailing one-year period, the unleveraged iShares MSCI South Korea ETF (EWY) gained +48.59% to close at $142.78, and the low-cost Franklin FTSE South Korea ETF (FLKR, charging just 0.09%) delivered a similar gain. Over that exact same twelve-month window, KORU—which promises 300% of the daily index return—is down -10.39%. Read that again. The underlying market rose nearly 49%, and the 3x bull fund lost more than 10%.",
+    "Why did that happen? Because volatility drag scales with the square of leverage. When KORU's 20-day historical volatility sits at 224.1% annualized—implying roughly 75% annualized volatility in the underlying index—the daily reset mechanism forces Rafferty Asset Management's swap desks to buy high after up days and sell low after down days. At 75% index volatility, the mathematical variance drag alone is roughly 3 times sigma-squared, or over 160% annualized in a sideways or choppy tape. Add in KORU's 1.32% prospectus expense ratio (1.68% audited including broker interest in FY2025) and swap financing spreads of SOFR plus 60 to 85 basis points across $461.65 million of notional swaps, and the wrapper becomes a melting ice cube whenever the trend stalls.",
+    "Let us translate that math into plain English using a six-month sensitivity check. If South Korea's stock market moves completely sideways (0% return) over the next six months at the current 75% underlying volatility regime, a KORU holder loses roughly 48% of their capital simply from daily reset slippage and fees. Even if Korean equities rally +20% over six months amidst two-way volatility at 75% annualized vol, KORU still finishes negative by roughly -8%. For KORU to generate the kind of +231.64% surge it posted in FY2025, you do not merely need Korean earnings to be cheap; you need a rare, low-volatility, unidirectional uptrend where daily volatility stays below 25% to 30%.",
+    "Look at the peer comparison alongside other 3x leveraged vehicles like YINN (Direxion Daily FTSE China Bull 3X, down -56.01% over 1 year at $23.15) and SOXL (Direxion Daily Semiconductor Bull 3X, down -65.08% over 6 months at $58.32). Every single one of them exhibits the exact same structural behavior: explosive multi-bagger upside during a low-volatility, unidirectional Stage 2 advance, followed by catastrophic capital destruction when volatility spikes and the trend breaks. Meanwhile, EWY ($20.63B AUM, 0.59% ER) and FLKR ($1.70B AUM, 0.09% ER) sit on the exact same Korean equity fundamentals without the daily reset tax.",
+    "Remember too that South Korean equities carry currency and governance nuances that amplify this volatility. Because KORU is USD-denominated and unhedged against the South Korean won (KRW), any risk-off spike in the US dollar simultaneously hits Korean exporters' translated NAV and triggers foreign institutional outflows from Seoul. And while the Korea Exchange's Corporate Value-Up program aims to narrow the 'Korea Discount' through higher dividends and buybacks, governance reform plays out over years—not single trading sessions. Using a 3x daily ETF to express a multi-year Value-Up or 4x P/E thesis is using a sprint vehicle for a marathon.",
+    "So why does KORU trade at $7.68 today? Because the market is pricing in two realities simultaneously: first, South Korean equities have entered a sharp pullback from their highs (EWY is down -21.61% over three months), and second, KORU's 3x daily compounding engine has amplified that 21.6% index pullback into a 65.8% three-month wipeout. At $7.68, there is no valuation floor in KORU—only a mathematical dependency on whether the next 30 to 90 days bring a clean, low-volatility uptrend or more two-way turbulence."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "Never confuse a cheap underlying index with a cheap leveraged ETF. If Samsung Electronics and SK Hynix trade at 4x forward earnings, you can express that thesis in EWY or FLKR with time on your side. The moment you step into KORU, time flips from your ally into your enemy."
+    }
+  ],
+  "section_takeaway": "KORU's -10.39% 1-year return vs. EWY's +48.59% 1-year gain proves that 3x daily volatility drag overwhelms cheap 8.5x trailing / 4.0x forward Korean equity multiples whenever the trend turns choppy.",
+  "book_subsections": [
+    {
+      "title": "7.1 Unpacking the 4x Forward P/E Illusion in Seoul",
+      "paragraphs": [
+        "Why do Samsung Electronics and SK Hynix trade at single-digit trailing multiples and roughly 3x to 4x forward consensus earnings? Because memory semiconductors are among the most violently cyclical industries on earth. When High-Bandwidth Memory and DRAM enter an AI-driven supply squeeze, operating margins explode upward, causing sell-side forward earnings estimates to spike faster than stock prices. Historically, peak-cycle earnings in memory chips are precisely when multiples compress to their lowest levels—because institutional buyers know that any normalization in hyperscaler capex or wafer supply can cut earnings in half within four quarters.",
+        "When you buy an unleveraged fund like EWY or FLKR at 8.5x trailing earnings, you are compensated for that cyclicality by owning real corporate equity that pays dividends, repurchases shares under Korea's Value-Up initiative, and survives a downcycle without forced selling. When you buy KORU, however, you inherit all of the memory-cycle volatility without any of the staying power. Every 5% daily swing in SK Hynix becomes a 15% daily swing in KORU, and the daily reset locks in variance drag on every reversal."
+      ]
+    },
+    {
+      "title": "7.2 Why EWY Gained +48.59% While KORU Lost -10.39%",
+      "paragraphs": [
+        "Consider the mathematical mechanics behind that 59-percentage-point 1-year divergence. Suppose an underlying index rises +10% on Day 1 and falls -9.09% on Day 2. The unleveraged EWY investor is right back at 1.000 (0.00% net return). A 3x daily leveraged holder, however, rises +30% on Day 1 to 1.300, and then falls -27.27% on Day 2 to 0.9455—a permanent -5.45% loss on a flat two-day round trip. Repeat that pattern across 252 trading days in a high-volatility market, and the 3x wrapper bleeds even when the underlying index climbs nearly 50% over the year."
+      ]
+    },
+    {
+      "title": "7.3 Currency (KRW/USD) & Korea Value-Up Structural Reality",
+      "paragraphs": [
+        "Beyond semiconductor cyclicality, you and I have to account for the silent currency lever embedded inside KORU. Neither KORU nor EWY hedges its South Korean won exposure back into US dollars. When global equity markets enter a Correction—like the one the S&P 500 is experiencing right now—institutional capital tends to rush into the US dollar and out of emerging-market export currencies. A 4% slide in the won against the dollar hits EWY by roughly 4%, but inside KORU's 3x daily swap book, that currency move is magnified threefold alongside any equity selloff.",
+        "Meanwhile, bulls often point to South Korea's Corporate Value-Up program as a structural re-rating catalyst that could lift Korean price-to-book and price-to-earnings multiples closer to developed-market peers. That is a perfectly sensible multi-year thesis for an unleveraged investor buying FLKR at a 0.09% annual fee or EWY at 0.59%. Corporate governance reform, dividend hikes, and chaebol share cancellations unfold quarter by quarter over three to five years. Trying to capture a slow-burn governance re-rating inside a 3x daily ETF that charges 1.68% audited expenses and resets every afternoon at 4:00 PM Eastern is a classic mismatch between thesis horizon and instrument design."
+      ]
+    },
+    {
+      "title": "7.4 Peer Architecture: Why FLKR (0.09%) and EWY (0.59%) Dominate for Long-Term Exposure",
+      "paragraphs": [
+        "Compare the fee and risk architecture across our four peer benchmarks as of November 13, 2026. Franklin Templeton's FLKR ($1.70B AUM, $47.36) charges just 0.09% per year with zero daily leverage reset and delivered +54.58% over the trailing year on Finviz. BlackRock's EWY ($20.63B AUM, $142.78) charges 0.59% with unmatched institutional options liquidity and gained +48.59% over the past year. Compare that against the 3x leveraged cohort: KORU (-10.39% 1Y), YINN (-56.01% 1Y), and SOXL (-65.08% 6M). Every single 3x peer demonstrates the same lesson—leverage is a rental for low-volatility Stage 2 trends, never a substitute for owning the underlying asset class."
+      ]
+    },
+    {
+      "title": "7.5 Historical Cycle Twin: What SOXL's 5-Year Flatline Teaches KORU Holders",
+      "paragraphs": [
+        "If you doubt that a booming semiconductor cycle can still leave a 3x leveraged ETF flat or negative over five years, look at Direxion's flagship Daily Semiconductor Bull 3X Shares (SOXL). Over the past five years—one of the greatest AI and data-center semiconductor booms in market history—SOXL's 5-year Finviz return sits at -0.25%, and as of November 13, 2026 it is down -65.08% over six months from its $302.00 52-week high to $58.32. The underlying chips grew earnings enormously, yet the 3x daily wrapper gave back years of gains inside a single high-volatility correction. KORU carries the exact same structural DNA, amplified by single-country Korea risk and won-dollar FX volatility."
+      ]
+    },
+    {
+      "title": "7.6 Key Takeaway: Valuation Belongs to the 1x Index, Not the 3x Wrapper",
+      "paragraphs": [
+        "When you separate the underlying Korean businesses from the Direxion derivative structure, everything clicks into focus. Samsung Electronics, SK Hynix, Hyundai Motor, and KB Financial generate real cash flows, pay dividends, and trade at single-digit earnings multiples. KORU, by contrast, is a daily-resetting swap contract that charges 1.68% audited expenses and suffers quadratic variance drag whenever volatility spikes. Never buy a 3x daily wrapper on a P/E thesis, because the wrapper will bleed out while you wait for the P/E multiple to re-rate."
+      ]
+    }
+  ]
+}
