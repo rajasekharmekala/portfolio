@@ -137,6 +137,7 @@ def main():
     ap.add_argument("--kind", required=True, choices=list(THRESH))
     ap.add_argument("--facts")
     ap.add_argument("--research", help="run-specific research record")
+    ap.add_argument("--allocation", help="optional path to allocation_<MKT>_<date>.json from portfolio_allocator.py")
     ap.add_argument("--max-na-pct", type=float, default=5.0)
     ap.add_argument("--price-tol-pct", type=float, default=1.5)
     ap.add_argument("--partial", action="store_true",
@@ -219,11 +220,41 @@ def main():
         elif not re.search(r"\d", t) or not re.search(r"\b(if|unless|until|would|trigger|below|above|breaks?|closes?)\b", t, re.I):
             errors.append(f"CASE NOTE LACKS NUMBERS OR IF/THEN TRIGGER: '{t[:50]}...'")
     if not args.partial and args.kind == "portfolio_audit" and F:
-        holds = [s for s, m in F["instruments"].items() if "holding" in m.get("roles", []) and not m.get("error")]
+        tracking_syms = set()
+        alloc_obj = json.load(open(args.allocation, encoding="utf-8")) if getattr(args, "allocation", None) and os.path.isfile(args.allocation) else None
+        if alloc_obj:
+            tracking_syms = {str(t.get("symbol", "")).upper() for t in (alloc_obj.get("tracking_positions") or [])}
+        else:
+            try:
+                sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+                import data_layer
+                scoring_p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".agents", "config", "scoring.json")
+                track_cap = float(json.load(open(scoring_p, encoding="utf-8")).get("position_sizing", {}).get("tracking_positions", {}).get("max_weight_pct", 0.35))
+                mkt_code = F.get("market", "IN")
+                pos_qty, cash_sum = {}, 0.0
+                for apth in data_layer.accounts_for(mkt_code):
+                    _, pdct, csh = data_layer.account_state(apth)
+                    cash_sum += csh
+                    for sy, pv in pdct.items():
+                        pos_qty[sy.upper()] = pos_qty.get(sy.upper(), 0.0) + pv["quantity"]
+                mvs = {sy: qt * (F["instruments"].get(sy, {}).get("close") or 0.0) for sy, qt in pos_qty.items()}
+                nw_est = sum(mvs.values()) + cash_sum
+                if nw_est > 0:
+                    tracking_syms = {sy for sy, mv in mvs.items() if 0.0 < (mv / nw_est * 100.0) < track_cap}
+            except Exception:
+                tracking_syms = set()
+        holds = [
+            s for s, m in F["instruments"].items()
+            if "holding" in m.get("roles", []) and not m.get("error") and s.upper() not in tracking_syms
+        ]
         alltext = " ".join(c["text"] for c in cases)
         missing = [s for s in holds if not re.search(rf"(?<![A-Z0-9]){re.escape(s)}(?![A-Z0-9])", alltext)]
         if missing:
             errors.append(f"HOLDINGS WITHOUT A CASE NOTE ({len(missing)}/{len(holds)}): {', '.join(missing[:20])}")
+        if alloc_obj:
+            nw_str = f"{alloc_obj['net_worth']:,.2f}"
+            if nw_str not in raw:
+                errors.append(f"ALLOCATOR MISMATCH: report missing reconciled net worth {nw_str} from {args.allocation}")
 
     # 3. data table takeaways
     tables = [i for i, b in enumerate(B) if b["kind"] == "table" and not b["infobox"] and len(b["rows"]) > 2]

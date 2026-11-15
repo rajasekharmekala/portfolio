@@ -1,18 +1,56 @@
 {
-  "$comment": "SINGLE SOURCE OF TRUTH for portfolio allocation buckets, position sizing, Stage 2 momentum & No-FOMO entry rules, and citation standards. Skills must reference this file and must not restate numbers that differ from it.",
-  "schema_version": 3,
-  "updated": "2026-10-29",
+  "$comment": "SINGLE SOURCE OF TRUTH for portfolio allocation buckets, position sizing, Stage 2 momentum & No-FOMO entry rules, sector-rotation guardrails, options/leveraged sleeves, hysteresis convergence, and citation standards. Skills and scripts must reference this file and must not restate numbers that differ from it.",
+  "schema_version": 4,
+  "updated": "2026-11-15",
   "buckets": {
-    "CORE_ALPHA": { "US": [35, 40], "IN": [30, 40] },
-    "TACTICAL_MOMENTUM": { "US": [50, 65], "IN": [50, 65] },
-    "LEVERAGED_SATELLITE": { "range_pct": [20, 25], "hard_max_pct": 30 },
-    "LEAPS_OPTIONS": { "range_pct": [5, 10], "hard_max_pct": 10, "note": "LEAPS only; short-dated options are outside this cap" },
+    "CORE_ALPHA": { "US": [35, 45], "IN": [35, 45] },
+    "TACTICAL_MOMENTUM": { "US": [25, 40], "IN": [40, 55] },
+    "LEVERAGED_SATELLITE": {
+      "range_pct": [0, 12],
+      "hard_max_pct": 12,
+      "max_positions": 2,
+      "single_position_max_pct": 6.0,
+      "time_stop_sessions": 15,
+      "profit_trim_pct": 15.0,
+      "profit_trim_fraction": 0.5,
+      "sector_index_etfs_only": true,
+      "forbid_underlying_overlap": true,
+      "choppy_downtrend_new_buys_pct": 0.0,
+      "note": "Liquid 2x/3x sector or country/index ETFs only for 1-4 week rotation swings; single-stock 2x ETFs are phased out."
+    },
+    "LEAPS_OPTIONS": {
+      "range_pct": [0, 10],
+      "hard_max_pct": 10,
+      "basis": "max_of_cost_or_mv",
+      "per_underlying_cost_max_pct": 2.0,
+      "max_loss_bps_per_trade": 60,
+      "min_leaps_delta": 0.60,
+      "max_leaps_delta": 0.82,
+      "min_leaps_dte": 240,
+      "roll_or_exit_dte": 120,
+      "debit_spread_iv_hv20_ratio": 1.15,
+      "profit_trim_pct": 45.0,
+      "profit_trim_fraction": 0.5,
+      "note": "Counter-cyclical drawdown calls and VCP LEAPS on COMPOUNDER_PASS underlyings; use Bull Call Debit Spreads whenever IV > 1.15x HV20."
+    },
+    "COMBINED_DECAY_SLEEVE": {
+      "hard_max_pct": 15.0,
+      "components": ["LEVERAGED_SATELLITE", "LEAPS_OPTIONS"],
+      "note": "Prevents simultaneous volatility-drag and theta bleed in sideways markets."
+    },
     "CASH": {
-      "range_pct": [5, 10],
+      "range_pct": [5, 25],
+      "regime_floors_pct": {
+        "Uptrend (broad)": 5.0,
+        "Uptrend (narrow breadth)": 12.0,
+        "Correction (below 50-DMA, above 200-DMA)": 15.0,
+        "Downtrend (capitulation bounce / follow-through watch)": 18.0,
+        "Downtrend": 22.0
+      },
       "vix_ladder": [
         { "vix_below": 15, "cash_pct": 5 },
-        { "vix_below": 22, "cash_pct": 7.5 },
-        { "vix_below": null, "cash_pct": 10 }
+        { "vix_below": 22, "cash_pct": 10 },
+        { "vix_below": null, "cash_pct": 15 }
       ]
     }
   },
@@ -21,6 +59,29 @@
     "initial_cost_cap_pct": 10,
     "runaway_winner_cap_pct": 22,
     "let_winners_run_rule": "Never mechanically trim a Stage 2 winner with intact fundamentals and rising/stable estimates solely because RSI > 70 or weight crossed 15%; allow appreciated weight up to runaway_winner_cap_pct (22%) while trailing the stop to the rising 21-day EMA or 50-day SMA.",
+    "tracking_positions": {
+      "max_weight_pct": 0.35,
+      "max_combined_weight_pct": 1.5,
+      "exclude_from_slot_count": true,
+      "exclude_from_case_notes": true,
+      "note": "Tiny tracking stubs (<0.35% of Net Worth) are excluded from the 12-15 active slot count, portfolio averages, and individual case-note gates, while still reconciled in total NAV."
+    },
+    "active_slots": [12, 15],
+    "count_unique_underlyings_across_sleeves": true,
+    "core_names": [5, 7],
+    "total_names": [12, 15],
+    "ununderwritten_holding_policy": {
+      "freeze_adds": true,
+      "provisional_pilot_cap_pct": 6.0,
+      "grandfather_existing": true,
+      "enforce_hard_stops": true,
+      "provisional_score_penalty_pts": 6.0
+    },
+    "cluster_risk": {
+      "correlation_threshold": 0.65,
+      "max_cluster_notional_pct": 25.0,
+      "max_cluster_heat_pct": 3.5
+    },
     "risk_unit_sizing": {
       "formula": "weight_pct = min(tier_max_pct, risk_budget_bps / ((entry_price - stop_loss) / entry_price * 10000) * 100)",
       "tier_risk_budget_bps": {
@@ -31,10 +92,49 @@
         "TIER_0": 0
       },
       "max_portfolio_heat_pct": 12.0,
+      "regime_heat_budget_pct": {
+        "Uptrend (broad)": 12.0,
+        "Uptrend (narrow breadth)": 8.5,
+        "Correction (below 50-DMA, above 200-DMA)": 7.5,
+        "Downtrend (capitulation bounce / follow-through watch)": 5.5,
+        "Downtrend": 4.0
+      },
       "note": "Size new entries by NAV risk-to-stop (bps of portfolio lost if stop is hit) capped by the tier notional range. Wider stops automatically receive smaller initial notional weights."
     },
-    "core_names": [5, 10],
-    "total_names": [6, 12],
+    "tranche_entry": {
+      "broad_uptrend": {
+        "starter_fraction": 0.5,
+        "proof_add_fraction": 0.5,
+        "max_extension_above_10w_ema_pct": 8.5,
+        "proof_min_gain_r": 0.75,
+        "sideways_profit_trim_active": false
+      },
+      "sideways_or_narrow": {
+        "starter_fraction": 0.5,
+        "proof_add_fraction": 0.5,
+        "support_proximity_max_pct": 4.0,
+        "proof_min_gain_r": 1.0,
+        "sideways_profit_trim_active": true,
+        "partial_profit_trim_r": 2.0,
+        "partial_profit_trim_rsi14": 74.0,
+        "partial_profit_trim_extension_10w_pct": 18.0,
+        "partial_profit_trim_fraction": 0.35
+      }
+    },
+    "convergence_and_hysteresis": {
+      "lock_window_calendar_days": 5,
+      "rebalance_deadband_wt_pct": 1.25,
+      "price_band_hysteresis_pct": 2.5,
+      "rsi_hysteresis_pts": 3.0,
+      "incumbent_score_buffer_pts": 5.0,
+      "slot_displacement_min_advantage_pts": 15.0,
+      "note": "Prevents flip-flopping on 1-5 day reruns and suppresses nuisance trades (<1.25% NAV delta) so portfolio edits converge monotonically toward 100% alignment."
+    },
+    "us_broker_routing": {
+      "equities_primary": "schwab",
+      "options_and_leveraged_primary": "robinhood",
+      "consolidate_duplicate_legs_on_trim": true
+    },
     "watchlist_capacity": {
       "max_active_names_per_market": 25,
       "rule": "Strict maximum 25 active candidates in data/watchlist/<MKT>.json. Never dump incidental research peers into active watchlist. New breakout additions must replace an inactive/archived row or prune the lowest-ranked candidate."
@@ -53,6 +153,11 @@
       "TIER_4": { "min_pct": 1, "max_pct": 2 },
       "TIER_0": { "min_pct": 0, "max_pct": 0 }
     }
+  },
+  "sector_rotation": {
+    "asymmetric_bucket_rule": "Sector tailwinds gate TACTICAL_MOMENTUM entries and 2x/3x rotation swings, and enforce 25% cluster risk caps; CORE_ALPHA compounders ignore short-term sector dips unless 30-week structure or company KPIs break.",
+    "tactical_allowed_quadrants": ["Leading", "Improving"],
+    "min_industry_stage2_pct_preferred": 40.0
   },
   "stage2_momentum": {
     "principle": "Focus on leading momentum sectors and catch high-conviction businesses in early Stan Weinstein Stage 2 advances or tight base/pullback setups — never chase extended FOMO spikes, and never rely on synthetic LLM formula math.",
@@ -91,6 +196,7 @@
   "stop_placement": {
     "CORE_ALPHA": "Below nearest structural support (50-day SMA, 10-week EMA, or recent consolidation swing low minus 1.0 x ATR14).",
     "TACTICAL_MOMENTUM": "Below nearest tactical support (20-day EMA / 50-day SMA or breakout pivot low minus 0.5 x ATR14).",
+    "LEVERAGED_SATELLITE": "Hard exit on underlying sector close below 20-day EMA or 15-session flat time stop.",
     "undercut_and_reclaim_rule": "Evaluate stops on the session close. If a holding briefly undercuts support intra-week and reclaims its 50-day SMA / 10-week EMA on positive volume, retain the holding and anchor the stop below the shakeout low."
   },
   "data_hygiene": {

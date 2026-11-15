@@ -1,677 +1,138 @@
 ---
 name: portfolio_audit
 description: >-
-  Portfolio forensic audit and capital reallocation for one market (IN = Zerodha account; US = the consolidated Schwab and Robinhood accounts). Audits holdings against the shortlist, explains each verdict and the rule behind it, and produces an executive institutional report with a case note for every position. Market-specific blocks are marked.
+  Deterministic portfolio forensic audit, risk-heat & sector-rotation allocation, hysteresis convergence,
+  and dual-edition storytelling (Web Research Desk + Masterclass Audiobook/PDF Companion) for one market
+  (IN = Zerodha account; US = consolidated Charles Schwab, Robinhood & Options book). Market-specific
+  blocks are marked.
+---
+
+> **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text outside a market block, and inside a market block follow only the block matching this run's market. Never mix figures, currencies, exchanges, or sources across markets.
+
+> **Single Source of Truth & Zero LLM Math (binding):** read `.agents/config/scoring.json` (schema v4). Never invent share counts, target weights, open portfolio heat, stop ratchets, or cash bridges in prose. Run `scripts/portfolio_allocator.py` first to produce `<RUN_DIR>/cache/allocation_<MKT>_<date>.json` (and update `data/allocations/<MKT>.json`), then compile **both** synchronized deliverables through `scripts/portfolio_audit_builder.py`:
+> 1. `docs/reports/<MKT>_Portfolio_Audit.html` — `research-desk-v1` Web Research Desk Edition with built-in interactive Audiobook narrator (`.book-audio-bar`), `.edition-switcher`, reconciled tables, and per-holding case notes.
+> 2. `docs/reports/<MKT>_Portfolio_Audit_book.pdf` — Masterclass Narrative Companion PDF ("The Portfolio Architect"), walking through every keep, ratchet, trim, exit, starter buy, option hold, and cash reserve as one cohesive second-person story.
+
+> **Reviewer-cycle limit & Publication (binding):** use `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json` (strict maximum of two rounds). After validation and review, publish both `<MKT>_Portfolio_Audit.html` and `<MKT>_Portfolio_Audit_book.pdf` plus `data/allocations/<MKT>.json` to GitHub Pages via `scripts/publish_run.py` per `../_shared/RUN_PROTOCOL.md` §6 & §8, then send the short decision digest via `scripts/send_email.py`.
+
+> **Holdings source & Tracking Isolation (binding):** for `IN`, positions replay from `data/accounts/IN/zerodha.transactions.jsonl`. For `US`, positions replay from `data/accounts/US/schwab.transactions.jsonl` and `data/accounts/US/robinhood.transactions.jsonl` plus `data/options/US.json`, consolidated in `<RUN_DIR>/cache/positions_US_<date>.json` (`net_worth` = equities + cash + options MV). Always pass `--allow-stale-holdings` to `market_facts.py` and disclose any freshness warning. Tiny tracking stubs (`< 0.35%` of Net Worth per `scoring.json`) are isolated automatically: they are reconciled in total Net Worth, excluded from the `12–15` active risk-slot count, and exempted from individual 80-word case notes.
+
+<!-- MARKET IN -->
+# Master India (Zerodha) Portfolio Audit, Deterministic Allocation & Narrative Companion Skill
+<!-- /MARKET -->
+<!-- MARKET US -->
+# Master US (Schwab, Robinhood & Options) Portfolio Audit, Deterministic Allocation & Narrative Companion Skill
+<!-- /MARKET -->
+
+> **Voice & Cohesive Audiobook Storytelling (binding):** read `../_shared/REPORT_VOICE.md` and `../_shared/REPORT_EDITORIAL_STANDARD.md`. Write the narrative chapters and case notes in clear second-person mentor voice (`"you and I"` sitting across the desk), telling one cohesive start-to-finish story explaining *why* the macro tide sets our risk budget, *why* each holding earns or loses its slot, *how* challengers compete fairly, and *why* our recommendations stay stable across short reruns. Use `verdict-*` classes from `../_shared/REPORT_PALETTE.md` only—no inline off-palette hex colors and no emoji.
+
+> **Report date (binding):** resolve the latest completed exchange session with a verified benchmark close per `../_shared/RUN_PROTOCOL.md` §0, and use that exact `<date>` across `market_facts.py`, `stock_snapshot.py`, `options_snapshot.py`, `portfolio_allocator.py`, research queries, and validation.
 
 ---
 
-> **Market blocks (binding):** this skill covers both markets. Read `.agents/config/markets.json` for the market in this run (`IN` or `US`). Follow the text that is not inside a market block, and inside a market block follow only the block whose label matches the run's market. Ignore the other block. Figures, currency, exchange names and data sources differ by market; never mix them.
+## STEP-BY-STEP EXECUTION PROTOCOL (MANDATORY)
 
-> **Reviewer-cycle limit (binding):** use the shared reviewer process in `../_shared/REVIEWER_OPERATIONS.md` and `.agents/config/reviewer.json`. Two complete rounds is a strict maximum. After round 2, fix remaining findings best-effort, rerun the validator, record and disclose unresolved items, and do not launch a third round.
-> **Publication (binding):** after the validator and reviewer gate, publish this report to this repository's GitHub Pages, regenerate its indexes, and commit and push the scoped publication. Follow `../_shared/RUN_PROTOCOL.md` §6 and never force-push or stage unrelated changes.
+### Step 1 — Start Isolated Run Session & Build Deterministic Evidence Ledgers
 
-
-> **Holdings source (binding):** for `IN`, positions come from the Zerodha holdings JSON record file (`data/accounts/IN/zerodha.transactions.jsonl`). For `US`, positions come only from the consolidated broker snapshots in `<RUN_DIR>/cache/positions_US_<date>.json` (Schwab and Robinhood, with the account split and cash). The US JSON record file supplies strategy buckets and metadata only, never quantities or values. The US net worth is the snapshot total plus the options book value, and the report must say so. The user's holdings record is assumed accurate: always pass `--allow-stale-holdings`; freshness metadata alone must never block the audit. Record any warning and disclose the assumption, while still failing on missing or malformed inputs.
-
+1. Start an isolated worktree & singleton claim per `RUN_PROTOCOL.md` §8:
+   ```bash
+   .venv/bin/python scripts/run_session.py start --workflow portfolio_audit --market <MKT>
+   ```
+2. Create `<RUN_DIR>` (`cache/`, `inputs/`, `work/`, `review/`), copy input JSONs (`shortlist`, `watchlist`, `options`, `allocations` if present), and build the session ledger + Stage 2 sector breadth + live multi-source snapshots:
 <!-- MARKET IN -->
-# Master Portfolio Forensic Audit & Capital Reallocation Skill
+   ```bash
+   .venv/bin/python scripts/market_facts.py --market IN --date <session> --screen nifty500 --allow-stale-holdings --run-dir "<RUN_DIR>"
+   .venv/bin/python scripts/stage2_scanner.py --market IN --min-mcap 1000 --out "<RUN_DIR>/cache/stage2_IN_<session>.json"
+   .venv/bin/python scripts/stock_snapshot.py --market IN --from-holdings --from-shortlist --stage2-file "<RUN_DIR>/cache/stage2_IN_<session>.json" --out "<RUN_DIR>/cache/snapshots_IN_<session>.json"
+   ```
 <!-- /MARKET -->
 <!-- MARKET US -->
-# Master US Portfolio Forensic Audit & Capital Reallocation Skill
+   ```bash
+   .venv/bin/python scripts/market_facts.py --market US --date <session> --screen sp1500 --allow-stale-holdings --run-dir "<RUN_DIR>"
+   .venv/bin/python scripts/stage2_scanner.py --market US --min-mcap 1.0 --out "<RUN_DIR>/cache/stage2_US_<session>.json"
+   .venv/bin/python scripts/stock_snapshot.py --market US --from-holdings --from-shortlist --stage2-file "<RUN_DIR>/cache/stage2_US_<session>.json" --out "<RUN_DIR>/cache/snapshots_US_<session>.json"
+   .venv/bin/python scripts/options_snapshot.py --market US --from-options --from-shortlist --out "<RUN_DIR>/cache/options_snapshot_US_<session>.json"
+   ```
 <!-- /MARKET -->
+3. Run the mandatory `duck-duck-go` MCP web research pass (`search` + `fetch_content` per `REPORT_EDITORIAL_STANDARD.md` §6) for every item in `facts.research_needs` (earnings dates, catalysts behind any `EXIT`/`TRIM`, FII/DII or Treasury/VIX context, promoter pledges / Form 4s) and write `<RUN_DIR>/cache/research_<MKT>_<session>.json` (`>= 12` distinct verified URLs).
 
-> **Voice (binding):** read `../_shared/REPORT_VOICE.md` before writing. Explain every heading and subsection in plain English with reasoning and consequences; no template phrases; each verdict names its rule and the level that would change it. Colours come only from `../_shared/REPORT_PALETTE.md`: use the `verdict-*` classes and no emoji status markers.
+### Step 2 — Run the Deterministic CIO Portfolio Allocator (`scripts/portfolio_allocator.py`)
 
-> **Report date (binding):** date the audit to the latest completed Indian/US exchange session with a verified final benchmark close, following `../_shared/RUN_PROTOCOL.md` §0. Do not use the run's calendar date by default. Use the same session date in the facts ledger, sibling-report lookup, HTML, filename, research queries, and validation; disclose any data delay when the latest available completed session predates the run date.
+Compute exact open portfolio heat, correlated cluster caps (`<= 25%` NAV / `<= 3.5%` heat), unified 100-point tournament scores, regime-adaptive 50/50 starter/scale-up tranches, 2x/3x & LEAPS decay guardrails, 5-day hysteresis locks, and `±1.25%` convergence deadbands:
 
-<!-- MARKET IN -->
-Act as the **Chief Investment Officer (CIO)** and **Lead Portfolio Risk Forensics Architect** for an Indian Private Wealth Fund (NSE/BSE), writing in the Research Desk style.
-<!-- /MARKET -->
-<!-- MARKET US -->
-Act as the **Chief Investment Officer (CIO)** and **Lead US Portfolio Risk Forensics Architect** for a US Private Wealth Fund (NYSE / NASDAQ), writing in the Research Desk style.
-<!-- /MARKET -->
-
-<!-- MARKET IN -->
-Execute the **Master Portfolio Audit & Capital Reallocation Blueprint**:
-<!-- /MARKET -->
-<!-- MARKET US -->
-Execute the **Master US Portfolio Audit & Capital Reallocation Blueprint**:
-<!-- /MARKET -->
-1. Conduct an exhaustive, adversarial, multi-agent portfolio forensic audit and capital reallocation analysis.
-2. Write the complete research body and assemble it with `scripts/assemble_report.py` in the shared Research Desk design; retain all required analysis, tables, and citations.
-<!-- MARKET IN -->
-3. Publish the stable deliverable **`docs/reports/IN_Portfolio_Audit.html`** with the resolved latest completed market session displayed on the page.
-<!-- /MARKET -->
-<!-- MARKET US -->
-3. Publish the stable deliverable **`docs/reports/US_Portfolio_Audit.html`** with the resolved latest completed market session displayed on the page.
-<!-- /MARKET -->
-4. After successful publication, send the short decision digest required by `_COMMON.md`; never email the complete report.
-
----
-
-### EDITORIAL, DATA-COMPLETENESS & COHERENCE STANDARD (MANDATORY — READ FIRST):
-
-Before anything else, read `.agents/skills/_shared/REPORT_EDITORIAL_STANDARD.md` in full; it is binding and overrides any terser skeleton text below. Non-negotiables:
-
-<!-- MARKET IN -->
-1. **Data first:** build it in this run (reuse of another run's ledger is not allowed) for the latest completed market session resolved under `../_shared/RUN_PROTOCOL.md` §0: `.venv/bin/python scripts/market_facts.py --market IN --date <session> --screen nifty500 --run-dir "<RUN_DIR>"`. Every CMP, DMA, RSI, ATR, stage, regime label, breadth figure and sector quadrant in every chapter comes from `<RUN_DIR>/cache/facts_IN_<date>.json`. If the JSON record file's `Current Price` differs from the ledger close, value positions at the ledger close and state the JSON record file price once in the methodology note. Never write a technical claim ("Stage 2", "above rising 50-DMA", "support at X") that the ledger does not back. `N/A` only after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results in `<RUN_DIR>/cache/research_IN_<date>.json`) and a second source all fail (max 5% of cells). Results dates, promoter pledge, catalysts behind every EXIT/TRIM and any market-flow figure you quote come from that pass; use precise date-stamped queries, read the fetched page, and cite URL + as-of date.
-2. **Write high-signal institutional intelligence (zero fluff):** start directly with the 150-300 word executive lede; each chapter opens with analytical context and closes with a takeaway; a `casenote` for every holding (what it is, why you own it, numbers with meaning, verdict, rule behind it, what changes it, with prices); money-at-risk table and cash waterfall; actionable execution orders; methodology & data-gaps note. Strictly NO beginner primers explaining the audit, NO 'how to read this table' blocks, and NO glossaries. Focus on capital reallocation, risk math, and execution.
-3. **One story:** read the same-date `IN_Market_Intelligence.html` first. Chapter 1 restates its regime label and sector map verbatim; Chapter 2 verdicts cite that regime; Chapter 3 allocates only available cash and recommended sale proceeds across actionable shortlist entries or cash; Chapter 4 explains shortlist gate results; Chapter 5 reconciles with Chapters 2 and 3; Chapter 6 alerts match the recommended actions. Address held names on the market report's Bull or Bear list.
-4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/IN_Portfolio_Audit.html --kind portfolio_audit --facts <RUN_DIR>/cache/facts_IN_<date>.json` must print `RESULT: PASS` before publication. The skeleton below is scaffolding only: every `{{NARRATIVE_*}}` slot, and an intro `<p>` before and takeaway `<p>` after every table, must be written as full prose.
-<!-- /MARKET -->
-<!-- MARKET US -->
-1. **Data first:** Always generate a fresh facts ledger from scratch for the latest completed market session resolved under `../_shared/RUN_PROTOCOL.md` §0: `.venv/bin/python scripts/market_facts.py --market US --date <session> --screen sp1500 --run-dir "<RUN_DIR>"`. Every price, DMA, RSI, ATR, stage, regime label, breadth figure, Treasury yield and sector quadrant in every chapter comes from `<RUN_DIR>/cache/facts_US_<date>.json`. If the JSON record file's `Current Price` differs from the ledger close, value positions at the ledger close and state the JSON record file price once in the methodology note. Never write a technical claim ("Stage 2", "above rising 50-DMA", "support at X") that the ledger does not back. `N/A` only after the ledger, the mandatory duck-duck-go MCP research pass (`search` + `fetch_content`, protocol in section 6 of the standard; results in `<RUN_DIR>/cache/research_US_<date>.json`) and a second source all fail (max 5% of cells); verify shortlist candidates against primary financials and current price/support evidence rather than blanket-marking metrics unavailable. Earnings dates, catalysts behind every EXIT/TRIM and any market-flow figure you quote come from the same pass; use precise date-stamped queries, read the fetched page, and cite URL + as-of date.
-2. **Write high-signal institutional intelligence (zero fluff):** start directly with the 150-300 word executive lede; each chapter opens with analytical context and closes with a takeaway; a `casenote` for every holding and LEAPS position (what it is, why you own it, numbers with meaning, verdict, rule behind it, what changes it, with prices); money-at-risk table and cash waterfall; actionable execution orders; methodology & data-gaps note. Strictly NO beginner primers explaining the audit, NO 'how to read this table' blocks, and NO glossaries. Focus on capital reallocation, risk math, and execution.
-3. **One story:** read the same-date `US_Market_Intelligence.html` first. Chapter 1 restates its regime label and sector map verbatim; Chapter 2 verdicts cite that regime; Chapter 3 allocates only available cash and recommended sale proceeds across actionable shortlist entries or cash; Chapter 4 explains shortlist gate results; Chapter 5 reconciles with Chapters 2 and 3; Chapter 6 alerts match the recommended actions. Address held names on the market report's Bull or Bear list.
-4. **Gate:** `.venv/bin/python scripts/validate_report.py --report docs/reports/US_Portfolio_Audit.html --kind portfolio_audit --facts <RUN_DIR>/cache/facts_US_<date>.json` must print `RESULT: PASS` before publication. The skeleton below is scaffolding only: every `{{NARRATIVE_*}}` slot, and an intro `<p>` before and takeaway `<p>` after every table, must be written as full prose.
-<!-- /MARKET -->
-
----
-
-### MANDATORY ZERO-HALLUCINATION & DATA ACCURACY RULES:
-
-<!-- MARKET IN -->
-1. **NO FABRICATION OF POSITIONS:** Ingest holdings strictly from `data/accounts/IN/zerodha.transactions.jsonl` and vetted shortlist candidates strictly from `data/shortlist/IN.json`.
-2. **MATHEMATICAL PRECISION:** All table percentages must sum to 100.0% ($\sum \text{Allocated Wt} + \text{Cash Buffer} = 100.0\%$). Capital values must reconcile exactly to the total account net worth.
-3. **MANDATORY USE OF `N/A`:** If any specific metric (e.g. historical delivery volume or pledge) is not deterministically verified after `scripts/market_facts.py`, an alternate source and web search have all failed, output **`N/A`** with a specific reason (never for data price history can supply).
-4. **MANDATORY TRADINGVIEW & SCREENER LINKS:**
-<!-- /MARKET -->
-<!-- MARKET US -->
-1. **NO FABRICATION OF POSITIONS:** Ingest holdings strictly from `data/metadata/symbols.json` and vetted shortlist candidates strictly from `data/shortlist/US.json`.
-2. **MATHEMATICAL PRECISION:** All table percentages must sum to 100.0% ($\sum \text{Allocated Wt} + \text{Cash Buffer} = 100.0\%$). Capital values in USD ($) must reconcile exactly to the total account net worth.
-3. **MANDATORY USE OF `N/A`:** If any specific metric (e.g. historical short interest, institutional dark pool ratio, or insider cluster trades) is not deterministically verified after `scripts/market_facts.py`, an alternate source and web search have all failed, output **`N/A`** with a specific reason (never for data price history can supply).
-4. **MANDATORY TRADINGVIEW & FINVIZ LINKS:**
-<!-- /MARKET -->
-   - In all data tables, format the Security / Symbol column with clickable sub-links:
-<!-- MARKET IN -->
-     `<b>{SYMBOL}</b><br><span style="font-size: 11px;"><a href="https://www.tradingview.com/chart/?symbol=NSE%3A{SYMBOL}" style="color: #0645ad;">Chart</a> • <a href="https://www.screener.in/company/{SYMBOL}/" style="color: #14532d;">Screener</a></span>`
-<!-- /MARKET -->
-<!-- MARKET US -->
-     `<b>{SYMBOL}</b><br><span style="font-size: 11px;"><a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3A{SYMBOL}" style="color: #0645ad;">Chart</a> • <a href="https://finviz.com/quote.ashx?t={SYMBOL}" style="color: #14532d;">Finviz</a></span>`
-<!-- /MARKET -->
-5. **MANDATORY ZERO-OMISSION INTEGRITY:** Every single chapter (Chapters 1 through 6) and every table must be completely rendered without truncation or placeholder dots (`...`).
-6. **MANDATORY AUTOMATED EMAIL DISPATCH:**
-   - Automated dispatch of the generated briefing to `rajasekharreddymekala732@gmail.com` via `scripts/send_email.py` is a **STRICT, MANDATORY PIPELINE REQUIREMENT**.
-   - Programmatically run `send_email.py` in the terminal as the final automated step without asking manual confirmation.
-7. **MANDATORY ONE-OFF SCRIPT LIFECYCLE & CACHE HYGIENE:**
-   - Scratch code lives only in `<RUN_DIR>` and is deleted with it (RUN_PROTOCOL sections 1 and 5).
-   - **Run directory:** nothing from earlier runs is read. Cleanup follows `../_shared/RUN_PROTOCOL.md` section 5. Repository scripts are never deleted.
-   - Permanent repository scripts (never delete): `scripts/send_email.py`, `scripts/build_dossier_portal.py`, `scripts/serve_blogs.py`, `scripts/market_facts.py`, `scripts/validate_report.py`.
-
----
-
-### EVIDENCE-LED PORTFOLIO REVIEW:
-
-The audit combines a market-regime review and an adversarial holding review. One CIO synthesis compares every funded action with the current shortlist and an explicit cash alternative; it does not construct a separate hypothetical all-cash portfolio.
-
-<!-- MARKET IN -->
-#### 1. Subagent 1: `macro_regime_specialist` (Independent Market Intelligence Agent)
-- Evaluates Nifty 50 regime, India VIX, FII flows, and 4-quadrant sector rotation to establish the macro portfolio posture.
-<!-- /MARKET -->
-<!-- MARKET US -->
-#### 1. Subagent 1: `us_macro_regime_specialist` (Independent Market Intelligence Agent)
-- Evaluates S&P 500 / Nasdaq 100 regime, CBOE VIX, US 10Y/2Y Yields, and 11-group sector rotation to establish the macro portfolio posture.
-<!-- /MARKET -->
-
-<!-- MARKET IN -->
-#### 2. Subagent 2: `forensic_holdings_auditor` (Adversarial Holding-Risk & Defense Agent)
-- Evaluates every position in `data/accounts/IN/zerodha.transactions.jsonl` against quantitative gating criteria (moving average breakdown, 14-day RSI divergence, earnings deceleration, promoter pledges, dead money >6 months, binary earnings event risks).
-- Outputs the **Active Holdings Extraction & Capital Liberation Ladder (Rank 1 to N)** categorizing holdings into `EXIT (Immediate)`, `TRIM (Climax/Over-concentration)`, `HOLD / HARD STOP`, `HOLD / TRAIL`, and quantifying exact capital liberated (₹ and %).
-<!-- /MARKET -->
-<!-- MARKET US -->
-#### 2. Subagent 2: `us_forensic_holdings_auditor` (Adversarial Holding-Risk & Defense Agent)
-- Evaluates every position in `data/metadata/symbols.json` against quantitative gating criteria (moving average breakdown, 14-day RSI divergence, SBC dilution acceleration, dead money >6 months, binary earnings event risks).
-- Outputs the **Active Holdings Extraction & Capital Liberation Ladder (Rank 1 to N)** categorizing holdings into `EXIT (Immediate)`, `TRIM (Climax/Over-concentration)`, `HOLD / HARD STOP`, `HOLD / TRAIL`, and quantifying exact capital liberated ($ and %).
-<!-- /MARKET -->
-
-<!-- MARKET IN -->
-#### 3. CIO Synthesis
-- Builds Chapter 1 (Market Alignment), Chapter 2 (Holding Actions), Chapter 3 (Incremental Cash Allocation), Chapter 4 (Shortlist Quality and Entry Gates), Chapter 5 (Cash Waterfall), and Chapter 6 (Advisory Execution Alerts).
-- Compares fundable shortlist entries against retaining cash. Cash is a valid final allocation when no candidate clears current evidence, risk, and entry hurdles.
-- Assemble in the Research Desk design; do not place broker orders.
-
----
-
-<!-- MARKET IN -->
-### STRATEGY BUCKET MANDATES & CAP ALLOCATION:
-<!-- /MARKET -->
-<!-- MARKET US -->
-### STRATEGY BUCKET MANDATES & CAP ALLOCATION (US EQUITIES):
-<!-- /MARKET -->
-
-<!-- MARKET IN -->
-- **CORE ALPHA (Long-Term Compounding Book — Target 30%–40% of Net Worth):**
-  - High ROCE (>18%), strong moat, clean balance sheet (D/E < 0.5), secular runway (>15% 3-year sales CAGR). Horizon: 1 to 3+ years.
-- **TACTICAL MOMENTUM (Stage 2 Breakout & Satellite Growth — Target 50%–65% of Net Worth):**
-  - Active Stage 2 markup, trading above rising 20/50/200 DMAs, RS Rating > 75 vs Nifty 500, volume expansion (>1.8x 20-DMA). Horizon: 3 weeks to 6 months.
-- **CASH & LIQUID MARGIN BUFFER (Risk Management & Dry Powder — Target 5%–10% of Net Worth):**
-  - Protects against market drawdowns and seizes high-asymmetry opportunistic pullbacks.
-<!-- /MARKET -->
-<!-- MARKET US -->
-- **CORE ALPHA (Long-Term Compounding Book — Target 35%–45% of Net Worth):**
-  - High ROIC (>16%), wide moat, strong FCF conversion, secular tech/industrial tailwinds. Horizon: 1 to 3+ years.
-- **TACTICAL MOMENTUM (Stage 2 Breakout & High Growth — Target 40%–55% of Net Worth):**
-  - Active Stage 2 markup, trading above rising 20/50/200 DMAs, RS Rating > 75 vs S&P 500, high revenue acceleration. Horizon: 3 weeks to 6 months.
-- **LEVERAGED SATELLITE (High-Beta Structural Growth / Options Proxies — Target 5%–15% of Net Worth):**
-  - Hyper-growth or leveraged momentum instruments with strict asymmetric stops.
-- **CASH & DRY POWDER BUFFER (Target 5%–10% of Net Worth):**
-  - Hedging and opportunistic dip deployment.
-<!-- /MARKET -->
-
----
-
-### DETERMINISTIC STAGE 2 & NO-FOMO DECISION RULES FOR HOLDINGS & CHALLENGERS:
-
-1. **Zero LLM Math — Ground Every Holding & Challenger in `market_facts.py` + `stock_snapshot.py`:**
-   - Every holding and shortlist challenger must be evaluated using `<RUN_DIR>/cache/facts_<MKT>_<date>.json` AND `<RUN_DIR>/cache/snapshots_<MKT>_<date>.json` (which pulls live TradingView daily/weekly moving averages, RSI-14, 10d/30d relative volume, classic pivots, Screener.in / Finviz valuation multiples, and TheWrap Stage 2 sector/stock status).
-2. **Stage 2 Trend & Sector Breadth Judgments on Current Holdings (per `.agents/config/scoring.json`):**
-   - **`KEEP_COMPOUNDING` (`HOLD / TRAIL`):** Holding is in a confirmed `STAGE_2` advance (or constructive `STAGE_2_PULLBACK` / `STAGE_1_BASE` above its rising 30-week SMA / 200-day SMA), its sector/industry has healthy Stage 2 breadth on TheWrap, and earnings/fundamentals are intact. Trail the stop below the 50-day SMA / 10-week EMA (`CORE_ALPHA`) or 20-day EMA / 50-day SMA (`TACTICAL_MOMENTUM`).
-   - **The Let-Winners-Run Rule (`runaway_winner_cap_pct: 22%`):** Never mechanically trim a Stage 2 winner with intact fundamentals and stable/rising earnings solely because $\text{RSI}(14) > 70$ or its appreciated weight crossed $15.0\%$. Allow appreciated weight up to $22.0\%$ while trailing the stop.
-   - **`ACCUMULATE_ON_DIP` (`ADD AT SUPPORT`):** High-conviction Stage 2 leader or Core compounder pulling back into its verified support zone (`20D EMA`, `10W EMA`, or `50D SMA`, within $10\%$ of 10W EMA and $\text{RSI}(14) \le 73$) with attractive Screener/Finviz valuation and position-size headroom below the $10\%$ initial cost cap.
-   - **`TRIM_PROFIT_BOOKING` (`TRIM`):** Holding has exceeded the $22.0\%$ runaway winner cap, OR is in a climax parabolic spike ($>25\%$ above 10-week EMA with $\text{RSI}(14) > 80$ and deteriorating sector breadth), OR its fundamental catalyst is maturing into Stage 3 distribution.
-    - **`EXIT`**: The thesis is materially broken, or a verified hard risk line is breached. State whether the recommendation is an immediate sale or a conditional exit, the exact shares, and the trigger; proceeds may be allocated to a qualifying shortlist entry or retained as cash.
-   - **Undercut & Reclaim (Shakeout) Rule (`undercut_and_reclaim_rule`):** Evaluate stops on the current session's close. If a holding briefly undercut support during a market shakeout and reclaimed its 50-day SMA / 10-week EMA (or bounced on positive volume with $\text{RSI}(14) \ge 32$), retain the holding (`HOLD / HARD STOP`) and anchor the stop below the shakeout low.
-3. **No-FOMO Deployment into Shortlist Challengers (`IMMEDIATE_BUY` vs. `WAIT_FOR_SUPPORT`):**
-   - When deploying cash or capital liberated from `EXIT`/`TRIM` actions into `data/shortlist/<MKT>.json` challengers:
-     - **`IMMEDIATE_BUY` (Deploy at Market / Near-CMP):** Only deploy immediately into shortlist challengers that are in Early Stage 2 or a constructive base/pullback within $10\%$ of their 10-week EMA ($12\%$ of 50-day SMA), $\text{RSI}(14) \le 73$, backed by strong Stage 2 sector breadth and reasonable valuation.
-     - **`WAIT_FOR_SUPPORT` (Resting Limit Order Only):** If a top shortlist challenger is extended on TradingView ($>10\%$ above 10W EMA, $>12\%$ above 50D SMA, or $\text{RSI}(14) > 73$) or needs a valuation pullback, **never chase it at market (No FOMO)**. Instead, specify a resting limit order at its exact TradingView support zone (`20D EMA` / `10W EMA` / `50D SMA`).
-4. **Effective Market Exposure & Hidden Overlap (`portfolio_risk_and_overlap`):**
-   - In Chapter 1 and Chapter 2, include and explain in plain English the two portfolio-level risk readings computed in `<RUN_DIR>/cache/positions_<MKT>_<date>.json` (`portfolio_risk_and_overlap`):
-     - **"What your portfolio really behaves like" (`plain_english_exposure`):** Total beta- and leverage-adjusted market exposure (`effective_market_exposure_pct`) and how much a 1% index drop moves the portfolio in dollars/rupees.
-     - **"Which holdings move in lockstep" (`plain_english_overlap`):** Any pair or cluster of holdings (`lockstep_clusters`, `high_correlation_pairs`) with 1-year daily return correlation $\ge 0.65$ that acts as one combined bet.
-5. **Action Labels:**
-   - Holding Actions: `HOLD / TRAIL`, `HOLD / HARD STOP`, `ADD AT SUPPORT`, `TRIM`, `EXIT`.
-    - Holding Verdicts: `KEEP_COMPOUNDING`, `ACCUMULATE_ON_DIP`, `TRIM_PROFIT_BOOKING`, `EXIT`.
-   - Pipeline Verdicts: `IMMEDIATE_BUY`, `ACCUMULATE_ON_DIP`, `WAIT_FOR_SUPPORT`, `REJECTED`.
-
----
-
-### DESIGN & ASSEMBLY (DELEGATED TO `scripts/assemble_report.py`):
-
-Write only the HTML body fragments (`<h1>`, `<dl class="key-figures">`, `<table class="infobox">`, and the chapter sections). Never write a `<head>`, `<style>`, or custom CSS block—`scripts/assemble_report.py` injects the shared Research Desk stylesheet (`REPORT_PALETTE.md`, `report_base.css`, `book_components.css`, `report_desk.css`), wraps tables in `.table-wrap`, and embeds the Pacific generation timestamp.
-
----
-
-### REQUIRED 7-CHAPTER BRIEFING STRUCTURE (the skeleton shows Chapters 1-6; add Chapter 7 "Rulebook & Monitoring"):
-
-```html
-<!-- SKELETON NOTE: write only the body (the section fragments). Pass the assembled body to scripts/assemble_report.py --market <MKT> --kind report --workflow "Portfolio audit" --as-of <SESSION_DATE>. -->
-<div class="clearfix">
-
-<!-- FLOATED INFOBOX: EXECUTIVE PORTFOLIO SNAPSHOT -->
-<table class="infobox" role="presentation">
-<!-- MARKET IN -->
-  <caption>Portfolio Executive Snapshot</caption>
-<!-- /MARKET -->
-<!-- MARKET US -->
-  <caption>US Portfolio Executive Snapshot</caption>
-<!-- /MARKET -->
-  <tr><th colspan="2" class="infobox-header">Session Date: {{SESSION_DATE}}</th></tr>
-<!-- MARKET IN -->
-  <tr><th>Total Net Worth</th><td><strong>₹{{NET_WORTH}}</strong></td></tr>
-  <tr><th>Invested Equities</th><td>₹{{EQUITIES_VALUE}} ({{EQUITIES_WT}}%)</td></tr>
-  <tr><th>Cash / Margin Buffer</th><td>₹{{CASH_VALUE}} ({{CASH_WT}}%)</td></tr>
-  <tr><th>Total Cost Basis</th><td>₹{{COST_BASIS}}</td></tr>
-  <tr><th>Total Unrealized P&amp;L</th><td>₹{{TOTAL_PNL}} ({{TOTAL_PNL_PCT}}%)</td></tr>
-  <tr><th>Core Alpha Allocation</th><td>{{CORE_WT}}% (Target: 30–40%)</td></tr>
-  <tr><th>Tactical Momentum</th><td>{{TACTICAL_WT}}% (Target: 50–65%)</td></tr>
-<!-- /MARKET -->
-<!-- MARKET US -->
-  <tr><th>Total Net Worth</th><td><strong>${{NET_WORTH}}</strong></td></tr>
-  <tr><th>Invested Equities</th><td>${{EQUITIES_VALUE}} ({{EQUITIES_WT}}%)</td></tr>
-  <tr><th>Cash / Margin Buffer</th><td>${{CASH_VALUE}} ({{CASH_WT}}%)</td></tr>
-  <tr><th>Total Cost Basis</th><td>${{COST_BASIS}}</td></tr>
-  <tr><th>Total Unrealized P&amp;L</th><td>${{TOTAL_PNL}} ({{TOTAL_PNL_PCT}}%)</td></tr>
-  <tr><th>Core Alpha Allocation</th><td>{{CORE_WT}}% (Target: 35–45%)</td></tr>
-  <tr><th>Tactical Momentum</th><td>{{TACTICAL_WT}}% (Target: 40–55%)</td></tr>
-  <tr><th>Leveraged Satellite</th><td>{{LEVERAGED_WT}}% (Target: 5–15%)</td></tr>
-<!-- /MARKET -->
-  <tr><th>Top 3 Concentration</th><td>{{TOP3_WT}}% of Portfolio</td></tr>
-  <tr><th>Portfolio Beta / RSI</th><td>Beta: {{PORTFOLIO_BETA}} &bull; Avg RSI: {{PORTFOLIO_RSI}}</td></tr>
-</table>
-
-<!-- CHAPTER 1: MACRO & SECTOR REGIME ALIGNMENT -->
-<!-- MARKET IN -->
-<h2 id="chapter1">Chapter 1: Macro &amp; Sector Regime Alignment</h2>
-<!-- /MARKET -->
-<!-- MARKET US -->
-<h2 id="chapter1">Chapter 1: US Macro &amp; Sector Regime Alignment</h2>
-<!-- /MARKET -->
-<p>
-  {{NARRATIVE_LEDE_AND_CH1_OPENING}}<!-- lede 150+ words (portfolio condition, three numbers that matter, the decision, chapter map), then 60+ words restating the market report's regime label and what it implies for this book. -->
-</p>
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Macro Dimension</th>
-      <th>Current Regime State</th>
-      <th>Institutional Significance</th>
-      <th>Portfolio Mandate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-<!-- MARKET IN -->
-      <td><strong>Market Regime</strong></td>
-      <td>{{MARKET_REGIME}} (Nifty: {{NIFTY_CLOSE}})</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td><strong>S&amp;P 500 / Nasdaq Regime</strong></td>
-      <td>{{MARKET_REGIME}} (SPY: ${{SPY_CLOSE}}, QQQ: ${{QQQ_CLOSE}})</td>
-<!-- /MARKET -->
-      <td>Stage 2 Trend Structure intact above 50/200-DMA</td>
-      <td>Maintain full long exposure, deploy pullbacks at support</td>
-    </tr>
-    <tr>
-<!-- MARKET IN -->
-      <td><strong>Volatility Regime</strong></td>
-      <td>India VIX: {{VIX_VALUE}}</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td><strong>CBOE VIX Regime</strong></td>
-      <td>VIX: {{VIX_VALUE}}</td>
-<!-- /MARKET -->
-      <td>{{VIX_REGIME}} regime</td>
-      <td>{{VIX_PORTFOLIO_RULE}}</td>
-    </tr>
-    <tr>
-      <td><strong>Sector Rotation Bias</strong></td>
-      <td>Leading: {{LEADING_SECTORS}}</td>
-      <td>Institutional rotation out of {{LAGGING_SECTORS}} into {{LEADING_SECTORS}}</td>
-      <td>Overweight top-quadrant leaders, trim lagging laggards</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<!-- CHAPTER 2: ACTIVE PORTFOLIO HEALTH & RISK AUDIT -->
-<!-- MARKET IN -->
-<h2 id="chapter2">Chapter 2: Active Portfolio Health &amp; Concentration Risk Audit</h2>
-<!-- /MARKET -->
-<!-- MARKET US -->
-<h2 id="chapter2">Chapter 2: Active US Portfolio Health &amp; Concentration Risk Audit</h2>
-<!-- /MARKET -->
-
-<div class="callout-box">
-  <strong>Super-Performer Momentum Exception:</strong> Top winning compounders exceeding the 20.0% concentration cap with intact Stage 2 momentum (above rising 20-DMA, RS &gt; 80) are protected from mechanical trimming. Stops are ratcheted to the 21-day EMA.
-</div>
-
-<h3>2.1 Active Holdings Extraction &amp; Capital Liberation Ladder (Rank 1 to N)</h3>
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Security &amp; Subsector</th>
-      <th class="num">Net-Worth Wt (%)</th>
-<!-- MARKET IN -->
-      <th class="num">P&amp;L (₹ / %)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">P&amp;L ($ / %)</th>
-<!-- /MARKET -->
-      <th>1D / 1W / 2W %</th>
-      <th>RSI &amp; Stage</th>
-      <th>Liberation Rationale</th>
-      <th>Action Verdict</th>
-<!-- MARKET IN -->
-      <th class="num">Capital Liberated (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Capital Liberated ($)</th>
-<!-- /MARKET -->
-    </tr>
-  </thead>
-  <tbody>
-<!-- MARKET IN -->
-    <!-- All active holdings ranked from Priority 1 (Exit/Trim) to Protected Compounders -->
-<!-- /MARKET -->
-<!-- MARKET US -->
-    <!-- All active US holdings ranked from Priority 1 (Exit/Trim) to Protected Compounders -->
-<!-- /MARKET -->
-  </tbody>
-</table>
-</div>
-
-<!-- MARKET IN -->
-<h3>2.2 Holdings Forensic Health Matrix</h3>
-<!-- /MARKET -->
-<!-- MARKET US -->
-<h3>2.2 US Holdings Forensic Health Matrix</h3>
-<!-- /MARKET -->
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Security</th>
-      <th>Strategy Bucket</th>
-<!-- MARKET IN -->
-      <th class="num">Cost vs CMP (₹)</th>
-      <th>ROCE / D/E / CFO</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Cost vs CMP ($)</th>
-      <th>ROIC / FCF Margin / SBC</th>
-<!-- /MARKET -->
-      <th>Technical Structure</th>
-<!-- MARKET IN -->
-      <th>Invalidation Stop (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th>Invalidation Stop ($)</th>
-<!-- /MARKET -->
-      <th>Forensic Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-<!-- MARKET IN -->
-    <!-- Forensic audit rows for every holding -->
-<!-- /MARKET -->
-<!-- MARKET US -->
-    <!-- Forensic audit rows for every US holding -->
-<!-- /MARKET -->
-  </tbody>
-</table>
-</div>
-
-<!-- CHAPTER 3: INCREMENTAL CASH ALLOCATION -->
-<h2 id="chapter3">Chapter 3: Incremental Cash Allocation (Shortlist or Cash)</h2>
-<div class="callout-box">
-<!-- MARKET IN -->
-  <strong>Funding rule:</strong> Allocate only available cash plus proceeds from recommended trims or exits. Compare shortlisted opportunities with retaining cash; no target allocation is required when no entry clears the gates.
-<!-- /MARKET -->
-<!-- MARKET US -->
-  <strong>Funding rule:</strong> Allocate only available cash plus proceeds from recommended trims or exits. Compare shortlisted opportunities with retaining cash; no target allocation is required when no entry clears the gates.
-<!-- /MARKET -->
-</div>
-<p>{{NARRATIVE_CH3_ALLOCATION}}</p><!-- state the verified cash plus sale proceeds available, funded allocations, and why any remaining capital stays in cash. -->
-
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Security &amp; Links</th>
-      <th>Bucket</th>
-      <th>Current Gate</th>
-      <th class="num">Share of Deployable Capital (%)</th>
-<!-- MARKET IN -->
-      <th class="num">Capital from Cash / Sales (₹)</th>
-      <th>Entry Zone (₹)</th>
-      <th>Stop Loss (₹)</th>
-      <th>Base Target (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Capital from Cash / Sales ($)</th>
-      <th>Entry Zone ($)</th>
-      <th>Stop Loss ($)</th>
-      <th>Base Target ($)</th>
-<!-- /MARKET -->
-      <th>Stage &amp; Entry Posture</th>
-      <th>Why Allocate or Wait</th>
-    </tr>
-  </thead>
-  <tbody>
-<!-- MARKET IN -->
-    <!-- Actionable shortlisted ideas only; no new money before evidence and entry gates pass -->
-<!-- /MARKET -->
-<!-- MARKET US -->
-    <!-- Actionable shortlisted US ideas only; no new money before evidence and entry gates pass -->
-<!-- /MARKET -->
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="4" style="text-align: right;">Total New Equities Deployed:</td>
-      <td class="num">{{TOTAL_INCREMENTAL_EQUITY_WT}}%</td>
-<!-- MARKET IN -->
-      <td class="num">₹{{TOTAL_TARGET_EQUITIES_CAP}}</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td class="num">${{TOTAL_TARGET_EQUITIES_CAP}}</td>
-<!-- /MARKET -->
-      <td colspan="5"></td>
-    </tr>
-    <tr>
-      <td colspan="4" style="text-align: right;">Cash Retained from Deployable Capital:</td>
-      <td class="num">{{RETAINED_CASH_WT}}%</td>
-<!-- MARKET IN -->
-      <td class="num">₹{{TARGET_CASH_CAP}}</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td class="num">${{TARGET_CASH_CAP}}</td>
-<!-- /MARKET -->
-      <td colspan="5"></td>
-    </tr>
-  </tfoot>
-</table>
-</div>
-
-<!-- CHAPTER 4: SHORTLIST STRATEGY FUNNEL -->
-<!-- MARKET IN -->
-<h2 id="chapter4">Chapter 4: Shortlist Strategy Funnel &amp; Deep Underwriting Pipeline</h2>
-<!-- /MARKET -->
-<!-- MARKET US -->
-<h2 id="chapter4">Chapter 4: US Shortlist Strategy Funnel &amp; Deep Underwriting Pipeline</h2>
-<!-- /MARKET -->
-<p>{{NARRATIVE_CH4_FUNNEL}}</p><!-- explain the financial, technical, and asymmetry gates; identify passing candidates and why cash is retained for every deferred setup. -->
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Security</th>
-      <th>Strategy Bucket</th>
-      <th>Financial Gate</th>
-      <th>Technical Gate</th>
-      <th>Asymmetry Gate</th>
-      <th>Operational KPIs</th>
-      <th>Entry Posture</th>
-      <th>Funnel Verdict</th>
-    </tr>
-  </thead>
-  <tbody>
-<!-- MARKET IN -->
-    <!-- All shortlisted candidates evaluated -->
-<!-- /MARKET -->
-<!-- MARKET US -->
-    <!-- All shortlisted US candidates evaluated -->
-<!-- /MARKET -->
-  </tbody>
-</table>
-</div>
-
-<!-- CHAPTER 5: MASTER CAPITAL REALLOCATION (MONEY BRIDGE) -->
-<h2 id="chapter5">Chapter 5: Master Capital Reallocation &amp; Money Bridge (Holding vs Target)</h2>
-<p>{{NARRATIVE_CH5_BRIDGE}}</p><!-- walk the reader through the bridge in words: capital freed by sells/trims, capital deployed, cash left, and proof the totals reconcile to Chapters 2 and 3. -->
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Security / Asset</th>
-<!-- MARKET IN -->
-      <th class="num">Current Value (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Current Value ($)</th>
-<!-- /MARKET -->
-      <th class="num">Current Wt (%)</th>
-<!-- MARKET IN -->
-      <th class="num">Target Value (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Target Value ($)</th>
-<!-- /MARKET -->
-      <th class="num">Target Wt (%)</th>
-<!-- MARKET IN -->
-      <th class="num">Variance (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Variance ($)</th>
-<!-- /MARKET -->
-      <th class="num">Variance (%)</th>
-      <th>Action Mandate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Every position (Holdings + New Buys + Cash) -->
-  </tbody>
-  <tfoot>
-    <tr>
-      <td><strong>Total Portfolio</strong></td>
-<!-- MARKET IN -->
-      <td class="num">₹{{NET_WORTH}}</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td class="num">${{NET_WORTH}}</td>
-<!-- /MARKET -->
-      <td class="num">100.0%</td>
-<!-- MARKET IN -->
-      <td class="num">₹{{NET_WORTH}}</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td class="num">${{NET_WORTH}}</td>
-<!-- /MARKET -->
-      <td class="num">100.0%</td>
-<!-- MARKET IN -->
-      <td class="num">₹0</td>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <td class="num">$0</td>
-<!-- /MARKET -->
-      <td class="num">0.0%</td>
-      <td><strong>Rebalanced</strong></td>
-    </tr>
-  </tfoot>
-</table>
-</div>
-
-<!-- CHAPTER 6: 3-PHASE ACTIONABLE EXECUTION ORDERS -->
-<h2 id="chapter6">Chapter 6: 3-Phase Actionable Execution Orders</h2>
-
-<h3>Phase 1: Immediate Capital Liberation (Sells &amp; Trims)</h3>
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Security</th>
-      <th>Action</th>
-      <th class="num">Shares to Sell</th>
-      <th>Execution Trigger</th>
-<!-- MARKET IN -->
-      <th class="num">Estimated Capital Liberated (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Estimated Capital Liberated ($)</th>
-<!-- /MARKET -->
-      <th>Liberation Rationale</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Sells and Trims -->
-  </tbody>
-</table>
-</div>
-
-<h3>Phase 2: High-Conviction Reallocation (Limit Buys at Support)</h3>
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Security</th>
-      <th>Strategy Bucket</th>
-<!-- MARKET IN -->
-      <th class="num">Capital Allocated (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Capital Allocated ($)</th>
-<!-- /MARKET -->
-      <th class="num">Target Shares</th>
-<!-- MARKET IN -->
-      <th>Limit Entry Zone (₹)</th>
-      <th>Initial Stop (₹)</th>
-      <th>Base Target (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th>Limit Entry Zone ($)</th>
-      <th>Initial Stop ($)</th>
-      <th>Base Target ($)</th>
-<!-- /MARKET -->
-      <th>Execution Rule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Limit Buys -->
-  </tbody>
-</table>
-</div>
-
-<!-- MARKET IN -->
-<h3>Phase 3: Defensive GTT &amp; Trailing Stop Architecture</h3>
-<!-- /MARKET -->
-<!-- MARKET US -->
-<h3>Phase 3: Defensive Trailing Stop Architecture</h3>
-<!-- /MARKET -->
-<div class="table-wrapper">
-<table class="wikitable">
-  <thead>
-    <tr>
-      <th>Security</th>
-      <th>Position Status</th>
-<!-- MARKET IN -->
-      <th class="num">Current CMP (₹)</th>
-      <th>GTT Trigger Level (₹)</th>
-<!-- /MARKET -->
-<!-- MARKET US -->
-      <th class="num">Current CMP ($)</th>
-      <th>Stop Trigger Level ($)</th>
-<!-- /MARKET -->
-      <th>Stop Type</th>
-      <th>Trailing Mechanism / Anchor</th>
-    </tr>
-  </thead>
-  <tbody>
-<!-- MARKET IN -->
-    <!-- GTT Stops for all retained and newly purchased positions -->
-<!-- /MARKET -->
-<!-- MARKET US -->
-    <!-- Stops for all retained and newly purchased positions -->
-<!-- /MARKET -->
-  </tbody>
-</table>
-</div>
-
-<!-- REFERENCES & CITATIONS -->
-<!-- MARKET IN -->
-<h2 id="references">References &amp; Regulatory Disclosures</h2>
-<!-- /MARKET -->
-<!-- MARKET US -->
-<h2 id="references">References &amp; SEC Disclosures</h2>
-<!-- /MARKET -->
-<ol class="reflist">
-<!-- MARKET IN -->
-  <li id="cite_note-1">^ Zerodha Broking Limited &bull; Demat Holdings Ledger &amp; Margin Statement for {{SESSION_DATE}}.</li>
-  <li id="cite_note-2">^ National Stock Exchange of India (NSE) &bull; Bhavcopy &amp; Corporate Announcements.</li>
-  <li id="cite_note-3">^ Screener.in Consolidated Financial Query Engine.</li>
-<!-- /MARKET -->
-<!-- MARKET US -->
-  <li id="cite_note-1">^ US Brokerage Holdings Ledger &amp; Margin Statement for {{SESSION_DATE}}.</li>
-  <li id="cite_note-2">^ US Securities and Exchange Commission (SEC EDGAR) &bull; Corporate Filings &amp; Form 4 Disclosures.</li>
-  <li id="cite_note-3">^ Finviz Financial Ratios &amp; Technical Screener.</li>
-<!-- /MARKET -->
-  <li id="cite_note-4">^ TradingView Interactive Technical Screener.</li>
-</ol>
-
-</div>
-</div>
-</body>
-</html>
+```bash
+.venv/bin/python scripts/portfolio_allocator.py \
+  --market <MKT> \
+  --facts "<RUN_DIR>/cache/facts_<MKT>_<session>.json" \
+  --positions "<RUN_DIR>/cache/positions_<MKT>_<session>.json" \
+  --snapshots "<RUN_DIR>/cache/snapshots_<MKT>_<session>.json" \
+  --shortlist "data/shortlist/<MKT>.json" \
+  --watchlist "data/watchlist/<MKT>.json" \
+  --options-snapshot "<RUN_DIR>/cache/options_snapshot_<MKT>_<session>.json" \
+  --prior-state "data/allocations/<MKT>.json" \
+  --persist-state "data/allocations/<MKT>.json" \
+  --out "<RUN_DIR>/cache/allocation_<MKT>_<session>.json"
 ```
 
+### Step 3 — Author Bespoke Cohesive Narrative & Case Notes (`audit_narrative_<MKT>.json`)
+
+Read `<RUN_DIR>/cache/allocation_<MKT>_<session>.json`, `<RUN_DIR>/cache/research_<MKT>_<session>.json`, and any same-date `<MKT>_Market_Intelligence.html` sibling report. Write `<RUN_DIR>/work/audit_narrative_<MKT>.json` via direct file-write tools or `json.dump` (never unquoted shell heredocs) supplying:
+- `"primer"`: 150–250 word executive thesis opening with portfolio condition, net worth, open heat vs ceiling, convergence score, what changed since the prior plan, and the decision summary.
+- `"chapters"` (`"chapter1"` .. `"chapter7"`): cohesive mentor-voice `"book_paragraphs"`, `"epigraph"` (`quote` + `author`), and `"book_callouts"` (`mental_model`, `reflection`, `parallel`, `execution`) weaving our macro regime, asymmetric sector rotation, holding verdicts, 2x/3x & options decay rules, challenger tournament, money bridge, execution routing, and hysteresis stability into one compelling audiobook story.
+- `"casenotes"`: one rich `90–160` word story per active non-tracking holding (`holding_decisions`) with varied sentence openings, explaining what the business does, why we own it, exact ledger close/weight/P&L/stop/heat from `allocation_<MKT>_<session>.json`, the rule behind its verdict, and the concrete `if / unless / below` invalidation trigger (citing research URLs where catalysts/earnings apply).
+- `"citations"`: numbered primary filing, exchange, and research source strings.
+
+**Strict Non-Contradiction Rule:** Every share count, dollar/rupee value, weight, stop, tournament score, convergence percentage, and verdict in your narrative MUST match `allocation_<MKT>_<session>.json` verbatim.
+
+### Step 4 — Compile Both Synchronized Editions (`scripts/portfolio_audit_builder.py`)
+
+```bash
+.venv/bin/python scripts/portfolio_audit_builder.py \
+  --allocation "<RUN_DIR>/cache/allocation_<MKT>_<session>.json" \
+  --facts "<RUN_DIR>/cache/facts_<MKT>_<session>.json" \
+  --research "<RUN_DIR>/cache/research_<MKT>_<session>.json" \
+  --narrative "<RUN_DIR>/work/audit_narrative_<MKT>.json" \
+  --out "docs/reports/<MKT>_Portfolio_Audit.html"
+```
+
+This writes both `docs/reports/<MKT>_Portfolio_Audit.html` (with interactive Web Speech Audiobook bar + Research Desk tables) and `docs/reports/<MKT>_Portfolio_Audit_book.pdf` ("The Portfolio Architect").
+
+### Step 5 — Mechanical Validation, Reviewer Gate, Publication & Digest
+
+1. Run the deterministic report validator:
+   ```bash
+   .venv/bin/python scripts/validate_report.py \
+     --report "docs/reports/<MKT>_Portfolio_Audit.html" \
+     --kind portfolio_audit \
+     --facts "<RUN_DIR>/cache/facts_<MKT>_<session>.json" \
+     --research "<RUN_DIR>/cache/research_<MKT>_<session>.json" \
+     --allocation "<RUN_DIR>/cache/allocation_<MKT>_<session>.json"
+   ```
+2. Build the Stage 9 review packet (`--allocation` traces all allocator numbers automatically) and run `report_reviewer` + `red_team` (max 2 rounds):
+   ```bash
+   .venv/bin/python scripts/review_packet.py build \
+     --report "docs/reports/<MKT>_Portfolio_Audit.html" \
+     --kind portfolio_audit \
+     --facts "<RUN_DIR>/cache/facts_<MKT>_<session>.json" \
+     --research "<RUN_DIR>/cache/research_<MKT>_<session>.json" \
+     --snapshots "<RUN_DIR>/cache/snapshots_<MKT>_<session>.json" \
+     --stage2-file "<RUN_DIR>/cache/stage2_<MKT>_<session>.json" \
+     --allocation "<RUN_DIR>/cache/allocation_<MKT>_<session>.json" \
+     --out-dir "<RUN_DIR>/review/round_1" --round 1
+   ```
+3. Rebuild catalog (`scripts/build_dossier_portal.py --completed "docs/reports/<MKT>_Portfolio_Audit.html" --workflow "Portfolio audit" --market <MKT> ...`), publish via `scripts/publish_run.py`, and dispatch the short decision digest via `scripts/send_email.py`.
+
 ---
 
-### DELIVERABLES & PUBLICATION
+## SUMMARY OF BINDING v4 PORTFOLIO RULES (`scoring.json`)
 
-- Use the stable output path from `.agents/config/markets.json`: `docs/reports/IN_Portfolio_Audit.html` or `docs/reports/US_Portfolio_Audit.html`.
-- Display the resolved market-session date and keep all ledger figures on that same cutoff.
-- Run the validator and configured review process before publication. Publish through `scripts/publish_run.py` as `_COMMON.md` requires.
-- After successful publication, send only the short digest required by `_COMMON.md`; never email the complete HTML report and never send a broker order.
+<!-- MARKET IN -->
+- **Sleeves & Slots (IN — Zerodha):** `12–15` active equity positions (`<0.35%` tracking stubs excluded). **Core Alpha `35%–45%`** (ROCE > 18%, secular moat; ignores short-term sector dips unless 30W structure or KPIs break), **Tactical Momentum `40%–55%`** (gated on Leading/Improving 3M RS + TheWrap Stage 2 breadth), **Cash Buffer `5%–22%`** (regime-driven floor).
+<!-- /MARKET -->
+<!-- MARKET US -->
+- **Sleeves & Slots (US — Schwab + Robinhood + Options):** `12–15` total unique active risk underlyings across Equities, 2x/3x ETFs, and Options (`<0.35%` tracking stubs and `NBIL` T-bill ETF excluded). **Core Alpha `35%–45%`**, **Tactical Momentum Equities `25%–40%`**, **2x/3x Sector Rotation ETFs `0%–12%`** (max 2 sector/index ETFs `<=6%` each; single-stock 2x ETFs phased out; `0%` new buys in sideways/downtrend regimes; 20D EMA stop + 15-session time stop + `+15%` half-trim), **Drawdown Calls / LEAPS `0%–10%`** at `max(cost, MV)` (`0.60–0.80` delta or Bull Call Debit Spreads when `IV > 1.15x HV20`; `<=2%` cost per underlying; grandfather legacy contracts above shelf stops), with a **15.0% Combined Decay Ceiling** across `(2x/3x ETFs + Options)`. Route equities to **Charles Schwab** (selling Robinhood duplicate lots first on trims) and Options / 2x/3x swings to **Robinhood**.
+<!-- /MARKET -->
+- **Cluster & Heat Caps:** Max **25.0% NAV** and **3.5% open heat** in any correlated/thematic cluster (`1Y r >= 0.65`); max total Open Portfolio Heat **12.0%** in Broad Uptrends, **7.5%–8.5%** in Narrow/Sideways tapes, **4.0%** in Downtrends.
+- **Regime-Adaptive 50/50 Tranches:** Deploy a **50% Starter** inside non-extended support/breakout rules (`<=4.0%` from support in sideways tapes; `<=8.5%` from 10W EMA in broad uptrends); deploy the **50% Proof Add** only on pullback or after `>= +1R` profit cushion; harvest `35%` into `+2R` strength on tactical swings during sideways regimes while letting Stage 2 winners run up to `22%` in broad uptrends.
+- **Day-1 Provisional Rule & Dossier Debt Queue:** Pre-dossier holdings are grandfathered on ratcheted chart stops, frozen from fresh `ADD`s, and ranked by capital exposure in Chapter 6.1 for upcoming `company_report` runs.
+- **Convergence & Short-Rerun Stability:** `data/allocations/<MKT>.json` enforces an upward-only stop ratchet, a **5-day `±2.5%` price hysteresis lock**, a **`+15 pt` slot displacement hurdle**, and a **`±1.25%` NAV rebalance deadband** so recommendations never flip-flop on 1-day reruns and converge monotonically toward zero trades as edits are executed.

@@ -98,7 +98,7 @@ def resolve(path, base, ours, theirs):
     if path.startswith("docs/") and path.endswith(".html") and ours is not None and theirs is not None:
         may_override(path, ours, theirs)
         return ours
-    if path.startswith("docs/blogs/") and path.endswith("_book.pdf") and ours is not None and theirs is not None:
+    if path.startswith(("docs/blogs/", "docs/reports/")) and path.endswith("_book.pdf") and ours is not None and theirs is not None:
         return ours
     raise Refused(f"{path}: changed by this run and by another run, and it cannot be merged automatically")
 

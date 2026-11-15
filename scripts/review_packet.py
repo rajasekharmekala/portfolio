@@ -861,7 +861,29 @@ def build(args):
         record_paths.append(args.snapshots)
     if getattr(args, "stage2_file", None) and os.path.isfile(args.stage2_file):
         record_paths.append(args.stage2_file)
+    alloc_extra = getattr(args, "allocation", None)
+    if not alloc_extra and args.facts:
+        cand_alloc = os.path.join(
+            os.path.dirname(os.path.abspath(args.facts)),
+            f"allocation_{facts_json.get('market', '')}_{facts_json.get('asof', '')}.json",
+        )
+        if os.path.isfile(cand_alloc):
+            alloc_extra = cand_alloc
+    if alloc_extra and os.path.isfile(alloc_extra):
+        record_paths.append(alloc_extra)
     facts = Facts(facts_json, research_json, record_paths)
+    if alloc_extra and os.path.isfile(alloc_extra):
+        try:
+            aj = load_json(alloc_extra)
+            facts.global_vals += (
+                flat_numbers(aj.get("portfolio_summary", {}))
+                + flat_numbers(aj.get("stability_and_convergence", {}))
+                + flat_numbers(aj.get("regime_envelope", {}))
+                + flat_numbers(aj.get("clusters", []))
+                + flat_numbers(aj.get("money_bridge", []))
+            )
+        except Exception:
+            pass
     default_symbol = args.symbol or ""
     if not default_symbol and kind == "dossier":
         m = re.match(r"([A-Z0-9&\-\.]+)_dossier", os.path.basename(report))
@@ -1146,6 +1168,7 @@ def main():
     b.add_argument("--research")
     b.add_argument("--snapshots", help="optional path to snapshots_<MKT>_<date>.json from stock_snapshot.py")
     b.add_argument("--stage2-file", help="optional fresh TheWrap Stage 2 dashboard evidence")
+    b.add_argument("--allocation", help="optional path to allocation_<MKT>_<date>.json from portfolio_allocator.py")
     b.add_argument("--out-dir", required=True)
     b.add_argument("--round", type=int, default=1)
     b.add_argument("--sibling")

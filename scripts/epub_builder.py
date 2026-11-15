@@ -913,6 +913,161 @@ def render_masterclass_book_html(
 """
 
 
+def render_portfolio_book_html(
+    spec: Dict[str, Any],
+    chapters: List[Dict[str, Any]],
+    stat_cards: List[tuple[str, str]],
+    web_words: int,
+    book_words: int,
+    audio_minutes: int,
+) -> str:
+    """Render the Portfolio Audit Masterclass Companion Book HTML ('The Portfolio Architect') for PDF compilation."""
+    market = str(spec.get("market") or "IN").upper()
+    as_of = str(spec.get("as_of") or dt.date.today().isoformat())
+    generated = dt.datetime.now(ZoneInfo("America/Los_Angeles"))
+    report_stem = f"{market}_Portfolio_Audit"
+    book_title = spec.get("book_title") or (
+        f"The Portfolio Architect — {'India (NSE/BSE)' if market == 'IN' else 'United States (NYSE/NASDAQ)'} Edition"
+    )
+    book_subtitle = spec.get("book_subtitle") or (
+        "A cohesive second-person narrative and audiobook walkthrough of our capital allocation, "
+        "open portfolio heat, sector-rotation guardrails, challenger tournament, hysteresis stability locks, "
+        "and step-by-step execution plan."
+    )
+    core_posture = _clean_audio_text(spec.get("headline_verdict") or "DISCIPLINED CONVERGENCE")
+
+    stat_strip_html = (
+        '<div class="mc-stat-strip">\n'
+        + "\n".join(
+            f'<div class="mc-stat-card"><span class="mc-stat-label">{html.escape(_clean_audio_text(k))}</span>'
+            f'<span class="mc-stat-val">{html.escape(_clean_audio_text(v))}</span></div>'
+            for k, v in stat_cards
+        )
+        + "\n</div>"
+    )
+
+    toc_items = []
+    chapter_sections = []
+    for idx, ch in enumerate(chapters):
+        cid = ch.get("id") or f"chapter{idx}"
+        roman = ROMAN[idx] if idx < len(ROMAN) else f"CHAPTER {idx}"
+        clean_title = _strip_chapter_prefix(ch.get("book_title") or ch.get("title") or f"Chapter {idx}")
+        toc_items.append(
+            f'<li><a href="#{html.escape(cid)}">{html.escape(clean_title)}</a>'
+            f'<span class="mc-toc-roman">{html.escape(roman)}</span></li>'
+        )
+        epigraph = ch.get("epigraph") or {}
+        epi_quote = _clean_audio_text(epigraph.get("quote") or ch.get("question") or "")
+        epi_author = _clean_audio_text(epigraph.get("author") or "Chief Investment Officer Desk Maxim")
+        epi_html = (
+            f'<blockquote class="mc-epigraph">"{html.escape(epi_quote)}"'
+            f"<footer>&mdash; {html.escape(epi_author)}</footer></blockquote>"
+            if epi_quote
+            else ""
+        )
+        body_blocks = _interleave_paragraphs_and_callouts(
+            ch.get("book_paragraphs", []),
+            ch.get("book_callouts", []),
+            is_first_block=True,
+        )
+        for sub in ch.get("book_subsections", []):
+            if sub.get("title"):
+                body_blocks.append(f"<h3>{html.escape(_clean_audio_text(sub['title']))}</h3>")
+            body_blocks.extend(
+                _interleave_paragraphs_and_callouts(
+                    sub.get("paragraphs", []),
+                    sub.get("callouts", []),
+                    is_first_block=False,
+                )
+            )
+        chapter_sections.append(
+            f'<section class="chapter book-chapter mc-chapter" id="{html.escape(cid)}" data-audio-chapter="{idx}">\n'
+            f'  <div class="mc-chapter-kicker">{html.escape(roman)}</div>\n'
+            f"  <h2>{html.escape(clean_title)}</h2>\n"
+            f"  {epi_html}\n"
+            f"  {chr(10).join(body_blocks)}\n"
+            "</section>"
+        )
+
+    cites_li = "\n".join(
+        f'<li id="cite_note-{i}">{html.escape(_clean_audio_text(c))}</li>'
+        for i, c in enumerate(spec.get("citations", []), 1)
+    )
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="report-design" content="masterclass-book-v1">
+  <meta name="report-market" content="{html.escape(market)}">
+  <meta name="report-kind" content="book">
+  <meta name="research-as-of" content="{html.escape(as_of)}">
+  <meta name="generated-at" content="{html.escape(generated.isoformat())}">
+  <title>{html.escape(book_title)}</title>
+  <style>
+{MASTERCLASS_BOOK_CSS}
+  </style>
+</head>
+<body id="top">
+  <header class="mc-topbar" role="navigation" aria-label="Masterclass Portfolio Companion &amp; Audiobook Controls">
+    <div class="mc-topbar-inner">
+      <div class="mc-edition-links">
+        <a href="../index.html">&larr; Portfolio Desk</a>
+        <a href="{report_stem}.html">Web Research Audit ({web_words:,}w)</a>
+        <a class="is-active" href="{report_stem}_book.pdf" download="{report_stem}_book.pdf">Download PDF ({book_words:,}w)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mc-book-shell report">
+    <section class="mc-cover" aria-label="Book Cover">
+      <div class="mc-cover-kicker">INSTITUTIONAL PORTFOLIO DESK &nbsp;&bull;&nbsp; MASTERCLASS NARRATIVE COMPANION</div>
+      <div class="mc-cover-center">
+        <h1 class="mc-cover-title">{html.escape(book_title)}</h1>
+        <hr class="mc-cover-rule">
+        <p class="mc-cover-subtitle">{html.escape(_clean_audio_text(book_subtitle))}</p>
+      </div>
+      <div class="mc-cover-meta">
+        <div><strong>Portfolio Scope:</strong> {'Zerodha Account (India NSE/BSE)' if market == 'IN' else 'Consolidated Charles Schwab & Robinhood + Options Book (US)'}</div>
+        <div><strong>Session Cutoff:</strong> {html.escape(as_of)} &bull; <strong>Generated:</strong> <time datetime="{html.escape(generated.isoformat())}">{html.escape(generated.strftime('%d %b %Y, %I:%M %p %Z'))}</time></div>
+        <div><strong>Portfolio Posture:</strong> {html.escape(core_posture)}</div>
+        <div><strong>Companion Edition:</strong> Cohesive Audiobook &amp; Narrative Walkthrough ({book_words:,} words &bull; ~{audio_minutes} min listen)</div>
+      </div>
+    </section>
+
+    <nav class="mc-toc" aria-label="Table of Contents">
+      <h2 class="mc-toc-kicker">CONTENTS</h2>
+      <p class="mc-toc-sub">From Macro Tide &amp; Risk Velocity to Every Holding Decision, Challenger Tournament &amp; Convergent Execution</p>
+      <ol class="mc-toc-list">
+        {chr(10).join("        " + item for item in toc_items)}
+      </ol>
+      {stat_strip_html}
+      <section class="primer" id="primer">
+        <h2>Preface &amp; Allocation Thesis</h2>
+        <p>{html.escape(_clean_audio_text(spec.get('primer') or ''))}</p>
+      </section>
+    </nav>
+
+    {chr(10).join(chapter_sections)}
+
+    <section class="mc-notes" id="notes">
+      <h2 id="references">Sources &amp; Deterministic Ledger References</h2>
+      <ol class="sources reflist">
+        {cites_li}
+      </ol>
+      <div class="mc-colophon">
+        &bull; &bull; &bull;<br>
+        Synchronized word-for-number with {html.escape(report_stem)}.html and the v4 Deterministic Portfolio Allocator.<br>
+        Verified against the {html.escape(market)} Research Ledger &bull; Session Cutoff {html.escape(as_of)}
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+"""
+
+
 def build_pdf_book(book_html_path: str | Path, out_pdf_path: str | Path) -> Path | None:
     """Compile the companion PDF book using WeasyPrint when available."""
     weasy = shutil.which("weasyprint") or (

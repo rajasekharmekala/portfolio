@@ -357,6 +357,10 @@ def read_entry(path, dates, updates):
             if sib.is_file():
                 entry_out[field] = sib.relative_to(DOCS).as_posix()
         entry_out["decision"] = dossier_decision(market, symbol)
+    elif kind == "report":
+        sib_pdf = path.parent / f"{path.stem}_book.pdf"
+        if sib_pdf.is_file():
+            entry_out["pdfUrl"] = sib_pdf.relative_to(DOCS).as_posix()
     return entry_out
 
 

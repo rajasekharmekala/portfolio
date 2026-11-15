@@ -217,8 +217,9 @@ def metrics(df: pd.DataFrame) -> dict:
     return {
         "asof_bar": df.index[-1].strftime("%Y-%m-%d"),
         "close": close, "prev_close": at(c, 1),
-        "chg_1d_pct": pct(1), "chg_1w_pct": pct(5), "chg_2w_pct": pct(10), "chg_1m_pct": pct(21),
+        "chg_1d_pct": pct(1), "chg_1w_pct": pct(5), "chg_2w_pct": pct(10), "chg_1m_pct": pct(21), "chg_3m_pct": pct(63),
         "sma20": s20v, "sma50": s50v, "sma200": s200v,
+        "ema10w_approx": at(c.ewm(span=50, adjust=False).mean()),
         "sma50_10d_ago": s50p,
         "sma50_trend": None if s50p is None or s50v is None else ("RISING" if s50v > s50p else "FALLING/FLAT"),
         "rsi14": at(r), "atr14": atrv,
@@ -323,6 +324,20 @@ BENCH_CLOSE_CACHE = None
 MARKET_CACHE = None
 
 
+SINGLE_STOCK_LEVERAGED_ETFS = {
+    "MSTX": ("MSTR", 2.0), "MSTU": ("MSTR", 2.0), "OCNL": ("ORCL", 2.0),
+    "NVDL": ("NVDA", 2.0), "NVDU": ("NVDA", 2.0), "TSLL": ("TSLA", 2.0),
+    "CONL": ("COIN", 2.0), "AMDL": ("AMD", 2.0), "MSFU": ("MSFT", 2.0),
+    "GGLL": ("GOOG", 2.0), "AAPU": ("AAPL", 2.0), "METU": ("META", 2.0),
+}
+SECTOR_INDEX_LEVERAGED_ETFS = {
+    "SOXL": 3.0, "TQQQ": 3.0, "UPRO": 3.0, "SPXL": 3.0, "TECL": 3.0, "FNGU": 3.0, "LABU": 3.0,
+    "FAS": 3.0, "KORU": 3.0, "TNA": 3.0, "DPST": 3.0,
+    "USD": 2.0, "SSO": 2.0, "QLD": 2.0, "ROM": 2.0, "UYG": 2.0,
+}
+CASH_EQUIV_ETFS = {"NBIL", "SGOV", "BIL", "SHV", "USFR", "TFLO", "LIQUIDBEES", "LIQUIDCASE", "LIQUIDIETF"}
+
+
 def compute_portfolio_risk_and_overlap(per_sym: dict, equities: float, cash_total: float, options_value: float, net_worth: float | None):
     """Compute Effective Market Exposure (beta/leverage-adjusted) and Hidden Overlap (pairwise return correlations >= 0.65)
     from the 2-year daily price series already downloaded in memory."""
@@ -331,36 +346,68 @@ def compute_portfolio_risk_and_overlap(per_sym: dict, equities: float, cash_tota
     cur_sym = "₹" if MARKET_CACHE == "IN" else "$"
     bench_name = "Nifty 50" if MARKET_CACHE == "IN" else "S&P 500"
     bench_ret = BENCH_CLOSE_CACHE.pct_change().dropna().iloc[-252:] if BENCH_CLOSE_CACHE is not None and len(BENCH_CLOSE_CACHE) > 30 else None
+    try:
+        with open(os.path.join(ROOT, ".agents", "config", "scoring.json"), encoding="utf-8") as sf:
+            scoring_cfg = json.load(sf)
+        tracking_max_pct = float(scoring_cfg.get("position_sizing", {}).get("tracking_positions", {}).get("max_weight_pct", 0.35))
+    except Exception:
+        tracking_max_pct = 0.35
 
     weighted_beta_sum = 0.0
     held_returns = {}
     per_holding_exposure = []
+    tracking_symbols = []
+    cross_account_duplicates = []
+    single_stock_etf_overlaps = []
     for sym, d in sorted(per_sym.items(), key=lambda kv: -(kv[1].get("market_value") or 0)):
         mv = d.get("market_value") or 0.0
         wt_pct = round(mv / net_worth * 100.0, 2)
+        is_tracking = bool(0.0 < wt_pct < tracking_max_pct)
+        d["is_tracking"] = is_tracking
+        if is_tracking:
+            tracking_symbols.append(sym)
+        if len(d.get("accounts") or []) > 1:
+            cross_account_duplicates.append(sym)
         meta = d.get("metadata") or {}
         lev = float(meta.get("leverage_multiplier") or 1.0)
-        if sym in ("SOXL", "TQQQ", "UPRO", "SPXL", "TECL", "FNGU", "LABU") and lev == 1.0:
-            lev = 3.0
-        elif sym in ("USD", "SSO", "QLD", "NVDL", "CONL", "MSTU") and lev == 1.0:
-            lev = 2.0
+        underlying_sym = sym
+        instrument_subtype = "EQUITY"
+        if sym in CASH_EQUIV_ETFS:
+            lev = 0.0
+            instrument_subtype = "CASH_EQUIV_ETF"
+        elif sym in SINGLE_STOCK_LEVERAGED_ETFS:
+            underlying_sym, default_lev = SINGLE_STOCK_LEVERAGED_ETFS[sym]
+            if lev == 1.0:
+                lev = default_lev
+            instrument_subtype = "SINGLE_STOCK_LEVERAGED_ETF"
+            if underlying_sym in per_sym and not per_sym[underlying_sym].get("is_tracking"):
+                single_stock_etf_overlaps.append({"etf": sym, "underlying": underlying_sym})
+        elif sym in SECTOR_INDEX_LEVERAGED_ETFS:
+            if lev == 1.0:
+                lev = SECTOR_INDEX_LEVERAGED_ETFS[sym]
+            instrument_subtype = "SECTOR_INDEX_LEVERAGED_ETF"
+        d["underlying_symbol"] = underlying_sym
+        d["instrument_subtype"] = instrument_subtype
+        d["leverage_multiplier"] = lev
         s_close = CLOSES_CACHE.get(sym)
-        beta_raw = 1.0
-        if s_close is not None and len(s_close) > 30:
+        beta_raw = 0.0 if sym in CASH_EQUIV_ETFS else 1.0
+        if s_close is not None and len(s_close) > 30 and sym not in CASH_EQUIV_ETFS:
             s_ret = s_close.pct_change().dropna().iloc[-252:]
-            held_returns[sym] = s_ret
+            if not is_tracking:
+                held_returns[sym] = s_ret
             if bench_ret is not None:
                 joined = pd.DataFrame({"s": s_ret, "b": bench_ret}).dropna()
                 if len(joined) >= 30 and joined["b"].var() > 0:
                     beta_raw = round(float(joined["s"].cov(joined["b"]) / joined["b"].var()), 2)
-        eff_beta = round(beta_raw if lev == 1.0 else max(beta_raw, lev), 2)
+        eff_beta = 0.0 if sym in CASH_EQUIV_ETFS else round(beta_raw if lev == 1.0 else max(beta_raw, lev), 2)
         d["beta_1y"] = beta_raw
         d["effective_beta"] = eff_beta
         d["weight_pct"] = wt_pct
         weighted_beta_sum += (mv / net_worth) * eff_beta
         per_holding_exposure.append({
-            "symbol": sym, "weight_pct": wt_pct, "beta_1y": beta_raw,
-            "leverage_multiplier": lev, "effective_beta": eff_beta,
+            "symbol": sym, "weight_pct": wt_pct, "is_tracking": is_tracking,
+            "instrument_subtype": instrument_subtype, "underlying_symbol": underlying_sym,
+            "beta_1y": beta_raw, "leverage_multiplier": lev, "effective_beta": eff_beta,
             "effective_exposure_pct": round(wt_pct * eff_beta, 2)
         })
 
@@ -424,10 +471,11 @@ def compute_portfolio_risk_and_overlap(per_sym: dict, equities: float, cash_tota
         f"{bench_name} is expected to move your portfolio by about {weighted_beta_sum:.2f}% "
         f"(roughly {cur_sym}{one_pct_drop_loss:,.2f})."
     )
+    active_non_tracking = [s for s, d in per_sym.items() if not d.get("is_tracking") and s not in CASH_EQUIV_ETFS]
     if clusters:
         top_c = clusters[0]
         plain_overlap = (
-            f"Although you hold {len(per_sym)} separate equity tickers, {top_c['count']} of them "
+            f"Although you hold {len(active_non_tracking)} active non-tracking positions, {top_c['count']} of them "
             f"({', '.join(top_c['symbols'])}) move closely together (1-year return correlation >= 0.65) "
             f"and make up {top_c['combined_weight_pct']:.1f}% of your net worth — acting like one combined bet."
         )
@@ -439,7 +487,7 @@ def compute_portfolio_risk_and_overlap(per_sym: dict, equities: float, cash_tota
         )
     else:
         plain_overlap = (
-            f"Across your {len(per_sym)} equity holdings, no pair has a 1-year daily return correlation of 0.60 or higher, "
+            f"Across your {len(active_non_tracking)} active non-tracking holdings, no pair has a 1-year daily return correlation of 0.60 or higher, "
             f"indicating low hidden overlap between positions."
         )
 
@@ -449,6 +497,10 @@ def compute_portfolio_risk_and_overlap(per_sym: dict, equities: float, cash_tota
         "effective_market_exposure_value": eff_val,
         "expected_move_per_1pct_index": round(weighted_beta_sum, 2),
         "expected_dollar_per_1pct_index": one_pct_drop_loss,
+        "active_non_tracking_count": len(active_non_tracking),
+        "tracking_positions": sorted(tracking_symbols),
+        "cross_account_duplicates": sorted(cross_account_duplicates),
+        "single_stock_etf_overlaps": single_stock_etf_overlaps,
         "per_holding_exposure": per_holding_exposure,
         "high_correlation_pairs": high_corr_pairs[:15],
         "lockstep_clusters": clusters,
@@ -908,16 +960,35 @@ def build(args):
         "sector_count": len(sec),
     }
 
-    # sector rotation quadrant: 1M return vs benchmark, and 1W momentum direction
+    # sector rotation quadrant: medium-term 3M relative strength + 1M trajectory + 50-DMA structure
+    # (prevents 1-week sector whipsaws while keeping quadrant_short_1m1w for transparency)
     bench_1m = p.get("chg_1m_pct")
+    bench_3m = p.get("chg_3m_pct")
     for n, m in sec.items():
         if m.get("chg_1m_pct") is None or bench_1m is None or m.get("chg_1w_pct") is None:
             m["quadrant"] = None
+            m["quadrant_short_1m1w"] = None
             continue
-        rel, mom = m["chg_1m_pct"] - bench_1m, m["chg_1w_pct"] - (p.get("chg_1w_pct") or 0)
-        m["quadrant"] = ("Leading" if rel >= 0 and mom >= 0 else "Weakening" if rel >= 0 else
-                         "Improving" if mom >= 0 else "Lagging")
-        m["rel_1m_vs_benchmark"] = num(rel)
+        rel_1m = m["chg_1m_pct"] - bench_1m
+        mom_1w = m["chg_1w_pct"] - (p.get("chg_1w_pct") or 0)
+        short_q = ("Leading" if rel_1m >= 0 and mom_1w >= 0 else "Weakening" if rel_1m >= 0 else
+                   "Improving" if mom_1w >= 0 else "Lagging")
+        m["quadrant_short_1m1w"] = short_q
+        m["rel_1m_vs_benchmark"] = num(rel_1m)
+        if m.get("chg_3m_pct") is not None and bench_3m is not None:
+            rel_3m = m["chg_3m_pct"] - bench_3m
+            m["rel_3m_vs_benchmark"] = num(rel_3m)
+            above_50 = bool(m.get("sma50") and m.get("close") and m["close"] >= m["sma50"])
+            if rel_3m >= 0 and (rel_1m >= -1.0 or above_50):
+                m["quadrant"] = "Leading"
+            elif rel_3m >= 0:
+                m["quadrant"] = "Weakening"
+            elif rel_1m >= 0 or above_50:
+                m["quadrant"] = "Improving"
+            else:
+                m["quadrant"] = "Lagging"
+        else:
+            m["quadrant"] = short_q
 
     macro = {}
     if market == "US":
