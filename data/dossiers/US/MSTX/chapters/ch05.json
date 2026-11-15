@@ -1,0 +1,127 @@
+{
+  "id": "ch-5",
+  "web_title": "5. Leading Operational KPIs & Sponsor Walk-the-Talk Audit",
+  "book_title": "Chapter 5: The Telemetry Dashboard — Six KPIs & Did the Sponsor Walk the Talk?",
+  "question": "Which leading operational KPIs govern MSTX's real-time execution quality, and how has Tidal/Defiance performed against its own prospectus commitments?",
+  "epigraph": {
+    "quote": "For a daily-reset derivative fund, the scorecard is not earnings growth—it is tracking error, swap spread, and variance drag.",
+    "author": "Quantitative ETF Due Diligence Framework"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "title": "5.1 Six Leading Operational KPIs for MSTX"
+    },
+    {
+      "type": "p",
+      "html": "MSTX has no corporate revenue growth, operating margins, or free cash flow. Instead, analysts track six leading operational KPIs to measure the health and drag of the wrapper [1][2]. Those six signals capture tracking precision, financing cost, volatility decay, asset flows, trading liquidity, and tax leakage."
+    },
+    {
+      "type": "table",
+      "caption": "MSTX Leading Operational KPIs, Observed Benchmarks & Structural Thresholds",
+      "headers": [
+        "Operational KPI",
+        "Observed Benchmark / Filing Data",
+        "What It Measures",
+        "Healthy vs. Stressed Signal"
+      ],
+      "rows": [
+        [
+          "1. Daily Tracking Error vs. 2x MSTR",
+          "Target 200.06% notional ($1.164B / $582.04M) [2]",
+          "Precision of 4:00 PM ET swap/option rebalance",
+          "<15 bps daily drift = healthy; >50 bps = option fallback [1][2]"
+        ],
+        [
+          "2. Implied Swap Financing Spread",
+          "OBFR + 10.00% to 17.00% across 4 dealers [2]",
+          "Hidden daily carry paid to swap counterparties",
+          "Tightening toward OBFR+5% = benign; >15% = severe carry drag [2]"
+        ],
+        [
+          "3. MSTR 30D Realized Volatility (σ)",
+          "Drives exp(-σ²t) decay (~47% drag at σ=80%) [7]",
+          "Mathematical compounding erosion rate",
+          "σ < 50% manageable short-term; σ > 80% lethal multi-week [7]"
+        ],
+        [
+          "4. AUM & Net Creation/Redemption Flows",
+          "$1.67B (Apr 2025) -> $582M (Oct 2025) -> $161.7M (Nov 2026) [2][20]",
+          "Institutional/retail demand & dealer viability",
+          "Sustained outflows signal closure/reverse-split risk [8][20]"
+        ],
+        [
+          "5. Bid-Ask Spread & AP Capacity",
+          "8.15M avg daily share volume [20]; 4 swap dealers [2]",
+          "Secondary-market execution friction",
+          "1–2 bps spread = liquid; widening = swap ceiling hit [1][11]"
+        ],
+        [
+          "6. Distribution & Tax Character (ROC/Ord)",
+          "$352.76M ($14.43/sh) payout Dec 31, 2024 [2][19]",
+          "Tax leakage from non-deferrable swap gains",
+          "Large Dec payouts force taxable cash drag in taxable accounts [1][2]"
+        ]
+      ],
+      "takeaway": "MSTX's telemetry shows disciplined 200.06% daily notional calibration, but severe headwinds from OBFR+10%–17% swap spreads, 90% AUM contraction from peak, and massive taxable swap-gain distributions."
+    },
+    {
+      "type": "p",
+      "html": "Tracking these six gauges in real time prevents a common analytical error. Traders often mistake a brief MSTR bounce for durable fund health. Even during a sharp MSTR rally, high volatility and steep swap spreads still work against multi-week holders [2][7]. If 30-day realized volatility stays above 80% and swap rates remain at OBFR + 10%–17%, internal carry and variance drag compound negatively every day [2][7]. Asset scale matters just as much. A drop in AUM below $100M would raise fund-viability and spread-widening risks. By contrast, holding $160M+ in AUM with 8.15M daily share volume keeps intraday fills tight for active traders [20]."
+    },
+    {
+      "type": "h3",
+      "title": "5.2 Sponsor Walk-the-Talk Audit: Tidal Investments LLC & Defiance ETFs"
+    },
+    {
+      "type": "p",
+      "html": "A fair audit of Tidal Investments LLC and Defiance ETFs splits into two parts. On the <strong>execution and disclosure side</strong>, Tidal has walked the talk. First, it onboarded four swap dealers—BMO, Cantor Fitzgerald, Clear Street, and Marex—and hit an exact <strong>200.06% gross swap notional ratio</strong> as of October 31, 2025 [2]. Second, it held the promised <strong>1.29% unitary management fee</strong> steady with zero fee creep [1][2]. Total fund expenses remain 1.31%, including 0.01% interest and 0.01% AFFE [1]. Third, Tidal placed blunt warnings on page 1 of the Summary Prospectus. It states that MSTX targets <em>only</em> a single trading day, that buyers can lose 100% of their stake in one day, and that swap costs sit outside the fee table [1]. Fourth, it ran the March 19, 2026 <strong>1-for-10 reverse split</strong> cleanly to protect exchange listing status [8]."
+    },
+    {
+      "type": "p",
+      "html": "On the <strong>investor-outcome side</strong>, sharp tensions remain. First, Tidal's 1.29% unitary fee is clear, but the <strong>OBFR + 10.00% to 17.00%</strong> swap spreads appear only inside the semi-annual Schedule of Investments [2]. That hidden carry creates an annual drag roughly <strong>10x to 15x larger</strong> than the headline fee [2]. Second, on October 29, 2024, the sponsor raised daily leverage from 1.75x to 2.00x just as MSTR volatility surged [10]. That shift raised the Cheng-Madhavan $\\beta(1-\\beta)\\sigma^2$ decay factor by 52%, moving from $1.75 \\times (-0.75) = -1.3125$ to $2.0 \\times (-1.0) = -2.00$ [7]. Third, portfolio turnover reached <strong>4,006%</strong> in the period ended April 30, 2025, and <strong>3,157%</strong> in the six months ended October 31, 2025 [2]. Tidal delivered the exact daily 2x contract promised in its filings. Yet for any buyer who ignored the single-day warning, the math caused severe capital loss."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "THE 1.75X -> 2.00X VOLATILITY DRAG AMPLIFICATION",
+      "paragraphs": [
+        "Raising MSTX's daily leverage from 1.75x to 2.00x in October 2024 [10] lifted the Cheng-Madhavan variance drag factor |β(1-β)| from 1.3125 to 2.0000 [7]. That move added 52.4% more mathematical volatility decay for just a 14.3% bump in daily target exposure [7]."
+      ]
+    }
+  ],
+  "book_paragraphs": [
+    "If we want to monitor an instrument like MSTX without getting fooled by noise, we need the right dashboard. Standard corporate metrics like price-to-earnings or return on invested capital mean nothing here. Instead, six operational KPIs tell us whether the wrapper is running cleanly or bleeding capital.",
+    "First is daily tracking error against 2x MSTR. On this front, Tidal Investments earns high marks. As of October 31, 2025, MSTX held $1.164 billion in swap notional against $582.04 million in net assets—an exact 200.06% ratio. Second is the implied swap financing spread. Across its four dealers, that rate sits at OBFR plus 10.00% to 17.00%. That single figure shows how costly MSTR leverage is in the wholesale market.",
+    "Third is MSTR's 30-day realized volatility. Daily-reset decay scales with the square of volatility. At 80% annual volatility, pure compounding math erodes nearly half of a flat-year 2x stake. Fourth is AUM and net creation-redemption flow. Assets climbed to $1.67 billion by April 2025, then shrank 90% to roughly $162 million by November 2026. Fifth is bid-ask spread and dealer capacity, backed by over eight million shares of daily volume. Sixth is payout tax character, shown by the $352.76 million taxable payout in December 2024.",
+    "Now let us run a fair walk-the-talk audit on Defiance ETFs and Tidal Investments. Did they deliver what they promised? Legally and operationally, yes. They held the unitary management fee steady at 1.29% (1.31% total expense ratio) and spread swaps across four institutional dealers. They also printed blunt warnings on page one of the prospectus. Those warnings state that MSTX is built strictly for one trading day and can lose 100% of its value in a single session.",
+    "Yet the tension is just as clear. By raising leverage from 1.75x to 2.00x in October 2024, the sponsor lifted the mathematical volatility drag factor by over 52% for just a 14% bump in daily target. Meanwhile, the true cost of the fund—the OBFR plus 10% to 17% swap spread—sits inside the semi-annual Schedule of Investments rather than the headline fee table.",
+    "Put all six KPIs together and the operational picture is crystal clear. The engine is well-built for a sprint, with tight 200% daily calibration and deep intraday volume. However, the fuel burn—swap financing spreads, 1.31% unitary fees, and quadratic volatility drag—makes it toxic for a marathon."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "Tidal and Defiance did not hide the single-day warning—it sits in bold on page one of the prospectus. The gap is behavioral: retail traders see a stock ticker and treat it like equity ownership, while the wrapper works like a 24-hour options desk."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "Turnover Velocity: 4,006% and 3,157%",
+      "paragraphs": [
+        "In a typical index ETF, portfolio turnover sits around 2% to 5% a year. In MSTX's Form N-CSRS, turnover hit 4,006% in its first fiscal period through April 2025. It then registered 3,157% in the six months ended October 31, 2025. That relentless churn reflects constant T-bill rolling, cash creations and redemptions, and daily derivative resets. It reminds us that MSTX is a high-frequency trading machine.",
+        "For an active day trader, that turnover is invisible because it happens inside the fund's plumbing. For a taxable multi-month holder, the story changes. High turnover paired with cash-settled swaps means realized gains cannot be deferred. That turns the fund into a potential tax trap during strong up-years like late 2024."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Why Leading KPIs Break Before the Price Chart Does",
+      "paragraphs": [
+        "When we track an operating business, leading KPIs like net dollar retention or same-store sales warn us quarters before an earnings miss. In a daily-reset leveraged ETF like MSTX, the leading KPIs are structural. They include daily tracking error, swap financing spreads over OBFR, MSTR's 30-day realized volatility, AUM flows, and bid-ask liquidity. Every one of those KPIs flashed red long before MSTX's 1-year return hit -90.60%.",
+        "First, look at the swap financing spread in Tidal Trust II's October 31, 2025 Form N-CSRS. Dealers charged OBFR plus 10.00% to 17.00% across $1.164 billion of gross notional. Paying double-digit spreads on 200% notional while earning just 3.89% on $80.85 million in Treasury bills makes net investment income negative (-$5.88 million in six months). Second, look at AUM contraction: assets fell from $1.67 billion on April 30, 2025, to $582.04 million on October 31, 2025, and $161.65 million by November 2026. That 90% shrinkage weakens Defiance's bargaining power with swap dealers. Third, look at MSTR's realized volatility. Once annual volatility crossed 75% to 85%, variance drain overwhelmed any short-term bullish thesis.",
+        "Watching those structural gauges keeps you ahead of the price chart. When swap spreads widen and AUM shrinks at the same time, the wrapper is flashing a clear warning long before a reverse split arrives."
+      ],
+      "callouts": []
+    }
+  ]
+}

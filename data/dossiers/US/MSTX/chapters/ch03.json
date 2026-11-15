@@ -1,0 +1,162 @@
+{
+  "id": "ch-3",
+  "web_title": "3. Distribution, Counterparty Supply Chain & Fund Unit Economics",
+  "book_title": "Chapter 3: The Plumbing — Authorized Participants, Dealers & Where Every Dollar Goes",
+  "question": "Who sits inside MSTX's distribution and swap supply chain, how does cash flow between retail traders, Authorized Participants, and prime brokers, and what do the fund's audited unit economics look like?",
+  "epigraph": {
+    "quote": "In a gold rush, the ETF sponsor collects 1.29% on the shovels while the swap desk collects OBFR plus seventeen hundred basis points on the leverage.",
+    "author": "ETF Structuring Commentary"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "title": "3.1 Primary vs. Secondary Market Distribution Architecture"
+    },
+    {
+      "type": "p",
+      "html": "MSTX runs on a two-tier ETF distribution model [1]. On the <strong>secondary market</strong> (Nasdaq Stock Market, LLC), retail and institutional traders buy and sell existing shares through brokers like Robinhood, Charles Schwab, Fidelity, and Interactive Brokers [1][4]. Secondary-market buyers never deal with Tidal Trust II directly. Instead, they trade at live market prices, cross the bid-ask spread quoted by market makers, and pay any brokerage or option fees [1]. On the <strong>primary market</strong>, only registered <strong>Authorized Participants (APs)</strong>—institutional broker-dealers and market-making desks—can create or redeem shares with the fund [1]. They transact at Net Asset Value (NAV) in large blocks called <strong>Creation Units</strong> [1]."
+    },
+    {
+      "type": "p",
+      "html": "MSTX holds over-the-counter swaps and cash collateral rather than a physical stock basket. As a result, Creation Units settle mainly in <strong>U.S. cash</strong> (or designated securities plus cash) [1]. When retail buying lifts MSTX's share price above its intraday NAV, APs step in to arbitrage the premium. They short MSTX shares to retail buyers and wire cash to MSTX's custodian, <strong>U.S. Bank Global Fund Services / U.S. Bank, N.A.</strong> [1][2]. They then receive new Creation Units at the 4:00 PM NAV [1][2]. When retail selling pushes shares to a discount, APs buy MSTX on the open market and redeem Creation Units for cash. SEC Form N-CSRS filings show huge churn in this arbitrage loop. In the initial period ended April 30, 2025, APs created <strong>62,375,000 shares ($2.92B)</strong> and redeemed <strong>19,800,000 shares ($849.9M)</strong> [2]. In the next six months ended October 31, 2025, APs created <strong>44,770,000 shares ($1.09B)</strong> and redeemed <strong>45,300,000 shares ($1.40B)</strong> [2]."
+    },
+    {
+      "type": "h3",
+      "title": "3.2 The Institutional Supply Chain: Trust, Adviser, Custodian & Swap Dealers"
+    },
+    {
+      "type": "p",
+      "html": "Every dollar inside MSTX flows through a four-part institutional supply chain [1][2]. First is the <strong>Sponsor & Brand</strong>: Defiance ETFs markets the fund and supports retail and advisor channels. The Summary Prospectus notes that Tidal Investments LLC or its affiliates may pay financial intermediaries out of their own profits for marketing, training, and shelf space [1]. Second is the <strong>Legal Trust & Adviser</strong>: <strong>Tidal Trust II</strong> serves as the registered 1940 Act trust, while <strong>Tidal Investments LLC</strong> acts as Investment Adviser [1]. Tidal collects a <strong>1.29% unitary management fee</strong> and pays standard admin, legal, audit, and custody costs from it [1]. Third is <strong>Custody & Fund Accounting</strong>: <strong>U.S. Bank Global Fund Services</strong> in Milwaukee handles fund accounting, transfer agency, and custody [2]. Fourth is the <strong>Swap Counterparty Group</strong>: <strong>BMO Capital Markets Corp., Cantor Fitzgerald & Co., Clear Street LLC, and Marex Capital Markets, Inc.</strong> manufacture the swaps and hedge their MSTR exposure across stock, borrow, and options markets [2][12]."
+    },
+    {
+      "type": "p",
+      "html": "Incentives across this supply chain are sharply asymmetric. Tidal Investments LLC earns a fixed 1.29% unitary fee on average daily net assets. In the six months ended October 31, 2025 alone, that fee yielded <strong>$6,911,811</strong>, whether shareholders made or lost money [2]. The four swap dealers also earn a steady spread of <strong>OBFR + 10.00% to 17.00%</strong> on the 200% notional while hedging MSTR delta-neutrally [2]. Only the ETF shareholder absorbs directional MSTR risk, path-dependent volatility decay, and taxable swap-gain payouts [1][2]. As long as trading volume and AUM stay active, the trust's service providers collect positive carry every day [1][2]."
+    },
+    {
+      "type": "table",
+      "caption": "MSTX Institutional Supply Chain & Economic Take-Rates (Per Form 497K & Form N-CSRS)",
+      "headers": [
+        "Supply Chain Role",
+        "Entity / Counterparty",
+        "Primary Function",
+        "Economic Take-Rate / Cost"
+      ],
+      "rows": [
+        [
+          "1940 Act Trust",
+          "Tidal Trust II (CIK 0001924868)",
+          "Legal issuer & board oversight",
+          "Covered under 1.29% unitary fee [1][3]"
+        ],
+        [
+          "Investment Adviser",
+          "Tidal Investments LLC",
+          "Portfolio management & 4 PM swap resets",
+          "1.29% unitary fee ($6.91M in 6M FY26) [1][2]"
+        ],
+        [
+          "Sponsor / Marketer",
+          "Defiance ETFs",
+          "Product branding & intermediary distribution",
+          "Revenue-share from unitary fee [1][4]"
+        ],
+        [
+          "Custodian / Admin",
+          "U.S. Bank Global Fund Services",
+          "Cash/T-bill custody, NAV calc, transfer agent",
+          "Covered under unitary fee [1][2]"
+        ],
+        [
+          "Swap Dealers (4)",
+          "BMO, Cantor, Clear Street, Marex",
+          "Manufacture 2x daily MSTR total return swaps",
+          "OBFR + 10.00% to 17.00% on 2x notional [2]"
+        ],
+        [
+          "Brokerage / APs",
+          "Market Makers & Retail Platforms",
+          "Creation/redemption arbitrage & order execution",
+          "Bid-ask spread + option/margin fees [1]"
+        ]
+      ],
+      "takeaway": "While Tidal Investments LLC collects a predictable 1.29% unitary fee on AUM, the swap dealers extract far larger embedded financing spreads (OBFR + 10%–17%) directly inside the swap mark-to-market."
+    },
+    {
+      "type": "h3",
+      "title": "3.3 Fund-Level Economic Waterfall (6M Ended October 31, 2025)"
+    },
+    {
+      "type": "p",
+      "html": "The breakdown below traces how every $100 of fund-level economics flows through fees, collateral yield, and swap financing."
+    },
+    {
+      "type": "waterfall",
+      "caption": "MSTX Fund-Level Statement of Operations Waterfall (6M Ended Oct 31, 2025, Unaudited Form N-CSRS)",
+      "period": "6M FY26 (May 1 – Oct 31, 2025)",
+      "unit": "M",
+      "revenue": 1.05,
+      "cogs": 0.0,
+      "employee_cost": 0.0,
+      "other_opex": 6.91,
+      "da": 0.0,
+      "interest": 0.02,
+      "other_income": -766.42,
+      "tax": 0.0,
+      "cfo": -5.88,
+      "capex": 0.0,
+      "takeaway": "On $1.05M of collateral dividend and interest income, MSTX incurred $6.91M in advisory fees and $0.02M in interest expense—yielding a -$5.88M Net Investment Loss (-1.10% annualized) before -$766.42M of realized and unrealized swap/investment losses."
+    },
+    {
+      "type": "p",
+      "html": "The fund-level waterfall reveals a wide gap between MSTX's cash yield and its fee drag [2]. For the six months ended October 31, 2025, MSTX earned <strong>$1,049,992 ($1.05M)</strong> in total investment income ($989,405 in money market dividends and $60,587 in interest) [2]. Over that same window, it paid <strong>$6,911,811 ($6.91M)</strong> in advisory fees and <strong>$21,362 ($0.02M)</strong> in interest expense [2]. That created a <strong>Net Investment Loss of -$5,883,181 (-$5.88M)</strong>, or an annualized NII drag of <strong>-1.10%</strong> on average net assets [2]. Below that line sits -$766.42M in net realized and unrealized losses (-$331.97M realized and -$434.46M unrealized) [2]. That loss reflects both MSTR's price drop during the half-year and the OBFR + 10%–17% swap financing cost deducted inside daily swap pricing [2]."
+    },
+    {
+      "type": "callout",
+      "kind": "note",
+      "title": "WHY GROSS COLLATERAL YIELD DOES NOT COVER THE ADVISORY FEE",
+      "paragraphs": [
+        "MSTX pledges ~83% of its net assets ($484.07M as of Oct 31, 2025) as segregated cash at swap dealers rather than holding 100% in T-bills. As a result, reported dividend and interest income ($1.05M in 6M) covers only ~15% of the $6.91M advisory fee [2]. Swap dealers net collateral interest directly inside the OBFR + 10%–17% financing leg."
+      ]
+    }
+  ],
+  "book_paragraphs": [
+    "Whenever we analyze a financial product, we should follow the money through its plumbing. Who builds the exposure, who distributes the shares, who takes a cut at each tollbooth, and what does the audited income statement show? Tracing those cash flows reveals who carries the risk and who collects steady fees.",
+    "MSTX uses the standard two-tier ETF structure, but with a major twist. It is a cash-settled derivative fund rather than a physical stock basket. On the secondary market—the Nasdaq exchange where you place orders via Schwab, Fidelity, or Robinhood—shares trade between buyers and sellers all day. Market makers quote a bid and an ask, earning pennies of spread on millions of shares in daily volume. Behind the scenes, on the primary market, only Authorized Participants can create or redeem shares directly with Tidal Trust II. Every share you see in your brokerage account flows through that two-tier pipe.",
+    "When retail buying pushes MSTX's market price above its underlying swap value, an Authorized Participant steps in. It sells MSTX shares to the crowd and wires U.S. dollars to U.S. Bank Global Fund Services in Milwaukee, MSTX's custodian. Tidal Investments LLC then calls its four swap dealers—BMO Capital Markets, Cantor Fitzgerald, Clear Street, and Marex Capital Markets—to add twice that cash in MSTR swap notional. SEC filings show massive churn in this loop. In the first 8.5 months through April 2025, APs created $2.92 billion of shares and redeemed $850 million. In the next six months through October 2025, creations totaled $1.09 billion while redemptions jumped to $1.40 billion. That is $5.2 billion of gross primary-market flow in fourteen months.",
+    "Now walk through MSTX's Statement of Operations for the six months ended October 31, 2025. It lays bare the unit economics of the wrapper. During those six months, MSTX earned $1.05 million in total investment income—$989,405 in money market dividends and $60,587 in interest. Against that $1.05 million, Tidal Investments LLC collected $6.91 million in unitary advisory fees, plus $21,362 in interest expense. That leaves a Net Investment Loss of negative $5.88 million, or negative 1.10% annualized on average net assets, before counting a penny of MSTR price moves.",
+    "Where did the rest of the money go? Below Net Investment Loss sit $331.97 million in net realized losses and $434.46 million in net unrealized losses—a $766.42 million drop for the half-year. Those swap lines embed both MSTR's market drawdown and the daily deduction of OBFR plus 10% to 17% financing spreads paid to BMO, Cantor, Clear Street, and Marex. In short, the adviser gets a steady 1.29% annuity on AUM, the swap dealers earn a rich financing spread on 200% notional, and the shareholder absorbs 100% of the volatility.",
+    "Step back and look at the full fourteen-and-a-half-month record from August 2024 through October 2025. The economic split is unmistakable. Tidal Investments collected nearly $13 million in cumulative unitary fees across those two periods. Meanwhile, the swap dealers earned double-digit annual financing spreads on over a billion dollars of average notional, while the fund's cumulative Net Investment Loss deepened to negative $11.71 million."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "Notice who holds the durable business model in this supply chain. Tidal Investments LLC and the four swap dealers collect positive-carry fees and financing spreads whether MSTR goes up, down, or sideways—as long as volume and AUM survive."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "Intermediary Revenue Sharing and Distribution Incentives",
+      "paragraphs": [
+        "One detail in the August 2026 Summary Prospectus stands out under Financial Intermediary Compensation. Tidal Investments LLC and its affiliates may pay broker-dealers out of their own advisory profits for marketing, training, and promotional campaigns. Those payments do not raise the fund's 1.31% expense ratio directly. Still, they show how single-stock ETF sponsors fight hard for retail brokerage visibility and shelf space.",
+        "For an adviser charging 1.29% on a billion-dollar fund, spending part of that fee on platform placement and marketing is a high-return growth loop. That holds true even when the average retail trader holds the shares for only a few days or weeks."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Why Segregated Cash Margin Suppresses Reported Interest Income",
+      "paragraphs": [
+        "You might wonder why a fund with $582 million in net assets earned just $1.05 million in six-month dividend and interest income—under 0.4% annualized. The answer sits on the balance sheet. Exactly 83.2% of MSTX's net assets ($484.07 million) sat as segregated cash collateral at the four swap dealers, leaving only $89.75 million in T-bills and money market funds. Swap dealers net the collateral interest credit inside the swap's financing leg, which keeps reported Net Investment Income structurally negative."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Who Actually Captures the $100 Waterfall?",
+      "paragraphs": [
+        "Look back at our Chapter 3 economic waterfall and ask who gets paid first. Before the ETF shareholder earns a cent of net return, Tidal Investments takes its 1.29% unitary advisory fee (1.31% total expense ratio). Next, the four swap dealers—BMO Capital Markets, Clear Street, Cantor Fitzgerald, and Marex Capital Markets—collect OBFR plus 10.00% to 17.00% on the swap notional. In the six months ended October 31, 2025, that structure yielded $1.05 million of gross investment income against $6.91 million of advisory fees. It locked in a -$5.88 million net investment loss before market moves even began.",
+        "That waterfall teaches a vital lesson for anyone trading single-stock leveraged funds. You are not just betting that MSTR will go up. You are betting that MSTR will rise fast enough, and smoothly enough, to outrun both the 1.31% explicit fee and the double-digit wholesale swap spread every single week. When MSTR stalls or chops sideways, the tollbooths still get paid in full."
+      ],
+      "callouts": []
+    }
+  ]
+}

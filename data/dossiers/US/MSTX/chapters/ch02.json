@@ -1,0 +1,151 @@
+{
+  "id": "ch-2",
+  "web_title": "2. Functional Sleeves & Daily Reset Mechanics",
+  "book_title": "Chapter 2: Inside the Engine — Swaps, Collateral & The 4:00 PM Reset",
+  "question": "How does MSTX manufacture 200% daily MSTR exposure without buying MSTR shares on margin, and what do real-world numerical walkthroughs reveal about volatility drag, financing costs, and creation baskets?",
+  "epigraph": {
+    "quote": "Compounding is the eighth wonder of the world—until daily leverage flips the sign on the variance term.",
+    "author": "Quantitative Portfolio Structuring Principle"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "title": "2.1 Sleeve 1: The Daily 2X Total Return Swap & Options Engine"
+    },
+    {
+      "type": "p",
+      "html": "A traditional equity ETF buys physical shares of a company. MSTX does not. Instead, it builds 200% daily exposure through over-the-counter <strong>Total Return Swap (TRS)</strong> contracts [1][2]. When swap capacity runs tight, it can also use listed or FLEX options [1][2]. Per MSTX's October 31, 2025 Form N-CSRS Schedule of Investments, the fund held <strong>$1,164,413,104 in gross swap notional</strong> across four dealers [2]. That notional stood against <strong>$582,041,567 in net assets</strong>, an exact <strong>200.06% gross exposure ratio</strong> [2]. Under each TRS contract, MSTX pays the dealer a floating rate: the <strong>Overnight Bank Funding Rate (OBFR) plus a spread of 10.00% to 17.00%</strong> [2]. In return, MSTX receives the daily total return of Strategy Inc. (MSTR) on that notional [2]."
+    },
+    {
+      "type": "p",
+      "html": "Portfolio managers Christopher P. Mullen and Stephen Foy at Tidal Investments LLC reset the swap notional at the <strong>4:00 PM ET market close</strong> each day [1]. Consider a concrete <strong>4:00 PM ET Rebalance Walkthrough</strong>. Suppose MSTX starts Day 1 with $100.00M in net assets and $200.00M in MSTR swap notional. If MSTR rises +10% on Day 1, the swap gains +$20.00M. Net assets climb to $120.00M, while swap notional marks up to $220.00M ($200M × 1.10). At 4:00 PM ET, MSTX's leverage has fallen to 1.83x ($220M / $120M). To restore 2.0x exposure for Day 2, the desk must <em>buy</em> +$20.00M of swap notional, lifting it to $240.00M. Now flip the move. If MSTR drops -10% on Day 1, MSTX loses -$20.00M. Net assets fall to $80.00M and swap notional drops to $180.00M, or 2.25x leverage. At 4:00 PM ET, the desk must <em>sell</em> -$20.00M of swap notional down to $160.00M. Buying high after rallies and selling low after drops is the core driver of volatility decay [5][7]."
+    },
+    {
+      "type": "p",
+      "html": "Swap dealers sometimes hit internal balance-sheet or stock-borrow limits on MSTR. When that happens, MSTX's prospectus lets Tidal use <strong>listed equity options or FLEX options</strong> to fill the gap [1][11]. These often take the form of deep-in-the-money call spreads or synthetic forwards. Options keep the fund near its 200% daily delta target during capacity crunches. However, they add gamma and vega slippage, wider bid-ask costs, and strike-ladder friction. As the prospectus states, options are 'typically less efficient than swaps' [1]."
+    },
+    {
+      "type": "h3",
+      "title": "2.2 Sleeve 2: Collateral & Cash-Management Architecture"
+    },
+    {
+      "type": "p",
+      "html": "Swaps are unfunded contracts, so MSTX's balance sheet is a cash-and-collateral pool. Per the October 31, 2025 Statement of Assets and Liabilities, MSTX held $582.04M in net assets [2]. That base was backed by <strong>$484,065,063 in segregated cash for swap contracts</strong> (83.2% of net assets, held as variation and initial margin) [2]. It also held <strong>$80,851,973 in U.S. Treasury Bills</strong> (3.89% yield maturing 11/20/2025, 13.9% of net assets) [2]. Another <strong>$8,895,013 sat in government money market funds</strong> (Dreyfus Government Cash Management at 4.00% and First American Government Obligations Fund at 4.03%, 1.5% of net assets) [2]. The fund also recorded $29.90M in unrealized swap gains and $33.55M in swap receivables [2]. T-bills and money market funds earn roughly 3.9% to 4.0% a year, which helps offset the 1.29% advisory fee. Yet that yield cannot cover the <strong>OBFR + 10.00% to 17.00%</strong> financing rate inside the swaps [2]. The prospectus notes that 40% to 60% of assets usually sit as collateral or option premiums. In practice, high-volatility margin calls pushed segregated cash to 83.2% of net assets in October 2025 [1][2]."
+    },
+    {
+      "type": "h3",
+      "title": "2.3 Sleeve 3: Fee, Friction & Multi-Day Compounding Walkthrough"
+    },
+    {
+      "type": "p",
+      "html": "MSTX investors pay three distinct layers of friction. First is the explicit <strong>1.31% Total Annual Fund Operating Expenses</strong> (1.29% unitary management fee, 0.01% interest, and 0.01% AFFE) [1]. Second is the implicit <strong>swap financing cost</strong> of OBFR + 10.00% to 17.00% on the 200% notional [2]. With OBFR near 4.3%, that swap rate equals ~14.3% to 21.3% a year on 2x notional. Relative to net assets, it creates ~28.6% to 42.6% in annual drag before T-bill interest offsets [2]. Third is <strong>path-dependent volatility drag</strong>. Cheng and Madhavan (2009) modeled this drag as $\\exp(\\frac{1}{2}\\beta(1-\\beta)\\sigma^2 t) = \\exp(-\\sigma^2 t)$ for $\\beta = 2$ [7]. At an annual MSTR volatility of $\\sigma = 80\\%$ ($\\sigma^2 = 0.64$), math alone erodes $1 - e^{-0.64} \\approx 47.3\\%$ of a 2x fund over a flat year [7]. That decay occurs before any fees or swap spreads [7]."
+    },
+    {
+      "type": "p",
+      "html": "To be fair, daily resets can work both ways depending on the market path. In a <strong>smooth, low-volatility uptrend</strong>—say five straight +3.0% days in MSTR—MSTR gains $+15.93\\%$ ($1.03^5 - 1$). Over those same five days, a 2x daily fund gains $+33.82\\%$ ($1.06^5 - 1$). That beats 2x the cumulative move ($31.85\\%$) by $+1.97\\%$ thanks to positive compounding. In a <strong>choppy sideways or whipsaw market</strong>, the opposite occurs. Every reversal locks in losses, as the 3-day test below shows [5][7]."
+    },
+    {
+      "type": "table",
+      "caption": "End-to-End 3-Day Volatile Path Walkthrough: MSTR Flat (+0.0%) vs. MSTX 2X Daily Reset (-9.8%)",
+      "headers": [
+        "Trading Day",
+        "MSTR Daily Move",
+        "MSTR Index (Start=100)",
+        "MSTX Daily 2X Move",
+        "MSTX NAV (Start=100)",
+        "4:00 PM Swap Notional Reset"
+      ],
+      "rows": [
+        [
+          "Day 0 (Start)",
+          "—",
+          "100.00",
+          "—",
+          "100.00",
+          "$200.00M notional (2.00x)"
+        ],
+        [
+          "Day 1",
+          "+15.0%",
+          "115.00",
+          "+30.0%",
+          "130.00",
+          "Marks to $230M; desk buys +$30M -> $260M"
+        ],
+        [
+          "Day 2",
+          "-20.0%",
+          "92.00",
+          "-40.0%",
+          "78.00",
+          "Marks to $208M; desk sells -$52M -> $156M"
+        ],
+        [
+          "Day 3",
+          "+8.70%",
+          "100.00 (Flat)",
+          "+17.39%",
+          "91.57 (-8.43% pre-fee)",
+          "Marks to $183.13M; after ~1.31% fee + swap spread -> ~90.2"
+        ],
+        [
+          "3-Day Cumulative",
+          "Flat (0.00%)",
+          "100.00",
+          "Expected 2x = 0.00%",
+          "Actual = -8.43% (math) / ~ -9.8% (net)",
+          "Pure path-dependent volatility decay in 3 sessions"
+        ]
+      ],
+      "takeaway": "Even when MSTR finishes a 3-day swing completely flat at 100.00, MSTX's mandatory 4:00 PM ET rebalancing locks in an 8.43% mathematical loss before swap financing and management fees."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "THE HIDDEN COST: OBFR + 10% TO 17% SWAP FINANCING",
+      "paragraphs": [
+        "Most retail traders look only at MSTX's 1.31% headline expense ratio. Footnote 3 of the Summary Prospectus states that swap costs are left out of that fee table [1]. Form N-CSRS shows MSTX pays OBFR plus 10.00% to 17.00% on its swaps [2]. That heavy carry cost reflects how scarce and costly MSTR stock borrow and hedging are [2]."
+      ]
+    }
+  ],
+  "book_paragraphs": [
+    "To see why MSTX behaves so differently from a traditional equity fund, we need to open the hood. Inside, we find three functional sleeves: the daily 2x swap engine, the collateral cash pool, and the layered fee and friction structure. Each sleeve plays a distinct role in shaping what you earn on a good day and what you lose during a choppy week.",
+    "First, look at the swap engine. When you buy an S&P 500 ETF, the fund buys the underlying stocks. MSTX does not. Instead, it signs over-the-counter Total Return Swap contracts with institutional dealers. In the October 31, 2025 semi-annual report, MSTX held $1.164 billion in swap notional across four dealers: BMO Capital Markets, Cantor Fitzgerald, Clear Street, and Marex Capital Markets. That notional sat against $582.04 million of net assets—an exact 200.06% gross exposure. Every day at 4:00 PM Eastern Time, the portfolio managers reset those swaps so the fund opens the next morning at 2.0x.",
+    "Let us walk through that 4:00 PM reset with real numbers. This is where both the gains and the damage happen. Imagine MSTX begins the day with $100 million in net assets and $200 million in MSTR swap notional. If MSTR rallies 10% that day, the swap gains $20 million. Net assets rise to $120 million, and the swap's notional marks up to $220 million. Notice that 220 divided by 120 is only 1.83x—the fund is now under-levered. At 4:00 PM, the desk must buy $20 million of swap notional to reach $240 million, or 2.0x. Now flip it around. If MSTR drops 10%, net assets fall to $80 million while swap notional drops to $180 million, a 2.25x ratio. At 4:00 PM, the desk must sell $20 million of swap notional down to $160 million. Every day, MSTX buys more after a rally and sells after a drop.",
+    "Now look at Sleeve 2: the collateral pool. Because swaps are unfunded contracts, MSTX parks investors' cash in safe, short-term assets. It held $484.07 million in segregated cash at swap dealers, $80.85 million in U.S. Treasury Bills yielding 3.89%, and $8.90 million in government money market funds yielding around 4.0%. That collateral interest—about $1.05 million over six months—helps cushion the 1.29% advisory fee, which totaled $6.91 million in the same window. But here is the catch buried in the N-CSRS footnotes. The swap dealers charge MSTX the Overnight Bank Funding Rate—OBFR—plus a steep spread of 10.00% to 17.00% a year. With OBFR near 4.3%, the embedded swap financing cost runs roughly 14.3% to 21.3% on the leveraged notional. That dwarfs the 1.31% headline expense ratio.",
+    "Finally, Sleeve 3—compounding and volatility drag—shows why time is MSTX's enemy. In a 2009 paper, Minder Cheng and Ananth Madhavan proved that a daily 2x ETF suffers a continuous drag tied to the square of the stock's volatility. Walk through a simple three-day whipsaw. MSTR starts at 100, jumps 15% on Day 1 to 115, drops 20% on Day 2 to 92, and rebounds 8.70% on Day 3 back to 100. MSTR ends flat. Yet MSTX, resetting 2x daily, jumps 30% to 130, drops 40% to 78, and rises 17.39% to 91.57. It loses 8.43% in three days before fees and swap spreads. Over months of high volatility, that math is relentless.",
+    "To be fair, daily compounding can work in your favor during a rare, low-volatility winning streak. If MSTR climbs 3% every day for five straight sessions, MSTR gains 15.93%. Over that run, a 2x daily reset fund gains 33.82%, beating twice the cumulative return. That is why momentum traders love 2x ETFs during clean breakouts. The trouble with MSTR is that smooth uptrends are rare, while sharp two-way swings are the rule."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "If you remember only one number from MSTX's Schedule of Investments, make it this: OBFR plus 10% to 17%. That is the institutional toll booth operators charge to manufacture 2x daily exposure on a hyper-volatile single stock."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "Authorized Participant Creation Baskets in Practice",
+      "paragraphs": [
+        "When demand for MSTX spikes on a broker like Robinhood or Schwab, an Authorized Participant steps in. That large market-making broker-dealer creates a Creation Unit, usually a block of 25,000 or 50,000 shares. Unlike a physical S&P 500 ETF where the AP delivers 500 stocks in-kind, MSTX issues and redeems Creation Units mainly for cash. The AP wires cash to the custodian, U.S. Bank. Tidal's trading desk then calls BMO, Cantor, Clear Street, or Marex to scale up swap notional by twice the incoming cash.",
+        "This cash-creation setup carries an important tax consequence. Because swaps settle in cash rather than in-kind stock transfers, realized swap gains stay inside the fund's tax ledger. They cannot vanish through an AP's in-kind basket. That is why MSTX had to pay out $352.76 million in taxable gains at the end of 2024."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "What Happens When Swap Desks Say 'Full': The FLEX Options Fallback",
+      "paragraphs": [
+        "When MSTX topped $1 billion in late 2024, swap dealers hit internal risk caps on MSTR exposure. In response, the prospectus lets Tidal use listed equity options and custom FLEX options to mimic 2x daily returns. Options keep the fund running, but they add strike-selection friction, bid-ask slippage, and implied volatility risk. That is why the prospectus warns that options are less efficient than swaps at hitting the exact 200% daily target."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Why Daily Resetting Changes Everything for Multi-Day Holders",
+      "paragraphs": [
+        "If you take one mechanical lesson from Chapter 2, make it this. MSTX's 200% target applies strictly from 4:00 PM ET on Day T to 4:00 PM ET on Day T+1. Over any window longer than one session, you do not own 2x MSTR. You own a path-dependent derivative that buys more exposure after up days and sells after down days. In a calm, trending market, that rebalancing hurts very little. In a choppy, high-volatility market, buying high and selling low every afternoon steadily drains your account.",
+        "Keep that daily reset clock in mind whenever you size a position. Even a brief two-week hold across an earnings report or a sharp Bitcoin swing exposes your capital to compounding math. The wrapper does not care where MSTR finishes a month from now. It only cares about the path MSTR takes between each 4:00 PM closing bell, and every reversal along that path locks in permanent slippage."
+      ],
+      "callouts": []
+    }
+  ]
+}
