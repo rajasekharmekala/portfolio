@@ -12,7 +12,7 @@
     status: "ALL",
     verdict: "ALL",
     sort: { key: "market", dir: "asc" },
-    dossierSort: { key: "verdict", dir: "asc" },
+    dossierSort: { key: "generated", dir: "desc" },
     openDossiers: new Set(),
     search: "",
     viewMode: "tree",
@@ -436,9 +436,10 @@
     { label: "Base", key: "base", num: true },
     { label: "Bull", num: true },
     { label: "EV 12m", key: "ev", num: true },
+    { label: "Generated", key: "generated", title: "When the monograph was generated (Pacific)" },
     { label: "Read" },
   ];
-  const DOSSIER_DEFAULT_DIR = { ticker: "asc", verdict: "asc", zone: "asc", base: "desc", ev: "desc" };
+  const DOSSIER_DEFAULT_DIR = { ticker: "asc", verdict: "asc", zone: "asc", base: "desc", ev: "desc", generated: "desc" };
 
   function dossierMetrics(e) {
     const d = e.decision;
@@ -469,6 +470,10 @@
       case "zone": return m ? m.zoneGap : null;
       case "base": return m ? m.baseUpside : null;
       case "ev": return m ? m.evUpside : null;
+      case "generated": {
+        const t = Date.parse(e.generatedAt || e.updatedAt || "");
+        return Number.isFinite(t) ? t : null;
+      }
       default: return null;
     }
   }
@@ -581,6 +586,7 @@
       <td class="num">${isNum(d?.targetBase) ? `${money(d.targetBase)}${versus(d.targetBase)}` : '<span class="pipe-muted">—</span>'}</td>
       <td class="num">${isNum(d?.targetBull) ? `${money(d.targetBull)}${versus(d.targetBull)}` : '<span class="pipe-muted">—</span>'}</td>
       <td class="num">${isNum(d?.expectedValue12m) ? `${money(d.expectedValue12m)}${versus(d.expectedValue12m)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td><span class="stamp">${escapeHtml(formatDateTime(e.generatedAt || e.updatedAt))}</span></td>
       <td><a class="pipe-doc" href="${escapeHtml(e.url)}">Read &rarr;</a></td>
     </tr>
     <tr class="dossier-detail" id="${id}"${open ? "" : " hidden"}>
