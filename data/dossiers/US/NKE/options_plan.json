@@ -1,0 +1,149 @@
+{
+  "symbol": "NKE",
+  "market": "US",
+  "generated_at": "2026-11-15T21:40:19+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": true,
+      "status": "connected",
+      "active_tabs": [
+        {
+          "title": "BE 191.99 ▼ −4.92% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
+        }
+      ]
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:NKE",
+    "exchange": "NYSE",
+    "company_name": "NIKE, Inc. Class B",
+    "close": 37.99,
+    "change_1d_pct": 0.61,
+    "perf_1w_pct": -1.55,
+    "perf_1m_pct": 2.29,
+    "perf_3m_pct": -2.81,
+    "rsi_1d": 50.23,
+    "rsi_4h": 46.11,
+    "rsi_1w": 40.46,
+    "sma20": 38.34,
+    "sma50": 36.89,
+    "sma200": 44.79,
+    "sma30_weekly": 40.77,
+    "ema10_weekly": 37.79,
+    "ema20_4h": 38.49,
+    "sma50_4h": 37.9,
+    "atr14": 1.19,
+    "bb_width_pct": 9.21,
+    "pivot_s1": 34.02,
+    "pivot_s2": 29.36,
+    "pivot_r1": 41.28,
+    "pivot_r2": 43.89,
+    "high_52w": 69.14,
+    "low_52w": 31.97,
+    "dist_to_200d_pct": -15.18,
+    "major_shelf": 34.02,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE1_BASING_BELOW_200D",
+    "setup_summary": "Stage 1 (Basing): +2.98% above 50D SMA ($36.89), but -6.82% below 30W SMA ($40.77) and -15.18% below 200D SMA ($44.79)."
+  },
+  "options_plan": {
+    "symbol": "NKE",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "WAIT_FOR_SUPPORT_OR_BASE",
+    "iv_regime": "IV_ELEVATED",
+    "atm_iv_pct": 44.3,
+    "hv20_pct": 35.0,
+    "open_positions_audit": [],
+    "headline": "Stand aside at CMP ($37.99): stock is in Stage 1 (Basing) above 50D SMA ($36.89) but below 30W/200D resistance ($40.77/$44.79). If NKE tests $34.02 support AND clears Dec 17 earnings risk, consider a defined-risk Call Spread (illustrative 2027-01-15 $37.5/$42.5 at $1.82 debit, or post-earnings March/June 2027 expiry to avoid 29-day post-earnings compression).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 61,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 37.5,
+          "mid": 2.94,
+          "bid": 2.87,
+          "ask": 3.0,
+          "open_interest": 7917
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 42.5,
+          "mid": 1.12,
+          "bid": 1.08,
+          "ask": 1.16,
+          "open_interest": 15406
+        }
+      ],
+      "contracts": 3,
+      "multiplier": 100,
+      "net_debit_per_share": 1.82,
+      "max_loss_total": 546.0,
+      "max_loss_nav_bps": 54.6,
+      "max_profit_total": "$954.00 (1.75:1 reward-to-risk)",
+      "breakeven_at_expiry": 39.32,
+      "breakeven_move_pct": 3.5,
+      "net_delta_dollars_per_1_move": 81.9,
+      "daily_theta_dollars": -1.08,
+      "underlying_stop_trigger": 34.02,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($667.80 gain) or exit early if NKE closes below $34.02.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $37.5 at Expiry",
+          "stock_price": 34.02,
+          "stock_move_pct": -10.5,
+          "contract_value": 0.0,
+          "net_pnl": -546.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($39.32)",
+          "stock_price": 39.32,
+          "stock_move_pct": 3.5,
+          "contract_value": 546.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($42.5)",
+          "stock_price": 42.5,
+          "stock_move_pct": 11.9,
+          "contract_value": 1500.0,
+          "net_pnl": 954.0,
+          "return_on_risk_pct": 174.7
+        },
+        {
+          "scenario": "Bull Overshoot ($50.24)",
+          "stock_price": 50.24,
+          "stock_move_pct": 32.2,
+          "contract_value": 1500.0,
+          "net_pnl": 954.0,
+          "return_on_risk_pct": 174.7
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: NKE is in an Stage 1 (Basing) structure above its 50D SMA ($36.89) and below 30W/200D resistance ($40.77/$44.79). While buying calls right now at CMP ($37.99) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($37.5/$42.5) is structured to be deployed once NKE tests its major $34.02 support shelf and stabilizes. Selling the upper $42.5 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $546.00.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $37.5 Call for $2.94 and simultaneously sell the $42.5 Call for $1.12, paying $1.82/sh net ($546.00 total for 3 spread(s)). That $546.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $39.32 (+3.5% from $37.99). Anywhere at or above $42.5, your $546.00 turns into $1,500.00 (+$954.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in NKE adds ~$81.90 to your spread (Net Delta), while sitting flat costs ~$1.08/day in time decay (Net Theta) — much lower than an unhedged call because the sold $42.5 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (NKE)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at CMP ($37.99): stock is in an active Stage 4 correction below 50D/200D averages. If NKE tests its major $34.02 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $37.5/$42.5) at $1.82 debit toward $43.69 ($546.00 max loss -&gt; $954.00 max profit, 1.75:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (36.89) and 200D/30W floor (44.79); trend is broken. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:NKE. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_nke_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:NKE\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:NKE\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_nke_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: NKE is in an Stage 1 (Basing) structure above its 50D SMA ($36.89) and below 30W/200D resistance ($40.77/$44.79). While buying calls right now at CMP ($37.99) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($37.5/$42.5) is structured to be deployed once NKE tests its major $34.02 support shelf and stabilizes. Selling the upper $42.5 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $546.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $37.5 Call for $2.94 and simultaneously sell the $42.5 Call for $1.12, paying $1.82/sh net ($546.00 total for 3 spread(s)). That $546.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $39.32 (+3.5% from $37.99). Anywhere at or above $42.5, your $546.00 turns into $1,500.00 (+$954.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in NKE adds ~$81.90 to your spread (Net Delta), while sitting flat costs ~$1.08/day in time decay (Net Theta) — much lower than an unhedged call because the sold $42.5 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for NKE</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $37.5 CALL @ $2.94 mid (bid $2.87 / ask $3.00, OI 7917) + SELL 2027-01-15 $42.5 CALL @ $1.12 mid (bid $1.08 / ask $1.16, OI 15406)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>3 contract(s) x 100 shares</td><td>Controls 300 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$546.00 (54.6 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$39.32 (+3.50% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$954.00 (1.75:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+81.90 per $1 move | $-1.08/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($667.80 gain) or exit early if NKE closes below $34.02.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $546.00 Across Stock Scenarios (NKE)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $37.5 at Expiry</td><td>$34.02 (-10.5%)</td><td>$0.00</td><td>$-546.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($39.32)</td><td>$39.32 (+3.5%)</td><td>$546.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($42.5)</td><td>$42.50 (+11.9%)</td><td>$1,500.00</td><td>$+954.00</td><td><strong>+174.7%</strong></td></tr><tr><td>Bull Overshoot ($50.24)</td><td>$50.24 (+32.2%)</td><td>$1,500.00</td><td>$+954.00</td><td><strong>+174.7%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
