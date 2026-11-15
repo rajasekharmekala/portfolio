@@ -1,0 +1,144 @@
+{
+  "symbol": "NBIL",
+  "market": "US",
+  "generated_at": "2026-11-15T22:36:09+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NASDAQ:NBIL",
+    "exchange": "NASDAQ",
+    "company_name": "GraniteShares 2x Long NBIS Daily ETF",
+    "close": 4.95,
+    "change_1d_pct": -19.77,
+    "perf_1w_pct": -27.74,
+    "perf_1m_pct": -71.71,
+    "perf_3m_pct": -85.66,
+    "rsi_1d": 34.0,
+    "rsi_4h": 34.52,
+    "rsi_1w": 36.23,
+    "sma20": 9.82,
+    "sma50": 18.29,
+    "sma200": 23.52,
+    "sma30_weekly": 27.14,
+    "ema10_weekly": 14.75,
+    "ema20_4h": 7.85,
+    "sma50_4h": 11.21,
+    "atr14": 2.57,
+    "bb_width_pct": 221.82,
+    "pivot_s1": 2.92,
+    "pivot_s2": null,
+    "pivot_r1": 23.86,
+    "pivot_r2": 37.61,
+    "high_52w": 68.49,
+    "low_52w": 4.29,
+    "dist_to_200d_pct": -78.95,
+    "major_shelf": 4.29,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (18.29) and 200D/30W floor (23.52); trend is broken."
+  },
+  "options_plan": {
+    "symbol": "NBIL",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "WAIT_FOR_SUPPORT_OR_BASE",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 177.2,
+    "hv20_pct": 303.1,
+    "open_positions_audit": [],
+    "headline": "Stand aside at CMP ($4.95): stock is in an active Stage 4 correction below 50D/200D averages. If NBIL tests its major $4.29 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-02-19 $15/$25) at $0.55 debit toward $23.86 ($550.00 max loss -> $9,450.00 max profit, 17.18:1 R:R).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-02-19",
+      "dte": 96,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 15.0,
+          "mid": 0.8,
+          "bid": 0.0,
+          "ask": 0.8,
+          "open_interest": 31
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 25.0,
+          "mid": 0.25,
+          "bid": 0.0,
+          "ask": 0.6,
+          "open_interest": 370
+        }
+      ],
+      "contracts": 10,
+      "multiplier": 100,
+      "net_debit_per_share": 0.55,
+      "max_loss_total": 550.0,
+      "max_loss_nav_bps": 55.0,
+      "max_profit_total": "$9,450.00 (17.18:1 reward-to-risk)",
+      "breakeven_at_expiry": 15.55,
+      "breakeven_move_pct": 214.14,
+      "net_delta_dollars_per_1_move": 64.0,
+      "daily_theta_dollars": -0.3,
+      "underlying_stop_trigger": 4.29,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($6,615.00 gain) or exit early if NBIL closes below $4.29.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $15 at Expiry",
+          "stock_price": 4.29,
+          "stock_move_pct": -13.3,
+          "contract_value": 0.0,
+          "net_pnl": -550.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($15.55)",
+          "stock_price": 15.55,
+          "stock_move_pct": 214.1,
+          "contract_value": 550.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($25)",
+          "stock_price": 25.0,
+          "stock_move_pct": 405.1,
+          "contract_value": 10000.0,
+          "net_pnl": 9450.0,
+          "return_on_risk_pct": 1718.2
+        },
+        {
+          "scenario": "Bull Overshoot ($27.44)",
+          "stock_price": 27.44,
+          "stock_move_pct": 454.3,
+          "contract_value": 10000.0,
+          "net_pnl": 9450.0,
+          "return_on_risk_pct": 1718.2
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: NBIL is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($4.95) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($15/$25) is structured to be deployed once NBIL tests its major $4.29 support shelf and stabilizes. Selling the upper $25 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $550.00.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $15 Call for $0.80 and simultaneously sell the $25 Call for $0.25, paying $0.55/sh net ($550.00 total for 10 spread(s)). That $550.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-02-19), you start making money above $15.55 (+214.1% from $4.95). Anywhere at or above $25, your $550.00 turns into $10,000.00 (+$9,450.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in NBIL adds ~$64.00 to your spread (Net Delta), while sitting flat costs ~$0.30/day in time decay (Net Theta) — much lower than an unhedged call because the sold $25 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (NBIL)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at CMP ($4.95): stock is in an active Stage 4 correction below 50D/200D averages. If NBIL tests its major $4.29 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-02-19 $15/$25) at $0.55 debit toward $23.86 ($550.00 max loss -&gt; $9,450.00 max profit, 17.18:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (18.29) and 200D/30W floor (23.52); trend is broken. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:NBIL. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_nbil_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:NBIL\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:NBIL\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_nbil_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: NBIL is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($4.95) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($15/$25) is structured to be deployed once NBIL tests its major $4.29 support shelf and stabilizes. Selling the upper $25 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $550.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $15 Call for $0.80 and simultaneously sell the $25 Call for $0.25, paying $0.55/sh net ($550.00 total for 10 spread(s)). That $550.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-02-19), you start making money above $15.55 (+214.1% from $4.95). Anywhere at or above $25, your $550.00 turns into $10,000.00 (+$9,450.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in NBIL adds ~$64.00 to your spread (Net Delta), while sitting flat costs ~$0.30/day in time decay (Net Theta) — much lower than an unhedged call because the sold $25 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for NBIL</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-02-19 $15 CALL @ $0.80 mid (bid $0.00 / ask $0.80, OI 31) + SELL 2027-02-19 $25 CALL @ $0.25 mid (bid $0.00 / ask $0.60, OI 370)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>10 contract(s) x 100 shares</td><td>Controls 1000 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$550.00 (55.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$15.55 (+214.14% vs CMP)</td><td>Stock price required by 2027-02-19 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$9,450.00 (17.18:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+64.00 per $1 move | $-0.30/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($6,615.00 gain) or exit early if NBIL closes below $4.29.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-02-19, 96 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $550.00 Across Stock Scenarios (NBIL)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $15 at Expiry</td><td>$4.29 (-13.3%)</td><td>$0.00</td><td>$-550.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($15.55)</td><td>$15.55 (+214.1%)</td><td>$550.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($25)</td><td>$25.00 (+405.1%)</td><td>$10,000.00</td><td>$+9,450.00</td><td><strong>+1718.2%</strong></td></tr><tr><td>Bull Overshoot ($27.44)</td><td>$27.44 (+454.3%)</td><td>$10,000.00</td><td>$+9,450.00</td><td><strong>+1718.2%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}

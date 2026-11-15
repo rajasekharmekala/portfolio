@@ -1,0 +1,111 @@
+{
+  "id": "ch-8",
+  "web_title": "8. Multi-Timeframe Tape, Volume Distribution & Options Chain Audit",
+  "book_title": "Chapter 8: Anatomy of a Stage 4 Breakdown",
+  "epigraph": {
+    "quote": "Never try to catch a falling knife—especially when the blade is sharpened by 2x daily leverage and institutional distribution.",
+    "author": "Stan Weinstein's Stage Analysis Principle"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "The tape on <b>NBIL</b> (NASDAQ: <b>NBIL</b>) is decisive. On November 13, 2026, NBIL closed at <b>$4.95</b> in a severe <b>Weinstein Stage 4</b> decline [1][38]. Its technical gate is <b>CAP_REJECTED</b> under the <b>STAGE4_BELOW_STRUCTURAL_FLOOR</b> setup [38]. NBIL has dropped <b>-27.74%</b> over 1 week, <b>-71.71%</b> over 1 month, <b>-85.66%</b> over 3 months, and <b>-87.78%</b> over 6 months [1][38]. It sits <b>-92.77%</b> below its $68.49 52-week high [1][38]. Every key moving average slopes down and caps rallies."
+    },
+    {
+      "type": "tradingview_chart"
+    },
+    {
+      "type": "h3",
+      "title": "Multi-Timeframe Structure: 1W, 1D & 4H Moving Average Stack"
+    },
+    {
+      "type": "p",
+      "html": "All three timeframes show pure Stage 4 distribution with no Stage 1 base [38]. On the <b>Weekly (1W)</b> chart, NBIL trades <b>-81.76%</b> below its 30-week SMA (<b>$27.14</b>) and <b>-66.44%</b> below its 10-week EMA (<b>$14.75</b>), with Weekly RSI(14) at <b>36.23</b> [38]. On the <b>Daily (1D)</b> chart, price ($4.95) sits <b>-78.95%</b> below the 200-day SMA (<b>$23.52</b>) and <b>-72.94%</b> below the 50-day SMA (<b>$18.29</b>) [38]. It also trails its 20-day SMA (<b>$9.82</b>) and 10-day SMA (<b>$7.46</b>) [38]. Daily RSI(14) is <b>34.00</b>, ATR14 is <b>$2.57</b> (51.9% of price), and Bollinger Band width is <b>221.82%</b> [38]."
+    },
+    {
+      "type": "p",
+      "html": "The tactical <b>4-Hour (4H)</b> chart shows no turn either [38]. NBIL stays pinned beneath its 20-EMA (<b>$7.85</b>) and 50-SMA (<b>$11.21</b>), with 4H RSI(14) at <b>34.52</b> and <code>intraday_4h_turn: false</code> [38]. Underlying <b>NBIS</b> confirms the breakdown. It closed at <b>$115.88</b> (-9.92% on November 13) below its 50-day SMA (<b>$194.60</b>), 200-day SMA (<b>$179.35</b>), and 30-week SMA (<b>$203.87</b>), with RSI(14) at <b>35.79</b> [40]. Note that while <code>facts_US_2026-11-13.json</code> tags NBIS as <code>Stage 1 (Basing)</code> near its $109.00 swing low, <code>snapshots_US_2026-11-13.json</code> flags <b>STAGE_4</b> (<code>CAP_REJECTED</code>) below its $194.60 50-DMA and $179.35 200-DMA; both indicators confirm NBIS is not in a Stage 2 uptrend [40]. NBIL's next support is its 52-week low at <b>$4.29</b>, followed by Pivot S1 at <b>$2.92</b> [38]. Resistance starts at $7.46–$9.82 and runs up to Pivot R1 at <b>$23.86</b> and R2 at <b>$37.61</b> [38]."
+    },
+    {
+      "type": "table",
+      "caption": "NBIL Multi-Timeframe Technical & Volume Distribution Ledger (as of 2026-11-13)",
+      "headers": [
+        "Timeframe / Metric",
+        "Current Reading",
+        "Key Reference Level",
+        "Gap / Status & Interpretation"
+      ],
+      "rows": [
+        [
+          "Weekly (1W) Trend",
+          "$4.95 Close | RSI 36.23",
+          "30W SMA $27.14 | 10W EMA $14.75",
+          "-81.8% vs 30W SMA; entrenched Stage 4 downtrend [38]."
+        ],
+        [
+          "Daily (1D) Trend",
+          "$4.95 Close | RSI 34.00",
+          "50D $18.29 | 200D $23.52",
+          "-78.95% below 200D floor; ATR14 $2.57 (51.9% of CMP) [38]."
+        ],
+        [
+          "4-Hour (4H) Tactical",
+          "RSI 34.52 | Turn: False",
+          "20EMA $7.85 | 50SMA $11.21",
+          "No intraday bottoming structure; sellers control rallies [38]."
+        ],
+        [
+          "Nov 13 Volume Surge",
+          "32.95M shares (-19.77%)",
+          "30D Avg ~10.73M (Finviz 6.49M)",
+          "3.07x 30d avg volume on post-earnings liquidation [1][38]."
+        ],
+        [
+          "Underlying NBIS Tape",
+          "$115.88 (-9.92% Nov 13)",
+          "50D $194.60 | 200D $179.35",
+          "NBIS also Stage 4 / CAP_REJECTED after Q3 CapEx hike [39][40]."
+        ]
+      ],
+      "takeaway": "Heavy 3.07x-average volume on a -19.77% down day confirms institutional distribution rather than exhaustion; $4.29 is the last shelf above $2.92."
+    },
+    {
+      "type": "h3",
+      "title": "Volume Distribution & Options Chain Audit (Zero New Capital Rule)"
+    },
+    {
+      "type": "p",
+      "html": "Volume on November 13 confirms heavy distribution. NBIL plunged <b>-19.77%</b> on <b>32.95 million shares</b>, or <b>3.07x</b> its 30-day average [1][38]. That selloff followed NBIS's November 12 Q3 release, where management hiked FY2026 CapEx to ~$27B and FY2027 CapEx to $40B–$45B [35][39]. High-volume drops near 52-week lows ($4.29) signal forced liquidation, not seller exhaustion [38]."
+    },
+    {
+      "type": "p",
+      "html": "Our audit of <code>options_US_NBIL.json</code> shows why options are also off-limits [38]. NBIL's 20-day realized volatility (<b>303.1%</b>) tops its ATM implied volatility (<b>177.2%</b>, tagged <code>IV_CHEAP</code>), yet chain liquidity is broken [38]. The snapshot prints a conditional February 19, 2027 (96 DTE) <b>$15 / $25 Bull Call Debit Spread</b> ($0.55 debit, $550 max loss on 10 contracts, $9,450 max profit, $15.55 breakeven or +214.14%) [38]. Look at the leg quotes: the $15 call has a <b>$0.00 bid / $0.80 ask</b> (OI 31), and the $25 call has a <b>$0.00 bid / $0.60 ask</b> (OI 370) [38]. Wide zero-bid spreads destroy execution edge on entry and exit. Because NBIL is graded <b>FUNDAMENTAL_FAIL</b> and <b>REJECTED</b>, <b>deploy zero new equity or options capital into NBIL</b>."
+    }
+  ],
+  "book_paragraphs": [
+    "Price action is where fundamental flaws and mathematical drag become visible on the tape. As of November 13, 2026, NBIL closed at $4.95, down 19.77% in a single session on 32.95 million shares—more than triple its 30-day average volume. That single-day drop capped a brutal multi-month cascade: down 27.74% over one week, 71.71% over one month, 85.66% over three months, and 92.77% from its 52-week high of $68.49.",
+    "Under Stan Weinstein's Stage Analysis framework, NBIL is locked in an unmistakable Stage 4 decline. On the weekly chart, the ETF sits nearly 82% below its falling 30-week simple moving average at $27.14 and more than 66% below its 10-week EMA at $14.75. On the daily chart, price is 78.95% below its 200-day SMA ($23.52) and 72.94% below its 50-day SMA ($18.29), while 14-day ATR has expanded to $2.57—meaning an average daily swing equals more than half of the entire share price.",
+    "Nor is there any sign of an early intraday turn on the 4-hour chart, where NBIL remains pinned beneath its $7.85 20-EMA and $11.21 50-SMA with RSI at 34.52. Meanwhile, underlying Nebius Group (NBIS) dropped 9.92% on November 13 to $115.88, breaking well below its own 50-day ($194.60), 200-day ($179.35), and 30-week ($203.87) averages. Until NBIS itself stops falling and builds a multi-month Stage 1 base, NBIL cannot stabilize."
+  ],
+  "book_subsections": [
+    {
+      "title": "Why the Options Chain Is a Liquidity Trap",
+      "paragraphs": [
+        "When an ETF falls 92% and its 20-day realized volatility surges to 303.1%, options market makers widen their spreads defensively. Although ATM implied volatility at 177.2% screens statistically cheap relative to realized volatility, the February 19, 2027 $15/$25 call spread illustrates the trap: the $15 strike has a $0.00 bid against a $0.80 ask with only 31 contracts of open interest, and the $25 strike sits at $0.00 bid / $0.60 ask. Paying a $0.55 debit for a spread that requires NBIL to rally +214% to $15.55 just to break even is negative-expectancy speculation.",
+        "Volume distribution on November 13 confirms that institutional and retail sellers are still exiting rather than accumulating. The 32.95 million shares traded on that -19.77% decline represent more than three times the 30-day average volume, occurring directly after Nebius Group's November 12 earnings release. In Stage Analysis, high-volume breakdown days near 52-week lows ($4.29) signal forced liquidation and margin calls, not durable seller exhaustion. Nearest structural support below $4.29 sits at Pivot S1 ($2.92), while overhead supply begins immediately at the 10-day SMA ($7.46) and 20-day SMA ($9.82).",
+        "Because NBIL fails fundamental quality checks (FUNDAMENTAL_FAIL) and carries a REJECTED verdict, our capital-preservation discipline is absolute: deploy zero new equity or options capital into NBIL.",
+        "In practical terms, an investor who waits for a confirmed Stage 1 base and Stage 2 breakout above a rising 30-week moving average will sacrifice the first few points off a theoretical bottom, but they avoid the devastating drawdowns that destroy capital during Stage 4 waterfalls. Right now, with NBIL 78.95% below its 200-day moving average and 81.76% below its 30-week moving average, there is no technical edge in either the shares or the options chain.",
+        "In addition, the 4-hour chart confirms that short-term momentum traders are not stepping in to defend the $4.95 level: both the 20-period EMA at $7.85 and the 50-period SMA at $11.21 are sloping sharply lower, and 4-hour RSI sits at 34.52 with no bullish divergence. Until NBIS itself reclaims its 50-day and 200-day moving averages and NBIL forms a multi-week horizontal base above support, any rally should be treated as a dead-cat bounce rather than a trend reversal.",
+        "Walk through the three-timeframe tape like a disciplined portfolio manager before you ever touch an order ticket. Start on the Weekly chart, which sets the primary tide: NBIL sits at $4.95 against a 30-week simple moving average of $27.14 and a 10-week EMA of $14.75, with weekly RSI at 36.23. That is an 81.76% deficit below the long-term institutional trend line. Next, drop to the Daily chart to inspect intermediate momentum: NBIL is 78.95% below its 200-day SMA ($23.52) and 72.94% below its 50-day SMA ($18.29), while 14-day ATR has ballooned to $2.57—more than half the share price in a typical daily range—and Bollinger Band width sits at 221.82%. Finally, check the 4-Hour chart for early basing clues: price remains trapped under both the $7.85 20-EMA and $11.21 50-SMA with no intraday turn.",
+        "Look at underlying Nebius Group (NBIS) as well, because NBIL cannot heal until NBIS heals first. On November 13, NBIS fell 9.92% to $115.88, sitting well below its $194.60 50-day SMA, $179.35 200-day SMA, and $203.87 30-week SMA with RSI at 35.79. Even though our facts ledger tags NBIS as Stage 1 (Basing) near its $109.00 swing low, our Stage 2 evaluation snapshot flags NBIS as STAGE_4 (CAP_REJECTED) beneath its 50-day and 200-day averages. Both lenses agree on the only rule that matters for your capital: NBIS is nowhere near a Stage 2 uptrend, and buying a 2x daily ETF on a Stage 4 underlying is compounding risk on top of a broken trend."
+      ]
+    }
+  ],
+  "book_callouts": [
+    {
+      "kind": "warning",
+      "title": "Zero-Bid Options & Stage 4 Rule",
+      "text": "Never deploy options capital into a Stage 4 leveraged ETF with $0.00-bid option legs. With NBIL graded FUNDAMENTAL_FAIL and REJECTED, both new equity purchases and conditional call spreads are strictly off-limits."
+    }
+  ]
+}

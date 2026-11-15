@@ -1,0 +1,129 @@
+{
+  "id": "ch-2",
+  "web_title": "2. What the Company Does: ETF Wrapper Mechanics, Operating Segments & Real-World Examples",
+  "book_title": "Chapter 2: Inside the Wrapper and Across the Server Racks",
+  "epigraph": {
+    "quote": "To know what you own, you must follow both the legal contract in your brokerage account and the physical megawatts at the end of the power line.",
+    "author": "Infrastructure Underwriting Principle"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "Because NBIL is a single-stock leveraged exchange-traded fund, understanding \"what the company does\" requires mapping two completely different operational machines. At the top layer, <b>GraniteShares 2x Long NBIS Daily ETF (NBIL)</b> operates as a regulated investment vehicle holding just <b>4 portfolio positions</b> as of November 2026 [1]. Rather than holding physical shares of Nebius Group N.V. in a 2-to-1 margin account, NBIL enters into over-the-counter <b>Total Return Swaps (TRS)</b> with institutional prime brokers and swap dealers (such as Clear Street), backed by cash and U.S. Treasury equivalents posted as collateral, with FLEX or listed options available as backup liquidity instruments [2][18]. The swap counterparty pays NBIL twice the daily return of NBIS. Meanwhile, NBIL pays the counterparty a floating financing rate (tied to SOFR plus a spread) and absorbs the fund's 1.41% net (1.50% gross cap) operating expense ratio [1][2][19]."
+    },
+    {
+      "type": "p",
+      "html": "Beneath the swap contract sits the actual economic engine: <b>Nebius Group N.V. (NBIS)</b>. That operates three consolidated business segments—<b>Nebius AI Cloud</b>, <b>Avride</b>, and <b>TripleTen</b>. Alongside two major unconsolidated equity-method or minority stakes in <b>Toloka AI</b> and <b>ClickHouse</b> [4][15]. In reality, Nebius Group has rapidly converged into a single-engine AI infrastructure business: by Q3 2026, the core <b>Nebius AI Cloud</b> segment generated <b>$973.8 million</b> out of <b>$980.8 million</b> in total consolidated revenue. Representing roughly <b>99.3%</b> of the group's top line [17][20]."
+    },
+    {
+      "type": "table",
+      "caption": "NBIS Operating Segments & Strategic Stakes: Revenue Role and Real-World Customer Proof",
+      "headers": [
+        "Segment / Asset",
+        "Accounting Status",
+        "Revenue / Scale Profile",
+        "Concrete End-to-End Customer Example"
+      ],
+      "rows": [
+        [
+          "Nebius AI Cloud",
+          "Consolidated Core (~98%–99% of revenue)",
+          "$973.8M in Q3 2026 (+643% YoY); $40B–$46B hyperscaler backlog [13][17]",
+          "Shopify runs foundation-model pre-training and merchant catalog structuring on H200 clusters via SkyPilot & Megatron Bridge; Microsoft ($17.4B–$19.4B) & Meta (up to $27B) lease dedicated multi-MW clusters [13][14][21]."
+        ],
+        [
+          "Avride",
+          "Consolidated Subsidiary",
+          "Early-stage commercial revenue; backed by $375M Uber & Nebius commitment (Oct 2025) [22]",
+          "Autonomous sidewalk delivery robots fulfill live Uber Eats and Grubhub orders across Austin, Dallas, Jersey City, and U.S. university campuses, alongside robotaxi pilots [22][23]."
+        ],
+        [
+          "TripleTen",
+          "Consolidated Subsidiary",
+          "Modest recurring digital edtech revenue; focused on narrowing cash burn [9][15]",
+          "Career-switching adult learners enroll in multi-month online coding, data science, and QA engineering bootcamps across the U.S. and Latin America [4][9]."
+        ],
+        [
+          "Toloka AI",
+          "Deconsolidated (Equity-Method, Q2 2025)",
+          "Removed from consolidated revenue after third-party investment reduced voting control [15]",
+          "AI labs and enterprises (including Shopify workflows) commission human-in-the-loop RLHF, domain-expert data labeling, and LLM safety evaluations [15][21]."
+        ],
+        [
+          "ClickHouse",
+          "Minority Equity Stake",
+          "Non-consolidated; $598.9M revaluation gain recognized in FY2025 GAAP net income [24]",
+          "High-throughput enterprises deploy ClickHouse's open-source columnar SQL engine for real-time observability and petabyte-scale analytical queries [4][9]."
+        ]
+      ],
+      "takeaway": "While Avride, TripleTen, Toloka, and ClickHouse provide valuable optionality and balance-sheet asset backing, Nebius Group's operational destiny—and therefore 100% of NBIL's daily variance—is driven by Nebius AI Cloud."
+    },
+    {
+      "type": "p",
+      "html": "<b>1. Nebius AI Cloud (Core Engine):</b> Nebius builds full-stack AI infrastructure spanning owned and co-located data centers across Europe (Mäntsälä and Lappeenranta in Finland, Paris, Iceland. The UK) and the United States (Vineland, New Jersey. Kansas City, Missouri. And Alabama) [16][25]. Unlike bare-metal landlords that simply rack servers, Nebius pairs dense NVIDIA GPU clusters (H100, H200, Blackwell B200/GB200/GB300. Planned Vera Rubin systems) with InfiniBand/NVLink fabric and its proprietary software orchestration layer, including <b>Soperator</b>. An open-source Kubernetes operator that runs Slurm job-scheduling pods with a unified root filesystem and automated faulty-GPU draining [14][16][26]. Consider <b>Shopify</b> as an end-to-end enterprise customer example: Shopify uses Nebius's H200 clusters alongside SkyPilot and NVIDIA Megatron Bridge to burst cross-cloud workloads, pre-train foundation models. Structure millions of merchant product catalogs so they are machine-readable for AI shopping agents [21]. Similarly, <b>Cloudflare</b> taps Nebius compute to power scalable inference-at-the-edge for developers on its Workers API. Meanwhile, <b>Mistral AI</b> and <b>Prosus</b> use Nebius for frontier model training and enterprise AI deployments [27]. At the hyperscaler tier, <b>Microsoft</b> signed a five-year, $17.4 billion to $19.4 billion contract centered on dedicated Blackwell capacity in Vineland, New Jersey [13][16], and <b>Meta</b> followed in March 2026 with a five-year deal up to $27 billion ($12 billion dedicated capacity plus a $15 billion backstop) [14]."
+    },
+    {
+      "type": "p",
+      "html": "<b>2. Avride (Autonomous Vehicles & Delivery Robotics):</b> Incubated inside Yandex's self-driving division before the 2024 carve-out, Avride develops both autonomous passenger vehicles and four-wheeled electric sidewalk delivery robots [22][28]. In October 2025, Uber and Nebius committed up to <b>$375 million</b> in strategic funding and commercial milestones to scale Avride across the Uber ecosystem, followed by an expansion onto <b>Grubhub</b> in late 2025 [22][23]. In concrete daily operation, a diner in Austin, Dallas, or Jersey City ordering lunch through Uber Eats or Grubhub has their meal loaded into an Avride delivery pod at a local restaurant. The robot navigates sidewalks autonomously using LiDAR and computer vision, crosses intersections. Texts the customer a code to pop the cargo lid upon arrival. Having already logged hundreds of thousands of commercial deliveries [22][23]."
+    },
+    {
+      "type": "p",
+      "html": "<b>3. TripleTen (Tech Reskilling Edtech):</b> TripleTen is a consolidated online bootcamp subsidiary offering structured, mentor-guided programs in software engineering, data science, business intelligence analytics. Quality assurance [4][9]. A concrete learner journey involves a non-technical career-switcher in the U.S. or Latin America completing a 5-to-9-month part-time curriculum with code reviews and career coaching to transition into a junior developer or data analyst role. Within the Nebius Group umbrella, TripleTen operates as a self-contained cash-efficiency unit focused on trimming burn rather than consuming hyperscale capital [9]."
+    },
+    {
+      "type": "p",
+      "html": "<b>4. Deconsolidated & Equity-Method Assets (Toloka AI & ClickHouse):</b> Two former or affiliated crown jewels sit outside consolidated revenue. <b>Toloka AI</b> provides crowdsourced and expert human-in-the-loop data labeling, reinforcement learning from human feedback (RLHF). Red-teaming evaluations for foundation-model builders [15][21]. Following a Q2 2025 third-party financing round, Nebius ceased to hold majority voting power and reclassified Toloka to discontinued operations and equity-method accounting [15]. Likewise, Nebius holds a significant minority equity stake in <b>ClickHouse</b>, the high-speed columnar SQL database company. In FY2025, a mark-to-market revaluation of this ClickHouse stake generated a <b>$598.9 million</b> non-cash accounting gain that single-handedly turned Nebius's GAAP bottom line positive despite a $(611.7) million operating loss [24][29]. While these non-consolidated stakes provide real balance-sheet optionality that could theoretically be monetized to help fund future GPU clusters, they do not generate recurring operating cash flow inside Nebius's consolidated P&L."
+    },
+    {
+      "type": "p",
+      "html": "<b>How NBIL Translates Segment Results Into Daily Swap Flows:</b> From an ETF mechanics standpoint, NBIL's four holdings. Its Total Return Swap agreements and cash/Treasury collateral. Have zero direct exposure to Avride's delivery robots or ClickHouse's database licenses [1][18]. Instead, NBIL settles daily against the closing market return of NBIS Class A shares. If Nebius AI Cloud announces a power-commissioning delay in Vineland, New Jersey, or if a Q3 2026 earnings release reveals that 33% of quarterly revenue came from a one-time asset-light partnership item [17], the equity's intraday repricing is immediately doubled inside NBIL's swap settlement at 4:00 PM ET. Conversely, NBIL's counterparty agreements carry strict concentration and credit-risk provisions: if NBIS experiences an extreme single-day gap exceeding 45%–50%, daily swap reset mechanics and intraday circuit breakers expose NBIL to severe NAV impairment or potential closure risk under extreme tail events [2][5]."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "Accounting vs. Operating Reality in NBIS's Bottom Line",
+      "paragraphs": [
+        "Investors analyzing Nebius Group must distinguish between operating cash generation and non-cash equity revaluations. In FY2025, Nebius posted a GAAP operating loss of $(611.7) million on $529.8 million of revenue, yet reported $82.5 million in GAAP net income primarily because of a $598.9 million ClickHouse revaluation gain and discontinued-operations effects [24][29]. NBIL's daily swap tracks the equity's market reaction to both real cloud bookings and non-operating accounting noise."
+      ]
+    }
+  ],
+  "book_paragraphs": [
+    "If you want to understand what you are actually exposed to when you hold NBIL, you have to trace two completely different sets of plumbing. The first set of plumbing is inside the GraniteShares ETF itself. If you opened NBIL's portfolio holdings report, you would not see a sprawling list of stocks or physical data center deeds. You would see just four line items: over-the-counter total return swaps written with institutional counterparties like Clear Street, paired with cash and short-term U.S. Treasury collateral. Every afternoon, those swap contracts settle the day's score. If Nebius Group shares rise five percent, the swap counterparty owes the fund ten percent on that notional exposure, minus a daily slice of financing interest and the fund's 1.41 to 1.50 percent annual expense drag. If Nebius drops ten percent, the fund loses twenty percent.",
+    "The second set of plumbing is the actual operating business of Nebius Group N.V., and here the story has consolidated at breathtaking speed. When Nebius re-listed in 2024, investors often treated it as a sum-of-the-parts tech incubator housing four different startups. By the third quarter of 2026, that framing was obsolete. Out of 980.8 million dollars in quarterly group revenue, Nebius AI Cloud generated 973.8 million dollars—more than ninety-nine percent of the entire enterprise.",
+    "Let us look at what Nebius AI Cloud actually does for a real customer, because \"GPU-as-a-Service\" sounds abstract until you watch a workload run. Take Shopify. To make millions of independent merchants' product catalogs intelligible to modern AI shopping assistants, Shopify's machine learning teams need to pre-train and fine-tune massive foundation models. They burst those heavy training jobs onto Nebius's NVIDIA H200 clusters using tools like SkyPilot and NVIDIA Megatron Bridge, relying on Nebius's low-latency InfiniBand networking and its open-source Soperator software—a clever bridge that lets classic Slurm supercomputing schedulers run seamlessly inside elastic Kubernetes pods. When a single GPU in a thousand-chip cluster throws a hardware error, Soperator automatically drains and replaces the faulty node so a multi-week training run does not crash."
+  ],
+  "book_subsections": [
+    {
+      "title": "The Hyperscaler Anchor and the Other Three Pillars",
+      "paragraphs": [
+        "Alongside enterprise developers like Shopify, Cloudflare, and Mistral AI, Nebius transformed its scale by becoming an overflow and dedicated capacity builder for the world's largest tech giants. In Vineland, New Jersey, Nebius is commissioning massive Blackwell GPU clusters under a five-year, 17.4 to 19.4 billion dollar contract with Microsoft. In March 2026, Meta signed an even larger five-year agreement worth up to 27 billion dollars, combining 12 billion dollars of dedicated capacity with a 15 billion dollar backstop commitment.",
+        "What about the other businesses in the Nebius ecosystem? Avride, the autonomous robotics spinout, has become a tangible commercial operator in its own right. Backed by a 375 million dollar strategic commitment from Uber and Nebius in October 2025, Avride's four-wheeled electric delivery robots now roll down sidewalks in Austin, Dallas, and Jersey City, delivering hot meals for both Uber Eats and Grubhub. Picture a college student or downtown office worker ordering lunch on Grubhub: the restaurant places the order inside an autonomous Avride pod, the pod navigates curbs and crosswalks using LiDAR and computer vision, and the customer unlocks the lid with a phone code. TripleTen, the online coding bootcamp, continues to train career-switchers in software engineering, data science, and quality assurance over five-to-nine-month mentored cohorts while working to trim its own cash burn.",
+        "Meanwhile, two of the group's most famous assets—the Toloka AI data-labeling platform and the ClickHouse columnar database—no longer sit inside consolidated revenue at all. Toloka was deconsolidated in the second quarter of 2025 after a third-party investment diluted Nebius's voting control, and ClickHouse sits on the balance sheet as a minority equity stake whose 598.9 million dollar paper revaluation in 2025 masked a 611.7 million dollar core operating loss. For you and me, the takeaway is straightforward: those equity stakes are nice balance-sheet cushions if Nebius ever sells them to buy more GPUs, but NBIL's daily swap only cares about how the market prices Nebius AI Cloud."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Why Swap Counterparties and Reset Clocks Matter More Than Robot Deliveries",
+      "paragraphs": [
+        "It is easy to get romantic about autonomous delivery robots rolling down sidewalks in Austin or Dallas, or about ClickHouse powering real-time analytics for global software teams. Those are genuinely impressive engineering businesses. Yet from the perspective of NBIL, they are background noise. Because NBIL's four holdings consist purely of total return swaps and Treasury collateral tied to NBIS stock, the ETF has no direct claim on Avride's fleet or ClickHouse's equity.",
+        "Every afternoon at four o'clock Eastern Time, the swap desk marks NBIS to market and settles the day's leveraged gain or loss. If Nebius AI Cloud reports a delay in commissioning Blackwell racks in New Jersey, or if a quarterly filing reveals a surprise one-time partnership item, NBIL absorbs twice the equity shock instantly. Worse, if NBIS ever experiences an extreme single-session drop approaching fifty percent, daily swap reset mechanics can inflict catastrophic impairment on the fund's net asset value before a recovery even has a chance to begin.",
+        "Let us also be crystal clear about how Nebius's three consolidated segments and two unconsolidated equity stakes fit together operationally. Nebius AI Cloud is the voracious capital consumer: it buys the NVIDIA H100, H200, and Blackwell clusters, leases the power substations in Finland, France, New Jersey, Missouri, and Alabama, and hires the systems engineers who maintain Soperator. Avride and TripleTen, by contrast, are self-contained operating units—Avride backed by Uber's 375 million dollar partnership, and TripleTen running lean online coding cohorts. Meanwhile, Toloka AI and ClickHouse sit off to the side as unconsolidated equity stakes. Understanding that separation prevents you from making a classic analyst mistake: never confuse a one-time paper revaluation in ClickHouse with recurring operating cash flow from renting GPUs.",
+        "Walk through one more concrete customer workflow so you can feel the difference between Nebius and a generic server landlord. When Cloudflare integrates Nebius capacity to support inference-at-the-edge through its Workers developer ecosystem, or when Mistral AI spins up multi-node frontier training clusters, they are not just renting bare concrete and electricity. They are relying on Nebius's pre-tuned InfiniBand fabric, unified root filesystems, and automated node-healing software to keep expensive GPU hours from sitting idle. That operational polish explains why Nebius won tier-one logos—even though those same workloads remain portable once contracts expire."
+      ],
+      "callouts": []
+    }
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "Mentor Check: Follow the 99% Revenue Engine",
+      "quote": "Side bets make great conference slides, but a single-stock leveraged ETF lives and dies on the core revenue engine.",
+      "text": "When you and I evaluate NBIL, Avride's delivery robots and ClickHouse's equity stake are interesting footnotes, not the driver. Ninety-nine percent of Nebius's revenue—and nearly one hundred percent of its capital expenditure—is tied to renting NVIDIA compute.",
+      "bullets": [
+        "NBIL holds 4 positions: Total Return Swaps + cash/Treasury collateral, resetting daily.",
+        "Nebius AI Cloud represents ~99.3% of Q3 2026 revenue ($973.8M of $980.8M).",
+        "ClickHouse and Toloka are unconsolidated/equity-method assets; do not mistake non-cash revaluation gains for recurring cloud cash flow."
+      ]
+    }
+  ]
+}
