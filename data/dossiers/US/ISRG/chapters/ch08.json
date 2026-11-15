@@ -1,0 +1,174 @@
+{
+  "id": "ch-8",
+  "title": "8. Technical Structure, Institutional Flow & Options Convexity",
+  "summary": "Primary facts ledger places ISRG in Stage 3 (Topping / Pullback) at $443.59 (declining 200D SMA $429.38, 50D < 200D, 7 distribution days) despite a short-term 10W/30W VCP squeeze; options favor patience given thin OI (7), $8.00 spread, and $9,300 debit vs $7,434.75 cash.",
+  "epigraph": {
+    "quote": "Short-term volatility squeezes inside a declining 200-day average demand patience until support holds or resistance breaks.",
+    "author": "Technical Reconciliation Desk"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "html": "8.1 Stage 3 vs. Stage 2 Reclaim Reconciliation & Moving Averages"
+    },
+    {
+      "type": "p",
+      "html": "After falling 26.54% from its $603.88 peak to a $328.57 low, ISRG closed on November 13, 2026 at <strong>$443.59</strong> (+0.84% 1D, -2.93% 1W, +4.42% 1M, +10.62% 3M) [23]. Our technical signals split across timeframes and require explicit reconciliation. The automated <code>stock_snapshot.py</code> screen flags a short-term Stage 2 reclaim because price sits <strong>+8.46%</strong> above the 30-week SMA ($409.00) and <strong>+4.45%</strong> above the 10-week EMA ($424.71), inside an 11.15% Bollinger squeeze [23]. However, our primary ledger (<code>facts_US_2026-11-13.json</code>) classifies ISRG as <strong>Stage 3 (Topping / Pullback)</strong>. Why? The 200-day SMA ($429.38) is still declining from $476.17 sixty-three trading days ago, the 50-day SMA ($417.59) remains below the 200-day SMA ($429.38), ISRG logged <strong>7 distribution days</strong> in the last 25 sessions, and the S&amp;P 500 sits in a <code>Correction</code> regime [23]."
+    },
+    {
+      "type": "p",
+      "html": "We defer to the primary ledger's <strong>Stage 3 (Topping / Pullback)</strong> classification and set our posture to <strong><code>WAIT_FOR_SUPPORT</code></strong>. On the 4-hour chart, ISRG coils on its 50-period SMA ($443.03) and below its 20-period EMA ($448.95), with 4H RSI(14) at <strong>47.50</strong>, daily RSI(14) at <strong>52.08</strong>, and weekly RSI(14) at <strong>55.60</strong> [23]. Average True Range (ATR 14) is <strong>$14.45</strong> (3.26% of CMP) [23]. Until the 200-day SMA flattens or turns up and price breaks out above Pivot R1 (<strong>$464.22</strong>) on volume—or successfully tests and holds the <strong>$418.34–$431.08</strong> support zone—chasing $443.59 is premature. Hard invalidation sits at <strong>$401.77</strong> [23]."
+    },
+    {
+      "type": "table",
+      "caption": "Multi-Timeframe Technical Dashboard for NASDAQ:ISRG (2026-11-13 Close: $443.59)",
+      "headers": [
+        "Timeframe / Metric",
+        "Current Reading",
+        "Distance / Status",
+        "Tactical Interpretation"
+      ],
+      "rows": [
+        [
+          "10-Week EMA (Weekly)",
+          "$424.71",
+          "+4.45% above",
+          "Short-term reclaim anchor in snapshot screen; sits inside $418.34–$431.08 support zone [23]"
+        ],
+        [
+          "30-Week SMA (Weekly)",
+          "$409.00",
+          "+8.46% above",
+          "Weekly floor above $401.77 hard stop; snapshot screen flags early Stage 2 reclaim [23]"
+        ],
+        [
+          "50-Day SMA (Daily)",
+          "$417.59",
+          "+6.23% above",
+          "Below 200D SMA ($429.38); anchors $418.34 support zone low [23]"
+        ],
+        [
+          "200-Day SMA (Daily)",
+          "$429.38",
+          "+3.31% above",
+          "Declining from $476.17 (63d ago); drives primary Stage 3 (Topping / Pullback) rating [23]"
+        ],
+        [
+          "20-Day SMA / 4H 50-SMA",
+          "$447.13 / $443.03",
+          "-0.79% / +0.13%",
+          "Coiling tightly around 4H 50-SMA inside 11.15% BB contraction [23]"
+        ],
+        [
+          "RSI(14) — 1W / 1D / 4H",
+          "55.60 / 52.08 / 47.50",
+          "Neutral",
+          "No overbought froth, but 7 distribution days in 25 sessions warrant patience [23]"
+        ],
+        [
+          "ATR(14) & BB Width",
+          "$14.45 (3.26%) / 11.15%",
+          "VCP Squeeze / Stage 3 Ledger",
+          "Tight volatility compression; wait for $464.22 breakout or $418.34–$431.08 support hold [23]"
+        ],
+        [
+          "Pivots (S1 / R1 / 52W)",
+          "S1 $394.45 / R1 $464.22",
+          "52W: $328.57–$603.88",
+          "Break above $464.22 + flattening 200D SMA confirms uptrend; hard stop at $401.77 [23]"
+        ]
+      ],
+      "takeaway": "While the 10W/30W screen shows an 11.15% VCP squeeze, the primary ledger classifies ISRG as Stage 3 (Topping / Pullback) due to a declining 200D SMA ($429.38 vs $476.17 63d ago), 50D < 200D, 7 distribution days, and a Correction market regime."
+    },
+    {
+      "type": "h3",
+      "html": "8.2 Volume Contraction, Institutional Flow & Short Interest"
+    },
+    {
+      "type": "p",
+      "html": "Volume confirms quiet institutional buying rather than selling [22, 23]. On November 13, 2026, ISRG traded 1.60 million shares—just <strong>0.65x</strong> its 30-day average of 2.47 million shares (and 0.68x Finviz relative volume) [22, 23]. Drying volume inside an 11.15% Bollinger squeeze is textbook Volatility Contraction Pattern (VCP) action, showing post-Q3 supply is absorbed. Institutions own <strong>90.64%</strong> of shares (-0.44% recent net change), insiders hold 0.70% (-2.51% routine Form 4 sales), and short interest is low at <strong>2.05%</strong> of float (7.06 million shares, 2.98 days to cover) [22]. In addition, management bought back <strong>$2.94 billion</strong> of stock in Q3 2026 alone, placing a strong corporate bid under the shares [3]."
+    },
+    {
+      "type": "h3",
+      "html": "8.3 Options & Call-Convexity Overlay (LEAPS Playbook)"
+    },
+    {
+      "type": "p",
+      "html": "For defined-risk upside once support or breakout confirms, our options desk flags the <strong>2027-09-17 $400 LEAPS Call</strong> (306 DTE, 0.71 Delta) under an <strong>IV_FAIR</strong> regime [27]. ATM implied volatility is <strong>46.5%</strong> versus 20-day realized volatility of <strong>44.6%</strong> [27]. However, two hard execution constraints apply. First, liquidity is thin: open interest is just <strong>7 contracts</strong> with an <strong>$8.00 bid-ask spread</strong> ($89.00 bid / $97.00 ask), creating roughly <strong>4%+ slippage risk</strong> at the $93.00 midpoint—use strict limit orders only [27]. Second, the <strong>$9,300.00 debit</strong> (930.0 bps of a $100,000 reference NAV) exceeds our actual <strong>$7,434.75 consolidated cash</strong> ($88,684.68 net worth), requiring fresh cash or trimming an existing holding. Expiration breakeven is <strong>$493.00</strong> (+11.14% vs CMP); if filled on a support hold, trim half at +75%–100% gain and exit on a weekly close below $429.38 [27]."
+    },
+    {
+      "type": "table",
+      "caption": "2027-09-17 $400 LEAPS Call Payoff & Risk Matrix ($9,300.00 Max Risk)",
+      "headers": [
+        "Scenario",
+        "ISRG Price (% Move)",
+        "Est. Option Value",
+        "Net P&L ($)",
+        "Return on Risk (%)"
+      ],
+      "rows": [
+        [
+          "Early Stop Trigger (Weekly Close < $429.38)",
+          "$429.38 (-3.2%)",
+          "$8,852.34",
+          "-$447.66",
+          "-4.8%"
+        ],
+        [
+          "Flat in 60 Days (Theta -$13.50/day)",
+          "$443.59 (0.0%)",
+          "$9,613.21",
+          "+$313.21",
+          "+3.4%"
+        ],
+        [
+          "Base Target ($510.13 / ~$515 Dossier Base)",
+          "$510.13 (+15.0%)",
+          "$13,281.99",
+          "+$3,981.99",
+          "+42.8%"
+        ],
+        [
+          "Bull Target ($586.65 / ~$590 Dossier Bull)",
+          "$586.65 (+32.3%)",
+          "$20,085.81",
+          "+$10,785.81",
+          "+116.0%"
+        ]
+      ],
+      "takeaway": "With 306 DTE and 0.71 Delta, the $400 LEAPS Call captures ~71% of common-stock upside ($+70.60 per $1 move) while capping catastrophic gap risk at $9,300 and losing only $13.50/day to theta."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "Reconciling Stage 3 vs. Stage 2: Why Patience Beats Chasing $443.59",
+      "paragraphs": [
+        "A great business bought at the wrong point in its technical cycle can tie up capital for quarters. After peaking at $603.88 and sliding to $328.57, ISRG closed on November 13, 2026 at $443.59. On the surface, our automated stock_snapshot.py screen flags an early Stage 2 reclaim: price sits 8.46 percent above the 30-week SMA ($409.00) and 4.45 percent above the 10-week EMA ($424.71) inside an 11.15 percent Bollinger squeeze.",
+        "However, our primary facts ledger classifies ISRG as Stage 3 (Topping / Pullback), and for good reason. The 200-day SMA ($429.38) is still declining from $476.17 sixty-three trading days ago, the 50-day SMA ($417.59) sits below the 200-day SMA ($429.38), the stock logged 7 distribution days in 25 sessions, and the S&P 500 is in a Correction regime. Even though four-hour RSI (47.50) and daily RSI (52.08) show no overbought froth, buying into overhead distribution before the 200-day average flattens creates unnecessary drawdown risk.",
+        "Accordingly, we honor the primary Stage 3 classification and wait for confirmation. We want to see either a decisive volume breakout above Pivot R1 ($464.22) alongside a flattening 200-day SMA, or a disciplined pullback that holds the $418.34 to $431.08 support zone above our $401.77 hard stop."
+      ]
+    },
+    {
+      "title": "Stock Replacement with Defined Risk: Liquidity & Cash Constraints",
+      "paragraphs": [
+        "For investors who prefer defined-risk convexity once support holds, the September 17, 2027 $400 Call (306 DTE, 0.71 Delta) trades near $93.00 per share ($9,300.00 debit) under an IV Fair regime (46.5% ATM IV vs. 44.6% HV20). Max loss is capped at $9,300.00 with a $493.00 expiration breakeven, and a weekly close below $429.38 limits early-stop loss to roughly $448 (-4.8%).",
+        "Two practical constraints govern execution. First, open interest is just 7 contracts with an $8.00 bid-ask spread ($89.00 bid / $97.00 ask), creating roughly 4%+ slippage risk—making strict limit orders near the $93.00 midpoint mandatory. Second, the $9,300.00 debit (930.0 bps of a $100,000 reference NAV) exceeds our actual $7,434.75 consolidated cash ($88,684.68 net worth), meaning this contract cannot be funded without fresh cash or trimming an existing holding.",
+        "Even with those constraints, understanding the LEAPS payoff profile is useful once ISRG confirms support. At $510.13 to $515.00, the $400 Call is modeled to gain roughly $3,982 (+42.8% on risk), and at our $586.65 to $590.00 Bull Target it gains roughly $10,786 (+116.0%). Daily theta decay is modest at $13.50 per day across 306 days to expiration. Still, options leverage magnifies poor timing: buying an illiquid LEAPS contract during Stage 3 distribution before support holds invites immediate mark-to-market slippage, so patience comes first."
+      ]
+    },
+    {
+      "title": "Moving-Average Architecture, Support Geometry, and Execution Rules",
+      "paragraphs": [
+        "Let us walk through the exact price levels on the chart so execution remains mechanical. At $443.59, ISRG sits below its 20-day SMA ($447.13), 4-hour 20-EMA ($448.95), and Pivot R1 ($464.22). A daily close above $464.22 on at least 1.3 times the 30-day average volume (2.47 million shares) alongside a flattening 200-day SMA would confirm upward resolution toward R2 ($496.44) and our $515.00 Base Target.",
+        "On the downside, our $418.34 to $431.08 support zone brackets the 200-day SMA ($429.38), 10-week EMA ($424.71), and 50-day SMA ($417.59), with the 30-week SMA ($409.00) and Pivot S1 ($394.45) below. Placing the hard stop at $401.77 keeps risk bounded if Stage 3 rollover resumes, while waiting for $418.34–$431.08 support lifts reward-to-risk to 2.86:1–5.83:1.",
+        "Volume and ownership data also explain why a patient limit bid works well here. Institutions hold 90.64 percent of ISRG shares, short interest is low at 2.05 percent of float (2.98 days to cover), and management retired $2.94 billion of stock in Q3 2026. On November 13, 2026, daily volume of 1.60 million shares was 0.65 times the 30-day average of 2.47 million. That dry-up shows sellers are not panicking, yet 7 distribution days over the past 25 sessions confirm that overhead supply still needs time to clear. Meanwhile, ISRG's 10.62 percent three-month gain (+13.64 percent over 63 trading days) shows relative strength against a weak S&P 500, making $418.34–$431.08 a high-probability area to monitor."
+      ]
+    }
+  ],
+  "book_callouts": [
+    {
+      "title": "Stage 3 Discipline & Options Constraints",
+      "text": "Primary facts ledger places ISRG in Stage 3 (declining 200D SMA $429.38, 50D < 200D, 7 distribution days), overriding the 10W/30W VCP reclaim screen. Wait for $418.34–$431.08 support or a $464.22 breakout. For the 2027-09-17 $400 Call, OI is 7 with an $8.00 spread (~4%+ slippage risk), and the $9,300 debit exceeds $7,434.75 consolidated cash."
+    }
+  ]
+}
