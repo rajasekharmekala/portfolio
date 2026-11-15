@@ -96,7 +96,7 @@
 
   const stageLabel = stage => stage ? stage.replace("_", " ") : "—";
   const statusLabel = status =>
-    status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "WATCHLIST" ? "Watchlist" : "Tracked";
+    status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "WATCHLIST" ? "Watchlist" : status === "DISCARDED" ? "Discarded" : "Tracked";
 
   // ---- Build one unified, de-duplicated pipeline row per (market, symbol) ----
   function buildPipeline() {
@@ -177,7 +177,7 @@
     if (statuses.includes("HELD")) return "HELD";
     if (statuses.includes("SHORTLIST")) return "SHORTLIST";
     if (statuses.includes("WATCHLIST")) return "WATCHLIST";
-    return "HELD";
+    return "DISCARDED";
   }
 
   function pipelineMatch(row) {
@@ -198,7 +198,7 @@
   // Ascending puts the most favourable value first: Stage 2 before 4, Immediate Buy before Avoid,
   // Held before Shortlist before Watchlist. Missing values sort last in both directions.
   const STAGE_RANK = { STAGE_2: 0, STAGE_1: 1, STAGE_3: 2, STAGE_4: 3 };
-  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, WATCHLIST: 2 };
+  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, WATCHLIST: 2, DISCARDED: 3 };
   const VERDICT_RANK = {
     "IMMEDIATE BUY": 0,
     "ACCUMULATE ON DIP": 1,
@@ -266,6 +266,7 @@
     { status: "HELD", id: "holdings", label: "Holdings" },
     { status: "SHORTLIST", id: "shortlist", label: "Shortlist" },
     { status: "WATCHLIST", id: "watchlist", label: "Watchlist" },
+    { status: "DISCARDED", id: "discarded", label: "Discarded" },
   ];
 
   function isFiltered() {
@@ -365,7 +366,7 @@
     if (counts) {
       const byMarket = m => filtered.filter(r => r.market === m).length;
       const byStatus = s => filtered.filter(r => r.status === s).length;
-      counts.textContent = `${filtered.length} names shown · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")}`;
+      counts.textContent = `${filtered.length} names shown · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
     }
     if (meta) meta.textContent = `${filtered.length} of ${all.length} tracked names`;
 
@@ -616,6 +617,7 @@
       <div><dt>Watchlist</dt><dd>${countStatus("WATCHLIST")}</dd></div>
       <div><dt>Shortlist</dt><dd>${countStatus("SHORTLIST")}</dd></div>
       <div><dt>Held</dt><dd>${countStatus("HELD")}</dd></div>
+      <div><dt>Discarded</dt><dd>${countStatus("DISCARDED")}</dd></div>
       <div><dt>Monographs</dt><dd>${publishedDossiers}</dd></div>
       <div><dt>Reports</dt><dd>${reports}</dd></div>
     `;
