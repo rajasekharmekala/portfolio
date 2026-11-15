@@ -1,0 +1,139 @@
+{
+  "symbol": "TXN",
+  "market": "US",
+  "generated_at": "2026-11-15T21:40:40+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": true,
+      "status": "connected",
+      "active_tabs": [
+        {
+          "title": "BE 191.99 ▼ −4.92% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
+        }
+      ]
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NASDAQ:TXN",
+    "exchange": "NASDAQ",
+    "company_name": "Texas Instruments Incorporated",
+    "close": 303.6,
+    "change_1d_pct": -2.84,
+    "perf_1w_pct": 7.36,
+    "perf_1m_pct": 7.04,
+    "perf_3m_pct": 10.96,
+    "rsi_1d": 54.83,
+    "rsi_4h": 52.54,
+    "rsi_1w": 58.69,
+    "sma20": 296.85,
+    "sma50": 283.87,
+    "sma200": 264.77,
+    "sma30_weekly": 286.1,
+    "ema10_weekly": 285.85,
+    "ema20_4h": 301.46,
+    "sma50_4h": 293.84,
+    "atr14": 13.28,
+    "bb_width_pct": 17.84,
+    "pivot_s1": 277.54,
+    "pivot_s2": 254.25,
+    "pivot_r1": 318.6,
+    "pivot_r2": 336.37,
+    "high_52w": 334.03,
+    "low_52w": 152.73,
+    "dist_to_200d_pct": 14.67,
+    "major_shelf": 286.1,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE2_SUPPORT_PULLBACK",
+    "setup_summary": "Constructive Stage 2 trend trading near 50D SMA (283.87) / 10W EMA (285.85) support."
+  },
+  "options_plan": {
+    "symbol": "TXN",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "LONG_CALL_LEAPS",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 49.6,
+    "hv20_pct": 57.1,
+    "open_positions_audit": [],
+    "headline": "Buy 1x TXN 2027-09-17 $280 LEAPS Call (306 DTE, 0.69 Delta) near $64.53/sh ($6,453.00 max possible loss).",
+    "recommended_trade": {
+      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
+      "expiry": "2027-09-17",
+      "dte": 306,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 280.0,
+          "mid": 64.53,
+          "bid": 63.05,
+          "ask": 66.0,
+          "open_interest": 50
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 64.53,
+      "max_loss_total": 6453.0,
+      "max_loss_nav_bps": 645.3,
+      "max_profit_total": "Uncapped upside",
+      "breakeven_at_expiry": 344.53,
+      "breakeven_move_pct": 13.48,
+      "net_delta_dollars_per_1_move": 68.7,
+      "daily_theta_dollars": -9.81,
+      "underlying_stop_trigger": 286.1,
+      "profit_taking_rule": "Trim half at +75%–100% contract gain or when TXN reaches $349.14; exit early on a weekly close below $286.10.",
+      "scenarios": [
+        {
+          "scenario": "Bear / Stop Hit ($286.10)",
+          "stock_price": 286.1,
+          "stock_move_pct": -5.8,
+          "contract_value": 5491.21,
+          "net_pnl": -961.79,
+          "return_on_risk_pct": -14.9
+        },
+        {
+          "scenario": "Flat in 60 Days ($303.60)",
+          "stock_price": 303.6,
+          "stock_move_pct": 0.0,
+          "contract_value": 6483.41,
+          "net_pnl": 30.41,
+          "return_on_risk_pct": 0.5
+        },
+        {
+          "scenario": "Base Target ($349.14)",
+          "stock_price": 349.14,
+          "stock_move_pct": 15.0,
+          "contract_value": 8792.33,
+          "net_pnl": 2339.33,
+          "return_on_risk_pct": 36.3
+        },
+        {
+          "scenario": "Bull Target ($401.51)",
+          "stock_price": 401.51,
+          "stock_move_pct": 32.2,
+          "contract_value": 13327.02,
+          "net_pnl": 6874.02,
+          "return_on_risk_pct": 106.5
+        }
+      ],
+      "beginner_explainer": [
+        "Why LEAPS instead of a short-dated call: With 306 days until 2027-09-17 and 0.69 delta, this option behaves ~68% like owning 100 shares for a fraction of the cash, while losing only $9.81/day to time decay.",
+        "Worst-case wallet risk: You pay $64.53 x 100 shares x 1 = $6,453.00 upfront. Even if TXN crashed 50% overnight, you cannot lose more than $6,453.00.",
+        "Volatility check: Implied Volatility is 49.6% vs. 20-day actual stock volatility of 57.1% (IV CHEAP), so you are not overpaying panic premiums."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (TXN)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x TXN 2027-09-17 $280 LEAPS Call (306 DTE, 0.69 Delta) near $64.53/sh ($6,453.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Constructive Stage 2 trend trading near 50D SMA (283.87) / 10W EMA (285.85) support. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:TXN. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_txn_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:TXN\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:TXN\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_txn_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 306 days until 2027-09-17 and 0.69 delta, this option behaves ~68% like owning 100 shares for a fraction of the cash, while losing only $9.81/day to time decay.</p><p>Worst-case wallet risk: You pay $64.53 x 100 shares x 1 = $6,453.00 upfront. Even if TXN crashed 50% overnight, you cannot lose more than $6,453.00.</p><p>Volatility check: Implied Volatility is 49.6% vs. 20-day actual stock volatility of 57.1% (IV CHEAP), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for TXN</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $280 CALL @ $64.53 mid (bid $63.05 / ask $66.00, OI 50)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$6,453.00 (645.3 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$344.53 (+13.48% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+68.70 per $1 move | $-9.81/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when TXN reaches $349.14; exit early on a weekly close below $286.10.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 306 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $6,453.00 Across Stock Scenarios (TXN)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($286.10)</td><td>$286.10 (-5.8%)</td><td>$5,491.21</td><td>$-961.79</td><td><strong>-14.9%</strong></td></tr><tr><td>Flat in 60 Days ($303.60)</td><td>$303.60 (+0.0%)</td><td>$6,483.41</td><td>$+30.41</td><td><strong>+0.5%</strong></td></tr><tr><td>Base Target ($349.14)</td><td>$349.14 (+15.0%)</td><td>$8,792.33</td><td>$+2,339.33</td><td><strong>+36.3%</strong></td></tr><tr><td>Bull Target ($401.51)</td><td>$401.51 (+32.2%)</td><td>$13,327.02</td><td>$+6,874.02</td><td><strong>+106.5%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
