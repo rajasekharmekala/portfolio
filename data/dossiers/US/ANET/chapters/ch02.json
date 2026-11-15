@@ -1,0 +1,227 @@
+{
+  "id": "ch-2",
+  "web_title": "2. Business Segments, Mix & Real-World Unit Examples",
+  "book_title": "Chapter 2: How the Money Is Made — Segments, Mix & Real-World Deals",
+  "question": "What does Arista Networks actually sell, how is revenue split across products, services, verticals, and geographies, and how does a deployment work end-to-end?",
+  "epigraph": {
+    "quote": "In God we trust; all others must bring data.",
+    "author": "W. Edwards Deming"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "title": "2.1 Revenue Architecture: Product Hardware vs. Recurring Software & Services"
+    },
+    {
+      "type": "p",
+      "html": "Arista Networks splits its Form 10-K revenue into two lines: <strong>Product</strong> and <strong>Service</strong> [1]. In FY2025, total sales reached $9,005.7 million [1]. Product revenue brought in $7,576.9 million, or 84.1% of the total, up 29% year-over-year [1][5]. Service revenue added $1,428.8 million, or 15.9%, up 28% year-over-year [1][5]. Product sales cover data center, AI, routing, and campus Ethernet switches, plus embedded EOS licenses and CloudVision or Awake NDR subscriptions [1]. Service revenue comes from post-contract customer support (PCS), 24/7 Technical Assistance Center (TAC) help, and software renewals [1]. Service carries an 81.9% GAAP gross margin, with $258.3 million in cost on $1,428.8 million of sales [1]. Product carries a 60.7% GAAP gross margin on $2,978.7 million in product cost [1]."
+    },
+    {
+      "type": "table",
+      "caption": "Arista Networks: FY2025 Revenue & Gross Margin Disaggregation (Audited Form 10-K)",
+      "headers": [
+        "Revenue / Mix Dimension",
+        "FY2025 Revenue ($M)",
+        "Share of Total (%)",
+        "FY2025 Gross Margin (%)",
+        "Primary Drivers"
+      ],
+      "rows": [
+        [
+          "Product Revenue",
+          "$7,576.9",
+          "84.1%",
+          "60.7%",
+          "400G/800G AI & cloud switches, campus hardware, embedded EOS & CloudVision licenses"
+        ],
+        [
+          "Service Revenue",
+          "$1,428.8",
+          "15.9%",
+          "81.9%",
+          "Multi-year PCS support contracts, TAC engineering, software maintenance renewals"
+        ],
+        [
+          "Total Revenue",
+          "$9,005.7",
+          "100.0%",
+          "64.1%",
+          "Blended gross profit of $5,768.7M"
+        ],
+        [
+          "Vertical: Cloud & AI Titans",
+          "~$4,322.7",
+          "48.0%",
+          "N/A (undisclosed)",
+          "Microsoft (26% of total), Meta (16% of total), and tier-1 hyperscalers"
+        ],
+        [
+          "Vertical: Enterprise & Campus",
+          "~$2,881.8",
+          "32.0%",
+          "N/A (undisclosed)",
+          "Fortune 500 data centers, Cognitive Campus Wi-Fi/switching, VeloCloud SD-WAN"
+        ],
+        [
+          "Vertical: AI & Specialty Providers",
+          "~$1,801.1",
+          "20.0%",
+          "N/A (undisclosed)",
+          "Neoclouds, telcos, financial trading firms, and Tier-2 service providers"
+        ],
+        [
+          "Geography: Americas",
+          "$7,122.1",
+          "79.1%",
+          "N/A (undisclosed)",
+          "US hyperscaler AI/cloud cluster buildouts and domestic enterprise campus"
+        ],
+        [
+          "Geography: EMEA",
+          "$1,070.3",
+          "11.9%",
+          "N/A (undisclosed)",
+          "European financial, sovereign cloud, and enterprise deployments"
+        ],
+        [
+          "Geography: APAC",
+          "$813.3",
+          "9.0%",
+          "N/A (undisclosed)",
+          "Asia-Pacific cloud, telecom, and multinational data centers"
+        ]
+      ],
+      "takeaway": "Hardware-anchored Product sales generate 84.1% of top-line dollars, while high-margin Service contracts (81.9% gross margin) and software subscriptions anchor recurring cash flow and balance-sheet deferred revenue ($5.37B at year-end 2025, rising to $6.84B by Q3 2026)."
+    },
+    {
+      "type": "p",
+      "html": "Heavy reliance on top cloud buyers and U.S. sales shapes Arista's revenue mix. In FY2025, Cloud and AI Titans drove 48% of total sales [1]. Microsoft accounted for 26% and Meta Platforms 16%, meaning two buyers made up 42% of company revenue [1]. Enterprise customers provided 32% of sales [1]. AI and Specialty Providers—including neocloud GPU operators, telecom carriers, and trading firms—added the final 20% [1]. By region, the Americas generated $7,122.1 million (79.1%), EMEA $1,070.3 million (11.9%), and APAC $813.3 million (9.0%) [7]. In Q3 2026, nine-month revenue climbed to $9,402.3 million, already beating all of FY2025 [2]. Management expects AI fabrics to scale toward a $7 billion business and Cognitive Campus toward a $2 billion run-rate by 2027 [3]."
+    },
+    {
+      "type": "h3",
+      "title": "2.2 Segment 1 Real-World Example: AI Data Center Networking (Etherlink 800G Fabric)"
+    },
+    {
+      "type": "p",
+      "html": "<strong>Customer & Problem:</strong> A hyperscale AI operator or tier-1 GPU cloud is building a 32,000-GPU training cluster for large language models [9]. During training, all 32,000 GPUs must sync massive gradient updates at the same time. If one Ethernet link drops packets or spikes in tail latency, the whole cluster stalls. Those stalls stretch Job Completion Time (JCT) and waste expensive compute capital [9]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Arista Solution & Deployment:</strong> Rather than locking into proprietary InfiniBand, the buyer deploys Arista's open <strong>Etherlink</strong> fabric [9]. At the rack top, <strong>Arista 7060X6</strong> leaf switches connect directly to GPU server NICs [10]. Each 7060X6 uses Broadcom Tomahawk 5 silicon for 51.2 Tbps of capacity across 64 ports of 800G Ethernet [10]. Those leaf switches feed into <strong>Arista 7800R4</strong> AI Spine chassis built with Jericho3-AI chips [11]. The 7800R4 delivers over 460 Tbps of throughput with Virtual Output Queuing, or buyers can pick a single-hop <strong>7700R4 Distributed Etherlink Switch (DES)</strong> [11][12]. EOS runs lossless RoCEv2 transport using DCQCN, dynamic load balancing, and packet spraying to prevent link congestion [9][13]. CloudVision's Network Data Lake (NetDL) streams microsecond queue telemetry to spot hot spots fast [14]. Arista also works with AMD, Broadcom, Microsoft, and Meta in the Ultra Ethernet Consortium (UEC) and ESUN on rack designs like Etherlink SU-144 [3][4]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Pricing & Licensing:</strong> The buyer purchases 7060X6 and 7800R4 switches, line cards, and optics under volume deals. Those boxes come with perpetual base EOS licenses. Buyers also add multi-year contracts for CloudVision telemetry and 24/7 TAC support, booked in Deferred Revenue and recognized over 1 to 5 years [1][14]."
+    },
+    {
+      "type": "h3",
+      "title": "2.3 Segment 2 Real-World Example: Cognitive Campus & VeloCloud Branch Routing"
+    },
+    {
+      "type": "p",
+      "html": "<strong>Customer & Problem:</strong> A global financial firm runs a headquarters, 150 branch offices, and hybrid-cloud workloads. Its campus switches, branch routers, and Wi-Fi points each run a different operating system. That split creates security audit gaps and slows down fixes when staff hit video-call drops [8][14]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Arista Solution & Deployment:</strong> The firm moves wired access to Arista 720XP Power-over-Ethernet (PoE) switches and wireless to Arista Cognitive Wi-Fi from Mojo Networks [15]. Branch WAN links shift to <strong>VeloCloud SD-WAN</strong> appliances, acquired from Broadcom in July 2025 [8]. Every wired switch runs the same single-binary EOS image used in the firm's core data centers [13]. Engineers use Zero Touch Provisioning (ZTP) in <strong>CloudVision</strong> to roll out configs, zero-trust rules, and Awake Security NDR policies from one console [13][14][15]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Pricing & Licensing:</strong> The firm buys switches and Wi-Fi access points upfront, often through channel VAR partners. It pays recurring per-device or per-bandwidth fees for CloudVision, VeloCloud SD-WAN orchestration, and multi-year TAC support."
+    },
+    {
+      "type": "h3",
+      "title": "2.4 Segment 3 Real-World Example: Cloud & Financial Routing / Low-Latency Specialty"
+    },
+    {
+      "type": "p",
+      "html": "<strong>Customer & Problem:</strong> A global quantitative trading firm and a Tier-1 telecom carrier face two distinct routing limits. The trading desk needs deterministic, sub-microsecond forwarding for live market-data feeds [15]. The carrier needs dense 400G and 800G peering routers to replace costly, power-hungry legacy core boxes [11]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Arista Solution & Deployment:</strong> The trading firm installs Arista <strong>7130 Series</strong> switches from the Metamako deal [15]. Those boxes embed programmable FPGAs right in the data path for layer-1 switching and nanosecond timestamping [15]. Meanwhile, the telecom carrier deploys Arista <strong>7280R3 and 7800R4</strong> deep-buffer routers running EOS FlexRoute [11][13]. They hold full internet BGP routing tables on merchant silicon while cutting power and rack space [11][13]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Pricing & Licensing:</strong> Customers pay upfront for hardware platforms. They add specialized EOS routing or FPGA feature licenses—such as FlexRoute or trading IP—plus recurring PCS support contracts."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "Dual-Edged Concentration: Microsoft (26%) and Meta (16%)",
+      "paragraphs": [
+        "Having 42% of FY2025 revenue tied to Microsoft (26%) and Meta (16%) cuts both ways. When hyperscaler AI spending surges, Arista sees huge operating leverage, as shown by Q3 2026's 58.5% year-over-year revenue jump. Yet if either giant shifts toward white-box SONiC switches or rival fabrics, Arista can hit a sudden multi-quarter air pocket like Meta's 2019 pause."
+      ]
+    }
+  ],
+  "book_paragraphs": [
+    "If you strip away the networking jargon, Arista Networks makes money in a straightforward way. You can split its entire revenue stream into two buckets: Product and Service. In fiscal year 2025, Product sales brought in 7.58 billion dollars, or 84.1 percent of the 9.01 billion dollar top line. Service revenue—multi-year engineering support, software maintenance, and 24/7 Technical Assistance Center contracts—brought in 1.43 billion dollars, or 15.9 percent.",
+    "The margin gap between those two buckets matters. Selling physical switches and embedded software carries a 60.7 percent GAAP gross margin. Selling support and software renewals carries an 81.9 percent GAAP gross margin. Together, they blend to a 64.1 percent gross margin, which is unusually high for a company that ships physical metal boxes.",
+    "Now look at who is writing the checks. Almost half of Arista's business—48 percent in 2025—comes from Cloud and AI Titans. Two companies alone account for 42 percent of total revenue: Microsoft at 26 percent and Meta Platforms at 16 percent. Enterprise and campus buyers make up 32 percent, while specialty providers like neoclouds, telecom carriers, and trading firms account for the remaining 20 percent. Nearly four out of every five dollars—79.1 percent—comes from the Americas."
+  ],
+  "book_subsections": [
+    {
+      "title": "Inside a 32,000-GPU AI Cluster Deal",
+      "paragraphs": [
+        "To see why hyperscalers buy Arista instead of building everything themselves, picture a cloud giant wiring up 32,000 AI accelerators to train a frontier language model. Every few milliseconds, all 32,000 chips must exchange massive mathematical updates across the network. If one link drops packets or gets congested, the entire cluster sits idle waiting for the straggler. Idle GPUs burn millions of dollars in wasted compute.",
+        "Arista solves this with its Etherlink architecture. At the top of each server rack sits an Arista 7060X6 leaf switch, packed with Broadcom Tomahawk 5 silicon delivering 51.2 terabits per second across sixty-four 800-Gigabit ports. Those leaf switches feed up into massive 7800R4 spine chassis powered by Jericho3-AI chips. Arista's EOS software runs lossless traffic-control algorithms that spray packets evenly across every available path, while CloudVision streams real-time queue telemetry so engineers can spot a hotspot before a training job stalls.",
+        "The customer buys the switches and optical transceivers upfront under volume agreements, bundled with perpetual EOS software licenses, and layers on multi-year CloudVision and support subscriptions."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "From the Trading Floor to the Corporate Campus",
+      "paragraphs": [
+        "That same single-binary EOS software powers Arista's push outside the hyperscale data center. Walk into a global bank's corporate headquarters and branch network. Historically, that bank ran one operating system in its data center, a second on its office Wi-Fi and wired closets, and a third on its branch WAN routers. Every software upgrade was a manual weekend ordeal.",
+        "Arista sells that bank Power-over-Ethernet campus switches, Cognitive Wi-Fi access points from the Mojo acquisition, and VeloCloud SD-WAN branch appliances acquired from Broadcom in July 2025. Because the wired switches run the exact same EOS code as the core data center, one engineering team manages the whole footprint from a single CloudVision screen using Zero Touch Provisioning.",
+        "Meanwhile, on Wall Street trading floors, Arista's 7130 switches—born from the Metamako deal—use programmable FPGAs to route market-data feeds in nanoseconds. Across all three segments, the hardware gets Arista in the door, and the unified operating system locks the customer in."
+      ],
+      "callouts": [
+        {
+          "kind": "reflection",
+          "title": "NARRATOR'S REFLECTION",
+          "text": "You cannot talk about Arista's segments without confronting the elephant in the room: Microsoft and Meta together represent 42 percent of revenue. That concentration is a rocket engine when AI clusters are scaling, lifting nine-month 2026 sales to 9.40 billion dollars. It is also the single biggest reason Arista pushes so aggressively to grow its Enterprise Campus run-rate toward two billion dollars—to diversify away from two hyperscale procurement desks."
+        }
+      ]
+    },
+    {
+      "title": "How the Three-Layer Architecture Works in Practice",
+      "paragraphs": [
+        "Every dollar of Arista's $9.01 billion in FY2025 revenue—and $9.40 billion in the first nine months of 2026—flows through three tightly linked product layers. At the base sit Arista's high-speed data center switches, spanning 100G, 400G, 800G, and 1.6-Terabit Etherlink platforms built around merchant silicon like Broadcom's Tomahawk 5 and Jericho3-AI. In an AI training cluster, a single stalled packet can leave thousands of expensive GPUs sitting idle, so Arista's Virtual Output Queuing and dynamic load balancing keep traffic flowing without packet drops.",
+        "Above the hardware sits the Extensible Operating System, or EOS, running the exact same single-binary Linux image across every switch from a campus closet to a massive hyperscale spine. CloudVision then ties thousands of switches together into a single telemetry and automation plane, streaming real-time network state into a centralized Network Data Lake. That software layer—paired with multi-year A-Care support contracts that drove $1.47 billion in FY2025 service revenue and pushed deferred revenue to $6.84 billion by Q3 2026—turns a one-time hardware sale into a sticky, recurring enterprise relationship."
+      ],
+      "callouts": [
+        {
+          "title": "Why Campus and Cloud WAN Matter Alongside AI",
+          "text": "AI back-end switching grabs the headlines, yet Arista is steadily building a second and third growth engine. Enterprise campus switching and Wi-Fi—bolstered by the July 2025 VeloCloud SD-WAN acquisition—allow corporate IT teams to manage branch offices, campus floors, and cloud data centers through one unified CloudVision dashboard instead of juggling separate legacy tools."
+        }
+      ]
+    },
+    {
+      "title": "Inside a Hyperscale AI Training Deployment",
+      "paragraphs": [
+        "Picture what happens inside a 32,000-GPU AI training cluster. Every few milliseconds, all 32,000 accelerators must exchange billions of parameters in an all-to-all burst. If even one switch port congests and drops packets, the entire multi-billion-dollar cluster stalls while waiting for retransmission. Arista solves this with its 7060X6 800G leaf switches, 7800R4 modular spines with deep packet buffers, and 7700R4 Distributed Etherlink Switches.",
+        "Instead of relying on rigid static routing, Arista's Etherlink architecture uses dynamic load balancing and Virtual Output Queuing to spread traffic evenly across every available link. That engineering reliability is why Microsoft (26% of FY2025 revenue) and Meta (16% of FY2025 revenue) trust Arista with their largest AI data center fabrics, and why Americas revenue reached $7.12 billion alongside $1.07 billion in EMEA and $813 million in APAC."
+      ]
+    },
+    {
+      "title": "Recurring Software and A-Care Support Economics",
+      "paragraphs": [
+        "While switches drive the initial sale—$7.54 billion of product revenue in FY2025—every box ships with multi-year A-Care support and CloudVision software subscriptions. Service revenue reached $1.47 billion in FY2025 at roughly 80% gross margin, smoothing out hardware shipment lumpiness and funding continuous R&D."
+      ]
+    },
+    {
+      "title": "How Enterprise Campus and VeloCloud Broaden the Customer Base",
+      "paragraphs": [
+        "A common mistake is treating Arista as purely a two-customer cloud story. While Microsoft and Meta drive massive hyperscale orders, Arista's enterprise campus and routing business has quietly scaled into a multi-billion-dollar pillar. Hospitals, universities, global banks, and manufacturers increasingly want the same zero-downtime reliability in their office buildings that hyperscalers get in their data centers.",
+        "Adding Broadcom's VeloCloud SD-WAN business in July 2025 closed the final gap in Arista's enterprise portfolio. Now a corporate network architect can run CloudVision across data center spines, campus Wi-Fi access points, and thousands of remote branch SD-WAN gateways from one screen—dramatically raising switching costs once deployed."
+      ]
+    },
+    {
+      "title": "Why Software Velocity Matters More Than Port Count",
+      "paragraphs": [
+        "Anyone can buy a switching chip and solder Ethernet ports onto a circuit board. What separates Arista from contract hardware makers is EOS's ability to run live in-service software upgrades, stream state telemetry to CloudVision in milliseconds, and isolate faults without rebooting an entire rack. For a cloud operator running ten-billion-dollar AI clusters, avoiding a single hour of downtime pays for the switch premium many times over."
+      ]
+    }
+  ]
+}
