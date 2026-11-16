@@ -1,0 +1,134 @@
+{
+  "symbol": "MNST",
+  "market": "US",
+  "generated_at": "2026-11-16T21:01:04+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NASDAQ:MNST",
+    "exchange": "NASDAQ",
+    "company_name": "Monster Beverage Corporation",
+    "close": 45.74,
+    "change_1d_pct": -1.54,
+    "perf_1w_pct": 0.38,
+    "perf_1m_pct": -0.38,
+    "perf_3m_pct": -0.4,
+    "rsi_1d": 49.24,
+    "rsi_4h": 45.06,
+    "rsi_1w": 53.4,
+    "sma20": 46.5,
+    "sma50": 44.79,
+    "sma200": 43.43,
+    "sma30_weekly": 45.48,
+    "ema10_weekly": 45.67,
+    "ema20_4h": 46.14,
+    "sma50_4h": 46.25,
+    "atr14": 1.24,
+    "bb_width_pct": 8.42,
+    "pivot_s1": 43.29,
+    "pivot_s2": 39.25,
+    "pivot_r1": 49.5,
+    "pivot_r2": 51.67,
+    "high_52w": 50.17,
+    "low_52w": 35.43,
+    "dist_to_200d_pct": 5.32,
+    "major_shelf": 45.48,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
+    "setup_summary": "Volatility contraction (Bollinger bandwidth 8.42% on live 2026-11-16 TradingView intraday) within a verified 2026-11-13 Stage 3 (Topping / Pullback) regime; wait for $43.40-$44.75 support and Stage 2 reset."
+  },
+  "options_plan": {
+    "symbol": "MNST",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "LONG_CALL_LEAPS",
+    "iv_regime": "IV_FAIR",
+    "atm_iv_pct": 29.6,
+    "hv20_pct": 30.2,
+    "open_positions_audit": [],
+    "headline": "Buy 1x MNST 2027-09-17 $45 LEAPS Call (305 DTE, 0.63 Delta) near $6.30/sh ($630.00 max possible loss).",
+    "recommended_trade": {
+      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
+      "expiry": "2027-09-17",
+      "dte": 305,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 45.0,
+          "mid": 6.3,
+          "bid": 6.0,
+          "ask": 6.6,
+          "open_interest": 13
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 6.3,
+      "max_loss_total": 630.0,
+      "max_loss_nav_bps": 63.0,
+      "max_profit_total": "Uncapped upside",
+      "breakeven_at_expiry": 51.3,
+      "breakeven_move_pct": 12.16,
+      "net_delta_dollars_per_1_move": 62.9,
+      "daily_theta_dollars": -1.24,
+      "underlying_stop_trigger": 45.48,
+      "profit_taking_rule": "Trim half at +75%–100% contract gain or when MNST reaches $52.60; exit early on a weekly close below $45.48.",
+      "scenarios": [
+        {
+          "scenario": "Bear / Stop Hit ($45.48)",
+          "stock_price": 45.48,
+          "stock_move_pct": -0.6,
+          "contract_value": 660.08,
+          "net_pnl": 30.08,
+          "return_on_risk_pct": 4.8
+        },
+        {
+          "scenario": "Flat in 60 Days ($45.74)",
+          "stock_price": 45.74,
+          "stock_move_pct": 0.0,
+          "contract_value": 656.02,
+          "net_pnl": 26.02,
+          "return_on_risk_pct": 4.1
+        },
+        {
+          "scenario": "Base Target ($52.60)",
+          "stock_price": 52.6,
+          "stock_move_pct": 15.0,
+          "contract_value": 1003.42,
+          "net_pnl": 373.42,
+          "return_on_risk_pct": 59.3
+        },
+        {
+          "scenario": "Bull Target ($60.49)",
+          "stock_price": 60.49,
+          "stock_move_pct": 32.2,
+          "contract_value": 1689.28,
+          "net_pnl": 1059.28,
+          "return_on_risk_pct": 168.1
+        }
+      ],
+      "beginner_explainer": [
+        "Why LEAPS instead of a short-dated call: With 305 days until 2027-09-17 and 0.63 delta, this option behaves ~62% like owning 100 shares for a fraction of the cash, while losing only $1.24/day to time decay.",
+        "Worst-case wallet risk: You pay $6.30 x 100 shares x 1 = $630.00 upfront. Even if MNST crashed 50% overnight, you cannot lose more than $630.00.",
+        "Volatility check: Implied Volatility is 29.6% vs. 20-day actual stock volatility of 30.2% (IV FAIR), so you are not overpaying panic premiums."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (MNST)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x MNST 2027-09-17 $45 LEAPS Call (305 DTE, 0.63 Delta) near $6.30/sh ($630.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 8.42%) above rising 50D SMA (44.79) and 30W SMA (45.48). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:MNST. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_mnst_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:MNST\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:MNST\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_mnst_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 305 days until 2027-09-17 and 0.63 delta, this option behaves ~62% like owning 100 shares for a fraction of the cash, while losing only $1.24/day to time decay.</p><p>Worst-case wallet risk: You pay $6.30 x 100 shares x 1 = $630.00 upfront. Even if MNST crashed 50% overnight, you cannot lose more than $630.00.</p><p>Volatility check: Implied Volatility is 29.6% vs. 20-day actual stock volatility of 30.2% (IV FAIR), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for MNST</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $45 CALL @ $6.30 mid (bid $6.00 / ask $6.60, OI 13)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$630.00 (63.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$51.30 (+12.16% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+62.90 per $1 move | $-1.24/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when MNST reaches $52.60; exit early on a weekly close below $45.48.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 305 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $630.00 Across Stock Scenarios (MNST)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($45.48)</td><td>$45.48 (-0.6%)</td><td>$660.08</td><td>$+30.08</td><td><strong>+4.8%</strong></td></tr><tr><td>Flat in 60 Days ($45.74)</td><td>$45.74 (+0.0%)</td><td>$656.02</td><td>$+26.02</td><td><strong>+4.1%</strong></td></tr><tr><td>Base Target ($52.60)</td><td>$52.60 (+15.0%)</td><td>$1,003.42</td><td>$+373.42</td><td><strong>+59.3%</strong></td></tr><tr><td>Bull Target ($60.49)</td><td>$60.49 (+32.2%)</td><td>$1,689.28</td><td>$+1,059.28</td><td><strong>+168.1%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
