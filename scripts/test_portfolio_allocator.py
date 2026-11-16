@@ -255,6 +255,21 @@ class TestPortfolioAllocator(unittest.TestCase):
                 track = {t["symbol"] for t in alloc["tracking_positions"]}
                 self.assertIn("KROSS", track)
                 self.assertIn("SSWL", track)
+                self.assertIn("MARINE", track)
+                by_sym = {h["symbol"]: h for h in alloc["holding_decisions"]}
+                self.assertEqual(by_sym["SEDEMAC"]["delta_shares"], -100.0)
+                self.assertEqual(by_sym["ASTRAMICRO"]["delta_shares"], -90.0)
+                self.assertEqual(by_sym["LAURUSLABS"]["delta_shares"], -15.0)
+                self.assertEqual(by_sym["RNITAI"]["verdict"], "EXIT")
+                self.assertEqual(by_sym["TANFACIND"]["verdict"], "EXIT")
+                self.assertEqual(by_sym["JYOTICNC"]["verdict"], "EXIT")
+                self.assertEqual(by_sym["NETWEB"]["verdict"], "KEEP_COMPOUNDING")
+                self.assertEqual(by_sym["APARINDS"]["verdict"], "KEEP_COMPOUNDING")
+                self.assertEqual(alloc["portfolio_summary"]["active_unique_risk_underlyings_count"], 12)
+                self.assertGreater(
+                    alloc["portfolio_summary"]["current_open_heat_pct"],
+                    alloc["portfolio_summary"]["target_open_heat_pct"],
+                )
 
             with tempfile.TemporaryDirectory() as td:
                 td_p = Path(td)
@@ -304,6 +319,22 @@ class TestPortfolioAllocator(unittest.TestCase):
                     text=True,
                 )
                 self.assertEqual(proc.returncode, 0, msg=f"{mkt} validate_report failed:\n{proc.stdout}\n{proc.stderr}")
+
+                rproc = subprocess.run(
+                    [
+                        str(REPO / ".venv" / "bin" / "python"),
+                        str(REPO / "scripts" / "readability_check.py"),
+                        str(out_html),
+                        "--max-grade", "13.0",
+                    ],
+                    capture_output=True,
+                    text=True,
+                )
+                r_bad = [
+                    ln for ln in (rproc.stdout + "\n" + rproc.stderr).splitlines()
+                    if ln.strip().startswith("- ") and not ln.strip().startswith(("- ESTIMATE", "- CHAPTER 7", "- PRIMER", "- NOTES"))
+                ]
+                self.assertEqual(r_bad, [], msg=f"{mkt} readability_check failed:\n" + "\n".join(r_bad))
 
 
 if __name__ == "__main__":

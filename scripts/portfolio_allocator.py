@@ -105,6 +105,50 @@ def _days_between(d1: Optional[str], d2: Optional[str]) -> Optional[int]:
         return None
 
 
+def _account_qty_as_of(market: str, symbol: str, as_of_date: Optional[str]) -> Optional[float]:
+    """Replay append-only account transaction logs up to `as_of_date` so dossier TRIM share counts converge cleanly."""
+    if not as_of_date:
+        return None
+    acct_dir = REPO / "data" / "accounts" / market.upper()
+    if not acct_dir.is_dir():
+        return None
+    cutoff = str(as_of_date)[:10]
+    target = symbol.upper()
+    qty = 0.0
+    seen = False
+    for p in sorted(acct_dir.glob("*.transactions.jsonl")):
+        try:
+            for line in p.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                row = json.loads(line)
+                if str(row.get("symbol") or "").upper() != target:
+                    continue
+                seen = True
+                rdate = str(row.get("date") or "")[:10]
+                if rdate and rdate > cutoff:
+                    continue
+                typ = str(row.get("type") or "").lower()
+                q = float(row.get("quantity") or 0.0)
+                if typ in {"opening", "buy", "split"}:
+                    qty += q
+                elif typ == "sell":
+                    qty = max(0.0, qty - q)
+        except Exception:
+            continue
+    return round(qty, 6) if seen else None
+
+
+def _normalize_tier(raw: Any, default: str = "TIER_3") -> str:
+    s = str(raw or "").upper().strip()
+    if s in {"TIER_1", "TIER_2", "TIER_3", "TIER_4", "TIER_0"}:
+        return s
+    if s in {"REJECTED", "AVOID", "FAIL", "NONE"}:
+        return "TIER_0"
+    return default
+
+
 def _load_dossier_spine(market: str, symbol: str) -> Dict[str, Any]:
     spine_p = REPO / "data" / "dossiers" / market / symbol / "spine.json"
     bq_p = REPO / "data" / "dossiers" / market / symbol / "business_quality.json"
@@ -384,8 +428,9 @@ def build_from_repo_fallback(market: str, as_of: str = "") -> Tuple[Dict[str, An
     shortlist = _load_json(REPO / "data" / "shortlist" / f"{market}.json")
     watchlist = _load_json(REPO / "data" / "watchlist" / f"{market}.json")
     meta_all = ((_load_json(REPO / "data" / "metadata" / "symbols.json").get(market) or {}).get("symbols") or {})
-    opts_raw = (_load_json(REPO / "data" / "options" / f"{market}.json").get("positions") or [])
+    opts_raw = (_load_json(REPO / "data" / "options" / f"{market}.json").get("positions") or []) if market == "US" else []
 
+    snap_view_date = str(snap_view.get("as_of_date") or snap_view.get("generated_at") or "")[:10]
     price_map: Dict[str, float] = {}
     for row in (watchlist.get("active") or []) + (shortlist.get("active") or []):
         if isinstance(row, dict) and row.get("symbol") and _num(row.get("cmp")):
@@ -394,6 +439,9 @@ def build_from_repo_fallback(market: str, as_of: str = "") -> Tuple[Dict[str, An
         tv = (sp.get("tradingview") if isinstance(sp, dict) else None) or {}
         if _num(tv.get("close")):
             price_map[sym] = float(tv["close"])
+        sp_spine = _load_dossier_spine(market, sym)
+        if _num(sp_spine.get("cmp")) and str(sp_spine.get("as_of") or "")[:10] > snap_view_date:
+            price_map[sym] = float(sp_spine["cmp"])
 
     accounts_out = []
     per_sym: Dict[str, Dict[str, Any]] = {}
@@ -643,7 +691,16 @@ def allocate_portfolio(
     # STEP 1: OPTIONS / LEAPS BOOK AUDIT (US & IN)
     # ------------------------------------------------------------------
     opt_cfg = buckets_cfg.get("LEAPS_OPTIONS") or {}
-    opt_rows = positions.get("options_rows") or _load_json(REPO / "data" / "options" / f"{mkt}.json").get("positions") or []
+    if "options_rows" in positions:
+        opt_rows = positions.get("options_rows") or []
+    elif mkt == "US":
+        opt_rows = _load_json(REPO / "data" / "options" / f"{mkt}.json").get("positions") or []
+    else:
+        opt_rows = []
+    opt_rows = [
+        o for o in opt_rows
+        if not (o.get("expiry_date") and str(o["expiry_date"])[:10] < as_of[:10])
+    ]
     options_cost_total = round(sum(float(o.get("cost_basis_usd") or o.get("cost_basis") or o.get("market_value") or 0.0) for o in opt_rows), 2)
     options_mv_total = round(sum(float(o.get("market_value") or o.get("current_mv_usd") or 0.0) for o in opt_rows), 2)
     options_cap_basis_val = max(options_cost_total, options_mv_total)
@@ -744,6 +801,8 @@ def allocate_portfolio(
             "pnl_pct": pnl_pct,
             "underlying_spot": spot,
             "invalidation_stop": inv_stop,
+            "current_open_heat_value": round(est_opt_loss, 2),
+            "current_open_heat_pct": round(est_opt_loss / net_worth * 100.0, 2),
             "open_heat_value": round(est_opt_loss if target_mv > 0 else 0.0, 2),
             "open_heat_pct": round((est_opt_loss if target_mv > 0 else 0.0) / net_worth * 100.0, 2),
             "verdict": verdict,
@@ -776,26 +835,40 @@ def allocate_portfolio(
         pnl_val = round(mv - cost, 2) if h.get("cost_complete", True) else 0.0
         pnl_pct = round((mv / cost - 1.0) * 100.0, 2) if cost > 0 else 0.0
 
-        # Tracking positions (< 0.35% NAV): isolated from active slot count & rebalance churn
-        if 0.0 < wt_pct < track_max_pct:
-            tracking_rows.append({
-                "symbol": sym,
-                "quantity": qty,
-                "close": close,
-                "current_value": round(mv, 2),
-                "current_wt_pct": wt_pct,
-                "target_value": round(mv, 2),
-                "target_wt_pct": wt_pct,
-                "verdict": "TRACKING_HOLD",
-                "rationale": f"Tracking stub ({wt_pct:.2f}% of NAV < {track_max_pct:.2f}% threshold); excluded from active slot limits and turnover.",
-            })
-            continue
-
         spine = _load_dossier_spine(mkt, sym)
         sl = shortlist_by_sym.get(sym) or {}
         wl = watchlist_by_sym.get(sym) or {}
         meta = h.get("metadata") or meta_by_sym.get(sym) or {}
         prior_row = prior_positions_by_sym.get(sym) or {}
+
+        # Tracking positions (< 0.35% NAV): isolated from active slot count & rebalance churn
+        if 0.0 < wt_pct < track_max_pct:
+            tr_stop = _num(spine.get("stop_loss")) or _num(sl.get("stop_loss")) or _num(wl.get("stop_loss")) or round(close * 0.85, 2)
+            tr_stage = _normalize_stage(inst_m.get("stage") or s2_ev.get("weinstein_stage") or spine.get("weinstein_stage"))
+            tr_new_cap = str(spine.get("new_capital_verdict") or spine.get("verdict") or sl.get("action_verdict") or "WAIT_FOR_SUPPORT").upper()
+            tracking_rows.append({
+                "symbol": sym,
+                "company_name": str(spine.get("company_name") or sl.get("company_name") or wl.get("company_name") or meta.get("company_name") or sym),
+                "has_dossier": bool(spine.get("_has_published_dossier") or sl.get("research_dossier_path")),
+                "quantity": qty,
+                "cost_basis": round(cost, 2),
+                "pnl_value": pnl_val,
+                "pnl_pct": pnl_pct,
+                "close": close,
+                "effective_stop": tr_stop,
+                "stage": tr_stage,
+                "new_capital_verdict": tr_new_cap,
+                "current_value": round(mv, 2),
+                "current_wt_pct": wt_pct,
+                "target_value": round(mv, 2),
+                "target_wt_pct": wt_pct,
+                "verdict": "TRACKING_HOLD",
+                "rationale": (
+                    f"Sub-0.35% tracking stub ({qty:g} sh = {cur}{mv:,.2f}, {wt_pct:.2f}% of NAV < {track_max_pct:.2f}% threshold; "
+                    f"stop {cur}{tr_stop:,.2f}, new capital {tr_new_cap}); excluded from active slot limits and turnover."
+                ),
+            })
+            continue
 
         is_cash_equiv = sym in CASH_EQUIV_ETFS
         is_single_lev = sym in SINGLE_STOCK_LEVERAGED_ETFS
@@ -808,23 +881,17 @@ def allocate_portfolio(
             bucket = "LEVERAGED_SATELLITE"
             lev_etf_current_wt += wt_pct
         else:
-            bucket = str(
-                spine.get("strategy_bucket")
-                or sl.get("strategy_bucket")
-                or wl.get("strategy_bucket")
-                or meta.get("strategy_bucket")
-                or "TACTICAL_MOMENTUM"
-            ).upper()
-            if bucket not in {"CORE_ALPHA", "TACTICAL_MOMENTUM", "LEVERAGED_SATELLITE"}:
-                bucket = "TACTICAL_MOMENTUM"
+            bucket_candidates = [
+                spine.get("strategy_bucket"),
+                sl.get("strategy_bucket"),
+                wl.get("strategy_bucket"),
+                meta.get("strategy_bucket"),
+            ]
+            bucket = next(
+                (str(b).upper() for b in bucket_candidates if str(b or "").upper() in {"CORE_ALPHA", "TACTICAL_MOMENTUM", "LEVERAGED_SATELLITE"}),
+                "TACTICAL_MOMENTUM",
+            )
 
-        stage = _normalize_stage(
-            inst_m.get("stage")
-            or s2_ev.get("weinstein_stage")
-            or sl.get("weinstein_stage")
-            or wl.get("weinstein_stage")
-            or spine.get("weinstein_stage")
-        )
         sma20 = _num(inst_m.get("sma20")) or _num(tv.get("sma20"))
         sma50 = _num(inst_m.get("sma50")) or _num(tv.get("sma50"))
         sma200 = _num(inst_m.get("sma200")) or _num(tv.get("sma200"))
@@ -833,6 +900,19 @@ def allocate_portfolio(
         atr14 = _num(inst_m.get("atr14")) or _num(tv.get("atr_14"))
         rs_63d = _num(inst_m.get("rs_63d_pct"))
         ext_10w = round((close / ema10w - 1.0) * 100.0, 2) if (close and ema10w and ema10w > 0) else None
+
+        if inst_m.get("stage") is not None:
+            stage = _normalize_stage(inst_m.get("stage"))
+        elif sma50 and close and close < sma50:
+            # Recent listing (<200 bars) trading below 50-DMA cannot be classified as Stage 2
+            stage = "STAGE_3"
+        else:
+            stage = _normalize_stage(
+                s2_ev.get("weinstein_stage")
+                or spine.get("weinstein_stage")
+                or sl.get("weinstein_stage")
+                or wl.get("weinstein_stage")
+            )
 
         # Resolve structural stop & enforce upward-only stop-loss ratchet for held shares
         raw_stop = (
@@ -887,7 +967,10 @@ def allocate_portfolio(
         cluster_heat_map[cid] = round(cluster_heat_map.get(cid, 0.0) + heat_pct, 2)
 
         quadrant, s2_ind_pct = _resolve_sector_quadrant(sec_lbl, inst_map, stage2_view)
-        tier = str(spine.get("conviction_tier") or sl.get("conviction_tier") or ("TIER_2" if bucket == "CORE_ALPHA" else "TIER_3"))
+        tier = _normalize_tier(
+            spine.get("conviction_tier") or sl.get("conviction_tier"),
+            default="TIER_2" if bucket == "CORE_ALPHA" else "TIER_3",
+        )
         bq_verdict = str(spine.get("business_quality_verdict") or ("COMPOUNDER_PASS" if sl.get("gate_status") == "PASSED" else "PROVISIONAL"))
         kpi_health = str(spine.get("kpi_health") or sl.get("kpi_health") or "PASS_WITH_WATCH")
         roic_roce = _num(sl.get("roic_pct")) or _num(sl.get("roce_pct")) or _num(tv.get("roe_pct"))
@@ -897,13 +980,19 @@ def allocate_portfolio(
             if (t_base and close > effective_stop)
             else _num(sl.get("asymmetry_ratio"))
         )
+        dossier_hold_action = str(spine.get("holding_action") or "").upper().strip()
+        dossier_new_cap = str(spine.get("new_capital_verdict") or spine.get("verdict") or "").upper().strip()
+        dossier_explicit_hold = bool(
+            has_dossier
+            and (dossier_hold_action in {"HOLD_WITH_HARD_STOP", "KEEP_COMPOUNDING"} or dossier_hold_action.startswith("TRIM"))
+        )
 
         score_obj = _score_candidate(
             sym=sym,
             bucket=bucket,
             has_dossier=has_dossier,
             tier=tier,
-            bq_verdict=bq_verdict,
+            bq_verdict="FUNDAMENTAL_FAIL" if dossier_hold_action in {"EXIT_IMMEDIATELY", "EXIT", "SELL_ALL"} else bq_verdict,
             kpi_health=kpi_health,
             roic_or_roce=roic_roce,
             asym_ratio=asym,
@@ -915,7 +1004,7 @@ def allocate_portfolio(
             sector_s2_pct=s2_ind_pct,
             cluster_current_wt_pct=max(0.0, cluster_wt_map.get(cid, wt_pct) - wt_pct),
             cluster_max_wt_pct=max_cluster_wt,
-            is_incumbent_or_anchored=True,
+            is_incumbent_or_anchored=dossier_hold_action not in {"EXIT_IMMEDIATELY", "EXIT", "SELL_ALL"},
             scoring=scoring,
         )
 
@@ -931,9 +1020,22 @@ def allocate_portfolio(
                 "priority_reason": f"Un-underwritten holding ({wt_pct:.2f}% of NAV, {cur}{mv:,.2f}); freeze ADDs until 10-chapter monograph completes.",
             })
 
+        # Resolve any explicit dossier partial-trim mandate (replaying account quantity at dossier as_of so executed trims converge!)
+        dossier_trim_sell_sh = 0
+        if has_dossier and dossier_hold_action.startswith("TRIM"):
+            raw_dossier_sell = _num(spine.get("holding_shares_to_sell")) or 0.0
+            if raw_dossier_sell > 0:
+                qty_at_dossier = _account_qty_as_of(mkt, sym, spine.get("as_of"))
+                base_qty_ref = qty_at_dossier if (qty_at_dossier is not None and qty_at_dossier > 0) else qty
+                post_trim_target_qty = max(0.0, round(base_qty_ref - raw_dossier_sell, 6))
+                if qty > post_trim_target_qty + 1e-4:
+                    dossier_trim_sell_sh = int(round(qty - post_trim_target_qty))
+
         # Determine raw holding verdict before hysteresis check
         safety_override = False
         hysteresis_applied = False
+        dossier_trim_mandate = False
+        explicit_sell_shares: Optional[int] = None
         gain_r = (
             round((close - avg_cost) / max(0.01, avg_cost - effective_stop), 2)
             if (avg_cost > effective_stop and close > 0)
@@ -993,23 +1095,34 @@ def allocate_portfolio(
                 target_wt = wt_pct
                 rationale = f"Active sector/index rotation swing ({wt_pct:.2f}% wt <= {single_max:.1f}% cap) above 20-DMA; hard exit below {cur}{sma20 or effective_stop:,.2f} or at +15% target."
         elif (
-            (effective_stop and close < effective_stop and (rsi14 is None or rsi14 < 42.0))
-            or str(spine.get("holding_action") or "").upper() == "EXIT_IMMEDIATELY"
+            (effective_stop and close < effective_stop and (rsi14 is None or rsi14 < 42.0 or dossier_explicit_hold))
+            or dossier_hold_action in {"EXIT_IMMEDIATELY", "EXIT", "SELL_ALL"}
             or bq_verdict == "FUNDAMENTAL_FAIL"
-            or (stage == "STAGE_4" and bucket != "CORE_ALPHA")
+            or (stage == "STAGE_4" and bucket != "CORE_ALPHA" and not dossier_explicit_hold)
             or (stage == "STAGE_4" and bucket == "CORE_ALPHA" and effective_stop and close < effective_stop)
         ):
             safety_override = True
             verdict = "EXIT"
             action_label = "EXIT"
             target_wt = 0.0
-            dossier_exit = str(spine.get("holding_action") or "").upper() == "EXIT_IMMEDIATELY"
+            dossier_exit = dossier_hold_action in {"EXIT_IMMEDIATELY", "EXIT", "SELL_ALL"}
             why_exit = (
-                f"published monograph mandates EXIT_IMMEDIATELY ({stage})"
+                f"published monograph mandates {dossier_hold_action} ({stage}, new capital {dossier_new_cap or 'REJECTED'})"
                 if dossier_exit
                 else f"hard risk gate triggered ({stage}, bucket={bucket}, close {cur}{close:,.2f} vs stop {cur}{effective_stop:,.2f}, quality={bq_verdict})"
             )
             rationale = f"Capital protection override: {why_exit}; exit full position ({qty:g} shares)."
+        elif dossier_trim_sell_sh > 0 and close > 0:
+            verdict = "TRIM_PROFIT_BOOKING"
+            action_label = f"TRIM ({dossier_hold_action.replace('_', ' ')})"
+            explicit_sell_shares = dossier_trim_sell_sh
+            dossier_trim_mandate = True
+            rem_qty = max(0.0, qty - dossier_trim_sell_sh)
+            target_wt = round((rem_qty * close) / net_worth * 100.0, 2)
+            rationale = (
+                f"Published monograph mandates {dossier_hold_action}: sell {dossier_trim_sell_sh:g} of {qty:g} shares "
+                f"({wt_pct:.2f}% -> {target_wt:.2f}% NAV; new capital {dossier_new_cap or 'REJECTED'}) and retain {rem_qty:g} shares behind hard stop {cur}{effective_stop:,.2f}."
+            )
         elif wt_pct > runaway_cap:
             verdict = "TRIM_PROFIT_BOOKING"
             action_label = "TRIM"
@@ -1033,6 +1146,8 @@ def allocate_portfolio(
             has_dossier
             and stage == "STAGE_2"
             and bq_verdict != "FUNDAMENTAL_FAIL"
+            and dossier_new_cap not in {"REJECTED"}
+            and tier != "TIER_0"
             and wt_pct + deadband_wt_pct < min(init_cost_cap, full_model_wt)
             and ext_10w is not None
             and ext_10w <= envelope["max_starter_extension_pct"]
@@ -1059,7 +1174,7 @@ def allocate_portfolio(
             )
 
         # Short-Timeframe Hysteresis Check (prevents 1-5 day flip-flops on minor price noise)
-        if hysteresis_window_active and not safety_override and prior_row:
+        if hysteresis_window_active and not safety_override and not dossier_trim_mandate and prior_row:
             p_verdict = prior_row.get("verdict")
             p_close = _num(prior_row.get("close"))
             p_qty = _num(prior_row.get("current_quantity"))
@@ -1069,14 +1184,16 @@ def allocate_portfolio(
                 verdict = p_verdict
                 action_label = str(prior_row.get("action_label") or action_label)
                 target_wt = float(prior_row.get("target_wt_pct", target_wt))
+                explicit_sell_shares = None
                 hysteresis_applied = True
                 rationale += f" [Hysteresis Lock: kept {verdict} from {prior_as_of} as {px_move_pct:.2f}% price move is within ±{price_hyst_pct:.1f}% deadband.]"
 
-        # Apply Convergence Rebalance Deadband (±1.25% NAV): suppress tiny nuisance trims/adds
-        if verdict in {"TRIM_PROFIT_BOOKING", "ACCUMULATE_ON_DIP"} and abs(target_wt - wt_pct) < deadband_wt_pct:
+        # Apply Convergence Rebalance Deadband (±1.25% NAV): suppress tiny nuisance trims/adds (except explicit dossier TRIM mandates)
+        if not dossier_trim_mandate and verdict in {"TRIM_PROFIT_BOOKING", "ACCUMULATE_ON_DIP"} and abs(target_wt - wt_pct) < deadband_wt_pct:
             verdict = "KEEP_COMPOUNDING"
             action_label = "HOLD / TRAIL (CONVERGED)"
             target_wt = wt_pct
+            explicit_sell_shares = None
             rationale += f" [Converged within ±{deadband_wt_pct:.2f}% NAV deadband — zero nuisance trade.]"
 
         # Convert target_wt into exact whole shares for sells/trims (buys/adds funded in Step 4 waterfall)
@@ -1087,9 +1204,12 @@ def allocate_portfolio(
             liberated = round(mv, 2)
             equity_liberated_total += liberated
         elif verdict == "TRIM_PROFIT_BOOKING" and target_wt < wt_pct and close > 0:
-            desired_val = net_worth * (target_wt / 100.0)
-            sell_sh = max(1, int(math.floor((mv - desired_val) / close)))
-            sell_sh = min(int(qty) if mkt == "IN" else sell_sh, int(math.floor(qty)))
+            if explicit_sell_shares is not None and explicit_sell_shares > 0:
+                sell_sh = min(int(math.floor(qty)), int(explicit_sell_shares))
+            else:
+                desired_val = net_worth * (target_wt / 100.0)
+                sell_sh = max(1, int(math.floor((mv - desired_val) / close)))
+                sell_sh = min(int(qty) if mkt == "IN" else sell_sh, int(math.floor(qty)))
             if sell_sh <= 0:
                 shares_delta = 0.0
                 target_qty = qty
@@ -1152,6 +1272,8 @@ def allocate_portfolio(
             "capital_deployed": 0.0,
             "pnl_value": pnl_val,
             "pnl_pct": pnl_pct,
+            "current_open_heat_value": round(heat_val, 2),
+            "current_open_heat_pct": heat_pct,
             "open_heat_value": round(heat_val * (target_val / mv), 2) if mv > 0 else 0.0,
             "open_heat_pct": round((heat_val * (target_val / mv) if mv > 0 else 0.0) / net_worth * 100.0, 2),
             "verdict": verdict,
@@ -1198,12 +1320,24 @@ def allocate_portfolio(
             )
 
     # ------------------------------------------------------------------
-    # STEP 3: SCORE SHORTLIST CHALLENGERS (NON-HELD)
+    # STEP 3: SCORE SHORTLIST & COMPLETED-MONOGRAPH CHALLENGERS (NON-HELD)
     # ------------------------------------------------------------------
     challenger_decisions: List[Dict[str, Any]] = []
     held_active_syms = {hd["symbol"] for hd in holding_decisions if hd["target_value"] > 0}
 
-    for r in shortlist_rows:
+    combined_challenger_rows: List[Dict[str, Any]] = list(shortlist_rows)
+    seen_challenger_syms = {str(r["symbol"]).upper() for r in shortlist_rows}
+    for wr in watchlist_rows:
+        wsym = str(wr["symbol"]).upper()
+        if wsym in seen_challenger_syms:
+            continue
+        wspine = _load_dossier_spine(mkt, wsym)
+        w_done = str(wr.get("status") or "").upper() == "COMPLETED" or str(wr.get("deep_research_status") or "").upper() == "COMPLETED"
+        if (w_done or wspine.get("_has_published_dossier")) and str(wspine.get("new_capital_verdict") or wspine.get("verdict") or wr.get("action_verdict") or "").upper() != "REJECTED":
+            combined_challenger_rows.append(wr)
+            seen_challenger_syms.add(wsym)
+
+    for r in combined_challenger_rows:
         sym = str(r["symbol"]).upper()
         if sym in held_by_sym and not held_by_sym[sym].get("is_tracking"):
             continue
@@ -1213,19 +1347,34 @@ def allocate_portfolio(
         s2_ev = snap_sym.get("stage2_evaluation") or {}
         spine = _load_dossier_spine(mkt, sym)
         prior_row = prior_positions_by_sym.get(sym) or {}
+        has_monograph = bool(spine.get("_has_published_dossier") or r.get("research_dossier_path"))
 
-        close = _num(inst_m.get("close")) or _num(tv.get("close")) or _num(r.get("cmp")) or 0.0
+        close = _num(inst_m.get("close")) or _num(tv.get("close")) or _num(spine.get("cmp")) or _num(r.get("cmp")) or 0.0
         entry_low = _num(spine.get("entry_zone_low")) or _num(r.get("entry_zone_low")) or round(close * 0.94, 2)
         entry_high = _num(spine.get("entry_zone_high")) or _num(r.get("entry_zone_high")) or round(close * 0.98, 2)
         stop_loss = _num(spine.get("stop_loss")) or _num(r.get("stop_loss")) or round(entry_low * 0.92, 2)
         target_base = _num(spine.get("target_base")) or _num(r.get("target_base"))
-        bucket = str(r.get("strategy_bucket") or spine.get("strategy_bucket") or "CORE_ALPHA").upper()
-        tier = str(r.get("conviction_tier") or spine.get("conviction_tier") or ("TIER_2" if bucket == "CORE_ALPHA" else "TIER_3"))
-        if "TIER_0" in str(r.get("entry_posture") or ""):
+
+        bucket_cands = [spine.get("strategy_bucket"), r.get("strategy_bucket")]
+        bucket = next(
+            (str(b).upper() for b in bucket_cands if str(b or "").upper() in {"CORE_ALPHA", "TACTICAL_MOMENTUM"}),
+            "CORE_ALPHA",
+        )
+        tier = _normalize_tier(
+            spine.get("conviction_tier") or r.get("conviction_tier"),
+            default="TIER_2" if bucket == "CORE_ALPHA" else "TIER_3",
+        )
+        if not spine.get("_has_published_dossier") and "TIER_0" in str(r.get("entry_posture") or ""):
             tier = "TIER_0"
 
-        stage = _normalize_stage(inst_m.get("stage") or s2_ev.get("weinstein_stage") or r.get("weinstein_stage"))
         sma50 = _num(inst_m.get("sma50")) or _num(tv.get("sma50"))
+        if inst_m.get("stage") is not None:
+            stage = _normalize_stage(inst_m.get("stage"))
+        elif sma50 and close and close < sma50:
+            stage = "STAGE_3"
+        else:
+            stage = _normalize_stage(s2_ev.get("weinstein_stage") or spine.get("weinstein_stage") or r.get("weinstein_stage"))
+
         ema10w = _num(tv.get("ema10_weekly")) or _num(inst_m.get("ema10w_approx")) or sma50 or entry_high
         rsi14 = _num(inst_m.get("rsi14")) or _num(tv.get("rsi_14_daily")) or _num(r.get("rsi_14"))
         rs_63d = _num(inst_m.get("rs_63d_pct"))
@@ -1236,7 +1385,7 @@ def allocate_portfolio(
         cid = _cluster_for(sym, sec_lbl, sym)
         quadrant, s2_ind_pct = _resolve_sector_quadrant(sec_lbl, inst_map, stage2_view)
         bq_verdict = str(spine.get("business_quality_verdict") or ("COMPOUNDER_PASS" if r.get("gate_status") == "PASSED" else "CONDITIONAL"))
-        kpi_health = str(r.get("kpi_health") or spine.get("kpi_health") or "PASS_WITH_WATCH")
+        kpi_health = str(spine.get("kpi_health") or r.get("kpi_health") or "PASS_WITH_WATCH")
         roic_roce = _num(r.get("roic_pct")) or _num(r.get("roce_pct")) or _num(r.get("roe_pct"))
 
         ref_px = min(close, entry_high) if close > 0 and entry_high > 0 else close
@@ -1246,12 +1395,23 @@ def allocate_portfolio(
             else _num(r.get("asymmetry_ratio"))
         )
 
+        raw_verdict_str = str(spine.get("new_capital_verdict") or spine.get("verdict") or r.get("action_verdict") or "").upper()
+        posture_str = str(spine.get("entry_posture") or r.get("entry_posture") or "").upper()
+        is_rejected = raw_verdict_str == "REJECTED" or str(r.get("gate_status") or "").upper() == "FAIL"
+        legacy_orders_disabled = bool(
+            not spine.get("_has_published_dossier")
+            and (
+                r.get("orders_enabled") is False
+                or "NO ORDER" in (str(r.get("entry_posture") or "") + " " + str(r.get("notes") or "")).upper()
+            )
+        )
+
         score_obj = _score_candidate(
             sym=sym,
             bucket=bucket,
-            has_dossier=True,
-            tier=tier,
-            bq_verdict=bq_verdict,
+            has_dossier=has_monograph,
+            tier="TIER_0" if is_rejected else tier,
+            bq_verdict="FUNDAMENTAL_FAIL" if is_rejected else bq_verdict,
             kpi_health=kpi_health,
             roic_or_roce=roic_roce,
             asym_ratio=asym,
@@ -1267,33 +1427,48 @@ def allocate_portfolio(
             scoring=scoring,
         )
 
-        sizing = _compute_risk_unit_target_wt(close if close > 0 else entry_high, stop_loss, tier, scoring)
+        sizing = _compute_risk_unit_target_wt(close if close > 0 else entry_high, stop_loss, "TIER_0" if is_rejected else tier, scoring)
         full_wt = sizing["full_target_wt_pct"]
         starter_wt = round(full_wt * envelope["starter_fraction"], 2)
 
-        raw_verdict_str = str(r.get("action_verdict") or "").upper()
-        posture_str = str(r.get("entry_posture") or "").upper()
+        explicit_no_alloc = (
+            ("NO_NEW_ALLOCATION" in posture_str or "MONITORING ONLY" in posture_str)
+            and raw_verdict_str not in {"WAIT_FOR_SUPPORT", "ACCUMULATE_ON_DIP", "IMMEDIATE_BUY"}
+        )
         hard_blocked = (
-            tier == "TIER_0"
+            is_rejected
+            or not has_monograph
+            or legacy_orders_disabled
+            or tier == "TIER_0"
             or stage in {"STAGE_3", "STAGE_4"}
             or bq_verdict == "FUNDAMENTAL_FAIL"
-            or "NO_NEW_ALLOCATION" in posture_str
-            or "MONITORING ONLY" in posture_str
+            or explicit_no_alloc
             or (asym is not None and asym < 1.25)
             or (bucket == "TACTICAL_MOMENTUM" and quadrant == "Lagging")
             or envelope["playbook_mode"] == "CAPITAL_PRESERVATION"
         )
 
-        # Regime-Adaptive 50/50 Starter Eligibility (solves the 86% WAIT_FOR_SUPPORT paralysis!)
-        if hard_blocked or full_wt <= 0:
+        # Regime-Adaptive 50/50 Starter Eligibility
+        if is_rejected:
+            entry_action = "REJECTED_BY_DOSSIER"
+            eligible_now = False
+            why = f"Published monograph rejected new capital ({stage}, R:R={asym if asym is not None else 'N/A'}); zero allocation."
+        elif not has_monograph or legacy_orders_disabled:
+            entry_action = "MONITOR_ONLY_PRE_MONOGRAPH"
+            eligible_now = False
+            why = (
+                f"Legacy shortlist monitor without a published 10-chapter monograph ({stage}, support {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f}); "
+                f"no order enabled until refreshed monograph underwriting completes."
+            )
+        elif hard_blocked or full_wt <= 0:
             entry_action = "DEFERRED_GATE_BLOCKED"
             eligible_now = False
             why = (
                 f"Blocked from immediate deployment ({stage}, tier={tier}, sector={quadrant}, "
-                f"asymmetry={asym if asym is not None else 'N/A'}); keep on watchlist/support monitor only."
+                f"asymmetry={asym if asym is not None else 'N/A'}); monitor {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f} and await Stage 2 / R:R confirmation."
             )
         elif envelope["playbook_mode"] == "BROAD_TREND":
-            if ext_10w <= envelope["max_starter_extension_pct"] and (rsi14 is None or rsi14 <= 73.0):
+            if ext_10w <= envelope["max_starter_extension_pct"] and (rsi14 is None or rsi14 <= 73.0) and raw_verdict_str in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP"}:
                 entry_action = "DEPLOY_STARTER_NOW"
                 eligible_now = True
                 why = (
@@ -1304,25 +1479,25 @@ def allocate_portfolio(
                 entry_action = "RESTING_LIMIT_AT_SUPPORT"
                 eligible_now = False
                 why = (
-                    f"Extended (+{ext_10w:.1f}% above 10W EMA / RSI {rsi14 or 0:.1f}); No-FOMO rule places resting limit "
-                    f"at {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f}."
+                    f"Stage 2 monograph with {asym:.2f}:1 support asymmetry, currently {dist_above_zone_pct:+.1f}% vs support top {cur}{entry_high:,.2f}; "
+                    f"stage resting limit for 50% Starter ({starter_wt:.2f}% NAV) inside {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f}."
                 )
         else:
-            # SIDEWAYS_DEFENSIVE: require proximity to support band or 10W EMA (<= 4.0%) or explicit IMMEDIATE_BUY
+            # SIDEWAYS_DEFENSIVE: require proximity to support band AND explicit IMMEDIATE_BUY/ACCUMULATE_ON_DIP or in-zone touch
             near_support = (dist_above_zone_pct <= envelope["max_starter_extension_pct"]) or (ext_10w <= envelope["max_starter_extension_pct"])
-            if near_support and (rsi14 is None or rsi14 <= 68.0) and (raw_verdict_str in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP"} or dist_above_zone_pct <= 2.0):
+            if near_support and (rsi14 is None or rsi14 <= 68.0) and (raw_verdict_str in {"IMMEDIATE_BUY", "ACCUMULATE_ON_DIP"} or dist_above_zone_pct <= 1.0):
                 entry_action = "DEPLOY_STARTER_AT_SUPPORT"
                 eligible_now = True
                 why = (
-                    f"Sideways-tape support starter: trading near support ({cur}{close:,.2f} vs zone {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f}, "
+                    f"Sideways-tape support starter: trading inside/near support ({cur}{close:,.2f} vs zone {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f}, "
                     f"{ext_10w:+.1f}% vs 10W EMA); deploy 50% Starter ({starter_wt:.2f}% NAV), add second 50% only after >= +1R proof."
                 )
             else:
                 entry_action = "RESTING_LIMIT_AT_SUPPORT"
                 eligible_now = False
                 why = (
-                    f"Sideways/narrow tape forbids chasing breakouts ({dist_above_zone_pct:+.1f}% vs support top {cur}{entry_high:,.2f}); "
-                    f"stage resting limit order for 50% Starter inside {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f}."
+                    f"Underwritten Stage 2 candidate trading {dist_above_zone_pct:+.1f}% above support top {cur}{entry_high:,.2f} ({ext_10w:+.1f}% vs 10W EMA); "
+                    f"stage resting limit for 50% Starter ({starter_wt:.2f}% NAV) inside {cur}{entry_low:,.2f}–{cur}{entry_high:,.2f} (R:R {asym:.2f}:1)."
                 )
 
         # Hysteresis check on challenger eligibility across 1-5 day reruns
@@ -1338,9 +1513,10 @@ def allocate_portfolio(
 
         challenger_decisions.append({
             "symbol": sym,
-            "company_name": str(r.get("company_name") or sym),
+            "company_name": str(spine.get("company_name") or r.get("company_name") or sym),
+            "has_dossier": has_monograph,
             "bucket": bucket,
-            "tier": tier,
+            "tier": "TIER_0" if is_rejected else tier,
             "macro_sector": sec_lbl,
             "sector_quadrant": quadrant,
             "sector_stage2_pct": s2_ind_pct,
@@ -1368,7 +1544,18 @@ def allocate_portfolio(
             "rationale": why,
         })
 
-    challenger_decisions.sort(key=lambda x: (-int(x["eligible_now"]), -x["score"]["tournament_score"]))
+    def _challenger_sort_key(item: Dict[str, Any]) -> tuple:
+        act = item["entry_action"]
+        prio = (
+            0 if item["eligible_now"]
+            else 1 if act == "RESTING_LIMIT_AT_SUPPORT"
+            else 2 if act == "DEFERRED_GATE_BLOCKED"
+            else 3 if act == "MONITOR_ONLY_PRE_MONOGRAPH"
+            else 4
+        )
+        return (prio, -item["score"]["tournament_score"])
+
+    challenger_decisions.sort(key=_challenger_sort_key)
 
     # ------------------------------------------------------------------
     # STEP 4: SLOT TOURNAMENT (12-15 CAP), HEAT GATE & CASH WATERFALL
@@ -1429,12 +1616,17 @@ def allocate_portfolio(
     min_cash_reserve = round(net_worth * (envelope["min_cash_floor_pct"] / 100.0), 2)
     deployable_cash = max(0.0, round(gross_cash_pool - min_cash_reserve, 2))
 
-    current_open_heat_pct = round(
+    pre_trade_open_heat_pct = round(
+        sum(hd["current_open_heat_pct"] for hd in holding_decisions)
+        + sum(od["current_open_heat_pct"] for od in options_decisions),
+        2,
+    )
+    post_phase1_open_heat_pct = round(
         sum(hd["open_heat_pct"] for hd in holding_decisions if hd["target_value"] > 0)
         + sum(od["open_heat_pct"] for od in options_decisions if od["target_value"] > 0),
         2,
     )
-    remaining_heat_pct = max(0.0, round(envelope["max_portfolio_heat_pct"] - current_open_heat_pct, 2))
+    remaining_heat_pct = max(0.0, round(envelope["max_portfolio_heat_pct"] - post_phase1_open_heat_pct, 2))
 
     # Priority 1: Fund any qualified Tranche-2 scale-up ADDs on existing Stage 2 winners
     holding_adds = [
@@ -1694,6 +1886,15 @@ def allocate_portfolio(
         2,
     )
 
+    post_cluster_heat: Dict[str, float] = {}
+    for hd in holding_decisions:
+        if hd["target_value"] > 0 and hd["bucket"] != "CASH_EQUIVALENT":
+            post_cluster_heat[hd["cluster_id"]] = round(post_cluster_heat.get(hd["cluster_id"], 0.0) + hd["open_heat_pct"], 2)
+    for ch in challenger_decisions:
+        if ch["funded_value"] > 0 and ch["close"] > 0:
+            ch_h = round((ch["funded_value"] * max(0.035, (ch["close"] - ch["stop_loss"]) / ch["close"])) / net_worth * 100.0, 2)
+            post_cluster_heat[ch["cluster_id"]] = round(post_cluster_heat.get(ch["cluster_id"], 0.0) + ch_h, 2)
+
     dossier_debt_queue.sort(key=lambda x: -x["market_value"])
 
     sells_and_trims = [hd for hd in holding_decisions if hd["delta_shares"] < 0]
@@ -1735,7 +1936,7 @@ def allocate_portfolio(
             "active_slots_range": [min_slots, max_slots],
             "tracking_positions_count": len(tracking_rows),
             "tracking_positions_value": tracking_total_val,
-            "current_open_heat_pct": current_open_heat_pct,
+            "current_open_heat_pct": pre_trade_open_heat_pct,
             "target_open_heat_pct": final_open_heat_pct,
             "max_portfolio_heat_pct": envelope["max_portfolio_heat_pct"],
             "core_alpha_target_wt_pct": round(target_bucket_totals["CORE_ALPHA"] / net_worth * 100.0, 2),
@@ -1768,7 +1969,8 @@ def allocate_portfolio(
                 "symbols": cluster_syms_map.get(cid, []),
                 "current_wt_pct": round(cluster_wt_map.get(cid, 0.0), 2),
                 "target_wt_pct": round(post_cluster_wt.get(cid, 0.0), 2),
-                "open_heat_pct": round(cluster_heat_map.get(cid, 0.0), 2),
+                "current_open_heat_pct": round(cluster_heat_map.get(cid, 0.0), 2),
+                "open_heat_pct": round(post_cluster_heat.get(cid, 0.0), 2),
                 "max_cluster_wt_pct": max_cluster_wt,
                 "max_cluster_heat_pct": max_cluster_heat,
             }

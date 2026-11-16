@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="report-design" content="research-desk-v1">
+<meta name="report-market" content="IN">
+<meta name="report-kind" content="report">
+<meta name="report-workflow" content="Portfolio audit">
+<meta name="research-as-of" content="2026-11-13">
+<meta name="generated-at" content="2026-11-15T20:01:56.300654-08:00">
+<title>India (Zerodha) Portfolio Forensic Audit, Allocation &amp; Narrative Playbook</title>
+<style>
+:root {
+  /* Page & surface (Techmeme / Morning Brief unified theme) */
+  --paper:          #ffffff;
+  --paper-top:      #f4f6f8;
+  --ink:            #111111;
+  --ink-strong:     #174a61;
+  --muted:          #556677;
+  --rule:           #cccccc;
+  --rule-soft:      #d8e0e6;
+  --surface:        #ffffff;
+  --surface-alt:    #f4f6f8;
+  --link:           #002848;
+  --link-visited:   #902050;
+  --link-hover-bg:  #d0e8f4;
+  --navy:           #174a61;
+  --navy-hover:     #578aa1;
+  --sisnav-hover:   #25607b;
+
+  /* Verdict semantic tokens — four distinct hues, colour-blind safe when paired with text labels */
+  --keep-ink:       #145a32;   /* forest green — KEEP / HOLD / SHORTLIST */
+  --keep-bg:        #e8f4ec;
+  --keep-rule:      #8ec5a1;
+
+  --accumulate-ink: #0f4c81;   /* slate blue — ACCUMULATE / BUY / ADD / STAGE 2 BREAKOUT */
+  --accumulate-bg:  #e7f0f9;
+  --accumulate-rule:#8fb4da;
+
+  --trim-ink:       #7c4700;   /* warm amber — TRIM / WAIT FOR SUPPORT / ROLL */
+  --trim-bg:        #fbf2e1;
+  --trim-rule:      #dfba73;
+
+  --exit-ink:       #8b1e1e;   /* brick red — EXIT / REJECT / CLOSE / STAGE 4 */
+  --exit-bg:        #fbeaea;
+  --exit-rule:      #dca1a1;
+
+  --watch-ink:      #424b54;   /* neutral slate — WATCH / ARCHIVED / PENDING */
+  --watch-bg:       #eef0f2;
+  --watch-rule:     #b8c0c8;
+
+  /* Callout accents (matching personal-wiki .exec-theme-box and .deepdive-container) */
+  --primer-accent:  #d4a017;   /* gold — Executive Synthesis / Primer box */
+  --primer-tint:    #fdfbe8;
+  --rule-accent:    #0f4c81;   /* slate blue — Rule Explained box */
+  --rule-tint:      #eef4fa;
+  --case-accent:    #174a61;   /* Techmeme navy — Deep-Dive / Case Note box */
+  --case-tint:      #fcfdfe;
+  --warn-accent:    #8b1e1e;   /* brick — Risk / Conflict callout */
+  --warn-tint:      #fcf1f1;
+}
+/* report_base v2 */
+* { box-sizing: border-box; }
+html { font-size: 15.5px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+}
+.report {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 18px 56px;
+}
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:visited {
+  color: var(--link-visited);
+}
+a:hover {
+  background-color: var(--link-hover-bg);
+  text-decoration: underline;
+}
+
+/* Headings — Techmeme / Research Desk style */
+h1, h2, h3, h4 {
+  color: var(--ink-strong);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.hatnote {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--navy);
+  clear: left;
+  color: var(--navy);
+}
+h3 {
+  font-size: 1.05rem;
+  margin: 1.35rem 0 0.45rem;
+  color: var(--ink-strong);
+}
+h4 {
+  font-size: 0.96rem;
+  margin: 1rem 0 0.35rem;
+  color: var(--ink);
+}
+p { margin: 0.55rem 0 0.9rem; }
+ul, ol { margin: 0.45rem 0 0.95rem; padding-left: 1.5rem; }
+li { margin: 0.28rem 0; }
+hr { border: 0; border-top: 1px solid var(--rule-soft); margin: 1.5rem 0; }
+
+/* Lead & TOC */
+.lead { font-size: 1.01rem; }
+.toc {
+  display: table;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  padding: 0.75rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+.toc-title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: var(--navy);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.toc ol { margin: 0; padding-left: 1.25rem; }
+.toc li { margin: 0.18rem 0; }
+
+/* Infobox */
+.infobox {
+  float: right;
+  clear: right;
+  width: 310px;
+  margin: 0 0 1.25rem 1.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.infobox caption, .infobox .infobox-title {
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+}
+.infobox th, .infobox td {
+  padding: 0.35rem 0.6rem;
+  border-top: 1px solid var(--rule-soft);
+  vertical-align: top;
+  text-align: left;
+}
+.infobox th {
+  width: 44%;
+  color: var(--muted);
+  font-weight: 600;
+}
+.infobox td {
+  font-variant-numeric: tabular-nums;
+}
+.infobox .infobox-subhead th {
+  background: var(--surface-alt);
+  color: var(--navy);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Data tables (wikitable) — responsive & sticky headers */
+.table-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 0.85rem 0 1.35rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+}
+.table-wrap:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+table.wikitable {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  background: var(--surface);
+}
+table.wikitable caption {
+  font-weight: 700;
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  color: var(--navy);
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--rule-soft);
+}
+table.wikitable th, table.wikitable td {
+  border: 1px solid var(--rule-soft);
+  padding: 0.44rem 0.65rem;
+  vertical-align: top;
+  text-align: left;
+}
+table.wikitable thead th, table.wikitable tr:first-child th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background: var(--surface-alt);
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom: 2px solid var(--rule);
+}
+table.wikitable tbody tr:nth-child(even) {
+  background: var(--paper);
+}
+table.wikitable tbody tr:hover {
+  background: var(--rule-tint);
+}
+.num, td.num, th.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Verdict pills */
+.verdict {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.verdict-keep       { color: var(--keep-ink);       background: var(--keep-bg);       border-color: var(--keep-rule); }
+.verdict-accumulate { color: var(--accumulate-ink); background: var(--accumulate-bg); border-color: var(--accumulate-rule); }
+.verdict-trim       { color: var(--trim-ink);       background: var(--trim-bg);       border-color: var(--trim-rule); }
+.verdict-exit       { color: var(--exit-ink);       background: var(--exit-bg);       border-color: var(--exit-rule); }
+.verdict-watch      { color: var(--watch-ink);      background: var(--watch-bg);      border-color: var(--watch-rule); }
+
+/* Footnotes & references */
+sup.reference { font-size: 0.75em; line-height: 0; }
+.reflist {
+  font-size: 0.84rem;
+  color: var(--muted);
+  column-width: 28rem;
+  column-gap: 2rem;
+  padding-left: 1.5rem;
+}
+.reflist li { margin: 0.25rem 0; break-inside: avoid; }
+
+code, .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-alt);
+  padding: 0.08rem 0.3rem;
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .report { padding: 14px 12px 40px; }
+  .infobox { float: none; width: 100%; margin: 0 0 1.25rem 0; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; }
+}
+@media print {
+  body { background: #fff; font-size: 10.5pt; }
+  .report { max-width: none; padding: 0; }
+  a { color: #000; text-decoration: underline; }
+  h2, h3 { page-break-after: avoid; }
+  table, .callout, .case-note { page-break-inside: avoid; }
+}
+
+/* === Book-report teaching components (Techmeme / Morning Brief unified theme) === */
+
+/* Key-figures strip: 3–5 headline numbers at the top of a report or section */
+.key-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 1.4rem;
+  clear: left;
+}
+.key-figures > div {
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-top: 3px solid var(--navy);
+  padding: 0.65rem 0.85rem;
+}
+.key-figures .kf-label {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+.key-figures .kf-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.15rem;
+}
+.key-figures .kf-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Callout boxes: Primer (matches .exec-theme-box), Rule Explained, Risk/Warning */
+.callout {
+  border: 1px solid var(--rule-soft);
+  border-left: 5px solid var(--primer-accent);
+  background: var(--primer-tint);
+  padding: 0.75rem 1.05rem;
+  margin: 1rem 0 1.25rem;
+  font-size: 0.93rem;
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--trim-ink);
+  margin: 0 0 0.35rem;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout-rule {
+  border-left-color: var(--rule-accent);
+  background: var(--rule-tint);
+}
+.callout-rule .callout-title { color: var(--rule-accent); }
+.callout-warn {
+  border-left-color: var(--warn-accent);
+  background: var(--warn-tint);
+}
+.callout-warn .callout-title { color: var(--warn-accent); }
+
+/* Case note: one box per holding / option / candidate (matches .deepdive-container) */
+.case-note {
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--case-accent);
+  background: var(--case-tint);
+  padding: 0.95rem 1.15rem;
+  margin: 1.15rem 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.case-note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.case-note-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+.case-note-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.case-note dl.case-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.35rem 0.9rem;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface-alt);
+  border-left: 3px solid var(--navy);
+  font-size: 0.84rem;
+}
+.case-note dl.case-facts div { margin: 0; }
+.case-note dl.case-facts dt {
+  color: var(--muted);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.case-note dl.case-facts dd {
+  margin: 0.05rem 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* First-use glossary term */
+dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 1px dotted var(--muted);
+  cursor: help;
+}
+
+/* Chapter lead / section summary */
+.section-summary {
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--surface-alt);
+  border-left: 4px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Horizontal bar meter for allocations / weights */
+.weight-bar {
+  display: inline-block;
+  height: 0.55rem;
+  background: var(--navy);
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border-radius: 1px;
+}
+
+/* === Dual-Edition Switcher & Audiobook Reader Components === */
+.edition-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin: 0.85rem 0 1.25rem;
+  padding: 0.65rem 0.95rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--navy);
+  font-size: 0.86rem;
+}
+.edition-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.edition-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--link);
+  font-weight: 700;
+  border-radius: 2px;
+  text-decoration: none;
+}
+.edition-tab.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #ffffff !important;
+}
+.edition-tab.is-active:visited {
+  color: #ffffff !important;
+}
+.edition-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+.edition-dl-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.6rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--surface);
+  color: var(--ink-strong);
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* Built-in Audiobook / TTS Reader Bar for SYMBOL_book.html */
+.book-audio-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+  margin: 0.75rem 0 1.35rem;
+  padding: 0.75rem 1rem;
+  background: var(--primer-tint);
+  border: 1px solid var(--primer-accent);
+  border-left: 5px solid var(--primer-accent);
+  font-size: 0.86rem;
+}
+.book-audio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+.book-audio-btn {
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--navy);
+  background: var(--navy);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.book-audio-btn.secondary {
+  background: var(--surface);
+  color: var(--navy);
+}
+.book-audio-btn:hover {
+  background: var(--navy-hover);
+  color: #ffffff;
+}
+.book-audio-select {
+  padding: 0.28rem 0.5rem;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+}
+.book-audio-status {
+  color: var(--ink-strong);
+  font-weight: 600;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Book-edition typography & chapter banners */
+.book-chapter p {
+  font-size: 1.03rem;
+  line-height: 1.72;
+  margin: 0.75rem 0 1.05rem;
+}
+.book-chapter p.is-speaking {
+  background: var(--primer-tint);
+  border-left: 3px solid var(--primer-accent);
+  padding-left: 0.65rem;
+}
+.chapter-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.35rem 0 0.95rem;
+  padding: 0.55rem 0.85rem;
+  background: var(--surface-alt);
+  border-left: 4px solid var(--navy);
+  font-size: 0.88rem;
+}
+.chapter-question {
+  font-weight: 600;
+  color: var(--ink-strong);
+}
+.chapter-listen-time {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* === Techmeme / Morning Brief Unified Research Desk Chrome === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Optima, "Century Gothic", "Trebuchet MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+code, .mono, .num, td.num, th.num, .infobox td, .key-figures .kf-value, .case-note dl.case-facts dd {
+  font-variant-numeric: tabular-nums;
+}
+
+.desk-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  border: 0;
+  background: transparent;
+}
+.desk-progress::-webkit-progress-bar { background: transparent; }
+.desk-progress::-webkit-progress-value { background: var(--navy-hover); }
+.desk-progress::-moz-progress-bar { background: var(--navy-hover); }
+
+/* Top prenavbar + logo header + navy navbar inside .desk-masthead */
+.desk-prenav {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 8px 18px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.desk-prenav-links a {
+  color: var(--link);
+  font-weight: 600;
+}
+.desk-logotab {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 10px 18px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.desk-brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+.desk-brand-title:visited { color: var(--navy); }
+.desk-brand-title:hover { background: transparent; text-decoration: none; color: var(--navy-hover); }
+.desk-brand-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.desk-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 34px;
+  padding: 0 18px;
+  background: var(--navy);
+  color: #ffffff;
+  border-bottom: 1px solid var(--navy);
+}
+.desk-wordmark {
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 6px 12px;
+  background: var(--navy-hover);
+  text-decoration: none;
+}
+.desk-wordmark:visited { color: #ffffff !important; }
+.desk-wordmark:hover { background: var(--navy-hover); text-decoration: none; }
+.desk-label {
+  color: var(--paper);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.desk-sisnav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+.desk-sisnav a {
+  color: #ffffff !important;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+.desk-sisnav a:hover {
+  background: var(--sisnav-hover);
+  text-decoration: none;
+}
+.desk-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.desk-tools select, .desk-tools button {
+  min-height: 26px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: var(--navy);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.desk-tools button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  padding: 0;
+}
+.desk-tools button svg { width: 14px; height: 14px; }
+.desk-tools select:hover, .desk-tools button:hover {
+  background: var(--navy-hover);
+}
+.desk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.desk-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 20px 18px 64px;
+}
+.report {
+  max-width: 960px;
+  margin: 0;
+  padding: 0;
+}
+.report-header {
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: var(--primer-tint);
+  border: 1px solid var(--primer-accent);
+  border-left: 5px solid var(--primer-accent);
+}
+.report-header h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 2.3vw, 1.95rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.report-generated, .report-as-of {
+  margin: 6px 0 0;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.report-as-of { font-weight: 500; color: var(--muted); }
+
+.toc { display: none; }
+.desk-contents { display: none; }
+
+.desk-footer {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 16px 18px 36px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+@media (min-width: 1120px) {
+  .desk-tools select { display: none; }
+  .desk-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 940px) 250px;
+    justify-content: space-between;
+    align-items: start;
+    gap: 28px;
+  }
+  .desk-contents:not([hidden]) {
+    display: block;
+    position: sticky;
+    top: 52px;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    padding: 10px 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--rule-soft);
+    border-top: 3px solid var(--navy);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+  .desk-contents-label {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .desk-contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .desk-contents li { margin: 0; }
+  .desk-contents a {
+    display: block;
+    padding: 4px 6px;
+    color: var(--link);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+  }
+  .desk-contents a:visited { color: var(--link); }
+  .desk-contents a:hover, .desk-contents a.is-active {
+    color: var(--navy);
+    background: var(--link-hover-bg);
+    border-left-color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .desk-prenav, .desk-logotab { padding-left: 12px; padding-right: 12px; }
+  .desk-masthead { padding: 0 10px; }
+  .desk-sisnav { display: none; }
+  .desk-layout { padding: 14px 12px 44px; }
+}
+
+@media print {
+  .desk-progress, .desk-prenav, .desk-logotab, .desk-masthead, .desk-contents, .desk-footer { display: none !important; }
+  .desk-layout, .report { display: block; max-width: none; padding: 0; }
+}
+
+</style></head><body id="top">
+<progress class="desk-progress" max="100" value="0" aria-label="Reading progress" hidden></progress>
+<div class="desk-prenav"><span>November 15, 2026 &bull; India (NSE/BSE)</span><span class="desk-prenav-links"><a href="https://rajasekharmekala.github.io/">Home</a> | <a href="../index.html">Portfolio Desk</a> | <a href="https://rajasekharmekala.github.io/personal-wiki/">The Morning Brief</a> | <a href="https://rajasekharmekala.github.io/travel-research/">Travel Research</a></span></div>
+<div class="desk-logotab"><a class="desk-brand-title" href="../index.html">Portfolio Research Desk</a><span class="desk-brand-sub">Stage 2 Sector Momentum &bull; Deep Business Monographs &bull; No-FOMO Execution</span></div>
+<header class="desk-masthead"><a class="desk-wordmark" href="../index.html">RESEARCH / DESK</a><span class="desk-label">India / Portfolio audit</span><nav class="desk-sisnav" aria-label="Sister sites"><a href="https://rajasekharmekala.github.io/">Profile</a><a href="https://rajasekharmekala.github.io/personal-wiki/">Morning Brief</a><a href="https://rajasekharmekala.github.io/travel-research/">Travel</a></nav><div class="desk-tools"><label class="desk-sr-only" for="desk-section">Report section</label><select id="desk-section" hidden><option value="">Contents</option></select><button id="desk-print" title="Print report" aria-label="Print report" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button></div></header>
+<div class="desk-layout"><main class="report"><header class="report-header"><h1>India (Zerodha) Portfolio Forensic Audit, Allocation &amp; Narrative Playbook</h1><p class="report-generated">Generated Date: <time datetime="2026-11-15T20:01:56.300654-08:00">15 Nov 2026, 08:01 PM PST</time></p><p class="report-as-of">Research as of 2026-11-13</p></header>
+<div aria-label="Audit Editions" class="edition-switcher" role="navigation">
+<div class="edition-tabs">
+<a class="edition-tab is-active" href="IN_Portfolio_Audit.html">Web Research Audit &amp; Tables</a>
+</div>
+<div class="edition-downloads">
+<a class="edition-dl-link" download="IN_Portfolio_Audit_book.pdf" href="IN_Portfolio_Audit_book.pdf">Download Masterclass Story PDF (4,170 words • ~27 min)</a>
+</div>
+</div>
+<div aria-label="Interactive Audiobook Narrator" class="book-audio-bar" role="region">
+<div class="book-audio-controls">
+<button class="book-audio-btn" data-audio-action="play" type="button">Play Audiobook</button>
+<button class="book-audio-btn secondary" data-audio-action="prev" type="button">← Prev</button>
+<button class="book-audio-btn secondary" data-audio-action="next" type="button">Next →</button>
+<button class="book-audio-btn secondary" data-audio-action="stop" type="button">Stop</button>
+<select aria-label="Narration speed" class="book-audio-select" data-audio-rate="">
+<option selected="" value="1.0">1.0x</option>
+<option value="1.15">1.15x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</div>
+<span class="book-audio-status" data-audio-status="">Cohesive Story Mode Ready (~27 min listen)</span>
+</div>
+<dl class="key-figures">
+<div><dt class="kf-label">Total Net Worth</dt><dd class="kf-value">₹4,297,450.80</dd><span class="kf-note">As of 2026-11-13 close</span></div>
+<div><dt class="kf-label">Open Portfolio Heat</dt><dd class="kf-value">13.41% → 7.01%</dd><span class="kf-note">₹301,251.30 risk vs 8.5% ceiling</span></div>
+<div><dt class="kf-label">Convergence Score</dt><dd class="kf-value">67.0%</dd><span class="kf-note">6 trade(s) outside ±1.25% band</span></div>
+<div><dt class="kf-label">Active Risk Slots</dt><dd class="kf-value">12 / 15</dd><span class="kf-note">+3 tracking stub(s) ignored</span></div>
+<div><dt class="kf-label">Target Cash Reserve</dt><dd class="kf-value">₹1,991,649.75 (46.34%)</dd><span class="kf-note">Regime floor: 12.0%</span></div>
+</dl>
+<section class="chapter book-chapter clearfix" id="chapter1">
+<h2>Chapter 1: Macro Tide, Sector Guardrails &amp; Convergence</h2>
+<table class="infobox" role="presentation">
+<caption>India Portfolio Executive Snapshot</caption>
+<tr><th colspan="2">Session Cutoff: 2026-11-13</th></tr>
+<tr><th>Market Regime</th><td>Uptrend (narrow breadth)</td></tr>
+<tr><th>Playbook Mode</th><td>SIDEWAYS DEFENSIVE</td></tr>
+<tr><th>Total Net Worth</th><td><strong>₹4,297,450.80</strong></td></tr>
+<tr><th>Current Equities</th><td>₹3,722,869.05 (86.63%)</td></tr>
+<tr><th>Current Cash</th><td>₹574,581.75 (13.37%)</td></tr>
+<tr><th>Top-3 Concentration</th><td>35.03% → 21.38%</td></tr>
+<tr><th>Money at Risk (Stops)</th><td>₹301,251.30 (7.01% vs 8.5% cap)</td></tr>
+<tr><th>Core Alpha Target</th><td>5.46% (Band 35–45%)</td></tr>
+<tr><th>Tactical Momentum Target</th><td>47.92%</td></tr>
+<tr><th>Effective Exposure</th><td>68.3% (Beta 0.68)</td></tr>
+</table>
+<p class="lede">After the Friday, 2026-11-13 close, you and I manage ₹4,297,450.80 in your Zerodha account. Equity holdings total ₹3,722,869.05 across 18 stocks, and settled cash stands at ₹574,581.75 (13.37%). Every single held stock now has a completed 10-chapter monograph. That full review exposes one urgent risk: open portfolio heat sits at 13.41% (₹576,288.15), above our 8.5% ceiling for 'Uptrend (narrow breadth)'. We fix that breach today through 6 Phase 1 sales. We exit RNITAI (6,500 shares), TANFACIND (70 shares), and JYOTICNC (100 shares) in full. We also trim half of SEDEMAC (100 shares), half of ASTRAMICRO (90 shares), and 15 shares of LAURUSLABS. Those 6 sales free ₹1,417,068.00 and cut open heat to 7.01% (₹301,251.30). Active risk slots tighten from 15 to 12 names (excluding 3 tiny tracking stubs), and cash rises to ₹1,991,649.75 (46.34%) behind 5 Stage 2 support alerts.</p>
+<p>Before we trade a single share after the 2026-11-13 close, we check the market tide. The Nifty 50 closed at 25,144.30 (-0.61% 1D, +10.66% 1M, +2.90% 3M), placing the regime in 'Uptrend (narrow breadth)'. Across the Nifty 500 (23,734.20), 57.6% of stocks trade above their 50-DMA and 47.8% hold above their 200-DMA, with 3 distribution days. Still, daily index charts warrant caution. Nifty 50 (25,144.30), Sensex (81,592.45), Bank Nifty (61,034.10), Nifty Midcap 150 (22,681.25, -3.57% 3M), and Nifty Smallcap 250 (17,940.55, -2.15% 3M) all sit in Stage 3 consolidation while India VIX reads 15.50.</p>
+<p>Institutional flow data from 2026-11-13 shows why selectivity beats broad index beta today. In cash equities, <a href="https://wealthticker.in/fii-dii-data">FIIs net bought ₹5,736.55 crore</a> while DIIs net sold ₹2,253.58 crore, lifting November FII cash buying to <a href="https://strota.in/fii-dii-data">₹79,302 crore</a>. Yet in derivatives, <a href="https://flashfinance.news/market-intelligence/participants/">NSE participant OI</a> shows FIIs net short -55,920 index-futures contracts (0.53 long-short ratio per <a href="https://justticks.in/participant-data">JustTicks</a>) against +62,576 net long client contracts. <a href="https://flashfinance.news/market-intelligence/option-walls/">Nifty 17 Nov option walls</a> pin max pain near 25,100–25,150 (<a href="https://strota.in/nifty-option-chain">Strota</a>) with 0.83 PCR, 25,000 / 24,000 put floors, and 25,500 / 26,000 call ceilings. Meanwhile, <a href="https://flashfinance.news/market-intelligence/delivery/">NSE cash delivery</a> hit 37.28%, with 138 stocks in distribution against only 26 in accumulation.</p>
+<p>That hedged tape locks two hard rules onto our ₹4,297,450.80 book. Cash must stay above 12.0%, and open portfolio heat must stay below 8.5%. Auditing your 15 active holdings (excluding 3 tracking stubs worth ₹11,544.55) reveals an immediate breach. Pre-trade open heat stands at 13.41% (₹576,288.15), or 491 bps above cap, because oversized stakes in SEDEMAC (14.56% weight) and RNITAI (13.33% weight) carry 4.84% of heat alone.</p>
+<p>We also treat sector rotation asymmetrically to avoid weekly whipsaws. Pharma (28,535.75, Stage 2, +6.63% 3M), PSU Bank (9,258.60, +5.00% 3M), and Realty (921.25, +3.53% 3M) lead on 3-month strength, while IT, Infra, Auto, Metal, Energy, and FMCG sit in Improving recovery. Core Alpha compounders ignore brief sector dips unless 30-week structure breaks, while Tactical Momentum names must clear strict reward-to-risk hurdles. Saving this baseline in data/allocations/IN.json at 67.0% convergence sets up our holdings audit in Chapter 2.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Macro Regime, Portfolio Heat &amp; Convergence Guardrails</caption>
+<thead><tr><th>Dimension</th><th>Verified Reading</th><th>v4 Rulebook Mandate</th><th>Portfolio Consequence</th></tr></thead>
+<tbody>
+<tr><td><strong>Market Regime</strong></td><td>Uptrend (narrow breadth) (Breadth &gt;50DMA: 57.6%)</td><td>SIDEWAYS DEFENSIVE Playbook</td><td>Min cash floor 12.0%; starter extension cap ≤4.0%</td></tr>
+<tr><td><strong>Open Portfolio Heat</strong></td><td>13.41% (₹576,288.15) → 7.01% (₹301,251.30)</td><td>Hard ceiling 8.5% of Net Worth</td><td>Every stop-out across the book is bounded below 8.5% total drawdown</td></tr>
+<tr><td><strong>Active Risk Slots</strong></td><td>12 unique underlyings (+3 tracking)</td><td>12–15 active names; &lt;0.35% stubs excluded</td><td>Challengers require +15.0 tournament pts to displace a Stage 3 incumbent</td></tr>
+<tr><td><strong>Convergence &amp; Stability</strong></td><td>67.0% converged (6 trade(s))</td><td>±1.25% NAV deadband; 5-day ±2.5% lock</td><td>Suppresses daily flip-flops and 1-share nuisance rebalancing</td></tr>
+</tbody>
+</table></div>
+<p>Reading these four guardrails together shows why our allocation plan stays steady across consecutive sessions. With 'Uptrend (narrow breadth)' setting a 12.0% cash floor and a 8.5% heat ceiling, every risk decision starts from downside protection rather than prediction. Positions already sitting inside our ±1.25% deadband generate zero nuisance orders, letting us carry clean capital math directly into our active holdings audit in Chapter 2 below.</p>
+<div class="callout callout-rule triggers"><div class="callout-title">What Changes Our Macro &amp; Heat Posture</div><p>If broad market breadth expands above 55.0% with benchmark price above rising 50-day and 200-day averages, our heat budget lifts to 12.0% and Broad Uptrend starters open up to +8.5% above the 10-week EMA; if the benchmark breaks below its 200-day average into Downtrend, maximum heat contracts to 4.0% and cash floor rises to 22.0%.</p></div>
+</section>
+<section class="chapter book-chapter" id="chapter2">
+<h2>Chapter 2: Active Holdings Audit &amp; Stop-Loss Ratchets</h2>
+<p>Having 10-chapter monographs on all 18 Zerodha holdings changes how we allocate capital. We no longer guess whether a dip is cheap or an advance is stretched. Each line is judged on Q2/H1 FY27 filings, cash conversion, dilution, and base-case value. Across your 15 active holdings worth ₹3,711,324.50 (86.36% of net worth), top-3 concentration sits high at 35.03% across SEDEMAC (14.56%), RNITAI (13.33%), and ASTRAMICRO (7.14%).</p>
+<p>Six active positions fail valuation or sizing gates today and fund ₹1,417,068.00 in Phase 1 sales. Three monographs mandate full exits: RNITAI (sell 6,500 shares, freeing ₹572,715.00), TANFACIND (sell 70 shares, freeing ₹234,458.00), and JYOTICNC (sell 100 shares into Stage 2 strength, freeing ₹107,310.00). Each trades above its base value with negative asymmetry. Three monographs mandate partial trims: sell 100 of 200 SEDEMAC shares (₹312,910.00), sell 90 of 180 ASTRAMICRO shares (₹153,315.00), and sell 15 of 31 LAURUSLABS shares (₹36,360.00).</p>
+<p>Just as vital is what we keep. Nine intact positions—MANORAMA (86.7 score), AJMERA (72.6), AUROPHARMA (70.2), TARIL (69.6), APARINDS (68.5), CYIENT (62.9), TDPOWERSYS (62.4), NETWEB (61.3), and AFCOM (49.4)—join our retained stakes in LAURUSLABS, SEDEMAC, and ASTRAMICRO. Together they form a clean 12-stock book at 53.66% of net worth, cutting top-3 weight to 21.38%. Monograph evidence also prevents panic exits on Stage 3 pullbacks like NETWEB and APARINDS while both hold above their rising 200-DMAs and hard stops, leading into Chapter 3.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Active Non-Tracking Holdings Audit, Tournament Scores &amp; Ratcheted Stops</caption>
+<thead><tr><th>Rank</th><th>Security &amp; Sector</th><th class="num">Wt (Now → Target)</th><th class="num">Close (₹)</th><th class="num">Unrealized P&amp;L</th><th>Stage &amp; Score</th><th class="num">Stop &amp; Heat</th><th>Action Verdict</th><th class="num">Liberated (₹)</th></tr></thead>
+<tbody><tr><td>1</td><td><strong>RNITAI</strong><br/><span class="case-note-sub">Technology — AI, digital identity and government/enterprise software services</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ARNITAI">Chart</a> • <a href="https://www.screener.in/company/RNITAI/">Screener</a> • <a href="../blogs/IN/RNITAI_dossier.html">Monograph</a></span></td><td class="num">13.33% → 0.00%</td><td class="num">₹88.11</td><td class="num">₹+211,652.11 (+58.6%)</td><td>Stage 3 • Score 38.1</td><td class="num">₹69.39 (0.00% heat)</td><td><span class="verdict verdict-exit">EXIT</span></td><td class="num">₹572,715.00</td></tr><tr><td>2</td><td><strong>TANFACIND</strong><br/><span class="case-note-sub">Specialty Chemicals / Fluorochemicals</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATANFACIND">Chart</a> • <a href="https://www.screener.in/company/TANFACIND/">Screener</a> • <a href="../blogs/IN/TANFACIND_dossier.html">Monograph</a></span></td><td class="num">5.46% → 0.00%</td><td class="num">₹3,349.40</td><td class="num">₹+10,265.60 (+4.6%)</td><td>Stage 3 • Score 40.2</td><td class="num">₹2,773.31 (0.00% heat)</td><td><span class="verdict verdict-exit">EXIT</span></td><td class="num">₹234,458.00</td></tr><tr><td>3</td><td><strong>JYOTICNC</strong><br/><span class="case-note-sub">Industrials</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AJYOTICNC">Chart</a> • <a href="https://www.screener.in/company/JYOTICNC/">Screener</a> • <a href="../blogs/IN/JYOTICNC_dossier.html">Monograph</a></span></td><td class="num">2.50% → 0.00%</td><td class="num">₹1,073.10</td><td class="num">₹+5,760.25 (+5.7%)</td><td>Stage 2 • Score 48.5</td><td class="num">₹630.00 (0.00% heat)</td><td><span class="verdict verdict-exit">EXIT</span></td><td class="num">₹107,310.00</td></tr><tr><td>4</td><td><strong>SEDEMAC</strong><br/><span class="case-note-sub">Consumer Discretionary / Auto Electronics &amp; Powertrain Controls</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ASEDEMAC">Chart</a> • <a href="https://www.screener.in/company/SEDEMAC/">Screener</a> • <a href="../blogs/IN/SEDEMAC_dossier.html">Monograph</a></span></td><td class="num">14.56% → 7.28%</td><td class="num">₹3,129.10</td><td class="num">₹+220,721.75 (+54.5%)</td><td>Stage 3 • Score 56.2</td><td class="num">₹2,696.82 (1.01% heat)</td><td><span class="verdict verdict-trim">TRIM (TRIM OVERWEIGHT)</span></td><td class="num">₹312,910.00</td></tr><tr><td>5</td><td><strong>ASTRAMICRO</strong><br/><span class="case-note-sub">Industrials / Defense &amp; Aerospace Electronics</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AASTRAMICRO">Chart</a> • <a href="https://www.screener.in/company/ASTRAMICRO/">Screener</a> • <a href="../blogs/IN/ASTRAMICRO_dossier.html">Monograph</a></span></td><td class="num">7.14% → 3.57%</td><td class="num">₹1,703.50</td><td class="num">₹+3,379.68 (+1.1%)</td><td>Stage 3 • Score 55.4</td><td class="num">₹1,539.80 (0.34% heat)</td><td><span class="verdict verdict-trim">TRIM (TRIM INTO STRENGTH)</span></td><td class="num">₹153,315.00</td></tr><tr><td>6</td><td><strong>LAURUSLABS</strong><br/><span class="case-note-sub">Healthcare &amp; Pharmaceuticals (CDMO / API)</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ALAURUSLABS">Chart</a> • <a href="https://www.screener.in/company/LAURUSLABS/">Screener</a> • <a href="../blogs/IN/LAURUSLABS_dossier.html">Monograph</a></span></td><td class="num">1.75% → 0.90%</td><td class="num">₹2,424.00</td><td class="num">₹+15,674.00 (+26.4%)</td><td>Stage 2 • Score 76.8</td><td class="num">₹1,684.88 (0.28% heat)</td><td><span class="verdict verdict-trim">TRIM (TRIM INTO STRENGTH)</span></td><td class="num">₹36,360.00</td></tr><tr><td>7</td><td><strong>NETWEB</strong><br/><span class="case-note-sub">Electronic Technology</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ANETWEB">Chart</a> • <a href="https://www.screener.in/company/NETWEB/">Screener</a> • <a href="../blogs/IN/NETWEB_dossier.html">Monograph</a></span></td><td class="num">7.13% → 7.13%</td><td class="num">₹4,196.20</td><td class="num">₹-15,267.98 (-4.8%)</td><td>Stage 3 • Score 61.3</td><td class="num">₹3,703.75 (0.84% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>8</td><td><strong>TDPOWERSYS</strong><br/><span class="case-note-sub">Industrials / Electrical Products</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATDPOWERSYS">Chart</a> • <a href="https://www.screener.in/company/TDPOWERSYS/">Screener</a> • <a href="../blogs/IN/TDPOWERSYS_dossier.html">Monograph</a></span></td><td class="num">6.97% → 6.97%</td><td class="num">₹637.55</td><td class="num">₹+485.55 (+0.2%)</td><td>Stage 3 • Score 62.4</td><td class="num">₹520.00 (1.29% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>9</td><td><strong>TARIL</strong><br/><span class="case-note-sub">Producer Manufacturing / Electrical Products</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATARIL">Chart</a> • <a href="https://www.screener.in/company/TARIL/">Screener</a> • <a href="../blogs/IN/TARIL_dossier.html">Monograph</a></span></td><td class="num">6.23% → 6.23%</td><td class="num">₹314.80</td><td class="num">₹+3,838.90 (+1.5%)</td><td>Stage 3 • Score 69.6</td><td class="num">₹292.47 (0.44% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>10</td><td><strong>APARINDS</strong><br/><span class="case-note-sub">Industrials</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAPARINDS">Chart</a> • <a href="https://www.screener.in/company/APARINDS/">Screener</a> • <a href="../blogs/IN/APARINDS_dossier.html">Monograph</a></span></td><td class="num">6.14% → 6.14%</td><td class="num">₹14,667.00</td><td class="num">₹-10,658.35 (-3.9%)</td><td>Stage 3 • Score 68.5</td><td class="num">₹13,127.14 (0.64% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>11</td><td><strong>AFCOM</strong><br/><span class="case-note-sub">Logistics &amp; Cargo Aviation</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAFCOM">Chart</a> • <a href="https://www.screener.in/company/AFCOM/">Screener</a> • <a href="../blogs/IN/AFCOM_dossier.html">Monograph</a></span></td><td class="num">4.23% → 4.23%</td><td class="num">₹1,515.70</td><td class="num">₹-12,516.00 (-6.4%)</td><td>Stage 3 • Score 49.4</td><td class="num">₹1,256.71 (0.72% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>12</td><td><strong>AJMERA</strong><br/><span class="case-note-sub">Real Estate &amp; Urban Property Development</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAJMERA">Chart</a> • <a href="https://www.screener.in/company/AJMERA/">Screener</a> • <a href="../blogs/IN/AJMERA_dossier.html">Monograph</a></span></td><td class="num">4.03% → 4.03%</td><td class="num">₹133.28</td><td class="num">₹+3,353.96 (+2.0%)</td><td>Stage 3 • Score 72.6</td><td class="num">₹120.00 (0.40% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>13</td><td><strong>MANORAMA</strong><br/><span class="case-note-sub">Consumer Non-Durables / Specialty Food Ingredients</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AMANORAMA">Chart</a> • <a href="https://www.screener.in/company/MANORAMA/">Screener</a> • <a href="../blogs/IN/MANORAMA_dossier.html">Monograph</a></span></td><td class="num">3.92% → 3.92%</td><td class="num">₹1,984.10</td><td class="num">₹+11,044.30 (+7.0%)</td><td>Stage 2 • Score 86.7</td><td class="num">₹1,664.00 (0.63% heat)</td><td><span class="verdict verdict-keep">HOLD / TRAIL</span></td><td class="num">₹0.00</td></tr><tr><td>14</td><td><strong>CYIENT</strong><br/><span class="case-note-sub">Information Technology / ER&amp;D</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ACYIENT">Chart</a> • <a href="https://www.screener.in/company/CYIENT/">Screener</a> • <a href="../blogs/IN/CYIENT_dossier.html">Monograph</a></span></td><td class="num">2.34% → 2.34%</td><td class="num">₹1,104.90</td><td class="num">₹-837.90 (-0.8%)</td><td>Stage 3 • Score 62.9</td><td class="num">₹951.20 (0.33% heat)</td><td><span class="verdict verdict-keep">HOLD / HARD STOP</span></td><td class="num">₹0.00</td></tr><tr><td>15</td><td><strong>AUROPHARMA</strong><br/><span class="case-note-sub">Health Technology</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAUROPHARMA">Chart</a> • <a href="https://www.screener.in/company/AUROPHARMA/">Screener</a> • <a href="../blogs/IN/AUROPHARMA_dossier.html">Monograph</a></span></td><td class="num">0.64% → 0.64%</td><td class="num">₹1,823.20</td><td class="num">₹+190.30 (+0.7%)</td><td>Stage 2 • Score 70.2</td><td class="num">₹1,570.64 (0.09% heat)</td><td><span class="verdict verdict-keep">HOLD / TRAIL</span></td><td class="num">₹0.00</td></tr></tbody>
+</table></div>
+<p>Across all 15 active non-tracking positions above, Phase 1 actions liberate ₹1,417,068.00 from broken or over-extended lines while keeping intact compounders anchored on upward-only ratcheted stops. Top-3 equity concentration shifts from 35.03% to 21.38% of net worth, and total money at risk if every stop hits is ₹301,251.30 (7.01%). Every active holding's specific business thesis, monograph verdict, and closing stop trigger follows in Section 2.1 below.</p>
+<h3>2.1 Individual Position Case Notes &amp; Invalidation Levels</h3>
+<p>Every active position in our book must earn its slot from today's close rather than past cost basis. Each case note below states what the company does, why we hold or trim it, the exact ledger price, weight, unrealized P&amp;L, tournament score, and ratcheted stop-loss, plus the specific price or filing event that changes the call. Treat these levels as standing desk discipline until the next completed session.</p>
+<div class="case-note casenote" data-symbol="SEDEMAC"><div class="case-note-head"><span class="case-note-title">SEDEMAC — Sedemac Mechatronics Limited</span><span class="verdict verdict-trim">TRIM (TRIM OVERWEIGHT)</span></div><p>Sedemac Mechatronics (<a href="../blogs/IN/SEDEMAC_dossier.html">monograph</a>) makes sensorless ISGs and ECUs for two-wheelers and gensets. At 14.56% weight, 200 shares at ₹3,129.10 (cost ₹2,025.49) equal ₹625,820.00 (+₹220,721.75, +54.5%). <a href="https://marketping.in/news/sedemac-mechatronics-q2-fy27-results">Q2 FY27 standalone sales</a> rose 29.3% QoQ to ₹400.64 Cr with ₹39.18 Cr PAT (<a href="https://www.screener.in/company/SEDEMAC/">promoters 26.23% unpledged</a>), earning COMPOUNDER_PASS. Still, price sits in Stage 3 below its ₹3,138.55 50-DMA (RSI 49.42), debt rose to ₹245.64 Cr, TVS drives 75%–81% of sales, and CMP tops our ₹3,050.00 base value (-0.18:1 R:R). Verdict: TRIM 100 shares (freeing ₹312,910.00) per monograph TRIM_OVERWEIGHT to cut weight to 7.28% (1.01% heat). Hold 100 shares unless a daily close breaks ₹2,696.82.</p></div>
+<div class="case-note casenote" data-symbol="RNITAI"><div class="case-note-head"><span class="case-note-title">RNITAI — RNIT AI Solutions Limited</span><span class="verdict verdict-exit">EXIT</span></div><p>RNIT AI Solutions (<a href="../blogs/IN/RNITAI_dossier.html">monograph</a>) builds AI-enabled governance software for state agencies. Your 6,500 shares at ₹88.11 (avg cost ₹55.55) equal ₹572,715.00, or 13.33% of net worth (+₹211,652.11, +58.6%). <a href="https://marketping.in/news/rnit-ai-solutions-q2-fy27-results">Q2 FY27 standalone sales</a> rose 19.6% YoY to ₹16.41 Cr (PAT ₹4.24 Cr, 29 Oct 2026). Still, price sits in Stage 3 below its ₹97.29 20-DMA and ₹100.28 50-DMA with RSI 33.99, zero FII stake (<a href="https://www.screener.in/company/517286/">Screener Sep 2026</a>), and 2.83% heat. Verdict: EXIT all 6,500 shares (score 38.1/100) per monograph EXIT_IMMEDIATELY. Our ₹63.00 base value sits 28.5% below the ₹88.11 close (-1.34:1 R:R). Unless Q3 cash flow surges and price reclaims ₹100.28 on volume, free ₹572,715.00 to cash.</p></div>
+<div class="case-note casenote" data-symbol="ASTRAMICRO"><div class="case-note-head"><span class="case-note-title">ASTRAMICRO — Astra Microwave Products Limited</span><span class="verdict verdict-trim">TRIM (TRIM INTO STRENGTH)</span></div><p>Astra Microwave (<a href="../blogs/IN/ASTRAMICRO_dossier.html">monograph</a>) builds radar, telemetry, and electronic-warfare subsystems for defence labs. Holding 180 shares at ₹1,703.50 (cost ₹1,684.72) equals ₹306,630.00, or 7.14% weight (+₹3,379.68, +1.1%). After <a href="https://www.investywise.com/astra-microwave-products-ltd-q2-h1-fy27-unaudited-financial-results/">12 Nov 2026 Q2 results</a> (standalone sales +22.5% YoY to ₹261 Cr, PAT +126.5% to ₹47 Cr), price reclaimed its ₹1,629.97 50-DMA (ledger Stage 3, RSI 57.91; <a href="https://www.screener.in/company/ASTRAMICRO/">promoters 6.54% unpledged</a>). However, 75.14x P/E sits above our ₹1,520.00 base value (-1.12:1 R:R) with heavy receivables. Verdict: TRIM 90 shares into strength (freeing ₹153,315.00, target weight 3.57%, heat 0.34%, score 55.4/100) per monograph TRIM_INTO_STRENGTH. Exit the remaining 90 shares if price closes below ₹1,539.80.</p></div>
+<div class="case-note casenote" data-symbol="NETWEB"><div class="case-note-head"><span class="case-note-title">NETWEB — Netweb Technologies India Limited</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>Netweb Technologies (<a href="../blogs/IN/NETWEB_dossier.html">monograph</a>) builds Tyrone AI servers and supercomputers in India. Across 73 shares at ₹4,196.20 (cost ₹4,405.35), our stake totals ₹306,322.60, or 7.13% weight (-₹15,267.98, -4.8%, heat 0.84%). Business growth is explosive: <a href="https://www.capket.com/business/netweb-q2-fy27-revenue-profit-ai-systems-results-2026/">Q2 FY27 revenue</a> surged 335.7% YoY to ₹1,323.3 Cr (AI systems 58.4%) and PAT rose 334.8% to ₹136.7 Cr on a ₹2,629 Cr backlog (<a href="https://www.screener.in/company/NETWEB/">promoters 64.16%</a>). Ledger trend reads Stage 3 below the ₹4,608.75 50-DMA while holding above the rising ₹4,179.52 200-DMA (RSI 44.38, 66.25x P/E). Verdict: HOLD / HARD STOP on all 73 shares (score 61.3/100) toward ₹4,600.00. Add nothing below the 50-DMA, and exit if price closes below ₹3,703.75.</p></div>
+<div class="case-note casenote" data-symbol="TDPOWERSYS"><div class="case-note-head"><span class="case-note-title">TDPOWERSYS — TD Power Systems Limited</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>TD Power Systems (<a href="../blogs/IN/TDPOWERSYS_dossier.html">monograph</a>) builds customized AC generators (1–60 MW in series production, with 40–200 MW design capability in development) for steam, gas, hydro, and data-center power. Valued at ₹299,648.50 (470 shares at ₹637.55 vs ₹636.52 cost, +₹485.55 or +0.2%), the stake is 6.97% of net worth (1.29% heat). <a href="https://marketping.in/news/td-power-systems-q2-fy27-results">Q2 FY27 revenue</a> jumped 85.9% YoY to ₹841.32 Cr and PAT doubled (+105.6%) to ₹123.75 Cr. On 13 Nov 2026, <a href="https://flashfinance.news/market-intelligence/bulk-block-deals/">NSE bulk data</a> showed ₹198 Cr / ₹197 Cr of matched HFT prop trades as the stock digested in Stage 3 above its rising ₹589.90 200-DMA (RSI 41.71; <a href="https://www.screener.in/company/TDPOWERSYS/">DIIs ~29%, FIIs 22.66%</a>). Verdict: HOLD / HARD STOP on all 470 shares (score 62.4/100) toward ₹820.00 (1.55:1 R:R); exit if price closes below ₹520.00.</p></div>
+<div class="case-note casenote" data-symbol="TARIL"><div class="case-note-head"><span class="case-note-title">TARIL — Transformers and Rectifiers (India) Limited</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>Transformers and Rectifiers India (<a href="../blogs/IN/TARIL_dossier.html">monograph</a>) manufactures high-voltage power and furnace transformers up to 1,200 kV. Positioned at 6.23% weight, 850 shares at ₹314.80 (cost ₹310.28) equal ₹267,580.00 (+₹3,838.90, +1.5%, heat 0.44%). <a href="https://www.stockfin.ai/news/TARIL/2026-10-21/financial-results">Q2 FY27 sales</a> grew 66% YoY to ₹709 Cr and EBITDA jumped 203% to ₹114 Cr on a ₹7,237 Cr backlog, though FY26 operating cash flow was negative ₹105.38 Cr and the cash-conversion cycle widened to about 200 days (<a href="https://www.screener.in/company/TARIL/">promoters 64.36%</a>, 31.04x P/E). Price holds above both its ₹299.05 50-DMA and ₹301.01 200-DMA (RSI 53.80), though the ledger marks Stage 3 until 50-DMA clears 200-DMA. Verdict: HOLD / HARD STOP on all 850 shares (score 69.6/100) toward ₹373.34 (2.62:1 R:R). Freeze adds until working capital reaches 110–120 days, and exit below ₹292.47.</p></div>
+<div class="case-note casenote" data-symbol="APARINDS"><div class="case-note-head"><span class="case-note-title">APARINDS — Apar Industries Limited</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>Apar Industries (<a href="../blogs/IN/APARINDS_dossier.html">monograph</a>) leads globally in transmission conductors, transformer oils, and renewables cables. Carrying 18 shares at ₹14,667.00 (cost ₹15,259.13) values our position at ₹264,006.00, or 6.14% weight (-₹10,658.35, -3.9%, heat 0.64%). On <a href="https://forgeup.in/filings/apar-industries-ltd-fundraise-qip-rights-fpo-29-oct-2026">29 Oct 2026</a>, Apar posted a ₹12,025 Cr conductor book and approved a USD 100M overseas expansion at 31.8% ROCE (<a href="https://www.screener.in/company/APARINDS/">promoters 55.42%, DIIs 23.83%</a>). U.S. shipment timing pulled daily trend into Stage 3 below its ₹16,725.78 50-DMA (RSI 39.53). That support rests on weak operating cash conversion, however: H1 CFO was -₹862.63 Cr, H1 conductor volume fell 8.0% and oil volume fell 16.9%, and the stock logged 7 distribution days. It trades 7.55% above its rising ₹13,637.14 200-DMA but sits below its ₹15,247.57 30-week SMA. Verdict: HOLD / HARD STOP on all 18 shares (score 68.5/100, COMPOUNDER_PASS) toward ₹16,200.00; exit if a daily close breaks ₹13,127.14.</p></div>
+<div class="case-note casenote" data-symbol="TANFACIND"><div class="case-note-head"><span class="case-note-title">TANFACIND — Tanfac Industries Limited</span><span class="verdict verdict-exit">EXIT</span></div><p>Tanfac Industries (<a href="../blogs/IN/TANFACIND_dossier.html">monograph</a>) produces hydrofluoric acid and specialty fluorochemicals at Cuddalore. Holding 70 shares at ₹3,349.40 (avg cost ₹3,202.75) values the stake at ₹234,458.00, or 5.46% weight (+₹10,265.60, +4.6%). In <a href="https://www.multibagg.ai/market-pulse/articles/tanfac-q2-revenue-margin-compression-ppt-cmw013bap009f2vpecn8vdwo8">Q2 FY27</a> (2 Nov 2026), sales rose 36.6% YoY to ₹230.5 Cr, but input costs cut EBITDA margin from 16.2% to 13.3%. Daily trend slipped to Stage 3 below its ₹3,362.71 50-DMA (RSI 48.51, 99.32x P/E, <a href="https://www.screener.in/company/TANFACIND/">promoters 48.98%</a>). Verdict: EXIT all 70 shares (score 40.2/100), freeing ₹234,458.00 under monograph EXIT_IMMEDIATELY. Our ₹2,950.00 base value sits below the ₹3,349.40 close (-0.69:1 R:R). Revisit only if price drops below ₹2,500 and margins recover above 18%.</p></div>
+<div class="case-note casenote" data-symbol="AFCOM"><div class="case-note-head"><span class="case-note-title">AFCOM — Afcom Holdings Limited</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>Afcom Holdings (<a href="../blogs/IN/AFCOM_dossier.html">monograph</a>) flies bonded ASEAN air-cargo freighters from Chennai. Across 120 shares at ₹1,515.70 (cost ₹1,620.00), market value stands at ₹181,884.00, or 4.23% weight (-₹12,516.00, -6.4%, heat 0.72%). <a href="https://www.capitalmarket.com/markets/news/corporate-results/afcom-holdings-standalone-net-profit-rises-80-27-in-the-september-2026-quarter/1749342">Q2 FY27 standalone sales</a> surged 98.37% YoY to ₹240.80 Cr and PAT rose 80.27% to ₹51.18 Cr (37.12% OPM). Price holds above its ₹1,448.06 50-DMA (ledger Stage 3, RSI 63.98, 23.27x P/E), but promoter stake eased to <a href="https://www.screener.in/company/544224/">35.40% in Sep 2026</a> and our ₹1,540.00 base target caps upside (0.09:1 R:R, TIER_0). Because it has a completed monograph with a HOLD_WITH_HARD_STOP mandate, holds above both its ₹1,448.06 50-DMA and ₹1,135.84 200-DMA, and its ₹1,256.71 stop sits well below price, we retain all 120 shares rather than force an exit as we did on Stage 2 JYOTICNC. That said, new capital is barred and the 0.09:1 reward-to-risk confirms no fresh money. The 50 ₹1,711.00 trim reference is only the 52-week-high resistance line where we harvest into strength, not a base-target price. Verdict: HOLD / HARD STOP on all 120 shares (score 49.4/100) behind ₹1,256.71; trim 60 shares near ₹1,711.00 resistance, and exit below ₹1,256.71.</p></div>
+<div class="case-note casenote" data-symbol="AJMERA"><div class="case-note-head"><span class="case-note-title">AJMERA — Ajmera Realty &amp; Infra India Ltd</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>Ajmera Realty (<a href="../blogs/IN/AJMERA_dossier.html">monograph</a>) pairs Wadala land-bank projects (~₹15,950 Cr GDV) with asset-light Mumbai society redevelopment. Owning 1,300 shares at ₹133.28 (cost ₹130.70) equals ₹173,264.00, or 4.03% weight (+₹3,353.96, +2.0%, heat 0.40%). <a href="https://www.stockfin.ai/news/AJMERA/2026-11-03/financial-results">H1 FY27 revenue</a> grew 28% YoY to ₹370 Cr (PAT ₹48.5 Cr) at 15.50x P/E with <a href="https://www.screener.in/company/AJMERA/">68.56% unpledged promoter stake</a> inside Leading Realty (+3.53% 3M). Price sits above its ₹122.78 50-DMA and ₹125.50 200-DMA (RSI 57.06), though ledger trend reads Stage 3 until 50-DMA crosses 200-DMA. Verdict: HOLD / HARD STOP on all 1,300 shares (score 72.6/100, TIER_1) toward ₹195.00 (4.65:1 R:R); exit below ₹120.00, and add Tranche 2 only after a 50-DMA golden cross above 200-DMA and +1R (~₹141.40).</p></div>
+<div class="case-note casenote" data-symbol="MANORAMA"><div class="case-note-head"><span class="case-note-title">MANORAMA — Manorama Industries Limited</span><span class="verdict verdict-keep">HOLD / TRAIL</span></div><p>Manorama Industries (<a href="../blogs/IN/MANORAMA_dossier.html">monograph</a>) produces sal-seed and mango-kernel cocoa-butter equivalents for global chocolate makers. Represented by 85 shares at ₹1,984.10 (cost ₹1,854.17), our stake is ₹168,648.50, or 3.92% weight (+₹11,044.30, +7.0%, heat 0.63%). <a href="https://www.investywise.com/manorama-industries-limited-investor-update-on-q2-h1-fy27-financial-results/">Q2 FY27 sales</a> rose 41.9% YoY to ₹458.9 Cr and PAT climbed 51.8% to ₹80.8 Cr (<a href="https://www.screener.in/company/MANORAMA/">51.38% unpledged promoters</a>, DIIs 6.40%). The working-capital watch is a 369-day seasonal inventory cycle, and the stock dropped 5.52% on 3.58x average volume on 13 Nov 2026. Even so, confirmed Stage 2 structure (+4.54% vs 10W EMA, RSI 56.17) earns #1 rank in our tournament at 86.7/100. Verdict: HOLD / TRAIL all 85 Core Alpha shares toward ₹2,520.00 (1.67:1 R:R). Add Tranche 2 on a dip into ₹1,870.00–₹1,960.00 or above +1R, and exit on a weekly close below ₹1,664.00.</p></div>
+<div class="case-note casenote" data-symbol="JYOTICNC"><div class="case-note-head"><span class="case-note-title">JYOTICNC — Jyoti CNC Automation Ltd.</span><span class="verdict verdict-exit">EXIT</span></div><p>Jyoti CNC Automation (<a href="../blogs/IN/JYOTICNC_dossier.html">monograph</a>) makes multi-axis CNC machines for aerospace and defence. Your 100 shares at ₹1,073.10 (cost ₹1,015.50) are worth ₹107,310.00, or 2.50% weight (+₹5,760.25, +5.7%). Daily price holds Stage 2 above its ₹1,007.20 50-DMA (RSI 62.77) on a <a href="https://www.5paisa.com/blog/jyoti-cnc-q2-fy27-results-order-book-5082-crore">₹5,082 Cr Sep-2026 backlog</a>. Yet consolidated Q2 FY27 PAT fell 15.1% YoY to ₹72.6 Cr, cumulative FCF is -₹847 Cr, and 79.03x P/E exceeds our ₹950.00 base value (-0.28:1 R:R; <a href="https://www.screener.in/company/JYOTICNC/">promoters 62.55% unpledged</a>). Verdict: EXIT all 100 shares into strength (score 48.5/100), freeing ₹107,310.00 per monograph EXIT_IMMEDIATELY. Re-evaluate only if price tests ₹700.00–₹750.00 with positive consolidated FCF.</p></div>
+<div class="case-note casenote" data-symbol="CYIENT"><div class="case-note-head"><span class="case-note-title">CYIENT — Cyient Limited</span><span class="verdict verdict-keep">HOLD / HARD STOP</span></div><p>Cyient Limited (<a href="../blogs/IN/CYIENT_dossier.html">monograph</a>) provides aerospace, connectivity, and industrial engineering R&amp;D through its core DET arm. Totaling 91 shares at ₹1,104.90 (cost ₹1,114.11), the line is worth ₹100,545.90, or 2.34% weight (-₹837.90, -0.8%, heat 0.33%). In <a href="https://www.kotakneo.com/news/stocks/cyient-share-price-and-q2-fy-27-results/">Q2 FY27</a> (23 Oct 2026), DET revenue grew 15.7% YoY to ₹1,664 Cr, EBIT margin hit a 10-quarter high of 14.2% (₹214 Cr FCF, ₹12/sh dividend), funded after management added ₹2,328 Cr of new debt for Kinetic Technologies and TAO Digital that lifted total borrowings 6.4x to ₹2,759 Cr, and <a href="https://www.screener.in/company/CYIENT/">promoters lifted stake to 24.75%</a> (~38.9% DIIs). Daily price digests in Stage 3 just below its ₹1,120.11 50-DMA while holding above its ₹963.95 200-DMA (RSI 45.81, 32.47x P/E). Verdict: HOLD / HARD STOP on all 91 shares (score 62.9/100) toward ₹1,280.00; exit if price closes below ₹951.20.</p></div>
+<div class="case-note casenote" data-symbol="LAURUSLABS"><div class="case-note-head"><span class="case-note-title">LAURUSLABS — Laurus Labs Limited</span><span class="verdict verdict-trim">TRIM (TRIM INTO STRENGTH)</span></div><p>Laurus Labs (<a href="../blogs/IN/LAURUSLABS_dossier.html">monograph</a>) runs a global small-molecule CDMO, peptide, and API platform. Your 31 shares at ₹2,424.00 (cost ₹1,918.39) are worth ₹75,144.00, or 1.75% weight (+₹15,674.00, +26.4%). <a href="https://guidance.fyi/company/laurus-labs/q2-fy27/">Q2 FY27 revenue</a> hit a record ₹2,206 Cr at 34.5% EBITDA margin as CDMO jumped 86% YoY to ₹875 Cr (<a href="https://www.screener.in/company/LAURUSLABS/">FIIs 30.84%, promoters 27.47%</a>). Price trends in Stage 2 (+12.95% vs 10W EMA, RSI 69.68, score 76.8/100). At 97.82x P/E against ₹2,466 Cr net debt, CMP leaves 0.04:1 R:R to our ₹2,450.00 base target. Verdict: TRIM 15 shares (freeing ₹36,360.00, target 0.90% weight, 0.28% heat) per monograph TRIM_INTO_STRENGTH. Hold 16 shares unless price closes below ₹1,684.88.</p></div>
+<div class="case-note casenote" data-symbol="AUROPHARMA"><div class="case-note-head"><span class="case-note-title">AUROPHARMA — Aurobindo Pharma Ltd</span><span class="verdict verdict-keep">HOLD / TRAIL</span></div><p>Aurobindo Pharma (<a href="../blogs/IN/AUROPHARMA_dossier.html">monograph</a>) manufactures US/EU generics, injectables, and APIs in Leading Pharma. Marked at ₹27,348.00 (15 shares at ₹1,823.20 vs ₹1,810.51 cost, +₹190.30 or +0.7%), this starter is 0.64% of net worth (0.09% heat). <a href="https://www.arthneeti.com/insights/aurobindo-pharma-ltd-q2-fy27-earnings">Q2 FY27 PAT</a> jumped 32.5% YoY to ₹1,124 Cr (4 Nov 2026), backing &gt;21% FY27 EBITDA margin guidance (<a href="https://www.screener.in/company/AUROPHARMA/">promoters 51.88%, DIIs 24.37%</a>, 26.44x P/E). Confirmed Stage 2 trend holds above its rising ₹1,688.19 50-DMA (+6.87% vs 10W EMA, RSI 66.26). Verdict: HOLD / TRAIL all 15 Core Alpha shares (score 70.2/100) toward ₹2,060.00. Scale up only inside ₹1,680.29–₹1,765.44 or after Eugia Unit I resolves its August 2026 FDA Warning Letter, and exit below ₹1,570.64.</p></div>
+<h3>2.2 Sub-0.35% Tracking Stubs &amp; Monograph Guardrails</h3>
+<p>Tiny 1-share and pilot stakes below 0.35% of net worth serve as live market trackers rather than active bets. Your Zerodha book holds 3 such stubs: MARINE (25 shares = ₹10,671.25, 0.25%), SSWL (1 share = ₹567.40, 0.01%), and KROSS (1 share = ₹305.90, 0.01%). Together they total ₹11,544.55, or just 0.27% of net worth. All three carry published 10-chapter monographs and trade in Stage 2 uptrends. Counting ₹305.90 or ₹567.40 trackers against our 12–15 slot limit would block real compounders. So we include all ₹11,544.55 in total net worth while excluding them from active slot counts. New capital is REJECTED at current prices for MARINE (75.05x P/E) and SSWL (above its ₹495.00 base value). KROSS waits for a dip into ₹268.00–₹282.00, while each tracker holds behind its monograph stop.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Sub-0.35% Tracking Stubs (Reconciled in Net Worth, Excluded from Active Risk Slots)</caption>
+<thead><tr><th>Ticker &amp; Company</th><th class="num">Qty</th><th class="num">Close (₹)</th><th class="num">Value &amp; Weight</th><th>Stage</th><th class="num">Advisory Stop</th><th>Monograph Posture</th></tr></thead>
+<tbody><tr><td><strong>MARINE</strong><br/><span class="case-note-sub">Marine Electricals (India) Limited</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AMARINE">Chart</a> • <a href="https://www.screener.in/company/MARINE/">Screener</a> • <a href="../blogs/IN/MARINE_dossier.html">Monograph</a></span></td><td class="num">25</td><td class="num">₹426.85</td><td class="num">₹10,671.25 (0.25%)</td><td>Stage 2</td><td class="num">₹313.40</td><td><span class="verdict verdict-keep">TRACKING HOLD (NEW CAP: REJECTED)</span></td></tr><tr><td><strong>SSWL</strong><br/><span class="case-note-sub">Steel Strips Wheels Limited</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ASSWL">Chart</a> • <a href="https://www.screener.in/company/SSWL/">Screener</a> • <a href="../blogs/IN/SSWL_dossier.html">Monograph</a></span></td><td class="num">1</td><td class="num">₹567.40</td><td class="num">₹567.40 (0.01%)</td><td>Stage 2</td><td class="num">₹303.53</td><td><span class="verdict verdict-keep">TRACKING HOLD (NEW CAP: REJECTED)</span></td></tr><tr><td><strong>KROSS</strong><br/><span class="case-note-sub">Kross Limited</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AKROSS">Chart</a> • <a href="https://www.screener.in/company/KROSS/">Screener</a> • <a href="../blogs/IN/KROSS_dossier.html">Monograph</a></span></td><td class="num">1</td><td class="num">₹305.90</td><td class="num">₹305.90 (0.01%)</td><td>Stage 2</td><td class="num">₹212.00</td><td><span class="verdict verdict-keep">TRACKING HOLD (NEW CAP: WAIT FOR SUPPORT)</span></td></tr></tbody>
+</table></div>
+<p>Keeping MARINE, SSWL, KROSS isolated in this tracking ledger preserves full accounting accuracy. All ₹11,544.55 sits inside our ₹4,297,450.80 net worth, yet our active risk count stays clean at 12 names. None of these tiny tracking shares warrants fresh capital at today's close. Each stub carries a clear advisory invalidation stop while we turn next to thematic cluster risk in Chapter 3.</p>
+<div class="callout callout-rule triggers"><div class="callout-title">Holding Ratchet &amp; Shakeout Trigger Rules</div><p>If any retained holding closes a completed daily session below its ratcheted stop in the table above with RSI(14) below 42, execute an exit on the next session; if an intraday flush undercuts support and closes back above the 50-day SMA or 10-week EMA on positive volume, retain the shares and anchor the hard stop below the shakeout low before moving to Chapter 3.</p></div>
+</section>
+<section class="chapter book-chapter" id="chapter3">
+<h2>Chapter 3: Thematic Cluster Risk, Velocity &amp; Drawdown Defense</h2>
+<p>In Indian mid- and small-cap portfolios, deep drawdowns rarely come from one isolated miss. They happen when four or five capital-goods winners all depend on the same domestic power and defence capex cycle. Pairwise 1-year daily correlations across your 15 active stocks sit below 0.60 today, giving a calm 0.68 beta and 68.3% effective Nifty exposure (~₹29,345.93 per 1% Nifty move). Even so, theme exposure still clusters in Industrials.</p>
+<p>Checking our Zerodha clusters against the 25.0% weight cap and 3.5% cluster-heat cap shows why Phase 1 trims matter. Pre-trade, our Industrials group (ASTRAMICRO, TDPOWERSYS, APARINDS, JYOTICNC) held 22.75% weight and 3.65% open heat, 15 bps above our 3.5% cluster-heat cap. Exiting JYOTICNC and halving ASTRAMICRO cuts Industrials to 16.68% weight and 2.27% heat. Exiting RNITAI removes 13.33% micro-cap tech risk, and halving SEDEMAC trims auto-electronics from 14.56% to 7.28%.</p>
+<p>NSE single-stock F&amp;O contracts carry short 1-to-3-month expiries and wide spreads during selloffs, and Zerodha holds zero options today. So 100% of our India risk runs through unleveraged cash stocks plus liquid cash. After Phase 1, Tactical Momentum sits at 47.92% (inside its 40%–55% band) while Core Alpha sits lean at 5.46% (MANORAMA, LAURUSLABS, AUROPHARMA). That leaves over 30 points of Core Alpha room for compounders in Chapter 4.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Correlated &amp; Thematic Cluster Exposure Matrix (25% Notional / 3.5% Heat Cap)</caption>
+<thead><tr><th>Cluster Group</th><th>Member Tickers</th><th class="num">Current Wt</th><th class="num">Target Wt</th><th class="num">Cluster Heat</th><th>Guardrail Status</th></tr></thead>
+<tbody><tr><td><strong>SECTOR_INDUSTRIALS</strong></td><td>ASTRAMICRO, TDPOWERSYS, APARINDS, JYOTICNC</td><td class="num">22.75%</td><td class="num">16.68% (Cap 25%)</td><td class="num">3.65% → 2.27% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_CONSUMER_DISCRETIONARY</strong></td><td>SEDEMAC</td><td class="num">14.56%</td><td class="num">7.28% (Cap 25%)</td><td class="num">2.01% → 1.01% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_TECHNOLOGY</strong></td><td>RNITAI</td><td class="num">13.33%</td><td class="num">0.00% (Cap 25%)</td><td class="num">2.83% → 0.00% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_ELECTRONIC_TECHNOLOGY</strong></td><td>NETWEB</td><td class="num">7.13%</td><td class="num">7.13% (Cap 25%)</td><td class="num">0.84% → 0.84% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_PRODUCER_MANUFACTURING</strong></td><td>TARIL</td><td class="num">6.23%</td><td class="num">6.23% (Cap 25%)</td><td class="num">0.44% → 0.44% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_SPECIALTY_CHEMICALS</strong></td><td>TANFACIND</td><td class="num">5.46%</td><td class="num">0.00% (Cap 25%)</td><td class="num">0.94% → 0.00% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_LOGISTICS_&amp;_CARGO_AVIATION</strong></td><td>AFCOM</td><td class="num">4.23%</td><td class="num">4.23% (Cap 25%)</td><td class="num">0.72% → 0.72% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_REAL_ESTATE_&amp;_URBAN_PROPERTY</strong></td><td>AJMERA</td><td class="num">4.03%</td><td class="num">4.03% (Cap 25%)</td><td class="num">0.40% → 0.40% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_CONSUMER_NON-DURABLES</strong></td><td>MANORAMA</td><td class="num">3.92%</td><td class="num">3.92% (Cap 25%)</td><td class="num">0.63% → 0.63% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_INFORMATION_TECHNOLOGY</strong></td><td>CYIENT</td><td class="num">2.34%</td><td class="num">2.34% (Cap 25%)</td><td class="num">0.33% → 0.33% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_HEALTHCARE_&amp;_PHARMACEUTICALS</strong></td><td>LAURUSLABS</td><td class="num">1.75%</td><td class="num">0.90% (Cap 25%)</td><td class="num">0.53% → 0.28% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr><tr><td><strong>SECTOR_HEALTH_TECHNOLOGY</strong></td><td>AUROPHARMA</td><td class="num">0.64%</td><td class="num">0.64% (Cap 25%)</td><td class="num">0.09% → 0.09% (Cap 3.5%)</td><td>WITHIN GUARDRAIL</td></tr></tbody>
+</table></div>
+<p>Grouping correlated holdings into explicit clusters ensures no single domestic or sector theme exceeds 25% of net worth or 3.5% of open portfolio heat. When several holdings share one macro capex driver, their combined drawdown risk must be budgeted as a single bet rather than independent lines. With thematic concentration verified and bounded inside our guardrails, we turn next to Chapter 4 to test shortlisted challengers.</p>
+</section>
+<section class="chapter book-chapter" id="chapter4">
+<h2>Chapter 4: Shortlist Challenger Tournament &amp; 50/50 Tranches</h2>
+<p>Exiting 3 full holdings lowers our active count from 15 to 12 names. That opens 3 clean slots inside our 12–15 cap and builds ₹1,991,649.75 in cash. To fill those slots wisely, our tournament scores all 18 non-held candidates across data/shortlist/IN.json and completed data/watchlist/IN.json monographs on one 100-point scale.</p>
+<p>Strict monograph governance filters out weak or unverified setups first. Eight older shortlist rows (ANANDRATHI, TIPSMUSIC, ZYDUSLIFE, COFORGE, IGIL, INDHOTEL, DIVISLAB, APLAPOLLO) lack 10-chapter monographs and carry no-order flags, so they stay MONITOR_ONLY_PRE_MONOGRAPH. Two shortlisted monographs—<a href="../blogs/IN/CNL_dossier.html">CNL</a> (0.14:1 R:R) and <a href="../blogs/IN/XPROINDIA_dossier.html">XPROINDIA</a> (₹811.00 base vs ₹1,190.10 close)—are blocked as REJECTED_BY_DOSSIER. Three watchlist monographs—<a href="../blogs/IN/MPSLTD_dossier.html">MPSLTD</a> (Stage 3 at ₹2,259.30), <a href="../blogs/IN/STALLION_dossier.html">STALLION</a> (Stage 3 at ₹187.12), and <a href="../blogs/IN/ALUWIND_dossier.html">ALUWIND</a> (Stage 4 at ₹44.90)—wait for Stage 2 repair.</p>
+<p>Five vetted Stage 2 monographs lead our buy queue: <a href="../blogs/IN/YASHHV_dossier.html">YASHHV</a> (85.8 pts, Tier 2 Core Alpha), <a href="../blogs/IN/SAILIFE_dossier.html">SAILIFE</a> (79.7 pts, Tier 2 Core Alpha), <a href="../blogs/IN/GREAVESCOT_dossier.html">GREAVESCOT</a> (75.3 pts), <a href="../blogs/IN/PROV_dossier.html">PROV</a> (74.3 pts), and <a href="../blogs/IN/KROSS_dossier.html">KROSS</a> (71.7 pts). Why do we buy zero shares at market open? Every one of the five trades +6.9% to +25.2% above its support zone today (SAILIFE sits at RSI 82.68; YASHHV sits +8.4% above ₹1,145.00). Instead of chasing, we stage 50% starter alerts at support, flowing into Chapter 5.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Shortlist &amp; Monograph Challenger Tournament, 50/50 Tranche Sizing &amp; Entry Gates</caption>
+<thead><tr><th>Rank</th><th>Candidate</th><th>Bucket &amp; Tier</th><th class="num">Score</th><th class="num">CMP (₹)</th><th class="num">Support Zone (₹)</th><th class="num">Stop / Base (R:R)</th><th class="num">Starter / Full Wt</th><th>Gate Verdict</th><th class="num">Funded Now</th></tr></thead>
+<tbody><tr><td>1</td><td><strong>YASHHV</strong><br/><span class="case-note-sub">Producer Manufacturing</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AYASHHV">Chart</a> • <a href="https://www.screener.in/company/YASHHV/">Screener</a> • <a href="../blogs/IN/YASHHV_dossier.html">Monograph</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">85.8</td><td class="num">₹1,240.85</td><td class="num">₹1,085.00–₹1,145.00</td><td class="num">₹990.00 / ₹1,550.00 (2.61:1)</td><td class="num">1.85% / 3.71%</td><td><span class="verdict verdict-watch">RESTING LIMIT AT SUPPORT</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>2</td><td><strong>SAILIFE</strong><br/><span class="case-note-sub">Healthcare</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ASAILIFE">Chart</a> • <a href="https://www.screener.in/company/SAILIFE/">Screener</a> • <a href="../blogs/IN/SAILIFE_dossier.html">Monograph</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">79.7</td><td class="num">₹1,928.80</td><td class="num">₹1,420.00–₹1,540.00</td><td class="num">₹1,290.00 / ₹2,050.00 (2.04:1)</td><td class="num">1.13% / 2.26%</td><td><span class="verdict verdict-watch">RESTING LIMIT AT SUPPORT</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>3</td><td><strong>GREAVESCOT</strong><br/><span class="case-note-sub">Producer Manufacturing / Trucks, Construction and Farm Machinery</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AGREAVESCOT">Chart</a> • <a href="https://www.screener.in/company/GREAVESCOT/">Screener</a> • <a href="../blogs/IN/GREAVESCOT_dossier.html">Monograph</a></span></td><td>TACTICAL MOMENTUM (TIER_3)</td><td class="num">75.3</td><td class="num">₹225.97</td><td class="num">₹205.02–₹211.26</td><td class="num">₹197.60 / ₹303.00 (6.72:1)</td><td class="num">1.75% / 3.50%</td><td><span class="verdict verdict-watch">RESTING LIMIT AT SUPPORT</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>4</td><td><strong>PROV</strong><br/><span class="case-note-sub">Consumer Staples / Branded Dry Fruits &amp; Healthy Snacking</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3APROV">Chart</a> • <a href="https://www.screener.in/company/PROV/">Screener</a> • <a href="../blogs/IN/PROV_dossier.html">Monograph</a></span></td><td>TACTICAL MOMENTUM (TIER_3)</td><td class="num">74.3</td><td class="num">₹2,125.70</td><td class="num">₹1,850.00–₹1,875.00</td><td class="num">₹1,692.11 / ₹2,216.00 (1.86:1)</td><td class="num">1.23% / 2.45%</td><td><span class="verdict verdict-watch">RESTING LIMIT AT SUPPORT</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>5</td><td><strong>KROSS</strong><br/><span class="case-note-sub">Auto Parts: OEM</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AKROSS">Chart</a> • <a href="https://www.screener.in/company/KROSS/">Screener</a> • <a href="../blogs/IN/KROSS_dossier.html">Monograph</a></span></td><td>CORE ALPHA (TIER_3)</td><td class="num">71.7</td><td class="num">₹305.90</td><td class="num">₹268.00–₹282.00</td><td class="num">₹212.00 / ₹400.00 (1.69:1)</td><td class="num">0.81% / 1.63%</td><td><span class="verdict verdict-watch">RESTING LIMIT AT SUPPORT</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>6</td><td><strong>MPSLTD</strong><br/><span class="case-note-sub">Scholarly, Education &amp; Corporate-Learning Content Engineering and Platforms</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AMPSLTD">Chart</a> • <a href="https://www.screener.in/company/MPSLTD/">Screener</a> • <a href="../blogs/IN/MPSLTD_dossier.html">Monograph</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">64.0</td><td class="num">₹2,259.30</td><td class="num">₹2,070.00–₹2,150.00</td><td class="num">₹2,005.00 / ₹2,410.00 (1.79:1)</td><td class="num">3.25% / 6.50%</td><td><span class="verdict verdict-watch">DEFERRED GATE BLOCKED</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>7</td><td><strong>STALLION</strong><br/><span class="case-note-sub">Chemicals: Refrigerant &amp; Industrial Gases</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ASTALLION">Chart</a> • <a href="https://www.screener.in/company/STALLION/">Screener</a> • <a href="../blogs/IN/STALLION_dossier.html">Monograph</a></span></td><td>TACTICAL MOMENTUM (TIER_3)</td><td class="num">59.5</td><td class="num">₹187.12</td><td class="num">₹155.07–₹159.79</td><td class="num">₹152.30 / ₹233.40 (9.83:1)</td><td class="num">1.34% / 2.69%</td><td><span class="verdict verdict-watch">DEFERRED GATE BLOCKED</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>8</td><td><strong>ALUWIND</strong><br/><span class="case-note-sub">Industrials / Building Products (facade and fenestration contractor)</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AALUWIND">Chart</a> • <a href="https://www.screener.in/company/ALUWIND/">Screener</a> • <a href="../blogs/IN/ALUWIND_dossier.html">Monograph</a></span></td><td>TACTICAL MOMENTUM (TIER_3)</td><td class="num">45.4</td><td class="num">₹44.90</td><td class="num">₹40.00–₹42.00</td><td class="num">₹36.95 / ₹56.00 (2.77:1)</td><td class="num">1.41% / 2.82%</td><td><span class="verdict verdict-watch">DEFERRED GATE BLOCKED</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>9</td><td><strong>ANANDRATHI</strong><br/><span class="case-note-sub">Financials</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AANANDRATHI">Chart</a> • <a href="https://www.screener.in/company/ANANDRATHI/">Screener</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">78.2</td><td class="num">₹2,381.20</td><td class="num">₹2,170.01–₹2,179.44</td><td class="num">₹2,134.21 / ₹2,425.10 (5.43:1)</td><td class="num">3.25% / 6.50%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>10</td><td><strong>TIPSMUSIC</strong><br/><span class="case-note-sub">Media &amp; Entertainment</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ATIPSMUSIC">Chart</a> • <a href="https://www.screener.in/company/TIPSMUSIC/">Screener</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">73.4</td><td class="num">₹816.45</td><td class="num">₹703.21–₹745.77</td><td class="num">₹656.27 / ₹814.08 (0.76:1)</td><td class="num">1.91% / 3.82%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>11</td><td><strong>ZYDUSLIFE</strong><br/><span class="case-note-sub">Healthcare</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AZYDUSLIFE">Chart</a> • <a href="https://www.screener.in/company/ZYDUSLIFE/">Screener</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">73.1</td><td class="num">₹1,189.90</td><td class="num">₹1,153.60–₹1,191.12</td><td class="num">₹1,085.76 / ₹1,352.43 (1.56:1)</td><td class="num">3.25% / 6.50%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>12</td><td><strong>COFORGE</strong><br/><span class="case-note-sub">Technology</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ACOFORGE">Chart</a> • <a href="https://www.screener.in/company/COFORGE/">Screener</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">71.1</td><td class="num">₹2,028.00</td><td class="num">₹1,893.01–₹1,970.76</td><td class="num">₹1,603.91 / ₹2,400.00 (1.17:1)</td><td class="num">1.79% / 3.59%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>13</td><td><strong>IGIL</strong><br/><span class="case-note-sub">Commercial Services</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AIGIL">Chart</a> • <a href="https://www.screener.in/company/IGIL/">Screener</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">67.5</td><td class="num">₹438.90</td><td class="num">₹353.72–₹369.73</td><td class="num">₹327.65 / ₹428.06 (1.39:1)</td><td class="num">1.48% / 2.96%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>14</td><td><strong>INDHOTEL</strong><br/><span class="case-note-sub">Consumer Services</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AINDHOTEL">Chart</a> • <a href="https://www.screener.in/company/INDHOTEL/">Screener</a></span></td><td>CORE ALPHA (TIER_2)</td><td class="num">66.6</td><td class="num">₹890.30</td><td class="num">₹737.39–₹756.22</td><td class="num">₹687.77 / ₹893.00 (2.00:1)</td><td class="num">1.65% / 3.30%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>15</td><td><strong>DIVISLAB</strong><br/><span class="case-note-sub">Healthcare</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ADIVISLAB">Chart</a> • <a href="https://www.screener.in/company/DIVISLAB/">Screener</a></span></td><td>TACTICAL MOMENTUM (TIER_3)</td><td class="num">63.5</td><td class="num">₹11,442.00</td><td class="num">₹9,130.72–₹9,543.05</td><td class="num">₹7,791.20 / ₹10,137.23 (0.34:1)</td><td class="num">0.79% / 1.57%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>16</td><td><strong>APLAPOLLO</strong><br/><span class="case-note-sub">Industrials</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AAPLAPOLLO">Chart</a> • <a href="https://www.screener.in/company/APLAPOLLO/">Screener</a></span></td><td>TACTICAL MOMENTUM (TIER_4)</td><td class="num">62.7</td><td class="num">₹2,251.60</td><td class="num">₹2,128.27–₹2,161.21</td><td class="num">₹1,960.00 / ₹2,500.00 (1.68:1)</td><td class="num">1.00% / 2.00%</td><td><span class="verdict verdict-watch">MONITOR ONLY PRE MONOGRAPH</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>17</td><td><strong>CNL</strong><br/><span class="case-note-sub">Technology distribution and brand licensing — IT, consumer electronics, surveillance and enterprise networking in India</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3ACNL">Chart</a> • <a href="https://www.screener.in/company/CNL/">Screener</a> • <a href="../blogs/IN/CNL_dossier.html">Monograph</a></span></td><td>TACTICAL MOMENTUM (TIER_0)</td><td class="num">54.4</td><td class="num">₹1,458.40</td><td class="num">₹1,184.30–₹1,297.52</td><td class="num">₹913.79 / ₹1,351.93 (0.14:1)</td><td class="num">0.00% / 0.00%</td><td><span class="verdict verdict-exit">REJECTED BY DOSSIER</span></td><td class="num">0 sh (₹0.00)</td></tr><tr><td>18</td><td><strong>XPROINDIA</strong><br/><span class="case-note-sub">Industrials / Specialty Polymer Films (capacitor-grade dielectric film, coextruded sheets)</span><br/><span class="case-note-sub"><a href="https://www.tradingview.com/chart/?symbol=NSE%3AXPROINDIA">Chart</a> • <a href="https://www.screener.in/company/XPROINDIA/">Screener</a> • <a href="../blogs/IN/XPROINDIA_dossier.html">Monograph</a></span></td><td>CORE ALPHA (TIER_0)</td><td class="num">44.0</td><td class="num">₹1,190.10</td><td class="num">₹620.00–₹660.00</td><td class="num">₹560.00 / ₹811.00 (1.51:1)</td><td class="num">0.00% / 0.00%</td><td><span class="verdict verdict-exit">REJECTED BY DOSSIER</span></td><td class="num">0 sh (₹0.00)</td></tr></tbody>
+</table></div>
+<p>Scoring all 18 non-held candidates on our unified 100-point rubric funds 0 immediate starter position(s) worth ₹0.00. We also stage 5 resting support alert band(s) on vetted Stage 2 monographs that sit extended above buy zones today. Pre-monograph shortlist monitors, rejected dossiers, and Stage 3 or Stage 4 pullbacks stay deferred so cash never chases weak setups, flowing directly into Chapter 5 below.</p>
+<div class="callout callout-rule triggers"><div class="callout-title">50/50 Starter &amp; Proof-Add Triggers</div><p>If a resting monograph challenger pulls back into its support band above with daily RSI(14) holding above 40 and intact volume structure, deploy the 50% Starter Tranche; never deploy the second 50% Proof Add unless Tranche 1 is up at least +1.0R in sideways tapes (+0.75R in broad uptrends) so your combined stop moves to breakeven.</p></div>
+</section>
+<section class="chapter book-chapter" id="chapter5">
+<h2>Chapter 5: Master Capital Reallocation &amp; Reconciled Money Bridge</h2>
+<p>Every portfolio plan stands or falls on exact accounting. Entering today's review, Zerodha holds ₹3,722,869.05 in 18 stocks (86.63%) and ₹574,581.75 in cash (13.37%), totaling ₹4,297,450.80. Our 6 Phase 1 actions—full exits in RNITAI (₹572,715.00), TANFACIND (₹234,458.00), and JYOTICNC (₹107,310.00) plus trims in SEDEMAC (₹312,910.00), ASTRAMICRO (₹153,315.00), and LAURUSLABS (₹36,360.00)—free ₹1,417,068.00 (32.97% of net worth).</p>
+<p>Because zero challengers sit inside non-extended buy zones at Friday's close, ₹0.00 goes into market buys today. Target equities settle at ₹2,305,801.05 (53.66% across 12 active stocks plus ₹11,544.55 in 3 tracking stubs). Target cash rises to ₹1,991,649.75 (46.34%, well above our 12.0% floor), reconciling to ₹4,297,450.80 (100.00%) with ₹0.00 drift.</p>
+<p>Once you execute these 6 sales in Zerodha, every retained line lands inside our ±1.25% deadband. Convergence jumps from 67.0% today to 100.0% (0 trades) on your next rerun unless a stop hits or a support alert fills, leading into Chapter 6.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Master Capital Reallocation &amp; 100.00% Reconciled Money Bridge</caption>
+<thead><tr><th>Asset / Position</th><th>Sleeve</th><th class="num">Current (₹)</th><th class="num">Current Wt</th><th class="num">Target (₹)</th><th class="num">Target Wt</th><th class="num">Delta (₹)</th><th class="num">Delta Wt</th><th>Mandate</th></tr></thead>
+<tbody><tr><td><strong>SEDEMAC</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹625,820.00</td><td class="num">14.56%</td><td class="num">₹312,910.00</td><td class="num">7.28%</td><td class="num">₹-312,910.00</td><td class="num">-7.28%</td><td>TRIM (TRIM OVERWEIGHT)</td></tr><tr><td><strong>RNITAI</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹572,715.00</td><td class="num">13.33%</td><td class="num">₹0.00</td><td class="num">0.00%</td><td class="num">₹-572,715.00</td><td class="num">-13.33%</td><td>EXIT</td></tr><tr><td><strong>ASTRAMICRO</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹306,630.00</td><td class="num">7.14%</td><td class="num">₹153,315.00</td><td class="num">3.57%</td><td class="num">₹-153,315.00</td><td class="num">-3.57%</td><td>TRIM (TRIM INTO STRENGTH)</td></tr><tr><td><strong>NETWEB</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹306,322.60</td><td class="num">7.13%</td><td class="num">₹306,322.60</td><td class="num">7.13%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>TDPOWERSYS</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹299,648.50</td><td class="num">6.97%</td><td class="num">₹299,648.50</td><td class="num">6.97%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>TARIL</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹267,580.00</td><td class="num">6.23%</td><td class="num">₹267,580.00</td><td class="num">6.23%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>APARINDS</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹264,006.00</td><td class="num">6.14%</td><td class="num">₹264,006.00</td><td class="num">6.14%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>TANFACIND</strong></td><td>CORE ALPHA</td><td class="num">₹234,458.00</td><td class="num">5.46%</td><td class="num">₹0.00</td><td class="num">0.00%</td><td class="num">₹-234,458.00</td><td class="num">-5.46%</td><td>EXIT</td></tr><tr><td><strong>AFCOM</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹181,884.00</td><td class="num">4.23%</td><td class="num">₹181,884.00</td><td class="num">4.23%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>AJMERA</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹173,264.00</td><td class="num">4.03%</td><td class="num">₹173,264.00</td><td class="num">4.03%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>MANORAMA</strong></td><td>CORE ALPHA</td><td class="num">₹168,648.50</td><td class="num">3.92%</td><td class="num">₹168,648.50</td><td class="num">3.92%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / TRAIL</td></tr><tr><td><strong>JYOTICNC</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹107,310.00</td><td class="num">2.50%</td><td class="num">₹0.00</td><td class="num">0.00%</td><td class="num">₹-107,310.00</td><td class="num">-2.50%</td><td>EXIT</td></tr><tr><td><strong>CYIENT</strong></td><td>TACTICAL MOMENTUM</td><td class="num">₹100,545.90</td><td class="num">2.34%</td><td class="num">₹100,545.90</td><td class="num">2.34%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / HARD STOP</td></tr><tr><td><strong>LAURUSLABS</strong></td><td>CORE ALPHA</td><td class="num">₹75,144.00</td><td class="num">1.75%</td><td class="num">₹38,784.00</td><td class="num">0.90%</td><td class="num">₹-36,360.00</td><td class="num">-0.85%</td><td>TRIM (TRIM INTO STRENGTH)</td></tr><tr><td><strong>AUROPHARMA</strong></td><td>CORE ALPHA</td><td class="num">₹27,348.00</td><td class="num">0.64%</td><td class="num">₹27,348.00</td><td class="num">0.64%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>HOLD / TRAIL</td></tr><tr><td><strong>TRACKING (3 stubs: MARINE, SSWL, KROSS)</strong></td><td>TRACKING</td><td class="num">₹11,544.55</td><td class="num">0.27%</td><td class="num">₹11,544.55</td><td class="num">0.27%</td><td class="num">₹+0.00</td><td class="num">+0.00%</td><td>IGNORED IN SLOT COUNT</td></tr><tr><td><strong>CASH &amp; LIQUID BUFFER</strong></td><td>CASH</td><td class="num">₹574,581.75</td><td class="num">13.37%</td><td class="num">₹1,991,649.75</td><td class="num">46.34%</td><td class="num">₹+1,417,068.00</td><td class="num">+32.97%</td><td>RESERVE FLOOR (12.0% MIN)</td></tr><tr><td><strong>TOTAL PORTFOLIO NET WORTH</strong></td><td><strong>ALL SLEEVES</strong></td><td class="num"><strong>₹4,297,450.80</strong></td><td class="num"><strong>100.00%</strong></td><td class="num"><strong>₹4,297,450.80</strong></td><td class="num"><strong>100.00%</strong></td><td class="num"><strong>₹0.00</strong></td><td class="num"><strong>0.00%</strong></td><td><strong>RECONCILED (67.0% CONVERGED)</strong></td></tr></tbody>
+</table></div>
+<p>Every rupee in the Master Money Bridge reconciles to ₹4,297,450.80 across both current and target columns. Current holdings plus cash equal 100.00%, and target holdings plus reserve cash equal 100.00% with ₹0.00 drift. Phase 1 sales free ₹1,417,068.00 to supplement our ₹574,581.75 starting cash, fund ₹0.00 of disciplined additions, and hold ₹1,991,649.75 (46.34%) in reserve. Read the two right-hand columns as the plan of record: every current line we keep holds its exact rupee value, every line we trim shows the precise freed cash, and the final cash row sits well above our 12.0% regime floor. Join that reconciled pool to Section 5.1's running-balance waterfall and stress tests below to see how the whole reset is self-funded. Against that risk, our 12 retained base-case targets sum to ₹+316,762.50 (+7.37% of net worth), a 1.05:1 aggregate reward-to-stop ratio; the per-line contributions (for example AJMERA +₹80,236.00, TDPOWERSYS +₹85,751.50, SEDEMAC ₹-7,910.00, ASTRAMICRO ₹-16,515.00) reconcile line by line to each Section 2.1 case note.</p>
+<h3>5.1 Step-by-Step Cash Waterfall &amp; Downside Stress Scenarios</h3>
+<p>Walking the cash ledger step by step proves that our risk reset needs zero margin debt. We start with ₹574,581.75 (13.37% of net worth) in Zerodha cash. Three full exits add ₹572,715.00 from RNITAI, ₹234,458.00 from TANFACIND, and ₹107,310.00 from JYOTICNC. Three partial trims add ₹312,910.00 from SEDEMAC, ₹153,315.00 from ASTRAMICRO, and ₹36,360.00 from LAURUSLABS. Settled cash rises by ₹1,417,068.00 to ₹1,991,649.75 (46.34% of net worth). Three stress tests confirm our safety margin. First, if all 12 retained stops hit at once, loss equals ₹301,251.30 (7.01% vs our 8.5% cap). Second, a 10.0% Nifty 50 drop at 0.68 beta implies roughly a 3.65% (₹156,856.95) mark-to-market dip before stops fire. Third, if zero support alerts fill, ₹1,991,649.75 waits with zero decay and covers ~₹289,149.00 of top starter alerts.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Step-by-Step Cash Waterfall (Running Liquidity Balance)</caption>
+<thead><tr><th>Waterfall Step</th><th>Transaction Detail</th><th class="num">Cash Flow (₹)</th><th class="num">Running Cash (₹)</th></tr></thead>
+<tbody><tr><td>Starting Broker Cash</td><td>Settled cash balance</td><td class="num">₹0.00</td><td class="num"><strong>₹574,581.75</strong></td></tr><tr><td>+ EXIT (RNITAI)</td><td>Exit 6500 sh @ ₹88.11</td><td class="num">+₹572,715.00</td><td class="num">₹1,147,296.75</td></tr><tr><td>+ TRIM (TRIM OVERWEIGHT) (SEDEMAC)</td><td>Trim 100 sh @ ₹3,129.10</td><td class="num">+₹312,910.00</td><td class="num">₹1,460,206.75</td></tr><tr><td>+ EXIT (TANFACIND)</td><td>Exit 70 sh @ ₹3,349.40</td><td class="num">+₹234,458.00</td><td class="num">₹1,694,664.75</td></tr><tr><td>+ TRIM (TRIM INTO STRENGTH) (ASTRAMICRO)</td><td>Trim 90 sh @ ₹1,703.50</td><td class="num">+₹153,315.00</td><td class="num">₹1,847,979.75</td></tr><tr><td>+ EXIT (JYOTICNC)</td><td>Exit 100 sh @ ₹1,073.10</td><td class="num">+₹107,310.00</td><td class="num">₹1,955,289.75</td></tr><tr><td>+ TRIM (TRIM INTO STRENGTH) (LAURUSLABS)</td><td>Trim 15 sh @ ₹2,424.00</td><td class="num">+₹36,360.00</td><td class="num">₹1,991,649.75</td></tr><tr><td><strong>Ending Target Cash Reserve</strong></td><td><strong>Floor 12.0% of Net Worth</strong></td><td class="num"><strong>₹+1,417,068.00</strong></td><td class="num"><strong>₹1,991,649.75 (46.34%)</strong></td></tr></tbody>
+</table></div>
+<p>Tracing the running cash balance from ₹574,581.75 to ₹1,991,649.75 shows that Phase 1 sales fortify our liquidity immediately without relying on optimistic fills. Open portfolio heat drops from 13.41% today to 7.01% after execution (₹301,251.30 if every retained stop hits), keeping worst-case stop-out loss below our 8.5% ceiling. Treat that 7.01% as pre-gap and pre-slippage, however: our Section 2.2 rule evaluates stops on completed daily or weekly closes (exiting only with RSI(14) below 42, or the following session on explicit hard-stop lines), and our two least liquid Phase 1 exits (RNITAI at 0.61x and TANFACIND at 0.20x average volume) can gap through their limit floors. That fully reconciled ₹1,991,649.75 reserve backs every sequenced advisory recommendation in Chapter 6 next.</p>
+</section>
+<section class="chapter book-chapter" id="chapter6">
+<h2>Chapter 6: 3-Phase Execution Orders, Broker Routing &amp; Dossier Queue</h2>
+<p>Clean execution in Indian mid- and micro-caps requires patience around opening spreads. Treat every ticket in Chapter 6 as an advisory recommendation rather than an automatic broker order. Check live NSE/BSE order-book depth after 09:30 IST, especially on BSE-listed RNITAI (6,500 shares), AFCOM, and TANFACIND. Use limit orders within ~1.0% of last close or slice larger lots across morning volume.</p>
+<p>After Phase 1 sales settle, set Zerodha GTT alerts for our 5 Phase 2B support bands (YASHHV, SAILIFE, GREAVESCOT, PROV, KROSS—valid for 14 days) and our 12 holding stops. Evaluate stops on completed daily or weekly closes under our Undercut-and-Reclaim rule so intraday wicks do not shake you out. Remember that overnight earnings or news gaps can still open below stated stop prices.</p>
+<p>Section 6.1 confirms a major milestone: our Dossier Debt Queue holds 0 stocks (₹0.00 un-underwritten risk). Every rupee in Zerodha is now backed by a 10-chapter monograph. Upcoming company_report runs can focus on fresh watchlist names (RPEL, TITAN, GNA, INDIAGLYCO, JIOFIN) and legacy shortlist refreshes, leading into Chapter 7.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Sequenced Advisory Execution Recommendations, Alert Bands &amp; Broker Routing</caption>
+<thead><tr><th>Execution Phase</th><th>Instrument</th><th class="num">Advisory Size</th><th class="num">Reference / Alert Band</th><th class="num">Protective Stop</th><th class="num">Cash Impact</th><th>Routing &amp; Validity</th></tr></thead>
+<tbody><tr><td>Phase 1: Advisory Trim</td><td><strong>SEDEMAC</strong></td><td class="num">Trim 100 sh</td><td class="num">Session / ≥ ₹3,097.81</td><td class="num">₹2,696.82</td><td class="num">₹312,910.00 freed</td><td>Route via Zerodha</td></tr><tr><td>Phase 1: Advisory Exit</td><td><strong>RNITAI</strong></td><td class="num">Exit 6500 sh</td><td class="num">Session / ≥ ₹87.23</td><td class="num">₹69.39</td><td class="num">₹572,715.00 freed</td><td>Route via Zerodha</td></tr><tr><td>Phase 1: Advisory Trim</td><td><strong>ASTRAMICRO</strong></td><td class="num">Trim 90 sh</td><td class="num">Session / ≥ ₹1,686.46</td><td class="num">₹1,539.80</td><td class="num">₹153,315.00 freed</td><td>Route via Zerodha</td></tr><tr><td>Phase 1: Advisory Exit</td><td><strong>TANFACIND</strong></td><td class="num">Exit 70 sh</td><td class="num">Session / ≥ ₹3,315.91</td><td class="num">₹2,773.31</td><td class="num">₹234,458.00 freed</td><td>Route via Zerodha</td></tr><tr><td>Phase 1: Advisory Exit</td><td><strong>JYOTICNC</strong></td><td class="num">Exit 100 sh</td><td class="num">Session / ≥ ₹1,062.37</td><td class="num">₹630.00</td><td class="num">₹107,310.00 freed</td><td>Route via Zerodha</td></tr><tr><td>Phase 1: Advisory Trim</td><td><strong>LAURUSLABS</strong></td><td class="num">Trim 15 sh</td><td class="num">Session / ≥ ₹2,399.76</td><td class="num">₹1,684.88</td><td class="num">₹36,360.00 freed</td><td>Route via Zerodha</td></tr><tr><td>Phase 2B: Advisory Support Alert</td><td><strong>YASHHV</strong></td><td class="num">Up to 69 sh</td><td class="num">₹1,085.00–₹1,145.00</td><td class="num">₹990.00</td><td class="num">Conditional watch</td><td>Zerodha (14-day review)</td></tr><tr><td>Phase 2B: Advisory Support Alert</td><td><strong>SAILIFE</strong></td><td class="num">Up to 31 sh</td><td class="num">₹1,420.00–₹1,540.00</td><td class="num">₹1,290.00</td><td class="num">Conditional watch</td><td>Zerodha (14-day review)</td></tr><tr><td>Phase 2B: Advisory Support Alert</td><td><strong>GREAVESCOT</strong></td><td class="num">Up to 355 sh</td><td class="num">₹205.02–₹211.26</td><td class="num">₹197.60</td><td class="num">Conditional watch</td><td>Zerodha (14-day review)</td></tr><tr><td>Phase 2B: Advisory Support Alert</td><td><strong>PROV</strong></td><td class="num">Up to 28 sh</td><td class="num">₹1,850.00–₹1,875.00</td><td class="num">₹1,692.11</td><td class="num">Conditional watch</td><td>Zerodha (14-day review)</td></tr><tr><td>Phase 2B: Advisory Support Alert</td><td><strong>KROSS</strong></td><td class="num">Up to 123 sh</td><td class="num">₹268.00–₹282.00</td><td class="num">₹212.00</td><td class="num">Conditional watch</td><td>Zerodha (14-day review)</td></tr></tbody>
+</table></div>
+<p>All rows above are advisory portfolio recommendations rather than automated broker orders: verify live bid-ask liquidity at market open, note that overnight earnings or regulatory gaps can open below stated stop levels, and review any unfilled Phase 2B support alerts after 14 calendar days. Executing Phase 1 sales before staging Phase 2 entries ensures settled cash covers every purchase while preserving our 12.0% reserve floor; Section 6.1 below audits monograph underwriting coverage.</p>
+<h3>6.1 Dossier Underwriting Coverage &amp; Debt Queue</h3>
+<p>Real conviction comes from primary filings and cash-flow forensics, never from a chart pattern alone. Whenever an equity sits in our account without a completed 10-chapter monograph, our rulebook places it in provisional status rather than dumping a working trend or adding blind risk. Existing shares stay guarded by a ratcheted closing stop, fresh capital additions remain frozen, and research priority runs strictly from largest rupee exposure down to smallest.</p>
+<div class="table-wrap" role="region" tabindex="0"><table class="wikitable">
+<caption>Dossier Underwriting Debt Queue (Pre-Monograph Holdings Ordered by Capital at Risk)</caption>
+<thead><tr><th>Priority</th><th>Held Ticker</th><th class="num">Exposure (₹ / % NAV)</th><th>Current Stage</th><th>Governance Rule Until Monograph Publishes</th></tr></thead>
+<tbody><tr><td>1</td><td>Queue Clear (100% Covered)</td><td class="num">₹0.00 (0.00%)</td><td>All Verified</td><td>Every active and tracking holding in this account has a published 10-chapter monograph dossier</td></tr></tbody>
+</table></div>
+<p>Zero pre-monograph holdings remain in the queue above, meaning 100% of our held equity capital is now backed by primary-filing 10-chapter monographs. Research capacity can now focus on fresh watchlist challengers and quarterly filing checks. Chapter 7 next codifies the hysteresis locks and disclosures that keep this plan stable across daily reruns.</p>
+</section>
+<section class="chapter book-chapter" id="chapter7">
+<h2>Chapter 7: Convergence, Hysteresis Locks &amp; Monitoring Contract</h2>
+<p>To ensure short-term reruns never whipsaw your orders, our anchor plan is saved in data/allocations/IN.json. Three deterministic rules lock stability across any 5-day rerun window. First, a ±2.5% price hysteresis band keeps borderline calls steady during normal market noise. Second, held stops ratchet upward only. Third, a ±1.25% weight deadband silences tiny nuisance trades once your 6 Phase 1 sales are done.</p>
+<p>Only three real events can override those locks right away. First is a confirmed close below a hard stop. Second is a material filing or governance failure. Third is a new Zerodha trade synced into data/accounts/IN/zerodha.transactions.jsonl via broker_transaction_sync.</p>
+<p>Methodology &amp; Data Disclosures: All closes, moving averages, RSI(14), ATR(14), and sector quadrants come from the verified 2026-11-13 NSE/BSE ledger (548 instruments, of which 545 priced cleanly, 3 non-portfolio feed errors, 0 stale, and 0 failed across every held, tracking, and challenger ticker). Cluster split note: our Industrials sector cluster holds ASTRAMICRO, TDPOWERSYS, APARINDS, and JYOTICNC, while transformer maker TARIL sits in its own Producer Manufacturing cluster. Combined, that power and industrial capex theme ran 28.98% of net worth and 4.09% of heat pre-trade and 22.91% and 2.71% post-trim, inside our 25.0% cap, though any Phase 2B starter fills in peer bushing maker YASHHV or Greaves Cotton would be sized to keep the combined theme under the cap. Holdings and ₹574,581.75 cash replay from data/accounts/IN/zerodha.transactions.jsonl (last trade 2026-11-13, --allow-stale-holdings recorded per protocol). Eight older rows in data/shortlist/IN.json (ANANDRATHI, DIVISLAB, COFORGE, APLAPOLLO, INDHOTEL, ZYDUSLIFE, IGIL, TIPSMUSIC, dated Oct 30–Nov 3) predate our 10-chapter monograph compiler and stay MONITOR_ONLY_PRE_MONOGRAPH with zero capital until refreshed. Tier provenance: YASHHV and SAILIFE carry TIER_2 conviction in their published 2026-11-13 monographs, which supersede the older Oct-Nov shortlist snapshots; the legacy eighth shortlist rows without monographs remain MONITOR_ONLY_PRE_MONOGRAPH with zero capital.</p>
+<div class="callout callout-rule triggers"><div class="callout-title">Hysteresis Override &amp; Rerun Stability Contract</div><p>If you rerun portfolio_audit within 5 calendar days without new broker trades, any holding whose price moved less than ±2.5% retains its anchored verdict unless it closes below its hard invalidation stop or enters Stage 4. Once an executed edit brings a holding within ±1.25% of its target weight, further adjustments are suppressed until a genuine fundamental or trend trigger fires.</p></div>
+</section>
+<h2 id="references">References</h2>
+<ol class="reflist">
+<li><a href="https://wealthticker.in/fii-dii-data">FIIs net bought ₹5,736.55 crore</a></li>
+<li><a href="https://strota.in/fii-dii-data">₹79,302 crore</a></li>
+<li><a href="https://flashfinance.news/market-intelligence/participants/">NSE participant OI</a></li>
+<li><a href="https://justticks.in/participant-data">JustTicks</a></li>
+<li><a href="https://flashfinance.news/market-intelligence/option-walls/">Nifty 17 Nov option walls</a></li>
+<li><a href="https://strota.in/nifty-option-chain">Strota</a></li>
+<li><a href="https://flashfinance.news/market-intelligence/delivery/">NSE cash delivery</a></li>
+<li><a href="https://marketping.in/news/sedemac-mechatronics-q2-fy27-results">Q2 FY27 standalone sales</a></li>
+<li><a href="https://marketping.in/news/rnit-ai-solutions-q2-fy27-results">Q2 FY27 standalone sales</a></li>
+<li><a href="https://www.investywise.com/astra-microwave-products-ltd-q2-h1-fy27-unaudited-financial-results/">12 Nov 2026 Q2 results</a></li>
+<li><a href="https://www.capket.com/business/netweb-q2-fy27-revenue-profit-ai-systems-results-2026/">Q2 FY27 revenue</a></li>
+<li><a href="https://marketping.in/news/td-power-systems-q2-fy27-results">Q2 FY27 revenue</a></li>
+<li><a href="https://flashfinance.news/market-intelligence/bulk-block-deals/">NSE bulk data</a></li>
+<li><a href="https://www.stockfin.ai/news/TARIL/2026-10-21/financial-results">Q2 FY27 sales</a></li>
+<li><a href="https://forgeup.in/filings/apar-industries-ltd-fundraise-qip-rights-fpo-29-oct-2026">29 Oct 2026</a></li>
+<li><a href="https://www.multibagg.ai/market-pulse/articles/tanfac-q2-revenue-margin-compression-ppt-cmw013bap009f2vpecn8vdwo8">Q2 FY27</a></li>
+<li><a href="https://www.capitalmarket.com/markets/news/corporate-results/afcom-holdings-standalone-net-profit-rises-80-27-in-the-september-2026-quarter/1749342">Q2 FY27 standalone sales</a></li>
+<li><a href="https://www.stockfin.ai/news/AJMERA/2026-11-03/financial-results">H1 FY27 revenue</a></li>
+<li><a href="https://www.investywise.com/manorama-industries-limited-investor-update-on-q2-h1-fy27-financial-results/">Q2 FY27 sales</a></li>
+<li><a href="https://www.5paisa.com/blog/jyoti-cnc-q2-fy27-results-order-book-5082-crore">₹5,082 Cr Sep-2026 backlog</a></li>
+<li><a href="https://www.kotakneo.com/news/stocks/cyient-share-price-and-q2-fy-27-results/">Q2 FY27</a></li>
+<li><a href="https://guidance.fyi/company/laurus-labs/q2-fy27/">Q2 FY27 revenue</a></li>
+<li><a href="https://www.arthneeti.com/insights/aurobindo-pharma-ltd-q2-fy27-earnings">Q2 FY27 PAT</a></li>
+<li><a href="https://www.multibagg.ai/market-pulse/articles/marine-electricals-q2-fy27-results-cmw2qaa4i00il2mtky5rg3mbt">MARINE</a> (retrieved 2026-11-04)</li>
+<li><a href="https://univest.in/blogs/steel-strips-wheels-q2-results-fy27-pat-117-crore">SSWL</a> (retrieved 2026-10-23)</li>
+<li><a href="https://quartrly.in/discover/pitches/kross-limited-q2-fy27">KROSS</a> (retrieved 2026-10-19)</li>
+<li><a href="https://www.screener.in/company/SEDEMAC/">SEDEMAC</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/517286/">RNITAI</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/ASTRAMICRO/">ASTRAMICRO</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/NETWEB/">NETWEB</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/TDPOWERSYS/">TDPOWERSYS</a> (retrieved 2026-10-31)</li>
+<li><a href="https://www.screener.in/company/TARIL/">TARIL</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/APARINDS/">APARINDS</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/TANFACIND/">TANFACIND</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/544224/">AFCOM</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/AJMERA/">AJMERA</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/MANORAMA/">MANORAMA</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/JYOTICNC/">JYOTICNC</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/CYIENT/">CYIENT</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/LAURUSLABS/">LAURUSLABS</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/AUROPHARMA/">AUROPHARMA</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/MARINE/">MARINE</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/SSWL/">SSWL</a> (retrieved 2026-09-30)</li>
+<li><a href="https://www.screener.in/company/KROSS/">KROSS</a> (retrieved 2026-10-31)</li>
+<li><a href="https://valueeducator.com/small-cap-stocks/yash-highvoltage-bushing-maker-order-book-rip-plant">YASHHV</a> (retrieved 2026-10-22)</li>
+<li><a href="https://www.investywise.com/sai-life-sciences-investor-presentation-q2-fy27-results/">SAILIFE</a> (retrieved 2026-11-06)</li>
+<li><a href="https://www.investywise.com/greaves-announces-unaudited-financial-results-for-q2-fy27/">GREAVESCOT</a> (retrieved 2026-10-29)</li>
+</ol></main><aside class="desk-contents" aria-label="Report contents" hidden><p class="desk-contents-label">CONTENTS</p><ol></ol></aside></div>
+<footer class="desk-footer"><span>Portfolio Research Desk &bull; Curated by Rajasekhar Mekala</span><a href="#top">Back to top &uarr;</a></footer>
+<script data-report-desk>
+(() => {
+  'use strict';
+  const report = document.querySelector('main.report');
+  if (!report) return;
+  const headings = [...report.querySelectorAll('h2')];
+  const sidebar = document.querySelector('.desk-contents');
+  const list = sidebar.querySelector('ol');
+  const picker = document.querySelector('#desk-section');
+  const links = new Map();
+  headings.forEach((heading, index) => {
+    if (!heading.id) {
+      if (heading.parentElement.id) heading.id = `${heading.parentElement.id}-heading`;
+      else heading.id = `chapter-${index + 1}`;
+      while (document.querySelectorAll(`[id="${CSS.escape(heading.id)}"]`).length > 1) heading.id += '-section';
+    }
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${encodeURIComponent(heading.id)}`;
+    link.textContent = heading.textContent.trim();
+    item.append(link);
+    list.append(item);
+    links.set(heading.id, link);
+    picker.add(new Option(link.textContent, heading.id));
+  });
+  if (headings.length) {
+    sidebar.hidden = false;
+    picker.hidden = false;
+  }
+  picker.addEventListener('change', () => {
+    const heading = document.getElementById(picker.value);
+    if (!heading) return;
+    heading.scrollIntoView({block: 'start'});
+    heading.tabIndex = -1;
+    heading.focus({preventScroll: true});
+    history.replaceState(null, '', `#${encodeURIComponent(heading.id)}`);
+  });
+  report.querySelectorAll('table:not(.infobox)').forEach(table => {
+    let wrapper = table.parentElement;
+    if (!wrapper.classList.contains('table-wrap')) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      table.before(wrapper);
+      wrapper.append(table);
+    }
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'region');
+    wrapper.setAttribute('aria-label', table.caption?.textContent.trim() || 'Research data table');
+  });
+  const print = document.querySelector('#desk-print');
+  print.hidden = false;
+  print.addEventListener('click', () => window.print());
+  const progress = document.querySelector('.desk-progress');
+  progress.hidden = false;
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const distance = document.documentElement.scrollHeight - innerHeight;
+    progress.value = distance > 0 ? Math.max(0, Math.min(100, scrollY / distance * 100)) : 100;
+    let active = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top > 140) break;
+      active = heading;
+    }
+    links.forEach((link, identifier) => {
+      if (identifier === active?.id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (active) picker.value = active.id;
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
+  addEventListener('load', schedule, {once: true});
+  update();
+
+  // Interactive Audiobook / Narrative Reader Bar (activates on *_book.html pages)
+  const audioBar = document.querySelector('.book-audio-bar');
+  if (audioBar && 'speechSynthesis' in window) {
+    const playBtn = audioBar.querySelector('[data-audio-action="play"]');
+    const prevBtn = audioBar.querySelector('[data-audio-action="prev"]');
+    const nextBtn = audioBar.querySelector('[data-audio-action="next"]');
+    const stopBtn = audioBar.querySelector('[data-audio-action="stop"]');
+    const rateSel = audioBar.querySelector('[data-audio-rate]');
+    const statusEl = audioBar.querySelector('[data-audio-status]');
+    const paragraphs = [...report.querySelectorAll('.book-chapter p')];
+    let idx = 0;
+    let playing = false;
+
+    const clearHighlight = () => paragraphs.forEach(p => p.classList.remove('is-speaking'));
+    const speakCurrent = () => {
+      if (!playing || idx < 0 || idx >= paragraphs.length) {
+        playing = false;
+        clearHighlight();
+        if (playBtn) playBtn.textContent = 'Play Audiobook';
+        if (statusEl) statusEl.textContent = 'Ready to listen';
+        return;
+      }
+      speechSynthesis.cancel();
+      clearHighlight();
+      const para = paragraphs[idx];
+      para.classList.add('is-speaking');
+      para.scrollIntoView({block: 'center', behavior: 'smooth'});
+      const sec = para.closest('.book-chapter');
+      const chTitle = sec?.querySelector('h2')?.textContent.trim() || 'Book';
+      if (statusEl) statusEl.textContent = `Reading (${idx + 1}/${paragraphs.length}) • ${chTitle.slice(0, 48)}`;
+      const utter = new SpeechSynthesisUtterance(para.textContent.trim());
+      utter.rate = parseFloat(rateSel?.value || '1.0') || 1.0;
+      utter.onend = () => {
+        if (!playing) return;
+        idx += 1;
+        speakCurrent();
+      };
+      speechSynthesis.speak(utter);
+    };
+
+    playBtn?.addEventListener('click', () => {
+      if (playing) {
+        playing = false;
+        speechSynthesis.cancel();
+        playBtn.textContent = 'Resume Audiobook';
+        if (statusEl) statusEl.textContent = `Paused at paragraph ${idx + 1}/${paragraphs.length}`;
+      } else {
+        playing = true;
+        playBtn.textContent = 'Pause';
+        speakCurrent();
+      }
+    });
+    prevBtn?.addEventListener('click', () => {
+      idx = Math.max(0, idx - 1);
+      if (playing) speakCurrent();
+    });
+    nextBtn?.addEventListener('click', () => {
+      idx = Math.min(paragraphs.length - 1, idx + 1);
+      if (playing) speakCurrent();
+    });
+    stopBtn?.addEventListener('click', () => {
+      playing = false;
+      idx = 0;
+      speechSynthesis.cancel();
+      clearHighlight();
+      if (playBtn) playBtn.textContent = 'Play Audiobook';
+      if (statusEl) statusEl.textContent = 'Ready to listen';
+    });
+    rateSel?.addEventListener('change', () => {
+      if (playing) speakCurrent();
+    });
+  }
+})();
+
+</script></body></html>

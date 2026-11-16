@@ -698,7 +698,7 @@ def sibling_items(parsed, sibling, facts, only_sids=None):
     return items
 
 
-def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, snapshots_path=None):
+def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, snapshots_path=None, allocation_path=None):
     py = sys.executable
     results = {}
 
@@ -717,6 +717,10 @@ def run_checks(kind, report, facts_path, research_path, cache_dir, allow_stale, 
         cmd = [py, "scripts/validate_report.py", "--report", report, "--kind", vkind]
         if facts_path:
             cmd += ["--facts", facts_path]
+        if research_path:
+            cmd += ["--research", research_path]
+        if allocation_path:
+            cmd += ["--allocation", allocation_path]
         run("validate_report", cmd)
     cmd = [py, "scripts/citation_check.py", report]
     if research_path:
@@ -923,7 +927,7 @@ def build(args):
     if not args.skip_checks:
         rpath = args.research
         checks = run_checks(kind, report, args.facts, rpath, args.cache_dir, args.allow_stale_asof,
-                            getattr(args, "snapshots", None))
+                            getattr(args, "snapshots", None), alloc_extra)
         for name, r in checks.items():
             if not r["ok"]:
                 for line in r["lines"][:25]:

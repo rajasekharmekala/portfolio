@@ -268,10 +268,13 @@ def main():
     is_dossier = args.report.endswith("_dossier.html") or bool(
         soup.find("meta", attrs={"name": "report-kind", "content": "dossier"})
     )
-    eff_grade = max(args.max_grade, 15.0) if is_dossier else args.max_grade
+    is_desk_report = is_dossier or bool(
+        soup.find("meta", attrs={"name": "report-design", "content": "research-desk-v1"})
+    )
+    eff_grade = max(args.max_grade, 15.0) if is_desk_report else args.max_grade
 
     errors = []
-    check_grade(soup, eff_grade, errors, prose_only=is_dossier)
+    check_grade(soup, eff_grade, errors, prose_only=is_desk_report)
     check_glossary(soup, glossary, errors)
     check_bare_tables(soup, errors)
     check_estimates(soup, errors)

@@ -563,6 +563,59 @@ body {
   margin: 0.25rem 0;
 }
 
+/* Archival Ledger Tables inside Masterclass Book PDF */
+.mc-table-wrap {
+  margin: 1.4rem 0 1.65rem;
+  page-break-inside: auto;
+}
+.mc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--mc-ink);
+  background: #ffffff;
+  border: 1px solid var(--mc-rule);
+}
+.mc-table caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mc-navy);
+  padding: 0 0 0.4rem;
+}
+.mc-table th {
+  background: var(--mc-navy);
+  color: #ffffff;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.42rem 0.5rem;
+  border: 1px solid var(--mc-navy);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+}
+.mc-table td {
+  padding: 0.38rem 0.5rem;
+  border: 1px solid var(--mc-rule);
+  vertical-align: top;
+}
+.mc-table tr:nth-child(even) td {
+  background: var(--mc-paper-alt);
+}
+.mc-table th.num, .mc-table td.num {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+}
+.mc-table tr {
+  page-break-inside: avoid;
+}
+
 /* Endnotes & Colophon */
 .mc-notes {
   padding-top: 2rem;
@@ -970,6 +1023,9 @@ def render_portfolio_book_html(
             ch.get("book_callouts", []),
             is_first_block=True,
         )
+        for tbl_html in ch.get("book_tables", []):
+            if tbl_html:
+                body_blocks.append(f'<div class="mc-table-wrap">{tbl_html}</div>')
         for sub in ch.get("book_subsections", []):
             if sub.get("title"):
                 body_blocks.append(f"<h3>{html.escape(_clean_audio_text(sub['title']))}</h3>")
@@ -980,6 +1036,9 @@ def render_portfolio_book_html(
                     is_first_block=False,
                 )
             )
+            for stbl in sub.get("tables", []):
+                if stbl:
+                    body_blocks.append(f'<div class="mc-table-wrap">{stbl}</div>')
         chapter_sections.append(
             f'<section class="chapter book-chapter mc-chapter" id="{html.escape(cid)}" data-audio-chapter="{idx}">\n'
             f'  <div class="mc-chapter-kicker">{html.escape(roman)}</div>\n'
