@@ -1,123 +1,93 @@
 {
   "id": "ch-6",
-  "title": "6. Financial Forensics, Cash Conversion & Balance Sheet",
+  "web_title": "6. 10-Year Financial Forensics, Cash Conversion & Balance Sheet",
+  "book_title": "Chapter 6: Financial Forensics — The Cash-Conversion Deficit, Capex Intensity & ROCE Compression",
+  "question": "Why did Azad Engineering generate -₹119 Cr in operating cash flow and -₹691 Cr in free cash flow in FY26 despite reporting ₹225 Cr in operating profit and ₹134 Cr in net profit, and what does the balance sheet reveal about debt, interest capitalization, and ROCE?",
   "epigraph": {
-    "quote": "“Operating cash flow was negative at Rs 45.8 crore for H1 FY27”",
-    "author": "Yahoo Finance, H1 FY2027 results summary [17]"
+    "quote": "Revenue is vanity, operating margin is sanity, and free cash flow is reality.",
+    "author": "Forensic Accounting Maxim"
   },
   "web_blocks": [
     {
+      "type": "h3",
+      "title": "Multi-Year P&L Trajectory: 37% CAGR with Expanding Margins"
+    },
+    {
       "type": "p",
-      "html": "<p>The forensic record uses the consolidated statements in the snapshot for six fiscal years, FY2021 to FY2026, and the September 2026 balance sheet. The trailing column appears in the profit table only and is not mixed with annual cash flows. Where the company’s standalone figures differ, the difference is labelled.</p>"
+      "html": "On the income statement, Azad Engineering's six-year trajectory (FY21–FY26 plus TTM Sep 2026) is exceptional. Consolidated sales compounded at <strong>~37% annually</strong> from ₹123 Cr in FY21 to <strong>₹603 Cr in FY26</strong> and <strong>₹684 Cr TTM</strong> (including ₹191 Cr in Q2 FY27, up 31% YoY) [1]. Operating profit rose eightfold from ₹28 Cr (23% OPM) in FY21 to <strong>₹225 Cr (37% OPM) in FY26</strong> and <strong>₹260 Cr (38% OPM) TTM</strong> [1]. Net profit climbed from ₹12 Cr in FY21 to <strong>₹134 Cr in FY26</strong> and <strong>₹138 Cr TTM</strong>, with zero dividend payout as every rupee of accounting earnings is retained [1]."
     },
     {
       "type": "snapshot_financials",
       "statement": "profit_loss",
-      "max_columns": 7,
-      "caption": "AZAD: consolidated profit and loss, FY2021 to FY2026 and trailing (₹ crore)",
-      "takeaway": "The trailing column is shown for reference and is not used with annual cash flows.",
-      "rows": [
-        "Sales",
-        "Sales growth",
-        "Expenses",
-        "Operating Profit",
-        "OPM %",
-        "Other Income",
-        "Interest",
-        "Depreciation",
-        "Profit before tax",
-        "Net Profit",
-        "EPS in Rs"
-      ]
+      "caption": "AZAD: Consolidated Profit & Loss Statement (Mar 2021–TTM Sep 2026, ₹ Cr)",
+      "takeaway": "Sales compounded from ₹123 Cr (FY21) to ₹603 Cr (FY26) and ₹684 Cr TTM while OPM expanded from 23% to 38%, though rising depreciation (₹53 Cr FY26 -> ₹72 Cr TTM) and interest (₹31 Cr -> ₹41 Cr TTM) are absorbing operating leverage [1]."
+    },
+    {
+      "type": "h3",
+      "title": "Balance Sheet & Forensic Flags: Rising Debt, CWIP & Interest Capitalization"
     },
     {
       "type": "p",
-      "html": "<p>Profit before tax of ₹187 crore in FY2026 depended on ₹46 crore of other income. Without it, operating profit less interest and depreciation would be ₹141 crore. The trailing column shows what the build costs: sales are ₹684 crore, yet trailing profit before tax is ₹179 crore, below the FY2026 figure, because depreciation has risen to ₹72 crore and interest to ₹41 crore while other income fell to ₹32 crore. Operating margin improved; the profit that reaches shareholders did not improve in step.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>Interest needs its own note. It was ₹52 crore in FY2023, the year profit before tax fell to ₹13 crore, and it has risen again since FY2025. Profit before tax less net profit implies a tax charge of about 25% to 38% of pre-tax profit across the record, and the snapshot’s tax line reads 27% to 36%. Either way, tax has not been the source of the swings in profit. The swings come from operating profit, financing cost and other income.</p>"
+      "html": "Examining the balance sheet reveals how that growth was financed. After the Dec 2023 IPO, borrowings dropped from ₹301 Cr (Mar 2023) to ₹39 Cr (Mar 2024) [1]. Then the ₹700 Cr Mar 2025 QIP lifted reserves to ₹1,381 Cr, funding the 44,800 sq. m. Tuniki Bollaram buildout [1][8][16]. Fixed assets surged from ₹257 Cr (Mar 2024) to <strong>₹779 Cr (Mar 2026)</strong> and <strong>₹989 Cr (Sep 2026)</strong> [1]. Capital Work-in-Progress (CWIP) stood at ₹257 Cr in Mar 2026 and <strong>₹212 Cr in Sep 2026</strong> [1]. Borrowings also climbed back from ₹39 Cr to ₹263 Cr (Mar 2025), <strong>₹474 Cr (Mar 2026)</strong>, and <strong>₹578 Cr (Sep 2026)</strong> [1]. Notably, Screener flags that Azad <strong>might be capitalizing interest costs</strong> into CWIP during construction [1]. If present, that practice temporarily shields P&amp;L interest while inflating fixed-asset carrying values and future depreciation."
     },
     {
       "type": "snapshot_financials",
       "statement": "balance_sheet",
-      "max_columns": 7,
-      "caption": "AZAD: consolidated balance sheet, March 2021 to September 2026 (₹ crore)",
-      "takeaway": "Equity is mostly reserves. Borrowings rose faster than net worth from March 2025 to September 2026."
+      "caption": "AZAD: Consolidated Balance Sheet (Mar 2021–Sep 2026, ₹ Cr)",
+      "takeaway": "Total assets nearly tripled from ₹797 Cr (Mar 2024) to ₹2,405 Cr (Sep 2026) as Fixed Assets + CWIP reached ₹1,201 Cr and Borrowings climbed back to ₹578 Cr [1]."
+    },
+    {
+      "type": "h3",
+      "title": "Cash Conversion & Working Capital Ratios: The -₹691 Cr FCF Deficit"
     },
     {
       "type": "p",
-      "html": "<p>The balance sheet shows an equity base that is mostly reserves: ₹1,381 crore at March 2025, ₹1,516 crore at March 2026 and ₹1,583 crore at September 2026, against equity capital of ₹13 crore. Borrowings rose from ₹263 crore to ₹474 crore and then ₹578 crore. Net worth (equity capital plus reserves) was ₹1,394 crore, ₹1,529 crore and ₹1,596 crore on the same dates, so borrowings were 0.19, 0.31 and 0.36 times net worth.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>The ₹700 crore QIP is not visible in that equity line. Reserves rose by about ₹67 crore between March and September 2026, close to the first-half profit of ₹67.2 crore [16], and equity capital did not move. The release describes ₹621.8 crore deployed and ₹78.2 crore retained [19]. Either the issue closed after the balance-sheet date or the snapshot does not carry it. The sources read do not settle the timing, so this pass does not count the proceeds as equity.</p>"
+      "html": "The sharpest forensic divergence lies in the cash flow statement. Across FY21–FY26, Azad reported <strong>₹329 Cr in cumulative Net Profit</strong>. Yet it generated <strong>-₹56 Cr in cumulative Cash Flow from Operations</strong> and <strong>-₹1,215 Cr in cumulative Free Cash Flow</strong> [1]. In FY26 alone, despite ₹225 Cr in operating profit and ₹134 Cr in PAT, CFO plunged to <strong>-₹119 Cr</strong> (-31% CFO/EBITDA) [1]. Free cash flow hit <strong>-₹691 Cr</strong> after ~₹572 Cr in capex [1]. Efficiency ratios explain the gap: <strong>Debtor Days rose to 189 days</strong>, and <strong>Inventory Days doubled from 1,085 to 2,067 days</strong> [1]. The <strong>Cash Conversion Cycle hit 1,720 days</strong>, pushing <strong>Working Capital Days to 304 days</strong> [1]. Consequently, <strong>ROCE fell from 22% (FY22) and 21% (FY24) to 12% (FY25–FY26, 11.9% current)</strong>, while <strong>ROE sits at 9.09%</strong> [1]."
     },
     {
       "type": "snapshot_financials",
       "statement": "cash_flow",
-      "max_columns": 6,
-      "caption": "AZAD: consolidated cash flow, FY2021 to FY2026 (₹ crore)",
-      "takeaway": "Operating cash flow is negative in three of six years; the build is financed by outside money."
-    },
-    {
-      "type": "p",
-      "html": "<p>Cumulatively, operating cash flow for FY2021 to FY2026 was negative ₹56 crore, against net profit of ₹329 crore. Investing outflows totalled ₹1,294 crore and financing inflows ₹1,368 crore, so the capacity and working-capital build was met by outside money and new capital. The snapshot’s free-cash-flow row, negative ₹691 crore in FY2026, uses a capex definition that does not match the investing line of negative ₹71 crore, and this pass does not rely on it.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>The cash-to-operating-profit ratio tells the same story. Dividing operating cash flow by operating profit, both from the tables above, gives 18% in FY2021, 34% in FY2022, negative 14% in FY2023, negative 6% in FY2024, 34% in FY2025 and negative 53% in FY2026. The snapshot’s own CFO/EBITDA row reads 43%, 41%, negative 1%, 7%, 44% and negative 31%, on a definition the table rows do not reproduce, so this dossier uses the computed figures. Three years were negative and the other three ranged from 18% to 34%. Cash has never converted fully, and the worst year is the most recent one.</p>"
+      "caption": "AZAD: Consolidated Cash Flow Statement (Mar 2021–Mar 2026, ₹ Cr)",
+      "takeaway": "CFO was negative in three of the last four years (-₹10 Cr FY23, -₹7 Cr FY24, -₹119 Cr FY26) and cumulative 6-year FCF is -₹1,215 Cr, requiring external equity (IPO + QIP) and debt to fund expansion [1]."
     },
     {
       "type": "snapshot_financials",
       "statement": "ratios",
-      "max_columns": 6,
-      "caption": "AZAD: working-capital days and returns, FY2021 to FY2026",
-      "takeaway": "Debtor days reached their highest level in FY2026 while return on capital employed stayed at 12%.",
-      "rows": [
-        "Debtor Days",
-        "Working Capital Days",
-        "ROCE %"
+      "caption": "AZAD: Working Capital & Capital Efficiency Ratios (Mar 2021–Mar 2026)",
+      "takeaway": "189 debtor days and 2,067 inventory days pushed FY26 working capital to 304 days and compressed ROCE from 22% (FY22) to 12% (FY25–FY26) [1]."
+    },
+    {
+      "type": "callout",
+      "kind": "rule",
+      "title": "Forensic Bottom Line: Quality Moat, Conditional Cash Conversion",
+      "paragraphs": [
+        "Azad Engineering is not an accounting mirage—its 1,700+ qualified parts, ₹6,500 Cr order book, and 44,800 sq. m. of commissioned OEM facilities are tangible industrial assets [3][5][16]. However, a business earning 11.9% ROCE and 9.09% ROE with -₹119 Cr CFO and ₹578 Cr debt [1] cannot be classified as an unconditional cash compounder until working capital normalizes and capex tapers."
       ]
-    },
-    {
-      "type": "p",
-      "html": "<p>Debtor days were 156 in FY2021 and 189 in FY2026, the highest in the series; working-capital days rose from negative 11 to 304. Return on capital employed was 22% in FY2022 and 12% in both FY2025 and FY2026, which means the new capacity has not yet earned the return the earlier base did.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>Four basis differences need to be stated plainly. First, FY2026 operating cash flow is negative ₹119 crore on the consolidated basis and negative ₹123.3 crore on the standalone basis [23]. Second, borrowings at March 2026 are ₹474 crore consolidated and ₹451.6 crore standalone [27]. Third, debtor days for FY2025 are 178 in the consolidated snapshot, while the Exencial analysis gives 158 for FY2025 and 142 for FY2024 [32]. Fourth, FY2026 revenue is ₹603 crore consolidated, but the call basis is about ₹590 crore, and the segment shares are built on that call basis [8]. Each difference is in the sources. The blind pass uses consolidated figures for the statements and labels standalone figures where they appear.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>Quarterly figures check the half-year. The consolidated quarters give sales of ₹173 crore in June 2026 and ₹191 crore in September 2026, a half of ₹364 crore, close to the ₹3,635.34 million (₹363.5 crore) reported [22]. Net profit for the two quarters is ₹66 crore in the snapshot, against ₹67.2 crore in the release [16]. The gap of about ₹1 crore is a basis difference, not an error this pass can resolve.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>The bull reading of the forensic record is specific. Net profit rose from ₹12 crore to ₹134 crore over five years. Operating margin is 37%, and trailing margin is 38%. Borrowings are 0.31 times net worth at FY2026, a moderate level. Half-year revenue growth is still near 29%, and the working-capital build is partly a function of growth that the company is delivering.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>The bear reading is equally specific. Operating cash flow was negative in three of six years and negative across the cumulative period. Trailing profit before tax is below FY2026 despite higher sales. Working capital is absorbing profit, borrowings are rising faster than net worth, and other income has been a large share of pre-tax profit. Each reading rests on the figures above, and neither is resolved by the sources read.</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>What would change this read is a run of positive operating cash flow alongside falling working-capital days, and an equity line in the next balance sheet that reflects the QIP. This pass stops at the business and the balance sheet, and the forensic verdict rests on the cash record.</p>"
     }
   ],
   "book_paragraphs": [
-    "The forensic record uses the consolidated statements in the snapshot for six fiscal years, FY2021 to FY2026, and the September 2026 balance sheet. The trailing column appears in the profit table only and is not mixed with annual cash flows. Where the company’s standalone figures differ, the difference is labelled.",
-    "Profit before tax of ₹187 crore in FY2026 depended on ₹46 crore of other income. Without it, operating profit less interest and depreciation would be ₹141 crore. The trailing column shows what the build costs: sales are ₹684 crore, yet trailing profit before tax is ₹179 crore, below the FY2026 figure, because depreciation has risen to ₹72 crore and interest to ₹41 crore while other income fell to ₹32 crore. Operating margin improved; the profit that reaches shareholders did not improve in step.",
-    "Interest needs its own note. It was ₹52 crore in FY2023, the year profit before tax fell to ₹13 crore, and it has risen again since FY2025. Profit before tax less net profit implies a tax charge of about 25% to 38% of pre-tax profit across the record, and the snapshot’s tax line reads 27% to 36%. Either way, tax has not been the source of the swings in profit. The swings come from operating profit, financing cost and other income.",
-    "The balance sheet shows an equity base that is mostly reserves: ₹1,381 crore at March 2025, ₹1,516 crore at March 2026 and ₹1,583 crore at September 2026, against equity capital of ₹13 crore. Borrowings rose from ₹263 crore to ₹474 crore and then ₹578 crore. Net worth (equity capital plus reserves) was ₹1,394 crore, ₹1,529 crore and ₹1,596 crore on the same dates, so borrowings were 0.19, 0.31 and 0.36 times net worth.",
-    "The ₹700 crore QIP is not visible in that equity line. Reserves rose by about ₹67 crore between March and September 2026, close to the first-half profit of ₹67.2 crore, and equity capital did not move. The release describes ₹621.8 crore deployed and ₹78.2 crore retained. Either the issue closed after the balance-sheet date or the snapshot does not carry it. The sources read do not settle the timing, so this pass does not count the proceeds as equity.",
-    "Cumulatively, operating cash flow for FY2021 to FY2026 was negative ₹56 crore, against net profit of ₹329 crore. Investing outflows totalled ₹1,294 crore and financing inflows ₹1,368 crore, so the capacity and working-capital build was met by outside money and new capital. The snapshot’s free-cash-flow row, negative ₹691 crore in FY2026, uses a capex definition that does not match the investing line of negative ₹71 crore, and this pass does not rely on it.",
-    "The cash-to-operating-profit ratio tells the same story. Dividing operating cash flow by operating profit, both from the tables above, gives 18% in FY2021, 34% in FY2022, negative 14% in FY2023, negative 6% in FY2024, 34% in FY2025 and negative 53% in FY2026. The snapshot’s own CFO/EBITDA row reads 43%, 41%, negative 1%, 7%, 44% and negative 31%, on a definition the table rows do not reproduce, so this dossier uses the computed figures. Three years were negative and the other three ranged from 18% to 34%. Cash has never converted fully, and the worst year is the most recent one.",
-    "Debtor days were 156 in FY2021 and 189 in FY2026, the highest in the series; working-capital days rose from negative 11 to 304. Return on capital employed was 22% in FY2022 and 12% in both FY2025 and FY2026, which means the new capacity has not yet earned the return the earlier base did.",
-    "Four basis differences need to be stated plainly. First, FY2026 operating cash flow is negative ₹119 crore on the consolidated basis and negative ₹123.3 crore on the standalone basis. Second, borrowings at March 2026 are ₹474 crore consolidated and ₹451.6 crore standalone. Third, debtor days for FY2025 are 178 in the consolidated snapshot, while the Exencial analysis gives 158 for FY2025 and 142 for FY2024. Fourth, FY2026 revenue is ₹603 crore consolidated, but the call basis is about ₹590 crore, and the segment shares are built on that call basis. Each difference is in the sources. The blind pass uses consolidated figures for the statements and labels standalone figures where they appear.",
-    "Quarterly figures check the half-year. The consolidated quarters give sales of ₹173 crore in June 2026 and ₹191 crore in September 2026, a half of ₹364 crore, close to the ₹3,635.34 million (₹363.5 crore) reported. Net profit for the two quarters is ₹66 crore in the snapshot, against ₹67.2 crore in the release. The gap of about ₹1 crore is a basis difference, not an error this pass can resolve.",
-    "The bull reading of the forensic record is specific. Net profit rose from ₹12 crore to ₹134 crore over five years. Operating margin is 37%, and trailing margin is 38%. Borrowings are 0.31 times net worth at FY2026, a moderate level. Half-year revenue growth is still near 29%, and the working-capital build is partly a function of growth that the company is delivering.",
-    "The bear reading is equally specific. Operating cash flow was negative in three of six years and negative across the cumulative period. Trailing profit before tax is below FY2026 despite higher sales. Working capital is absorbing profit, borrowings are rising faster than net worth, and other income has been a large share of pre-tax profit. Each reading rests on the figures above, and neither is resolved by the sources read.",
-    "What would change this read is a run of positive operating cash flow alongside falling working-capital days, and an equity line in the next balance sheet that reflects the QIP. This pass stops at the business and the balance sheet, and the forensic verdict rests on the cash record."
+    "Now you and I arrive at the forensic heart of Azad Engineering. If you only read the profit-and-loss statement, you would think you had found one of the cleanest industrial compounders in India. From FY21 to FY26, sales grew at a 37 percent annual clip from ₹123 crore to ₹603 crore, and reached ₹684 crore on a trailing-twelve-month basis through September 2026. Operating margins climbed from 23 percent to 38 percent. Net profit rose from ₹12 crore to ₹134 crore in FY26. Every line on the P&L slopes up and to the right.",
+    "Now flip the page to the cash flow statement and the balance sheet, and the picture changes dramatically. Over those exact same six years from FY21 through FY26, Azad reported ₹329 crore in cumulative net profit—yet generated minus ₹56 crore in cumulative cash flow from operations and minus ₹1,215 crore in cumulative free cash flow. In FY26 alone, operating cash flow was minus ₹119 crore, and free cash flow was minus ₹691 crore.",
+    "How can a business with a 37 percent operating margin burn ₹119 crore in operations? Three numbers in the ratio table explain it completely: 189 debtor days, 2,067 inventory days, and 304 working-capital days. Because Azad stocked raw superalloys and work-in-progress for six brand-new OEM plants at Tuniki Bollaram while export customers took half a year to pay, working capital absorbed the entire operating profit and more. Meanwhile, fixed assets plus capital work-in-progress swelled to ₹1,201 crore by September 2026, pulling borrowings back up from ₹39 crore post-IPO to ₹578 crore—while Screener also flags potential interest capitalization during heavy CWIP construction.",
+    "The consequence of piling ₹2,405 crore of total assets onto the balance sheet ahead of full plant utilization is visible in capital efficiency: ROCE compressed from 22 percent in FY22 and 21 percent in FY24 down to 12 percent in FY25 and FY26, and ROE sits at just 9.09 percent. That is why our price-blind verdict is neither an unconditional pass nor a fundamental fail—it is conditional. The moat and order book are real, but the cash-conversion proof still lies ahead.",
+    "Let us also check the quarterly trajectory through September 2026 so we do not miss any early inflection. In Q2 FY27, consolidated sales reached ₹191 crore, up 31 percent year-on-year, with operating profit of ₹72 crore and a 38 percent operating margin. However, quarterly depreciation jumped to ₹23 crore—nearly double the ₹12 crore run-rate a year earlier—as the newly commissioned Tuniki Bollaram plants began depreciating on the P&L, while quarterly interest rose to ₹12 crore. As a result, Q2 FY27 net profit of ₹31 crore actually stepped down sequentially from ₹35 crore in Q1 FY27 and ₹37 crore in Q4 FY26. That sequential squeeze is the classic signature of a capital-intensive ramp: fixed depreciation and interest arrive before the new bays hit full billing velocity.",
+    "Think about what that balance-sheet reality implies for capital allocation and equity dilution. Since December 2023, Azad has raised equity twice—first in its IPO and again in its March 2025 QIP—boosting reserves from ₹202 crore in FY23 to ₹1,583 crore by September 2026. Yet even after absorbing more than ₹1,100 crore of fresh equity and increasing borrowings to ₹578 crore, free cash flow remained negative ₹691 crore in FY26. Until inventory days retreat from 2,067 days toward normalized levels and non-recourse bill discounting compresses debtor days below 120 days, shareholders are funding a working-capital bridge rather than harvesting distributable cash."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION: Why We Separate Business Quality from Stock Price",
+      "text": "Before you ever look at a stock chart or a valuation multiple, this six-chapter forensic audit gives you a crystal-clear lens: Azad Engineering has built a rare, sticky, 37-percent-margin engineering franchise, yet it currently earns 12 percent ROCE with negative free cash flow. Knowing that tension cold protects you from overpaying for hope—or dismissing a genuine moat too early."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "The Forensic Checklist: Separating Accounting Earnings from Cash Reality",
+      "paragraphs": [
+        "Whenever you audit a fast-growing industrial manufacturer, train yourself to run a three-line forensic check before trusting headline EPS growth. Line one is cumulative CFO versus cumulative PAT over at least five years: in Azad's case, ₹329 crore of cumulative net profit produced negative ₹56 crore of cumulative operating cash flow. That tells you immediately that earnings are sitting on the balance sheet in receivables and inventory rather than in the bank.",
+        "Line two is asset-turn and ROCE trajectory: Azad's total assets nearly tripled from ₹797 crore in March 2024 to ₹2,405 crore by September 2026, while ROCE dropped from 21% to 11.9%. Line three is financing dependency: despite two equity raises, borrowings climbed back to ₹578 crore. None of these three lines invalidates Azad's engineering moat, but together they prove why Pass 1 must classify the business as CYCLICAL_CONDITIONAL until audited cash conversion catches up with reported profit.",
+        "Let us also examine the interest-capitalization flag raised in Screener's automated forensic notes and how it interacts with CWIP. Between March 2024 and March 2026, capital work-in-progress climbed from ₹45 crore to ₹257 crore before easing to ₹212 crore in September 2026 as the six Tuniki Bollaram plants came online. Under Ind AS 23, borrowing costs directly attributable to qualifying assets under construction can be capitalized into CWIP rather than expensed through the P&L. That is completely legal accounting, yet it means reported finance costs of ₹31 crore in FY26 and ₹41 crore TTM may understate total cash interest outflow—another reason to watch cash-flow-from-operations and free cash flow rather than relying solely on reported net profit. Similarly, FY26 Other Income jumped to ₹46 crore (roughly 25% of pre-tax profit) largely from treasury interest on unspent QIP proceeds; as those proceeds are consumed by capex and working capital, Other Income will naturally step down, putting more pressure on core operating bays to carry earnings."
+      ]
+    }
   ]
 }
