@@ -98,6 +98,21 @@
   const statusLabel = status =>
     status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "WATCHLIST" ? "Watchlist" : status === "DISCARDED" ? "Discarded" : "Tracked";
 
+  function tradingViewUrl(symbol, market) {
+    if (!symbol) return null;
+    const raw = String(symbol).trim().toUpperCase();
+    if (!raw || raw === "—") return null;
+    if (raw.includes(":")) {
+      return `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(raw)}`;
+    }
+    if (market === "IN") {
+      const base = raw.replace(/\.(NS|BO)$/i, "");
+      const exch = raw.endsWith(".BO") ? "BSE" : "NSE";
+      return `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(`${exch}:${base}`)}`;
+    }
+    return `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(raw)}`;
+  }
+
   // ---- Build one unified, de-duplicated pipeline row per (market, symbol) ----
   function buildPipeline() {
     const rows = new Map(); // key -> row
@@ -287,8 +302,9 @@
 
   function pipelineRowHtml(row) {
     const company = row.company && row.company !== row.symbol ? escapeHtml(row.company) : "";
-    const tickerLink = row.dossierUrl
-      ? `<a class="pipe-ticker" href="${escapeHtml(row.dossierUrl)}">${escapeHtml(row.symbol)}</a>`
+    const tvUrl = tradingViewUrl(row.symbol, row.market);
+    const tickerLink = tvUrl
+      ? `<a class="pipe-ticker" href="${escapeHtml(tvUrl)}" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(row.symbol)} on TradingView">${escapeHtml(row.symbol)}</a>`
       : `<span class="pipe-ticker">${escapeHtml(row.symbol)}</span>`;
     const statusTitle = row.statuses.map(statusLabel).join(" · ");
     const secondary = row.statuses.filter(s => s !== row.status);
@@ -569,10 +585,15 @@
       section("Summary", summaryBody),
     ].join("") || '<p class="detail-note">No decision data for this monograph yet.</p>';
 
+    const tvUrl = tradingViewUrl(e.symbol, e.market);
+    const tickerLink = tvUrl
+      ? `<a class="pipe-ticker" href="${escapeHtml(tvUrl)}" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(e.symbol)} on TradingView">${escapeHtml(e.symbol)}</a>`
+      : `<span class="pipe-ticker">${escapeHtml(e.symbol || "—")}</span>`;
+
     return `<tr>
       <td><div class="dossier-id">
         <button type="button" class="dossier-toggle" aria-expanded="${open}" aria-controls="${id}" data-url="${escapeHtml(e.url)}" aria-label="Show details for ${escapeHtml(e.symbol || e.title)}" data-dossier-toggle>${open ? "−" : "+"}</button>
-        <a class="pipe-ticker" href="${escapeHtml(e.url)}">${escapeHtml(e.symbol || "—")}</a>
+        ${tickerLink}
         <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
         ${pdf}
       </div>${sector}</td>
