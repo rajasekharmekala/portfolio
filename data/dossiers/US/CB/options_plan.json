@@ -1,0 +1,134 @@
+{
+  "symbol": "CB",
+  "market": "US",
+  "generated_at": "2026-11-16T23:41:42+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:CB",
+    "exchange": "NYSE",
+    "company_name": "Chubb Limited",
+    "close": 381.28,
+    "change_1d_pct": 1.47,
+    "perf_1w_pct": 3.84,
+    "perf_1m_pct": 8.0,
+    "perf_3m_pct": 9.91,
+    "rsi_1d": 70.18,
+    "rsi_4h": 70.31,
+    "rsi_1w": 69.7,
+    "sma20": 365.23,
+    "sma50": 349.71,
+    "sma200": 337.76,
+    "sma30_weekly": 343.41,
+    "ema10_weekly": 360.56,
+    "ema20_4h": 371.04,
+    "sma50_4h": 362.8,
+    "atr14": 6.69,
+    "bb_width_pct": 7.83,
+    "pivot_s1": 336.41,
+    "pivot_s2": 308.71,
+    "pivot_r1": 380.41,
+    "pivot_r2": 396.71,
+    "high_52w": 384.26,
+    "low_52w": 291.03,
+    "dist_to_200d_pct": 12.88,
+    "major_shelf": 343.41,
+    "intraday_4h_turn": true,
+    "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
+    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 7.83%) above rising 50D SMA (349.71) and 30W SMA (343.41)."
+  },
+  "options_plan": {
+    "symbol": "CB",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "LONG_CALL_LEAPS",
+    "iv_regime": "IV_FAIR",
+    "atm_iv_pct": 21.6,
+    "hv20_pct": 20.3,
+    "open_positions_audit": [],
+    "headline": "Buy 1x CB 2027-09-17 $360 LEAPS Call (305 DTE, 0.69 Delta) near $49.25/sh ($4,925.00 max possible loss).",
+    "recommended_trade": {
+      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
+      "expiry": "2027-09-17",
+      "dte": 305,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 360.0,
+          "mid": 49.25,
+          "bid": 47.0,
+          "ask": 51.5,
+          "open_interest": 5
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 49.25,
+      "max_loss_total": 4925.0,
+      "max_loss_nav_bps": 492.5,
+      "max_profit_total": "Uncapped upside",
+      "breakeven_at_expiry": 409.25,
+      "breakeven_move_pct": 7.34,
+      "net_delta_dollars_per_1_move": 68.7,
+      "daily_theta_dollars": -8.5,
+      "underlying_stop_trigger": 343.41,
+      "profit_taking_rule": "Trim half at +75%–100% contract gain or when CB reaches $438.47; exit early on a weekly close below $343.41.",
+      "scenarios": [
+        {
+          "scenario": "Bear / Stop Hit ($343.41)",
+          "stock_price": 343.41,
+          "stock_move_pct": -9.9,
+          "contract_value": 3184.33,
+          "net_pnl": -1740.67,
+          "return_on_risk_pct": -35.3
+        },
+        {
+          "scenario": "Flat in 60 Days ($381.28)",
+          "stock_price": 381.28,
+          "stock_move_pct": 0.0,
+          "contract_value": 5351.37,
+          "net_pnl": 426.37,
+          "return_on_risk_pct": 8.7
+        },
+        {
+          "scenario": "Base Target ($438.47)",
+          "stock_price": 438.47,
+          "stock_move_pct": 15.0,
+          "contract_value": 8999.51,
+          "net_pnl": 4074.51,
+          "return_on_risk_pct": 82.7
+        },
+        {
+          "scenario": "Bull Target ($504.24)",
+          "stock_price": 504.24,
+          "stock_move_pct": 32.2,
+          "contract_value": 15190.29,
+          "net_pnl": 10265.29,
+          "return_on_risk_pct": 208.4
+        }
+      ],
+      "beginner_explainer": [
+        "Why LEAPS instead of a short-dated call: With 305 days until 2027-09-17 and 0.69 delta, this option behaves ~68% like owning 100 shares for a fraction of the cash, while losing only $8.50/day to time decay.",
+        "Worst-case wallet risk: You pay $49.25 x 100 shares x 1 = $4,925.00 upfront. Even if CB crashed 50% overnight, you cannot lose more than $4,925.00.",
+        "Volatility check: Implied Volatility is 21.6% vs. 20-day actual stock volatility of 20.3% (IV FAIR), so you are not overpaying panic premiums."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (CB)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x CB 2027-09-17 $360 LEAPS Call (305 DTE, 0.69 Delta) near $49.25/sh ($4,925.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 7.83%) above rising 50D SMA (349.71) and 30W SMA (343.41). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:CB. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_cb_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:CB\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:CB\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_cb_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 305 days until 2027-09-17 and 0.69 delta, this option behaves ~68% like owning 100 shares for a fraction of the cash, while losing only $8.50/day to time decay.</p><p>Worst-case wallet risk: You pay $49.25 x 100 shares x 1 = $4,925.00 upfront. Even if CB crashed 50% overnight, you cannot lose more than $4,925.00.</p><p>Volatility check: Implied Volatility is 21.6% vs. 20-day actual stock volatility of 20.3% (IV FAIR), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for CB</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $360 CALL @ $49.25 mid (bid $47.00 / ask $51.50, OI 5)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$4,925.00 (492.5 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$409.25 (+7.34% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+68.70 per $1 move | $-8.50/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when CB reaches $438.47; exit early on a weekly close below $343.41.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 305 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $4,925.00 Across Stock Scenarios (CB)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($343.41)</td><td>$343.41 (-9.9%)</td><td>$3,184.33</td><td>$-1,740.67</td><td><strong>-35.3%</strong></td></tr><tr><td>Flat in 60 Days ($381.28)</td><td>$381.28 (+0.0%)</td><td>$5,351.37</td><td>$+426.37</td><td><strong>+8.7%</strong></td></tr><tr><td>Base Target ($438.47)</td><td>$438.47 (+15.0%)</td><td>$8,999.51</td><td>$+4,074.51</td><td><strong>+82.7%</strong></td></tr><tr><td>Bull Target ($504.24)</td><td>$504.24 (+32.2%)</td><td>$15,190.29</td><td>$+10,265.29</td><td><strong>+208.4%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
