@@ -516,6 +516,8 @@ def _default_story_and_casenotes(alloc: Dict[str, Any], narrative_override: Dict
             },
         },
         "casenotes": built_casenotes,
+        "book_casenotes": narrative_override.get("book_casenotes") or {},
+        "book_challengers": narrative_override.get("book_challengers") or [],
         "citations": narrative_override.get("citations") or [
             f"Deterministic Market Facts Ledger & Price Series ({mkt}, session cutoff {as_of})",
             f"TradingView & Stage 2 Sector Breadth Scanner Snapshot ({mkt}, {as_of})",
@@ -1151,13 +1153,65 @@ def compile_portfolio_audit(
             cdict["book_tables"] = [book_ch1_tbl]
         elif key == "chapter2":
             cdict["book_tables"] = [book_ch2_tbl]
-            subs = []
+            book_cases = story.get("book_casenotes") or {}
+
+            def _holding_group(hd_item: Dict[str, Any]) -> tuple[int, str, str]:
+                v = hd_item["verdict"]
+                if v == "EXIT":
+                    return (
+                        1,
+                        "Reclaiming Risk Budget — Full Exits",
+                        "These positions either broke their structural thesis or carry negative risk-reward; exiting in full frees capital and eliminates open portfolio heat.",
+                    )
+                if v == "TRIM_PROFIT_BOOKING":
+                    return (
+                        2,
+                        "Right-Sizing Concentration — Trims & Profit Protection",
+                        "Trimming oversized or extended positions locks in gains and brings single-stock and cluster risk back inside our regime limits.",
+                    )
+                if v == "ACCUMULATE_ON_DIP":
+                    return (
+                        3,
+                        "Deploying Into Strength — Active Additions",
+                        "High-conviction leaders inside healthy buy zones earn incremental capital so our best ideas carry meaningful weight.",
+                    )
+                if hd_item["pnl_pct"] < 0:
+                    return (
+                        4,
+                        "Holding Through Noise — Why Intact Drawdowns Stay",
+                        "Temporary pullbacks above structural support and intact fundamentals are held patiently behind hard stops rather than panic-sold.",
+                    )
+                return (
+                    5,
+                    "Compounding Engines — Core Leaders We Let Run",
+                    "Winners with intact trends and thesis execution remain untouched inside our deadband so compounding does the heavy lifting.",
+                )
+
+            grouped_holdings: Dict[int, Dict[str, Any]] = {}
             for hd in ranked_holdings:
-                subs.append({
-                    "title": f"{hd['symbol']} — {hd['company_name']} ({hd['action_label']})",
-                    "paragraphs": [story["casenotes"][hd["symbol"]]],
-                    "callouts": [],
-                })
+                g_ord, g_title, g_intro = _holding_group(hd)
+                bucket_grp = grouped_holdings.setdefault(g_ord, {"title": g_title, "intro": g_intro, "items": []})
+                bucket_grp["items"].append(hd)
+
+            subs = []
+            for g_ord in sorted(grouped_holdings):
+                grp = grouped_holdings[g_ord]
+                for idx_in_grp, hd in enumerate(grp["items"]):
+                    bc = book_cases.get(hd["symbol"]) or {}
+                    paras = bc.get("paragraphs") if isinstance(bc, dict) and bc.get("paragraphs") else [story["casenotes"][hd["symbol"]]]
+                    calls = bc.get("callouts") if isinstance(bc, dict) and bc.get("callouts") else []
+                    if hd.get("decision_source") == "CIO_OVERRIDE" and hd.get("cio_rationale") and not (isinstance(bc, dict) and bc.get("paragraphs")):
+                        paras = list(paras) + [f"Context-aware CIO decision (overriding baseline {hd.get('baseline_verdict', '').replace('_', ' ')}): {hd['cio_rationale']}"]
+                    sub_entry: Dict[str, Any] = {
+                        "title": f"{hd['symbol']} — {hd['company_name']} ({hd['action_label']})",
+                        "paragraphs": paras,
+                        "callouts": calls,
+                        "under_group": True,
+                    }
+                    if idx_in_grp == 0:
+                        sub_entry["group_header"] = grp["title"]
+                        sub_entry["group_intro"] = grp["intro"]
+                    subs.append(sub_entry)
             if book_tracking_sub:
                 subs.append(book_tracking_sub)
             cdict["book_subsections"] = subs
@@ -1165,8 +1219,16 @@ def compile_portfolio_audit(
             cdict["book_tables"] = [book_ch3_tbl]
         elif key == "chapter4":
             cdict["book_tables"] = [book_ch4_tbl]
-            if cdict.get("book_subsections"):
-                cdict["book_subsections"] = list(cdict["book_subsections"])
+            ch4_subs = list(cdict.get("book_subsections") or [])
+            for bch in (story.get("book_challengers") or []):
+                if isinstance(bch, dict) and bch.get("title") and bch.get("paragraphs"):
+                    ch4_subs.append({
+                        "title": bch["title"],
+                        "paragraphs": bch["paragraphs"],
+                        "callouts": bch.get("callouts") or [],
+                    })
+            if ch4_subs:
+                cdict["book_subsections"] = ch4_subs
         elif key == "chapter5":
             cdict["book_tables"] = [book_ch5_tbl, wf_tbl.replace('class="wikitable"', 'class="mc-table"')]
             cdict["book_subsections"] = [{
@@ -1180,7 +1242,15 @@ def compile_portfolio_audit(
 
     book_words = sum(
         _word_count(" ".join(c.get("book_paragraphs", [])))
-        + sum(_word_count(" ".join(s.get("paragraphs", []))) for s in c.get("book_subsections", []))
+        + sum(
+            _word_count(co.get("text", "")) + _word_count(co.get("quote", ""))
+            for co in c.get("book_callouts", [])
+        )
+        + sum(
+            _word_count(" ".join(s.get("paragraphs", [])))
+            + sum(_word_count(co.get("text", "")) + _word_count(co.get("quote", "")) for co in s.get("callouts", []))
+            for s in c.get("book_subsections", [])
+        )
         for c in book_chapters
     ) + _word_count(story["primer"])
     audio_mins = max(3, round(book_words / 155))

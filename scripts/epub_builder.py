@@ -36,12 +36,32 @@ ROMAN = ["PROLOGUE", "CHAPTER I", "CHAPTER II", "CHAPTER III", "CHAPTER IV", "CH
          "CHAPTER VI", "CHAPTER VII", "CHAPTER VIII", "CHAPTER IX", "CHAPTER X"]
 
 
+_AUDIO_TOKEN_MAP = {
+    "EXIT_IMMEDIATELY": "immediate exit",
+    "COMPOUNDER_PASS": "compounder pass",
+    "KEEP_COMPOUNDING": "keep compounding",
+    "TRIM_PROFIT_BOOKING": "trim into strength",
+    "ACCUMULATE_ON_DIP": "accumulate on dip",
+    "DEPLOY_STARTER_NOW": "deploy starter now",
+    "DEPLOY_STARTER_AT_SUPPORT": "deploy starter at support",
+    "RESTING_LIMIT_AT_SUPPORT": "resting limit at support",
+    "DEFERRED_GATE_BLOCKED": "deferred by regime gate",
+    "MONITOR_ONLY_PRE_MONOGRAPH": "monitor until monograph completes",
+    "BLOCKED_SLOT_CAP_FULL": "held back by slot cap",
+    "HOLD / HARD STOP": "Hold with a Hard Stop",
+    "HOLD / TRAIL": "Hold and Trail Stop",
+}
+
+
 def _clean_audio_text(raw: str) -> str:
-    """Strip inline citation superscripts and HTML tags while preserving clean spoken text."""
+    """Strip inline citation superscripts and HTML tags while humanizing robotic enum tokens for spoken text."""
     text = re.sub(r"<sup[^>]*>.*?</sup>", "", raw or "", flags=re.S | re.I)
     text = re.sub(r"\[\d+(?:[,\u2013\-]\s*\d+)*\]", "", text)
     text = re.sub(r"<[^>]+>", "", text)
     text = html.unescape(text)
+    for tok, spoken in _AUDIO_TOKEN_MAP.items():
+        if tok in text:
+            text = text.replace(tok, spoken)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -1027,8 +1047,13 @@ def render_portfolio_book_html(
             if tbl_html:
                 body_blocks.append(f'<div class="mc-table-wrap">{tbl_html}</div>')
         for sub in ch.get("book_subsections", []):
+            if sub.get("group_header"):
+                body_blocks.append(f'<h3 class="mc-group-heading">{html.escape(_clean_audio_text(sub["group_header"]))}</h3>')
+                if sub.get("group_intro"):
+                    body_blocks.append(f'<p class="mc-group-intro">{html.escape(_clean_audio_text(sub["group_intro"]))}</p>')
             if sub.get("title"):
-                body_blocks.append(f"<h3>{html.escape(_clean_audio_text(sub['title']))}</h3>")
+                tag = "h4" if sub.get("group_header") or sub.get("under_group") else "h3"
+                body_blocks.append(f"<{tag}>{html.escape(_clean_audio_text(sub['title']))}</{tag}>")
             body_blocks.extend(
                 _interleave_paragraphs_and_callouts(
                     sub.get("paragraphs", []),

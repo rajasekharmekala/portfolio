@@ -578,8 +578,9 @@ def allocate_portfolio(
     options_snapshot: Optional[Dict[str, Any]] = None,
     prior_state: Optional[Dict[str, Any]] = None,
     scoring: Optional[Dict[str, Any]] = None,
+    cio_decisions: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
-    """Pure deterministic portfolio construction & convergence function."""
+    """Portfolio construction & convergence function with optional CIO override reconciliation."""
     mkt = market.upper()
     cur = "₹" if mkt == "IN" else "$"
     scoring = scoring or _load_json(SCORING_PATH)
@@ -814,6 +815,32 @@ def allocate_portfolio(
     # ------------------------------------------------------------------
     # STEP 2: EVALUATE EVERY EXISTING EQUITY / ETF HOLDING
     # ------------------------------------------------------------------
+    cio_decisions = cio_decisions or {}
+    holding_overrides = {
+        str(k).upper(): v
+        for k, v in (cio_decisions.get("holding_overrides") or {}).items()
+        if isinstance(v, dict)
+    }
+    challenger_overrides = {
+        str(k).upper(): v
+        for k, v in (cio_decisions.get("challenger_overrides") or {}).items()
+        if isinstance(v, dict)
+    }
+    cio_portfolio_thesis = str(cio_decisions.get("portfolio_thesis") or "").strip()
+
+    # Pre-compute current Core Alpha weight so baseline rules avoid starving an underweight Core sleeve
+    current_core_alpha_wt = round(
+        sum(
+            float(h.get("market_value") or 0.0) / net_worth * 100.0
+            for h in consolidated
+            if (
+                (shortlist_by_sym.get(str(h.get("symbol", "")).upper()) or watchlist_by_sym.get(str(h.get("symbol", "")).upper()) or {}).get("bucket") == "CORE_ALPHA"
+                or _load_dossier_spine(mkt, str(h.get("symbol", "")).upper()).get("bucket") == "CORE_ALPHA"
+            )
+        ),
+        2,
+    )
+
     holding_decisions: List[Dict[str, Any]] = []
     tracking_rows: List[Dict[str, Any]] = []
     dossier_debt_queue: List[Dict[str, Any]] = []
@@ -1196,6 +1223,34 @@ def allocate_portfolio(
             explicit_sell_shares = None
             rationale += f" [Converged within ±{deadband_wt_pct:.2f}% NAV deadband — zero nuisance trade.]"
 
+        # Apply CIO Context-Aware Override (if supplied via --cio-decisions)
+        baseline_verdict = verdict
+        decision_source = "BASELINE_RULEBOOK"
+        cio_rationale = ""
+        if sym in holding_overrides:
+            ov = holding_overrides[sym]
+            decision_source = "CIO_OVERRIDE"
+            verdict = str(ov.get("verdict") or verdict)
+            action_label = str(ov.get("action_label") or verdict.replace("_", " "))
+            if ov.get("stop_loss") is not None:
+                ov_stop = float(ov["stop_loss"])
+                effective_stop = max(effective_stop, ov_stop) if ov.get("ratchet_only", True) else ov_stop
+                stop_dist = max(0.035, (close - effective_stop) / close) if (close > 0 and effective_stop and close > effective_stop) else 0.10
+                heat_val = round(mv * stop_dist, 2)
+                heat_pct = round(heat_val / net_worth * 100.0, 2) if net_worth > 0 else 0.0
+            if ov.get("target_shares") is not None and close > 0:
+                target_wt = round((float(ov["target_shares"]) * close) / net_worth * 100.0, 2)
+            elif ov.get("target_wt_pct") is not None:
+                target_wt = float(ov["target_wt_pct"])
+            elif verdict == "EXIT":
+                target_wt = 0.0
+            elif verdict == "KEEP_COMPOUNDING":
+                target_wt = wt_pct
+            explicit_sell_shares = int(ov["sell_shares"]) if ov.get("sell_shares") is not None else None
+            cio_rationale = str(ov.get("rationale") or "").strip()
+            if cio_rationale:
+                rationale = f"[CIO Decision] {cio_rationale}"
+
         # Convert target_wt into exact whole shares for sells/trims (buys/adds funded in Step 4 waterfall)
         if verdict == "EXIT":
             shares_delta = -qty
@@ -1277,6 +1332,9 @@ def allocate_portfolio(
             "open_heat_value": round(heat_val * (target_val / mv), 2) if mv > 0 else 0.0,
             "open_heat_pct": round((heat_val * (target_val / mv) if mv > 0 else 0.0) / net_worth * 100.0, 2),
             "verdict": verdict,
+            "baseline_verdict": baseline_verdict,
+            "decision_source": decision_source,
+            "cio_rationale": cio_rationale,
             "action_label": action_label,
             "hysteresis_locked": hysteresis_applied,
             "score": score_obj,
@@ -1511,6 +1569,23 @@ def allocate_portfolio(
                     eligible_now = entry_action in {"DEPLOY_STARTER_NOW", "DEPLOY_STARTER_AT_SUPPORT"}
                     why += f" [Hysteresis Lock: preserved {entry_action} from {prior_as_of}.]"
 
+        baseline_entry_action = entry_action
+        ch_decision_source = "BASELINE_RULEBOOK"
+        ch_cio_rationale = ""
+        if sym in challenger_overrides:
+            ov = challenger_overrides[sym]
+            ch_decision_source = "CIO_OVERRIDE"
+            if ov.get("entry_action"):
+                entry_action = str(ov["entry_action"])
+            eligible_now = entry_action in {"DEPLOY_STARTER_NOW", "DEPLOY_STARTER_AT_SUPPORT"}
+            if ov.get("starter_wt_pct") is not None:
+                starter_wt = float(ov["starter_wt_pct"])
+            if ov.get("stop_loss") is not None:
+                stop_loss = float(ov["stop_loss"])
+            ch_cio_rationale = str(ov.get("rationale") or "").strip()
+            if ch_cio_rationale:
+                why = f"[CIO Decision] {ch_cio_rationale}"
+
         challenger_decisions.append({
             "symbol": sym,
             "company_name": str(spine.get("company_name") or r.get("company_name") or sym),
@@ -1534,6 +1609,9 @@ def allocate_portfolio(
             "starter_target_wt_pct": starter_wt,
             "risk_budget_bps": sizing["risk_budget_bps"],
             "entry_action": entry_action,
+            "baseline_entry_action": baseline_entry_action,
+            "decision_source": ch_decision_source,
+            "cio_rationale": ch_cio_rationale,
             "eligible_now": eligible_now,
             "funded_shares": 0,
             "funded_value": 0.0,
@@ -1897,6 +1975,28 @@ def allocate_portfolio(
 
     dossier_debt_queue.sort(key=lambda x: -x["market_value"])
 
+    # Hard Guardrail Enforcement when CIO overrides are active
+    target_cash_wt_check = round(target_cash / net_worth * 100.0, 2) if net_worth > 0 else 0.0
+    if holding_overrides or challenger_overrides:
+        if final_open_heat_pct > envelope["max_portfolio_heat_pct"] + 0.05:
+            raise ValueError(
+                f"CIO_GUARDRAIL_BREACH: Open portfolio heat {final_open_heat_pct:.2f}% exceeds regime cap {envelope['max_portfolio_heat_pct']:.1f}%."
+            )
+        if target_cash_wt_check + 0.05 < envelope["min_cash_floor_pct"]:
+            raise ValueError(
+                f"CIO_GUARDRAIL_BREACH: Target cash {target_cash_wt_check:.2f}% is below regime floor {envelope['min_cash_floor_pct']:.1f}%."
+            )
+        for cid, ch_heat in post_cluster_heat.items():
+            c_wt = post_cluster_wt.get(cid, 0.0)
+            if ch_heat > max_cluster_heat + 0.05 or c_wt > max_cluster_wt + 0.25:
+                raise ValueError(
+                    f"CIO_GUARDRAIL_BREACH: Cluster {cid} breaches cap (weight {c_wt:.2f}%/{max_cluster_wt:.1f}%, heat {ch_heat:.2f}%/{max_cluster_heat:.1f}%)."
+                )
+
+    cio_overrides_count = sum(1 for hd in holding_decisions if hd.get("decision_source") == "CIO_OVERRIDE") + sum(
+        1 for ch in challenger_decisions if ch.get("decision_source") == "CIO_OVERRIDE"
+    )
+
     sells_and_trims = [hd for hd in holding_decisions if hd["delta_shares"] < 0]
     equity_buys_and_adds = (
         [hd for hd in holding_decisions if hd["delta_shares"] > 0]
@@ -1911,6 +2011,11 @@ def allocate_portfolio(
         "currency_symbol": cur,
         "as_of_date": as_of,
         "net_worth": round(net_worth, 2),
+        "cio_context": {
+            "decision_mode": "CIO_LED" if (cio_overrides_count > 0 or cio_portfolio_thesis) else "BASELINE_ONLY",
+            "overrides_applied_count": cio_overrides_count,
+            "portfolio_thesis": cio_portfolio_thesis,
+        },
         "regime_envelope": envelope,
         "portfolio_summary": {
             "net_worth": round(net_worth, 2),
@@ -2008,6 +2113,7 @@ def main() -> None:
     ap.add_argument("--options-snapshot", default="", help="Path to options_snapshot_<MKT>_<date>.json")
     ap.add_argument("--prior-state", default="", help="Path to prior data/allocations/<MKT>.json")
     ap.add_argument("--persist-state", default="", help="Write updated anchor state to data/allocations/<MKT>.json")
+    ap.add_argument("--cio-decisions", default="", help="Optional path to cio_decisions_<MKT>.json for CIO-led overrides")
     ap.add_argument("--from-repo", action="store_true", help="Fallback offline build from repo transaction logs + latest views")
     ap.add_argument("--as-of", default="", help="Override as-of date in --from-repo mode")
     ap.add_argument("--out", required=True, help="Output path for allocation_<MKT>_<date>.json")
@@ -2027,6 +2133,7 @@ def main() -> None:
     options_snap = _load_json(args.options_snapshot)
     prior_path = args.prior_state or str(REPO / "data" / "allocations" / f"{mkt}.json")
     prior_state = _load_json(prior_path)
+    cio_decisions = _load_json(args.cio_decisions) if args.cio_decisions else None
 
     result = allocate_portfolio(
         market=mkt,
@@ -2037,6 +2144,7 @@ def main() -> None:
         watchlist_data=watchlist,
         options_snapshot=options_snap,
         prior_state=prior_state,
+        cio_decisions=cio_decisions,
     )
 
     out_p = Path(args.out)

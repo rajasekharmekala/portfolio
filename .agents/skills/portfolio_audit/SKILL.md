@@ -56,9 +56,9 @@ description: >-
 <!-- /MARKET -->
 3. Run the mandatory `duck-duck-go` MCP web research pass (`search` + `fetch_content` per `REPORT_EDITORIAL_STANDARD.md` §6) for every item in `facts.research_needs` (earnings dates, catalysts behind any `EXIT`/`TRIM`, FII/DII or Treasury/VIX context, promoter pledges / Form 4s) and write `<RUN_DIR>/cache/research_<MKT>_<session>.json` (`>= 12` distinct verified URLs).
 
-### Step 2 — Run the Deterministic CIO Portfolio Allocator (`scripts/portfolio_allocator.py`)
+### Step 2 — Baseline Risk Diagnostics & CIO Context-Aware Decisions (`scripts/portfolio_allocator.py`)
 
-Compute exact open portfolio heat, correlated cluster caps (`<= 25%` NAV / `<= 3.5%` heat), unified 100-point tournament scores, regime-adaptive 50/50 starter/scale-up tranches, 2x/3x & LEAPS decay guardrails, 5-day hysteresis locks, and `±1.25%` convergence deadbands:
+1. **Baseline Diagnostics Pass:** Compute exact open portfolio heat, correlated cluster caps (`<= 25%` NAV / `<= 3.5%` heat), quantitative scores, hysteresis locks, and a baseline rulebook proposal (do not pass `--persist-state` yet):
 
 ```bash
 .venv/bin/python scripts/portfolio_allocator.py \
@@ -70,19 +70,44 @@ Compute exact open portfolio heat, correlated cluster caps (`<= 25%` NAV / `<= 3
   --watchlist "data/watchlist/<MKT>.json" \
   --options-snapshot "<RUN_DIR>/cache/options_snapshot_<MKT>_<session>.json" \
   --prior-state "data/allocations/<MKT>.json" \
+  --out "<RUN_DIR>/cache/baseline_allocation_<MKT>_<session>.json"
+```
+
+2. **Step 2b — CIO Context Review & Judgment (`cio_decisions_<MKT>.json`):** Never treat the baseline script output as final or robotic. Review `baseline_allocation_<MKT>_<session>.json` alongside `facts`, `research`, and any same-date `<MKT>_Market_Intelligence.html` through three lenses:
+   - **Market & Flow Context:** Institutional flows (FII/DII or US breadth/VIX/yields), distribution days, and whether a narrow-breadth label hides strong sector leadership.
+   - **Portfolio Philosophy & Sleeve Balance:** Check `CORE_ALPHA` vs `TACTICAL_MOMENTUM` balance and cluster concentration. Override any robotic baseline trim on an underweight Core Alpha leader in a leading sector, or adjust sizing/exits so we stick to our philosophy and cash in better.
+   - **Stock-Specific & Replacement Risk-Reward:** Compare held names against top shortlisted challengers on thesis quality, upcoming earnings/catalysts, and asymmetric risk-reward.
+
+   Write `<RUN_DIR>/work/cio_decisions_<MKT>.json` with `"portfolio_thesis"`, `"holding_overrides"`, and `"challenger_overrides"`, then run the **Reconciliation & Guardrail Pass** (which enforces hard heat/cluster/cash ceilings and computes penny-exact shares and cash):
+
+```bash
+.venv/bin/python scripts/portfolio_allocator.py \
+  --market <MKT> \
+  --facts "<RUN_DIR>/cache/facts_<MKT>_<session>.json" \
+  --positions "<RUN_DIR>/cache/positions_<MKT>_<session>.json" \
+  --snapshots "<RUN_DIR>/cache/snapshots_<MKT>_<session>.json" \
+  --shortlist "data/shortlist/<MKT>.json" \
+  --watchlist "data/watchlist/<MKT>.json" \
+  --options-snapshot "<RUN_DIR>/cache/options_snapshot_<MKT>_<session>.json" \
+  --prior-state "data/allocations/<MKT>.json" \
+  --cio-decisions "<RUN_DIR>/work/cio_decisions_<MKT>.json" \
   --persist-state "data/allocations/<MKT>.json" \
   --out "<RUN_DIR>/cache/allocation_<MKT>_<session>.json"
 ```
 
-### Step 3 — Author Bespoke Cohesive Narrative & Case Notes (`audit_narrative_<MKT>.json`)
+### Step 3 — Author Readable Book & Audiobook Narrative (`audit_narrative_<MKT>.json`)
 
-Read `<RUN_DIR>/cache/allocation_<MKT>_<session>.json`, `<RUN_DIR>/cache/research_<MKT>_<session>.json`, and any same-date `<MKT>_Market_Intelligence.html` sibling report. Write `<RUN_DIR>/work/audit_narrative_<MKT>.json` via direct file-write tools or `json.dump` (never unquoted shell heredocs) supplying:
-- `"primer"`: 150–250 word executive thesis opening with portfolio condition, net worth, open heat vs ceiling, convergence score, what changed since the prior plan, and the decision summary.
-- `"chapters"` (`"chapter1"` .. `"chapter7"`): cohesive mentor-voice `"book_paragraphs"`, `"epigraph"` (`quote` + `author`), and `"book_callouts"` (`mental_model`, `reflection`, `parallel`, `execution`) weaving our macro regime, asymmetric sector rotation, holding verdicts, 2x/3x & options decay rules, challenger tournament, money bridge, execution routing, and hysteresis stability into one compelling audiobook story.
-- `"casenotes"`: one rich `90–160` word story per active non-tracking holding (`holding_decisions`) with varied sentence openings, explaining what the business does, why we own it, exact ledger close/weight/P&L/stop/heat from `allocation_<MKT>_<session>.json`, the rule behind its verdict, and the concrete `if / unless / below` invalidation trigger (citing research URLs where catalysts/earnings apply).
+Read `<RUN_DIR>/cache/allocation_<MKT>_<session>.json`, `<RUN_DIR>/work/cio_decisions_<MKT>.json`, `<RUN_DIR>/cache/research_<MKT>_<session>.json`, and any same-date `<MKT>_Market_Intelligence.html` sibling report. Target **8,000–12,000 words** (~50–75 min listen) for the Book/Audiobook Edition. Write `<RUN_DIR>/work/audit_narrative_<MKT>.json` via direct file-write tools or `json.dump` (never unquoted shell heredocs) supplying:
+- `"primer"`: 150–250 word executive thesis opening with portfolio condition, net worth, open heat vs ceiling, convergence score, what changed since the prior plan, and what the rebalance is trying to achieve.
+- `"chapters"` (`"chapter1"` .. `"chapter7"`): cohesive mentor-voice `"book_paragraphs"`, `"epigraph"` (`quote` + `author`), and `"book_callouts"` (`mental_model`, `reflection`, `parallel`, `execution`) weaving market conditions, portfolio philosophy, concrete examples/similar scenarios, and what we are trying to achieve into a compelling story.
+- `"casenotes"`: one crisp `90–160` word summary per active non-tracking holding (`holding_decisions`) for the Web Research Desk table, naming exact close/weight/P&L/stop/heat, the rule/CIO rationale behind its verdict, and the concrete `if / unless / below` invalidation trigger.
+- `"book_casenotes"`: one rich `250–450` word multi-paragraph story per active non-tracking holding (`{"paragraphs": [...], "callouts": [...]}`) written for **comfortable reading and listening**. Explain what the business does in plain English, why we own it, how current market and sector conditions affect it, *why* this decision makes sense (including any CIO override of the baseline rulebook), a concrete scenario or similar-case parallel (e.g., rupee/dollar impact of a gap-down or how a past winner behaved), and what we are trying to achieve by holding, trimming, or exiting.
+- `"book_challengers"`: list of `{"title": ..., "paragraphs": [...], "callouts": [...]}` entries comparing top challengers head-to-head against incumbents on risk-reward and entry discipline.
 - `"citations"`: numbered primary filing, exchange, and research source strings.
 
-**Strict Non-Contradiction Rule:** Every share count, dollar/rupee value, weight, stop, tournament score, convergence percentage, and verdict in your narrative MUST match `allocation_<MKT>_<session>.json` verbatim.
+**Audiobook-First Prose & Non-Contradiction Rules:**
+- Every share count, dollar/rupee value, weight, stop, convergence percentage, and verdict in your narrative MUST match `allocation_<MKT>_<session>.json` verbatim.
+- Write `"book_paragraphs"`, `"book_casenotes"`, and `"book_challengers"` for the ear: never dump raw enum codes (`EXIT_IMMEDIATELY`, `COMPOUNDER_PASS`, `TRIM_PROFIT_BOOKING`), slash-heavy labels (`HOLD / HARD STOP`), or dense parenthetical stat-lists into prose. Spell out risk-reward ratios naturally (e.g., *"roughly 2.6 rupees of upside for every 1 rupee of risk to our stop"*).
 
 ### Step 4 — Compile Both Synchronized Editions (`scripts/portfolio_audit_builder.py`)
 
