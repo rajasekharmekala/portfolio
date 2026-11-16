@@ -1,0 +1,144 @@
+{
+  "symbol": "PGR",
+  "market": "US",
+  "generated_at": "2026-11-16T21:04:35+00:00",
+  "business_quality_verdict": "COMPOUNDER_PASS",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": true,
+      "accessible": false,
+      "logged_in": false,
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": true,
+      "accessible": false,
+      "status": "no_open_tab",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NYSE:PGR",
+    "exchange": "NYSE",
+    "company_name": "Progressive Corporation",
+    "close": 237.26,
+    "change_1d_pct": 0.63,
+    "perf_1w_pct": 3.59,
+    "perf_1m_pct": 10.87,
+    "perf_3m_pct": 14.23,
+    "rsi_1d": 64.21,
+    "rsi_4h": 63.2,
+    "rsi_1w": 63.33,
+    "sma20": 230.15,
+    "sma50": 220.36,
+    "sma200": 210.72,
+    "sma30_weekly": 214.67,
+    "ema10_weekly": 226.25,
+    "ema20_4h": 233.16,
+    "sma50_4h": 227.53,
+    "atr14": 5.02,
+    "bb_width_pct": 7.31,
+    "pivot_s1": 209.75,
+    "pivot_s2": 188.22,
+    "pivot_r1": 244.08,
+    "pivot_r2": 256.89,
+    "high_52w": 241.02,
+    "low_52w": 189.2,
+    "dist_to_200d_pct": 12.59,
+    "major_shelf": 214.67,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
+    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 7.31%) above rising 50D SMA (220.36) and 30W SMA (214.67)."
+  },
+  "options_plan": {
+    "symbol": "PGR",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
+    "iv_regime": "IV_ELEVATED",
+    "atm_iv_pct": 27.2,
+    "hv20_pct": 23.1,
+    "open_positions_audit": [],
+    "headline": "Buy 1x PGR 2027-01-15 $220/$290 Bull Call Spread (60 DTE) at $19.24 net debit ($1,924.00 max loss -> $5,076.00 max profit, 2.64:1 R:R).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 60,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 220.0,
+          "mid": 20.4,
+          "bid": 19.7,
+          "ask": 21.1,
+          "open_interest": 1343
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 290.0,
+          "mid": 1.16,
+          "bid": 0.0,
+          "ask": 0.45,
+          "open_interest": 216
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 19.24,
+      "max_loss_total": 1924.0,
+      "max_loss_nav_bps": 192.4,
+      "max_profit_total": "$5,076.00 (2.64:1 reward-to-risk)",
+      "breakeven_at_expiry": 239.24,
+      "breakeven_move_pct": 0.83,
+      "net_delta_dollars_per_1_move": 74.3,
+      "daily_theta_dollars": -6.0,
+      "underlying_stop_trigger": 214.67,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($3,553.20 gain) or exit early if PGR closes below $214.67.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $220 at Expiry",
+          "stock_price": 214.67,
+          "stock_move_pct": -9.5,
+          "contract_value": 0.0,
+          "net_pnl": -1924.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($239.24)",
+          "stock_price": 239.24,
+          "stock_move_pct": 0.8,
+          "contract_value": 1924.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($290)",
+          "stock_price": 290.0,
+          "stock_move_pct": 22.2,
+          "contract_value": 7000.0,
+          "net_pnl": 5076.0,
+          "return_on_risk_pct": 263.8
+        },
+        {
+          "scenario": "Bull Overshoot ($313.78)",
+          "stock_price": 313.78,
+          "stock_move_pct": 32.3,
+          "contract_value": 7000.0,
+          "net_pnl": 5076.0,
+          "return_on_risk_pct": 263.8
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: Selling the upper $290 call collects $1.16/sh upfront, lowering your breakeven to $239.24 and protecting you against post-news volatility crush.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $220 Call for $20.40 and simultaneously sell the $290 Call for $1.16, paying $19.24/sh net ($1,924.00 total for 1 spread(s)). That $1,924.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $239.24 (+0.8% from $237.26). Anywhere at or above $290, your $1,924.00 turns into $7,000.00 (+$5,076.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in PGR adds ~$74.30 to your spread (Net Delta), while sitting flat costs ~$6.00/day in time decay (Net Theta) — much lower than an unhedged call because the sold $290 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (PGR)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x PGR 2027-01-15 $220/$290 Bull Call Spread (60 DTE) at $19.24 net debit ($1,924.00 max loss -&gt; $5,076.00 max profit, 2.64:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 7.31%) above rising 50D SMA (220.36) and 30W SMA (214.67). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:PGR. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_pgr_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:PGR\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:PGR\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_pgr_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: Selling the upper $290 call collects $1.16/sh upfront, lowering your breakeven to $239.24 and protecting you against post-news volatility crush.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $220 Call for $20.40 and simultaneously sell the $290 Call for $1.16, paying $19.24/sh net ($1,924.00 total for 1 spread(s)). That $1,924.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $239.24 (+0.8% from $237.26). Anywhere at or above $290, your $1,924.00 turns into $7,000.00 (+$5,076.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in PGR adds ~$74.30 to your spread (Net Delta), while sitting flat costs ~$6.00/day in time decay (Net Theta) — much lower than an unhedged call because the sold $290 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for PGR</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $220 CALL @ $20.40 mid (bid $19.70 / ask $21.10, OI 1343) + SELL 2027-01-15 $290 CALL @ $1.16 mid (bid $0.00 / ask $0.45, OI 216)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,924.00 (192.4 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$239.24 (+0.83% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$5,076.00 (2.64:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+74.30 per $1 move | $-6.00/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($3,553.20 gain) or exit early if PGR closes below $214.67.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 60 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $1,924.00 Across Stock Scenarios (PGR)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $220 at Expiry</td><td>$214.67 (-9.5%)</td><td>$0.00</td><td>$-1,924.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($239.24)</td><td>$239.24 (+0.8%)</td><td>$1,924.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($290)</td><td>$290.00 (+22.2%)</td><td>$7,000.00</td><td>$+5,076.00</td><td><strong>+263.8%</strong></td></tr><tr><td>Bull Overshoot ($313.78)</td><td>$313.78 (+32.3%)</td><td>$7,000.00</td><td>$+5,076.00</td><td><strong>+263.8%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+}
