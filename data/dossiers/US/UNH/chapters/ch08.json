@@ -2,115 +2,131 @@
   "id": "ch-8",
   "title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
   "epigraph": {
-    "quote": "Never argue with the tape. Fundamentals tell you what to own; the 30-week moving average tells you when institutions agree with your math.",
-    "author": "Stan Weinstein Market Principle"
+    "quote": "Fundamental value tells you what a business is worth; the tape tells you when institutions are actually willing to own it.",
+    "author": "Stan Weinstein Stage Analysis Principle"
   },
   "web_blocks": [
     {
+      "type": "p",
+      "html": "While UNH's fundamental recovery and Reverse DCF valuation point to long-term upside, the technical tape as of <b>November 17, 2026</b> issues an unambiguous caution. Shares closed at <b>$389.68</b>, falling <b>-5.42%</b> on the day from $412.02 on elevated volume of <b>7.94 million shares</b>—<b>1.35x</b> the 30-day average of 5.87 million. That single-session breakdown sliced decisively below the <b>30-week simple moving average ($398.33, -2.17%)</b>, the <b>10-week exponential moving average ($396.46, -1.71%)</b>, the <b>50-day SMA ($391.50, -0.46%)</b>, and the <b>20-day SMA ($406.51)</b>, while remaining <b>+6.01%</b> above the rising 200-day SMA (<b>$367.58</b>). Under `facts_US_2026-11-17.json`, UNH sits in <b>Stage 3 (Topping / Pullback)</b>; however, because price broke below both its 30-week and 50-day SMAs on 1.35x volume, our deterministic timing screen triggers <b>AVOID_STAGE4_OR_BROKEN</b> and <b>CAP_REJECTED</b> on the snapshot's Stage 4 technical flag, blocking immediate buying and enforcing <b>WAIT_FOR_SUPPORT</b>."
+    },
+    {
       "type": "h3",
-      "title": "Weinstein Stage 2 & Multi-Timeframe (1W / 1D / 4H) Structure",
-      "html": "The broader US index sits in a <strong>Correction</strong> as of November 13, 2026. It trades below its 50-DMA with six distribution days and 52.6% breadth above the 50-DMA [2]. Against that weak backdrop, UNH shows clear relative strength. Shares closed at <strong>$407.46</strong> (+0.58%), up 4.91% over the trailing 5-day TradingView window and 6.58% over 1 month (note: Finviz's calendar-aligned ledger records +3.38% 1W and +0.19% 1M over slightly different lookback cutoffs) [2]."
+      "title": "Multi-Timeframe Structure (1W / 1D / 4H) &amp; Institutional Flow"
     },
     {
       "type": "p",
-      "html": "The broader US index sits in a <strong>Correction</strong> as of November 13, 2026. It trades below its 50-DMA with six distribution days and 52.6% breadth above the 50-DMA [2]. Against that weak backdrop, UNH shows clear relative strength. Shares closed at <strong>$407.46</strong> (+0.58%), up 4.91% on the week and 6.58% on the month [2]."
+      "html": "Examining the multi-timeframe tape confirms that institutional distribution has not yet exhausted itself. On the <b>weekly chart (1W)</b>, UNH remains <b>-15.58%</b> below its 52-week high of $461.62 (52-week low $255.97), with a neutral weekly RSI of <b>50.49</b> and the stock unable to hold its 30-week SMA ($398.33) or 10-week EMA ($396.46). On the <b>daily chart (1D)</b>, the daily RSI sits at <b>42.92</b>, below the 50 midpoint, while the 14-day Average True Range (ATR14) of <b>$11.62</b> (2.98% of price) and Bollinger Band width of <b>8.48%</b> signal expanding downside volatility. Only the rising <b>200-day SMA at $367.58</b> (+6.01% below CMP) remains intact as long-term trend support."
     },
     {
       "type": "p",
-      "html": "UNH is in a confirmed <strong>Weinstein Stage 2 uptrend</strong>. Price sits just <strong>+2.39% above the 10-week EMA ($397.96)</strong> and <strong>+2.59% above the 30-week SMA ($397.18)</strong> [2]. It also holds +4.10% above the 50-DMA ($391.43) and +11.20% above the 200-DMA ($366.44) [2]."
-    },
-    {
-      "type": "p",
-      "html": "Momentum is balanced across every timeframe. Daily RSI is <strong>55.32</strong>, Weekly RSI is <strong>57.04</strong>, and 4-Hour RSI is <strong>55.42</strong> [2]. Meanwhile, UNH is coiling in a tight Volatility Contraction Pattern (VCP). Bollinger bandwidth has compressed to <strong>7.56%</strong> with a $10.82 ATR(14) [2]. Friday volume was 3.47M shares (0.60x average), showing quiet supply absorption. Support spans <strong>$391.99–$408.40</strong>, with a hard stop at <strong>$386.02</strong> [2]."
+      "html": "The <b>4-hour intraday chart (4H)</b> provides the decisive timing check: <b>intraday_4h_turn is false</b>. Price at $389.68 sits well below both the 4H EMA20 (<b>$402.55</b>) and 4H SMA50 (<b>$406.25</b>), with 4H RSI depressed at <b>38.27</b>. Because the 4H chart has not printed a higher low or reclaimed its 20-period EMA, there is no confirmed mean-reversion window at CMP. Attempting to catch a -5.42% distribution bar in a broader US market regime classified as <b>Downtrend</b> (43.5% of stocks above their 50-day SMA; 7 distribution days over the last 25 sessions) violates Stage 2 capital-preservation discipline."
     },
     {
       "type": "table",
-      "caption": "UNH Multi-Timeframe Technical & Institutional Flow Ledger (As of 2026-11-13)",
+      "caption": "UNH Multi-Timeframe Technical &amp; Support Ledger (As of 2026-11-17)",
       "headers": [
-        "Indicator / Level",
-        "Observed Value",
-        "Distance / Signal",
-        "Interpretation"
+        "Timeframe / Metric",
+        "Current Reading",
+        "Key Benchmark / Level",
+        "Technical Signal / Gate Status"
       ],
       "rows": [
         [
-          "Close Price (CMP)",
-          "$407.46",
-          "+4.91% 1W / +6.58% 1M",
-          "Outperforming US index during market Correction"
+          "Weekly Trend (1W)",
+          "$389.68 (-3.81% 1W)",
+          "30W SMA $398.33 | 10W EMA $396.46",
+          "Stage 3 (Topping / Pullback) | -2.17% below 30W SMA; CAP_REJECTED"
         ],
         [
-          "10-Week EMA / 30-Week SMA",
-          "$397.96 / $397.18",
-          "+2.39% / +2.59%",
-          "Confirmed Stage 2; non-extended"
+          "Daily Trend (1D)",
+          "$389.68 (-5.42% 1D)",
+          "50D SMA $391.50 | 200D SMA $367.58",
+          "Below 20D/50D SMAs; +6.01% above 200D SMA"
         ],
         [
-          "50-Day SMA / 200-Day SMA",
-          "$391.43 / $366.44",
-          "+4.10% / +11.20%",
-          "Rising moving-average stack"
+          "Intraday (4H)",
+          "4H RSI 38.27",
+          "4H EMA20 $402.55 | 4H SMA50 $406.25",
+          "intraday_4h_turn: FALSE (No reversal confirmation)"
         ],
         [
-          "RSI(14) 1D / 1W / 4H",
-          "55.32 / 57.04 / 55.42",
-          "Neutral-Bullish",
-          "Room to run before >70 overbought"
+          "Momentum &amp; Volatility",
+          "1D RSI 42.92 | 1W RSI 50.49",
+          "ATR14 $11.62 | BB Width 8.48%",
+          "1.35x volume spike on breakdown; sellers active"
         ],
         [
-          "Bollinger Bandwidth / ATR(14)",
-          "7.56% / $10.82",
-          "VCP Volatility Squeeze",
-          "Tight coil; clear risk definition"
-        ],
-        [
-          "Support Zone / Invalidation Stop",
-          "$391.99–$408.40 / $386.02",
-          "5.26% stop distance",
-          "CMP sits inside upper support shelf"
-        ],
-        [
-          "52-Week Range / Pivot R1 & R2",
-          "$255.97–$461.62 / $434.81 & $462.66",
-          "-11.73% off 52W high",
-          "Clear overhead air to $435–$462"
+          "Support &amp; Resistance",
+          "Pivot S1 $370.86 | S2 $334.76",
+          "Support Zone $365.30–$376.42 | R1 $434.81",
+          "Invalidation at $365.05; hard stop at $358.00"
         ]
       ],
-      "takeaway": "UNH passes the Stage 2 technical gate cleanly (CLEAR_FOR_CONSIDERATION) with tight VCP compression and well-defined $386.02 invalidation."
+      "takeaway": "Every short- and intermediate-term moving average sits overhead as resistance; disciplined buyers wait for stabilization in the $365.30–$376.42 support zone or a confirmed 30W SMA reclaim above $398.33."
+    },
+    {
+      "type": "tradingview_chart",
+      "symbol": "NYSE:UNH"
     },
     {
       "type": "h3",
-      "title": "Short-Term Trading & Options Convexity Context"
+      "title": "Support Shelves, Overhead Supply &amp; Options-Implied Volatility"
     },
     {
       "type": "p",
-      "html": "Implied volatility sits at <strong>33.2% ATM IV</strong> versus <strong>24.2% HV20</strong> [2]. Because options are pricey, a defined-risk bull call debit spread beats buying naked calls. The Jan 15, 2027 $400/$470 spread caps loss at $2,190 per contract and targets 2.20:1 reward-to-risk above $421.90 [2]. For stock buyers, scaling in tranches inside $391.99–$408.40 respects the broader market Correction."
+      "html": "The nearest structural demand shelf sits between <b>$365.30 and $376.42</b>, anchored by Pivot S1 at <b>$370.86</b> and the rising 200-day SMA at <b>$367.58</b>. Below that shelf, the deterministic invalidation trigger sits at <b>$365.05</b>, with a hard protective stop at <b>$358.00</b> (roughly 0.8x ATR below the 200-day SMA) to prevent a deeper slide toward Pivot S2 at <b>$334.76</b>. Conversely, overhead supply now clusters between the 50-day SMA ($391.50), the 30-week SMA ($398.33), and Pivot R1 ($434.81), with Pivot R2 sitting at $462.66 near the 52-week high ($461.62). Options pricing reflects this tension: at-the-money implied volatility stands at <b>36.1%</b> against 20-day historical volatility of <b>30.6%</b> (IV_ELEVATED), signaling that derivatives desks are pricing elevated near-term event risk."
+    },
+    {
+      "type": "callout",
+      "kind": "warning",
+      "title": "Why No-FOMO Discipline Matters in a Downtrend Regime",
+      "paragraphs": [
+        "In a US Downtrend regime with 7 distribution days and 43.5% breadth above the 50-day SMA, buying Stage 3 pullbacks that slice below the 30-week and 50-day SMAs on the first red day carries poor short-term expectancy. Even high-quality healthcare compounders routinely overshoot below their 50-day and 30-week averages before finding institutional bids near the 200-day SMA.",
+        "Waiting for either the $365.30–$376.42 support shelf or a confirmed Stage 2 reclaim above $398.33 improves reward-to-risk from mediocre at CMP to 4.81:1 at the upper edge of the support zone."
+      ]
+    },
+    {
+      "type": "h3",
+      "title": "What a Valid Stage 1 Base &amp; Stage 2 Reclaim Looks Like"
     },
     {
       "type": "p",
-      "html": "Institutional ownership sits at 90.97%, with quarterly institutional buying up +0.43% [2]. Short interest is low at 1.56% of float (2.68 days to cover) [2]. That shows short sellers have largely covered their 2025 bets. On the 4-hour chart, price holds above both the 20-EMA ($403.15) and 50-SMA ($404.26) [2]. On the weekly chart, the 30-week SMA ($397.18) and 10-week EMA ($397.96) form a tight floor right under $400 [2]. Overhead, Pivot R1 sits at $434.81 and Pivot R2 sits at $462.66 [2]. A breakout above $415 on 6M+ daily shares would confirm institutional follow-through."
+      "html": "For UNH to transition out of its current <b>Stage 3 (Topping / Pullback)</b> and CAP_REJECTED posture, price must complete a clear three-step repair sequence. First, it must halt lower lows above the rising 200-day SMA ($367.58) on contracting volume. Second, it must flatten the 50-day SMA ($391.50) and 10-week EMA ($396.46) over two to four weeks of tight consolidation. Third, it must break above the <b>30-week SMA ($398.33)</b> on weekly volume at least 1.2x average. Until that sequence triggers, defensive cash discipline protects capital from secondary markdown waves, especially while Pivot R1 ($434.81) and R2 ($462.66) cap upside rallies. Relative strength versus the S&amp;P 500 must also stabilize before institutional funds rotate back into the stock."
+    },
+    {
+      "type": "p",
+      "html": "Comparing the dollar risk at CMP versus support makes the case for patience concrete. Buying at $389.68 with a hard stop at $358.00 risks $31.68 per share for $75.32 of upside to $465.00, or a 2.38:1 ratio. Waiting for $376.42 cuts risk to $18.42 per share and raises upside to $88.58, delivering a 4.81:1 payoff."
     }
   ],
   "book_paragraphs": [
-    "Once you and I know what a business is worth, we turn to the tape—not because charts predict the future, but because charts tell us whether the institutions who move hundred-million-dollar blocks are quietly accumulating shares or heading for the exits.",
-    "Look at the broader backdrop on November 13, 2026: the US market is officially in a Correction, trading below its 50-day moving average with six distribution days on the ledger and barely 52.6 percent of stocks holding above their 50-day line. In that kind of tape, most stocks look ragged. Yet UnitedHealth Group closed at $407.46, up 4.91 percent on the week and 6.58 percent on the month, sitting in a textbook Stan Weinstein Stage 2 uptrend.",
-    "Let us check the moving-average stack across every timeframe. On the weekly chart, UNH sits just 2.39 percent above its 10-week EMA of $397.96 and 2.59 percent above its 30-week SMA of $397.18. On the daily chart, it is 4.10 percent above its 50-day SMA of $391.43 and 11.20 percent above its 200-day SMA of $366.44. That is the exact opposite of a chased, extended breakout. The stock has already digested its 59 percent rebound off the $255.97 fifty-two-week low and is now coiling tightly.",
-    "Look even closer at the Volatility Contraction Pattern. Bollinger bandwidth has squeezed down to just 7.56 percent, while the 14-day Average True Range is $10.82—roughly 2.66 percent of the share price. Daily, weekly, and four-hour RSI readings all cluster right around 55 to 57, meaning momentum is constructive without being remotely overbought. Friday's volume came in at 3.47 million shares, just 60 percent of the 30-day average, showing sellers have dried up inside this shelf.",
-    "Why does this matter for your wallet? Because tight coils give us cheap, unambiguous invalidation. The structural support shelf runs from $391.99 to $408.40, anchored by the 50-day and 30-week moving averages, with a hard invalidation stop just underneath at $386.02. If UNH breaks $386.02 on a closing basis, the Stage 2 thesis is broken and you step aside for a 5.3 percent loss from current levels. If it holds and breaks above pivot resistance at $434.81, the path opens toward the $461.62 fifty-two-week high and our $475.00 base target.",
-    "There is also a subtle clue in the options chain. At-the-money implied volatility is sitting at 33.2 percent against 20-day historical volatility of 24.2 percent. Options market makers are pricing in policy and guidance event risk, which makes buying naked calls expensive. If you use options at all, selling an upside call against a long call—a defined-risk bull call spread—lets you harvest that elevated volatility while capping your worst-case loss to the penny.",
-    "Let us walk through the exact mechanics of the options setup from our Options Desk snapshot so there is zero ambiguity about how defined-risk call convexity works in plain dollars. At $407.46, UNH at-the-money implied volatility is 33.2 percent compared to 20-day historical realized volatility of 24.2 percent. When implied volatility trades nine percentage points above realized volatility, buying an outright naked call means you are overpaying for time value that will evaporate if the stock merely chops sideways inside its shelf. Instead, look at the January 15, 2027 $400/$470 Bull Call Debit Spread (61 days to expiration).",
-    "Here is the exact wallet math for one contract, which controls 100 shares. You buy the January 15, 2027 $400 Call at the $25.95 mid-price (open interest 7,449 contracts, tight $25.60/$26.30 market) and simultaneously sell the January 15, 2027 $470 Call at the $4.05 mid-price (open interest 3,955 contracts, $3.80/$4.30 market). Your net debit is $21.90 per share, or $2,190.00 total cash out of pocket—which is 100 percent of your maximum possible loss, representing 219 basis points of a $100,000 reference budget. Selling the $470 call cuts your breakeven down to $421.90 (+3.54 percent from $407.46) and trims daily time decay to just $8.39 per day while giving you +$43.10 of net delta for every $1 move higher. If UNH reaches $470.00 by January expiration, the spread settles at its full $70.00 width ($7,000.00), locking in a $4,810.00 net profit—a 219.6 percent return on risk, or 2.20-to-1 reward-to-risk. And just like the equity, we pair it with a disciplined early-exit rule: close if UNH breaks below the $397.18 thirty-week SMA shelf, or take profits at 65 to 75 percent of maximum gain ($3,367.00).",
-    "Let us also look at the institutional sponsorship and volume footprint beneath the Stage 2 surface. Institutions hold 90.97 percent of UnitedHealth Group shares outstanding, with institutional transactions ticking up +0.43 percent over the recent quarter and short interest sitting at a modest 1.56 percent of the float (13.96 million shares, or 2.68 days to cover). That low short interest tells you something important: the aggressive short-sellers who rode UNH down during the 2025 guidance cuts have largely covered, and the stock is now in an institutional re-accumulation phase rather than a battleground short squeeze.",
-    "Watch the 4-hour and weekly moving averages together as you manage entries. On the 4-hour chart, price ($407.46) sits cleanly above both the 20-period EMA ($403.15) and the 50-period SMA ($404.26), confirming short-term buyer control. On the weekly chart, the 30-week SMA ($397.18) and 10-week EMA ($397.96) have converged almost to the penny, creating a dense institutional demand shelf right below $400.00. Meanwhile, Pivot S1 sits down at $370.86 and Pivot S2 at $334.76, while Pivot R1 sits overhead at $434.81 and Pivot R2 at $462.66—just above the $461.62 fifty-two-week high. That asymmetric chart geometry—thick moving-average support just 2.5 percent below CMP and open air up to $434.81—is what makes a staged dip-accumulation plan attractive here.",
-    "Compare UnitedHealth Group technical posture against its five managed-care peers on the exact same November 13, 2026 ledger, and you will see why the tape singles out UNH. CVS Health remains stuck in Stage 1 basing at $89.35, while Elevance Health at $429.69 sits in a Stage 2 pullback posture requiring a deeper dip before entry. Cigna ($297.00), Humana ($450.00), and Centene ($71.27) are all in Stage 2, yet none match UNH combination of 9.52 percent ROIC, 5.32 percent trailing operating margin, and a 7.56 percent Bollinger bandwidth squeeze perched right on top of its 20-day, 50-day, and 30-week moving-average confluence.",
-    "Remember also how to treat volume on a Stage 2 breakout attempt: Friday volume of 3.47 million shares (0.60 times the 30-day average of 5.82 million) is constructive during a tight shelf coil, because it shows sellers are exhausted. When UNH eventually clears $415 to $434.81 pivot resistance, you want to see daily volume expand above 6 million shares—at least 1.2 times the 30-day average—to confirm institutional follow-through. Until that breakout volume arrives, patience inside the $391.99 to $408.40 support shelf is your highest-edge posture."
+    "In investing, being right on the business and wrong on the timing can still cost you months of dead money and painful drawdowns. That is why after we finish valuing UnitedHealth Group at $389.68, you and I have to turn off our fundamental spreadsheets and read the price tape with cold objectivity. As of November 17, 2026, the tape is telling us a very clear story: institutions are not yet done selling, and the stock sits in Stage 3 (Topping / Pullback) below its 30-week and 50-day averages, triggering our CAP_REJECTED timing gate.",
+    "Look closely at what happened on the November 17 session. UNH dropped 5.42 percent in a single day, falling from $412.02 to $389.68 on 7.94 million shares—35 percent heavier than normal thirty-day volume. In one stroke, that selloff knocked the stock below four key institutional guardrails: the 20-day moving average at $406.51, the 50-day moving average at $391.50, the 10-week exponential moving average at $396.46, and the critical 30-week simple moving average at $398.33. Whenever a mega-cap stock breaks below its 30-week average on above-average volume, Stan Weinstein's Stage Analysis rule is unambiguous: do not step in front of the train.",
+    "The shorter-term intraday charts confirm that the selling pressure has not yet turned. On the 4-hour chart, UNH's RSI sits at 38.27, well below its 20-period EMA of $402.55 and 50-period SMA of $406.25. There is no higher low, no bullish divergence, and no volume dry-up to suggest that buyers have absorbed the supply. Meanwhile, the broader US equity market itself is in a Downtrend regime, with only 43.5 percent of tracked stocks trading above their 50-day moving averages and seven institutional distribution days logged over the past twenty-five sessions. Buying a Stage 3 pullback into a weak market tape while the snapshot's Stage 4 technical flag blocks entry is how disciplined portfolios accumulate avoidable paper losses.",
+    "Notice how the options market confirms this near-term caution. At-the-money implied volatility on UNH options sits at 36.1 percent against 20-day realized volatility of 30.6 percent. Options market makers are charging a clear volatility premium because they know a stock trading with an $11.62 daily Average True Range—nearly 3 percent per day—can easily swing another $20 lower before finding its footing. Even within the healthcare sector, capital is rotating selectively: peers like The Cigna Group and Elevance Health remain in Stage 2 uptrends above their 50-day averages, whereas UNH and CVS Health are still digesting Medicare Advantage and regulatory uncertainty.",
+    "Does this mean UNH is broken forever? Not at all. Look just 6 percent below the current price, and you will find two major technical anchors converging: Pivot S1 support at $370.86 and the rising 200-day simple moving average at $367.58. Together, they define our high-probability support zone between $365.30 and $376.42. Think about the difference in your odds if you wait for that zone. Buying at $389.68 puts you right underneath overhead resistance at $391.50 to $406.51 while exposing you to a quick $22 drop to the 200-day average.",
+    "Waiting for price to settle into $365.30 to $376.42—and insisting on a 4-hour trend turn before committing a single dollar—lets you place a tight stop at $358.00 and capture a 4.81-to-1 reward-to-risk ratio toward our $465.00 Base Case target. By contrast, if UNH slices through the $365.05 invalidation level and fails to hold $358.00, the next structural floor sits all the way down at Pivot S2 ($334.76). Having that stop in place protects you from riding a routine pullback into a deeper markdown.",
+    "For investors who prefer buying strength rather than catching support, the alternative trigger is equally crisp: wait for UNH to carve out a multi-week Stage 1 base and reclaim the 30-week moving average at $398.33 on strong volume. When a stock reclaims its 30-week average on 1.2 times normal weekly volume, it signals that institutional accumulation has returned and overhead supply has been absorbed. Either way, patience is not indecision; it is the price of asymmetric returns.",
+    "Let us walk through what that Stage 1 basing and Stage 2 reclaim actually look like on a weekly chart so you can recognize it in real time. First, selling pressure has to dry up. After a high-volume breakdown like November 17's 7.94 million share session, you want to see down days print on progressively lighter volume as UNH approaches the $365.30 to $376.42 shelf. That tells you forced institutional liquidation is ending and long-term value buyers are quietly placing bids near the 200-day moving average ($367.58).",
+    "Second, the moving averages need time to stop sloping downward. Right now, the 20-day moving average at $406.51 and the 50-day moving average at $391.50 sit overhead like a ceiling. If UNH spends three to six weeks trading sideways in a tightening volatility band—shrinking its Bollinger Band width from 8.48 percent back toward 4 or 5 percent—those short-term averages will flatten out and converge near price. That volatility contraction pattern is the hallmark of institutional absorption.",
+    "Third, we need a decisive catalyst bar on the 4-hour and daily timeframes. When price finally pushes back above $398.33—the 30-week moving average—on volume running 20 to 50 percent above average, the burden of proof shifts back to the bears. Until those three steps occur, stepping in early at $389.68 offers poor compensation for taking on Downtrend market risk.",
+    "Let us also address a common question from long-term investors: if you believe UNH is worth $465.00, why care about $15 or $20 on the entry price? The answer is simple arithmetic and behavioral discipline. When you buy a Stage 3 breakdown below the 30-week average at $389.68 before support forms, your stop loss still has to sit below the 200-day moving average at $358.00, meaning you risk $31.68 per share for $75.32 of Base Case upside—a 2.38-to-1 ratio that gets worse if a broader market selloff triggers your stop on day three. Waiting for the $365.30 to $376.42 support shelf cuts your dollar risk nearly in half to $18.42 while boosting your upside to $88.58, giving you a 4.81-to-1 payoff.",
+    "Even more importantly, waiting for a confirmed 4-hour reversal keeps you from catching a falling knife if unexpected news hits. In a market with seven distribution days over twenty-five sessions, institutional funds routinely de-risk healthcare winners to raise cash or meet redemptions. Respecting the 30-week average and the 4-hour EMA20 ($402.55) ensures you are swimming with the institutional tide rather than against it.",
+    "Let us also check the exact price map above and below the current quote so nothing catches you off guard. Above $389.68, the first minor hurdle is the 50-day moving average at $391.50, followed closely by the 10-week EMA at $396.46 and the 30-week SMA at $398.33. Beyond that cluster sits the 20-day moving average at $406.51, and then Pivot R1 resistance at $434.81, with Pivot R2 at $462.66 guarding the 52-week high of $461.62. Any bounce that stalls inside the $391 to $406 zone on light volume is simply a bear-market rally back into supply, not a new uptrend.",
+    "Below $389.68, the tape is much cleaner. Between $389.68 and $376.42 lies a 3.4 percent air pocket where buyers have little reason to step in aggressively. Once price enters $365.30 to $376.42, however, it meets both Pivot S1 ($370.86) and the rising 200-day simple moving average ($367.58). That confluence is where pension funds and value desks historically defend long-term compounders, making it the only logical zone for staged support bids.",
+    "Remember also how relative strength behaves during market downturns. Over the past month, UNH has slipped 4.23 percent while the S&P 500 has logged seven distribution days and seen breadth fall to 43.5 percent above the 50-day average. If UNH holds its 200-day average at $367.58 while the broader index continues testing lower lows, its relative-strength line will turn upward before price breaks out. That subtle divergence—holding the 200-day shelf while peers wobble—is often the earliest clue that institutional accumulation is quietly absorbing supply. Until that happens, keeping your powder dry in cash respects both the market regime and the Stage 3 CAP_REJECTED chart."
   ],
   "book_callouts": [
     {
       "kind": "reflection",
-      "label": "NARRATOR'S REFLECTION",
-      "title": "Relative Strength During a Market Correction",
-      "text": "When the S&P 500 is under its 50-day moving average with six distribution days, stocks that refuse to break their own 10-week EMA are usually being accumulated by institutions rotating into defensive cash-flow visibility. Still, a market Correction raises the odds of a shakeout toward the lower end of the support shelf—which is why staged tranches beat all-in market orders."
+      "title": "Two Ways to Enter, One Rule Against Chasing",
+      "text": "Stage 3 pullbacks below the 30-week and 50-day SMAs require patience. You either buy a confirmed bounce inside the $365.30–$376.42 support shelf or wait for UNH to reclaim its 30-week SMA above $398.33.",
+      "bullets": [
+        "Current Posture: Stage 3 (Topping / Pullback) | CAP_REJECTED ($389.68 is below 30W, 10W, 50D, and 20D averages; +6.01% above 200D SMA).",
+        "Support Shelf: $365.30–$376.42 (anchored by 200D SMA $367.58 and Pivot S1 $370.86).",
+        "4H Gate: intraday_4h_turn is FALSE (4H RSI 38.27 vs 4H EMA20 $402.55).",
+        "Hard Stop: $358.00 (below $365.05 invalidation), preventing a slide toward S2 ($334.76)."
+      ]
     }
   ]
 }
