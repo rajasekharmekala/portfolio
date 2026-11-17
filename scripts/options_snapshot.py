@@ -609,8 +609,8 @@ def structure_options_setup(
         and setup_type in {"STAGE2_VCP_VOLATILITY_SQUEEZE", "STAGE2_SUPPORT_PULLBACK"}
     )
 
-    if use_leaps and leaps_exp:
-        l_rows = liquid_rows(chains[leaps_exp])
+    l_rows = liquid_rows(chains[leaps_exp]) if (use_leaps and leaps_exp) else []
+    if use_leaps and leaps_exp and l_rows:
         # Target ~0.68-0.75 delta (strike ~ 0.88-0.95 * spot)
         enriched = []
         for r in l_rows:

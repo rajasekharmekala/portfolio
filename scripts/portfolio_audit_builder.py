@@ -550,6 +550,7 @@ def compile_portfolio_audit(
     narrative_override = narrative_override or {}
     story = _default_story_and_casenotes(alloc, narrative_override)
     report_stem = f"{mkt}_Portfolio_Audit"
+    cur_word = "rupee" if mkt == "IN" else "dollar"
     title = (
         f"India (Zerodha) Portfolio Forensic Audit, Allocation & Narrative Playbook"
         if mkt == "IN"
@@ -610,6 +611,11 @@ def compile_portfolio_audit(
 
     # Build Chapter 1 HTML (place infobox right before p.lede so every table has an immediate prose paragraph)
     ch1 = story["chapters"]["chapter1"]
+    heat_note = (
+        f"Every stop-out across the book is bounded below {ps['max_portfolio_heat_pct']:.1f}% total drawdown"
+        if ps["target_open_heat_pct"] <= ps["max_portfolio_heat_pct"]
+        else f"Post-exit heat ({ps['target_open_heat_pct']:.2f}%) still exceeds the {ps['max_portfolio_heat_pct']:.1f}% ceiling due to legacy positions and grandfathered options; new buys are blocked"
+    )
     ch1_tbl = (
         '<table class="wikitable">\n'
         '  <caption>Macro Regime, Portfolio Heat &amp; Convergence Guardrails</caption>\n'
@@ -618,7 +624,7 @@ def compile_portfolio_audit(
         f'    <tr><td><strong>Market Regime</strong></td><td>{_esc(env["regime_label"])} (Breadth &gt;50DMA: {env["breadth_pct_above_50dma"] if env["breadth_pct_above_50dma"] is not None else "Measured"}%)</td>'
         f'<td>{_esc(env["playbook_mode"].replace("_", " "))} Playbook</td><td>Min cash floor {env["min_cash_floor_pct"]:.1f}%; starter extension cap &le;{env["max_starter_extension_pct"]:.1f}%</td></tr>\n'
         f'    <tr><td><strong>Open Portfolio Heat</strong></td><td>{ps["current_open_heat_pct"]:.2f}% ({cur}{cur_heat_amt:,.2f}) &rarr; {ps["target_open_heat_pct"]:.2f}% ({cur}{tgt_heat_amt:,.2f})</td>'
-        f'<td>Hard ceiling {ps["max_portfolio_heat_pct"]:.1f}% of Net Worth</td><td>Every stop-out across the book is bounded below {ps["max_portfolio_heat_pct"]:.1f}% total drawdown</td></tr>\n'
+        f'<td>Hard ceiling {ps["max_portfolio_heat_pct"]:.1f}% of Net Worth</td><td>{heat_note}</td></tr>\n'
         f'    <tr><td><strong>Active Risk Slots</strong></td><td>{ps["active_unique_risk_underlyings_count"]} unique underlyings (+{ps["tracking_positions_count"]} tracking)</td>'
         f'<td>{ps["active_slots_range"][0]}–{ps["active_slots_range"][1]} active names; &lt;0.35% stubs excluded</td><td>Challengers require +15.0 tournament pts to displace a Stage 3 incumbent</td></tr>\n'
         f'    <tr><td><strong>Convergence &amp; Stability</strong></td><td>{sc["convergence_score_pct"]:.1f}% converged ({sc["actionable_trades_count"]} trade(s))</td>'
@@ -745,7 +751,7 @@ def compile_portfolio_audit(
             f"Small 1-share and pilot tracking positions below 0.35% of net worth serve as live exchange-screen anchors rather than meaningful capital commitments. "
             f"In our {mkt} account, {len(tracking)} tracking stub(s) ({', '.join(t['symbol'] for t in tracking)}) sum to {cur}{ps['tracking_positions_value']:,.2f}, or just {round(ps['tracking_positions_value'] / ps['net_worth'] * 100.0, 2):.2f}% of total capital. "
             f"Under our v4 sizing charter, counting a {cur}{tracking[-1]['current_value']:,.2f} 1-share tracker against the 12–15 active risk-slot cap would artificially block real compounders or generate brokerage friction worth more than the position itself. "
-            f"We reconcile every rupee of these stubs in our Money Bridge while holding each behind its monograph invalidation stop with zero new capital unless a full support setup triggers."
+            f"We reconcile every {cur_word} of these stubs in our Money Bridge while holding each behind its monograph invalidation stop with zero new capital unless a full support setup triggers."
         )
         tr_take = (
             f"<p>Keeping {', '.join(t['symbol'] for t in tracking)} isolated in this tracking ledger preserves full accounting accuracy. "
@@ -928,10 +934,10 @@ def compile_portfolio_audit(
     )
     book_ch5_tbl = ch5_tbl.replace('class="wikitable"', 'class="mc-table"')
     ch5_take = (
-        f"<p>Every rupee in the Master Money Bridge reconciles to {cur}{ps['net_worth']:,.2f} across both current and target columns. "
+        f"<p>Every {cur_word} in the Master Money Bridge reconciles to {cur}{ps['net_worth']:,.2f} across both current and target columns. "
         f"Current holdings plus cash equal 100.00%, and target holdings plus reserve cash equal 100.00% with {cur}0.00 drift. "
         f"Phase 1 sales free {cur}{ps['capital_liberated_equities'] + ps['capital_liberated_options']:,.2f} to supplement our {cur}{ps['current_cash_value']:,.2f} starting cash, fund {cur}{ps['capital_deployed_equities']:,.2f} of disciplined additions, and hold {cur}{ps['target_cash_value']:,.2f} ({ps['target_cash_wt_pct']:.2f}%) in reserve. "
-        f"Read the two right-hand columns as the plan of record: every current line we keep holds its exact rupee value, every line we trim shows the precise freed cash, and the final cash row sits well above our {env['min_cash_floor_pct']:.1f}% regime floor. "
+        f"Read the two right-hand columns as the plan of record: every current line we keep holds its exact {cur_word} value, every line we trim shows the precise freed cash, and the final cash row sits well above our {env['min_cash_floor_pct']:.1f}% regime floor. "
         f"Join that reconciled pool to Section 5.1's running-balance waterfall and stress tests below to see how the whole reset is self-funded.</p>"
     )
     # Aggregate retained-book base-case reward versus open-heat stop risk (red-team disclosure)
@@ -1019,9 +1025,14 @@ def compile_portfolio_audit(
         f"Second, a 10.0% index drop at {beta_val:.2f} beta implies roughly {ten_pct_index_drop_pct:.2f}% ({cur}{ten_pct_index_drop_amt:,.2f}) equity impact before stops fire. "
         f"Third, if zero support alerts fill, {cur}{ps['target_cash_value']:,.2f} waits safely in dry powder with zero decay, covering ~{cur}{resting_total_need:,.2f} of top resting starters."
     )
+    heat_status_txt = (
+        f"keeping worst-case stop-out loss below our {ps['max_portfolio_heat_pct']:.1f}% ceiling."
+        if ps["target_open_heat_pct"] <= ps["max_portfolio_heat_pct"]
+        else f"cutting {ps['current_open_heat_pct'] - ps['target_open_heat_pct']:.2f} percentage points of risk, though remaining above our {ps['max_portfolio_heat_pct']:.1f}% ceiling due to legacy positions and grandfathered options."
+    )
     wf_take = (
         f"<p>Tracing the running cash balance from {cur}{ps['current_cash_value']:,.2f} to {cur}{ps['target_cash_value']:,.2f} shows that Phase 1 sales fortify our liquidity immediately without relying on optimistic fills. "
-        f"Open portfolio heat drops from {ps['current_open_heat_pct']:.2f}% today to {ps['target_open_heat_pct']:.2f}% after execution ({cur}{tgt_heat_amt:,.2f} if every retained stop hits), keeping worst-case stop-out loss below our {ps['max_portfolio_heat_pct']:.1f}% ceiling. "
+        f"Open portfolio heat drops from {ps['current_open_heat_pct']:.2f}% today to {ps['target_open_heat_pct']:.2f}% after execution ({cur}{tgt_heat_amt:,.2f} if every retained stop hits), {heat_status_txt} "
         f"Treat that {ps['target_open_heat_pct']:.2f}% as pre-gap and pre-slippage, however: our Section 2.2 rule evaluates stops on completed daily or weekly closes (exiting only with RSI(14) below 42, or the following session on explicit hard-stop lines), and thin-volume Phase 1 exits or stop-outs can gap through their limit floors. "
         f"That fully reconciled {cur}{ps['target_cash_value']:,.2f} reserve backs every sequenced advisory recommendation in Chapter 6 next.</p>"
     )
@@ -1131,7 +1142,7 @@ def compile_portfolio_audit(
         + "\n".join(f"<p>{_prose_html(p)}</p>" for p in ch6["book_paragraphs"])
         + f"\n{ch6_tbl}\n{ch6_take}\n"
         + "<h3>6.1 Dossier Underwriting Coverage &amp; Debt Queue</h3>\n"
-        + f"<p>Real conviction comes from primary filings and cash-flow forensics, never from a chart pattern alone. Whenever an equity sits in our account without a completed 10-chapter monograph, our rulebook places it in provisional status rather than dumping a working trend or adding blind risk. Existing shares stay guarded by a ratcheted closing stop, fresh capital additions remain frozen, and research priority runs strictly from largest rupee exposure down to smallest.</p>\n"
+        + f"<p>Real conviction comes from primary filings and cash-flow forensics, never from a chart pattern alone. Whenever an equity sits in our account without a completed 10-chapter monograph, our rulebook places it in provisional status rather than dumping a working trend or adding blind risk. Existing shares stay guarded by a ratcheted closing stop, fresh capital additions remain frozen, and research priority runs strictly from largest {cur_word} exposure down to smallest.</p>\n"
         + f"{debt_tbl}\n{debt_take}\n</section>"
     )
 
