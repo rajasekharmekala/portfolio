@@ -1,0 +1,239 @@
+{
+  "id": "ch-7",
+  "title": "7. Why the Price Is What It Is: Valuation, Reverse DCF & Peer Comps",
+  "epigraph": {
+    "quote": "Price is what you pay; value is what you get—and at sixty times earnings, the market is demanding fifteen years of near-flawless execution.",
+    "author": "Institutional Valuation Desk Principle"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "At its November 13, 2026 ledger close of <strong>₹4,844.90</strong>, Titan commands a market cap of <strong>₹4,30,611.81 crore</strong> on the TradingView snapshot [1][29]. The stock trades at <strong>62.0x headline TTM P/E</strong> and <strong>23.8x Price-to-Book</strong>, with a 0.31% dividend yield [1][29]. Crucially, headline TTM PAT (₹7,031 crore) embeds a ₹671 crore Q2 FY27 one-off customs-duty/tax gain [7]. Stripping that one-off reduces normalized TTM PAT to <strong>₹6,360 crore</strong> (normalized TTM EPS <strong>₹71.64</strong> across 88.78 crore shares), lifting the true <strong>normalized TTM P/E to 67.6x</strong> at ₹4,844.90 [1][7]. Against audited FY26 figures of ₹5,073 crore PAT and ₹4,713 crore FCF, Titan trades at <strong>84.9x FY26 PAT</strong> and <strong>91.4x FY26 FCF</strong> [1][4]."
+    },
+    {
+      "type": "p",
+      "html": "To test whether ₹4,844.90 embeds excess optimism or fair compounding math, we run a <strong>Reverse DCF</strong> model and stress-test cash conversion. Instead of guessing a target price, we solve for the growth rate already priced into ₹4,30,611.81 crore today."
+    },
+    {
+      "type": "estimate",
+      "title": "Reverse DCF: Implied 10-Year Free Cash Flow Growth at ₹4,844.90",
+      "the_number": "18.6% annual FCF CAGR over FY27–FY36 is required on the model grid to justify ₹4,844.90 at an 11.0% INR cost of equity and 5.5% terminal growth rate—assuming FY26's 92.9% FCF/PAT conversion holds.",
+      "how_calculated": "We solve for the explicit 10-year FCF CAGR (g) that equates the present value of FY27–FY36 Free Cash Flows plus the Gordon Growth terminal value (TV = FCF_10 * (1 + 5.5%) / (11.0% - 5.5%)) to ₹4,30,611.81 crore, starting from FY26 peak FCF of ₹4,713 crore (92.9% of PAT).",
+      "the_inputs": "CMP ₹4,844.90; Market Cap ₹4,30,611.81 Cr; Base FY26 FCF ₹4,713 Cr (vs 12-year cumulative FCF/PAT conversion of ~40%); Cost of Equity (Ke) 11.0% (6.8% India 10Y G-Sec + 4.2% equity risk premium at 0.85 beta); Terminal growth 5.5%.",
+      "the_range": "At 15.0% FCF CAGR (or if FCF conversion reverts toward the 40% historical norm), intrinsic value drops to ₹3,510 (-27.5% vs ₹4,844.90) at Ke=11.0% or ₹2,840 at Ke=12.0%; at 18.6% CAGR, fair value equals ~₹4,845; at 21.0% CAGR, fair value rises to ₹5,790 (+19.5%).",
+      "if_off": "If CaratLane, studded jewellery mix, and Damas GCC fail to sustain >=70% FCF/PAT conversion (contrast FY26's 92.9% peak against the 12-year ~40% norm), or if normalized EPS de-rates to 50x (₹3,581.81), downside is 26.1% from ₹4,844.90."
+    },
+    {
+      "type": "table",
+      "caption": "Reverse DCF Sensitivity Matrix: Implied Fair Value per Share (₹) Across FCF CAGR & Discount Rates",
+      "headers": [
+        "10Y FCF CAGR (FY27–36)",
+        "Ke = 10.0% (Bull Rates)",
+        "Ke = 11.0% (Base Case)",
+        "Ke = 12.0% (Stress Case)",
+        "Implied FY36E FCF (₹ Cr)"
+      ],
+      "rows": [
+        [
+          "15.0% CAGR (Conservative / 40–60% FCF Conv.)",
+          "₹4,410",
+          "₹3,510",
+          "₹2,840",
+          "₹19,067"
+        ],
+        [
+          "17.0% CAGR (Moderation)",
+          "₹5,180",
+          "₹4,125",
+          "₹3,335",
+          "₹22,655"
+        ],
+        [
+          "18.6% CAGR (Implied at ₹4,844.90)",
+          "₹5,940",
+          "₹4,845",
+          "₹3,840",
+          "₹25,968"
+        ],
+        [
+          "21.0% CAGR (Historical Pace)",
+          "₹7,190",
+          "₹5,790",
+          "₹4,680",
+          "₹31,705"
+        ],
+        [
+          "23.0% CAGR (Studded + GCC Upside)",
+          "₹8,460",
+          "₹6,810",
+          "₹5,500",
+          "₹37,350"
+        ]
+      ],
+      "takeaway": "At ₹4,844.90, the market prices Titan for ~18.6% annual FCF compounding off FY26's 92.9% FCF/PAT peak—leaving zero margin of safety if conversion mean-reverts toward the 12-year ~40% norm."
+    },
+    {
+      "type": "p",
+      "html": "Stress-testing cash conversion and expected returns explains why <strong>WAIT_FOR_SUPPORT</strong> is disciplined. FY26 delivered a 92.9% FCF-to-PAT peak (₹4,713 crore on ₹5,073 crore PAT). Yet Titan's 12-year cumulative FCF-to-PAT conversion sits near <strong>~40%</strong>, including negative CFO in FY20, FY23, and FY25 [1]. At ₹4,844.90, our 25/50/25 Expected Value of ₹5,350.00 offers only <strong>+10.43%</strong>, trailing our 11.0% cost of equity. A 15/45/40 stress case (weighting a 50x normalized EPS Bear case at ₹3,581.81) yields just <strong>₹4,912.72 (+1.4%)</strong>. Waiting for the ₹4,550.00–₹4,696.38 support shelf fixes both valuation cushion and technical asymmetry."
+    },
+    {
+      "type": "table",
+      "caption": "Titan Historical Valuation Bands & Street Q2 FY27 Target Consensus",
+      "headers": [
+        "Valuation Lens / Brokerage",
+        "Reference Metric / Rating",
+        "Multiple / Target Price (₹)",
+        "Implied vs CMP (₹4,844.90)"
+      ],
+      "rows": [
+        [
+          "Titan 5-Year Median TTM P/E",
+          "Historical Band (55x–75x)",
+          "~66.0x TTM P/E",
+          "62.0x headline / 67.6x normalized ex-one-off"
+        ],
+        [
+          "Motilal Oswal (Nov 2026)",
+          "BUY (~55x Sep-28E EPS)",
+          "₹5,700",
+          "+17.6% upside [28]"
+        ],
+        [
+          "Emkay Global (Nov 2026)",
+          "BUY (Re-rating on Q2 beat)",
+          "₹5,600",
+          "+15.6% upside [27][28]"
+        ],
+        [
+          "Nuvama Institutional (Nov 2026)",
+          "HOLD (Raised from ₹5,030)",
+          "₹5,479",
+          "+13.1% upside [27][28]"
+        ],
+        [
+          "Prabhudas Lilladher (Nov 2026)",
+          "ACCUMULATE (Q2 FY27 review)",
+          "₹5,330",
+          "+10.0% upside [28]"
+        ]
+      ],
+      "takeaway": "Post-Q2 FY27 Street targets cluster between ₹5,330 and ₹5,700 (+10.0% to +17.6% vs ₹4,844.90), confirming upside toward ₹5,600 once Stage 3 distribution resolves."
+    },
+    {
+      "type": "p",
+      "html": "Brokerage targets after Q2 FY27 results reinforce a fundamental floor near ₹5,330–₹5,700 [27][28]. Even cautious desks like Nuvama (Hold, ₹5,479) and Prabhudas Lilladher (Accumulate, ₹5,330) raised targets above ₹5,300 after seeing 11.7% ex-duty margins and 31% CaratLane growth [8][27][28]. Motilal Oswal (₹5,700) and Emkay (₹5,600) value Titan at ~55x Sep-28E EPS, expecting Q3 festive demand to drive operating leverage [6][27][28]."
+    },
+    {
+      "type": "peer_snapshot_table",
+      "peers": [
+        "TITAN",
+        "KALYANKJIL",
+        "SENCO",
+        "THANGAMAYL",
+        "TRENT"
+      ],
+      "caption": "Peer Valuation & Capital Efficiency Comparison: Indian Listed Jewellery & Tata Retail Leaders (Nov 13, 2026)",
+      "takeaway": "On the TradingView peer ledger above, TITAN (₹430,611.81 Cr Mcap) trades at 62.0x headline TTM P/E and 45.3% ROE—at a premium to KALYANKJIL (45.7x), THANGAMAYL (32.2x), and SENCO (8.9x), while sitting 31.2% cheaper on P/E than Tata stablemate TRENT (90.1x). (Note: automated peer table cells reflect TradingView snapshot feed ₹4,910.00 / STAGE_2; all thesis and valuation gates in this dossier anchor on the authoritative 2026-11-13 NSE ledger close ₹4,844.90 / Stage 3.)"
+    },
+    {
+      "type": "p",
+      "html": "The peer snapshot table above explains Titan's quality premium using uniform TradingView multiples [29]. <strong>KALYANKJIL</strong> trades at 45.7x P/E with 26.7% ROE. It is expanding nationally, yet trails Titan in studded mix and luxury breadth. <strong>SENCO</strong> sits at 8.9x P/E in a weak Stage 4 downtrend. <strong>THANGAMAYL</strong> trades at 32.2x P/E (29.3% ROE) with regional concentration and a steep drawdown from ₹7,430. Meanwhile, Tata stablemate <strong>TRENT</strong> trades at 90.1x P/E (27.3% ROE). This leaves TITAN (62.0x headline P/E, 45.3% ROE, ₹430,611.81 Cr market cap) 31.2% cheaper on P/E with superior ROE [29]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Why Cash Conversion Supports the Long-Term Multiple—With Caveats:</strong> Optical P/E ratios can mislead when comparing asset-heavy and asset-light retailers. Titan's L2 and L3 franchise partners fund most store capex and physical space, keeping corporate ROE elevated (45.3% TradingView / 37.7% Screener) [1][16][29]. Even with 222 inventory days and ₹27,638 crore of Gold-on-Lease and lease borrowings, Titan matches bullion liabilities against physical stock [1][14]. In FY26, it generated ₹5,590 crore in operating cash flow and ₹4,713 crore in Free Cash Flow (92.9% of PAT), though investors must respect the 12-year ~40% cumulative FCF/PAT norm [1]."
+    },
+    {
+      "type": "p",
+      "html": "<strong>What Could Compress Valuation:</strong> Paying 67.6x normalized ex-one-off TTM P/E leaves zero room for a structural miss. If record gold prices stall physical gram demand or lab-grown diamonds erode natural solitaire pricing, jewellery margins could slip toward 8–9% [19]. Under a 15% FCF CAGR stress test at Ke=11.0%, fair value drops to ₹3,510; at 50x normalized TTM EPS (₹71.64), the stock drops to ₹3,581.81 (-26.1% vs ₹4,844.90)."
+    },
+    {
+      "type": "p",
+      "html": "<strong>Historical Band Context:</strong> Titan has traded between 55x and 75x trailing earnings for most of the past five years, averaging near 66x. At ₹4,844.90, headline P/E (62.0x) sits slightly below the 5-year median, but normalized ex-one-off P/E (67.6x) sits above it [1][7][29]. Pairing a valuation pullback into ₹4,550.00–₹4,696.38 with a hard ₹4,380.00 stop protects capital before committing."
+    },
+    {
+      "type": "p",
+      "html": "<strong>The Bottom Line on Price:</strong> Titan is priced for durable ~18.6% FCF compounding off FY26's peak cash conversion [1]. While Street targets cluster between ₹5,330 and ₹5,700, our 25/50/25 EV (+10.43% vs ₹4,844.90) trails our 11.0% cost of equity and our 15/45/40 stress EV is just ₹4,912.72 (+1.4%) [27][28]. Therefore, <strong>WAIT_FOR_SUPPORT</strong> at ₹4,550.00–₹4,696.38 is the disciplined valuation posture."
+    },
+    {
+      "type": "trigger",
+      "html": "Valuation Gate Trigger: Monitor quarterly studded jewellery share (must hold >=33%) and consolidated FCF-to-PAT conversion (target >=70% across FY27–FY28) to confirm the 18.6% Reverse DCF compounding path remains intact."
+    }
+  ],
+  "book_paragraphs": [
+    "Whenever an investor looks at Titan Company Limited for the first time, the conversation almost always stalls on a single number: sixty-two times earnings. At the November 13, 2026 ledger closing price of 4,844.90 rupees, Titan carries a TradingView market capitalization of 4,30,611.81 crore rupees. That is 62.0 times headline trailing twelve-month earnings, 23.8 times book value, and a 0.31 percent dividend yield. Strip out the 671 crore rupee one-time customs-duty and tax gain embedded in Q2 FY27, and normalized trailing net profit drops from 7,031 crore to 6,360 crore rupees—equal to 71.64 rupees in normalized EPS and a true 67.6 times normalized trailing P/E.",
+    "Value investors are trained to recoil from numbers like these, and rightly so—most companies trading above sixty times normalized earnings eventually disappoint and suffer brutal multiple compression. Yet Titan has traded between fifty-five and seventy-five times earnings for nearly a decade, and anyone who waited for it to become cheap on a statistical price-to-earnings screen missed one of India's greatest wealth creators. The goal here is not to defend a high multiple blindly, nor to dismiss it out of hand, but to dissect what the market is actually pricing in—and why patience for a pullback pays.",
+    "The cleanest way to strip away narrative bias is a Reverse Discounted Cash Flow model. Instead of inventing a target price out of thin air, we work backward from 4,30,611.81 crore rupees. Using an 11.0 percent rupee cost of equity and a 5.5 percent terminal growth rate, Titan must compound its Free Cash Flow at roughly 18.6 percent per year over the next decade to justify 4,844.90 rupees per share—assuming FY26's 92.9 percent FCF-to-PAT conversion holds."
+  ],
+  "book_callouts": [
+    {
+      "kind": "insight",
+      "title": "THE REVERSE DCF & FCF CONVERSION REALITY CHECK",
+      "text": "At 4,844.90 rupees, you are paying fair value for 18.6 percent annual Free Cash Flow compounding off FY26's 92.9 percent FCF-to-PAT peak—yet Titan's 12-year cumulative FCF-to-PAT conversion is only ~40 percent. That is why Wait for Support in the 4,550 to 4,696.38 rupee zone is disciplined."
+    }
+  ],
+  "book_subsections": [
+    {
+      "title": "Why 62x–67.6x Earnings Persists: Zero Dilution vs. Cash Conversion Reality",
+      "paragraphs": [
+        "Most high-growth consumer companies dilute their shareholders through stock-based compensation or equity raises to fund store rollouts. Titan has not issued a single net equity share since FY15, keeping its share capital frozen at 89 crore rupees. Because Tanishq's L2 and L3 franchise partners fund store capex and much of the physical showroom footprint, Titan generates a 45.3 percent TradingView Return on Equity (37.7 percent on Screener) and a 20.5 percent Return on Capital Employed while funding expansion internally.",
+        "At the same time, an honest Red Team check prevents overpaying at current levels. While FY26 generated 4,713 crore rupees of Free Cash Flow (92.9 percent of PAT), Titan's 12-year cumulative FCF-to-PAT conversion sits near 40 percent, with negative operating cash flow in FY20, FY23, and FY25 when gold inventory expanded. If FCF growth moderates toward 15 percent at an 11 percent discount rate, fair value drops to 3,510 rupees—or 2,840 rupees at a 12 percent discount rate.",
+        "Furthermore, at 4,844.90 rupees, our 25/50/25 Expected Value of 5,350 rupees implies +10.43 percent—trailing our 11.0 percent cost of equity—while a 15/45/40 stress-weighted scenario (using a 50x normalized P/E bear case of 3,581.81 rupees) yields just 4,912.72 rupees (+1.4 percent). Waiting for the 4,550 to 4,696.38 rupee support shelf restores real margin of safety."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Reading the Peer Table: Kalyan, Senco, Thangamayil, and Trent",
+      "paragraphs": [
+        "Comparing Titan against its listed peers on the National Stock Exchange using uniform TradingView multiples reveals why institutional capital treats it as a benchmark asset. Kalyan Jewellers trades at 45.7 times earnings with 26.7 percent ROE, reflecting strong national expansion through its asset-light FOCO model, yet it still trails Titan in studded diamond mix and multi-category luxury breadth. Regional players like Thangamayil Jewellery at 32.2 times earnings (29.3 percent ROE) and Senco Gold at 8.9 times earnings trade at sharp discounts because of geographic concentration, tighter balance-sheet cushions, and weaker technical trends.",
+        "Zooming out to the broader Tata Group retail stable makes Titan's valuation look far more grounded. Trent—the powerhouse behind Zudio and Westside—trades at 90.1 times earnings with a 27.3 percent ROE. Titan delivers a higher 45.3 percent TradingView Return on Equity while trading at a 31.2 percent lower earnings multiple than Trent. Following Q2 FY27 results, sell-side analysts at Motilal Oswal, Emkay Global, Nuvama, and Prabhudas Lilladher set twelve-month targets between 5,330 and 5,700 rupees, implying 10.0 to 17.6 percent upside from 4,844.90 rupees."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "The Verdict on Price: Wait for Support to Restore Margin of Safety",
+      "paragraphs": [
+        "The numbers tell a clear story. Titan is neither a screaming deep-value bargain nor an indefensible bubble. At 4,844.90 rupees, headline P/E (62.0x) sits slightly below its five-year median of 66 times, while normalized ex-one-off P/E (67.6x) sits above it and expected return trails our 11.0 percent cost of equity. Waiting for a pullback into the 4,550 to 4,696.38 rupee support shelf lets us buy a Tier-1 compounder at a 2.85-to-1 reward-to-risk ratio.",
+        "Put differently, valuation discipline is not about refusing to own great growth companies—it is about refusing to overpay when both normalized earnings multiples and technical distribution signal caution. By waiting for the 4,550.00 to 4,696.38 rupee zone, we demand that the market give us both a better entry multiple and a cleaner risk-reward floor before we commit a single rupee of cash."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Deconstructing the Multiple: Gold Inflation, Mix Shift, and Terminal Value",
+      "paragraphs": [
+        "Let us dig one layer deeper into why Titan's Reverse DCF bar of 18.6 percent annual Free Cash Flow growth deserves careful scrutiny. In most manufacturing or software businesses, revenue growth comes from selling more units or raising subscription prices. In jewellery retail, nominal revenue is the product of physical gold tonnage, making charges, studded diamond mix, and the underlying spot price of gold. When gold rallies thirty percent in a year, Titan's top line gets an automatic nominal tailwind, even if physical gram volumes stay flat.",
+        "That nuance cuts both ways for valuation. On the positive side, rising gold prices lift the rupee value of Titan's existing inventory and increase absolute rupee making charges where charges are linked to gold value. On the negative side, steep gold rallies can cause sticker shock among middle-class wedding shoppers, leading them to buy lighter necklaces or defer purchases until prices stabilize. In our Reverse DCF, assuming 18.6 percent Free Cash Flow compounding over a full decade means Titan cannot rely on gold-price inflation alone; it must keep gaining market share and lifting its studded diamond mix.",
+        "Fortunately, Titan's segment economics show how management is engineering that exact shift. Studded jewellery—pieces set with diamonds and precious stones—carries structurally higher gross margins than plain 22-karat gold coins or bars. In the second quarter of FY27, studded sales grew more than 30 percent year-on-year, lifting ex-duty jewellery operating margins to roughly 11.7 percent. At the same time, CaratLane's 31 percent revenue surge proves that younger urban shoppers are embracing lightweight, higher-margin everyday jewellery.",
+        "What about the Watches and Wearables division and EyeCare? While jewellery accounts for roughly 88 percent of consolidated revenue, Watches delivered a 16.2 percent EBIT margin in FY26, acting as a steady, high-return cash cow. Precision engineering subsidiary TEAL adds industrial diversification in aerospace and automation components. Together, these secondary engines help stabilize consolidated profitability when jewellery faces temporary customs-duty adjustments or seasonal calendar shifts.",
+        "When we weigh all of these cash-flow drivers against the current market capitalization of 4,30,611.81 crore rupees, the valuation picture becomes crystal clear. You are paying 62.0 times headline (67.6 times normalized) trailing earnings for a zero-dilution Tata Group leader. You are not getting a statistical bargain at current price, which is why patience for the 4,550 to 4,696.38 rupee support zone and a hard 4,380 rupee stop-loss is essential."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Stress-Testing Consensus Targets Against Historical P/E Bands",
+      "paragraphs": [
+        "When institutional analysts set twelve-month price targets, they typically anchor on forward earnings multiples two years out. Following Titan's Q2 FY27 results in November 2026, Motilal Oswal reiterated its Buy rating with a 5,700 rupee target based on roughly 55 times September 2028 estimated earnings. Emkay Global maintained a Buy rating at 5,600 rupees, while more cautious desks like Nuvama and Prabhudas Lilladher lifted their targets to 5,479 and 5,330 rupees respectively.",
+        "Notice how tightly those four independent brokerage models cluster around our own 5,600 rupee Base Case. That convergence reflects the math of Titan's earnings trajectory: when normalized net profit grows 54 percent in Q2 and delayed Diwali wedding demand shifts into Q3, forward earnings estimates step up rapidly. Even if the trailing P/E multiple drifts down toward 55 times two-year forward earnings, 20 to 25 percent annual earnings growth still pulls the stock price higher over time.",
+        "At the same time, we never outsource our risk limits to Dalal Street consensus. Brokerages rarely tell investors when to exit if a thesis breaks, and they often lag downward revisions during gold-price shocks. That is why our stress test pairs the 5,600 rupee Base Case with an explicit 3,800 rupee Bear Case—and a 50x normalized EPS Bear case of 3,581.81 rupees—demonstrating why waiting for support keeps risk tightly bounded."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Working Capital, Gold-on-Lease, and Cash Flow Quality in Valuation",
+      "paragraphs": [
+        "A careful analyst never stops at the income statement when valuing a jeweller, because inventory accounting can flatter or distort reported profits. Titan's balance sheet carries 222 inventory days as of FY26 and 27,638 crore rupees of total borrowings and lease liabilities as of September 2026. Most of those borrowings represent Gold Metal Loans—bullion leased from bullion banks at low single-digit interest rates and repaid when jewellery is sold.",
+        "Because Titan matches physical gold inventory with Gold-on-Lease liabilities and customer advances under its Golden Harvest Scheme, its working capital cycle is structurally protected from spot gold swings. Even after funding store expansion and rising gold prices, Titan generated 5,590 crore rupees in operating cash flow and 4,713 crore rupees in Free Cash Flow in FY26. Still, the 12-year ~40 percent cumulative FCF-to-PAT conversion reminds us to demand >=70 percent conversion across FY27–FY28 before paying peak multiples."
+      ],
+      "callouts": []
+    },
+    {
+      "title": "Why Valuation Discipline Still Matters at 67.6x Normalized Earnings",
+      "paragraphs": [
+        "Acknowledging that Titan deserves a premium multiple does not mean paying any price. Our Reverse DCF anchors us to a simple truth: at 4,844.90 rupees, future returns depend on Titan sustaining roughly 18.6 percent Free Cash Flow compounding without major margin erosion or working-capital drag. Once you strip the 671 crore rupee Q2 FY27 one-time customs-duty and tax gain out of trailing earnings, normalized trailing net profit falls from 7,031 crore to 6,360 crore rupees—equal to 71.64 rupees per share and a steep 67.6 times normalized earnings multiple.",
+        "That normalized multiple leaves very little room for error if Free Cash Flow conversion reverts toward its 12-year historical norm of roughly 40 percent, or if high gold prices keep physical gram volumes muted. In our stress-weighted 15/45/40 scenario—which assigns 40 percent weight to a 50x normalized EPS bear case of 3,581.81 rupees—Expected Value drops to 4,912.72 rupees, barely +1.4 percent above the November 13 ledger close. Even under our baseline 25/50/25 probabilities, the 5,350 rupee Expected Value (+10.43 percent) falls short of our 11.0 percent rupee cost of equity.",
+        "That is precisely why we pair valuation work with strict technical risk limits. Fundamental analysis tells us Titan is worth owning on a pullback into the 4,550.00 to 4,696.38 rupee support shelf with a 5,600 rupee base target, while our 4,380.00 rupee stop ensures we never ride a multi-year de-rating if the thesis breaks. Waiting for support transforms both the valuation cushion and the trade asymmetry from 1.62-to-1 at current market price to 2.85-to-1."
+      ],
+      "callouts": []
+    }
+  ]
+}
