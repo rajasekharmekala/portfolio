@@ -634,7 +634,7 @@ def compile_portfolio_audit(
     )
     ch1_trigger = (
         '<div class="callout callout-rule triggers"><div class="callout-title">What Changes Our Macro &amp; Heat Posture</div>'
-        f'<p>If broad market breadth expands above 55.0% with benchmark price above rising 50-day and 200-day averages, our heat budget lifts to 12.0% and Broad Uptrend starters open up to +8.5% above the 10-week EMA; '
+        f'<p>If broad market breadth expands above 65.0% with benchmark price above rising 50-day and 200-day averages and distribution days subside, our heat budget lifts to 12.0% and Broad Uptrend starters open up to +8.5% above the 10-week EMA; '
         f'if the benchmark breaks below its 200-day average into Downtrend, maximum heat contracts to 4.0% and cash floor rises to 22.0%.</p></div>'
     )
     ch1_html = (
@@ -941,11 +941,16 @@ def compile_portfolio_audit(
     )
     retained_base_gain_pct = round(retained_base_gain / ps["net_worth"] * 100.0, 2)
     retained_rr = round(retained_base_gain / tgt_heat_amt, 2) if tgt_heat_amt else 0.0
+    _top_contrib = sorted(
+        [(h["symbol"], round((h["target_base"] - h["close"]) * h["target_quantity"], 2)) for h in retained_lines],
+        key=lambda x: x[1],
+        reverse=True,
+    )[:2]
+    _contrib_str = ", ".join(f"{sym} {cur}{val:+,.2f}" for sym, val in _top_contrib)
     retained_base_line = (
         f"Against that risk, our {len(retained_lines)} retained base-case targets sum to {cur}{retained_base_gain:+,.2f} "
-        f"({retained_base_gain_pct:+.2f}% of net worth), a {retained_rr:.2f}:1 aggregate reward-to-stop ratio; "
-        f"the per-line contributions (for example AJMERA +{cur}80,236.00, TDPOWERSYS +{cur}85,751.50, "
-        f"SEDEMAC {cur}-7,910.00, ASTRAMICRO {cur}-16,515.00) reconcile line by line to each Section 2.1 case note."
+        f"({retained_base_gain_pct:+.2f}% of net worth), a {retained_rr:.2f}:1 aggregate reward-to-stop ratio "
+        f"(led by {_contrib_str}), reconciling line by line to each Section 2.1 case note."
     )
     ch5_take = ch5_take.replace("</p>", " " + retained_base_line + "</p>")
 
@@ -1017,7 +1022,7 @@ def compile_portfolio_audit(
     wf_take = (
         f"<p>Tracing the running cash balance from {cur}{ps['current_cash_value']:,.2f} to {cur}{ps['target_cash_value']:,.2f} shows that Phase 1 sales fortify our liquidity immediately without relying on optimistic fills. "
         f"Open portfolio heat drops from {ps['current_open_heat_pct']:.2f}% today to {ps['target_open_heat_pct']:.2f}% after execution ({cur}{tgt_heat_amt:,.2f} if every retained stop hits), keeping worst-case stop-out loss below our {ps['max_portfolio_heat_pct']:.1f}% ceiling. "
-        f"Treat that {ps['target_open_heat_pct']:.2f}% as pre-gap and pre-slippage, however: our Section 2.2 rule evaluates stops on completed daily or weekly closes (exiting only with RSI(14) below 42, or the following session on explicit hard-stop lines), and our two least liquid Phase 1 exits (RNITAI at 0.61x and TANFACIND at 0.20x average volume) can gap through their limit floors. "
+        f"Treat that {ps['target_open_heat_pct']:.2f}% as pre-gap and pre-slippage, however: our Section 2.2 rule evaluates stops on completed daily or weekly closes (exiting only with RSI(14) below 42, or the following session on explicit hard-stop lines), and thin-volume Phase 1 exits or stop-outs can gap through their limit floors. "
         f"That fully reconciled {cur}{ps['target_cash_value']:,.2f} reserve backs every sequenced advisory recommendation in Chapter 6 next.</p>"
     )
     ch5_html = (
@@ -1074,7 +1079,7 @@ def compile_portfolio_audit(
                 f'<td class="num">{cur}{ch["funded_value"]:,.2f} deployed</td>'
                 f"<td>{_esc(ch['broker_routing'])}</td></tr>"
             )
-    for ch in challengers[:6]:
+    for ch in challengers:
         if ch["entry_action"] == "RESTING_LIMIT_AT_SUPPORT":
             est_sh = max(1, int((ps["net_worth"] * (ch["starter_target_wt_pct"] / 100.0)) // max(0.01, ch["entry_zone_high"])))
             exec_rows.append(
