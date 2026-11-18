@@ -38,7 +38,6 @@
         <a href="#performance" role="tab" id="navtab-performance" aria-controls="panel-performance" aria-selected="true" class="active" data-tab="performance">Performance &amp; XIRR</a>
         <a href="#pipeline" role="tab" id="navtab-pipeline" aria-controls="panel-pipeline" aria-selected="false" tabindex="-1" data-tab="pipeline">Pipeline</a>
         <a href="#reports" role="tab" id="navtab-reports" aria-controls="panel-reports" aria-selected="false" tabindex="-1" data-tab="reports">Operating Reports</a>
-        <a href="#monographs" role="tab" id="navtab-dossiers" aria-controls="panel-dossiers" aria-selected="false" tabindex="-1" data-tab="dossiers">Monographs</a>
       </div>
     </div>
 
@@ -78,7 +77,7 @@
           </select>
         </label>
 
-        <label class="select-field" data-tab-scope="pipeline dossiers">
+        <label class="select-field" data-tab-scope="pipeline">
           <span>Verdict</span>
           <select id="verdict-filter"><option value="ALL">All verdicts</option></select>
         </label>
@@ -91,6 +90,9 @@
             <option value="company">Company A&ndash;Z</option>
             <option value="stage">Stage (2 &rarr; 4)</option>
             <option value="verdict">Verdict (buy &rarr; avoid, R/R priority)</option>
+            <option value="zone">CMP vs entry zone</option>
+            <option value="base">Base upside</option>
+            <option value="generated">Latest monograph</option>
             <option value="status">Status (held &rarr; watchlist)</option>
             <option value="sector">Sector A&ndash;Z</option>
             <option value="monograph">Monograph first</option>
@@ -214,24 +216,6 @@
         <p class="queue-note" id="report-empty" hidden></p>
       </section>
 
-      <section class="section" id="panel-dossiers" role="tabpanel" aria-labelledby="navtab-dossiers" hidden>
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Single-name underwriting</p>
-            <h2 id="dossiers-heading">Company Monographs &amp; Dossiers</h2>
-          </div>
-          <p class="section-meta" id="dossier-meta"></p>
-        </div>
-        <div class="pipeline-scroll dossier-scroll" id="dossier-table-wrap" role="region" tabindex="0" aria-label="Company monograph decisions table" hidden>
-          <table class="pipeline-table dossier-table">
-            <caption class="sr-only">Company monographs with verdicts, entry zones, stops, targets and expected value</caption>
-            <thead id="dossier-head"></thead>
-            <tbody id="dossier-body"></tbody>
-          </table>
-        </div>
-        <p class="queue-note" id="dossier-empty" hidden></p>
-      </section>
-
       <section class="empty-state" id="empty-state" hidden>
         <h2>No published reports or dossiers yet</h2>
         <p>Run Market Intelligence, Company Report, Dossier Refresh, Portfolio Audit, or Options Desk to populate the catalog. Stage 2 sector and stock scanning is part of Market Intelligence.</p>
@@ -259,7 +243,6 @@
     status: "ALL",
     verdict: "ALL",
     sort: { key: "market", dir: "asc" },
-    dossierSort: { key: "generated", dir: "desc" },
     openDossiers: new Set(),
     search: "",
     viewMode: "tree",
@@ -273,7 +256,6 @@
     { id: "performance", hash: "#performance", searchPlaceholder: "" },
     { id: "pipeline", hash: "#pipeline", searchPlaceholder: "Search ticker, company, sector…" },
     { id: "reports", hash: "#reports", searchPlaceholder: "Search report title, market, summary…" },
-    { id: "dossiers", hash: "#monographs", searchPlaceholder: "Search ticker, company, summary…" },
   ];
   const DEFAULT_TAB = "performance";
 
@@ -284,9 +266,9 @@
     "#performance-heading": "performance",
     "#reports": "reports",
     "#reports-heading": "reports",
-    "#monographs": "dossiers",
-    "#dossiers": "dossiers",
-    "#dossiers-heading": "dossiers",
+    "#monographs": "pipeline",
+    "#dossiers": "pipeline",
+    "#dossiers-heading": "pipeline",
   };
 
   function resolveTabFromHash(hash) {
@@ -399,7 +381,7 @@
         rows.set(key, {
           market, symbol, company: company || symbol,
           stages: new Set(), sectors: new Set(), statuses: new Set(),
-          verdict: null, dossierUrl: null, decision: null,
+          verdict: null, dossierUrl: null, decision: null, dossier: null,
         });
       }
       const row = rows.get(key);
@@ -440,6 +422,7 @@
       if (e.verdict && e.verdict !== "Not specified") row.verdict = e.verdict;
       if (e.sector && e.sector !== "Not specified") row.sectors.add(e.sector);
       if (e.url) row.dossierUrl = e.url;
+      row.dossier = e;
       if (e.decision) {
         row.decision = e.decision;
         const st = normalizeStage(e.decision.weinsteinStage);
@@ -458,6 +441,7 @@
       verdict: r.dossierUrl ? r.verdict : null,
       dossierUrl: r.dossierUrl,
       decision: r.decision,
+      dossier: r.dossier,
     }));
   }
 
@@ -484,7 +468,7 @@
     if (state.verdict !== "ALL" && row.verdict !== state.verdict) return false;
     if (state.search) {
       const q = state.search.toLowerCase();
-      const text = [row.symbol, row.company, row.sector, row.verdict, row.stage, row.market]
+      const text = [row.symbol, row.company, row.sector, row.verdict, row.stage, row.market, row.dossier?.summary]
         .join(" ").toLowerCase();
       if (!text.includes(q)) return false;
     }
@@ -510,14 +494,20 @@
 
   const PIPELINE_COLUMNS = [
     { key: "ticker", label: "Ticker" },
-    { key: "company", label: "Company", className: "col-company" },
-    { key: "market", label: "Market" },
     { key: "stage", label: "Stage" },
-    { key: "sector", label: "Sector", className: "col-sector" },
     { key: "status", label: "Status" },
     { key: "verdict", label: "Verdict", title: "Underwriting verdict; within each verdict, ordered by Stage, quality tier, zone proximity, and Base/Stop risk-reward" },
-    { key: "monograph", label: "Monograph" },
+    { key: "zone", label: "CMP", num: true, title: "Latest price and its distance from the entry zone" },
+    { key: "entryZone", label: "Entry zone", num: true },
+    { key: "stop", label: "Stop", num: true },
+    { key: "range", label: "Range" },
+    { key: "bear", label: "Bear", num: true },
+    { key: "base", label: "Base", num: true },
+    { key: "bull", label: "Bull", num: true },
+    { key: "generated", label: "Generated", title: "When the monograph was generated (Pacific)" },
+    { key: "monograph", label: "Read" },
   ];
+  const PIPELINE_DEFAULT_DIR = { base: "desc", generated: "desc" };
 
   function sortValue(key, row) {
     switch (key) {
@@ -528,6 +518,12 @@
       // Held names with more memberships first; the direction flips the whole order.
       case "status": return STATUS_RANK[row.status] * 3 + (3 - row.statuses.length);
       case "verdict": return row.verdict ? (VERDICT_RANK[row.verdict] ?? 7) : null;
+      case "zone": return decisionMetrics(row.decision, row.stage)?.zoneGap ?? null;
+      case "base": return decisionMetrics(row.decision, row.stage)?.baseUpside ?? null;
+      case "generated": {
+        const t = Date.parse(row.dossier?.generatedAt || row.dossier?.updatedAt || "");
+        return Number.isFinite(t) ? t : null;
+      }
       case "monograph": return row.dossierUrl ? 0 : 1;
       default: return row.market;
     }
@@ -568,10 +564,13 @@
 
   function pipelineHeadRow() {
     const cells = PIPELINE_COLUMNS.map(col => {
+      const cls = col.num ? ' class="num"' : "";
+      const title = col.title ? ` title="${escapeHtml(col.title)}"` : "";
+      if (["entryZone", "stop", "range", "bear", "bull"].includes(col.key)) {
+        return `<th scope="col"${cls}${title}>${escapeHtml(col.label)}</th>`;
+      }
       const active = state.sort.key === col.key;
       const ariaSort = active ? (state.sort.dir === "desc" ? "descending" : "ascending") : "none";
-      const cls = col.className ? ` class="${col.className}"` : "";
-      const title = col.title ? ` title="${escapeHtml(col.title)}"` : "";
       return `<th scope="col"${cls}${title} aria-sort="${ariaSort}"><button type="button" class="th-sort" data-sort-key="${col.key}">${escapeHtml(col.label)}<span class="sort-ind" aria-hidden="true"></span></button></th>`;
     });
     return `<tr>${cells.join("")}</tr>`;
@@ -591,51 +590,119 @@
 
   function isCurrentTabFiltered() {
     if (state.activeTab === "pipeline") return isFiltered();
-    if (state.activeTab === "dossiers") {
-      return state.market !== "ALL" || state.verdict !== "ALL" || Boolean(state.search);
-    }
     if (state.activeTab === "reports") {
       return state.market !== "ALL" || Boolean(state.search);
     }
     return false;
   }
 
-  function pipelineRowHtml(row) {
-    const company = row.company && row.company !== row.symbol ? escapeHtml(row.company) : "";
+  function dossierDetailHtml(row, m, cur) {
+    const e = row.dossier;
+    const d = row.decision;
+    const money = v => fmtMoney(v, cur);
+    const profileItems = [
+      ["Conviction tier", d?.tier],
+      ["Archetype", d?.archetype],
+      ["Strategy bucket", d?.strategyBucket],
+      ["Business quality", d?.businessQuality],
+      ["KPI health", d?.kpiHealth],
+      ["Weinstein stage", d?.weinsteinStage || row.stage],
+      ["Research as of", d?.asOf],
+      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist/watchlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
+    ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(/^[A-Z0-9_]+$/.test(v) ? humanize(v) : v)}</dd></div>`).join("");
+    const alerts = (d?.alerts || []).map(a => `<li><strong>${escapeHtml(a.trigger || "Trigger")}</strong>${a.instruction ? `<br>${escapeHtml(a.instruction)}` : ""}</li>`).join("");
+    const redeploy = (d?.redeployment || []).map(r => `<li><strong>${escapeHtml(humanize(r.type) || "Destination")}${isNum(r.allocationPct) ? ` · ${escapeHtml(String(r.allocationPct))}%` : ""}</strong>${r.recommendation ? `<br>${escapeHtml(r.recommendation)}` : ""}${r.entryCondition ? `<br><span class="detail-note">Entry: ${escapeHtml(r.entryCondition)}</span>` : ""}</li>`).join("");
+    const highlights = (e?.highlights || []).map(h => `<li>${escapeHtml(h)}</li>`).join("");
+    const section = (title, body) => (body ? `<section><h4>${title}</h4>${body}</section>` : "");
+    const holdingBody = [d?.holdingRationale ? `<p>${escapeHtml(d.holdingRationale)}</p>` : "", alerts ? `<ul>${alerts}</ul>` : ""].join("");
+    const summaryBody = [e?.summary ? `<p>${escapeHtml(e.summary)}</p>` : "", highlights ? `<ul>${highlights}</ul>` : ""].join("");
+    return [
+      section("Holding plan", holdingBody),
+      section("Redeployment", redeploy ? `<ul>${redeploy}</ul>` : ""),
+      section("Profile", profileItems ? `<dl class="detail-kv">${profileItems}</dl>` : ""),
+      section("Summary", summaryBody),
+    ].join("") || '<p class="detail-note">No decision data for this monograph yet.</p>';
+  }
+
+  function pipelineRowHtml(row, index, scope) {
+    const e = row.dossier;
+    const d = row.decision;
+    const m = decisionMetrics(d, row.stage) || { mid: null, zoneState: null, zoneGap: null };
+    const cur = row.market === "IN" ? "INR" : "USD";
+    const money = v => fmtMoney(v, cur);
+    const versus = v => (m.mid !== null && isNum(v) ? `<span class="cell-sub">${escapeHtml(fmtPct(v / m.mid - 1))} vs mid</span>` : "");
+    const ref = d?.newCapitalVerdict === "REJECTED";
+    const hasZone = isNum(d?.entryLow) && isNum(d?.entryHigh);
+    const gapText = m.zoneState === "in" ? "In zone"
+      : m.zoneState ? `${fmtPct(Math.abs(m.zoneGap), false)} ${m.zoneState} zone` : "";
+
     const tvUrl = tradingViewUrl(row.symbol, row.market);
     const tickerLink = tvUrl
       ? `<a class="pipe-ticker" href="${escapeHtml(tvUrl)}" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(row.symbol)} on TradingView">${escapeHtml(row.symbol)}</a>`
       : `<span class="pipe-ticker">${escapeHtml(row.symbol)}</span>`;
+    const id = `pipeline-detail-${scope}-${index}`;
+    const hasDetail = Boolean(e || d);
+    const open = hasDetail && state.openDossiers.has(row.dossierUrl);
+    const toggleBtn = hasDetail
+      ? `<button type="button" class="dossier-toggle" aria-expanded="${open}" aria-controls="${id}" data-url="${escapeHtml(row.dossierUrl)}" aria-label="Show details for ${escapeHtml(row.symbol)}" data-dossier-toggle>${open ? "−" : "+"}</button>`
+      : "";
+    const pdf = e?.pdfUrl ? `<a class="pipe-doc" href="${escapeHtml(e.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : "";
+    const subParts = [row.company && row.company !== row.symbol ? row.company : null, row.sector && row.sector !== "Not specified" ? row.sector : null].filter(Boolean);
+    const subLine = subParts.length ? `<div class="pipe-sector dossier-sector">${escapeHtml(subParts.join(" · "))}</div>` : "";
+
     const statusTitle = row.statuses.map(statusLabel).join(" · ");
     const secondary = row.statuses.filter(s => s !== row.status);
+    const holdingActionSub = d?.holdingAction ? `<span class="cell-sub">${escapeHtml(humanize(d.holdingAction))}</span>` : "";
     const statusCell = `<span class="status-pill status-${row.status.toLowerCase()}">${statusLabel(row.status)}</span>` +
-      secondary.map(s => ` <span class="status-more" title="${escapeHtml(statusTitle)}">${statusLabel(s)}</span>`).join("");
-    const m = decisionMetrics(row.decision, row.stage);
-    const rrSub = rrSummaryHtml(m);
+      secondary.map(s => ` <span class="status-more" title="${escapeHtml(statusTitle)}">${statusLabel(s)}</span>`).join("") +
+      holdingActionSub;
+
+    const rejectChips = d?.rejectionReasons?.length
+      ? `<div>${d.rejectionReasons.map(r => `<span class="reason-chip">${escapeHtml(humanize(r))}</span>`).join("")}</div>`
+      : "";
     const verdict = row.verdict && row.verdict !== "Not specified"
-      ? `<span class="verdict-pill ${verdictClass(row.verdict)}">${escapeHtml(row.verdict)}</span>${rrSub}`
+      ? `<span class="verdict-pill ${verdictClass(row.verdict)}">${escapeHtml(row.verdict)}</span>${rejectChips}`
       : '<span class="pipe-muted" title="Underwriting pending">—</span>';
     const mono = row.dossierUrl
       ? `<a class="pipe-doc" href="${escapeHtml(row.dossierUrl)}">Read &rarr;</a>`
       : '<span class="pipe-muted">—</span>';
-    return `<tr>
-      <td>${tickerLink}</td>
-      <td class="pipe-company col-company">${company || '<span class="pipe-muted">&mdash;</span>'}</td>
-      <td><span class="market-pill market-${escapeHtml(row.market)}">${escapeHtml(row.market)}</span></td>
+    const generatedCell = e && (e.generatedAt || e.updatedAt)
+      ? `<span class="stamp">${escapeHtml(formatDateTime(e.generatedAt || e.updatedAt))}</span>`
+      : '<span class="pipe-muted">—</span>';
+
+    const mainRow = `<tr>
+      <td><div class="dossier-id">
+        ${toggleBtn}
+        ${tickerLink}
+        <span class="market-pill market-${escapeHtml(row.market)}">${escapeHtml(row.market)}</span>
+        ${pdf}
+      </div>${subLine}</td>
       <td><span class="stage-pill ${stageClass(row.stage)}">${escapeHtml(stageLabel(row.stage))}</span></td>
-      <td class="pipe-sector col-sector">${row.sector ? escapeHtml(row.sector) : '<span class="pipe-muted">&mdash;</span>'}</td>
       <td class="pipe-status-cell">${statusCell}</td>
       <td>${verdict}</td>
+      <td class="num">${isNum(d?.cmp) ? `${money(d.cmp)}<span class="cell-sub ${m.zoneState ? `gap-${m.zoneState}` : ""}">${escapeHtml(gapText)}</span>` : '<span class="pipe-muted">—</span>'}${d?.cmpAsOf ? `<span class="cell-sub">as of ${escapeHtml(d.cmpAsOf)}</span>` : ""}</td>
+      <td class="num${ref ? " is-ref" : ""}">${hasZone ? `${money(d.entryLow)} – ${money(d.entryHigh)}${ref ? '<span class="cell-sub">reference only</span>' : ""}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.stop) ? `${money(d.stop)}${versus(d.stop)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td>${rangeBarHtml(d, cur)}${rrSummaryHtml(m, row.verdict)}</td>
+      <td class="num">${isNum(d?.targetBear) ? `${money(d.targetBear)}${versus(d.targetBear)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.targetBase) ? `${money(d.targetBase)}${versus(d.targetBase)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td class="num">${isNum(d?.targetBull) ? `${money(d.targetBull)}${versus(d.targetBull)}` : '<span class="pipe-muted">—</span>'}</td>
+      <td>${generatedCell}</td>
       <td>${mono}</td>
+    </tr>`;
+    if (!hasDetail) return mainRow;
+    return `${mainRow}
+    <tr class="dossier-detail" id="${id}"${open ? "" : " hidden"}>
+      <td colspan="${PIPELINE_COLUMNS.length}"><div class="dossier-detail-grid">${dossierDetailHtml(row, m, cur)}</div></td>
     </tr>`;
   }
 
-  function renderBranchTable(items, label) {
+  function renderBranchTable(items, label, scope) {
     if (!items.length) {
-      const scope = isFiltered() ? " match the current filters" : " yet";
-      return `<p class="branch-empty">No ${escapeHtml(label.toLowerCase())} names${scope}.</p>`;
+      const scopeText = isFiltered() ? " match the current filters" : " yet";
+      return `<p class="branch-empty">No ${escapeHtml(label.toLowerCase())} names${scopeText}.</p>`;
     }
-    return `<div class="branch-table-wrap"><table class="pipeline-table"><thead>${pipelineHeadRow()}</thead><tbody>${items.map(pipelineRowHtml).join("")}</tbody></table></div>`;
+    return `<div class="branch-table-wrap"><table class="pipeline-table"><thead>${pipelineHeadRow()}</thead><tbody>${items.map((row, idx) => pipelineRowHtml(row, idx, scope)).join("")}</tbody></table></div>`;
   }
 
   // Each name sits in exactly one section (its primary status), so section counts sum to the tracked total.
@@ -655,7 +722,7 @@
         const inMkt = mkt => items.filter(r => r.market === mkt).length;
         count.textContent = `${items.length} names · IN ${inMkt("IN")} · US ${inMkt("US")}`;
       }
-      if (content) content.innerHTML = renderBranchTable(items, section.label);
+      if (content) content.innerHTML = renderBranchTable(items, section.label, section.id);
       if (branch) branch.hidden = filtering && items.length === 0;
     }
 
@@ -684,13 +751,14 @@
     if (counts) {
       const byMarket = m => filtered.filter(r => r.market === m).length;
       const byStatus = s => filtered.filter(r => r.status === s).length;
-      counts.textContent = `${filtered.length} names shown · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
+      const monographed = filtered.filter(r => Boolean(r.dossierUrl)).length;
+      counts.textContent = `${filtered.length} names shown (${monographed} monographs) · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
     }
     if (meta) meta.textContent = `${filtered.length} of ${all.length} tracked names`;
 
     const head = byId("pipeline-head");
     if (head) head.innerHTML = pipelineHeadRow();
-    body.innerHTML = filtered.map(pipelineRowHtml).join("");
+    body.innerHTML = filtered.map((row, idx) => pipelineRowHtml(row, idx, "flat")).join("");
 
     if (emptyNote) {
       const none = filtered.length === 0;
@@ -742,24 +810,6 @@
   const humanize = v => (v ? String(v).replace(/_/g, " ").toLowerCase().replace(/^./, c => c.toUpperCase()) : null);
   const vsMid = (mid, v) => (mid !== null && isNum(v) ? v / mid - 1 : null);
 
-  const DOSSIER_COLUMNS = [
-    { label: "Ticker", key: "ticker" },
-    { label: "Verdict", key: "verdict", title: "Underwriting verdict; within each verdict, ordered by Stage, quality tier, zone proximity, and Base/Stop risk-reward" },
-    { label: "Why rejected", title: "Reason classes from the monograph's rejection_reasons" },
-    { label: "Holding" },
-    { label: "CMP", key: "zone", num: true, title: "Latest price and its distance from the entry zone" },
-    { label: "Entry zone", num: true },
-    { label: "Stop", num: true },
-    { label: "Range" },
-    { label: "Bear", num: true },
-    { label: "Base", key: "base", num: true },
-    { label: "Bull", num: true },
-    { label: "EV 12m", key: "ev", num: true },
-    { label: "Generated", key: "generated", title: "When the monograph was generated (Pacific)" },
-    { label: "Read" },
-  ];
-  const DOSSIER_DEFAULT_DIR = { ticker: "asc", verdict: "asc", zone: "asc", base: "desc", ev: "desc", generated: "desc" };
-
   function decisionMetrics(d, stage) {
     if (!d) return null;
     const hasZone = isNum(d.entryLow) && isNum(d.entryHigh);
@@ -802,69 +852,11 @@
     };
   }
 
-  function rrSummaryHtml(m) {
-    if (!m || !isNum(m.rawZoneRR)) return "";
-    const parts = [`${m.rawZoneRR.toFixed(1)}x zone`];
-    if (isNum(m.rawCmpRR)) parts.unshift(`${m.rawCmpRR.toFixed(1)}x CMP`);
-    return `<span class="cell-sub" title="Base target upside vs stop risk">${escapeHtml(parts.join(" · "))}</span>`;
-  }
-
-  function dossierMetrics(e, stageMap = null) {
-    const stages = stageMap || queueStageLookup();
-    const stage = e?.decision?.weinsteinStage || stages.get(`${e?.market}:${e?.symbol}`) || null;
-    return decisionMetrics(e?.decision, stage);
-  }
-
-  function dossierSortValue(key, e, stageMap = null) {
-    const m = dossierMetrics(e, stageMap);
-    switch (key) {
-      case "ticker": return e.symbol || "";
-      case "verdict": return e.verdict ? (VERDICT_RANK[e.verdict] ?? 7) : null;
-      case "zone": return m ? m.zoneGap : null;
-      case "base": return m ? m.baseUpside : null;
-      case "ev": return m ? m.evUpside : null;
-      case "generated": {
-        const t = Date.parse(e.generatedAt || e.updatedAt || "");
-        return Number.isFinite(t) ? t : null;
-      }
-      default: return null;
-    }
-  }
-
-  function sortDossiers(list) {
-    const { key, dir } = state.dossierSort;
-    const sign = dir === "desc" ? -1 : 1;
-    const stageMap = queueStageLookup();
-    return [...list].sort((a, b) => {
-      const va = dossierSortValue(key, a, stageMap);
-      const vb = dossierSortValue(key, b, stageMap);
-      let cmp;
-      if (key === "verdict") {
-        const sa = dossierMetrics(a, stageMap)?.alertScore ?? null;
-        const sb = dossierMetrics(b, stageMap)?.alertScore ?? null;
-        cmp = compareVerdictRows(va, vb, sa, sb, sign);
-      } else if (va === null || vb === null) {
-        cmp = (va === null) - (vb === null);
-      } else if (typeof va === "number") {
-        cmp = (va - vb) * sign;
-      } else {
-        cmp = String(va).localeCompare(String(vb)) * sign;
-      }
-      return cmp || (a.symbol || "").localeCompare(b.symbol || "") || a.market.localeCompare(b.market);
-    });
-  }
-
-  function dossierHeadRow() {
-    const { key, dir } = state.dossierSort;
-    const cells = DOSSIER_COLUMNS.map(col => {
-      const cls = col.num ? ' class="num"' : "";
-      const title = col.title ? ` title="${escapeHtml(col.title)}"` : "";
-      if (!col.key) return `<th scope="col"${cls}${title}>${escapeHtml(col.label)}</th>`;
-      const active = state.dossierSort.key === col.key;
-      const ariaSort = active ? (dir === "desc" ? "descending" : "ascending") : "none";
-      return `<th scope="col"${cls}${title} aria-sort="${ariaSort}"><button type="button" class="th-sort" data-dossier-sort="${col.key}">${escapeHtml(col.label)}<span class="sort-ind" aria-hidden="true"></span></button></th>`;
-    });
-    return `<tr>${cells.join("")}</tr>`;
+  function rrSummaryHtml(m, verdict = null) {
+    if (!m || !isNum(m.rawZoneRR) || verdict === "AVOID / REJECTED") return "";
+    const parts = [`${m.rawZoneRR.toFixed(1)}:1 zone`];
+    if (isNum(m.rawCmpRR)) parts.unshift(`${m.rawCmpRR.toFixed(1)}:1 now`);
+    return `<span class="cell-sub" title="Reward-to-risk (Base target upside vs Stop downside): at current price (now) vs at the entry zone">${escapeHtml(`R/R ${parts.join(" · ")}`)}</span>`;
   }
 
   function rangeBarHtml(d, cur) {
@@ -882,90 +874,6 @@
       : "");
     const ref = d.newCapitalVerdict === "REJECTED" ? " is-ref" : "";
     return `<span class="range-bar${ref}" role="img" aria-label="Stop, entry zone, base target and CMP on one price scale">${zone}${mark(d.stop, "mark-stop", "Stop")}${mark(d.targetBase, "mark-base", "Base")}${mark(d.cmp, "mark-cmp", "CMP")}</span>`;
-  }
-
-  function dossierRowsHtml(e, index, stageMap = null) {
-    const d = e.decision;
-    const m = dossierMetrics(e, stageMap) || { mid: null, zoneState: null, zoneGap: null };
-    const cur = e.market === "IN" ? "INR" : "USD";
-    const money = v => fmtMoney(v, cur);
-    const versus = v => (m.mid !== null && isNum(v) ? `<span class="cell-sub">${escapeHtml(fmtPct(v / m.mid - 1))} vs mid</span>` : "");
-    const ref = d?.newCapitalVerdict === "REJECTED";
-    const hasZone = isNum(d?.entryLow) && isNum(d?.entryHigh);
-    const gapText = m.zoneState === "in" ? "In zone"
-      : m.zoneState ? `${fmtPct(Math.abs(m.zoneGap), false)} ${m.zoneState} zone` : "";
-    const id = `dossier-detail-${index}`;
-    const open = state.openDossiers.has(e.url);
-    const verdict = e.verdict && e.verdict !== "Not specified"
-      ? `<span class="verdict-pill ${verdictClass(e.verdict)}">${escapeHtml(e.verdict)}</span>`
-      : '<span class="pipe-muted">—</span>';
-    const sector = e.sector && e.sector !== "Not specified"
-      ? `<div class="pipe-sector dossier-sector">${escapeHtml(e.sector)}</div>` : "";
-    const pdf = e.pdfUrl ? `<a class="pipe-doc" href="${escapeHtml(e.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : "";
-
-    const profileItems = [
-      ["Conviction tier", d?.tier],
-      ["Archetype", d?.archetype],
-      ["Strategy bucket", d?.strategyBucket],
-      ["Business quality", d?.businessQuality],
-      ["KPI health", d?.kpiHealth],
-      ["Weinstein stage", d?.weinsteinStage],
-      ["Research as of", d?.asOf],
-      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist/watchlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
-    ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(/^[A-Z0-9_]+$/.test(v) ? humanize(v) : v)}</dd></div>`).join("");
-    const alerts = (d?.alerts || []).map(a => `<li><strong>${escapeHtml(a.trigger || "Trigger")}</strong>${a.instruction ? `<br>${escapeHtml(a.instruction)}` : ""}</li>`).join("");
-    const redeploy = (d?.redeployment || []).map(r => `<li><strong>${escapeHtml(humanize(r.type) || "Destination")}${isNum(r.allocationPct) ? ` · ${escapeHtml(String(r.allocationPct))}%` : ""}</strong>${r.recommendation ? `<br>${escapeHtml(r.recommendation)}` : ""}${r.entryCondition ? `<br><span class="detail-note">Entry: ${escapeHtml(r.entryCondition)}</span>` : ""}</li>`).join("");
-    const highlights = (e.highlights || []).map(h => `<li>${escapeHtml(h)}</li>`).join("");
-    const section = (title, body) => (body ? `<section><h4>${title}</h4>${body}</section>` : "");
-    const holdingBody = [d?.holdingRationale ? `<p>${escapeHtml(d.holdingRationale)}</p>` : "", alerts ? `<ul>${alerts}</ul>` : ""].join("");
-    const summaryBody = [e.summary ? `<p>${escapeHtml(e.summary)}</p>` : "", highlights ? `<ul>${highlights}</ul>` : ""].join("");
-    const detailBody = [
-      section("Holding plan", holdingBody),
-      section("Redeployment", redeploy ? `<ul>${redeploy}</ul>` : ""),
-      section("Profile", profileItems ? `<dl class="detail-kv">${profileItems}</dl>` : ""),
-      section("Summary", summaryBody),
-    ].join("") || '<p class="detail-note">No decision data for this monograph yet.</p>';
-
-    const tvUrl = tradingViewUrl(e.symbol, e.market);
-    const tickerLink = tvUrl
-      ? `<a class="pipe-ticker" href="${escapeHtml(tvUrl)}" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(e.symbol)} on TradingView">${escapeHtml(e.symbol)}</a>`
-      : `<span class="pipe-ticker">${escapeHtml(e.symbol || "—")}</span>`;
-
-    return `<tr>
-      <td><div class="dossier-id">
-        <button type="button" class="dossier-toggle" aria-expanded="${open}" aria-controls="${id}" data-url="${escapeHtml(e.url)}" aria-label="Show details for ${escapeHtml(e.symbol || e.title)}" data-dossier-toggle>${open ? "−" : "+"}</button>
-        ${tickerLink}
-        <span class="market-pill market-${escapeHtml(e.market)}">${escapeHtml(e.market)}</span>
-        ${pdf}
-      </div>${sector}</td>
-      <td>${verdict}</td>
-      <td>${d?.rejectionReasons?.length ? d.rejectionReasons.map(r => `<span class="reason-chip">${escapeHtml(humanize(r))}</span>`).join("") : '<span class="pipe-muted">—</span>'}</td>
-      <td>${d?.holdingAction ? escapeHtml(humanize(d.holdingAction)) : '<span class="pipe-muted">—</span>'}</td>
-      <td class="num">${isNum(d?.cmp) ? `${money(d.cmp)}<span class="cell-sub ${m.zoneState ? `gap-${m.zoneState}` : ""}">${escapeHtml(gapText)}</span>` : '<span class="pipe-muted">—</span>'}${d?.cmpAsOf ? `<span class="cell-sub">as of ${escapeHtml(d.cmpAsOf)}</span>` : ""}</td>
-      <td class="num${ref ? " is-ref" : ""}">${hasZone ? `${money(d.entryLow)} – ${money(d.entryHigh)}${ref ? '<span class="cell-sub">reference only</span>' : ""}` : '<span class="pipe-muted">—</span>'}</td>
-      <td class="num">${isNum(d?.stop) ? `${money(d.stop)}${versus(d.stop)}` : '<span class="pipe-muted">—</span>'}</td>
-      <td>${rangeBarHtml(d, cur)}${rrSummaryHtml(m)}</td>
-      <td class="num">${isNum(d?.targetBear) ? `${money(d.targetBear)}${versus(d.targetBear)}` : '<span class="pipe-muted">—</span>'}</td>
-      <td class="num">${isNum(d?.targetBase) ? `${money(d.targetBase)}${versus(d.targetBase)}` : '<span class="pipe-muted">—</span>'}</td>
-      <td class="num">${isNum(d?.targetBull) ? `${money(d.targetBull)}${versus(d.targetBull)}` : '<span class="pipe-muted">—</span>'}</td>
-      <td class="num">${isNum(d?.expectedValue12m) ? `${money(d.expectedValue12m)}${versus(d.expectedValue12m)}` : '<span class="pipe-muted">—</span>'}</td>
-      <td><span class="stamp">${escapeHtml(formatDateTime(e.generatedAt || e.updatedAt))}</span></td>
-      <td><a class="pipe-doc" href="${escapeHtml(e.url)}">Read &rarr;</a></td>
-    </tr>
-    <tr class="dossier-detail" id="${id}"${open ? "" : " hidden"}>
-      <td colspan="${DOSSIER_COLUMNS.length}"><div class="dossier-detail-grid">${detailBody}</div></td>
-    </tr>`;
-  }
-
-  function renderDossierTable(list) {
-    const wrap = byId("dossier-table-wrap");
-    const head = byId("dossier-head");
-    const body = byId("dossier-body");
-    if (!wrap || !head || !body) return;
-    const stageMap = queueStageLookup();
-    wrap.hidden = list.length === 0;
-    head.innerHTML = dossierHeadRow();
-    body.innerHTML = list.map((e, i) => dossierRowsHtml(e, i, stageMap)).join("");
   }
 
   function renderStats(pipeline) {
@@ -995,7 +903,6 @@
     renderTree(pipeline);
 
     const reports = filterEntries("report");
-    const dossiers = sortDossiers(filterEntries("dossier"));
 
     const reportMeta = byId("report-meta");
     if (reportMeta) reportMeta.textContent = `${reports.length} report${reports.length === 1 ? "" : "s"}`;
@@ -1011,22 +918,6 @@
         ? (allReportsCount === 0
           ? "No operating reports are published right now."
           : "No operating reports match these filters.")
-        : "";
-    }
-
-    const dossierMeta = byId("dossier-meta");
-    if (dossierMeta) dossierMeta.textContent = `${dossiers.length} monograph${dossiers.length === 1 ? "" : "s"}`;
-    renderDossierTable(dossiers);
-
-    const dossierEmpty = byId("dossier-empty");
-    if (dossierEmpty) {
-      const allDossiersCount = state.entries.filter(e => e.kind === "dossier").length;
-      const none = dossiers.length === 0;
-      dossierEmpty.hidden = !none;
-      dossierEmpty.textContent = none
-        ? (allDossiersCount === 0
-          ? "No monographs are published right now; they are being regenerated from scratch under the new evidence-first workflow."
-          : "No monographs match these filters.")
         : "";
     }
 
@@ -1199,7 +1090,8 @@
     const sortSelect = byId("sort-select");
     if (sortSelect) {
       sortSelect.addEventListener("change", () => {
-        state.sort = { key: sortSelect.value, dir: "asc" };
+        const key = sortSelect.value;
+        state.sort = { key, dir: PIPELINE_DEFAULT_DIR[key] || "asc" };
         render();
       });
     }
@@ -1207,21 +1099,6 @@
     const pipelinePanel = byId("panel-pipeline");
     if (pipelinePanel) {
       pipelinePanel.addEventListener("click", ev => {
-        const button = ev.target.closest(".th-sort");
-        if (!button) return;
-        const key = button.dataset.sortKey;
-        const index = Array.from(pipelinePanel.querySelectorAll(".th-sort")).indexOf(button);
-        state.sort = state.sort.key === key
-          ? { key, dir: state.sort.dir === "asc" ? "desc" : "asc" }
-          : { key, dir: "asc" };
-        render();
-        pipelinePanel.querySelectorAll(".th-sort")[index]?.focus({ preventScroll: true });
-      });
-    }
-
-    const dossierPanel = byId("panel-dossiers");
-    if (dossierPanel) {
-      dossierPanel.addEventListener("click", ev => {
         const toggle = ev.target.closest("[data-dossier-toggle]");
         if (toggle) {
           const detail = byId(toggle.getAttribute("aria-controls"));
@@ -1234,12 +1111,13 @@
         }
         const button = ev.target.closest(".th-sort");
         if (!button) return;
-        const key = button.dataset.dossierSort;
-        state.dossierSort = state.dossierSort.key === key
-          ? { key, dir: state.dossierSort.dir === "asc" ? "desc" : "asc" }
-          : { key, dir: DOSSIER_DEFAULT_DIR[key] || "asc" };
+        const key = button.dataset.sortKey;
+        const index = Array.from(pipelinePanel.querySelectorAll(".th-sort")).indexOf(button);
+        state.sort = state.sort.key === key
+          ? { key, dir: state.sort.dir === "asc" ? "desc" : "asc" }
+          : { key, dir: PIPELINE_DEFAULT_DIR[key] || "asc" };
         render();
-        dossierPanel.querySelector(`.th-sort[data-dossier-sort="${key}"]`)?.focus({ preventScroll: true });
+        pipelinePanel.querySelectorAll(".th-sort")[index]?.focus({ preventScroll: true });
       });
     }
 

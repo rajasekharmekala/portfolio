@@ -525,8 +525,11 @@ a:hover {
 /* Monograph decision table */
 .dossier-scroll { max-height: 42rem; }
 .dossier-table td.num,
-.dossier-table th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.dossier-table td.is-ref { color: var(--faint); }
+.dossier-table th.num,
+.pipeline-table td.num,
+.pipeline-table th.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.dossier-table td.is-ref,
+.pipeline-table td.is-ref { color: var(--faint); }
 .dossier-id { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .dossier-toggle {
   width: 22px;
@@ -586,7 +589,8 @@ a:hover {
   border-radius: 50%;
   background: var(--navy);
 }
-.dossier-table tr.dossier-detail > td {
+.dossier-table tr.dossier-detail > td,
+.pipeline-table tr.dossier-detail > td {
   padding: 12px 14px 14px;
   text-align: left;
   white-space: normal;
