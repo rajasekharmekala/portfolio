@@ -1030,9 +1030,10 @@ def compile_portfolio_audit(
         if ps["target_open_heat_pct"] <= ps["max_portfolio_heat_pct"]
         else f"cutting {ps['current_open_heat_pct'] - ps['target_open_heat_pct']:.2f} percentage points of risk, though remaining above our {ps['max_portfolio_heat_pct']:.1f}% ceiling due to legacy positions and grandfathered options."
     )
+    heat_verb = "drops from" if ps["target_open_heat_pct"] < ps["current_open_heat_pct"] else ("edges up from" if ps["target_open_heat_pct"] > ps["current_open_heat_pct"] else "holds steady at")
     wf_take = (
         f"<p>Tracing the running cash balance from {cur}{ps['current_cash_value']:,.2f} to {cur}{ps['target_cash_value']:,.2f} shows that Phase 1 sales fortify our liquidity immediately without relying on optimistic fills. "
-        f"Open portfolio heat drops from {ps['current_open_heat_pct']:.2f}% today to {ps['target_open_heat_pct']:.2f}% after execution ({cur}{tgt_heat_amt:,.2f} if every retained stop hits), {heat_status_txt} "
+        f"Open portfolio heat {heat_verb} {ps['current_open_heat_pct']:.2f}% today to {ps['target_open_heat_pct']:.2f}% after execution ({cur}{tgt_heat_amt:,.2f} if every retained stop hits), {heat_status_txt} "
         f"Treat that {ps['target_open_heat_pct']:.2f}% as pre-gap and pre-slippage, however: our Section 2.2 rule evaluates stops on completed daily or weekly closes (exiting only with RSI(14) below 42, or the following session on explicit hard-stop lines), and thin-volume Phase 1 exits or stop-outs can gap through their limit floors. "
         f"That fully reconciled {cur}{ps['target_cash_value']:,.2f} reserve backs every sequenced advisory recommendation in Chapter 6 next.</p>"
     )
