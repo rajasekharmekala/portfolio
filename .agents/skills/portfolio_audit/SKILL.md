@@ -73,7 +73,7 @@ description: >-
   --out "<RUN_DIR>/cache/baseline_allocation_<MKT>_<session>.json"
 ```
 
-2. **Step 2b — CIO Context Review & Judgment (`cio_decisions_<MKT>.json`):** Never treat the baseline script output as final or robotic. Review `baseline_allocation_<MKT>_<session>.json` alongside `facts`, `research`, and any same-date `<MKT>_Market_Intelligence.html` through three lenses:
+2. **Step 2b — CIO Context Review & Judgment (`cio_decisions_<MKT>.json`):** Never treat the baseline script output as final or robotic. Review `baseline_allocation_<MKT>_<session>.json` alongside `facts`, `stage2`, and `research` through three lenses:
    - **Market & Flow Context:** Institutional flows (FII/DII or US breadth/VIX/yields), distribution days, and whether a narrow-breadth label hides strong sector leadership.
    - **Portfolio Philosophy & Sleeve Balance:** Check `CORE_ALPHA` vs `TACTICAL_MOMENTUM` balance and cluster concentration. Override any robotic baseline trim on an underweight Core Alpha leader in a leading sector, or adjust sizing/exits so we stick to our philosophy and cash in better.
    - **Stock-Specific & Replacement Risk-Reward:** Compare held names against top shortlisted challengers on thesis quality, upcoming earnings/catalysts, and asymmetric risk-reward.
@@ -97,7 +97,7 @@ description: >-
 
 ### Step 3 — Author Readable Book & Audiobook Narrative (`audit_narrative_<MKT>.json`)
 
-Read `<RUN_DIR>/cache/allocation_<MKT>_<session>.json`, `<RUN_DIR>/work/cio_decisions_<MKT>.json`, `<RUN_DIR>/cache/research_<MKT>_<session>.json`, and any same-date `<MKT>_Market_Intelligence.html` sibling report. Target **8,000–12,000 words** (~50–75 min listen) for the Book/Audiobook Edition. Write `<RUN_DIR>/work/audit_narrative_<MKT>.json` via direct file-write tools or `json.dump` (never unquoted shell heredocs) supplying:
+Read `<RUN_DIR>/cache/allocation_<MKT>_<session>.json`, `<RUN_DIR>/work/cio_decisions_<MKT>.json`, and `<RUN_DIR>/cache/research_<MKT>_<session>.json`. Target **8,000–12,000 words** (~50–75 min listen) for the Book/Audiobook Edition. Write `<RUN_DIR>/work/audit_narrative_<MKT>.json` via direct file-write tools or `json.dump` (never unquoted shell heredocs) supplying:
 - `"primer"`: 150–250 word executive thesis opening with portfolio condition, net worth, open heat vs ceiling, convergence score, what changed since the prior plan, and what the rebalance is trying to achieve.
 - `"chapters"` (`"chapter1"` .. `"chapter7"`): cohesive mentor-voice `"book_paragraphs"`, `"epigraph"` (`quote` + `author`), and `"book_callouts"` (`mental_model`, `reflection`, `parallel`, `execution`) weaving market conditions, portfolio philosophy, concrete examples/similar scenarios, and what we are trying to achieve into a compelling story.
 - `"casenotes"`: one crisp `90–160` word summary per active non-tracking holding (`holding_decisions`) for the Web Research Desk table, naming exact close/weight/P&L/stop/heat, the rule/CIO rationale behind its verdict, and the concrete `if / unless / below` invalidation trigger.
