@@ -1,6 +1,6 @@
 # IN holdings (generated from the transaction log; do not edit)
 
-Generated 2026-11-17T20:24:01. Quantities and cost from `data/accounts/IN/`. Market values need the ledger close and are added by the daily build.
+Generated 2026-11-19T10:20:33. Quantities and cost from `data/accounts/IN/`. Market values need the ledger close and are added by the daily build.
 
 ## Zerodha
 
