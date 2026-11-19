@@ -5,6 +5,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
@@ -535,6 +536,14 @@ def build_catalog(completed=(), workflow=None, market=None, summary=None, highli
     entries = [read_entry(path, dates, updates) for path in paths]
     entries.sort(key=lambda entry: entry["updatedAt"] or "", reverse=True)
     holdings = held_symbols()
+    if not any(accounts_for(m) for m in ("IN", "US")) and CATALOG.exists():
+        try:
+            prev_holdings = json.loads(CATALOG.read_text(encoding="utf-8")).get("holdings")
+            if isinstance(prev_holdings, dict) and any(prev_holdings.get(m) for m in ("IN", "US")):
+                print("WARNING: no transaction logs found under data/accounts; preserving existing catalog holdings", file=sys.stderr)
+                holdings = prev_holdings
+        except Exception:
+            pass
     for entry in entries:
         entry["held"] = entry["kind"] == "dossier" and entry["symbol"] in holdings.get(entry["market"], [])
     catalog = {"schemaVersion": 1, "generatedAt": now, "baseUrl": BASE_URL, "entries": entries,
