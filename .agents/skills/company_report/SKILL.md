@@ -17,7 +17,7 @@ description: >-
 > 2. `docs/blogs/<MARKET>/<SYMBOL>_book.pdf` — narrative PDF companion, printed by WeasyPrint from the same chapter data. There is **no** standalone `_book.html`, `.epub`, or `.md`; the narrative HTML is an internal build intermediate that the compiler writes and removes.
 
 > **Blind-First, Judge-Second Decision Order (binding):** prevent price/valuation anchoring by separating business underwriting from market pricing:
-> 1. **Pass 1 — Price-Blind Business & Forensic Audit (`ch-1`..`ch-6` + `business_quality.json`):** run an isolated subagent given *only* `--blind-only` fundamentals, primary filings, concalls, and two-sided Bull/Skeptic web research — **never** stock prices, P/E multiples, `stage2_evaluation` postures, watchlist verdict notes, or portfolio holdings. Chapters 1–6 must contain zero portfolio verdict, tier, or support-zone tokens and end with `business_quality.json` (`business_quality_verdict`: `COMPOUNDER_PASS`, `CYCLICAL_CONDITIONAL`, or `FUNDAMENTAL_FAIL`; `kpi_health`: `PASS`, `PASS_WITH_WATCH`, or `FAIL`). Gate Pass 1 with `scripts/dossier_schema.py --check-blind-pass <RUN_DIR>/work/<SYMBOL>` before pulling live prices.
+> 1. **Pass 1 — Price-Blind Business & Forensic Audit (`ch-1`..`ch-6` + `business_quality.json`):** run an isolated subagent given *only* `--blind-only` fundamentals, primary filings, concalls, and two-sided Bull/Skeptic web research — **never** stock prices, P/E multiples, `stage2_evaluation` postures, shortlist verdict notes, or portfolio holdings. Chapters 1–6 must contain zero portfolio verdict, tier, or support-zone tokens and end with `business_quality.json` (`business_quality_verdict`: `COMPOUNDER_PASS`, `CYCLICAL_CONDITIONAL`, or `FUNDAMENTAL_FAIL`; `kpi_health`: `PASS`, `PASS_WITH_WATCH`, or `FAIL`). Gate Pass 1 with `scripts/dossier_schema.py --check-blind-pass <RUN_DIR>/work/<SYMBOL>` before pulling live prices.
 > 2. **Pass 2 — Valuation, Tape & Synthesis (`ch-7`..`ch-9` -> `spine.json` -> `ch-0`):** only after Pass 1 passes, run `market_facts.py`, `stage2_scanner.py`, and full `stock_snapshot.py` to test the locked business reality against Reverse DCF (`ch-7`), Weinstein Stage 2 structure (`ch-8`), and Bull vs. Bear probability-weighted outcomes (`ch-9`). Derive `spine.json` and `ch-0` (`id: "ch-0"`) last.
 > 3. **Anti-Hedging Rules (enforced by `dossier_schema.py`):** `FUNDAMENTAL_FAIL` must map to `REJECTED` (never hedged as `WAIT_FOR_SUPPORT`). Every non-rejected call (`IMMEDIATE_BUY`, `ACCUMULATE_ON_DIP`, `WAIT_FOR_SUPPORT`) requires `target_base > entry_zone_high` with `>= 1.5:1` support-zone asymmetry; if even the support zone lacks asymmetric upside, assign `REJECTED`. Conversely, when `business_quality_verdict == "COMPOUNDER_PASS"`, `technical_timing_gate == "CLEAR_FOR_CONSIDERATION"`, and CMP asymmetry clears hurdles, assign an earned `IMMEDIATE_BUY` rather than defaulting timidly to `WAIT_FOR_SUPPORT`.
 >
@@ -71,8 +71,8 @@ Both the Web Dossier (`_dossier.html`) and the narrative PDF companion (`_book.p
 ## Step-by-Step Execution Protocol
 
 1. **Claim a Company and Pull Price-Blind Fundamentals Only:**
-   - Claim one eligible active-watchlist name with `run_claims.py batch --workflow company_report --market <MARKET> --run-id <RUN_ID> --size 1`, or claim a specifically requested symbol with `run_claims.py names --workflow company_report --market <MARKET> --run-id <RUN_ID> <SYMBOL>`.
-   - Do **not** read watchlist verdict blurbs, shortlist targets, or portfolio holdings yet. Pull only price-blind operating and financial statement data:
+   - Claim one eligible active-shortlist name with `run_claims.py batch --workflow company_report --market <MARKET> --run-id <RUN_ID> --size 1`, or claim a specifically requested symbol with `run_claims.py names --workflow company_report --market <MARKET> --run-id <RUN_ID> <SYMBOL>`.
+   - Do **not** read shortlist verdict blurbs, targets, or portfolio holdings yet. Pull only price-blind operating and financial statement data:
      ```bash
      .venv/bin/python scripts/stock_snapshot.py \
        --market <MARKET> --symbols <SYMBOL> --blind-only \
@@ -125,9 +125,9 @@ Both the Web Dossier (`_dossier.html`) and the narrative PDF companion (`_book.p
        --out-dir "<RUN_DIR>/review/round_1" --round 1 --allow-stale-asof
      ```
      Verify reviewer JSON with `scripts/review_packet.py check`. If `red_team` or `report_reviewer` flags a hedged verdict or unsupported assumption (`BLOCK` / `REVISE`), update `ch09.json`, `spine.json`, and `ch00.json`, recompile, and complete Round 2 delta verification.
-6. **Deterministic Pipeline Sync (`Watchlist <-> Shortlist` / `Discard`) & Validation:**
+6. **Deterministic Pipeline Sync (`Shortlist` / `Discarded`) & Validation:**
    - Never touch brokerage `Holdings` (`data/accounts/<MARKET>/*.transactions.jsonl`); holdings reflect executed broker trades only.
-   - Sync `data/watchlist/<MARKET>.json` and `data/shortlist/<MARKET>.json` deterministically from the reviewed monograph:
+   - Sync `data/shortlist/<MARKET>.json` and `data/discarded/<MARKET>.json` deterministically from the reviewed monograph:
      ```bash
      .venv/bin/python scripts/sync_dossier_pipeline.py \
        --spec "<RUN_DIR>/work/<SYMBOL>" \
@@ -136,5 +136,5 @@ Both the Web Dossier (`_dossier.html`) and the narrative PDF companion (`_book.p
        --review-dir "<RUN_DIR>/review" \
        --research "<RUN_DIR>/cache/research_<MARKET>_<date>.json"
      ```
-     (`REJECTED` / `FUNDAMENTAL_FAIL` discards the symbol from both active queues; qualified `TIER_1`/`TIER_2` setups promote/upsert into `shortlist.active` and mark `watchlist.active` `COMPLETED`; conditional `TIER_3` setups remain on `watchlist.active` as `COMPLETED`.)
+     (`REJECTED` / `FUNDAMENTAL_FAIL` / `TIER_0` moves the symbol from `shortlist.active` to `discarded.items`; all other underwritten setups upsert into `shortlist.active` as `COMPLETED` and remove from `discarded.items` if present.)
    - Validate with `scripts/data_layer.py --market <MARKET> --validate` and `scripts/validate_data.py`, rebuild the catalog via `scripts/build_dossier_portal.py --completed ...`, and publish via `scripts/publish_run.py`.

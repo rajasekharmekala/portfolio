@@ -7,7 +7,7 @@ description: >-
   filings/concalls, actively brainstorms omitted risks/competitors/unit-economics
   blind spots and patches the owning chapters, re-evaluates live Valuation, Stage 2
   technicals, and upward-only held stop-loss ratchets, recompiles synchronized Web
-  HTML + PDF, and updates Watchlist/Shortlist/Discard deterministically.
+  HTML + PDF, and updates Shortlist/Discarded deterministically.
 ---
 
 # Skill: dossier_refresh (Companion Assumption Audit, Blind-Spot Brainstorm & Tape Re-Underwriting)
@@ -20,7 +20,7 @@ description: >-
 
 1. **Verdict-Stripped Pass 1 Barrier (`prepare` -> `validate-audit`):**
    - Start with `scripts/dossier_refresh.py prepare --market <MARKET> --symbol <SYMBOL> --out-dir "<RUN_DIR>/work/<SYMBOL>"`. It copies *only* `ch01..ch06` + `business_quality.json` and writes `blind_refresh_packet.md` (stripping `spine.json`, `ch-0`, `ch-7..ch-9`, prices, multiples, targets, and stops).
-   - Spawn an isolated Pass 1 subagent that reads **only** `blind_refresh_packet.md`, `--blind-only` fundamentals (`stock_snapshot.py --blind-only`), new filings/concalls since `prior_as_of`, and skeptic web searches — **never** `prior_anchor_locked.json`, `docs/blogs/`, `watchlist`, `shortlist`, or `positions`.
+   - Spawn an isolated Pass 1 subagent that reads **only** `blind_refresh_packet.md`, `--blind-only` fundamentals (`stock_snapshot.py --blind-only`), new filings/concalls since `prior_as_of`, and skeptic web searches — **never** `prior_anchor_locked.json`, `docs/blogs/`, `shortlist`, `discarded`, or `positions`.
 2. **Mandatory Blind-Spot & Omission Brainstorm (`>= 2` distinct vectors):**
    - Pass 1 must actively ask *"What did the original dossier fail to consider?"* across the 6 vectors in `blind_refresh_packet.md` (`CUSTOMER_SUPPLIER_CONCENTRATION`, `FOOTNOTE_BALANCE_SHEET_FORENSICS`, `UNIT_ECONOMICS_HIDDEN_FRICTION`, `UNLISTED_OR_ADJACENT_COMPETITION`, `REGULATORY_TARIFF_FX_EXPOSURE`, `GOVERNANCE_INCENTIVES_CAPITAL_ALLOCATION`), research primary sources, and **directly update the owning `chapters/ch01..ch06.json` (`web_blocks` + `book_paragraphs`) and `business_quality.json`** whenever a blind spot is `MATERIAL_PATCHED` or an assumption is `WEAKENED` / `BROKEN`.
    - `scripts/dossier_refresh.py validate-audit` checks SHA-256 diffs against `baseline_hashes.json` and fails if any `MATERIAL_PATCHED` / `WEAKENED` / `BROKEN` finding did not actually update its target chapter JSON.
@@ -69,6 +69,6 @@ description: >-
        --shortlist "data/shortlist/<MARKET>.json" \
        --out "docs/blogs/<MARKET>/<SYMBOL>_dossier.html"
      ```
-4. **Reviewer, Red-Team & Deterministic Pipeline Sync (`Watchlist <-> Shortlist` / `Discard`):**
+4. **Reviewer, Red-Team & Deterministic Pipeline Sync (`Shortlist` / `Discarded`):**
    - Run `readability_check.py`, `citation_check.py --min-sources 25 --allow-stale-asof`, and Stage 9 `review_packet.py build --kind dossier` -> `report_reviewer` + `red_team` -> `review_packet.py check`.
    - Run `scripts/sync_dossier_pipeline.py` (with `--review-dir "<RUN_DIR>/review"`), `scripts/data_layer.py --market <MARKET> --validate`, `scripts/validate_data.py`, `scripts/build_dossier_portal.py --completed ...`, and `scripts/publish_run.py`.

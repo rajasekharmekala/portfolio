@@ -232,7 +232,7 @@ REC_KEYS = ("symbol", "Symbol", "ticker", "Ticker", "underlying", "SYMBOL", "Tra
 
 
 def collect_records(obj, out):
-    """symbol -> numeric fields, from any JSON record or snapshot file (shortlist, watchlist, options, stock_snapshot, stage2)."""
+    """symbol -> numeric fields, from any JSON record or snapshot file (shortlist, discarded, options, stock_snapshot, stage2)."""
     if isinstance(obj, dict):
         sym = next((str(obj[k]).upper() for k in REC_KEYS if isinstance(obj.get(k), str)), None)
         if sym:

@@ -1134,7 +1134,7 @@ def compile_portfolio_audit(
         f'  <tbody>{"".join(debt_rows_html)}</tbody>\n</table>'
     )
     debt_take = (
-        f"<p>{'Zero pre-monograph holdings remain in the queue above, meaning 100% of our held equity capital is now backed by primary-filing 10-chapter monographs. Research capacity can now focus on fresh watchlist challengers and quarterly filing checks.' if not debt_q else f'Ranking our {len(debt_q)} pre-dossier holdings by capital exposure ensures upcoming company_report runs retire the largest blind spots first. Provisional lines stay protected by hard stops and barred from fresh adds until underwritten.'} "
+        f"<p>{'Zero pre-monograph holdings remain in the queue above, meaning 100% of our held equity capital is now backed by primary-filing 10-chapter monographs. Research capacity can now focus on fresh shortlist challengers and quarterly filing checks.' if not debt_q else f'Ranking our {len(debt_q)} pre-dossier holdings by capital exposure ensures upcoming company_report runs retire the largest blind spots first. Provisional lines stay protected by hard stops and barred from fresh adds until underwritten.'} "
         f"Chapter 7 next codifies the hysteresis locks and disclosures that keep this plan stable across daily reruns.</p>"
     )
     ch6_html = (

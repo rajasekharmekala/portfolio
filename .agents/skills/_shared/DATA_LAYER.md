@@ -1,6 +1,6 @@
 # Data Layer (how the portfolio is stored and written)
 
-Holdings, watchlists, shortlists, options, and metadata live in JSON under `data/`. Excel workbooks are retired. Nothing is read or written by cell position.
+Holdings, shortlists, discarded names, options, and metadata live in JSON under `data/`. Excel workbooks are retired. Nothing is read or written by cell position.
 
 ## Where things are
 
@@ -8,8 +8,8 @@ Holdings, watchlists, shortlists, options, and metadata live in JSON under `data
 |---|---|---|
 | Holdings (per account) | `data/accounts/<MKT>/<account>.transactions.jsonl` | the user, when a trade happens (one JSON line per transaction) |
 | Strategy bucket and name per symbol | `data/metadata/symbols.json` | the user, when a new name is bought |
-| Watchlist (active) | `data/watchlist/<MKT>.json` | the watchlist workflows |
-| Shortlist (one array per sheet) | `data/shortlist/<MKT>.json` | the shortlist workflows |
+| Shortlist (active research & candidates) | `data/shortlist/<MKT>.json` | the shortlist / company_report workflows |
+| Discarded (rejected / disqualified) | `data/discarded/<MKT>.json` | `scripts/sync_dossier_pipeline.py` |
 | Options positions | `data/options/<MKT>.json` | the user for new trades |
 | Generated holdings view | `data/views/holdings_<MKT>.md` | `scripts/data_layer.py --view` (never edit) |
 
@@ -25,12 +25,12 @@ Types: `opening` (position already held at the start of the log; amount may be n
 
 Holdings are replayed with the average-cost method. A position whose cost is unknown keeps `cost_known: false`. Never fill an unknown cost with a guess; record the purchase when you have it.
 
-## Editing records (watchlist, shortlist, options)
+## Editing records (shortlist, discarded, options)
 
 - Find the record by its `symbol` (or `underlying` for US options), then change only the fields you need. Never change field order or add fields that the schema does not use.
-- Column names in older text map to JSON keys: lowercase the name and replace spaces and punctuation with underscores. For example, "Action Verdict" is `action_verdict`, "Deep Research Status" is `deep_research_stat`, and "Strategy Bucket" is `strategy_bucket`.
-- The watchlist file has one array, `active` (names being researched). There is no archive: a name that is rejected or dropped is removed from the file.
-- The shortlist file has one array per former sheet under `sheets`. The workflows read `sheets.Master_Shortlist` unless the skill says otherwise.
+- Column names in older text map to JSON keys: lowercase the name and replace spaces and punctuation with underscores. For example, "Action Verdict" is `action_verdict`, "Deep Research Status" is `deep_research_status`, and "Strategy Bucket" is `strategy_bucket`.
+- The shortlist file has one array, `active` (queued, pending, and underwritten candidates).
+- The discarded file has one array, `items` (names rejected or disqualified during underwriting).
 - After any edit, run `.venv/bin/python scripts/data_layer.py --market <MKT> --validate`. It must print `RESULT: PASS` before the run continues.
 
 ## Where the workflows read from

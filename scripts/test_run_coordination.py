@@ -153,10 +153,10 @@ class EndToEndTests(unittest.TestCase):
         config = self.main / ".agents/config"
         config.mkdir(parents=True)
         (config / "portfolios.json").write_text(json.dumps({"US": {"sources": [
-            {"id": "watchlist_active", "role": "watchlist", "kind": "records", "path": "data/watchlist/US.json"}]}}))
+            {"id": "shortlist", "role": "shortlist", "kind": "records", "path": "data/shortlist/US.json"}]}}))
         (self.main / ".gitignore").write_text(".worktrees/\n__pycache__/\n")
-        self.write(self.main, "data/watchlist/US.json", {"market": "US", "active": rows(*"ABCDEFGH")})
-        self.write(self.main, "data/shortlist/US.json", {"market": "US", "sheets": {"Master_Shortlist": []}})
+        self.write(self.main, "data/shortlist/US.json", {"market": "US", "active": rows(*"ABCDEFGH")})
+        self.write(self.main, "data/discarded/US.json", {"market": "US", "items": []})
         (self.main / "docs/blogs/US").mkdir(parents=True)
         (self.main / "docs/blogs/US/.gitkeep").write_text("")
         self.sh("git", "add", "-A", cwd=self.main)
@@ -197,18 +197,19 @@ class EndToEndTests(unittest.TestCase):
         return self.py("publish_run.py", "--run-id", run_id, "--market", "US", "--message", f"run {run_id}",
                        "--no-portal", "--no-validate", cwd=tree, check=check)
 
-    def complete(self, tree, symbols, shortlist_row=None):
-        path = "data/watchlist/US.json"
+    def complete(self, tree, symbols, discard_symbol=None):
+        path = "data/shortlist/US.json"
         data = self.read(tree, path)
         for row in data["active"]:
             if row["symbol"] in symbols:
                 row["status"] = "COMPLETED"
                 (tree / f"docs/blogs/US/{row['symbol']}_dossier.html").write_text(f"<html>{row['symbol']}</html>")
+        if discard_symbol:
+            data["active"] = [r for r in data["active"] if r["symbol"] != discard_symbol]
+            disc = self.read(tree, "data/discarded/US.json")
+            disc["items"].append({"symbol": discard_symbol, "action_verdict": "REJECTED"})
+            self.write(tree, "data/discarded/US.json", disc)
         self.write(tree, path, data)
-        if shortlist_row:
-            sheet = self.read(tree, "data/shortlist/US.json")
-            sheet["sheets"]["Master_Shortlist"].append({"symbol": shortlist_row})
-            self.write(tree, "data/shortlist/US.json", sheet)
 
     def test_two_runs_work_in_parallel_and_both_land_on_main(self):
         one, two = self.start("company_report", "r1"), self.start("company_report", "r2")
@@ -220,15 +221,13 @@ class EndToEndTests(unittest.TestCase):
         self.assertEqual(got1, list("ABC"))
         self.assertEqual(got2, list("DEF"))
 
-        self.complete(one, got1, shortlist_row="A")
-        self.complete(two, got2, shortlist_row="D")
+        self.complete(one, got1)
+        self.complete(two, got2)
         self.publish(one, "r1")
         self.publish(two, "r2")                                  # origin moved under it: must merge, not clobber
 
-        active = {r["symbol"]: r["status"] for r in self.origin_file("data/watchlist/US.json")["active"]}
+        active = {r["symbol"]: r["status"] for r in self.origin_file("data/shortlist/US.json")["active"]}
         self.assertEqual(active, {**{s: "COMPLETED" for s in "ABCDEF"}, "G": "RESEARCH_REQUIRED", "H": "RESEARCH_REQUIRED"})
-        self.assertEqual([r["symbol"] for r in self.origin_file("data/shortlist/US.json")["sheets"]["Master_Shortlist"]],
-                         ["A", "D"])
         listing = self.sh("git", "ls-tree", "-r", "--name-only", "main", "docs/blogs/US", cwd=self.origin).stdout
         for symbol in "ABCDEF":
             self.assertIn(f"{symbol}_dossier.html", listing)
@@ -249,7 +248,7 @@ class EndToEndTests(unittest.TestCase):
         self.complete(three, got3["symbols"])
         self.publish(three, "r3")
 
-        # Now all 8 rows in watchlist.active are COMPLETED at cycle 1 -> round-robin rolls over to cycle 2!
+        # Now all 8 rows in shortlist.active are COMPLETED at cycle 1 -> round-robin rolls over to cycle 2!
         four, five = self.start("company_report", "r4"), self.start("company_report", "r5")
         got4 = json.loads(self.py("run_claims.py", "batch", "--workflow", "company_report", "--market", "US",
                                   "--run-id", "r4", "--size", "3", cwd=four).stdout)
@@ -264,11 +263,11 @@ class EndToEndTests(unittest.TestCase):
         # Even if complete() only updates cmp/status without manually setting research_cycle=2,
         # publish_run.py automatically bumps research_cycle to 2 on the modified rows!
         for tree, syms in ((four, got4["symbols"]), (five, got5["symbols"])):
-            data = self.read(tree, "data/watchlist/US.json")
+            data = self.read(tree, "data/shortlist/US.json")
             for row in data["active"]:
                 if row["symbol"] in syms:
                     row["cmp"] = 9.0
-            self.write(tree, "data/watchlist/US.json", data)
+            self.write(tree, "data/shortlist/US.json", data)
         self.publish(four, "r4")
         self.publish(five, "r5")
 
@@ -285,7 +284,6 @@ class EndToEndTests(unittest.TestCase):
         # independent of production data validators and account files.
         for name in ("portal_publish.py", "build_dossier_portal.py", "data_layer.py"):
             shutil.copy(SCRIPTS / name, self.main / "scripts" / name)
-        self.write(self.main, "data/shortlist/US.json", {"market": "US", "active": [], "archived": []})
         self.sh("git", "add", "-A", cwd=self.main)
         self.sh("git", "commit", "-q", "-m", "add catalog builder", cwd=self.main)
         self.sh("git", "push", "-q", "origin", "main", cwd=self.main)
@@ -297,7 +295,7 @@ class EndToEndTests(unittest.TestCase):
         result = self.py("publish_run.py", "--run-id", "homepage", "--market", "US", "--message", "publish homepage",
                          "--no-validate", cwd=homepage)
         self.assertEqual(json.loads(result.stdout)["status"], "PUBLISHED")
-        queue = self.origin_file("docs/portal-data.json")["queues"]["US"]["watchlist"]
+        queue = self.origin_file("docs/portal-data.json")["queues"]["US"]["shortlist"]
         by_symbol = {row["symbol"]: row for row in queue["rows"]}
         self.assertEqual(by_symbol["A"]["status"], "Completed")
         self.assertEqual(by_symbol["B"]["status"], "Pending")
@@ -327,9 +325,9 @@ class EndToEndTests(unittest.TestCase):
     def test_same_record_changed_by_both_is_refused_and_nothing_is_pushed(self):
         one, two = self.start("company_report", "c1"), self.start("company_report", "c2")
         for tree, verdict in ((one, "BUY"), (two, "SELL")):
-            data = self.read(tree, "data/watchlist/US.json")
+            data = self.read(tree, "data/shortlist/US.json")
             data["active"][0]["status"] = verdict
-            self.write(tree, "data/watchlist/US.json", data)
+            self.write(tree, "data/shortlist/US.json", data)
         self.publish(one, "c1")
         before = self.sh("git", "rev-parse", "main", cwd=self.origin).stdout
         refused = self.publish(two, "c2", check=False)
@@ -337,7 +335,7 @@ class EndToEndTests(unittest.TestCase):
         self.assertIn("[A].status", refused.stderr)
         self.assertEqual(self.sh("git", "rev-parse", "main", cwd=self.origin).stdout, before)
         self.assertEqual(self.sh("git", "branch", "--show-current", cwd=two).stdout.strip(), "run/c2")
-        self.assertEqual(self.read(two, "data/watchlist/US.json")["active"][0]["status"], "SELL")
+        self.assertEqual(self.read(two, "data/shortlist/US.json")["active"][0]["status"], "SELL")
 
     def test_publishing_from_the_shared_checkout_is_refused(self):
         (self.main / "docs/x.html").write_text("x")
@@ -389,7 +387,7 @@ class EndToEndTests(unittest.TestCase):
 
     def test_publish_automatically_cleans_up_worktree_on_success(self):
         tree = self.start("company_report", "pub1")
-        path = "data/watchlist/US.json"
+        path = "data/shortlist/US.json"
         data = self.read(tree, path)
         data["active"][0]["status"] = "BUY"
         self.write(tree, path, data)
@@ -400,7 +398,7 @@ class EndToEndTests(unittest.TestCase):
 
     def test_publish_with_keep_worktree_preserves_worktree(self):
         tree = self.start("company_report", "pub2")
-        path = "data/watchlist/US.json"
+        path = "data/shortlist/US.json"
         data = self.read(tree, path)
         data["active"][0]["status"] = "HOLD"
         self.write(tree, path, data)

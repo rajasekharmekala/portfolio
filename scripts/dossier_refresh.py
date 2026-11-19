@@ -395,7 +395,7 @@ def prepare_refresh_workspace(
         f"# Verdict-Stripped Assumption Audit & Blind-Spot Brainstorm Packet: {sym} ({mkt})",
         "",
         f"- **Prior Research Cutoff (`as_of`):** {prior_spec.get('as_of', 'unknown')}",
-        "- **Information Barrier:** Prior portfolio verdicts, valuation targets, entry zones, and stop losses are intentionally stripped. Do NOT read `prior_anchor_locked.json`, `docs/blogs/`, `data/shortlist/`, or `data/watchlist/` during Pass 1.",
+        "- **Information Barrier:** Prior portfolio verdicts, valuation targets, entry zones, and stop losses are intentionally stripped. Do NOT read `prior_anchor_locked.json`, `docs/blogs/`, `data/shortlist/`, or `data/discarded/` during Pass 1.",
         "",
         "## Part 1 — Challenge & Re-Verify Existing Chapter 1–6 Claims Since Prior Cutoff",
         "Search all quarterly/annual filings, concall transcripts, NSE/BSE or SEC disclosures, insider transactions, and competitor developments since the prior cutoff. Score key claims in `refresh_audit.json -> assumptions_checked` (`CONFIRMED`, `UNCHANGED`, `WEAKENED`, or `BROKEN`).",

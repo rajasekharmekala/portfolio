@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfolio Research Desk</title>
-  <meta name="description" content="Equity research portal for US and Indian markets: a filterable Stage 2 pipeline of watchlist, shortlist and held names, plus market intelligence, portfolio audits and deep company monographs.">
+  <meta name="description" content="Equity research portal for US and Indian markets: a filterable Stage 2 pipeline of shortlist, held and discarded names, plus market intelligence, portfolio audits and deep company monographs.">
   <link rel="stylesheet" href="portal.css?v=monograph-decisions-2">
 </head>
 <body id="top">
@@ -72,7 +72,6 @@
             <option value="ALL">All names</option>
             <option value="HELD">Held</option>
             <option value="SHORTLIST">Shortlist</option>
-            <option value="WATCHLIST">Watchlist</option>
             <option value="DISCARDED">Discarded</option>
           </select>
         </label>
@@ -93,7 +92,7 @@
             <option value="zone">CMP vs entry zone</option>
             <option value="base">Base upside</option>
             <option value="generated">Latest monograph</option>
-            <option value="status">Status (held &rarr; watchlist)</option>
+            <option value="status">Status (held &rarr; discarded)</option>
             <option value="sector">Sector A&ndash;Z</option>
             <option value="monograph">Monograph first</option>
           </select>
@@ -134,11 +133,11 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Research pipeline</p>
-            <h2 id="pipeline-heading">Watchlist, Shortlist &amp; Holdings</h2>
+            <h2 id="pipeline-heading">Shortlist, Holdings &amp; Discarded</h2>
           </div>
           <p class="section-meta" id="pipeline-meta">Loading pipeline&hellip;</p>
         </div>
-        <p class="queue-note">Each name appears once, in its most advanced lifecycle stage: <strong>Holdings</strong> (active capital deployed), then <strong>Shortlist</strong> (underwritten actionable setups), then <strong>Watchlist</strong> (screened research candidates). Pills show any other stage the name also belongs to.</p>
+        <p class="queue-note">Each name appears once, in its most advanced lifecycle stage: <strong>Holdings</strong> (active capital deployed), then <strong>Shortlist</strong> (queued &amp; underwritten candidates), then <strong>Discarded</strong> (rejected or retired). Pills show any other stage the name also belongs to.</p>
 
         <!-- View Mode & Tree Controls -->
         <div class="tree-controls">
@@ -172,24 +171,11 @@
               <div class="branch-summary-left">
                 <span class="branch-chevron" aria-hidden="true"></span>
                 <span class="branch-title">Shortlist</span>
-                <span class="branch-subtitle">Underwritten, actionable setups</span>
+                <span class="branch-subtitle">Underwritten &amp; queued setups</span>
               </div>
               <span class="branch-badge" id="count-shortlist">0 names</span>
             </summary>
             <div class="branch-content" id="content-shortlist"></div>
-          </details>
-
-          <!-- Watchlist Branch -->
-          <details class="accordion-branch branch-watchlist" id="branch-watchlist">
-            <summary class="branch-summary">
-              <div class="branch-summary-left">
-                <span class="branch-chevron" aria-hidden="true"></span>
-                <span class="branch-title">Watchlist</span>
-                <span class="branch-subtitle">Screened ideas &amp; ingestion queue</span>
-              </div>
-              <span class="branch-badge" id="count-watchlist">0 names</span>
-            </summary>
-            <div class="branch-content" id="content-watchlist"></div>
           </details>
 
           <!-- Discarded Branch -->
@@ -209,7 +195,7 @@
         <!-- Consolidated Flat Table (Secondary view) -->
         <div class="pipeline-scroll" id="pipeline-table-wrap" role="region" tabindex="0" aria-label="Research pipeline table" hidden>
           <table class="pipeline-table">
-            <caption class="sr-only">Research pipeline: watchlist, shortlist and holdings</caption>
+            <caption class="sr-only">Research pipeline: shortlist, holdings and discarded</caption>
             <thead id="pipeline-head"></thead>
             <tbody id="pipeline-body"></tbody>
           </table>
@@ -338,7 +324,7 @@
 
   const stageLabel = stage => stage ? stage.replace("_", " ") : "—";
   const statusLabel = status =>
-    status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "WATCHLIST" ? "Watchlist" : status === "DISCARDED" ? "Discarded" : "Tracked";
+    status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "DISCARDED" ? "Discarded" : "Tracked";
 
   function tradingViewUrl(symbol, market) {
     if (!symbol) return null;
@@ -369,7 +355,7 @@
     const queueData = state.queues || {};
     for (const market of ["US", "IN"]) {
       const group = queueData[market] || {};
-      for (const kind of ["shortlist", "watchlist"]) {
+      for (const kind of ["shortlist", "discarded"]) {
         const bucket = group[kind];
         if (!bucket || !bucket.available || !Array.isArray(bucket.rows)) continue;
         for (const r of bucket.rows) {
@@ -405,14 +391,14 @@
     const queueData = state.queues || {};
     for (const market of ["US", "IN"]) {
       const group = queueData[market] || {};
-      for (const kind of ["watchlist", "shortlist"]) {
+      for (const kind of ["shortlist", "discarded"]) {
         const bucket = group[kind];
         if (!bucket || !bucket.available || !Array.isArray(bucket.rows)) continue;
         for (const r of bucket.rows) {
           const row = ensure(market, r.symbol, r.company);
           if (r.stage) row.stages.add(r.stage);
           if (r.sector) row.sectors.add(r.sector);
-          row.statuses.add(kind === "shortlist" ? "SHORTLIST" : "WATCHLIST");
+          row.statuses.add(kind === "shortlist" ? "SHORTLIST" : "DISCARDED");
           if (r.dossierUrl) {
             row.dossierUrl = r.dossierUrl;
             if (r.verdict && r.verdict !== "Not specified") row.verdict = r.verdict;
@@ -464,12 +450,11 @@
     return [...stages][0] || null;
   }
 
-  // Held outranks Shortlist outranks Watchlist for the single Status column,
+  // Held outranks Shortlist outranks Discarded for the single Status column,
   // but the full set is kept so the Status filter can match any membership.
   function primaryStatus(statuses) {
     if (statuses.includes("HELD")) return "HELD";
     if (statuses.includes("SHORTLIST")) return "SHORTLIST";
-    if (statuses.includes("WATCHLIST")) return "WATCHLIST";
     return "DISCARDED";
   }
 
@@ -489,9 +474,9 @@
   }
 
   // Ascending puts the most favourable value first: Stage 2 before 4, Immediate Buy before Avoid,
-  // Held before Shortlist before Watchlist. Missing values sort last in both directions.
+  // Held before Shortlist before Discarded. Missing values sort last in both directions.
   const STAGE_RANK = { STAGE_2: 0, STAGE_1: 1, STAGE_3: 2, STAGE_4: 3 };
-  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, WATCHLIST: 2, DISCARDED: 3 };
+  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, DISCARDED: 2 };
   const VERDICT_RANK = {
     "IMMEDIATE BUY": 0,
     "ACCUMULATE ON DIP": 1,
@@ -592,7 +577,6 @@
   const SECTIONS = [
     { status: "HELD", id: "holdings", label: "Holdings" },
     { status: "SHORTLIST", id: "shortlist", label: "Shortlist" },
-    { status: "WATCHLIST", id: "watchlist", label: "Watchlist" },
     { status: "DISCARDED", id: "discarded", label: "Discarded" },
   ];
 
@@ -621,7 +605,7 @@
       ["KPI health", d?.kpiHealth],
       ["Weinstein stage", d?.weinsteinStage || row.stage],
       ["Research as of", d?.asOf],
-      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist/watchlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
+      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
     ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(/^[A-Z0-9_]+$/.test(v) ? humanize(v) : v)}</dd></div>`).join("");
     const alerts = (d?.alerts || []).map(a => `<li><strong>${escapeHtml(a.trigger || "Trigger")}</strong>${a.instruction ? `<br>${escapeHtml(a.instruction)}` : ""}</li>`).join("");
     const redeploy = (d?.redeployment || []).map(r => `<li><strong>${escapeHtml(humanize(r.type) || "Destination")}${isNum(r.allocationPct) ? ` · ${escapeHtml(String(r.allocationPct))}%` : ""}</strong>${r.recommendation ? `<br>${escapeHtml(r.recommendation)}` : ""}${r.entryCondition ? `<br><span class="detail-note">Entry: ${escapeHtml(r.entryCondition)}</span>` : ""}</li>`).join("");
@@ -765,7 +749,7 @@
       const byMarket = m => filtered.filter(r => r.market === m).length;
       const byStatus = s => filtered.filter(r => r.status === s).length;
       const monographed = filtered.filter(r => Boolean(r.dossierUrl)).length;
-      counts.textContent = `${filtered.length} names shown (${monographed} monographs) · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
+      counts.textContent = `${filtered.length} names shown (${monographed} monographs) · US ${byMarket("US")} · IN ${byMarket("IN")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
     }
     if (meta) meta.textContent = `${filtered.length} of ${all.length} tracked names`;
 
@@ -898,7 +882,6 @@
 
     statsEl.innerHTML = `
       <div><dt>Tracked</dt><dd>${pipeline.length}</dd></div>
-      <div><dt>Watchlist</dt><dd>${countStatus("WATCHLIST")}</dd></div>
       <div><dt>Shortlist</dt><dd>${countStatus("SHORTLIST")}</dd></div>
       <div><dt>Held</dt><dd>${countStatus("HELD")}</dd></div>
       <div><dt>Discarded</dt><dd>${countStatus("DISCARDED")}</dd></div>

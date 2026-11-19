@@ -3,8 +3,8 @@
 W1 — Schema validation for portfolio data records.
 
 Validates every record in:
-    data/shortlist/{US,IN}.json   (all sheets)
-    data/watchlist/{US,IN}.json   (active)
+    data/shortlist/{US,IN}.json   (active)
+    data/discarded/{US,IN}.json   (items)
 
 against the draft-07 schemas in scripts/schemas/. Also warns when a
 research_dossier_path does not resolve to an existing file under the repo.
@@ -55,7 +55,7 @@ def validate_rows(rows, validator, label):
 
 def main():
     shortlist_v = load_validator("shortlist_record.schema.json")
-    watch_v = load_validator("watchlist_record.schema.json")
+    discard_v = load_validator("discarded_record.schema.json")
 
     total_errors = 0
     total_rows = 0
@@ -65,58 +65,42 @@ def main():
         # ---- shortlist
         path = REPO / "data" / "shortlist" / f"{market}.json"
         data = json.loads(path.read_text(encoding="utf-8"))
-        if "sheets" in data:
-            for sheet, rows in data["sheets"].items():
-                errs = validate_rows(rows, shortlist_v, f"{market}/{sheet}")
-                total_rows += len(rows)
-                total_errors += len(errs)
-                for e in errs[:10]:
-                    print(e)
-                if len(errs) > 10:
-                    print(f"  ... and {len(errs) - 10} more errors in {market}/{sheet}")
-        else:
-            for key in ("active",):
-                rows = data.get(key, [])
-                errs = validate_rows(rows, shortlist_v, f"{market}/shortlist/{key}")
-                total_rows += len(rows)
-                total_errors += len(errs)
-                for e in errs[:10]:
-                    print(e)
-                if len(errs) > 10:
-                    print(f"  ... and {len(errs) - 10} more errors in {market}/shortlist/{key}")
-
-        # ---- watchlist
-        path = REPO / "data" / "watchlist" / f"{market}.json"
-        data = json.loads(path.read_text(encoding="utf-8"))
-        for bucket in ("active",):
-            errs = validate_rows(data[bucket], watch_v, f"{market}/watchlist/{bucket}")
-            total_rows += len(data[bucket])
+        for key in ("active",):
+            rows = data.get(key, [])
+            errs = validate_rows(rows, shortlist_v, f"{market}/shortlist/{key}")
+            total_rows += len(rows)
             total_errors += len(errs)
             for e in errs[:10]:
                 print(e)
             if len(errs) > 10:
-                print(f"  ... and {len(errs) - 10} more errors in {market}/watchlist/{bucket}")
+                print(f"  ... and {len(errs) - 10} more errors in {market}/shortlist/{key}")
+
+        # ---- discarded
+        path = REPO / "data" / "discarded" / f"{market}.json"
+        if path.exists():
+            data = json.loads(path.read_text(encoding="utf-8"))
+            rows = data.get("items", [])
+            errs = validate_rows(rows, discard_v, f"{market}/discarded/items")
+            total_rows += len(rows)
+            total_errors += len(errs)
+            for e in errs[:10]:
+                print(e)
+            if len(errs) > 10:
+                print(f"  ... and {len(errs) - 10} more errors in {market}/discarded/items")
 
     # ---- dossier path existence (warnings only)
     for market in ("US", "IN"):
-        path = REPO / "data" / "shortlist" / f"{market}.json"
-        data = json.loads(path.read_text(encoding="utf-8"))
-        if "sheets" in data:
-            for sheet, rows in data["sheets"].items():
-                for row in rows:
-                    p = row.get("research_dossier_path")
-                    if p and not dossier_path_exists(p):
-                        missing_dossiers += 1
-                        if missing_dossiers <= 10:
-                            print(f"  [warn] {market}/{sheet} {row.get('symbol')}: dossier not found: {p}")
-        else:
-            for key in ("active",):
-                for row in data.get(key, []):
-                    p = row.get("research_dossier_path")
-                    if p and not dossier_path_exists(p):
-                        missing_dossiers += 1
-                        if missing_dossiers <= 10:
-                            print(f"  [warn] {market}/shortlist/{key} {row.get('symbol')}: dossier not found: {p}")
+        for folder, key in (("shortlist", "active"), ("discarded", "items")):
+            path = REPO / "data" / folder / f"{market}.json"
+            if not path.exists():
+                continue
+            data = json.loads(path.read_text(encoding="utf-8"))
+            for row in data.get(key, []):
+                p = row.get("research_dossier_path")
+                if p and not dossier_path_exists(p):
+                    missing_dossiers += 1
+                    if missing_dossiers <= 10:
+                        print(f"  [warn] {market}/{folder}/{key} {row.get('symbol')}: dossier not found: {p}")
 
     print(f"\nrows checked: {total_rows}, schema errors: {total_errors}, missing dossier files: {missing_dossiers}")
     sys.exit(1 if total_errors else 0)

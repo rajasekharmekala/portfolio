@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "portfolio/discarded_record.schema.json",
+  "title": "Discarded record (shared IN + US)",
+  "description": "Canonical record for rejected or fundamentally disqualified names in data/discarded/<MKT>.json (items array).",
+  "type": "object",
+  "required": [
+    "symbol",
+    "company_name",
+    "action_verdict",
+    "discarded_date"
+  ],
+  "properties": {
+    "symbol": { "type": "string", "minLength": 1 },
+    "company_name": { "type": "string", "minLength": 1 },
+    "action_verdict": { "type": "string", "minLength": 1 },
+    "discarded_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$|^unknown$" },
+    "reason": { "type": ["string", "null"] },
+    "macro_sector": { "type": ["string", "null"] },
+    "weinstein_stage": { "enum": ["STAGE_1", "STAGE_2", "STAGE_3", "STAGE_4", "UNKNOWN"] },
+    "research_dossier_path": { "type": ["string", "null"] },
+    "as_of_date": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$|^unknown$" },
+    "notes": { "type": ["string", "null"] }
+  },
+  "additionalProperties": true
+}

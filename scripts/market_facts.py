@@ -16,7 +16,7 @@ if the benchmark's last bar is not on that date, the build exits non-zero (no si
 
 Also written per run: cache/factpack_<MKT>_<date>.json (the compact subset that report sections are drafted
 from; the full ledger is too large to give every section) and manifest.json (inputs with SHA-256, and per-symbol
-freshness for every holding, shortlist and watchlist name). A holding that is not current on the session date
+freshness for every holding and shortlist name). A holding that is not current on the session date
 aborts the build unless --allow-stale-holdings is given. Input sources live in .agents/config/portfolios.json.
 """
 from __future__ import annotations
@@ -899,7 +899,7 @@ def build(args):
                  f"Source not yet updated or session not closed. Aborting; nothing written.")
     stale = sorted(k for k, v in inst.items() if v.get("asof_bar") and v["asof_bar"] < asof)
 
-    # Per-symbol freshness for every name a report will quote as a holding, shortlist or watchlist entry.
+    # Per-symbol freshness for every name a report will quote as a holding or shortlist entry.
     fetched_at = dt.datetime.now().isoformat(timespec="seconds")
     freshness = []
     for sym in sorted(roles):
@@ -917,7 +917,7 @@ def build(args):
                  f"{' ...' if len(blocked) > 40 else ''}. Aborting; nothing written. "
                  "Re-run after the source updates, or pass --allow-stale-holdings and state the reason in the report.")
 
-    # breadth from the screening universe when supplied, otherwise from the book/watchlist
+    # breadth from the screening universe when supplied, otherwise from the book/shortlist
     pool = [inst[s] for s in (universe or roles) if s in inst and inst[s].get("sma50")]
     breadth50 = num(100 * sum(1 for m in pool if m["close"] > m["sma50"]) / len(pool), 1) if pool else None
     breadth200 = num(100 * sum(1 for m in pool if m.get("sma200") and m["close"] > m["sma200"]) / len(pool), 1) if pool else None
@@ -1050,7 +1050,7 @@ def build(args):
 
 def factpack(facts):
     """The compact subset that report sections are drafted from. Holdings and shortlist names keep full metrics;
-    watchlist names keep only the fields needed to mention them. Sized for a section agent, not the whole ledger."""
+    discarded/other names keep only the fields needed to mention them. Sized for a section agent, not the whole ledger."""
     inst = facts["instruments"]
     fresh = {f["symbol"]: f for f in facts["freshness"]}
     names = {}

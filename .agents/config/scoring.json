@@ -135,16 +135,12 @@
       "options_and_leveraged_primary": "robinhood",
       "consolidate_duplicate_legs_on_trim": true
     },
-    "watchlist_capacity": {
-      "max_active_names_per_market": 25,
-      "rule": "Strict maximum 25 active candidates in data/watchlist/<MKT>.json. Never dump incidental research peers into active watchlist. New breakout additions must replace an inactive/archived row or prune the lowest-ranked candidate."
-    },
     "shortlist_capacity": {
-      "max_active_names_per_market": 15,
-      "core_alpha_max": 8,
-      "tactical_momentum_max": 7,
+      "max_active_names_per_market": 45,
+      "core_alpha_max": 25,
+      "tactical_momentum_max": 20,
       "staleness_ttl_days": 60,
-      "rule": "Only companies with verified, published deep business-monograph dossiers may enter data/shortlist/<MKT>.json. Candidates deteriorating into Stage 4 or breaking 200D SMA are retired to shortlist.archived."
+      "rule": "Unified shortlist in data/shortlist/<MKT>.json (active). Rejected or fundamentally disqualified names are moved to data/discarded/<MKT>.json."
     },
     "tier_table": {
       "TIER_1": { "min_pct": 7, "max_pct": 10 },
@@ -179,7 +175,7 @@
       "STAGE_2_PULLBACK": "Primary Stage 2 uptrend intact (price > 30W SMA & 200D SMA), pulling back constructively toward the 10-week EMA / 20D-50D SMA support zone on contracting volume.",
       "STAGE_1_BASE": "Constructive multi-week horizontal base or turnaround accumulation near a flattening 30W / 200D SMA with relative strength inflecting up.",
       "STAGE_3_DISTRIBUTION": "Chopping laterally or breaking below a flattening 50D SMA after an extended advance while still above the 200D SMA.",
-      "STAGE_4_BREAKDOWN": "Price below a falling 30-week SMA and falling 50-day SMA. Automatic avoid/reject for new buys and prune candidate for the watchlist."
+      "STAGE_4_BREAKDOWN": "Price below a falling 30-week SMA and falling 50-day SMA. Automatic avoid/reject for new buys and prune candidate for the shortlist."
     },
     "no_fomo_entry_rules": {
       "max_extension_above_10w_ema_pct": 10.0,
@@ -187,10 +183,7 @@
       "max_immediate_buy_rsi14": 73.0,
       "IMMEDIATE_BUY": "Stock is in Early Stage 2 (1-8 weeks in Stage 2 or fresh base breakout / constructive pullback), within 10% of its 10W EMA / 50D SMA, RSI(14) <= 73, and valuation + business execution support immediate deployment at CMP.",
       "WAIT_FOR_SUPPORT": "Business quality and Stage 2 trend are strong, but price is extended (>10% above 10W EMA, >12% above 50D SMA, or RSI > 73) OR valuation requires a margin-of-safety pullback. Place on Shortlist with a concrete limit-order support zone (20D EMA / 10W EMA / 50D SMA).",
-      "REJECTED": "Broken Stage 4 downtrend, structural business/governance failure, or severe valuation disconnect with deteriorating fundamentals. Prune from active watchlist to archive."
-    },
-    "watchlist_pruning": {
-      "rule": "Keep the active watchlist focused. Automatically move any active watchlist stock in a confirmed Stage 4 breakdown or marked REJECTED/AVOID into watchlist.archive via scripts/stock_snapshot.py --prune-watchlist."
+      "REJECTED": "Broken Stage 4 downtrend, structural business/governance failure, or severe valuation disconnect with deteriorating fundamentals. Move from data/shortlist/<MKT>.json to data/discarded/<MKT>.json."
     }
   },
   "stop_placement": {

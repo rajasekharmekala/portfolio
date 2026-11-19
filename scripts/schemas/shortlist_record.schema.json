@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "portfolio/shortlist_record.schema.json",
-  "title": "Shortlist / Holdings record (shared IN + US)",
-  "description": "Canonical record for every row of the shortlist sheets (Master_Shortlist, Holdings_Audit, Core_Alpha_Challengers, Tactical_Momentum, Leveraged_Satellite). One field set is shared by both markets; the file-level 'market' field disambiguates currency and units (US: USD, market_cap in USD billions; IN: INR, market_cap in INR crores).",
+  "title": "Shortlist record (shared IN + US)",
+  "description": "Canonical record for every row of the unified shortlist (data/shortlist/<MKT>.json -> active). One field set is shared by both markets; the file-level 'market' field disambiguates currency and units (US: USD, market_cap in USD billions; IN: INR, market_cap in INR crores).",
   "type": "object",
   "required": [
     "symbol",
@@ -30,7 +30,7 @@
     "fine_subsector": { "type": ["string", "null"] },
     "cap_tier": { "enum": ["Large-Cap", "Mid-Cap", "Small-Cap", "Micro-Cap", "Mega-Cap"] },
 
-    "cmp": { "type": "number", "minimum": 0 },
+    "cmp": { "type": ["number", "null"], "minimum": 0 },
     "entry_zone_low": { "type": ["number", "null"], "minimum": 0 },
     "entry_zone_high": { "type": ["number", "null"], "minimum": 0 },
     "stop_loss": { "type": ["number", "null"], "minimum": 0 },
@@ -70,6 +70,11 @@
       "enum": ["IMMEDIATE_BUY", "ACCUMULATE_ON_DIP", "KEEP_COMPOUNDING", "WAIT_FOR_SUPPORT", "TRIM_PROFIT_BOOKING", "REPLACE_UNDERPERFORMER", "REJECTED", "QUALIFIED", "PENDING", "RESEARCH_REQUIRED"]
     },
     "action_verdict_detail": { "type": ["string", "null"] },
+    "status": { "enum": ["COMPLETED", "RESEARCH_REQUIRED", "REJECTED", "UNDERWRITTEN", "PENDING", "UNKNOWN"] },
+    "deep_research_status": { "type": ["string", "null"] },
+    "research_cycle": { "type": ["integer", "null"], "minimum": 0 },
+    "strategy_fit": { "type": ["string", "null"] },
+    "shortlist_action": { "type": ["string", "null"] },
     "weinstein_stage": { "enum": ["STAGE_1", "STAGE_2", "STAGE_3", "STAGE_4", "UNKNOWN"] },
     "weinstein_stage_detail": { "type": ["string", "null"] },
     "kpi_health": { "enum": ["PASS", "PASS_WITH_WATCH", "FAIL", "PENDING", "UNKNOWN"] },
@@ -87,7 +92,9 @@
     "moat_description": { "type": ["string", "null"] },
     "primary_catalyst": { "type": ["string", "null"] },
     "primary_kpi_summary": { "type": ["string", "null"] },
-    "invalidation_condition": { "type": ["string", "null"] }
+    "invalidation_condition": { "type": ["string", "null"] },
+    "summary_rationale": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] }
   },
   "additionalProperties": true
 }

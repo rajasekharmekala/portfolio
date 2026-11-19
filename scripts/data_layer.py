@@ -6,7 +6,7 @@ The log is the record of truth. Broker snapshots are optional reconciliation che
   data/accounts/<MKT>/<account>.transactions.jsonl   one JSON object per line (see TYPES below)
   data/accounts/<MKT>/<account>.snapshot.json        optional broker snapshot for reconciliation
   data/metadata/symbols.json                         strategy bucket and name per symbol, by market
-  data/watchlist/<MKT>.json, data/shortlist/<MKT>.json, data/options/<MKT>.json   workflow records
+  data/shortlist/<MKT>.json, data/discarded/<MKT>.json, data/options/<MKT>.json   workflow records
 
 Usage:
   python3 scripts/data_layer.py --market US --validate          check every file in the data layer
@@ -150,7 +150,7 @@ def validate(market):
             replay(rows)
         except SystemExit as e:
             problems.append(str(e))
-    for name in ("watchlist", "shortlist", "options"):
+    for name in ("shortlist", "discarded", "options"):
         for path in glob.glob(os.path.join(DATA, name, f"{market}.json")):
             try:
                 json.load(open(path, encoding="utf-8"))

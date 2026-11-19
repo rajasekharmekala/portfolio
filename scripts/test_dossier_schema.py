@@ -387,15 +387,17 @@ class DossierDecisionSchemaTests(unittest.TestCase):
                             "rsi_14_daily": 58.0},
             "stage2_evaluation": {"weinstein_stage": "STAGE_2", "entry_timing_posture": "BUY_AT_CMP_NO_FOMO"},
         }}}
-        wl_init = {"active": [{
+        sl_init = {"market": "US", "active": [{
             "symbol": "TEST", "company_name": "Test Systems Inc", "source_type": "SCANNER",
             "status": "RESEARCH_REQUIRED", "action_verdict": "RESEARCH_REQUIRED",
+            "weinstein_stage": "STAGE_2", "cmp": 96.0, "stop_loss": 85.0,
+            "target_base": 120.0, "asymmetry_ratio": 2.1,
             "kpi_health": "PENDING", "gate_status": "PENDING", "strategy_bucket": "CORE_ALPHA",
             "as_of_date": "2026-11-01", "research_cycle": 2,
         }]}
-        sl_init = {"market": "US", "active": []}
+        dc_init = {"market": "US", "items": []}
 
-        # 1. Qualified TIER_1 COMPOUNDER_PASS -> PROMOTE_TO_SHORTLIST (and mark watchlist COMPLETED at cycle 2)
+        # 1. Qualified TIER_1 COMPOUNDER_PASS -> KEEP_ON_SHORTLIST (marked COMPLETED at cycle 2)
         promote_spec = {
             **valid_spec(),
             "verdict": "IMMEDIATE_BUY",
@@ -405,27 +407,27 @@ class DossierDecisionSchemaTests(unittest.TestCase):
             "kpi_health": "PASS",
             "primer": "High-ROIC semiconductor leader in early Stage 2.",
         }
-        r1 = apply_pipeline_transition(promote_spec, snapshots, wl_init, sl_init, today_iso="2026-11-12")
-        self.assertEqual(r1["transition"], "PROMOTE_TO_SHORTLIST")
+        r1 = apply_pipeline_transition(promote_spec, snapshots, sl_init, dc_init, today_iso="2026-11-12")
+        self.assertEqual(r1["transition"], "KEEP_ON_SHORTLIST")
         self.assertEqual(len(r1["shortlist"]["active"]), 1)
         self.assertEqual(r1["shortlist"]["active"][0]["action_verdict"], "IMMEDIATE_BUY")
-        self.assertEqual(r1["watchlist"]["active"][0]["status"], "COMPLETED")
-        self.assertEqual(r1["watchlist"]["active"][0]["research_cycle"], 2)
+        self.assertEqual(r1["shortlist"]["active"][0]["status"], "COMPLETED")
+        self.assertEqual(r1["shortlist"]["active"][0]["research_cycle"], 2)
+        self.assertEqual(r1["discarded"]["items"], [])
 
-        # 2. Conditional TIER_3 WAIT_FOR_SUPPORT -> KEEP_ON_WATCHLIST (and demote from shortlist)
+        # 2. Conditional TIER_3 WAIT_FOR_SUPPORT -> KEEP_ON_SHORTLIST (stays on shortlist as COMPLETED)
         monitor_spec = {
             **valid_spec(),
             "conviction_tier": "TIER_3",
             "business_quality_verdict": "CYCLICAL_CONDITIONAL",
             "kpi_health": "PASS_WITH_WATCH",
         }
-        r2 = apply_pipeline_transition(monitor_spec, snapshots, r1["watchlist"], r1["shortlist"], today_iso="2026-11-12")
-        self.assertEqual(r2["transition"], "KEEP_ON_WATCHLIST")
-        self.assertEqual(r2["shortlist"]["active"], [])
-        self.assertEqual(r2["watchlist"]["active"][0]["status"], "COMPLETED")
-        self.assertEqual(r2["watchlist"]["active"][0]["shortlist_action"], "MONITOR_ON_WATCHLIST")
+        r2 = apply_pipeline_transition(monitor_spec, snapshots, r1["shortlist"], r1["discarded"], today_iso="2026-11-12")
+        self.assertEqual(r2["transition"], "KEEP_ON_SHORTLIST")
+        self.assertEqual(len(r2["shortlist"]["active"]), 1)
+        self.assertEqual(r2["shortlist"]["active"][0]["status"], "COMPLETED")
 
-        # 3. REJECTED -> DISCARD from both watchlist and shortlist
+        # 3. REJECTED -> DISCARD from shortlist into discarded
         reject_spec = {
             **valid_spec(),
             "verdict": "REJECTED",
@@ -434,10 +436,17 @@ class DossierDecisionSchemaTests(unittest.TestCase):
             "business_quality_verdict": "FUNDAMENTAL_FAIL",
             "kpi_health": "FAIL",
         }
-        r3 = apply_pipeline_transition(reject_spec, snapshots, r1["watchlist"], r1["shortlist"], today_iso="2026-11-12")
+        r3 = apply_pipeline_transition(reject_spec, snapshots, r1["shortlist"], r1["discarded"], today_iso="2026-11-12")
         self.assertEqual(r3["transition"], "DISCARD")
-        self.assertEqual(r3["watchlist"]["active"], [])
         self.assertEqual(r3["shortlist"]["active"], [])
+        self.assertEqual(len(r3["discarded"]["items"]), 1)
+        self.assertEqual(r3["discarded"]["items"][0]["symbol"], "TEST")
+
+        # 4. Re-underwritten non-rejected name moves back from discarded to shortlist
+        r4 = apply_pipeline_transition(promote_spec, snapshots, r3["shortlist"], r3["discarded"], today_iso="2026-11-12")
+        self.assertEqual(r4["transition"], "KEEP_ON_SHORTLIST")
+        self.assertEqual(len(r4["shortlist"]["active"]), 1)
+        self.assertEqual(r4["discarded"]["items"], [])
 
         # 4. Reviewer & Red-Team gate blocks unapproved dossiers and passes approved ones
         with tempfile.TemporaryDirectory() as tmp, patch("dossier_builder_template.build_pdf_book"):

@@ -1,5 +1,5 @@
 ---
-description: Portfolio audit for one market (IN or US) across all declared accounts. Reconciles holdings, shortlist and watchlist against the same-session ledger, writes the audit in sections, passes the validator and reviewer gate, then delivers.
+description: Portfolio audit for one market (IN or US) across all declared accounts. Reconciles holdings, shortlist and discarded against the same-session ledger, writes the audit in sections, passes the validator and reviewer gate, then delivers.
 ---
 
 # Portfolio Audit Workflow (generic: IN or US)

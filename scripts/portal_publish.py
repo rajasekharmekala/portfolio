@@ -69,7 +69,7 @@ def _clean_lead_sector(raw):
 
 
 def record_lookup(symbol):
-    """Backfill (action_verdict, macro_sector) for a symbol from shortlist/watchlist/metadata records."""
+    """Backfill (action_verdict, macro_sector) for a symbol from shortlist/discarded/metadata records."""
     if not symbol:
         return (None, None)
     root = DOCS.parent / "data"
@@ -77,7 +77,8 @@ def record_lookup(symbol):
     if cache_key in _record_cache:
         return _record_cache[cache_key]
     verdict, sector = None, None
-    for name in ("shortlist/IN.json", "shortlist/US.json"):
+    for name, key in (("shortlist/IN.json", "active"), ("shortlist/US.json", "active"),
+                      ("discarded/IN.json", "items"), ("discarded/US.json", "items")):
         path = root / name
         if not path.exists():
             continue
@@ -85,31 +86,13 @@ def record_lookup(symbol):
             payload = json.loads(path.read_text(encoding="utf-8"))
         except ValueError:
             continue
-        rows = list(payload.get("active") or [])
-        for sheet_rows in (payload.get("sheets") or {}).values():
-            if isinstance(sheet_rows, list):
-                rows.extend(r for r in sheet_rows if isinstance(r, dict))
+        rows = list(payload.get(key) or [])
         for row in rows:
             if row.get("symbol") == symbol:
                 verdict = verdict or row.get("action_verdict")
                 sector = sector or _clean_lead_sector(row.get("macro_sector"))
         if verdict and sector:
             break
-    if not verdict or not sector:
-        for name in ("watchlist/IN.json", "watchlist/US.json"):
-            path = root / name
-            if not path.exists():
-                continue
-            try:
-                data = json.loads(path.read_text(encoding="utf-8"))
-            except ValueError:
-                continue
-            for row in data.get("active", []):
-                if row.get("symbol") == symbol:
-                    verdict = verdict or row.get("action_verdict")
-                    sector = sector or _clean_lead_sector(row.get("macro_sector"))
-            if verdict and sector:
-                break
     if not sector:
         reg_path = root / "metadata" / "symbols.json"
         if reg_path.exists():
@@ -130,18 +113,16 @@ def _is_number(value):
 
 
 def record_price(market, symbol):
-    """Last close and its as-of date from the market's shortlist or watchlist record."""
-    for name in (f"shortlist/{market}.json", f"watchlist/{market}.json"):
-        path = DOCS.parent / "data" / name
-        if not path.exists():
-            continue
+    """Last close and its as-of date from the market's shortlist record."""
+    path = DOCS.parent / "data" / "shortlist" / f"{market}.json"
+    if path.exists():
         try:
             rows = json.loads(path.read_text(encoding="utf-8")).get("active") or []
+            for row in rows:
+                if row.get("symbol") == symbol and _is_number(row.get("cmp")):
+                    return row["cmp"], row.get("as_of_date")
         except ValueError:
-            continue
-        for row in rows:
-            if row.get("symbol") == symbol and _is_number(row.get("cmp")):
-                return row["cmp"], row.get("as_of_date")
+            pass
     return None, None
 
 
@@ -408,7 +389,7 @@ def public_queue(entries):
             return None
         return dossier_verdicts.get((market, symbol)) or normalize_verdict(row_action_verdict)
 
-    def active_rows(market, kind):
+    def active_rows(market, kind, key="active"):
         path = DOCS.parent / "data" / kind / (market + ".json")
         if not path.exists():
             return None
@@ -416,9 +397,9 @@ def public_queue(entries):
             data = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError) as exc:
             raise ValueError(f"Cannot read {kind} records for {market}") from exc
-        if not isinstance(data, dict) or not isinstance(data.get("active"), list):
-            raise ValueError(f"Invalid {kind} active records for {market}")
-        rows = data["active"]
+        if not isinstance(data, dict) or not isinstance(data.get(key), list):
+            raise ValueError(f"Invalid {kind} {key} records for {market}")
+        rows = data[key]
         if any(not isinstance(row, dict) or not isinstance(row.get("symbol"), str)
                or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,39}", row["symbol"].strip()) for row in rows):
             raise ValueError(f"Invalid {kind} symbol for {market}")
@@ -469,40 +450,42 @@ def public_queue(entries):
 
     result = {}
     for market in ("IN", "US"):
-        active = active_rows(market, "watchlist")
-        shortlist = active_rows(market, "shortlist")
-        watch = {"available": active is not None, "rows": [], "currentCycle": None,
+        shortlist = active_rows(market, "shortlist", "active")
+        discarded = active_rows(market, "discarded", "items")
+        short = {"available": shortlist is not None, "rows": [], "currentCycle": None,
                  "targetCycle": None, "rollover": False}
-        if active:
-            current = max(_row_cycle(row) for row in active)
-            pending = [i for i, row in enumerate(active) if _is_pending_row(row)]
-            behind = [i for i, row in enumerate(active)
+        if shortlist:
+            current = max(_row_cycle(row) for row in shortlist)
+            pending = [i for i, row in enumerate(shortlist) if _is_pending_row(row)]
+            behind = [i for i, row in enumerate(shortlist)
                       if not _is_pending_row(row) and _row_cycle(row) < current]
             eligible = pending + behind
             rollover = not eligible
-            ordered = eligible or list(range(len(active)))
+            ordered = eligible or list(range(len(shortlist)))
             positions = {idx: n + 1 for n, idx in enumerate(ordered)}
-            watch.update(currentCycle=current, targetCycle=current + 1 if rollover else current,
+            short.update(currentCycle=current, targetCycle=current + 1 if rollover else current,
                          rollover=rollover)
-            for idx in ordered + [i for i in range(len(active)) if i not in positions]:
-                row = active[idx]
+            for idx in ordered + [i for i in range(len(shortlist)) if i not in positions]:
+                row = shortlist[idx]
                 is_pending = idx in pending or idx in behind
                 completed = row.get("status") == "COMPLETED" or row.get("deep_research_status") == "COMPLETED"
                 item = identity(row, market)
+                gate = text(row, "gate_status")
+                if gate not in ("PASSED", "PASSED_CONDITIONAL", "PARTIAL", "FAIL", "PENDING", "UNKNOWN"):
+                    gate = None
                 item.update(cycle=_row_cycle(row), status="Pending" if is_pending else "Completed" if completed else "Unknown",
                             queuePosition=positions.get(idx), lastResearched=date(row, "last_researched_date"),
-                            verdict=resolved_verdict(market, item["symbol"], row.get("action_verdict")))
-                watch["rows"].append(item)
-        short = {"available": shortlist is not None, "rows": []}
-        for row in shortlist or []:
+                            verdict=resolved_verdict(market, item["symbol"], row.get("action_verdict")),
+                            gateStatus=gate, asOf=date(row, "as_of_date"))
+                short["rows"].append(item)
+        disc = {"available": discarded is not None, "rows": []}
+        for row in discarded or []:
             item = identity(row, market)
-            gate = text(row, "gate_status")
-            if gate not in ("PASSED", "PASSED_CONDITIONAL", "PARTIAL", "FAIL", "PENDING", "UNKNOWN"):
-                gate = None
             item.update(verdict=resolved_verdict(market, item["symbol"], row.get("action_verdict")),
-                        gateStatus=gate, asOf=date(row, "as_of_date"))
-            short["rows"].append(item)
-        result[market] = {"watchlist": watch, "shortlist": short}
+                        discardedDate=date(row, "discarded_date"), reason=text(row, "reason"),
+                        asOf=date(row, "as_of_date"))
+            disc["rows"].append(item)
+        result[market] = {"shortlist": short, "discarded": disc}
     return result
 
 

@@ -426,13 +426,12 @@ def build_from_repo_fallback(market: str, as_of: str = "") -> Tuple[Dict[str, An
     snap_view = _load_json(REPO / "data" / "views" / f"snapshots_{market}_latest.json")
     snaps = snap_view.get("snapshots") or {}
     shortlist = _load_json(REPO / "data" / "shortlist" / f"{market}.json")
-    watchlist = _load_json(REPO / "data" / "watchlist" / f"{market}.json")
     meta_all = ((_load_json(REPO / "data" / "metadata" / "symbols.json").get(market) or {}).get("symbols") or {})
     opts_raw = (_load_json(REPO / "data" / "options" / f"{market}.json").get("positions") or []) if market == "US" else []
 
     snap_view_date = str(snap_view.get("as_of_date") or snap_view.get("generated_at") or "")[:10]
     price_map: Dict[str, float] = {}
-    for row in (watchlist.get("active") or []) + (shortlist.get("active") or []):
+    for row in (shortlist.get("active") or []):
         if isinstance(row, dict) and row.get("symbol") and _num(row.get("cmp")):
             price_map[row["symbol"]] = float(row["cmp"])
     for sym, sp in snaps.items():
@@ -574,7 +573,6 @@ def allocate_portfolio(
     positions: Dict[str, Any],
     snapshots: Optional[Dict[str, Any]] = None,
     shortlist_data: Optional[Dict[str, Any]] = None,
-    watchlist_data: Optional[Dict[str, Any]] = None,
     options_snapshot: Optional[Dict[str, Any]] = None,
     prior_state: Optional[Dict[str, Any]] = None,
     scoring: Optional[Dict[str, Any]] = None,
@@ -590,12 +588,7 @@ def allocate_portfolio(
         r for r in ((shortlist_data or {}).get("active") or [])
         if isinstance(r, dict) and r.get("symbol")
     ]
-    watchlist_rows = [
-        r for r in ((watchlist_data or {}).get("active") or [])
-        if isinstance(r, dict) and r.get("symbol")
-    ]
     shortlist_by_sym = {r["symbol"].upper(): r for r in shortlist_rows}
-    watchlist_by_sym = {r["symbol"].upper(): r for r in watchlist_rows}
     meta_by_sym = ((_load_json(REPO / "data" / "metadata" / "symbols.json").get(mkt) or {}).get("symbols") or {})
     stage2_view = _load_json(REPO / "data" / "views" / f"stage2_{mkt}_latest.json")
     opt_pkgs = ((options_snapshot or {}).get("packages") or {})
@@ -678,7 +671,7 @@ def allocate_portfolio(
         is_track = bool(0.0 < wt < track_max_pct)
         if is_track or sym in CASH_EQUIV_ETFS:
             continue
-        sl = shortlist_by_sym.get(sym) or watchlist_by_sym.get(sym) or {}
+        sl = shortlist_by_sym.get(sym) or {}
         meta = h.get("metadata") or meta_by_sym.get(sym) or {}
         spine = _load_dossier_spine(mkt, sym)
         sec_lbl = str(sl.get("macro_sector") or spine.get("sector") or meta.get("sub_theme") or "General")
@@ -834,7 +827,7 @@ def allocate_portfolio(
             float(h.get("market_value") or 0.0) / net_worth * 100.0
             for h in consolidated
             if (
-                (shortlist_by_sym.get(str(h.get("symbol", "")).upper()) or watchlist_by_sym.get(str(h.get("symbol", "")).upper()) or {}).get("bucket") == "CORE_ALPHA"
+                (shortlist_by_sym.get(str(h.get("symbol", "")).upper()) or {}).get("bucket") == "CORE_ALPHA"
                 or _load_dossier_spine(mkt, str(h.get("symbol", "")).upper()).get("bucket") == "CORE_ALPHA"
             )
         ),
@@ -864,18 +857,17 @@ def allocate_portfolio(
 
         spine = _load_dossier_spine(mkt, sym)
         sl = shortlist_by_sym.get(sym) or {}
-        wl = watchlist_by_sym.get(sym) or {}
         meta = h.get("metadata") or meta_by_sym.get(sym) or {}
         prior_row = prior_positions_by_sym.get(sym) or {}
 
         # Tracking positions (< 0.35% NAV): isolated from active slot count & rebalance churn
         if 0.0 < wt_pct < track_max_pct:
-            tr_stop = _num(spine.get("stop_loss")) or _num(sl.get("stop_loss")) or _num(wl.get("stop_loss")) or round(close * 0.85, 2)
+            tr_stop = _num(spine.get("stop_loss")) or _num(sl.get("stop_loss")) or round(close * 0.85, 2)
             tr_stage = _normalize_stage(inst_m.get("stage") or s2_ev.get("weinstein_stage") or spine.get("weinstein_stage"))
             tr_new_cap = str(spine.get("new_capital_verdict") or spine.get("verdict") or sl.get("action_verdict") or "WAIT_FOR_SUPPORT").upper()
             tracking_rows.append({
                 "symbol": sym,
-                "company_name": str(spine.get("company_name") or sl.get("company_name") or wl.get("company_name") or meta.get("company_name") or sym),
+                "company_name": str(spine.get("company_name") or sl.get("company_name") or meta.get("company_name") or sym),
                 "has_dossier": bool(spine.get("_has_published_dossier") or sl.get("research_dossier_path")),
                 "quantity": qty,
                 "cost_basis": round(cost, 2),
@@ -911,7 +903,6 @@ def allocate_portfolio(
             bucket_candidates = [
                 spine.get("strategy_bucket"),
                 sl.get("strategy_bucket"),
-                wl.get("strategy_bucket"),
                 meta.get("strategy_bucket"),
             ]
             bucket = next(
@@ -938,14 +929,12 @@ def allocate_portfolio(
                 s2_ev.get("weinstein_stage")
                 or spine.get("weinstein_stage")
                 or sl.get("weinstein_stage")
-                or wl.get("weinstein_stage")
             )
 
         # Resolve structural stop & enforce upward-only stop-loss ratchet for held shares
         raw_stop = (
             _num(spine.get("stop_loss"))
             or _num(sl.get("stop_loss"))
-            or _num(wl.get("stop_loss"))
         )
         if not raw_stop:
             if is_single_lev or is_sector_lev:
@@ -986,7 +975,7 @@ def allocate_portfolio(
         sec_lbl = str(
             SECTOR_INDEX_LEVERAGED_ETFS[sym][0]
             if is_sector_lev
-            else sl.get("macro_sector") or wl.get("macro_sector") or spine.get("sector") or meta.get("sub_theme") or tv.get("sector") or "General"
+            else sl.get("macro_sector") or spine.get("sector") or meta.get("sub_theme") or tv.get("sector") or "General"
         )
         und_sym = SINGLE_STOCK_LEVERAGED_ETFS.get(sym, (sym, 1.0))[0]
         cid = sym_to_cluster_id.get(sym) or _cluster_for(sym, sec_lbl, und_sym)
@@ -1296,7 +1285,7 @@ def allocate_portfolio(
 
         holding_decisions.append({
             "symbol": sym,
-            "company_name": str(sl.get("company_name") or wl.get("company_name") or meta.get("company_name") or sym),
+            "company_name": str(sl.get("company_name") or meta.get("company_name") or sym),
             "bucket": bucket,
             "tier": tier,
             "has_dossier": has_dossier,
@@ -1383,17 +1372,17 @@ def allocate_portfolio(
     challenger_decisions: List[Dict[str, Any]] = []
     held_active_syms = {hd["symbol"] for hd in holding_decisions if hd["target_value"] > 0}
 
-    combined_challenger_rows: List[Dict[str, Any]] = list(shortlist_rows)
-    seen_challenger_syms = {str(r["symbol"]).upper() for r in shortlist_rows}
-    for wr in watchlist_rows:
-        wsym = str(wr["symbol"]).upper()
-        if wsym in seen_challenger_syms:
+    combined_challenger_rows: List[Dict[str, Any]] = []
+    for sr in shortlist_rows:
+        ssym = str(sr["symbol"]).upper()
+        sspine = _load_dossier_spine(mkt, ssym)
+        s_status = str(sr.get("status") or "").upper()
+        s_verdict = str(sspine.get("new_capital_verdict") or sspine.get("verdict") or sr.get("action_verdict") or "").upper()
+        if s_verdict == "REJECTED":
             continue
-        wspine = _load_dossier_spine(mkt, wsym)
-        w_done = str(wr.get("status") or "").upper() == "COMPLETED" or str(wr.get("deep_research_status") or "").upper() == "COMPLETED"
-        if (w_done or wspine.get("_has_published_dossier")) and str(wspine.get("new_capital_verdict") or wspine.get("verdict") or wr.get("action_verdict") or "").upper() != "REJECTED":
-            combined_challenger_rows.append(wr)
-            seen_challenger_syms.add(wsym)
+        if s_status == "RESEARCH_REQUIRED" and not sspine.get("_has_published_dossier") and not sr.get("research_dossier_path"):
+            continue
+        combined_challenger_rows.append(sr)
 
     for r in combined_challenger_rows:
         sym = str(r["symbol"]).upper()
@@ -2109,7 +2098,6 @@ def main() -> None:
     ap.add_argument("--positions", default="", help="Path to positions_<MKT>_<date>.json")
     ap.add_argument("--snapshots", default="", help="Path to snapshots_<MKT>_<date>.json")
     ap.add_argument("--shortlist", default="", help="Path to data/shortlist/<MKT>.json")
-    ap.add_argument("--watchlist", default="", help="Path to data/watchlist/<MKT>.json")
     ap.add_argument("--options-snapshot", default="", help="Path to options_snapshot_<MKT>_<date>.json")
     ap.add_argument("--prior-state", default="", help="Path to prior data/allocations/<MKT>.json")
     ap.add_argument("--persist-state", default="", help="Write updated anchor state to data/allocations/<MKT>.json")
@@ -2129,7 +2117,6 @@ def main() -> None:
 
     snapshots = _load_json(args.snapshots) or snap_default
     shortlist = _load_json(args.shortlist or (REPO / "data" / "shortlist" / f"{mkt}.json"))
-    watchlist = _load_json(args.watchlist or (REPO / "data" / "watchlist" / f"{mkt}.json"))
     options_snap = _load_json(args.options_snapshot)
     prior_path = args.prior_state or str(REPO / "data" / "allocations" / f"{mkt}.json")
     prior_state = _load_json(prior_path)
@@ -2141,7 +2128,6 @@ def main() -> None:
         positions=positions,
         snapshots=snapshots,
         shortlist_data=shortlist,
-        watchlist_data=watchlist,
         options_snapshot=options_snap,
         prior_state=prior_state,
         cio_decisions=cio_decisions,

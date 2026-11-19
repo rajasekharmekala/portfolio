@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Record-level three-way merge for the JSON record files in data/.
 
-Two runs that start from the same origin/main may each edit data/watchlist/US.json. A text merge
+Two runs that start from the same origin/main may each edit data/shortlist/US.json. A text merge
 cannot tell that they touched different companies; this merge can. Lists of objects that carry a
 unique "symbol" are merged by symbol, objects are merged field by field, and anything both sides
 changed differently is reported as a conflict instead of being guessed.

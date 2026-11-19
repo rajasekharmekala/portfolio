@@ -123,9 +123,9 @@ def commit_run(git, message):
     return True
 
 
-def bump_watchlist_cycles(path, base_bytes, ours_bytes):
-    """Ensure completed rows modified during a watchlist round-robin batch advance to target_research_cycle."""
-    if not (path.startswith("data/watchlist/") and path.endswith(".json") and base_bytes and ours_bytes):
+def bump_shortlist_cycles(path, base_bytes, ours_bytes):
+    """Ensure completed rows modified during a shortlist round-robin batch advance to target_research_cycle."""
+    if not (path.startswith("data/shortlist/") and path.endswith(".json") and base_bytes and ours_bytes):
         return ours_bytes
     try:
         base_data = json.loads(base_bytes.decode("utf-8"))
@@ -171,7 +171,7 @@ def apply_run(git, run_commit, target, completed, args):
         if path in CATALOG_FILES:
             continue
         b, o, t = (git.blob(ref, path) for ref in (base, run_commit, target))
-        o = bump_watchlist_cycles(path, b, o)
+        o = bump_shortlist_cycles(path, b, o)
         if o == t:
             continue
         if b == t:

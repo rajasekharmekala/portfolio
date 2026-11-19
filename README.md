@@ -51,8 +51,8 @@ Both should print `RESULT: PASS`.
 │   ├── accounts/IN/            Zerodha transaction log (zerodha.transactions.jsonl)
 │   ├── accounts/US/            Schwab and Robinhood transaction logs
 │   ├── metadata/symbols.json   Company name, strategy bucket and mandate per symbol, by market
-│   ├── watchlist/IN.json, US.json     Active candidates
-│   ├── shortlist/IN.json, US.json     Shortlist sheets, one array per sheet
+│   ├── shortlist/IN.json, US.json     Active research & candidate shortlist
+│   ├── discarded/IN.json, US.json     Rejected / fundamentally disqualified names
 │   ├── options/IN.json, US.json       Open option contracts
 │   └── views/                  Generated readable tables (do not edit)
 ├── scripts/                    Python tools
@@ -117,7 +117,7 @@ The full format is in `.agents/skills/_shared/DATA_LAYER.md`. The update routine
 
 **Unknown cost.** An opening position with `"amount": null` has no known cost. Reports show the cost as unknown and never estimate it. To fix it, find the original purchase and append a `buy` line. Don't edit the opening line.
 
-**Watchlist, shortlist and options** are JSON records keyed by symbol. The workflows update them. You can edit them by hand too, but run the validator afterwards.
+**Shortlist, discarded and options** are JSON records keyed by symbol. The workflows update them. You can edit them by hand too, but run the validator afterwards.
 
 ---
 

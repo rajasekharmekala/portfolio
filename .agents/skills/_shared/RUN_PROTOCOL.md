@@ -19,7 +19,7 @@ Several runs, of the same or different workflows, may be active at once and all 
 
 1. **One worktree per run.** `scripts/run_session.py start --workflow <w> --market <MKT>` creates `.worktrees/<run_id>` on branch `run/<run_id>` from freshly fetched `origin/main`. Every command and file edit of the run happens there. Never edit, merge, pull or check out in the shared main checkout, and never touch another run's worktree or untracked files.
 2. **Singleton claim.** `market_intelligence`, `portfolio_audit`, and `options_desk` allow one live run per market. If `start` is refused (exit 3), stop and report which run holds it; do not wait, retry in a loop or bypass the claim. `company_report` and `dossier_refresh` use per-company name claims and may run concurrently for different tickers.
-3. **Name claims.** `company_report` claims one active-watchlist name with `scripts/run_claims.py batch --workflow company_report --market <MKT> --run-id <id> --size 1`, or an explicitly requested ticker with `names SYMBOL...`, from inside the worktree. Batch selection walks active-watchlist order, skips names held by another live run, and claims the next available name. Work only on the claimed symbol and record the claim output. If no symbol is returned, distinguish temporary locks from an empty eligible queue. Do not widen or manually reorder the batch. For runs longer than the claim TTL (6 hours), renew with `run_claims.py heartbeat --run-id <id>`.
+3. **Name claims.** `company_report` claims one active-shortlist name with `scripts/run_claims.py batch --workflow company_report --market <MKT> --run-id <id> --size 1`, or an explicitly requested ticker with `names SYMBOL...`, from inside the worktree. Batch selection walks active-shortlist order, skips names held by another live run, and claims the next available name. Work only on the claimed symbol and record the claim output. If no symbol is returned, distinguish temporary locks from an empty eligible queue. Do not widen or manually reorder the batch. For runs longer than the claim TTL (6 hours), renew with `run_claims.py heartbeat --run-id <id>`.
 4. **Merge-aware publish.** `scripts/publish_run.py` (see §6) is the only way a run reaches `origin/main`.
 
 Failure handling: a run that stops keeps its worktree, branch and claims; the claims expire by TTL or are released with `run_session.py finish --run-id <id> --keep-worktree`. `run_claims.py list` shows what is held.
@@ -50,12 +50,12 @@ mkdir -p "$RUN_DIR/cache" "$RUN_DIR/inputs" "$RUN_DIR/work"
 
 ## 2. Inputs and manifest
 
-- Copy the portfolio JSON record files needed for this run (holdings, watchlist, shortlist) into `<RUN_DIR>/inputs/` and record their SHA-256 in the manifest. Work from the copies, not the originals.
+- Copy the portfolio JSON record files needed for this run (holdings, shortlist, discarded) into `<RUN_DIR>/inputs/` and record their SHA-256 in the manifest. Work from the copies, not the originals.
 - Write `<RUN_DIR>/manifest.json` at start with: market, session date, start time (ISO 8601 with timezone), input file hashes, and the ledger and research paths. Update it with output paths and the validation result at the end.
 
 ## 3. What may carry over between runs
 
-Only the user's own state may carry over: holdings, watchlist, shortlist, and option positions. These are read from the JSON record files in `sheets/`, `watchlist/`, and `shortlist/`.
+Only the user's own state may carry over: holdings, shortlist, discarded, and option positions. These are read from the JSON record files in `accounts/`, `shortlist/`, `discarded/`, and `options/`.
 
 These may NOT carry over: ledgers (`facts_*.json`), research records, prior report HTML, prior screen results, or any cached web result. Prior reports may be cited as history in a report, but never used as a data source for the current run.
 
@@ -69,7 +69,7 @@ These may NOT carry over: ledgers (`facts_*.json`), research records, prior repo
 
 ## 5. Outputs and cleanup
 
-- Only final artifacts leave the run: the report HTML, the updated watchlist/shortlist/holdings JSON record files, and the email. Everything else stays in `<RUN_DIR>`.
+- Only final artifacts leave the run: the report HTML, the updated shortlist/discarded/holdings JSON record files, and the email. Everything else stays in `<RUN_DIR>`.
 - After the validation gate passes and artifacts are saved, delete the run directory: `rm -rf "$RUN_DIR"`.
 - If the run fails, keep `<RUN_DIR>` and report its path so the failure can be inspected. Do not delete it.
 

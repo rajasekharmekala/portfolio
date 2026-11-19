@@ -35,7 +35,7 @@ REPO = Path(__file__).resolve().parents[1]
 DEFAULT_TTL_HOURS = 6.0
 SINGLETON_WORKFLOWS = {"market_intelligence", "portfolio_audit", "options_desk"}
 NAME_WORKFLOWS = {"company_report", "dossier_refresh"}
-ELIGIBLE_WATCHLIST_STATUS = {"RESEARCH_REQUIRED", "PENDING_RESEARCH", "PENDING"}
+ELIGIBLE_SHORTLIST_STATUS = {"RESEARCH_REQUIRED", "PENDING_RESEARCH", "PENDING"}
 MARKETS = ("IN", "US")
 
 
@@ -183,9 +183,9 @@ def list_claims():
         return dict(claims)
 
 
-def _watchlist_path(market):
+def _shortlist_path(market):
     sources = json.loads((REPO / ".agents/config/portfolios.json").read_text())[market]["sources"]
-    return next(s["path"] for s in sources if s["role"] == "watchlist")
+    return next(s["path"] for s in sources if s["role"] == "shortlist")
 
 
 def _row_cycle(row):
@@ -197,25 +197,25 @@ def _row_cycle(row):
 
 def _is_pending_row(row):
     return (
-        row.get("status") in ELIGIBLE_WATCHLIST_STATUS
+        row.get("status") in ELIGIBLE_SHORTLIST_STATUS
         or row.get("deep_research_status") in ("PENDING", "RESEARCH_REQUIRED")
     )
 
 
-def watchlist_queue_info(market, ref="origin/main"):
-    """Return (ordered_symbols, target_cycle, rollover) for the active watchlist.
+def shortlist_queue_info(market, ref="origin/main"):
+    """Return (ordered_symbols, target_cycle, rollover) for the active shortlist.
 
-    For 'watchlist' (`watchlist.active`):
-      1. Any row explicitly marked pending (`status` in ELIGIBLE_WATCHLIST_STATUS or
+    For 'shortlist' (`shortlist.active`):
+      1. Any row explicitly marked pending (`status` in ELIGIBLE_SHORTLIST_STATUS or
          `deep_research_status` in {'PENDING', 'RESEARCH_REQUIRED'}) is eligible first in sequential order.
       2. When `max_cycle > 1` (a multi-cycle round-robin pass is already underway), completed rows with
          `research_cycle < max_cycle` are eligible next in sequential order so every company completes
          `max_cycle` before the next rollover.
-      3. Round-Robin Rollover: when ZERO rows in `watchlist.active` match (1) or (2) — meaning every
-         company in `watchlist.active` has completed `max_cycle` — the queue automatically rolls over
-         to `target_cycle = max_cycle + 1` from the top of `watchlist.active` (`rollover = True`).
+      3. Round-Robin Rollover: when ZERO rows in `shortlist.active` match (1) or (2) — meaning every
+         company in `shortlist.active` has completed `max_cycle` — the queue automatically rolls over
+         to `target_cycle = max_cycle + 1` from the top of `shortlist.active` (`rollover = True`).
     """
-    rel = _watchlist_path(market)
+    rel = _shortlist_path(market)
     text = None
     if ref != "WORKTREE":
         shown = _git("show", f"{ref}:{rel}", check=False)
@@ -242,7 +242,7 @@ def watchlist_queue_info(market, ref="origin/main"):
 def refresh_queue_info(market, ref="origin/main"):
     """Return ordered symbols that already have a published dossier, stalest research-as-of first.
 
-    Prioritizes held and shortlisted names with published dossiers before watchlist-only names so
+    Prioritizes held and shortlisted names with published dossiers before other names so
     active capital and ready-to-buy setups are refreshed first.
     """
     dossier_dir = REPO / "docs" / "blogs" / market
@@ -291,7 +291,7 @@ def candidate_symbols(market, ref="origin/main"):
 
     ref "WORKTREE" reads the working file. If the ref cannot be resolved the working file is used.
     """
-    symbols, _, _ = watchlist_queue_info(market, ref)
+    symbols, _, _ = shortlist_queue_info(market, ref)
     return symbols
 
 
@@ -335,7 +335,7 @@ def main():
             if args.workflow == "dossier_refresh":
                 candidates, target_cycle, rollover = refresh_queue_info(args.market, args.ref)
             else:
-                candidates, target_cycle, rollover = watchlist_queue_info(args.market, args.ref)
+                candidates, target_cycle, rollover = shortlist_queue_info(args.market, args.ref)
             symbols, skipped = claim_batch(args.workflow, args.market, args.run_id, args.size, candidates, args.ttl_hours)
             print(json.dumps({"symbols": symbols, "skipped_held_by_other_runs": skipped,
                               "short_batch": len(symbols) < args.size,

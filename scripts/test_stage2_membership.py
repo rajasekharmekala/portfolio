@@ -90,7 +90,7 @@ class Stage2MembershipTest(unittest.TestCase):
             path.parent.mkdir(parents=True)
             path.write_text(json.dumps({"active": [{"symbol": "AAA"}, {"symbol": "BBB"}]}))
             with patch.object(stock_snapshot, "ROOT", root):
-                self.assertEqual(collect_symbols_from_records("US", False, True, False), ["AAA", "BBB"])
+                self.assertEqual(collect_symbols_from_records("US", True, False), ["AAA", "BBB"])
 
 
 if __name__ == "__main__":

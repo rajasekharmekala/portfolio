@@ -94,7 +94,7 @@
 
   const stageLabel = stage => stage ? stage.replace("_", " ") : "—";
   const statusLabel = status =>
-    status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "WATCHLIST" ? "Watchlist" : status === "DISCARDED" ? "Discarded" : "Tracked";
+    status === "HELD" ? "Held" : status === "SHORTLIST" ? "Shortlist" : status === "DISCARDED" ? "Discarded" : "Tracked";
 
   function tradingViewUrl(symbol, market) {
     if (!symbol) return null;
@@ -125,7 +125,7 @@
     const queueData = state.queues || {};
     for (const market of ["US", "IN"]) {
       const group = queueData[market] || {};
-      for (const kind of ["shortlist", "watchlist"]) {
+      for (const kind of ["shortlist", "discarded"]) {
         const bucket = group[kind];
         if (!bucket || !bucket.available || !Array.isArray(bucket.rows)) continue;
         for (const r of bucket.rows) {
@@ -161,14 +161,14 @@
     const queueData = state.queues || {};
     for (const market of ["US", "IN"]) {
       const group = queueData[market] || {};
-      for (const kind of ["watchlist", "shortlist"]) {
+      for (const kind of ["shortlist", "discarded"]) {
         const bucket = group[kind];
         if (!bucket || !bucket.available || !Array.isArray(bucket.rows)) continue;
         for (const r of bucket.rows) {
           const row = ensure(market, r.symbol, r.company);
           if (r.stage) row.stages.add(r.stage);
           if (r.sector) row.sectors.add(r.sector);
-          row.statuses.add(kind === "shortlist" ? "SHORTLIST" : "WATCHLIST");
+          row.statuses.add(kind === "shortlist" ? "SHORTLIST" : "DISCARDED");
           if (r.dossierUrl) {
             row.dossierUrl = r.dossierUrl;
             if (r.verdict && r.verdict !== "Not specified") row.verdict = r.verdict;
@@ -220,12 +220,11 @@
     return [...stages][0] || null;
   }
 
-  // Held outranks Shortlist outranks Watchlist for the single Status column,
+  // Held outranks Shortlist outranks Discarded for the single Status column,
   // but the full set is kept so the Status filter can match any membership.
   function primaryStatus(statuses) {
     if (statuses.includes("HELD")) return "HELD";
     if (statuses.includes("SHORTLIST")) return "SHORTLIST";
-    if (statuses.includes("WATCHLIST")) return "WATCHLIST";
     return "DISCARDED";
   }
 
@@ -245,9 +244,9 @@
   }
 
   // Ascending puts the most favourable value first: Stage 2 before 4, Immediate Buy before Avoid,
-  // Held before Shortlist before Watchlist. Missing values sort last in both directions.
+  // Held before Shortlist before Discarded. Missing values sort last in both directions.
   const STAGE_RANK = { STAGE_2: 0, STAGE_1: 1, STAGE_3: 2, STAGE_4: 3 };
-  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, WATCHLIST: 2, DISCARDED: 3 };
+  const STATUS_RANK = { HELD: 0, SHORTLIST: 1, DISCARDED: 2 };
   const VERDICT_RANK = {
     "IMMEDIATE BUY": 0,
     "ACCUMULATE ON DIP": 1,
@@ -348,7 +347,6 @@
   const SECTIONS = [
     { status: "HELD", id: "holdings", label: "Holdings" },
     { status: "SHORTLIST", id: "shortlist", label: "Shortlist" },
-    { status: "WATCHLIST", id: "watchlist", label: "Watchlist" },
     { status: "DISCARDED", id: "discarded", label: "Discarded" },
   ];
 
@@ -377,7 +375,7 @@
       ["KPI health", d?.kpiHealth],
       ["Weinstein stage", d?.weinsteinStage || row.stage],
       ["Research as of", d?.asOf],
-      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist/watchlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
+      ["CMP source", isNum(d?.cmp) ? `${money(d.cmp)} · ${d.cmpSource === "record" ? "shortlist record" : "monograph"} · ${d.cmpAsOf || "date unknown"}` : null],
     ].filter(([, v]) => v).map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(/^[A-Z0-9_]+$/.test(v) ? humanize(v) : v)}</dd></div>`).join("");
     const alerts = (d?.alerts || []).map(a => `<li><strong>${escapeHtml(a.trigger || "Trigger")}</strong>${a.instruction ? `<br>${escapeHtml(a.instruction)}` : ""}</li>`).join("");
     const redeploy = (d?.redeployment || []).map(r => `<li><strong>${escapeHtml(humanize(r.type) || "Destination")}${isNum(r.allocationPct) ? ` · ${escapeHtml(String(r.allocationPct))}%` : ""}</strong>${r.recommendation ? `<br>${escapeHtml(r.recommendation)}` : ""}${r.entryCondition ? `<br><span class="detail-note">Entry: ${escapeHtml(r.entryCondition)}</span>` : ""}</li>`).join("");
@@ -521,7 +519,7 @@
       const byMarket = m => filtered.filter(r => r.market === m).length;
       const byStatus = s => filtered.filter(r => r.status === s).length;
       const monographed = filtered.filter(r => Boolean(r.dossierUrl)).length;
-      counts.textContent = `${filtered.length} names shown (${monographed} monographs) · US ${byMarket("US")} · IN ${byMarket("IN")} · Watchlist ${byStatus("WATCHLIST")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
+      counts.textContent = `${filtered.length} names shown (${monographed} monographs) · US ${byMarket("US")} · IN ${byMarket("IN")} · Shortlist ${byStatus("SHORTLIST")} · Held ${byStatus("HELD")} · Discarded ${byStatus("DISCARDED")}`;
     }
     if (meta) meta.textContent = `${filtered.length} of ${all.length} tracked names`;
 
@@ -654,7 +652,6 @@
 
     statsEl.innerHTML = `
       <div><dt>Tracked</dt><dd>${pipeline.length}</dd></div>
-      <div><dt>Watchlist</dt><dd>${countStatus("WATCHLIST")}</dd></div>
       <div><dt>Shortlist</dt><dd>${countStatus("SHORTLIST")}</dd></div>
       <div><dt>Held</dt><dd>${countStatus("HELD")}</dd></div>
       <div><dt>Discarded</dt><dd>${countStatus("DISCARDED")}</dd></div>

@@ -244,8 +244,7 @@ class TestPortfolioAllocator(unittest.TestCase):
             facts["research_file"] = f"research_{mkt}_2026-11-13.json"
             facts["research_needs"] = []
             shortlist = pa._load_json(REPO / "data" / "shortlist" / f"{mkt}.json")
-            watchlist = pa._load_json(REPO / "data" / "watchlist" / f"{mkt}.json")
-            alloc = pa.allocate_portfolio(mkt, facts, positions, snapshots=snap, shortlist_data=shortlist, watchlist_data=watchlist)
+            alloc = pa.allocate_portfolio(mkt, facts, positions, snapshots=snap, shortlist_data=shortlist)
 
             cur_sum = round(sum(r["current_value"] for r in alloc["money_bridge"]), 2)
             tgt_sum = round(sum(r["target_value"] for r in alloc["money_bridge"]), 2)
@@ -337,7 +336,6 @@ class TestPortfolioAllocator(unittest.TestCase):
     def test_cio_override_guardrails_and_rich_book_casenotes(self):
         facts, positions, snap = pa.build_from_repo_fallback("IN", as_of="2026-11-13")
         shortlist = pa._load_json(REPO / "data" / "shortlist" / "IN.json")
-        watchlist = pa._load_json(REPO / "data" / "watchlist" / "IN.json")
 
         # 1. Valid CIO override: keep LAURUSLABS intact while keeping heat below regime ceiling
         cio_ok = {
@@ -350,7 +348,7 @@ class TestPortfolioAllocator(unittest.TestCase):
             },
         }
         alloc_ok = pa.allocate_portfolio(
-            "IN", facts, positions, snapshots=snap, shortlist_data=shortlist, watchlist_data=watchlist, cio_decisions=cio_ok
+            "IN", facts, positions, snapshots=snap, shortlist_data=shortlist, cio_decisions=cio_ok
         )
         self.assertEqual(alloc_ok["cio_context"]["decision_mode"], "CIO_LED")
         self.assertEqual(alloc_ok["cio_context"]["overrides_applied_count"], 1)
@@ -373,7 +371,7 @@ class TestPortfolioAllocator(unittest.TestCase):
         }
         with self.assertRaises(ValueError) as ctx:
             pa.allocate_portfolio(
-                "IN", facts, positions, snapshots=snap, shortlist_data=shortlist, watchlist_data=watchlist, cio_decisions=cio_bad
+                "IN", facts, positions, snapshots=snap, shortlist_data=shortlist, cio_decisions=cio_bad
             )
         self.assertIn("CIO_GUARDRAIL_BREACH", str(ctx.exception))
 

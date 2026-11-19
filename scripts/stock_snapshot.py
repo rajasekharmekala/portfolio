@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Deterministic Per-Stock Consumer Tool Snapshot & Watchlist Pruner (Zero LLM Math).
+Deterministic Per-Stock Consumer Tool Snapshot (Zero LLM Math).
 
 Pulls verified pre-computed indicators and valuation metrics from:
   1. TradingView Live Scanner Engine (daily/weekly SMAs & EMAs including 30-week SMA,
@@ -18,7 +18,7 @@ Pulls verified pre-computed indicators and valuation metrics from:
 
 Usage:
   .venv/bin/python scripts/stock_snapshot.py --market IN --symbols FSL IGIL EXIDEIND
-  .venv/bin/python scripts/stock_snapshot.py --market IN --from-watchlist --from-holdings --out <RUN_DIR>/cache/snapshots_IN.json
+  .venv/bin/python scripts/stock_snapshot.py --market IN --from-shortlist --from-holdings --out <RUN_DIR>/cache/snapshots_IN.json
 """
 
 from __future__ import annotations
@@ -652,15 +652,8 @@ def evaluate_stage2_and_entry_posture(
     }
 
 
-def collect_symbols_from_records(market: str, from_wl: bool, from_sl: bool, from_hold: bool) -> List[str]:
+def collect_symbols_from_records(market: str, from_sl: bool, from_hold: bool) -> List[str]:
     syms: List[str] = []
-    if from_wl:
-        wl_path = ROOT / "data" / "watchlist" / f"{market}.json"
-        if wl_path.exists():
-            wl = json.loads(wl_path.read_text(encoding="utf-8"))
-            for row in wl.get("active", []):
-                if row.get("symbol") and row["symbol"] not in syms:
-                    syms.append(row["symbol"])
     if from_sl:
         sl_path = ROOT / "data" / "shortlist" / f"{market}.json"
         if sl_path.exists():
@@ -731,7 +724,6 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--market", choices=["IN", "US"], required=True)
     parser.add_argument("--symbols", nargs="*", default=[], help="Explicit symbols to snapshot")
-    parser.add_argument("--from-watchlist", action="store_true", help="Include all active watchlist symbols")
     parser.add_argument("--from-shortlist", action="store_true", help="Include all shortlist symbols")
     parser.add_argument("--from-holdings", action="store_true", help="Include all current holding symbols")
     parser.add_argument("--stage2-file", default=None, help="Path to stage2_<MKT>_latest.json")
@@ -773,10 +765,9 @@ def main():
         return
 
     stage2_data = load_stage2_context(market, args.stage2_file)
-    if args.from_watchlist or args.from_shortlist or args.from_holdings:
+    if args.from_shortlist or args.from_holdings:
         extra = collect_symbols_from_records(
             market,
-            from_wl=args.from_watchlist,
             from_sl=args.from_shortlist,
             from_hold=args.from_holdings,
         )

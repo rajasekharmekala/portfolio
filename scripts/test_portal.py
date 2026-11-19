@@ -172,8 +172,8 @@ class PortalTests(unittest.TestCase):
                  "target_bear": 60, "target_base": 130, "target_bull": 160, "expected_value_12m": 120,
                  "conviction_tier": "B"}
         (spine_dir / "spine.json").write_text(json.dumps(spine))
-        (root / "data" / "watchlist").mkdir(parents=True)
-        (root / "data" / "watchlist" / "US.json").write_text(
+        (root / "data" / "shortlist").mkdir(parents=True)
+        (root / "data" / "shortlist" / "US.json").write_text(
             json.dumps({"active": [{"symbol": "TESTUS", "cmp": 95.5, "as_of_date": "2026-11-12"}]}))
         with patch.object(portal, "DOCS", self.docs), patch.object(portal, "CATALOG", self.docs / "portal-data.json"), patch.object(portal, "UPDATES", self.docs / "portal-updates.json"), patch.object(portal, "git_dates", return_value={}):
             catalog = portal.build_catalog()
@@ -196,31 +196,30 @@ class PortalTests(unittest.TestCase):
 
     def test_public_queue_follows_scheduler_and_only_projects_public_fields(self):
         data = self.docs.parent / "data"
-        for kind in ("watchlist", "shortlist"):
-            (data / kind).mkdir(parents=True)
-        watch = {"active": [
+        (data / "shortlist").mkdir(parents=True)
+        (data / "discarded").mkdir(parents=True)
+        short = {"active": [
             {"symbol": "OLD", "company_name": "Older", "status": "COMPLETED", "research_cycle": 1},
             {"symbol": "NEXT", "company_name": "Next", "status": "RESEARCH_REQUIRED", "research_cycle": 2,
-             "last_researched_date": "PRIVATE-DATE", "notes": "PRIVATE-NOTE", "account_scope": "PRIVATE-ACCOUNT", "cmp": 123456},
-            {"symbol": "DONE", "status": "COMPLETED", "research_cycle": 2},
+             "last_researched_date": "PRIVATE-DATE", "notes": "PRIVATE-NOTE", "account_scope": "PRIVATE-ACCOUNT", "cmp": 123456,
+             "gate_status": "PRIVATE-GATE", "as_of_date": "PRIVATE-DATE"},
+            {"symbol": "DONE", "status": "COMPLETED", "research_cycle": 2,
+             "action_verdict": "WAIT_FOR_SUPPORT", "gate_status": "PASSED", "notes": "PRIVATE-SHORTLIST"},
             {"symbol": "UNKNOWN", "status": "UNDERWRITTEN", "research_cycle": 2},
         ]}
-        (data / "watchlist" / "IN.json").write_text(json.dumps(watch))
-        (data / "shortlist" / "IN.json").write_text(json.dumps({"active": [
-            {"symbol": "DONE", "action_verdict": "WAIT_FOR_SUPPORT", "gate_status": "PASSED", "notes": "PRIVATE-SHORTLIST"},
-            {"symbol": "NEXT", "gate_status": "PRIVATE-GATE", "as_of_date": "PRIVATE-DATE"}
-        ]}))
-        (data / "watchlist" / "US.json").write_text(json.dumps({"active": [
+        (data / "shortlist" / "IN.json").write_text(json.dumps(short))
+        (data / "discarded" / "IN.json").write_text(json.dumps({"items": []}))
+        (data / "shortlist" / "US.json").write_text(json.dumps({"active": [
             {"symbol": "DONE", "status": "COMPLETED"}, {"symbol": "TWO", "status": "COMPLETED", "research_cycle": 1}
         ]}))
-        (data / "shortlist" / "US.json").write_text(json.dumps({"active": []}))
+        (data / "discarded" / "US.json").write_text(json.dumps({"items": []}))
         entries = [{"kind": "dossier", "market": "IN", "symbol": "DONE", "url": "blogs/IN/DONE_dossier.html"},
                    {"kind": "dossier", "market": "US", "symbol": "DONE", "url": "https://example.com/unsafe"}]
         with patch.object(portal, "DOCS", self.docs):
             queue = portal.public_queue(entries)
-        with patch.object(run_claims, "REPO", self.docs.parent), patch.object(run_claims, "_watchlist_path", return_value="data/watchlist/IN.json"):
-            symbols, cycle, rollover = run_claims.watchlist_queue_info("IN", ref="WORKTREE")
-        india = queue["IN"]["watchlist"]
+        with patch.object(run_claims, "REPO", self.docs.parent), patch.object(run_claims, "_shortlist_path", return_value="data/shortlist/IN.json"):
+            symbols, cycle, rollover = run_claims.shortlist_queue_info("IN", ref="WORKTREE")
+        india = queue["IN"]["shortlist"]
         self.assertEqual([r["symbol"] for r in india["rows"] if r["queuePosition"]], symbols)
         self.assertEqual((india["targetCycle"], india["rollover"]), (cycle, rollover))
         self.assertEqual(india["targetCycle"], 2)
@@ -228,50 +227,53 @@ class PortalTests(unittest.TestCase):
         self.assertEqual([r["symbol"] for r in india["rows"]], ["NEXT", "OLD", "DONE", "UNKNOWN"])
         self.assertEqual([r["status"] for r in india["rows"]], ["Pending", "Pending", "Completed", "Unknown"])
         self.assertEqual([r["queuePosition"] for r in india["rows"]], [1, 2, None, None])
-        self.assertEqual(queue["IN"]["shortlist"]["rows"][0]["dossierUrl"], "blogs/IN/DONE_dossier.html")
-        self.assertIsNone(india["rows"][0]["lastResearched"])
-        self.assertIsNone(queue["IN"]["shortlist"]["rows"][1]["gateStatus"])
-        self.assertIsNone(queue["IN"]["shortlist"]["rows"][1]["asOf"])
-        usa = queue["US"]["watchlist"]
+        done_row = next(r for r in india["rows"] if r["symbol"] == "DONE")
+        next_row = next(r for r in india["rows"] if r["symbol"] == "NEXT")
+        self.assertEqual(done_row["dossierUrl"], "blogs/IN/DONE_dossier.html")
+        self.assertIsNone(next_row["lastResearched"])
+        self.assertIsNone(next_row["gateStatus"])
+        self.assertIsNone(next_row["asOf"])
+        usa = queue["US"]["shortlist"]
         self.assertEqual(usa["targetCycle"], 2)
         self.assertTrue(usa["rollover"])
         self.assertEqual([r["status"] for r in usa["rows"]], ["Completed", "Completed"])
         self.assertEqual([r["queuePosition"] for r in usa["rows"]], [1, 2])
         self.assertIsNone(usa["rows"][0]["dossierUrl"])
-        self.assertEqual(queue["US"]["shortlist"]["rows"], [])
+        self.assertEqual(queue["US"]["discarded"]["rows"], [])
         encoded = json.dumps(queue)
         for secret in ("PRIVATE-NOTE", "PRIVATE-ACCOUNT", "PRIVATE-SHORTLIST", "PRIVATE-GATE", "PRIVATE-DATE", "123456"):
             self.assertNotIn(secret, encoded)
 
     def test_queue_missing_differs_from_empty_and_invalid_records_fail(self):
-        data = self.docs.parent / "data" / "watchlist"
+        data = self.docs.parent / "data" / "shortlist"
         data.mkdir(parents=True)
         (data / "IN.json").write_text('{"active": []}')
         with patch.object(portal, "DOCS", self.docs):
             queue = portal.public_queue([])
-            self.assertTrue(queue["IN"]["watchlist"]["available"])
-            self.assertFalse(queue["US"]["watchlist"]["available"])
-            self.assertFalse(queue["IN"]["shortlist"]["available"])
+            self.assertTrue(queue["IN"]["shortlist"]["available"])
+            self.assertFalse(queue["US"]["shortlist"]["available"])
+            self.assertFalse(queue["IN"]["discarded"]["available"])
             (data / "IN.json").write_text('{"active": {}}')
-            with self.assertRaisesRegex(ValueError, "Invalid watchlist active"):
+            with self.assertRaisesRegex(ValueError, "Invalid shortlist active"):
                 portal.public_queue([])
             (data / "IN.json").write_text('{"active": [{"symbol": "<script>"}]}')
-            with self.assertRaisesRegex(ValueError, "Invalid watchlist symbol"):
+            with self.assertRaisesRegex(ValueError, "Invalid shortlist symbol"):
                 portal.public_queue([])
 
     def test_catalog_rebuild_refreshes_queue_from_current_data(self):
         data = self.docs.parent / "data"
-        for kind in ("watchlist", "shortlist"):
-            (data / kind).mkdir(parents=True)
-            for market in ("IN", "US"):
-                (data / kind / f"{market}.json").write_text('{"active": []}')
-        path = data / "watchlist" / "US.json"
+        (data / "shortlist").mkdir(parents=True)
+        (data / "discarded").mkdir(parents=True)
+        for market in ("IN", "US"):
+            (data / "shortlist" / f"{market}.json").write_text('{"active": []}')
+            (data / "discarded" / f"{market}.json").write_text('{"items": []}')
+        path = data / "shortlist" / "US.json"
         with patch.object(portal, "DOCS", self.docs), patch.object(portal, "CATALOG", self.docs / "portal-data.json"), patch.object(portal, "UPDATES", self.docs / "portal-updates.json"), patch.object(portal, "git_dates", return_value={}):
-            self.assertEqual(portal.build_catalog()["queues"]["US"]["watchlist"]["rows"], [])
+            self.assertEqual(portal.build_catalog()["queues"]["US"]["shortlist"]["rows"], [])
             path.write_text(json.dumps({"active": [{"symbol": "TEST", "status": "PENDING", "research_cycle": 3}]}))
             catalog = portal.build_catalog()
-            self.assertEqual(catalog["queues"]["US"]["watchlist"]["rows"][0]["status"], "Pending")
-            self.assertEqual(json.loads((self.docs / "portal-data.json").read_text())["queues"]["US"]["watchlist"]["targetCycle"], 3)
+            self.assertEqual(catalog["queues"]["US"]["shortlist"]["rows"][0]["status"], "Pending")
+            self.assertEqual(json.loads((self.docs / "portal-data.json").read_text())["queues"]["US"]["shortlist"]["targetCycle"], 3)
 
     def test_homepage_inline_script_matches_portal_source(self):
         docs = Path(__file__).resolve().parents[1] / "docs"

@@ -6,7 +6,7 @@ description: Companion dossier refresh, assumption audit, blind-spot brainstorm,
 
 Read `_COMMON.md` first and follow `.agents/skills/dossier_refresh/SKILL.md`.
 
-**Input:** market `<MKT>` and optionally a specific ticker that already has a published dossier (if none exists yet, delegate to `company_report.md`). With no ticker, claims the stalest published dossier across active holdings, shortlist, and watchlist.
+**Input:** market `<MKT>` and optionally a specific ticker that already has a published dossier (if none exists yet, delegate to `company_report.md`). With no ticker, claims the stalest published dossier across active holdings and shortlist.
 
 ## 1. Start an isolated worktree, claim one company & prepare the blind packet
 
@@ -36,6 +36,6 @@ Spawn an isolated Pass 1 subagent reading only `<RUN_DIR>/work/<SYMBOL>/blind_re
 2. Author fresh `ch07.json`, `ch08.json`, `ch09.json`, `spine.json` (enforcing upward-only stop ratchet on held shares via `dossier_refresh.py check-ratchet`), and `ch00.json`.
 3. Compile `docs/blogs/<MKT>/<SYMBOL>_dossier.html`, `<SYMBOL>_book.pdf`, and canonical `data/dossiers/<MKT>/<SYMBOL>/` via `scripts/dossier_builder_template.py`.
 
-## 4. Review, sync pipeline (`Watchlist <-> Shortlist` / `Discard`) & publish
+## 4. Review, sync pipeline (`Shortlist` / `Discarded`) & publish
 
 Run `readability_check.py`, `citation_check.py`, Stage 9 `review_packet.py` + `report_reviewer` + `red_team`, `scripts/sync_dossier_pipeline.py`, `data_layer.py --validate`, `validate_data.py`, and publish via `scripts/publish_run.py`. Company dossiers are not emailed.

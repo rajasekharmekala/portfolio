@@ -38,7 +38,7 @@ description: >-
    ```bash
    .venv/bin/python scripts/run_session.py start --workflow portfolio_audit --market <MKT>
    ```
-2. Create `<RUN_DIR>` (`cache/`, `inputs/`, `work/`, `review/`), copy input JSONs (`shortlist`, `watchlist`, `options`, `allocations` if present), and build the session ledger + Stage 2 sector breadth + live multi-source snapshots:
+2. Create `<RUN_DIR>` (`cache/`, `inputs/`, `work/`, `review/`), copy input JSONs (`shortlist`, `discarded`, `options`, `allocations` if present), and build the session ledger + Stage 2 sector breadth + live multi-source snapshots:
 <!-- MARKET IN -->
    ```bash
    .venv/bin/python scripts/market_facts.py --market IN --date <session> --screen nifty500 --allow-stale-holdings --run-dir "<RUN_DIR>"
@@ -67,7 +67,6 @@ description: >-
   --positions "<RUN_DIR>/cache/positions_<MKT>_<session>.json" \
   --snapshots "<RUN_DIR>/cache/snapshots_<MKT>_<session>.json" \
   --shortlist "data/shortlist/<MKT>.json" \
-  --watchlist "data/watchlist/<MKT>.json" \
   --options-snapshot "<RUN_DIR>/cache/options_snapshot_<MKT>_<session>.json" \
   --prior-state "data/allocations/<MKT>.json" \
   --out "<RUN_DIR>/cache/baseline_allocation_<MKT>_<session>.json"
@@ -87,7 +86,6 @@ description: >-
   --positions "<RUN_DIR>/cache/positions_<MKT>_<session>.json" \
   --snapshots "<RUN_DIR>/cache/snapshots_<MKT>_<session>.json" \
   --shortlist "data/shortlist/<MKT>.json" \
-  --watchlist "data/watchlist/<MKT>.json" \
   --options-snapshot "<RUN_DIR>/cache/options_snapshot_<MKT>_<session>.json" \
   --prior-state "data/allocations/<MKT>.json" \
   --cio-decisions "<RUN_DIR>/work/cio_decisions_<MKT>.json" \
