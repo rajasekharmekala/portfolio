@@ -16,19 +16,21 @@
     "VALUATION"
   ],
   "cmp": 1102.15,
-  "entry_zone_low": 1005.64,
-  "entry_zone_high": 1078.97,
-  "stop_loss": 963.22,
+  "entry_zone_low": 1018.73,
+  "entry_zone_high": 1081.96,
+  "stop_loss": 966.03,
   "target_base": 990.0,
-  "target_bull": 1272.0,
+  "target_bull": 1220.0,
   "target_bear": 816.0,
+  "weinstein_stage": "STAGE_2",
+  "entry_posture": "WAIT_FOR_SUPPORT_PULLBACK",
   "holding_action": "NOT_HELD",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "Costco (COST) is NOT_HELD in any verified US brokerage account (0 shares). No position management, trim, or exit action is required. New capital is REJECTED on VALUATION grounds (53.09x trailing P/E, 43.85x forward P/E, 1.92% trailing FCF yield) despite a COMPOUNDER_PASS business verdict.",
+  "holding_rationale": "Costco (COST) is NOT_HELD in any verified US brokerage account (0 shares). No position management, trim, or exit action is required. New capital is REJECTED (TIER_0) on VALUATION grounds (53.09x trailing P/E, 43.50x forward P/E, 1.92% trailing FCF yield) despite a COMPOUNDER_PASS business verdict.",
   "holding_alerts": [
     {
-      "trigger": "Price pulls back to Stage 2 support / 200-day SMA breach ($979.00) or invalidation stop ($963.22)",
-      "trigger_price": 963.22,
+      "trigger": "Price pulls back to Stage 2 support / 200-day SMA ($979.46) or invalidation stop ($966.03)",
+      "trigger_price": 966.03,
       "shares": 0,
       "instruction": "No shares held; monitor whether institutional defensive crowding unwinds toward fundamental value."
     },
@@ -46,32 +48,28 @@
         "destination_type": "CASH",
         "allocation_pct": 100,
         "recommendation": "HOLD_CASH_IN_TBILLS",
-        "rationale": "US market regime sits in a Downtrend (38.8% > 50-DMA, 10 distribution days) and COST offers negative base-case asymmetry (-10.2% to $990.00) at 53.09x trailing P/E.",
+        "rationale": "US market regime sits in a Downtrend (38.8% > 50-DMA, 10 distribution days) and COST offers negative base-case asymmetry (-10.2% to $990.00; -9.9% to $992.50 EV) at 53.09x trailing P/E.",
         "entry_condition": "Retain 100% in short-duration cash until either COST resets toward $850–$900 or an active shortlist name hits its support buy zone."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "AVPT",
+        "symbol": "",
         "allocation_pct": 0,
-        "recommendation": "WAIT_FOR_LOWER_SUPPORT",
-        "rationale": "AvePoint (AVPT) is an active Stage 2 shortlist compounder ($16.49 CMP inside its $15.27–$16.57 support band, $12.69 stop), but $16.49 offers only 0.92:1 reward-to-risk to $20.00 vs. 1.74:1 on a deeper retest toward $15.27.",
-        "entry_condition": "Deploy only on a retest of the lower $15.27 support shelf with stop at $12.69 and $20.00 base target.",
-        "target_base": 20.0,
-        "asymmetry_ratio": 1.74
+        "recommendation": "NO_ACTIVE_SHORTLIST_CANDIDATE",
+        "rationale": "Zero active US shortlist candidates currently satisfy our Stage 2 support and >=1.50:1 reward-to-risk entry gate.",
+        "entry_condition": "Deploy only when an underwritten US shortlist compounder enters its Stage 2 support zone with >=1.50:1 reward-to-risk."
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "BJ",
+        "symbol": "",
         "allocation_pct": 0,
-        "recommendation": "WATCHLIST_FOR_FULL_UNDERWRITING",
-        "rationale": "BJ's Wholesale Club (BJ) trades in Stage 2 at $104.82 (20.61x forward P/E, less than half Costco's multiple), but requires a full 10-chapter standalone audit before committing capital.",
-        "entry_condition": "Complete full 10-chapter underwriting and verify support at $101.67–$104.77 before any allocation.",
-        "target_base": 122.0,
-        "asymmetry_ratio": 1.55
+        "recommendation": "NO_OUTSIDE_CANDIDATE_FUNDED",
+        "rationale": "No outside equity candidate is funded in this Downtrend US tape (0% outside allocation). BJ's Wholesale Club (BJ) is referenced as a peer valuation benchmark in Chapter 7, but is not in the active batch snapshot and would require full 10-chapter standalone underwriting.",
+        "entry_condition": "Complete full 10-chapter underwriting with fresh Stage 2 snapshot verification before any outside allocation."
       }
     ]
   },
-  "primer": "Costco Wholesale (NASDAQ: COST) is a top global warehouse club with $303,154M in FY2026 sales. Its 939 clubs, 84.1M paid members, 92.3% U.S./Canada renewal, and 21.23% ROIC earn a clear COMPOUNDER_PASS. Yet at $1,102.15 (53.09x trailing P/E, 43.85x forward P/E, 1.92% FCF yield), shares are priced for perfection. Our Reverse DCF and 39x normalized multiple yield a $990.00 base target, forcing a REJECTED (VALUATION) verdict.",
+  "primer": "Costco Wholesale (NASDAQ: COST) is a top global warehouse club with $303,154M in FY2026 sales, $15,817M in CFO, and $9,382M in FCF. Its 939 clubs, 84.1M paid members, 92.3% U.S./Canada renewal, and 21.23% ROIC earn a clear COMPOUNDER_PASS. Yet at $1,102.15 ($1,094.01 Nov 23 snapshot; 53.09x trailing P/E, 43.50x forward P/E, 1.92% FCF yield), shares are priced for perfection. Our Reverse DCF and 39x normalized multiple yield a $990.00 base target ($992.50 EV), forcing a REJECTED (VALUATION, TIER_0) verdict and 100% CASH allocation.",
   "citations": [
     "Costco Wholesale Corporation — Form 10-K for Fiscal Year 2026 (52 Weeks Ended August 30, 2026), SEC EDGAR Accession 0000909832-26-000093 (https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm)",
     "Costco Wholesale Corporation — Form 10-K for Fiscal Year 2025 (52 Weeks Ended August 31, 2025), SEC EDGAR Accession 0000909832-25-000101 (https://www.sec.gov/Archives/edgar/data/909832/000090983225000101/cost-20250831.htm)",
@@ -102,6 +100,16 @@
     "Macrotrends — Costco Historical P/E Ratio 2012–2026 (https://www.macrotrends.net/stocks/charts/COST/costco/pe-ratio)",
     "Macrotrends — Costco Historical Price/Book Ratio 2012–2026 (https://www.macrotrends.net/stocks/charts/COST/costco/price-book)",
     "Alpha Spread — COST DCF Valuation Model (https://www.alphaspread.com/security/nasdaq/cost/dcf-valuation)",
-    "FullRatio — COST Historical PEG & P/E Analysis (https://fullratio.com/stocks/nasdaq-cost/peg-ratio)"
+    "FullRatio — COST Historical PEG & P/E Analysis (https://fullratio.com/stocks/nasdaq-cost/peg-ratio)",
+    "Costco Wholesale Corp. FY2026 Form 10-K (filed Oct 7, 2026): https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm",
+    "Costco Wholesale Corp. Form 8-K — Special Dividend $30/sh & Board Departure (filed Nov 10, 2026): https://www.sec.gov/Archives/edgar/data/909832/000090983226000134/cost-20261107.htm",
+    "Costco Wholesale Corp. Form 8-K — FY2027 Executive Bonus Plan (filed Oct 16, 2026): https://www.sec.gov/Archives/edgar/data/909832/000090983226000100/cost-20261013.htm",
+    "Costco Wholesale Corp. Form 8-K — Quarterly Dividend $1.47/sh (filed Oct 14, 2026): https://www.sec.gov/Archives/edgar/data/909832/000090983226000096/cost-20261014.htm",
+    "Costco Wholesale Corp. DEF 14A Proxy Statement (filed Dec 4, 2025): https://www.sec.gov/Archives/edgar/data/909832/000090983225000159/cost-20251204.htm"
+  ],
+  "gate_exceptions": [
+    "EXCEPTION AS-OF (citation_check --allow-stale-asof): The audited FY2026 Form 10-K (52 weeks ended 2026-08-30, filed Oct 7, 2026) is the most recent annual SEC filing available as of 2026-11-20 (age: 82 days vs. 60-day threshold; cure date: Q1 FY2027 Form 10-Q / Dec 10, 2026 earnings release). This applies to all 10 COST:* FY2026 10-K records in research_US_2026-11-20.json: COST:fy2026_total_revenue_m ($303,154M), COST:fy2026_net_sales_m ($297,247M), COST:fy2026_operating_income_m ($11,685M), COST:fy2026_net_income_m ($9,226M), COST:fy2026_cfo_m ($15,817M), COST:fy2026_capex_m ($6,435M), COST:fy2026_current_debt_m ($2,248M), COST:fy2026_accrued_member_rewards_m ($3,037M), COST:fy2026_us_ca_renewal_rate (92.3%), and COST:fy2026_paid_members_k (84,100k).",
+    "Dual-Date Market Ledger Disclosure (2026-11-20 vs. 2026-11-23): Official session close is anchored to 2026-11-20 ($1,102.15 in facts_US_2026-11-20.json), while live TradingView ($1,094.01), Finviz ($1,093.28; 43.50x Fwd P/E; 51.64x P/FCF; $1,101.97 target), Stage 2 scanner ($1,018.73–$1,081.96 support, $966.03 stop), and options volatility (27.9% IV vs. 21.8% HV20) reflect the 2026-11-23 snapshot pull.",
+    "Linux Environment & Tooling Disclosures: WeasyPrint PDF compilation and macOS Chrome automation (TheWrap / Robinhood live browser sessions) are unavailable in this Linux container; public TradingView, Finviz, and options_US_batch8.json feeds were used. In Chapter 5, Q4 FY2026 CFO Gary Millerchip verbatim transcript text was unavailable offline; only verified SEC filings and Q1/Q4 CEO remarks were cited."
   ]
 }

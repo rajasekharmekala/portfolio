@@ -1,7 +1,7 @@
 {
   "symbol": "MDLZ",
   "market": "US",
-  "generated_at": "2026-11-22T21:49:06+00:00",
+  "generated_at": "2026-11-23T17:49:08+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
@@ -23,43 +23,122 @@
     "tv_symbol": "NASDAQ:MDLZ",
     "exchange": "NASDAQ",
     "company_name": "Mondelez International, Inc. Class A",
-    "close": 66.28,
-    "change_1d_pct": 0.9,
-    "perf_1w_pct": -0.9,
-    "perf_1m_pct": 3.9,
-    "perf_3m_pct": 3.18,
-    "rsi_1d": 55.97,
-    "rsi_4h": 50.38,
-    "rsi_1w": 60.38,
-    "sma20": 65.65,
-    "sma50": 63.0,
-    "sma200": 61.01,
-    "sma30_weekly": 62.16,
-    "ema10_weekly": 64.31,
-    "ema20_4h": 66.46,
-    "sma50_4h": 65.31,
-    "atr14": 1.45,
-    "bb_width_pct": 10.53,
+    "close": 66.08,
+    "change_1d_pct": -0.3,
+    "perf_1w_pct": -3.63,
+    "perf_1m_pct": 1.62,
+    "perf_3m_pct": 2.65,
+    "rsi_1d": 54.83,
+    "rsi_4h": 48.85,
+    "rsi_1w": 59.73,
+    "sma20": 65.8,
+    "sma50": 63.08,
+    "sma200": 61.04,
+    "sma30_weekly": 62.32,
+    "ema10_weekly": 64.64,
+    "ema20_4h": 66.43,
+    "sma50_4h": 65.35,
+    "atr14": 1.42,
+    "bb_width_pct": 9.88,
     "pivot_s1": 59.55,
     "pivot_s2": 54.17,
     "pivot_r1": 68.09,
     "pivot_r2": 71.25,
     "high_52w": 68.92,
     "low_52w": 51.2,
-    "dist_to_200d_pct": 8.64,
-    "major_shelf": 62.16,
+    "dist_to_200d_pct": 8.26,
+    "major_shelf": 62.32,
     "intraday_4h_turn": false,
     "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
-    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 10.53%) above rising 50D SMA (63.0) and 30W SMA (62.16)."
+    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 9.88%) above rising 50D SMA (63.08) and 30W SMA (62.32)."
   },
   "options_plan": {
     "symbol": "MDLZ",
     "market": "US",
     "optionable": true,
-    "options_verdict": "NO_OPTIONS_EDGE",
-    "headline": "Stand aside on MDLZ call spreads: $52.5/$77.5 spread costs $14.10 for only $10.90 max gain (0.77:1 R:R < 1.25:1 minimum).",
+    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
+    "iv_regime": "IV_FAIR",
+    "atm_iv_pct": 23.0,
+    "hv20_pct": 24.4,
     "open_positions_audit": [],
-    "recommended_trade": null
+    "headline": "Buy 10x MDLZ 2027-01-15 $70/$77.5 Bull Call Spread (53 DTE) at $0.58 net debit ($580.00 max loss -> $6,920.00 max profit, 11.93:1 R:R).",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-01-15",
+      "dte": 53,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 70.0,
+          "mid": 0.88,
+          "bid": 0.85,
+          "ask": 0.9,
+          "open_interest": 2645
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 77.5,
+          "mid": 0.3,
+          "bid": 0.0,
+          "ask": 0.3,
+          "open_interest": 55
+        }
+      ],
+      "contracts": 10,
+      "multiplier": 100,
+      "net_debit_per_share": 0.58,
+      "max_loss_total": 580.0,
+      "max_loss_nav_bps": 58.0,
+      "max_profit_total": "$6,920.00 (11.93:1 reward-to-risk)",
+      "breakeven_at_expiry": 70.58,
+      "breakeven_move_pct": 6.81,
+      "net_delta_dollars_per_1_move": 196.0,
+      "daily_theta_dollars": -7.9,
+      "underlying_stop_trigger": 61.43,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($4,844.00 gain) or exit early if MDLZ closes below $61.43.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $70 at Expiry",
+          "stock_price": 61.43,
+          "stock_move_pct": -7.0,
+          "contract_value": 0.0,
+          "net_pnl": -580.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($70.58)",
+          "stock_price": 70.58,
+          "stock_move_pct": 6.8,
+          "contract_value": 580.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($77.5)",
+          "stock_price": 77.5,
+          "stock_move_pct": 17.3,
+          "contract_value": 7500.0,
+          "net_pnl": 6920.0,
+          "return_on_risk_pct": 1193.1
+        },
+        {
+          "scenario": "Bull Overshoot ($78.00)",
+          "stock_price": 81.38,
+          "stock_move_pct": 23.1,
+          "contract_value": 7500.0,
+          "net_pnl": 6920.0,
+          "return_on_risk_pct": 1193.1
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: Selling the upper $77.5 call collects $0.30/sh upfront, lowering your breakeven to $70.58 and protecting you against post-news volatility crush.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $70 Call for $0.88 and simultaneously sell the $77.5 Call for $0.30, paying $0.58/sh net ($580.00 total for 10 spread(s)). That $580.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $70.58 (+6.8% from $66.08). Anywhere at or above $77.5, your $580.00 turns into $7,500.00 (+$6,920.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in MDLZ adds ~$196.00 to your spread (Net Delta), while sitting flat costs ~$7.90/day in time decay (Net Theta) — much lower than an unhedged call because the sold $77.5 call decays in your favor."
+      ]
+    }
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (MDLZ)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>Stand aside on MDLZ call spreads: $52.5/$77.5 spread costs $14.10 for only $10.90 max gain (0.77:1 R:R &lt; 1.25:1 minimum).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 10.53%) above rising 50D SMA (63.0) and 30W SMA (62.16). <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:MDLZ. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_mdlz_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:MDLZ\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:MDLZ\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_mdlz_options_chart\"});</script></div>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (MDLZ)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 10x MDLZ 2027-01-15 $70/$77.5 Bull Call Spread (53 DTE) at $0.58 net debit ($580.00 max loss -&gt; $6,920.00 max profit, 11.93:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 9.88%) above rising 50D SMA (63.08) and 30W SMA (62.32). <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:MDLZ. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_mdlz_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:MDLZ\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:MDLZ\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_mdlz_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: Selling the upper $77.5 call collects $0.30/sh upfront, lowering your breakeven to $70.58 and protecting you against post-news volatility crush.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $70 Call for $0.88 and simultaneously sell the $77.5 Call for $0.30, paying $0.58/sh net ($580.00 total for 10 spread(s)). That $580.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $70.58 (+6.8% from $66.08). Anywhere at or above $77.5, your $580.00 turns into $7,500.00 (+$6,920.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in MDLZ adds ~$196.00 to your spread (Net Delta), while sitting flat costs ~$7.90/day in time decay (Net Theta) — much lower than an unhedged call because the sold $77.5 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for MDLZ</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $70 CALL @ $0.88 mid (bid $0.85 / ask $0.90, OI 2645) + SELL 2027-01-15 $77.5 CALL @ $0.30 mid (bid $0.00 / ask $0.30, OI 55)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>10 contract(s) x 100 shares</td><td>Controls 1000 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$580.00 (58.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$70.58 (+6.81% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$6,920.00 (11.93:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+196.00 per $1 move | $-7.90/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($4,844.00 gain) or exit early if MDLZ closes below $61.43.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 53 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $580.00 Across Stock Scenarios (MDLZ)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $70 at Expiry</td><td>$61.43 (-7.0%)</td><td>$0.00</td><td>$-580.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($70.58)</td><td>$70.58 (+6.8%)</td><td>$580.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($77.5)</td><td>$77.50 (+17.3%)</td><td>$7,500.00</td><td>$+6,920.00</td><td><strong>+1193.1%</strong></td></tr><tr><td>Bull Overshoot ($78.00)</td><td>$81.38 (+23.1%)</td><td>$7,500.00</td><td>$+6,920.00</td><td><strong>+1193.1%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
 }

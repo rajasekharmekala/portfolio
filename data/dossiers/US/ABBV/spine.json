@@ -2,73 +2,78 @@
   "symbol": "ABBV",
   "market": "US",
   "as_of": "2026-11-20",
-  "title": "AbbVie Inc. (ABBV): Post-Humira Immunology Compounder Navigating Apogee Leverage & 2027 IRA Headwinds",
+  "title": "AbbVie Inc. (ABBV): Post-Humira Compounder Rejected on 10Y DCF Valuation & Debt-Royalty Asymmetry",
   "sector": "Healthcare — Biopharmaceuticals",
   "decision_basis": "ch-9",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "kpi_health": "PASS_WITH_WATCH",
-  "verdict": "ACCUMULATE_ON_DIP",
-  "new_capital_verdict": "ACCUMULATE_ON_DIP",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
+  "rejection_reasons": [
+    "VALUATION"
+  ],
   "archetype": "Post-LOE Biopharma Compounder & Dividend Aristocrat",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_2",
+  "conviction_tier": "TIER_0",
+  "entry_posture": "REJECT_DO_NOT_ALLOCATE",
+  "weinstein_stage": "STAGE_2",
   "cmp": 286.2,
-  "entry_zone_low": 277.05,
-  "entry_zone_high": 281.27,
-  "stop_loss": 249.53,
-  "target_base": 340.0,
-  "target_bull": 390.0,
-  "target_bear": 236.21,
+  "entry_zone_low": 274.0,
+  "entry_zone_high": 278.2,
+  "stop_loss": 252.23,
+  "target_base": 315.0,
+  "target_bull": 365.0,
+  "target_bear": 235.0,
   "holding_action": "NOT_HELD",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "ABBV is not currently held in the consolidated US portfolio (0 shares across Schwab, Robinhood, and options). No trim or exit action is required; new capital is staged for dip accumulation inside the narrowed $277.05–$281.27 support zone.",
+  "holding_rationale": "ABBV is NOT_HELD (0 shares across Schwab, Robinhood, and options). New capital is REJECTED (TIER_0, VALUATION) because 10Y DCF Base fair value ($315.00) and EV ($305.00) fail the 1.50:1 hurdle even at $278.20 support vs. $252.23 stop (1.42:1 Base / 1.03:1 EV) inside a 10-distribution-day Downtrend (38.8% >50-DMA, 3.38% US cash vs. 22.0% floor).",
   "holding_alerts": [
     {
-      "trigger": "Limit Entry Zone ($277.05–$281.27)",
-      "trigger_price": 281.27,
+      "trigger": "Watch-Only DCF Re-Underwriting Zone (~$255–$262)",
+      "trigger_price": 262.0,
       "shares": 0,
-      "instruction": "Stage starter limit bids around the 10-week EMA ($281.27) and 50-day SMA ($279.00) with 1.0%–1.5% portfolio risk budget against the $249.53 stop."
+      "instruction": "No live buy orders. Re-underwrite only if ABBV pulls back enough for Base R:R to clear 2.0:1 and S&P 500 breadth recovers above 50%."
     },
     {
-      "trigger": "Structural Invalidation Stop ($249.53)",
-      "trigger_price": 249.53,
+      "trigger": "Reference Structural Floor ($252.23)",
+      "trigger_price": 252.23,
       "shares": 0,
-      "instruction": "Cancel pending buy orders and stand aside if ABBV closes below $249.53 (30-week SMA breakdown)."
+      "instruction": "Upward-only reference stop (>= prior $249.53) just below the 30-week SMA ($252.88); monitor only with 0 shares held."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Next marginal US cash unit ($2,540.35 available cash; ABBV is NOT_HELD with 0 shares, so no existing ABBV position is being sold).",
+    "capital_source": "Next marginal US cash unit ($2,540.35 available cash = 3.38% of $75,110.60 NAV vs. 22.0% Downtrend cash floor; ABBV is NOT_HELD with 0 shares).",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100,
         "recommendation": "HOLD_CASH_FOR_PULLBACK",
-        "rationale": "S&P 500 is in a Downtrend regime (38.0% breadth > 50-DMA, 10 distribution days) and ABBV ($286.20) sits above its narrowed $277.05–$281.27 support zone (1.47:1 CMP asymmetry vs 1.85:1 at $281.27). Retain marginal cash until ABBV tests support.",
-        "entry_condition": "Deploy into ABBV on limit fill inside $277.05–$281.27 with $249.53 stop."
+        "rationale": "ABBV is REJECTED (TIER_0, VALUATION) with 1.42:1 Base / 1.03:1 EV R:R at $278.20 support vs. $252.23 stop. S&P 500 is in a 10-distribution-day Downtrend (38.8% >50-DMA) and US cash sits at 3.38% vs. the 22.0% Downtrend floor. Preserve 100% cash.",
+        "entry_condition": "Retain 100% cash until portfolio cash rebuilds toward 22.0% and breadth recovers."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "LLY",
+        "symbol": "MCK",
         "allocation_pct": 0,
         "recommendation": "WATCH_BENCHMARK",
-        "rationale": "Eli Lilly ($1,347.11) is an active US shortlist Stage 2 Healthcare peer (+3.45% above 10W EMA $1,302.14), but trades at 26.58x forward P/E vs ABBV's 17.60x and offers lower near-term valuation cushion in a Downtrend regime.",
-        "entry_condition": "Consider only on a pullback into $1,282.61–$1,321.67 support with breadth > 50%.",
-        "target_base": 1550.0,
-        "asymmetry_ratio": 1.4
+        "rationale": "McKesson Corp. ($1,052.21) is an active US shortlist Stage 2 Healthcare peer in the same-session snapshot, tracked at 0% allocation while US cash sits at 3.38%.",
+        "entry_condition": "Monitor only; 0% allocation in Downtrend cash-preservation mode.",
+        "target_base": 1150.0,
+        "asymmetry_ratio": 1.5
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "JNJ",
+        "symbol": "COST",
         "allocation_pct": 0,
         "recommendation": "WATCH_BENCHMARK",
-        "rationale": "Johnson & Johnson ($270.47) sits right on its 10W EMA ($269.95) in Stage 2, but trades at a richer 23.37x forward P/E with slower top-line growth than ABBV.",
-        "entry_condition": "Benchmark only; ABBV offers superior immunology growth at a 25% lower forward P/E.",
-        "target_base": 305.0,
-        "asymmetry_ratio": 1.42
+        "rationale": "Costco Wholesale ($1,094.01) is an outside Stage 2 defensive compounder in the same-session snapshot, tracked at 0% allocation while US cash sits at 3.38% vs. the 22.0% Downtrend floor.",
+        "entry_condition": "Monitor only; 0% allocation in Downtrend cash-preservation mode.",
+        "target_base": 1150.0,
+        "asymmetry_ratio": 1.4
       }
     ]
   },
-  "primer": "AbbVie Inc. (ABBV) has navigated the largest patent cliff in pharmaceutical history. Skyrizi ($21.8B FY26E) and Rinvoq ($10.3B FY26E) now replace Humira, while Neuroscience adds $13.0B. At $286.20 (17.60x forward P/E, 2.54% yield), ABBV sits in a Stage 2 squeeze above $277.05–$281.27 support. Our independent verdict is ACCUMULATE_ON_DIP with a $340.00 base target and a $249.53 stop.",
+  "primer": "AbbVie (NYSE: ABBV) has navigated the Humira patent cliff cleanly, with Skyrizi ($21.8B FY26E) and Rinvoq ($10.3B FY26E) driving ~$67.8B in FY2026E revenue. However, Q3 2026 gross debt sits at $80.90B with -$4.58B stockholders' equity and $27.31B in contingent consideration liabilities. At $286.20, our 10-year DCF ($21.50B FCF, 8.5% WACC, 2.5% g, deducting $81.25B net debt and Skyrizi claims) yields $315.00 Base, $235.00 Bear, $365.00 Bull, and $305.00 Expected Value. Even at $278.20 support vs. a $252.23 stop, Base R:R (1.42:1) and EV R:R (1.03:1) fail our 1.50:1 gate in a 10-dist-day Downtrend, so we assign REJECTED (TIER_0, VALUATION) with 100% cash.",
   "citations": [
     "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000008/abbv-20251231.htm",
     "https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2025-financial",
@@ -98,10 +103,15 @@
     "https://finviz.com/quote.ashx?t=ABBV — Finviz ABBV Valuation, Forward P/E (17.60x), EV/EBITDA (18.23x), and TTM Financial Ratios (Retrieved 2026-11-22)",
     "https://sec-api.io/insights/abbvie-abbv-q3-2026-earnings-sec-filing-analysis — SEC-API Q3 2026 AbbVie SEC Filing Analysis (9M 2026 EPS, Apogee Debt, Contingent Consideration)",
     "https://www.alpha-sense.com/earnings/abbv/ — AlphaSense Q3 2026 AbbVie Earnings Highlights (FY2026 Guidance, 9M 2026 FCF ~4B, 2.0x Net Leverage Target)",
-    "https://www.tradingview.com/symbols/NYSE-ABBV/technicals/ — TradingView Live Technicals for NYSE:ABBV (Stage 2, 10W EMA, 30W SMA, RSI-14, Bollinger Bandwidth)"
+    "https://www.tradingview.com/symbols/NYSE-ABBV/technicals/ — TradingView Live Technicals for NYSE:ABBV (Stage 2, 10W EMA, 30W SMA, RSI-14, Bollinger Bandwidth)",
+    "AbbVie Inc. 2026 Proxy Statement DEF 14A (filed Mar 23, 2026): https://www.sec.gov/Archives/edgar/data/1551152/000110465926033387/abbv-20260508xdef14a.htm",
+    "AbbVie Inc. Q3 2026 Form 8-K Exhibit 99.1 Earnings Release (filed Oct 30, 2026): https://www.sec.gov/Archives/edgar/data/1551152/000155115226000033/abbv-20260930xexhibit991.htm",
+    "AbbVie Inc. Form 8-K Board Update (filed Nov 2, 2026): https://www.sec.gov/Archives/edgar/data/1551152/000110465926121322/tm2628215d1_8k.htm"
   ],
   "gate_exceptions": [
-    "Holdings note: US holdings come from data/accounts/US/ trade logs. They are assumed accurate per RUN_PROTOCOL section 4.",
-    "Prior filing dates: FY2025 10-K metrics (as_of 2025-12, 354 days old) and 9M 2026 results (as_of 2026-09, 80 days old) are the latest filings. Apogee (as_of 2026-09), Rinvoq 2037 settlement (as_of 2025-09, 445 days old), and emraclidine (as_of 2024-12, 719 days old) are also the latest primary records."
+    "Session close vs. live snapshot disclosure: Decision and technicals are anchored to the verified 2026-11-20 session close of $286.20 (facts_US_2026-11-20.json). The TradingView snapshot pulled on 2026-11-23 prints $287.68 (+0.52% 1D); both are disclosed transparently in Chapter 8.",
+    "Linux environment note: WeasyPrint PDF rendering and macOS Chrome Robinhood/TradingView browser automation are unavailable in this Linux container; public options-chain data and TradingView widget embeds are used instead.",
+    "Holdings note: US holdings come from data/accounts/US/ consolidated trade logs ($75,110.60 NAV, $2,540.35 cash = 3.38%, ABBV 0 shares NOT_HELD).",
+    "Prior filing dates: FY2025 10-K (as_of 2025-12, 354 days old) and Q3 2026 Form 10-Q / EX-99.1 (filed Oct/Nov 2026) are the latest primary SEC filings."
   ]
 }
