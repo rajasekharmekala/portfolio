@@ -23,17 +23,23 @@
       "period": "FY2025",
       "unit": "M",
       "revenue": 29443,
-      "cogs": 6234,
+      "cogs": 3844,
       "employee_cost": 0,
-      "other_opex": 10407,
-      "da": 2780,
+      "other_opex": 12817,
+      "da": 2760,
       "interest": 1024,
       "other_income": 798,
       "tax": 1286,
       "cfo": 10019,
       "capex": 563,
       "caption": "Gilead Sciences FY2025 GAAP P&L-to-FCF Waterfall ($ Millions, per FY2025 Form 10-K)",
-      "takeaway": "On $29,443M of revenue, Gilead generated $23,209M gross profit (78.8% GAAP gross margin), $10,022M GAAP operating income (34.0% margin after $1,024M acquired IPR&D and ~$590M MYR impairment), $8,510M GAAP net income, and $9,456M free cash flow ($10,019M CFO less $563M CapEx). Note: Employee costs are embedded within R&D ($5,799M) and SG&A ($5,774M) on the 10-K; D&A (~$2,780M) is broken out separately from operating overhead so EBIT reconciles exactly to $10,022M."
+      "takeaway": "On $29,443M of revenue, backing out $2,390M of acquisition amortization from GAAP COGS ($6,234M -> $3,844M cash COGS) and $370M of depreciation from operating overhead ($13,187M -> $12,817M) eliminates D&A double-counting and reconciles cleanly to $12,782M EBITDA (43.4%), $10,022M GAAP EBIT (34.0%), $8,510M GAAP net income, and $9,456M FCF ($10,019M CFO less $563M CapEx).",
+      "notes": {
+        "revenue": "FY2025 audited total revenues: $29,443M ($28,915M product sales + $527M royalty/contract).",
+        "cogs": "Cash COGS ex-amortization: $3,844M (GAAP COGS $6,234M less $2,390M intangible amortization embedded in COGS per 10-K Note 7/Cash Flows).",
+        "other_opex": "OpEx ex-depreciation: $12,817M (R&D $5,799M + SG&A $5,774M + Acq. IPR&D $1,024M + Impairment $590M less $370M depreciation).",
+        "da": "Total D&A: $2,760M ($370M depreciation + $2,390M intangible amortization per FY2025 10-K Cash Flows), with zero double-counting."
+      }
     },
     {
       "type": "table",
@@ -91,6 +97,10 @@
       "paragraphs": [
         "FY2025 CapEx was a modest $563 million (1.9% of revenue). However, Gilead has outlined up to $32 billion in U.S. plant and R&D spending through 2030 [1]. This plan covers domestic biologics, ADC, and cell-therapy sites. Investors should watch if annual CapEx rises from ~$0.6B toward $1.0B–$1.5B/year, which would trim FCF conversion from ~111% of GAAP net income."
       ]
+    },
+    {
+      "type": "p",
+      "html": "<b>Wholesaler Concentration & Unit-Economics Friction:</b> Gilead's FY2025 Form 10-K (Note 2) reveals extreme channel concentration: <b>Cardinal Health (29%)</b>, <b>McKesson (24%)</b>, and <b>Cencora (21%)</b> together accounted for <b>74% of global gross product sales</b> (~90% in the U.S.) [1]. While this three-wholesaler oligopoly keeps selling costs low, it creates quarterly working-capital and inventory-stocking noise—indeed, Q3 2026 EX-99.1 noted that HIV (+18% YoY), Biktarvy (+10%), and Descovy (+49%) benefited from <i>\"favorable inventory dynamics\"</i> that can unwind in subsequent quarters [4]. On the cost side, Q3 2026 GAAP product gross margin rose to <b>81.0%</b> (88.1% Non-GAAP) due to the expiration of a royalty-related obligation, but accrued rebates climbed to <b>$4,624 million</b> on the Q3 2026 balance sheet and Cell Therapy sales fell 18% YoY to $355 million, squeezing fixed cleanroom absorption at Kite [4]."
     }
   ],
   "book_paragraphs": [
@@ -110,7 +120,7 @@
       "title": "Inside the FY2025 Cash Waterfall",
       "paragraphs": [
         "Walk down the FY2025 income statement with me line by line, because it reveals how clean Gilead's underlying unit economics really are when M&A write-downs aren't distorting the picture. Total revenue was $29,443 million. Cost of goods sold was just $6,234 million—leaving a 78.8% GAAP gross margin (and over 86% on a non-GAAP product basis once you strip out Kite acquisition amortization).",
-        "From that $23,209 million gross profit, Gilead spent $5,799 million on core R&D, $5,774 million on SG&A, $1,024 million on acquired IPR&D, and roughly $590 million on a partial impairment of its MYR Hepatitis Delta asset. Even after all of that—and $2,780 million of embedded depreciation and amortization—GAAP operating income came in at $10,022 million, a 34.0% operating margin. After $1,024 million of interest expense, $798 million of net interest and investment income, and $1,286 million of taxes (a remarkably low ~13.1% effective tax rate), GAAP net income reached $8,510 million. Cash flow from operations hit $10,019 million, and CapEx was just $563 million, leaving $9,456 million of free cash flow."
+        "From that $23,209 million GAAP gross profit, Gilead spent $5,799 million on core R&D, $5,774 million on SG&A, $1,024 million on acquired IPR&D, and $590 million on a partial impairment of its MYR Hepatitis Delta asset. When we strip out $2,390 million of intangible amortization embedded inside GAAP COGS and $370 million of depreciation from operating expenses—avoiding any double-counting—underlying cash COGS was just $3,844 million, EBITDA reached $12,782 million, and GAAP operating income came in at $10,022 million (a 34.0% operating margin). After $1,024 million of interest expense, $798 million of net other income, and $1,286 million of taxes (~13.1% effective tax rate), GAAP net income reached $8,510 million. Cash flow from operations hit $10,019 million, and CapEx was just $563 million, leaving $9,456 million of free cash flow."
       ],
       "callouts": []
     },
@@ -118,7 +128,8 @@
       "title": "Two Supply Chains Under One Roof",
       "paragraphs": [
         "Operationally, Gilead runs two completely different factories. Its small-molecule HIV and liver pills are manufactured through standard chemical synthesis and distributed through the big three wholesalers—McKesson, Cencora, and Cardinal Health—with minimal working-capital friction. By contrast, Kite's cell-therapy plants in El Segundo, Frederick, and Hoofddorp operate like bespoke hospital laboratories, turning each patient's frozen T-cells into Yescarta or Tecartus in 14 to 17 days with a >96% manufacturing success rate.",
-        "That manufacturing reliability is a genuine competitive moat in CAR-T, where rival cell therapies have historically struggled with out-of-specification batches and multi-week waitlists. Yet bespoke batches are expensive, and as Kite's 2026 volumes dipped mid-teens, fixed cleanroom overhead weighed on segment margins. Getting anito-cel approved in December 2026 is critical not just for top-line growth, but to fill Kite's existing manufacturing suites with high-margin multiple myeloma volume."
+        "That manufacturing reliability is a genuine competitive moat in CAR-T, where rival cell therapies have historically struggled with out-of-specification batches and multi-week waitlists. Yet bespoke batches are expensive, and as Kite's 2026 volumes dipped mid-teens, fixed cleanroom overhead weighed on segment margins. Getting anito-cel approved in December 2026 is critical not just for top-line growth, but to fill Kite's existing manufacturing suites with high-margin multiple myeloma volume.",
+        "There is also a subtle channel concentration risk hidden in the footnotes: just three U.S. wholesalers—Cardinal Health (29%), McKesson (24%), and Cencora (21%)—handle 74% of Gilead's global gross product sales and roughly 90% of U.S. volume. When those distributors build or draw down inventory ahead of price or policy shifts, quarterly revenue swings; in Q3 2026, management explicitly credited favorable wholesaler inventory dynamics as one driver behind Biktarvy's 10% and Descovy's 49% surge. Meanwhile, $4.62 billion of accrued rebates sit on the Q3 2026 balance sheet as a reminder of how much gross-to-net leakage stands between list price and collected cash."
       ],
       "callouts": []
     }

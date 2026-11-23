@@ -1,149 +1,144 @@
 {
   "symbol": "VRTX",
   "market": "US",
-  "generated_at": "2026-11-19T18:46:15+00:00",
+  "generated_at": "2026-11-23T17:14:12+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
-      "accessible": true,
-      "status": "connected",
-      "active_tabs": [
-        {
-          "title": "REGN 938.50 ▼ −0.74% TheWrap",
-          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ADOCN"
-        }
-      ]
+      "checked": false,
+      "accessible": false,
+      "status": "unavailable",
+      "active_tabs": []
     }
   },
   "multitimeframe_chart": {
     "tv_symbol": "NASDAQ:VRTX",
     "exchange": "NASDAQ",
     "company_name": "Vertex Pharmaceuticals Incorporated",
-    "close": 536.45,
-    "change_1d_pct": -2.41,
-    "perf_1w_pct": -4.44,
-    "perf_1m_pct": 3.08,
-    "perf_3m_pct": -3.96,
-    "rsi_1d": 44.67,
-    "rsi_4h": 35.78,
-    "rsi_1w": 54.24,
-    "sma20": 538.63,
-    "sma50": 522.79,
-    "sma200": 484.61,
-    "sma30_weekly": 495.17,
-    "ema10_weekly": 527.12,
-    "ema20_4h": 537.13,
-    "sma50_4h": 534.08,
-    "atr14": 14.85,
-    "bb_width_pct": 8.56,
+    "close": 533.13,
+    "change_1d_pct": 3.52,
+    "perf_1w_pct": -2.69,
+    "perf_1m_pct": 0.28,
+    "perf_3m_pct": -2.27,
+    "rsi_1d": 50.74,
+    "rsi_4h": 49.08,
+    "rsi_1w": 56.0,
+    "sma20": 538.82,
+    "sma50": 523.0,
+    "sma200": 485.15,
+    "sma30_weekly": 498.53,
+    "ema10_weekly": 526.95,
+    "ema20_4h": 533.47,
+    "sma50_4h": 535.29,
+    "atr14": 15.58,
+    "bb_width_pct": 8.43,
     "pivot_s1": 507.37,
     "pivot_s2": 455.87,
     "pivot_r1": 587.09,
     "pivot_r2": 615.31,
     "high_52w": 568.67,
     "low_52w": 412.27,
-    "dist_to_200d_pct": 8.03,
+    "dist_to_200d_pct": 9.89,
     "major_shelf": 507.37,
     "intraday_4h_turn": false,
     "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
-    "setup_summary": "Stage 3 daily pullback/consolidation ($536.45 close, 51.64 RSI14) above 50D SMA ($522.61) and 30W SMA ($495.17); tight 8.56% Bollinger bandwidth ahead of Nov 30 povetacicept PDUFA."
+    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 8.43%) above rising 50D SMA (523.0) and 30W SMA (498.53)."
   },
   "options_plan": {
     "symbol": "VRTX",
     "market": "US",
     "optionable": true,
-    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
+    "options_verdict": "DECLINED — ILLUSTRATIVE ONLY",
     "iv_regime": "IV_ELEVATED",
-    "atm_iv_pct": 43.3,
-    "hv20_pct": 29.4,
+    "atm_iv_pct": 39.4,
+    "hv20_pct": 30.9,
     "open_positions_audit": [],
-    "headline": "Buy 1x VRTX 2027-01-15 $500/$680 Bull Call Spread (57 DTE) at $41.36 net debit ($4,136.00 max loss -> $13,864.00 max profit, 3.35:1 R:R).",
+    "headline": "DECLINED — ILLUSTRATIVE ONLY (see Ch. 8 Options Desk Audit): 1x VRTX 2027-01-15 $530/$700 Bull Call Spread (53 DTE) at $29.80 net debit ($2,980.00 max loss -> $14,020.00 max profit, 4.70:1 R:R).",
     "recommended_trade": {
       "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
       "expiry": "2027-01-15",
-      "dte": 57,
+      "dte": 53,
       "legs": [
         {
           "side": "BUY",
           "type": "CALL",
-          "strike": 500.0,
-          "mid": 45.55,
-          "bid": 42.4,
-          "ask": 48.7,
-          "open_interest": 158
+          "strike": 530.0,
+          "mid": 31.4,
+          "bid": 29.5,
+          "ask": 33.3,
+          "open_interest": 349
         },
         {
           "side": "SELL",
           "type": "CALL",
-          "strike": 680.0,
-          "mid": 4.19,
+          "strike": 700.0,
+          "mid": 1.6,
           "bid": 0.0,
-          "ask": 7.5,
-          "open_interest": 182
+          "ask": 4.9,
+          "open_interest": 276
         }
       ],
       "contracts": 1,
       "multiplier": 100,
-      "net_debit_per_share": 41.36,
-      "max_loss_total": 4136.0,
-      "max_loss_nav_bps": 413.6,
-      "max_profit_total": "$13,864.00 (3.35:1 reward-to-risk)",
-      "breakeven_at_expiry": 541.36,
-      "breakeven_move_pct": 0.92,
-      "net_delta_dollars_per_1_move": 51.0,
-      "daily_theta_dollars": -9.17,
-      "underlying_stop_trigger": 507.37,
-      "profit_taking_rule": "Close spread at 65%–75% of max profit ($9,704.80 gain) or exit early if VRTX closes below $507.37.",
+      "net_debit_per_share": 29.8,
+      "max_loss_total": 2980.0,
+      "max_loss_nav_bps": 396.7,
+      "max_profit_total": "$14,020.00 (4.70:1 reward-to-risk)",
+      "breakeven_at_expiry": 559.8,
+      "breakeven_move_pct": 5.0,
+      "net_delta_dollars_per_1_move": 45.4,
+      "daily_theta_dollars": -13.67,
+      "underlying_stop_trigger": 490.73,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($9,814.00 gain) or exit early if VRTX closes below $490.73.",
       "scenarios": [
         {
-          "scenario": "At or Below $500 at Expiry",
-          "stock_price": 500.0,
-          "stock_move_pct": -6.8,
+          "scenario": "At or Below $530 at Expiry",
+          "stock_price": 490.73,
+          "stock_move_pct": -8.0,
           "contract_value": 0.0,
-          "net_pnl": -4136.0,
+          "net_pnl": -2980.0,
           "return_on_risk_pct": -100.0
         },
         {
-          "scenario": "At Breakeven ($541.36)",
-          "stock_price": 541.36,
-          "stock_move_pct": 0.9,
-          "contract_value": 4136.0,
+          "scenario": "At Breakeven ($559.80)",
+          "stock_price": 559.8,
+          "stock_move_pct": 5.0,
+          "contract_value": 2980.0,
           "net_pnl": 0.0,
           "return_on_risk_pct": 0.0
         },
         {
-          "scenario": "At Short Call Cap ($680.00)",
-          "stock_price": 680.0,
-          "stock_move_pct": 26.8,
-          "contract_value": 18000.0,
-          "net_pnl": 13864.0,
-          "return_on_risk_pct": 335.2
+          "scenario": "At Short Call Cap ($700.00)",
+          "stock_price": 700.0,
+          "stock_move_pct": 31.3,
+          "contract_value": 17000.0,
+          "net_pnl": 14020.0,
+          "return_on_risk_pct": 470.5
         },
         {
-          "scenario": "Bull Overshoot ($714.00)",
-          "stock_price": 714.0,
-          "stock_move_pct": 33.1,
-          "contract_value": 18000.0,
-          "net_pnl": 13864.0,
-          "return_on_risk_pct": 335.2
+          "scenario": "Bull Overshoot ($660.00)",
+          "stock_price": 735.0,
+          "stock_move_pct": 37.9,
+          "contract_value": 17000.0,
+          "net_pnl": 14020.0,
+          "return_on_risk_pct": 470.5
         }
       ],
       "beginner_explainer": [
-        "Why this spread works differently from buying shares: Selling the upper $680 call collects $4.19/sh upfront, lowering your breakeven to $541.36 and protecting you against post-news volatility crush.",
-        "Exact wallet math (1 contract = 100 shares): You buy the $500 Call for $45.55 and simultaneously sell the $680 Call for $4.19, paying $41.36/sh net ($4,136.00 total for 1 spread(s)). That $4,136.00 is the absolute maximum you can lose.",
-        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $541.36 (+0.9% from $536.45). Anywhere at or above the $680.00 short call cap, your $4,136.00 turns into $18,000.00 (+$13,864.00 net profit).",
-        "Speed & time decay in plain English: Today, each $1 move up in VRTX adds ~$51.00 to your spread (Net Delta), while sitting flat costs ~$9.17/day in time decay (Net Theta) — much lower than an unhedged call because the sold $680 call decays in your favor."
+        "Why this spread works differently from buying shares: Selling the upper $700 call collects $1.60/sh upfront, lowering your breakeven to $559.80 and protecting you against post-news volatility crush.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $530 Call for $31.40 and simultaneously sell the $700 Call for $1.60, paying $29.80/sh net ($2,980.00 total for 1 spread(s)). That $2,980.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $559.80 (+5.0% from $533.13). Anywhere at or above $700, your $2,980.00 turns into $17,000.00 (+$14,020.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in VRTX adds ~$45.40 to your spread (Net Delta), while sitting flat costs ~$13.67/day in time decay (Net Theta) — much lower than an unhedged call because the sold $700 call decays in your favor."
       ]
     }
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (VRTX)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x VRTX 2027-01-15 $500/$680 Bull Call Spread (57 DTE) at $41.36 net debit ($4,136.00 max loss -&gt; $13,864.00 max profit, 3.35:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Stage 3 daily pullback/consolidation ($536.45 close, 51.64 RSI14) above 50D SMA ($522.61) and 30W SMA ($495.17); tight 8.56% Bollinger bandwidth ahead of Nov 30 povetacicept PDUFA. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:VRTX. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_vrtx_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:VRTX\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:VRTX\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_vrtx_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: Selling the upper $680 call collects $4.19/sh upfront, lowering your breakeven to $541.36 and protecting you against post-news volatility crush.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $500 Call for $45.55 and simultaneously sell the $680 Call for $4.19, paying $41.36/sh net ($4,136.00 total for 1 spread(s)). That $4,136.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $541.36 (+0.9% from $536.45). Anywhere at or above $680, your $4,136.00 turns into $18,000.00 (+$13,864.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in VRTX adds ~$51.00 to your spread (Net Delta), while sitting flat costs ~$9.17/day in time decay (Net Theta) — much lower than an unhedged call because the sold $680 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for VRTX</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $500 CALL @ $45.55 mid (bid $42.40 / ask $48.70, OI 158) + SELL 2027-01-15 $680 CALL @ $4.19 mid (bid $0.00 / ask $7.50, OI 182)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$4,136.00 (413.6 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$541.36 (+0.92% vs $536.45)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$13,864.00 (3.35:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+51.00 per $1 move | $-9.17/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($9,704.80 gain) or exit early if VRTX closes below $507.37.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 57 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $4,136.00 Across Stock Scenarios (VRTX)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $500 at Expiry</td><td>$500.00 (-6.8%)</td><td>$0.00</td><td>$-4,136.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($541.36)</td><td>$541.36 (+0.9%)</td><td>$4,136.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Call Cap ($680.00)</td><td>$680.00 (+26.8%)</td><td>$18,000.00</td><td>$+13,864.00</td><td><strong>+335.2%</strong></td></tr><tr><td>Bull Overshoot ($714.00)</td><td>$714.00 (+33.1%)</td><td>$18,000.00</td><td>$+13,864.00</td><td><strong>+335.2%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"DECLINED_ILLUSTRATIVE_ONLY\">\n<h2>Options &amp; Call-Convexity Playbook (VRTX)</h2>\n<p><span class=\"verdict verdict-watch\">DECLINED — ILLUSTRATIVE ONLY</span> &mdash; <strong>DECLINED — ILLUSTRATIVE ONLY (see Ch. 8 Options Desk Audit): 1x VRTX 2027-01-15 $530/$700 Bull Call Spread (53 DTE) at $29.80 net debit ($2,980.00 max loss -&gt; $14,020.00 max profit, 4.70:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 8.43%) above rising 50D SMA (523.0) and 30W SMA (498.53). <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:VRTX. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_vrtx_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:VRTX\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:VRTX\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_vrtx_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: Selling the upper $700 call collects $1.60/sh upfront, lowering your breakeven to $559.80 and protecting you against post-news volatility crush.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $530 Call for $31.40 and simultaneously sell the $700 Call for $1.60, paying $29.80/sh net ($2,980.00 total for 1 spread(s)). That $2,980.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $559.80 (+5.0% from $533.13). Anywhere at or above $700, your $2,980.00 turns into $17,000.00 (+$14,020.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in VRTX adds ~$45.40 to your spread (Net Delta), while sitting flat costs ~$13.67/day in time decay (Net Theta) — much lower than an unhedged call because the sold $700 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for VRTX</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $530 CALL @ $31.40 mid (bid $29.50 / ask $33.30, OI 349) + SELL 2027-01-15 $700 CALL @ $1.60 mid (bid $0.00 / ask $4.90, OI 276)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$2,980.00 (396.7 bps / 3.97% of $75,110.60 NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$559.80 (+5.00% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$14,020.00 (4.70:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+45.40 per $1 move | $-13.67/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($9,814.00 gain) or exit early if VRTX closes below $490.73.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 53 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $2,980.00 Across Stock Scenarios (VRTX)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $530 at Expiry</td><td>$490.73 (-8.0%)</td><td>$0.00</td><td>$-2,980.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($559.80)</td><td>$559.80 (+5.0%)</td><td>$2,980.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Call Cap ($700.00)</td><td>$700.00 (+31.3%)</td><td>$17,000.00</td><td>$+14,020.00</td><td><strong>+470.5%</strong></td></tr><tr><td>Bull Overshoot ($660.00)</td><td>$735.00 (+37.9%)</td><td>$17,000.00</td><td>$+14,020.00</td><td><strong>+470.5%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
 }

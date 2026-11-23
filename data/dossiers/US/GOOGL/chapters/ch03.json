@@ -41,17 +41,100 @@
       "period": "FY2025",
       "unit": "M",
       "revenue": 402836,
-      "cogs": 162535,
-      "employee_cost": 61087,
-      "other_opex": 50175,
-      "da": 21136,
-      "interest": 736,
-      "other_income": 30523,
-      "tax": 26656,
-      "cfo": 164713,
-      "capex": 91447,
-      "caption": "FY2025 Audited Cash & Earnings Waterfall (USD Millions, Form 10-K). Note: 'employee_cost' maps to R&D ($61,087M, primarily engineering talent); 'other_opex' maps to Sales & Marketing ($28,693M) + General & Administrative ($21,482M); 'other_income' ($30,523M) minus 'interest' ($736M) equals net Other Income & Expense of $29,787M.",
-      "takeaway": "In FY2025, Alphabet converted $402,836M of revenue into $129,039M of operating income (32.0% margin) and $164,713M of operating cash flow (40.9% CFO margin), before $91,447M of CapEx left $73,266M of free cash flow."
+      "caption": "FY2025 Audited $100 Revenue-to-Free-Cash-Flow Waterfall (USD Millions, Form 10-K — Zero D&A Double-Counting)",
+      "takeaway": "In FY2025, Alphabet converted $402,836M of revenue into $129,039M of GAAP operating income (32.0% margin) and $164,713M of operating cash flow (40.9% CFO margin), before $91,447M of CapEx left $73,266M of free cash flow. D&A ($21,136M) is embedded inside COGS/OpEx and added back once in the CFO bridge.",
+      "lines": [
+        {
+          "label": "Consolidated Revenue",
+          "amount": 402836,
+          "signed": false,
+          "note": "FY2025 Form 10-K audited consolidated revenue: $402,836M."
+        },
+        {
+          "label": "Cost of Revenues (incl. TAC $59,926M & embedded D&A)",
+          "amount": -162535,
+          "signed": true,
+          "note": "FY2025 Cost of Revenues ($162,535M), including $59,926M TAC and data-center D&A."
+        },
+        {
+          "label": "Research & Development (incl. engineering SBC & D&A)",
+          "amount": -61087,
+          "signed": true,
+          "note": "FY2025 R&D expense ($61,087M, 15.2% of revenue), primarily AI/engineering talent."
+        },
+        {
+          "label": "Sales, Marketing & General/Administrative",
+          "amount": -50175,
+          "signed": true,
+          "note": "FY2025 S&M ($28,693M) + G&A ($21,482M) = $50,175M."
+        },
+        {
+          "label": "GAAP Operating Income (EBIT)",
+          "amount": 129039,
+          "signed": false,
+          "note": "Reconciled operating profit: $402,836M - $162,535M - $61,087M - $50,175M = $129,039M (32.0% margin)."
+        },
+        {
+          "label": "Interest Expense",
+          "amount": -736,
+          "signed": true,
+          "note": "FY2025 interest expense on debt obligations: $(736)M."
+        },
+        {
+          "label": "Other Income & Expense (incl. $24,620M security gains)",
+          "amount": 30523,
+          "signed": true,
+          "note": "Non-operating income ($30,523M) less interest ($736M) = $29,787M net OI&E."
+        },
+        {
+          "label": "Profit Before Income Taxes (PBT)",
+          "amount": 158826,
+          "signed": false,
+          "note": "FY2025 pre-tax income: $129,039M + $29,787M = $158,826M."
+        },
+        {
+          "label": "Income Tax Provision",
+          "amount": -26656,
+          "signed": true,
+          "note": "FY2025 GAAP income tax provision: $(26,656)M (16.8% effective rate)."
+        },
+        {
+          "label": "GAAP Net Income",
+          "amount": 132170,
+          "signed": false,
+          "note": "FY2025 audited net income: $132,170M ($10.81 diluted EPS)."
+        },
+        {
+          "label": "Non-Cash D&A Add-Back (embedded in COGS/OpEx above)",
+          "amount": 21136,
+          "signed": true,
+          "note": "FY2025 depreciation of property & equipment ($21,136M) added back once for CFO."
+        },
+        {
+          "label": "SBC ($24,953M), Deferred Tax, Security Gains & Working Capital",
+          "amount": 11407,
+          "signed": true,
+          "note": "Net non-cash & working-capital bridge: +$24,953M SBC +$8,348M deferred tax -$24,620M security gains +$2,726M other/WC = +$11,407M."
+        },
+        {
+          "label": "Cash Flow from Operations (CFO)",
+          "amount": 164713,
+          "signed": false,
+          "note": "FY2025 audited operating cash flow: $164,713M (40.9% of revenue)."
+        },
+        {
+          "label": "Capital Expenditures (CapEx)",
+          "amount": -91447,
+          "signed": true,
+          "note": "FY2025 purchases of property & equipment: $(91,447)M (55.5% of CFO)."
+        },
+        {
+          "label": "Free Cash Flow (FCF)",
+          "amount": 73266,
+          "signed": false,
+          "note": "FY2025 FCF: $164,713M - $91,447M = $73,266M (18.2% of revenue)."
+        }
+      ]
     },
     {
       "type": "callout",
@@ -60,6 +143,14 @@
       "paragraphs": [
         "FY2025 depreciation of property and equipment was $21,136M against $91,447M of CapEx, a 4.3x ratio [11]. Servers and network gear depreciate over 4–6 years, while data-center buildings run longer. As a result, the 2025–2026 CapEx wave ($195B–$205B guided for FY2026) will add tens of billions in annual depreciation to Cost of Revenues over 2027–2030 [7]."
       ]
+    },
+    {
+      "type": "h3",
+      "title": "Blind-Spot Forensics: $802.1B Supply Commitments & Single-Source Silicon/Power Bottlenecks"
+    },
+    {
+      "type": "p",
+      "html": "A critical supply-chain blind spot sits in Note 10 of the Q3 2026 Form 10-Q: Alphabet carries <strong>$802.1 billion</strong> in off-balance-sheet long-term contractual commitments (&gt;1 year), up sharply to lock in AI compute and power [5, 11]. That total includes $4.5 billion of standby letters of credit, multi-year technical-infrastructure supply agreements extending through 2032 (majority payable through 2031), take-or-pay energy service contracts through 2054, and contingent repurchase obligations on certain hardware at below-cost [5]. To secure grid interconnects directly, Alphabet also acquired renewable-energy developer Intersect (a VIE) for $5.9 billion on March 10, 2026 [5]. On the silicon front, custom TPU fabrication relies on Broadcom co-design and TSMC leading-edge foundry capacity, while third-party Cloud AI workloads remain exposed to Nvidia GPU allocation and Apple/OEM non-exclusive distribution shifts under Judge Mehta's Search order [8, 15]."
     }
   ],
   "book_paragraphs": [
@@ -67,7 +158,8 @@
     "The primary toll on that traffic is Traffic Acquisition Costs, or TAC. In FY2025, Alphabet paid out $59.9 billion in TAC—mostly revenue shares to browser and device partners like Apple to keep Google Search front-and-center, plus payouts to third-party website publishers in the Google Network. Here is the subtle structural tailwind: because high-margin Search and YouTube are growing much faster than the third-party Google Network, the overall TAC rate actually edged down from 20.7% of ad revenue in 2024 to 20.3% in 2025. Meanwhile, receivables turn over briskly on 30-day terms or instant card billing, meaning Alphabet doesn't tie up cash financing customer inventory.",
     "On the back end, however, Alphabet runs one of the most capital-intensive physical supply chains in corporate history. Unlike pure software companies that rent someone else's cloud, Alphabet designs its own custom AI chips—Tensor Processing Units, or TPUs—fabricates them via partners like Broadcom and TSMC, and installs them inside company-owned hyperscale data centers wired together by private subsea fiber cables. Owning the TPU stack gives Alphabet a massive unit-cost edge when serving billions of AI Overviews and Gemini prompts, because it isn't paying Nvidia's gross margin on every internal inference call.",
     "Look at the FY2025 waterfall to see how cleanly the P&L converts to cash—and where the tension lies. Out of $402.8 billion in revenue, Cost of Revenues (including that $59.9 billion TAC and data-center operating costs) took $162.5 billion, leaving a 59.7% gross margin. Research and development absorbed $61.1 billion—mostly elite engineering compensation—while Sales, Marketing, and G&A combined for $50.2 billion. That left $129.0 billion in operating income, a 32.0% operating margin. Add back $21.1 billion in non-cash depreciation, $25.0 billion in stock-based compensation, and favorable working capital, and operating cash flow reached an astonishing $164.7 billion.",
-    "But look at the final step of the waterfall: $91.4 billion went straight back out the door as Capital Expenditures for data centers, servers, and AI infrastructure, leaving $73.3 billion in free cash flow. And here is the watchpoint you cannot ignore: FY2025 depreciation was $21.1 billion, less than a quarter of FY2025 CapEx. When a company spends $91 billion in 2025 and guides to $195–$205 billion in 2026, those assets don't stay off the income statement forever. Over the next four to six years, depreciation will march steadily upward, meaning revenue growth—especially in Google Cloud and AI monetization—must keep pace just to hold operating margins flat."
+    "But look at the final step of the waterfall: $91.4 billion went straight back out the door as Capital Expenditures for data centers, servers, and AI infrastructure, leaving $73.3 billion in free cash flow. And here is the watchpoint you cannot ignore: FY2025 depreciation was $21.1 billion, less than a quarter of FY2025 CapEx. When a company spends $91 billion in 2025 and guides to $195–$205 billion in 2026, those assets don't stay off the income statement forever. Over the next four to six years, depreciation will march steadily upward, meaning revenue growth—especially in Google Cloud and AI monetization—must keep pace just to hold operating margins flat.",
+    "There is also a massive off-balance-sheet supply-chain commitment you will not see on the income statement. Buried in Note 10 of the Q3 2026 Form 10-Q, Alphabet disclosed $802.1 billion in long-term contractual commitments—mostly multi-year supply agreements for technical infrastructure and inventory components through 2032, backed by $4.5 billion in standby letters of credit, plus take-or-pay energy contracts running as far out as 2054. Alphabet even spent $5.9 billion in March 2026 to buy renewable-energy developer Intersect just to accelerate data-center power. While custom TPUs shield internal inference from Nvidia's gross margin, Alphabet's physical supply chain remains concentrated in TSMC foundry capacity, Broadcom ASIC co-design, and multi-decade take-or-pay power obligations."
   ],
   "book_callouts": [
     {

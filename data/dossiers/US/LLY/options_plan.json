@@ -1,139 +1,144 @@
 {
   "symbol": "LLY",
   "market": "US",
-  "generated_at": "2026-11-19T18:45:35+00:00",
+  "generated_at": "2026-11-23T17:14:11+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
-      "accessible": true,
-      "status": "connected",
-      "active_tabs": [
-        {
-          "title": "REGN 938.50 ▼ −0.74% TheWrap",
-          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ADOCN"
-        }
-      ]
+      "checked": false,
+      "accessible": false,
+      "status": "unavailable",
+      "active_tabs": []
     }
   },
   "multitimeframe_chart": {
     "tv_symbol": "NYSE:LLY",
     "exchange": "NYSE",
     "company_name": "Eli Lilly and Company",
-    "close": 1355.33,
-    "change_1d_pct": -1.98,
-    "perf_1w_pct": -6.31,
-    "perf_1m_pct": 7.27,
-    "perf_3m_pct": 10.01,
-    "rsi_1d": 50.9,
-    "rsi_4h": 38.39,
-    "rsi_1w": 60.87,
-    "sma20": 1380.44,
-    "sma50": 1262.37,
-    "sma200": 1116.29,
-    "sma30_weekly": 1180.15,
-    "ema10_weekly": 1303.63,
-    "ema20_4h": 1399.54,
-    "sma50_4h": 1361.33,
-    "atr14": 43.36,
-    "bb_width_pct": 16.57,
+    "close": 1373.57,
+    "change_1d_pct": 1.96,
+    "perf_1w_pct": -5.52,
+    "perf_1m_pct": 5.32,
+    "perf_3m_pct": 9.97,
+    "rsi_1d": 54.05,
+    "rsi_4h": 46.25,
+    "rsi_1w": 61.66,
+    "sma20": 1388.63,
+    "sma50": 1271.62,
+    "sma200": 1119.48,
+    "sma30_weekly": 1193.55,
+    "ema10_weekly": 1315.12,
+    "ema20_4h": 1388.73,
+    "sma50_4h": 1367.43,
+    "atr14": 42.09,
+    "bb_width_pct": 13.24,
     "pivot_s1": 1215.94,
     "pivot_s2": 1014.34,
     "pivot_r1": 1534.41,
     "pivot_r2": 1651.28,
     "high_52w": 1475.25,
     "low_52w": 850.51,
-    "dist_to_200d_pct": 21.41,
+    "dist_to_200d_pct": 22.7,
     "major_shelf": 1215.94,
     "intraday_4h_turn": false,
-    "setup_archetype": "STAGE2_SUPPORT_PULLBACK",
-    "setup_summary": "Constructive Stage 2 trend trading near 50D SMA (1262.37) / 10W EMA (1303.63) support."
+    "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
+    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 13.24%) above rising 50D SMA (1271.62) and 30W SMA (1193.55)."
   },
   "options_plan": {
     "symbol": "LLY",
     "market": "US",
     "optionable": true,
-    "options_verdict": "LONG_CALL_LEAPS",
-    "iv_regime": "IV_FAIR",
-    "atm_iv_pct": 39.4,
-    "hv20_pct": 37.7,
+    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
+    "iv_regime": "IV_ELEVATED",
+    "atm_iv_pct": 42.6,
+    "hv20_pct": 35.9,
     "open_positions_audit": [],
-    "headline": "Buy 1x LLY 2027-09-17 $1240 LEAPS Call (302 DTE, 0.70 Delta) near $267.00/sh ($26,700.00 max possible loss).",
+    "headline": "Buy 1x LLY 2027-02-19 $1360/$1640 Bull Call Spread (88 DTE) at $93.17 net debit ($9,317.00 max loss -> $18,683.00 max profit, 2.01:1 R:R).",
     "recommended_trade": {
-      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
-      "expiry": "2027-09-17",
-      "dte": 302,
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-02-19",
+      "dte": 88,
       "legs": [
         {
           "side": "BUY",
           "type": "CALL",
-          "strike": 1240.0,
-          "mid": 267.0,
-          "bid": 260.0,
-          "ask": 274.0,
-          "open_interest": 87
+          "strike": 1360.0,
+          "mid": 114.92,
+          "bid": 110.25,
+          "ask": 119.6,
+          "open_interest": 38
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 1640.0,
+          "mid": 21.75,
+          "bid": 20.25,
+          "ask": 23.25,
+          "open_interest": 191
         }
       ],
       "contracts": 1,
       "multiplier": 100,
-      "net_debit_per_share": 267.0,
-      "max_loss_total": 26700.0,
-      "max_loss_nav_bps": 2670.0,
-      "max_profit_total": "Uncapped upside",
-      "breakeven_at_expiry": 1507.0,
-      "breakeven_move_pct": 11.19,
-      "net_delta_dollars_per_1_move": 69.6,
-      "daily_theta_dollars": -40.09,
-      "underlying_stop_trigger": 1215.94,
-      "profit_taking_rule": "Trim half at +75%–100% contract gain or when LLY reaches $1,558.63; exit early on a weekly close below $1,215.94.",
+      "net_debit_per_share": 93.17,
+      "max_loss_total": 9317.0,
+      "max_loss_nav_bps": "1,240.4 (12.40% of $75,110.60)",
+      "max_profit_total": "$18,683.00 (2.01:1 reward-to-risk)",
+      "breakeven_at_expiry": 1453.17,
+      "breakeven_move_pct": 5.8,
+      "net_delta_dollars_per_1_move": 37.6,
+      "daily_theta_dollars": -29.12,
+      "underlying_stop_trigger": 1158.45,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($13,078.10 gain) or exit early if LLY closes below $1,158.45.",
       "scenarios": [
         {
-          "scenario": "Bear / Stop Hit ($1,215.94)",
-          "stock_price": 1215.94,
-          "stock_move_pct": -10.3,
-          "contract_value": 18835.23,
-          "net_pnl": -7864.77,
-          "return_on_risk_pct": -29.5
+          "scenario": "At or Below $1360 at Expiry",
+          "stock_price": 1158.45,
+          "stock_move_pct": -15.7,
+          "contract_value": 0.0,
+          "net_pnl": -9317.0,
+          "return_on_risk_pct": -100.0
         },
         {
-          "scenario": "Flat in 60 Days ($1,355.33)",
-          "stock_price": 1355.33,
-          "stock_move_pct": 0.0,
-          "contract_value": 27140.07,
-          "net_pnl": 440.07,
-          "return_on_risk_pct": 1.6
+          "scenario": "At Breakeven ($1,453.17)",
+          "stock_price": 1453.17,
+          "stock_move_pct": 5.8,
+          "contract_value": 9317.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
         },
         {
-          "scenario": "Base Target ($1,558.63)",
-          "stock_price": 1558.63,
-          "stock_move_pct": 15.0,
-          "contract_value": 38469.33,
-          "net_pnl": 11769.33,
-          "return_on_risk_pct": 44.1
+          "scenario": "At Short Cap / Base Target ($1640)",
+          "stock_price": 1640.0,
+          "stock_move_pct": 19.4,
+          "contract_value": 28000.0,
+          "net_pnl": 18683.0,
+          "return_on_risk_pct": 200.5
         },
         {
-          "scenario": "Bull Target ($1,792.42)",
-          "stock_price": 1792.42,
-          "stock_move_pct": 32.2,
-          "contract_value": 59311.39,
-          "net_pnl": 32611.39,
-          "return_on_risk_pct": 122.1
+          "scenario": "Bull Overshoot ($1,920.00)",
+          "stock_price": 1920.0,
+          "stock_move_pct": 39.8,
+          "contract_value": 28000.0,
+          "net_pnl": 18683.0,
+          "return_on_risk_pct": 200.5
         }
       ],
       "beginner_explainer": [
-        "Why LEAPS instead of a short-dated call: With 302 days until 2027-09-17 and 0.70 delta, this option behaves ~69% like owning 100 shares for a fraction of the cash, while losing only $40.09/day to time decay.",
-        "Worst-case wallet risk: You pay $267.00 x 100 shares x 1 = $26,700.00 upfront. Even if LLY crashed 50% overnight, you cannot lose more than $26,700.00.",
-        "Volatility check: Implied Volatility is 39.4% vs. 20-day actual stock volatility of 37.7% (IV FAIR), so you are not overpaying panic premiums."
+        "Why this spread works differently from buying shares: Selling the upper $1640 call collects $21.75/sh upfront, lowering your breakeven to $1,453.17 and protecting you against post-news volatility crush.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $1360 Call for $114.92 and simultaneously sell the $1640 Call for $21.75, paying $93.17/sh net ($9,317.00 total for 1 spread(s)). That $9,317.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-02-19), you start making money above $1,453.17 (+5.8% from $1,373.57). Anywhere at or above $1640, your $9,317.00 turns into $28,000.00 (+$18,683.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in LLY adds ~$37.60 to your spread (Net Delta), while sitting flat costs ~$29.12/day in time decay (Net Theta) — much lower than an unhedged call because the sold $1640 call decays in your favor."
       ]
     }
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (LLY)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x LLY 2027-09-17 $1240 LEAPS Call (302 DTE, 0.70 Delta) near $267.00/sh ($26,700.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Constructive Stage 2 trend trading near 50D SMA (1262.37) / 10W EMA (1303.63) support. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:LLY. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_lly_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:LLY\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:LLY\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_lly_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 302 days until 2027-09-17 and 0.70 delta, this option behaves ~69% like owning 100 shares for a fraction of the cash, while losing only $40.09/day to time decay.</p><p>Worst-case wallet risk: You pay $267.00 x 100 shares x 1 = $26,700.00 upfront. Even if LLY crashed 50% overnight, you cannot lose more than $26,700.00.</p><p>Volatility check: Implied Volatility is 39.4% vs. 20-day actual stock volatility of 37.7% (IV FAIR), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for LLY</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $1240 CALL @ $267.00 mid (bid $260.00 / ask $274.00, OI 87)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$26,700.00 (2670.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$1,507.00 (+11.19% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+69.60 per $1 move | $-40.09/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when LLY reaches $1,558.63; exit early on a weekly close below $1,215.94.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 302 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $26,700.00 Across Stock Scenarios (LLY)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($1,215.94)</td><td>$1,215.94 (-10.3%)</td><td>$18,835.23</td><td>$-7,864.77</td><td><strong>-29.5%</strong></td></tr><tr><td>Flat in 60 Days ($1,355.33)</td><td>$1,355.33 (+0.0%)</td><td>$27,140.07</td><td>$+440.07</td><td><strong>+1.6%</strong></td></tr><tr><td>Base Target ($1,558.63)</td><td>$1,558.63 (+15.0%)</td><td>$38,469.33</td><td>$+11,769.33</td><td><strong>+44.1%</strong></td></tr><tr><td>Bull Target ($1,792.42)</td><td>$1,792.42 (+32.2%)</td><td>$59,311.39</td><td>$+32,611.39</td><td><strong>+122.1%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (LLY)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x LLY 2027-02-19 $1360/$1640 Bull Call Spread (88 DTE) at $93.17 net debit ($9,317.00 max loss -&gt; $18,683.00 max profit, 2.01:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 13.24%) above rising 50D SMA (1271.62) and 30W SMA (1193.55). <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:LLY. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_lly_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:LLY\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:LLY\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_lly_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: Selling the upper $1640 call collects $21.75/sh upfront, lowering your breakeven to $1,453.17 and protecting you against post-news volatility crush.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $1360 Call for $114.92 and simultaneously sell the $1640 Call for $21.75, paying $93.17/sh net ($9,317.00 total for 1 spread(s)). That $9,317.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-02-19), you start making money above $1,453.17 (+5.8% from $1,373.57). Anywhere at or above $1640, your $9,317.00 turns into $28,000.00 (+$18,683.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in LLY adds ~$37.60 to your spread (Net Delta), while sitting flat costs ~$29.12/day in time decay (Net Theta) — much lower than an unhedged call because the sold $1640 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for LLY</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-02-19 $1360 CALL @ $114.92 mid (bid $110.25 / ask $119.60, OI 38) + SELL 2027-02-19 $1640 CALL @ $21.75 mid (bid $20.25 / ask $23.25, OI 191)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$9,317.00 (1,240.4 bps of NAV (12.40% of $75,110.60))</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$1,453.17 (+5.80% vs CMP)</td><td>Stock price required by 2027-02-19 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$18,683.00 (2.01:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+37.60 per $1 move | $-29.12/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($13,078.10 gain) or exit early if LLY closes below $1,158.45.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-02-19, 88 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $9,317.00 Across Stock Scenarios (LLY)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $1360 at Expiry</td><td>$1,158.45 (-15.7%)</td><td>$0.00</td><td>$-9,317.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($1,453.17)</td><td>$1,453.17 (+5.8%)</td><td>$9,317.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($1640)</td><td>$1,640.00 (+19.4%)</td><td>$28,000.00</td><td>$+18,683.00</td><td><strong>+200.5%</strong></td></tr><tr><td>Bull Overshoot ($1,920.00)</td><td>$1,920.00 (+39.8%)</td><td>$28,000.00</td><td>$+18,683.00</td><td><strong>+200.5%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
 }
