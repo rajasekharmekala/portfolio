@@ -1,149 +1,65 @@
 {
   "symbol": "TSM",
   "market": "US",
-  "generated_at": "2026-11-15T21:39:56+00:00",
+  "generated_at": "2026-11-23T05:56:09+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
-      "accessible": true,
-      "status": "connected",
-      "active_tabs": [
-        {
-          "title": "BE 191.99 ▼ −4.92% TheWrap",
-          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
-        }
-      ]
+      "checked": false,
+      "accessible": false,
+      "status": "unavailable",
+      "active_tabs": []
     }
   },
   "multitimeframe_chart": {
     "tv_symbol": "NYSE:TSM",
     "exchange": "NYSE",
     "company_name": "Taiwan Semiconductor Manufacturing Co., Ltd. Sponsored ADR",
-    "close": 398.73,
-    "change_1d_pct": -1.67,
-    "perf_1w_pct": 4.77,
-    "perf_1m_pct": -8.6,
-    "perf_3m_pct": -7.1,
-    "rsi_1d": 45.26,
-    "rsi_4h": 47.66,
-    "rsi_1w": 47.15,
-    "sma20": 408.86,
-    "sma50": 430.11,
-    "sma200": 403.05,
-    "sma30_weekly": 420.49,
-    "ema10_weekly": 414.34,
-    "ema20_4h": 400.29,
-    "sma50_4h": 413.34,
-    "atr14": 17.1,
-    "bb_width_pct": 20.97,
+    "close": 319.14,
+    "change_1d_pct": -9.36,
+    "perf_1w_pct": -21.7,
+    "perf_1m_pct": -26.32,
+    "perf_3m_pct": -24.55,
+    "rsi_1d": 28.33,
+    "rsi_4h": 22.47,
+    "rsi_1w": 33.48,
+    "sma20": 391.8,
+    "sma50": 422.16,
+    "sma200": 403.57,
+    "sma30_weekly": 417.72,
+    "ema10_weekly": 397.04,
+    "ema20_4h": 368.26,
+    "sma50_4h": 398.06,
+    "atr14": 19.05,
+    "bb_width_pct": 38.61,
     "pivot_s1": 375.01,
     "pivot_s2": 343.89,
     "pivot_r1": 462.36,
     "pivot_r2": 518.59,
     "high_52w": 487.47,
-    "low_52w": 266.82,
-    "dist_to_200d_pct": -1.07,
-    "major_shelf": 403.05,
+    "low_52w": 273.08,
+    "dist_to_200d_pct": -20.92,
+    "major_shelf": 273.08,
     "intraday_4h_turn": false,
-    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
-    "setup_summary": "TSM sits below its 50D SMA (430.11) after an -8.6% 1M slide near structural support (403.05). Repair remains unconfirmed. The 4H chart has not turned up (4H RSI 47.66 vs Daily RSI 45.26; close 398.73 vs 4H EMA20 400.29), so no confirmed mean-reversion window is open yet."
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (422.16) and 200D/30W floor (403.57); trend is broken."
   },
   "options_plan": {
     "symbol": "TSM",
     "market": "US",
-    "optionable": true,
-    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
-    "iv_regime": "IV_CHEAP",
-    "atm_iv_pct": 44.9,
-    "hv20_pct": 61.9,
+    "optionable": false,
+    "options_verdict": "NOT_OPTIONABLE_OR_ILLIQUID",
+    "headline": "TSM options bid-ask spreads exceed 14% or lack open interest — avoid illiquid slippage; trade equity only.",
     "open_positions_audit": [],
-    "headline": "Buy 1x TSM 2027-01-15 $390/$450 Bull Call Spread (61 DTE) at $23.73 net debit ($2,373.00 max loss -> $3,627.00 max profit, 1.53:1 R:R).",
-    "recommended_trade": {
-      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
-      "expiry": "2027-01-15",
-      "dte": 61,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 390.0,
-          "mid": 33.38,
-          "bid": 32.4,
-          "ask": 34.35,
-          "open_interest": 1931
-        },
-        {
-          "side": "SELL",
-          "type": "CALL",
-          "strike": 450.0,
-          "mid": 9.65,
-          "bid": 9.3,
-          "ask": 10.0,
-          "open_interest": 17334
-        }
-      ],
-      "contracts": 1,
-      "multiplier": 100,
-      "net_debit_per_share": 23.73,
-      "max_loss_total": 2373.0,
-      "max_loss_nav_bps": 237.3,
-      "max_profit_total": "$3,627.00 (1.53:1 reward-to-risk)",
-      "breakeven_at_expiry": 413.73,
-      "breakeven_move_pct": 3.76,
-      "net_delta_dollars_per_1_move": 32.2,
-      "daily_theta_dollars": -6.62,
-      "underlying_stop_trigger": 370.82,
-      "profit_taking_rule": "Close spread at 65%–75% of max profit ($2,538.90 gain) or exit early if TSM closes below $370.82.",
-      "scenarios": [
-        {
-          "scenario": "At or Below $390 at Expiry",
-          "stock_price": 370.82,
-          "stock_move_pct": -7.0,
-          "contract_value": 0.0,
-          "net_pnl": -2373.0,
-          "return_on_risk_pct": -100.0
-        },
-        {
-          "scenario": "At Breakeven ($413.73)",
-          "stock_price": 413.73,
-          "stock_move_pct": 3.8,
-          "contract_value": 2373.0,
-          "net_pnl": 0.0,
-          "return_on_risk_pct": 0.0
-        },
-        {
-          "scenario": "At Short Cap / Base Target ($450)",
-          "stock_price": 450.0,
-          "stock_move_pct": 12.9,
-          "contract_value": 6000.0,
-          "net_pnl": 3627.0,
-          "return_on_risk_pct": 152.8
-        },
-        {
-          "scenario": "Bull Overshoot ($531.71)",
-          "stock_price": 531.71,
-          "stock_move_pct": 33.4,
-          "contract_value": 6000.0,
-          "net_pnl": 3627.0,
-          "return_on_risk_pct": 152.8
-        }
-      ],
-      "beginner_explainer": [
-        "Why this spread fits: TSM pulled back into its $403.05 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals. Stage 2 equity rules still wait for trend repair. A defined-risk Bull Call Spread captures a rebound with capped downside.",
-        "Exact wallet math (1 contract = 100 shares): Buy the $390 Call for $33.38 and sell the $450 Call for $9.65. Net debit is $23.73/sh, or $2,373.00 total for 1 spread. That $2,373.00 is your maximum possible loss.",
-        "Breakeven and profit cap: At expiry (2027-01-15), you profit above $413.73 (+3.8% from $398.73). At or above $450, your $2,373.00 turns into $6,000.00 (+$3,627.00 net profit).",
-        "Speed and time decay: Each $1 move up adds ~$32.20 to the spread (Net Delta). Sitting flat costs ~$6.62/day in decay (Net Theta), cushioned by the short $450 call."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (TSM)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x TSM 2027-01-15 $390/$450 Bull Call Spread (61 DTE) at $23.73 net debit ($2,373.00 max loss -&gt; $3,627.00 max profit, 1.53:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Dislocated below 50D SMA (430.11) after a -8.6% 1M move near structural support (403.05), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 47.66 vs Daily RSI 45.26; close 398.73 vs 4H EMA20 400.29), so there is no confirmed mean-reversion window yet. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:TSM. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_tsm_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:TSM\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:TSM\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_tsm_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: TSM pulled back into its major $403.05 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals — even though Stage 2 equity rules wait for trend repair, a defined-risk Bull Call Spread captures a rebound with strictly capped downside.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $390 Call for $33.38 and simultaneously sell the $450 Call for $9.65, paying $23.73/sh net ($2,373.00 total for 1 spread(s)). That $2,373.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $413.73 (+3.8% from $398.73). Anywhere at or above $450, your $2,373.00 turns into $6,000.00 (+$3,627.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in TSM adds ~$32.20 to your spread (Net Delta), while sitting flat costs ~$6.62/day in time decay (Net Theta) — much lower than an unhedged call because the sold $450 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for TSM</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $390 CALL @ $33.38 mid (bid $32.40 / ask $34.35, OI 1931) + SELL 2027-01-15 $450 CALL @ $9.65 mid (bid $9.30 / ask $10.00, OI 17334)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$2,373.00 (237.3 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$413.73 (+3.76% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$3,627.00 (1.53:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+32.20 per $1 move | $-6.62/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($2,538.90 gain) or exit early if TSM closes below $370.82.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $2,373.00 Across Stock Scenarios (TSM)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $390 at Expiry</td><td>$370.82 (-7.0%)</td><td>$0.00</td><td>$-2,373.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($413.73)</td><td>$413.73 (+3.8%)</td><td>$2,373.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($450)</td><td>$450.00 (+12.9%)</td><td>$6,000.00</td><td>$+3,627.00</td><td><strong>+152.8%</strong></td></tr><tr><td>Bull Overshoot ($531.71)</td><td>$531.71 (+33.4%)</td><td>$6,000.00</td><td>$+3,627.00</td><td><strong>+152.8%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NOT_OPTIONABLE_OR_ILLIQUID\">\n<h2>Options &amp; Call-Convexity Playbook (TSM)</h2>\n<p><span class=\"verdict verdict-watch\">NOT OPTIONABLE OR ILLIQUID</span> &mdash; <strong>TSM options bid-ask spreads exceed 14% or lack open interest — avoid illiquid slippage; trade equity only.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (422.16) and 200D/30W floor (403.57); trend is broken. <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:TSM. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_tsm_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:TSM\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:TSM\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_tsm_options_chart\"});</script></div>\n</section>"
 }

@@ -2,164 +2,177 @@
   "id": "ch-8",
   "title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
   "web_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
-  "book_title": "Chapter 8: Reading the Tape — Stage 4 Markdown, 1W/1D/4H Levels & Options Skew",
-  "question": "What does SKHY's multi-timeframe price structure (1W/1D/4H), institutional volume, and options chain reveal about timing and risk?",
+  "book_title": "Chapter 8: Reading the Tape — Breached Stop, Stage 4 Crash & 1W/1D/4H Structure",
+  "question": "What does SKHY's November 20, 2026 plunge to $103.57 on 39.86M shares mean for our prior $116.28 stop, multi-timeframe levels, and options posture?",
   "epigraph": {
-    "quote": "Never argue with the 50-day moving average when a high-beta leader breaks below it on institutional distribution; let the base rebuild before committing fresh capital.",
+    "quote": "When a high-beta leader slices through your structural stop on heavy volume during a market downtrend, discipline executes the exit before hoping for a bounce.",
     "author": "Stan Weinstein Stage Analysis Principle"
   },
   "web_blocks": [
     {
       "type": "h3",
-      "title": "Weinstein Stage Classification & Multi-Timeframe Structure (1W / 1D / 4H)"
+      "title": "Stop Breach, Stage Split Disclosure & Multi-Timeframe Damage (1W / 1D / 4H)"
     },
     {
       "type": "p",
-      "html": "On November 13, 2026, SKHY closed at $131.79 (-4.30% on the day), sitting 34.06% below its $199.87 post-IPO high and just 7.85% above its $122.20 52-week low [21, 22]. Because the NASDAQ ADS listed on July 10, 2026, SKHY does not yet have 200 daily bars or 30 weekly bars for a 200D/30W moving average [4, 21, 22]. Nevertheless, every available trend gauge confirms an active Stage 4 markdown (`AVOID_STAGE4_OR_BROKEN`, `CAP_REJECTED`) [22]. Price trades 19.64% below its 50-day SMA ($164.00), 11.96% below its 10-week EMA ($149.69), and 6.77% below its 20-day SMA ($141.36), while the 4-hour chart shows no bullish turn (`intraday_4h_turn = false`, below 4H 20-EMA at $137.48 and 4H 50-SMA at $143.12) [22]."
+      "html": "On November 20, 2026, SKHY suffered a decisive technical breakdown, plunging 13.11% to close at $103.57—a 21.41% weekly drop and a 48.18% drawdown from its $199.87 post-IPO high [21, 22]. Price tagged a fresh 52-week intraday low of $102.45 and breached our prior $116.28 structural stop by 10.9% [22]. Two ledger views must be disclosed transparently. Because the NASDAQ ADS listed on July 10, 2026, it has only 95 daily bars, so <code>facts_US_2026-11-20.json</code> records <code>stage = null</code> (<code>N/A (insufficient history)</code>) [4, 22]. By contrast, <code>snapshots_US_2026-11-20.json</code> assigns <code>STAGE_4</code> (<code>AVOID_STAGE4_OR_BROKEN</code>, <code>CAP_REJECTED</code>) because price sits 34.04% below its falling 50-day SMA ($157.01) and 26.70% below its 10-week EMA ($141.30) [22]."
     },
     {
       "type": "table",
-      "caption": "SKHY Multi-Timeframe Technical & Pivot Matrix (as of 2026-11-13)",
+      "caption": "SKHY Multi-Timeframe Technical & Pivot Matrix (as of 2026-11-20)",
       "headers": [
         "Timeframe / Indicator",
-        "Current Level",
-        "Distance vs. CMP ($131.79)",
+        "Observed Level",
+        "Distance vs. CMP ($103.57)",
         "Signal & Structural Role"
       ],
       "rows": [
         [
           "Weekly (1W): 10W EMA / RSI-14",
-          "$149.69 / 40.95",
-          "-11.96%",
-          "Bearish weekly trend; first major overhead supply zone [22]."
+          "$141.30 (TV) / 34.30",
+          "-26.70%",
+          "Bearish weekly markdown; prior $149.69 EMA gave way [22]."
         ],
         [
-          "Daily (1D): 50D SMA / 20D SMA",
-          "$164.00 / $141.36",
-          "-19.64% / -6.77%",
-          "Stage 4 markdown; must reclaim $164.00 on volume to repair trend [22]."
+          "Daily (1D): 50D SMA / 20D SMA / 10D SMA",
+          "$157.01 / $136.13 / $126.58",
+          "-34.04% / -23.92% / -18.18%",
+          "50D SMA falling (-5.17 ATRs below); CAP_REJECTED Stage 4 [22]."
         ],
         [
           "Daily (1D): RSI-14 / ATR-14 / BB Width",
-          "41.72 / $10.11 / 31.09%",
-          "7.67% daily ATR",
-          "Wide Bollinger Bands; not yet oversold (<30) or tight (VCP) [22]."
+          "30.36 (facts 30.26) / $10.34 / 57.47%",
+          "9.98% daily ATR",
+          "Bollinger Bands expanded to 57.47%; extreme volatility, no VCP [22]."
         ],
         [
           "4-Hour (4H): 20-EMA / 50-SMA / RSI-14",
-          "$137.48 / $143.12 / 43.05",
-          "-4.14% / -7.92%",
-          "No 4H reversal turn (`intraday_4h_turn = false`) [22]."
+          "$124.55 / $136.92 / 25.14",
+          "-16.84% / -24.36%",
+          "Oversold 4H RSI (25.14), but <code>intraday_4h_turn = false</code> [22]."
         ],
         [
-          "Support Shelf: 52W Low / Pivot S1 / Stop",
-          "$122.20 / $121.34 / $116.28",
-          "-7.28% / -7.93% / -11.77%",
-          "Support buy zone $119.52–$123.16; hard invalidation at $116.28 [22]."
+          "Broken Levels & Monitor Shelf",
+          "$121.34 (S1) / $116.28 (Prior Stop) / $102.45 (52W Low)",
+          "0.11 ATR above $102.45",
+          "Prior $116.28 stop breached; watch band $81.58–$93.48 spans KRX parity ($81.58) to Pivot S2 ($93.48 = 158.66 - (186.52 - 121.34)) [22]."
         ],
         [
-          "Overhead Pivots: Middle / R1 / R2",
-          "$158.66 / $186.52 / $223.84",
-          "+20.39% / +41.53% / +69.85%",
-          "Key resistance zones on any Stage 4 relief rally [22]."
+          "Overhead Resistance Pivots",
+          "$158.66 (Mid) / $186.52 (R1) / $223.84 (R2)",
+          "+53.19% / +80.09% / +116.12%",
+          "Heavy trapped supply layers above $121.34–$158.66 [22]."
         ]
       ],
-      "takeaway": "SKHY is trapped below declining 4H, 1D, and 1W moving averages with 31.09% Bollinger Band width, offering no confirmed base or Stage 2 entry."
+      "takeaway": "SKHY sits 5.17 ATRs below a falling 50-day SMA ($157.01) with 57.47% Bollinger Band width and intraday_4h_turn = false, confirming a Stage 4 breakdown through the $116.28 stop."
     },
     {
       "type": "p",
-      "html": "The volatility profile underscores why chasing rebounds is hazardous [22]. An ATR(14) of $10.11 represents 7.67% of the $131.79 share price, and SKHY's 1-year beta is 3.20x [22]. At the same time, the broader U.S. market sits in a Correction regime. The S&P 500 trades below its 50-DMA with 6 distribution days in 25 sessions and 52.6% breadth above the 50-DMA, while the 10-year yield has risen to 5.10% against a 4.86% 2-year yield [21, 22]. High-beta semiconductor ADRs rarely bottom cleanly until index distribution abates and peer leaders stabilize—yet MU, WDC, STX, TSM, and NVDA are all simultaneously in Stage 4 [22]."
+      "html": "The volatility and breadth backdrop makes catching this drop hazardous [21, 22]. Daily ATR(14) expanded to $10.33–$10.34 (9.98% of the $103.57 close), alongside Finviz volatility of 8.11% weekly and 6.01% monthly (Finviz beta is not yet published at '-') [21, 22]. Meanwhile, the S&P 500 entered an official <code>Downtrend</code> regime with 10 distribution days in 25 sessions and only 38.8% of stocks above their 50-day moving averages (3 of 11 sectors above 50-DMA) [22]. Across Semiconductors, TheWrap shows just 17.0% of industry peers above their 50-day EMA and 26.0% above their 200-day EMA, as MU, WDC, STX, TSM, and NVDA all sit in Stage 4 [22]."
+    },
+    {
+      "type": "tradingview_chart"
     },
     {
       "type": "h3",
-      "title": "Institutional Flow, Short Interest & Options Volatility Skew"
+      "title": "Institutional Volume Distribution, Short Interest & Zero Options Edge"
     },
     {
       "type": "p",
-      "html": "Volume and ownership data reflect an ADR float still undergoing institutional seasoning [21, 22]. On November 13, SKHY traded 16.42M shares, or 0.72x its 30-day average of 22.80M shares—indicating steady selling pressure without a high-volume capitulation washout [22]. Finviz shows U.S. institutional ownership at just 1.55% (up 9.48% quarter-over-quarter) and short interest at 0.50% of float (36.42M shares, 1.75 days to cover) [21]. Meanwhile, across the broader market on November 13, Cboe reported a total put/call ratio of 0.85 and an equity put/call ratio of 0.63—showing hedging demand without extreme panic [27]."
+      "html": "Volume on November 20 confirms active institutional liquidation rather than quiet drifting [21, 22]. SKHY traded 39.68M–39.86M shares, or 1.69x its 30-day average of 23.65M shares (1.98x Finviz relative volume) [21, 22]. SKHY has logged 8 distribution days in the past 25 sessions and underperformed the S&P 500 by -23.69% over 63 days (-22.72% over 28 days) [22]. Finviz shows U.S. institutional ownership remains tiny at 2.55% (up 10.37% QoQ), while short interest stands at 0.53% of float (36.42M shares, 1.81 days to cover) [21]."
     },
     {
       "type": "table",
-      "caption": "Conditional Options & Call-Convexity Structure (2027-01-15 $130/$160 Bull Call Spread)",
+      "caption": "Options Desk & Call-Convexity Audit (options_snapshot.py as of 2026-11-20)",
       "headers": [
-        "Options Metric",
-        "Observed Value",
-        "Interpretation & Risk Discipline"
+        "Options Parameter",
+        "Live Batch Reading",
+        "Desk Decision & Risk Rule"
       ],
       "rows": [
         [
-          "Volatility Regime",
-          "IV_CHEAP (ATM IV 70.0% vs. HV20 101.1%)",
-          "Options are cheap relative to realized volatility, favoring debit spreads over naked calls."
+          "Open Portfolio Options",
+          "0 open SKHY contracts",
+          "No existing call or spread exposure to unwind."
         ],
         [
-          "Conditional Structure",
-          "BUY Jan 15 '27 $130C ($15.93) / SELL $160C ($5.62)",
-          "Net debit $10.31/sh ($1,031 max loss for 1 contract, 103.1 bps of NAV)."
+          "Options Verdict",
+          "NO_OPTIONS_EDGE",
+          "Price ($103.57) sits below 50D ($157.01) and 10W ($141.30) floors [22]."
         ],
         [
-          "Breakeven & Max Profit",
-          "BE $140.31 (+6.46%) | Max Profit $1,969 (1.91:1 R:R)",
-          "Max profit reached at >=$160.00; net delta +$29.40/$1, theta -$2.28/day."
+          "Setup Archetype & 4H Turn",
+          "STAGE4_BELOW_STRUCTURAL_FLOOR (turn: false)",
+          "Do not buy calls or debit spreads into falling 4H/1D moving averages."
         ],
         [
-          "Deployment Gate",
-          "STAND_ASIDE (CALENDAR_MISMATCH)",
-          "Expires Jan 15 '27—12–13 days before Jan 27–28 earnings; wait for Stage 1 base & Mar/Apr '27 expirations."
+          "Browser / Chain Feed Note",
+          "Linux container (no macOS Chrome probe)",
+          "Public options feed confirms zero actionable long-call setup."
         ]
       ],
-      "takeaway": "Although implied volatility (70.0%) sits below 20-day realized volatility (101.1%), the Jan 15, 2027 expiry precedes Q4 earnings (Jan 27–28) by 12–13 days, reinforcing standing aside until a Stage 1 base forms."
+      "takeaway": "Our automated options desk assigns NO_OPTIONS_EDGE because SKHY is broken below all structural moving averages and fails COMPOUNDER_PASS quality criteria."
     },
     {
       "type": "p",
-      "html": "The options chain confirms why patience pays: open interest is concentrated at the January 15, 2027 $130 Call (21,652 contracts) and $160 Call (3,896 contracts), creating natural gamma magnets at $130 and $160. Crucially, however, this `options_snapshot.py` conditional `2027-01-15 $130/$160` Bull Call Spread expires 12–13 days before the late-January Q4/FY2026 earnings catalyst (`2027-01-27`–`28`) [28]. That calendar mismatch—combined with 100% loss risk if SKHY breaks $122.20 toward Pivot S2 ($93.48)—reinforces standing aside on options until a Stage 1 base forms and post-earnings March/April 2027 expirations are evaluated [22]."
+      "html": "The <code>options_snapshot.py</code> batch package assigns <code>NO_OPTIONS_EDGE</code> to SKHY [22]. Unlike last week's conditional stand-aside spread, the November 20 crash below Pivot S1 ($121.34) and the $116.28 stop eliminated any defined-risk call setup [22]. With 4H RSI washed out at 25.14 and daily RSI at 30.36, oversold dead-cat bounces could test the falling 20-day SMA ($136.13) or Pivot S1 ($121.34) as overhead resistance—strictly technical bounce zones, not intrinsic value—yet buying options into Stage 4 risks 100% loss if SKHY slides toward Pivot S2 ($93.48) or KRX parity ($81.58) [22]."
     },
     {
       "type": "h3",
-      "title": "What a Valid Stage 2 Repair Sequence Would Look Like"
+      "title": "What a Valid Stage 2 Base-and-Reclaim Sequence Requires"
     },
     {
       "type": "p",
-      "html": "For SKHY to transition out of Stage 4 and earn fresh capital, three sequential tape milestones must occur [22]. First, price must hold the $119.52–$123.16 support zone and carve a higher low on the 4-hour chart (`intraday_4h_turn = true`) [22]. Second, daily Bollinger Band width must compress from 31.09% toward <15% as volume dries up and sellers exhaust supply [22]. Third, SKHY must reclaim its 50-day SMA ($164.00) on >=1.5x average volume (~34.2M shares/day) while the S&P 500 exits its Correction [22]. Until those three conditions are met, rallies into $141.36–$149.69 remain selling opportunities rather than breakouts [22]."
-    },
-    {
-      "type": "p",
-      "html": "Peer breadth confirms this patience: MU ($778.31 vs. $943.78 50D SMA), WDC ($295.65 vs. $391.72), STX ($528.29 vs. $740.61), TSM ($398.73 vs. $430.11), and NVDA ($162.85 vs. $214.65, RSI 24.86) are all in Stage 4 [22]. When the entire semiconductor complex is below its 50-day averages, individual rebounds routinely stall at the 20-day SMA ($141.36) or 10-week EMA ($149.69) before retesting lows [22]."
+      "html": "SKHY cannot re-enter our actionable pipeline until three tape milestones confirm institutional accumulation [22]. First, shares must carve a durable floor inside or above the $81.58–$93.48 monitor band (anchored from $81.58 KRX 000660.KS parity at $580.01B / 7.11B ADSs up to TradingView Classic Pivot S2 at $93.48 = 158.66 - (186.52 - 121.34)) and trigger a 4-hour reversal turn [22]. Second, daily Bollinger Band width must contract sharply from 57.47% toward below 18% over several weeks, showing supply exhaustion [22]. Third, SKHY must reclaim its 50-day SMA ($157.01) on at least 1.5x average volume (~35.5M shares/day) after the S&P 500 exits its 10-distribution-day Downtrend [22]."
     }
   ],
   "book_paragraphs": [
-    "If Chapter 7 showed us that SKHY's 3.25x forward earnings multiple hides a 5.53x price-to-book ratio and a 43.6% U.S. ADR premium, Chapter 8 asks the market's own jury—the price and volume tape—whether institutional buyers are stepping in to defend the stock. On November 13, 2026, the tape's answer is an unambiguous no.",
-    "SKHY closed at $131.79, down 4.30% on the session. That leaves the NASDAQ ADR 34.06% below its $199.87 post-IPO peak and just 7.85% above its $122.20 52-week low. Because the ADR only began trading on July 10, 2026, it has not yet accumulated the 200 daily bars or 30 weekly bars required to plot a traditional 200-day simple moving average. Even without that long-term line, however, the multi-timeframe damage across the 4-hour, daily, and weekly charts places SKHY squarely in a Weinstein Stage 4 markdown.",
-    "Let us walk down the timeframes systematically. On the weekly chart, SKHY sits 11.96% below its declining 10-week exponential moving average at $149.69, with a weekly RSI of 40.95. On the daily chart, the stock is 19.64% below its 50-day simple moving average at $164.00 and 6.77% below its 20-day simple moving average at $141.36, with a daily RSI of 41.72. Notice that an RSI of 41.72 is weak—confirming bearish momentum—yet not deeply oversold below 30, meaning there is still room for another leg down if support cracks. On the 4-hour intraday chart, price remains pinned below both the 4H 20-EMA ($137.48) and 4H 50-SMA ($143.12), with no reversal turn triggered.",
-    "Volatility is also wide and unforgiving. SKHY's 14-day Average True Range is $10.11, or 7.67% of the current share price, and its Bollinger Band width is 31.09%. In a healthy Stage 2 Volatility Contraction Pattern—the kind of tight, quiet base that precedes sustainable breakouts—volatility contracts and price hugs a rising 10-week EMA. Here, the bands are wide open, daily swings routinely exceed 4% to 7%, and the stock carries a 1-year beta of 3.20x. Over the past month, SKHY is down 12.46%, and over the past three months it has fallen 22.16%, even after a brief +2.06% weekly bounce earlier in November that failed to clear resistance.",
-    "Macro and sector context reinforce the caution. As of November 13, 2026, the S&P 500 is in an official Correction regime, trading below its 50-day moving average with six institutional distribution days over the past 25 sessions and only 52.6% of index breadth above the 50-day average. Simultaneously, the 10-year U.S. Treasury yield has pushed up to 5.10% against a 4.86% 2-year yield. Across the entire AI memory and semiconductor peer group—Micron, Western Digital, Seagate, TSMC, and NVIDIA—every single peer is in Stage 4 below its 50-day moving average. NVIDIA's daily RSI has even washed out to 24.86, while Western Digital sits at 38.52 and Seagate at 37.06. When the entire complex is liquidating together, trying to catch a falling 3.20-beta ADR in mid-air is a low-probability trade."
+    "If Chapter 7 showed that SKHY's 5.77x trailing earnings multiple still hides a 27.0% ADR premium and steep capital commitments, Chapter 8 reads the market's verdict straight off the November 20, 2026 tape. That verdict is brutal and unmistakable: our $116.28 structural stop has been breached.",
+    "On Friday, November 20, SKHY crashed 13.11% to close at $103.57, locking in a 21.41% weekly loss and a 48.18% decline from its $199.87 post-IPO high. During the session, shares hit a fresh 52-week low of $102.45 on nearly 39.86 million shares—1.69 times the 30-day average volume. When a stock slices through both Pivot S1 at $121.34 and your $116.28 hard stop on nearly double normal volume, debate ends and risk rules take over.",
+    "Let us disclose a technical data nuance cleanly before walking through the timeframes. Because SKHY only began trading on the NASDAQ on July 10, 2026, it has accumulated 95 daily bars as of November 20—short of the 200 daily bars required by our quantitative market-facts script to compute a 200-day moving average. As a result, the raw facts ledger records stage as null with insufficient history. Meanwhile, our snapshot evaluation engine classifies SKHY as STAGE_4 and CAP_REJECTED because every available moving average is rolling over.",
+    "Look at the multi-timeframe damage across the weekly, daily, and 4-hour charts. On the weekly chart, SKHY sits 26.70% below its 10-week exponential moving average at $141.30, with a weekly RSI of 34.30. On the daily chart, the stock trades 34.04% below its falling 50-day simple moving average at $157.01 and 23.92% below its 20-day moving average at $136.13, with a daily RSI of 30.36. On the 4-hour chart, price sits deep below the 4H 20-EMA at $124.55 and the 4H 50-SMA at $136.92, with an oversold 4H RSI of 25.14 and no reversal turn triggered.",
+    "Notice how violently volatility expanded during the breakdown. SKHY's 14-day Average True Range reached $10.33 to $10.34, which equals 9.98% of the $103.57 share price, while Finviz records 8.11% weekly and 6.01% monthly volatility (with Finviz beta still unpublished at '-') and Bollinger Band width blew out to 57.47%. In a constructive Volatility Contraction Pattern, price tightens into single-digit band widths near highs. Here, 57.47% band width and 9.98% daily ATR swings reflect forced liquidation.",
+    "The broader market confirms that SKHY is not falling in a vacuum. As of November 20, the S&P 500 sits in an official Downtrend regime with ten institutional distribution days over the past 25 sessions and just 38.8% of index stocks above their 50-day moving averages. Only three of eleven market sectors remain above their 50-day averages. Within Semiconductors specifically, just 17.0% of peers trade above their 50-day EMA and 26.0% above their 200-day EMA, as Micron (-13.89%), Western Digital (-12.02%), Seagate (-12.35%), TSMC (-9.36%), and NVIDIA (-14.01%) all sit in Stage 4."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION: Why Oversight Layers Fail Below the 50-Day Average",
+      "text": "Once SKHY dropped below $157.01 and then crashed through $121.34 Pivot S1, every buyer from July through October moved underwater. Those trapped holders create overhead supply on every bounce, which is why Stage 4 markdowns require time—not hope—to repair."
+    }
   ],
   "book_subsections": [
     {
-      "title": "Institutional Ownership, Volume & The $122.20 Line in the Sand",
+      "title": "Volume Liquidation, Thin U.S. Sponsorship & The Next Air Pocket",
       "paragraphs": [
-        "Examining the volume and ownership plumbing adds further clarity. On November 13, SKHY traded 16.42 million shares, which is only 0.72x its 30-day average volume of 22.80 million shares. There has been no high-volume selling climax or institutional accumulation spike to mark a durable bottom. Meanwhile, Finviz reports U.S. institutional ownership at just 1.55% (up 9.48% quarter-over-quarter) and short interest at 0.50% of float (36.42 million shares, or 1.75 days to cover). Because the U.S. ADR is still new, domestic U.S. mutual funds and pension allocators have barely built core positions, leaving the float vulnerable to fast-money momentum outflows.",
-        "This brings us to the critical support and resistance map. Immediately below $131.79 sits the $122.20 52-week low and Pivot S1 at $121.34, defining a technical support zone between $119.52 and $123.16, with a hard structural invalidation stop at $116.28. If $122.20 breaks on heavy volume, there is an air pocket down toward Pivot S2 at $93.48—which, not coincidentally, aligns closely with the ~$91–$95 Seoul KRX ordinary-share parity level! Conversely, any relief bounce faces immediate overhead supply at the 20-day SMA ($141.36) and 10-week EMA ($149.69), followed by Pivot Middle ($158.66) and the 50-day SMA ($164.00)."
+        "The ownership and volume plumbing explains why the selloff accelerated below $121.34. On November 20, 39.86 million shares changed hands, marking SKHY's eighth institutional distribution day in 25 sessions and pushing 63-day relative strength to minus 23.69% against the S&P 500. Yet Finviz shows U.S. institutional ownership at just 2.55%, with short interest at only 0.53% of float (36.42 million shares, or 1.81 days to cover).",
+        "That low U.S. institutional base means long-only pension and mutual-fund buyers have not stepped in to absorb fast-money selling. With SKHY closing at $103.57—barely above the $102.45 session low—any break below $102.45 opens a technical air pocket into our derived $81.58–$93.48 monitor band, spanning TradingView Classic Pivot S2 ($93.48, calculated as 158.66 minus 186.52 minus 121.34) down to implied Seoul KRX parity at $81.58 ($580.01 billion divided by 7.11 billion ADS equivalents).",
+        "Translate that $10.33–$10.34 daily Average True Range (9.98% of close) and 8.11% weekly / 6.01% monthly volatility (Finviz beta '-') into portfolio risk terms. With nearly 10% single-day ATR swings in an active Downtrend, SKHY lost $15.63 per share on November 20 alone—wiping out $277.65 from our small 17.764-share Schwab sleeve in six hours."
       ]
     },
     {
-      "title": "Options Skew & Why Even Cheap Volatility Demands Patience",
+      "title": "Why the Options Desk Shifted to NO_OPTIONS_EDGE",
       "paragraphs": [
-        "Interestingly, the options market shows that SKHY's 61-day at-the-money implied volatility of 70.0% sits well below its 20-day realized historical volatility of 101.1%—an IV_CHEAP regime. In theory, cheap implied volatility favors buying defined-risk debit spreads, such as the January 15, 2027 $130/$160 Bull Call Spread priced at $10.31 ($1,031 max loss for $1,969 max profit, a 1.91:1 reward-to-risk ratio with a $140.31 breakeven). Open interest clusters heavily at the $130 strike (21,652 contracts) and $160 strike (3,896 contracts), confirming where institutional dealers have anchored their positioning.",
-        "Let us walk through the exact wallet math on that conditional spread so you see both its appeal and its danger. Buying one $130 Call at the $15.93 mid-price and selling one $160 Call at $5.62 costs $10.31 per share, or $1,031.00 total. That $1,031.00 is 103.1 basis points of portfolio NAV and represents your absolute maximum loss. At expiration on January 15, 2027, the spread breaks even at $140.31 (+6.46% above today's close) and hits its maximum $3,000.00 value—a $1,969.00 net profit—anywhere at or above $160.00. Today, net delta adds $29.40 per $1 move up, while net theta costs $2.28 per day.",
-        "Yet cheap options do not override a broken Stage 4 chart—nor do they fix a critical calendar mismatch. The January 15, 2027 expiration occurs 12 to 13 days before SK hynix's expected Q4/FY2026 earnings catalyst on January 27–28, 2027, meaning the spread decays to expiration before the fundamental catalyst even arrives. Across the broader market on November 13, Cboe reported a total put/call ratio of 0.85 and an equity put/call ratio of 0.63—showing orderly hedging rather than capitulation. Deploying even a $1,031 debit spread at $131.79 while 4-hour and daily trends point straight down invites daily theta bleed into a falling knife. The disciplined playbook stands aside on options until a Stage 1 base forms and post-earnings March or April 2027 expirations are evaluated."
+        "On November 13, our options desk kept a conditional January 2027 Bull Call Spread on standby in case the $122.20 shelf held. By November 20, the options desk downgraded SKHY to NO_OPTIONS_EDGE. Our portfolio holds zero open SKHY options contracts, and initiating new calls below all falling moving averages in a CYCLICAL_CONDITIONAL stock violates our risk rules.",
+        "True, a 4-hour RSI of 25.14 and a daily RSI of 30.36 can spark violent short-covering bounces toward $121.34 Pivot S1, the $126.58 10-day SMA, or even the falling $136.13 20-day SMA—strictly technical overhead bounce ceilings rather than fundamental value. Trying to trade a dead-cat bounce in a high-volatility Stage 4 ADR (9.98% daily ATR, 8.11% weekly volatility, Finviz beta '-') during a 10-distribution-day market downtrend, however, is pure speculation. Options capital stays strictly in cash."
       ]
     },
     {
-      "title": "The Three-Step Repair Checklist Before Re-Entry",
+      "title": "The Three Milestones Required Before Re-Evaluating SKHY",
       "paragraphs": [
-        "Technical discipline is not permanent pessimism; it is conditional patience. Before SKHY can earn back a Stage 2 buy rating, we need to see three specific things happen on the tape. First, price must test and hold the $119.52 to $123.16 support shelf and print a confirmed higher low on the 4-hour chart. Second, daily Bollinger Band width must contract from its current 31.09% down below 15% as sellers exhaust themselves and volume dries up. Third, SKHY must break back above its 50-day moving average ($164.00) on at least 1.5x average volume—roughly 34.2 million shares—in a healthy market tape. Until those three boxes are checked, any bounce is guilty until proven innocent.",
-        "Let us also connect the tape to the calendar. SK hynix is expected to report Q4 and full-year 2026 results around January 27 to January 28, 2027. That means we are roughly ten weeks away from the next major fundamental catalyst—and explains why a January 15, 2027 option expiration misses the event entirely. In a Stage 4 downtrend during an S&P 500 Correction, stocks rarely go straight up into earnings without first building a proper multi-week base. If SKHY spends November and December testing $122.20 and carving a tight consolidation between $125 and $145, the January earnings report could become the catalyst that launches a true Stage 2 breakout, at which point post-earnings March or April 2027 expirations can be evaluated cleanly.",
-        "Conversely, if the broader market suffers another wave of institutional distribution and SKHY closes below $121.34 on heavy volume, waiting for a bounce would be a mistake. Respecting the $121.34 Pivot S1 level and the $116.28 invalidation stop ensures that a cyclical correction never turns into a permanent capital impairment.",
-        "Let us also put the 1-year beta of 3.20x into plain dollar terms for a portfolio manager. When the S&P 500 drops 1% during a Correction session, a 3.20-beta stock historically moves more than 3% in the same direction. On November 13, 2026, SKHY fell 4.30% on a single day, wiping out nearly two weeks of modest stabilization. With an Average True Range of $10.11 per day, normal daily noise can swing a $2,341 position by nearly $180 in a single afternoon.",
-        "That is why Stan Weinstein's stage rules are so unforgiving about Stage 4 stocks. Once price breaks below the 50-day moving average ($164.00) and the 10-week EMA ($149.69), every prior buyer between $150 and $199 sits underwater and looks for rallies to sell into. Until that overhead supply is absorbed through time and tight consolidation, the path of least resistance remains sideways to down.",
-        "To make this concrete, trace the supply shelves above $131.79. First, short-term traders who bought the early-November bounce will look to exit near the 20-day SMA at $141.36 and the 4-hour 50-SMA at $143.12. Second, swing buyers from October sit trapped near the 10-week EMA at $149.69. Third, institutional buyers from September and August sit underwater between Pivot Middle at $158.66 and the 50-day SMA at $164.00. Clearing three separate layers of trapped supply requires sustained institutional accumulation, not a one-day dead-cat bounce.",
-        "In addition, watch the broader semiconductor ETF and peer leadership. When NVIDIA sits at a 24.86 daily RSI and Micron trades 17.5% below its own 50-day moving average, active fund managers are reducing gross semiconductor exposure across the board rather than rotating into high-beta Korean ADRs. Until sector-wide distribution ends, patience remains the highest-return trade."
+        "Respecting a breached stop does not mean writing off SK hynix forever. It means refusing to hold equity capital through an uncontained Stage 4 markdown while waiting for the chart to heal. Before SKHY can earn another look after January 2027 Q4 earnings, we require three objective checkpoints on the tape.",
+        "First, selling pressure must carve a durable floor around $102.45 or inside the $81.58–$93.48 monitor band (KRX parity $81.58 to Pivot S2 $93.48) and trigger a higher low on the 4-hour chart. Second, daily Bollinger Band width must compress from 57.47% down below 18% over multiple quiet weeks. Third, price must reclaim the 50-day moving average ($157.01) on at least 1.5 times average volume—roughly 35.5 million shares per day—while S&P 500 breadth recovers above 50%. Until all three boxes are checked, the trend remains broken.",
+        "Trace the overhead resistance shelf by shelf so you see why patience pays. Any sharp rebound first meets sellers at the 4-hour 20-EMA ($124.55) and 10-day SMA ($126.58), then hits heavier supply at the 20-day SMA ($136.13) and 10-week EMA ($141.30), and finally confronts trapped autumn buyers between the 50-day SMA ($157.01) and Pivot Middle ($158.66). Clearing four layered resistance ceilings requires months of institutional accumulation, not a single oversold bounce."
+      ]
+    },
+    {
+      "title": "Why Sector Breadth Rules Out Lone-Wolf Bottom Picking",
+      "paragraphs": [
+        "Experienced stage traders rarely buy an individual semiconductor stock when its entire industry group is liquidating. On November 20, TheWrap reported that only 17.0% of Semiconductors trade above their 50-day EMA and 26.0% trade above their 200-day EMA, pulling the sector rank down to 21 despite strong trailing 12-month gains. Look across the peer board from the same afternoon: Micron fell 13.89%, Western Digital dropped 12.02%, Seagate slid 12.35%, TSMC lost 9.36%, and NVIDIA fell 14.01%.",
+        "When capital rotates out of an entire hardware leadership group at once, forced fund redemptions push even high-margin winners below their moving averages. Waiting for Micron, TSMC, and NVIDIA to stabilize alongside SKHY avoids fighting a sector-wide tide. Once broader industry breadth climbs back above 50% and the S&P 500 clears its ten distribution days, the next legitimate Stage 2 leader will announce itself cleanly on heavy volume.",
+        "To summarize the technical picture in one clear mental model: Stage 4 stocks behave like falling safes while distribution volume remains elevated. Our November 13 structural stop at $116.28 existed precisely to prevent a 13% gap-down week from turning into an open-ended capital loss. Respecting that broken stop on November 20 is the exact discipline that keeps a portfolio intact through a market Downtrend.",
+        "When the tape heals—if SKHY holds $102.45 or $93.48, shrinks Bollinger Band width below 18%, and reclaims $157.01 on 35.5 million shares a day—we will gladly re-examine the stock. Until those three milestones appear, technical structure bars any fresh capital commitment.",
+        "Remember that Stage 2 discipline protects you from the worst enemy in cyclical investing: buying too early into forced liquidation simply because the stock is already down 48% from its peak. Let the base form first."
       ]
     }
   ]

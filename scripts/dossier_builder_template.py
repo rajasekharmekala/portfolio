@@ -1485,10 +1485,22 @@ def render_10chapter_monograph_editions(
             for a in (refresh_audit.get("assumptions_checked") or [])
             if isinstance(a, dict) and a.get("disposition") in {"WEAKENED", "BROKEN", "CONFIRMED"}
         ]
+        if holding["action"] in {"EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE"} and isinstance(prior_stop, (int, float)):
+            stop_delta_html = (
+                f"Prior Structural Stop {prior_stop_txt} Breached "
+                f"({_esc(holding['action'])}; {new_stop_txt} monitor-only floor, no live stop)"
+            )
+        elif no_new_allocation:
+            stop_delta_html = (
+                f"Prior Structural Stop {prior_stop_txt} &rarr; "
+                f"<strong>{new_stop_txt} monitor-only floor (no live stop)</strong>"
+            )
+        else:
+            stop_delta_html = f"Structural Stop {prior_stop_txt} &rarr; <strong>{new_stop_txt}</strong>"
         rev_ps = [
             f"<strong>Companion Audit ({tier_mode}) — { _esc(prior_as_of) } &rarr; { _esc(as_of) }:</strong> "
             f"Verdict {_esc(prior_verdict)} &rarr; <strong>{_esc(spec['new_capital_verdict'])}</strong>; "
-            f"Structural Stop {prior_stop_txt} &rarr; <strong>{new_stop_txt}</strong>."
+            f"{stop_delta_html}."
         ]
         if changed_assumptions:
             rev_ps.append("<strong>Assumptions Re-Tested:</strong> " + " | ".join(changed_assumptions[:4]))

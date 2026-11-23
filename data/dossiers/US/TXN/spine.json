@@ -1,82 +1,88 @@
 {
   "symbol": "TXN",
   "market": "US",
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-20",
   "title": "Texas Instruments Incorporated (NASDAQ: TXN) — Institutional Investment Dossier",
-  "sector": "Technology",
+  "sector": "Electronic Technology",
   "industry": "Semiconductors",
-  "cmp": 303.6,
+  "cmp": 263.75,
+  "weinstein_stage": "STAGE_4",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "kpi_health": "PASS_WITH_WATCH",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
+  "rejection_reasons": [
+    "TREND",
+    "VALUATION"
+  ],
   "decision_basis": "ch-9",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_2",
-  "archetype": "STAGE2_SUPPORT_PULLBACK",
-  "entry_zone_low": 278.0,
-  "entry_zone_high": 286.0,
+  "conviction_tier": "TIER_0",
+  "archetype": "STAGE4_BREAKDOWN",
+  "entry_zone_low": 225.0,
+  "entry_zone_high": 240.0,
   "stop_loss": 262.0,
-  "target_base": 345.0,
-  "target_bull": 390.0,
-  "target_bear": 225.0,
-  "holding_action": "HOLD_WITH_HARD_STOP",
-  "holding_shares_to_sell": 0,
-  "holding_rationale": "Hold the 1.6917 Schwab shares ($499.98 basis, ~$295.55/sh, $513.60 value, +2.72% gain, 0.58% weight). Set a hard stop at $262.00, just below the 200-day SMA ($264.77) and 40-week EMA ($264.24). Do not chase TXN at $303.60 (1.00:1 asymmetry in a 6-distribution-day Correction). Deploy new capital only on a drop to the $278.00-$286.00 shelf (2.46:1 asymmetry).",
+  "target_base": 295.0,
+  "target_bull": 350.0,
+  "target_bear": 220.0,
+  "holding_action": "EXIT_IMMEDIATELY",
+  "holding_shares_to_sell": 6.7226,
+  "holding_rationale": "Exit all 6.7226 Schwab shares right away. The stake carries a $1,999.97 cost basis (~$297.50 per share) and a $1,773.09 value (-$226.88 or -11.34% loss, 2.36% weight). On November 20, TXN fell 7.70% on 16.82M shares (1.99x average volume) to close at $263.75. That drop broke the 50D SMA ($286.38), 30W SMA ($285.65), 200D SMA ($266.37), and 40W EMA ($264.22) in a US Downtrend. Only $1.75 (0.12x ATR14) remains above our prior $262.00 stop. Move 100% of proceeds into USD cash rather than risking a gap lower.",
   "holding_alerts": [
     {
-      "trigger": "Hard structural stop < $262.00 (daily/weekly close)",
+      "trigger": "Immediate Stage 4 exit at CMP (~$263.75)",
+      "trigger_price": 263.75,
+      "shares": 6.7226,
+      "instruction": "Sell all 6.7226 Schwab shares immediately (~$1,773.09 proceeds) into cash following the 1.99x-volume breakdown below the 200D SMA ($266.37) and 40W EMA ($264.22)."
+    },
+    {
+      "trigger": "Prior structural stop floor <= $262.00 (intraday backstop)",
       "trigger_price": 262.0,
-      "shares": 1.6917,
-      "instruction": "Exit full 1.6917-share Schwab position if TXN closes below $262.00, breaching the 200-day SMA ($264.77) and 40-week EMA ($264.24)."
+      "shares": 6.7226,
+      "instruction": "Absolute ceiling on any staged intraday execution: never allow shares to remain open below the prior $262.00 structural floor."
     },
     {
-      "trigger": "Support pullback buy zone ($278.00–$286.00)",
-      "trigger_price": 286.0,
+      "trigger": "Future Stage 2 reclaim monitor >= $286.38 (50D SMA)",
+      "trigger_price": 286.38,
       "shares": 0,
-      "instruction": "WAIT_FOR_SUPPORT entry zone for new capital (confluence of S1 $277.54, 50D SMA $283.87, 10W EMA $285.85, and 30W SMA $286.10), offering 2.46:1 reward-to-risk to $345.00 vs $262.00 stop."
-    },
-    {
-      "trigger": "Base target >= $345.00",
-      "trigger_price": 345.0,
-      "shares": 0,
-      "instruction": "Re-evaluate trailing stop upward toward $318.60 (R1) and execute LEAPS Call profit-taking discipline (+75%-100% contract gain or near $349.14)."
+      "instruction": "Do not commit new capital until TXN builds a multi-week Stage 1 base ($225.00–$240.00 conditional watch band at 8.5%–9.5% WACC; $198.28 Base DCF at 10.5% CAPM WACC) and reclaims its rising 50D/30W averages as US breadth heals."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Zero TXN shares sold (HOLD_WITH_HARD_STOP on 1.6917 shares in Schwab); new-capital allocation kept 100% in USD Cash awaiting support pullback.",
+    "capital_source": "Immediate exit proceeds from selling all 6.7226 Schwab shares of TXN (~$1,773.09 at $263.75 CMP)",
     "destinations": [
       {
         "destination_type": "CASH",
         "symbol": "USD",
         "allocation_pct": 100.0,
-        "recommendation": "Hold 100% in USD Cash / T-Bills pending TXN support retest",
-        "rationale": "Market regime is Correction (6 distribution days) and TXN at $303.60 offers only 1.00:1 asymmetry; holding cash preserves dry powder for $278.00-$286.00.",
-        "entry_condition": "Deploy into TXN on confirmed support hold in the $278.00-$286.00 zone with broad market distribution stabilizing."
+        "recommendation": "Park 100% of ~$1,773.09 exit proceeds in USD Cash / T-Bills (~4.76% 2Y yield)",
+        "rationale": "US market is in a 10-distribution-day Downtrend (38.8% > 50DMA) and Semiconductors dropped to Rank 21 (17% > 50D EMA); cash preserves capital safely.",
+        "entry_condition": "Settle sale proceeds into Schwab cash sweep / short-duration T-bills immediately."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "MSFT",
+        "symbol": "LLY",
         "allocation_pct": 0.0,
-        "target_base": 660.0,
-        "asymmetry_ratio": 1.9,
-        "recommendation": "Do not swap out of TXN; evaluate MSFT independently",
-        "rationale": "MSFT ($523.88 vs SMA50 $519.00, stop $452.41, target $660.00, 1.90:1 asymmetry) is a quality shortlist compounder, but TXN's 0.58% CORE_ALPHA starter weight does not warrant trimming.",
-        "entry_condition": "Monitor MSFT separately against its $519.00 50-day SMA shelf."
+        "target_base": 1660.0,
+        "asymmetry_ratio": 2.08,
+        "recommendation": "Evaluated Shortlist Stage 2 leader LLY ($1,347.11); held at 0% today",
+        "rationale": "LLY holds Stage 2 ($1,660.00 target, $1,282.61–$1,321.67 support, $1,158.67 stop, 2.08:1 support R:R) yet trades above its support zone inside a 10-distribution-day Downtrend.",
+        "entry_condition": "Wait for market Downtrend stabilization and an LLY pullback into $1,282.61–$1,321.67."
       },
       {
         "destination_type": "OUTSIDE",
         "symbol": "NXPI",
         "allocation_pct": 0.0,
-        "target_base": 310.0,
-        "asymmetry_ratio": 1.65,
-        "recommendation": "Pass on analog peer swap; retain superior TXN ROIC",
-        "rationale": "NXPI ($265.09 vs SMA50 $240.01, entry zone $242.42–$257.84, stop $234.07, target $310.00, 1.65:1 asymmetry) trades at a lower 14.44x Fwd P/E but delivers lower ROIC (14.63% vs TXN 22.04%) and lower asymmetry than TXN at $286 (2.46:1).",
-        "entry_condition": "Revisit only if TXN breaks $262.00 stop while NXPI holds its $242.42–$257.84 entry zone above $234.07 stop."
+        "target_base": 280.0,
+        "asymmetry_ratio": 0.0,
+        "recommendation": "Rejected analog peer swap NXPI ($235.15); 0% allocated",
+        "rationale": "NXPI trades cheaper (12.82x Fwd P/E) but also sits in STAGE_4 beneath its 50D SMA ($242.17) and 200D SMA ($248.48); never swap one Stage 4 chipmaker for another.",
+        "entry_condition": "Revisit NXPI only after it forms a Stage 1 base and reclaims $248.48 on volume."
       }
     ]
   },
-  "primer": "Texas Instruments (TXN) earns a COMPOUNDER_PASS on business quality, backed by an 80,000-product analog catalog and 22.04% ROIC. Its 300mm wafer fabs and >80% direct TI.com sales drove Q3 2026 revenue up 28% YoY to $6.06B. Gross margin hit 64.2% and TTM FCF reached $8.42B, though 194-day inventory and the $7.5B Silicon Labs deal warrant PASS_WITH_WATCH. At $303.60 (26.06x Fwd P/E) in a 6-distribution-day Correction, new capital is WAIT_FOR_SUPPORT at $278.00-$286.00 (2.46:1 asymmetry to $345.00). Existing 1.6917 Schwab shares remain HOLD_WITH_HARD_STOP at $262.00.",
+  "primer": "Texas Instruments (TXN) holds a COMPOUNDER_PASS quality rating with 22.04% ROIC and 64.2% Q3 gross margin. KPI health stays PASS_WITH_WATCH on 12% top-buyer risk, ~50% China ship-to exposure, 194-day inventory, and a $499M merger fee. At $263.75 on November 20, TXN broke below its 50-day and 200-day averages into STAGE_4 inside a 10-distribution-day US Downtrend. We assign REJECTED (TREND, VALUATION; TIER_0) for new cash and EXIT_IMMEDIATELY on our 6.7226 Schwab shares into 100% cash.",
   "citations": [
     "[1] Texas Instruments Incorporated, Form 10-K for the Fiscal Year Ended December 31, 2025 (filed February 6, 2026) — https://investor.ti.com/sec-filings",
     "[2] Texas Instruments Q3 2026 Financial Results Press Release & CFO Commentary (October 21, 2026) — https://investor.ti.com/financial-information/quarterly-results",
@@ -89,20 +95,35 @@
     "[9] Texas Instruments Dividend Increase Announcement ($1.52/share quarterly, 23rd consecutive annual increase, September 2026) — https://investor.ti.com/dividend-history",
     "[10] Texas Instruments Form 10-Q for the Quarterly Period Ended September 30, 2026 (SEC EDGAR) — https://www.sec.gov/edgar/searchedgar/companysearch",
     "[11] Silicon Laboratories Inc. Form 8-K / Merger Announcement & Proxy Disclosures (February 2026) — https://investor.silabs.com/sec-filings",
-    "[12] Finviz Institutional Quote & Fundamental Ratio Snapshot for TXN (Verified 2026-11-13) — https://finviz.com/quote.ashx?t=TXN",
-    "[13] TradingView Multi-Timeframe Technical & Moving Average Data for NASDAQ:TXN (Verified 2026-11-13) — https://www.tradingview.com/symbols/NASDAQ-TXN/",
-    "[14] TheWrap Stage 2 Sector Ranking & Semiconductor Breadth Ledger (Rank 12, Verified 2026-11-13) — https://www.tradingview.com/markets/stocks-usa/sectorandindustry-sector/",
-    "[15] US Market Regime & Distribution-Day Audit (facts_US_2026-11-13.json: Correction, 6 Distribution Days, SPY/QQQ/SOXX) — https://www.investors.com/market-trend/stock-market-today/",
-    "[16] TXN Options Desk & Public Chain Analysis (2027-09-17 $280 LEAPS Call, IV 49.6% vs HV20 57.1%) — https://finance.yahoo.com/quote/TXN/options/",
-    "[17] Charles Schwab Portfolio Position Ledger (TXN 1.6917 shares, Cost Basis $499.98, Verified 2026-11-13) — https://www.schwab.com/stocks",
-    "[18] Analog Devices, Inc. (ADI) Fundamental & Peer Comparison Snapshot — https://finviz.com/quote.ashx?t=ADI",
-    "[19] NXP Semiconductors N.V. (NXPI) Fundamental & Peer Comparison Snapshot — https://finviz.com/quote.ashx?t=NXPI",
-    "[20] Microchip Technology Incorporated (MCHP) Fundamental & Peer Comparison Snapshot — https://finviz.com/quote.ashx?t=MCHP",
-    "[21] ON Semiconductor Corporation (ON) Fundamental & Peer Comparison Snapshot — https://finviz.com/quote.ashx?t=ON",
-    "[22] STMicroelectronics N.V. (STM) Fundamental & Peer Comparison Snapshot — https://finviz.com/quote.ashx?t=STM",
+    "[12] Finviz Institutional Quote & Fundamental Ratio Snapshot for TXN (Verified 2026-11-20) — https://finviz.com/quote.ashx?t=TXN",
+    "[13] TradingView Multi-Timeframe Technical & Moving Average Data for NASDAQ:TXN (Verified 2026-11-20) — https://www.tradingview.com/symbols/NASDAQ-TXN/",
+    "[14] TheWrap Stage 2 Sector Ranking & Semiconductor Breadth Ledger (Rank 21, 17% > 50D EMA, Verified 2026-11-20) — https://www.tradingview.com/markets/stocks-usa/sectorandindustry-sector/",
+    "[15] US Market Regime & Distribution-Day Audit (facts_US_2026-11-20.json: Downtrend, 10 Distribution Days, 38.8% > 50DMA) — https://www.investors.com/market-trend/stock-market-today/",
+    "[16] TXN Options Desk & Public Chain Analysis (NO_OPTIONS_EDGE, 4H RSI 29.16, Verified 2026-11-20) — https://finance.yahoo.com/quote/TXN/options/",
+    "[17] Charles Schwab Portfolio Position Ledger (TXN 6.7226 shares, Cost Basis $1,999.97, MV $1,773.09, Verified 2026-11-20) — https://www.schwab.com/stocks",
+    "[18] Analog Devices, Inc. (ADI) Fundamental & Peer Comparison Snapshot (Verified 2026-11-20) — https://finviz.com/quote.ashx?t=ADI",
+    "[19] NXP Semiconductors N.V. (NXPI) Fundamental & Peer Comparison Snapshot (Verified 2026-11-20) — https://finviz.com/quote.ashx?t=NXPI",
+    "[20] Microchip Technology Incorporated (MCHP) Fundamental & Peer Comparison Snapshot (Verified 2026-11-20) — https://finviz.com/quote.ashx?t=MCHP",
+    "[21] ON Semiconductor Corporation (ON) Fundamental & Peer Comparison Snapshot (Verified 2026-11-20) — https://finviz.com/quote.ashx?t=ON",
+    "[22] STMicroelectronics N.V. (STM) Historical Analog Peer Reference Snapshot — https://finviz.com/quote.ashx?t=STM",
     "[23] U.S. Department of Commerce CHIPS Program Office Final Award Summary (Texas & Utah 300mm Fabs) — https://www.nist.gov/chips",
     "[24] Semiconductor Industry Association (SIA) Global Analog & Embedded Sales Trend Data — https://www.semiconductors.org/data-resources/",
     "[25] Texas Instruments Investor Relations — TI.com Direct Distribution & Inventory Management Overview — https://www.ti.com/about-ti/company/overview.html",
-    "[26] Microsoft Corporation (MSFT) Shortlist Reference Snapshot (Verified 2026-11-13) — https://finviz.com/quote.ashx?t=MSFT"
+    "[26] Eli Lilly and Company (LLY) Shortlist Reference Snapshot (Verified 2026-11-20) — https://finviz.com/quote.ashx?t=LLY",
+    "[27] Texas Instruments Incorporated, Form 10-Q for the Quarterly Period Ended September 30, 2026 (filed October 23, 2026) — https://www.sec.gov/Archives/edgar/data/97476/000009747626000169/txn-20260930.htm",
+    "[28] Texas Instruments Incorporated, Form 8-K (Closing of $2,000,000,000 Senior Notes Offering, filed November 9, 2026) — https://www.sec.gov/Archives/edgar/data/97476/000119312526453606/d180182d8k.htm",
+    "[29] Texas Instruments Incorporated, Form 424B5 Prospectus Supplement ($2.0B Senior Notes due 2028–2036, filed October 28, 2026) — https://www.sec.gov/Archives/edgar/data/97476/000119312526434821/d166196d424b5.htm",
+    "[30] Texas Instruments Incorporated, Form 8-K Exhibit 99 (Q3 2026 Financial Results & Q4 2026 Outlook, October 21, 2026) — https://www.sec.gov/Archives/edgar/data/97476/000009747626000165/q32026txnex99-eredgar.htm",
+    "[31] Texas Instruments Incorporated, Form 10-K for the Fiscal Year Ended December 31, 2025 (filed February 6, 2026) — https://www.sec.gov/Archives/edgar/data/97476/000009747626000059/txn-20251231.htm",
+    "[32] Silicon Laboratories Inc., Form 10-Q for the Quarterly Period Ended October 3, 2026 (filed November 10, 2026) — https://www.sec.gov/Archives/edgar/data/1038074/000103807426000035/slab-20261003.htm",
+    "[33] Silicon Laboratories Inc., Form 8-K (Merger Agreement Summary with Texas Instruments, filed February 4, 2026) — https://www.sec.gov/Archives/edgar/data/1038074/000119312526036712/d62897d8k.htm",
+    "[34] Texas Instruments Incorporated, Form 8-K (Appointment of CFO Julie Knecht, filed June 2, 2026) — https://www.sec.gov/Archives/edgar/data/97476/000095010326008325/dp247795_8k.htm"
+  ],
+  "gate_exceptions": [
+    "Linux Tooling Note: Live macOS Chrome probes for Robinhood and TradingView tabs are unavailable here. Same-day public TradingView, Finviz, and options-chain snapshots for 2026-11-20 fill that gap.",
+    "Stage Split Note: The facts ledger marks TXN Stage 1 (Basing) on a rising 50D SMA ($286.38 vs $272.18, 7 distribution days). The snapshot screen marks TXN STAGE_4 (CAP_REJECTED) because close ($263.75) fell below both 50D ($286.38) and 200D ($266.37) averages. This report applies the stricter STAGE_4 rule.",
+    "EXCEPTION AS-OF (TXN:fy2025_major_customer_pct): Source is the FY2025 Form 10-K dated 2026-02-06 (287 days before 2026-11-20, max 60 days). Next update is the FY2026 Form 10-K due February 2027.",
+    "EXCEPTION AS-OF (TXN:fy2025_shipped_into_china_pct): Source is the FY2025 Form 10-K dated 2026-02-06 (287 days before 2026-11-20, max 60 days). Next update is the FY2026 Form 10-K due February 2027.",
+    "EXCEPTION AS-OF (TXN:silicon_labs_reverse_termination_fee): Source is the SLAB Merger Form 8-K dated 2026-02-04 (289 days before 2026-11-20, max 60 days). Next update is the H1 2027 closing or an amended Form 8-K."
   ]
 }

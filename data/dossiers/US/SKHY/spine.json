@@ -1,81 +1,104 @@
 {
   "symbol": "SKHY",
   "market": "US",
-  "as_of": "2026-11-13",
-  "title": "SK hynix Inc. (NASDAQ: SKHY): AI Memory Monopoly vs. Stage 4 Markdown & ADR Parity",
+  "as_of": "2026-11-20",
+  "title": "SK hynix Inc. (NASDAQ: SKHY): Breached Stop, Q3 6-K Capex Surge & Stage 4 Parity Test",
   "sector": "Semiconductors / Memory",
   "business_quality_verdict": "CYCLICAL_CONDITIONAL",
-  "kpi_health": "PASS",
+  "kpi_health": "PASS_WITH_WATCH",
   "verdict": "REJECTED",
   "new_capital_verdict": "REJECTED",
   "rejection_reasons": [
-    "TREND"
+    "TREND",
+    "VALUATION"
   ],
   "archetype": "CYCLICAL_CONDITIONAL",
   "strategy_bucket": "TACTICAL_MOMENTUM",
-  "conviction_tier": "TIER_3",
-  "cmp": 131.79,
-  "entry_zone_low": 119.52,
-  "entry_zone_high": 123.16,
-  "stop_loss": 116.28,
-  "target_base": 125.0,
-  "target_bull": 186.52,
-  "target_bear": 93.48,
+  "conviction_tier": "TIER_0",
+  "cmp": 103.57,
+  "weinstein_stage": "STAGE_4",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
+  "entry_zone_low": 81.58,
+  "entry_zone_high": 93.48,
+  "stop_loss": 80.0,
+  "target_base": 73.24,
+  "target_bull": 157.01,
+  "target_bear": 60.06,
   "holding_action": "EXIT_IMMEDIATELY",
   "holding_shares_to_sell": 17.764,
-  "holding_rationale": "SKHY is in a confirmed Stage 4 markdown (-19.64% below its $164.00 50D SMA). It has 9 distribution days and -24.64% 28D RS. It also carries 3.20x beta in an S&P 500 Correction and a 43.6% ADS premium over KRX parity ($93.48). Waiting for a bounce to $141.36–$149.69 is a negative-EV gamble. Exit all 17.764 Schwab shares immediately (~$2,341.12 at $131.79).",
+  "holding_rationale": "Live close ($103.57) breached our prior $116.28 structural stop by 10.9% on 39.86M shares (1.69x avg volume). The S&P 500 sits in a 10-distribution-day Downtrend with only 38.8% breadth above the 50-DMA. Upward-only ratchet rules forbid lowering stops or averaging down into Stage 4 (CAP_REJECTED, -34.04% vs. $157.01 50D SMA). Exit all 17.764 Schwab shares (~$1,839.82) immediately. Selling removes exposure to $10.33–$10.34 daily ATR swings (9.98% of close) and 8.11% weekly / 6.01% monthly Finviz volatility (beta '-'). This protects capital from deeper downside toward $81.58 KRX parity or $60.06 cycle-compression stress.",
   "holding_alerts": [
     {
-      "trigger": "Immediate market or tight limit exit at CMP ($131.79)",
-      "trigger_price": 131.79,
+      "trigger": "Immediate market or tight limit exit at CMP ($103.57 — prior $116.28 stop breached)",
+      "trigger_price": 103.57,
       "shares": 17.764,
-      "instruction": "Sell all 17.764 Schwab shares immediately (~$2,341.12). This removes Stage 4 downside toward KRX parity ($93.48)."
+      "instruction": "Sell all 17.764 Charles Schwab shares immediately (~$1,839.82 proceeds) to prevent deeper drawdown toward Pivot S2 ($93.48), Seoul KRX parity ($81.58), or 1.87x KRX P/B stress ($60.06)."
     },
     {
-      "trigger": "Hard stop on daily close below $121.34 (Pivot S1 / $116.28 invalidation) if staged",
-      "trigger_price": 121.34,
-      "shares": 17.764,
-      "instruction": "If any shares are staged intraday, sell 100% below $121.34 (Pivot S1) or $116.28 invalidation."
-    },
-    {
-      "trigger": "Stage 2 Trend Reclaim above $164.00 (50D SMA) after Q4 Earnings (2027-01-27/28)",
-      "trigger_price": 164.0,
+      "trigger": "Stage 1 Base & 50D SMA Reclaim Watch ($157.01) after Q4 Earnings (2027-01-27/28)",
+      "trigger_price": 157.01,
       "shares": 0,
-      "instruction": "Re-evaluate SKHY only after a Stage 1 base forms and price reclaims $164.00 on >=34.2M shares/day."
+      "instruction": "Monitor only; do not re-enter until the S&P 500 exits its Downtrend, Bollinger Band width compresses below 18%, and SKHY reclaims $157.01 on >=35.5M shares/day."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Proceeds from exiting 17.764 Schwab shares of SKHY immediately (~$2,341.12 at CMP $131.79)",
+    "capital_source": "Proceeds from exiting 17.764 Schwab shares of SKHY immediately (~$1,839.82 at CMP $103.57)",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100.0,
-        "recommendation": "Park 100% in Schwab Money Market / T-Bill Sweep (~4.86% 2Y Treasury yield)",
-        "rationale": "Respects the S&P 500 Correction (6 distribution days, 52.6% breadth above 50DMA). Cuts 3.20x-beta Stage 4 risk.",
-        "entry_condition": "Settle proceeds into Schwab cash sweep upon exit."
+        "recommendation": "Park 100% in Schwab Money Market / T-Bill Sweep (~4.76% 2Y US Treasury benchmark)",
+        "rationale": "Preserves capital during the active US Downtrend (10 distribution days, 38.8% breadth > 50DMA) and cuts high-volatility Stage 4 exposure ($10.33–$10.34 ATR, 9.98% of close; 8.11% weekly / 6.01% monthly Finviz volatility, beta '-').",
+        "entry_condition": "Sweep full exit proceeds into Schwab cash upon trade settlement."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "MSFT",
+        "symbol": "MCK",
         "allocation_pct": 0.0,
-        "target_base": 0.0,
-        "asymmetry_ratio": 0.0,
-        "recommendation": "Evaluated Shortlist leader MSFT ($523.88); held at 0% today",
-        "rationale": "S&P 500 is in Correction (6 distribution days). MSFT sits below its 20D SMA ($529.39) with no fresh target in this bundle.",
-        "entry_condition": "Wait for S&P 500 Correction to end and MSFT to reclaim $529.39."
+        "target_base": 1200.0,
+        "asymmetry_ratio": 1.69,
+        "recommendation": "Evaluated Shortlist Stage 2 leader McKesson ($1,069.72); held at 0% today",
+        "rationale": "S&P 500 sits in a 10-distribution-day Downtrend and MCK trades slightly above its $985.44–$1,066.70 snapshot support zone.",
+        "entry_condition": "Wait for US Downtrend resolution and pullback into $940–$985 / $985.44–$1,066.70 support."
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "TSM",
+        "symbol": "MU",
         "allocation_pct": 0.0,
         "target_base": 0.0,
         "asymmetry_ratio": 0.0,
-        "recommendation": "Evaluated TSMC ($398.73); 0% allocated today",
-        "rationale": "TSMC sits in Stage 1 (Basing) (-7.3% below its $430.11 50D SMA) during this Correction.",
-        "entry_condition": "Do not buy in Stage 4. Wait for a reclaim of $430.11 on volume."
+        "recommendation": "Evaluated outside memory peer Micron ($594.51); held at 0% today",
+        "rationale": "Micron dropped 13.89% on Nov. 20 into STAGE_4 (AVOID_STAGE4_OR_BROKEN) far below its $912.26 50D SMA and $772.54 200D SMA.",
+        "entry_condition": "Avoid Stage 4 semiconductor liquidation; wait for Stage 1 basing and 50D reclaim."
       }
     ]
   },
+  "ch4": {
+    "stage_override": "STAGE_4 (snapshots) / N/A (facts: 95 bars < 200D)",
+    "stage_explanation": "facts_US_2026-11-20.json reports stage=None because SKHY has only 95 daily bars since its July 10, 2026 IPO (<200D history), whereas snapshots_US_2026-11-20.json classifies STAGE_4 (CAP_REJECTED) at -34.04% below its $157.01 50-day SMA and -26.70% below its $141.30 10-week EMA.",
+    "support_band_override": [
+      81.58,
+      93.48
+    ],
+    "stop_override": 80.0,
+    "stop_placement_explanation": "Prior $116.28 structural stop was breached at $103.57, forcing EXIT_IMMEDIATELY; the non-actionable $81.58–$93.48 monitor band spans KRX 000660.KS parity ($81.58 = $580.01B / 7.11B ADSs) to Classic Pivot S2 ($93.48 = 158.66 - (186.52 - 121.34)), with $80.00 as a monitor-only floor (no live stop).",
+    "dossier_verdict": "REJECTED",
+    "intro_prose": "We reconcile SKHY's November 20, 2026 breakdown across both the raw market-facts ledger and the TradingView snapshot engine, disclosing the 95-bar history split transparently.",
+    "gate_intro_prose": "We test whether the -21.41% weekly drop creates a valid support setup or confirms an uncontained Stage 4 markdown after breaching the $116.28 stop.",
+    "closing_prose": "With SKHY 5.17 ATRs below a falling 50-day SMA and S&P 500 breadth at 38.8% above 50-DMA, new capital stays REJECTED and held shares exit immediately."
+  },
+  "gate_exceptions": [
+    "Linux Environment Exception: macOS Chrome probes (stage2_scanner.py, Robinhood, TradingView tabs) are unavailable on Linux. Technicals, 1W/1D/4H bars, and options skew come from stock_snapshot.py, options_snapshot.py, and yfinance market_facts.py.",
+    "Stage Classification Split: facts_US_2026-11-20.json reports stage=None because SKHY has only 95 daily bars (<200D). snapshots_US_2026-11-20.json reports STAGE_4 (CAP_REJECTED, -34.04% vs. $157.01 50D SMA). Both ledgers are disclosed in Chapter 8.",
+    "EXCEPTION AS-OF SPOT:label_stream_concentration_fy2025 (shared US batch research ledger): as_of 2025-12-31 is 324 days old vs. 2026-11-20. Cure date: FY2026 Form 20-F expected Feb–Mar 2027.",
+    "EXCEPTION AS-OF SPOT:founder_combined_voting_power (shared US batch research ledger): as_of 2025-12-31 is 324 days old vs. 2026-11-20. Cure date: FY2026 Form 20-F expected Feb–Mar 2027.",
+    "EXCEPTION AS-OF TSM:fx_operating_margin_sensitivity (shared US batch research ledger): as_of 2025-12-31 is 324 days old vs. 2026-11-20. Cure date: FY2026 Form 20-F expected Apr 2027.",
+    "EXCEPTION AS-OF TSM:section_232_tariff_rate (shared US batch research ledger): as_of 2025-12-31 is 324 days old vs. 2026-11-20. Cure date: next U.S. tariff proclamation or Apr 2027 Form 20-F.",
+    "EXCEPTION AS-OF TXN:fy2025_major_customer_pct (shared US batch research ledger): as_of 2026-02-06 is 287 days old vs. 2026-11-20. Cure date: FY2026 Form 10-K expected Feb 2027.",
+    "EXCEPTION AS-OF TXN:fy2025_shipped_into_china_pct (shared US batch research ledger): as_of 2026-02-06 is 287 days old vs. 2026-11-20. Cure date: FY2026 Form 10-K expected Feb 2027.",
+    "EXCEPTION AS-OF TXN:silicon_labs_reverse_termination_fee (shared US batch research ledger): as_of 2026-02-04 is 289 days old vs. 2026-11-20. Cure date: transaction close or Feb 2027 Form 10-K.",
+    "EXCEPTION AS-OF VRT:fy2025_us_destination_sales (shared US batch research ledger): as_of 2025-12-31 is 324 days old vs. 2026-11-20. Cure date: FY2026 Form 10-K expected Feb 2027."
+  ],
   "decision_basis": "ch-9",
   "citations": [
     "SK hynix Inc. (2026-01), FY2025 Full-Year Financial Results Announcement — https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
@@ -98,14 +121,21 @@
     "SK hynix Newsroom, Cheongju M15X DRAM & HBM Expansion Announcement — https://news.skhynix.com/en/sk-hynix-to-produce-dram-from-m15x-in-cheongju/",
     "SK hynix Newsroom (2026), Yongin Semiconductor Cluster & Fab Facility Investment — https://news.skhynix.com/en/fab-facility-investment-2026/",
     "BigGo Finance (2026), Solidigm 2022-2025 Turnaround from Capital Impairment to Profitability — https://finance.biggo.com/news/9fa7848f-5d11-4c05-8b70-aa733dcaf05c",
-    "Finviz (2026-11-13), SK hynix Inc. (SKHY) Fundamental & Valuation Card — https://finviz.com/quote.ashx?t=SKHY",
-    "TradingView (2026-11-13), NASDAQ:SKHY Technicals & Multi-Timeframe Chart — https://www.tradingview.com/symbols/NASDAQ-SKHY/technicals/",
-    "Investing.com (2026-11-13), SK hynix Inc. (000660) KRX Historical Price & Share Data — https://www.investing.com/equities/sk-hynix-inc",
-    "TradingEconomics (2026-11-13), South Korean Won (USD/KRW) Spot Exchange Rate — https://tradingeconomics.com/south-korea/currency",
-    "CompaniesMarketCap (2026-11-13), SK hynix (000660.KS) Historical P/B Ratio & Market Cap — https://companiesmarketcap.com/sk-hynix/pb-ratio/",
+    "Finviz (2026-11-20), SK hynix Inc. (SKHY) Fundamental & Valuation Card — https://finviz.com/quote.ashx?t=SKHY",
+    "TradingView (2026-11-20), NASDAQ:SKHY Technicals & Multi-Timeframe Chart — https://www.tradingview.com/symbols/NASDAQ-SKHY/technicals/",
+    "Investing.com (2026-11-20), SK hynix Inc. (000660) KRX Historical Price & Share Data — https://www.investing.com/equities/sk-hynix-inc",
+    "TradingEconomics (2026-11-20), South Korean Won (USD/KRW) Spot Exchange Rate — https://tradingeconomics.com/south-korea/currency",
+    "CompaniesMarketCap (2026-11-20), SK hynix (000660.KS) Historical P/B Ratio & Market Cap — https://companiesmarketcap.com/sk-hynix/pb-ratio/",
     "Seeking Alpha / FnGuide (2026-11), SK hynix FY2026-FY2027 Consensus Revenue & EPS Estimates — https://seekingalpha.com/symbol/SKHY/earnings/estimates",
-    "Cboe Global Markets (2026-11-13), Daily Market Statistics: Total & Equity Put/Call Ratios — https://www.cboe.com/us/options/market_statistics/daily/",
-    "Earnings.report (2026-11), SK hynix Q4 2026 / FY2026 Expected Earnings Release Calendar — https://earnings.report/stocks/SKHY"
+    "FRED / U.S. Department of the Treasury (2026-11-19), Market Yield on U.S. Treasury Securities at 2-Year (4.76%) and 10-Year (5.04%) Constant Maturity — https://fred.stlouisfed.org/series/DGS10",
+    "Earnings.report (2026-11), SK hynix Q4 2026 / FY2026 Expected Earnings Release Calendar — https://earnings.report/stocks/SKHY",
+    "SK hynix Inc., Form 6-K (Quarterly Business Report for the Nine Months Ended September 30, 2026), filed November 16, 2026 — https://www.sec.gov/Archives/edgar/data/2120882/000119312526461909/d166755d6k.htm",
+    "SK hynix Inc., Form 6-K (Decision on Acquisition of Shares — BCPE Pangea Cayman2, Ltd. / Kioxia Holdings Corp.), filed November 20, 2026 — https://www.sec.gov/Archives/edgar/data/2120882/000119312526469266/d79768d6k.htm",
+    "SK hynix Inc., Form 6-K (Expected Size and Implementation Plan of Shareholder Returns for Fiscal Year 2026), filed October 28, 2026 — https://www.sec.gov/Archives/edgar/data/2120882/000119312526435008/d236990d6k.htm",
+    "SK hynix Inc., Form 6-K (Clarification Regarding Rumors or Media Reports on Solidigm U.S. NAND Fab), filed October 29, 2026 — https://www.sec.gov/Archives/edgar/data/2120882/000119312526436872/d183583d6k.htm",
+    "SK square Co., Ltd., Schedule 13G (Beneficial Ownership of SK hynix Inc.), filed November 13, 2026 — https://www.sec.gov/Archives/edgar/data/2120882/000119312526459140/primary_doc.xml",
+    "SK hynix Inc. / HYAICO Corporation / SHIFTIX1 LLC, Schedule 13D (Penguin Solutions, Inc.), filed November 3, 2026 — https://www.sec.gov/Archives/edgar/data/2120882/000119312526444399/primary_doc.xml",
+    "SK hynix Newsroom (2026-11-20), Building the Future AI Ecosystem Around Memory: Supercomputing 2026 Technology Showcase — https://news.skhynix.com/en/sc26-ai-hpc-exhibition/"
   ],
-  "primer": "SK hynix (NASDAQ: SKHY / KRX: 000660) has engineered a historic fundamental ascent, capturing 50%–58% of global HBM revenue, ~70% of initial HBM4 allocations, and >50% LTA coverage for 2027–2028 capacity . FY2025 revenue reached KRW 97.15T (48.6% operating margin), while Q3 2026 revenue hit KRW 104.62T (79.7% margin) with 71.84% ROIC and ~$42.96B net cash . Yet strong operations do not make a safe stock at $131.79. We assign **CYCLICAL_CONDITIONAL** business quality (`PASS` KPIs), **REJECTED** (`TREND`) for new capital, and **EXIT_IMMEDIATELY** for our 17.764 held Schwab shares ."
+  "primer": "SK hynix holds 50%–58% of global HBM sales and ~70% of early HBM4 supply. Yet Q3 2026 filings flagged 24.87% two-buyer share, 83.7% cash conversion on KRW 59.12T ending receivables (+KRW 47.44T CFO drag), and KRW 42.71T in capex pledges. On November 20, 2026, SKHY fell 13.11% to $103.57 in Stage 4 and broke our $116.28 stop. We rate quality CYCLICAL_CONDITIONAL (PASS_WITH_WATCH) and new capital REJECTED (TIER_0, TREND/VALUATION; $73.24 Base). For our 17.764 Schwab shares, we issue EXIT_IMMEDIATELY (~$1,839.82) into 100% cash."
 }

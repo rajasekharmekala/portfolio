@@ -2,171 +2,161 @@
   "id": "ch-8",
   "title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
   "epigraph": {
-    "quote": "Never buy a stock in Stage 4, no matter how cheap it looks on earnings. Let the institutions finish their selling, build a floor, and prove they want it back.",
+    "quote": "Never buy a stock in Stage 4, no matter how cheap it looks on earnings. Respect your stop when it breaks, and let institutions build a Stage 1 floor before returning.",
     "author": "Stan Weinstein, Secrets for Profiting in Bull and Bear Markets"
   },
   "web_blocks": [
     {
       "type": "p",
-      "html": "<p>Chapter 7 showed that Vertiv's valuation at $202.07 looks attractive against its 23.93% ROIC and 25.2% Q3 adjusted operating margin. The technical tape tells a starkly different story. As of November 13, 2026, VRT is locked in a <strong>Stan Weinstein Stage 4 downtrend</strong> (<code>STAGE_4</code>) [30]. That triggers a mandatory <code>CAP_REJECTED</code> / <code>AVOID_STAGE4_OR_BROKEN</code> timing gate [30]. The stock trades 25.59% below its 200-day simple moving average ($271.58) [30]. It also sits 27.19% below its 30-week SMA ($277.53), 12.64% below its 50-day SMA ($231.31), and 9.81% below its 10-week EMA ($224.06) [30].</p>"
+      "html": "<p>Chapter 7 showed that VRT at $166.24 looks cheap on forward earnings (16.75x) and implied cash flow growth (8.3%–8.5%) [48]. The November 20, 2026 tape overrides that valuation appeal completely. Both our market-facts ledger (<code>stage: 4</code>) and TradingView snapshot (<code>STAGE_4</code>) agree unanimously: VRT is in an accelerating <strong>Stage 4 markdown</strong> [47]. That triggers a hard <code>CAP_REJECTED</code> / <code>AVOID_STAGE4_OR_BROKEN</code> timing ceiling [47]. Worse, VRT sliced decisively through our prior $185.16 structural stop, dropping 10.14% from $184.99 to <strong>$166.24</strong> on 11.99M–12.02M shares (1.42x 20-day / 1.49x 30-day average volume) [47, 49].</p>"
     },
     {
       "type": "p",
-      "html": "<p>Every major trend filter across daily, weekly, and 4-hour charts confirms heavy overhead supply. On November 13, VRT fell 3.61% to $202.07 on 5.44 million shares [30]. That volume equaled 0.71x its 30-day average of 7.63 million shares [30]. The 1-week return is +10.51%, yet the 1-month (-5.90%), 3-month (-30.90%), and 6-month (-45.52%) trends remain decisively negative [30]. Meanwhile, the broader US equity market sits in a <strong>Correction</strong> below its 50-DMA [30, 35]. Market internals show 6 distribution days and a 0.85 CBOE total put/call ratio [30, 35].</p>"
+      "html": "<p>Every trend filter across weekly (1W), daily (1D), and 4-hour (4H) charts points downward [47, 49]. VRT now sits 38.95% below its 30-week SMA ($272.29), 38.79% below its 200-day SMA ($271.57), 25.46% below its 50-day SMA ($223.02), and 22.15% below its 10-week EMA ($213.55) [47, 49]. On the 4-hour chart, VRT trades well beneath its 4H 20-EMA ($191.10) and 4H 50-SMA ($204.29), with <code>intraday_4h_turn: false</code> and weak momentum across all timeframes (1W RSI 36.61, 1D RSI 35.14, 4H RSI 32.13) [49]. Meanwhile, the broader US equity market fell into a confirmed <strong>Downtrend</strong>, with just 38.8% of stocks above their 50-DMA and 10 distribution days in 25 sessions [51].</p>"
+    },
+    {
+      "type": "tradingview_chart"
     },
     {
       "type": "table",
-      "caption": "Table 8.1 — Multi-Timeframe Technical Ledger & Support/Resistance Map (As of November 13, 2026)",
+      "caption": "Table 8.1 — Multi-Timeframe (1W / 1D / 4H) Technical & Stop-Breach Ledger (November 20, 2026)",
       "headers": [
-        "Indicator / Level",
-        "Value",
-        "Distance vs. CMP ($202.07)",
-        "Technical Interpretation"
+        "Timeframe / Indicator",
+        "Observed Value (2026-11-20)",
+        "Distance vs. CMP ($166.24)",
+        "Tape & Rule Interpretation"
       ],
       "rows": [
         [
-          "Last Close (CMP)",
-          "$202.07",
+          "Session Close (CMP)",
+          "$166.24 (-10.14% 1D)",
           "—",
-          "-3.61% daily; -46.82% from $379.94 52W high [30]"
+          "Broke $184.99 prior close and breached $185.16 prior stop by -10.22% [47]."
         ],
         [
-          "10-Day / 20-Day SMA",
-          "$203.83 / $208.98",
-          "-0.86% / -3.31%",
-          "Short-term rebound stalled at 10D/20D cluster [30]"
+          "1W / 1M / 3M / 6M Perf",
+          "-17.73% / -15.01% / -34.80% (facts); -21.98% / -23.24% / -38.02% / -50.22% (TV)",
+          "-56.25% vs. $379.94 52W High",
+          "Accelerating Stage 4 liquidation; RS 63d -25.15%, RS 28d -18.61% [47, 49]."
         ],
         [
-          "50-Day SMA / 10-Week EMA",
-          "$231.31 / $224.06",
-          "-12.64% / -9.81%",
-          "Primary intermediate resistance ceiling [30]"
+          "Weekly (30W SMA / 10W EMA)",
+          "$272.29 / $213.55",
+          "-38.95% / -22.15%",
+          "Unanimous Stage 4 markdown; 40W EMA $241.50 [47, 49]."
         ],
         [
-          "200-Day SMA / 30-Week SMA",
-          "$271.58 / $277.53",
-          "-25.59% / -27.19%",
-          "Broken Stage 4 structural trend floor [30]"
+          "Daily (20D / 50D / 200D SMA)",
+          "$204.64 / $223.02 / $271.57",
+          "-18.76% / -25.46% / -38.79%",
+          "50D SMA falling ($249.56 -> $237.00 -> $223.02); -3.38 ATR below 50D [47]."
         ],
         [
-          "4H 20-EMA / 4H 50-SMA",
-          "$205.10 / $212.00",
-          "-1.48% / -4.68%",
-          "Intraday 4H turn = False; below 4H MAs [36]"
+          "4-Hour (20-EMA / 50-SMA)",
+          "$191.10 / $204.29",
+          "-13.01% / -18.63%",
+          "intraday_4h_turn = false; steep lower highs and lower lows [49]."
         ],
         [
           "RSI (1W / 1D / 4H)",
-          "41.50 / 45.05 / 47.25",
-          "Neutral-Weak",
-          "Cooling from oversold, no bullish divergence yet [36]"
+          "36.61 / 35.14 / 32.13",
+          "Weak across all frames",
+          "Selling pressure active without confirmed bullish divergence [49]."
         ],
         [
-          "14-Day ATR / BB Width",
-          "$17.25 (8.5%) / 36.06%",
-          "High Volatility",
-          "Wide daily swings; beta 2.12–2.81 [30, 36]"
+          "ATR14 / BB Width / Beta",
+          "$16.78 (10.09% of CMP) / 51.58%",
+          "Beta 2.17 (Finviz) / 2.79 (Pos)",
+          "Extreme daily swing expansion; wide stop risk [47, 48, 49, 50]."
         ],
         [
-          "Support Buy Zone (Pivot S1)",
-          "$190.88–$196.70 ($193.79)",
-          "-2.66% to -5.54%",
-          "Major shelf; must hold to prevent slide to S2 ($155.09) [30]"
+          "Volume & Distribution",
+          "11.99M–12.02M shares (1.42x–1.49x avg)",
+          "7 dist days (25d); 1.93x Finviz RelVol",
+          "Heavy institutional distribution on breakdown day [47, 48]."
         ],
         [
-          "Invalidation Hard Stop",
-          "$185.16",
-          "-8.37%",
-          "Structural breakdown level below S1 shelf [30]"
+          "Support & Pivot Shelves",
+          "Broken S1: $193.79 | Next S2: $155.09 | 52W Low: $147.82",
+          "S2 -6.71% | 52W Low -11.08%",
+          "20D/63D low $163.57; loss of $185.16 opens test of $147.82–$155.09 [47, 49]."
         ],
         [
-          "Overhead Resistance (R1 / R2)",
-          "$264.65 / $296.81",
-          "+30.97% / +46.88%",
-          "Major supply zones on any relief rally [30, 36]"
+          "Options Liquidity & Tape",
+          "NOT_OPTIONABLE_OR_ILLIQUID",
+          "Spreads >14% or low OI",
+          "options_US_batch4.json flags illiquid spreads; avoid option overlays [49]."
         ]
       ],
-      "takeaway": "VRT is pinned beneath all key moving averages with an active Stage 4 designation; $193.79 (Pivot S1) is the immediate make-or-break shelf above $185.16 invalidation."
+      "takeaway": "Both daily and weekly ledgers confirm Stage 4 markdown with zero 4-hour reversal, 1.49x breakdown volume, and a decisive breach of the prior $185.16 structural stop."
     },
     {
       "type": "p",
-      "html": "<p>Institutional flow data shows why catching this falling knife early is dangerous. Institutional ownership stands at 83.09%, but it fell 4.26% quarter-over-quarter as momentum and growth funds trimmed exposure [31]. Short interest is modest at 2.88% of float, or 11.07 million shares (1.82 days to cover) [31]. That means long-only institutional liquidation—not an aggressive short-seller campaign—drove the drawdown [31]. With a 14-day Average True Range of $17.25 (8.5% of price) and a 1-year beta of 2.81, VRT swings violently each day [36]. Buying before the 4-hour 20-EMA ($205.10) and daily 20-SMA ($208.98) curl upward invites unnecessary stop-outs [36].</p>"
+      "html": "<p>Institutional and options signals confirm that stepping in front of this slide is reckless. Institutional ownership sits at 84.08% (-1.93% QoQ) while short interest remains low at 2.88% of float (11.07 million shares, 1.78 days to cover) [48]. That proves institutions—not short sellers—are liquidating into a market Downtrend where only 1 of 11 US sectors holds its 20-DMA and 3 of 11 hold their 50-DMA [48, 51]. With 14-day ATR surging to $16.78 (10.09% of price) and Bollinger Band width widening to 51.58%, volatility is expanding rather than contracting [47, 49].</p>"
+    },
+    {
+      "type": "p",
+      "html": "<p>Our options desk check (<code>options_US_batch4.json</code>) adds one more guardrail [49]. On November 20, VRT's listed options chain triggered <code>NOT_OPTIONABLE_OR_ILLIQUID</code> because bid-ask spreads exceeded 14% or lacked sufficient open interest [49]. That rules out call-spread bottom fishing as well [49]. Notice too that the Linux execution environment could not run macOS Chrome browser automation for Robinhood or TradingView tabs, so all options and 1W/1D/4H metrics come from public chain and TradingView data feeds [49].</p>"
     },
     {
       "type": "callout",
       "kind": "warn",
-      "title": "Stage 4 Timing Gate: No Short-Term Momentum Edge Today",
+      "title": "Stop Breach & Stage 4 Mandate: Exit First, Re-Underwrite Base Later",
       "paragraphs": [
-        "Short-term momentum traders have no long setup in VRT today. A valid Stage 2 transition requires three steps. First, VRT must halt its slide in the $190.88–$196.70 support zone. Next, it must build a multi-week Stage 1 base with tightening volatility (Volatility Contraction Pattern). Finally, it must reclaim its 10-week EMA ($224.06) and 50-day SMA ($231.31) on volume at least 1.5x its 30-day average.",
-        "Until that base forms, rallies into $224–$231 remain guilty until proven innocent. Buyers who entered near the October 28 earnings spike create trapped overhead supply there."
-      ]
-    },
-    {
-      "type": "p",
-      "html": "<p>The options market reinforces this patience-first posture. In our live options snapshot, VRT's at-the-money implied volatility sits at 65.6% [36]. That compares with 20-day realized historical volatility of 112.7% (<code>IV_CHEAP</code>) [36]. Because option premiums are cheap relative to recent realized swings, a defined-risk Bull Call Debit Spread limits downside far better than buying shares outright [36]. For example, the January 15, 2027 $200/$260 spread costs ~$18.06 per share [36]. That risks $1,806 per contract for a $4,194 maximum profit, or 2.32:1 reward-to-risk [36]. Even that spread works <strong>only</strong> if VRT tests the $193.79 shelf and confirms a higher low [36].</p>"
-    },
-    {
-      "type": "p",
-      "html": "<p>Relative strength confirms the gap between Vertiv's operations and its stock tape. VRT has declined 30.90% over 3 months and 45.52% over 6 months [30]. It lagged both the S&amp;P 500 and peer Eaton as growth funds de-risked high-beta AI infrastructure holdings [30, 31]. On November 13, the CBOE equity put/call ratio stood at 0.63 and total put/call at 0.85 [35]. Broader market hedging remains elevated rather than washed out [35].</p>"
-    },
-    {
-      "type": "callout",
-      "kind": "reflection",
-      "title": "NARRATOR'S REFLECTION: Respecting the Tape When Fundamentals Shine",
-      "paragraphs": [
-        "The hardest discipline in investing is refusing to buy a great company when its chart is broken. When a stock falls 47% in six months while earnings accelerate, your instinct says the market is wrong. Sometimes it is—and sometimes a fund with a billion dollars to sell is only halfway done.",
-        "Waiting for VRT to hold $190.88–$196.70 or reclaim $224.06 costs you the first 5%–10% of a bounce. In exchange, it protects you from another 25% Stage 4 drop toward Pivot S2 ($155.09)."
+        "Because VRT closed at $166.24—more than $18.92 below our prior $185.16 hard stop—disciplined risk management leaves zero ambiguity. You cannot move a stop lower on a losing Stage 4 position to match a falling stock.",
+        "Before VRT can ever earn new capital again, it must stop making lower lows near $147.82–$155.09, form a multi-week Stage 1 base with ATR contracting well below 6%, and reclaim its 10-week EMA ($213.55) and 50-day SMA ($223.02) on >1.5x volume."
       ]
     }
   ],
   "book_paragraphs": [
-    "If Chapter 7 gave you the urge to reach for your wallet, Chapter 8 is here to gently put your hand back on the table. When you and I look at Vertiv's price chart as of Friday, November 13, 2026, the picture is unambiguous: the stock is in a Stan Weinstein Stage 4 downtrend.",
-    "Let us walk through what that means in plain English. A healthy Stage 2 uptrend looks like a staircase climbing steadily above a rising 30-week moving average, with institutions quietly accumulating shares on every pullback. Vertiv right now is the mirror opposite. At $202.07, the stock sits 25.59 percent below its 200-day moving average of $271.58, 27.19 percent below its 30-week moving average of $277.53, and 12.64 percent below its 50-day moving average of $231.31. Even on the shorter 4-hour chart, the stock remains pinned beneath its 20-period exponential average ($205.10) and 50-period average ($212.00).",
-    "Look at the institutional footprint behind that slide. Roughly 83.1 percent of Vertiv's shares are held by institutions, and that ownership dropped 4.26 percent over the past quarter. Meanwhile, short interest is just 2.88 percent of the float. That combination tells you something vital: Vertiv is not being attacked by short sellers. It is being methodically sold by long-only growth funds locking in multi-year gains and rotating out of high-beta AI infrastructure names during a broader market correction."
+    "If Chapter 7 showed you a tempting fundamental bargain at 16.75 times forward earnings, Chapter 8 delivers the cold splash of reality from the price tape. As of Friday, November 20, 2026, Vertiv is in a full Stan Weinstein Stage 4 markdown, and the stock has decisively broken the structural floor we set one week earlier.",
+    "Follow the exact sequence of numbers. One week ago, Vertiv closed at $202.07 above its $193.79 Pivot S1 shelf and our $185.16 invalidation stop. By Friday, November 20, VRT plunged 10.14 percent in a single day—falling from $184.99 to $166.24 on roughly 12 million shares, nearly 1.5 times its 30-day average volume. Both our daily market-facts ledger and our TradingView snapshot classify the stock unanimously in Stage 4.",
+    "Look across all three chart timeframes—weekly, daily, and 4-hour—and you will not find a single green shoot yet. On the weekly chart, VRT sits 38.95 percent below its 30-week average ($272.29) and 22.15 percent below its 10-week exponential average ($213.55). On the daily chart, the 50-day moving average has rolled steadily lower from $249.56 to $223.02, leaving price 25.46 percent beneath it. On the 4-hour chart, VRT remains pinned below its 20-EMA ($191.10) and 50-SMA ($204.29), with a 32.13 RSI and no intraday reversal signal."
   ],
   "book_subsections": [
     {
-      "title": "Reading the Shelves: $193.79 Support vs. $185.16 Invalidation",
+      "title": "Why Breaking $185.16 Changes Everything for Existing Shares",
       "paragraphs": [
-        "Does that mean Vertiv is headed to zero? Of course not. Even in a Stage 4 correction, stocks pause at prior institutional battlegrounds. Right below Friday's $202.07 close sits Pivot S1 support at $193.79, anchoring a technical support zone between $190.88 and $196.70. Just beneath that floor lies our structural invalidation stop at $185.16. If VRT loses $185.16 on a closing basis, the next major technical shelf does not appear until Pivot S2 down at $155.09—coincidentally right near our $145 Bear Case fundamental value.",
-        "Volatility is also wide. Vertiv's 14-day Average True Range is $17.25, meaning a routine daily swing is 8.5 percent of the stock price, and its one-year beta is 2.81. Trying to scalp a short-term momentum trade inside an 8.5 percent daily ATR while the 50-day average slopes downward above your head is a low-probability gamble."
+        "There is one rule in institutional risk management that separates survivors from blown-up accounts: never lower a structural stop on a losing Stage 4 position just because the stock looks cheap on next year's earnings. When a stock drops more than 10 percent on 1.5 times volume right through a pre-committed $185.16 floor, institutions are selling regardless of valuation.",
+        "Notice where the next support shelf sits. With Pivot S1 ($193.79) and our $185.16 stop broken, the next technical shelves are Pivot S2 down at $155.09 and the 52-week low at $147.82. Meanwhile, daily volatility has exploded: Vertiv's 14-day Average True Range is $16.78—over 10 percent of the stock price—and its Bollinger Band width has stretched to 51.58 percent. Trying to guess a bottom inside 10 percent daily swings while the broader US market sits in a confirmed Downtrend with 10 distribution days and only 38.8 percent of stocks above their 50-day average is a low-odds gamble."
       ],
       "callouts": []
     },
     {
-      "title": "The Conditional Options Lens",
+      "title": "Why Options Spreads Are Also Off the Table Today",
       "paragraphs": [
-        "There is one silver lining in the volatility data. Because VRT has swung wildly over the past month—posting a 20-day realized historical volatility of 112.7 percent—its 65.6 percent implied volatility in the options chain actually prices options cheaply relative to recent movement. Once VRT tests the $193.79 shelf and proves it can hold, a defined-risk January 2027 $200/$260 Bull Call Debit Spread costing $18.06 caps your worst-case loss at $1,806 per contract while offering $4,194 in upside if the stock rebounds toward $260.",
-        "Notice the word 'once.' Neither stock nor options should be bought while the 4-hour trend is still pointing down. In Chapter 9, we bring our Pass 1 business quality, Chapter 7 valuation, and Chapter 8 tape together into a concrete decision—both for new money and for the 23 shares already sitting in your Schwab account."
+        "A common temptation when equity charts break is reaching for cheap call options to catch a rebound. Our November 20 options-chain audit shuts that door cleanly. Spreads across Vertiv's option chain widened past 14 percent or lacked sufficient open interest, triggering an illiquid status where slippage destroys expected return.",
+        "Even if options were liquid, buying calls into a market Downtrend with falling 4-hour, daily, and weekly moving averages only turns time decay into an accomplice against your capital. In Chapter 9, we bring our Pass 1 business quality, Chapter 7 valuation, and this Chapter 8 stop breach together into a clear execution mandate."
       ],
       "callouts": [
         {
           "kind": "reflection",
           "title": "NARRATOR'S REFLECTION",
-          "text": "A Stage 4 label is not an insult to Vertiv's engineers or its 25 percent operating margins; it is a weather report on institutional money flow. You do not cancel a trip because it is raining, but you do wait for the storm to pass before launching the boat."
+          "text": "The hardest moment as a student of great businesses is honoring your stop when a high-ROIC company breaks support. You do not exit because Vertiv forgot how to build liquid cooling; you exit because a Stage 4 waterfall in a market Downtrend respects no valuation floor until forced selling finishes."
         }
       ]
     },
     {
-      "title": "What a Healthy Stage 1 Base Looks Like Before Re-Entry",
+      "title": "What Must Heal Before Vertiv Ever Re-Enters Stage 2",
       "paragraphs": [
-        "If you are wondering what must happen on the chart before Vertiv graduates from Stage 4 back into a buyable setup, picture a concrete sequence rather than a vague wish. First, selling pressure must stop making lower lows—ideally holding the $190.88–$196.70 Pivot S1 zone over several weeks while daily price swings narrow from today's 8.5 percent ATR toward 4 or 5 percent. Second, the 50-day moving average ($231.31) must stop sloping downward and flatten out.",
-        "Finally, when Vertiv breaks out above its 10-week EMA ($224.06) and 50-day SMA ($231.31) on volume at least 50 percent above average, you have objective proof that institutional buyers have returned. Until those footprints appear, patience is not missed opportunity—it is risk management."
+        "Stepping aside today does not mean forgetting Vertiv forever. It means waiting for objective evidence that institutional liquidation has ended. First, VRT must stop making lower lows somewhere around the $147.82–$155.09 shelf and carve out a multi-week Stage 1 sideways base where daily swings narrow from 10 percent back toward 4 percent.",
+        "Second, the falling 50-day moving average ($223.02) must flatten out, and the 4-hour moving averages must curl higher. Finally, VRT must break above its 10-week EMA and 50-day SMA on volume at least 50 percent above average, ideally alongside an improving US market breadth reading above 50 percent. Until those footprints appear, capital belongs safely in cash."
       ],
       "callouts": []
     },
     {
-      "title": "Why Beta 2.81 Demands Strict Position Sizing",
+      "title": "Reading Volatility Expansion: Beta 2.79 and 10.1 Percent Daily Swings",
       "paragraphs": [
-        "One number in your Schwab ledger deserves special respect: Vertiv's one-year beta of 2.81 (2.12 on Finviz's longer window). A stock with a 2.8 beta moves nearly three times as violently as the S&P 500 during risk-off episodes. That explains why a routine 3 to 5 percent market pullback can translate into a 15 percent drawdown in VRT in just a few sessions, and why an 8.5 percent daily ATR easily shakes out traders who place tight stops inside noise.",
-        "Respecting beta means two things for your portfolio: never size VRT like a sleepy utility, and never average down into a Stage 4 downtrend where volatility expands against you. Waiting for volatility to contract inside a Stage 1 base is how you turn beta from an enemy into an ally."
+        "Look closely at two risk numbers in our November 20 ledger: Vertiv's one-year beta of 2.79 in your Schwab portfolio report and its $16.78 14-day Average True Range. At $166.24, a $16.78 average daily range equals 10.09 percent of the stock's entire share price in a single trading day.",
+        "Meanwhile, Bollinger Band width expanded to 51.58 percent. When volatility widens past 50 percent while price slides beneath falling 20-day, 50-day, and 200-day averages, tight tactical stops get whipsawed and unhedged shares suffer violent gaps. Waiting for Bollinger Band width and ATR to compress inside a quiet Stage 1 base is essential before risking new capital."
       ],
       "callouts": []
     },
     {
-      "title": "Volume, Distribution Days, and Market Regime Context",
+      "title": "Market Breadth and Institutional Distribution Context",
       "paragraphs": [
-        "A stock never trades in a vacuum. On November 13, 2026, the broader US equity market registered a Correction regime—trading below its 50-day moving average with six distribution days and only 52.6 percent of stocks above their 50-day averages. In correction regimes, high-beta leaders like VRT routinely overshoot fair value on the downside as funds raise cash.",
-        "Notice, too, that Friday's 3.61 percent drop occurred on 5.44 million shares—0.71 times the 30-day average volume. Lighter volume on a down day hints that panic liquidation may be starting to tire, though it is not yet a confirmed reversal until buyers step in with above-average volume at support."
+        "Individual stocks rarely bottom sustainably while the broader market is in heavy distribution. On November 20, the S&P 500 benchmark stood in a confirmed Downtrend with 10 distribution days over the past 25 sessions. Only 38.8 percent of stocks held above their 50-day averages, and just one of eleven sectors held its 20-day average.",
+        "Vertiv logged seven distribution days of its own over those same 25 sessions, lagging the market by 25.15 percent over 63 days. With institutional ownership slipping 1.93 percent quarter-over-quarter and Friday's breakdown occurring on 1.49 times average volume, institutions are still reducing exposure rather than building a floor."
       ],
       "callouts": []
     }

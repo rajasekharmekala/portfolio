@@ -300,9 +300,13 @@ def validate_monograph_spec(
                 if dest_type in {"SHORTLIST", "OUTSIDE"} and (row.get("symbol") or pct):
                     if not isinstance(row.get("symbol"), str) or not row["symbol"].strip():
                         errors.append("a named equity redeployment requires symbol")
-                    for key in ("target_base", "asymmetry_ratio"):
-                        if not isinstance(row.get(key), (int, float)) or isinstance(row.get(key), bool):
-                            errors.append(f"named equity redeployment requires numeric {key}")
+                    if not isinstance(row.get("target_base"), (int, float)) or isinstance(row.get("target_base"), bool):
+                        errors.append("named equity redeployment requires numeric target_base")
+                    asym = row.get("asymmetry_ratio")
+                    if pct > 0 and (not isinstance(asym, (int, float)) or isinstance(asym, bool)):
+                        errors.append("named equity redeployment requires numeric asymmetry_ratio")
+                    elif asym is not None and (not isinstance(asym, (int, float)) or isinstance(asym, bool)):
+                        errors.append("named equity redeployment requires numeric or null asymmetry_ratio")
             if not REDEPLOYMENT_TYPES <= types:
                 errors.append("redeployment_plan must assess CASH, SHORTLIST, and OUTSIDE options")
             if abs(total - 100.0) > 0.01:

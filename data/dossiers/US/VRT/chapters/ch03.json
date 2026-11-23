@@ -12,7 +12,7 @@
     },
     {
       "type": "p",
-      "html": "<p>Vertiv manufactures across 30 global facilities, up from 24 in prior cycles, to speed regional delivery and limit tariff or ocean-freight shocks [19, 20, 21]. Core hubs include North American plants in Ohio and Texas, an expanded chiller campus in Tognana, Italy, and a fast-growing APAC hub in Johor, Malaysia [19, 20, 21]. Customer qualification cycles are rigorous: hyperscalers audit factory capacity, UL/CE safety certifications, and full-load test-bay performance before awarding multi-year supply frameworks [16, 20]. Under Albertazzi's commercial overhaul, long-lead contracts incorporate price-escalation clauses and progress milestone billing [7, 8]. Those terms compress the lag between input inflation and realized revenue [7, 8].</p>"
+      "html": "<p>Vertiv manufactures across global facilities in North America, EMEA, and APAC, yet its production footprint still trails its geographic revenue shift [1, 41]. Per the FY2025 Form 10-K, 58.8% ($6,013.6 million of $10,229.9 million) of net sales shipped to United States destinations, up from 51.0% in 2024 [1]. By contrast, Q3 2026 Form 10-Q Note 8 shows only 43.6% ($577.8 million of $1,324.6 million) of net property, plant, and equipment sits in the United States [41]. Because 56.4% of net fixed assets sit outside the United States, cross-border tariff policy remains an active cost friction [1, 41]. After the U.S. Supreme Court invalidated IEEPA tariffs in February 2026, U.S. Customs launched its CAPE refund portal in April and June 2026 [41]. Vertiv has not recognized any refund gain contingencies under ASC 450-30, and prior Mexico SAT customs audits ($10.1 million paid in 2024) underscore cross-border compliance risk [1, 41].</p>"
     },
     {
       "type": "waterfall",
@@ -20,53 +20,124 @@
       "unit": "M",
       "currency": "$",
       "revenue": 10229.9,
-      "cogs": 6514.7,
-      "sga": 1617.8,
-      "other_opex": 1576.9,
-      "da": 308.6,
-      "interest": 86.1,
-      "other_income": -1.7,
-      "tax": 409.1,
-      "net_income": 1332.8,
-      "cfo": 2113.8,
-      "capex": 226.4,
-      "fcf": 1887.4,
       "caption": "Audited FY2025 Revenue-to-Free-Cash-Flow Waterfall ($M)",
-      "takeaway": "On $10,229.9M of FY2025 revenue, Vertiv converted 17.9% into GAAP operating profit ($1,829.7M) and 18.4% into Free Cash Flow ($1,887.4M), as negative working capital and modest capex intensity (2.2% of sales) boosted cash conversion above 140% of net income.",
-      "notes": {
-        "revenue": "Audited FY2025 Net Sales ($8,390.6M Products + $1,839.3M Services & Spares) [1].",
-        "cogs": "Audited FY2025 Cost of Sales ($6,514.70M), yielding $3,715.20M (36.3%) Gross Profit [1].",
-        "employee_cost": "Consolidated inside Cost of Sales and SG&A in Vertiv's US GAAP Form 10-K [1].",
-        "other_opex": "FY2025 SG&A ($1,617.80M, incl. ~$442M ER&D) plus intangible amortization ($200.40M), restructuring ($54.50M), and other operating items ($12.80M), net of $308.60M D&A shown separately below [1].",
-        "ebitda": "GAAP EBITDA ($2,138.30M, 20.9% of sales) before $308.60M depreciation and amortization [1].",
-        "da": "Total FY2025 depreciation and intangible amortization ($308.60M, 3.0% of sales) [1].",
-        "ebit": "Audited FY2025 GAAP Operating Profit ($1,829.70M, 17.9% margin) [1].",
-        "interest": "Audited FY2025 net interest expense ($86.10M) [1].",
-        "other_income": "Audited FY2025 non-operating other expense (-$1.70M) [1].",
-        "tax": "Audited FY2025 income tax expense ($409.10M, 23.5% effective tax rate) [1].",
-        "pat": "Audited FY2025 GAAP Net Income ($1,332.80M, 13.0% net margin) [1].",
-        "wc": "Positive working-capital & non-cash operating cash flow adjustments (+$472.40M) [1].",
-        "cfo": "Audited FY2025 Net Cash Provided by Operating Activities ($2,113.80M, 20.7% of sales) [1].",
-        "capex": "Audited FY2025 capital expenditures including capitalized software (-$226.40M, 2.2% of sales) [1].",
-        "fcf": "Audited FY2025 Free Cash Flow ($1,887.40M, 18.4% of sales; 141.6% of GAAP Net Income) [1]."
-      }
+      "takeaway": "On $10,229.9M of FY2025 revenue, Vertiv converted 17.9% into GAAP EBIT ($1,829.7M) and 13.0% into GAAP Net Income ($1,332.8M). Adding back $308.60M of D&A (+3.02) and $472.40M of working-capital inflows (+4.62) lifted CFO to $2,113.80M (20.66) and FCF to $1,887.40M (+18.45).",
+      "lines": [
+        {
+          "label": "Gross Billed Revenue",
+          "amount": 10229.9,
+          "signed": false,
+          "note": "Audited FY2025 Net Sales ($8,390.60M Products + $1,839.30M Services &amp; Spares) [1, 2]."
+        },
+        {
+          "label": "Direct Materials / COGS (incl. Factory Payroll)",
+          "amount": -6514.7,
+          "signed": true,
+          "note": "Audited FY2025 Cost of Sales (-$6,514.70M), leaving $3,715.20M (36.3%) Gross Profit [1, 46]."
+        },
+        {
+          "label": "Other Operating Overhead (SG&A, Amort., Restruct., ex-D&A)",
+          "amount": -1576.9,
+          "signed": true,
+          "note": "FY2025 SG&amp;A ($1,617.80M, incl. ~$442M ER&amp;D), amort. ($200.40M), restructuring ($54.50M), and other ($12.80M), net of $308.60M D&amp;A shown separately [1, 23]."
+        },
+        {
+          "label": "Operating EBITDA",
+          "amount": 2138.3,
+          "signed": false,
+          "note": "GAAP EBITDA ($2,138.30M, 20.9% of sales) before $308.60M depreciation and amortization [1, 22]."
+        },
+        {
+          "label": "Depreciation & Amortization",
+          "amount": -308.6,
+          "signed": true,
+          "note": "Total FY2025 depreciation ($108.20M) and intangible amortization ($200.40M) (-$308.60M, -3.0% of sales) [22, 46]."
+        },
+        {
+          "label": "Operating EBIT",
+          "amount": 1829.7,
+          "signed": false,
+          "note": "Audited FY2025 GAAP Operating Profit ($1,829.70M, 17.9% margin) [1, 46]."
+        },
+        {
+          "label": "Finance Costs (Interest)",
+          "amount": -86.1,
+          "signed": true,
+          "note": "Audited FY2025 net interest expense (-$86.10M) [1, 46]."
+        },
+        {
+          "label": "Other Non-Operating Expense",
+          "amount": -1.7,
+          "signed": true,
+          "note": "Audited FY2025 non-operating other expense (-$1.70M) [1, 46]."
+        },
+        {
+          "label": "Profit Before Tax (PBT)",
+          "amount": 1741.9,
+          "signed": false,
+          "note": "Audited FY2025 pre-tax income ($1,741.90M, 17.0% of sales) [1, 46]."
+        },
+        {
+          "label": "Income Tax",
+          "amount": -409.1,
+          "signed": true,
+          "note": "Audited FY2025 income tax expense (-$409.10M, 23.5% effective tax rate) [1, 46]."
+        },
+        {
+          "label": "Reported Profit After Tax (PAT)",
+          "amount": 1332.8,
+          "signed": false,
+          "note": "Audited FY2025 GAAP Net Income ($1,332.80M, 13.0% net margin) [1, 46]."
+        },
+        {
+          "label": "Depreciation & Amortization Add-Back",
+          "amount": 308.6,
+          "signed": true,
+          "note": "Non-cash FY2025 depreciation ($108.20M) and intangible amortization ($200.40M) added back to net income (+$308.60M, +3.0% of sales) [22, 46]."
+        },
+        {
+          "label": "Working Capital & Non-Cash Bridge",
+          "amount": 472.4,
+          "signed": true,
+          "note": "Positive working-capital &amp; non-cash operating cash flow adjustments (+$472.40M); $1,332.80M + $308.60M + $472.40M = $2,113.80M CFO [22, 46]."
+        },
+        {
+          "label": "Cash Flow from Operations (CFO)",
+          "amount": 2113.8,
+          "signed": false,
+          "note": "Audited FY2025 Net Cash Provided by Operating Activities ($2,113.80M, 20.7% of sales) [22, 46]."
+        },
+        {
+          "label": "Capital Expenditures (Capex)",
+          "amount": -226.4,
+          "signed": true,
+          "note": "Audited FY2025 capital expenditures including capitalized software (-$226.40M, -2.2% of sales) [22, 46]."
+        },
+        {
+          "label": "Free Cash Flow (FCF)",
+          "amount": 1887.4,
+          "signed": true,
+          "note": "Audited FY2025 Free Cash Flow ($1,887.40M, 18.4% of sales; 141.6% of GAAP Net Income) [22, 46]."
+        }
+      ]
     },
     {
       "type": "p",
-      "html": "<p>Every line of the FY2025 waterfall reconciles directly to Vertiv's audited Form 10-K. Out of $10,229.90 million in net sales, cost of sales absorbs $6,514.70 million (63.7%), leaving $3,715.20 million in gross profit (36.3%) [1]. Total operating expenses of $1,885.50 million comprise $1,617.80 million in selling, general, and administrative expense (including roughly $442 million in engineering, research, and development), $200.40 million in intangible amortization, $54.50 million in restructuring, and $12.80 million in other operating items [1]. Separating $308.60 million of total depreciation and amortization yields $2,138.30 million in GAAP EBITDA (20.9%) and $1,829.70 million in GAAP operating profit (17.9%), which after $86.10 million in net interest, $1.70 million in other expense, and $409.10 million in taxes leaves $1,332.80 million in GAAP net income (13.0%) [1].</p>"
+      "html": "<p>Every line of the FY2025 waterfall reconciles directly to Vertiv's audited Form 10-K. Out of $10,229.90 million in net sales, cost of sales absorbs $6,514.70 million (63.7%), leaving $3,715.20 million in gross profit (36.3%) [1]. Operating expenses ex-D&amp;A take $1,576.90 million (15.4%), yielding $2,138.30 million in GAAP EBITDA (20.9%) and—after $308.60 million of D&amp;A—$1,829.70 million in GAAP operating profit (17.9%) [1, 22, 23]. Subtracting $86.10 million in net interest, $1.70 million in other expense, and $409.10 million in taxes leaves $1,332.80 million in GAAP net income (13.03 per $100) [1]. Adding back non-cash D&amp;A of $308.60 million (+3.02 per $100) plus $472.40 million (+4.62 per $100) in working-capital and non-cash bridges equals $2,113.80 million in CFO (20.66 per $100, within $0.01 rounding) [22, 46]. Deducting $226.40 million in capex (-2.21) delivers $1,887.40 million in FCF (+18.45) [22, 46].</p>"
     },
     {
       "type": "p",
-      "html": "<p>Two working-capital forces explain why FY2025 free cash flow ($1,887.4 million) beat GAAP net income ($1,332.8 million) by over $550 million [22, 23]. First, Vertiv focuses on assembly and engineering rather than heavy fabrication [22, 23]. Capital spending stayed at just $226.4 million (2.2% of sales), well below $308.6 million in depreciation and amortization [22, 23]. Second, hyperscale buyers pay upfront deposits and milestones on custom power and cooling orders [24, 25]. Deferred revenue reached $3.63 billion by H1 2026, offsetting $3,109.0 million in year-end 2025 receivables [24, 25].</p>"
+      "html": "<p>Cash conversion stayed strong in 2026 even as capital intensity nearly doubled [41, 42]. In 9M 2026, operating cash flow hit $2,660.6 million while capital expenditures including software jumped to $430.3 million ($425.0 million PP&amp;E plus $5.3 million software) [41]. That lifts capex intensity to 4.2% of 9M 2026 sales, versus 2.2% ($226.4 million) in FY2025, with full-year 2026 capex guided to $575 million–$600 million (~4.0% of revenue) [1, 41, 42]. Meanwhile, customer prepayments pushed current deferred revenue to $4,120.5 million ($4,245.7 million including $125.2 million noncurrent) at September 30, 2026, up from $1,814.7 million current at year-end 2025 [41].</p>"
     },
     {
       "type": "p",
-      "html": "<p>Inventory discipline has also improved markedly since the 2022 supply-chain crunch [25]. Year-end 2025 inventory stood at $1,456.5 million against $6,514.7 million in cost of sales (~81.6 days of inventory) [22, 25]. Accounts payable reached $1,756.4 million (~98.4 days payable) [22, 25]. Combined with 110.9 days of year-end receivables ($3,109.0 million), Vertiv's net cash conversion cycle sits near 94 days [24, 25]. That is a manageable figure for custom-engineered industrial gear, while customer prepayments fund factory expansion without straining the balance sheet [24, 25].</p>"
+      "html": "<p>Working-capital absorption requires fresh scrutiny after rapid 2026 inventory growth [41]. Between December 31, 2025 and September 30, 2026, inventories more than doubled (+125.8%) from $1,456.5 million to $3,288.4 million [41]. Raw materials surged 143.6% to $1,658.1 million, while finished products rose 120.5% to $1,224.7 million [41]. Accounts receivable also grew 40.9% YTD to $4,379.7 million (92.7 days on Q3 annualized sales), cushioned by $3,244.7 million in accounts payable and $4,120.5 million in current deferred revenue [41].</p>"
     }
   ],
   "book_paragraphs": [
     "Understanding Vertiv's economics requires looking past the glamour of artificial intelligence chips and examining how heavy electrical and thermal hardware actually moves from a factory floor to a customer site. Vertiv runs two distinct sales channels. For the world's largest hyperscalers and colocation landlords, its own solution architects sit at the design table 12 to 24 months before a concrete slab is poured. For mid-sized enterprises, hospitals, and regional telecoms, it relies on distributors, value-added resellers, and OEM partners.",
-    "Behind those channels sits a global manufacturing network of 30 plants, expanded from 24 just a few years ago. Rather than shipping bulky chillers and switchgear across oceans—a mistake that crushed margins in 2022—Vertiv builds close to demand: Ohio and Texas for North America, Tognana in Italy for Europe, and Johor in Malaysia for Asia Pacific. Hyperscalers put these factories through grueling qualification audits, testing equipment under full thermal and electrical load before signing multi-year supply agreements."
+    "Behind those channels sits a global manufacturing network of 30 plants, expanded from 24 just a few years ago. Rather than shipping bulky chillers and switchgear across oceans—a mistake that crushed margins in 2022—Vertiv builds close to demand: Ohio and Texas for North America, Tognana in Italy for Europe, and Johor in Malaysia for Asia Pacific. Hyperscalers put these factories through grueling qualification audits, testing equipment under full thermal and electrical load before signing multi-year supply agreements.",
+    "Two 2026 updates sharpen this unit-economics picture. First, capital spending stepped up from 2.2 percent of sales in FY2025. Nine-month 2026 capex including software jumped to 430.3 million dollars, or 4.2 percent of revenue. Vertiv is expanding capacity while inventories more than doubled to 3.29 billion dollars. Second, tariff risk remains meaningful. In FY2025, 58.8 percent of revenue shipped to the United States. Yet only 43.6 percent of net plant and equipment sat inside US borders at September 30, 2026."
   ],
   "book_subsections": [
     {
@@ -97,7 +168,8 @@
       "title": "Tracing Every Dollar From Factory Floor to Free Cash Flow",
       "paragraphs": [
         "Look closely at the FY2025 $100 unit-economics waterfall in the web edition and notice how lean Vertiv's physical capital intensity remains. Out of every $100 of net sales ($10,229.9 million total), cost of goods sold consumes $63.70, leaving $36.30 of gross profit. Selling, general, and administrative expenses—including roughly $442 million of engineering, research, and development—take $15.80, while intangible amortization, restructuring, and other items absorb $2.60, leaving $17.90 of GAAP operating profit.",
-        "From there, net interest takes just $0.80 thanks to rapid deleveraging, and taxes take $4.00, yielding $13.00 of GAAP net income. Now watch the cash conversion magic: adding back $3.00 of non-cash depreciation and amortization alongside net working-capital inflows lifts operating cash flow to $20.70 per $100 of sales, while capital expenditures require only $2.20. That leaves $18.50 of free cash flow on every $100 of revenue—a cash engine powerful enough to self-fund capacity expansion and bolt-on acquisitions simultaneously."
+        "From there, net interest takes just $0.80 thanks to rapid deleveraging, and taxes take $4.00, yielding $13.00 of GAAP net income. Now watch the cash conversion magic: adding back $3.00 of non-cash depreciation and amortization alongside net working-capital inflows lifts operating cash flow to $20.70 per $100 of sales, while capital expenditures require only $2.20. That leaves $18.50 of free cash flow on every $100 of revenue—a cash engine powerful enough to self-fund capacity expansion and bolt-on acquisitions simultaneously.",
+        "In 2026, that asset-light capex ratio moved higher. Nine-month 2026 capital spending including software reached 430.3 million dollars, or 4.2 percent of sales. Full-year capex is guided near 4.0 percent. Current deferred revenue expanded to 4.12 billion dollars by September 30, 2026. Yet inventories doubled to 3.29 billion dollars, and IEEPA tariff refund claims remain unrecognized until collected."
       ],
       "callouts": []
     },

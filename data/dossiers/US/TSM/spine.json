@@ -1,74 +1,92 @@
 {
   "symbol": "TSM",
   "market": "US",
-  "as_of": "2026-11-13",
-  "title": "Taiwan Semiconductor Manufacturing Company (TSM): Pure-Play Foundry Monopoly in a Stage 4 / Stage 1 Basing Pullback",
+  "as_of": "2026-11-20",
+  "title": "Taiwan Semiconductor Manufacturing Company (TSM): Compounder Monopoly Under a Stage 4 Stop Breach",
   "sector": "Technology",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
+  "rejection_reasons": [
+    "TREND"
+  ],
   "decision_basis": "ch-9",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "kpi_health": "PASS_WITH_WATCH",
   "archetype": "Leading-Edge Foundry Monopoly",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_2",
-  "cmp": 398.73,
-  "entry_zone_low": 369.38,
-  "entry_zone_high": 380.64,
+  "conviction_tier": "TIER_0",
+  "cmp": 318.71,
+  "weinstein_stage": "STAGE_4 (snapshots_US) / Stage 1 (facts_US)",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
+  "scenario_horizon": "12-month",
+  "entry_zone_low": 290.0,
+  "entry_zone_high": 318.48,
   "stop_loss": 348.0,
-  "target_base": 485.0,
-  "target_bull": 580.0,
-  "target_bear": 290.0,
-  "holding_action": "HOLD_WITH_HARD_STOP",
-  "holding_shares_to_sell": 0,
-  "holding_rationale": "Hold all 2.3344 shares in Schwab (1.05% NAV, cost basis $428.36/sh, -$69.16 unrealized P&L) with an automated hard stop at $348.00 (below the $351.19 20D/63D swing low). Business quality earns COMPOUNDER_PASS (32.67% ROIC, +41.2% Q3 YoY revenue), so selling 1% below the 200-DMA ($403.05) is premature. Breaking $348.00 invalidates support and triggers a full exit.",
+  "target_base": 425.0,
+  "target_bull": 550.0,
+  "target_bear": 250.0,
+  "holding_action": "EXIT_IMMEDIATELY",
+  "holding_shares_to_sell": 2.3344,
+  "holding_rationale": "Exit all 2.3344 shares in Schwab (0.99% NAV, cost basis $999.96 / $428.36/sh, MV $744.00, unrealized P&L -$255.96) immediately at market. Live close $318.71 ($319.14 TV) breached the locked $348.00 structural stop on 2.38x volume inside a Stage 4 breakdown (-24.5% vs 50D SMA $422.15, -21.0% vs 200D SMA $403.56) and US Downtrend (10 distribution days, 38.8% > 50DMA). Upward-only stop ratchet forbids lowering stops on losers.",
   "holding_alerts": [
     {
-      "trigger": "Hard Stop Invalidation (<$348.00)",
-      "trigger_price": 348.0,
+      "trigger": "Prior $348.00 Stop Breached at $318.71 — Immediate Full Exit",
+      "trigger_price": 318.71,
       "shares": 2.3344,
-      "instruction": "Exit all 2.3344 shares of TSM at market if daily/weekly close breaks below $348.00 invalidation stop (below $351.19 swing low)."
+      "instruction": "Exit all 2.3344 shares of TSM in Schwab at market open (~$744.00 proceeds) because $318.71 closed below the locked $348.00 stop; park 100% of proceeds in Cash."
     },
     {
-      "trigger": "Stage 2 Reclaim (>$420.49 on >1.2x volume)",
-      "trigger_price": 420.49,
+      "trigger": "Future Stage 2 Reclaim Gate (>$417.72 30W SMA on >1.2x volume)",
+      "trigger_price": 417.72,
       "shares": 0,
-      "instruction": "Hold existing 2.3344 shares and re-evaluate for ACCUMULATE_ON_DIP if TSM reclaims its 30-week SMA ($420.49) on institutional volume."
+      "instruction": "Re-underwrite TSM for fresh entry only after a multi-week Stage 1 base above $266.82–$318.48 and a confirmed Stage 2 breakout above the 200D ($403.56) and 30W ($417.72) averages."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "If $348.00 hard stop triggers on 2.3344 TSM shares (~$812.37 proceeds), redeploy under US Correction regime.",
+    "capital_source": "Immediate market exit of 2.3344 Schwab TSM shares at ~$318.71 (~$744.00 proceeds) following breach of the $348.00 structural stop under US Downtrend.",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100,
-        "recommendation": "Park 100% of stopped proceeds in Cash / T-Bills",
-        "rationale": "US market is in Correction (below 50-DMA, 6 distribution days, 52.6% breadth > 50-DMA); preserving cash avoids rotating into another Stage 4 drawdown.",
-        "entry_condition": "Immediate upon $348.00 stop execution."
+        "recommendation": "Park 100% of exited proceeds in Cash / T-Bills",
+        "rationale": "US market is in formal Downtrend (10 distribution days in 25 sessions, 38.8% > 50-DMA, 17.0% of semiconductors > 50D EMA); preserving cash avoids rotating into correlated drawdown risk.",
+        "entry_condition": "Immediate upon liquidation of 2.3344 TSM shares."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "MSFT",
+        "symbol": "LLY",
         "allocation_pct": 0,
-        "target_base": 660.0,
-        "asymmetry_ratio": 1.9,
-        "recommendation": "Benchmark Stage 2 Shortlist Leader (0% immediate; watch for deployment)",
-        "rationale": "MSFT ($523.88) is in confirmed Stage 2 (IMMEDIATE_BUY, +1.66% above 10W EMA, 34.22% ROE, 1.90:1 asymmetry to $660.00 base target vs $452.41 stop).",
-        "entry_condition": "Deploy only if broader market distribution days subside and MSFT holds $507.61–$526.78."
+        "target_base": 1660.0,
+        "asymmetry_ratio": 2.08,
+        "recommendation": "Stage 2 Shortlist Leader Watchlist (0% immediate in US Downtrend)",
+        "rationale": "LLY ($1,347.11) holds Stage 2 (BUY_AT_CMP_NO_FOMO, 86.09% ROE, +45.5% YoY rev growth, 2.08:1 support asymmetry from $1,321.67 to $1,660.00 vs $1,158.67 stop), sidelined solely due to Downtrend cash preservation.",
+        "entry_condition": "Deploy only if US Downtrend distribution pressure eases and LLY holds $1,282.61–$1,321.67."
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "ASML",
+        "symbol": "AAPL",
         "allocation_pct": 0,
-        "target_base": 2379.18,
-        "asymmetry_ratio": 16.81,
-        "recommendation": "Monopoly Peer Watchlist (0% immediate; Stage 4)",
-        "rationale": "ASML ($1,495.16) shares TSM's semiconductor monopoly economics (65.98% ROE) with Street target $2,379.18, but is also in Stage 4 (-10.97% below 30W SMA) at 36.83x trailing P/E.",
-        "entry_condition": "Wait for ASML Stage 1 base or hold at $1,421.35–$1,464.63 support above $1,410.42 stop."
+        "target_base": 348.52,
+        "asymmetry_ratio": 0.22,
+        "recommendation": "Outside Stage 2 Benchmark Rejected on Upside Asymmetry (0% allocation)",
+        "rationale": "AAPL ($342.56) sits in Stage 2 (142.26% ROE) but trades at 38.17x trailing P/E with only $5.96 upside to Street target $348.52 vs $315.89 stop (0.22:1 asymmetry, failing our 1.5:1 hurdle).",
+        "entry_condition": "Rejected unless pullback or earnings expansion restores >=1.5:1 reward-to-risk."
       }
     ]
   },
-  "primer": "TSMC (NYSE: TSM) is the dominant pure-play foundry, making 3nm/2nm logic and CoWoS packaging for AI and mobile leaders. Fundamentals earn COMPOUNDER_PASS (Q3 2026 sales +41.2% YoY, 66.4% gross margin, 32.67% ROIC, 17.26x forward P/E). At $398.73, the market-facts ledger classifies TSM as Stage 1 Basing (-1.07% vs 200-DMA, above $351.19 low), while TradingView flags STAGE_4 (-5.17% below 30W SMA, -7.30% below 50D SMA). Both feeds agree TSM is not a buyable Stage 2 uptrend (CAP_REJECTED). New capital waits for $369.38–$380.64 support (3.20:1 asymmetry to $485 base target) while existing 2.3344 shares hold with a $348.00 stop.",
+  "primer": "TSMC (NYSE: TSM) earns a price-blind COMPOUNDER_PASS rating as October 2026 sales jumped 59.7% YoY and net cash reached $93.64B. On November 20, 2026, TSM fell 9.48% to $318.71 on 2.38x volume and broke our $348.00 stop inside a US Downtrend. Although facts_US tags Stage 1 at the $318.48 low, snapshots_US confirms STAGE_4 (CAP_REJECTED) far below its 50-day ($422.15) and 200-day ($403.56) averages. We exit all 2.3344 Schwab shares (~$744.00) into 100% Cash and rate new capital REJECTED (TIER_0) until a new base forms.",
+  "gate_exceptions": [
+    "Linux environment note: WeasyPrint PDF compilation and macOS Chrome tools for stage2_scanner.py, Robinhood, and TheWrap do not run in this Linux container. All price, chart, and options data come from public yfinance, TradingView, Finviz, and SEC EDGAR feeds as of 2026-11-20.",
+    "Technical feed stage split: facts_US_2026-11-20.json tags Stage 1 (Basing) because $318.71 sits at the $318.48 63-day low. Snapshots_US_2026-11-20.json tags STAGE_4 (CAP_REJECTED) because price sits 24.5% below the falling 50D SMA ($422.15) and 21.0% below the 200D SMA ($403.56) on 2.38x volume. We enforce the stricter STAGE_4 gate.",
+    "EXCEPTION AS-OF TSM:fx_operating_margin_sensitivity: 2025-12-31 is 324 days older than 2026-11-20 (max 60 days). TSMC reports annual FX sensitivity only in its Form 20-F. Cure date: FY2026 Form 20-F in April 2027.",
+    "EXCEPTION AS-OF TSM:section_232_tariff_rate: 2025-12-31 is 324 days older than 2026-11-20 (max 60 days). This statutory rate comes from TSMC's FY2025 Form 20-F risk factors. Cure date: FY2026 Form 20-F in April 2027 or a new USTR filing.",
+    "EXCEPTION AS-OF SPOT:label_stream_concentration_fy2025: 2025-12-31 is 324 days older than 2026-11-20 (max 60 days). Shared batch ledger item; SPOT reports label share yearly. Cure date: FY2026 Form 20-F in Feb 2027.",
+    "EXCEPTION AS-OF SPOT:founder_combined_voting_power: 2025-12-31 is 324 days older than 2026-11-20 (max 60 days). Shared batch ledger item; SPOT discloses voting control yearly. Cure date: FY2026 Form 20-F in Feb 2027.",
+    "EXCEPTION AS-OF TXN:fy2025_major_customer_pct: 2026-02-06 is 287 days older than 2026-11-20 (max 60 days). Shared batch ledger item; TXN reports top customer share yearly. Cure date: FY2026 Form 10-K in Feb 2027.",
+    "EXCEPTION AS-OF TXN:fy2025_shipped_into_china_pct: 2026-02-06 is 287 days older than 2026-11-20 (max 60 days). Shared batch ledger item; TXN reports China ship-to share yearly. Cure date: FY2026 Form 10-K in Feb 2027.",
+    "EXCEPTION AS-OF TXN:silicon_labs_reverse_termination_fee: 2026-02-04 is 289 days older than 2026-11-20 (max 60 days). Shared batch ledger item from the merger filing. Cure date: deal close or FY2026 Form 10-K in Feb 2027.",
+    "EXCEPTION AS-OF VRT:fy2025_us_destination_sales: 2025-12-31 is 324 days older than 2026-11-20 (max 60 days). Shared batch ledger item; VRT reports U.S. sales mix yearly. Cure date: FY2026 Form 10-K in Feb 2027."
+  ],
   "citations": [
     {
       "id": 1,
@@ -212,59 +230,108 @@
     },
     {
       "id": 21,
-      "citation": "TradingView & Finviz Market Snapshot for NYSE:TSM as of 2026-11-13 ($398.73 close, Market Cap $2,068.01B Finviz / $1,844.69B TV, EV $1,976.82B, P/E 25.66x, Forward P/E 17.26x, PEG 0.42, Street Target $554.22)",
-      "url": "https://www.tradingview.com/symbols/NYSE-TSM/technicals/",
+      "citation": "TSMC Q3 2026 Consolidated Financial Statements & Independent Auditors' Review Report (Form 6-K, Nov 13, 2026): Note 6 Cash, Note 11/13/28 Grants & VIS Gain, Note 20a/c Geography, Packaging & Customer Temporary Receipts, Note 27/33 Profit-Sharing & Commitments",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm",
       "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:39:51-08:00"
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 22,
-      "citation": "StockAnalysis & Macrotrends Historical Valuation Multiples for TSM (2020–2026 P/E 11.2x–31.1x and EV/EBITDA 7.2x–17.0x bands)",
-      "url": "https://stockanalysis.com/stocks/tsm/statistics/",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:41:26-08:00"
+      "citation": "TSMC October 2026 Monthly Revenue, Parent Guarantees & FX Derivatives Report (Form 6-K, Nov 10, 2026): NT$586.89B Oct Revenue (+59.7% YoY), NT$441.20B FX Forwards & NT$326.95B Arizona Guarantees",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000796/tsm-revenue20261110.htm",
+      "as_of": "2026-11-10",
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 23,
-      "citation": "FullRatio & CompaniesMarketCap Historical P/E Ratio Archive for Taiwan Semiconductor Manufacturing (2020–2026)",
-      "url": "https://fullratio.com/pe-ratio/tsm",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:41:26-08:00"
+      "citation": "TSMC Board of Directors Resolutions (Form 6-K, Nov 10, 2026): NT$9.0 Q3 Cash Dividend (+28.6% QoQ), US$40.93B Capex Appropriations & Up to US$1.5B Anthropic/OpenAI/VC AI Equity Investments",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000797/tsm-boardx202611xx.htm",
+      "as_of": "2026-11-10",
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 24,
-      "citation": "TSMC Investor Relations Financial Calendar (Expected Q4 2026 Earnings Release Window: Mid-January 2027)",
-      "url": "https://investor.tsmc.com/",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:41:28-08:00"
+      "citation": "Sony Semiconductor Solutions & TSMC Definitive Agreement for Kumamoto Image Sensor JV (Form 6-K, Aug 11, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000539/sonysemiconductorsolutions.htm",
+      "as_of": "2026-08-11",
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 25,
-      "citation": "CBOE Market Statistics & YCharts Daily Put/Call Ratios for November 13, 2026 (Total 0.85, Equity 0.63, Index 0.96)",
-      "url": "https://www.cboe.com/us/options/market_statistics/daily/",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:41:30-08:00"
+      "citation": "TSMC Statement Regarding Unauthorized Access of Employee Personal Data via Third-Party Cloud Vendor (Form 6-K, Nov 12, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000800/a20261112statementregardin.htm",
+      "as_of": "2026-11-12",
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 26,
-      "citation": "TradingView Peer Technical & Valuation Snapshots as of 2026-11-13: UMC, GFS, INTC, ASML, and MSFT",
-      "url": "https://www.tradingview.com/chart/?symbol=NYSE%3ATSM",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:39:51-08:00"
+      "citation": "TSMC Month-End Insider Shareholdings & Zero Pledge Report (Form 6-K, Oct 22, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000728/tsm-monthend6kx20261022.htm",
+      "as_of": "2026-10-22",
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 27,
-      "citation": "Morningstar & GuruFocus Historical EV/EBITDA Valuation Bands for TSMC (10-Year Median ~10–11x vs Current AI Cycle)",
-      "url": "https://www.gurufocus.com/term/ev2ebitda/TSM",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:41:26-08:00"
+      "citation": "SEC Form 4 Filing — Director Ursula M. Burns ADS Acquisition (Nov 18, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000803/xslF345X06/wk-form4_1794999834.xml",
+      "as_of": "2026-11-18",
+      "retrieved_at": "2026-11-23T05:57:00Z"
     },
     {
       "id": 28,
-      "citation": "Yahoo Finance & US Treasury Yield Curve Data as of 2026-11-12/13 (US2Y 4.86%, US10Y 5.10%, +24 bps spread)",
+      "citation": "TradingView Technical & Multi-Timeframe Market Snapshot for NYSE:TSM as of 2026-11-20 ($319.14 TV / $318.71 Finviz close, 50D SMA $422.16, 200D SMA $403.57, 30W SMA $417.72, Daily RSI 28.33, 4H RSI 22.47, Strong Sell -0.65)",
+      "url": "https://www.tradingview.com/symbols/NYSE-TSM/technicals/",
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T05:56:09Z"
+    },
+    {
+      "id": 29,
+      "citation": "Finviz Fundamental & Valuation Card for NYSE:TSM as of 2026-11-20 ($318.71 close, Market Cap $1,652.98B, EV $1,561.80B, Trailing P/E 20.51x, Forward P/E 13.81x, PEG 0.34, P/FCF 33.14x, EV/EBITDA 13.70x, ROIC 32.67%, ROE 41.98%, Target $554.22)",
+      "url": "https://finviz.com/quote.ashx?t=TSM",
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T05:55:57Z"
+    },
+    {
+      "id": 30,
+      "citation": "StockAnalysis & Macrotrends Historical Valuation Multiples for TSM (2020–2026 P/E 11.2x–31.1x and EV/EBITDA 7.2x–17.0x bands)",
+      "url": "https://stockanalysis.com/stocks/tsm/statistics/",
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T06:06:00Z"
+    },
+    {
+      "id": 31,
+      "citation": "FullRatio & GuruFocus Historical P/E and EV/EBITDA Valuation Bands for TSMC (2020–2026)",
+      "url": "https://fullratio.com/pe-ratio/tsm",
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T06:06:00Z"
+    },
+    {
+      "id": 32,
+      "citation": "TSMC Investor Relations Financial Calendar (Q3 Dividend Ex-Date Dec 10, 2026; Expected Q4 2026 Earnings Release Window: Mid-January 2027)",
+      "url": "https://investor.tsmc.com/",
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T06:06:00Z"
+    },
+    {
+      "id": 33,
+      "citation": "TradingView Peer Technical & Valuation Snapshots as of 2026-11-20: UMC, INTC, ASX, NVDA, TXN, MSFT, LLY, and AAPL",
+      "url": "https://www.tradingview.com/chart/?symbol=NYSE%3ATSM",
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T05:55:57Z"
+    },
+    {
+      "id": 34,
+      "citation": "U.S. Department of the Treasury Daily Treasury Par Yield Curve Rates as of 2026-11-19 (US2Y 4.76%, US10Y 5.04%, +28 bps 2s10s spread)",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+      "as_of": "2026-11-19",
+      "retrieved_at": "2026-11-23T05:55:53Z"
+    },
+    {
+      "id": 35,
+      "citation": "Yahoo Finance Market Ledger for NYSE:TSM as of 2026-11-20 ($318.71 close, -9.48% 1D, Volume 37.17M at 2.38x 20D avg, ATR14 $19.06, 20D/63D Low $318.48)",
       "url": "https://finance.yahoo.com/quote/TSM/",
-      "as_of": "2026-11-13",
-      "retrieved_at": "2026-11-15T13:39:08-08:00"
+      "as_of": "2026-11-20",
+      "retrieved_at": "2026-11-23T05:55:53Z"
     }
   ]
 }

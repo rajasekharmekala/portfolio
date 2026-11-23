@@ -1,32 +1,39 @@
 {
   "id": "ch-8",
   "web_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
-  "book_title": "Chapter 8: Reading the Tape—Why a Monopoly Is in Stage 4",
-  "question": "Why is TSM in Weinstein Stage 4 despite 41%+ revenue growth, and what exact technical repair is required before new capital can enter?",
+  "book_title": "Chapter 8: Reading the Tape—Stop Breached in Stage 4 Liquidation",
+  "question": "Why did TSM break its $348.00 structural stop on 2.38x volume, how do our two technical feeds diverge, and what exact base-and-reclaim proof is needed before re-entering?",
   "epigraph": {
-    "quote": "Never argue with the tape. A great company in a Stage 4 downtrend is simply a future opportunity waiting for supply to exhaust itself.",
+    "quote": "The first rule of surviving a Stage 4 break is never to argue with a violated stop. Great companies can still lose 30% to 50% when institutional supply overwhelms the tape.",
     "author": "Stan Weinstein, Stage Analysis"
   },
   "web_blocks": [
     {
       "type": "h3",
-      "text": "Weekly & Daily Structure: Two-Feed Stage Reconciliation (CAP_REJECTED)"
+      "title": "Weekly & Daily Breakdown: Stop Breached & Two-Feed Stage Split (CAP_REJECTED)"
     },
     {
       "type": "p",
-      "html": "Despite strong Q3 2026 results ($46.72B sales, +41.2% YoY) and October sales (+59.7% YoY), the tape on November 13, 2026 is weak [5, 6]. TSM closed at $398.73 (-1.67% 1D, +4.77% 1W, -8.60% 1M, -7.10% 3M, +37.89% 1Y), sitting -18.20% off its $487.47 52-week high ($266.82 low) [21]. Our two technical feeds frame this pullback differently: the deterministic `facts_US_2026-11-13.json` ledger classifies TSM as <strong>Stage 1 (Basing)</strong> because $398.73 sits within -1.07% of its 200-DMA ($403.05) and holds above its $351.19 20D/63D swing low. Conversely, the TradingView/Stage 2 snapshot screen (`snapshots_US_2026-11-13.json`) flags <strong>STAGE_4 / AVOID_STAGE4_OR_BROKEN</strong> because $398.73 trails the 30-week SMA ($420.49) by -5.17% and the 50-day SMA ($430.11) by -7.30% [21]. Both feeds agree on the key gate: TSM is <strong>not</strong> in a buyable Stage 2 uptrend today (`CAP_REJECTED`) [21]."
+      "html": "On November 20, 2026, TSM suffered a decisive technical breakdown despite record October revenue (+59.7% YoY) [22, 35]. The stock plunged -9.48% in a single day from $352.09 to close at <strong>$318.71</strong> ($319.14 on TradingView), finishing -20.07% for the week and -34.62% off its $487.47 52-week high [28, 35]. Most critically, closing at $318.71 <strong>shattered our prior $348.00 structural stop</strong> by $29.29 (-8.42%). Heavy institutional liquidation drove the move, with 37.17 million shares trading—<strong>2.38x</strong> the 20-day average (2.36x the 30-day average of 15.78M) [28, 35]."
     },
     {
       "type": "p",
-      "html": "Every intermediate moving average sits overhead as resistance. The $398.73 close trails the 30-week SMA ($420.49) by -5.17%, the 10-week EMA ($414.34) by -3.77%, and the 50-day SMA ($430.11) by -7.30% [21]. It also sits -1.07% below the 200-day SMA ($403.05), clinging just above the 40-week EMA ($394.74) and 200-day EMA ($395.02) [21]. TradingView's technical rating is -0.29 (Sell), driven by a -0.67 moving-average score [21]. Meanwhile, the US market is in a 'Correction (below 50-DMA, above 200-DMA)' with 6 distribution days in 25 sessions and 52.6% breadth above the 50-DMA [28]."
+      "html": "We must also disclose a mechanical divergence between our two market-data feeds as of November 20, 2026. The deterministic `facts_US_2026-11-20.json` ledger tags TSM as <strong>Stage 1 (Basing)</strong> solely because $318.71 sits right on its $318.48 63-day low (`base_pivot_atr: 0.01`, `vol_dryup_ratio_63d: 0.50`) [35]. In sharp contrast, our `snapshots_US_2026-11-20.json` evaluation classifies TSM as <strong>STAGE_4 / AVOID_STAGE4_OR_BROKEN (`CAP_REJECTED`)</strong> [28]. That `STAGE_4` call reflects reality: price trades <strong>-24.5%</strong> below a falling 50-day SMA ($422.15), <strong>-21.0%</strong> below its 200-day SMA ($403.56), and <strong>-23.6%</strong> below its 30-week SMA ($417.72) on 9 distribution days in 25 sessions [28, 35]."
+    },
+    {
+      "type": "tradingview_chart"
     },
     {
       "type": "h3",
-      "text": "Multi-Timeframe (1W / 1D / 4H) Dislocation & Institutional Volume"
+      "title": "Multi-Timeframe (1W / 1D / 4H) Damage & Institutional Volume Profile"
+    },
+    {
+      "type": "p",
+      "html": "Reviewing weekly, daily, and 4-hour price action side by side shows uniform institutional distribution across every timeframe [28, 35]."
     },
     {
       "type": "table",
-      "caption": "TSM Multi-Timeframe Technical Dashboard (as of 2026-11-13 Close: $398.73)",
+      "caption": "TSM Multi-Timeframe Technical Dashboard (as of 2026-11-20 Close: $318.71 / TV $319.14)",
       "headers": [
         "Timeframe / Metric",
         "Current Reading",
@@ -36,149 +43,118 @@
       "rows": [
         [
           "Weekly (1W)",
-          "Close $398.73 | RSI-14: 47.15",
-          "30W SMA $420.49 (-5.17%) | 10W EMA $414.34",
-          "Stage 4 breakdown below 30W SMA; testing 40W EMA ($394.74)"
+          "Close $319.14 (TV) / $318.71 (Finviz) | RSI-14: 33.48",
+          "30W SMA $417.72 (-23.60%) | 10W EMA $397.04 (-19.62%)",
+          "Confirmed Stage 4 breakdown below 30W SMA and 40W EMA ($391.05)"
         ],
         [
           "Daily (1D)",
-          "Close $398.73 | RSI-14: 45.26",
-          "50D SMA $430.11 (-7.30%) | 200D SMA $403.05",
-          "Failed 200D SMA reclaim (-1.07%); ATR-14 is $17.10 (4.3% daily range)"
+          "Close $318.71 (-9.48% 1D) | RSI-14: 28.26",
+          "50D SMA $422.15 (-24.50%) | 200D SMA $403.56 (-21.03%)",
+          "-5.43x ATR below falling 50D SMA; ATR-14 spiked to $19.06 (6.0% range)"
         ],
         [
           "Intraday (4H)",
-          "Close $398.73 | RSI-14: 47.66",
-          "4H EMA20 $400.29 | 4H SMA50 $413.34",
-          "intraday_4h_turn = FALSE; buyers have not reclaimed 4H EMA20"
+          "Close $319.14 | RSI-14: 22.47",
+          "4H EMA20 $368.26 | 4H SMA50 $398.06",
+          "intraday_4h_turn = FALSE; STAGE4_BELOW_STRUCTURAL_FLOOR"
         ],
         [
           "Volume & Pivots",
-          "10.75M vs 13.68M 30D avg (0.79x)",
-          "Pivot S1 $375.01 | S2 $343.89 | R1 $462.36",
-          "Sub-average bounce volume (0.79x); no institutional accumulation footprint"
+          "37.17M shares (2.38x 20D / 2.36x 30D avg)",
+          "Pivot S1 $375.01 | S2 $343.89 | 63D Low $318.48",
+          "Violated both Pivot S1 and S2 on institutional liquidation (9 dist days)"
         ],
         [
-          "Support & Stop",
-          "Support Zone: $369.38–$380.64",
-          "Invalidation Stop: $348.00 (below $351.19 swing low)",
-          "$32.64 (1.91x ATR14) room below $380.64; wait for base test or >$420.49 reclaim"
+          "Market & Sector Regime",
+          "US Downtrend (10 dist days, 38.8% > 50DMA)",
+          "Semiconductors: 26.0% > 200D EMA, 17.0% > 50D EMA",
+          "Broad equity and chip liquidation; 52W low $266.82 sits -16.3% lower"
         ]
       ],
-      "takeaway": "TSM shows a classic dislocation at its $403.05 200-DMA shelf. Neither the 4H chart (below $400.29 EMA20) nor volume (0.79x 30D avg) confirms an actionable bottom."
+      "takeaway": "Every timeframe from 4H to Weekly confirms Stage 4 liquidation below all major moving averages on 2.38x distribution volume, invalidating the prior $348.00 stop and enforcing CAP_REJECTED."
     },
     {
       "type": "p",
-      "html": "The 4-hour chart shows why chasing the +4.77% weekly bounce is premature. TSM closed at $398.73, still below its 4H EMA20 ($400.29) and 4H SMA50 ($413.34), with 4H RSI at 47.66 and `intraday_4h_turn: false` [21]. Volume on November 13 was 10.75M shares—just 0.79x the 30-day average (13.68M) and well under the 10-day average (17.07M) [21]. Institutional buyers are not yet stepping in to absorb overhead supply [21]. With ATR-14 at $17.10 (4.29% of price) and Bollinger Band width at 20.97%, volatility stays elevated."
+      "html": "Our multi-timeframe `options_US_batch4.json` chart readout underscores why catching this falling knife is dangerous [28]. On the 4-hour chart, RSI dropped to an oversold 22.47 while price crashed to $319.14—nearly $50 below the 4H EMA20 ($368.26) and $79 below the 4H SMA50 ($398.06), leaving `intraday_4h_turn: false` [28]. On the daily tape, ATR-14 widened from $17.10 to $19.06 (5.98% of share price), and Bollinger Band width expanded to 38.61% [28, 35]. Meanwhile, 63-day relative strength stands at -12.64% (-17.06% over 28 days) [35]."
     },
     {
       "type": "h3",
-      "text": "Options Surface & Volatility Regime (IV_CHEAP)"
+      "title": "Options Liquidity Gate & Volatility Assessment (NOT_OPTIONABLE_OR_ILLIQUID)"
     },
     {
       "type": "p",
-      "html": "The options surface offers a useful sentiment cross-check. On November 13, 2026, the CBOE total put/call ratio stood at 0.85 (equity 0.63, index 0.96) [25]. For TSM, 30-day ATM implied volatility (44.9%) trades well below 20-day realized volatility (61.9%), putting TSM in an `IV_CHEAP` regime. While `options_snapshot.py` mechanically flags a `2027-01-15 $390/$450` Bull Call Spread (`$2,373` debit = `237.3 bps` NAV, `2.55x` our `$930.80` equity stake), <strong>we do NOT recommend opening that spread today</strong>. Three flaws block it: (a) 4H repair is unconfirmed (`4H EMA20 $400.29`), (b) `2027-01-15` expires 6 days before Q4'26 earnings (~January 21, 2027) [24], and (c) `$2,373` oversizes a Correction-regime trade relative to our `1.05%` equity stake. Wait for a 4H / 30W SMA reclaim and use a post-Feb 2027 expiry if trading options."
+      "html": "Live options telemetry from `options_snapshot.py` (`options_US_batch4.json`) flags TSM as <strong>NOT_OPTIONABLE_OR_ILLIQUID</strong> for automated trade execution today. Option bid-ask spreads exceed our 14% slippage ceiling or lack qualifying open interest across the screened contracts, and the macOS Chrome Robinhood probe is unavailable in this Linux environment. Even if spreads tighten intraday on NYSE exchanges, buying bullish calls or debit spreads into a Stage 4 waterfall (`CAP_REJECTED`, `REJECTED`) violates our fundamental-technical safety interlock. Zero options exposure is authorized."
     },
     {
       "type": "callout",
-      "kind": "warning",
-      "title": "Why Short-Term Momentum Is Avoid / Wait",
+      "variant": "warn",
+      "title": "Why Oversold RSI (28.26 Daily / 22.47 4H) Is Not a Buy Signal",
       "paragraphs": [
-        "A stock below its 50-DMA ($430.11), 200-DMA ($403.05), and 30-week SMA ($420.49) on 0.79x volume has negative short-term expectancy. Buying here means fighting trapped supply from buyers between $405 and $487 over the past four months. Wait for either a high-volume hold in $369.38–$380.64 around Pivot S1 ($375.01), or a Stage 1 base and decisive reclaim of $420.49."
+        "Deeply oversold RSI readings often tempt value buyers into calling a bottom after a -20% week. In Stan Weinstein's framework, oversold readings in Stage 4 frequently precede sharp dead-cat bounces into falling averages—like the 4H EMA20 ($368.26) or 20D SMA ($391.78)—followed by another leg lower. Real bottoms require weeks of sideways absorption where volume dries up and price stops making lower lows below $318.48."
       ]
     },
     {
       "type": "h3",
-      "text": "Anatomy of the Overhead Supply Shelf ($403–$487)"
+      "title": "Macro Regime & Overhead Supply Ceilings ($344–$431)"
     },
     {
       "type": "p",
-      "html": "From August to October 2026, TSM peaked at $487.47 before pulling back -18.20% [21]. That distribution left three overhead supply shelves that any rally must clear [21]. First sits the 200-day SMA ($403.05) and 20-day SMA ($408.86); second sits the 10-week EMA ($414.34) and 30-week SMA ($420.49) [21]. Third sits the 50-day SMA ($430.11) and Pivot R1 ($462.36) [21]. Until TSM exhausts sellers in $369.38–$380.64 (Pivot S1 $375.01) or reclaims $420.49 on >1.2x volume, bounces face trapped-holder selling."
-    },
-    {
-      "type": "p",
-      "html": "TSM's 1-year return remains +37.89%, beating many cyclical peers, yet -8.60% 1-month and -7.10% 3-month returns lag Stage 2 leaders [21, 26]. By contrast, MSFT (+2.66% 1Y, -6.31% off highs) holds above its rising 30-week SMA at $460.02 [26]. In a market with 6 distribution days and 52.6% breadth above the 50-DMA, capital rotates out of extended chip winners into Stage 2 bases [28]. That rotation confirms why `CAP_REJECTED` keeps us from catching a falling knife."
+      "html": "The broader tape offers zero tailwinds. As of November 20, 2026, the S&amp;P 500 shifted into a formal <strong>Downtrend</strong>, with 10 distribution days in 25 sessions and 38.8% of stocks above their 50-day SMA (46.9% above 200-DMA) [35]. Only 1 of 11 sectors holds its 20-day SMA, and just 17.0% of semiconductor peers hold above their 50-day EMA [28, 35]. Crucially, the automated `snapshots_US_2026-11-20.json` screen still prints legacy moving-average bands (`$391.08–$428.49` support buy zone and `$408.20` stop anchored near the `$422.16` 50-day SMA) [28]. Because TSM collapsed to `$318.71`, <strong>`$391.08–$428.49` and `$408.20` are broken historical levels now acting as heavy overhead trapped supply above `$318.71`—NOT nearest support</strong>. Every shelf from Pivot S2 (`$343.89`) and our breached `$348.00` stop up through `$428.49` represents trapped supply, leaving the `$318.48` 63-day low and `$266.82` 52-week low as the real downside levels [28, 35]."
     },
     {
       "type": "h3",
-      "text": "What a Confirmed Stage 1 Base & Stage 2 Reclaim Looks Like"
+      "title": "What Technical Proof Is Required to Exit REJECTED?"
     },
     {
       "type": "p",
-      "html": "Upgrading TSM out of `CAP_REJECTED` requires one of two observable tape events [21]. (1) <strong>Support-Zone Capitulation & Reversal:</strong> price tests $369.38–$380.64 (Pivot S1 $375.01) without closing below $348.00 (below the $351.19 swing low), then prints a 4H higher low and reclaims the 4H EMA20 ($400.29) on rising volume. (2) <strong>Stage 2 Breakout:</strong> TSM bases sideways for 4–8 weeks to flatten the 10-week EMA ($414.34) and 30-week SMA ($420.49), then breaks $420.49 on &gt;1.2x volume (&gt;16.4M shares/day) [21]."
+      "html": "TSMC remains on our fundamental compounder radar (`COMPOUNDER_PASS`), so we define clear, objective conditions to re-underwrite it later [28, 35]. Step 1 requires price to carve a durable Stage 1 floor—either holding the $266.82–$290.00 52-week low zone or stabilizing above $318.48 for at least 4 to 8 weeks while 20-day and 50-day averages flatten [35]. Step 2 requires volume dry-up on down days followed by institutional accumulation (&gt;1.2x average volume on strong closes). Step 3 requires a decisive Stage 2 breakout back above the 200-day SMA ($403.56) and 30-week SMA ($417.72) on &gt;1.2x volume as market breadth recovers [28, 35]."
     },
     {
       "type": "p",
-      "html": "Track these levels over the next 30 trading days: immediate resistance sits at the 4H EMA20 ($400.29) and 200-day SMA ($403.05) [21]. Higher ceilings sit at the 10-week EMA ($414.34), 30-week SMA ($420.49), and 50-day SMA ($430.11) [21]. On the downside, Pivot S1 ($375.01) anchors our $369.38–$380.64 support zone above the $351.19 swing low, $348.00 stop, and Pivot S2 ($343.89) [21]."
-    },
-    {
-      "type": "p",
-      "html": "TSM's technical posture (`STAGE_4`, `CAP_REJECTED`, 4H RSI `47.66`, Daily RSI `45.26`, volume `0.79x`) shows supply is not yet absorbed [21]. Patience at `$369.38–$380.64` or above `$420.49` remains the highest-probability play."
+      "html": "Until those three steps occur, the tape overrides valuation. TradingView's overall technical score sits at -0.65 (Strong Sell), with a -0.93 moving-average score [28]. Disciplined capital steps aside at $318.71, honors the breached $348.00 stop, and waits for sellers to finish."
     }
   ],
   "book_paragraphs": [
-    "Chapter 7 showed that TSMC's valuation is reasonable and its peers are weaker. Chapter 8 forces an uncomfortable truth: none of that helps while the tape is unconfirmed. On November 13, 2026, TSM closed at $398.73—down 18.20% from its $487.47 high. Our market-facts ledger classifies it as Stage 1 Basing (-1.07% vs the $403.05 200-DMA, above the $351.19 swing low), while TradingView flags Stage 4 (-5.17% below the $420.49 30-week SMA and -7.30% below the $430.11 50-day SMA). Both feeds agree TSM is not a buyable Stage 2 uptrend.",
-    "Why is a company growing sales over 40% stuck in Stage 4? With the 10-year Treasury at 5.10% and the S&P 500 logging six distribution days in twenty-five sessions, funds de-gross high-beta winners first. Even after a 4.77% weekly bounce, the 4-hour chart has not turned up. TSM closed below its 4H 20-EMA ($400.29) on 10.75 million shares—just 0.79x its 30-day average—signaling a weak bounce, not institutional buying.",
-    "Consider the tape psychology between $403 and $487. Over the past three months, hundreds of millions of shares traded above $415. Buyers near the $487.47 peak now sit on an 18% drawdown. When TSM bounces 4% or 5% on light volume (10.75 million shares, 0.79x average), trapped holders use that rally to lighten risk.",
-    "That is why Stan Weinstein's Stage Analysis pairs so well with fundamental research. Fundamentals tell us *what* to own; Stage Analysis tells us *when* institutional money flows our way. With TSM below its 200-day SMA ($403.05), 10-week EMA ($414.34), 30-week SMA ($420.49), and 50-day SMA ($430.11), and capped by the 4H 20-EMA ($400.29), the tide is still ebbing."
+    "Chapter 7 showed that TSMC's valuation has compressed to 13.81x forward earnings. Chapter 8 delivers the cold reality of the tape: on November 20, 2026, TSM suffered a severe Stage 4 breakdown that violated our $348.00 structural stop and forced a full exit.",
+    "In a single session, TSM fell 9.48% from $352.09 to $318.71 ($319.14 on TradingView), completing a -20.07% weekly drop on 37.17 million shares—2.38 times its 20-day average volume. The stock now sits 34.62% below its $487.47 52-week high and has broken cleanly below every intermediate support shelf.",
+    "Let us be transparent about a technical feed split. Our deterministic market-facts ledger mechanically labels TSM Stage 1 Basing because $318.71 sits right on its $318.48 63-day low. Our TradingView snapshot flags STAGE_4 (CAP_REJECTED). Anyone looking at the moving averages sees why Stage 4 wins: TSM trades 24.5% below its falling 50-day SMA ($422.15), 21.0% below its 200-day SMA ($403.56), and 23.6% below its 30-week SMA ($417.72).",
+    "Worse, the macro backdrop deteriorated from a Correction into an outright US Downtrend, logging ten distribution days in twenty-five sessions with only 38.8% of stocks above their 50-day moving average. In that tape, oversold oscillators do not protect buyers."
   ],
   "book_callouts": [
     {
       "kind": "warning",
-      "title": "The Two Technical Paths to Action",
-      "text": "New capital has two disciplined paths into TSM: wait for a washout holding $369.38–$380.64 around Pivot S1 ($375.01) with a $348.00 stop below the $351.19 swing low, or wait for a Stage 1 base and volume-backed reclaim of the 30-week SMA ($420.49)."
+      "title": "Why Breaking $348.00 Forces Immediate Action",
+      "text": "Our prior monograph set $348.00 as the non-negotiable guardrail below the $351.19 swing low. Closing at $318.71 on 2.38x volume breached that stop by nearly $30. Hoping for a rebound after a broken stop is how small losses become permanent drawdowns."
     }
   ],
   "book_subsections": [
     {
-      "title": "Volatility, Options Pricing, and the Discipline of Waiting",
+      "title": "Reading the 1W, 1D, and 4H Tape Together After the Crash",
       "paragraphs": [
-        "Interestingly, the options market is not panicking. Thirty-day implied volatility (44.9%) sits well below 20-day realized volatility (61.9%). While options_snapshot.py mechanically flags a 2027-01-15 $390/$450 bull call spread ($2,373 = 237.3 bps NAV, 2.55x our $930.80 equity stake), we do not recommend opening it today. The 4H chart stays unconfirmed, January 15 expires six days before Q4 2026 earnings, and $2,373 oversizes a Correction trade. Wait for a 4H and 30-week SMA reclaim and use a post-February 2027 expiry."
+        "Walking across all three timeframes shows uniform technical damage. On the weekly chart, TSM sits 23.60% below its $417.72 30-week SMA and 19.62% below its $397.04 10-week EMA, with weekly RSI down at 33.48. On the daily chart, TSM sits 5.43 ATR units below its falling 50-day SMA ($422.15), while ATR-14 expanded to $19.06—nearly 6% daily volatility.",
+        "Drop down to the 4-hour chart from options_US_batch4.json and there is still no bottoming turn. TSM closed nearly $50 below its $368.26 4H 20-EMA and $79 below its $398.06 4H 50-SMA, with 4H RSI crushed to 22.47 and intraday_4h_turn false. Every rally back toward $343.89 (Pivot S2) or $368.26 now meets trapped supply."
       ]
     },
     {
-      "title": "Comparing TSM's Tape to Stage 2 Benchmark MSFT",
+      "title": "Why Options Are Sidelined: Illiquid Spreads and Broken Trend",
       "paragraphs": [
-        "Compare TSM's chart with Microsoft ($523.88) to see the contrast. TSM sits 5.17% below its 30-week SMA and 18.20% off its 52-week high. Microsoft sits 13.88% above its rising 30-week SMA ($460.02), just 6.31% off highs, and inside its $507.61–$526.78 Stage 2 buy zone. That is why we refuse to force new cash into TSM at $398.73."
+        "Our options engine (`options_US_batch4.json`) flags TSM as NOT_OPTIONABLE_OR_ILLIQUID in this session because screened option bid-ask spreads exceed 14% or lack qualifying open interest, while the macOS Chrome Robinhood probe is unavailable in this Linux workspace.",
+        "Even more importantly, our discipline strictly forbids buying bullish calls or debit spreads on a stock in Stage 4 below its broken stop. Capital belongs in cash, not fighting heavy institutional distribution."
       ]
     },
     {
-      "title": "Why Volume Dry-Up and 4H Confirmation Matter",
+      "title": "Overhead Supply Psychology and Sector Breadth Breakdown",
       "paragraphs": [
-        "In any Stage 4 correction, seller exhaustion starts with volume drying up on down days. Next come accumulation days, where price closes near session highs on 1.2x or higher volume. Today's 10.75 million shares (0.79x 30-day average) show big funds are still on the sidelines.",
-        "Waiting for either a clean defense of $369.38–$380.64 with a 4H turn, or a high-volume reclaim of $420.49, lets institutional flow do the heavy lifting first."
+        "Think about the overhead supply created between August and November 2026. Millions of shares changed hands between $375 and $487.47. Notice that our automated snapshot screen still displays legacy moving-average bands ($391.08–$428.49 and $408.20) anchored to the 50-day SMA ($422.16). At $318.71, those broken historical levels are NOT nearest support—they are heavy overhead supply alongside Pivot S2 ($343.89) and our breached $348.00 stop.",
+        "Sector breadth confirms that this is not an isolated shakeout. Only 17.0% of semiconductor peers hold above their 50-day EMA, and just one of eleven S&P 500 sectors holds its 20-day moving average. When institutions liquidate an entire leadership group at 2.38x normal volume, rallies into falling moving averages get sold until supply dries up."
       ]
     },
     {
-      "title": "Technical Map for the Next 30 Days",
+      "title": "The Road Back: What a Real Stage 1 Base Looks Like",
       "paragraphs": [
-        "Keep these exact levels written down: $403.05 at the 200-day SMA, $420.49 at the 30-week SMA, $375.01 at Pivot S1 inside our $369.38–$380.64 zone, the $351.19 swing low, and $348.00 as our hard stop. Drawing the map before the open removes emotion when volatility spikes."
-      ]
-    },
-    {
-      "title": "Patience as a Technical Edge",
-      "paragraphs": [
-        "The hardest skill in technical analysis is sitting on your hands when a great stock sits 18% off its highs. Waiting for $369.38–$380.64 or a Stage 2 reclaim above $420.49 separates disciplined compounding from catching falling knives."
-      ]
-    },
-    {
-      "title": "How Institutional Liquidity Drives Support Tests",
-      "paragraphs": [
-        "With 30-day average volume of 13.68 million shares—over $5.4 billion in daily liquidity at $398.73—TSM is one of the most liquid stocks on the NYSE. Deep liquidity means support zones like $369.38 to $380.64 around Pivot S1 ($375.01) rarely turn on a dime. Instead, large funds scale in over several sessions as selling pressure fades and 4-hour moving averages flatten."
-      ]
-    },
-    {
-      "title": "Walking the 1W, 1D, and 4H Tape Together",
-      "paragraphs": [
-        "Let us read the weekly, daily, and 4-hour charts together step by step so you and I do not guess. On the weekly 1W chart, TSM closed at $398.73. That sits 5.17% below its $420.49 30-week SMA and 3.77% below its $414.34 10-week EMA. Weekly RSI sits at 47.15, and price is testing the 40-week EMA at $394.74. That weekly structure places TSM squarely in Weinstein Stage 4 with a CAP_REJECTED timing gate.",
-        "Drop down to the daily 1D chart and you and I see the same overhead ceiling. Price failed to reclaim the 200-day SMA at $403.05 (-1.07%) and trails the 50-day SMA at $430.11 by 7.30%. Daily RSI reads 45.26, while ATR-14 sits at $17.10, or 4.29% of price. Now check the 4H intraday tape: TSM finished at $398.73, still below the 4H EMA20 at $400.29 and 4H SMA50 at $413.34. That leaves intraday_4h_turn false. Worse, volume was just 10.75 million shares, or 0.79x the 13.68 million 30-day average. Big institutions are not stepping in yet near Pivot S1 at $375.01. Until 10.75 million shares expand above the 13.68 million average on an up-close, the tape stays in repair mode."
-      ]
-    },
-    {
-      "title": "Why Weinstein Stage 4 Demands Patience Over Heroics",
-      "paragraphs": [
-        "When you and I see a +4.77% weekly bounce on 0.79x volume, the temptation is to buy early and feel clever. Resist that urge. Between August and October 2026, TSM peaked at $487.47 before sliding 18.20%. That drop trapped buyers across every shelf between $403.05 and $487.47. Whenever TSM bounces weakly into the 200-day SMA ($403.05), 10-week EMA ($414.34), or 30-week SMA ($420.49), trapped holders sell to break even.",
-        "Meanwhile, the broader US market has logged six distribution days in twenty-five sessions with 52.6% breadth above the 50-DMA. In a Correction regime, heroics get punished quickly. Patience gives you and I two clean, objective triggers instead of guesswork. We either wait for a high-volume hold in $369.38–$380.64 around Pivot S1 ($375.01) with a 4H EMA20 turn, or we wait for a Stage 2 reclaim above $420.49 on 1.2x volume. Either path lets institutional money prove demand before you and I commit fresh capital above $348.00."
+        "Stepping aside today does not mean ignoring TSMC forever. A compounder growing sales 40%+ with $93.64 billion in net cash will eventually attract institutional accumulation again. First, the waterfall must stop—watching whether buyers defend the $266.82–$290.00 zone or stabilize above $318.48 over four to eight weeks.",
+        "Second, we need to see volume dry up on pullbacks and expand above 1.2x average on strong up-closes, flattening the 50-day SMA. Third, TSM must reclaim its 200-day ($403.56) and 30-week ($417.72) moving averages alongside improving S&P 500 breadth before new capital returns."
       ]
     }
   ]
