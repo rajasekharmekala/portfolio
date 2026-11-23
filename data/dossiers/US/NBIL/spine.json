@@ -1,12 +1,12 @@
 {
   "symbol": "NBIL",
   "market": "US",
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-20",
   "sector": "Financial",
   "title": "GraniteShares 2x Long NBIS Daily ETF (NBIL): Investment Monograph & Action Plan",
+  "decision_basis": "ch-9",
   "verdict": "REJECTED",
   "new_capital_verdict": "REJECTED",
-  "decision_basis": "ch-9",
   "rejection_reasons": [
     "BUSINESS",
     "CASH_FLOW",
@@ -18,64 +18,72 @@
   "archetype": "STAGE4_LEVERAGED_SINGLE_STOCK_ETF",
   "strategy_bucket": "LEVERAGED_SATELLITE",
   "conviction_tier": "TIER_0",
-  "cmp": 4.95,
-  "entry_zone_low": 3.5,
-  "entry_zone_high": 4.29,
+  "weinstein_stage": "STAGE_4",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
+  "scenario_horizon": "12-month",
+  "cmp": 2.29,
+  "entry_zone_low": 1.5,
+  "entry_zone_high": 2.0,
   "stop_loss": 2.92,
-  "target_bear": 1.5,
-  "target_base": 3.8,
-  "target_bull": 9.5,
+  "target_bear": 0.21,
+  "target_base": 1.02,
+  "target_bull": 3.47,
   "holding_action": "EXIT_IMMEDIATELY",
-  "holding_shares_to_sell": 50,
-  "holding_rationale": "Exit all 50.0 shares in Robinhood now. The position is worth $247.50 at $4.95 CMP against a $1,017.45 cost basis ($20.35/sh), leaving a -$769.95 (-75.67%) unrealized loss and 0.28% weight. NBIL is graded FUNDAMENTAL_FAIL. Its 2x daily-reset swap structure charges -sigma^2 volatility decay and a 1.41% fee. Meanwhile, Nebius Group (NBIS) faces -$3.66B FY25 FCF, ~$27B FY26E CapEx, $40B-$45B FY27E CapEx, and $14.19B carrying debt. NBIL sits in Stage 4, 78.95% below its $23.52 200-day SMA on 3.07x volume.",
+  "holding_shares_to_sell": 50.0,
+  "holding_rationale": "Exit all 50.0 shares in Robinhood immediately. At Friday's $2.29 close (-32.45% 1D), the position is worth $114.50 against a $1,017.45 cost basis ($20.35/sh), resulting in a -$902.95 (-88.75%) unrealized loss and 0.15% weight. Because $2.29 decisively breached the locked $2.92 structural stop inside Stage 4 Markdown, further holding risks reverse splits, trust closure, and discrete 2x variance decay ($1.23 expected 12-month value).",
   "holding_alerts": [
     {
-      "trigger": "Immediate market-hours limit exit near CMP",
-      "trigger_price": 4.95,
-      "shares": 50,
-      "instruction": "Place a limit sell order for all 50 shares of NBIL in Robinhood near $4.95 during regular market hours to lock in tax-loss harvest and recover cash"
+      "trigger": "Immediate market-hours limit exit near CMP ($2.29) after $2.92 stop breach",
+      "trigger_price": 2.29,
+      "shares": 50.0,
+      "instruction": "Submit a market-hours limit sell order for all 50.0 shares of NBIL in Robinhood at or near $2.29 (est. $114.50 proceeds) to terminate Stage 4 decay and harvest the -$902.95 loss."
     },
     {
-      "trigger": "Hard structural floor backstop below 52W low",
-      "trigger_price": 4.29,
-      "shares": 50,
-      "instruction": "If any shares remain unfilled and NBIL breaks below $4.29, execute immediate market liquidation of all 50 shares so no residual leveraged position stays open"
+      "trigger": "Gap-down market exit contingency below $2.00",
+      "trigger_price": 2.0,
+      "shares": 50.0,
+      "instruction": "If NBIL opens below $2.00 on the next session, convert immediately to a market or marketable limit order for all 50.0 shares rather than waiting for a bounce."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "$247.50 expected proceeds from exiting 50.0 shares of NBIL in Robinhood at $4.95 CMP",
+    "capital_source": "$114.50 expected proceeds from exiting 50.0 shares of NBIL in Robinhood at $2.29 CMP (cost basis $1,017.45; -$902.95 realized loss)",
     "destinations": [
       {
-        "destination_type": "SHORTLIST",
-        "symbol": "MSFT",
-        "allocation_pct": 50.0,
-        "target_base": 660.0,
-        "asymmetry_ratio": 1.9,
-        "recommendation": "Redeploy 50% ($123.75) into Microsoft Corporation (MSFT), a TIER_3 Stage 2 compounder in its support buy zone",
-        "entry_condition": "Buy within $507.61-$526.78 support zone (CMP $523.88) with hard invalidation stop at $452.41",
-        "rationale": "Upgrades capital from a decaying Stage 4 2x ETF into a high-ROIC (24.2%) Stage 2 hyperscale compounder with 1.90:1 risk-reward asymmetry."
+        "destination_type": "CASH",
+        "allocation_pct": 100.0,
+        "recommendation": "Park 100% of proceeds ($114.50) in USD Cash / 3-Month Treasury Bill Sweep (~4.50%–4.75% yield)",
+        "entry_condition": "Immediate upon executing market-hours limit exit of 50.0 NBIL shares near $2.29; hold cash during the 10-distribution-day US Downtrend (38.8% above 50-DMA, 0/9 sectors above 20-DMA).",
+        "rationale": "Preserves remaining capital from 2x daily volatility decay while maintaining risk-free dry powder until S&P 500 breadth recovers."
       },
       {
-        "destination_type": "CASH",
-        "symbol": null,
-        "allocation_pct": 50.0,
-        "target_base": null,
-        "asymmetry_ratio": null,
-        "recommendation": "Retain 50% ($123.75) in Cash Reserve to lower portfolio beta and preserve dry powder",
-        "entry_condition": "Hold in USD cash / money-market sweep until Stage 2 shortlist setups trigger",
-        "rationale": "Preserves optionality while eliminating exposure to 300%+ realized-volatility leveraged ETFs."
+        "destination_type": "SHORTLIST",
+        "symbol": "ABBV",
+        "allocation_pct": 0.0,
+        "target_base": 340.0,
+        "asymmetry_ratio": 1.85,
+        "recommendation": "Track Stage 2 Healthcare leader AbbVie (ABBV) at 0% immediate allocation (ACCUMULATE_ON_DIP; posture BUY_AT_CMP_NO_FOMO; $286.20 CMP, $277.05–$285.49 snapshot / $277.05–$281.27 shortlist buy zone, $249.53 stop)",
+        "entry_condition": "Wait for US Downtrend distribution to subside or a disciplined pullback into ABBV's $277.05–$285.49 snapshot support zone ($277.05–$281.27 shortlist zone) above the $249.53 stop.",
+        "rationale": "ABBV delivers durable post-Humira compounding (Skyrizi, Rinvoq) in a confirmed Stage 2 trend (+31.89% 6M, 65% Healthcare breadth >200D EMA), contrasting sharply with NBIL's Stage 4 cash burn, though 10-distribution-day market weakness keeps initial allocation at 0%."
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "NBIS",
         "allocation_pct": 0.0,
-        "target_base": 110.0,
-        "asymmetry_ratio": 0.0,
-        "recommendation": "Allocate 0% to unleveraged Nebius Group (NBIS) while it remains in Stage 4",
-        "entry_condition": "Do not enter NBIS until it reclaims its 50D/200D averages ($194.60 / $179.35) and forms a confirmed Stage 2 base",
-        "rationale": "Even without 2x daily decay, NBIS trades at 14.38x P/S in Stage 4 with $67B+ FY26-27E CapEx and negative FCF."
+        "recommendation": "No outside equity funded; 0% outside deployment during active US Downtrend",
+        "entry_condition": "Require a confirmed S&P 500 Follow-Through Day and Stage 2 base breakout before funding any non-shortlist name.",
+        "rationale": "Capital preservation takes priority over deploying $114.50 outside the underwritten shortlist in a 10-distribution-day Downtrend."
       }
     ]
+  },
+  "primer": "GraniteShares 2x Long NBIS Daily ETF seeks 200% of Nebius Group's daily return via Clear Street swaps priced at OBFR01 plus 600 bps [42]. Pass 1 assigns FUNDAMENTAL_FAIL across both layers due to 2.86% prospectus fees, $62.26M shrinking AUM, and Nebius's $16.59B lease and power overhang [43][48][59]. On November 20, 2026, NBIL plunged 32.45% to $2.29 in Stage 4 Markdown, decisively breaching our $2.92 structural stop on 2.33x volume [57]. We assign REJECTED (Tier 0), order EXIT_IMMEDIATELY on all 50.0 Robinhood shares, and move 100% of proceeds ($114.50) into Treasury bill cash.",
+  "sizing_table_takeaway": "This execution table confirms REJECTED (TIER_0, 0.0% new allocation) alongside mandatory EXIT_IMMEDIATELY on all 50.0 held Robinhood shares after the $2.29 close breached our $2.92 structural stop.",
+  "verdict_rule_summary": "N/A — Never re-enter NBIL (monitor unlevered NBIS only); exit immediately on all 50.0 shares after the $2.92 structural stop breach.",
+  "ch4": {
+    "stage_override": "Stage 4 (Markdown)",
+    "stage_explanation": "Both market_facts (Stage 4 Markdown) and TradingView snapshot (STAGE_4, CAP_REJECTED) agree 100%: close ($2.29) sits -85.70% below falling 50D SMA ($16.01) and -91.37% below 30W SMA ($26.55).",
+    "support_zone_explanation": "N/A — Never re-enter NBIL (monitor unlevered NBIS only). The $1.50–$2.00 numeric band is a non-actionable legacy/schema placeholder with no value floor under FUNDAMENTAL_FAIL and CAP_REJECTED.",
+    "stop_placement_explanation": "Prior November 13 structural stop ($2.92, matching TradingView S1 pivot) was breached by -21.6% at the $2.29 close, triggering EXIT_IMMEDIATELY.",
+    "tech_table_takeaway": "All daily and weekly averages slope downward with NBIL trading -96.66% off its 52-week high on 2.33x–2.66x volume, while 4H momentum shows zero reversal turn.",
+    "gate_table_takeaway": "Both trend and fundamental gates reject new capital; the 50.0-share holding must be liquidated at market-hours limit pricing near $2.29."
   },
   "citations": [
     "Finviz Quote & Fund Profile: GraniteShares 2x Long NBIS Daily ETF (NBIL) (as of 2026-11-13): https://finviz.com/quote.ashx?t=NBIL",
@@ -118,7 +126,31 @@
     "Close $4.95 (-19.77%), vol 32.95M (3.07x 30d avg), 52W range $4.29-$68.49, SMA50 $18.29, SMA200 $23.52, STAGE_4 (as of 2026-11-13): https://www.nasdaq.com/market-activity/etf/nbil",
     "Q3 2026 revenue $980.8M (+571% YoY, $973.8M AI Cloud), Adj EBITDA $465.8M, GAAP net loss -$37.5M, ARR $6.4B, RPO $38.7B, FY26 CapEx ~$27B, FY27 revenue $12B-$13B with $40B-$45B CapEx (as of 2026-11-13): https://nebius.com/newsroom/nebius-reports-third-quarter-2026-financial-results",
     "Close $115.88 (-9.92% on Nov 13), MCap $31.49B, P/S 14.38x, P/E 528.89x, SMA50 $194.60, SMA200 $179.35, STAGE_4 (as of 2026-11-13): https://www.nasdaq.com/market-activity/stocks/nbis",
-    "CMP $523.88, support zone $507.61-$526.78, invalidation stop $452.41, target_base $660.00, asymmetry 1.90:1, STAGE_2 (as of 2026-11-13): https://www.microsoft.com/en-us/investor"
+    "CMP $523.88, support zone $507.61-$526.78, invalidation stop $452.41, target_base $660.00, asymmetry 1.90:1, STAGE_2 (as of 2026-11-13): https://www.microsoft.com/en-us/investor",
+    "GraniteShares ETF Trust — Annual Report on Form N-CSR for the Period Ended June 30, 2026 (NBIL Schedule of Investments: Clear Street OBFR01+600 bps swap, $195.60M net assets, distributable earnings), filed Sept 4, 2026: https://www.sec.gov/Archives/edgar/data/1689873/000149315226041612/formn-csr.htm",
+    "GraniteShares 2x Long NBIS Daily ETF (NBIL) — Summary Prospectus on Form 497K (1.41% net operating expenses, 1.45% estimated indirect swap cost), dated Oct 28, 2026: https://www.sec.gov/Archives/edgar/data/1689873/000149315226049055/form497k.htm",
+    "GraniteShares ETF Trust — Form 497(e) Supplement (Liquidation of 12 sub-scale YieldBOOST ETFs, excluding NBIL), filed Nov 19, 2026: https://www.sec.gov/Archives/edgar/data/1689873/000149315226053289/form497.htm",
+    "Nebius Group N.V. — Form 6-K Exhibit 99.1 (Q3 2026 Financial Results & 292.90M Shares Outstanding), filed Nov 12, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000110465926126008/tm2629571d1_ex99-1.htm",
+    "Nebius Group N.V. — Form 6-K Exhibit 99.2 (Q3 2026 Shareholder Letter & 2027 Guidance), filed Nov 12, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000110465926126008/tm2629571d1_ex99-2.htm",
+    "Nebius Group N.V. — Form 6-K Exhibit 99.1 (Q3 2026 Operating and Financial Review and Prospects), filed Nov 12, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000110465926126238/nbis-ex99d1.htm",
+    "Nebius Group N.V. — Form 6-K Exhibit 99.2 (Q3 2026 Unaudited Financial Statements & Footnotes Notes 1-16), filed Nov 12, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000110465926126238/nbis-ex99d2.htm",
+    "Nebius Group N.V. — Form 6-K Exhibit 99.1 ($3.5B Citigroup Senior Secured 364-Day Facility), filed Oct 22, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000110465926117978/tm2628078d1_ex99-1.htm",
+    "Nebius Group N.V. — Form 4 (CRO Marc Boroditsky 7,000-share exercise and full sale), filed Nov 13, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000151384526000149/form4.xml",
+    "Nebius Group N.V. — Schedule 13G/A (Situational Awareness LP 8,010,000 Class A shares / 3.4%), filed Nov 16, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000093583626000604/primary_doc.xml",
+    "Nebius Group N.V. — Form 4 (Director John Wilson Boynton IV 4,502-share sale), filed Nov 17, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000151384526000151/form4.xml",
+    "Nebius Group N.V. — Form 4 (General Counsel Yael Almog 10,795-share acquisition), filed Nov 20, 2026: https://www.sec.gov/Archives/edgar/data/1513845/000151384526000156/form4.xml",
+    "Themes ETF Trust / Leverage Shares 2X Long NBIS Daily ETF (NBIG) — Form 497K (0.76% total expense ratio), dated Feb 27, 2026: https://www.sec.gov/Archives/edgar/data/1976322/000089418926007250/leverageshares2xlongnbisda.htm",
+    "Themes ETF Trust / Leverage Shares 2X Long NBIS Daily ETF (NBIG) — Form NPORT-P ($90.37M net assets across 4 counterparties), filed Sept 28, 2026: https://www.sec.gov/Archives/edgar/data/1976322/000089418926027600/primary_doc.xml",
+    "Investment Managers Series Trust II / Tradr 2X Long NBIS Daily ETF (NEBX) — Form 497K (1.30% expense ratio), dated Aug 5, 2026: https://www.sec.gov/Archives/edgar/data/1587982/000121390026085598/ea0297676-22_497k.htm",
+    "Market Facts & Yahoo Finance Daily OHLCV Ledger for NBIL (Close $2.29, -32.45% 1D, SMA50 $16.01, SMA200 $23.40, STAGE_4, US Downtrend 10 dist days, as of 2026-11-20): https://finance.yahoo.com/quote/NBIL/",
+    "TradingView Technicals & Multi-Timeframe Feed for NASDAQ:NBIL (Close $2.29, 1W RSI 34.67, 1D RSI 29.72, 4H RSI 26.63, 30W SMA $26.55, as of 2026-11-20): https://www.tradingview.com/symbols/NASDAQ-NBIL/technicals/",
+    "Finviz Quote & Fund Profile for NBIL (AUM $62.26M, Expense 1.41%, Beta 8.90, Avg Vol 8.15M, as of 2026-11-20): https://finviz.com/quote.ashx?t=NBIL"
   ],
-  "primer": "GraniteShares 2x Long NBIS Daily ETF (NASDAQ: NBIL ) uses total return swaps to seek 200% of the daily return of Nebius Group N.V. (NASDAQ: NBIS ), charging a 1.41% fee on $130.88 million in AUM . On November 13, 2026, NBIL closed at $4.95 (-19.77% on 32.95M shares, 3.07x 30-day average volume), down -92.77% from its $68.49 peak and -58.26% over one year (Finviz: -61.48%) . NBIL is graded FUNDAMENTAL_FAIL (underlying KPIs PASS_WITH_WATCH ) and REJECTED for all new equity or options capital . For our existing 50.0-share Robinhood holding ($247.50 value, -$769.95 unrealized loss), the required action is EXIT_IMMEDIATELY ."
+  "gate_exceptions": [
+    "Linux Browser Automation Limits: macOS Chrome tabs for live Robinhood, TradingView, and TheWrap accounts were unavailable in this Linux sandbox. Public TradingView, Finviz, Yahoo Finance, and options feeds were used cleanly, while NBIL_book.pdf compiled via headless Chromium.",
+    "Positions Ledger Metadata Bug: positions_US_2026-11-20.json mislabels NBIL as CASH_EQUIV_ETF with 0.0x leverage and 0.0 beta under 'T-Rowway 2X Long NBIS ETF'. NBIL is actually a 2.0x daily leveraged ETF (Finviz Beta 8.90), which we disclose and exit immediately.",
+    "Underlying NBIS Data & Feed Window Variance: NBIS is null in facts and snapshots, so its metrics come from Q3 2026 Form 6-K filings and the 7-day-old Nov 13 ($115.88) reference. NBIL facts and Finviz show -53.74% 1W / -79.55% 1M versus TradingView -59.75% / -83.51% due to rolling windows, while Finviz still displays a stale $3.36 52W low vs. live $2.25.",
+    "EXCEPTION AS-OF (Shared-Batch MNST Records under --allow-stale-asof): MNST:mnst_mark_hall_resignation_8k (2026-06-04, 169 days old vs. 2026-11-20); MNST:mnst_2_for_1_stock_split_8k (2026-07-08, 135 days old); MNST:mnst_2026_def14a_ownership_and_kona_vie (2026-03-27, 238 days old); MNST:mnst_fy2025_10k_flavor_and_tccc_renewal (2026-02-27, 266 days old). These shared-batch Monster Beverage records remain valid until MNST's FY2026 Form 10-K / 2027 DEF 14A filings cure the 60-day window.",
+    "EXCEPTION AS-OF (Shared-Batch NKE & Periodic NBIL Filings under --allow-stale-asof): NKE:nke_fy26_endorsement_obligations (2026-07-15, 128 days old vs. 2026-11-20) and NKE:nke_swoosh_llc_class_a_pct (2026-07-15, 128 days old), cured by Nike's FY2027 Form 10-K. All 12 NBIL-specific research records are <=53 days old, while older periodic NBIL citations (June 30, 2026 N-CSR filed Sept 4, 2026 = 77 days; NEBX Aug 5, 2026 497K = 107 days) remain the latest verified SEC filings."
+  ]
 }

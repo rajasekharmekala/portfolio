@@ -1,157 +1,101 @@
 {
   "id": "ch-8",
   "web_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
-  "book_title": "Chapter 8: Reading the Tape — Trend, Volume & Momentum Opportunity",
-  "question": "Is NKE building a Stage 1 base after its 45% drawdown, or is it still trapped under declining 30-week and 200-day moving averages with no short-term momentum edge?",
+  "book_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
+  "question": "Does NKE's multi-timeframe price, moving-average, and volume tape signal base accumulation or an active Stage 4 markdown?",
   "epigraph": {
-    "quote": "Never try to catch a falling knife—wait for the blade to stick in the floor, stop vibrating, and prove that institutional buyers are willing to lift it above its 30-week moving average on expanding volume.",
-    "author": "Stan Weinstein, Secrets for Profiting in Bull and Bear Markets"
+    "quote": "An oversold oscillator inside a falling 30-week structure measures velocity, not a durable floor.",
+    "author": "Institutional Research Desk"
   },
   "web_blocks": [
     {
+      "type": "p",
+      "html": "Both our quantitative facts ledger and live TradingView snapshot place NKE in <strong>Stage 4 (Markdown)</strong> as of November 20, 2026 [42]. The official facts ledger closes at <strong>$32.92</strong> (-4.11% 1D, -13.35% 1W, -19.21% 3M). TradingView's snapshot and options package record <strong>$32.94</strong> (-4.06% 1D, -13.10% 1W), a $0.02 (0.06%) tick variance [42, 44]. Meanwhile, the broader U.S. market sits in a <strong>Downtrend</strong> with 10 distribution days in 25 sessions. Only 38.8% of tracked stocks sit above their 50-day SMA, and zero of nine S&amp;P sectors hold their 20-day SMA."
+    },
+    {
+      "type": "tradingview_chart"
+    },
+    {
       "type": "h3",
-      "title": "Weinstein Stage & Multi-Timeframe Structure (1W / 1D / 4H)"
+      "title": "Multi-Timeframe (1W / 1D / 4H) & Options Overlay Breakdown"
     },
     {
       "type": "p",
-      "html": "On November 13, 2026, NKE closed at <strong>$37.99</strong> (+0.61% daily; -1.55% 1-week; +2.29% 1-month; -2.81% 3-month per our TradingView session ledger) [23, 29]. Its technical posture sits in <strong>Stage 1 (Basing)</strong>: price has stabilized +2.98% above its 50-day SMA ($36.89) and +0.53% above its 10-week EMA ($37.79) off the $31.97 low [29]. However, higher-timeframe resistance remains heavy because shares sit <strong>-6.82% below a falling 30-week SMA ($40.77)</strong> and <strong>-15.18% below a falling 200-day SMA ($44.79)</strong> [29]. Both `stock_snapshot.py` and `options_snapshot.py` enforce <strong>CAP_WAIT_FOR_SUPPORT</strong> (`WAIT_FOR_SUPPORT_RETEST`) [29]."
+      "html": "Weekly and daily snapshots confirm sustained institutional distribution rather than Stage 1 basing [42]. On the <strong>weekly chart (1W)</strong>, NKE trades 18.42% below a falling 30-week SMA ($40.38) and 10.76% below its 10-week EMA ($36.91), with weekly RSI at 31.06 [42]. On the <strong>daily chart (1D)</strong>, every major moving average slopes downward overhead: 10-day SMA at $37.03, 20-day SMA at $37.81, 50-day SMA at $36.69, and 200-day SMA at $44.12, while daily RSI sits at 31.66 (facts) / 31.70 (TradingView) [42]."
+    },
+    {
+      "type": "p",
+      "html": "Our NKE multi-timeframe options snapshot (<code>options_US_batch3.json</code>) adds intraday <strong>4-hour (4H)</strong> context for the November 20 close [44]. On the 4H chart, post-Investor-Day selling pushed 4H RSI to 24.91 below the 4H 20-EMA ($36.45) and 4H 50-SMA ($37.84), widening Bollinger Band width to 21.4% [44]. Oversold intraday readings can spark sharp bounces toward Pivot S1 ($34.02) or the 50-day SMA ($36.69). Even so, trading below the 50D SMA ($36.69), 30W SMA ($40.38), and 200D SMA ($44.12) earns <strong>NO OPTIONS EDGE</strong> for long calls or LEAPS [44]."
     },
     {
       "type": "table",
-      "caption": "NKE Multi-Timeframe Technical & Volatility Dashboard (As of 2026-11-13 Close: $37.99)",
+      "caption": "NKE Multi-Timeframe (1W / 1D / 4H) Technical & Institutional Flow Matrix (As of 2026-11-20)",
       "headers": [
         "Timeframe / Metric",
-        "Observed Level",
-        "vs. CMP ($37.99)",
-        "Structural Interpretation"
+        "Observed Level / Reading",
+        "Structural Alignment",
+        "Trading & Risk Implication"
       ],
       "rows": [
         [
-          "52-Week High / Low",
-          "$69.14 / $31.97",
-          "-45.05% / +18.83%",
-          "Deep cyclical drawdown; $31.97 is major cycle low"
+          "Weekly (1W) Trend [42]",
+          "30W SMA $40.38 | 10W EMA $36.91 | RSI 31.06",
+          "Stage 4 Markdown (-18.42% vs. 30W SMA)",
+          "Primary institutional trend remains firmly downward"
         ],
         [
-          "200-Day SMA (Daily)",
-          "$44.79",
-          "-15.18% below",
-          "Primary long-term trend ceiling; declining"
+          "Daily (1D) Moving Averages [42]",
+          "10D $37.03 | 20D $37.81 | 50D $36.69 | 200D $44.12",
+          "All daily SMAs stacked bearishly above CMP; 1D RSI 31.66/31.70",
+          "50D ($36.69) now acts as heavy overhead supply"
         ],
         [
-          "30-Week SMA (Weekly)",
-          "$40.77",
-          "-6.82% below",
-          "Weinstein Stage 2 reclaim gate ($40.77–$41.28 R1)"
+          "4-Hour (4H) Options Feed [44]",
+          "RSI 24.91 | 20 EMA $36.45 | 50 SMA $37.84 | BB 21.4%",
+          "Intraday oversold (options_US_batch3 MTF feed)",
+          "Can trigger brief relief bounces that fail below 50D SMA"
         ],
         [
-          "10-Week EMA / 20-Day SMA",
-          "$37.79 / $38.34",
-          "+0.53% / -0.91%",
-          "Immediate short-term equilibrium band"
+          "Volume & Distribution",
+          "32.0M shares (1.33x 20D avg); 5 dist. days",
+          "Heavy post-Investor-Day supply expansion",
+          "Institutions sold the Nov 17 FY27 reset aggressively"
         ],
         [
-          "50-Day SMA (Daily)",
-          "$36.89",
-          "+2.98% above",
-          "First tactical support; must hold on pullbacks"
+          "Relative Strength & Shorts",
+          "63D RS -9.51% | Short Float 7.91% (92.92M sh)",
+          "Underperforming S&P 500; elevated short interest",
+          "Shorts remain in control until $36.69 is reclaimed"
         ],
         [
-          "Pivot S1 / Major Shelf",
-          "$34.02",
-          "-10.45% below",
-          "Primary structural support shelf (S2 at $29.36)"
-        ],
-        [
-          "RSI (1W / 1D / 4H)",
-          "40.46 / 50.23 / 46.11",
-          "Neutral / Weak",
-          "No overbought exhaustion, but no 1W > 55 momentum thrust"
-        ],
-        [
-          "ATR(14) / BB Width",
-          "$1.19 / 9.21%",
-          "Moderate compression",
-          "Tightening volatility; awaits Dec 17 Q2 FY27 earnings catalyst"
+          "Key Price Levels",
+          "52W Low $31.97 | Prior Stop $31.50 | Pivot S2 $29.36",
+          "CMP $32.92 sits only $0.95 above 52W low",
+          "High breakdown risk if $31.97 fails ahead of Dec 17 earnings"
         ]
       ],
-      "takeaway": "NKE has stabilized above its 50-day SMA ($36.89) after a +2.29% 1-month bounce, but remains trapped beneath declining 30-week ($40.77) and 200-day ($44.79) ceilings."
+      "takeaway": "Every timeframe from 4H (options_US_batch3 feed) to 1D and 1W points downward on 1.33x volume just $0.95 above the $31.97 52-week low, exposing shares to Pivot S2 ($29.36) if support cracks [42, 43, 44]."
     },
     {
       "type": "h3",
-      "title": "Institutional Ownership, Short Interest & Insider Form 4 Conviction"
+      "title": "Why Scanner Support Levels Differ from Actionable Support"
     },
     {
       "type": "p",
-      "html": "Positioning shows a tug-of-war between insiders and short sellers. Institutional ownership is <strong>68.79%</strong> (+0.94% recent change), while short interest reached <strong>92.92 million shares</strong>, or <strong>7.91% of float</strong> (2.83 days to cover) [23]. Friday's volume (12.18M shares) ran at <strong>0.54x</strong> its 20-day average (and 0.37x its 3-month Finviz average) [23, 29]. Quiet volume on a bounce signals no institutional accumulation yet."
+      "html": "The automated technical screen table above carries one important nuance. Its formula anchors support around the 50-day SMA ($36.14–$37.24, stop $35.91) [42]. Because NKE already broke lower to $32.92, that band now sits 10%–13% above price as overhead supply. Meanwhile, our November 13 review anchored a structural stop at <strong>$31.50</strong>, right below the $31.97 52-week low."
     },
     {
       "type": "p",
-      "html": "On the insider side, SEC Form 4 filings show CEO <strong>Elliott Hill</strong> invested roughly <strong>$2.0 million</strong> in open-market buys [30, 31]. He bought 16,388 shares at ~$61.10 ($1.0M) in December 2025, and 23,660 shares at ~$42.27 ($1.0M) in April 2026 alongside directors Tim Cook and Robert Swan [30]. Insider buying confirms management conviction, but shares still trade ~10% below Hill's April buy [23, 30]."
-    },
-    {
-      "type": "h3",
-      "title": "Market Regime Context & Options / Momentum Edge Assessment"
-    },
-    {
-      "type": "p",
-      "html": "Broad market conditions reinforce patience. As of November 13, 2026, the US market sits in a <strong>Correction</strong> regime (S&P 500 below its 50-DMA, 52.6% breadth above 50-DMA, and <strong>6 distribution days</strong> over 25 sessions) [29]. Buying a sub-200-DMA stock in a Correction fights both stock and market trends."
-    },
-    {
-      "type": "p",
-      "html": "Options pricing also favors waiting. NKE's 30-day ATM implied volatility is <strong>44.3%</strong> versus 20-day realized volatility of <strong>35.0%</strong> (`IV_ELEVATED`) ahead of December 17 earnings [24, 29]. Because IV carries a +9.3 point premium and `intraday_4h_turn` is false, buying naked calls at $37.99 has negative edge [29]. Note also that the scanner's illustrative `2027-01-15` $37.5/$42.5 call spread (61 DTE) expires just ~29 days after December 17 earnings; any conditional options entry at the <strong>$34.02</strong> shelf should either wait until after earnings or use a longer-dated March/June 2027 expiry [29]."
-    },
-    {
-      "type": "p",
-      "html": "A valid Stage 2 breakout requires three steps. First, price must hold a higher low above $34.02 on light selling volume. Second, weekly closes must reclaim the 30-week SMA ($40.77) and Pivot R1 ($41.28) on >= 1.5x weekly volume [29]. Third, the 200-day SMA ($44.79) must flatten as Q2/Q3 FY2027 results confirm margin repair [23, 24]."
-    },
-    {
-      "type": "p",
-      "html": "Overhead supply mapping explains why prior bounces stalled. Between $40.77 and $44.79, the 30-week SMA, Pivot R2 ($43.89), 200-day SMA, and Hill's $42.27 buy zone all converge [29, 30]. Clearing that $41–$45 wall demands a real fundamental catalyst on December 17, not 0.37x-volume drift [23, 24]."
-    },
-    {
-      "type": "p",
-      "html": "Relative strength versus both the S&amp;P 500 and footwear peers confirms the lack of leadership. Over the past 3 months, NKE fell -2.81% while failing to hold above its 30-week average [29]. Meanwhile, active Stage 2 leaders across the US market trade above rising 10-week and 30-week averages on expanding volume. In Stan Weinstein's discipline, capital belongs in confirmed Stage 2 leaders or cash—never trapped in a Stage 1 basing zone under a falling 200-day ceiling."
-    },
-    {
-      "type": "p",
-      "html": "Downside support levels are equally clear on the weekly chart. First support sits at the 50-day SMA ($36.89), followed by the primary Pivot S1 shelf at $34.02 and the 52-week cycle low at $31.97 [29]. A high-volume undercut of $34.02 that quickly reclaims $34.50–$35.00 would create the first asymmetric swing setup. Conversely, a weekly close below $31.50 breaks the entire base and opens air down toward Pivot S2 ($29.36) [29]."
+      "html": "Catching a Stage 4 falling knife inside a 10-distribution-day Downtrend violates capital preservation. We also face Q2 FY2027 earnings on December 17, 2026 ($0.38 consensus EPS) [24, 43]. To heal technically, NKE must first stop making lower lows below $31.97. It then needs a multi-month Stage 1 base followed by a high-volume reclaim of the 50-day SMA ($36.69) and 30-week SMA ($40.38)."
     }
   ],
   "book_paragraphs": [
-    "Now let's pull up the price chart and read what institutional money is actually doing with its feet. At Friday's close of $37.99, NIKE is sitting in a Stage 1 basing zone. Over the past month, the stock nudged up 2.29% (down 1.55% on the week and 2.81% over three months) to climb +2.98% above its 50-day simple moving average at $36.89 and +0.53% above its 10-week EMA at $37.79.",
-    "But zoom out to the weekly and 200-day charts, and the overhead supply is unmistakable. NIKE's 30-week moving average sits at $40.77 and is still sloping downward. Its 200-day moving average sits way up at $44.79—more than 15% above the current price. In Stan Weinstein's framework, a stock trading 15% below a falling 200-day moving average has not earned a Stage 2 breakout. Every rally into the $40.77 to $44.79 zone runs straight into trapped shareholders looking to sell at breakeven.",
-    "Notice the volume and positioning clues too. On November 13, NKE traded just 12.18 million shares—0.54x its 20-day average (0.37x its 3-month average). True institutional accumulation announces itself with 1.5x to 2.5x volume surges on up-weeks, not quiet 0.54x drift. Meanwhile, short interest stands at 92.9 million shares, or 7.91% of the float. Bears are still leaning on the tape.",
-    "Yes, CEO Elliott Hill put $2.0 million of his own cash into open-market purchases—$1.0 million at $61.10 in December 2025 and another $1.0 million at $42.27 in April 2026 alongside Tim Cook and Robert Swan. I respect insiders writing real checks. But insider buying tells you what management believes three years from now; it does not override a falling 30-week moving average or a broader US market sitting in a Correction with six distribution days. Short-term momentum edge right here? Zero. We either wait for a washout retest of the $33.50–$35.00 support shelf, or we wait for NKE to prove itself by reclaiming $40.77–$44.79 on heavy volume."
-  ],
-  "book_callouts": [
-    {
-      "kind": "reflection",
-      "title": "NARRATOR'S REFLECTION",
-      "text": "Insider buying at $61 and $42 proves management's conviction, not the timing of the bottom. When a stock trades 15% below its 200-day moving average in a Correction regime, patience is a position."
-    }
-  ],
-  "book_subsections": [
-    {
-      "title": "Why Elevated Implied Volatility Punishes Impatient Call Buyers",
-      "paragraphs": [
-        "Walk through the options pricing for a moment, because it reinforces the exact same discipline. With Q2 FY2027 earnings expected around December 17, 2026, NIKE's at-the-money implied volatility is 44.3% compared to 20-day realized volatility of 35.0%. Option sellers are already charging a 9.3-point volatility premium.",
-        "If you buy outright shares or naked calls at $37.99 today, you are paying elevated volatility in a stock with neutral daily RSI (50.23) and weak weekly RSI (40.46). If NKE drifts sideways or tests its $34.02 pivot shelf before earnings, time decay and IV compression eat your capital. That is why our technical gate says: stand aside at $37.99, and act only at confirmed support ($33.50–$35.00) or on a Stage 2 volume breakout."
-      ]
-    },
-    {
-      "title": "Reading Overhead Supply: The $40.77 to $44.79 Gauntlet",
-      "paragraphs": [
-        "When you and I study a weekly chart after a 45% decline, we always ask: where are the trapped buyers sitting? For NIKE, the heaviest overhead supply band sits right between $40.77 and $44.79—spanning the declining 30-week moving average, Pivot R1 at $41.28, Pivot R2 at $43.89, and the 200-day moving average at $44.79. Notice that even CEO Elliott Hill's April 2026 open-market purchase at $42.27 sits smack in the middle of that ceiling.",
-        "Until institutional volume surges to 1.5x or 2.0x normal weekly turnover and drives price decisively above $44.79, every bounce from $37.99 toward $41 faces natural selling pressure. Respecting that overhead gauntlet is what separates disciplined Stage 2 trend followers from investors who tie up capital for quarters in dead-money range trade."
-      ]
-    },
-    {
-      "title": "Aligning Weekly, Daily, and 4-Hour Timeframes",
-      "paragraphs": [
-        "Notice how our three timeframes tell a coherent story when you stack them together. On the 4-hour chart, NKE is drifting just below its 20-period EMA ($38.49) and right on its 50-period SMA ($37.90) with a 4H RSI of 46.11—no intraday turn signal has fired yet. On the daily chart, price sits modestly above the 50-day SMA ($36.89) with a neutral RSI of 50.23, reflecting a modest one-month relief bounce off the lows.",
-        "On the weekly chart, however, the primary trend remains decisively down: weekly RSI is 40.46, price sits nearly 7% below the 30-week moving average ($40.77), and Friday's volume ran at just 0.54x its 20-day average. True bottoming formations require all three timeframes to stop fighting each other—either by washing down into the $34.02 Pivot S1 shelf where buyers step in aggressively, or by building a tight multi-week Volatility Contraction Pattern just beneath $40.77 before breaking out on institutional volume."
-      ]
-    }
+    "Price action confirms what the November 17 Investor Day guidance implied: NKE has entered a decisive Weinstein Stage 4 markdown inside a U.S. Downtrend. On November 20, 2026, the official market-facts ledger closed at $32.92, down 4.11% on the day and 13.35% for the week. TradingView's snapshot closed at $32.94, a two-cent tick difference. Across the S&P 500, ten distribution days in twenty-five sessions have pushed market breadth below 39% above the 50-day average, while zero of nine sectors hold their 20-day average.",
+    "Weekly and daily charts confirm active institutional selling. Weekly price sits 18.42% below a falling 30-week average ($40.38) and 10.76% below the 10-week EMA ($36.91), with weekly RSI at 31.06. Daily price sits beneath downward-sloping 10-day ($37.03), 20-day ($37.81), 50-day ($36.69), and 200-day ($44.12) averages, with daily RSI near 31.7. Friday's selloff hit 32.0 million shares, or 1.33 times the 20-day average, confirming real institutional supply.",
+    "In the NKE multi-timeframe options snapshot (options_US_batch3), four-hour RSI dropped to 24.91 below the 4H 20-EMA ($36.45) and 4H 50-SMA ($37.84), with Bollinger Band width stretched to 21.4%. Oversold intraday levels often trigger brief bounces toward Pivot S1 ($34.02) or the broken 50-day average ($36.69). Yet bounces inside Stage 4 act as exits, not durable floors. Accordingly, the options overlay assigns NO OPTIONS EDGE and rejects both long calls and LEAPS.",
+    "Automated screens still list theoretical support at $36.14 to $37.24 around the 50-day average. Because NKE already sliced 10.2% below that level, that zone has flipped into overhead supply. Shares now hover just $0.95 above the $31.97 52-week low and $1.42 above our prior $31.50 stop, with 7.91% of the float (92.92 million shares) sold short and Pivot S2 sitting lower at $29.36.",
+    "Three technical repairs must occur before NKE earns fresh capital. First, shares must hold above $31.97 through December 17 Q2 earnings ($0.38 consensus). Second, price must build a tight Stage 1 horizontal base as the 50-day average flattens. Third, NKE must reclaim both the 50-day and 30-week averages on strong accumulation volume while 63-day relative strength (-9.51%) turns positive.",
+    "Price action across weekly, daily, and intraday horizons leaves zero ambiguity about institutional supply dominance. On November 20, 2026, NIKE fell 4.11 percent to $32.92 on 32.00 million shares, sitting 1.33 times its twenty-day average volume and closing only $0.95 above the $31.97 fifty-two-week low. All primary moving averages slope steadily lower overhead, led by the 50-day simple moving average at $36.69, the 10-week exponential average at $36.91, the 30-week average at $40.38, and the 200-day average at $44.12.",
+    "Attempting to buy an oversold Stage 4 decline inside a broad S&P 500 Downtrend with ten distribution days ignores the basic mechanics of capital preservation. Overhead volume shelves between $36.14 and $37.24 will attract trapped sellers on any reflex rally into the December 17 quarterly report. Options pricing reflects that fragility as well, delivering no favorable call-spread asymmetry while implied volatility remains elevated into a low-visibility earnings reset."
   ]
 }

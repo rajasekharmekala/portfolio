@@ -1,181 +1,140 @@
 {
   "id": "ch-8",
   "title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
+  "web_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
+  "book_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
+  "question": "What happened when QCOM breached $150.07 on November 20, 2026, and how do we resolve the Stage 1 vs. Stage 4 data split?",
   "epigraph": {
-    "quote": "Fundamentals tell you what a business is worth; the weekly chart tells you whether institutions are accumulating it or distributing it into your bid.",
+    "quote": "When price slices through structural support on heavy volume, respect the breakdown first and ask questions later.",
     "author": "Stan Weinstein's Stage Analysis"
   },
   "web_blocks": [
     {
       "type": "p",
-      "html": "Qualcomm's long-term pivot is real, yet the chart on <strong>November 13, 2026</strong> is broken. Shares closed at <strong>$172.47</strong>, down 2.64% on the day and 33.64% off the 52-week high of $259.92 [24]. QCOM sits in a <strong>Stage 3 pullback (screened CAP_REJECTED / AVOID_STAGE4_OR_BROKEN)</strong> [24]. Price trades below both the 50-day SMA (<strong>$178.73</strong>, -3.50%) and declining 30-week SMA (<strong>$184.35</strong>, -6.44%) [24]. It also sits just under the 10-week EMA (<strong>$173.24</strong>, -0.44%) and barely above the 200-day SMA (<strong>$170.20</strong>, +1.33%) [24]. Momentum stays neutral-weak: daily RSI is <strong>48.80</strong>, 4-hour RSI is <strong>49.73</strong>, and weekly RSI is <strong>49.19</strong> [24]. If $170.20 breaks, shares have room to fall further [24]."
+      "html": "On Friday, <strong>November 20, 2026</strong>, Qualcomm suffered a decisive technical breakdown [24]. Shares plunged <strong>-7.45%</strong> on the day to close at <strong>$149.94</strong>, down 15.00% on the week per TradingView (-13.06% in our 5-day facts ledger) and <strong>-42.31%</strong> below its $259.92 52-week high [24]. Volume spiked to <strong>22.22 million shares</strong> (1.58x the 20-day average in our facts ledger; 22.28 million or 1.68x 30-day average in TradingView), confirming institutional distribution [24]. Most critically, the $149.94 close sliced through both Pivot S1 ($154.69) and our prior <strong>$150.07 structural invalidation stop</strong> [24]."
     },
     {
       "type": "tradingview_chart"
     },
     {
       "type": "callout",
-      "kind": "rule",
-      "title": "Stage Reconciliation: Automated Ledger (Stage 3) vs. Screening Engine (CAP_REJECTED)",
+      "variant": "rule",
+      "title": "Transparent Stage Reconciliation: Facts Ledger (Stage 1) vs. Snapshots Engine (STAGE_4)",
       "paragraphs": [
-        "Our automated market-facts ledger classifies QCOM as Stage 3 (Topping / Pullback) because its $172.47 close holds +1.33% above the 200-day SMA ($170.20) [24].",
-        "However, our Stage 2 screening engine stamps AVOID_STAGE4_OR_BROKEN and CAP_REJECTED because price trades below both the 50-day SMA ($178.73, -3.50%) and declining 30-week SMA ($184.35, -6.44%) [24]. Both outputs agree on execution: stand aside on new capital until QCOM either tests $152.37–$157.01 support or reclaims $184.35 [24]."
+        "Our quantitative market-facts ledger tags QCOM as Stage 1 (Basing) solely because the $149.94 close sits +0.18 ATR above its 63-day low ($148.25) [24].",
+        "However, our live snapshots engine classifies QCOM as STAGE_4 (AVOID_STAGE4_OR_BROKEN / CAP_REJECTED) because price trades -15.44% below a falling 50-day SMA ($177.31), -12.08% below the 200-day SMA ($170.55), and -18.68% below the 30-week SMA ($184.39) [24]. We adopt STAGE_4 for risk control."
       ]
     },
     {
       "type": "table",
-      "caption": "Table 8.1: QCOM Multi-Timeframe Technical &amp; Volatility Structure (As of November 13, 2026)",
+      "caption": "Table 8.1: Multi-Timeframe Technical & Volatility Breakdown (As of November 20, 2026)",
       "headers": [
-        "Technical / Flow Metric",
-        "Observed Level",
-        "Distance / Reading",
-        "Structural Interpretation"
+        "Timeframe / Metric",
+        "Verified Reading",
+        "Distance / Trend",
+        "Execution Meaning"
       ],
       "rows": [
         [
-          "Session Close / 52W Range",
-          "$172.47 ($121.99–$259.92)",
-          "-33.64% off 52W High",
-          "Active Stage 3 pullback (screened AVOID_STAGE4_OR_BROKEN); CAP_REJECTED for new spot equity [24]."
+          "Weekly (1W) Structure",
+          "Close $149.94 vs. 30W SMA $184.39 (1W: -15.00% TV / -13.06% facts)",
+          "-18.68% below 30W; 1W RSI 42.09",
+          "Firm Stage 4 markdown; 10W EMA ($169.00) sits 11.28% overhead as resistance [24]."
         ],
         [
-          "30-Week SMA / 50-Day SMA",
-          "$184.35 / $178.73",
-          "-6.44% / -3.50% below",
-          "Overhead institutional supply ceilings; must reclaim $184.35 for Stage 2 [24]."
+          "Daily (1D) Structure",
+          "50D SMA $177.31 / 200D SMA $170.55",
+          "-15.44% / -12.08% below; 1D RSI 35.10",
+          "Prior $150.07 stop breached on 1.58x–1.68x volume; TV rating Strong Sell (-0.56) [24]."
         ],
         [
-          "10-Week EMA / 200-Day SMA",
-          "$173.24 / $170.20",
-          "-0.44% / +1.33%",
-          "Immediate inflection shelf; $170.20 is the last near-term trendline defense [24]."
+          "Intraday (4H) Structure",
+          "20-EMA $165.25 / 50-SMA $170.99",
+          "4H RSI 32.20; intraday_4h_turn: false",
+          "No higher-low accumulation turn yet; falling-knife momentum remains active [24]."
         ],
         [
-          "RSI (1D / 4H / 1W)",
-          "48.80 / 49.73 / 49.19",
-          "Neutral-weak",
-          "Not yet oversold; no confirmed 4H higher-low accumulation turn [24]."
+          "Volatility & Pivots",
+          "ATR14 $9.34 (6.23%) / BB Width 24.77%",
+          "Pivot S1 $154.69 (broken) / S2 $144.59",
+          "Next chart shelf sits at Pivot S2 ($144.59), then 52W low ($121.99) [24]."
         ],
         [
-          "ATR (14D) / BB Width / Rel Vol",
-          "$9.23 (5.35%) / 17.01% / 0.83x",
-          "10.43M vs 12.51M 30D avg",
-          "Wide daily swings require wide structural stops; 1W bounce (+6.94%) lacked volume thrust [24]."
-        ],
-        [
-          "Support Buy Zone &amp; Pivot S1",
-          "$152.37–$157.01 (S1 $154.69)",
-          "-9.0% to -11.7% below CMP",
-          "High-conviction demand shelf where valuation and technical support converge [24]."
-        ],
-        [
-          "Invalidation Stop / Pivot R1",
-          "$150.07 / $181.92 (R2 $199.05)",
-          "-13.0% / +5.5% vs CMP",
-          "Daily/weekly close below $150.07 breaks the long-term base structure [24]."
+          "Broader US Tape & Sector",
+          "S&P 500 Downtrend (10 dist. days)",
+          "0/9 sectors >20D; Semis 26% >200D EMA",
+          "Only 17% of semiconductor stocks hold above 50D EMA; group tailwind vanished [24]."
         ]
       ],
-      "takeaway": "Buying spot shares or unhedged calls at $172.47 breaks Stage Analysis rules. Wait for $152.37–$157.01 support (stop $150.07) or a weekly reclaim above $184.35."
+      "takeaway": "Every timeframe from 4-hour to weekly confirms Stage 4 distribution, while semiconductor breadth collapsed to 17% above 50-day EMAs inside a 10-distribution-day US Downtrend."
     },
     {
       "type": "p",
-      "html": "Institutions hold 81.90% of shares, and short interest is low at 2.72% of float (28.92M shares, 2.30 days to cover) [23]. That shows the 33.6% drop from $259.92 is steady institutional selling, not a short attack [23]. Volume confirms weak demand. QCOM's 1-week +6.94% bounce came on 0.83x 30-day average volume (10.43M vs. 12.51M shares) [24]. That is a light reflex rally into the 10-week EMA ($173.24) and 50-day SMA ($178.73) [24]. Because 14-day ATR is $9.23 (5.35% daily swing), tight stops under $170.20 risk noise shakeouts. True support sits at <strong>$152.37–$157.01</strong> (around Pivot S1 at $154.69) with a hard stop at <strong>$150.07</strong>."
-    },
-    {
-      "type": "table",
-      "caption": "Table 8.2: Conditional Options Playbook — 2027-01-15 $170/$200 Bull Call Spread (61 DTE, IV_CHEAP)",
-      "headers": [
-        "Scenario / Parameter",
-        "Stock Price (% Move)",
-        "Spread Value / Structure",
-        "Net P&amp;L / Risk-Reward",
-        "Execution Rule"
-      ],
-      "rows": [
-        [
-          "Volatility &amp; Structure",
-          "CMP $172.47",
-          "BUY $170C @ $14.97 + SELL $200C @ $4.72",
-          "$10.25 debit ($1,025 max loss, 102.5 bps NAV)",
-          "WAIT_FOR_SUPPORT_OR_BASE: deploy only after $170.20 or $152–$157 shelf stabilizes."
-        ],
-        [
-          "At or Below $170 at Expiry",
-          "$170.00 (-1.4%)",
-          "$0.00",
-          "-$1,025.00 (-100.0%)",
-          "Exit early if QCOM closes below $170.20 once deployed."
-        ],
-        [
-          "At Breakeven",
-          "$180.25 (+4.5%)",
-          "$1,025.00",
-          "$0.00 (+0.0%)",
-          "Daily theta -$2.40/day; net delta +$31.20 per $1 move."
-        ],
-        [
-          "At Short Cap / Base Target",
-          "$200.00 (+16.0%)",
-          "$3,000.00",
-          "+$1,975.00 (+192.7%, 1.93:1 R:R)",
-          "Take profits at 65%–75% of max profit (~$1,382.50 gain)."
-        ]
-      ],
-      "takeaway": "Implied volatility (49.6%) looks cheap next to 20-day realized volatility (67.8%). The $170/$200 Bull Call Spread offers defined risk, but only after support holds."
-    },
-    {
-      "type": "p",
-      "html": "<strong>What Reclaiming Stage 2 Requires (The Stage 2 Checklist):</strong> To move from <code>CAP_REJECTED</code> to a Stage 2 buy above $172.47, three signals must align. First, QCOM must close a week above the 30-week SMA (<strong>$184.35</strong>) and Pivot R1 (<strong>$181.92</strong>) on &gt;1.2x average volume (&gt;15M shares/day). Second, the 50-day SMA ($178.73) and 10-week EMA ($173.24) must flatten and turn up. Third, daily and weekly RSI must reclaim 55+ to confirm buyer demand. Until then, rallies into $178.73–$184.35 stay overhead supply."
+      "html": "Notice how completely the market backdrop deteriorated in a single week [24]. Just seven days earlier, semiconductors outperformed the S&P 500 on healthy breadth; by November 20, only <strong>26% of semiconductor peers sit above their 200-day EMA</strong> and just <strong>17% sit above their 50-day EMA</strong> [24]. NVDA (-14.01%), TSM (-9.36%), AVGO (-12.19%), MRVL (-11.69%), TXN (-7.70%), and NXPI (-6.60%) all sit in Stage 4 alongside QCOM [24]. Meanwhile, the S&P 500 sits in an active Downtrend with 10 distribution days in 25 sessions and zero of nine sectors above their 20-day averages."
     },
     {
       "type": "callout",
-      "title": "Why ATR ($9.23) Dictates Wide Support Bands &amp; Defined-Risk Sizing",
+      "variant": "warn",
+      "title": "Options Desk Verdict: NO_OPTIONS_EDGE",
       "paragraphs": [
-        "At $9.23 14-day ATR (5.35% of CMP), QCOM swings $15–$20 in any 5-day window [24]. A tight stop at $168.00 below the $170.20 200-day SMA invites noise shakeouts.",
-        "Waiting for $152.37–$157.01 aligns entry with Pivot S1 ($154.69). That caps risk at $6.94/share to the $150.07 stop (&lt;0.8x weekly ATR) while keeping 5.47:1 upside to $195.00."
+        "Our options desk flags NO_OPTIONS_EDGE on QCOM: price ($149.94) sits below both the 50-day ($177.31) and 200-day/30-week ($170.55/$184.39) structural floors while fundamentals rate CYCLICAL_CONDITIONAL.",
+        "We hold zero QCOM option contracts in the live options book, and high 6.23% daily ATR ($9.34) makes catching falling calls negative-expectancy until a multi-week Stage 1 base forms."
       ]
     },
     {
       "type": "p",
-      "html": "<strong>Key Support &amp; Resistance Ladder:</strong> Overhead resistance sits at the 20-day SMA ($173.30), 10-week EMA ($173.24), and 50-day SMA ($178.73) [24]. Higher ceilings sit at Pivot R1 ($181.92), the 30-week SMA ($184.35), and Pivot R2 ($199.05) [24]. Below CMP ($172.47), first support is the 200-day SMA ($170.20) [24]. Deeper floors sit at our buy zone ($152.37–$157.01 around Pivot S1 at $154.69), the $150.07 stop, and Pivot S2 ($144.59) [24]."
+      "html": "<strong>Why $149.94 Triggers Immediate Risk Discipline:</strong> With a 14-day ATR of $9.34 (6.23% daily range) and 4H RSI at 32.20 showing no turn, hoping for a bounce is dangerous [24]. Pivot S1 ($154.69) and the 200-day SMA ($170.55) now sit overhead as trapped supply [24]. The next chart shelf lies at <strong>Pivot S2 ($144.59)</strong>, followed by the 52-week low at <strong>$121.99</strong> [24]. Short interest remains modest at 2.72% of float, proving this drop is real institutional de-risking rather than a short squeeze [23]."
     },
     {
       "type": "p",
-      "html": "<strong>Why TheWrap Sector Breadth Does Not Override Stock-Specific Stage 4:</strong> TheWrap's Semiconductors group ranks #13 and beats the S&amp;P 500 across 72% of periods [24]. Even so, QCOM sits 33.64% off its 52-week high and below its 50-day and 30-week averages [24]. Strong group breadth may cushion $152–$157, but it never overrides a broken stock chart."
+      "html": "<strong>What Re-Qualification Would Require:</strong> QCOM cannot leave <code>CAP_REJECTED</code> until three strict chart signals appear. First, selling must exhaust above Pivot S2 ($144.59) or the $136–$144 shelf and carve a multi-week Stage 1 base with contracting volume. Second, price must reclaim the 50-day SMA ($177.31) and close a week above the 30-week SMA ($184.39) on >1.2x volume. Third, the US market must exit its 10-distribution-day Downtrend via a confirmed follow-through day."
     },
     {
       "type": "p",
-      "html": "That leaves two clear paths for disciplined buyers. First, let shares drop into the $152.37–$157.01 demand zone and stabilize above $150.07. Second, wait for a weekly close above $184.35 on heavy volume. Until either signal fires, patience beats catching a Stage 3 pullback (screened AVOID_STAGE4_OR_BROKEN), and cash in Treasury bills earns yield while waiting."
+      "html": "<strong>Why Pivot S2 ($144.59) Is Not a Green Light to Catch Falling Shares:</strong> When a stock falls -15.00% in TradingView (-13.06% in our 5-day facts ledger) and breaks its 200-day moving average ($170.55) by -12.08%, momentum traders often hunt for an automatic bounce at Pivot S2 ($144.59) [24]. Yet QCOM's 20-day Bollinger Band width widened to 24.77% while 4-hour RSI sits at 32.20 with zero bullish divergence [24]. Because the 63-day low at $148.25 sits right underneath Friday's $149.94 close, any weak open next week tests $144.59 immediately. In a Downtrend where zero of nine S&amp;P 500 sectors hold above their 20-day SMAs, waiting for a confirmed Stage 1 floor saves capital from catching falling knives."
     }
   ],
   "book_paragraphs": [
-    "In Chapter 7, we established that Qualcomm's fundamentals are in transition and its valuation is reasonable on reported cash flow—but not cheap enough to ignore the tape. Now let us open the multi-timeframe chart as of November 13, 2026, because in portfolio management, being early on a broken chart is indistinguishable from being wrong.",
-    "Look at the numbers on the weekly and daily screens. Qualcomm closed at $172.47, down 2.64 percent on the day and 33.64 percent below its 52-week high of $259.92. Under Stan Weinstein's Stage Analysis, QCOM is in a Stage 3 pullback (screened AVOID_STAGE4_OR_BROKEN) and fails our capital-deployment gate. The stock trades 3.50 percent below its 50-day simple moving average of $178.73 and 6.44 percent below its 30-week simple moving average of $184.35. Even its 10-week exponential moving average sits overhead at $173.24, while the 200-day simple moving average sits just underneath Friday's close at $170.20, only 1.33 percent away.",
-    "Why does that distinction matter so much for you and I? Because when a stock bounces 6.94 percent in a single week—as QCOM just did—and stalls right underneath its 10-week EMA and 50-day SMA on below-average volume (10.43 million shares versus the 12.51 million 30-day average, or 0.83 times normal volume), that is a classic counter-trend reflex rally inside a Stage 3 pullback (screened AVOID_STAGE4_OR_BROKEN), not a confirmed Stage 2 breakout. Check the momentum gauges across all three timeframes: daily RSI is 48.80, four-hour RSI is 49.73, and weekly RSI is 49.19. There is no oversold washout yet, and our four-hour structure shows no confirmed higher-low turn.",
-    "Look closely at volatility and stop placement as well. Qualcomm's 14-day Average True Range is $9.23, which is more than 5.3 percent of the stock price every single day. If you buy at $172.47 and put a tight stop at $168, routine daily semiconductor noise can stop you out within forty-eight hours. Conversely, if you use our true structural invalidation stop at $150.07—just beneath Pivot S1 at $154.69—your downside from $172.47 is 13 percent, which swamps our near-term upside to overhead resistance at Pivot R1 ($181.92) and the 30-week moving average ($184.35).",
-    "Notice also what the options market is telling us. Twenty-day historical volatility is elevated at 67.8 percent, while at-the-money implied volatility is 49.6 percent. That makes defined-risk call spreads structurally cheaper than usual. Specifically, the January 15, 2027 $170/$200 Bull Call Spread—buying the $170 call at $14.97 and selling the $200 call at $4.72—costs $10.25 per share, or $1,025.00 total for one contract. Your worst-case loss is strictly capped at $1,025.00, your maximum profit at or above $200 is $1,975.00 (a 1.93-to-1 reward-to-risk ratio), and your expiry breakeven sits at $180.25. Selling that upper $200 call cuts daily time decay to just $2.40 per day while giving you $31.20 of upside sensitivity per $1 move. Yet even our options desk flags this setup as conditional: wait for support or a base rather than buying into overhead supply.",
-    "Institutional sponsorship data reinforces this patience. Institutions own 81.9 percent of the float and short interest is a modest 2.72 percent (2.30 days to cover), meaning this 34 percent decline is slow-motion institutional re-pricing—funds trimming mobile exposure while waiting for Data Center proof—not a crowded short squeeze waiting to explode. The smart technical posture is binary: either QCOM pulls back to the high-conviction demand zone between $152.37 and $157.01 where our stop at $150.07 gives a tight, well-defined floor, or it reclaims $184.35 on heavy volume and builds a proper Stage 2 base.",
-    "Let us spell out that Stage 2 reclaim checklist clearly so you never have to guess. Before we would ever chase Qualcomm above $172.47, we need to see three specific footprints on the chart. First, price must close the week decisively above both Pivot R1 at $181.92 and the 30-week simple moving average at $184.35, ideally on volume at least 20 percent above the 30-day average—meaning more than 15 million shares changing hands on up days. Second, the 10-week exponential moving average at $173.24 and the 50-day simple moving average at $178.73 must flatten out and begin sloping upward beneath price, turning former overhead resistance into a rising floor. Third, daily and weekly RSI need to push above 55, signaling that institutional buyers have absorbed the post-earnings supply and are stepping up their bids.",
-    "Conversely, if the $170.20 200-day average gives way over the coming weeks, do not panic. Watch how price behaves as it approaches Pivot S1 at $154.69 and the $152.37 to $157.01 demand zone. If volume dries up on the decline and a higher low forms on the four-hour chart above $150.07, that is where both spot equity buyers and our January 2027 $170/$200 Bull Call Spread find asymmetric edge. Until one of those two clear signals triggers, standing aside with fresh cash is the highest-discipline trade on the board."
+    "In Chapter 7, we saw that once you adjust for Qualcomm's flat share count, new $4.0 billion senior debt, AWS contra-revenue warrants, and $3.45 billion in stock-based pay, $149.94 offers zero real margin of safety. Now let us open the November 20, 2026 technical chart, because the tape just answered the valuation debate with an exclamation point.",
+    "On Friday, November 20, Qualcomm plunged 7.45 percent in a single session to close at $149.94, finishing the week down 15.00 percent on TradingView (-13.06 percent in our 5-day facts ledger) and 42.31 percent below its 52-week high of $259.92. Volume surged to 22.22 million shares—roughly 1.58 times the 20-day average and 1.68 times the 30-day average. More importantly, Friday's close broke two critical lines in the sand: Pivot S1 support at $154.69 and our prior structural invalidation stop at $150.07.",
+    "Before we go further, let us transparently reconcile a small split between our two automated data feeds. Our quantitative market-facts ledger still labels Qualcomm Stage 1 Basing because $149.94 happens to sit 0.18 ATR above its 63-day low of $148.25. However, our live TradingView and Stage 2 screening engine stamps STAGE_4, AVOID_STAGE4_OR_BROKEN, and CAP_REJECTED. Look at the moving averages and you will immediately see why Stage 4 is the honest call: Qualcomm trades 15.44 percent below a falling 50-day average ($177.31), 12.08 percent below its 200-day average ($170.55), and 18.68 percent below its 30-week average ($184.39).",
+    "Check all three timeframes together. On the weekly chart, RSI sits at 42.09 well below a declining 30-week average, with the 10-week EMA overhead at $169.00. On the daily chart, RSI has dropped to 35.10 and TradingView's composite technical rating reads Strong Sell at -0.56. On the four-hour intraday chart, RSI is 32.20 under a falling 20-EMA ($165.25) and 50-SMA ($170.99), with zero higher-low reversal turn in place. Every timeframe points down.",
+    "Even more telling is what happened to the surrounding market and semiconductor group. Just a week ago, semiconductor sector breadth provided a cushion. By November 20, the S&P 500 entered a confirmed Downtrend with 10 distribution days over the past 25 sessions and zero of nine sectors holding above their 20-day averages. Within semiconductors, only 26 percent of stocks remain above their 200-day EMA and just 17 percent hold above their 50-day EMA. Broadcom fell 12.2 percent, TSMC fell 9.4 percent, Marvell fell 11.7 percent, and NVIDIA fell 14.0 percent—all sitting in Stage 4.",
+    "Volatility has also widened. Qualcomm's 14-day Average True Range now stands at $9.34, representing 6.23 percent daily swings, while Bollinger Band width expanded to 24.77 percent. When a stock drops 7.45 percent on heavy volume through a structural stop while short interest sits at just 2.72 percent of float, it is not a short attack—it is genuine institutional liquidation. Trapped buyers now sit at every overhead shelf: $154.69, $169.00, $170.55, $177.31, and $184.39.",
+    "Our options desk matches that caution with a clear NO_OPTIONS_EDGE verdict. With price broken below both the 50-day and 200-day floors and business quality rated Cyclical Conditional, buying call spreads or LEAPS into a Stage 4 waterfall violates every risk rule. We hold zero QCOM options in the portfolio, and we deploy none today.",
+    "Where is the next real chart floor, and what would it take for Qualcomm to earn back Stage 2 consideration? Below $149.94, the next classical floor is Pivot S2 at $144.59, followed by the 52-week low down at $121.99. To ever qualify for new capital again, Qualcomm must stop making lower lows, carve out a quiet multi-week Stage 1 base with contracting volume, and then reclaim its 50-day ($177.31) and 30-week ($184.39) averages on expanding institutional demand alongside a healthier S&P 500 tape."
   ],
   "book_callouts": [
     {
       "kind": "warning",
-      "title": "STAGE 4 DISCIPLINE",
-      "text": "QCOM at $172.47 is below its 50D SMA ($178.73) and 30W SMA ($184.35) with neutral RSI (~49) and 0.83x volume. Never confuse a 1-week bounce into overhead resistance with a Stage 2 trend reversal."
+      "title": "STRUCTURAL STOP BREACHED ($149.94 <= $150.07)",
+      "text": "QCOM broke $150.07 on -7.45% and 1.58x–1.68x volume, falling into STAGE_4 (CAP_REJECTED) inside a 10-distribution-day US Downtrend. Options verdict: NO_OPTIONS_EDGE."
     }
   ],
   "book_subsections": [
     {
-      "title": "Deep Dive: Reading Volatility Regimes &amp; Avoiding Knife-Catching Traps",
+      "title": "Deep Dive: Why Averaging Down Into a Stage 4 Breakdown Destroys Portfolio Capital",
       "paragraphs": [
-        "One of the most common mistakes individual investors make in semiconductor stocks is treating every 30 percent drawdown from a 52-week high as an automatic bargain. Qualcomm peaked at $259.92 over the past year and sits at $172.47 today—down 33.64 percent. Yet if you look at the moving-average architecture, that decline has not yet carved out a durable bottom. Every major intermediate trendline—the 20-day SMA at $173.30, the 50-day SMA at $178.73, and the 30-week SMA at $184.35—sits above Friday's closing price, acting as a layered ceiling where trapped buyers from earlier in the year look to exit at breakeven.",
-        "Think about the psychology of overhead supply. Anyone who bought Qualcomm between $180 and $220 over the past six months is sitting on a paper loss. When the stock bounces 6.9 percent in a week on light 0.83-times volume, as it just did, those trapped holders use the rally to lighten their positions. That is why our Stage Analysis discipline refuses to deploy fresh capital into a Stage 3 pullback (screened AVOID_STAGE4_OR_BROKEN). Instead, we let the sellers exhaust themselves either down at the $152.37 to $157.01 support shelf—where Pivot S1 at $154.69 and value buyers step in—or we wait until institutional buyers prove they have absorbed all that overhead supply by driving QCOM cleanly back above $184.35 on expanding volume.",
-        "This same discipline applies to our conditional options structure. Because 20-day historical volatility is 67.8 percent while implied volatility is 49.6 percent, the January 15, 2027 $170/$200 Bull Call Spread is mathematically attractive at $10.25 per share—capping loss at $1,025 while offering $1,975 in upside. Even so, with only 61 days to expiration, buying a call spread before the 4-hour and daily charts turn higher invites unnecessary time decay of $2.40 per day. Waiting for support stabilization ensures that time and momentum work with you rather than against you.",
-        "Keep this simple support-and-resistance ladder pinned beside your screen. Above $172.47, Qualcomm faces a gauntlet of moving averages and pivot ceilings: the 10-week EMA at $173.24, the 20-day SMA at $173.30, the 50-day SMA at $178.73, Pivot R1 at $181.92, and the decisive 30-week SMA at $184.35. Below $172.47, the 200-day SMA at $170.20 is the sole near-term shelf before the chart opens down toward Pivot S1 at $154.69 and our $152.37 to $157.01 buy zone, with Pivot S2 sitting lower at $144.59. When resistance is stacked five layers thick directly overhead and real support sits 10 percent lower, the highest-probability move is always to let price come to you.",
-        "One final technical nuance deserves your attention: semiconductor sector breadth versus individual stock stage. On our sector dashboard, semiconductors as an industry group rank thirteenth and outperform the S&P 500 across 72 percent of measured periods. That healthy industry backdrop explains why Qualcomm has held above its 200-day average so far and why a bounce from $152 to $157 could be sharp. Yet strong sector breadth never overrides a broken individual stock chart. Until Qualcomm itself stops making lower highs below $184.35, we respect the Stage 4 signal and keep our fresh cash patient.",
-        "To make that rule concrete, imagine two traders looking at Qualcomm on November 13, 2026. The first trader sees a 31 percent ROIC semiconductor leader down 33 percent from its highs, buys immediately at $172.47, and watches the stock drift down to test the $154.69 Pivot S1 support shelf over the next four weeks—suffering an immediate 10 percent drawdown while wondering whether to cut losses or average down blindly. The second trader respects the Stage 4 moving-average structure, sets price alerts at $157.01 below and $184.35 above, keeps cash earning Treasury bill yields, and deploys only when price either stabilizes on the support shelf with a tight $150.07 stop or proves institutional accumulation above the 30-week moving average. Same stock, same fundamentals, dramatically different risk-adjusted outcome.",
-        "That is the entire purpose of combining Stan Weinstein's Stage Analysis with fundamental valuation. Fundamentals give us conviction in what to own—and Qualcomm's Data Center, Automotive, and IoT roadmap certainly earns a spot on our watchlist—while the chart tells us when institutional sponsorship actually agrees. With that technical discipline locked in, let us move to Chapter 9 to weigh both sides of the investment case and build our complete, executable action plan."
+        "One of the hardest psychological lessons in investing is honoring a stop-loss order when it triggers by thirteen cents—$149.94 against $150.07—on a famous technology franchise. It is tempting to tell yourself that a one-day 7.45 percent drop is an overreaction, that RSI at 35.10 is almost oversold, and that holding for a reflex bounce will recover a few hundred dollars.",
+        "History shows why that rationalization is fatal to compounding. Stocks do not become cheap simply because they fall from $259.92 to $149.94, and oversold readings in Stage 4 regularly become far more oversold before a bottom forms. Look at what is sitting immediately above $149.94: Pivot S1 at $154.69, the 10-week EMA at $169.00, the 200-day SMA at $170.55, the 50-day SMA at $177.31, and the 30-week SMA at $184.39. Every single rally into those five overhead ceilings will meet trapped holders eager to sell at breakeven.",
+        "Even more important is portfolio context. As of November 20, the US portfolio carries a beta-weighted exposure of 233.5 percent with only $2,540.35 in cash—barely 3.38 percent of net worth—in the middle of a 10-distribution-day market Downtrend. Qualcomm alone carries an effective beta of 2.04. Selling into the stop breach raises $4,498.20 in cash, cuts high-beta semiconductor risk immediately, and moves us out of the path of Pivot S2 ($144.59) or the $115 Bear Case. We can always buy Qualcomm back months from now if it builds a Stage 1 base and reclaims Stage 2—we never need to ride a Stage 4 markdown down to find out where the floor is."
+      ]
+    },
+    {
+      "title": "Multi-Timeframe Anatomy: Weekly, Daily, and 4-Hour Breakdown Signals",
+      "paragraphs": [
+        "Walk down the three chart timeframes one by one so you can spot this exact Stage 4 signature in future holdings. Start with the weekly chart: Qualcomm sits at $149.94 against a declining 30-week simple moving average at $184.39, leaving price 18.68 percent beneath its long-term institutional trendline. Weekly RSI sits at 42.09, meaning weekly momentum still has plenty of room to fall before reaching classic washout levels below 30.",
+        "Next, examine the daily chart: Friday's -7.45 percent drop came on 22.22 million shares, or 1.58 times the 20-day average. Daily RSI dropped to 35.10, while the 20-day moving average ($169.85), 200-day moving average ($170.55), and 50-day moving average ($177.31) all sit far overhead. That alignment—short averages falling beneath long averages while price makes fresh lows on heavy volume—is the textbook definition of institutional distribution.",
+        "Finally, check the four-hour intraday chart: price sits beneath both its 20-period EMA ($165.25) and 50-period SMA ($170.99), with 4-hour RSI at 32.20 and zero higher-low reversal structure. Even if buyers step in briefly near Pivot S2 at $144.59, a single reflex bounce cannot repair five layers of overhead supply. Respect the multi-timeframe alignment, honor the $150.07 stop breach, and wait for a clean Stage 1 base.",
+        "Compare that chart against the rest of the semiconductor sector on November 20 to see why group sponsorship cannot rescue Qualcomm right now. Broadcom dropped 12.19 percent to $304.41, Marvell fell 11.69 percent to $122.28, NVIDIA lost 14.01 percent to $125.53, TSMC fell 9.36 percent to $319.14, Texas Instruments slid 7.70 percent to $263.75, and NXP declined 6.60 percent to $235.15. Every single one of those peers now sits in Stage 4 alongside Qualcomm, leaving just 17 percent of semiconductor stocks above their 50-day EMAs. When institutional money is actively selling the entire chip complex, individual turnaround stories almost never decouple upward on their own."
+      ]
+    },
+    {
+      "title": "Pinning the Exact Reclaim Checklist Before Ever Returning to QCOM",
+      "paragraphs": [
+        "Because good research builds institutional memory, write down the exact technical and liquidity footprints required before Qualcomm can ever leave Stage 4. First, price must stop setting lower weekly lows and build a multi-week Stage 1 base above Pivot S2 ($144.59) or the $136.00 to $144.59 shelf, with daily volume drying up on quiet pullbacks.",
+        "Second, price must punch cleanly back through the 50-day SMA ($177.31) and close a week above the 30-week SMA ($184.39) on at least 1.2 times average volume—more than 15 million shares on advancing sessions. Third, the 50-day and 10-week moving averages must flatten and turn higher beneath price, while daily and weekly RSI climb above 55 alongside a healthy S&P 500 market uptrend.",
+        "Fourth, check the four-hour chart and options desk before touching any leverage. A healthy Stage 2 breakout shows a clean higher-low base turn on the four-hour chart, narrowing Bollinger Band width instead of 24.8 percent panic expansion, and positive relative strength versus the S&P 500. Until all four signals appear together, staying completely out of Qualcomm shares and options protects your capital from further Stage 4 markdown."
       ]
     }
   ]
