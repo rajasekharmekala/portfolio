@@ -1,80 +1,99 @@
 {
   "symbol": "CB",
   "market": "US",
-  "as_of": "2026-11-16",
+  "as_of": "2026-11-20",
   "title": "Chubb Limited (NYSE: CB) — Institutional Underwriting Dossier",
   "sector": "Financials — Property & Casualty Insurance",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
   "archetype": "Compounder",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_2",
+  "conviction_tier": "TIER_0",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "kpi_health": "PASS_WITH_WATCH",
   "decision_basis": "ch-9",
-  "cmp": 381.28,
-  "entry_zone_low": 355.15,
-  "entry_zone_high": 370.85,
-  "stop_loss": 340.06,
-  "target_base": 425.0,
-  "target_bull": 495.0,
-  "target_bear": 315.0,
+  "cmp": 371.63,
+  "entry_zone_low": 330.0,
+  "entry_zone_high": 345.0,
+  "stop_loss": 339.73,
+  "target_base": 385.0,
+  "target_bull": 430.0,
+  "target_bear": 301.0,
+  "scenario_horizon": "12-month",
+  "weinstein_stage": "STAGE_2",
+  "entry_posture": "NO_NEW_ALLOCATION_VALUATION_RR_FAIL",
   "holding_action": "NOT_HELD",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "CB is not held in either the Charles Schwab or Robinhood accounts (0 shares). New capital should wait for a pullback into the $355.15–$370.85 support zone near the 10-week EMA ($360.56) rather than chasing RSI 70.18 at $381.28.",
+  "holding_rationale": "CB is not held in Charles Schwab or Robinhood (0 shares, 0 open options). Although screens label CMP ($371.63) BUY_AT_CMP_NO_FOMO, reconciled Bear Justified P/B ($301.00; $300.56 exact) cuts weighted EV to $373.00 (+0.4% vs CMP), failing 1.50:1 even at the $355.00 50D SMA shelf (1.18:1) amid a 10-dist-day US Downtrend.",
   "holding_alerts": [
     {
-      "trigger": "Pullback into support buy zone ($355.15–$370.85)",
-      "trigger_price": 370.85,
+      "trigger": "Monitor-only valuation & regime re-open watch below $345.00",
+      "trigger_price": 345.0,
       "shares": 0,
-      "instruction": "Initiate 50% starter tranche on constructive hold above 10-week EMA ($360.56) with invalidation stop at $340.06."
+      "instruction": "Do NOT place resting buy bids today (REJECTED / TIER_0); re-open fresh underwriting review strictly below $330.00–$345.00 ONLY if S&P 500 exits Downtrend, 4H/daily trend turns up, and NA Commercial long-tail adverse PPD stabilizes below $150M–$192M/quarter"
     },
     {
-      "trigger": "Deep support retest near 10W EMA / 20D SMA ($360.56)",
-      "trigger_price": 360.56,
+      "trigger": "Deep sensitivity floor watch at $330.00",
+      "trigger_price": 330.0,
       "shares": 0,
-      "instruction": "Complete second 50% tranche if volume remains orderly and Stage 2 structure holds above $340.06."
+      "instruction": "Aligns with Justified P/B stress tests ($323.54–$336.96 under +100 bps Ke, 12.5% ROE, or 50% AOCI persistence); verify Stage 2 base repair and calculate a fresh stop before any entry"
     },
     {
-      "trigger": "Structural breakdown below 30W SMA ($343.41) / stop ($340.06)",
-      "trigger_price": 340.06,
+      "trigger": "Current Stage 2 snapshot stop reference ($339.73)",
+      "trigger_price": 339.73,
       "shares": 0,
-      "instruction": "Cancel pending buy orders; Stage 2 trend invalidated."
+      "instruction": "Closing below $339.73 invalidates the 30W SMA ($343.09) uptrend; keep 100% marginal capital in USD cash and maintain REJECTED status"
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Next marginal $10,000 USD of deployable portfolio capital (CB is NOT_HELD in Schwab or Robinhood).",
+    "capital_source": "Next marginal $10,000 USD of deployable portfolio capital (CB is NOT_HELD in Schwab or Robinhood)",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100,
         "recommendation": "Hold 100% in USD T-Bills / Money Market",
-        "rationale": "S&P 500 is in a Correction (below 50-DMA, 6 distribution days) and CB is overbought (RSI 70.18) with 1.06:1 CMP asymmetry; preserve dry powder for support pullback.",
-        "entry_condition": "Deploy into CB on pullback to $355.15–$370.85 (1.76:1–2.70:1 asymmetry vs $340.06 stop)."
+        "rationale": "S&P 500 is in a 10-distribution-day Downtrend (38.8% > 50-DMA), CB carries 5 distribution days and intraday_4h_turn: false, and weighted EV ($373.00) yields only 0.04:1 at CMP (1.18:1 at $355.00 50D shelf); earn ~4.76% 2Y carry in cash.",
+        "entry_condition": "Re-open CB review strictly below $330.00–$345.00 ONLY if S&P 500 exits Downtrend, 4H/daily trend turns up, and NA Commercial long-tail adverse PPD stabilizes below $150M–$192M/quarter."
       },
       {
         "destination_type": "SHORTLIST",
         "symbol": "RNR",
         "allocation_pct": 0,
-        "recommendation": "Keep on watchlist / await $338.15–$354.30 support",
-        "rationale": "RenaissanceRe ($356.59) is a quality specialty reinsurer trading just above its support zone, but offers narrower diversification than CB.",
-        "entry_condition": "Consider only on pullback into $338.15–$354.30 with stop at $317.83.",
-        "target_base": 405.0,
-        "asymmetry_ratio": 1.39
+        "recommendation": "Monitor on watchlist; pass at current CMP ($343.97)",
+        "rationale": "RenaissanceRe ($343.97, 1.32x P/B) posts -21.18% TTM revenue contraction and offers only 0.79:1 asymmetry to $365.00 conservative target vs. $317.26 stop.",
+        "entry_condition": "Requires property-cat rate stabilization and deeper pullback toward $330–$335 to clear 1.50:1 asymmetry.",
+        "target_base": 365.0,
+        "asymmetry_ratio": 0.79
       },
       {
         "destination_type": "OUTSIDE",
         "symbol": "TRV",
         "allocation_pct": 0,
-        "recommendation": "Pass in favor of CB on pullback",
-        "rationale": "The Travelers Companies ($403.06) posts a 27.5% ROE but trades at 2.85x P/B with higher U.S. personal/commercial concentration than CB.",
-        "entry_condition": "Requires pullback into $382.93–$402.45 (stop $350.31) and higher upside to compete with CB.",
-        "target_base": 435.0,
-        "asymmetry_ratio": 0.61
+        "recommendation": "Pass; fails asymmetry hurdle at CMP ($393.43)",
+        "rationale": "The Travelers Companies ($393.43) trades at 2.78x P/B and above its $382.38 Finviz consensus target, offering 0.38:1 CMP asymmetry to $410.00 vs. $350.04 stop.",
+        "entry_condition": "Requires pullback below $372 and broader market stabilization to clear 1.50:1 asymmetry.",
+        "target_base": 410.0,
+        "asymmetry_ratio": 0.38
       }
     ]
   },
-  "primer": "Chubb Limited (NYSE: CB) is a premier global P&C and life insurer (COMPOUNDER_PASS; 85.7% FY2025 combined ratio, 15.48% TTM ROE, $168.7B float portfolio). However, at $381.28 (1.99x P/B, RSI 70.18 near its $384.26 52-week high during an S&P 500 Correction), CMP risk-reward to our $425 base target is only 1.06:1. Verdict: WAIT_FOR_SUPPORT ($355.15–$370.85, stop $340.06); NOT_HELD (0 shares).",
+  "ch4": {
+    "intro_prose": "On November 20, 2026, CB closed at $371.63 (+0.41% 1D) in a Stage 2 uptrend, yet the S&P 500 sat in a 10-distribution-day Downtrend with only 38.8% of stocks above their 50-day SMA. Both facts and TradingView ledgers confirm STAGE_2, while CB shows 5 distribution days, a 51.79 4H RSI, and intraday_4h_turn: false below its $371.81 4H 20-EMA.",
+    "gate_intro_prose": "We test the raw technical screen against reconciled probability-weighted valuation ($373.00 EV), 1.50:1 asymmetry, and the 10-distribution-day US Downtrend.",
+    "closing_prose": "At CMP ($371.63), Base R:R is 0.42:1 and EV ($373.00) upside is +0.4%. Even pulling back to the $355.00 50-day SMA yields just 1.18:1 EV asymmetry against the $339.73 snapshot stop reference, forcing REJECTED (TIER_0) with conditional re-open watch strictly below $330.00–$345.00.",
+    "posture_override": "NO_NEW_ALLOCATION_VALUATION_RR_FAIL (REJECTED TIER_0 Override of BUY_AT_CMP_NO_FOMO)",
+    "posture_explanation": "TradingView/Finviz screen marks CMP ($371.63) as BUY_AT_CMP_NO_FOMO (+3.58% above 10W EMA, RSI 57.68), but 10-distribution-day US Downtrend, intraday_4h_turn: false, 5 CB dist days, and 1.18:1 EV R:R even at the $355.00 50D shelf compel REJECTED (TIER_0).",
+    "support_zone_explanation": "Raw snapshot band ($353.42–$373.05) and even the $348.00–$355.00 50D SMA shelf fail 1.50:1 asymmetry on reconciled EV ($373.00). Monitor-only conditional re-open watch sits strictly below $330.00–$345.00 (Pivot S1 $336.41 & sensitivity floor $323.54–$336.96).",
+    "stop_placement_explanation": "Current snapshot invalidation stop reference sits at $339.73 (30W SMA $343.09 less 0.5x ATR14 $6.71, above 200D SMA $338.77). Because verdict is REJECTED (TIER_0), no live order or stop is active; recalculate a fresh stop upon any future $330–$345 re-open.",
+    "dossier_verdict": "REJECTED",
+    "valuation_assessment": {
+      "posture": "Overvalued Relative to Cycle Risk / Zero Safety Margin (1.94x P/B, 1.72x ex-AOCI, +0.4% to $373.00 EV)",
+      "note": "Finviz consensus is $378.91; Base Fair Value is $385.00, Bear Justified P/B (1.36x on $221E BV) is $301.00 ($300.56 exact), and weighted EV is $373.00—failing 1.50:1 at CMP and at $355.00."
+    },
+    "tech_table_takeaway": "Every moving-average, oscillator, pivot, and volume metric reconciles to the November 20, 2026 facts and TradingView ledgers; 5 CB distribution days and intraday_4h_turn: false reinforce our REJECTED posture.",
+    "gate_table_takeaway": "Separating Stage 2 trend labels from reconciled EV asymmetry (0.04:1 at CMP; 1.18:1 at $355.00) prevents forcing capital into a 10-distribution-day Downtrend with zero valuation cushion."
+  },
+  "primer": "Chubb Limited (NYSE: CB) earns COMPOUNDER_PASS with PASS_WITH_WATCH KPIs on an 84.1% Q3 combined ratio and $13.75B nine-month cash flow. Watchpoints include -5.0% Major Accounts property contraction, +$192M Q3 long-tail adverse PPD, 14% below-IG bonds, $17.53B PE ($7.08B unfunded), and a $9.48B AOCI deficit. Bear Justified P/B (1.36x on $221E BV) equals $301.00, pulling weighted EV to $373.00 (+0.4% versus CMP) and 1.18:1 R:R at $355.00. Given 10 S&P 500 distribution days (Downtrend), 5 CB distribution days, and intraday_4h_turn false, we assign REJECTED (TIER_0; VALUATION, TREND) with re-open watch below $330–$345. CB is NOT_HELD (0 shares), keeping 100% of marginal capital in USD cash.",
   "citations": [
     "[1] Chubb Limited FY2025 Form 10-K (SEC EDGAR CIK 0000896159) — https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000896159&type=10-K",
     "[2] Chubb Reports Fourth Quarter and Full Year 2025 Results — https://investors.chubb.com/news-releases/news-release-details/chubb-reports-fourth-quarter-and-full-year-2025-results",
@@ -105,13 +124,25 @@
     "[27] MarketBeat: Chubb (CB) Analyst Consensus Price Targets Post-Q3 2026 — https://www.marketbeat.com/stocks/NYSE/CB/forecast/",
     "[28] AM Best: Reliance Insurance Company 2001 Liquidation & $1.1B Deficit — https://news.ambest.com/newscontent.aspx?refnum=45012",
     "[29] Chubb Limited Investor Relations: Historical SEC 10-K Filings (2016–2024) — https://investors.chubb.com/financial-information/sec-filings",
-    "[30] CompaniesMarketCap: Chubb Historical Price-to-Book Ratio (2016–2023) — https://companiesmarketcap.com/chubb/pb-ratio/"
+    "[30] CompaniesMarketCap: Chubb Historical Price-to-Book Ratio (2016–2023) — https://companiesmarketcap.com/chubb/pb-ratio/",
+    "[31] Chubb Limited Form 10-Q for the Quarterly Period Ended September 30, 2026 (filed 2026-10-28): https://www.sec.gov/Archives/edgar/data/896159/000089615926000021/cb-20260930.htm",
+    "[32] Chubb Limited Form 8-K Q3 2026 Earnings Release Exhibit 99.1 (filed 2026-10-20): https://www.sec.gov/Archives/edgar/data/896159/000119312526426866/d160822dex991.htm",
+    "[33] Chubb Limited Form 8-K Q3 2026 Financial Supplement Exhibit 99.2 (filed 2026-10-20): https://www.sec.gov/Archives/edgar/data/896159/000119312526426866/d160822dex992.htm",
+    "[34] Chubb Limited Form 10-K for Fiscal Year Ended December 31, 2025 (filed 2026-02-27): https://www.sec.gov/Archives/edgar/data/896159/000089615926000005/cb-20251231.htm",
+    "[35] SEC Form 4 Insider Filing — Evan G. Greenberg (filed 2026-11-19, transaction 2026-11-17): https://www.sec.gov/Archives/edgar/data/896159/000119312526468572/ownership.xml",
+    "[36] Berkshire Hathaway Inc. Form 13F-HR Information Table for Period Ended 2026-09-30 (filed 2026-11-16): https://www.sec.gov/Archives/edgar/data/1067983/000119312526463399/60471.xml"
   ],
   "gate_exceptions": [
-    "CITATION_ASOF_STALE (PASS WITH EXCEPTIONS): Twenty annual-filing and historical sources are older than 60 days from November 16, 2026. These are the latest audited FY2025 10-K filings available. They will update when FY2026 10-K filings release in early 2027.",
-    "Stale source list: CB 10-K (2026-02-26, 263d); FY25 Release (2026-01-27, 293d); Reinsurance News (2026-01-28, 292d); Letter (2026-04-01, 229d); S&P (2025-11-15, 366d); AM Best (2025-12-10, 341d); Agency Checklists (2026-08-15, 93d); Carrier Mgmt (2025-04-10, 585d); Business Ins. (2026-07-22, 117d); Risk & Ins. (2025-03-18, 608d); Intelligent Insurer (2026-05-12, 188d); Segments 10-K (2026-02-26, 263d); TRV 10-K (2026-02-15, 274d); ACGL (2026-02-10, 279d); AIG (2026-02-12, 277d); Zurich (2026-02-19, 270d); III (2026-06-01, 168d); NAIC (2026-05-01, 199d); History (2026-01-01, 319d); Marsh (2026-03-01, 260d).",
-    "REVIEWER_MODEL_SUBSTITUTION: The default runner model (inherit) ran both review passes because the configured models were not exposed. Both verdicts are disclosed here.",
-    "HOLDINGS_FRESHNESS: Holdings come from the Schwab and Robinhood logs with --allow-stale-holdings. CB is NOT_HELD (0 shares).",
-    "BEST_EFFORT_AFTER_REVIEW_LIMIT: Round 2 Red Team returned APPROVE. Round 2 reviewer returned REVISE on Chapter 6 2016 NPW and style length. Post-Round-2 edits fixed Chapter 6 2016 NPW ($28.15B) and kept only verified milestone years (2016, 2020, 2024, 2025, Q3 2026)."
+    "LINUX_ENVIRONMENT_PDF_BROWSER: On Linux, TheWrap-Chrome and macOS Chrome automation are unavailable. Options ran on public feeds (NO_OPTIONS_EDGE), and PDF built via WeasyPrint.",
+    "HOLDINGS_LEDGER_VERIFIED: Consolidated Schwab and Robinhood positions for 2026-11-20 confirm CB is NOT_HELD (0 shares, 0 open options).",
+    "EXCEPTION AS-OF CB:fy2025_marsh_broker_gpw_concentration_pct: 2025-12-31 is 324 days old vs 2026-11-20 (max 60d). Latest audited FY2025 Form 10-K; cures with FY2026 10-K in Feb 2027.",
+    "EXCEPTION AS-OF CB:fy2025_unhedged_fx_net_assets: 2025-12-31 is 324 days old vs 2026-11-20 (max 60d). Latest audited FY2025 Form 10-K; cures with FY2026 10-K in Feb 2027.",
+    "EXCEPTION AS-OF CB:fy2025_huatai_ownership_pct: 2025-12-31 is 324 days old vs 2026-11-20 (max 60d). Latest audited FY2025 Form 10-K; cures with FY2026 10-K in Feb 2027.",
+    "EXCEPTION AS-OF CB:fy2025_rate_shock_100bps_fv_drop: 2025-12-31 is 324 days old vs 2026-11-20 (max 60d). Latest audited FY2025 Form 10-K; cures with FY2026 10-K in Feb 2027.",
+    "SHARED_BATCH_RESEARCH_ASOF (ABM, BTSG, DFIN): The shared cache research_US_2026-11-20.json also logs 52 sibling-company EXCEPTION AS-OF warnings older than 60d (not cited in CB): ABM (45 keys: 30 Jul-31 112d, 4 Sep-08 73d, 1 Feb-03 290d, 2 Feb-13 280d, 8 Oct-31 385d; cure next 10-Q/10-K); BTSG (2 keys: Jun-05 168d, Apr-10 224d; cure next filing); DFIN (5 keys: May-14 190d, Feb-17 276d x2, Apr-01 233d, Jul-08 135d; cure next 10-K/DEF 14A)."
+  ],
+  "rejection_reasons": [
+    "VALUATION",
+    "TREND"
   ]
 }

@@ -1,84 +1,90 @@
 {
   "symbol": "PGR",
   "market": "US",
-  "as_of": "2026-11-16",
+  "as_of": "2026-11-20",
   "title": "The Progressive Corporation (NYSE: PGR) — Institutional Investment Dossier",
   "sector": "Finance / P&C Insurance",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
+  "rejection_reasons": [
+    "VALUATION"
+  ],
   "archetype": "Compounding Underwriting & Telematics Moat",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_1",
+  "conviction_tier": "TIER_0",
   "business_quality_verdict": "COMPOUNDER_PASS",
-  "kpi_health": "PASS",
+  "kpi_health": "PASS_WITH_WATCH",
   "decision_basis": "ch-9",
-  "cmp": 237.35,
-  "entry_zone_low": 218.0,
-  "entry_zone_high": 226.27,
-  "stop_loss": 205.0,
-  "target_base": 262.0,
-  "target_bull": 305.0,
-  "target_bear": 190.0,
+  "weinstein_stage": "STAGE_2",
+  "entry_posture": "BUY_AT_CMP_NO_FOMO",
+  "cmp": 231.39,
+  "entry_zone_low": 221.81,
+  "entry_zone_high": 233.59,
+  "stop_loss": 211.78,
+  "target_base": 242.0,
+  "target_bull": 285.0,
+  "target_bear": 188.0,
+  "scenario_horizon": "12–18 month",
   "holding_action": "NOT_HELD",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "PGR is currently NOT_HELD, with 0 shares in our US accounts. Charles Schwab holds $48,280.45 in equity and $2,160.64 in cash. Robinhood holds $16,949.63 in equity and $1,658.24 in cash ($3,818.88 total deployable US cash). Progressive scores COMPOUNDER_PASS on fundamentals, but at $237.35 CMP (above the $235.10 Street consensus) in a Correction regime with 4 PGR distribution days in 25 sessions, R:R to our $262.00 Base target against a $205.00 stop is just 0.76:1 (< 1.50:1). On pullback to $226.27 (upper support shelf), R:R improves to 1.68:1, earning WAIT_FOR_SUPPORT with 0% CMP allocation.",
+  "holding_rationale": "Progressive is NOT_HELD across all accounts, with 0 shares and 0 open options. Charles Schwab holds $43,534.30 in TradingView-priced equities ex-OCNL ($1,103.80 -> $44,634.37 total factpack equity) and $22.43 in cash. Robinhood holds $13,060.32 in equity ($13,057.44 factpack) and $2,517.92 in cash, totaling $2,540.35 in deployable US cash (3.38% of $75,110.60 net worth vs. 22% Downtrend floor). Pass 1 confirms COMPOUNDER_PASS quality with KPIs on watch. However, at $231.39 CMP, our normalized 91.8% combined-ratio model sets Base value at $242.00 ($237.10 EV). That leaves just 0.54:1 CMP reward-to-risk and 1.25:1 at the 10-week EMA against a $211.78 stop. In a 10-distribution-day US Downtrend, PGR fails our 1.50:1 hurdle and moves to REJECTED (TIER_0).",
   "holding_alerts": [
     {
-      "trigger": "Support Buy-Zone Entry ($218.00–$226.27)",
-      "trigger_price": 226.27,
-      "instruction": "Stage a 50% equity tranche on a controlled pullback into $218.00–$226.27 (50-DMA $220.36 to 10-week EMA $226.27) where reward-to-risk reaches 1.68:1 toward the $262.00 Base target.",
+      "trigger": "Deep-Value Reset Watch ($205.00–$215.00 + Direct CR < 92.0%; or < $190.00–$195.00)",
+      "trigger_price": 210.0,
+      "instruction": "No live buy order while REJECTED (TIER_0); re-open underwriting at $205.00–$215.00 ONLY if monthly 8-K Direct Auto CR also stabilizes < 92.0% with intact 40M+ PIF (or require < $190.00–$195.00 if Direct Auto stays >= 92.0%).",
       "shares": 0
     },
     {
-      "trigger": "52-Week High Breakout Monitor ($241.02 — No Chase)",
-      "trigger_price": 241.02,
-      "instruction": "Monitor volume on any push above $241.02 (>=1.3x 30D average). Do not chase at CMP ($237.35) where reward-to-risk is 0.76:1 and no options trade is initiated.",
+      "trigger": "Monthly Form 8-K Direct Auto CR Check (92.0% / 96.0%)",
+      "instruction": "Monitor subsequent monthly Form 8-K disclosures for Direct Auto CR stabilizing below 92.0% and personal auto PLE stabilization.",
       "shares": 0
     },
     {
-      "trigger": "Structural Invalidation Hard Stop ($205.00)",
-      "trigger_price": 205.0,
-      "instruction": "Exit any filled PGR equity tranche immediately on a daily close below $205.00 (beneath the $210.72 200-DMA). No options trade is active at CMP.",
+      "trigger": "Structural Trend Breakdown Reference ($211.78)",
+      "trigger_price": 211.78,
+      "instruction": "Monitor-only invalidation floor below the 30-week SMA ($214.48); zero position is held.",
       "shares": 0
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Deployable US Brokerage Cash ($3,818.88 combined across Charles Schwab $2,160.64 and Robinhood $1,658.24) plus new US portfolio inflows",
+    "capital_source": "Deployable US Brokerage Cash ($2,540.35 combined = 3.38% of $75,110.60 net worth across Robinhood $2,517.92 and Charles Schwab $22.43) plus new US portfolio inflows",
     "destinations": [
       {
         "destination_type": "CASH",
-        "allocation_pct": 75,
-        "recommendation": "HOLD_DRY_POWDER — Keep 75% US cash in Correction regime awaiting $218.00–$226.27 pullback",
-        "rationale": "With the U.S. market in a Correction (6 distribution days, 52.4% breadth) and PGR offering 0.76:1 CMP asymmetry above $235.10 consensus, holding 75% cash preserves dry powder for support-zone fills.",
-        "entry_condition": "Release 50% tranche into PGR only on pullback into $218.00–$226.27 (1.68:1 R:R) with a $205.00 stop."
+        "allocation_pct": 100,
+        "recommendation": "HOLD_DRY_POWDER — Retain 100% cash buffer inside 10-distribution-day US Downtrend",
+        "rationale": "Only 38.8% of US stocks hold above 50-DMA with 10 index distribution days, while deployable cash sits at just $2,540.35 (3.38% vs. 22% Downtrend floor); keeping 100% in cash protects capital while neither PGR nor AVPT clears live risk-reward hurdles.",
+        "entry_condition": "Deploy only after market regime improves or a fully researched Stage 2 leader clears >= 1.50:1 live support asymmetry."
       },
       {
         "destination_type": "SHORTLIST",
         "symbol": "AVPT",
-        "allocation_pct": 25,
-        "target_base": 21.0,
-        "asymmetry_ratio": 1.73,
-        "recommendation": "ACCUMULATE_ON_DIP — Secondary non-correlated enterprise SaaS allocation",
-        "rationale": "Balances P&C insurance concentration with recurring Microsoft-ecosystem data governance growth at 1.73:1 reward-to-risk.",
-        "entry_condition": "Deploy on confirmed Stage 2 support hold above 50-DMA."
+        "allocation_pct": 0,
+        "target_base": 20.0,
+        "asymmetry_ratio": 0.92,
+        "recommendation": "HOLD_WATCHLIST — 0% deployment at $16.49 CMP (snapshots_US_2026-11-20.json zone $15.27–$16.57, stop $12.69)",
+        "rationale": "AVPT carries 0 fundamental records in research_US_2026-11-20.json, trades at 48.4x P/E with 5 distribution days, and offers only 0.92:1 CMP R:R (0.88:1 at the $16.57 snapshot high vs. $12.69 stop and $20.00 Base target), versus 1.74:1 only on a conditional deep dip <=$15.35.",
+        "entry_condition": "Hold on watchlist at 0% until fundamental research records are refreshed and price dips conditionally <=$15.35 (>=1.74:1 asymmetry) in an improved tape."
       },
       {
         "destination_type": "OUTSIDE",
         "symbol": "PGR",
         "allocation_pct": 0,
-        "target_base": 262.0,
-        "asymmetry_ratio": 1.68,
-        "recommendation": "WAIT_FOR_SUPPORT — 0% at CMP ($237.35); stage 50% on pullback to $218.00–$226.27",
-        "rationale": "Note: table Entry zone/Stop columns reflect the mechanical Stage 2 snapshot shelf ($222.88-$233.16 / $212.17); our stricter underwriting entry zone is $218.00-$226.27 with a $205.00 stop (1.68:1 R:R vs. 0.76:1 at $237.35 CMP).",
-        "entry_condition": "Stage 50% tranche on pullback into $218.00–$226.27 with $205.00 stop."
+        "target_base": 242.0,
+        "asymmetry_ratio": 0.54,
+        "recommendation": "REJECTED (TIER_0, VALUATION) — 0% allocation at $231.39",
+        "rationale": "At $231.39 CMP (0.54:1 R:R vs. $211.78 stop) and $233.59 upper band (0.39:1), normalized 91.8% CR fair value ($242.00) fails the 1.50:1 hurdle.",
+        "entry_condition": "Re-evaluate only at $205.00–$215.00 with monthly 8-K Direct Auto CR stabilizing < 92.0% (or < $190.00–$195.00 if Direct Auto stays >= 92.0%)."
       }
     ]
   },
-  "primer": "The Progressive Corporation is a U.S. property and casualty insurer covering 40.489 million policies in force across personal auto, commercial auto, and property lines. In FY2025, it delivered $81,661 million in net premiums earned, an 87.4% combined ratio, $11,308 million in net income, and a 35.3% ROE. At $237.35 (14.67x forward P/E, 3.99x P/B), the stock sits in a confirmed Stage 2 uptrend, but Q3 2026 premium growth slowed to +4% YoY and CMP offers only 0.76:1 reward-to-risk against our $262.00 base target. We assign WAIT_FOR_SUPPORT, targeting staged entries in the $218.00–$226.27 support zone with a $205.00 invalidation stop (1.68:1 support R:R) while holding 0 shares.",
+  "primer": "The Progressive Corporation (NYSE: PGR) is a leading U.S. P&C insurer covering 40.532 million policies in force at an 87.9% YTD October 2026 combined ratio and 34.4% TTM ROE. Pass 1 forensics maintain COMPOUNDER_PASS quality but downgrade KPI health to PASS_WITH_WATCH after October Direct Auto CR hit 96.1%, personal auto PLE fell 9% YoY despite +18% ad spend, and Florida's statutory cap constrained 2025 profits. At $231.39 (14.44x forward P/E, 3.89x P/B), our normalized 91.8% combined-ratio Excess-Return model sets Base fair value at $242.00, yielding only 0.54:1 CMP and 1.25:1 10-week EMA reward-to-risk against a $211.78 stop. Inside a 10-distribution-day US Downtrend with illiquid options, we cleanly downgrade PGR to REJECTED (TIER_0, VALUATION) and hold 0 shares.",
   "gate_exceptions": [
-    "Citation freshness exceptions (--allow-stale-asof): six primary-filing baseline records predate the 60-day window as of 2026-11-16 because they represent the latest audited full-year SEC Form 10-K / Annual Report figures: PGR:fy2025_income_statement (2025-12-31, 320 days), PGR:fy2025_cash_flow_and_balance_sheet (2025-12-31, 320 days), PGR:fy2025_underwriting_and_segments (2025-12-31, 320 days), PGR:capital_return_variable_dividend (2025-12-31, 320 days), PGR:ceo_cfo_verbatim_quotes (2025-12-31, 320 days), and PGR:fy2024_total_investments (2024-12-31, 685 days). All current-period operating figures are anchored to Q3 2026 (2026-09-30) and the 2026-11-16 market session.",
-    "Holdings freshness assumption (--allow-stale-holdings): brokerage transaction logs are treated as authoritative; positions_US_2026-11-16.json confirms 0 shares of PGR held across Charles Schwab and Robinhood.",
-    "Review status (BEST_EFFORT_AFTER_REVIEW_LIMIT): Round 2 red_team returned APPROVE (verdict_holds). Round 2 report_reviewer returned BLOCK for two mechanical items (omission of PGR:ceo_cfo_verbatim_quotes and PGR:fy2024_total_investments from gate-exceptions, and the mechanical snapshot shelf $222.88-$233.16 / $212.17 in S12 vs. our stricter underwriting zone $218.00-$226.27 / $205.00). Both mechanical disclosures were updated after Round 2 without launching a third review round."
+    "All PGR research items in the shared cache date to 2026-09-30 (51d) or 2026-10-31 (20d) and pass freshness. The 56 EXCEPTION AS-OF items below come from sibling US batch records in the shared research JSON (--allow-stale-asof): ABM:abm_q3_fy26_revenue_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_q3_fy26_op_profit_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_q3_fy26_net_income_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_9m_fy26_revenue_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_9m_fy26_cfo_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_9m_fy26_capex_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_goodwill_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_intangibles_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_equity_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_unbilled_ar_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_costs_in_excess_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_rpo_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_wgnstar_consideration_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_wgnstar_goodwill_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_wgnstar_intangibles_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_lmc_contingent_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_ravenvolt_contingent_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_restructuring_cum_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_restructuring_savings_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_insurance_reserves_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026).",
+    "Remaining sibling EXCEPTION AS-OF disclosures (items 21 to 40): ABM:abm_insurance_recov_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_surety_bonds_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_receivables_facility_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_receivables_pledged_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_swap_notional_jul26_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_swap_maturity_cliff (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_debt_maturity_2030_m (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_wotc_expiration (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_ats_9m_margin_pct (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_md_9m_margin_pct (2026-07-31, 112d old; cures FY26 10-K Dec 2026). ABM:abm_fy26_seg_margin_guide (2026-09-08, 73d old; cures FY26 10-K Dec 2026). ABM:abm_fy26_fcf_guide_m (2026-09-08, 73d old; cures FY26 10-K Dec 2026). ABM:abm_bi_uk_client_exit (2026-09-08, 73d old; cures FY26 10-K Dec 2026). ABM:abm_ats_client_deferral (2026-09-08, 73d old; cures FY26 10-K Dec 2026). ABM:abm_first_incremental_loan (2026-02-03, 290d old; cures next credit amendment). ABM:abm_lti_ma_ebitda_weight (2026-02-13, 280d old; cures 2027 DEF 14A proxy). ABM:abm_prior_yr_ins_fy25_m (2026-02-13, 280d old; cures FY26 Form 10-K). ABM:abm_fy25_op_profit_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026). ABM:abm_fy25_restructuring_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026). ABM:abm_fy25_depreciation_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026).",
+    "Remaining sibling EXCEPTION AS-OF disclosures (items 41 to 56): ABM:abm_fy25_total_da_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026). ABM:abm_fy25_union_pct (2025-10-31, 385d old; cures FY26 10-K Dec 2026). ABM:abm_fy25_multiemployer_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026). ABM:abm_fy25_seiu_red_zone_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026). ABM:abm_fy25_foreign_rev_m (2025-10-31, 385d old; cures FY26 10-K Dec 2026). BTSG:btsg_kkr_remaining_shares_jun26 (2026-06-05, 168d old; cures next Form 13D/A). BTSG:btsg_abdc_fy25_invoice_purchases (2026-04-10, 224d old; cures FY26 Form 10-K). CB:fy2025_marsh_broker_gpw_concentration_pct (2025-12-31, 324d old; cures FY26 10-K Feb 2027). CB:fy2025_unhedged_fx_net_assets (2025-12-31, 324d old; cures FY26 10-K Feb 2027). CB:fy2025_huatai_ownership_pct (2025-12-31, 324d old; cures FY26 10-K Feb 2027). CB:fy2025_rate_shock_100bps_fv_drop (2025-12-31, 324d old; cures FY26 10-K Feb 2027). DFIN:dfin_may2026_clay_transition (2026-05-14, 190d old; cures FY26 Form 10-K). DFIN:dfin_fy2025_us_net_sales (2026-02-17, 276d old; cures FY26 Form 10-K). DFIN:dfin_fy2025_no_10pct_customer (2026-02-17, 276d old; cures FY26 Form 10-K). DFIN:dfin_def14a_aip_ebitda_weight (2026-04-01, 233d old; cures 2027 DEF 14A proxy). DFIN:sec_2026_edelivery_agenda (2026-07-08, 135d old; cures next SEC RegFlex update).",
+    "Browser and options feed note: This Linux run had no live macOS Chrome or Robinhood tab; options_US_batch5.json relied on public chain metrics and flagged PGR as NOT_OPTIONABLE_OR_ILLIQUID. Both facts_US_2026-11-20.json (Stage 2 Markup) and snapshots_US_2026-11-20.json (STAGE_2, BUY_AT_CMP_NO_FOMO) agree on Stage 2 trend status, which our valuation gate overrides to REJECTED (TIER_0, VALUATION). Holdings ledger positions_US_2026-11-20.json verifies 0 PGR shares and 0 open options across Schwab ($43,534.30 TradingView-priced equities ex-OCNL $1,103.80 = $44,634.37 total factpack equity; $22.43 cash) and Robinhood ($13,060.32 equity / $13,057.44 factpack; $2,517.92 cash; $2,540.35 = 3.38% total cash vs. 22% Downtrend floor)."
   ],
   "citations": [
     "[1] The Progressive Corporation, FY2025 Form 10-K (Annual Report for the Year Ended December 31, 2025), SEC EDGAR: https://www.sec.gov/edgar/browse/?CIK=0000080661",
@@ -104,9 +110,16 @@
     "[21] Chubb Limited (NYSE: CB), FY2025 Form 10-K & Q3 2026 Financial Supplement, Chubb Investor Relations: https://investors.chubb.com/",
     "[22] The Travelers Companies, Inc. (NYSE: TRV), FY2025 Form 10-K & Investor Relations: https://investor.travelers.com/",
     "[23] The Allstate Corporation (NYSE: ALL), FY2025 Form 10-K & Financial Results, Allstate Investor Relations: https://www.allstateinvestors.com/",
-    "[24] W. R. Berkley Corporation (NYSE: WRB), FY2025 Form 10-K & Investor Relations: https://ir.berkley.com/",
-    "[25] NYSE: PGR Market Snapshot, Valuation Multiples, Stage 2 Technicals & Consensus Estimates (as of Nov 16, 2026): https://finance.yahoo.com/quote/PGR/",
-    "[26] Cboe & OCC Listed Equity Options Chain, PGR 2027-01-15 $220/$290 Bull Call Debit Spread Pricing: https://www.cboe.com/delayed_quotes/pgr/quote_table",
-    "[27] AvePoint, Inc. (NASDAQ: AVPT), Investor Relations & SEC Filings (US Shortlist Diversification Benchmark): https://ir.avepoint.com/"
+    "[24] The Progressive Corporation, Q3 2025 Investor Relations Call & Earnings Release (November 2025, CFO John Sauerland), Progressive Investor Relations: https://investors.progressive.com/news-events/events-and-presentations/default.aspx",
+    "[25] NYSE: PGR Market Snapshot, Valuation Multiples, Stage 2 Technicals & Consensus Estimates (as of Nov 20, 2026): https://finance.yahoo.com/quote/PGR/",
+    "[26] Cboe & OCC Listed Equity Options Chain, PGR Liquidity & Bid-Ask Spread Audit (as of Nov 20, 2026): https://www.cboe.com/delayed_quotes/pgr/quote_table",
+    "[27] AvePoint, Inc. (NASDAQ: AVPT), Investor Relations & SEC Filings (US Shortlist Diversification Benchmark): https://ir.avepoint.com/",
+    "[28] The Progressive Corporation, Form 8-K (October 2026 Monthly Financial Results, Exhibit 99), filed November 18, 2026: https://www.sec.gov/Archives/edgar/data/80661/000008066126000384/pgr202610ex99earningsrelea.htm",
+    "[29] The Progressive Corporation, Form 10-Q for the Quarterly Period Ended September 30, 2026, filed November 2, 2026: https://www.sec.gov/Archives/edgar/data/80661/000008066126000379/pgr-20260930.htm",
+    "[30] The Progressive Corporation, Q3 2026 Letter to Shareholders (Exhibit 99 to Q3 2026 Form 10-Q), filed November 2, 2026: https://www.sec.gov/Archives/edgar/data/80661/000008066126000379/pgr-2026930ex99shareholder.htm",
+    "[31] The Progressive Corporation, Form 10-Q for the Quarterly Period Ended June 30, 2026 (June 2026 Catastrophe Reinsurance Renewal), filed August 3, 2026: https://www.sec.gov/Archives/edgar/data/80661/000008066126000308/pgr-20260630.htm",
+    "[32] The Progressive Corporation, 2025 Annual Report to Shareholders (Exhibit 13 / App.-A Ten-Year Summary, State NPW & Florida Statutory Profit Limit), filed March 2, 2026: https://www.sec.gov/Archives/edgar/data/80661/000008066126000086/pgr-20251231_d2.htm",
+    "[33] The Progressive Corporation, FY2025 Form 10-K (Channel Mix & Regulatory Disclosures), filed March 2, 2026: https://www.sec.gov/Archives/edgar/data/80661/000008066126000086/pgr-20251231.htm",
+    "[34] RenaissanceRe Holdings Ltd. (NYSE: RNR), FY2025 Form 10-K & Investor Relations: https://investor.renre.com/"
   ]
 }
