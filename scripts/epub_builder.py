@@ -28,6 +28,7 @@ import html
 import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Dict, List
 from zoneinfo import ZoneInfo
@@ -1153,13 +1154,67 @@ def render_portfolio_book_html(
 
 
 def build_pdf_book(book_html_path: str | Path, out_pdf_path: str | Path) -> Path | None:
-    """Compile the companion PDF book using WeasyPrint when available."""
-    weasy = shutil.which("weasyprint") or (
-        "/opt/homebrew/bin/weasyprint" if Path("/opt/homebrew/bin/weasyprint").exists() else None
-    )
-    out_p = Path(out_pdf_path)
-    if not weasy:
-        return None
+    """Compile the companion PDF book using WeasyPrint (CLI or Python) or headless Chromium/Chrome fallback."""
+    html_p = Path(book_html_path).resolve()
+    out_p = Path(out_pdf_path).resolve()
     out_p.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run([weasy, str(book_html_path), str(out_p)], check=True, capture_output=True, text=True)
-    return out_p
+
+    # 1. WeasyPrint CLI (venv, PATH, or Homebrew)
+    venv_weasy = Path(sys.executable).with_name("weasyprint")
+    weasy = (
+        (str(venv_weasy) if venv_weasy.exists() else None)
+        or shutil.which("weasyprint")
+        or ("/opt/homebrew/bin/weasyprint" if Path("/opt/homebrew/bin/weasyprint").exists() else None)
+    )
+    if weasy:
+        try:
+            subprocess.run([weasy, str(html_p), str(out_p)], check=True, capture_output=True, text=True)
+            if out_p.is_file() and out_p.stat().st_size > 0:
+                return out_p
+        except Exception:
+            pass
+
+    # 2. WeasyPrint Python API (when installed in .venv without CLI on PATH)
+    try:
+        import weasyprint  # type: ignore
+
+        weasyprint.HTML(filename=str(html_p)).write_pdf(str(out_p))
+        if out_p.is_file() and out_p.stat().st_size > 0:
+            return out_p
+    except Exception:
+        pass
+
+    # 3. Headless Chromium / Google Chrome fallback (works on Linux containers without WeasyPrint/Pango)
+    chrome_candidates = [
+        shutil.which("chromium"),
+        shutil.which("chromium-browser"),
+        shutil.which("google-chrome"),
+        shutil.which("google-chrome-stable"),
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    ]
+    chrome_bin = next((c for c in chrome_candidates if c and Path(c).exists()), None)
+    if chrome_bin:
+        file_url = html_p.as_uri()
+        for headless_flag in ("--headless=new", "--headless"):
+            try:
+                subprocess.run(
+                    [
+                        chrome_bin,
+                        headless_flag,
+                        "--disable-gpu",
+                        "--no-sandbox",
+                        "--no-pdf-header-footer",
+                        f"--print-to-pdf={out_p}",
+                        file_url,
+                    ],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=120,
+                )
+                if out_p.is_file() and out_p.stat().st_size > 0:
+                    return out_p
+            except Exception:
+                continue
+
+    return None
