@@ -1,6 +1,6 @@
 # US holdings (generated from the transaction log; do not edit)
 
-Generated 2026-11-19T10:20:33. Quantities and cost from `data/accounts/US/`. Market values need the ledger close and are added by the daily build.
+Generated 2026-11-23T10:19:48. Quantities and cost from `data/accounts/US/`. Market values need the ledger close and are added by the daily build.
 
 ## Robinhood
 
@@ -18,7 +18,7 @@ Last transaction: 2026-11-18. Cash: 2,517.92.
 
 ## Charles Schwab
 
-Last transaction: 2026-11-18. Cash: 22.43.
+Last transaction: 2026-11-20. Cash: 4,772.99.
 
 | Symbol | Quantity | Cost basis | Cost known | Realized P&L |
 |---|---:|---:|:---:|---:|
