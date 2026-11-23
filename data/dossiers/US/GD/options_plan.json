@@ -1,21 +1,21 @@
 {
   "symbol": "GD",
   "market": "US",
-  "generated_at": "2026-11-19T19:02:20+00:00",
+  "generated_at": "2026-11-23T07:22:23+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "skipped",
+      "note": "Browser check disabled.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
-      "status": "no_open_tab",
+      "status": "skipped",
       "active_tabs": []
     }
   },
@@ -23,122 +23,43 @@
     "tv_symbol": "NYSE:GD",
     "exchange": "NYSE",
     "company_name": "General Dynamics Corporation",
-    "close": 348.26,
-    "change_1d_pct": -0.22,
-    "perf_1w_pct": -5.68,
-    "perf_1m_pct": 1.46,
-    "perf_3m_pct": -10.01,
-    "rsi_1d": 42.13,
-    "rsi_4h": 33.81,
-    "rsi_1w": 47.28,
-    "sma20": 360.91,
-    "sma50": 348.99,
-    "sma200": 355.0,
-    "sma30_weekly": 358.57,
-    "ema10_weekly": 354.53,
-    "ema20_4h": 357.07,
-    "sma50_4h": 357.82,
-    "atr14": 7.73,
-    "bb_width_pct": 9.31,
+    "close": 341.77,
+    "change_1d_pct": -1.6,
+    "perf_1w_pct": -6.26,
+    "perf_1m_pct": -1.05,
+    "perf_3m_pct": -11.69,
+    "rsi_1d": 37.3,
+    "rsi_4h": 26.55,
+    "rsi_1w": 45.27,
+    "sma20": 360.48,
+    "sma50": 348.68,
+    "sma200": 354.94,
+    "sma30_weekly": 358.35,
+    "ema10_weekly": 353.35,
+    "ema20_4h": 354.63,
+    "sma50_4h": 357.83,
+    "atr14": 8.02,
+    "bb_width_pct": 10.36,
     "pivot_s1": 334.19,
     "pivot_s2": 295.8,
     "pivot_r1": 398.79,
     "pivot_r2": 425.0,
     "high_52w": 400.0,
     "low_52w": 306.77,
-    "dist_to_200d_pct": -1.9,
-    "major_shelf": 358.57,
+    "dist_to_200d_pct": -3.71,
+    "major_shelf": 334.19,
     "intraday_4h_turn": false,
     "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
-    "setup_summary": "GD sits below its 50D SMA (348.99) after a +1.5% 1M move near structural support (358.57). Repair remains unconfirmed on the 4H chart (4H RSI 33.81 vs Daily RSI 42.13). With the close at 348.26 vs 4H EMA20 357.07, there is no confirmed mean-reversion window yet."
+    "setup_summary": "Dislocated below 50D SMA (348.68) after a -1.1% 1M move near structural support (334.19), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 26.55 vs Daily RSI 37.3; close 341.77 vs 4H EMA20 354.63), so there is no confirmed mean-reversion window yet."
   },
   "options_plan": {
     "symbol": "GD",
     "market": "US",
     "optionable": true,
-    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
-    "iv_regime": "IV_FAIR",
-    "atm_iv_pct": 29.4,
-    "hv20_pct": 26.7,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "headline": "No clean call-spread strikes available above $290 on 2027-02-19; stand aside.",
     "open_positions_audit": [],
-    "headline": "Buy 1x GD 2027-02-19 $340/$430 Bull Call Spread (92 DTE) at $20.40 net debit ($2,040.00 max loss -> $6,960.00 max profit, 3.41:1 R:R).",
-    "recommended_trade": {
-      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
-      "expiry": "2027-02-19",
-      "dte": 92,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 340.0,
-          "mid": 23.1,
-          "bid": 21.5,
-          "ask": 24.7,
-          "open_interest": 10
-        },
-        {
-          "side": "SELL",
-          "type": "CALL",
-          "strike": 430.0,
-          "mid": 2.7,
-          "bid": 0.0,
-          "ask": 4.9,
-          "open_interest": 33
-        }
-      ],
-      "contracts": 1,
-      "multiplier": 100,
-      "net_debit_per_share": 20.4,
-      "max_loss_total": 2040.0,
-      "max_loss_nav_bps": 204.0,
-      "max_profit_total": "$6,960.00 (3.41:1 reward-to-risk)",
-      "breakeven_at_expiry": 360.4,
-      "breakeven_move_pct": 3.49,
-      "net_delta_dollars_per_1_move": 45.5,
-      "daily_theta_dollars": -3.34,
-      "underlying_stop_trigger": 323.88,
-      "profit_taking_rule": "Close spread at 65%–75% of max profit ($4,872.00 gain) or exit early if GD closes below $323.88.",
-      "scenarios": [
-        {
-          "scenario": "At or Below $340 at Expiry",
-          "stock_price": 323.88,
-          "stock_move_pct": -7.0,
-          "contract_value": 0.0,
-          "net_pnl": -2040.0,
-          "return_on_risk_pct": -100.0
-        },
-        {
-          "scenario": "At Breakeven ($360.40)",
-          "stock_price": 360.4,
-          "stock_move_pct": 3.5,
-          "contract_value": 2040.0,
-          "net_pnl": 0.0,
-          "return_on_risk_pct": 0.0
-        },
-        {
-          "scenario": "At Short Cap / Base Target ($430)",
-          "stock_price": 430.0,
-          "stock_move_pct": 23.5,
-          "contract_value": 9000.0,
-          "net_pnl": 6960.0,
-          "return_on_risk_pct": 341.2
-        },
-        {
-          "scenario": "Bull Overshoot ($460.57)",
-          "stock_price": 460.57,
-          "stock_move_pct": 32.2,
-          "contract_value": 9000.0,
-          "net_pnl": 6960.0,
-          "return_on_risk_pct": 341.2
-        }
-      ],
-      "beginner_explainer": [
-        "Why this spread works differently from buying shares: GD pulled back near its $358.57 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals. Stage 2 equity rules wait for trend repair. A defined-risk Bull Call Spread captures a rebound with strictly capped downside.",
-        "Exact wallet math (1 contract = 100 shares): You buy the $340 Call for $23.10 and sell the $430 Call for $2.70. That costs $20.40/sh net, or $2,040.00 total for 1 spread(s). That $2,040.00 is the absolute maximum you can lose.",
-        "Breakeven & profit ceiling: At expiry (2027-02-19), you start making money above $360.40 (+3.5% from $348.26). Anywhere at or above $430, your $2,040.00 turns into $9,000.00 (+$6,960.00 net profit).",
-        "Speed & time decay in plain English: Today, each $1 move up in GD adds ~$45.50 to your spread (Net Delta). Sitting flat costs ~$3.34/day in time decay (Net Theta). That decay is much lower than an unhedged call because the sold $430 call decays in your favor."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (GD)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x GD 2027-02-19 $340/$430 Bull Call Spread (92 DTE) at $20.40 net debit ($2,040.00 max loss -&gt; $6,960.00 max profit, 3.41:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> GD sits below its 50D SMA (348.99) after a +1.5% 1M move near structural support (358.57). Repair remains unconfirmed on the 4H chart (4H RSI 33.81 vs Daily RSI 42.13). With the close at 348.26 vs 4H EMA20 357.07, there is no confirmed mean-reversion window yet. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:GD. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_gd_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:GD\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:GD\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_gd_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: GD pulled back near its $358.57 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals. Stage 2 equity rules wait for trend repair. A defined-risk Bull Call Spread captures a rebound with strictly capped downside.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $340 Call for $23.10 and sell the $430 Call for $2.70. That costs $20.40/sh net, or $2,040.00 total for 1 spread(s). That $2,040.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-02-19), you start making money above $360.40 (+3.5% from $348.26). Anywhere at or above $430, your $2,040.00 turns into $9,000.00 (+$6,960.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in GD adds ~$45.50 to your spread (Net Delta). Sitting flat costs ~$3.34/day in time decay (Net Theta). That decay is much lower than an unhedged call because the sold $430 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for GD</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-02-19 $340 CALL @ $23.10 mid (bid $21.50 / ask $24.70, OI 10) + SELL 2027-02-19 $430 CALL @ $2.70 mid (bid $0.00 / ask $4.90, OI 33)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$2,040.00 (204.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$360.40 (+3.49% vs CMP)</td><td>Stock price required by 2027-02-19 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$6,960.00 (3.41:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+45.50 per $1 move | $-3.34/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($4,872.00 gain) or exit early if GD closes below $323.88.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-02-19, 92 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $2,040.00 Across Stock Scenarios (GD)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $340 at Expiry</td><td>$323.88 (-7.0%)</td><td>$0.00</td><td>$-2,040.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($360.40)</td><td>$360.40 (+3.5%)</td><td>$2,040.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($430)</td><td>$430.00 (+23.5%)</td><td>$9,000.00</td><td>$+6,960.00</td><td><strong>+341.2%</strong></td></tr><tr><td>Bull Overshoot ($460.57)</td><td>$460.57 (+32.2%)</td><td>$9,000.00</td><td>$+6,960.00</td><td><strong>+341.2%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (GD)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>No clean call-spread strikes available above $290 on 2027-02-19; stand aside.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Dislocated below 50D SMA (348.68) after a -1.1% 1M move near structural support (334.19), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 26.55 vs Daily RSI 37.3; close 341.77 vs 4H EMA20 354.63), so there is no confirmed mean-reversion window yet. <em>Account / Chain Feed: Browser check disabled.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:GD. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_gd_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:GD\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:GD\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_gd_options_chart\"});</script></div>\n</section>"
 }

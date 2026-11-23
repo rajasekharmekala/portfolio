@@ -1,21 +1,21 @@
 {
   "symbol": "UNH",
   "market": "US",
-  "generated_at": "2026-11-17T22:15:40+00:00",
+  "generated_at": "2026-11-23T07:22:23+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "skipped",
+      "note": "Browser check disabled.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
-      "status": "no_open_tab",
+      "status": "skipped",
       "active_tabs": []
     }
   },
@@ -23,122 +23,43 @@
     "tv_symbol": "NYSE:UNH",
     "exchange": "NYSE",
     "company_name": "UnitedHealth Group Incorporated",
-    "close": 389.68,
-    "change_1d_pct": -5.42,
-    "perf_1w_pct": -3.81,
-    "perf_1m_pct": -4.23,
-    "perf_3m_pct": -1.24,
-    "rsi_1d": 42.92,
-    "rsi_4h": 38.27,
-    "rsi_1w": 50.49,
-    "sma20": 406.51,
-    "sma50": 391.5,
-    "sma200": 367.58,
-    "sma30_weekly": 398.33,
-    "ema10_weekly": 396.46,
-    "ema20_4h": 402.55,
-    "sma50_4h": 406.25,
-    "atr14": 11.62,
-    "bb_width_pct": 8.48,
+    "close": 339.88,
+    "change_1d_pct": 2.85,
+    "perf_1w_pct": -16.67,
+    "perf_1m_pct": -19.42,
+    "perf_3m_pct": -11.95,
+    "rsi_1d": 29.7,
+    "rsi_4h": 27.57,
+    "rsi_1w": 38.19,
+    "sma20": 394.52,
+    "sma50": 388.7,
+    "sma200": 368.54,
+    "sma30_weekly": 396.67,
+    "ema10_weekly": 387.4,
+    "ema20_4h": 375.04,
+    "sma50_4h": 399.23,
+    "atr14": 15.36,
+    "bb_width_pct": 28.01,
     "pivot_s1": 370.86,
     "pivot_s2": 334.76,
     "pivot_r1": 434.81,
     "pivot_r2": 462.66,
     "high_52w": 461.62,
     "low_52w": 255.97,
-    "dist_to_200d_pct": 6.01,
-    "major_shelf": 398.33,
+    "dist_to_200d_pct": -7.78,
+    "major_shelf": 334.76,
     "intraday_4h_turn": false,
-    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
-    "setup_summary": "UNH trades below its 50D SMA ($391.50) after a -4.23% 1M move. 4H repair remains unconfirmed (4H RSI 38.27 vs Daily RSI 42.92; close $389.68 vs 4H EMA20 $402.55)."
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (388.7) and 200D/30W floor (368.54); trend is broken."
   },
   "options_plan": {
     "symbol": "UNH",
     "market": "US",
-    "optionable": true,
-    "options_verdict": "BULL_CALL_DEBIT_SPREAD",
-    "iv_regime": "IV_ELEVATED",
-    "atm_iv_pct": 36.1,
-    "hv20_pct": 30.6,
+    "optionable": false,
+    "options_verdict": "NOT_OPTIONABLE_OR_ILLIQUID",
+    "headline": "UNH options bid-ask spreads exceed 14% or lack open interest — avoid illiquid slippage; trade equity only.",
     "open_positions_audit": [],
-    "headline": "Buy 1x UNH 2027-01-15 $390/$470 Bull Call Spread (59 DTE) at $19.60 net debit ($1,960.00 max loss -> $6,040.00 max profit, 3.08:1 R:R).",
-    "recommended_trade": {
-      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
-      "expiry": "2027-01-15",
-      "dte": 59,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 390.0,
-          "mid": 21.48,
-          "bid": 20.35,
-          "ask": 22.6,
-          "open_interest": 2300
-        },
-        {
-          "side": "SELL",
-          "type": "CALL",
-          "strike": 470.0,
-          "mid": 1.88,
-          "bid": 1.75,
-          "ask": 2.0,
-          "open_interest": 3983
-        }
-      ],
-      "contracts": 1,
-      "multiplier": 100,
-      "net_debit_per_share": 19.6,
-      "max_loss_total": 1960.0,
-      "max_loss_nav_bps": 236.7,
-      "max_profit_total": "$6,040.00 (3.08:1 reward-to-risk)",
-      "breakeven_at_expiry": 409.6,
-      "breakeven_move_pct": 5.11,
-      "net_delta_dollars_per_1_move": 45.1,
-      "daily_theta_dollars": -13.54,
-      "underlying_stop_trigger": 386.02,
-      "profit_taking_rule": "Close spread at 65%–75% of max profit ($4,228.00 gain) or exit early if UNH closes below $386.02.",
-      "scenarios": [
-        {
-          "scenario": "At or Below $390 at Expiry",
-          "stock_price": 386.02,
-          "stock_move_pct": -0.9,
-          "contract_value": 0.0,
-          "net_pnl": -1960.0,
-          "return_on_risk_pct": -100.0
-        },
-        {
-          "scenario": "At Breakeven ($409.60)",
-          "stock_price": 409.6,
-          "stock_move_pct": 5.1,
-          "contract_value": 1960.0,
-          "net_pnl": 0.0,
-          "return_on_risk_pct": 0.0
-        },
-        {
-          "scenario": "At Short Cap / Base Target ($470)",
-          "stock_price": 470.0,
-          "stock_move_pct": 20.6,
-          "contract_value": 8000.0,
-          "net_pnl": 6040.0,
-          "return_on_risk_pct": 308.2
-        },
-        {
-          "scenario": "Bull Overshoot ($545.00)",
-          "stock_price": 545.0,
-          "stock_move_pct": 39.9,
-          "contract_value": 8000.0,
-          "net_pnl": 6040.0,
-          "return_on_risk_pct": 308.2
-        }
-      ],
-      "beginner_explainer": [
-        "Why this spread works differently: UNH earned COMPOUNDER_PASS fundamentals, with 30W SMA reclaim at $398.33 and support at $365.30–$376.42. Keep 100% cash now; enter this defined-risk spread only conditional on a 4H turn at support.",
-        "Exact wallet math (1 contract = 100 shares): You buy the $390 Call for $21.48 and simultaneously sell the $470 Call for $1.88, paying $19.60/sh net ($1,960.00 total for 1 spread(s)). That $1,960.00 is the absolute maximum you can lose.",
-        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $409.60 (+5.1% from $389.68). Anywhere at or above $470, your $1,960.00 turns into $8,000.00 (+$6,040.00 net profit).",
-        "Speed & time decay in plain English: Today, each $1 move up in UNH adds ~$45.10 to your spread (Net Delta), while sitting flat costs ~$13.54/day in time decay (Net Theta) — much lower than an unhedged call because the sold $470 call decays in your favor."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (UNH)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x UNH 2027-01-15 $390/$470 Bull Call Spread (59 DTE) at $19.60 net debit ($1,960.00 max loss -&gt; $6,040.00 max profit, 3.08:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> UNH trades below its 50D SMA ($391.50) after a -4.23% 1M move. 4H repair remains unconfirmed (4H RSI 38.27 vs Daily RSI 42.92; close $389.68 vs 4H EMA20 $402.55). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:UNH. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_unh_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:UNH\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:UNH\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_unh_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently: UNH earned COMPOUNDER_PASS fundamentals, with 30W SMA reclaim at $398.33 and support at $365.30–$376.42. Keep 100% cash now; enter this defined-risk spread only conditional on a 4H turn at support.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $390 Call for $21.48 and simultaneously sell the $470 Call for $1.88, paying $19.60/sh net ($1,960.00 total for 1 spread(s)). That $1,960.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $409.60 (+5.1% from $389.68). Anywhere at or above $470, your $1,960.00 turns into $8,000.00 (+$6,040.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in UNH adds ~$45.10 to your spread (Net Delta), while sitting flat costs ~$13.54/day in time decay (Net Theta) — much lower than an unhedged call because the sold $470 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for UNH</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $390 CALL @ $21.48 mid (bid $20.35 / ask $22.60, OI 2300) + SELL 2027-01-15 $470 CALL @ $1.88 mid (bid $1.75 / ask $2.00, OI 3983)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$1,960.00 (236.7 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$409.60 (+5.11% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$6,040.00 (3.08:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+45.10 per $1 move | $-13.54/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($4,228.00 gain) or exit early if UNH closes below $386.02.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 59 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $1,960.00 Across Stock Scenarios (UNH)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $390 at Expiry</td><td>$386.02 (-0.9%)</td><td>$0.00</td><td>$-1,960.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($409.60)</td><td>$409.60 (+5.1%)</td><td>$1,960.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($470)</td><td>$470.00 (+20.6%)</td><td>$8,000.00</td><td>$+6,040.00</td><td><strong>+308.2%</strong></td></tr><tr><td>Bull Overshoot ($545.00)</td><td>$545.00 (+39.9%)</td><td>$8,000.00</td><td>$+6,040.00</td><td><strong>+308.2%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NOT_OPTIONABLE_OR_ILLIQUID\">\n<h2>Options &amp; Call-Convexity Playbook (UNH)</h2>\n<p><span class=\"verdict verdict-watch\">NOT OPTIONABLE OR ILLIQUID</span> &mdash; <strong>UNH options bid-ask spreads exceed 14% or lack open interest — avoid illiquid slippage; trade equity only.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (388.7) and 200D/30W floor (368.54); trend is broken. <em>Account / Chain Feed: Browser check disabled.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:UNH. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_unh_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:UNH\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:UNH\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_unh_options_chart\"});</script></div>\n</section>"
 }

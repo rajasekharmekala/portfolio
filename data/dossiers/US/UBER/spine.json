@@ -1,326 +1,154 @@
 {
   "symbol": "UBER",
   "market": "US",
-  "as_of": "2026-11-17",
+  "as_of": "2026-11-20",
   "title": "Uber Technologies, Inc. (NYSE: UBER) — Institutional Underwriting & Multi-Horizon Dossier",
   "sector": "Technology / Transportation",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
+  "rejection_reasons": [
+    "TREND",
+    "CASH_FLOW"
+  ],
   "decision_basis": "ch-9",
   "archetype": "Quality Compounder",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_2",
+  "conviction_tier": "TIER_0",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "kpi_health": "PASS_WITH_WATCH",
-  "cmp": 68.81,
-  "entry_zone_low": 62.0,
-  "entry_zone_high": 65.0,
-  "stop_loss": 58.5,
-  "target_base": 88.0,
+  "weinstein_stage": "STAGE_4",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
+  "cmp": 63.47,
+  "entry_zone_low": 61.24,
+  "entry_zone_high": 63.1,
+  "stop_loss": 60.96,
+  "target_bear": 45.0,
+  "target_base": 75.0,
   "target_bull": 108.0,
-  "target_bear": 52.0,
+  "expected_value_12m": 72.6,
+  "scenario_horizon": "12-month",
   "holding_action": "NOT_HELD",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "Consolidated equity holdings show 0 common UBER shares (holding_shares_to_sell: 0). However, the options book holds 5 open December 17, 2027 LEAPS contracts (4x UBER271217C00110000 at $1,307.91 MV and 1x UBER271217C00100000 at $467.95 MV; $1,775.86 total MV, 395 DTE, 2.14% of $82,808.19 net worth). Both LEAPS lines are rated HOLD above the $63.00 structural invalidation floor while abstaining from averaging down until Stage 2 structure is restored.",
+  "holding_rationale": "Equity accounts in Robinhood and Schwab hold 0 UBER common shares (NOT_HELD; sell 0 shares). Robinhood still holds 5 Dec 17, 2027 Call LEAPS with 392 calendar days left as of 2026-11-20 (389 from 2026-11-23). The stack holds 4x $110 calls ($2,644.91 cost; $1,307.91 prior mark) and 1x $100 call ($818.95 cost; $467.95 prior mark). Total cost is $3,463.86 and prior mark is $1,775.86, or 2.36% of $75,110.60 net worth. We override the scanner and mandate EXIT_IMMEDIATELY (CLOSE_INTO_CASH) across all 5 contracts. Both strikes expire at $0.00 intrinsic value (-100%) at our $75.00 Base Case, and all 4x $110C expire at $0.00 at $108.00 Bull. Delta is compressed to 0.14–0.22 (~$820–$1,020 value), while $63.47 sits $0.47 (<0.2x ATR) above $63.00 on 1.63x Stage 4 volume. Spreads exceed 14%, and US cash sits at 3.38% versus the 22.0% Downtrend floor. Close all 5 contracts cleanly on market liquidity into USD cash with zero averaging down (hard breach <= $63.00).",
   "holding_alerts": [
     {
-      "trigger": "Common / LEAPS Structural Support Entry ($62.00–$65.00)",
-      "trigger_price": 64.04,
+      "trigger": "LEAPS Immediate Liquidation — EXIT_IMMEDIATELY (CLOSE_INTO_CASH)",
+      "trigger_price": 63.47,
       "shares": 0,
-      "instruction": "Wait for UBER to test and stabilize at the $62.00–$65.00 support shelf ($64.04 52W low) before deploying new common equity or the conditional Jan 15, 2027 $67.5/$77.5 Bull Call Debit Spread ($3.73 debit)."
+      "instruction": "Close all 5 open Dec 17, 2027 LEAPS contracts (4x $110C, 1x $100C; 392 DTE) cleanly on market liquidity using limit orders to salvage ~$820–$1,020 into USD cash ($0.00 intrinsic at $75.00 Base; 0.14–0.22 delta; 3.38% portfolio cash vs. 22.0% floor); ZERO averaging down; 0 common shares held."
     },
     {
-      "trigger": "LEAPS Invalidation Floor ($63.00)",
+      "trigger": "LEAPS Gap-Down Hard Breach Floor — EXIT_AT_MARKET_OPEN",
       "trigger_price": 63.0,
       "shares": 0,
-      "instruction": "Re-evaluate or exit the 5 open Dec 17, 2027 LEAPS contracts (4x $110C, 1x $100C) if UBER closes decisively below $63.00 on heavy volume."
+      "instruction": "If any open Dec 2027 LEAPS contract remains unfilled and UBER trades or closes <= $63.00 (below the $63.29 52W low), liquidate immediately regardless of >14% bid-ask spreads."
     },
     {
-      "trigger": "Common Invalidation Stop ($58.50)",
-      "trigger_price": 58.5,
+      "trigger": "Snapshot Monitor Floor (Screen Reference Only)",
+      "trigger_price": 60.96,
       "shares": 0,
-      "instruction": "Hard invalidation stop at $58.50 for any new common equity position initiated in the $62.00–$65.00 support zone."
+      "instruction": "Purely a historical technical support reference beneath the $61.24–$63.10 pocket (below the $63.00 LEAPS invalidation floor); carries 0.0% equity bids until a full Stage 1 base and Stage 2 reclaim >$73.50 form."
     },
     {
-      "trigger": "Stage 2 Breakout Reclaim ($73.50)",
+      "trigger": "Stage 2 Re-Underwriting Gate",
       "trigger_price": 73.5,
       "shares": 0,
-      "instruction": "Alternative momentum entry trigger if UBER reclaims its 200-day SMA ($72.55) and 30-week SMA ($71.94) above $73.50 on >=1.25x average volume."
+      "instruction": "Re-open equity underwriting only after UBER builds a Stage 1 base, reclaims $72.40–$73.50 (200D/30W SMAs) on >=1.25x volume, US breadth exits Downtrend, and leverage tracks <2.0x."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Next marginal cash unit from $3,818.88 consolidated cash ($2,160.64 Schwab + $1,658.24 Robinhood) within $82,808.19 net worth.",
+    "capital_source": "Next marginal cash unit from $2,540.35 consolidated US cash ($2,517.92 Robinhood + $22.43 Schwab; 3.38% of $75,110.60 net worth vs. 22.0% Downtrend cash floor)",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100,
         "recommendation": "RETAIN_CASH",
-        "rationale": "US market is in a confirmed Downtrend (42.6% breadth >50DMA, 7 distribution days, 5.12% 10Y yield) and UBER is in Stage 4 below its 50D ($69.31) and 200D ($72.55) SMAs. Preserve dry powder until UBER stabilizes at $62.00–$65.00 or breadth exits Downtrend.",
-        "entry_condition": "Deploy into UBER only on $62.00–$65.00 support stabilization (3.54:1 R:R to $88.00 Base) or a Stage 2 reclaim above $73.50."
+        "rationale": "US market is in a 10-distribution-day Downtrend (38.8% breadth >50DMA) and consolidated US cash sits at just 3.38% versus the 22.0% Downtrend floor; UBER is REJECTED in Stage 4.",
+        "entry_condition": "Retain 100% of marginal cash in reserve until portfolio cash approaches the 22.0% Downtrend floor or breadth exits Downtrend."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "MSFT",
+        "symbol": "ABBV",
         "allocation_pct": 0,
-        "recommendation": "WATCH_AT_SUPPORT",
-        "target_base": 660.0,
-        "asymmetry_ratio": 4.5,
-        "rationale": "Microsoft (CMP $506.24) is a premier shortlist compounder currently in Stage 3 (CAP_WAIT_FOR_SUPPORT); already a 7.58% portfolio holding ($6,278.49 MV).",
-        "entry_condition": "Wait for stabilization in the $498.08–$513.26 support zone and broader market Downtrend exit before adding marginal cash."
+        "recommendation": "WATCH_UNTIL_CASH_FLOOR_RESTORED",
+        "target_base": 340.0,
+        "asymmetry_ratio": 1.85,
+        "rationale": "AbbVie ($286.20 CMP, STAGE_2, CLEAR_FOR_CONSIDERATION, 36.18% OPM, +10.68% Rev YoY) is an unheld defensive healthcare compounder, yet 3.38% portfolio cash prohibits deploying marginal cash before rebuilding reserves.",
+        "entry_condition": "Consider only after portfolio cash rebuilds toward the 22.0% Downtrend floor and ABBV holds its $277.05–$285.49 support zone ($249.53 stop)."
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "ABNB",
+        "symbol": "ACGL",
         "allocation_pct": 0,
-        "recommendation": "WATCH_FOR_MACRO_TURN",
-        "target_base": 215.0,
-        "asymmetry_ratio": 1.75,
-        "rationale": "Airbnb (CMP $180.94, 21.33x P/FCF, 27.45% ROIC; Stage 3 in the daily facts ledger, STAGE_2 in the TradingView snapshot) screens CLEAR_FOR_CONSIDERATION on technicals, but 1.75:1 asymmetry is inferior to UBER's 3.54:1 support-zone setup.",
-        "entry_condition": "Require macro regime exit from Downtrend or pullback toward $172.96–$177.93 support."
+        "recommendation": "WATCH_FOR_CASH_FLOOR_RECOVERY",
+        "target_base": 130.0,
+        "asymmetry_ratio": 1.85,
+        "rationale": "Arch Capital Group ($108.82 CMP, STAGE_2, 8.89x P/E, 23.61% OPM) offers defensive insurance cash flow outside the shortlist, yet remains unfunded at 0% until macro breadth exits Downtrend and cash recovers.",
+        "entry_condition": "Wait for a pullback into the $102.16–$108.76 support zone ($97.27 stop) once portfolio cash exceeds the Downtrend threshold."
       }
     ]
   },
-  "primer": "Uber Technologies (NYSE: UBER) runs an asset-light global marketplace for rides and delivery, reaching $193.5B in FY2025 Gross Bookings and $59.82B in Q3 2026. Trailing Free Cash Flow stands at $10.4B on 0.6% capex intensity, backed by >50M Uber One members and a >$2.5B Advertising run-rate. At $68.81 (13.48x P/FCF), the stock prices in autonomous vehicle fears while sitting in a Stage 4 downtrend below its 50D ($69.31) and 200D ($72.55) SMAs. We rate the business COMPOUNDER_PASS (PASS_WITH_WATCH) and assign WAIT_FOR_SUPPORT ($62.00–$65.00 entry zone, $58.50 stop, $88.00 Base target, 3.54:1 R:R).",
+  "primer": "Uber runs a global ride and delivery network with $59.82B in Q3 2026 Gross Bookings and $10.42B in TTM FCF [31, 32]. Core quality earns COMPOUNDER_PASS with PASS_WITH_WATCH for $17.1B in pending deals, +49% higher debt, $1.5B UK VAT cash, and robotaxis [31, 33]. Deducting $2.15B stock pay, $7.67B net debt, $1.5B UK VAT cash, and $10.65B deal outlays puts shares at 17.12x normalized EV/(FCF-SBC). Our SBC-adjusted DCF sets Base fair value at $75.00 ($70.14 standalone ex-M&A FCF) against $45.00 Bear ($41.78 stressed) and $108.00 Bull ($72.60 EV). At $63.47 in Stage 4 (CAP_REJECTED), equity is REJECTED (TIER_0; TREND, CASH_FLOW) and we mandate EXIT_IMMEDIATELY on the 5 open Dec 2027 LEAPS.",
+  "verdict_rule_summary": "STAGE_4 (CAP_REJECTED) and M&A/cash-flow friction force REJECTED (TIER_0); $61.24–$63.10 ($60.96 stop) is strictly a historical reference below the $63.00 LEAPS floor (0.0% bids until Stage 1 base + Stage 2 reclaim >$73.50).",
+  "sizing_table_takeaway": "At $75,110.60 US net worth ($2,540.35 cash, 3.38% vs. 22.0% Downtrend floor), UBER carries 0.0% equity allocation under REJECTED (TIER_0) while existing Dec 2027 LEAPS carry EXIT_IMMEDIATELY (CLOSE_INTO_CASH) to salvage ~$820–$1,020.",
+  "gate_exceptions": [
+    "Citation AS-OF audit: Zero EXCEPTION AS-OF items apply to UBER. All 48 UBER records date from 2026-11-04 to 2026-11-16, well within 60 days of 2026-11-20. We pass --allow-stale-asof only for any shared non-UBER records in the market file.",
+    "Stage and price check: Facts ($63.47 close, Stage 4) and TradingView ($63.48 close, STAGE_4, CAP_REJECTED) match on UBER. Peer DASH is STAGE_4 in TradingView, LYFT is STAGE_2, and GOOGL is STAGE_4.",
+    "Linux environment notes: Fresh PDF export completed (docs/blogs/US/UBER_book.pdf) alongside canonical chapter JSONs in data/dossiers/US/UBER/. Mac Chrome tabs for TheWrap, Robinhood, and TradingView are offline in this Linux container, so checks use public feeds and data/options/US.json."
+  ],
   "citations": [
-    {
-      "id": 1,
-      "title": "Uber Technologies, Inc. Form 10-K for the Fiscal Year Ended December 31, 2025",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0001543151",
-      "as_of": "2026-02-18",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 2,
-      "title": "Uber Announces Results for Fourth Quarter and Full Year 2025",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/news-events/news/",
-      "as_of": "2026-02-04",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 3,
-      "title": "Uber Announces Results for Third Quarter 2026",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/financials/",
-      "as_of": "2026-11-04",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 4,
-      "title": "Uber Announces Results for Second Quarter 2026",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/",
-      "as_of": "2026-08-05",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 5,
-      "title": "Uber Announces Results for First Quarter 2026",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/news-events/events/",
-      "as_of": "2026-05-06",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 6,
-      "title": "Uber 2024 Investor Update Presentation (3-Year Financial Outlook 2024-2026)",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/financials/default.aspx",
-      "as_of": "2024-02-14",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 7,
-      "title": "Uber Technologies, Inc. Form 10-K for the Fiscal Year Ended December 31, 2024",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001543151&type=10-K",
-      "as_of": "2025-02-14",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 8,
-      "title": "Uber Engineering Blog: Marketplace Matching, Dynamic Pricing & Logistics Architecture",
-      "publisher": "Uber Technologies, Inc.",
-      "url": "https://www.uber.com/blog/engineering/",
-      "as_of": "2026-11-17",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 9,
-      "title": "Uber Announces $20 Billion Share Repurchase Authorization (July 2025)",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/governance/",
-      "as_of": "2025-07-30",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 10,
-      "title": "Uber & Aurora Innovation Complete ATG Transaction (Form 8-K)",
-      "publisher": "U.S. Securities and Exchange Commission",
-      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001543151&type=8-K",
-      "as_of": "2020-12-07",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 11,
-      "title": "Uber & Joby Aviation Elevate Divestiture Announcement",
-      "publisher": "Uber Newsroom",
-      "url": "https://www.uber.com/newsroom/",
-      "as_of": "2020-12-08",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 12,
-      "title": "Uber Completes Acquisition of Postmates",
-      "publisher": "Uber Investor Relations",
-      "url": "https://www.uber.com/newsroom/uber-postmates/",
-      "as_of": "2020-12-01",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 13,
-      "title": "Uber Completes Acquisition of Careem",
-      "publisher": "Uber Newsroom",
-      "url": "https://www.uber.com/newsroom/careem-acquisition/",
-      "as_of": "2020-01-02",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 14,
-      "title": "California Proposition 22 Driver Benefits & Insurance Framework",
-      "publisher": "Uber Under the Hood",
-      "url": "https://www.uber.com/us/en/drive/insurance/",
-      "as_of": "2026-11-17",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 15,
-      "title": "UK Private Hire VAT and Tour Operators Margin Scheme (TOMS) Reform",
-      "publisher": "UK Parliament / HMRC",
-      "url": "https://www.gov.uk/government/publications/",
-      "as_of": "2026-04-01",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 16,
-      "title": "Uber Q3 2026 Earnings Call Transcript & Autonomous Fleet Remarks",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/news-events/events/default.aspx",
-      "as_of": "2026-11-04",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 17,
-      "title": "Uber CFO Transition: Balaji Krishnamurthy Appointed CFO",
-      "publisher": "Uber Investor Relations",
-      "url": "https://investor.uber.com/governance/executive-leadership/",
-      "as_of": "2026-02-15",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 18,
-      "title": "Uber & Waymo Autonomous Ride-Hailing Partnership (Austin & Atlanta)",
-      "publisher": "Uber Newsroom",
-      "url": "https://www.uber.com/newsroom/waymo-uber/",
-      "as_of": "2025-03-04",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 19,
-      "title": "Uber Advertising: Journey Takeovers & Sponsored Listings Scale Past $2.5B Run-Rate",
-      "publisher": "Uber Advertising",
-      "url": "https://www.uber.com/us/en/advertising/",
-      "as_of": "2026-09-01",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 20,
-      "title": "Uber Technologies Historical Financials (2018-2025 10-K Series)",
-      "publisher": "SEC EDGAR / Uber Form 10-K Filings",
-      "url": "https://www.sec.gov/edgar/searchedgar/companysearch",
-      "as_of": "2026-02-18",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 21,
-      "title": "Uber Technologies Form 10-Q (Q3 2026) & Market Valuation Snapshot",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/searchedgar/companysearch?CIK=0001543151",
-      "as_of": "2026-11-06",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 22,
-      "title": "Waymo Autonomous Ride-Hailing Commercial Fleet Expansion Updates",
-      "publisher": "Waymo LLC",
-      "url": "https://waymo.com/blog/",
-      "as_of": "2026-11-01",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 23,
-      "title": "U.S. Department of the Treasury Daily Treasury Par Yield Curve Rates",
-      "publisher": "U.S. Department of the Treasury",
-      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
-      "as_of": "2026-11-16",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 24,
-      "title": "Options Clearing Corporation (OCC) Equity Options Open Interest & Volume Data",
-      "publisher": "The Options Clearing Corporation",
-      "url": "https://www.theocc.com/market-data/market-data-reports/series-and-trading-data/volume-by-product",
-      "as_of": "2026-11-17",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 25,
-      "title": "DoorDash, Inc. SEC EDGAR Filings (Peer Benchmark)",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0001792789",
-      "as_of": "2026-11-05",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 26,
-      "title": "Airbnb, Inc. SEC EDGAR Filings (Peer Benchmark)",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0001559720",
-      "as_of": "2026-11-05",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 27,
-      "title": "Booking Holdings Inc. SEC EDGAR Filings (Peer Benchmark)",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0001075531",
-      "as_of": "2026-11-04",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 28,
-      "title": "Lyft, Inc. SEC EDGAR Filings (Peer Benchmark)",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0001759509",
-      "as_of": "2026-11-06",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 29,
-      "title": "Grab Holdings Limited SEC EDGAR Filings (Peer Benchmark)",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0001855612",
-      "as_of": "2026-11-10",
-      "retrieved_at": "2026-11-17"
-    },
-    {
-      "id": 30,
-      "title": "Microsoft Corporation SEC EDGAR Filings (Shortlist Opportunity Benchmark)",
-      "publisher": "U.S. Securities and Exchange Commission (EDGAR)",
-      "url": "https://www.sec.gov/edgar/browse/?CIK=0000789019",
-      "as_of": "2026-10-30",
-      "retrieved_at": "2026-11-17"
-    }
-  ]
+    "Uber Technologies, Inc. Form 10-K for the Fiscal Year Ended December 31, 2025 — U.S. Securities and Exchange Commission (EDGAR) (2026-02-18): https://www.sec.gov/edgar/browse/?CIK=0001543151",
+    "Uber Announces Results for Fourth Quarter and Full Year 2025 — Uber Investor Relations (2026-02-04): https://investor.uber.com/news-events/news/",
+    "Uber Announces Results for Third Quarter 2026 — Uber Investor Relations (2026-11-04): https://investor.uber.com/financials/",
+    "Uber Announces Results for Second Quarter 2026 — Uber Investor Relations (2026-08-05): https://investor.uber.com/",
+    "Uber Announces Results for First Quarter 2026 — Uber Investor Relations (2026-05-06): https://investor.uber.com/news-events/events/",
+    "Uber 2024 Investor Update Presentation (3-Year Financial Outlook 2024-2026) — Uber Investor Relations (2024-02-14): https://investor.uber.com/financials/default.aspx",
+    "Uber Technologies, Inc. Form 10-K for the Fiscal Year Ended December 31, 2024 — U.S. Securities and Exchange Commission (EDGAR) (2025-02-14): https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001543151&type=10-K",
+    "Uber Engineering Blog: Marketplace Matching, Dynamic Pricing & Logistics Architecture — Uber Technologies, Inc. (2026-11-17): https://www.uber.com/blog/engineering/",
+    "Uber Announces $20 Billion Share Repurchase Authorization (July 2025) — Uber Investor Relations (2025-07-30): https://investor.uber.com/governance/",
+    "Uber & Aurora Innovation Complete ATG Transaction (Form 8-K) — U.S. Securities and Exchange Commission (2020-12-07): https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001543151&type=8-K",
+    "Uber & Joby Aviation Elevate Divestiture Announcement — Uber Newsroom (2020-12-08): https://www.uber.com/newsroom/",
+    "Uber Completes Acquisition of Postmates — Uber Investor Relations (2020-12-01): https://www.uber.com/newsroom/uber-postmates/",
+    "Uber Completes Acquisition of Careem — Uber Newsroom (2020-01-02): https://www.uber.com/newsroom/careem-acquisition/",
+    "California Proposition 22 Driver Benefits & Insurance Framework — Uber Under the Hood (2026-11-17): https://www.uber.com/us/en/drive/insurance/",
+    "UK Private Hire VAT and Tour Operators Margin Scheme (TOMS) Reform — UK Parliament / HMRC (2026-04-01): https://www.gov.uk/government/publications/",
+    "Uber Q3 2026 Earnings Call Transcript & Autonomous Fleet Remarks — Uber Investor Relations (2026-11-04): https://investor.uber.com/news-events/events/default.aspx",
+    "Uber CFO Transition: Balaji Krishnamurthy Appointed CFO — Uber Investor Relations (2026-02-15): https://investor.uber.com/governance/executive-leadership/",
+    "Uber & Waymo Autonomous Ride-Hailing Partnership (Austin & Atlanta) — Uber Newsroom (2025-03-04): https://www.uber.com/newsroom/waymo-uber/",
+    "Uber Advertising: Journey Takeovers & Sponsored Listings Scale Past $2.5B Run-Rate — Uber Advertising (2026-09-01): https://www.uber.com/us/en/advertising/",
+    "Uber Technologies Historical Financials (2018-2025 10-K Series) — SEC EDGAR / Uber Form 10-K Filings (2026-02-18): https://www.sec.gov/edgar/searchedgar/companysearch",
+    "Uber Technologies Form 10-Q (Q3 2026) & Market Valuation Snapshot — U.S. Securities and Exchange Commission (EDGAR) (2026-11-06): https://www.sec.gov/edgar/searchedgar/companysearch?CIK=0001543151",
+    "Waymo Autonomous Ride-Hailing Commercial Fleet Expansion Updates — Waymo LLC (2026-11-01): https://waymo.com/blog/",
+    "U.S. Department of the Treasury Daily Treasury Par Yield Curve Rates — U.S. Department of the Treasury (2026-11-16): https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+    "Options Clearing Corporation (OCC) Equity Options Open Interest & Volume Data — The Options Clearing Corporation (2026-11-17): https://www.theocc.com/market-data/market-data-reports/series-and-trading-data/volume-by-product",
+    "DoorDash, Inc. SEC EDGAR Filings (Peer Benchmark) — U.S. Securities and Exchange Commission (EDGAR) (2026-11-05): https://www.sec.gov/edgar/browse/?CIK=0001792789",
+    "Airbnb, Inc. SEC EDGAR Filings (Peer Benchmark) — U.S. Securities and Exchange Commission (EDGAR) (2026-11-05): https://www.sec.gov/edgar/browse/?CIK=0001559720",
+    "Booking Holdings Inc. SEC EDGAR Filings (Peer Benchmark) — U.S. Securities and Exchange Commission (EDGAR) (2026-11-04): https://www.sec.gov/edgar/browse/?CIK=0001075531",
+    "Lyft, Inc. SEC EDGAR Filings (Peer Benchmark) — U.S. Securities and Exchange Commission (EDGAR) (2026-11-06): https://www.sec.gov/edgar/browse/?CIK=0001759509",
+    "Grab Holdings Limited SEC EDGAR Filings (Peer Benchmark) — U.S. Securities and Exchange Commission (EDGAR) (2026-11-10): https://www.sec.gov/edgar/browse/?CIK=0001855612",
+    "Microsoft Corporation SEC EDGAR Filings (Shortlist Opportunity Benchmark) — U.S. Securities and Exchange Commission (EDGAR) (2026-10-30): https://www.sec.gov/edgar/browse/?CIK=0000789019",
+    "Uber Technologies, Inc. Q3 2026 Form 10-Q (filed 2026-11-04): https://www.sec.gov/Archives/edgar/data/1543151/000154315126000041/uber-20260930.htm",
+    "Uber Technologies, Inc. Q3 2026 Form 8-K Exhibit 99.1 Earnings Release (2026-11-04): https://www.sec.gov/Archives/edgar/data/1543151/000154315126000039/uberq326earningspressrelea.htm",
+    "Uber Technologies, Inc. Form 8-K & Exhibit 99.1 Delivery Hero Takeover Offer (2026-07-16): https://www.sec.gov/Archives/edgar/data/1543151/000155278126000382/e26302_ex99-1.htm",
+    "Uber Technologies, Inc. Form 8-K Term Loan Credit Agreement €4.0B (2026-08-07): https://www.sec.gov/Archives/edgar/data/1543151/000155278126000414/e26328_uber-8k.htm",
+    "Uber Technologies, Inc. Form 8-K Euro Senior Notes Offering €4.5B (2026-09-15): https://www.sec.gov/Archives/edgar/data/1543151/000155278126000486/e26383_uber-8k.htm",
+    "Uber Technologies, Inc. Form 4 Insider Transaction — Tony West (filed 2026-11-16): https://www.sec.gov/Archives/edgar/data/1543151/000162620126000024/primarydocument.xml",
+    "Uber Technologies, Inc. Form 4 Insider RSU Vesting — CFO Balaji Krishnamurthy (filed 2026-11-18): https://www.sec.gov/Archives/edgar/data/1543151/000211186726000015/primarydocument.xml",
+    "Uber Technologies, Inc. FY2025 Form 10-K (filed 2026-02-13): https://www.sec.gov/Archives/edgar/data/1543151/000154315126000015/uber-20251231.htm"
+  ],
+  "ch4": {
+    "stage_override": "STAGE_4",
+    "posture_override": "AVOID_STAGE4_OR_BROKEN",
+    "support_band_override": [
+      61.24,
+      63.1
+    ],
+    "stop_override": 60.96,
+    "dossier_verdict": "REJECTED",
+    "intro_prose": "We audit Uber's November 20, 2026 TradingView moving averages, 4H/1D/1W RSI readings, and institutional volume signature across both market ledgers.",
+    "gate_intro_prose": "Both the market-facts ledger and the TradingView snapshot flag Stage 4 breakdown (CAP_REJECTED), blocking new capital deployment.",
+    "closing_prose": "With UBER sitting 12.32% below its 200-day SMA ($72.40) and $0.47 above $63.00, new equity carries 0.0% bids while existing Dec 2027 LEAPS enforce EXIT_IMMEDIATELY (CLOSE_INTO_CASH).",
+    "tech_table_takeaway": "Session price ($63.47 facts / $63.48 TradingView) sits below every daily and weekly moving average on 1.55x–1.63x distribution volume, confirming active Stage 4 supply.",
+    "gate_table_takeaway": "The technical screen enforces CAP_REJECTED (AVOID_STAGE4_OR_BROKEN); snapshot levels ($61.24–$63.10 band, $60.96 stop) are purely a historical support reference below the $63.00 LEAPS floor, carrying 0.0% bids until a Stage 1 base and >$73.50 reclaim form."
+  }
 }
