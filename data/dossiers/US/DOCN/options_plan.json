@@ -1,84 +1,76 @@
 {
   "symbol": "DOCN",
   "market": "US",
-  "generated_at": "2026-11-15T18:40:31+00:00",
+  "generated_at": "2026-11-23T00:30:59+00:00",
   "business_quality_verdict": "CYCLICAL_CONDITIONAL",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
-      "accessible": true,
-      "status": "connected",
-      "active_tabs": [
-        {
-          "title": "BE 191.99 ▼ −4.92% TheWrap",
-          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
-        }
-      ]
+      "checked": false,
+      "accessible": false,
+      "status": "unavailable",
+      "active_tabs": []
     }
   },
   "multitimeframe_chart": {
     "tv_symbol": "NYSE:DOCN",
     "exchange": "NYSE",
     "company_name": "DigitalOcean Holdings, Inc.",
-    "close": 86.32,
-    "change_1d_pct": -4.16,
-    "perf_1w_pct": 10.1,
-    "perf_1m_pct": -32.04,
-    "perf_3m_pct": -34.53,
-    "rsi_1d": 41.7,
-    "rsi_4h": 48.04,
-    "rsi_1w": 40.57,
-    "sma20": 90.8,
-    "sma50": 113.95,
-    "sma200": 112.9,
-    "sma30_weekly": 126.87,
-    "ema10_weekly": 102.41,
-    "ema20_4h": 86.01,
-    "sma50_4h": 95.54,
-    "atr14": 9.22,
-    "bb_width_pct": 46.34,
+    "close": 66.76,
+    "change_1d_pct": -13.4,
+    "perf_1w_pct": -26.26,
+    "perf_1m_pct": -35.45,
+    "perf_3m_pct": -42.34,
+    "rsi_1d": 31.04,
+    "rsi_4h": 29.37,
+    "rsi_1w": 35.17,
+    "sma20": 85.61,
+    "sma50": 109.09,
+    "sma200": 113.37,
+    "sma30_weekly": 125.92,
+    "ema10_weekly": 95.93,
+    "ema20_4h": 79.48,
+    "sma50_4h": 88.01,
+    "atr14": 8.93,
+    "bb_width_pct": 64.45,
     "pivot_s1": 67.44,
     "pivot_s2": 45.23,
     "pivot_r1": 130.82,
     "pivot_r2": 171.99,
     "high_52w": 187.5,
-    "low_52w": 41.96,
-    "dist_to_200d_pct": -23.54,
+    "low_52w": 42.77,
+    "dist_to_200d_pct": -41.11,
     "major_shelf": 67.44,
-    "intraday_4h_turn": true,
-    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
-    "setup_summary": "Dislocated below 50D SMA (113.95) after a -32.0% 1M move, now stabilizing above structural support (67.44) with 4H momentum turning up (4H RSI 48.04 vs Daily RSI 41.7, above 4H EMA20 86.01) — actionable mean-reversion call-spread window toward 113.95."
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (109.09) and 200D/30W floor (113.37); trend is broken."
   },
   "options_plan": {
     "symbol": "DOCN",
     "market": "US",
     "optionable": true,
     "options_verdict": "NO_OPTIONS_EDGE",
-    "iv_regime": "IV_CHEAP",
-    "atm_iv_pct": 85.3,
-    "hv20_pct": 109.6,
+    "headline": "No call setup on DOCN: price ($66.76) is below both 50D and 200D/30W structural floors and fundamentals do not qualify as COMPOUNDER_PASS.",
     "open_positions_audit": [
       {
         "contract": "DOCN270617C00150000",
         "type": "Call (LEAPS)",
         "strike": 150,
         "expiry": "2027-06-17",
-        "dte": 214,
+        "dte": 206,
         "contracts": 4,
-        "action": "HOLD",
-        "rationale": "214 DTE runway intact above invalidation floor ($80.0)."
+        "action": "CLOSE",
+        "rationale": "Underlying ($66.76) breached invalidation ($80.0) or fundamentals failed."
       }
     ],
-    "headline": "NO_OPTIONS_EDGE for new long calls or spreads while DOCN remains in Stage 4 (-31.96% below 30W SMA) in a Correction regime; manage the existing 4x 2027-06-17 $150 LEAPS ($3,720 MV) with a strict $80.00 daily close invalidation floor.",
     "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"BULL_CALL_DEBIT_SPREAD\">\n<h2>Options &amp; Call-Convexity Playbook (DOCN)</h2>\n<p><span class=\"verdict verdict-keep\">BULL CALL DEBIT SPREAD</span> &mdash; <strong>Buy 1x DOCN 2027-01-15 $85/$100 Bull Call Spread (61 DTE) at $5.40 net debit ($540.00 max loss -&gt; $960.00 max profit, 1.78:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Dislocated below 50D SMA (113.95) after a -32.0% 1M move, now stabilizing above structural support (67.44) with 4H momentum turning up (4H RSI 48.04 vs Daily RSI 41.7, above 4H EMA20 86.01) — actionable mean-reversion call-spread window toward 113.95. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:DOCN. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_docn_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:DOCN\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:DOCN\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_docn_options_chart\"});</script></div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Active Open Options Audit for DOCN</caption><thead><tr><th>Contract</th><th>Structure</th><th>Strike</th><th>Expiry (DTE)</th><th>Qty</th><th>Action</th><th>Rule &amp; Rationale</th></tr></thead><tbody><tr><td>DOCN270617C00150000</td><td>Call (LEAPS)</td><td>150</td><td>2027-06-17 (214d)</td><td>4</td><td><strong>HOLD</strong></td><td>214 DTE runway intact above invalidation floor ($80.0).</td></tr></tbody></table></div><p>Open option contracts above are audited against underlying structural support and remaining DTE theta runway.</p>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: DOCN pulled back into its major $67.44 support shelf while Pass 1 confirmed COMPOUNDER_PASS fundamentals — even though Stage 2 equity rules wait for trend repair, a defined-risk Bull Call Spread captures a rebound with strictly capped downside.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $85 Call for $12.50 and simultaneously sell the $100 Call for $7.10, paying $5.40/sh net ($540.00 total for 1 spread(s)). That $540.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $90.40 (+4.7% from $86.32). Anywhere at or above $100, your $540.00 turns into $1,500.00 (+$960.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in DOCN adds ~$18.70 to your spread (Net Delta), while sitting flat costs ~$0.16/day in time decay (Net Theta) — much lower than an unhedged call because the sold $100 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for DOCN</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $85 CALL @ $12.50 mid (bid $11.70 / ask $13.30, OI 234) + SELL 2027-01-15 $100 CALL @ $7.10 mid (bid $6.70 / ask $7.50, OI 343)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$540.00 (54.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$90.40 (+4.73% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$960.00 (1.78:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+18.70 per $1 move | $-0.16/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($672.00 gain) or exit early if DOCN closes below $67.44.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $540.00 Across Stock Scenarios (DOCN)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $85 at Expiry</td><td>$67.44 (-21.9%)</td><td>$0.00</td><td>$-540.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($90.40)</td><td>$90.40 (+4.7%)</td><td>$540.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($100)</td><td>$100.00 (+15.8%)</td><td>$1,500.00</td><td>$+960.00</td><td><strong>+177.8%</strong></td></tr><tr><td>Bull Overshoot ($150.44)</td><td>$150.44 (+74.3%)</td><td>$1,500.00</td><td>$+960.00</td><td><strong>+177.8%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (DOCN)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>No call setup on DOCN: price ($66.76) is below both 50D and 200D/30W structural floors and fundamentals do not qualify as COMPOUNDER_PASS.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (109.09) and 200D/30W floor (113.37); trend is broken. <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:DOCN. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_docn_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:DOCN\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:DOCN\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_docn_options_chart\"});</script></div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Active Open Options Audit for DOCN</caption><thead><tr><th>Contract</th><th>Structure</th><th>Strike</th><th>Expiry (DTE)</th><th>Qty</th><th>Action</th><th>Rule &amp; Rationale</th></tr></thead><tbody><tr><td>DOCN270617C00150000</td><td>Call (LEAPS)</td><td>150</td><td>2027-06-17 (206d)</td><td>4</td><td><strong>CLOSE</strong></td><td>Underlying ($66.76) breached invalidation ($80.0) or fundamentals failed.</td></tr></tbody></table></div><p>Open option contracts above are audited against underlying structural support and remaining DTE theta runway.</p>\n</section>"
 }

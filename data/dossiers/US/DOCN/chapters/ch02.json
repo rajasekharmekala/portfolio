@@ -18,11 +18,11 @@
     },
     {
       "type": "p",
-      "html": "<strong>AI-Native Compute</strong> sits on top of that base [14]. It offers on-demand and reserved GPU Droplets, bare-metal clusters, and the Gradient AI Platform for inference and GenAI agents [14]. In Q3 2026, AI Customer ARR reached $376M (+288% YoY) out of ~$1.28B–$1.29B in total ARR [1]. Crucially, 90% of AI revenue comes from customers who also buy Core Cloud products [1]. About 60% of total revenue comes from accounts using four or more products [1]."
+      "html": "<strong>AI-Native Compute</strong> sits on top of that base [14]. It offers on-demand and reserved GPU Droplets, bare-metal clusters, Gradient AI inference, and Managed Agents with Cuttlefish supervision [14][31]. In Q3 2026, AI Customer ARR reached $376M (+288% YoY) out of $1,285M total ARR [1][2]. Per Form 10-Q definitions, AI Customer ARR counts all IaaS and PaaS/SaaS revenue from accounts using at least one AI offering [2]. Thus, Core Cloud migrations into AI cohorts mechanically lift AI Customer ARR rather than isolating pure GPU compute sales [2]."
     },
     {
       "type": "p",
-      "html": "Geography also stays well balanced across North America, Europe, and Asia [22]. Predictable pricing binds the whole stack together. While hyperscalers charge up to $0.08–$0.09/GB for outbound data, DigitalOcean bundles pooled bandwidth and charges $0.01/GiB for overages [15]."
+      "html": "Geography shifted sharply toward North America in 2026, breaking the older balanced three-region mix [2]. In Q3 2026, North America jumped 72.6% YoY to $157.5M (49% of revenue, up from 40%), with U.S. customers rising from 34% to 45% [2]. Europe stagnated at $63.5M (+2.6% YoY, falling from 27% to 20%), while Asia held at 23% ($72.6M) [2]. Predictable $0.01/GiB egress pricing still differentiates the stack against hyperscaler $0.08–$0.09/GB fees [15]."
     },
     {
       "type": "h3",
@@ -30,7 +30,7 @@
     },
     {
       "type": "p",
-      "html": "The customer mix has shifted steadily upmarket since 2024 [1][21]. Self-serve 'Learners' still enter at $5–$24/month through tutorials and Hacktoberfest [8][15]. Once a startup scales, it adds Managed Databases, DOKS, and GPU Droplets inside one VPC. By Q3 2026, customers with $100k+ ARR generated 41% of total revenue [1]. The $1M+ ARR cohort surged 273% YoY to $386M [1]."
+      "html": "Customer concentration rose sharply as revenue moved upmarket in 2026 [1][2]. Just 51 accounts in the $1M+ ARR cohort (up from 26) generated $386M ARR—30% of total revenue, or ~$7.57M average ARR each [1][2]. Another 655 accounts ($100K+ cohort) drove 41% of Q3 revenue (+133% YoY), capturing most of DOCN's YoY dollar growth [1][2]. Crucially, Note 3 discloses that right after September 30, 2026, a single customer prepaid $107.4M in cash—nearly double the $52.7M Q3 deferred revenue balance [2]."
     },
     {
       "type": "table",
@@ -43,31 +43,31 @@
       ],
       "rows": [
         [
-          "Core Cloud",
-          "Droplets, DOKS, Managed DBs, App Platform, Spaces, Cloudways",
-          "~$904M–$914M implied ARR (~71% of Q3 26 ARR); ~60% rev from 4+ product users",
+          "Core Cloud & SMB Base",
+          "Droplets, DOKS, Managed DBs, App Platform, Spaces, Cloudways AI Builder",
+          "~$909M non-AI-customer ARR; ~60% total rev from 4+ product users [1][2]",
           "High gross margin (~60%+), low churn once DBs/VPC attached"
         ],
         [
-          "AI/ML & GPU Cloud",
-          "GPU Droplets (H100/H200), Bare Metal GPUs, Gradient AI, GenAI Agents",
-          "$376M ARR in Q3 2026 (+288% YoY; ~29% of total ARR)",
-          "Lower gross margin (~35–45% est. blended drag), high capex/lease intensity; 90% cross-use Core Cloud"
+          "AI Customer ARR (Blended)",
+          "GPU Droplets (B300/H200/H100/MI350X), Gradient AI, Managed Agents",
+          "$376M ARR in Q3 2026 (+288% YoY; includes all Core Cloud spend of AI users) [2]",
+          "Blends Core Cloud + lower-margin GPU compute; 90% cross-use Core Cloud"
         ],
         [
-          "$1M+ ARR Cohort",
-          "Multi-product AI + Core Cloud production stacks",
-          "$386M ARR in Q3 2026 (+273% YoY)",
-          "Drives record $160M Q3 net-new ARR; introduces customer concentration risk"
+          "$1M+ ARR Cohort (51 Logos)",
+          "Multi-product AI + Core Cloud production stacks & committed RPO",
+          "$386M ARR in Q3 2026 (+273% YoY; 30% of rev); 51 customers (~$7.57M avg) [1][2]",
+          "Drives record $160M Q3 net-new ARR & $799.7M RPO; acute top-51 & $107.4M prepayment concentration"
         ],
         [
-          "$100k+ ARR Cohort",
-          "Scalers & mid-market SaaS / AI startups",
-          "41% of total Q3 2026 revenue (up from ~24–26% in 2025)",
-          "Core focus of inside-sales & solutions engineering motion"
+          "$100K+ ARR Cohort (655 Logos)",
+          "Scalers & mid-market SaaS / AI startups ($8,333+/mo)",
+          "41% of Q3 2026 revenue (+133% YoY); 655 accounts (+11% YoY) [1][2]",
+          "Generated ~82% of Q3 YoY dollar growth; smaller <$100K base grew single digits"
         ]
       ],
-      "takeaway": "DigitalOcean's revenue center of gravity has migrated from $5–$50/month Learners to $100k+ and $1M+ ARR multi-product Scalers."
+      "takeaway": "Just 51 $1M+ customers generate 30% of revenue and a single customer prepaid $107.4M post-Q3, making top-account concentration and AI-to-Core accounting boundaries central watchpoints."
     },
     {
       "type": "h3",
@@ -99,11 +99,11 @@
     },
     {
       "type": "p",
-      "html": "That multi-product habit explains why 60% of revenue now sits with 4+ product users [1]. It also explains why $100k+ ARR clients generate 41% of total revenue [1]. Unlike bare-metal GPU renters, these teams cannot leave in a weekend. Moving databases, storage buckets, and Kubernetes clusters to AWS takes months of work. Core Cloud stickiness is therefore the real anchor behind the 288% AI ARR surge [1]."
+      "html": "Geographic and asset concentration also tilted heavily toward the United States in 2026 [2]. North America reached 49% of Q3 2026 revenue ($157.5M), while European revenue crawled at +2.6% YoY ($63.5M) [2]. On the balance sheet, U.S. long-lived assets tripled from $610.1M at year-end 2025 to $1,892.8M on September 30, 2026—nearly 90% of all physical assets [2]. That U.S. buildout reflects domestic GPU demand and U.S. export-control constraints on overseas AI clusters [3]."
     },
     {
       "type": "p",
-      "html": "Regional diversity also buffers DigitalOcean against single-market shocks. Roughly half of revenue comes from outside the United States across Europe and Asia-Pacific [22]. Twenty data centers in thirteen regions give global startups low-latency nodes close to end users [16]. Combined with $0.01/GiB egress fees, that footprint keeps international developers loyal [15]."
+      "html": "Supplier concentration mirrors that customer skew [3]. DigitalOcean builds none of its silicon and relies on a tight set of GPU vendors—led by NVIDIA and AMD—plus third-party colocation landlords across 20 sites [3][16][31]. Product breadth also expanded in November 2026 with Cuttlefish agent supervision (with Box) and Cloudways AI Website Builder [31]. Yet losing even two or three $1M+ accounts or facing GPU allocation delays would hit growth quickly [2][3]."
     },
     {
       "type": "p",
@@ -111,11 +111,11 @@
     }
   ],
   "book_paragraphs": [
-    "To see why DigitalOcean behaves differently from both legacy web hosts and pure-play GPU rental shops, you and I need to open the hood and trace what a dollar of revenue actually buys. On paper, DigitalOcean reports as a single cloud segment. In practice, it runs two distinct but tightly coupled engines: a high-margin Core Cloud built around virtual machines and managed software, and a fast-scaling AI/ML and GPU Cloud built around NVIDIA silicon and agentic tooling.",
-    "The Core Cloud is the bedrock. It starts with Droplets—virtual servers that can cost as little as $4 a month—and climbs up a ladder of managed services: DigitalOcean Kubernetes with a free control plane, Managed Databases for PostgreSQL, MySQL, and Redis, App Platform for push-to-deploy containers, and Spaces for S3-compatible object storage. Think of a 35-person B2B software company that wants production reliability without hiring a three-person DevOps team. They put their application containers on four worker nodes, attach a Managed PostgreSQL cluster, front it with a $12 load balancer, and pay roughly $600 to $900 a month with generous pooled bandwidth. By Q3 2026, roughly 60% of DigitalOcean's entire revenue came from customers using four or more of these platform products.",
-    "A recurring mistake among generalist investors analyzing DigitalOcean is treating it as a monolithic commodity VPS provider. In reality, the company operates a layered cloud platform spanning twenty data centers across thirteen global regions, deliberately engineered around simplicity and predictable total cost of ownership. At the foundation sits Core Cloud Infrastructure—Droplets (virtual machines), DigitalOcean Kubernetes (DOKS), Managed Databases (PostgreSQL, MySQL, Redis, MongoDB, Kafka), Spaces object storage, and App Platform. These workloads carry software-like gross margins and exceptionally low incremental support overhead because they run on standardized, multi-tenant x86 server fleets.",
-    "Layered atop that foundation is the AI-Native Compute and Gradient AI Platform, which has become the primary growth engine in 2025 and 2026. Here, DigitalOcean provides on-demand and reserved GPU Droplets, bare-metal clusters, serverless inference endpoints, and managed GenAI agent workflows. Crucially, management's Q3 2026 disclosures reveal that 90 percent of AI customer revenue comes from clients that also consume Core Cloud products, and roughly 60 percent of total company revenue is generated by customers utilizing four or more distinct products.",
-    "In practice, DigitalOcean's segmentation between Core Cloud and AI-Native Compute functions like a razor-and-blades model in reverse. The GPU cluster is often the high-visibility hook that brings a fast-growing AI startup onto the platform, while Managed Databases, Spaces object storage, and load balancers supply the durable, high-margin annuity stream. As long as 90% of AI revenue overlaps with Core Cloud and 60% of revenue sits with four-product customers, the ecosystem retains real structural stickiness."
+    "To see why DigitalOcean behaves differently from both legacy web hosts and pure-play GPU rental shops, we must trace what a dollar of revenue actually buys. On paper, DigitalOcean reports one operating segment. In practice, it runs a high-margin Core Cloud alongside a fast-scaling AI/ML and GPU compute layer.",
+    "The Core Cloud remains the margin anchor: Droplets, DigitalOcean Kubernetes, Managed Databases, App Platform, Spaces object storage, and Cloudways—which added an AI Website Builder in November 2026. By Q3 2026, roughly 60% of revenue came from customers using four or more products.",
+    "However, Q3 2026 Form 10-Q footnotes expose two critical nuances that surface headlines obscure. First, DigitalOcean defines AI Customer ARR ($376 million) as total revenue—including Core Cloud IaaS and PaaS—from any customer using at least one AI product. When an existing $500,000 Core Cloud customer tests GPU Droplets, its entire spend shifts into AI Customer ARR.",
+    "Second, top-customer and geographic concentration surged in 2026. Just 51 customers spending $1 million or more generate $386 million in ARR—30% of total revenue—and one customer prepaid $107.4 million in cash right after Q3 closed. Meanwhile, North America climbed to 49% of revenue (45% U.S.) and 90% of long-lived assets, while Europe stalled at 2.6% YoY growth.",
+    "DigitalOcean therefore faces a dual-edged customer shift. Multi-product attach among 4+ product buyers creates real switching friction, yet 51 mega-accounts, a $107.4 million single-customer prepayment, and heavy reliance on NVIDIA, AMD, and colocation landlords introduce concentration risk that did not exist in its $5 Droplet era."
   ],
   "book_subsections": [
     {
@@ -128,8 +128,8 @@
     {
       "title": "From $5 Learners to $1M+ Scalers",
       "paragraphs": [
-        "Just as striking is who pays the bills today. For its first decade, DigitalOcean was famous for 'Learners'—students and hobbyists spending $5 to $20 a month. Those users still fill the top of the funnel, but they no longer drive the P&L. By Q3 2026, customers spending over $100,000 a year accounted for 41% of total revenue, and the $1 million-plus ARR cohort surged 273% year-over-year to $386 million.",
-        "That upmarket shift also changes how DigitalOcean's geographic footprint behaves. Because developer tutorials and credit-card self-serve signups travel across borders without a local sales office, DigitalOcean built a remarkably balanced international base: in FY2025, the Americas contributed 38.4% of revenue, Europe contributed 27.0%, and Asia-Pacific and the rest of the world accounted for roughly 34.6%. As larger AI startups in North America and Europe commit to multi-rack GPU inference and managed databases, the key question is whether DigitalOcean can keep those $1M+ logos anchored on its platform once they grow large enough to attract direct enterprise attention from AWS, Azure, and Google Cloud—a competitive dynamic we will examine in Chapters 3 and 4."
+        "Just as striking is who pays the bills today. In Q3 2026, 655 customers spending $100,000 or more generated 41% of revenue (+133% YoY), while just 51 customers at $1 million-plus ARR accounted for $386 million, or 30% of total revenue. Smaller accounts under $100,000 grew only modestly, meaning top-cohort concentration now drives roughly four-fifths of incremental dollar growth.",
+        "Geography also broke from its historical three-way split. North America surged 72.6% YoY to 49% of Q3 2026 revenue ($157.5 million), with U.S. customers rising from 34% to 45%. Europe barely grew (+2.6% YoY to $63.5 million, dropping to 20% of revenue), while U.S. long-lived assets tripled to $1,892.8 million—89.6% of total physical and lease assets—reflecting domestic AI cluster concentration and export-control boundaries."
       ]
     },
     {
@@ -145,13 +145,20 @@
         "Inside DigitalOcean's engine room, the financial contrast between Core Cloud and AI-Native Compute could not be sharper. Core Cloud workloads—standard CPU Droplets, Managed PostgreSQL and Redis clusters, DOKS Kubernetes nodes, and Spaces object storage—run on mature, multi-tenant x86 hardware with five-to-six-year useful lives and minimal idle capacity. Those workloads historically supported GAAP gross margins in the 60% range and threw off abundant operating cash flow.",
         "AI-Native Compute operates under very different physics. High-density GPU clusters require specialized liquid or high-airflow cooling, higher power-per-rack colocation leases, and rapid depreciation schedules as Nvidia architectures turn over every eighteen to twenty-four months. If DigitalOcean were simply renting bare-metal GPUs to transient model-training labs, those lower hardware margins would permanently dilute the business. What saves the strategy—at least so far—is the 90% overlap: AI customers are provisioning Managed Databases, Kubernetes, and Spaces alongside their GPU Droplets, turning lower-margin silicon into a high-velocity customer-acquisition wedge for high-margin platform services."
       ]
+    },
+    {
+      "title": "The $107.4M Single-Customer Prepayment and AI Revenue Boundary",
+      "paragraphs": [
+        "Note 3 of the Q3 2026 Form 10-Q adds two vital forensic footnotes. First, Remaining Performance Obligations jumped thirteenfold year-over-year from $61 million to $799.7 million (3.7-year average life), and subsequent to September 30, 2026, a single customer handed DigitalOcean $107.4 million in cash prepayment—nearly twice the entire $52.7 million deferred revenue balance at quarter-end.",
+        "Second, management's AI Customer ARR metric ($376 million, up 288% YoY) captures all Core Cloud and AI spend of customers utilizing an AI/ML product. Combined with single-source silicon reliance on NVIDIA and AMD and third-party colocation leases, investors must monitor mega-customer concentration alongside multi-product stickiness."
+      ]
     }
   ],
   "book_callouts": [
     {
-      "title": "Two-Engine Reality Check",
-      "quote": "Core Cloud provides the margin and the glue; AI/GPU Cloud provides the velocity and the $1M+ logos.",
-      "text": "Watch the 60% four-product attach rate and the 90% AI-to-Core overlap. If those numbers hold as AI scales, DigitalOcean is building a real platform; if they slip, it risks becoming a lower-margin hardware lessor."
+      "title": "Concentration & Accounting Reality Check",
+      "quote": "Fifty-one accounts supply 30% of ARR, one customer prepaid $107.4M post-Q3, and AI Customer ARR includes Core Cloud spend.",
+      "text": "Watch the 60% four-product attach rate alongside top-51 customer churn and RPO conversion. If mega-customers concentrate GPU demand without durable software lock-in, revenue lumpiness rises sharply."
     }
   ]
 }

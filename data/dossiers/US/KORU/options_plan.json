@@ -1,21 +1,21 @@
 {
   "symbol": "KORU",
   "market": "US",
-  "generated_at": "2026-11-15T22:35:30+00:00",
-  "business_quality_verdict": "COMPOUNDER_PASS",
+  "generated_at": "2026-11-23T00:31:02+00:00",
+  "business_quality_verdict": "CYCLICAL_CONDITIONAL",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
-      "status": "no_open_tab",
+      "status": "unavailable",
       "active_tabs": []
     }
   },
@@ -23,122 +23,43 @@
     "tv_symbol": "AMEX:KORU",
     "exchange": "AMEX",
     "company_name": "Direxion Daily MSCI South Korea Bull 3X ETF",
-    "close": 7.68,
-    "change_1d_pct": -5.42,
-    "perf_1w_pct": 7.41,
-    "perf_1m_pct": -42.9,
-    "perf_3m_pct": -65.79,
-    "rsi_1d": 36.68,
-    "rsi_4h": 39.94,
-    "rsi_1w": 38.37,
-    "sma20": 10.02,
-    "sma50": 15.85,
-    "sma200": 24.08,
-    "sma30_weekly": 25.31,
-    "ema10_weekly": 13.58,
-    "ema20_4h": 8.63,
-    "sma50_4h": 10.68,
-    "atr14": 1.54,
-    "bb_width_pct": 106.12,
+    "close": 4.76,
+    "change_1d_pct": -25.04,
+    "perf_1w_pct": -38.58,
+    "perf_1m_pct": -61.3,
+    "perf_3m_pct": -77.34,
+    "rsi_1d": 29.77,
+    "rsi_4h": 26.54,
+    "rsi_1w": 36.18,
+    "sma20": 8.77,
+    "sma50": 14.16,
+    "sma200": 23.8,
+    "sma30_weekly": 24.59,
+    "ema10_weekly": 11.98,
+    "ema20_4h": 7.03,
+    "sma50_4h": 9.29,
+    "atr14": 1.39,
+    "bb_width_pct": 204.41,
     "pivot_s1": 5.99,
     "pivot_s2": 1.34,
     "pivot_r1": 19.29,
     "pivot_r2": 27.94,
     "high_52w": 63.98,
-    "low_52w": 6.28,
-    "dist_to_200d_pct": -68.11,
-    "major_shelf": 6.28,
+    "low_52w": 4.59,
+    "dist_to_200d_pct": -80.0,
+    "major_shelf": 4.59,
     "intraday_4h_turn": false,
     "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
-    "setup_summary": "Trading below both 50D SMA (15.85) and 200D/30W floor (24.08); trend is broken."
+    "setup_summary": "Trading below both 50D SMA (14.16) and 200D/30W floor (23.8); trend is broken."
   },
   "options_plan": {
     "symbol": "KORU",
     "market": "US",
     "optionable": true,
-    "options_verdict": "WAIT_FOR_SUPPORT_OR_BASE",
-    "iv_regime": "IV_CHEAP",
-    "atm_iv_pct": 136.9,
-    "hv20_pct": 224.1,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "headline": "No call setup on KORU: price ($4.76) is below both 50D and 200D/30W structural floors and fundamentals do not qualify as COMPOUNDER_PASS.",
     "open_positions_audit": [],
-    "headline": "Stand aside at CMP ($7.68): stock is in an active Stage 4 correction below 50D/200D averages. If KORU tests its major $6.28 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $16.5/$19.5) at $0.05 debit toward $19.29 ($600.00 max loss -> $35,400.00 max profit, 59.00:1 R:R).",
-    "recommended_trade": {
-      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
-      "expiry": "2027-01-15",
-      "dte": 61,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 16.5,
-          "mid": 0.15,
-          "bid": 0.0,
-          "ask": 0.5,
-          "open_interest": 125
-        },
-        {
-          "side": "SELL",
-          "type": "CALL",
-          "strike": 19.5,
-          "mid": 0.2,
-          "bid": 0.0,
-          "ask": 0.25,
-          "open_interest": 231
-        }
-      ],
-      "contracts": 120,
-      "multiplier": 100,
-      "net_debit_per_share": 0.05,
-      "max_loss_total": 600.0,
-      "max_loss_nav_bps": 60.0,
-      "max_profit_total": "$35,400.00 (59.00:1 reward-to-risk)",
-      "breakeven_at_expiry": 16.55,
-      "breakeven_move_pct": 115.49,
-      "net_delta_dollars_per_1_move": 744.0,
-      "daily_theta_dollars": -33.6,
-      "underlying_stop_trigger": 6.28,
-      "profit_taking_rule": "Close spread at 65%–75% of max profit ($24,780.00 gain) or exit early if KORU closes below $6.28.",
-      "scenarios": [
-        {
-          "scenario": "At or Below $16.5 at Expiry",
-          "stock_price": 6.28,
-          "stock_move_pct": -18.2,
-          "contract_value": 0.0,
-          "net_pnl": -600.0,
-          "return_on_risk_pct": -100.0
-        },
-        {
-          "scenario": "At Breakeven ($16.55)",
-          "stock_price": 16.55,
-          "stock_move_pct": 115.5,
-          "contract_value": 600.0,
-          "net_pnl": 0.0,
-          "return_on_risk_pct": 0.0
-        },
-        {
-          "scenario": "At Short Cap / Base Target ($19.5)",
-          "stock_price": 19.5,
-          "stock_move_pct": 153.9,
-          "contract_value": 36000.0,
-          "net_pnl": 35400.0,
-          "return_on_risk_pct": 5900.0
-        },
-        {
-          "scenario": "Bull Overshoot ($22.18)",
-          "stock_price": 22.18,
-          "stock_move_pct": 188.8,
-          "contract_value": 36000.0,
-          "net_pnl": 35400.0,
-          "return_on_risk_pct": 5900.0
-        }
-      ],
-      "beginner_explainer": [
-        "Why this spread works differently from buying shares: KORU is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($7.68) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($16.5/$19.5) is structured to be deployed once KORU tests its major $6.28 support shelf and stabilizes. Selling the upper $19.5 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $600.00.",
-        "Exact wallet math (1 contract = 100 shares): You buy the $16.5 Call for $0.15 and simultaneously sell the $19.5 Call for $0.20, paying $0.05/sh net ($600.00 total for 120 spread(s)). That $600.00 is the absolute maximum you can lose.",
-        "Breakeven & profit ceiling: At expiry (2027-01-15), you start making money above $16.55 (+115.5% from $7.68). Anywhere at or above $19.5, your $600.00 turns into $36,000.00 (+$35,400.00 net profit).",
-        "Speed & time decay in plain English: Today, each $1 move up in KORU adds ~$744.00 to your spread (Net Delta), while sitting flat costs ~$33.60/day in time decay (Net Theta) — much lower than an unhedged call because the sold $19.5 call decays in your favor."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (KORU)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at CMP ($7.68): stock is in an active Stage 4 correction below 50D/200D averages. If KORU tests its major $6.28 support shelf and stabilizes, deploy this conditional defined-risk Call Spread (2027-01-15 $16.5/$19.5) at $0.05 debit toward $19.29 ($600.00 max loss -&gt; $35,400.00 max profit, 59.00:1 R:R).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (15.85) and 200D/30W floor (24.08); trend is broken. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for AMEX:KORU. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_koru_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for AMEX:KORU\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"AMEX:KORU\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_koru_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why this spread works differently from buying shares: KORU is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($7.68) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($16.5/$19.5) is structured to be deployed once KORU tests its major $6.28 support shelf and stabilizes. Selling the upper $19.5 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $600.00.</p><p>Exact wallet math (1 contract = 100 shares): You buy the $16.5 Call for $0.15 and simultaneously sell the $19.5 Call for $0.20, paying $0.05/sh net ($600.00 total for 120 spread(s)). That $600.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-01-15), you start making money above $16.55 (+115.5% from $7.68). Anywhere at or above $19.5, your $600.00 turns into $36,000.00 (+$35,400.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in KORU adds ~$744.00 to your spread (Net Delta), while sitting flat costs ~$33.60/day in time decay (Net Theta) — much lower than an unhedged call because the sold $19.5 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for KORU</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-01-15 $16.5 CALL @ $0.15 mid (bid $0.00 / ask $0.50, OI 125) + SELL 2027-01-15 $19.5 CALL @ $0.20 mid (bid $0.00 / ask $0.25, OI 231)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>120 contract(s) x 100 shares</td><td>Controls 12000 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$600.00 (60.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$16.55 (+115.49% vs CMP)</td><td>Stock price required by 2027-01-15 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$35,400.00 (59.00:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+744.00 per $1 move | $-33.60/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($24,780.00 gain) or exit early if KORU closes below $6.28.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-01-15, 61 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $600.00 Across Stock Scenarios (KORU)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $16.5 at Expiry</td><td>$6.28 (-18.2%)</td><td>$0.00</td><td>$-600.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($16.55)</td><td>$16.55 (+115.5%)</td><td>$600.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap / Base Target ($19.5)</td><td>$19.50 (+153.9%)</td><td>$36,000.00</td><td>$+35,400.00</td><td><strong>+5900.0%</strong></td></tr><tr><td>Bull Overshoot ($22.18)</td><td>$22.18 (+188.8%)</td><td>$36,000.00</td><td>$+35,400.00</td><td><strong>+5900.0%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (KORU)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>No call setup on KORU: price ($4.76) is below both 50D and 200D/30W structural floors and fundamentals do not qualify as COMPOUNDER_PASS.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (14.16) and 200D/30W floor (23.8); trend is broken. <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for AMEX:KORU. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_koru_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for AMEX:KORU\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"AMEX:KORU\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_koru_options_chart\"});</script></div>\n</section>"
 }

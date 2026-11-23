@@ -1,21 +1,21 @@
 {
   "symbol": "ISRG",
   "market": "US",
-  "generated_at": "2026-11-15T22:39:07+00:00",
+  "generated_at": "2026-11-23T00:31:01+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
-      "status": "no_open_tab",
+      "status": "unavailable",
       "active_tabs": []
     }
   },
@@ -23,112 +23,43 @@
     "tv_symbol": "NASDAQ:ISRG",
     "exchange": "NASDAQ",
     "company_name": "Intuitive Surgical, Inc.",
-    "close": 443.59,
-    "change_1d_pct": 0.84,
-    "perf_1w_pct": -2.93,
-    "perf_1m_pct": 4.42,
-    "perf_3m_pct": 10.62,
-    "rsi_1d": 52.08,
-    "rsi_4h": 47.5,
-    "rsi_1w": 55.6,
-    "sma20": 447.13,
-    "sma50": 417.59,
-    "sma200": 429.38,
-    "sma30_weekly": 409.0,
-    "ema10_weekly": 424.71,
-    "ema20_4h": 448.95,
-    "sma50_4h": 443.03,
-    "atr14": 14.45,
-    "bb_width_pct": 11.15,
+    "close": 399.05,
+    "change_1d_pct": -2.01,
+    "perf_1w_pct": -10.06,
+    "perf_1m_pct": -0.86,
+    "perf_3m_pct": 6.38,
+    "rsi_1d": 35.29,
+    "rsi_4h": 27.06,
+    "rsi_1w": 45.82,
+    "sma20": 442.13,
+    "sma50": 423.51,
+    "sma200": 427.69,
+    "sma30_weekly": 406.23,
+    "ema10_weekly": 420.05,
+    "ema20_4h": 429.1,
+    "sma50_4h": 442.37,
+    "atr14": 14.43,
+    "bb_width_pct": 18.53,
     "pivot_s1": 394.45,
     "pivot_s2": 356.9,
     "pivot_r1": 464.22,
     "pivot_r2": 496.44,
     "high_52w": 603.88,
     "low_52w": 328.57,
-    "dist_to_200d_pct": 3.31,
-    "major_shelf": 429.38,
+    "dist_to_200d_pct": -6.7,
+    "major_shelf": 406.23,
     "intraday_4h_turn": false,
-    "setup_archetype": "STAGE2_VCP_VOLATILITY_SQUEEZE",
-    "setup_summary": "Tight Stage 2 volatility contraction (Bollinger bandwidth 11.15%) above rising 50D SMA (417.59) and 30W SMA (409.0)."
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (423.51) and 200D/30W floor (427.69); trend is broken."
   },
   "options_plan": {
     "symbol": "ISRG",
     "market": "US",
     "optionable": true,
-    "options_verdict": "LONG_CALL_LEAPS",
-    "iv_regime": "IV_FAIR",
-    "atm_iv_pct": 46.5,
-    "hv20_pct": 44.6,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "headline": "No clean call-spread strikes available above $370 on 2027-02-19; stand aside.",
     "open_positions_audit": [],
-    "headline": "Buy 1x ISRG 2027-09-17 $400 LEAPS Call (306 DTE, 0.71 Delta) near $93.00/sh ($9,300.00 max possible loss).",
-    "recommended_trade": {
-      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
-      "expiry": "2027-09-17",
-      "dte": 306,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 400.0,
-          "mid": 93.0,
-          "bid": 89.0,
-          "ask": 97.0,
-          "open_interest": 7
-        }
-      ],
-      "contracts": 1,
-      "multiplier": 100,
-      "net_debit_per_share": 93.0,
-      "max_loss_total": 9300.0,
-      "max_loss_nav_bps": 930.0,
-      "max_profit_total": "Uncapped upside",
-      "breakeven_at_expiry": 493.0,
-      "breakeven_move_pct": 11.14,
-      "net_delta_dollars_per_1_move": 70.6,
-      "daily_theta_dollars": -13.5,
-      "underlying_stop_trigger": 429.38,
-      "profit_taking_rule": "Trim half at +75%–100% contract gain or when ISRG reaches $510.13; exit early on a weekly close below $429.38.",
-      "scenarios": [
-        {
-          "scenario": "Bear / Stop Hit ($429.38)",
-          "stock_price": 429.38,
-          "stock_move_pct": -3.2,
-          "contract_value": 8852.34,
-          "net_pnl": -447.66,
-          "return_on_risk_pct": -4.8
-        },
-        {
-          "scenario": "Flat in 60 Days ($443.59)",
-          "stock_price": 443.59,
-          "stock_move_pct": 0.0,
-          "contract_value": 9613.21,
-          "net_pnl": 313.21,
-          "return_on_risk_pct": 3.4
-        },
-        {
-          "scenario": "Base Target ($510.13)",
-          "stock_price": 510.13,
-          "stock_move_pct": 15.0,
-          "contract_value": 13281.99,
-          "net_pnl": 3981.99,
-          "return_on_risk_pct": 42.8
-        },
-        {
-          "scenario": "Bull Target ($586.65)",
-          "stock_price": 586.65,
-          "stock_move_pct": 32.3,
-          "contract_value": 20085.81,
-          "net_pnl": 10785.81,
-          "return_on_risk_pct": 116.0
-        }
-      ],
-      "beginner_explainer": [
-        "Why LEAPS instead of a short-dated call: With 306 days until 2027-09-17 and 0.71 delta, this option behaves ~70% like owning 100 shares for a fraction of the cash, while losing only $13.50/day to time decay.",
-        "Worst-case wallet risk: You pay $93.00 x 100 shares x 1 = $9,300.00 upfront. Even if ISRG crashed 50% overnight, you cannot lose more than $9,300.00.",
-        "Volatility check: Implied Volatility is 46.5% vs. 20-day actual stock volatility of 44.6% (IV FAIR), so you are not overpaying panic premiums."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (ISRG)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x ISRG 2027-09-17 $400 LEAPS Call (306 DTE, 0.71 Delta) near $93.00/sh ($9,300.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 11.15%) above rising 50D SMA (417.59) and 30W SMA (409.0). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:ISRG. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_isrg_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:ISRG\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:ISRG\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_isrg_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 306 days until 2027-09-17 and 0.71 delta, this option behaves ~70% like owning 100 shares for a fraction of the cash, while losing only $13.50/day to time decay.</p><p>Worst-case wallet risk: You pay $93.00 x 100 shares x 1 = $9,300.00 upfront. Even if ISRG crashed 50% overnight, you cannot lose more than $9,300.00.</p><p>Volatility check: Implied Volatility is 46.5% vs. 20-day actual stock volatility of 44.6% (IV FAIR), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for ISRG</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $400 CALL @ $93.00 mid (bid $89.00 / ask $97.00, OI 7)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$9,300.00 (930.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$493.00 (+11.14% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+70.60 per $1 move | $-13.50/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when ISRG reaches $510.13; exit early on a weekly close below $429.38.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 306 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $9,300.00 Across Stock Scenarios (ISRG)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($429.38)</td><td>$429.38 (-3.2%)</td><td>$8,852.34</td><td>$-447.66</td><td><strong>-4.8%</strong></td></tr><tr><td>Flat in 60 Days ($443.59)</td><td>$443.59 (+0.0%)</td><td>$9,613.21</td><td>$+313.21</td><td><strong>+3.4%</strong></td></tr><tr><td>Base Target ($510.13)</td><td>$510.13 (+15.0%)</td><td>$13,281.99</td><td>$+3,981.99</td><td><strong>+42.8%</strong></td></tr><tr><td>Bull Target ($586.65)</td><td>$586.65 (+32.3%)</td><td>$20,085.81</td><td>$+10,785.81</td><td><strong>+116.0%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (ISRG)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>No clean call-spread strikes available above $370 on 2027-02-19; stand aside.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (423.51) and 200D/30W floor (427.69); trend is broken. <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NASDAQ:ISRG. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_isrg_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NASDAQ:ISRG\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NASDAQ:ISRG\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_isrg_options_chart\"});</script></div>\n</section>"
 }

@@ -1,21 +1,21 @@
 {
   "symbol": "JPM",
   "market": "US",
-  "generated_at": "2026-11-16T20:59:33+00:00",
+  "generated_at": "2026-11-23T00:31:01+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
-      "status": "no_open_tab",
+      "status": "unavailable",
       "active_tabs": []
     }
   },
@@ -23,113 +23,43 @@
     "tv_symbol": "NYSE:JPM",
     "exchange": "NYSE",
     "company_name": "JPMorgan Chase & Co.",
-    "close": 346.19,
-    "change_1d_pct": 0.98,
-    "perf_1w_pct": -0.45,
-    "perf_1m_pct": -0.58,
-    "perf_3m_pct": -6.87,
-    "rsi_1d": 56.12,
-    "rsi_4h": 44.87,
-    "rsi_1w": 51.11,
-    "sma20": 339.04,
-    "sma50": 340.42,
-    "sma200": 324.86,
-    "sma30_weekly": 335.05,
-    "ema10_weekly": 340.58,
-    "ema20_4h": 341.29,
-    "sma50_4h": 338.61,
-    "atr14": 7.11,
-    "bb_width_pct": 5.64,
+    "close": 310.68,
+    "change_1d_pct": -2.98,
+    "perf_1w_pct": -10.31,
+    "perf_1m_pct": -7.84,
+    "perf_3m_pct": -12.25,
+    "rsi_1d": 30.72,
+    "rsi_4h": 21.97,
+    "rsi_1w": 39.55,
+    "sma20": 336.6,
+    "sma50": 337.35,
+    "sma200": 325.2,
+    "sma30_weekly": 334.16,
+    "ema10_weekly": 334.97,
+    "ema20_4h": 329.8,
+    "sma50_4h": 336.46,
+    "atr14": 7.92,
+    "bb_width_pct": 11.89,
     "pivot_s1": 326.16,
     "pivot_s2": 315.27,
     "pivot_r1": 346.84,
     "pivot_r2": 356.63,
     "high_52w": 366.5,
     "low_52w": 279.1,
-    "dist_to_200d_pct": 3.83,
-    "major_shelf": 335.05,
+    "dist_to_200d_pct": -4.46,
+    "major_shelf": 315.27,
     "intraday_4h_turn": false,
-    "setup_archetype": "STAGE3_PULLBACK_WAIT_FOR_SUPPORT",
-    "setup_summary": "Stage 3 (Topping / Pullback) above rising 30W SMA ($335.05) with FALLING/FLAT 50D SMA ($340.42); wait for support retest ($326.16-$335.05) before deploying LEAPS."
+    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
+    "setup_summary": "Dislocated below 50D SMA (337.35) after a -7.8% 1M move near structural support (315.27), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 21.97 vs Daily RSI 30.72; close 310.68 vs 4H EMA20 329.8), so there is no confirmed mean-reversion window yet."
   },
   "options_plan": {
     "symbol": "JPM",
     "market": "US",
     "optionable": true,
-    "options_verdict": "WAIT_FOR_SUPPORT_LEAPS",
-    "iv_regime": "IV_FAIR",
-    "atm_iv_pct": 26.5,
-    "hv20_pct": 28.0,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "headline": "Stand aside on JPM call spreads: $310/$330 spread costs $9.57 for only $10.43 max gain (1.09:1 R:R < 1.25:1 minimum).",
     "open_positions_audit": [],
-    "headline": "Wait for pullback to $326.16–$335.05 before buying 1x JPM 2027-09-17 $315 LEAPS Call (305 DTE, 0.69 Delta) — note $4,933.00 max risk exceeds current $3,818.88 cash reserve.",
-    "recommended_trade": {
-      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
-      "expiry": "2027-09-17",
-      "dte": 305,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 315.0,
-          "mid": 49.33,
-          "bid": 47.75,
-          "ask": 50.9,
-          "open_interest": 11
-        }
-      ],
-      "contracts": 1,
-      "multiplier": 100,
-      "net_debit_per_share": 49.33,
-      "max_loss_total": 4933.0,
-      "max_loss_nav_bps": 560.8,
-      "max_profit_total": "Uncapped upside",
-      "breakeven_at_expiry": 364.33,
-      "breakeven_move_pct": 5.24,
-      "net_delta_dollars_per_1_move": 69.5,
-      "daily_theta_dollars": -7.88,
-      "underlying_stop_trigger": 335.05,
-      "profit_taking_rule": "Trim half at +75%–100% contract gain or when JPM reaches $388.09; exit early on a weekly close below $335.05.",
-      "scenarios": [
-        {
-          "scenario": "Bear / Stop Hit ($322.51)",
-          "stock_price": 322.51,
-          "stock_move_pct": -6.84,
-          "contract_value": 4120.0,
-          "net_pnl": -813.0,
-          "return_on_risk_pct": -16.5
-        },
-        {
-          "scenario": "Flat in 60 Days ($346.19)",
-          "stock_price": 346.19,
-          "stock_move_pct": 0.0,
-          "contract_value": 5192.49,
-          "net_pnl": 259.49,
-          "return_on_risk_pct": 5.3
-        },
-        {
-          "scenario": "Base Target ($388.09)",
-          "stock_price": 388.09,
-          "stock_move_pct": 12.1,
-          "contract_value": 8387.56,
-          "net_pnl": 3454.56,
-          "return_on_risk_pct": 70.0
-        },
-        {
-          "scenario": "Bull Target ($425.00)",
-          "stock_price": 425.0,
-          "stock_move_pct": 22.76,
-          "stock_value": 425.0,
-          "contract_value": 11520.0,
-          "net_pnl": 6587.0,
-          "return_on_risk_pct": 133.5
-        }
-      ],
-      "beginner_explainer": [
-        "Why LEAPS instead of a short-dated call: With 305 days until 2027-09-17 and 0.69 delta, this option behaves ~69% like owning 100 shares for a fraction of the cash, while losing only $7.88/day to time decay.",
-        "Worst-case wallet risk: You pay $49.33 x 100 shares x 1 = $4,933.00 upfront. Even if JPM crashed 50% overnight, you cannot lose more than $4,933.00.",
-        "Volatility check: Implied Volatility is 26.5% vs. 20-day actual stock volatility of 28.0% (IV FAIR), so you are not overpaying panic premiums."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (JPM)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x JPM 2027-09-17 $315 LEAPS Call (305 DTE, 0.69 Delta) near $49.33/sh ($4,933.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Tight Stage 2 volatility contraction (Bollinger bandwidth 5.64%) above rising 50D SMA (340.0) and 30W SMA (335.05). <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:JPM. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_jpm_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:JPM\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:JPM\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_jpm_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 305 days until 2027-09-17 and 0.69 delta, this option behaves ~69% like owning 100 shares for a fraction of the cash, while losing only $7.88/day to time decay.</p><p>Worst-case wallet risk: You pay $49.33 x 100 shares x 1 = $4,933.00 upfront. Even if JPM crashed 50% overnight, you cannot lose more than $4,933.00.</p><p>Volatility check: Implied Volatility is 26.5% vs. 20-day actual stock volatility of 28.0% (IV FAIR), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for JPM</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $315 CALL @ $49.33 mid (bid $47.75 / ask $50.90, OI 11)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$4,933.00 (493.3 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$364.33 (+7.96% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+69.50 per $1 move | $-7.88/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when JPM reaches $388.09; exit early on a weekly close below $335.05.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 305 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $4,933.00 Across Stock Scenarios (JPM)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($335.05)</td><td>$335.05 (-0.7%)</td><td>$5,153.13</td><td>$+220.13</td><td><strong>+4.5%</strong></td></tr><tr><td>Flat in 60 Days ($337.47)</td><td>$337.47 (+0.0%)</td><td>$5,192.49</td><td>$+259.49</td><td><strong>+5.3%</strong></td></tr><tr><td>Base Target ($388.09)</td><td>$388.09 (+15.0%)</td><td>$8,387.56</td><td>$+3,454.56</td><td><strong>+70.0%</strong></td></tr><tr><td>Bull Target ($446.30)</td><td>$446.30 (+32.2%)</td><td>$13,832.42</td><td>$+8,899.42</td><td><strong>+180.4%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (JPM)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>Stand aside on JPM call spreads: $310/$330 spread costs $9.57 for only $10.43 max gain (1.09:1 R:R &lt; 1.25:1 minimum).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Dislocated below 50D SMA (337.35) after a -7.8% 1M move near structural support (315.27), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 21.97 vs Daily RSI 30.72; close 310.68 vs 4H EMA20 329.8), so there is no confirmed mean-reversion window yet. <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:JPM. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_jpm_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:JPM\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:JPM\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_jpm_options_chart\"});</script></div>\n</section>"
 }

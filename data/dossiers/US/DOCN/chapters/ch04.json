@@ -14,7 +14,7 @@
     },
     {
       "type": "p",
-      "html": "DigitalOcean competes in a crowded middle lane between giant hyperscalers and low-cost hosts [18][19][20]. AWS, Azure, and GCP dominate Fortune 500 IT budgets with custom chips and deep enterprise catalogs. At the budget end, Hetzner offers European bare-metal servers with 20 TB of included traffic and EUR 1.00/TB overages [18]. Vultr targets similar developers with global regions and $0.01/GB bandwidth overages [19]. Meanwhile, CoreWeave raises billions to build massive zero-egress GPU training clusters for frontier AI labs [20]."
+      "html": "DigitalOcean competes in a crowded middle lane between giant hyperscalers and aggressive GPU neoclouds [18][19][20]. AWS, Azure, and GCP dominate Fortune 500 IT budgets with custom chips and deep enterprise catalogs. At the budget end, Hetzner offers European bare-metal servers with 20 TB traffic and EUR 1.00/TB overages [18]. Meanwhile, CoreWeave hit $3,661M Q3 2026 revenue (+168% YoY) and Nebius reached $980.8M (+571% YoY), pushing neoclouds directly into mid-market AI-native SaaS accounts [20][30]."
     },
     {
       "type": "table",
@@ -43,13 +43,13 @@
         ],
         [
           "GPU Neoclouds",
-          "CoreWeave, Lambda, Nebius",
-          "CoreWeave $0 internet egress; long-term reserved cluster contracts",
-          "Priority NVIDIA cluster scale, InfiniBand, frontier-lab contracts",
-          "DOCN wins on Core Cloud + AI integration (90% overlap); loses on multi-thousand-GPU frontier training"
+          "CoreWeave (CRWV), Nebius (NBIS), Lambda",
+          "CoreWeave $0 internet egress; $132.5B backlog; 1.7 GW active power (4.6 GW contracted) [20]",
+          "10x–50x capex scale ($15.4B NBIS 9M capex); winning Canva, Substack, Cohere, Perplexity [20][30]",
+          "DOCN wins on Core Cloud + AI stack simplicity; trails sharply on cluster scale & power capacity (~180 MW)"
         ]
       ],
-      "takeaway": "DigitalOcean cannot out-spend AWS or out-cheap Hetzner on raw hardware; its defensibility rests on integrated developer workflow simplicity."
+      "takeaway": "CoreWeave and Nebius now outscale DigitalOcean 10x–50x in power and GPU capex while winning mid-market AI logos, forcing DOCN to win via multi-vendor silicon (B300, AMD MI350X/355X) and integrated PaaS software."
     },
     {
       "type": "h3",
@@ -57,11 +57,11 @@
     },
     {
       "type": "p",
-      "html": "DigitalOcean cannot outspend CoreWeave on 100,000-GPU training farms. Nor can it match AWS's 200+ enterprise services. Instead, its moat rests on simplicity, predictable $0.01/GiB egress fees, and multi-product stickiness [1][15]. With 60% of revenue tied to 4+ product users, migrating off DigitalOcean takes months of engineering effort [1]."
+      "html": "DigitalOcean cannot outspend CoreWeave ($132.5B backlog) or Nebius ($15.4B 9M capex) on gigawatt GPU farms [20][30]. Nor can it match AWS's 200+ services. Instead, DOCN added NVIDIA HGX B300 ($7.94/GPU/hr reserved) and AMD Instinct MI300X–MI355X droplets alongside H100/H200, anchored by $0.01/GiB egress and 60% 4+ product stickiness [1][15][31]."
     },
     {
       "type": "p",
-      "html": "Still, the two-front squeeze is real. Hyperscalers could simplify their mid-market onboarding, while neoclouds could layer managed databases onto raw GPU racks. If DigitalOcean loses pricing power in either lane, gross margin could stay pinned near 50%."
+      "html": "Still, CoreWeave's Q3 2026 wins at Canva, Substack, Serve Robotics, and Perplexity show neoclouds moving directly into DigitalOcean's mid-market AI-native lane [20]. At the same time, CoreWeave's $846M quarterly net interest expense and $(709)M GAAP net loss underscore the brutal debt-funded economics of raw GPU leasing [20]."
     },
     {
       "type": "h3",
@@ -95,7 +95,8 @@
     },
     {
       "type": "h3",
-      "text": "Why Hyperscalers Leave the Mid-Market Open"
+      "text": "Why Hyperscalers Leave the Mid-Market Open",
+      "html": "On the low end, European hosts like Hetzner offer cheap bare metal and 20 TB traffic pools, though lacking managed PaaS [18]. Among neoclouds, CoreWeave's 1.7 GW active power dwarfs DigitalOcean's ~180 MW committed capacity (including 20 MW added for 2028) [1][20]. DigitalOcean must therefore convert GPU buyers into sticky Managed Agents, Cuttlefish, and database users rather than chasing raw FLOP scale [1][31]."
     },
     {
       "type": "p",
@@ -115,10 +116,10 @@
     }
   ],
   "book_paragraphs": [
-    "Whenever you and I evaluate a mid-sized infrastructure company, we have to ask a blunt question: why doesn't Amazon, Microsoft, or Google simply crush it? DigitalOcean fights a three-front war. Above it sit the hyperscalers with 200-plus services and near-infinite balance sheets. Below it sit bare-metal value hosts like Hetzner and Vultr, where Hetzner gives away 20 terabytes of traffic and charges barely a euro per terabyte thereafter. And beside it in AI sit specialized neoclouds like CoreWeave, armed with priority NVIDIA clusters and zero-egress pricing.",
+    "Whenever we evaluate a mid-sized infrastructure company, we must ask why giants or specialized upstarts do not crush it. DigitalOcean fights a three-front war. Above it sit AWS, Azure, and Google Cloud. Below it sit bare-metal discounters like Hetzner and Vultr. Beside it sit hyper-scaled AI neoclouds: CoreWeave ($3.66 billion Q3 2026 revenue, $132.5 billion backlog, 1.7 GW active power) and Nebius ($980.8 million Q3 revenue, $15.4 billion 9M capex), both expanding rapidly compared to DigitalOcean's ~180 MW footprint.",
     "DigitalOcean survives—and recently accelerated to 40% growth—because it doesn't try to win any of those raw hardware battles. It wins on workflow glue. A startup doesn't leave AWS for DigitalOcean because a virtual CPU is two dollars cheaper; it leaves because managing IAM roles, NAT gateways, and unpredictable egress bills wastes senior engineering hours. And once that startup wires its Kubernetes cluster, Managed PostgreSQL database, Spaces object storage, and Gradient AI agent together inside one clean console—as roughly 60% of DigitalOcean's revenue base now does—the switching cost shifts from a weekend script to a multi-month migration.",
     "DigitalOcean occupies one of the most contested neighborhoods in enterprise technology: the narrow corridor between three trillion-dollar hyperscalers on one side and a swarm of venture-backed GPU neoclouds and low-cost European bare-metal hosts on the other. On the top end, Amazon Web Services, Microsoft Azure, and Google Cloud Platform command unmatched scale, custom silicon (Trainium, TPU), and enterprise procurement relationships. On the bottom end, Hetzner offers bare-metal and cloud instances in Europe at aggressive prices with 20 TB of included traffic, while Vultr competes directly for developer mindshare with global regions and $0.01/GB bandwidth overages.",
-    "Simultaneously, specialized AI neoclouds such as CoreWeave have raised tens of billions in debt and equity to deploy massive, liquid-cooled Nvidia clusters tailored for frontier-model pre-training. DigitalOcean cannot—and wisely does not try to—outspend CoreWeave on 100,000-GPU training superclusters or out-catalog AWS on 200 enterprise services. Instead, its moat rests on simplicity, mid-market total cost of ownership, and integrated application workflows.",
+    "Simultaneously, CoreWeave's November 2026 Q3 disclosures show neoclouds are no longer confined to frontier model labs—winning mid-market AI-native accounts like Canva, Substack, Serve Robotics, and Perplexity. Yet CoreWeave's $846 million quarterly interest expense and $709 million net loss prove that debt-fueled GPU leasing carries punishing capital costs. DigitalOcean's edge remains lower-cost multi-vendor inference (adding NVIDIA B300 and AMD MI300X–MI355X) coupled with Core Cloud workflow glue.",
     "Ultimately, DigitalOcean's competitive moat is strongest in the $10,000 to $500,000 annual spend bracket—too small for AWS account teams to customize pricing, yet too complex for bare-metal European discounters like Hetzner to serve with managed PaaS tooling. Defending that middle ground against both hyperscaler simplicity initiatives and well-funded neoclouds requires relentless product execution on the Gradient AI platform without sacrificing Core Cloud reliability."
   ],
   "book_subsections": [
@@ -140,7 +141,7 @@
       "title": "Competitive Positioning: Hyperscalers Above, Bare-Metal Below",
       "paragraphs": [
         "To appreciate DigitalOcean's competitive durability, imagine a three-lane highway. In the express lane sit AWS, Microsoft Azure, and Google Cloud, optimized for Fortune 500 enterprises with dedicated cloud-engineering teams and multi-year commit discounts. In the budget lane sit European bare-metal providers like Hetzner—offering 20 TB of included traffic and EUR 1.00/TB overages—and regional VPS hosts that compete purely on raw cents per vCPU, with minimal managed services.",
-        "DigitalOcean owns the middle lane: mid-market SaaS builders, digital agencies, and AI-native application startups that want managed Kubernetes, automated database backups, and predictable $0.01/GiB egress pricing without hiring a three-person DevOps team. Meanwhile, specialized GPU neoclouds like CoreWeave focus on massive, zero-egress training superclusters for frontier AI labs. DigitalOcean's moat is therefore behavioral and architectural: as long as 60% of its revenue comes from customers using four or more integrated products, neither a bare-metal discounter nor a frontier training cluster can easily replicate its developer workflow."
+        "DigitalOcean owns the middle lane: mid-market SaaS builders, agencies, and AI-native teams wanting managed Kubernetes, Postgres, and predictable $0.01/GiB egress without hiring a DevOps squad. CoreWeave and Nebius now compete directly for fast-growing AI startups with 10x–50x capital budgets, so DigitalOcean's defense rests on keeping 60% of revenue anchored in four-product software stacks plus new agentic tools like Managed Agents and Cuttlefish."
       ]
     }
   ],
