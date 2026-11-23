@@ -360,10 +360,16 @@ def _build_ch4_from_snapshot_or_ledger(
     # sessions (for example, a Nov 6 close under a Nov 9 report header).
     ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
     target_bar_date = str(inst_m.get("asof_bar") or as_of)[:10]
+    snap_date = str(snap_sym.get("retrieved_at") or "")[:10]
+    using_tv_snapshot = not ledger_is_asof and not inst_m.get("close") and tv.get("close") is not None
     price_label = (
         f"Session Price ({_esc(as_of)})"
         if ledger_is_asof
-        else f"Last verified target bar ({_esc(target_bar_date)})"
+        else (
+            f"Live TradingView snapshot ({_esc(snap_date)})"
+            if (using_tv_snapshot and snap_date)
+            else f"Last verified target bar ({_esc(target_bar_date)})"
+        )
     )
     primary = inst_m if ledger_is_asof else tv
     secondary = tv if ledger_is_asof else inst_m
@@ -411,7 +417,15 @@ def _build_ch4_from_snapshot_or_ledger(
 
     tech_rows = [
         [
-            f"Session close ({_esc(as_of)})" if ledger_is_asof else f"Last verified close ({_esc(target_bar_date)})",
+            (
+                f"Session close ({_esc(as_of)})"
+                if ledger_is_asof
+                else (
+                    f"Live TradingView snapshot ({_esc(snap_date)})"
+                    if (using_tv_snapshot and snap_date)
+                    else f"Last verified close ({_esc(target_bar_date)})"
+                )
+            ),
             fmt_px(close) + cite_tag,
             f"1D: {tv.get('change_1d_pct') if not ledger_is_asof else (inst_m.get('chg_1d_pct') if inst_m.get('chg_1d_pct') is not None else tv.get('change_1d_pct', 'N/A'))}%, "
             f"1W: {tv.get('perf_1w_pct') if not ledger_is_asof else (inst_m.get('chg_1w_pct') if inst_m.get('chg_1w_pct') is not None else tv.get('perf_1w_pct', 'N/A'))}%, "
@@ -575,10 +589,16 @@ def render_book_dossier(spec: dict, facts: dict | None = None, snapshots: dict |
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
     ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    snap_date = str(snap_sym.get("retrieved_at") or "")[:10]
+    using_tv_snapshot = not ledger_is_asof and not inst_m.get("close") and tv.get("close") is not None
     price_label = (
         f"Session Price ({_esc(as_of)})"
         if ledger_is_asof
-        else f"Last verified target bar ({_esc(str(inst_m.get('asof_bar') or as_of)[:10])})"
+        else (
+            f"Live TradingView snapshot ({_esc(snap_date)})"
+            if (using_tv_snapshot and snap_date)
+            else f"Last verified target bar ({_esc(str(inst_m.get('asof_bar') or as_of)[:10])})"
+        )
     )
     close = (inst_m.get("close") if ledger_is_asof else None) or tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
@@ -1243,10 +1263,16 @@ def render_10chapter_monograph_editions(
     tv = snap_sym.get("tradingview") or {}
     s2_ev = snap_sym.get("stage2_evaluation") or {}
     ledger_is_asof = str(inst_m.get("asof_bar", ""))[:10] == str(as_of)[:10]
+    snap_date = str(snap_sym.get("retrieved_at") or "")[:10]
+    using_tv_snapshot = not ledger_is_asof and not inst_m.get("close") and tv.get("close") is not None
     price_label = (
         f"Session Price ({_esc(as_of)})"
         if ledger_is_asof
-        else f"Last verified target bar ({_esc(str(inst_m.get('asof_bar') or as_of)[:10])})"
+        else (
+            f"Live TradingView snapshot ({_esc(snap_date)})"
+            if (using_tv_snapshot and snap_date)
+            else f"Last verified target bar ({_esc(str(inst_m.get('asof_bar') or as_of)[:10])})"
+        )
     )
     close = (inst_m.get("close") if ledger_is_asof else None) or tv.get("close") or inst_m.get("close") or spec.get("cmp") or 0.0
     entry_low = spec["entry_zone_low"]
