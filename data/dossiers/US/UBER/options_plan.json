@@ -1,86 +1,174 @@
 {
   "symbol": "UBER",
   "market": "US",
-  "generated_at": "2026-11-23T07:22:23+00:00",
+  "generated_at": "2026-11-23T19:40:36+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": false,
+      "checked": true,
       "accessible": false,
       "logged_in": false,
-      "status": "skipped",
-      "note": "Browser check disabled.",
+      "status": "no_robinhood_tab",
+      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": false,
-      "accessible": false,
-      "status": "skipped",
-      "active_tabs": []
+      "checked": true,
+      "accessible": true,
+      "status": "connected",
+      "active_tabs": [
+        {
+          "title": "DOCN 77.64 ▲ +16.3% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ADOCN"
+        },
+        {
+          "title": "ADBE 223.64 ▲ +2.72% TheWrap",
+          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ADOCN"
+        }
+      ]
     }
   },
   "multitimeframe_chart": {
     "tv_symbol": "NYSE:UBER",
     "exchange": "NYSE",
     "company_name": "Uber Technologies, Inc.",
-    "close": 63.48,
-    "change_1d_pct": -3.24,
-    "perf_1w_pct": -8.43,
-    "perf_1m_pct": -8.02,
-    "perf_3m_pct": -20.38,
-    "rsi_1d": 34.09,
-    "rsi_4h": 29.21,
-    "rsi_1w": 38.44,
-    "sma20": 67.8,
-    "sma50": 68.97,
-    "sma200": 72.4,
-    "sma30_weekly": 71.76,
-    "ema10_weekly": 68.47,
-    "ema20_4h": 67.86,
-    "sma50_4h": 68.05,
+    "close": 64.62,
+    "change_1d_pct": 1.8,
+    "perf_1w_pct": -7.69,
+    "perf_1m_pct": -5.62,
+    "perf_3m_pct": -18.59,
+    "rsi_1d": 38.63,
+    "rsi_4h": 36.21,
+    "rsi_1w": 40.45,
+    "sma20": 67.73,
+    "sma50": 68.8,
+    "sma200": 72.35,
+    "sma30_weekly": 71.41,
+    "ema10_weekly": 67.77,
+    "ema20_4h": 67.28,
+    "sma50_4h": 67.83,
     "atr14": 2.42,
-    "bb_width_pct": 13.58,
+    "bb_width_pct": 13.85,
     "pivot_s1": 62.17,
     "pivot_s2": 59.08,
     "pivot_r1": 70.21,
     "pivot_r2": 75.16,
     "high_52w": 92.78,
     "low_52w": 63.29,
-    "dist_to_200d_pct": -12.32,
+    "dist_to_200d_pct": -10.68,
     "major_shelf": 63.29,
     "intraday_4h_turn": false,
     "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
-    "setup_summary": "Trading below both 50D SMA (68.97) and 200D/30W floor (72.4); trend is broken."
+    "setup_summary": "Trading below both 50D SMA (68.8) and 200D/30W floor (72.35); trend is broken."
   },
   "options_plan": {
     "symbol": "UBER",
     "market": "US",
-    "optionable": false,
-    "options_verdict": "NOT_OPTIONABLE_OR_ILLIQUID",
-    "headline": "UBER new options bid-ask spreads exceed 14% and equity is REJECTED (TIER_0) in Stage 4; exit the 5 existing Dec 2027 OTM LEAPS into cash immediately (hard breach <= $63.00).",
+    "optionable": true,
+    "options_verdict": "WAIT_FOR_SUPPORT_OR_BASE",
+    "iv_regime": "IV_ELEVATED",
+    "atm_iv_pct": 42.8,
+    "hv20_pct": 34.3,
     "open_positions_audit": [
       {
         "contract": "UBER271217C00110000",
         "type": "Call (LEAPS)",
         "strike": 110,
         "expiry": "2027-12-17",
-        "dte": 392,
+        "dte": 389,
         "contracts": 4,
         "action": "EXIT_IMMEDIATELY",
-        "rationale": "CLOSE_INTO_CASH — close all 5 Dec 17, 2027 LEAPS contracts cleanly on market liquidity to salvage ~$820–$1,020 into USD cash rather than risking a gap below $63.00 and total theta decay; zero averaging down (392 DTE as of 2026-11-20; $0.00 intrinsic at $75.00 Base and $108.00 Bull; 0.14–0.22 delta; >14% spreads)."
+        "rationale": "Independent override (CLOSE_INTO_CASH): $0.00 intrinsic at $70.00 Base ($67.20 EV; 4x $110C also $0.00 at $105.00 Bull); close via limit orders on bounce liquidity (~$64.60) to rebuild 9.13% cash toward 22.0% floor (hard breach <= $63.00)."
       },
       {
         "contract": "UBER271217C00100000",
         "type": "Call (LEAPS)",
         "strike": 100,
         "expiry": "2027-12-17",
-        "dte": 392,
+        "dte": 389,
         "contracts": 1,
         "action": "EXIT_IMMEDIATELY",
-        "rationale": "CLOSE_INTO_CASH — close all 5 Dec 17, 2027 LEAPS contracts cleanly on market liquidity to salvage ~$820–$1,020 into USD cash rather than risking a gap below $63.00 and total theta decay; zero averaging down (392 DTE as of 2026-11-20; $0.00 intrinsic at $75.00 Base; 0.14–0.22 delta; >14% spreads)."
+        "rationale": "Independent override (CLOSE_INTO_CASH): $0.00 intrinsic at $70.00 Base ($67.20 EV; 4x $110C also $0.00 at $105.00 Bull); close via limit orders on bounce liquidity (~$64.60) to rebuild 9.13% cash toward 22.0% floor (hard breach <= $63.00)."
       }
     ],
-    "recommended_trade": null
+    "headline": "Stand aside at Nov 23 live options-chain spot ($64.62; verified Nov 20 close $63.47): UBER is in confirmed Stage 4 (CAP_REJECTED) with 100% marginal capital held in CASH. Commit zero new options cash until a Stage 1 base and Stage 2 reclaim >$73.50 form; illustrative Feb 19, 2027 $65/$75 Call Spread ($3.49 debit, $349.00 max loss = 43.7 bps of $79,861.16 NAV, $651.00 max profit, 1.87:1 R:R) is strictly reference-only.",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-02-19",
+      "dte": 88,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 65.0,
+          "mid": 5.05,
+          "bid": 4.95,
+          "ask": 5.15,
+          "open_interest": 58
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 75.0,
+          "mid": 1.56,
+          "bid": 1.52,
+          "ask": 1.6,
+          "open_interest": 276
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 3.49,
+      "max_loss_total": 349.0,
+      "max_loss_nav_bps": 43.7,
+      "max_profit_total": "$651.00 (1.87:1 reward-to-risk)",
+      "breakeven_at_expiry": 68.49,
+      "breakeven_move_pct": 5.99,
+      "net_delta_dollars_per_1_move": 28.7,
+      "daily_theta_dollars": -0.95,
+      "underlying_stop_trigger": 60.96,
+      "profit_taking_rule": "Close spread at 65%–75% of max profit ($455.70 gain) or exit early if UBER closes below $60.96.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $65 at Expiry",
+          "stock_price": 60.96,
+          "stock_move_pct": -5.7,
+          "contract_value": 0.0,
+          "net_pnl": -349.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($68.49)",
+          "stock_price": 68.49,
+          "stock_move_pct": 6.0,
+          "contract_value": 349.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap ($75.00; Above $70.00 Base)",
+          "stock_price": 75.0,
+          "stock_move_pct": 16.1,
+          "contract_value": 1000.0,
+          "net_pnl": 651.0,
+          "return_on_risk_pct": 186.5
+        },
+        {
+          "scenario": "At Bull Target ($105.00)",
+          "stock_price": 105.0,
+          "stock_move_pct": 62.5,
+          "contract_value": 1000.0,
+          "net_pnl": 651.0,
+          "return_on_risk_pct": 186.5
+        }
+      ],
+      "beginner_explainer": [
+        "Why we stand aside today: UBER is in a Stage 4 breakdown below its 50D and 200D averages at Nov 23 live spot ($64.62; verified Nov 20 close $63.47). Buying calls here risks drawdown, vol crush (ATM IV 42.8% vs HV20 34.3%), and theta decay. We commit 0% new options cash until UBER builds a Stage 1 base and reclaims >$73.50; the Feb 2027 $65/$75 spread serves strictly as an illustrative defined-risk reference ($349.00 max loss = 43.7 bps of $79,861.16 NAV).",
+        "Exact wallet math (1 contract = 100 shares): You buy the $65 Call for $5.05 and simultaneously sell the $75 Call for $1.56, paying $3.49/sh net ($349.00 total for 1 spread(s)). That $349.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-02-19), you start making money above $68.49 (+6.0% from $64.62). Anywhere at or above $75, your $349.00 turns into $1,000.00 (+$651.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in UBER adds ~$28.70 to your spread (Net Delta), while sitting flat costs ~$0.95/day in time decay (Net Theta) — much lower than an unhedged call because the sold $75 call decays in your favor."
+      ]
+    }
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NOT_OPTIONABLE_OR_ILLIQUID\">\n<h2>Options &amp; Call-Convexity Playbook (UBER)</h2>\n<p><span class=\"verdict verdict-watch\">NOT OPTIONABLE OR ILLIQUID</span> &mdash; <strong>UBER new options bid-ask spreads exceed 14% and equity is REJECTED (TIER_0) in Stage 4; exit the 5 existing Dec 2027 OTM LEAPS into cash immediately (hard breach &lt;= $63.00).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (68.97) and 200D/30W floor (72.4); trend is broken. <em>Account / Chain Feed: Browser check disabled.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:UBER. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_uber_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:UBER\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:UBER\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_uber_options_chart\"});</script></div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Active Open Options Audit for UBER</caption><thead><tr><th>Contract</th><th>Structure</th><th>Strike</th><th>Expiry (DTE)</th><th>Qty</th><th>Action</th><th>Rule &amp; Rationale</th></tr></thead><tbody><tr><td>UBER271217C00110000</td><td>Call (LEAPS)</td><td>110</td><td>2027-12-17 (392d)</td><td>4</td><td><strong>EXIT_IMMEDIATELY</strong></td><td>CLOSE_INTO_CASH — close all 5 Dec 17, 2027 LEAPS contracts cleanly on market liquidity to salvage ~$820–$1,020 into USD cash rather than risking a gap below $63.00 and total theta decay; zero averaging down (392 DTE as of 2026-11-20; $0.00 intrinsic at $75.00 Base and $108.00 Bull; 0.14–0.22 delta; &gt;14% spreads).</td></tr><tr><td>UBER271217C00100000</td><td>Call (LEAPS)</td><td>100</td><td>2027-12-17 (392d)</td><td>1</td><td><strong>EXIT_IMMEDIATELY</strong></td><td>CLOSE_INTO_CASH — close all 5 Dec 17, 2027 LEAPS contracts cleanly on market liquidity to salvage ~$820–$1,020 into USD cash rather than risking a gap below $63.00 and total theta decay; zero averaging down (392 DTE as of 2026-11-20; $0.00 intrinsic at $75.00 Base; 0.14–0.22 delta; &gt;14% spreads).</td></tr></tbody></table></div><p>Open option contracts above are audited against underlying structural support and remaining DTE theta runway.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"WAIT_FOR_SUPPORT_OR_BASE\">\n<h2>Options &amp; Call-Convexity Playbook (UBER)</h2>\n<p><span class=\"verdict verdict-watch\">WAIT FOR SUPPORT OR BASE</span> &mdash; <strong>Stand aside at Nov 23 live options-chain spot ($64.62; verified Nov 20 close $63.47): UBER is in confirmed Stage 4 (CAP_REJECTED) with 100% marginal capital held in CASH. Commit zero new options cash until a Stage 1 base and Stage 2 reclaim &gt;$73.50 form; the Feb 19, 2027 $65/$75 spread ($349.00 max loss = 43.7 bps of $79,861.16 NAV) is illustrative reference only.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below both 50D SMA (68.8) and 200D/30W floor (72.35); trend is broken. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:UBER. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_uber_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:UBER\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:UBER\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_uber_options_chart\"});</script></div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Active Open Options Audit for UBER</caption><thead><tr><th>Contract</th><th>Structure</th><th>Strike</th><th>Expiry (DTE)</th><th>Qty</th><th>Action</th><th>Rule &amp; Rationale</th></tr></thead><tbody><tr><td>UBER271217C00110000</td><td>Call (LEAPS)</td><td>110</td><td>2027-12-17 (389d)</td><td>4</td><td><strong>EXIT_IMMEDIATELY</strong></td><td>Independent override (CLOSE_INTO_CASH): $0.00 intrinsic at $70.00 Base (4x $110C also $0.00 at $105.00 Bull); close via limit orders on bounce (~$64.60) to rebuild 9.13% cash toward 22.0% floor (hard breach &lt;= $63.00).</td></tr><tr><td>UBER271217C00100000</td><td>Call (LEAPS)</td><td>100</td><td>2027-12-17 (389d)</td><td>1</td><td><strong>EXIT_IMMEDIATELY</strong></td><td>Independent override (CLOSE_INTO_CASH): $0.00 intrinsic at $70.00 Base (4x $110C also $0.00 at $105.00 Bull); close via limit orders on bounce (~$64.60) to rebuild 9.13% cash toward 22.0% floor (hard breach &lt;= $63.00).</td></tr></tbody></table></div><p>Open option contracts above are audited against underlying structural support and remaining DTE theta runway.</p>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why we stand aside today: UBER is in a Stage 4 breakdown below its 50D and 200D averages at Nov 23 live spot ($64.62; verified Nov 20 close $63.47). Buying calls here risks drawdown, vol crush (ATM IV 42.8% vs HV20 34.3%), and theta decay. We commit 0% new options cash until UBER builds a Stage 1 base and reclaims >$73.50; the Feb 2027 $65/$75 spread serves strictly as an illustrative defined-risk reference ($349.00 max loss = 43.7 bps of $79,861.16 NAV).</p><p>Exact wallet math (1 contract = 100 shares): You buy the $65 Call for $5.05 and simultaneously sell the $75 Call for $1.56, paying $3.49/sh net ($349.00 total for 1 spread(s)). That $349.00 is the absolute maximum you can lose.</p><p>Breakeven &amp; profit ceiling: At expiry (2027-02-19), you start making money above $68.49 (+6.0% from $64.62). Anywhere at or above $75, your $349.00 turns into $1,000.00 (+$651.00 net profit).</p><p>Speed &amp; time decay in plain English: Today, each $1 move up in UBER adds ~$28.70 to your spread (Net Delta), while sitting flat costs ~$0.95/day in time decay (Net Theta) — much lower than an unhedged call because the sold $75 call decays in your favor.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for UBER</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-02-19 $65 CALL @ $5.05 mid (bid $4.95 / ask $5.15, OI 58) + SELL 2027-02-19 $75 CALL @ $1.56 mid (bid $1.52 / ask $1.60, OI 276)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$349.00 (43.7 bps of $79,861.16 NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$68.49 (+5.99% vs Nov 23 live spot $64.62)</td><td>Stock price required by 2027-02-19 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>$651.00 (1.87:1 reward-to-risk)</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+28.70 per $1 move | $-0.95/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Close spread at 65%–75% of max profit ($455.70 gain) or exit early if UBER closes below $60.96.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-02-19, 88 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $349.00 Across Stock Scenarios (UBER)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>At or Below $65 at Expiry</td><td>$60.96 (-5.7%)</td><td>$0.00</td><td>$-349.00</td><td><strong>-100.0%</strong></td></tr><tr><td>At Breakeven ($68.49)</td><td>$68.49 (+6.0%)</td><td>$349.00</td><td>$+0.00</td><td><strong>+0.0%</strong></td></tr><tr><td>At Short Cap ($75.00; Above $70.00 Base)</td><td>$75.00 (+16.1%)</td><td>$1,000.00</td><td>$+651.00</td><td><strong>+186.5%</strong></td></tr><tr><td>At Bull Target ($105.00)</td><td>$105.00 (+62.5%)</td><td>$1,000.00</td><td>$+651.00</td><td><strong>+186.5%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
 }

@@ -22,48 +22,48 @@
   "entry_zone_low": 61.24,
   "entry_zone_high": 63.1,
   "stop_loss": 60.96,
-  "target_bear": 45.0,
-  "target_base": 75.0,
-  "target_bull": 108.0,
-  "expected_value_12m": 72.6,
+  "target_bear": 42.0,
+  "target_base": 70.0,
+  "target_bull": 105.0,
+  "expected_value_12m": 67.2,
   "scenario_horizon": "12-month",
   "holding_action": "NOT_HELD",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "Equity accounts in Robinhood and Schwab hold 0 UBER common shares (NOT_HELD; sell 0 shares). Robinhood still holds 5 Dec 17, 2027 Call LEAPS with 392 calendar days left as of 2026-11-20 (389 from 2026-11-23). The stack holds 4x $110 calls ($2,644.91 cost; $1,307.91 prior mark) and 1x $100 call ($818.95 cost; $467.95 prior mark). Total cost is $3,463.86 and prior mark is $1,775.86, or 2.36% of $75,110.60 net worth. We override the scanner and mandate EXIT_IMMEDIATELY (CLOSE_INTO_CASH) across all 5 contracts. Both strikes expire at $0.00 intrinsic value (-100%) at our $75.00 Base Case, and all 4x $110C expire at $0.00 at $108.00 Bull. Delta is compressed to 0.14–0.22 (~$820–$1,020 value), while $63.47 sits $0.47 (<0.2x ATR) above $63.00 on 1.63x Stage 4 volume. Spreads exceed 14%, and US cash sits at 3.38% versus the 22.0% Downtrend floor. Close all 5 contracts cleanly on market liquidity into USD cash with zero averaging down (hard breach <= $63.00).",
+  "holding_rationale": "Schwab and Robinhood hold 0 UBER common shares (NOT_HELD; sell 0 shares). Robinhood holds 5 Dec 17, 2027 Call LEAPS: 4x $110C ($2,644.91 cost; $1,307.91 book mark) and 1x $100C ($818.95 cost; $467.95 mark). Total cost is $3,463.86 and book mark is $1,775.86 (2.22% of $79,861.16 NAV), with 392 DTE as of Nov 20 (389 DTE Nov 23). We override the scanner and mandate EXIT_IMMEDIATELY (CLOSE_INTO_CASH) on all 5 contracts. Both strikes expire at $0.00 intrinsic value at our $70.00 Base Case ($67.20 EV), and all 4x $110C expire at $0.00 even at $105.00 Bull. Waymo breaks exclusivity in Jan 2028, AV spend tops $10B, and US cash sits at 9.13% ($7,290.91) vs. the 22.0% floor. Close all 5 calls via limit orders on bounce liquidity (~$64.60) into USD cash, with zero averaging down (hard breach <= $63.00).",
   "holding_alerts": [
     {
       "trigger": "LEAPS Immediate Liquidation — EXIT_IMMEDIATELY (CLOSE_INTO_CASH)",
       "trigger_price": 63.47,
       "shares": 0,
-      "instruction": "Close all 5 open Dec 17, 2027 LEAPS contracts (4x $110C, 1x $100C; 392 DTE) cleanly on market liquidity using limit orders to salvage ~$820–$1,020 into USD cash ($0.00 intrinsic at $75.00 Base; 0.14–0.22 delta; 3.38% portfolio cash vs. 22.0% floor); ZERO averaging down; 0 common shares held."
+      "instruction": "Close all 5 open Dec 17, 2027 LEAPS contracts (4x $110C, 1x $100C; 392 DTE Nov 20 / 389 DTE Nov 23) cleanly via limit orders near mid on relief-bounce liquidity (~$64.60) into USD cash ($0.00 intrinsic at $70.00 Base; 9.13% portfolio cash vs. 22.0% floor); ZERO averaging down; 0 common shares held."
     },
     {
       "trigger": "LEAPS Gap-Down Hard Breach Floor — EXIT_AT_MARKET_OPEN",
       "trigger_price": 63.0,
       "shares": 0,
-      "instruction": "If any open Dec 2027 LEAPS contract remains unfilled and UBER trades or closes <= $63.00 (below the $63.29 52W low), liquidate immediately regardless of >14% bid-ask spreads."
+      "instruction": "If any open Dec 2027 LEAPS contract remains unfilled and UBER trades or closes <= $63.00 (below the $63.29 52W low), liquidate immediately."
     },
     {
       "trigger": "Snapshot Monitor Floor (Screen Reference Only)",
       "trigger_price": 60.96,
       "shares": 0,
-      "instruction": "Purely a historical technical support reference beneath the $61.24–$63.10 pocket (below the $63.00 LEAPS invalidation floor); carries 0.0% equity bids until a full Stage 1 base and Stage 2 reclaim >$73.50 form."
+      "instruction": "Purely a historical technical support reference beneath the $61.24–$63.10 pocket; carries 0.0% equity bids until a full Stage 1 base and Stage 2 reclaim >$73.50 form."
     },
     {
       "trigger": "Stage 2 Re-Underwriting Gate",
       "trigger_price": 73.5,
       "shares": 0,
-      "instruction": "Re-open equity underwriting only after UBER builds a Stage 1 base, reclaims $72.40–$73.50 (200D/30W SMAs) on >=1.25x volume, US breadth exits Downtrend, and leverage tracks <2.0x."
+      "instruction": "Re-open equity underwriting only after UBER builds a Stage 1 base, reclaims $72.40–$73.50 (200D/30W SMAs) on >=1.25x volume, US breadth exits Downtrend, Delivery Hero tracks <2.0x leverage, and AV unit ROI is proven."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Next marginal cash unit from $2,540.35 consolidated US cash ($2,517.92 Robinhood + $22.43 Schwab; 3.38% of $75,110.60 net worth vs. 22.0% Downtrend cash floor)",
+    "capital_source": "Next marginal cash unit from $7,290.91 consolidated US cash ($4,772.99 Schwab + $2,517.92 Robinhood; 9.13% of $79,861.16 net worth vs. 22.0% Downtrend cash floor)",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100,
         "recommendation": "RETAIN_CASH",
-        "rationale": "US market is in a 10-distribution-day Downtrend (38.8% breadth >50DMA) and consolidated US cash sits at just 3.38% versus the 22.0% Downtrend floor; UBER is REJECTED in Stage 4.",
+        "rationale": "US market is in a 10-distribution-day Downtrend (35.8% breadth >50DMA) and consolidated US cash sits at 9.13% versus the 22.0% Downtrend floor; UBER is REJECTED in Stage 4.",
         "entry_condition": "Retain 100% of marginal cash in reserve until portfolio cash approaches the 22.0% Downtrend floor or breadth exits Downtrend."
       },
       {
@@ -72,9 +72,9 @@
         "allocation_pct": 0,
         "recommendation": "WATCH_UNTIL_CASH_FLOOR_RESTORED",
         "target_base": 340.0,
-        "asymmetry_ratio": 1.85,
-        "rationale": "AbbVie ($286.20 CMP, STAGE_2, CLEAR_FOR_CONSIDERATION, 36.18% OPM, +10.68% Rev YoY) is an unheld defensive healthcare compounder, yet 3.38% portfolio cash prohibits deploying marginal cash before rebuilding reserves.",
-        "entry_condition": "Consider only after portfolio cash rebuilds toward the 22.0% Downtrend floor and ABBV holds its $277.05–$285.49 support zone ($249.53 stop)."
+        "asymmetry_ratio": 1.36,
+        "rationale": "AbbVie ($286.20 Nov 20 / $289.49 live, STAGE_2, CLEAR_FOR_CONSIDERATION, 36.18% OPM, +10.68% Rev YoY) is an unheld defensive healthcare compounder, yet 9.13% portfolio cash prohibits deploying marginal cash before rebuilding reserves.",
+        "entry_condition": "Consider only after portfolio cash rebuilds toward the 22.0% Downtrend floor and ABBV holds its $278.53–$292.96 support zone ($252.29 stop)."
       },
       {
         "destination_type": "OUTSIDE",
@@ -82,19 +82,19 @@
         "allocation_pct": 0,
         "recommendation": "WATCH_FOR_CASH_FLOOR_RECOVERY",
         "target_base": 130.0,
-        "asymmetry_ratio": 1.85,
-        "rationale": "Arch Capital Group ($108.82 CMP, STAGE_2, 8.89x P/E, 23.61% OPM) offers defensive insurance cash flow outside the shortlist, yet remains unfunded at 0% until macro breadth exits Downtrend and cash recovers.",
-        "entry_condition": "Wait for a pullback into the $102.16–$108.76 support zone ($97.27 stop) once portfolio cash exceeds the Downtrend threshold."
+        "asymmetry_ratio": 1.86,
+        "rationale": "Arch Capital Group ($108.82 Nov 20 / $109.05 live, STAGE_2, 10.92x forward P/E, 23.61% OPM) offers defensive insurance cash flow outside the shortlist, yet remains unfunded at 0% until macro breadth exits Downtrend and cash recovers.",
+        "entry_condition": "Wait for a pullback into the $103.12–$108.94 support zone ($97.78 stop) once portfolio cash exceeds the Downtrend threshold."
       }
     ]
   },
-  "primer": "Uber runs a global ride and delivery network with $59.82B in Q3 2026 Gross Bookings and $10.42B in TTM FCF [31, 32]. Core quality earns COMPOUNDER_PASS with PASS_WITH_WATCH for $17.1B in pending deals, +49% higher debt, $1.5B UK VAT cash, and robotaxis [31, 33]. Deducting $2.15B stock pay, $7.67B net debt, $1.5B UK VAT cash, and $10.65B deal outlays puts shares at 17.12x normalized EV/(FCF-SBC). Our SBC-adjusted DCF sets Base fair value at $75.00 ($70.14 standalone ex-M&A FCF) against $45.00 Bear ($41.78 stressed) and $108.00 Bull ($72.60 EV). At $63.47 in Stage 4 (CAP_REJECTED), equity is REJECTED (TIER_0; TREND, CASH_FLOW) and we mandate EXIT_IMMEDIATELY on the 5 open Dec 2027 LEAPS.",
-  "verdict_rule_summary": "STAGE_4 (CAP_REJECTED) and M&A/cash-flow friction force REJECTED (TIER_0); $61.24–$63.10 ($60.96 stop) is strictly a historical reference below the $63.00 LEAPS floor (0.0% bids until Stage 1 base + Stage 2 reclaim >$73.50).",
-  "sizing_table_takeaway": "At $75,110.60 US net worth ($2,540.35 cash, 3.38% vs. 22.0% Downtrend floor), UBER carries 0.0% equity allocation under REJECTED (TIER_0) while existing Dec 2027 LEAPS carry EXIT_IMMEDIATELY (CLOSE_INTO_CASH) to salvage ~$820–$1,020.",
+  "primer": "Uber runs a global ride and delivery network with $59.82B in Q3 2026 Gross Bookings (+20% YoY) and $10.42B in TTM FCF [31, 32]. Core quality earns COMPOUNDER_PASS with PASS_WITH_WATCH for Waymo's Jan 2028 app, >$10B AV outlays, $17.1B M&A, and $1.5B UK VAT [31, 39–45]. Deducting SBC, debt, VAT, M&A, and -$0.50B/yr AV drag puts shares at 18.16x normalized EV/FCF ($8.22B FCF_0). Independent DCF sets Base fair value at $70.00 ($42.00 Bear, $105.00 Bull, $67.20 EV). In Stage 4 at $63.47, new equity is REJECTED (TIER_0), and we mandate EXIT_IMMEDIATELY on all 5 open Dec 2027 LEAPS.",
+  "verdict_rule_summary": "STAGE_4 (CAP_REJECTED), thin +5.9% EV, and M&A/AV cash-flow friction force REJECTED (TIER_0); $61.24–$63.10 ($60.96 stop) is strictly a historical reference (0.0% bids until Stage 1 base + Stage 2 reclaim >$73.50).",
+  "sizing_table_takeaway": "At $79,861.16 US net worth ($7,290.91 cash, 9.13% vs. 22.0% Downtrend floor), UBER carries 0.0% equity allocation under REJECTED (TIER_0) while existing 5 Dec 2027 LEAPS carry EXIT_IMMEDIATELY (CLOSE_INTO_CASH).",
   "gate_exceptions": [
-    "Citation AS-OF audit: Zero EXCEPTION AS-OF items apply to UBER. All 48 UBER records date from 2026-11-04 to 2026-11-16, well within 60 days of 2026-11-20. We pass --allow-stale-asof only for any shared non-UBER records in the market file.",
-    "Stage and price check: Facts ($63.47 close, Stage 4) and TradingView ($63.48 close, STAGE_4, CAP_REJECTED) match on UBER. Peer DASH is STAGE_4 in TradingView, LYFT is STAGE_2, and GOOGL is STAGE_4.",
-    "Linux environment notes: Fresh PDF export completed (docs/blogs/US/UBER_book.pdf) alongside canonical chapter JSONs in data/dossiers/US/UBER/. Mac Chrome tabs for TheWrap, Robinhood, and TradingView are offline in this Linux container, so checks use public feeds and data/options/US.json."
+    "Citation AS-OF audit: Primary UBER Q3 2026 10-Q, earnings call, Waymo Jan 2028, Lucid/Nuro AV, Delivery Hero, Australia HCA, and FTC records date from Oct–Nov 2026 (within 60 days of 2026-11-20). We pass --allow-stale-asof strictly for historical corporate/M&A milestones (e.g., FY2024–2025 10-Ks, Oct 2025 DoorDash-Deliveroo completion, 2020 ATG/Elevate/Postmates/Careem filings).",
+    "Verified session vs. live intraday context: All ledger metrics, DCF anchors, and Stage 4 classifications are locked to the verified November 20, 2026 close ($63.47, S&P 1500 Downtrend, 35.8% breadth >50DMA). Monday November 23 live TradingView ($64.60) and public options chain readings are disclosed as supplemental live context; Robinhood Chrome tab was closed so open LEAPS use data/options/US.json recorded marks plus public chain quotes.",
+    "Reviewer model substitution (per _COMMON.md item 7): Configured external reviewer aliases (azure//claude-sonnet-5-5 for report_reviewer and ao-foundry-lc/gpt-6.1-sol for red_team) are unavailable in this runner; both Stage 9 passes executed cleanly using the runner's default independent subagent model."
   ],
   "citations": [
     "Uber Technologies, Inc. Form 10-K for the Fiscal Year Ended December 31, 2025 — U.S. Securities and Exchange Commission (EDGAR) (2026-02-18): https://www.sec.gov/edgar/browse/?CIK=0001543151",
@@ -134,7 +134,14 @@
     "Uber Technologies, Inc. Form 8-K Euro Senior Notes Offering €4.5B (2026-09-15): https://www.sec.gov/Archives/edgar/data/1543151/000155278126000486/e26383_uber-8k.htm",
     "Uber Technologies, Inc. Form 4 Insider Transaction — Tony West (filed 2026-11-16): https://www.sec.gov/Archives/edgar/data/1543151/000162620126000024/primarydocument.xml",
     "Uber Technologies, Inc. Form 4 Insider RSU Vesting — CFO Balaji Krishnamurthy (filed 2026-11-18): https://www.sec.gov/Archives/edgar/data/1543151/000211186726000015/primarydocument.xml",
-    "Uber Technologies, Inc. FY2025 Form 10-K (filed 2026-02-13): https://www.sec.gov/Archives/edgar/data/1543151/000154315126000015/uber-20251231.htm"
+    "Uber Technologies, Inc. FY2025 Form 10-K (filed 2026-02-13): https://www.sec.gov/Archives/edgar/data/1543151/000154315126000015/uber-20251231.htm",
+    "Uber Q3 2026 Earnings Call Transcript — CFO Balaji Krishnamurthy Capital Allocation & Q4 UK VAT Warning (2026-11-04): https://www.fool.com/earnings/call-transcripts/",
+    "Waymo Plans Standalone Waymo One App in Austin & Atlanta Starting January 2028 (>500k Weekly Trips) — TechCrunch (2026-11-20): https://techcrunch.com/category/transportation/",
+    "Uber >$10B Autonomous Vehicle Commercialization & Lucid/Nuro 35,000+ Vehicle Procurement Commitment — Lucid Motors Media Room (2026-11-20): https://www.lucidmotors.com/media-room",
+    "DoorDash Completes £2.9B (~$3.9B) All-Cash Acquisition of Deliveroo — DoorDash Newsroom (2025-10-02): https://about.doordash.com/en-us/news",
+    "Delivery Hero SE Takeover Offer Reaches 66.56% Acceptance; EC, KFTC & MENA Antitrust Scrutiny — Delivery Hero Newsroom (2026-11-10): https://www.deliveryhero.com/newsroom/",
+    "FTC & 21-State Federal ROSCA Lawsuit Over Uber One + October 2026 FTC Algorithmic Pricing Inquiry — Federal Trade Commission (2026-10-31): https://www.ftc.gov/news-events/news/press-releases",
+    "EU Platform Work Directive (Directive (EU) 2024/2831, Dec 2, 2026 Transposition) & High Court of Australia [2026] HCA 40 Payroll Tax Ruling — EUR-Lex (2026-11-04): https://eur-lex.europa.eu/eli/dir/2024/2831/oj"
   ],
   "ch4": {
     "stage_override": "STAGE_4",
@@ -145,10 +152,10 @@
     ],
     "stop_override": 60.96,
     "dossier_verdict": "REJECTED",
-    "intro_prose": "We audit Uber's November 20, 2026 TradingView moving averages, 4H/1D/1W RSI readings, and institutional volume signature across both market ledgers.",
-    "gate_intro_prose": "Both the market-facts ledger and the TradingView snapshot flag Stage 4 breakdown (CAP_REJECTED), blocking new capital deployment.",
-    "closing_prose": "With UBER sitting 12.32% below its 200-day SMA ($72.40) and $0.47 above $63.00, new equity carries 0.0% bids while existing Dec 2027 LEAPS enforce EXIT_IMMEDIATELY (CLOSE_INTO_CASH).",
-    "tech_table_takeaway": "Session price ($63.47 facts / $63.48 TradingView) sits below every daily and weekly moving average on 1.55x–1.63x distribution volume, confirming active Stage 4 supply.",
-    "gate_table_takeaway": "The technical screen enforces CAP_REJECTED (AVOID_STAGE4_OR_BROKEN); snapshot levels ($61.24–$63.10 band, $60.96 stop) are purely a historical support reference below the $63.00 LEAPS floor, carrying 0.0% bids until a Stage 1 base and >$73.50 reclaim form."
+    "intro_prose": "We audit Uber's verified November 20, 2026 session close ($63.47) alongside November 23 live TradingView ($64.60) moving averages, 4H/1D/1W RSI readings, and institutional volume signature.",
+    "gate_intro_prose": "Both the market-facts ledger (Stage 4) and the live TradingView snapshot (STAGE_4, CAP_REJECTED) block new capital deployment.",
+    "closing_prose": "With UBER trading 10.7%–12.3% below its 200-day SMA ($72.35–$72.40) inside a 10-distribution-day US Downtrend, new equity carries 0.0% bids while existing 5 Dec 2027 LEAPS enforce EXIT_IMMEDIATELY (CLOSE_INTO_CASH).",
+    "tech_table_takeaway": "Verified session close ($63.47) and live intraday bounce ($64.60 on 0.62x volume) both sit below every daily and weekly moving average, confirming active Stage 4 supply.",
+    "gate_table_takeaway": "The technical screen enforces CAP_REJECTED (AVOID_STAGE4_OR_BROKEN); snapshot levels ($61.24–$63.10 band, $60.96 stop) are purely a historical support reference carrying 0.0% bids until a Stage 1 base and >$73.50 reclaim form."
   }
 }
