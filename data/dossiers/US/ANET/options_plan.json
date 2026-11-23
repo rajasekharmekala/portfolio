@@ -1,139 +1,65 @@
 {
   "symbol": "ANET",
   "market": "US",
-  "generated_at": "2026-11-15T18:42:31+00:00",
+  "generated_at": "2026-11-22T23:55:16+00:00",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "browser_sessions": {
     "robinhood": {
-      "checked": true,
+      "checked": false,
       "accessible": false,
       "logged_in": false,
-      "status": "no_robinhood_tab",
-      "note": "No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.",
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
       "observed_quotes": null
     },
     "tradingview": {
-      "checked": true,
-      "accessible": true,
-      "status": "connected",
-      "active_tabs": [
-        {
-          "title": "BE 191.99 ▼ −4.92% TheWrap",
-          "url": "https://www.tradingview.com/chart/JiMVH98B/?symbol=NYSE%3ABE"
-        }
-      ]
+      "checked": false,
+      "accessible": false,
+      "status": "unavailable",
+      "active_tabs": []
     }
   },
   "multitimeframe_chart": {
     "tv_symbol": "NYSE:ANET",
     "exchange": "NYSE",
     "company_name": "Arista Networks Inc",
-    "close": 197.29,
-    "change_1d_pct": -4.52,
-    "perf_1w_pct": 14.17,
-    "perf_1m_pct": -1.57,
-    "perf_3m_pct": -3.89,
-    "rsi_1d": 55.25,
-    "rsi_4h": 58.68,
-    "rsi_1w": 57.2,
-    "sma20": 180.51,
-    "sma50": 192.93,
-    "sma200": 167.35,
-    "sma30_weekly": 178.09,
-    "ema10_weekly": 186.39,
-    "ema20_4h": 187.57,
-    "sma50_4h": 183.37,
-    "atr14": 11.99,
-    "bb_width_pct": 23.24,
+    "close": 167.66,
+    "change_1d_pct": -11.57,
+    "perf_1w_pct": -18.17,
+    "perf_1m_pct": -10.54,
+    "perf_3m_pct": -8.77,
+    "rsi_1d": 41.49,
+    "rsi_4h": 36.74,
+    "rsi_1w": 46.41,
+    "sma20": 182.15,
+    "sma50": 192.01,
+    "sma200": 168.58,
+    "sma30_weekly": 177.78,
+    "ema10_weekly": 182.98,
+    "ema20_4h": 184.95,
+    "sma50_4h": 181.43,
+    "atr14": 12.68,
+    "bb_width_pct": 28.75,
     "pivot_s1": 151.34,
     "pivot_s2": 133.83,
     "pivot_r1": 201.89,
     "pivot_r2": 234.93,
     "high_52w": 217.41,
-    "low_52w": 114.52,
-    "dist_to_200d_pct": 17.89,
-    "major_shelf": 178.09,
-    "intraday_4h_turn": true,
-    "setup_archetype": "STAGE2_SUPPORT_PULLBACK",
-    "setup_summary": "Constructive Stage 2 trend trading near 50D SMA (192.93) / 10W EMA (186.39) support."
+    "low_52w": 115.42,
+    "dist_to_200d_pct": -0.55,
+    "major_shelf": 168.58,
+    "intraday_4h_turn": false,
+    "setup_archetype": "DISLOCATION_AT_MAJOR_SHELF",
+    "setup_summary": "Dislocated below 50D SMA (192.01) after a -10.5% 1M move near structural support (168.58), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 36.74 vs Daily RSI 41.49; close 167.66 vs 4H EMA20 184.95), so there is no confirmed mean-reversion window yet."
   },
   "options_plan": {
     "symbol": "ANET",
     "market": "US",
     "optionable": true,
-    "options_verdict": "LONG_CALL_LEAPS",
-    "iv_regime": "IV_CHEAP",
-    "atm_iv_pct": 57.1,
-    "hv20_pct": 86.2,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "headline": "Stand aside on ANET call spreads: $165/$180 spread costs $6.75 for only $8.25 max gain (1.22:1 R:R < 1.25:1 minimum).",
     "open_positions_audit": [],
-    "headline": "Buy 1x ANET 2027-09-17 $180 LEAPS Call (306 DTE, 0.70 Delta) near $51.90/sh ($5,190.00 max possible loss).",
-    "recommended_trade": {
-      "structure": "Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)",
-      "expiry": "2027-09-17",
-      "dte": 306,
-      "legs": [
-        {
-          "side": "BUY",
-          "type": "CALL",
-          "strike": 180.0,
-          "mid": 51.9,
-          "bid": 50.35,
-          "ask": 53.45,
-          "open_interest": 77
-        }
-      ],
-      "contracts": 1,
-      "multiplier": 100,
-      "net_debit_per_share": 51.9,
-      "max_loss_total": 5190.0,
-      "max_loss_nav_bps": 519.0,
-      "max_profit_total": "Uncapped upside",
-      "breakeven_at_expiry": 231.9,
-      "breakeven_move_pct": 17.54,
-      "net_delta_dollars_per_1_move": 69.6,
-      "daily_theta_dollars": -7.5,
-      "underlying_stop_trigger": 178.09,
-      "profit_taking_rule": "Trim half at +75%–100% contract gain or when ANET reaches $226.88; exit early on a weekly close below $178.09.",
-      "scenarios": [
-        {
-          "scenario": "Bear / Stop Hit ($178.09)",
-          "stock_price": 178.09,
-          "stock_move_pct": -9.7,
-          "contract_value": 3879.0,
-          "net_pnl": -1311.0,
-          "return_on_risk_pct": -25.3
-        },
-        {
-          "scenario": "Flat in 60 Days ($197.29)",
-          "stock_price": 197.29,
-          "stock_move_pct": 0.0,
-          "contract_value": 5016.33,
-          "net_pnl": -173.67,
-          "return_on_risk_pct": -3.3
-        },
-        {
-          "scenario": "Base Target ($226.88)",
-          "stock_price": 226.88,
-          "stock_move_pct": 15.0,
-          "contract_value": 6345.61,
-          "net_pnl": 1155.61,
-          "return_on_risk_pct": 22.3
-        },
-        {
-          "scenario": "Bull Target ($260.91)",
-          "stock_price": 260.91,
-          "stock_move_pct": 32.2,
-          "contract_value": 9200.78,
-          "net_pnl": 4010.78,
-          "return_on_risk_pct": 77.3
-        }
-      ],
-      "beginner_explainer": [
-        "Why LEAPS instead of a short-dated call: With 306 days until 2027-09-17 and 0.70 delta, this option behaves ~69% like owning 100 shares for a fraction of the cash, while losing only $7.50/day to time decay.",
-        "Worst-case wallet risk: You pay $51.90 x 100 shares x 1 = $5,190.00 upfront. Even if ANET crashed 50% overnight, you cannot lose more than $5,190.00.",
-        "Volatility check: Implied Volatility is 57.1% vs. 20-day actual stock volatility of 86.2% (IV CHEAP), so you are not overpaying panic premiums."
-      ]
-    }
+    "recommended_trade": null
   },
-  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"LONG_CALL_LEAPS\">\n<h2>Options &amp; Call-Convexity Playbook (ANET)</h2>\n<p><span class=\"verdict verdict-keep\">LONG CALL LEAPS</span> &mdash; <strong>Buy 1x ANET 2027-09-17 $180 LEAPS Call (306 DTE, 0.70 Delta) near $51.90/sh ($5,190.00 max possible loss).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Constructive Stage 2 trend trading near 50D SMA (192.93) / 10W EMA (186.39) support. <em>Account / Chain Feed: No open Robinhood tab in Chrome; live account quotes skipped, using public options chain.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:ANET. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_anet_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:ANET\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:ANET\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_anet_options_chart\"});</script></div>\n<div class=\"callout callout-rule\">\n<p class=\"callout-title\">Beginner Guide: How This Call Trade Works in Plain Dollars</p>\n<p>Why LEAPS instead of a short-dated call: With 306 days until 2027-09-17 and 0.70 delta, this option behaves ~69% like owning 100 shares for a fraction of the cash, while losing only $7.50/day to time decay.</p><p>Worst-case wallet risk: You pay $51.90 x 100 shares x 1 = $5,190.00 upfront. Even if ANET crashed 50% overnight, you cannot lose more than $5,190.00.</p><p>Volatility check: Implied Volatility is 57.1% vs. 20-day actual stock volatility of 86.2% (IV CHEAP), so you are not overpaying panic premiums.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Structured Call Setup &amp; Risk-Capped Wallet Math for ANET</caption><thead><tr><th>Option Parameter</th><th>Exact Value</th><th>What This Means for a Beginner</th></tr></thead><tbody><tr><td><strong>Strategy Structure</strong></td><td>Long ITM/Near-ATM LEAPS Call (Stock-Replacement Convexity)</td><td>Matches volatility regime and chart support shelf.</td></tr><tr><td><strong>Exact Option Leg(s)</strong></td><td>BUY 2027-09-17 $180 CALL @ $51.90 mid (bid $50.35 / ask $53.45, OI 77)</td><td>Always use limit orders near the mid-price; never place market orders on options.</td></tr><tr><td><strong>Contracts &amp; Multiplier</strong></td><td>1 contract(s) x 100 shares</td><td>Controls 100 underlying shares.</td></tr><tr><td><strong>Total Upfront Cost (Max Possible Loss)</strong></td><td>$5,190.00 (519.0 bps of NAV)</td><td>100% of your downside is capped at the cash paid upfront.</td></tr><tr><td><strong>Breakeven Stock Price at Expiry</strong></td><td>$231.90 (+17.54% vs CMP)</td><td>Stock price required by 2027-09-17 to recover full upfront cost.</td></tr><tr><td><strong>Maximum Profit Potential</strong></td><td>Uncapped upside</td><td>Net profit after subtracting upfront debit.</td></tr><tr><td><strong>Net Delta &amp; Daily Time Decay (Theta)</strong></td><td>$+69.60 per $1 move | $-7.50/day decay</td><td>Initial sensitivity to a 1-unit stock move vs. daily time decay.</td></tr><tr><td><strong>Profit-Taking &amp; Early Stop Rule</strong></td><td>Trim half at +75%–100% contract gain or when ANET reaches $226.88; exit early on a weekly close below $178.09.</td><td>Advisory exit discipline to protect premium before late-stage theta accelerates.</td></tr></tbody></table></div><p>Every figure above is computed deterministically from live option-chain mid-prices (2027-09-17, 306 DTE) and capped within our portfolio risk budget.</p>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>What Happens to Your $5,190.00 Across Stock Scenarios (ANET)</caption><thead><tr><th>Scenario</th><th>Underlying Stock Price (% Move)</th><th>Option Value</th><th>Your Net Profit / Loss</th><th>Return on Risk (%)</th></tr></thead><tbody><tr><td>Bear / Stop Hit ($178.09)</td><td>$178.09 (-9.7%)</td><td>$3,879.00</td><td>$-1,311.00</td><td><strong>-25.3%</strong></td></tr><tr><td>Flat in 60 Days ($197.29)</td><td>$197.29 (+0.0%)</td><td>$5,016.33</td><td>$-173.67</td><td><strong>-3.3%</strong></td></tr><tr><td>Base Target ($226.88)</td><td>$226.88 (+15.0%)</td><td>$6,345.61</td><td>$+1,155.61</td><td><strong>+22.3%</strong></td></tr><tr><td>Bull Target ($260.91)</td><td>$260.91 (+32.2%)</td><td>$9,200.78</td><td>$+4,010.78</td><td><strong>+77.3%</strong></td></tr></tbody></table></div><p>Compare the underlying percentage move in column 2 against your option return in column 5: defined-risk call structures amplify upside above breakeven while strictly capping worst-case loss.</p>\n</section>"
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (ANET)</h2>\n<p><span class=\"verdict verdict-watch\">NO OPTIONS EDGE</span> &mdash; <strong>Stand aside on ANET call spreads: $165/$180 spread costs $6.75 for only $8.25 max gain (1.22:1 R:R &lt; 1.25:1 minimum).</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Dislocated below 50D SMA (192.01) after a -10.5% 1M move near structural support (168.58), but the repair is unconfirmed: the 4H chart has not turned up (4H RSI 36.74 vs Daily RSI 41.49; close 167.66 vs 4H EMA20 184.95), so there is no confirmed mean-reversion window yet. <em>Account / Chain Feed: macOS Chrome automation skill unavailable in this environment; using public options data.</em></p>\n<p><strong>Interactive TradingView chart:</strong> public live chart for NYSE:ANET. Use its on-chart controls for visual context; the report's decision remains tied to the verified session cutoff.</p>\n<div class=\"tradingview-widget-container\" style=\"height: 520px; width: 100%; margin: 1.25rem 0;\"><div id=\"tradingview_anet_options_chart\" role=\"img\" aria-label=\"Interactive TradingView daily chart for NYSE:ANET\" style=\"height: 100%; width: 100%;\"></div><script type=\"text/javascript\" src=\"https://s3.tradingview.com/tv.js\"></script><script type=\"text/javascript\">new TradingView.widget({\"autosize\":true,\"symbol\":\"NYSE:ANET\",\"interval\":\"D\",\"timezone\":\"Etc/UTC\",\"theme\":\"light\",\"style\":\"1\",\"locale\":\"en\",\"toolbar_bg\":\"#f4f6f8\",\"enable_publishing\":false,\"hide_top_toolbar\":false,\"allow_symbol_change\":true,\"container_id\":\"tradingview_anet_options_chart\"});</script></div>\n</section>"
 }

@@ -1,80 +1,82 @@
 {
   "symbol": "ANET",
   "market": "US",
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-20",
   "title": "Arista Networks, Inc. (NYSE: ANET) — Institutional Investment Monograph",
   "sector": "Electronic Technology / AI Data Center Networking",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
   "decision_basis": "ch-9",
   "archetype": "SECULAR_COMPOUNDER",
   "strategy_bucket": "CORE_ALPHA",
-  "conviction_tier": "TIER_2",
-  "cmp": 197.29,
-  "entry_zone_low": 183.59,
-  "entry_zone_high": 195.82,
-  "stop_loss": 172.09,
-  "target_base": 242.0,
-  "target_bull": 275.0,
-  "target_bear": 150.0,
+  "conviction_tier": "TIER_0",
+  "cmp": 167.66,
+  "weinstein_stage": "STAGE_4",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
+  "entry_zone_low": 149.07,
+  "entry_zone_high": 153.61,
+  "stop_loss": 133.83,
+  "target_base": 180.0,
+  "target_bull": 215.0,
+  "target_bear": 115.0,
+  "scenario_horizon": "12-month",
   "business_quality_verdict": "COMPOUNDER_PASS",
   "kpi_health": "PASS_WITH_WATCH",
-  "holding_action": "KEEP_COMPOUNDING",
-  "holding_shares_to_sell": 0,
-  "holding_rationale": "You hold 31.628949 shares worth $6,240.07, or 7.04% of your portfolio. That stake spans 21.4341 shares at Schwab and 10.194849 shares at Robinhood, carrying a +$240.10 unrealized gain. ANET is one of your strongest Stage 2 leaders in a Correction tape. Q3 2026 revenue grew 58.5% YoY with a 44.9% GAAP operating margin and $14.36B in net cash. Keep compounding with zero immediate sales, and enforce a hard structural exit at $172.09.",
+  "holding_action": "EXIT_IMMEDIATELY",
+  "holding_shares_to_sell": 39.599149,
+  "holding_rationale": "The $167.62 facts close ($167.66 TV) broke our locked $172.09 stop on 1.67x volume. Price fell below the 50D, 30W, and 200D averages in a Downtrend market. Sell all 39.599149 shares at once to raise $6,637.61 in cash and cut high-beta risk.",
   "holding_alerts": [
     {
-      "trigger": "Daily or weekly close below $172.09 (below 30W SMA $178.09 minus 0.5x ATR)",
-      "trigger_price": 172.09,
-      "shares": 31.628949,
-      "instruction": "Exit entire 31.628949-share position (21.4341 sh Schwab + 10.194849 sh Robinhood) immediately on Stage 2 breakdown."
+      "trigger": "Prior structural stop ($172.09) breached at Nov 20, 2026 facts close ($167.62 facts / $167.66 TV)",
+      "trigger_price": 167.62,
+      "shares": 39.599149,
+      "instruction": "Execute EXIT_IMMEDIATELY across all 39.599149 shares (29.4043 shares at Charles Schwab + 10.194849 shares at Robinhood)"
     },
     {
-      "trigger": "Price reaches $242.00 Base target with portfolio weight > 9.0% or daily RSI > 75",
-      "trigger_price": 242.0,
-      "shares": 10.5,
-      "instruction": "Trim 10.5 shares (~1/3 of position) into strength to lock in gains and let remaining 21.128949 shares run toward $275.00."
-    },
-    {
-      "trigger": "Q4 2026 earnings (mid-Feb 2027) cuts ~$18.5B FY2027 revenue outlook or flags inventory write-downs on $11.4B commitments",
-      "trigger_price": null,
-      "shares": 15.8,
-      "instruction": "Trim 50% (15.8 shares) immediately if hyperscaler capex digestion or Spectrum-X share loss breaks the FY2027 growth trajectory."
+      "trigger": "Post-exit re-evaluation gate: Stage 1 base above $133.83 Pivot S2, close > $177.78 30W SMA, >=62% GM, and eval-inventory burn-off",
+      "shares": 0,
+      "instruction": "Hold 0 shares (REJECTED); re-evaluate only if Stage 2 resumes, ex-SBC R:R clears >=1.50:1 on a >=1.0x ATR stop, and evaluation gear burns down cleanly."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Existing $7,434.75 consolidated cash ($5,867.51 Schwab + $1,567.24 Robinhood) or incremental capital from non-core trims",
+    "capital_source": "$6,637.61 ANET exit proceeds ($4,928.75 Schwab + $1,708.86 Robinhood) plus $2,540.35 existing consolidated cash",
     "destinations": [
       {
         "destination_type": "CASH",
-        "allocation_pct": 40.0,
-        "recommendation": "Hold 40% in USD cash/money-market as staged dip reserve for ANET",
-        "rationale": "Market regime is Correction (6 distribution days) and ANET carries a 2.42 beta with $11.99 ATR; keeping cash dry enables limit fills in the $183.59–$195.82 support band.",
-        "entry_condition": "Deploy into ANET on limit bids between $183.59 and $195.82 while $172.09 holds."
+        "allocation_pct": 100.0,
+        "recommendation": "Retain 100% of exit proceeds in USD cash / money-market reserve",
+        "rationale": "S&P 500 is in a 10-distribution-day Downtrend (34.5% 50-DMA breadth, 22% target cash floor), Schwab cash is just $22.43, and portfolio effective S&P 500 exposure sits at 234.2%.",
+        "entry_condition": "Hold cash until market breadth heals toward an Uptrend or Downtrend follow-through day confirms."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "MSFT",
-        "allocation_pct": 60.0,
-        "target_base": 660.0,
-        "asymmetry_ratio": 1.9,
-        "recommendation": "Allocate 60% of incremental capital to MSFT ($523.88, IMMEDIATE_BUY)",
-        "rationale": "MSFT is a Stage 2 CORE_ALPHA compounder at 21.72x forward P/E with a 1.01 beta, lowering the portfolio's elevated 2.53 weighted beta while maintaining hyperscale AI exposure.",
-        "entry_condition": "Buy at CMP $523.88 or within $507.61–$526.78 support zone with $452.41 stop."
+        "symbol": "ABBV",
+        "allocation_pct": 0.0,
+        "target_base": 340.0,
+        "asymmetry_ratio": 1.85,
+        "recommendation": "0% immediate deployment — Defer Stage 2 healthcare leader ABBV ($286.20, ACCUMULATE_ON_DIP) while Downtrend cash floor rebuilds",
+        "rationale": "ABBV sits in confirmed Stage 2 ($277.05–$285.49 zone, $249.53 stop, 36.18% OPM), yet rebuilding consolidated cash from 3.38% toward the 22% Downtrend floor takes priority over new equity buys.",
+        "entry_condition": "Consider only after Downtrend pressure subsides and cash exceeds portfolio liquidity targets, inside $277.05–$285.49."
       },
       {
         "destination_type": "OUTSIDE",
-        "symbol": "HPE",
+        "symbol": "TDC",
         "allocation_pct": 0.0,
-        "target_base": 55.0,
-        "asymmetry_ratio": 2.52,
-        "recommendation": "0% — Excluded (STAGE_4 & Low ROIC)",
-        "rationale": "HPE trades at $48.29 in a Stage 4 downtrend with 6.36% ROIC and 8.03% operating margin, failing both our quality and trend gates despite a 2.52:1 support-zone ratio.",
-        "entry_condition": "Excluded until Stage 2 recovery and ROIC > 12%."
+        "target_base": 35.38,
+        "asymmetry_ratio": 0.21,
+        "recommendation": "0% — Excluded Stage 2 outside peer TDC ($35.45) on weak growth and 0.21:1 support asymmetry",
+        "rationale": "Although Teradata sits in Stage 2 ($32.11–$34.54 support zone, $30.54 stop), 1.39% TTM revenue growth, 7.53% operating margins, and a $35.38 consensus target yield just 0.21:1 support R:R.",
+        "entry_condition": "Excluded unless revenue growth accelerates >10% and operating margins expand past 15%."
       }
     ]
   },
-  "primer": "Arista Networks builds high-speed Ethernet switches and EOS software linking AI accelerators inside hyperscale data centers. Q3 2026 sales grew 58.5% YoY with a 44.9% GAAP operating margin, $14.36 billion net cash, and zero debt. Its weekly Stage 2 structure is tempered by a daily Stage 3 pullback inside a market correction, earning WAIT FOR SUPPORT for new capital. Skip any immediate starter tranche at CMP; wait for $183.59–$195.82 support or a confirmed Stage 2 resumption above $206.63 on volume, with a $172.09 stop and $242.00 base target. KEEP COMPOUNDING your 31.628949 existing shares with a $172.09 hard stop, as the thesis fails below $172.09 or if capex pauses and Spectrum-X cut the ~$18.5 billion FY2027 outlook.",
+  "primer": "Arista Networks builds high-speed data center switches and single-code EOS software for cloud and AI clusters. Nine-month sales grew 44.3% YoY with a 44.4% operating margin and $14.36 billion in cash. Yet gross margin fell 160 bps to 62.9%, test gear doubled to $874.3 million, and NVIDIA won fresh Meta work. On November 20, ANET fell 11.57% to $167.66 ($167.62 in facts), breaking our $172.09 stop and forcing an immediate exit on all 39.599149 shares into cash. New capital is REJECTED on Valuation and Trend because ex-SBC diluted Base fair value ($180.00) leaves <1.50:1 R:R across every Stage 4 and 30-week reclaim entry path.",
+  "report_status": "PUBLISHED_WITH_GATE_EXCEPTIONS",
+  "gate_exceptions": [
+    "Browser Tools: This run ran on Linux, where macOS Chrome tools are not present. Options checks used public chain feeds instead of live tabs.",
+    "Stage Split: The facts file marks ANET as Stage 1 Basing on its $158.35 low. The snapshot engine marks ANET as STAGE_4 because price broke below the 30-week ($177.78), 50-day ($192.01), and 200-day ($168.58) averages on 1.67x volume. The stricter STAGE_4 rule governs new buys, and the $172.09 stop breach forces an exit on held shares.",
+    "Price and Filing Dates: TradingView ($167.66) and Finviz/facts ($167.62) differ by $0.04 at the November 20 close. The Q3 2026 10-Q (Sep 30, 2026) and FY2025 10-K (Dec 31, 2025) are older than 60 days (EXCEPTION AS-OF), specifically ANET:anet_fy2025_top2_reseller_ar_pct (as of 2025-12-31, 324 days older than 2026-11-20 vs. the 60-day limit; expected cure date: FY2026 Form 10-K in February 2027), and are paired with November 17–20 filings."
+  ],
   "citations": [
     "[1] Arista Networks, Inc. — Form 10-K for FY2025 (2025-12-31): https://www.sec.gov/Archives/edgar/data/1596532/000159653226000013/anet-20251231.htm",
     "[2] Arista Networks, Inc. — Form 10-Q for Q3 2026 (2026-09-30): https://www.sec.gov/Archives/edgar/data/1596532/000159653226000254/anet-20260930.htm",
@@ -97,11 +99,32 @@
     "[19] Data Center Knowledge — 2019 Cloud Titan Order Cuts & Digestion Cycle: https://www.datacenterknowledge.com/investing/arista-says-cloud-titan-cut-orders-causing-big-revenue-miss",
     "[20] Los Angeles Times — Cisco Q3 FY2001 $2.2B Inventory Write-Down Archive: https://www.latimes.com/archives/la-xpm-2001-may-09-fi-61144-story.html",
     "[21] Hewlett Packard Enterprise — $14B Acquisition of Juniper Networks Announcement: https://www.hpe.com/us/en/newsroom/press-release/2024/01/hpe-to-acquire-juniper-networks-to-accelerate-ai-driven-innovation.html",
-    "[22] Finviz — Arista Networks (ANET) Live Quote, Valuation Multiples & Consensus Target (2026-11-13): https://finviz.com/quote.ashx?t=ANET",
-    "[23] TradingView — NYSE:ANET Multi-Timeframe Technicals & Moving Averages (2026-11-13): https://www.tradingview.com/symbols/NYSE-ANET/technicals/",
+    "[22] Finviz — Arista Networks (ANET) Live Quote, Valuation Multiples & Consensus Target (2026-11-20): https://finviz.com/quote.ashx?t=ANET",
+    "[23] TradingView — NYSE:ANET Multi-Timeframe Technicals & Moving Averages (2026-11-20): https://www.tradingview.com/symbols/NYSE-ANET/technicals/",
     "[24] Stock Analysis — ANET Consensus FY2026–FY2028 Revenue & EPS Estimates: https://stockanalysis.com/stocks/anet/forecast/",
     "[25] FullRatio — ANET 5-Year Historical P/E Valuation Bands: https://fullratio.com/stocks/nyse-anet/pe-ratio",
     "[26] MarketBeat — Wall Street Analyst Reactions Post-Q3 2026 (Citigroup $248, Barclays $236): https://www.marketbeat.com/stocks/NYSE/ANET/forecast/",
-    "[27] Cboe Global Markets — U.S. Options Market Put/Call Ratios (2026-11-13): https://www.cboe.com/us/options/market_statistics/"
+    "[27] Cboe Global Markets — U.S. Options Market Put/Call Ratios (2026-11-20): https://www.cboe.com/us/options/market_statistics/",
+    "[28] Arista Networks Press Release — New R4 Etherlink Platforms for Distributed AI Inferencing (2026-11-17): https://www.arista.com/en/company/news/press-release/25174-pr-20261117",
+    "[29] Arista Networks Press Release — Rack-Scale Architectures for Scale-Up and Scale-Out AI Fabrics (2026-10-07): https://www.arista.com/en/company/news/press-release/24818-pr-20261007",
+    "[30] NVIDIA Corporation — Form 8-K Exhibit 99.1 Q3 FY27 Financial Results, Meta Spectrum-X, NVLink Fusion & Cisco USFP (2026-11-17): https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27pr.htm",
+    "[31] SEC Form 4 — Andreas Bechtolsheim 300,000-Share 10b5-1 Sale (2026-11-18, filed 2026-11-20): https://www.sec.gov/Archives/edgar/data/1596532/000159653226000269/edgardoc.xml",
+    "[32] SEC Form 144 — Andreas Bechtolsheim Sale Notice & Trailing Three-Month Sales (2026-11-18): https://www.sec.gov/Archives/edgar/data/1596532/000195824426000733/primary_doc.xml",
+    "[33] SEC Form 4 — Jayshree Ullal 890,000-Share Gift Filing (2026-11-17, filed 2026-11-19): https://www.sec.gov/Archives/edgar/data/1596532/000159653226000267/edgardoc.xml",
+    "[34] SEC Form 4 — Director Lewis Chew 2,500-Share Non-10b5-1 Sale (2026-11-13, filed 2026-11-17): https://www.sec.gov/Archives/edgar/data/1596532/000159653226000265/edgardoc.xml",
+    "[35] Arista Networks — Form 8-K Appointment of Todd Nightingale as President & COO (2025-06-16): https://www.sec.gov/Archives/edgar/data/1596532/000159653225000170/anet-20250613.htm",
+    "[36] Arista Networks — Form 8-K Appointment of Kenneth Duda as President & CTO (2025-09-08): https://www.sec.gov/Archives/edgar/data/1596532/000159653225000258/anet-20250905.htm",
+    "[37] U.S. Department of the Treasury — Daily Treasury Par Yield Curve Rates (2026-11-19): https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+    "[38] Finviz — Broadcom Inc. (AVGO) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=AVGO",
+    "[39] Finviz — Cisco Systems, Inc. (CSCO) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=CSCO",
+    "[40] Finviz — Hewlett Packard Enterprise (HPE) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=HPE",
+    "[41] Finviz — Celestica Inc. (CLS) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=CLS",
+    "[42] Finviz — Jabil Inc. (JBL) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=JBL",
+    "[43] Finviz — NVIDIA Corporation (NVDA) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=NVDA",
+    "[44] Finviz — Teradata Corporation (TDC) Live Quote & Valuation Multiples (2026-11-20): https://finviz.com/quote.ashx?t=TDC"
+  ],
+  "rejection_reasons": [
+    "VALUATION",
+    "TREND"
   ]
 }

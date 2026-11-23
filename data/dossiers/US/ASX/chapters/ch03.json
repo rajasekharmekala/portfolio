@@ -12,11 +12,11 @@
     },
     {
       "type": "p",
-      "html": "ASE's global plant network spans Taiwan, Mainland China, Southeast Asia, Northeast Asia, North America, and Europe. This footprint balances foundry proximity against geopolitical diversification [4][7][8]. Its premier advanced packaging, bumping, and LEAP/VIPack cleanrooms sit mostly in Taiwan. Kaohsiung (Nanzih and K21–K28 campuses) and Taichung (SPIL's core hub) lie right beside TSMC's 3nm/5nm fabs in Hsinchu, Taichung, and Tainan [7][9]. High-volume wirebonding, flip-chip, and USI's EMS assembly run across Mainland China (Kunshan, Suzhou, Shanghai, Weihai), Penang in Malaysia, South Korea (Paju), and Japan (Yamagata). Penang is expanding fast for 'Taiwan+1' resilience. USI also operates plants in Guadalajara, Mexico, and Eastern Europe (Poland) to serve North American and European auto and industrial OEMs [4][8]."
+      "html": "ASE's global plant network spans Taiwan, Mainland China, Southeast Asia, Northeast Asia, North America, and Europe, yet asset concentration remains heavily anchored in Taiwan [4][7][8]. Per the audited FY2025 Form 20-F (Note 36d), <strong>75.4% of ASE's non-current assets (NT$393,994 million of NT$522,480 million) sit in Taiwan</strong>—up from 69.8% in 2024 as LEAP cleanrooms scaled in Kaohsiung (Nanzih and K21–K28) and Taichung/Yunlin [4][7][9]. <strong>Mainland China accounts for 13.8% (NT$72,079 million)</strong> across Kunshan, Suzhou, Shanghai, and Weihai, while Malaysia (Penang), South Korea (Paju), Japan (Yamagata), Mexico (Guadalajara), and Europe (Poland/France) together represent just <strong>10.8% (NT$56,407 million)</strong> [4][8]. That physical concentration in Taiwan and China contrasts sharply with ASE's billing base, where 56.7% of FY2025 revenue came from U.S.-headquartered customers [4]."
     },
     {
       "type": "p",
-      "html": "Supply-chain mechanics and billing cycles differ sharply between ATM and EMS. In ATM, ASE usually works on a consignment wafer model. The customer or foundry ships probed silicon wafers to ASE. ASE bills for assembly, test, and packaging materials (leadframes, substrates, wire, mold compounds) upon shipment under net-45 to net-75 trade credit [4]. In FY2025, ASE ended with NT$125,042 million in trade receivables on NT$645,388 million in revenue, implying 70.7 days sales outstanding (DSO) [4][5]. Year-end inventories stood at NT$69,383 million, or 47.7 days on hand against NT$531,195 million cost of revenues [4][5]. For AI LEAP capacity, working capital has improved structurally. Hyperscale and GPU clients increasingly provide cash prepayments or multi-year volume deals to fund dedicated cleanrooms [3][10]. In EMS, USI buys raw parts on its own balance sheet and bills finished boards on a BOM pass-through plus fee basis, raising inventory sensitivity when component lead times swing [8]."
+      "html": "Supply-chain mechanics and billing cycles differ sharply between ATM and EMS. In ATM, ASE usually works on a consignment wafer model: customers or foundries ship probed silicon wafers to ASE, avoiding die inventory risk on ASE's balance sheet [4]. However, ASE remains heavily exposed to external interconnect material bottlenecks. In FY2025, ASE's internal substrate operations supplied just <strong>8.7%</strong> of consolidated IC substrate requirements by value, leaving <strong>91.3% reliant on external suppliers</strong> such as Unimicron, Kinsus Interconnect, and Nan Ya PCB [4]. On the billing side, ASE ended FY2025 with NT$125,042 million in trade receivables (70.7 DSO) and NT$69,383 million in inventories (47.7 DIO) [4][5]. By September 30, 2026 (Q3 2026 Form 6-K), rapid revenue scaling lifted trade receivables to NT$174,495 million and inventories to NT$99,721 million, partially cushioned by customer capacity advance payments under Note 37(e) that helped expand non-current other liabilities from NT$7,057 million (2024) to NT$37,585 million (2025) and total non-current other liabilities (including leases and deferred items) to NT$109,152 million at Q3 2026 [1][4]. In EMS, USI buys third-party components (78.7% of EMS revenue in 2025) on its own balance sheet and bills finished boards on a BOM pass-through plus fee basis [4][8]."
     },
     {
       "type": "table",
@@ -58,7 +58,7 @@
     {
       "type": "waterfall",
       "caption": "ASE Technology Holding FY2025 Audited Cash & Earnings Waterfall (NT$ Million)",
-      "takeaway": "In FY2025, NT$645,388M of revenue converted into NT$50,756M of operating income (7.9% margin) and NT$142,249M of operating cash flow (22.0% CFO margin, buoyed by NT$67,440M D&A), but NT$162,149M of AI/LEAP capex pushed free cash flow to -NT$19,900M.",
+      "takeaway": "In FY2025, NT$645,388M of revenue converted into NT$50,756M of operating income (7.9% margin) and NT$142,249M of operating cash flow (22.0% CFO margin, buoyed by NT$67,440M D&A), but NT$162,149M of AI/LEAP CapEx pushed free cash flow to -NT$19,900M [4].",
       "period": "FY2025",
       "unit": "NT$M",
       "revenue": 645388,
@@ -70,11 +70,120 @@
       "other_income": 1712,
       "tax": 10098,
       "cfo": 142249,
-      "capex": 162149
+      "capex": 162149,
+      "lines": [
+        {
+          "label": "Gross Billed Revenue",
+          "amount": 645388,
+          "signed": false,
+          "note": "FY2025 audited consolidated net revenue: NT$645,388M [4]."
+        },
+        {
+          "label": "Direct Materials / COGS (excl. D&A)",
+          "amount": -463755,
+          "signed": true,
+          "note": "Direct cost of revenues excluding D&A (includes wafers/substrates, materials, and embedded fab/assembly labor): -NT$463,755M [4]."
+        },
+        {
+          "label": "Employee Expenses (Embedded in COGS & OpEx)",
+          "amount": 0,
+          "signed": true,
+          "note": "Direct fabrication, assembly, and engineering payroll is embedded within COGS and R&D/SG&A rather than reported as a standalone line on the summary income statement (e.g., Q3 2026 COGS labor was 10% of revenue) [1][4]."
+        },
+        {
+          "label": "Other Operating Overhead (SG&A & R&D)",
+          "amount": -63437,
+          "signed": true,
+          "note": "SG&A, R&D (including embedded engineering payroll), and SPIL PPA amortization: -NT$63,437M [4]."
+        },
+        {
+          "label": "Operating EBITDA",
+          "amount": 118196,
+          "signed": false,
+          "note": "Core operating cash profit before D&A (EBIT + D&A): NT$118,196M [4]."
+        },
+        {
+          "label": "Depreciation & Amortization",
+          "amount": -67440,
+          "signed": true,
+          "note": "Non-cash cleanroom and packaging equipment depreciation: -NT$67,440M [4]."
+        },
+        {
+          "label": "Operating EBIT",
+          "amount": 50756,
+          "signed": false,
+          "note": "Audited operating income after D&A: NT$50,756M [4]."
+        },
+        {
+          "label": "Finance Costs (Net Interest)",
+          "amount": -1712,
+          "signed": true,
+          "note": "FY2025 net interest expense (prior to 9M 2026 debt surge): -NT$1,712M [4]."
+        },
+        {
+          "label": "Other Non-Operating Income",
+          "amount": 1712,
+          "signed": true,
+          "note": "Net non-operating income (offsetting net interest in FY2025): +NT$1,712M [4]."
+        },
+        {
+          "label": "Profit Before Tax (PBT)",
+          "amount": 50756,
+          "signed": false,
+          "note": "Pre-tax income: NT$50,756M [4]."
+        },
+        {
+          "label": "Income Tax & Minority Interests",
+          "amount": -10098,
+          "signed": true,
+          "note": "Corporate income tax (NT$9,461M) plus non-controlling interest deduction (NT$637M): -NT$10,098M [4][5]."
+        },
+        {
+          "label": "Reported Profit After Tax (PAT)",
+          "amount": 40658,
+          "signed": false,
+          "note": "Parent net income attributable to shareholders: NT$40,658M [4][5]."
+        },
+        {
+          "label": "Working Capital & Non-Cash Bridge",
+          "amount": 34151,
+          "signed": true,
+          "note": "Net working-capital, Note 37(e) customer advances, and non-cash bridge (CFO less PAT and D&A): +NT$34,151M [4]."
+        },
+        {
+          "label": "Cash Flow from Operations (CFO)",
+          "amount": 142249,
+          "signed": false,
+          "note": "Audited operating cash flow: NT$142,249M [4]."
+        },
+        {
+          "label": "Capital Expenditures (Net Cash PP&E)",
+          "amount": -162149,
+          "signed": true,
+          "note": "Net cash property, plant, and equipment CapEx (NT$164,643M gross): -NT$162,149M [4]."
+        },
+        {
+          "label": "Free Cash Flow (FCF)",
+          "amount": -19900,
+          "signed": true,
+          "note": "Reconciled CFO less net PP&E CapEx: -NT$19,900M [4]."
+        }
+      ]
     },
     {
       "type": "p",
       "html": "The FY2025 waterfall exposes both the cash engine and the capital trap of the OSAT model [4][5]. Out of NT$645,388 million in consolidated revenue, cost of revenues took NT$531,195 million (82.3%) [4]. That left NT$114,193 million in gross profit (17.7% gross margin) [4]. Operating expenses absorbed NT$63,437 million, including R&amp;D, selling, administration, and NT$1,048 million of SPIL purchase-price-allocation amortization. Operating income reached NT$50,756 million (7.9% operating margin) [4]. Net interest expense of NT$1,712 million matched NT$1,712 million in net non-operating income, leaving pretax income at NT$50,756 million [4]. After NT$9,461 million in income taxes (~18.6% effective tax rate) and minor non-controlling interests, parent net income reached NT$40,658 million [4][5]. Non-cash depreciation and amortization added back NT$67,440 million. Operating cash flow surged to NT$142,249 million, more than 3.5x parent net income [4]. Yet ASE spent NT$162,149 million on property, plant, and equipment to build LEAP capacity—114% of CFO and 25.1% of revenue. Free cash flow therefore finished at negative NT$19,900 million [4]."
+    },
+    {
+      "type": "callout",
+      "variant": "warn",
+      "title": "Blind-Spot Audit: Export Controls, U.S. Tariffs, FX Mismatch & Taiwan Power Risk",
+      "paragraphs": [
+        "<strong>1. Nov 18, 2026 U.S. BIS AI Export Rule Tightening:</strong> Following the U.S. Bureau of Industry and Security's November 18, 2026 tightening of AI chip export controls (TrendForce), foundries and OSATs face narrowed license exemptions and stricter end-user verification. While tight AI capacity allows international orders to backfill near-term slots, prolonged license checks threaten Chinese fabless orders and cloud 2H 2027 visibility.",
+        "<strong>2. U.S. Semiconductor-Specific Tariff & Geographic Asymmetry:</strong> ASE's FY2025 Form 20-F explicitly warns of elevated U.S. semiconductor-specific tariffs that ASE may not be able to pass through [4]. With 75.4% of fixed assets in Taiwan, 13.8% in China, and zero active U.S. advanced-packaging fab (while rival Amkor builds a CHIPS-subsidized Arizona campus eligible for a 35% U.S. ITC), ASE faces rising localization pressure.",
+        "<strong>3. USD/NTD Currency & Derivative Swap Distortion:</strong> Most ASE revenues and equipment CapEx are USD-denominated, whereas Taiwan cleanroom labor, utilities, and depreciation are NTD-denominated [4]. In October 2026 alone (Nov 10, 2026 Form 6-K), NTD depreciation created a 6.7 percentage-point growth gap (+47.1% YoY in NT$ vs. +40.4% YoY in US$). ASE carries US$4.30 billion in Buy-USD/Sell-NTD swaps (avg. strike 30.501 at end-2025), driving +NT$7,775 million of non-operating valuation gains in 9M 2026 versus -NT$4,035 million in 9M 2025 [1][4].",
+        "<strong>4. Taiwan Power Grid & Energy Cost Inflation:</strong> AI accelerators and multi-minute high-wattage burn-in testing sharply raise fab power intensity. ASE warns in its Form 20-F that rising electricity tariffs and long-term corporate renewable power purchase agreements (Note 37f) may compress margins if energy surcharges cannot be fully passed to clients [4]."
+      ]
     }
   ],
   "book_paragraphs": [
@@ -83,7 +192,8 @@
     "Now let us look at the unit economics through the FY2025 cash waterfall, because this is where the numbers tell a story that headline earnings miss. In 2025, ASE brought in NT$645.4 billion at the top line. Cost of revenues took NT$531.2 billion, leaving NT$114.2 billion in gross profit. Operating expenses took another NT$63.4 billion, leaving NT$50.8 billion in operating income. After paying NT$9.5 billion in taxes—with net interest expense and non-operating income roughly canceling each other out—parent net income landed at NT$40.7 billion.",
     "At first glance, NT$40.7 billion of net profit on NT$645.4 billion of revenue looks like a modest 6.3 percent net margin. But look one layer deeper at the cash flow statement. Because semiconductor packaging equipment depreciates rapidly—typically over five to seven years—ASE recorded NT$67.4 billion in non-cash depreciation and amortization in 2025. Add that back, along with disciplined working capital, and ASE generated NT$142.2 billion in operating cash flow, a massive 22 percent cash-from-operations margin. In a maintenance year, a company generating NT$142 billion of operating cash flow is a cash-printing machine.",
     "The catch, as you can see immediately at the bottom of the waterfall, is that 2025 was not a maintenance year. ASE spent NT$162.1 billion on new machinery and cleanroom facilities—more than one hundred percent of its operating cash flow—resulting in negative free cash flow of roughly NT$19.9 billion. And in 2026, management raised capital spending guidance even higher, to 11.5 billion US dollars. In OSAT, depreciation is not an accounting fiction; it is a real economic bill that comes due every time silicon nodes shrink and packaging architectures leap from wirebonding to 2.5D interposers and co-packaged optics. ASE collects enormous cash inflows today, but it must continuously bet that capital forward on tomorrow's equipment.",
-    "Let us also examine the working-capital plumbing that keeps this global machine running smoothly. In FY2025, ASE ended the year with NT$125 billion in trade receivables—about seventy-one days of sales—and NT$69.4 billion in inventories, or forty-eight days of cost of goods sold. Why does that matter? Because in ATM, ASE does not buy the expensive silicon wafers; the customer consigns them. ASE only buys the substrates, leadframes, bonding wire, and mold compounds, and increasingly for AI LEAP programs, hyperscale customers wire cash prepayments upfront to reserve cleanroom capacity. That keeps working capital remarkably disciplined even during a forty-five percent revenue surge. Meanwhile, on the cost side, once ATM factory utilization crosses eighty to eighty-five percent, fixed depreciation is fully absorbed and incremental revenue drops through at forty to fifty percent gross margin—explaining how ATM gross margins leapt from 23.5 percent in 2025 to 30.6 percent in Q3 2026."
+    "Let us also examine the working-capital plumbing that keeps this global machine running smoothly. In FY2025, ASE ended the year with NT$125 billion in trade receivables—about seventy-one days of sales—and NT$69.4 billion in inventories, or forty-eight days of cost of goods sold. Why does that matter? Because in ATM, ASE does not buy the expensive silicon wafers; the customer consigns them. ASE only buys the substrates, leadframes, bonding wire, and mold compounds, and increasingly for AI LEAP programs, hyperscale customers wire cash prepayments upfront to reserve cleanroom capacity. That keeps working capital remarkably disciplined even during a forty-five percent revenue surge. Meanwhile, on the cost side, once ATM factory utilization crosses eighty to eighty-five percent, fixed depreciation is fully absorbed and incremental revenue drops through at forty to fifty percent gross margin—explaining how ATM gross margins leapt from 23.5 percent in 2025 to 30.6 percent in Q3 2026.",
+    "Before we move to competition, we also have to audit four structural frictions that sit beneath ASE's supply chain: export rules, tariffs, currency swings, and electricity. First, on the asset map, ASE's audited FY2025 Form 20-F reveals that 75.4 percent of its non-current assets sit in Taiwan and 13.8 percent sit in Mainland China, leaving less than eleven percent across Malaysia, Korea, Japan, Mexico, and Europe—even though nearly fifty-seven percent of revenue is billed to U.S.-headquartered clients. That geographic mismatch collided with fresh policy risk on November 18, 2026, when the U.S. Bureau of Industry and Security tightened AI chip export rules, narrowing license exemptions for foundries and OSATs and forcing stricter end-customer verification that could cloud second-half 2027 visibility. Second, ASE's Form 20-F warns explicitly about evolving U.S. semiconductor-specific tariffs and its 91.3 percent reliance on external IC substrate vendors like Unimicron, Kinsus, and Nan Ya PCB. Third, currency movements distort reported growth and non-operating earnings: in October 2026, consolidated sales grew 47.1 percent year-over-year in NT dollars but 40.4 percent in U.S. dollars, while US$4.3 billion of foreign-exchange swap hedges swung non-operating derivative gains to NT$7.8 billion in the first nine months of 2026. Finally, high-wattage AI test handlers consume far more power than legacy wirebonders, exposing ASE to rising Taiwanese industrial electricity rates and long-term renewable power purchase obligations that cannot always be passed through to customers."
   ],
   "book_callouts": [
     {

@@ -1,96 +1,125 @@
 {
   "symbol": "MSTR",
   "market": "US",
-  "as_of": "2026-11-12",
+  "as_of": "2026-11-20",
   "title": "Strategy Inc. (MSTR) — Comprehensive Investment Monograph",
-  "company_name": "Strategy Inc. (formerly MicroStrategy Incorporated)",
-  "sector": "Bitcoin Treasury / Enterprise Analytics Software",
+  "company_name": "Strategy Inc.",
+  "sector": "Finance / Bitcoin Treasury & Enterprise Analytics Software",
   "currency": "USD",
   "amount_symbol": "$",
   "business_quality_verdict": "CYCLICAL_CONDITIONAL",
   "kpi_health": "PASS_WITH_WATCH",
-  "verdict": "WAIT_FOR_SUPPORT",
-  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "verdict": "REJECTED",
+  "new_capital_verdict": "REJECTED",
+  "rejection_reasons": [
+    "TREND",
+    "CASH_FLOW",
+    "VALUATION"
+  ],
   "decision_basis": "ch-9",
   "archetype": "DIGITAL_ASSET_TREASURY_WITH_ENTERPRISE_SOFTWARE",
   "strategy_bucket": "TACTICAL_MOMENTUM",
-  "conviction_tier": "TIER_4",
+  "conviction_tier": "TIER_0",
   "weinstein_stage": "STAGE_4",
-  "technical_timing_gate": "CAP_REJECTED_AT_CMP",
-  "entry_posture": "WAIT_FOR_SUPPORT_AFTER_BASE_CONFIRMATION",
-  "cmp": 114.41,
-  "entry_zone_low": 88.0,
-  "entry_zone_high": 94.0,
-  "stop_loss": 79.0,
-  "target_base": 134.64,
-  "target_bull": 213.31,
-  "target_bear": 29.0,
-  "target_base_method": "Analyst scenario, not consensus: static capital claims and approximate shares; BTC +15% over twelve months; exit enterprise-value-to-BTC ratio 1.05x; excludes software value and future issuance.",
-  "target_bull_method": "Analyst scenario, not forecast: BTC +50%; exit enterprise-value-to-BTC ratio 1.20x; same capital claims and basic-equivalent share estimate.",
-  "target_bear_method": "Analyst stress case, not forecast: BTC −50%; exit enterprise-value-to-BTC ratio 0.80x; same capital claims and basic-equivalent share estimate.",
-  "support_zone_asymmetry": 2.71,
-  "probability_weighted_value": 108.12,
-  "probability_weighted_return_pct": -5.5,
-  "holding_action": "EXIT_IMMEDIATELY",
-  "holding_shares_to_sell": 21.414,
-  "holding_rationale": "The ledger confirms 21.414 direct MSTR shares in Schwab, worth $2,449.98 at the November 12 close, against $2,699.99 cost and a $250.01 unrealized loss. The position is 2.70% of net worth; the linked MSTX holding raises combined MSTR-related exposure to 4.21%. The model values MSTR at $108.12, below the $114.41 close, while the $79 invalidation is 31% below that close. Exit the direct shares at the next available execution opportunity; re-underwrite MSTX separately. This is advisory, not a broker order.",
+  "technical_timing_gate": "CAP_REJECTED",
+  "entry_posture": "AVOID_STAGE4_OR_BROKEN",
+  "cmp": 77.8,
+  "entry_zone_low": 55.0,
+  "entry_zone_high": 62.0,
+  "stop_loss": 48.0,
+  "target_bear": 9.66,
+  "target_base": 76.34,
+  "target_bull": 162.32,
+  "probability_weighted_value": 66.86,
+  "probability_weighted_return_pct": -14.06,
+  "scenario_horizon": "12-month",
+  "target_base_method": "Analyst scenario: 850,849 BTC +10% ($64,679), 0.90x post-MSCI EV/BTC exit multiple, -$1.55B 1-year fixed-charge drag, 427.672M basic-equivalent shares.",
+  "target_bull_method": "Analyst scenario: BTC +50% ($88,198), 1.15x EV/BTC exit multiple, -$1.55B fixed-charge drag, 427.672M shares.",
+  "target_bear_method": "Analyst stress scenario: BTC -40% ($35,279), 0.70x EV/BTC exit multiple, -$1.55B fixed-charge drag, 427.672M shares.",
+  "holding_action": "NOT_HELD",
+  "holding_shares_to_sell": 0,
+  "holding_rationale": "The November 20, 2026 positions ledger confirms 0 MSTR shares and 0 MSTX shares held across Schwab and Robinhood. Prior shares have been exited, and MSTR subsequently breached the $79.00 structural stop to close at $77.80. Maintain zero exposure while Stage 4 breakdown, sub-1.0x mNAV dilution, and MSCI exclusion risk persist.",
   "holding_alerts": [
     {
-      "trigger": "Next available execution opportunity at prevailing market conditions",
-      "shares": 21.414,
-      "instruction": "Exit all 21.414 direct MSTR shares. The November 12 reference value is $2,449.98; actual proceeds depend on execution. Review the separate MSTX holding independently. This is advisory, not a broker order."
+      "trigger": "Confirmed multi-week Stage 1 base and weekly close above the 30-week SMA ($128.25) on heavy volume",
+      "trigger_price": 128.25,
+      "shares": 0,
+      "instruction": "Re-underwrite from scratch only after trend repair and positive quarterly BTC Yield; keep 0 shares while in Stage 4."
+    },
+    {
+      "trigger": "Further drop toward $55.00–$62.00 deep-discount band or sub-$55,000 BTC-USD",
+      "trigger_price": 55.0,
+      "shares": 0,
+      "instruction": "Do not catch the falling knife; monitor USD Reserve depletion, STRC buybacks, and Sept. 2027 convertible put refinancing."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Anticipated proceeds from exiting 21.414 direct MSTR shares (November 12 reference value $2,449.98; actual proceeds depend on execution), plus the next marginal US cash unit",
+    "capital_source": "Next marginal US cash unit under review (0 MSTR shares held; prior 21.414 MSTR and 148.48 MSTX shares exited)",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100.0,
-        "recommendation": "Retain all direct-MSTR exit proceeds and the next marginal dollar in cash.",
-        "rationale": "The probability-weighted MSTR value is below the November 12 close, the stock has no confirmed base, the broad market is in Correction, and correlated MSTX exposure remains for separate review.",
-        "entry_condition": "Reassess after the broad-market regime stabilizes and a current equity setup clears business, valuation, and trend gates."
+        "recommendation": "Hold 100% of marginal capital in cash during the S&P 500 Downtrend.",
+        "rationale": "MSTR is REJECTED (expected value $66.86 vs $77.80 CMP), broad US breadth sits at 34.5% above 50DMA with 10 distribution days, and cash preserves optionality.",
+        "entry_condition": "Wait for market regime improvement above 50% breadth and a qualified Stage 2 setup."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "AVPT",
+        "symbol": "LLY",
         "allocation_pct": 0.0,
-        "target_base": 22.8,
-        "asymmetry_ratio": 1.58,
-        "recommendation": "Retain AVPT as the active-shortlist comparator; no capital is allocated by this dossier.",
-        "rationale": "AVPT is on the copied active US shortlist and the November 12 facts ledger classifies it as Stage 2, but the user's broader high-beta portfolio and the market correction argue against adding risk from an MSTR-only review.",
-        "entry_condition": "Require a separate same-session AVPT review, continued Stage 2 structure, and its operating/valuation gates before allocating."
+        "target_base": 1660.0,
+        "asymmetry_ratio": 2.08,
+        "recommendation": "Track LLY as the active Stage 2 shortlist comparator; 0% allocated by this MSTR review.",
+        "rationale": "LLY holds a Stage 2 uptrend ($1,347.11 close, CLEAR_FOR_CONSIDERATION) with 2.08:1 support asymmetry on its $1,282.61–$1,321.67 zone and $1,158.67 stop, but macro Downtrend favors holding cash here.",
+        "entry_condition": "Require a separate same-session LLY portfolio-fit check and broad-market stabilization before deploying."
       },
       {
         "destination_type": "OUTSIDE",
         "symbol": "IBIT",
         "allocation_pct": 0.0,
-        "target_base": 46.3,
-        "asymmetry_ratio": 2.94,
-        "recommendation": "Use IBIT only as a comparison vehicle for direct Bitcoin exposure; no capital is allocated now.",
-        "rationale": "IBIT removes MSTR-specific equity issuance and preferred-stock mechanics and had a November 12 NAV of $40.4352, closing price $40.36, and a 0.25% sponsor fee. It still has Bitcoin price risk, no operating cash yield, and is not a substitute for a diversified cash reserve.",
-        "entry_condition": "A hypothetical base uses BTC +15% less the 0.25% annual sponsor fee; review only after Bitcoin and broad-market trends stabilize and a fresh same-session snapshot confirms the $34–$36 support review band."
+        "target_base": 36.23,
+        "asymmetry_ratio": 0.0,
+        "recommendation": "Use IBIT strictly as a direct spot-Bitcoin benchmark; 0% allocated while in Stage 4.",
+        "rationale": "IBIT ($33.02 close, 0.25% fee) eliminates MSTR's 12% preferred dividend burden and $5.914B put wall, but IBIT itself is Stage 4 (CAP_REJECTED) with RSI 17.49.",
+        "entry_condition": "Consider only if BTC-USD and IBIT build a multi-week Stage 1 base and break into Stage 2."
       }
     ]
   },
-  "short_term_outlook": "Stay out at the current close: MSTR is below its 20/50/200-day averages, the multi-timeframe snapshot calls the structure Stage 4, and no options edge is present. Reconsider only after a base and trend reclaim.",
-  "medium_term_outlook": "Watch cloud-subscription retention and software cash conversion alongside USD-reserve coverage, preferred dividend burden, share issuance, and BTC Yield. A continuing negative per-share yield would weaken the core capital-markets thesis.",
-  "long_term_outlook": "Conditional on Bitcoin appreciation and the ability to grow Bitcoin per share without persistent dilution, while the software operation improves its cash contribution. The current evidence does not establish a durable compounder profile.",
+  "technical_spec": {
+    "stage_override": "STAGE_4 (Snapshot & Multi-Timeframe Markdown; Facts Screen: Stage 1 Basing)",
+    "stage_explanation": "Snapshot and multi-timeframe technicals classify MSTR as STAGE_4 (CAP_REJECTED): close $77.80 is 43.99% below the falling 50D SMA ($138.91) and 39.34% below the 30W SMA ($128.25) with RSI 20.22 and 9 distribution days. The quantitative facts script tags Stage 1 only because price sits at its 63-day low ($77.69).",
+    "posture_override": "AVOID_STAGE4_OR_BROKEN",
+    "posture_explanation": "Trading 36.44% below the 10W EMA and 43.99% below the 50D SMA with no 4H turn (4H RSI 14.33); CAP_REJECTED blocks any equity or options entry.",
+    "dossier_verdict": "REJECTED",
+    "support_band_override": [
+      55.0,
+      62.0
+    ],
+    "support_zone_explanation": "Hypothetical deep-discount watch zone (~0.70x-0.75x EV/BTC mNAV) only; the raw snapshot band ($120.56-$140.99) is stale above CMP and unusable. Measured from the $62.00 upper edge against $48.00, unadjusted $76.34 Base R:R is 1.02:1 (< 1.50:1), and modeling 10% dilution plus -$67.241M software burn cuts Base value to $69.25 (1.02:1 even at the $58.50 midpoint).",
+    "stop_override": 48.0,
+    "stop_placement_explanation": "Hypothetical reference floor only; MSTR is NOT_HELD and REJECTED, with zero live position or active order.",
+    "valuation_assessment": {
+      "posture": "Unattractive (0.972x mNAV; negative expected value)",
+      "note": "At $77.80, MSTR trades near 0.96x static NAV ($81.13/sh) and 0.972x EV/BTC mNAV, breaking the >1.0x ATM flywheel. Fixed-charge-adjusted 12M Base value is $76.34 and weighted value is $66.86 (-14.1%)."
+    },
+    "ledger_cite_tag": " [42]",
+    "tech_table_takeaway": "All daily and weekly moving averages sit 35% to 44% above the $77.80 close on 1.95x volume, confirming severe Stage 4 breakdown. [42]",
+    "gate_table_takeaway": "Both the Stage 4 technical gate and the negative expected-return valuation screen independently reject any new capital deployment in MSTR.",
+    "intro_prose": "MSTR closed November 20, 2026 at $77.80, breaching its prior $79.00 structural stop on nearly double average volume. Every daily, weekly, and 4-hour trend gauge confirms Stage 4 markdown.",
+    "gate_intro_prose": "We reconcile the automated facts-ledger Stage 1 tag against the Stage 4 snapshot breakdown and apply our No-FOMO timing gate.",
+    "closing_prose": "Until MSTR completes a multi-week Stage 1 base and reclaims its 30-week average ($128.25), the tape offers no low-risk entry."
+  },
+  "short_term_outlook": "REJECTED (Stage 4 CAP_REJECTED): price sits 44% below its 50-day average with RSI 20.22 and no 4-hour turn; avoid catching the falling knife.",
+  "medium_term_outlook": "Avoid: sub-1.0x mNAV breaks the equity-issuance flywheel while MSCI November 2026 exclusion, 12% STRC dividends, and Sept. 2027 debt puts weigh on common equity.",
+  "long_term_outlook": "Unproven (CYCLICAL_CONDITIONAL): requires positive BTC-per-share yield across a full cycle and self-funding software operating cash flow.",
+  "sizing_table_takeaway": "Risk-unit sizing is 0.0% of net worth under REJECTED (TIER_0); the $55-$62 band and $48 stop are watch references only, not active orders.",
+  "verdict_rule_summary": "REJECTED because Stage 4 trend (CAP_REJECTED), negative software cash flow / $1.55B fixed charges, and sub-CMP 12-month Base fair value ($76.34) fail our hurdles.",
+  "primer": "Strategy Inc combines a cash-negative analytics software unit with 850,849 Bitcoin funded by $6.75 billion in convertible debt and $13.48 billion in adjusted preferred liquidation preference. On November 20, 2026, MSTR closed at $77.80 alongside $58,798.98 Bitcoin, breaching the prior $79.00 structural stop in a Stage 4 markdown with 20.22 daily RSI. At 0.972x EV-to-Bitcoin mNAV, the accretive equity-issuance flywheel is broken, leaving 12-month Base fair value at $76.34 and probability-weighted value at $66.86 per share. With zero shares held in the portfolio ledger, we assign REJECTED and NOT_HELD while keeping 100% of marginal capital in cash.",
   "gate_exceptions": [
-    "AS-OF exception MSTR:ten_year_financials_2016_2025 — source period 2025-12-31 is 316 days older than the 2026-11-12 report date. These are historical fiscal rows retained for the required ten-year table. Cure: supplement when the FY2026 Form 10-K is filed; exact filing date had not been announced at the cutoff.",
-    "AS-OF exception MSTR:fy2025_software_financials — source period 2025-12-31 is 316 days older than the report date. The FY2025 audited stream and cost lines are historical, not current-quarter claims. Cure: supplement with the FY2026 Form 10-K once filed; exact filing date had not been announced at the cutoff.",
-    "AS-OF exception MSTR:fy2025_software_cash_warning — source period 2025-12-31 is 316 days older than the report date. This is management's historical software-cash disclosure. Cure: update the forward cash-sufficiency assessment when a newer periodic filing is published; the historical FY2025 fact itself is not replaceable.",
-    "AS-OF exception MSTR:fy2025_distribution_terms — source period 2025-12-31 is 316 days older than the report date. Contract terms and the on-premises support deadline are shown as historical filing disclosures. Cure: update only if a later filing changes those terms; otherwise the historical disclosure remains.",
-    "AS-OF exception MSTR:adobe_cloud_transition_2013 — FY2013 source date 2013-11-29 is 4,731 days older than the report date. It is an explicitly historical subscription-transition parallel; no cure is applicable to that historical outcome.",
-    "AS-OF exception MSTR:adobe_cloud_transition_2024 — FY2024 source date 2024-11-29 is 713 days older than the report date. It is an explicitly historical peer outcome, not a current Adobe estimate; no cure is applicable to that historical result.",
-    "AS-OF exception MSTR:gbtc_2022_discount — source date 2022-12-13 is 1,430 days older than the report date. It is a historical market-structure failure-mode parallel; no cure is applicable to that dated event.",
-    "AS-OF exception MSTR:gbtc_2024_nav_discount — source date 2024-12-31 is 681 days older than the report date. It is a historical post-conversion outcome used to compare wrapper mechanics; no cure is applicable to that historical observation.",
-    "Market-data timing exception: market_facts and positions use the verified November 12 close. Stock/options snapshots were retrieved during the November 13 session; close and technical statements in the report use the November 12 ledger, while later chart/option readings are explicitly identified as post-cutoff context.",
-    "Technical-classification conflict: the November 12 facts ledger labels MSTR Stage 1 (Basing), while stock_snapshot and the multi-timeframe options/chart read label the structure Stage 4/below trend. The report discloses the conflict and bases its no-entry posture on the underlying price/average/volume evidence rather than silently selecting a bullish label.",
-    "Holdings freshness: market_facts reported ACA in stale_vs_asof and was run with --allow-stale-holdings. Schwab's copied transaction log last records a transaction on November 10 and Robinhood's on November 12; the ledger treats broker transaction logs as authoritative for executed holdings. MSTR itself was priced at the November 12 close.",
-    "Browser probe exception: the options helper could not read a Robinhood session because its Chrome bridge lacked eval_js, so it used the public options chain. A separate read-only Chrome inspection confirmed TradingView access and manually checked visible 1D/1W MSTR charts; the 4H reading came from the public multi-timeframe snapshot.",
-    "Reviewer-model exception: the configured reviewer model ao-claude-lc/claude-sonnet-5-5 and red-team model ao-foundry-lc/gpt-6.1-sol were unavailable in this harness (the runner returned “Model is not available”). Both independent passes were completed in separate sessions by the default Azure gpt-6-luna agent. Using the same model family reduces model diversity and lowers confidence in the independent judgment; cure by rerunning the review with the configured routes if they become available before the next dossier refresh.",
-    "Review-limit exception: the final independent reviewer returned REVISE in Round 2. Its findings on the selected $79 weekly-close invalidation wording, the executive first-person aside, and duplicate punctuation were corrected after that round. No third review was run because the two-round cap is strict. The post-round corrections have not received another independent review; the dossier is best effort and is not reviewer-approved. Recheck these edits in the next dossier refresh."
+    "AS-OF historical disclosures: MSTR ten-year FY2016-FY2025 annual financials (2025-12-31), Adobe FY2013/FY2024 historical parallels, and GBTC 2022/2024 historical parallels are retained as historical context. In addition, the shared US run research ledger contains five older peer/other-symbol items flagged by --allow-stale-asof: BE_GOVERNANCE_PSU_CFO_2026 (2026-06-17, 156d old; cures upon Bloom Energy's Spring 2027 proxy/Form 10-K), ANET top-2 reseller AR (anet_fy2025_top2_reseller_ar_pct from 2025-12-31, 324d old; cures upon Arista Networks' Feb. 2027 Form 10-K), and three ASX FY2025 Form 20-F items (fy2025_largest_customer_revenue_share, fy2025_internal_substrate_supply_share, and fy2025_taiwan_non_current_assets_share from 2026-04-01, 233d old; cure upon ASE Technology's Mar.–Apr. 2027 Form 20-F).",
+    "BTC-USD reference cutoff: BTC-USD is not present in facts_US_2026-11-20.json; the $58,798.98 November 20, 2026 close comes from the session Yahoo/Coinbase BTC-USD feed and aligns with IBIT ($33.02, -5.87%).",
+    "Technical-classification conflict: facts_US_2026-11-20.json quantitatively labels both MSTR and comparator IBIT ($33.02 close) as Stage 1 (Basing) due to 63-day-low proximity ($77.69 for MSTR), whereas snapshots_US_2026-11-20.json and options_US_batch1.json classify both as STAGE_4 (CAP_REJECTED). Both readings are disclosed and STAGE_4 governs.",
+    "Linux environment limits: WeasyPrint PDF generation and macOS Chrome browser automation (TheWrap, Robinhood, TradingView live tabs) are unavailable in this Linux container. Public TradingView, Finviz, and public options-chain snapshots were used alongside the consolidated positions ledger."
   ],
   "citations": [
     "Strategy Inc. FY2025 Form 10-K, SEC EDGAR (filed Feb. 19, 2026): https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
@@ -141,7 +170,12 @@
     "Strategy Inc. SEC EDGAR issuer filings, CIK 0001050446: https://www.sec.gov/edgar/browse/?CIK=0001050446",
     "Strategy Inc. SEC filings and financial documents: https://www.strategy.com/financial-documents",
     "Strategy Inc. Form 4, Jarrod M. Patten, SEC EDGAR filing index (Nov. 6, 2026): https://www.sec.gov/Archives/edgar/data/1050446/000119312526451813/xslF345X06/ownership.xml",
-    "Strategy Inc. Q3 2026 results Form 8-K, SEC EDGAR: https://www.sec.gov/Archives/edgar/data/1050446/000119312526437776/mstr-20261028.htm"
-  ],
-  "primer": "BEST_EFFORT_AFTER_REVIEW_LIMIT / PUBLISHED_WITH_GATE_EXCEPTIONS — Strategy sells analytics software and holds Bitcoin. Debt and preferred shares shape how it funds the treasury. Blind review rates business quality CYCLICAL_CONDITIONAL and KPI health PASS_WITH_WATCH: cloud sales grew, but FY2025 software cash flow was negative and near-term needs remain unmet. MSTR closed at $114.41 on November 12, below key trend lines; asset-based and weighted values are about $107 and $108. Wait for an $88–$94 base before new money; exit the 21.414 direct shares and keep proceeds in cash [1][2][12][14][15][42][45]."
+    "Strategy Inc. Q3 2026 results Form 8-K, SEC EDGAR: https://www.sec.gov/Archives/edgar/data/1050446/000119312526437776/mstr-20261028.htm",
+    "Strategy Inc. Form 8-K (ATM, BTC holdings 850,849, STRC buybacks, USD Reserve $4.75B, Dec. 2026 daily dividend declaration), filed Nov. 16, 2026: https://www.sec.gov/Archives/edgar/data/1050446/000119312526462151/mstr-20261116.htm",
+    "Strategy Inc. Form 3 (Initial statement of beneficial ownership: Shelley Khanna, VP and Chief Accounting Officer), filed Nov. 10, 2026: https://www.sec.gov/Archives/edgar/data/1050446/000119312526455407/ownership.xml",
+    "S&P 500 November 20, 2026 correction drawdown reference, Koyfin: https://www.koyfin.com/blog/stock-market-correction-what-to-check/",
+    "CBOE Total Put/Call Ratio (Nov. 20, 2026), YCharts/CBOE session data: https://ycharts.com/indicators/total_putcall_ratio",
+    "Coinbase Bitcoin (BTC-USD) Nov. 20, 2026 close ($58,798.98), Yahoo Finance chart API: https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD",
+    "Eli Lilly and Company (LLY) SEC EDGAR filings and market snapshot comparator (Nov. 20, 2026): https://www.sec.gov/edgar/browse/?CIK=0000059478"
+  ]
 }
