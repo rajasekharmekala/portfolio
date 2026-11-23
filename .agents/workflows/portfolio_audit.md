@@ -24,7 +24,7 @@ Run the input check. The manifest lists every holding source with its row count 
    ```bash
    .venv/bin/python scripts/market_facts.py --market <MKT> --date <session> --screen <screen> --run-dir "<RUN_DIR>" --allow-stale-holdings
    ```
-2. Extract a fresh TheWrap Stage 2 dashboard into the private run directory; do not read a prior `data/views/stage2_*_latest.json` as this run's market evidence:
+2. Extract a fresh Stage 2 & sector breadth snapshot into the private run directory (runs headless via TradingView Scanner API by default; pass `--source powerbi` only if explicitly requested); do not read a prior `data/views/stage2_*_latest.json` as this run's market evidence:
    ```bash
    .venv/bin/python scripts/stage2_scanner.py --market <MKT> --min-mcap <MIN_MCAP> --out "<RUN_DIR>/cache/stage2_<MKT>_<date>.json"
    ```

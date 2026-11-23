@@ -12,6 +12,10 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from data_layer import accounts_for
+try:
+    from stock_snapshot import fetch_tradingview_batch
+except Exception:
+    fetch_tradingview_batch = None
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -602,6 +606,21 @@ def build_performance(refresh: bool = False) -> dict:
                 sdates = sorted(pmap.keys())
                 price_lookup[sym] = (sdates, pmap)
                 all_price_dates.update(sdates)
+
+            # Overlay latest TradingView close on weekdays so same-day / lagged Yahoo bars stay current
+            if fetch_tradingview_batch is not None and syms and today.weekday() < 5:
+                try:
+                    tv_latest = fetch_tradingview_batch(market, syms)
+                    today_iso = today.isoformat()
+                    for sym, tv_row in tv_latest.items():
+                        tv_close = tv_row.get("close") if isinstance(tv_row, dict) else None
+                        if tv_close is not None and float(tv_close) > 0:
+                            sdates, pmap = price_lookup.get(sym, ([], {}))
+                            pmap[today_iso] = round(float(tv_close), 4)
+                            price_lookup[sym] = (sorted(pmap.keys()), pmap)
+                            all_price_dates.add(today_iso)
+                except Exception:
+                    pass
 
             as_of_iso = max(all_price_dates) if all_price_dates else today.isoformat()
             as_of = date.fromisoformat(as_of_iso)

@@ -6,7 +6,13 @@ from unittest.mock import patch
 
 import stock_snapshot
 from stock_snapshot import collect_symbols_from_records, evaluate_stage2_and_entry_posture, match_stage2_symbol
-from stage2_scanner import clear_india_slicers, extract_in, extract_scrollable_sectors, split_stage2_rows
+from stage2_scanner import (
+    build_tradingview_stage2,
+    clear_india_slicers,
+    extract_in,
+    extract_scrollable_sectors,
+    split_stage2_rows,
+)
 
 
 class Stage2MembershipTest(unittest.TestCase):
@@ -91,6 +97,53 @@ class Stage2MembershipTest(unittest.TestCase):
             path.write_text(json.dumps({"active": [{"symbol": "AAA"}, {"symbol": "BBB"}]}))
             with patch.object(stock_snapshot, "ROOT", root):
                 self.assertEqual(collect_symbols_from_records("US", True, False), ["AAA", "BBB"])
+
+    def test_tradingview_stage2_in_compatible_with_stock_snapshot(self):
+        rows = [
+            {"name": "AAA", "description": "AAA Ltd", "exchange": "NSE", "sector": "Tech", "industry": "IT",
+             "close": 103.0, "SMA30|1W": 100.0, "SMA50": 102.0, "SMA200": 95.0,
+             "volume": 200000, "average_volume_30d_calc": 100000, "Perf.W": 3.0, "Perf.3M": 25.0, "Perf.6M": 40.0, "Perf.Y": 60.0, "market_cap_basic": 2e10},
+            {"name": "BBB", "description": "BBB Ltd", "exchange": "NSE", "sector": "Tech", "industry": "IT",
+             "close": 120.0, "SMA30|1W": 100.0, "SMA50": 110.0, "SMA200": 90.0,
+             "volume": 100000, "average_volume_30d_calc": 100000, "Perf.W": 1.0, "Perf.3M": 15.0, "Perf.6M": 20.0, "Perf.Y": 30.0, "market_cap_basic": 3e10},
+            {"name": "CCC", "description": "CCC Ltd", "exchange": "NSE", "sector": "Tech", "industry": "IT",
+             "close": 80.0, "SMA30|1W": 100.0, "SMA50": 85.0, "SMA200": 95.0,
+             "volume": 50000, "average_volume_30d_calc": 100000, "Perf.W": -4.0, "Perf.3M": -15.0, "Perf.6M": -20.0, "Perf.Y": -10.0, "market_cap_basic": 2e10},
+        ]
+        payload = build_tradingview_stage2("IN", 1000.0, rows)
+        self.assertEqual(payload["source"], "tradingview_scanner")
+        self.assertEqual(payload["stage2_universe_count"], 2)
+        self.assertTrue(payload["stage2_universe_complete"])
+        self.assertEqual(payload["strongest_sectors"][0]["sector"], "IT")
+        self.assertAlmostEqual(payload["strongest_sectors"][0]["pct_in_stage2"], 66.7, places=1)
+        m_aaa = match_stage2_symbol("AAA", "IN", {}, payload)
+        self.assertTrue(m_aaa["in_thewrap_stage2"])
+        self.assertTrue(m_aaa["is_new_addition_this_week"])
+        self.assertEqual(m_aaa["sector_rank"], 1)
+        m_ccc = match_stage2_symbol("CCC", "IN", {}, payload)
+        self.assertFalse(m_ccc["in_thewrap_stage2"])
+
+    def test_tradingview_stage2_us_breadth_and_breakout(self):
+        rows = [
+            {"name": "NVDA", "description": "NVIDIA", "exchange": "NASDAQ", "sector": "Tech", "industry": "Semis",
+             "close": 149.0, "change": 2.5, "SMA30|1W": 120.0, "SMA50": 135.0, "SMA200": 110.0, "EMA50": 136.0, "EMA200": 112.0,
+             "price_52_week_high": 150.0, "volume": 2000000, "average_volume_30d_calc": 1000000,
+             "Perf.1M": 10.0, "Perf.3M": 30.0, "Perf.6M": 50.0, "Perf.Y": 90.0, "market_cap_basic": 3e12},
+            {"name": "AMD", "description": "AMD", "exchange": "NASDAQ", "sector": "Tech", "industry": "Semis",
+             "close": 160.0, "change": 1.0, "SMA30|1W": 150.0, "SMA50": 155.0, "SMA200": 145.0, "EMA50": 154.0, "EMA200": 146.0,
+             "price_52_week_high": 200.0, "volume": 1000000, "average_volume_30d_calc": 1000000,
+             "Perf.1M": 5.0, "Perf.3M": 12.0, "Perf.6M": 20.0, "Perf.Y": 25.0, "market_cap_basic": 2.5e11},
+            {"name": "INTC", "description": "Intel", "exchange": "NASDAQ", "sector": "Tech", "industry": "Semis",
+             "close": 20.0, "change": -1.0, "SMA30|1W": 30.0, "SMA50": 25.0, "SMA200": 32.0, "EMA50": 25.0, "EMA200": 32.0,
+             "price_52_week_high": 50.0, "volume": 500000, "average_volume_30d_calc": 1000000,
+             "Perf.1M": -5.0, "Perf.3M": -10.0, "Perf.6M": -30.0, "Perf.Y": -40.0, "market_cap_basic": 1e11},
+        ]
+        payload = build_tradingview_stage2("US", 1.0, rows, spy_3m=5.0)
+        self.assertEqual(payload["strongest_sectors"][0]["sector"], "Semis")
+        self.assertAlmostEqual(payload["strongest_sectors"][0]["pct_outperforming_sp500"], 66.7, places=1)
+        m_nvda = match_stage2_symbol("NVDA", "US", {"industry": "Semis"}, payload)
+        self.assertEqual(m_nvda["breakout_type"], "52W High Breakout")
+        self.assertEqual(m_nvda["volume_signal"], "Volume Spike")
 
 
 if __name__ == "__main__":
