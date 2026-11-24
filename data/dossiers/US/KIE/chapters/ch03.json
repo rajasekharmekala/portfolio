@@ -1,0 +1,154 @@
+{
+  "id": "ch-3",
+  "title": "3. Distribution, Index Mechanics, Creation/Redemption & Unit Economics",
+  "book_title": "The Mechanics of Equal Weight: Quarterly Rebalancing, ETF Plumbing, and the $100 Premium Waterfall",
+  "epigraph": {
+    "quote": "An index methodology is a silent portfolio manager that trades four times a year without emotion, fear, or valuation discretion.",
+    "author": "Institutional Index Architecture Notes"
+  },
+  "web_blocks": [
+    {
+      "type": "p",
+      "html": "KIE's unit economics rest on <strong>two layers</strong> [1][2][5][6]. First is the ETF wrapper's index, trading, and fee plumbing run by State Street and S&amp;P Dow Jones Indices. Second is the underlying industry's premium-to-profit cash flow waterfall. At the fund level, KIE tracks the <strong>S&amp;P Insurance Select Industry Index</strong> via replication and sampling. At least 80% of total assets stay invested in index stocks [1][5]. To join the index, a firm must belong to the S&amp;P Total Market Index (TMI) and sit in one of the five GICS insurance groups [2][3]. It must also pass liquidity screens and float-adjusted market-cap floors ($400 million for new adds; $300 million for current members) [2][3]."
+    },
+    {
+      "type": "p",
+      "html": "The index rebalances <strong>four times a year</strong> after the close on the <strong>third Friday of March, June, September, and December</strong> [2]. S&amp;P sets weights using prices and three-month median daily value traded (MDVT) from the last business days of February, May, August, and November [2]. Each stock starts at an equal weight (1/N, or ~1.85% across 54 names). S&amp;P then applies a <strong>basket liquidity cap</strong> based on MDVT and a hard <strong>4.5% single-stock cap</strong>, spreading excess weight to uncapped names [2]. Between rebalances, stock weights drift with market returns. That drift explains why recent winners like Palomar (2.20%) and Ryan Specialty (2.13%) sit slightly above 2% ahead of the December reset [1][2]."
+    },
+    {
+      "type": "p",
+      "html": "On the primary market, <strong>Authorized Participants (APs)</strong> create and redeem KIE shares in large in-kind <strong>Creation Unit</strong> blocks [1][5]. In-kind swaps let State Street flush out low-cost-basis lots during redemptions and rebalances. This shields ETF holders from taxable capital-gains payouts [5]. Secondary trading is tight and liquid across <strong>$603.49 million in AUM</strong> (9.35 million shares). KIE posts a <strong>30-day median bid-ask spread of 0.02%</strong> (2 bps) and a 0.00% average closing premium or discount to NAV [1]. Listed NYSE Arca options and CME <strong>E-mini S&amp;P Insurance Select Industry Futures (SXI)</strong> also help APs hedge inventory [1][3]. State Street lends portfolio shares against cash collateral in Navigator Securities Lending Portfolio II, earning small fee income that trims friction [1][4]."
+    },
+    {
+      "type": "waterfall",
+      "caption": "Underlying US P&C Insurance Unit Economics: Per-$100 Net Premiums Earned to Pre-Tax Operating Income (AM Best 2025 Statutory Basis)",
+      "period": "FY2025 US P&C Industry Statutory Basis ($923.3B NPE)",
+      "unit": "$",
+      "revenue": 100.0,
+      "lines": [
+        {
+          "label": "Net Premiums Earned (Base Underwriting Revenue)",
+          "amount": 100.0,
+          "signed": false,
+          "note": "AM Best 2025 US P&C statutory filings (~96% of industry): $923.3B NPE (+6.1% YoY) [6]."
+        },
+        {
+          "label": "Less: Incurred Losses & Loss Adjustment Expenses (LAE)",
+          "amount": -66.68,
+          "signed": true,
+          "note": "$615.7B on $923.3B NPE (66.7% net loss ratio, including 7.6 pts catastrophe losses) [6]."
+        },
+        {
+          "label": "Less: Underwriting & Policy Acquisition Expenses",
+          "amount": -26.12,
+          "signed": true,
+          "note": "$241.2B on $923.3B NPE (26.1% expense ratio; commissions, tech, state premium taxes) [6]."
+        },
+        {
+          "label": "Less: Policyholder Dividends & Misc. Statutory Adj.",
+          "amount": -0.6,
+          "signed": true,
+          "note": "~$5.5B net statutory adjustment bridging to $60.9B net underwriting gain [6]."
+        },
+        {
+          "label": "Net Underwriting Profit (92.9% Combined Ratio)",
+          "amount": 6.6,
+          "signed": false,
+          "note": "$60.9B net underwriting gain on $923.3B NPE (6.6% underwriting margin; decade high) [6]."
+        },
+        {
+          "label": "Plus: Net Investment Income Earned on Float",
+          "amount": 9.9,
+          "signed": true,
+          "note": "$91.4B NII on $923.3B NPE (+9.1% YoY; 4.39% fixed-income book yield on $2.63T assets) [6][10]."
+        },
+        {
+          "label": "Pre-Tax Operating Profit (Excl. Realized Cap Gains)",
+          "amount": 16.5,
+          "signed": false,
+          "note": "$153.1B pre-tax operating income (~16.6% of NPE; $152.3B sum of UW + NII plus $0.8B other) [6]."
+        }
+      ],
+      "takeaway": "Even in the strongest P&C underwriting year in over a decade (2025, 92.9% CR), bond float income ($9.90 per $100 NPE) still supplied 60% of pre-tax operating profit ($16.50) [6][10]."
+    },
+    {
+      "type": "table",
+      "caption": "ETF-Level Unit Economics: KIE Gross Yield to Net Investor Yield & Tracking Drag",
+      "headers": [
+        "ETF Cash-Flow / Return Layer",
+        "Annual Rate (bps / %)",
+        "Verified Basis & Source",
+        "Economic Impact on Holder"
+      ],
+      "rows": [
+        [
+          "Index Indicated Dividend Yield",
+          "1.92% (192 bps)",
+          "SSGA Index Dividend Yield as of Nov 20, 2026 [1]",
+          "Gross cash dividend stream paid by KIE's 54 constituents"
+        ],
+        [
+          "Less: Gross Operating Expense Ratio",
+          "-0.35% (-35 bps)",
+          "SSGA statutory unitary management fee [1][4]",
+          "Fixed annual fee paid to SSGA Funds Management, Inc."
+        ],
+        [
+          "Implied Net Distribution Yield",
+          "1.57% (Actual: 1.55%)",
+          "SSGA Fund Distribution Yield 1.55% (30-Day SEC 1.17%) [1]",
+          "Quarterly cash distributions ($0.9917 TTM per share) [20]"
+        ],
+        [
+          "Quarterly Rebalance & Cash-Drag Slippage",
+          "-0.04% to -0.08% (-4 to -8 bps)",
+          "SSGA 10Y NAV (11.87%) vs Index (12.29%) = -42 bps total drag [1]",
+          "21% annual turnover + cash buffer adds ~6-7 bps beyond 35 bps fee [1][20]"
+        ],
+        [
+          "Secondary-Market Execution Friction",
+          "-0.02% (-2 bps round-trip)",
+          "SSGA 30-day median NBBO bid-ask spread [1]",
+          "Tight institutional liquidity; negligible for multi-month holds"
+        ]
+      ],
+      "explanatory_p": "Through October 31, 2026, KIE's tracking gap stayed steady across every horizon: 1Y (-43 bps), 3Y (-42 bps), 5Y (-41 bps), 10Y (-42 bps), and Since Inception (-39 bps) [1]. That ~41 bps annual gap equals the 35 bps fee plus ~6 bps of trading friction [1].",
+      "takeaway": "KIE's fund plumbing is clean and tax-efficient. Its 0.35% fee plus ~6 bps of quarterly rebalance friction creates a steady ~41 bps annual drag versus its gross index [1][20]."
+    },
+    {
+      "type": "callout",
+      "kind": "warn",
+      "title": "The Hidden Trade-Off of Equal-Weight Rebalancing: Trimming Winners to Buy Laggards",
+      "paragraphs": [
+        "Quarterly equal-weight resets enforce strict contrarian rules. Every March, June, September, and December, KIE trims winners above ~1.85% and buys laggards [2].",
+        "In choppy, mean-reverting markets, this 'rebalancing bonus' adds return. In winner-take-all markets, however, elite carriers like Progressive or Chubb keep taking share from weaker peers. Equal weighting then sells compounders to buy turnarounds, driving <strong>21% annual turnover</strong> and capping mega-cap alpha [1][20]."
+      ]
+    }
+  ],
+  "book_paragraphs": [
+    "To understand whether KIE is a well-built financial machine, you and I have to inspect two completely different engines of unit economics: the ETF wrapper operated by State Street, and the underlying insurance machine operated by its 54 portfolio companies.",
+    "Start with the wrapper. Every quarter—after the closing bell on the third Friday of March, June, September, and December—S&P Dow Jones Indices resets the S&P Insurance Select Industry Index back to equal weights, roughly 1.85% per stock across 54 constituents. To prevent the index from cramming too much money into thinly traded small-cap insurers, S&P checks each stock's three-month median daily trading volume and enforces both a liquidity cap and a hard 4.5% single-stock ceiling. State Street's Systematic Equity Beta Group mirrors that rebalance inside KIE, relying on Authorized Participants to create and redeem shares in large in-kind Creation Units.",
+    "How efficiently does that plumbing run? Exceptionally well on liquidity, and predictably on fees. Across $603.49 million in assets, KIE's 30-day median bid-ask spread is a razor-thin 2 basis points, and its closing price sits right on top of net asset value—reinforced by CME E-mini S&P Insurance Select Industry Futures that market makers use to hedge. For managing the fund, State Street charges a flat 0.35% gross expense ratio. Compare KIE's 10-year annualized NAV return of 11.87% through October 2026 against its benchmark's 12.29%, and you see the exact toll: 42 basis points a year—35 basis points for the management fee, plus roughly 6 to 7 basis points of friction from 21% annual portfolio turnover and cash drag. Notice how cleanly that shows up in the cash yield too: the underlying index yields 1.92%, State Street deducts 0.35%, and shareholders receive roughly 1.55% in quarterly cash distributions.",
+    "Now step inside the underlying businesses and follow a single $100 bill of net earned premium through the U.S. property-and-casualty industry's 2025 statutory income statement, compiled by AM Best across 96% of the market. Of every $100 in earned premiums ($923.3 billion industry-wide), $66.68 went straight out the door to pay incurred claims and loss adjustment expenses—including 7.6 points of catastrophe losses. Another $26.12 covered underwriting and policy acquisition expenses such as broker commissions, technology, and state premium taxes. After $0.60 in policyholder dividends and statutory adjustments, the industry kept $6.60 in pure underwriting profit—a 92.9% combined ratio, the best result in more than a decade.",
+    "Here is the magic—and the vulnerability—of insurance unit economics. On top of that $6.60 underwriting profit, U.S. P&C insurers earned another $9.90 per $100 of earned premium in net investment income ($91.4 billion total) by investing $2.63 trillion of float and surplus at a decade-high 4.39% fixed-income book yield. Add the two together, and pre-tax operating profit reached $16.50 per $100 of earned premium ($153.1 billion total). Pause and reflect on that ratio: even in the single best underwriting year in over a decade, investment income on float still supplied 60% of the industry's operating profit! In an average year—when the combined ratio hovers near 98% to 100%—float yield supplies nearly all of it.",
+    "Finally, don't overlook the behavioral quirk baked into KIE's quarterly rebalance. Every ninety days, the index mechanically trims its biggest winners and buys its biggest laggards. When insurance stocks mean-revert around macro interest-rate swings, that buy-low, sell-high machine harvests a quiet rebalancing bonus. But when a structural winner like Progressive or Chubb pulls away from weaker competitors for five years running, KIE repeatedly cuts its flowers to water its weeds. That structural trade-off is neither good nor bad in the abstract—it is simply a design choice you must understand before comparing KIE to cap-weighted rivals."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "NARRATOR'S REFLECTION",
+      "text": "Look again at that $100 P&C waterfall: $6.60 from underwriting in a banner year, and $9.90 from bond float. That two-line equation explains why insurance stocks behave like hybrid financial-industrial assets. When underwriting margins compress in a soft market, bond yields act as a shock absorber; when interest rates fall at the same time property rates soften, both profit pillars sag together."
+    }
+  ],
+  "section_takeaway": "KIE pairs tight institutional ETF plumbing (0.02% spread, ~41 bps total tracking drag) with float-driven underlying unit economics where 2025 P&C NII ($9.90/$100 NPE) still supplied 60% of peak operating profit ($16.50/$100 NPE) [1][6][10].",
+  "book_subsections": [
+    {
+      "title": "Reading the Creation-Unit Plumbing Like an Institutional Desk",
+      "paragraphs": [
+        "You might wonder why we spent time checking KIE's 2-basis-point median bid-ask spread, its in-kind Creation Unit mechanics, and CME's E-mini S&P Insurance Select Industry Futures (ticker SXI). Here is why those plumbing details matter to real-world returns: in an equal-weighted ETF that rebalances 54 stocks four times a year—generating 21% annual portfolio turnover—sloppy execution or cash-only redemptions would leak tens of basis points in hidden market-impact costs and taxable capital-gains distributions.",
+        "Instead, Authorized Participants use custom in-kind baskets during creations and redemptions to strip low-cost-basis shares out of the SPDR Series Trust without triggering taxable events for remaining shareholders. Meanwhile, State Street's securities lending program lends out in-demand mid-cap insurance equities against cash collateral invested in the State Street Navigator Securities Lending Portfolio II, clawing back a few basis points of friction. The result is visible in the ten-year audit trail: after deducting the 0.35% unitary fee, KIE's net tracking slippage is only 6 to 7 basis points a year—proof that the wrapper itself is engineered cleanly.",
+        "Keep one practical rule in mind whenever you evaluate any modified equal-weight ETF like KIE. Because the index rebalances four times a year—using end-of-February, May, August, and November reference dates for third-Friday execution—the fund is continuously harvesting mean reversion across its fifty-four holdings. That means your real-world experience depends not just on where the insurance industry finishes five years from now, but on the dispersion between winners and laggards along the way. In a choppy, rotating sector where P&C, brokers, reinsurers, and life carriers take turns leading, quarterly equal weighting acts as a quiet, rules-based contrarian partner."
+      ]
+    }
+  ]
+}
