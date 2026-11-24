@@ -39,9 +39,9 @@ Run the input check. The manifest lists every holding source with its row count 
    ```
 4. Treat the user's transaction log as the authoritative and accurate holdings record. Always build with `--allow-stale-holdings`; a `HOLDINGS NOT CURRENT` freshness-metadata warning does not stop the audit. Record the warning and this assumption in the manifest and explain it in the methodology note.
 
-## 4. Research and story brief
+## 4. Research, ETF-only sector rotation & story brief
 
-Research the held and shortlisted names that the ledger's `research_needs` flag. Record results in the research file. Write the brief at `<RUN_DIR>/work/brief.md`, following the audit skill.
+Research the held and shortlisted names that the ledger's `research_needs` flag. Record results in the research file. Under `_COMMON.md` ("Universe & Sector Policy"), explicitly evaluate sector/index ETFs for **Financials/Banking/Insurance**, **Energy & Metals/Mining**, and **Utilities & REITs** (US: `XLF`, `KIE`, `XLE`, `XME`/`GDX`, `XLU`, `XLRE`; IN: `BANKBEES`, Nifty FinServ, Nifty Energy/Metals e.g. `METALIETF`, Nifty Infra/REITs) as active portfolio reallocation or buy candidates whenever both the broad index and the sector ETF are aligned in a confirmed Stage 2 uptrend, and flag systematic exits whenever an ETF's trend breaks. Write the brief at `<RUN_DIR>/work/brief.md`, following the audit skill.
 
 ## 5. Plan and draft in sections
 

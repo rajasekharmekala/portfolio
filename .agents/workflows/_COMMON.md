@@ -15,8 +15,12 @@ Every workflow takes a market (`IN` or `US`) and reads its parameters from `../c
 
 ## Universe & Sector Policy (binding — IN & US)
 
-- **No individual banks, insurance companies, or pure finance stocks:** Do not screen, shortlist, claim, underwrite (`company_report` / `dossier_refresh`), or recommend new capital into individual banks, insurers, reinsurers, NBFCs, or pure financial institutions/rating agencies in either India (`IN`) or the United States (`US`).
-- **Trend-following via index/sector ETFs only:** Participation in Banking, Insurance, and Financials is allowed **only** through broad market index or sector ETFs (e.g., US: `XLF`, `KIE`; IN: Nifty Bank / Financial Services ETFs) when both the broad index and the sector ETF are aligned in a confirmed Stage 2 uptrend, and must be exited systematically when the trend breaks.
+- **ETF-only sectors (no individual stock picking):** Do not screen, shortlist, claim, underwrite (`company_report` / `dossier_refresh`), or recommend new capital into individual stocks in:
+  1. **Banking, Insurance & Pure Financials** (banks, insurers, reinsurers, NBFCs, rating agencies)
+  2. **Energy (Oil & Gas) & Metals / Mining** (upstream E&P, refiners, miners, commodity metals)
+  3. **Utilities & REITs**
+  *(Individual stock picking remains explicitly open for Pharma, Biotech, Healthcare, Airlines, Tech/Semis, Industrials, and Consumer/Retail.)*
+- **Actively consider these sectors via ETFs for reallocation & buys:** We are **not** avoiding these sectors—only avoiding single-stock winner picking inside them. Every `portfolio_audit` (IN & US) must explicitly evaluate their broad index / sector ETFs (US: `XLF`, `KIE`, `XLE`, `XME`/`GDX`, `XLU`, `XLRE`; IN: `BANKBEES`, Nifty Financial Services, Nifty Energy/Metals e.g. `METALIETF`, Nifty Infra/REITs) as active reallocation/buy candidates whenever both the broad market index and the sector ETF are aligned in a confirmed Stage 2 uptrend, and exit systematically when the trend breaks.
 
 ## Run session (isolated worktree, claims) — do this before anything else
 
