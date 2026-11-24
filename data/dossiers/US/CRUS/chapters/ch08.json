@@ -1,0 +1,120 @@
+{
+  "id": "ch-8",
+  "web_title": "8. Stage 2 Technical Structure, Institutional Flow & Momentum Setup",
+  "book_title": "Chapter 8: Reading the Tape — Trend, Volume & Momentum Opportunity",
+  "question": "What Stan Weinstein stage is Cirrus Logic in across weekly, daily, and 4-hour timeframes, and is there any actionable short-term trading or options edge right now?",
+  "epigraph": {
+    "quote": "Never buy a stock in Stage 4 or beneath a declining 30-week moving average; wait for institutional accumulation to prove itself on the chart first.",
+    "author": "Stan Weinstein, Secrets for Profiting in Bull and Bear Markets"
+  },
+  "web_blocks": [
+    {
+      "type": "h3",
+      "title": "8.1 Multi-Timeframe Weinstein Stage & Moving-Average Anatomy (1W / 1D / 4H)"
+    },
+    {
+      "type": "p",
+      "html": "As of the November 24, 2026 close, Cirrus Logic trades at $115.72 (-1.26% on the session), sitting 35.86% below its 52-week high of $180.42 and 10.10% above its 52-week low of $105.10 [28]. A multi-timeframe inspection reveals a stock attempting an early, fragile stabilization after a severe 6-month drawdown (-33.36% over 6 months) [28], yet still trapped deeply beneath every major long-term institutional trend floor. Specifically, CRUS sits 12.53% below its declining 30-week simple moving average ($132.30) and 15.91% below its 200-day simple moving average ($137.61) [28]. On the shorter timeframe, shares are hovering directly on top of the flat 50-day SMA ($115.21, +0.44% extension), 20-day SMA ($115.50), and 10-week EMA ($115.19, +0.46% extension) [28]."
+    },
+    {
+      "type": "p",
+      "html": "Two deterministic classifiers capture this exact structural tension. Our `stage2_evaluation` engine classifies CRUS as **STAGE_1** (`WAIT_FOR_SUPPORT_RETEST`, `CAP_WAIT_FOR_SUPPORT`) because price has stopped making lower lows since the $105.10 shelf and is coiling tightly along its 50-day SMA ($115.21) and 10-week EMA ($115.19) with a neutral daily RSI of 50.62 and tight 12.41% Bollinger Band width [28]. Meanwhile, our `options_snapshot` multi-timeframe classifier flags CRUS as **STAGE4_BELOW_STRUCTURAL_FLOOR** because it remains decisively below both the 30-week SMA ($132.30) and 200-day SMA ($137.61) with a bearish weekly RSI of 44.16 and no confirmed 4-hour reversal turn (`ema20_4h` at $116.10 caps price above $115.72) [28]. Reconciling both lenses is straightforward: CRUS is in a **nascent Stage 1 basing attempt inside a damaged primary downtrend**—decisively **not** a confirmed Stage 2 uptrend."
+    },
+    {
+      "type": "table",
+      "caption": "Cirrus Logic (NASDAQ: CRUS): Multi-Timeframe Technical & Breadth Ledger (Session: November 24, 2026)",
+      "headers": [
+        "Technical Indicator / Level",
+        "Verified Value",
+        "Distance / Signal vs. CMP ($115.72)",
+        "Structural Interpretation"
+      ],
+      "rows": [
+        [
+          "Last Close / 1D Change",
+          "$115.72 (-1.26%)",
+          "Prev Close $117.20 | 1W -0.27% | 6M -33.36%",
+          "Held up better than analog peers (-8.7% to -17.4%) on Nov 24, but remains in a deep 6M drawdown [28]."
+        ],
+        [
+          "30-Week SMA / 200-Day SMA",
+          "$132.30 / $137.61",
+          "-12.53% below 30W | -15.91% below 200D",
+          "Heavy overhead institutional supply; primary long-term trend remains broken until 30W SMA is reclaimed [28]."
+        ],
+        [
+          "50-Day SMA / 10-Week EMA",
+          "$115.21 / $115.19",
+          "+0.44% above 50D | +0.46% above 10W EMA",
+          "Short-term equilibrium pivot; price is coiling tightly around $115 with 12.41% Bollinger Band width [28]."
+        ],
+        [
+          "RSI (1W / 1D / 4H)",
+          "44.16 / 50.62 / 49.18",
+          "Weekly bearish (<50); Daily & 4H neutral",
+          "No oversold washout extreme and no bullish momentum thrust; neutral chop inside a range [28]."
+        ],
+        [
+          "14-Day ATR / Volatility",
+          "$4.29 (3.71% of CMP)",
+          "Weekly volatility 3.53% | Beta 1.17",
+          "A realistic >=1.0x ATR stop requires >=$4.30 buffer; snapshot $113.06 stop ($2.66) is only 0.62x ATR [27][28]."
+        ],
+        [
+          "Key Resistance / Support Shelves",
+          "R1 $120.18, R2 $130.54 | S1 $102.28, S2 $94.74",
+          "52W High $180.42 (-35.86%) | 52W Low $105.10 (+10.10%)",
+          "Major structural floor sits at $105.10 (52W low) and $102.28 (Pivot S1); overhead supply begins at $120.18 [28]."
+        ],
+        [
+          "Volume & Short Interest",
+          "766.1K (0.99x 30D avg) | 7.21% Short Float",
+          "3.57M shares short (4.33 days to cover)",
+          "No institutional accumulation surge; elevated 7.21% short interest reflects post-guidance skepticism [27][28]."
+        ],
+        [
+          "Market & Industry Breadth",
+          "S&P 500 Downtrend (10 dist. days, 27.8% >50D)",
+          "Semiconductors: 8.2% >200D EMA, 2.0% >50D EMA",
+          "Hostile macro and sector tape (Sector Rank 100); 98% of semiconductor peers sit below their 50D EMA [28]."
+        ]
+      ],
+      "takeaway": "CRUS is coiling near $115.20 short-term support, but it remains -12.53% below its 30-week SMA inside a hostile Downtrend market where only 2.0% of Semiconductor stocks trade above their 50-day EMA."
+    },
+    {
+      "type": "h3",
+      "title": "8.2 Institutional Flow, Short Interest & Sector Breadth Headwinds"
+    },
+    {
+      "type": "p",
+      "html": "Volume and ownership flows confirm the absence of institutional accumulation. Daily volume on November 24 was 766,100 shares—virtually flat at 0.99x the 30-day average of 775,973 shares (0.93x Finviz average volume) [27][28]. Institutional ownership remains high at 105.43% (reflecting short-share rehypothecation), but trailing institutional transactions declined -1.40% and insider transactions fell -9.87% (insider ownership is a modest 0.64%) [27]. Meanwhile, short interest stands at 3.57 million shares, or 7.21% of float (4.33 days to cover)—a meaningful bearish positioning footprint for a debt-free mid-cap semiconductor name [27]."
+    },
+    {
+      "type": "p",
+      "html": "Even more decisive is the top-down tape. Our November 24, 2026 market ledger confirms the S&P 500 is in a **Downtrend** with 10 distribution days over the last 25 sessions and only 27.8% of the market breadth pool trading above its 50-day and 200-day moving averages [41]. Within Electronic Technology, the **Semiconductors** industry is experiencing severe breadth liquidation: just 8.2% of semiconductor stocks sit above their 200-day EMA, only 2.0% sit above their 50-day EMA, and only 18.4% are outperforming the S&P 500 (sector rank 100) [28]. While CRUS showed relative resilience on November 24 (-1.26% vs. -11.25% for TXN and -17.37% for ADI) [28], buying a single-customer chipmaker below its 30-week SMA in a 10-distribution-day Downtrend violates core Weinstein trend discipline."
+    },
+    {
+      "type": "h3",
+      "title": "8.3 Short-Term Trading & Options Convexity Assessment"
+    },
+    {
+      "type": "p",
+      "html": "Is there an asymmetric short-term swing trade or call-convexity setup in CRUS right now? The data gives an unambiguous **no** on both counts. On the equity chart, the automated support zone ($113.46–$117.25) carries an algorithmically tight invalidation stop at $113.06—just $2.66 (0.62x ATR) below CMP, which invites routine noise stop-outs given CRUS's $4.29 daily ATR [28]. Moving the stop to a genuine structural shelf below the $105.10 52-week low ($104.50, or 2.62x ATR) exposes $11.22–$12.75 of downside risk against only $4.46 of upside to Pivot R1 ($120.18) or $8.75–$10.28 to Base fair value ($126.00)—a sub-1:1 reward-to-risk trap. On the options desk, `options_snapshot.py` stamps CRUS **`NOT_OPTIONABLE_OR_ILLIQUID`**: CRUS options bid-ask spreads exceed 14% or lack institutional open interest, making call spreads and LEAPS unviable due to immediate slippage drag. Traders and investors alike have zero edge forcing a position here."
+    }
+  ],
+  "book_paragraphs": [
+    "Step back from the spreadsheets and look at Cirrus Logic's price chart with me. Charts are not fortune-telling devices; they are footprints of institutional supply and demand. And right now, the footprints on CRUS tell a story of heavy damage followed by an uneasy truce. At $115.72, the stock sits 35.86% below its 52-week high of $180.42. Over the past six months, CRUS has surrendered a third of its market value. Even though shares held up remarkably well on November 24—slipping just 1.26% on a brutal day when Texas Instruments plunged 11.25% and Analog Devices collapsed 17.37%—resilience on one ugly Tuesday does not equal an uptrend.",
+    "Apply Stan Weinstein's primary rule and the picture clarifies instantly. A confirmed Stage 2 uptrend requires price to trade above a rising 30-week simple moving average and above the 200-day moving average, backed by expanding volume and healthy sector breadth. Cirrus Logic fails every single one of those tests today. At $115.72, CRUS trades 12.53% below its 30-week SMA ($132.30) and 15.91% below its 200-day SMA ($137.61). Its weekly RSI sits at a soft 44.16. Every investor who bought shares between $120 and $180 over the past nine months is currently underwater, creating layers of overhead supply waiting to sell into rallies.",
+    "To be completely fair to the tape, CRUS is no longer in freefall. Since printing its 52-week low at $105.10, shares have carved out a tight horizontal coil right on top of the 50-day SMA ($115.21) and 10-week EMA ($115.19), compressing Bollinger Band width to 12.41% with a neutral daily RSI of 50.62. That is why our Stage 2 scanner classifies CRUS as an early Stage 1 basing candidate, while our multi-timeframe options lens classifies it as Stage 4 below its structural floor. Both perspectives point to the exact same practical conclusion: you are looking at a stock trying to build a floor, not a stock breaking out into institutional leadership.",
+    "Now zoom out to the macro and industry backdrop, because individual stocks rarely swim upstream against a tidal wave. As of November 24, 2026, the S&P 500 is locked in a 10-distribution-day Downtrend with just 27.8% of stocks above their 50-day moving average. Inside the Semiconductors industry, conditions are even bleaker: only 8.2% of chip stocks sit above their 200-day EMA and a stunning 2.0% sit above their 50-day EMA. Meanwhile, CRUS carries 7.21% of its float sold short (3.57 million shares, 4.33 days to cover) with zero volume accumulation surge (0.99x 30-day average volume).",
+    "What about using options to rent upside convexity cheaply while risking a small fixed dollar amount? We checked the listed U.S. options chain, and the market slammed that door shut as well. Cirrus Logic's options carry wide bid-ask spreads exceeding 14% with thin open interest, earning a strict NOT_OPTIONABLE_OR_ILLIQUID stamp. Paying 14%+ slippage on entry and exit destroys options expectancy before the stock even moves. Whether you are a short-term momentum trader or a position investor, the tape is telling you to keep your hands in your pockets until CRUS reclaims its 30-week moving average on genuine volume and semiconductor breadth heals.",
+    "Notice also what the anatomy of support and resistance tells us about trade construction. On a purely mechanical scan, the algorithm spots the 50-day SMA at $115.21 and draws a tight support buy zone between $113.46 and $117.25 with an invalidation stop at $113.06. Put yourself in the seat of a live portfolio manager for thirty seconds: Cirrus Logic's 14-day Average True Range is $4.29 per day. Putting a hard stop just $2.66 below the close—barely 0.62 times a single day's normal range—guarantees that an ordinary afternoon swing in the Nasdaq whipsaws you out at a loss. The only technically honest structural stop sits below the 52-week low of $105.10, around $104.50 (2.62x ATR), where buyers actually defended the stock during the autumn sell-off. Yet the moment you place your stop at $104.50, you are risking $11.22 per share from today's close to chase $10.28 of upside to our $126.00 Base fair value—and you still have to fight through heavy overhead supply at Pivot R1 ($120.18), Pivot R2 ($130.54), the 30-week SMA ($132.30), and the 200-day SMA ($137.61). Good traders refuse trades where the chart forces them to choose between a noise stop-out and a sub-1:1 payoff."
+  ],
+  "book_callouts": [
+    {
+      "kind": "reflection",
+      "title": "Narrator's Reflection: Why 'Less Bad' Is Not a Buy Signal",
+      "text": "It is tempting to admire CRUS for dropping only 1.26% while analog titans TXN and ADI fell double digits on November 24. That relative stability reflects CRUS's $1.08 billion cash cushion and lower 14.6x P/E multiple. Yet relative stability below a falling 30-week moving average ($132.30) inside a 10-distribution-day market Downtrend is still dead money—and dead money carries real opportunity cost when cash earns nearly 5%."
+    }
+  ]
+}
