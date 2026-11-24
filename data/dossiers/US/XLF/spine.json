@@ -1,0 +1,123 @@
+{
+  "symbol": "XLF",
+  "market": "US",
+  "as_of": "2026-11-24",
+  "title": "State Street Financial Select Sector SPDR ETF (XLF) — Institutional Sector Dossier",
+  "sector": "Financials (Sector ETF)",
+  "archetype": "CYCLICAL_HYBRID_SECTOR_ETF",
+  "strategy_bucket": "CORE_ALPHA",
+  "conviction_tier": "TIER_2",
+  "cmp": 56.11,
+  "verdict": "WAIT_FOR_SUPPORT",
+  "new_capital_verdict": "WAIT_FOR_SUPPORT",
+  "business_quality_verdict": "CYCLICAL_CONDITIONAL",
+  "kpi_health": "PASS_WITH_WATCH",
+  "decision_basis": "ch-9",
+  "weinstein_stage": "STAGE_2",
+  "entry_posture": "WAIT_FOR_SUPPORT_PULLBACK",
+  "entry_zone_low": 54.99,
+  "entry_zone_high": 56.67,
+  "stop_loss": 53.8,
+  "target_base": 62.5,
+  "target_bull": 70.0,
+  "target_bear": 46.0,
+  "asymmetry_ratio": 2.03,
+  "holding_action": "NOT_HELD",
+  "holding_shares_to_sell": 0,
+  "holding_rationale": "Verified against the consolidated November 24, 2026 US positions ledger ($83,506.98 NAV = $61,337.64 equities + $14,878.43 options + $7,290.91 cash, or 8.73% cash vs. 22.0% Downtrend floor): XLF is not currently held in any account (0 shares, 0 options). No position trim or exit is required.",
+  "holding_alerts": [
+    {
+      "trigger": "Regime-gated staged entry confirmation ($54.99–$56.67)",
+      "trigger_price": 56.67,
+      "shares": 0,
+      "instruction": "Do not deploy capital while US market is in Downtrend (27.8% >50DMA, 10 distribution days) and cash is 8.73% vs. 22.0% floor. Activate starter tranche inside $54.99–$56.67 only after S&P 500 breadth recovers above 45%–50% AND XLF reclaims $56.67–$57.18 (20D SMA) on expanding volume."
+    },
+    {
+      "trigger": "Structural Stage 2 invalidation below Pivot S1 ($53.80) and 200D SMA ($54.03)",
+      "trigger_price": 53.8,
+      "shares": 0,
+      "instruction": "A weekly close below $53.80 breaks the Stage 2 uptrend and cancels the setup; downgrade to Stage 3/4 watch and retain 100% cash."
+    }
+  ],
+  "redeployment_plan": {
+    "capital_source": "Next marginal $1,000 unit of investable US cash under review (XLF is NOT_HELD; portfolio cash is 8.73% or $7,290.91 on $83,506.98 NAV vs. 22.0% Downtrend defensive floor).",
+    "destinations": [
+      {
+        "destination_type": "CASH",
+        "allocation_pct": 100,
+        "recommendation": "RETAIN_CASH",
+        "rationale": "US market regime is Downtrend (27.8% >50DMA, 10 distribution days), portfolio cash is 8.73% ($7,290.91) vs. 22.0% Downtrend floor, and XLF lacks a 4H upward turn despite holding Stage 2 support.",
+        "entry_condition": "Retain 100% in USD Cash/T-Bills (4.63%–4.92% yields) until S&P 500 exits Downtrend (>45%–50% >50DMA) and XLF confirms above $56.67–$57.18."
+      },
+      {
+        "destination_type": "SHORTLIST",
+        "symbol": "XLV",
+        "allocation_pct": 0,
+        "recommendation": "DEFER_IN_DOWNTREND",
+        "rationale": "XLV ($184.72) holds Stage 2 inside its $176.46–$185.35 support zone, but CMP R:R to $206.00 against the $164.30 snapshot stop is 1.04:1 (<1.50:1) and broad Downtrend cash preservation takes precedence.",
+        "entry_condition": "Deploy only on deeper pullback toward $176.46 support once US market breadth recovers.",
+        "target_base": 206.0,
+        "asymmetry_ratio": 1.04
+      },
+      {
+        "destination_type": "OUTSIDE",
+        "symbol": "VFH",
+        "allocation_pct": 0,
+        "recommendation": "DEFER_IN_DOWNTREND",
+        "rationale": "Vanguard Financials ETF ($135.65, 0.09% ER, $12.99B AUM) holds Stage 2 inside $133.62–$137.68 support (mechanical ATR stop $133.89; structural stop $127.68 yields 1.80:1 to $150.00), but adds small/mid-cap regional CRE exposure compared to XLF.",
+        "entry_condition": "Prefer XLF over VFH for broad Financials allocation once US market exits Downtrend.",
+        "target_base": 150.0,
+        "asymmetry_ratio": 1.8
+      }
+    ]
+  },
+  "gate_exceptions": [
+    "<strong>ETF Snapshot Coverage:</strong> XLF is a sector ETF, not a single S&amp;P 1500 stock. It is omitted from <code>facts_US_2026-11-24.json</code>. All price and Stage 2 levels ($56.11 close, $54.99–$56.67 zone) come from <code>snapshots_US_2026-11-24.json</code> and <code>options_US_XLF.json</code> (cure: N/A, ETF exemption).",
+    "<strong>Options Chain Feed &amp; Override:</strong> macOS Chrome is absent in this Linux VM, so <code>options_snapshot.py</code> used public yfinance data. The <code>2027-09-30 $62 Call</code> printed a stale after-hours quote (<code>bid $2.24 / ask $0.00, OI 0</code>). We overrode the automated options verdict to <code>NO_OPTIONS_EDGE</code> and suppressed the distorted payoff table during the US Downtrend (cure: live market-hours check after Downtrend ends).",
+    "<strong>SP1500 Screen Note:</strong> Optional <code>lxml</code> was absent for the Wikipedia SP1500 scrape. All 60 core ledger symbols, macro yields, breadth (27.8% &gt;50DMA), and 10 distribution days built with 0 failures and 0 stale bars (cure: install <code>lxml</code> if needed).",
+    "<strong>Citation As-Of Exceptions (<code>PASS WITH EXCEPTIONS</code>):</strong> Fresh Nov 2026 SSGA data, FDIC Q3 2026 (Nov 24), and Oct 2026 Fed SLOOS are current (&lt;60 days). Twenty-three older filings remain cited beside Q3 2026 updates. Trust and index rules: <code>sec_nport_select_sector_trust</code> (147d, cure: Dec 2026), <code>sec_497_select_sector_trust_2026</code> (297d, cure: Jan 2027), and <code>sp_dji_capping_methodology</code> (841d, next S&amp;P DJI update). Permanent history: <code>gics_2016_xlre_spinoff</code> (3721d) and <code>gics_march_2023_payments_reclass</code> (1348d). Macro and regulatory baselines: <code>fdic_q2_2026_unrealized_losses_asset_quality</code> (91d, cure: Q3 full QBP), <code>fed_2026_stress_test</code> (138d, cure: Jun 2027), <code>fed_basel3_endgame_2026</code> (250d, cure: final rule), <code>fsb_private_credit_2026</code> (202d, next FSB report), <code>fed_fsr_may2026_funding</code> (180d, next FSR), and <code>doj_visa_antitrust_suit</code> (791d, court ruling). Audited FY2025 10-Ks (cure: Feb–Mar 2027 FY2026 10-Ks): <code>brk_2025_10k</code> (328d), <code>jpm_2025_10k_earnings</code> (315d), <code>mastercard_2025_10k</code> (286d), <code>bac_2025_ar</code> (246d), <code>wfc_2025_10k</code> (284d), <code>gs_2025_ar</code> (249d), <code>ms_2025_earnings</code> (313d), <code>blk_2025_10k</code> (272d), <code>spgi_2025_ar</code> (287d), <code>chubb_2025_10k</code> (272d), <code>progressive_2025_10k</code> (267d), and <code>axp_2025_10k</code> (291d).",
+    "<strong>Reviewer Model Substitution:</strong> External reviewer models configured in <code>reviewer.json</code> (<code>azure//claude-sonnet-5-5</code> and <code>ao-foundry-lc/gpt-6.1-sol</code>) are unreachable in this runner; per <code>REVIEWER_OPERATIONS.md</code> §3.5, both independent <code>report_reviewer</code> and <code>red_team</code> passes ran on the runner's default agent model (cure: run in environment with configured model endpoints)."
+  ],
+  "primer": "XLF ($51.62B AUM, 0.08% fee) holds 76 S&P 500 financial leaders led by Berkshire Hathaway, JPMorgan, Visa, and Mastercard. Pass 1 grades XLF CYCLICAL_CONDITIONAL with PASS_WITH_WATCH KPIs, balancing 11.2% stressed bank CET1 against office CRE and private credit. At the November 24, 2026 close of $56.11 (15.33x FY1 P/E), XLF implies 8.3% EPS growth in Stage 2. Our $62.50 Base target and $53.80 hard stop offer 2.03:1 support-zone asymmetry inside the $54.99–$56.67 buy zone. We rate XLF WAIT_FOR_SUPPORT (TIER_2) and NOT_HELD, keeping 100% of marginal US cash sidelined during the broad Downtrend (8.73% cash).",
+  "citations": [
+    "State Street Global Advisors: XLF Official Product Page & Daily Holdings — https://www.ssga.com/us/en/intermediary/etfs/state-street-financial-select-sector-spdr-etf-xlf",
+    "State Street Global Advisors: XLF Quarterly Fact Sheet (Q3 2026) — https://www.ssga.com/library-content/products/factsheets/etfs/us/factsheet-us-en-xlf.pdf",
+    "SEC EDGAR Form N-PORT: Select Sector SPDR Trust (XLF) Schedule of Investments — https://www.sec.gov/Archives/edgar/data/1064641/000141036826089509/NPORT_J916_47698810_0626.htm",
+    "SEC EDGAR Form 497: Select Sector SPDR Trust Prospectus & SAI (2026) — https://www.sec.gov/Archives/edgar/data/1064641/000119312526031948/d85739d497.htm",
+    "S&P Dow Jones Indices: Select Sector Indices RIC 25/50 Capping Methodology — https://www.spglobal.com/spdji/en/documents/indexnews/announcements/20240805-1473751/1473751_sp-select-sector-indices-consult-20240805.pdf",
+    "S&P Dow Jones Indices: The New GICS Real Estate Sector (Sep 2016 XLRE Spin-Off) — https://www.spglobal.com/spdji/en/documents/additional-material/spdji-the-new-gics-real-estate-sector-and-sp-us-benchmarks.pdf",
+    "State Street Global Advisors: March 2023 GICS Reclassification Impact on S&P Sectors — https://www.ssga.com/library-content/story/general/etf/emea/spdr-gics-changes-incoming.pdf",
+    "FDIC Quarterly Banking Profile — Third Quarter 2026 Press Release (Nov 24, 2026) — https://www.fdic.gov/news/press-releases/2026/fdic-insured-institutions-reported-return-assets-128-percent-and-net",
+    "FDIC Quarterly Banking Profile — Second Quarter 2026 Full Report — https://www.fdic.gov/quarterly-banking-profile/quarterly-banking-profile-second-quarter-2026.pdf",
+    "Federal Reserve Board: 2026 Dodd-Frank Act Stress Test Results — https://www.federalreserve.gov/publications/2026-june-dodd-frank-act-stress-test-introduction.htm",
+    "Federal Reserve Board: October 2026 Senior Loan Officer Opinion Survey (SLOOS) — https://www.federalreserve.gov/data/sloos/sloos-202610.htm",
+    "Federal Reserve Board: March 2026 Basel III Endgame Capital Modernization Proposals — https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260319a.htm",
+    "Federal Reserve Board: May 2026 Financial Stability Report — Funding Risks — https://www.federalreserve.gov/publications/2026-may-financial-stability-report-funding-risks.htm",
+    "Financial Stability Board (FSB): Report on Vulnerabilities in Private Credit (May 2026) — https://www.fsb.org/uploads/P060526.pdf",
+    "U.S. Department of Justice: Antitrust Lawsuit Against Visa in Debit Markets — https://www.justice.gov/archives/opa/pr/justice-department-sues-visa-monopolizing-debit-markets",
+    "Berkshire Hathaway Inc. FY2025 Form 10-K (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm",
+    "JPMorgan Chase & Co. 4Q25 & Full-Year 2025 Earnings Release (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/19617/000162828026001902/a4q25erfexhibit991narrative.htm",
+    "Visa Inc. Fiscal Fourth Quarter & Full-Year 2026 Earnings Release — https://s1.q4cdn.com/050606653/files/content_files/4Q26-Earnings-Release_vFINAL.pdf",
+    "Mastercard Incorporated FY2025 Form 10-K (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/1141391/000114139126000013/ma-20251231.htm",
+    "Bank of America Corporation 2025 Annual Report (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/70858/000007085826000209/bofaannualreport2025.pdf",
+    "Wells Fargo & Company FY2025 Form 10-K — https://www.wellsfargo.com/assets/pdf/about/investor-relations/sec-filings/2025/10k.pdf",
+    "The Goldman Sachs Group, Inc. 2025 Annual Report — https://www.goldmansachs.com/investor-relations/financials/current/annual-reports/2025-annual-report",
+    "Morgan Stanley 4Q25 & Full-Year 2025 Earnings Release (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/895421/000089542126000007/a4q25msearningsrelease.htm",
+    "BlackRock, Inc. FY2025 Form 10-K (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/2012383/000119312526071966/blk-20251231.htm",
+    "S&P Global Inc. 4Q25 & Full-Year 2025 Earnings Release (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/64040/000006404026000007/a4q25earningsrelease.htm",
+    "Chubb Limited FY2025 Form 10-K (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/896159/000089615926000005/cb-20251231.htm",
+    "The Progressive Corporation FY2025 Form 10-K (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/80661/000008066126000086/pgr-20251231.htm",
+    "American Express Company FY2025 Form 10-K (SEC EDGAR) — https://www.sec.gov/Archives/edgar/data/4962/000000496226000080/axp-20251231.htm",
+    "Vanguard Financials ETF (VFH) Product Schedule — https://investor.vanguard.com/investment-products/list/etfs",
+    "State Street Global Advisors: KRE Regional Banking & KIE Insurance ETFs — https://www.ssga.com/us/en/intermediary/etfs/state-street-spdr-sp-regional-banking-etf-kre",
+    "BlackRock iShares MSCI Europe Financials ETF (EUFN) Product Page — https://www.blackrock.com/us/financial-professionals/products/239645/ishares-msci-europe-financials-etf",
+    "ETF Database — Non-Leveraged Financials ETF List (XLF 15.96x, VFH 14.80x, IYF 17.87x, KBWB 13.46x, KRE 11.72x P/E) — https://etfdb.com/etfs/sector/financials/",
+    "Federal Reserve Bank of St. Louis (FRED) — 10-Year Treasury Constant Maturity Yield (DGS10) — https://fred.stlouisfed.org/series/DGS10",
+    "U.S. Department of the Treasury — Daily Treasury Par Yield Curve Rates (2026) — https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value=2026",
+    "Vanguard Advisors — Vanguard Financials ETF (VFH) Product Profile (0.09% ER, $12.99B AUM) — https://advisors.vanguard.com/investments/products/vfh/vanguard-financials-etf",
+    "iShares by BlackRock — iShares U.S. Financials ETF (IYF) Product Profile (0.37% ER, $3.71B AUM) — https://www.ishares.com/us/products/239508/ishares-us-financials-etf"
+  ],
+  "technical_spec": {
+    "closing_prose": "Note: TradingView/Finviz screens leave ETF valuation ratios blank ('Valuation unavailable'); verified SSGA fundamentals (15.33x FY1 P/E, 2.37x P/B, 13.28x P/CF) are detailed in Chapter 7. Our thesis hard stop is anchored at $53.80 (Pivot S1, below the $54.03 200D SMA) rather than the tighter $54.81 mechanical ATR screen stop; because XLF is NOT_HELD, no live broker stop order is active."
+  }
+}
