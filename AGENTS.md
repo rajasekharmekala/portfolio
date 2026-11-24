@@ -17,6 +17,7 @@ This file defines binding repo-wide rules, workflow routing, and mandatory deriv
 - **Publication authorization:**
   - Newly completed **research workflow** outputs (`company_report`, `dossier_refresh`, `portfolio_audit`, `options_desk`) are pre-authorized to commit and push to `main` via `scripts/publish_run.py` once all quality gates pass, letting the worktree and branch clean up automatically after push.
   - **Broker transaction syncs** and manual ledger edits require explicit user approval before committing and pushing.
+- **Sector & universe policy — No individual banks, insurance, or pure finance stocks (IN & US, Binding):** Never screen, shortlist, underwrite (`company_report` / `dossier_refresh`), or recommend buying individual banks, insurance companies, reinsurers, NBFCs, or pure financial institutions/rating agencies in either India or the US. Exposure to Banking, Insurance, and Financials is **strictly limited to broad market indexes or sector ETFs** (e.g., US: `XLF`, `KIE`; IN: Nifty Bank / Nifty Financial Services ETFs such as `BANKBEES`) — entered **only** when both the broad index and sector ETF are aligned in a confirmed Stage 2 uptrend, and exited systematically when the trend breaks.
 
 ---
 

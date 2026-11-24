@@ -13,6 +13,11 @@ Every workflow takes a market (`IN` or `US`) and reads its parameters from `../c
 - `../config/reviewer.json`: the reviewer model, the red-team scope and the strict maximum of two rounds. Do not raise the cap or name a model in a workflow.
 - `../../scripts/review_packet.py`: builds the review packet (the mechanical review, in code) and checks reviewer output.
 
+## Universe & Sector Policy (binding — IN & US)
+
+- **No individual banks, insurance companies, or pure finance stocks:** Do not screen, shortlist, claim, underwrite (`company_report` / `dossier_refresh`), or recommend new capital into individual banks, insurers, reinsurers, NBFCs, or pure financial institutions/rating agencies in either India (`IN`) or the United States (`US`).
+- **Trend-following via index/sector ETFs only:** Participation in Banking, Insurance, and Financials is allowed **only** through broad market index or sector ETFs (e.g., US: `XLF`, `KIE`; IN: Nifty Bank / Financial Services ETFs) when both the broad index and the sector ETF are aligned in a confirmed Stage 2 uptrend, and must be exited systematically when the trend breaks.
+
 ## Run session (isolated worktree, claims) — do this before anything else
 
 Runs may overlap, so no run works in the shared checkout. RUN_PROTOCOL §8 is binding. Start the session from the main checkout:

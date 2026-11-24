@@ -6,7 +6,7 @@ description: Single-company underwriting for a named ticker or the next active-s
 
 Read `_COMMON.md` first and follow `.agents/skills/company_report/SKILL.md`.
 
-**Input:** market `<MKT>` and optionally a specific ticker. With no ticker, claim the next eligible active-shortlist candidate. A named ticker may be held, shortlisted, or a researched outside opportunity.
+**Input:** market `<MKT>` and optionally a specific ticker. With no ticker, claim the next eligible active-shortlist candidate. A named ticker may be held, shortlisted, or a researched outside opportunity. **Sector exclusion (`_COMMON.md`):** Never claim or underwrite individual banks, insurance companies, or pure finance stocks (IN or US); Financials/Banking/Insurance exposure is strictly via index/sector ETFs following confirmed trend alignment.
 
 ## 1. Start an isolated run and claim one company
 
