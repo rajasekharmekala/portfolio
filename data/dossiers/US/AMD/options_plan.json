@@ -1,0 +1,144 @@
+{
+  "symbol": "AMD",
+  "market": "US",
+  "generated_at": "2026-11-25T17:30:21+00:00",
+  "business_quality_verdict": "CYCLICAL_CONDITIONAL",
+  "browser_sessions": {
+    "robinhood": {
+      "checked": false,
+      "accessible": false,
+      "logged_in": false,
+      "status": "unavailable",
+      "note": "macOS Chrome automation skill unavailable in this environment; using public options data.",
+      "observed_quotes": null
+    },
+    "tradingview": {
+      "checked": false,
+      "accessible": false,
+      "status": "unavailable",
+      "active_tabs": []
+    }
+  },
+  "multitimeframe_chart": {
+    "tv_symbol": "NASDAQ:AMD",
+    "exchange": "NASDAQ",
+    "company_name": "Advanced Micro Devices, Inc.",
+    "close": 386.81,
+    "change_1d_pct": -6.4,
+    "perf_1w_pct": -24.14,
+    "perf_1m_pct": -26.01,
+    "perf_3m_pct": -19.67,
+    "rsi_1d": 36.34,
+    "rsi_4h": 33.12,
+    "rsi_1w": 41.75,
+    "sma20": 488.26,
+    "sma50": 547.97,
+    "sma200": 432.86,
+    "sma30_weekly": 505.89,
+    "ema10_weekly": 484.24,
+    "ema20_4h": 466.7,
+    "sma50_4h": 501.22,
+    "atr14": 46.51,
+    "bb_width_pct": 54.58,
+    "pivot_s1": 445.17,
+    "pivot_s2": 385.53,
+    "pivot_r1": 611.48,
+    "pivot_r2": 718.15,
+    "high_52w": 658.52,
+    "low_52w": 188.22,
+    "dist_to_200d_pct": -10.64,
+    "major_shelf": 385.53,
+    "intraday_4h_turn": false,
+    "setup_archetype": "STAGE4_BELOW_STRUCTURAL_FLOOR",
+    "setup_summary": "Trading below both 50D SMA (547.97) and 200D/30W floor (432.86); trend is broken."
+  },
+  "options_plan": {
+    "symbol": "AMD",
+    "market": "US",
+    "optionable": true,
+    "options_verdict": "NO_OPTIONS_EDGE",
+    "iv_regime": "IV_CHEAP",
+    "atm_iv_pct": 84.7,
+    "hv20_pct": 135.4,
+    "open_positions_audit": [],
+    "headline": "NO OPTIONS EDGE at CMP ($387.65 TV / $386.81 options): AMD is REJECTED in Weinstein Stage 4 with Base fair value ($375.00) below CMP. Even the liquid 2027-02-19 $390/$610 Bull Call Spread ($52.59 debit, $5,259.00 max loss) requires $442.59 (+14.4% in 86 days, well above our $375 Base Case) just to break even, caps profit at $610 (above our $540 Bull Case), and would risk 630 bps (6.30%) of $83,506.98 net worth and 72.1% of the $7,290.91 cash reserve. Stand completely aside.",
+    "recommended_trade": {
+      "structure": "Bull Call Debit Spread (Defined-Risk Rebound / Catalyst Structure)",
+      "expiry": "2027-02-19",
+      "dte": 86,
+      "legs": [
+        {
+          "side": "BUY",
+          "type": "CALL",
+          "strike": 390.0,
+          "mid": 60.62,
+          "bid": 59.25,
+          "ask": 62.0,
+          "open_interest": 105
+        },
+        {
+          "side": "SELL",
+          "type": "CALL",
+          "strike": 610.0,
+          "mid": 8.03,
+          "bid": 7.8,
+          "ask": 8.25,
+          "open_interest": 705
+        }
+      ],
+      "contracts": 1,
+      "multiplier": 100,
+      "net_debit_per_share": 52.59,
+      "max_loss_total": 5259.0,
+      "max_loss_nav_bps": 629.8,
+      "max_profit_total": "$16,741.00 (3.18:1 reward-to-risk)",
+      "breakeven_at_expiry": 442.59,
+      "breakeven_move_pct": 14.42,
+      "net_delta_dollars_per_1_move": 44.1,
+      "daily_theta_dollars": -19.44,
+      "underlying_stop_trigger": 385.53,
+      "profit_taking_rule": "DO NOT DEPLOY (NO_OPTIONS_EDGE). Re-evaluate options only after AMD exits Stage 4, forms a Stage 1 base, and clears all four equity re-evaluation gates.",
+      "scenarios": [
+        {
+          "scenario": "At or Below $390 at Expiry",
+          "stock_price": 385.53,
+          "stock_move_pct": -0.3,
+          "contract_value": 0.0,
+          "net_pnl": -5259.0,
+          "return_on_risk_pct": -100.0
+        },
+        {
+          "scenario": "At Breakeven ($442.59)",
+          "stock_price": 442.59,
+          "stock_move_pct": 14.4,
+          "contract_value": 5259.0,
+          "net_pnl": 0.0,
+          "return_on_risk_pct": 0.0
+        },
+        {
+          "scenario": "At Short Cap / Base Target ($610)",
+          "stock_price": 610.0,
+          "stock_move_pct": 57.7,
+          "contract_value": 22000.0,
+          "net_pnl": 16741.0,
+          "return_on_risk_pct": 318.3
+        },
+        {
+          "scenario": "Bull Overshoot ($703.20)",
+          "stock_price": 703.2,
+          "stock_move_pct": 81.8,
+          "contract_value": 22000.0,
+          "net_pnl": 16741.0,
+          "return_on_risk_pct": 318.3
+        }
+      ],
+      "beginner_explainer": [
+        "Why this spread works differently from buying shares: AMD is in an active Stage 4 correction below its 50D and 200D averages. While buying calls right now at CMP ($386.81) is a trap due to accelerating theta decay on an unconfirmed knife-drop, this defined-risk Bull Call Spread ($390/$610) is structured to be deployed once AMD tests its major $385.53 support shelf and stabilizes. Selling the upper $610 call funds your entry, reduces daily theta decay by over 60%, and caps your worst-case loss at $5,259.00.",
+        "Exact wallet math (1 contract = 100 shares): You buy the $390 Call for $60.62 and simultaneously sell the $610 Call for $8.03, paying $52.59/sh net ($5,259.00 total for 1 spread(s)). That $5,259.00 is the absolute maximum you can lose.",
+        "Breakeven & profit ceiling: At expiry (2027-02-19), you start making money above $442.59 (+14.4% from $386.81). Anywhere at or above $610, your $5,259.00 turns into $22,000.00 (+$16,741.00 net profit).",
+        "Speed & time decay in plain English: Today, each $1 move up in AMD adds ~$44.10 to your spread (Net Delta), while sitting flat costs ~$19.44/day in time decay (Net Theta) — much lower than an unhedged call because the sold $610 call decays in your favor."
+      ]
+    }
+  },
+  "rendered_html": "<section class=\"chapter\" id=\"options-overlay\" data-options-verdict=\"NO_OPTIONS_EDGE\">\n<h2>Options &amp; Call-Convexity Playbook (AMD)</h2>\n<p><span class=\"verdict verdict-avoid\">NO OPTIONS EDGE</span> &mdash; <strong>Stand completely aside at CMP ($387.65 TV / $386.81 options): AMD is REJECTED in Stage 4 with Base fair value ($375.00) below current price.</strong></p>\n<p><strong>Multi-Timeframe Chart Context (1W / 1D / 4H):</strong> Trading below 50D SMA ($547.98), 30W SMA ($505.92), and 200D SMA ($432.87); trend is broken with zero 4H reversal. <em>Account / Chain Feed: macOS Chrome automation unavailable on Linux; public options chain used.</em></p>\n<div class=\"callout callout-warn\">\n<p class=\"callout-title\">Why We Reject Call Spreads Here (Plain-Dollar Risk Audit)</p>\n<p>Although 20-day realized volatility (135.4% HV20) exceeds at-the-money implied volatility (84.7% IV), cheap volatility inside a Stage 4 crash is a trap. Testing the liquid Feb 19, 2027 $390/$610 Bull Call Spread ($60.62 long $390 call minus $8.03 short $610 call = $52.59/sh net debit) exposes three fatal flaws:</p>\n<p>1. <strong>Valuation Mismatch:</strong> The $442.59 expiry breakeven (+14.4% in 86 days) sits 18% above our $375.00 12-month Base fair value, while the $610.00 short strike sits above our $540.00 Bull Case.</p>\n<p>2. <strong>Portfolio Risk Breach:</strong> One single contract costs $5,259.00 upfront — equal to <strong>630 bps (6.30%)</strong> of actual $83,506.98 US net worth and <strong>72.1%</strong> of our entire $7,290.91 cash reserve.</p>\n<p>3. <strong>Stage 4 Knife-Drop:</strong> Deploying 72% of cash at $385.53 (just 0.33% below close) during a 10-distribution-day Downtrend risks a 100% premium loss if Pivot S2 breaks. Correct action: <strong>0 contracts (NO_OPTIONS_EDGE)</strong>.</p>\n</div>\n<div class=\"table-wrap\"><table class=\"wikitable\"><caption>Rejected Benchmark Call Spread Audit (2027-02-19, 86 DTE — DO NOT DEPLOY)</caption><thead><tr><th>Option Parameter</th><th>Live Chain Figure</th><th>Why It Fails Risk Discipline</th></tr></thead><tbody><tr><td><strong>Benchmark Structure</strong></td><td>BUY $390 Call ($60.62) / SELL $610 Call ($8.03)</td><td>86-DTE vertical spread tested and rejected.</td></tr><tr><td><strong>Upfront Debit (Max Loss)</strong></td><td>$52.59/sh = $5,259.00 (1 contract)</td><td>630 bps (6.30%) of $83,506.98 NAV; 72.1% of $7,290.91 cash.</td></tr><tr><td><strong>Expiry Breakeven</strong></td><td>$442.59 (+14.42% vs. $386.81)</td><td>Requires price to clear $375.00 Base fair value by +18% in 86 days.</td></tr><tr><td><strong>Max Profit Cap ($610+)</strong></td><td>$16,741.00 (3.18:1 optical R:R)</td><td>Short $610 cap sits above our $540.00 12M Bull target.</td></tr><tr><td><strong>Greeks (Net Delta / Theta)</strong></td><td>+$44.10 per $1 | -$19.44/day decay</td><td>Severe theta burn if AMD bases sideways or breaks $385.53.</td></tr><tr><td><strong>Final Options Verdict</strong></td><td><strong>NO_OPTIONS_EDGE (0 contracts)</strong></td><td>Consistent with equity REJECTED (TIER_0) and 100% USD Cash plan.</td></tr></tbody></table></div>\n<p>Re-evaluate defined-risk LEAPS or vertical spreads only after AMD exits Stage 4, completes a multi-week Stage 1 base, and clears all four equity re-evaluation gates with position risk strictly capped under 150 bps of NAV.</p>\n</section>"
+}
