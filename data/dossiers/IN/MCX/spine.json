@@ -1,10 +1,10 @@
 {
   "symbol": "MCX",
   "market": "IN",
-  "as_of": "2026-11-13",
+  "as_of": "2026-11-23",
   "title": "Multi Commodity Exchange of India Limited (NSE: MCX) — Institutional Investment Dossier",
   "sector": "Financial Services",
-  "archetype": "Compounder Monopoly / Stage 2 Extended",
+  "archetype": "Compounder Monopoly / Stage 2 Pullback Reset",
   "strategy_bucket": "TACTICAL_MOMENTUM",
   "conviction_tier": "TIER_2",
   "business_quality_verdict": "COMPOUNDER_PASS",
@@ -12,63 +12,69 @@
   "verdict": "WAIT_FOR_SUPPORT",
   "new_capital_verdict": "WAIT_FOR_SUPPORT",
   "decision_basis": "ch-9",
-  "cmp": 3720.0,
-  "entry_zone_low": 3341.38,
-  "entry_zone_high": 3494.46,
-  "stop_loss": 3033.74,
-  "target_base": 4300.0,
-  "target_bull": 5200.0,
-  "target_bear": 2450.0,
-  "holding_action": "NOT_HELD",
+  "cmp": 3581.6,
+  "entry_zone_low": 3343.8,
+  "entry_zone_high": 3460.0,
+  "stop_loss": 3043.24,
+  "target_base": 4150.0,
+  "target_bull": 5000.0,
+  "target_bear": 2350.0,
+  "holding_action": "HOLD_WITH_HARD_STOP",
   "holding_shares_to_sell": 0,
-  "holding_rationale": "Verified 0 shares held in Zerodha per same-session positions ledger (positions_IN_2026-11-13.json). New capital should wait for a pullback into the ₹3,341.38–₹3,494.46 support zone (1.75:1 R:R vs ₹3,033.74 stop) rather than chasing at ₹3,720.00 (0.85:1 R:R). Also remove expired OPT-IN-002 (3300 Bull Call Spread, exp 2026-10-29) from data/options/IN.json.",
+  "holding_rationale": "We hold 25 shares in Zerodha at ₹3,494.40 average cost (₹87,360.00 cost; ₹89,540.00 value at ₹3,581.60; +2.50% gain; 2.10% weight). MCX sits in a healthy Stage 2 trend (+5.02% above 10W EMA, RSI 55.82). Hold our starter shares and raise the GTT stop from ₹3,033.74 to ₹3,043.24. Wait for ₹3,343.80–₹3,460.00 (1.66:1 R:R vs 1.06:1 at CMP) before adding fresh cash. Remove expired OPT-IN-002 from data/options/IN.json.",
   "holding_alerts": [
     {
-      "trigger": "Pullback into Stage 2 support buy zone (₹3,341.38–₹3,494.46)",
-      "trigger_price": 3494.46,
-      "shares": 0,
-      "instruction": "Initiate staged cash-equity accumulation only if price holds above 10-week EMA (₹3,392.26) / 50-day SMA (₹3,307.07) with constructive volume."
+      "trigger": "Protective Stop-Loss GTT (Ratcheted UP to ₹3,043.24)",
+      "trigger_price": 3043.24,
+      "shares": 25,
+      "instruction": "Exit all 25 held shares on a close below ₹3,043.24. This stop ratchets UP from ₹3,033.74 and sits below the 30-week SMA (₹3,107.47)."
     },
     {
-      "trigger": "Structural invalidation close below ₹3,033.74",
-      "trigger_price": 3033.74,
+      "trigger": "Add-On-Dip Support Buy Zone (₹3,343.80–₹3,460.00)",
+      "trigger_price": 3460.0,
       "shares": 0,
-      "instruction": "Cancel pending buy orders or exit any newly initiated position on a daily/weekly close below ₹3,033.74 (below 30-week SMA ₹3,094.18)."
+      "instruction": "Add a cash-equity tranche only inside ₹3,343.80–₹3,460.00 on calm volume. That band aligns with the 50D SMA (₹3,344.73) and 10W EMA (₹3,394.72) for 1.66:1 R:R."
+    },
+    {
+      "trigger": "Base Case Fair-Value Review / Partial Trim Zone (₹4,150.00)",
+      "trigger_price": 4150.0,
+      "shares": 0,
+      "instruction": "Review position sizing above ₹4,150.00 (44x FY28E EPS ₹94). Consider partial profit-taking if daily or 4H RSI turns overbought."
     }
   ],
   "redeployment_plan": {
-    "capital_source": "Next marginal cash unit (₹1,373,602.19 Zerodha cash pool; 0 MCX shares held)",
+    "capital_source": "Next marginal cash unit (₹1,539,387.79 Zerodha cash pool; 25 MCX shares held at ₹3,494.40 avg cost, 2.10% weight)",
     "destinations": [
       {
         "destination_type": "CASH",
         "allocation_pct": 100,
-        "recommendation": "Retain 100% in cash / liquid instruments",
-        "rationale": "MCX is COMPOUNDER_PASS but extended at ₹3,720.00 (0.85:1 R:R vs ₹3,033.74 stop); waiting for ₹3,341.38–₹3,494.46 lifts R:R to 1.75:1.",
-        "entry_condition": "Deploy into MCX cash equity only on a controlled pullback into ₹3,341.38–₹3,494.46."
+        "recommendation": "Retain 100% in cash / liquid instruments pending support retest",
+        "rationale": "We already hold 25 MCX shares (2.10% weight) at ₹3,494.40 avg cost. At ₹3,581.60 CMP, adding offers only 1.06:1 R:R vs the ₹3,043.24 stop. Waiting for ₹3,343.80–₹3,460.00 lifts R:R to 1.66:1.",
+        "entry_condition": "Deploy into an add-on MCX cash-equity tranche only on a pullback into ₹3,343.80–₹3,460.00."
       },
       {
         "destination_type": "SHORTLIST",
-        "symbol": "AJMERA",
+        "symbol": "ZYDUSLIFE",
         "allocation_pct": 0,
-        "recommendation": "Monitor existing Zerodha position; 0% new marginal allocation",
-        "rationale": "Active shortlist IMMEDIATE_BUY (snapshot CMP ₹132.47, support ₹125.61–₹132.39, stop ₹120.41, target ₹195.00; note facts ledger shows Stage 3 pullback at ₹133.28), already held in Zerodha.",
-        "entry_condition": "Add only if portfolio real-estate weight is expanded; 0% from this MCX-earmarked cash unit.",
-        "target_base": 195.0,
-        "asymmetry_ratio": 4.4
+        "recommendation": "Monitor existing Zerodha position; 0% allocation from this MCX cash unit",
+        "rationale": "Active shortlist ACCUMULATE_ON_DIP (₹1,236.00, 2026-11-25 TV, Stage 2 CLEAR_FOR_CONSIDERATION, support ₹1,167.24–₹1,215.29, stop ₹1,114.44, target ₹1,420.00, 2.03:1 R:R). Already held in Zerodha (115 shares, 3.24% weight).",
+        "entry_condition": "Add only if portfolio healthcare weight expands; 0% from this MCX cash unit.",
+        "target_base": 1420.0,
+        "asymmetry_ratio": 2.03
       },
       {
         "destination_type": "OUTSIDE",
         "symbol": "CDSL",
         "allocation_pct": 0,
         "recommendation": "Track as depository peer alternative; 0% allocation",
-        "rationale": "CDSL is STAGE_2 CLEAR_FOR_CONSIDERATION (CMP ₹1,434, support ₹1,324.80–₹1,365.14, stop ₹1,293.88, 32.0% ROCE, 59.4x P/E), but MCX offers superior 71.4% ROCE on pullback.",
-        "entry_condition": "Consider only if MCX fails to pull back and CDSL holds ₹1,324.80–₹1,365.14.",
+        "rationale": "CDSL is STAGE_2 CLEAR_FOR_CONSIDERATION (₹1,413.00, 2026-11-25 TV, support ₹1,336.41–₹1,396.61, stop ₹1,296.82, 32.0% ROCE, 58.5x P/E). MCX offers higher 71.4% ROCE at 50.6x P/E on pullback.",
+        "entry_condition": "Consider only if MCX breaks support and CDSL holds ₹1,336.41–₹1,396.61.",
         "target_base": 1620.0,
-        "asymmetry_ratio": 3.58
+        "asymmetry_ratio": 2.24
       }
     ]
   },
-  "primer": "MCX is India's near-monopoly (>99% market share) non-agricultural commodity derivatives exchange, compounding at 71.4% ROCE and 76% Q2 FY27 operating margins post-TCS platform migration. While business quality earns COMPOUNDER_PASS (PASS_WITH_WATCH), the stock at ₹3,720.00 (52.8x TTM P/E) is extended above its 10-week EMA with 0.85:1 R:R at CMP. Verdict: WAIT_FOR_SUPPORT in ₹3,341.38–₹3,494.46 (1.75:1 R:R vs ₹3,033.74 stop); NOT_HELD.",
+  "primer": "MCX holds >98%–99% of Indian non-agri commodity derivatives, earning 71.4% ROCE and 76% Q2 FY27 margins. Pass 1 kept COMPOUNDER_PASS (PASS_WITH_WATCH) but flagged recurring IT opex, CME royalties, ~25% tax, and 15% dividend payout. Those frictions trim our Base Target to ₹4,150. Hold our 25 Zerodha shares (+2.50%) and raise the stop to ₹3,043.24. New cash waits for ₹3,343.80–₹3,460.00 (1.66:1 R:R vs 1.06:1 at ₹3,581.60).",
   "citations": [
     "[1] Screener.in — Multi Commodity Exchange of India Ltd (MCX) Consolidated Financial Statements, Quarterly Results, Balance Sheet, Cash Flow & Ratios (up to Q2 FY27 / Sep 2026) — https://www.screener.in/company/MCX/consolidated/",
     "[2] Multi Commodity Exchange of India Ltd (MCX) — Official Investor Relations, Quarterly Presentations & Annual Reports — https://www.mcxindia.com/investor-relations",
@@ -92,10 +98,18 @@
     "[20] Forbes India — NSEL ₹5,600 Crore Crisis (2013), FTIL Exit, Kotak Mahindra Bank 15% Stake & FMC-SEBI Merger (2015) — https://www.forbesindia.com/article/special/nsel-crisis-mcx-kotak-sebi-merger/",
     "[21] CME Group — Clearing House Risk Management, Commodity Options ADV & Operating Leverage Model — https://www.cmegroup.com/clearing/risk-management.html",
     "[22] Morningstar / FCA — London Metal Exchange (LME) 2022 Nickel Crisis ($12 Billion Cancelled Trades, £9.2M FCA Fine & Volume Fallout) — https://www.morningstar.co.uk/uk/news/lme-nickel-crisis-fca-fine-hkex",
-    "[23] TradingView — NSE:MCX Multi-Timeframe Technicals, Moving Averages, RSI & 52-Week Range (as of 13 Nov 2026) — https://www.tradingview.com/symbols/NSE-MCX/",
+    "[23] TradingView — NSE:MCX Multi-Timeframe Technicals, Moving Averages, RSI & 52-Week Range (refreshed 23–25 Nov 2026) — https://www.tradingview.com/symbols/NSE-MCX/",
     "[24] Trendlyne — MCX 1:5 Stock Split (₹10 to ₹2 Face Value, Effective Jan 2, 2026) & Valuation History — https://trendlyne.com/equity/MCX/multi-commodity-exchange-of-india-ltd/",
-    "[25] NSE India — FII/DII Provisional Cash Market Trading Activity (13 Nov 2026) — https://www.nseindia.com/reports/fii-dii",
-    "[26] Groww — FII/DII Daily Cash Flow Summary (13 Nov 2026) — https://groww.in/fii-dii-activity",
-    "[27] Screener.in — Peer Financial Ratios for BSE, CDSL, IEX & Angel One — https://www.screener.in/screens/"
+    "[25] NSE India — FII/DII Provisional Cash Market Trading Activity (Nov 2026) — https://www.nseindia.com/reports/fii-dii",
+    "[26] Groww — FII/DII Daily Cash Flow Summary (Nov 2026) — https://groww.in/fii-dii-activity",
+    "[27] Screener.in — Peer Financial Ratios for BSE, CDSL, IEX & Angel One — https://www.screener.in/screens/",
+    "[28] BSE India — MCX Q2 FY27 Earnings Conference Call Transcript (Filing MCX/SEC/2783, Nov 11, 2026) — https://www.bseindia.com/xml-data/corpfiling/AttachLive/9d184c97-b9f4-40ee-98ad-1da2e7ea836d.pdf",
+    "[29] ScanX — MCX Q2FY27 Net Profit Rises 130% YoY to ₹454.57 Crore: SGF Z-score, Recurring IT Opex & Tax Guidance (Nov 11, 2026) — https://scanx.trade/stock-market-news/companies/mcx-q2fy27-results-net-profit-rises-130-yoy-454-57-crore/55270091",
+    "[30] Angel One — MCX Operational Scalability, Nov 2026 Delivery Consolidation & Concall Highlights (Nov 16, 2026) — https://www.angelone.in/news/stocks/mcx-share-price-in-focus-hits-52-week-high-in-intraday-trading-on-november-16-2026",
+    "[31] 5paisa — MCX Q2 FY27 Effective Tax Rate Jump (21% to 29%) & Margin Conversion Analysis (Nov 18, 2026) — https://www.5paisa.com/blog/mcx-share-price-falls-nearly-7-percent-profit-growth",
+    "[32] INDmoney — MCX Dividend History & FY26 15% Payout Ratio (₹8.00/share) (Nov 20, 2026) — https://www.indmoney.com/stocks/dividend/multi-commodity-exchange-of-india-ltd-dividend",
+    "[33] Business Standard — SEBI Imposes ₹25 Lakh Penalty on MCX for Disclosure Lapses on 63 Moons Payments (May 26, 2025) — https://www.business-standard.com/markets/news/sebi-fines-mcx-rs-25-lakh-for-disclosure-lapses-in-63-moons-payments-125052601253_1.html",
+    "[34] Nextyn Consulting & Research — Gold Trading in India: IIBX FY26 Volume Collapse vs MCX Settlement Design (Nov 17, 2026) — https://www.nextyncore.com/articles/gold-trading-india-iibx",
+    "[35] Kotak Neo — Silver Hits 14-Month Low & MCX Intraday Sensitivity (Nov 25, 2026) — https://www.kotakneo.com/news/commodities/hindustan-zinc-and-mcx-shares-react-as-silver-prices-hit-14-month-low/"
   ]
 }

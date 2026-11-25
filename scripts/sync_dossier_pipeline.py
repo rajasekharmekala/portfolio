@@ -118,6 +118,9 @@ def verify_review_and_quality_gates(
         chosen_round = 2 if (review_dir / "round_2").is_dir() else 1
         r_folder = review_dir / f"round_{chosen_round}"
         rev_file = r_folder / f"round_{chosen_round}_review.json"
+        if not rev_file.is_file() and chosen_round == 2:
+            # Reviewer only re-runs in round 2 if round 1 was non-APPROVE
+            rev_file = review_dir / "round_1" / "round_1_review.json"
         if not rev_file.is_file():
             raise ValueError(f"Missing reviewer verdict file: {rev_file}")
         rev_json = json.loads(rev_file.read_text(encoding="utf-8"))

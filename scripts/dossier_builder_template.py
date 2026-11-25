@@ -134,7 +134,8 @@ def _decision_panels(spec: dict, market: str, symbol: str, positions: dict,
         )
         holding_summary += f"; cost basis {cur}{cost:,.2f}" if isinstance(cost, (int, float)) else "; cost basis unknown"
         if action == "HOLD_WITH_HARD_STOP":
-            holding_summary += f"; retain all {quantity:g} shares now; {shares_to_sell:g} shares are subject to the listed conditional trigger(s)"
+            cond_shares = max((a.get("shares", 0) for a in spec.get("holding_alerts", []) if isinstance(a, dict)), default=quantity)
+            holding_summary += f"; retain all {quantity:g} shares now (0 immediate sale); up to {cond_shares:g} shares governed by the listed conditional trigger(s)"
         elif shares_to_sell:
             holding_summary += f"; recommend selling {shares_to_sell:g} shares and retaining {quantity - shares_to_sell:g} shares"
         else:
@@ -1448,11 +1449,19 @@ def render_10chapter_monograph_editions(
         ],
         [
             "Let-winners-run rule",
-            ("Not applicable while no position is open" if no_new_allocation else f"Appreciated weight ceiling up to {ru['runaway_winner_cap_pct']}%"),
             (
-                "Do not allocate or place an order before the entry gates pass"
-                if no_new_allocation
-                else "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break"
+                "Existing holding governed by Holding Verdict; no new capital allocated"
+                if (no_new_allocation and (holding.get("quantity", 0) > 0))
+                else ("Not applicable while no position is open" if no_new_allocation else f"Appreciated weight ceiling up to {ru['runaway_winner_cap_pct']}%")
+            ),
+            (
+                "Manage existing shares under the Holding Verdict alerts below; do not add new capital before entry gates pass"
+                if (no_new_allocation and (holding.get("quantity", 0) > 0))
+                else (
+                    "Do not allocate or place an order before the entry gates pass"
+                    if no_new_allocation
+                    else "Never trim solely for RSI > 70 or crossing 15%; trail stop to rising 21-EMA / 50-SMA until trend or fundamentals break"
+                )
             ),
         ],
     ]
@@ -1512,9 +1521,20 @@ def render_10chapter_monograph_editions(
             if isinstance(a, dict) and a.get("disposition") in {"WEAKENED", "BROKEN", "CONFIRMED"}
         ]
         if holding["action"] in {"EXIT_IMMEDIATELY", "EXIT_ON_BOUNCE"} and isinstance(prior_stop, (int, float)):
+            if isinstance(close, (int, float)) and close < prior_stop:
+                stop_delta_html = (
+                    f"Prior Structural Stop {prior_stop_txt} Breached "
+                    f"({_esc(holding['action'])}; {new_stop_txt} reference floor)"
+                )
+            else:
+                stop_delta_html = (
+                    f"Structural Stop {prior_stop_txt} &rarr; "
+                    f"<strong>{new_stop_txt} active held hard stop ({_esc(holding['action'])}; no new capital)</strong>"
+                )
+        elif no_new_allocation and (holding.get("quantity", 0) > 0):
             stop_delta_html = (
-                f"Prior Structural Stop {prior_stop_txt} Breached "
-                f"({_esc(holding['action'])}; {new_stop_txt} monitor-only floor, no live stop)"
+                f"Structural Stop {prior_stop_txt} &rarr; "
+                f"<strong>{new_stop_txt} active held hard stop (new capital monitor-only)</strong>"
             )
         elif no_new_allocation:
             stop_delta_html = (
