@@ -1,10 +1,10 @@
 # IN holdings (generated from the transaction log; do not edit)
 
-Generated 2026-11-23T10:19:48. Quantities and cost from `data/accounts/IN/`. Market values need the ledger close and are added by the daily build.
+Generated 2026-11-25T11:04:50. Quantities and cost from `data/accounts/IN/`. Market values need the ledger close and are added by the daily build.
 
 ## Zerodha
 
-Last transaction: 2026-11-23. Cash: 1,539,387.79.
+Last transaction: 2026-11-25. Cash: 1,420,949.94.
 
 | Symbol | Quantity | Cost basis | Cost known | Realized P&L |
 |---|---:|---:|:---:|---:|
@@ -15,8 +15,8 @@ Last transaction: 2026-11-23. Cash: 1,539,387.79.
 | AUROPHARMA | 15 | 27,157.70 | yes | 0.00 |
 | COFORGE | 41 | 83,713.80 | yes | 0.00 |
 | CYIENT | 92 | 102,509.70 | yes | 0.00 |
-| GRWRHITECH | 1 | 7,781.40 | yes | 0.00 |
-| KROSS | 124 | 34,974.75 | yes | 0.00 |
+| GRWRHITECH | 6 | 45,420.40 | yes | 0.00 |
+| KROSS | 424 | 115,773.60 | yes | 0.00 |
 | LAURUSLABS | 31 | 59,470.00 | yes | 428,163.00 |
 | MANORAMA | 135 | 250,574.20 | yes | 55.65 |
 | MARINE | 125 | 51,604.15 | yes | 0.00 |
